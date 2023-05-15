@@ -193,7 +193,7 @@ paths:
   /create-app:
     post:
       operationId: CreateApp
-      description: '<p>Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe a Resilience Hub application, you provide an application name, resources from one or more–up to 20–CloudFormation stacks, and an appropriate resiliency policy.</p> <p>After you create an Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).</p>'
+      description: '<p>Creates an Resilience Hub application. An Resilience Hub application is a collection of Amazon Web Services resources structured to prevent and recover Amazon Web Services application disruptions. To describe an Resilience Hub application, you provide an application name, resources from one or more CloudFormation stacks, Resource Groups, Terraform state files, AppRegistry applications, and an appropriate resiliency policy. For more information about the number of resources supported per application, see <a href="https://docs.aws.amazon.com/general/latest/gr/resiliencehub.html#limits_resiliencehub">Service Quotas</a>.</p> <p>After you create an Resilience Hub application, you publish it so that you can run a resiliency assessment on it. You can then use recommendations from the assessment to improve resiliency by running another assessment, comparing results, and then iterating the process until you achieve your goals for recovery time objective (RTO) and recovery point objective (RPO).</p>'
       responses:
         '200':
           description: Success
@@ -461,7 +461,6 @@ paths:
                 - appComponents
                 - logicalResourceId
                 - physicalResourceId
-                - resourceName
                 - resourceType
               properties:
                 additionalInfo:
@@ -3757,7 +3756,7 @@ paths:
                   type: string
                   pattern: '^[\w\s:,-\.''\/{}\[\]:"\\]+$'
                   minLength: 0
-                  maxLength: 204800
+                  maxLength: 409600
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6115,7 +6114,7 @@ components:
       type: string
       pattern: '^[\w\s:,-\.''\/{}\[\]:"\\]+$'
       minLength: 0
-      maxLength: 204800
+      maxLength: 409600
     AppVersionSummary:
       type: object
       required:
@@ -6420,7 +6419,6 @@ components:
         - appComponents
         - logicalResourceId
         - physicalResourceId
-        - resourceName
         - resourceType
       title: CreateAppVersionResourceRequest
       properties:
@@ -6487,6 +6485,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LogicalResourceId'
             - description: The logical identifier of the resource.
+        parentResourceName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the parent resource.
         physicalResourceId:
           allOf:
             - $ref: '#/components/schemas/PhysicalResourceId'
@@ -6499,6 +6501,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String255'
             - description: The type of resource.
+        sourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceSourceType'
+            - description: The type of input source.
       description: 'Defines a physical resource. A physical resource is a resource that exists in your account. It can be identified using an Amazon Resource Name (ARN) or an Resilience Hub-native identifier. '
     TemplateFormat:
       type: string
@@ -7370,6 +7376,11 @@ components:
             - $ref: '#/components/schemas/PhysicalIdentifierType'
             - description: <p>Specifies the type of physical resource identifier.</p> <dl> <dt>Arn</dt> <dd> <p>The resource identifier is an Amazon Resource Name (ARN) .</p> </dd> <dt>Native</dt> <dd> <p>The resource identifier is an Resilience Hub-native identifier.</p> </dd> </dl>
       description: Defines a physical resource identifier.
+    ResourceSourceType:
+      type: string
+      enum:
+        - AppTemplate
+        - Discovered
     PublishAppVersionRequest:
       type: object
       required:

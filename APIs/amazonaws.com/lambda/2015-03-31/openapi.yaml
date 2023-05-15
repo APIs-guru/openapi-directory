@@ -1119,6 +1119,7 @@ paths:
                     - provided.al2
                     - nodejs18.x
                     - python3.10
+                    - java17
                 Role:
                   description: The Amazon Resource Name (ARN) of the function's execution role.
                   type: string
@@ -3519,6 +3520,7 @@ paths:
                     - provided.al2
                     - nodejs18.x
                     - python3.10
+                    - java17
                 DeadLetterConfig:
                   description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.'
                   type: object
@@ -4688,6 +4690,7 @@ paths:
               - provided.al2
               - nodejs18.x
               - python3.10
+              - java17
         - name: LayerName
           in: path
           required: true
@@ -4894,6 +4897,7 @@ paths:
               - provided.al2
               - nodejs18.x
               - python3.10
+              - java17
         - name: Marker
           in: query
           required: false
@@ -6693,6 +6697,7 @@ components:
         - provided.al2
         - nodejs18.x
         - python3.10
+        - java17
     PutFunctionCodeSigningConfigResponse:
       type: object
       required:

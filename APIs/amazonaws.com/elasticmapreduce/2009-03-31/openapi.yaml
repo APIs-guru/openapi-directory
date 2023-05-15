@@ -123,7 +123,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.AddInstanceFleet:
     post:
       operationId: AddInstanceFleet
-      description: '<p>Adds an instance fleet to a running cluster.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x.</p> </note>'
+      description: '<p>Adds an instance fleet to a running cluster.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x.</p> </note>'
       responses:
         '200':
           description: Success
@@ -291,7 +291,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.CancelSteps:
     post:
       operationId: CancelSteps
-      description: 'Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. When you use Amazon EMR versions 5.28.0 and later, you can cancel steps that are in a <code>PENDING</code> or <code>RUNNING</code> state. In earlier versions of Amazon EMR, you can only cancel steps that are in a <code>PENDING</code> state. '
+      description: 'Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. When you use Amazon EMR releases 5.28.0 and later, you can cancel steps that are in a <code>PENDING</code> or <code>RUNNING</code> state. In earlier versions of Amazon EMR, you can only cancel steps that are in a <code>PENDING</code> state. '
       responses:
         '200':
           description: Success
@@ -724,7 +724,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.DescribeReleaseLabel:
     post:
       operationId: DescribeReleaseLabel
-      description: 'Provides EMR release label details, such as releases available the region where the API request is run, and the available applications for a specific EMR release label. Can also list EMR release versions that support a specified version of Spark.'
+      description: 'Provides Amazon EMR release label details, such as the releases available the Region where the API request is run, and the available applications for a specific Amazon EMR release label. Can also list Amazon EMR releases that support a specified version of Spark.'
       responses:
         '200':
           description: Success
@@ -1207,7 +1207,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListInstanceFleets:
     post:
       operationId: ListInstanceFleets
-      description: '<p>Lists all available details about the instance fleets in a cluster.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>Lists all available details about the instance fleets in a cluster.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1309,7 +1309,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListInstances:
     post:
       operationId: ListInstances
-      description: 'Provides information for all active EC2 instances and EC2 instances terminated in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the following states are considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.'
+      description: 'Provides information for all active Amazon EC2 instances and Amazon EC2 instances terminated in the last 30 days, up to a maximum of 2,000. Amazon EC2 instances in any of the following states are considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.'
       responses:
         '200':
           description: Success
@@ -1360,7 +1360,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListNotebookExecutions:
     post:
       operationId: ListNotebookExecutions
-      description: 'Provides summaries of all notebook executions. You can filter the list based on multiple criteria such as status, time range, and editor id. Returns a maximum of 50 notebook executions and a marker to track the paging of a longer notebook execution list across multiple <code>ListNotebookExecution</code> calls.'
+      description: 'Provides summaries of all notebook executions. You can filter the list based on multiple criteria such as status, time range, and editor id. Returns a maximum of 50 notebook executions and a marker to track the paging of a longer notebook execution list across multiple <code>ListNotebookExecutions</code> calls.'
       responses:
         '200':
           description: Success
@@ -1411,7 +1411,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ListReleaseLabels:
     post:
       operationId: ListReleaseLabels
-      description: Retrieves release labels of EMR services in the region where the API is called.
+      description: Retrieves release labels of Amazon EMR services in the Region where the API is called.
       responses:
         '200':
           description: Success
@@ -1717,7 +1717,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.ModifyInstanceFleet:
     post:
       operationId: ModifyInstanceFleet
-      description: '<p>Modifies the target On-Demand and target Spot capacities for the instance fleet with the specified InstanceFleetID within the cluster specified using ClusterID. The call either succeeds or fails atomically.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>Modifies the target On-Demand and target Spot capacities for the instance fleet with the specified InstanceFleetID within the cluster specified using ClusterID. The call either succeeds or fails atomically.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1793,7 +1793,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.PutAutoScalingPolicy:
     post:
       operationId: PutAutoScalingPolicy
-      description: Creates or updates an automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric.
+      description: Creates or updates an automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates Amazon EC2 instances in response to the value of a CloudWatch metric.
       responses:
         '200':
           description: Success
@@ -1826,7 +1826,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.PutAutoTerminationPolicy:
     post:
       operationId: PutAutoTerminationPolicy
-      description: '<note> <p>Auto-termination is supported in Amazon EMR versions 5.30.0 and 6.1.0 and later. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html">Using an auto-termination policy</a>.</p> </note> <p>Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html">Control cluster termination</a>.</p>'
+      description: '<note> <p>Auto-termination is supported in Amazon EMR releases 5.30.0 and 6.1.0 and later. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html">Using an auto-termination policy</a>.</p> </note> <p>Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html">Control cluster termination</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1904,7 +1904,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.PutManagedScalingPolicy:
     post:
       operationId: PutManagedScalingPolicy
-      description: 'Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+      description: 'Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as Amazon EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
       responses:
         '200':
           description: Success
@@ -1937,7 +1937,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.RemoveAutoScalingPolicy:
     post:
       operationId: RemoveAutoScalingPolicy
-      description: Removes an automatic scaling policy from a specified instance group within an EMR cluster.
+      description: Removes an automatic scaling policy from a specified instance group within an Amazon EMR cluster.
       responses:
         '200':
           description: Success
@@ -2003,7 +2003,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.RemoveManagedScalingPolicy:
     post:
       operationId: RemoveManagedScalingPolicy
-      description: ' Removes a managed scaling policy from a specified EMR cluster. '
+      description: ' Removes a managed scaling policy from a specified Amazon EMR cluster. '
       responses:
         '200':
           description: Success
@@ -2081,7 +2081,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.RunJobFlow:
     post:
       operationId: RunJobFlow
-      description: '<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the steps specified. After the steps complete, the cluster stops and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster transitions to the WAITING state rather than shutting down after the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop.</p> <p>For long-running clusters, we recommend that you periodically store your results.</p> <note> <p>The instance fleets configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups parameters, but not both.</p> </note>'
+      description: '<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the steps specified. After the steps complete, the cluster stops and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster transitions to the WAITING state rather than shutting down after the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop.</p> <p>For long-running clusters, we recommend that you periodically store your results.</p> <note> <p>The instance fleets configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups parameters, but not both.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2120,7 +2120,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.SetTerminationProtection:
     post:
       operationId: SetTerminationProtection
-      description: '<p>SetTerminationProtection locks a cluster (job flow) so the EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling <code>SetTerminationProtection</code> on a cluster is similar to calling the Amazon EC2 <code>DisableAPITermination</code> API on all EC2 instances in a cluster.</p> <p> <code>SetTerminationProtection</code> is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a cluster that has been locked by setting <code>SetTerminationProtection</code> to <code>true</code>, you must first unlock the job flow by a subsequent call to <code>SetTerminationProtection</code> in which you set the value to <code>false</code>. </p> <p> For more information, see<a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html">Managing Cluster Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>'
+      description: '<p>SetTerminationProtection locks a cluster (job flow) so the Amazon EC2 instances in the cluster cannot be terminated by user intervention, an API call, or in the event of a job-flow error. The cluster still terminates upon successful completion of the job flow. Calling <code>SetTerminationProtection</code> on a cluster is similar to calling the Amazon EC2 <code>DisableAPITermination</code> API on all Amazon EC2 instances in a cluster.</p> <p> <code>SetTerminationProtection</code> is used to prevent accidental termination of a cluster and to ensure that in the event of an error, the instances persist so that you can recover any data stored in their ephemeral instance storage.</p> <p> To terminate a cluster that has been locked by setting <code>SetTerminationProtection</code> to <code>true</code>, you must first unlock the job flow by a subsequent call to <code>SetTerminationProtection</code> in which you set the value to <code>false</code>. </p> <p> For more information, see<a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html">Managing Cluster Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>'
       responses:
         '200':
           description: Success
@@ -2155,7 +2155,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.SetVisibleToAllUsers:
     post:
       operationId: SetVisibleToAllUsers
-      description: '<important> <p>The SetVisibleToAllUsers parameter is no longer supported. Your cluster may be visible to all users in your account. To restrict cluster access using an IAM policy, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-access-iam.html">Identity and Access Management for EMR</a>. </p> </important> <p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an EMR cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals.</p> <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
+      description: '<important> <p>The SetVisibleToAllUsers parameter is no longer supported. Your cluster may be visible to all users in your account. To restrict cluster access using an IAM policy, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-access-IAM.html">Identity and Access Management for Amazon EMR</a>. </p> </important> <p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an Amazon EMR cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform Amazon EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals.</p> <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_IAM_emr-with-IAM.html#security_set_visible_to_all_users">Understanding the Amazon EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2276,7 +2276,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.TerminateJobFlows:
     post:
       operationId: TerminateJobFlows
-      description: '<p>TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut down, any step not yet completed is canceled and the EC2 instances on which the cluster is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the cluster was created.</p> <p>The maximum number of clusters allowed is 10. The call to <code>TerminateJobFlows</code> is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5 minutes for the cluster to completely terminate and release allocated resources, such as Amazon EC2 instances.</p>'
+      description: '<p>TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut down, any step not yet completed is canceled and the Amazon EC2 instances on which the cluster is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the cluster was created.</p> <p>The maximum number of clusters allowed is 10. The call to <code>TerminateJobFlows</code> is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5 minutes for the cluster to completely terminate and release allocated resources, such as Amazon EC2 instances.</p>'
       responses:
         '200':
           description: Success
@@ -2533,7 +2533,7 @@ components:
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/ArnType'
-            - description: '<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The runtime role can be a cross-account IAM role. The runtime role ARN is a combination of account ID, role name, and role type using the following format: <code>arn:partition:service:region:account:resource</code>. </p> <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted runtime role ARN.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The runtime role can be a cross-account IAM role. The runtime role ARN is a combination of account ID, role name, and role type using the following format: <code>arn:partition:service:region:account:resource</code>. </p> <p>For example, <code>arn:aws:IAM::1234567890:role/ReadOnly</code> is a correctly formatted runtime role ARN.</p>'
       description: ' The input argument to the <a>AddJobFlowSteps</a> operation. '
     AddTagsOutput:
       type: object
@@ -2715,7 +2715,7 @@ components:
         SessionPolicyArn:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. You should specify the ARN for the session policy that you want to apply, not the ARN of your user role. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html">Create an EMR Studio User Role with Session Policies</a>.'
+            - description: 'The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. You should specify the ARN for the session policy that you want to apply, not the ARN of your user role. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html">Create an Amazon EMR Studio User Role with Session Policies</a>.'
     DeleteSecurityConfigurationOutput:
       type: object
       properties: {}
@@ -2954,7 +2954,7 @@ components:
         BlockPublicAccessConfiguration:
           allOf:
             - $ref: '#/components/schemas/BlockPublicAccessConfiguration'
-            - description: '<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating the block public access configuration to remove the exception.</p> <note> <p>For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region.</p> </note>'
+            - description: '<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating the block public access configuration to remove the exception.</p> <note> <p>For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an Amazon EMR cluster in a Region before this date, block public access is enabled by default in that Region.</p> </note>'
         BlockPublicAccessConfigurationMetadata:
           allOf:
             - $ref: '#/components/schemas/BlockPublicAccessConfigurationMetadata'
@@ -3230,6 +3230,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Marker'
             - description: 'The pagination token, returned by a previous <code>ListNotebookExecutions</code> call, that indicates the start of the list for this <code>ListNotebookExecutions</code> call.'
+        ExecutionEngineId:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The unique ID of the execution engine.
     ListReleaseLabelsOutput:
       type: object
       properties:
@@ -3474,7 +3478,7 @@ components:
         BlockPublicAccessConfiguration:
           allOf:
             - $ref: '#/components/schemas/BlockPublicAccessConfiguration'
-            - description: '<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating <code>BlockPublicSecurityGroupRules</code> to remove the exception.</p> <note> <p>For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region.</p> </note>'
+            - description: '<p>A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code> in the <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating <code>BlockPublicSecurityGroupRules</code> to remove the exception.</p> <note> <p>For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an Amazon EMR cluster in a Region before this date, block public access is enabled by default in that Region.</p> </note>'
     PutManagedScalingPolicyOutput:
       type: object
       properties: {}
@@ -3488,7 +3492,7 @@ components:
         ClusterId:
           allOf:
             - $ref: '#/components/schemas/ClusterId'
-            - description: 'Specifies the ID of an EMR cluster where the managed scaling policy is attached. '
+            - description: 'Specifies the ID of an Amazon EMR cluster where the managed scaling policy is attached. '
         ManagedScalingPolicy:
           allOf:
             - $ref: '#/components/schemas/ManagedScalingPolicy'
@@ -3587,7 +3591,7 @@ components:
         LogEncryptionKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: 'The KMS key used for encrypting log files. If a value is not provided, the logs remain encrypted by AES-256. This attribute is only available with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.'
+            - description: 'The KMS key used for encrypting log files. If a value is not provided, the logs remain encrypted by AES-256. This attribute is only available with Amazon EMR releases 5.30.0 and later, excluding Amazon EMR 6.0.0.'
         AdditionalInfo:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -3619,7 +3623,7 @@ components:
         NewSupportedProducts:
           allOf:
             - $ref: '#/components/schemas/NewSupportedProductsList'
-            - description: '<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the <a href="https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf">Amazon EMR Developer Guide</a>. Supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>"mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.</p> </li> <li> <p>"mapr-m7" - launch the cluster using MapR M7 Edition.</p> </li> <li> <p>"hunk" - launch the cluster with the Hunk Big Data Analytics Platform.</p> </li> <li> <p>"hue"- launch the cluster with Hue installed.</p> </li> <li> <p>"spark" - launch the cluster with Apache Spark installed.</p> </li> <li> <p>"ganglia" - launch the cluster with the Ganglia Monitoring System installed.</p> </li> </ul>'
+            - description: '<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the <a href="https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf">Amazon EMR Developer Guide</a>. Supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>"mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.</p> </li> <li> <p>"mapr-m7" - launch the cluster using MapR M7 Edition.</p> </li> <li> <p>"hunk" - launch the cluster with the Hunk Big Data Analytics Platform.</p> </li> <li> <p>"hue"- launch the cluster with Hue installed.</p> </li> <li> <p>"spark" - launch the cluster with Apache Spark installed.</p> </li> <li> <p>"ganglia" - launch the cluster with the Ganglia Monitoring System installed.</p> </li> </ul>'
         Applications:
           allOf:
             - $ref: '#/components/schemas/ApplicationList'
@@ -3627,15 +3631,15 @@ components:
         Configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
-            - description: For Amazon EMR releases 4.0 and later. The list of configurations supplied for the EMR cluster you are creating.
+            - description: For Amazon EMR releases 4.0 and later. The list of configurations supplied for the Amazon EMR cluster that you are creating.
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<important> <p>The VisibleToAllUsers parameter is no longer supported. By default, the value is set to <code>true</code>. Setting it to <code>false</code> now has no effect.</p> </important> <p>Set this value to <code>true</code> so that IAM principals in the Amazon Web Services account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to <code>true</code> for clusters created using the EMR API or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command.</p> <p>When set to <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>'
+            - description: '<important> <p>The VisibleToAllUsers parameter is no longer supported. By default, the value is set to <code>true</code>. Setting it to <code>false</code> now has no effect.</p> </important> <p>Set this value to <code>true</code> so that IAM principals in the Amazon Web Services account associated with the cluster can perform Amazon EMR actions on the cluster that their IAM policies allow. This value defaults to <code>true</code> for clusters created using the Amazon EMR API or the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command.</p> <p>When set to <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform Amazon EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_IAM_emr-with-IAM.html#security_set_visible_to_all_users">Understanding the Amazon EMR cluster VisibleToAllUsers setting</a> in the <i>Amazon EMR Management Guide</i>.</p>'
         JobFlowRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: 'Also called instance profile and EC2 role. An IAM role for an EMR cluster. The EC2 instances of the cluster assume this role. The default role is <code>EMR_EC2_DefaultRole</code>. In order to use the default role, you must have already created it using the CLI or console.'
+            - description: 'Also called instance profile and Amazon EC2 role. An IAM role for an Amazon EMR cluster. The Amazon EC2 instances of the cluster assume this role. The default role is <code>EMR_EC2_DefaultRole</code>. In order to use the default role, you must have already created it using the CLI or console.'
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -3651,19 +3655,19 @@ components:
         AutoScalingRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group.
+            - description: An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate Amazon EC2 instances in an instance group.
         ScaleDownBehavior:
           allOf:
             - $ref: '#/components/schemas/ScaleDownBehavior'
-            - description: 'Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
+            - description: 'Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR earlier than 5.1.0.'
         CustomAmiId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: '<p>Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches cluster EC2 instances. For more information about custom AMIs in Amazon EMR, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html">Using a Custom AMI</a> in the <i>Amazon EMR Management Guide</i>. If omitted, the cluster uses the base Linux AMI for the <code>ReleaseLabel</code> specified. For Amazon EMR versions 2.x and 3.x, use <code>AmiVersion</code> instead.</p> <p>For information about creating a custom AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>. For information about finding an AMI ID, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html">Finding a Linux AMI</a>. </p>'
+            - description: '<p>Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches cluster Amazon EC2 instances. For more information about custom AMIs in Amazon EMR, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html">Using a Custom AMI</a> in the <i>Amazon EMR Management Guide</i>. If omitted, the cluster uses the base Linux AMI for the <code>ReleaseLabel</code> specified. For Amazon EMR releases 2.x and 3.x, use <code>AmiVersion</code> instead.</p> <p>For information about creating a custom AMI, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>. For information about finding an AMI ID, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html">Finding a Linux AMI</a>. </p>'
         EbsRootVolumeSize:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.'
+            - description: 'The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and later.'
         RepoUpgradeOnBoot:
           allOf:
             - $ref: '#/components/schemas/RepoUpgradeOnBoot'
@@ -3721,7 +3725,7 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: A value of <code>true</code> indicates that an IAM principal in the Amazon Web Services account can perform EMR actions on the cluster that the IAM policies attached to the principal allow. A value of <code>false</code> indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.
+            - description: A value of <code>true</code> indicates that an IAM principal in the Amazon Web Services account can perform Amazon EMR actions on the cluster that the IAM policies attached to the principal allow. A value of <code>false</code> indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform Amazon EMR actions on the cluster.
       description: The input to the SetVisibleToAllUsers action.
     StartNotebookExecutionOutput:
       type: object
@@ -3733,8 +3737,6 @@ components:
     StartNotebookExecutionInput:
       type: object
       required:
-        - EditorId
-        - RelativePath
         - ExecutionEngine
         - ServiceRole
       title: StartNotebookExecutionInput
@@ -3742,11 +3744,11 @@ components:
         EditorId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The unique identifier of the EMR Notebook to use for notebook execution.
+            - description: The unique identifier of the Amazon EMR Notebook to use for notebook execution.
         RelativePath:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: 'The path and file name of the notebook file for this execution, relative to the path specified for the EMR Notebook. For example, if you specify a path of <code>s3://MyBucket/MyNotebooks</code> when you create an EMR Notebook for a notebook with an ID of <code>e-ABCDEFGHIJK1234567890ABCD</code> (the <code>EditorID</code> of this request), and you specify a <code>RelativePath</code> of <code>my_notebook_executions/notebook_execution.ipynb</code>, the location of the file for the notebook execution is <code>s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb</code>.'
+            - description: 'The path and file name of the notebook file for this execution, relative to the path specified for the Amazon EMR Notebook. For example, if you specify a path of <code>s3://MyBucket/MyNotebooks</code> when you create an Amazon EMR Notebook for a notebook with an ID of <code>e-ABCDEFGHIJK1234567890ABCD</code> (the <code>EditorID</code> of this request), and you specify a <code>RelativePath</code> of <code>my_notebook_executions/notebook_execution.ipynb</code>, the location of the file for the notebook execution is <code>s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb</code>.'
         NotebookExecutionName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -3754,7 +3756,7 @@ components:
         NotebookParams:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: Input parameters in JSON format passed to the EMR Notebook at runtime for execution.
+            - description: Input parameters in JSON format passed to the Amazon EMR Notebook at runtime for execution.
         ExecutionEngine:
           allOf:
             - $ref: '#/components/schemas/ExecutionEngineConfig'
@@ -3762,15 +3764,31 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The name or ARN of the IAM role that is used as the service role for Amazon EMR (the EMR role) for the notebook execution.
+            - description: The name or ARN of the IAM role that is used as the service role for Amazon EMR (the Amazon EMR role) for the notebook execution.
         NotebookInstanceSecurityGroupId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The unique identifier of the Amazon EC2 security group to associate with the EMR Notebook for this notebook execution.
+            - description: The unique identifier of the Amazon EC2 security group to associate with the Amazon EMR Notebook for this notebook execution.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of tags associated with a notebook execution. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
+        NotebookS3Location:
+          allOf:
+            - $ref: '#/components/schemas/NotebookS3LocationFromInput'
+            - description: The Amazon S3 location for the notebook execution input.
+        OutputNotebookS3Location:
+          allOf:
+            - $ref: '#/components/schemas/OutputNotebookS3LocationFromInput'
+            - description: The Amazon S3 location for the notebook execution output.
+        OutputNotebookFormat:
+          allOf:
+            - $ref: '#/components/schemas/OutputNotebookFormat'
+            - description: The output format for the notebook execution.
+        EnvironmentVariables:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariablesMap'
+            - description: The environment variables associated with the notebook execution.
     StopNotebookExecutionInput:
       type: object
       required:
@@ -3882,7 +3900,7 @@ components:
         InstanceTypeConfigs:
           allOf:
             - $ref: '#/components/schemas/InstanceTypeConfigList'
-            - description: The instance type configurations that define the EC2 instances in the instance fleet.
+            - description: The instance type configurations that define the Amazon EC2 instances in the instance fleet.
         LaunchSpecifications:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetProvisioningSpecifications'
@@ -3891,7 +3909,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetResizingSpecifications'
             - description: The resize specification for the instance fleet.
-      description: '<p>The configuration that defines an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>The configuration that defines an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceFleetId:
       type: string
     ArnType:
@@ -3974,12 +3992,12 @@ components:
         MinCapacity:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The lower boundary of EC2 instances in an instance group below which scaling activities are not allowed to shrink. Scale-in activities will not terminate instances below this boundary.
+            - description: The lower boundary of Amazon EC2 instances in an instance group below which scaling activities are not allowed to shrink. Scale-in activities will not terminate instances below this boundary.
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The upper boundary of EC2 instances in an instance group beyond which scaling activities are not allowed to grow. Scale-out activities will not add instances beyond this boundary.
-      description: The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activities triggered by automatic scaling rules will not cause an instance group to grow above or below these limits.
+            - description: The upper boundary of Amazon EC2 instances in an instance group beyond which scaling activities are not allowed to grow. Scale-out activities will not add instances beyond this boundary.
+      description: The upper and lower Amazon EC2 instance limits for an automatic scaling policy. Automatic scaling activities triggered by automatic scaling rules will not cause an instance group to grow above or below these limits.
     ScalingRuleList:
       type: array
       items:
@@ -3993,12 +4011,12 @@ components:
         Constraints:
           allOf:
             - $ref: '#/components/schemas/ScalingConstraints'
-            - description: The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.
+            - description: The upper and lower Amazon EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.
         Rules:
           allOf:
             - $ref: '#/components/schemas/ScalingRuleList'
             - description: The scale-in and scale-out rules that comprise the automatic scaling policy.
-      description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. An automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
+      description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. An automatic scaling policy defines how an instance group dynamically adds and terminates Amazon EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
     AutoScalingPolicyStatus:
       type: object
       properties:
@@ -4021,12 +4039,12 @@ components:
         Constraints:
           allOf:
             - $ref: '#/components/schemas/ScalingConstraints'
-            - description: The upper and lower EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.
+            - description: The upper and lower Amazon EC2 instance limits for an automatic scaling policy. Automatic scaling activity will not cause an instance group to grow above or below these limits.
         Rules:
           allOf:
             - $ref: '#/components/schemas/ScalingRuleList'
             - description: The scale-in and scale-out rules that comprise the automatic scaling policy.
-      description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
+      description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates Amazon EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
     AutoScalingPolicyState:
       type: string
       enum:
@@ -4078,11 +4096,11 @@ components:
         BlockPublicSecurityGroupRules:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates whether Amazon EMR block public access is enabled (<code>true</code>) or disabled (<code>false</code>). By default, the value is <code>false</code> for accounts that have created EMR clusters before July 2019. For accounts created after this, the default is <code>true</code>.'
+            - description: 'Indicates whether Amazon EMR block public access is enabled (<code>true</code>) or disabled (<code>false</code>). By default, the value is <code>false</code> for accounts that have created Amazon EMR clusters before July 2019. For accounts created after this, the default is <code>true</code>.'
         PermittedPublicSecurityGroupRuleRanges:
           allOf:
             - $ref: '#/components/schemas/PortRanges'
-            - description: '<p>Specifies ports and port ranges that are permitted to have security group rules that allow inbound traffic from all public sources. For example, if Port 23 (Telnet) is specified for <code>PermittedPublicSecurityGroupRuleRanges</code>, Amazon EMR allows cluster creation if a security group associated with the cluster has a rule that allows inbound traffic on Port 23 from IPv4 0.0.0.0/0 or IPv6 port ::/0 as the source.</p> <p>By default, Port 22, which is used for SSH access to the cluster EC2 instances, is in the list of <code>PermittedPublicSecurityGroupRuleRanges</code>.</p>'
+            - description: '<p>Specifies ports and port ranges that are permitted to have security group rules that allow inbound traffic from all public sources. For example, if Port 23 (Telnet) is specified for <code>PermittedPublicSecurityGroupRuleRanges</code>, Amazon EMR allows cluster creation if a security group associated with the cluster has a rule that allows inbound traffic on Port 23 from IPv4 0.0.0.0/0 or IPv6 port ::/0 as the source.</p> <p>By default, Port 22, which is used for SSH access to the cluster Amazon EC2 instances, is in the list of <code>PermittedPublicSecurityGroupRuleRanges</code>.</p>'
       description: 'A configuration for Amazon EMR block public access. When <code>BlockPublicSecurityGroupRules</code> is set to <code>true</code>, Amazon EMR prevents cluster creation if one of the cluster''s security groups has a rule that allows inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using <code>PermittedPublicSecurityGroupRuleRanges</code>.'
     Date:
       type: string
@@ -4263,7 +4281,7 @@ components:
         Period:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'The period, in seconds, over which the statistic is applied. EMR CloudWatch metrics are emitted every five minutes (300 seconds), so if an EMR CloudWatch metric is specified, specify <code>300</code>.'
+            - description: 'The period, in seconds, over which the statistic is applied. CloudWatch metrics for Amazon EMR are emitted every five minutes (300 seconds), so if you specify a CloudWatch metric, specify <code>300</code>.'
         Statistic:
           allOf:
             - $ref: '#/components/schemas/Statistic'
@@ -4301,7 +4319,7 @@ components:
         ErrorDetails:
           allOf:
             - $ref: '#/components/schemas/ErrorDetailList'
-            - description: A list of tuples that provide information about the errors that caused a cluster termination. This structure may have up to 10 different <code>ErrorDetail</code> tuples.
+            - description: A list of tuples that provides information about the errors that caused a cluster to terminate. This structure can contain up to 10 different <code>ErrorDetail</code> tuples.
       description: The detailed status of the cluster.
     Ec2InstanceAttributes:
       type: object
@@ -4317,7 +4335,7 @@ components:
         RequestedEc2SubnetIds:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256List'
-            - description: 'Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and Region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.'
+            - description: 'Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch Amazon EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the Amazon EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and Region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.'
         Ec2AvailabilityZone:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4325,11 +4343,11 @@ components:
         RequestedEc2AvailabilityZones:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256List'
-            - description: 'Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.'
+            - description: 'Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch Amazon EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.'
         IamInstanceProfile:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The IAM role that was specified when the cluster was launched. The EC2 instances of the cluster assume this role.
+            - description: The IAM role that was specified when the cluster was launched. The Amazon EC2 instances of the cluster assume this role.
         EmrManagedMasterSecurityGroup:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4350,7 +4368,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/StringList'
             - description: A list of additional Amazon EC2 security group IDs for the core and task nodes.
-      description: 'Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.'
+      description: 'Provides information about the Amazon EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.'
     InstanceCollectionType:
       type: string
       enum:
@@ -4428,11 +4446,11 @@ components:
         Ec2InstanceAttributes:
           allOf:
             - $ref: '#/components/schemas/Ec2InstanceAttributes'
-            - description: 'Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.'
+            - description: 'Provides information about the Amazon EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.'
         InstanceCollectionType:
           allOf:
             - $ref: '#/components/schemas/InstanceCollectionType'
-            - description: '<note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note> <p>The instance group configuration of the cluster. A value of <code>INSTANCE_GROUP</code> indicates a uniform instance group configuration. A value of <code>INSTANCE_FLEET</code> indicates an instance fleets configuration.</p>'
+            - description: '<note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note> <p>The instance group configuration of the cluster. A value of <code>INSTANCE_GROUP</code> indicates a uniform instance group configuration. A value of <code>INSTANCE_FLEET</code> indicates an instance fleets configuration.</p>'
         LogUri:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4440,7 +4458,7 @@ components:
         LogEncryptionKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The KMS key used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. '
+            - description: ' The KMS key used for encrypting log files. This attribute is only available with Amazon EMR 5.30.0 and later, excluding Amazon EMR 6.0.0. '
         RequestedAmiVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4460,11 +4478,11 @@ components:
         TerminationProtected:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.'
+            - description: 'Indicates whether Amazon EMR will lock the cluster to prevent the Amazon EC2 instances from being terminated by an API call or user intervention, or in the event of a cluster error.'
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Amazon Web Services Management Console.</p>'
+            - description: '<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform Amazon EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the Amazon EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Amazon Web Services Management Console.</p>'
         Applications:
           allOf:
             - $ref: '#/components/schemas/ApplicationList'
@@ -4480,7 +4498,7 @@ components:
         NormalizedInstanceHours:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.'
+            - description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.'
         MasterPublicDnsName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4488,7 +4506,7 @@ components:
         Configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
-            - description: Applies only to Amazon EMR releases 4.x and later. The list of Configurations supplied to the EMR cluster.
+            - description: Applies only to Amazon EMR releases 4.x and later. The list of configurations that are supplied to the Amazon EMR cluster.
         SecurityConfiguration:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -4496,23 +4514,23 @@ components:
         AutoScalingRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate EC2 instances in an instance group.
+            - description: An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the automatic scaling feature requires to launch and terminate Amazon EC2 instances in an instance group.
         ScaleDownBehavior:
           allOf:
             - $ref: '#/components/schemas/ScaleDownBehavior'
-            - description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
+            - description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR releases 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
         CustomAmiId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.
+            - description: Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.
         EbsRootVolumeSize:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.'
+            - description: 'The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and later.'
         RepoUpgradeOnBoot:
           allOf:
             - $ref: '#/components/schemas/RepoUpgradeOnBoot'
-            - description: Applies only when <code>CustomAmiID</code> is used. Specifies the type of updates that are applied from the Amazon Linux AMI package repositories when an instance boots using the AMI.
+            - description: Applies only when <code>CustomAmiID</code> is used. Specifies the type of updates that the Amazon Linux AMI package repositories apply when an instance boots using the AMI.
         KerberosAttributes:
           allOf:
             - $ref: '#/components/schemas/KerberosAttributes'
@@ -4613,7 +4631,7 @@ components:
         NormalizedInstanceHours:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.'
+            - description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour an m1.small instance runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.'
         ClusterArn:
           allOf:
             - $ref: '#/components/schemas/ArnType'
@@ -4667,20 +4685,20 @@ components:
         MinimumCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The lower boundary of EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+            - description: ' The lower boundary of Amazon EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
         MaximumCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The upper boundary of EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+            - description: ' The upper boundary of Amazon EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
         MaximumOnDemandCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The upper boundary of On-Demand EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. The On-Demand units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between On-Demand and Spot Instances. '
+            - description: ' The upper boundary of On-Demand Amazon EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. The On-Demand units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between On-Demand and Spot Instances. '
         MaximumCoreCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The upper boundary of EC2 units for core node type in a cluster. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. The core units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between core and task nodes. '
-      description: ' The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster can not be above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+            - description: ' The upper boundary of Amazon EC2 units for core node type in a cluster. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. The core units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between core and task nodes. '
+      description: ' The Amazon EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster can not be above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
     Configuration:
       type: object
       properties:
@@ -4748,11 +4766,11 @@ components:
         EditorId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The unique identifier of the EMR Notebook that is used for the notebook execution.
+            - description: The unique identifier of the Amazon EMR Notebook that is used for the notebook execution.
         ExecutionEngine:
           allOf:
             - $ref: '#/components/schemas/ExecutionEngineConfig'
-            - description: 'The execution engine, such as an EMR cluster, used to run the EMR notebook and perform the notebook execution.'
+            - description: 'The execution engine, such as an Amazon EMR cluster, used to run the Amazon EMR notebook and perform the notebook execution.'
         NotebookExecutionName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -4760,7 +4778,7 @@ components:
         NotebookParams:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: Input parameters in JSON format passed to the EMR Notebook at runtime for execution.
+            - description: Input parameters in JSON format passed to the Amazon EMR Notebook at runtime for execution.
         Status:
           allOf:
             - $ref: '#/components/schemas/NotebookExecutionStatus'
@@ -4788,12 +4806,28 @@ components:
         NotebookInstanceSecurityGroupId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The unique identifier of the EC2 security group associated with the EMR Notebook instance. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html">Specifying EC2 Security Groups for EMR Notebooks</a> in the <i>EMR Management Guide</i>.'
+            - description: 'The unique identifier of the Amazon EC2 security group associated with the Amazon EMR Notebook instance. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html">Specifying Amazon EC2 Security Groups for Amazon EMR Notebooks</a> in the <i>Amazon EMR Management Guide</i>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of tags associated with a notebook execution. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
-      description: A notebook execution. An execution is a specific instance that an EMR Notebook is run using the <code>StartNotebookExecution</code> action.
+        NotebookS3Location:
+          allOf:
+            - $ref: '#/components/schemas/NotebookS3LocationForOutput'
+            - description: The Amazon S3 location that stores the notebook execution input.
+        OutputNotebookS3Location:
+          allOf:
+            - $ref: '#/components/schemas/OutputNotebookS3LocationForOutput'
+            - description: The Amazon S3 location for the notebook execution output.
+        OutputNotebookFormat:
+          allOf:
+            - $ref: '#/components/schemas/OutputNotebookFormat'
+            - description: The output format for the notebook execution.
+        EnvironmentVariables:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariablesMap'
+            - description: The environment variables associated with the notebook execution.
+      description: A notebook execution. An execution is a specific instance that an Amazon EMR Notebook is run using the <code>StartNotebookExecution</code> action.
     MaxResultsNumber:
       type: integer
       minimum: 1
@@ -4832,7 +4866,7 @@ components:
         ExecutionRoleArn:
           allOf:
             - $ref: '#/components/schemas/OptionalArnType'
-            - description: '<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The runtime role can be a cross-account IAM role. The runtime role ARN is a combination of account ID, role name, and role type using the following format: <code>arn:partition:service:region:account:resource</code>. </p> <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted runtime role ARN.</p>'
+            - description: '<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The runtime role can be a cross-account IAM role. The runtime role ARN is a combination of account ID, role name, and role type using the following format: <code>arn:partition:service:region:account:resource</code>. </p> <p>For example, <code>arn:aws:IAM::1234567890:role/ReadOnly</code> is a correctly formatted runtime role ARN.</p>'
       description: This represents a step in a cluster.
     Studio:
       type: object
@@ -4856,7 +4890,7 @@ components:
         AuthMode:
           allOf:
             - $ref: '#/components/schemas/AuthMode'
-            - description: Specifies whether the Amazon EMR Studio authenticates users using IAM or IAM Identity Center.
+            - description: Specifies whether the Amazon EMR Studio authenticates users with IAM or IAM Identity Center.
         VpcId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -4938,14 +4972,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ThroughputVal'
             - description: 'The throughput, in mebibyte per second (MiB/s). This optional parameter can be a number from 125 - 1000 and is valid only for gp3 volumes.'
-      description: 'EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the cluster.'
+      description: 'EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an Amazon EC2 instance in the cluster.'
     EbsBlockDevice:
       type: object
       properties:
         VolumeSpecification:
           allOf:
             - $ref: '#/components/schemas/VolumeSpecification'
-            - description: 'EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the cluster.'
+            - description: 'EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an Amazon EC2 instance in the cluster.'
         Device:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4959,7 +4993,7 @@ components:
         VolumeSpecification:
           allOf:
             - $ref: '#/components/schemas/VolumeSpecification'
-            - description: 'EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the cluster.'
+            - description: 'EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s) that are requested for the EBS volume attached to an Amazon EC2 instance in the cluster.'
         VolumesPerInstance:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -4996,7 +5030,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The volume identifier of the EBS volume.
-      description: EBS block device that's attached to an EC2 instance.
+      description: EBS block device that's attached to an Amazon EC2 instance.
     EbsVolumeList:
       type: array
       items:
@@ -5005,6 +5039,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/XmlStringMaxLen256'
+    EnvironmentVariablesMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/XmlString'
     ErrorData:
       type: array
       items:
@@ -5015,20 +5053,25 @@ components:
         ErrorCode:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name or code that's associated with the error.
+            - description: The name or code associated with the error.
         ErrorData:
           allOf:
             - $ref: '#/components/schemas/ErrorData'
-            - description: A list of key value pairs that provide contextual information to explain why the error may have occured.
+            - description: A list of key value pairs that provides contextual information about why an error occured.
         ErrorMessage:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A message describing the error that occured.
+            - description: A message that describes the error.
       description: A tuple that provides information about an error that caused a cluster to terminate.
     ExecutionEngineType:
       type: string
       enum:
         - EMR
+    IAMRoleArn:
+      type: string
+      pattern: '^arn:(aws[a-zA-Z0-9-]*):iam::(\d{12})?:(role((\u002F)|(\u002F[\u0021-\u007F]+\u002F))[\w+=,.@-]+)$'
+      minLength: 20
+      maxLength: 2048
     ExecutionEngineConfig:
       type: object
       required:
@@ -5037,16 +5080,20 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The unique identifier of the execution engine. For an EMR cluster, this is the cluster ID.'
+            - description: 'The unique identifier of the execution engine. For an Amazon EMR cluster, this is the cluster ID.'
         Type:
           allOf:
             - $ref: '#/components/schemas/ExecutionEngineType'
-            - description: The type of execution engine. A value of <code>EMR</code> specifies an EMR cluster.
+            - description: The type of execution engine. A value of <code>EMR</code> specifies an Amazon EMR cluster.
         MasterInstanceSecurityGroupId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'An optional unique ID of an EC2 security group to associate with the master instance of the EMR cluster for this notebook execution. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html">Specifying EC2 Security Groups for EMR Notebooks</a> in the <i>EMR Management Guide</i>.'
-      description: 'Specifies the execution engine (cluster) to run the notebook and perform the notebook execution, for example, an EMR cluster.'
+            - description: 'An optional unique ID of an Amazon EC2 security group to associate with the master instance of the Amazon EMR cluster for this notebook execution. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html">Specifying Amazon EC2 Security Groups for Amazon EMR Notebooks</a> in the <i>EMR Management Guide</i>.'
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleArn'
+            - description: The execution role ARN required for the notebook execution.
+      description: 'Specifies the execution engine (cluster) to run the notebook and perform the notebook execution, for example, an Amazon EMR cluster.'
     FailureDetails:
       type: object
       properties:
@@ -5069,7 +5116,7 @@ components:
         ComputeLimits:
           allOf:
             - $ref: '#/components/schemas/ComputeLimits'
-            - description: The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration.
+            - description: The Amazon EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration.
       description: ' Managed scaling policy for an Amazon EMR cluster. The policy specifies the limits for resources that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
     SessionMappingDetail:
       type: object
@@ -5213,7 +5260,7 @@ components:
         InstanceFleetId:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetId'
-            - description: The unique identifier of the instance fleet to which an EC2 instance belongs.
+            - description: The unique identifier of the instance fleet to which an Amazon EC2 instance belongs.
         Market:
           allOf:
             - $ref: '#/components/schemas/MarketType'
@@ -5221,19 +5268,19 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
-            - description: 'The EC2 instance type, for example <code>m3.xlarge</code>.'
+            - description: 'The Amazon EC2 instance type, for example <code>m3.xlarge</code>.'
         EbsVolumes:
           allOf:
             - $ref: '#/components/schemas/EbsVolumeList'
             - description: The list of Amazon EBS volumes that are attached to this instance.
-      description: Represents an EC2 instance provisioned as part of cluster.
+      description: Represents an Amazon EC2 instance provisioned as part of cluster.
     InstanceFleetStatus:
       type: object
       properties:
         State:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetState'
-            - description: '<p>A code representing the instance fleet status.</p> <ul> <li> <p> <code>PROVISIONING</code>—The instance fleet is provisioning EC2 resources and is not yet ready to run jobs.</p> </li> <li> <p> <code>BOOTSTRAPPING</code>—EC2 instances and other resources have been provisioned and the bootstrap actions specified for the instances are underway.</p> </li> <li> <p> <code>RUNNING</code>—EC2 instances and other resources are running. They are either executing jobs or waiting to execute jobs.</p> </li> <li> <p> <code>RESIZING</code>—A resize operation is underway. EC2 instances are either being added or removed.</p> </li> <li> <p> <code>SUSPENDED</code>—A resize operation could not complete. Existing EC2 instances are running, but instances can''t be added or removed.</p> </li> <li> <p> <code>TERMINATING</code>—The instance fleet is terminating EC2 instances.</p> </li> <li> <p> <code>TERMINATED</code>—The instance fleet is no longer active, and all EC2 instances have been terminated.</p> </li> </ul>'
+            - description: '<p>A code representing the instance fleet status.</p> <ul> <li> <p> <code>PROVISIONING</code>—The instance fleet is provisioning Amazon EC2 resources and is not yet ready to run jobs.</p> </li> <li> <p> <code>BOOTSTRAPPING</code>—Amazon EC2 instances and other resources have been provisioned and the bootstrap actions specified for the instances are underway.</p> </li> <li> <p> <code>RUNNING</code>—Amazon EC2 instances and other resources are running. They are either executing jobs or waiting to execute jobs.</p> </li> <li> <p> <code>RESIZING</code>—A resize operation is underway. Amazon EC2 instances are either being added or removed.</p> </li> <li> <p> <code>SUSPENDED</code>—A resize operation could not complete. Existing Amazon EC2 instances are running, but instances can''t be added or removed.</p> </li> <li> <p> <code>TERMINATING</code>—The instance fleet is terminating Amazon EC2 instances.</p> </li> <li> <p> <code>TERMINATED</code>—The instance fleet is no longer active, and all Amazon EC2 instances have been terminated.</p> </li> </ul>'
         StateChangeReason:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetStateChangeReason'
@@ -5242,7 +5289,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetTimeline'
             - description: 'Provides historical timestamps for the instance fleet, including the time of creation, the time it became ready to run jobs, and the time of termination.'
-      description: '<p>The status of the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>The status of the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceFleetType:
       type: string
       enum:
@@ -5266,8 +5313,8 @@ components:
         OnDemandSpecification:
           allOf:
             - $ref: '#/components/schemas/OnDemandProvisioningSpecification'
-            - description: '<p> The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
-      description: '<p>The launch specification for Spot Instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation strategies are available in Amazon EMR version 5.12.1 and later.</p> </note>'
+            - description: '<p> The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is available in Amazon EMR releases 5.12.1 and later.</p> </note>'
+      description: '<p>The launch specification for Spot Instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation strategies are available in Amazon EMR releases 5.12.1 and later.</p> </note>'
     InstanceFleetResizingSpecifications:
       type: object
       properties:
@@ -5327,7 +5374,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetResizingSpecifications'
             - description: The resize specification for the instance fleet.
-      description: '<p>Describes an instance fleet, which is a group of EC2 instances that host a particular node type (master, core, or task) in an Amazon EMR cluster. Instance fleets can consist of a mix of instance types and On-Demand and Spot Instances, which are provisioned to meet a defined target capacity. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>Describes an instance fleet, which is a group of Amazon EC2 instances that host a particular node type (master, core, or task) in an Amazon EMR cluster. Instance fleets can consist of a mix of instance types and On-Demand and Spot Instances, which are provisioned to meet a defined target capacity. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceTypeConfigList:
       type: array
       items:
@@ -5361,7 +5408,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetResizingSpecifications'
             - description: The resize specification for the instance fleet.
-      description: '<p>Configuration parameters for an instance fleet modification request.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>Configuration parameters for an instance fleet modification request.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     SpotProvisioningSpecification:
       type: object
       required:
@@ -5384,7 +5431,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SpotProvisioningAllocationStrategy'
             - description: ' Specifies the strategy to use in launching Spot Instance fleets. Currently, the only option is capacity-optimized (the default), which launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. '
-      description: '<p>The launch specification for Spot Instances in the instance fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note> <note> <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer available to new customers from July 1, 2021. For customers who have previously used the feature, we will continue to support Spot Instances with a defined duration until December 31, 2022. </p> </note>'
+      description: '<p>The launch specification for Spot Instances in the instance fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation strategy is available in Amazon EMR releases 5.12.1 and later.</p> </note> <note> <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer available to new customers from July 1, 2021. For customers who have previously used the feature, we will continue to support Spot Instances with a defined duration until December 31, 2022. </p> </note>'
     OnDemandProvisioningSpecification:
       type: object
       required:
@@ -5398,7 +5445,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OnDemandCapacityReservationOptions'
             - description: 'The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy.'
-      description: '<p> The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
+      description: '<p> The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is available in Amazon EMR releases 5.12.1 and later.</p> </note>'
     SpotResizingSpecification:
       type: object
       required:
@@ -5447,7 +5494,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: An explanatory message.
-      description: '<p>Provides status change reason details for the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>Provides status change reason details for the instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceFleetTimeline:
       type: object
       properties:
@@ -5463,7 +5510,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: The time and date the instance fleet terminated.
-      description: '<p>Provides historical timestamps for the instance fleet, including the time of creation, the time it became ready to run jobs, and the time of termination.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>Provides historical timestamps for the instance fleet, including the time of creation, the time it became ready to run jobs, and the time of termination.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceGroupId:
       type: string
     InstanceGroupType:
@@ -5526,7 +5573,7 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
-            - description: The EC2 instance type for all instances in the instance group.
+            - description: The Amazon EC2 instance type for all instances in the instance group.
         RequestedInstanceCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -5570,7 +5617,7 @@ components:
         AutoScalingPolicy:
           allOf:
             - $ref: '#/components/schemas/AutoScalingPolicyDescription'
-            - description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.
+            - description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates Amazon EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.
         CustomAmiId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -5596,7 +5643,7 @@ components:
         Market:
           allOf:
             - $ref: '#/components/schemas/MarketType'
-            - description: Market type of the EC2 instances used to create a cluster node.
+            - description: Market type of the Amazon EC2 instances used to create a cluster node.
         InstanceRole:
           allOf:
             - $ref: '#/components/schemas/InstanceRoleType'
@@ -5608,7 +5655,7 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
-            - description: The EC2 instance type for all instances in the instance group.
+            - description: The Amazon EC2 instance type for all instances in the instance group.
         InstanceCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -5616,15 +5663,15 @@ components:
         Configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
-            - description: '<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).</p>'
+            - description: '<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>The list of configurations supplied for an Amazon EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).</p>'
         EbsConfiguration:
           allOf:
             - $ref: '#/components/schemas/EbsConfiguration'
-            - description: EBS configurations that will be attached to each EC2 instance in the instance group.
+            - description: EBS configurations that will be attached to each Amazon EC2 instance in the instance group.
         AutoScalingPolicy:
           allOf:
             - $ref: '#/components/schemas/AutoScalingPolicy'
-            - description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
+            - description: An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates Amazon EC2 instances in response to the value of a CloudWatch metric. See <a>PutAutoScalingPolicy</a>.
         CustomAmiId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -5666,7 +5713,7 @@ components:
         Market:
           allOf:
             - $ref: '#/components/schemas/MarketType'
-            - description: Market type of the EC2 instances used to create a cluster node.
+            - description: Market type of the Amazon EC2 instances used to create a cluster node.
         InstanceRole:
           allOf:
             - $ref: '#/components/schemas/InstanceRoleType'
@@ -5678,7 +5725,7 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
-            - description: EC2 instance type.
+            - description: Amazon EC2 instance type.
         InstanceRequestCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -5745,7 +5792,7 @@ components:
         EC2InstanceIdsToTerminate:
           allOf:
             - $ref: '#/components/schemas/EC2InstanceIdsToTerminateList'
-            - description: 'The EC2 InstanceIds to terminate. After you terminate the instances, the instance group will not return to its original requested size.'
+            - description: 'The Amazon EC2 InstanceIds to terminate. After you terminate the instances, the instance group will not return to its original requested size.'
         ShrinkPolicy:
           allOf:
             - $ref: '#/components/schemas/ShrinkPolicy'
@@ -5878,7 +5925,7 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
-            - description: 'An EC2 instance type, such as <code>m3.xlarge</code>. '
+            - description: 'An Amazon EC2 instance type, such as <code>m3.xlarge</code>. '
         WeightedCapacity:
           allOf:
             - $ref: '#/components/schemas/WholeNumber'
@@ -5886,11 +5933,11 @@ components:
         BidPrice:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%. '
+            - description: 'The bid price for each Amazon EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%. '
         BidPriceAsPercentageOfOnDemandPrice:
           allOf:
             - $ref: '#/components/schemas/NonNegativeDouble'
-            - description: 'The bid price, as a percentage of On-Demand price, for each EC2 Spot Instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%). If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
+            - description: 'The bid price, as a percentage of On-Demand price, for each Amazon EC2 Spot Instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%). If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
         EbsConfiguration:
           allOf:
             - $ref: '#/components/schemas/EbsConfiguration'
@@ -5903,14 +5950,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
             - description: The custom AMI ID to use for the instance type.
-      description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. When you use an allocation strategy, you can include a maximum of 30 instance type configurations for a fleet. For more information about how to use an allocation strategy, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html">Configure Instance Fleets</a>. Without an allocation strategy, you may specify a maximum of five instance type configurations for a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the Amazon EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. When you use an allocation strategy, you can include a maximum of 30 instance type configurations for a fleet. For more information about how to use an allocation strategy, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html">Configure Instance Fleets</a>. Without an allocation strategy, you may specify a maximum of five instance type configurations for a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceTypeSpecification:
       type: object
       properties:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
-            - description: 'The EC2 instance type, for example <code>m3.xlarge</code>.'
+            - description: 'The Amazon EC2 instance type, for example <code>m3.xlarge</code>.'
         WeightedCapacity:
           allOf:
             - $ref: '#/components/schemas/WholeNumber'
@@ -5918,11 +5965,11 @@ components:
         BidPrice:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD.
+            - description: The bid price for each Amazon EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD.
         BidPriceAsPercentageOfOnDemandPrice:
           allOf:
             - $ref: '#/components/schemas/NonNegativeDouble'
-            - description: 'The bid price, as a percentage of On-Demand price, for each EC2 Spot Instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%).'
+            - description: 'The bid price, as a percentage of On-Demand price, for each Amazon EC2 Spot Instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%).'
         Configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
@@ -5939,7 +5986,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
             - description: The custom AMI ID to use for the instance type.
-      description: '<p>The configuration specification for each instance type in an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>The configuration specification for each instance type in an instance fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     JobFlowExecutionStatusDetail:
       type: object
       required:
@@ -6062,7 +6109,7 @@ components:
         LogEncryptionKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: 'The KMS key used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.'
+            - description: 'The KMS key used for encrypting log files. This attribute is only available with Amazon EMR 5.30.0 and later, excluding 6.0.0.'
         AmiVersion:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -6090,11 +6137,11 @@ components:
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Amazon Web Services Management Console.</p>'
+            - description: '<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform Amazon EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p> <p>The default value is <code>true</code> if a value is not provided when creating a cluster using the Amazon EMR API <a>RunJobFlow</a> command, the CLI <a href="https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html">create-cluster</a> command, or the Amazon Web Services Management Console.</p>'
         JobFlowRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The IAM role that was specified when the job flow was launched. The EC2 instances of the job flow assume this role.
+            - description: The IAM role that was specified when the job flow was launched. The Amazon EC2 instances of the job flow assume this role.
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -6102,11 +6149,11 @@ components:
         AutoScalingRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides a way for the automatic scaling feature to get the required permissions it needs to launch and terminate EC2 instances in an instance group.
+            - description: An IAM role for automatic scaling policies. The default role is <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides a way for the automatic scaling feature to get the required permissions it needs to launch and terminate Amazon EC2 instances in an instance group.
         ScaleDownBehavior:
           allOf:
             - $ref: '#/components/schemas/ScaleDownBehavior'
-            - description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
+            - description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR earlier than 5.1.0.'
       description: A description of a cluster (job flow).
     JobFlowExecutionState:
       type: string
@@ -6130,7 +6177,7 @@ components:
         AvailabilityZones:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256List'
-            - description: '<p>When multiple Availability Zones are specified, Amazon EMR evaluates them and launches instances in the optimal Availability Zone. <code>AvailabilityZones</code> is used for instance fleets, while <code>AvailabilityZone</code> (singular) is used for uniform instance groups.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+            - description: '<p>When multiple Availability Zones are specified, Amazon EMR evaluates them and launches instances in the optimal Availability Zone. <code>AvailabilityZones</code> is used for instance fleets, while <code>AvailabilityZone</code> (singular) is used for uniform instance groups.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
       description: The Amazon EC2 Availability Zone configuration of the cluster (job flow).
     SecurityGroupsList:
       type: array
@@ -6142,15 +6189,15 @@ components:
         MasterInstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
-            - description: The EC2 instance type of the master node.
+            - description: The Amazon EC2 instance type of the master node.
         SlaveInstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
-            - description: The EC2 instance type of the core and task nodes.
+            - description: The Amazon EC2 instance type of the core and task nodes.
         InstanceCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of EC2 instances in the cluster.
+            - description: The number of Amazon EC2 instances in the cluster.
         InstanceGroups:
           allOf:
             - $ref: '#/components/schemas/InstanceGroupConfigList'
@@ -6158,11 +6205,11 @@ components:
         InstanceFleets:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetConfigList'
-            - description: '<note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note> <p>Describes the EC2 instances and instance configurations for clusters that use the instance fleet configuration.</p>'
+            - description: '<note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note> <p>Describes the Amazon EC2 instances and instance configurations for clusters that use the instance fleet configuration.</p>'
         Ec2KeyName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The name of the EC2 key pair that can be used to connect to the master node using SSH as the user called "hadoop."
+            - description: The name of the Amazon EC2 key pair that can be used to connect to the master node using SSH as the user called "hadoop."
         Placement:
           allOf:
             - $ref: '#/components/schemas/PlacementType'
@@ -6186,7 +6233,7 @@ components:
         Ec2SubnetIds:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256List'
-            - description: '<p>Applies to clusters that use the instance fleet configuration. When multiple EC2 subnet IDs are specified, Amazon EMR evaluates them and launches instances in the optimal subnet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+            - description: '<p>Applies to clusters that use the instance fleet configuration. When multiple Amazon EC2 subnet IDs are specified, Amazon EMR evaluates them and launches instances in the optimal subnet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
         EmrManagedMasterSecurityGroup:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -6294,11 +6341,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringList'
             - description: The list of user-supplied arguments.
-      description: The list of supported product configurations that allow user-supplied arguments. EMR accepts these arguments and forwards them to the corresponding installation script as bootstrap action arguments.
+      description: The list of supported product configurations that allow user-supplied arguments. Amazon EMR accepts these arguments and forwards them to the corresponding installation script as bootstrap action arguments.
     NewSupportedProductsList:
       type: array
       items:
         $ref: '#/components/schemas/SupportedProductConfig'
+    NotebookS3LocationForOutput:
+      type: object
+      properties:
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon S3 bucket that stores the notebook execution input.
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/UriString'
+            - description: The key to the Amazon S3 location that stores the notebook execution input.
+      description: The Amazon S3 location that stores the notebook execution input.
+    OutputNotebookS3LocationForOutput:
+      type: object
+      properties:
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon S3 bucket that stores the notebook execution output.
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/UriString'
+            - description: The key to the Amazon S3 location that stores the notebook execution output.
+      description: The Amazon S3 location that stores the notebook execution output.
+    OutputNotebookFormat:
+      type: string
+      enum:
+        - HTML
     NotebookExecutionSummary:
       type: object
       properties:
@@ -6326,7 +6401,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: The timestamp when notebook execution started.
+        NotebookS3Location:
+          allOf:
+            - $ref: '#/components/schemas/NotebookS3LocationForOutput'
+            - description: The Amazon S3 location that stores the notebook execution input.
+        ExecutionEngineId:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The unique ID of the execution engine for the notebook execution.
       description: Details for a notebook execution. The details include information such as the unique ID and status of the notebook execution.
+    UriString:
+      type: string
+      pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\r\n\t]*'
+      minLength: 1
+      maxLength: 10280
+    NotebookS3LocationFromInput:
+      type: object
+      properties:
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon S3 bucket that stores the notebook execution input.
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/UriString'
+            - description: The key to the Amazon S3 location that stores the notebook execution input.
+      description: The Amazon S3 location that stores the notebook execution input.
     OSRelease:
       type: object
       properties:
@@ -6364,6 +6464,18 @@ components:
       type: string
       enum:
         - lowest-price
+    OutputNotebookS3LocationFromInput:
+      type: object
+      properties:
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon S3 bucket that stores the notebook execution output.
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/UriString'
+            - description: The key to the Amazon S3 location that stores the notebook execution output.
+      description: The Amazon S3 location that stores the notebook execution output.
     PlacementGroupStrategy:
       type: string
       enum:
@@ -6379,12 +6491,12 @@ components:
         InstanceRole:
           allOf:
             - $ref: '#/components/schemas/InstanceRoleType'
-            - description: '<p>Role of the instance in the cluster.</p> <p>Starting with Amazon EMR version 5.23.0, the only supported instance role is <code>MASTER</code>.</p>'
+            - description: '<p>Role of the instance in the cluster.</p> <p>Starting with Amazon EMR release 5.23.0, the only supported instance role is <code>MASTER</code>.</p>'
         PlacementStrategy:
           allOf:
             - $ref: '#/components/schemas/PlacementGroupStrategy'
-            - description: '<p>EC2 Placement Group strategy associated with instance role.</p> <p>Starting with Amazon EMR version 5.23.0, the only supported placement strategy is <code>SPREAD</code> for the <code>MASTER</code> instance role.</p>'
-      description: '<p>Placement group configuration for an Amazon EMR cluster. The configuration specifies the placement strategy that can be applied to instance roles during cluster creation.</p> <p>To use this configuration, consider attaching managed policy AmazonElasticMapReducePlacementGroupPolicy to the EMR role.</p>'
+            - description: '<p>Amazon EC2 Placement Group strategy associated with instance role.</p> <p>Starting with Amazon EMR release 5.23.0, the only supported placement strategy is <code>SPREAD</code> for the <code>MASTER</code> instance role.</p>'
+      description: '<p>Placement group configuration for an Amazon EMR cluster. The configuration specifies the placement strategy that can be applied to instance roles during cluster creation.</p> <p>To use this configuration, consider attaching managed policy AmazonElasticMapReducePlacementGroupPolicy to the Amazon EMR role.</p>'
     Port:
       type: integer
       minimum: -1
@@ -6411,16 +6523,16 @@ components:
         AdjustmentType:
           allOf:
             - $ref: '#/components/schemas/AdjustmentType'
-            - description: 'The way in which EC2 instances are added (if <code>ScalingAdjustment</code> is a positive number) or terminated (if <code>ScalingAdjustment</code> is a negative number) each time the scaling activity is triggered. <code>CHANGE_IN_CAPACITY</code> is the default. <code>CHANGE_IN_CAPACITY</code> indicates that the EC2 instance count increments or decrements by <code>ScalingAdjustment</code>, which should be expressed as an integer. <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance group with the number of EC2 instances specified by <code>ScalingAdjustment</code>, which should be expressed as a positive integer.'
+            - description: 'The way in which Amazon EC2 instances are added (if <code>ScalingAdjustment</code> is a positive number) or terminated (if <code>ScalingAdjustment</code> is a negative number) each time the scaling activity is triggered. <code>CHANGE_IN_CAPACITY</code> is the default. <code>CHANGE_IN_CAPACITY</code> indicates that the Amazon EC2 instance count increments or decrements by <code>ScalingAdjustment</code>, which should be expressed as an integer. <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance group with the number of Amazon EC2 instances specified by <code>ScalingAdjustment</code>, which should be expressed as a positive integer.'
         ScalingAdjustment:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'The amount by which to scale in or scale out, based on the specified <code>AdjustmentType</code>. A positive value adds to the instance group''s EC2 instance count while a negative number removes instances. If <code>AdjustmentType</code> is set to <code>EXACT_CAPACITY</code>, the number should only be a positive integer. If <code>AdjustmentType</code> is set to <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value should express the percentage as an integer. For example, -20 indicates a decrease in 20% increments of cluster capacity.'
+            - description: 'The amount by which to scale in or scale out, based on the specified <code>AdjustmentType</code>. A positive value adds to the instance group''s Amazon EC2 instance count while a negative number removes instances. If <code>AdjustmentType</code> is set to <code>EXACT_CAPACITY</code>, the number should only be a positive integer. If <code>AdjustmentType</code> is set to <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value should express the percentage as an integer. For example, -20 indicates a decrease in 20% increments of cluster capacity.'
         CoolDown:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: 'The amount of time, in seconds, after a scaling activity completes before any further trigger-related scaling activities can start. The default value is 0.'
-      description: 'An automatic scaling configuration, which describes how the policy adds or removes instances, the cooldown period, and the number of EC2 instances that will be added each time the CloudWatch metric alarm condition is satisfied.'
+      description: 'An automatic scaling configuration, which describes how the policy adds or removes instances, the cooldown period, and the number of Amazon EC2 instances that will be added each time the CloudWatch metric alarm condition is satisfied.'
     ScalingAction:
       type: object
       required:
@@ -6468,7 +6580,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScalingTrigger'
             - description: The CloudWatch alarm definition that determines when automatic scaling activity is triggered.
-      description: 'A scale-in or scale-out rule that defines scaling activity, including the CloudWatch metric alarm that triggers activity, how EC2 instances are added or removed, and the periodicity of adjustments. The automatic scaling policy for an instance group can comprise one or more automatic scaling rules.'
+      description: 'A scale-in or scale-out rule that defines scaling activity, including the CloudWatch metric alarm that triggers activity, how Amazon EC2 instances are added or removed, and the periodicity of adjustments. The automatic scaling policy for an instance group can comprise one or more automatic scaling rules.'
     SecurityConfigurationSummary:
       type: object
       properties:

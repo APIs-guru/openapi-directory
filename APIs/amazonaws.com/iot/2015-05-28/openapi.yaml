@@ -2982,6 +2982,14 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Tag'
+                tlsConfig:
+                  description: An object that specifies the TLS configuration for a domain.
+                  type: object
+                  properties:
+                    securityPolicy:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityPolicy'
+                        - description: 'The security policy for a domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3192,6 +3200,14 @@ paths:
                 removeAuthorizerConfig:
                   description: Removes the authorization configuration from a domain.
                   type: boolean
+                tlsConfig:
+                  description: An object that specifies the TLS configuration for a domain.
+                  type: object
+                  properties:
+                    securityPolicy:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityPolicy'
+                        - description: 'The security policy for a domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.'
   '/dynamic-thing-groups/{thingGroupName}':
     post:
       operationId: CreateDynamicThingGroup
@@ -3972,7 +3988,7 @@ paths:
                     $ref: '#/components/schemas/TargetArn'
                   minItems: 1
                 documentSource:
-                  description: '<p>An S3 link to the job document. Required if you don''t specify a value for <code>document</code>.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
+                  description: '<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don''t specify a value for <code>document</code>.</p> <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a bucket</a>.</p>'
                   type: string
                   minLength: 1
                   maxLength: 1350
@@ -3992,7 +4008,7 @@ paths:
                     roleArn:
                       allOf:
                         - $ref: '#/components/schemas/RoleArn'
-                        - description: '<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>'
+                        - description: '<p>The ARN of an IAM role that grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>'
                     expiresInSec:
                       allOf:
                         - $ref: '#/components/schemas/ExpiresInSec'
@@ -4262,7 +4278,7 @@ paths:
                     roleArn:
                       allOf:
                         - $ref: '#/components/schemas/RoleArn'
-                        - description: '<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>'
+                        - description: '<p>The ARN of an IAM role that grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>'
                     expiresInSec:
                       allOf:
                         - $ref: '#/components/schemas/ExpiresInSec'
@@ -4393,7 +4409,7 @@ paths:
                     roleArn:
                       allOf:
                         - $ref: '#/components/schemas/RoleArn'
-                        - description: '<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>'
+                        - description: '<p>The ARN of an IAM role that grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>'
                     expiresInSec:
                       allOf:
                         - $ref: '#/components/schemas/ExpiresInSec'
@@ -17908,6 +17924,10 @@ components:
       maxLength: 128
     AllowAuthorizerOverride:
       type: boolean
+    SecurityPolicy:
+      type: string
+      pattern: '[\s\S]*'
+      maxLength: 128
     CertificateValidationException: {}
     CreateDynamicThingGroupResponse:
       type: object
@@ -19040,6 +19060,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateType'
             - description: The date and time the domain configuration's status was last changed.
+        tlsConfig:
+          allOf:
+            - $ref: '#/components/schemas/TlsConfig'
+            - description: An object that specifies the TLS configuration for a domain.
     DescribeEndpointResponse:
       type: object
       properties:
@@ -23583,6 +23607,14 @@ components:
         - DATA
         - CREDENTIAL_PROVIDER
         - JOBS
+    TlsConfig:
+      type: object
+      properties:
+        securityPolicy:
+          allOf:
+            - $ref: '#/components/schemas/SecurityPolicy'
+            - description: 'The security policy for a domain configuration. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/transport-security.html#tls-policy-table">Security policies </a> in the <i>Amazon Web Services IoT Core developer guide</i>.'
+      description: An object that specifies the TLS configuration for a domain.
     CreateDomainConfigurationRequest:
       type: object
       title: CreateDomainConfigurationRequest
@@ -23611,6 +23643,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: '<p>Metadata which can be used to manage the domain configuration.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: &amp;&amp;tags "key1=value1&amp;key2=value2..."</p> <p>For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..."</p> </note>'
+        tlsConfig:
+          allOf:
+            - $ref: '#/components/schemas/TlsConfig'
+            - description: An object that specifies the TLS configuration for a domain.
     DomainConfigurationArn:
       type: string
     ThingGroupProperties:
@@ -23769,7 +23805,7 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: '<p>The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>'
+            - description: '<p>The ARN of an IAM role that grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.</p> <important> <p>For information about addressing the confused deputy problem, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/cross-service-confused-deputy-prevention.html">cross-service confused deputy prevention</a> in the <i>Amazon Web Services IoT Core developer guide</i>.</p> </important>'
         expiresInSec:
           allOf:
             - $ref: '#/components/schemas/ExpiresInSec'
@@ -23852,7 +23888,7 @@ components:
         documentSource:
           allOf:
             - $ref: '#/components/schemas/JobDocumentSource'
-            - description: '<p>An S3 link to the job document. Required if you don''t specify a value for <code>document</code>.</p> <note> <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p> <p>The placeholder link is of the following form:</p> <p> <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code> </p> <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p> </note>'
+            - description: '<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don''t specify a value for <code>document</code>.</p> <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a bucket</a>.</p>'
         document:
           allOf:
             - $ref: '#/components/schemas/JobDocument'
@@ -28590,6 +28626,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RemoveAuthorizerConfig'
             - description: Removes the authorization configuration from a domain.
+        tlsConfig:
+          allOf:
+            - $ref: '#/components/schemas/TlsConfig'
+            - description: An object that specifies the TLS configuration for a domain.
     UpdateDynamicThingGroupRequest:
       type: object
       required:

@@ -698,6 +698,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TrustedAdvisorIntegrationStatus'
                         - description: Discovery integration status in respect to Trusted Advisor for the workload.
+                    WorkloadResourceDefinition:
+                      allOf:
+                        - $ref: '#/components/schemas/WorkloadResourceDefinition'
+                        - description: '<p>The mode to use for identifying resources associated with the workload.</p> <p>You can specify <code>WORKLOAD_METADATA</code>, <code>APP_REGISTRY</code>, or both.</p>'
                 Applications:
                   description: List of AppRegistry application ARNs associated to the workload.
                   type: array
@@ -2245,6 +2249,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TrustedAdvisorIntegrationStatus'
                         - description: Discovery integration status in respect to Trusted Advisor for the workload.
+                    WorkloadResourceDefinition:
+                      allOf:
+                        - $ref: '#/components/schemas/WorkloadResourceDefinition'
+                        - description: '<p>The mode to use for identifying resources associated with the workload.</p> <p>You can specify <code>WORKLOAD_METADATA</code>, <code>APP_REGISTRY</code>, or both.</p>'
                 Applications:
                   description: List of AppRegistry application ARNs to associate to the workload.
                   type: array
@@ -3386,7 +3394,7 @@ paths:
   /global-settings:
     patch:
       operationId: UpdateGlobalSettings
-      description: Updates whether the Amazon Web Services account is opted into organization sharing features.
+      description: Updates whether the Amazon Web Services account is opted into organization sharing and discovery integration features.
       responses:
         '200':
           description: Success
@@ -3430,6 +3438,12 @@ paths:
               properties:
                 OrganizationSharingStatus:
                   description: The status of organization sharing settings.
+                  type: string
+                  enum:
+                    - ENABLED
+                    - DISABLED
+                DiscoveryIntegrationStatus:
+                  description: The status of discovery support settings.
                   type: string
                   enum:
                     - ENABLED
@@ -3815,6 +3829,10 @@ components:
       enum:
         - ENABLED
         - DISABLED
+    WorkloadResourceDefinition:
+      type: array
+      items:
+        $ref: '#/components/schemas/DefinitionType'
     ApplicationArn:
       type: string
       pattern: 'arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:/applications/[a-z0-9]+'
@@ -4803,6 +4821,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TrustedAdvisorIntegrationStatus'
             - description: Discovery integration status in respect to Trusted Advisor for the workload.
+        WorkloadResourceDefinition:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadResourceDefinition'
+            - description: '<p>The mode to use for identifying resources associated with the workload.</p> <p>You can specify <code>WORKLOAD_METADATA</code>, <code>APP_REGISTRY</code>, or both.</p>'
       description: Discovery configuration associated to the workload.
     WorkloadApplications:
       type: array
@@ -4881,6 +4903,11 @@ components:
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
       description: Input for Create Workload Share
+    DefinitionType:
+      type: string
+      enum:
+        - WORKLOAD_METADATA
+        - APP_REGISTRY
     LensStatusType:
       type: string
       enum:
@@ -4920,6 +4947,11 @@ components:
         LensAliases:
           $ref: '#/components/schemas/LensAliases'
       description: Input to disassociate lens reviews.
+    DiscoveryIntegrationStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
     ExportLensInput:
       type: object
       title: ExportLensInput
@@ -5783,6 +5815,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrganizationSharingStatus'
             - description: The status of organization sharing settings.
+        DiscoveryIntegrationStatus:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryIntegrationStatus'
+            - description: The status of discovery support settings.
     UpdateLensReviewInput:
       type: object
       title: UpdateLensReviewInput

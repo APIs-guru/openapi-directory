@@ -520,7 +520,7 @@ paths:
                   minLength: 1
                   maxLength: 4096
                 maxResults:
-                  description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is less than 1 MB.</p> </li> <li> <p>The number of data points in the result set is less than the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
+                  description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is equal to 1 MB.</p> </li> <li> <p>The number of data points in the result set is equal to the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
                   type: integer
                   minimum: 1
     parameters:
@@ -670,7 +670,7 @@ paths:
                   minLength: 1
                   maxLength: 4096
                 maxResults:
-                  description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is less than 1 MB.</p> </li> <li> <p>The number of data points in the result set is less than the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
+                  description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is equal to 4 MB.</p> </li> <li> <p>The number of data points in the result set is equal to the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 20000.</p> </li> </ul>'
                   type: integer
                   minimum: 1
     parameters:
@@ -4363,9 +4363,9 @@ paths:
           description: The time interval over which to aggregate data.
           schema:
             type: string
-            pattern: 1m|1h|1d
+            pattern: 1m|15m|1h|1d
             minLength: 2
-            maxLength: 2
+            maxLength: 3
         - name: qualities
           in: query
           required: false
@@ -4411,11 +4411,10 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: '<p>The maximum number of results to return for each paginated request.</p> <p>Default: 100</p>'
+          description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is equal to 1 MB.</p> </li> <li> <p>The number of data points in the result set is equal to the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 250.</p> </li> </ul>'
           schema:
             type: integer
             minimum: 1
-            maximum: 250
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4615,11 +4614,10 @@ paths:
         - name: maxResults
           in: query
           required: false
-          description: '<p>The maximum number of results to return for each paginated request.</p> <p>Default: 100</p>'
+          description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is equal to 4 MB.</p> </li> <li> <p>The number of data points in the result set is equal to the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 20000.</p> </li> </ul>'
           schema:
             type: integer
             minimum: 1
-            maximum: 250
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8230,9 +8228,9 @@ components:
       maxLength: 64
     Resolution:
       type: string
-      pattern: 1m|1h|1d
+      pattern: 1m|15m|1h|1d
       minLength: 2
-      maxLength: 2
+      maxLength: 3
     Qualities:
       type: array
       items:
@@ -8316,7 +8314,7 @@ components:
         maxResults:
           allOf:
             - $ref: '#/components/schemas/BatchGetAssetPropertyAggregatesMaxResults'
-            - description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is less than 1 MB.</p> </li> <li> <p>The number of data points in the result set is less than the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
+            - description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is equal to 1 MB.</p> </li> <li> <p>The number of data points in the result set is equal to the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
     BatchGetAssetPropertyAggregatesSuccessEntries:
       type: array
       items:
@@ -8477,7 +8475,7 @@ components:
         maxResults:
           allOf:
             - $ref: '#/components/schemas/BatchGetAssetPropertyValueHistoryMaxResults'
-            - description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is less than 1 MB.</p> </li> <li> <p>The number of data points in the result set is less than the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 4000.</p> </li> </ul>'
+            - description: '<p>The maximum number of results to return for each paginated request. A result set is returned in the two cases, whichever occurs first.</p> <ul> <li> <p>The size of the result set is equal to 4 MB.</p> </li> <li> <p>The number of data points in the result set is equal to the value of <code>maxResults</code>. The maximum value of <code>maxResults</code> is 20000.</p> </li> </ul>'
     BatchGetAssetPropertyValueHistorySuccessEntries:
       type: array
       items:
@@ -9487,14 +9485,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/GatewaySummary'
-    MaxResults:
+    GetAssetPropertyValueAggregatesMaxResults:
       type: integer
       minimum: 1
-      maximum: 250
     GetAssetPropertyAggregatesRequest:
       type: object
       title: GetAssetPropertyAggregatesRequest
       properties: {}
+    GetAssetPropertyValueHistoryMaxResults:
+      type: integer
+      minimum: 1
     GetAssetPropertyValueHistoryRequest:
       type: object
       title: GetAssetPropertyValueHistoryRequest
@@ -9603,6 +9603,10 @@ components:
       enum:
         - PORTAL
         - PROJECT
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 250
     ListAccessPoliciesRequest:
       type: object
       title: ListAccessPoliciesRequest

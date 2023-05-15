@@ -115,6 +115,77 @@ servers:
     description: The Amazon Appflow endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /cancel-flow-executions:
+    post:
+      operationId: CancelFlowExecutions
+      description: '<p>Cancels active runs for a flow.</p> <p>You can cancel all of the active runs for a flow, or you can cancel specific runs by providing their IDs.</p> <p>You can cancel a flow run only when the run is in progress. You can''t cancel a run that has already completed or failed. You also can''t cancel a run that''s scheduled to occur but hasn''t started yet. To prevent a scheduled run, you can deactivate the flow with the <code>StopFlow</code> action.</p> <p>You cannot resume a run after you cancel it.</p> <p>When you send your request, the status for each run becomes <code>CancelStarted</code>. When the cancellation completes, the status becomes <code>Canceled</code>.</p> <note> <p>When you cancel a run, you still incur charges for any data that the run already processed before the cancellation. If the run had already written some data to the flow destination, then that data remains in the destination. If you configured the flow to use a batch API (such as the Salesforce Bulk API 2.0), then the run will finish reading or writing its entire batch of data after the cancellation. For these operations, the data processing charges for Amazon AppFlow apply. For the pricing information, see <a href="http://aws.amazon.com/appflow/pricing/">Amazon AppFlow pricing</a>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelFlowExecutionsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - flowName
+              properties:
+                flowName:
+                  description: The name of a flow with active runs that you want to cancel.
+                  type: string
+                  pattern: '[a-zA-Z0-9][\w!@#.-]+'
+                  maxLength: 256
+                executionIds:
+                  description: '<p>The ID of each active run to cancel. These runs must belong to the flow you specify in your request.</p> <p>If you omit this parameter, your request ends all active runs that belong to the flow.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ExecutionId'
+                  minItems: 0
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /create-connector-profile:
     post:
       operationId: CreateConnectorProfile
@@ -2052,6 +2123,22 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CancelFlowExecutionsResponse:
+      type: object
+      properties:
+        invalidExecutions:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionIds'
+            - description: The IDs of runs that Amazon AppFlow couldn't cancel. These runs might be ineligible for canceling because they haven't started yet or have already completed.
+    ExecutionId:
+      type: string
+      pattern: \S+
+      maxLength: 256
+    ValidationException: {}
+    AccessDeniedException: {}
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    InternalServerException: {}
     CreateConnectorProfileResponse:
       type: object
       properties:
@@ -2213,11 +2300,9 @@ components:
             - $ref: '#/components/schemas/PardotConnectorProfileCredentials'
             - description: The connector-specific credentials required when using Salesforce Pardot.
       description: ' The connector-specific credentials required by a connector. '
-    ValidationException: {}
     ConflictException: {}
     ServiceQuotaExceededException: {}
     ConnectorAuthenticationException: {}
-    InternalServerException: {}
     CreateFlowResponse:
       type: object
       properties:
@@ -2428,7 +2513,6 @@ components:
             - $ref: '#/components/schemas/GlueDataCatalogTablePrefix'
             - description: A naming prefix for each Data Catalog table that Amazon AppFlow creates for the flow that you configure with this setting. Amazon AppFlow adds the prefix to the beginning of the each table name.
       description: '<p>Specifies the configuration that Amazon AppFlow uses when it catalogs your data with the Glue Data Catalog. When Amazon AppFlow catalogs your data, it stores metadata in Data Catalog tables. This metadata represents the data that''s transferred by the flow that you configure with these settings.</p> <note> <p>You can configure a flow with these settings only when the flow destination is Amazon S3.</p> </note>'
-    ResourceNotFoundException: {}
     ConnectorServerException: {}
     DeleteConnectorProfileResponse:
       type: object
@@ -2627,8 +2711,6 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: Lambda ARN of the connector being registered.
       description: Contains information about the configuration of the lambda which is being registered as the connector.
-    AccessDeniedException: {}
-    ThrottlingException: {}
     StartFlowResponse:
       type: object
       properties:
@@ -2980,6 +3062,30 @@ components:
       type: string
       pattern: \S+
       maxLength: 18
+    FlowName:
+      type: string
+      pattern: '[a-zA-Z0-9][\w!@#.-]+'
+      maxLength: 256
+    ExecutionIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExecutionId'
+      minItems: 0
+      maxItems: 100
+    CancelFlowExecutionsRequest:
+      type: object
+      required:
+        - flowName
+      title: CancelFlowExecutionsRequest
+      properties:
+        flowName:
+          allOf:
+            - $ref: '#/components/schemas/FlowName'
+            - description: The name of a flow with active runs that you want to cancel.
+        executionIds:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionIds'
+            - description: '<p>The ID of each active run to cancel. These runs must belong to the flow you specify in your request.</p> <p>If you omit this parameter, your request ends all active runs that belong to the flow.</p>'
     CatalogType:
       type: string
       enum:
@@ -3545,6 +3651,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SalesforceDataTransferApiList'
             - description: The Salesforce APIs that you can have Amazon AppFlow use when your flows transfers data to or from Salesforce.
+        oauth2GrantTypesSupported:
+          allOf:
+            - $ref: '#/components/schemas/OAuth2GrantTypeSupportedList'
+            - description: '<p>The OAuth 2.0 grant types that Amazon AppFlow can use when it requests an access token from Salesforce. Amazon AppFlow requires an access token each time it attempts to access your Salesforce records.</p> <dl> <dt>AUTHORIZATION_CODE</dt> <dd> <p>Amazon AppFlow passes an authorization code when it requests the access token from Salesforce. Amazon AppFlow receives the authorization code from Salesforce after you log in to your Salesforce account and authorize Amazon AppFlow to access your records.</p> </dd> <dt>CLIENT_CREDENTIALS</dt> <dd> <p>Amazon AppFlow passes client credentials (a client ID and client secret) when it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.</p> </dd> <dt>JWT_BEARER</dt> <dd> <p>Amazon AppFlow passes a JSON web token (JWT) when it requests the access token from Salesforce. You provide the JWT to Amazon AppFlow when you define the connection to your Salesforce account. When you use this grant type, you don''t need to log in to your Salesforce account to authorize Amazon AppFlow to access your records.</p> </dd> </dl>'
       description: ' The connector metadata specific to Salesforce. '
     ServiceNowMetadata:
       type: object
@@ -4240,6 +4350,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientCredentialsArn'
             - description: ' The secret manager ARN, which contains the client ID and client secret of the connected app. '
+        oAuth2GrantType:
+          allOf:
+            - $ref: '#/components/schemas/OAuth2GrantType'
+            - description: '<p>Specifies the OAuth 2.0 grant type that Amazon AppFlow uses when it requests an access token from Salesforce. Amazon AppFlow requires an access token each time it attempts to access your Salesforce records.</p> <p>You can specify one of the following values:</p> <dl> <dt>AUTHORIZATION_CODE</dt> <dd> <p>Amazon AppFlow passes an authorization code when it requests the access token from Salesforce. Amazon AppFlow receives the authorization code from Salesforce after you log in to your Salesforce account and authorize Amazon AppFlow to access your records.</p> </dd> <dt>CLIENT_CREDENTIALS</dt> <dd> <p>Amazon AppFlow passes client credentials (a client ID and client secret) when it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.</p> </dd> <dt>JWT_BEARER</dt> <dd> <p>Amazon AppFlow passes a JSON web token (JWT) when it requests the access token from Salesforce. You provide the JWT to Amazon AppFlow when you define the connection to your Salesforce account. When you use this grant type, you don''t need to log in to your Salesforce account to authorize Amazon AppFlow to access your records.</p> </dd> </dl>'
+        jwtToken:
+          allOf:
+            - $ref: '#/components/schemas/JwtToken'
+            - description: A JSON web token (JWT) that authorizes Amazon AppFlow to access your Salesforce records.
       description: ' The connector-specific profile credentials required when using Salesforce. '
     ServiceNowConnectorProfileCredentials:
       type: object
@@ -4762,10 +4880,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>CreateConnectorProfile</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>CreateConnectorProfile</code>. The token is active for 8 hours.</p>'
-    FlowName:
-      type: string
-      pattern: '[a-zA-Z0-9][\w!@#.-]+'
-      maxLength: 256
     FlowDescription:
       type: string
       pattern: '[\w!@#\-.?,\s]*'
@@ -5596,10 +5710,8 @@ components:
         - InProgress
         - Successful
         - Error
-    ExecutionId:
-      type: string
-      pattern: \S+
-      maxLength: 256
+        - CancelStarted
+        - Canceled
     ExecutionResult:
       type: object
       properties:
@@ -5837,6 +5949,11 @@ components:
       description: ' The properties that are applied when Infor Nexus is being used as a source. '
     JavaBoolean:
       type: boolean
+    JwtToken:
+      type: string
+      pattern: '^([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_\-\+\/=]*)'
+      maxLength: 8000
+      format: password
     ListEntitiesMaxResults:
       type: integer
       minimum: 1
@@ -6001,6 +6118,7 @@ components:
       enum:
         - CLIENT_CREDENTIALS
         - AUTHORIZATION_CODE
+        - JWT_BEARER
     TokenUrl:
       type: string
       pattern: '^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]'

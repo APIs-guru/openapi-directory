@@ -3521,6 +3521,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GeneratedSceneMetadataMap'
             - description: The generated scene metadata.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/SceneError'
+            - description: The SceneResponse error.
     GetSyncJobResponse:
       type: object
       required:
@@ -4944,6 +4948,18 @@ components:
       type: object
       title: GetSceneRequest
       properties: {}
+    SceneError:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/SceneErrorCode'
+            - description: The SceneError code.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: The SceneError message.
+      description: The scene error.
     GetSyncJobRequest:
       type: object
       title: GetSyncJobRequest
@@ -5347,6 +5363,10 @@ components:
             - $ref: '#/components/schemas/RowData'
             - description: The data in a row of query results.
       description: Represents a single row in the query results.
+    SceneErrorCode:
+      type: string
+      enum:
+        - MATTERPORT_ERROR
     SceneSummary:
       type: object
       required:

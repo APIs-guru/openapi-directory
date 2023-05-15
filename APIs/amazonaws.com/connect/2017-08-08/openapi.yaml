@@ -1655,7 +1655,7 @@ paths:
   '/evaluation-forms/{InstanceId}':
     put:
       operationId: CreateEvaluationForm
-      description: 'Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form.'
+      description: 'Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define questions related to agent performance, and create sections to organize such questions. Question and section identifiers cannot be duplicated within the same evaluation form.'
       responses:
         '200':
           description: Success
@@ -1719,7 +1719,7 @@ paths:
                 - Items
               properties:
                 Title:
-                  description: A unique title of the evaluation form.
+                  description: A title of the evaluation form.
                   type: string
                   minLength: 0
                   maxLength: 128
@@ -2281,30 +2281,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidRequestException'
         '481':
-          description: InvalidParameterException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '482':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
-        '483':
+        '482':
           description: InternalServiceException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServiceException'
-        '484':
+        '483':
           description: ServiceQuotaExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '485':
+        '484':
           description: ThrottlingException
           content:
             application/json:
@@ -2988,6 +2982,7 @@ paths:
               - OnZendeskTicketCreate
               - OnZendeskTicketStatusUpdate
               - OnSalesforceCaseCreate
+              - OnContactEvaluationSubmit
         - name: maxResults
           in: query
           required: false
@@ -4664,7 +4659,7 @@ paths:
             minimum: 1
     put:
       operationId: UpdateEvaluationForm
-      description: <p>Updates details about a specific evaluation form version in the specified Amazon Connect instance. An evaluation form must have a unique title within an instance. Question and section identifiers cannot be duplicated within the same evaluation form.</p> <p>This operation does not support partial updates. Instead it does a full update of evaluation form content.</p>
+      description: <p>Updates details about a specific evaluation form version in the specified Amazon Connect instance. Question and section identifiers cannot be duplicated within the same evaluation form.</p> <p>This operation does not support partial updates. Instead it does a full update of evaluation form content.</p>
       responses:
         '200':
           description: Success
@@ -4744,7 +4739,7 @@ paths:
                   description: A flag indicating whether the operation must create a new version.
                   type: boolean
                 Title:
-                  description: A unique title of the evaluation form.
+                  description: A title of the evaluation form.
                   type: string
                   minLength: 0
                   maxLength: 128
@@ -7198,7 +7193,7 @@ paths:
             maxLength: 500
     put:
       operationId: UpdatePhoneNumber
-      description: '<p>Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.</p> <important> <p>You can call <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html">DescribePhoneNumber</a> API to verify the status of a previous <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html">UpdatePhoneNumber</a> operation.</p> </important>'
+      description: '<p>Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.</p> <important> <p>After using this API, you must verify that the phone number is attached to the correct flow in the target instance or traffic distribution group. You need to do this because the API switches only the phone number to a new instance or traffic distribution group. It doesn''t migrate the flow configuration of the phone number, too.</p> <p>You can call <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html">DescribePhoneNumber</a> API to verify the status of a previous <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html">UpdatePhoneNumber</a> operation.</p> </important>'
       responses:
         '200':
           description: Success
@@ -8633,7 +8628,7 @@ paths:
   /metrics/data:
     post:
       operationId: GetMetricDataV2
-      description: '<p>Gets metric data from the specified Amazon Connect instance. </p> <p> <code>GetMetricDataV2</code> offers more features than <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html">GetMetricData</a>, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for the last 14 days, in 24-hour intervals.</p> <p>For a description of the historical metrics that are supported by <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical metrics definitions</a> in the <i>Amazon Connect Administrator''s Guide</i>. </p> <p>This API is not available in the Amazon Web Services GovCloud (US) Regions.</p>'
+      description: '<p>Gets metric data from the specified Amazon Connect instance. </p> <p> <code>GetMetricDataV2</code> offers more features than <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html">GetMetricData</a>, the previous version of this API. It has new metrics, offers filtering at a metric level, and offers the ability to filter and group data by channels, queues, routing profiles, agents, and agent hierarchy levels. It can retrieve historical data for the last 35 days, in 24-hour intervals.</p> <p>For a description of the historical metrics that are supported by <code>GetMetricDataV2</code> and <code>GetMetricData</code>, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical metrics definitions</a> in the <i>Amazon Connect Administrator''s Guide</i>. </p> <p>This API is not available in the Amazon Web Services GovCloud (US) Regions.</p>'
       responses:
         '200':
           description: Success
@@ -8701,7 +8696,7 @@ paths:
                   description: The Amazon Resource Name (ARN) of the resource. This includes the <code>instanceId</code> an Amazon Connect instance.
                   type: string
                 StartTime:
-                  description: 'The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be before the end time timestamp. The time range between the start and end time must be less than 24 hours. The start time cannot be earlier than 14 days before the time of the request. Historical metrics are available for 14 days.'
+                  description: 'The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be before the end time timestamp. The time range between the start and end time must be less than 24 hours. The start time cannot be earlier than 35 days before the time of the request. Historical metrics are available for 35 days.'
                   type: string
                   format: date-time
                 EndTime:
@@ -16160,6 +16155,7 @@ components:
         - OnZendeskTicketCreate
         - OnZendeskTicketStatusUpdate
         - OnSalesforceCaseCreate
+        - OnContactEvaluationSubmit
     IntegrationAssociationId:
       type: string
       minLength: 1
@@ -16772,7 +16768,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/MetricNameV2'
-            - description: The name of the metric.
+            - description: <p>The name of the metric.</p> <important> <p>This parameter is required. The following Required = No is incorrect.</p> </important>
         Threshold:
           allOf:
             - $ref: '#/components/schemas/ThresholdCollections'
@@ -19205,7 +19201,7 @@ components:
         Title:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormTitle'
-            - description: A unique title of the evaluation form.
+            - description: A title of the evaluation form.
         Description:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormDescription'
@@ -20349,7 +20345,7 @@ components:
         Title:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormTitle'
-            - description: A unique title of the evaluation form.
+            - description: A title of the evaluation form.
         Description:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormDescription'
@@ -20413,7 +20409,7 @@ components:
         Title:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormTitle'
-            - description: A unique title of the evaluation form.
+            - description: A title of the evaluation form.
         Description:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormDescription'
@@ -21278,7 +21274,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NumericQuestionPropertyAutomationLabel'
             - description: The property label of the automation.
-      description: '<p>Information about the property value used in automation of a numeric questions. Label values are associated with minimum and maximum values for the numeric question.</p> <ul> <li> <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p> </li> <li> <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>, <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value of 0 and maximum value of 28800.</p> </li> <li> <p>Percantages have a minimum value of 0 and maximum value of 100. </p> </li> <li> <p> <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of 100.</p> </li> </ul>'
+      description: '<p>Information about the property value used in automation of a numeric questions. Label values are associated with minimum and maximum values for the numeric question.</p> <ul> <li> <p>Sentiment scores have a minimum value of -5 and maximum value of 5.</p> </li> <li> <p> Duration labels, such as <code>NON_TALK_TIME</code>, <code>CONTACT_DURATION</code>, <code>AGENT_INTERACTION_DURATION</code>, <code>CUSTOMER_HOLD_TIME</code> have a minimum value of 0 and maximum value of 28800.</p> </li> <li> <p>Percentages have a minimum value of 0 and maximum value of 100. </p> </li> <li> <p> <code>NUMBER_OF_INTERRUPTIONS</code> has a minimum value of 0 and maximum value of 1000.</p> </li> </ul>'
     EvaluationFormNumericQuestionAutomation:
       type: object
       properties:
@@ -21435,7 +21431,7 @@ components:
         OptionRefId:
           allOf:
             - $ref: '#/components/schemas/ReferenceId'
-            - description: The identifier of the answer option tha
+            - description: The identifier of the answer option.
       description: Information about the automation option based on a rule category for a single select question.
     EvaluationFormSingleSelectQuestionAutomationOption:
       type: object
@@ -21506,7 +21502,7 @@ components:
         Title:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormTitle'
-            - description: A unique title of the evaluation form.
+            - description: A title of the evaluation form.
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -21646,7 +21642,7 @@ components:
         EvaluationFormTitle:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormTitle'
-            - description: A unique title of the evaluation form.
+            - description: A title of the evaluation form.
         EvaluationFormId:
           allOf:
             - $ref: '#/components/schemas/ResourceId'
@@ -21899,7 +21895,7 @@ components:
         StartTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be before the end time timestamp. The time range between the start and end time must be less than 24 hours. The start time cannot be earlier than 14 days before the time of the request. Historical metrics are available for 14 days.'
+            - description: 'The timestamp, in UNIX Epoch time format, at which to start the reporting interval for the retrieval of historical metrics data. The time must be before the end time timestamp. The time range between the start and end time must be less than 24 hours. The start time cannot be earlier than 35 days before the time of the request. Historical metrics are available for 35 days.'
         EndTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -24336,7 +24332,7 @@ components:
         Title:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormTitle'
-            - description: A unique title of the evaluation form.
+            - description: A title of the evaluation form.
         Description:
           allOf:
             - $ref: '#/components/schemas/EvaluationFormDescription'

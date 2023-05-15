@@ -3,7 +3,7 @@ info:
   version: '2020-07-14'
   x-release: v4
   title: Amazon Interactive Video Service RealTime
-  description: '<p> <b>Introduction</b> </p> <p>The Amazon Interactive Video Service (IVS) stage API is REST compatible, using a standard HTTP API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, including errors. </p> <p>Terminology: The IVS stage API sometimes is referred to as the IVS RealTime API.</p> <p> <b>Resources</b> </p> <p>The following resources contain information about your IVS live stream (see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html">Getting Started with Amazon IVS</a>):</p> <ul> <li> <p> <b>Stage</b> — A stage is a virtual space where multiple participants can exchange audio and video in real time.</p> </li> </ul> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS stages has no service-specific constraints beyond what is documented there.</p> <p>Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Access Tags</a>).</p> <p>The Amazon IVS stage API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p> <p>At most 50 tags can be applied to a resource.</p> <p> <b>Stages Endpoints</b> </p> <ul> <li> <p> <a>CreateParticipantToken</a> — Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire.</p> </li> <li> <p> <a>CreateStage</a> — Creates a new stage (and optionally participant tokens).</p> </li> <li> <p> <a>DeleteStage</a> — Shuts down and deletes the specified stage (disconnecting all participants).</p> </li> <li> <p> <a>DisconnectParticipant</a> — Disconnects a specified participant and revokes the participant permanently from a specified stage.</p> </li> <li> <p> <a>GetStage</a> — Gets information for the specified stage.</p> </li> <li> <p> <a>ListStages</a> — Gets summary information about all stages in your account, in the AWS region where the API request is processed.</p> </li> <li> <p> <a>UpdateStage</a> — Updates a stage’s configuration.</p> </li> </ul> <p> <b>Tags Endpoints</b> </p> <ul> <li> <p> <a>ListTagsForResource</a> — Gets information about AWS tags for the specified ARN.</p> </li> <li> <p> <a>TagResource</a> — Adds or updates tags for the AWS resource with the specified ARN.</p> </li> <li> <p> <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p> </li> </ul>'
+  description: '<p> <b>Introduction</b> </p> <p>The Amazon Interactive Video Service (IVS) stage API is REST compatible, using a standard HTTP API and an AWS EventBridge event stream for responses. JSON is used for both requests and responses, including errors. </p> <p>Terminology:</p> <ul> <li> <p>The IVS stage API sometimes is referred to as the IVS <i>RealTime</i> API.</p> </li> <li> <p>A <i>participant token</i> is an authorization token used to publish/subscribe to a stage.</p> </li> <li> <p>A <i>participant object</i> represents participants (people) in the stage and contains information about them. When a token is created, it includes a participant ID; when a participant uses that token to join a stage, the participant is associated with that participant ID There is a 1:1 mapping between participant tokens and participants.</p> </li> </ul> <p> <b>Resources</b> </p> <p>The following resources contain information about your IVS live stream (see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/getting-started.html">Getting Started with Amazon IVS</a>):</p> <ul> <li> <p> <b>Stage</b> — A stage is a virtual space where multiple participants can exchange audio and video in real time.</p> </li> </ul> <p> <b>Tagging</b> </p> <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag comprises a <i>key</i> and a <i>value</i>, both set by you. For example, you might set a tag as <code>topic:nature</code> to label a particular video category. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS stages has no service-specific constraints beyond what is documented there.</p> <p>Tags can help you identify and organize your AWS resources. For example, you can use the same tag for different resources to indicate that they are related. You can also use tags to manage access (see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html">Access Tags</a>).</p> <p>The Amazon IVS stage API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following resource supports tagging: Stage.</p> <p>At most 50 tags can be applied to a resource.</p> <p> <b>Stages Endpoints</b> </p> <ul> <li> <p> <a>CreateParticipantToken</a> — Creates an additional token for a specified stage. This can be done after stage creation or when tokens expire.</p> </li> <li> <p> <a>CreateStage</a> — Creates a new stage (and optionally participant tokens).</p> </li> <li> <p> <a>DeleteStage</a> — Shuts down and deletes the specified stage (disconnecting all participants).</p> </li> <li> <p> <a>DisconnectParticipant</a> — Disconnects a specified participant and revokes the participant permanently from a specified stage.</p> </li> <li> <p> <a>GetParticipant</a> — Gets information about the specified participant token.</p> </li> <li> <p> <a>GetStage</a> — Gets information for the specified stage.</p> </li> <li> <p> <a>GetStageSession</a> — Gets information for the specified stage session.</p> </li> <li> <p> <a>ListParticipantEvents</a> — Lists events for a specified participant that occurred during a specified stage session.</p> </li> <li> <p> <a>ListParticipants</a> — Lists all participants in a specified stage session.</p> </li> <li> <p> <a>ListStages</a> — Gets summary information about all stages in your account, in the AWS region where the API request is processed.</p> </li> <li> <p> <a>ListStageSessions</a> — Gets all sessions for a specified stage.</p> </li> <li> <p> <a>UpdateStage</a> — Updates a stage’s configuration.</p> </li> </ul> <p> <b>Tags Endpoints</b> </p> <ul> <li> <p> <a>ListTagsForResource</a> — Gets information about AWS tags for the specified ARN.</p> </li> <li> <p> <a>TagResource</a> — Adds or updates tags for the AWS resource with the specified ARN.</p> </li> <li> <p> <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -179,7 +179,7 @@ paths:
                   minItems: 0
                   maxItems: 2
                 duration:
-                  description: 'Duration (in minutes), after which the token expires. Default: 60 (1 hour).'
+                  description: 'Duration (in minutes), after which the token expires. Default: 720 (12 hours).'
                   type: integer
                   minimum: 1
                   maximum: 20160
@@ -385,7 +385,7 @@ paths:
                 - stageArn
               properties:
                 participantId:
-                  description: Identifier of the participant to be disconnected. This is returned by <a>CreateParticipantToken</a>.
+                  description: Identifier of the participant to be disconnected. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.
                   type: string
                 reason:
                   description: Description of why this participant is being disconnected.
@@ -394,6 +394,70 @@ paths:
                   maxLength: 128
                 stageArn:
                   description: ARN of the stage to which the participant is attached.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetParticipant:
+    post:
+      operationId: GetParticipant
+      description: Gets information about the specified participant token.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetParticipantResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - participantId
+                - sessionId
+                - stageArn
+              properties:
+                participantId:
+                  description: Unique identifier for the participant. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.
+                  type: string
+                sessionId:
+                  description: ID of a session within the stage.
+                  type: string
+                  pattern: '^st-[a-zA-Z0-9]+$'
+                  minLength: 16
+                  maxLength: 16
+                stageArn:
+                  description: Stage ARN.
                   type: string
                   pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
                   minLength: 1
@@ -447,6 +511,308 @@ paths:
               properties:
                 arn:
                   description: ARN of the stage for which the information is to be retrieved.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetStageSession:
+    post:
+      operationId: GetStageSession
+      description: Gets information for the specified stage session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStageSessionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+                - stageArn
+              properties:
+                sessionId:
+                  description: ID of a session within the stage.
+                  type: string
+                  pattern: '^st-[a-zA-Z0-9]+$'
+                  minLength: 16
+                  maxLength: 16
+                stageArn:
+                  description: ARN of the stage for which the information is to be retrieved.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListParticipantEvents:
+    post:
+      operationId: ListParticipantEvents
+      description: Lists events for a specified participant that occurred during a specified stage session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListParticipantEventsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - participantId
+                - sessionId
+                - stageArn
+              properties:
+                maxResults:
+                  description: 'Maximum number of results to return. Default: 50.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
+                  minLength: 0
+                  maxLength: 1024
+                participantId:
+                  description: Unique identifier for this participant. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.
+                  type: string
+                sessionId:
+                  description: ID of a session within the stage.
+                  type: string
+                  pattern: '^st-[a-zA-Z0-9]+$'
+                  minLength: 16
+                  maxLength: 16
+                stageArn:
+                  description: Stage ARN.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListParticipants:
+    post:
+      operationId: ListParticipants
+      description: Lists all participants in a specified stage session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListParticipantsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+                - stageArn
+              properties:
+                filterByPublished:
+                  description: 'Filters the response list to only show participants who published during the stage session. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, or <code>filterByState</code> can be provided per request.'
+                  type: boolean
+                filterByState:
+                  description: 'Filters the response list to only show participants in the specified state. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, or <code>filterByState</code> can be provided per request.'
+                  type: string
+                  enum:
+                    - CONNECTED
+                    - DISCONNECTED
+                filterByUserId:
+                  description: 'Filters the response list to match the specified user ID. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, or <code>filterByState</code> can be provided per request. A <code>userId</code> is a customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems.'
+                  type: string
+                  minLength: 0
+                  maxLength: 128
+                maxResults:
+                  description: 'Maximum number of results to return. Default: 50.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
+                  minLength: 0
+                  maxLength: 1024
+                sessionId:
+                  description: ID of the session within the stage.
+                  type: string
+                  pattern: '^st-[a-zA-Z0-9]+$'
+                  minLength: 16
+                  maxLength: 16
+                stageArn:
+                  description: Stage ARN.
+                  type: string
+                  pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
+                  minLength: 1
+                  maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListStageSessions:
+    post:
+      operationId: ListStageSessions
+      description: Gets all sessions for a specified stage.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStageSessionsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - stageArn
+              properties:
+                maxResults:
+                  description: 'Maximum number of results to return. Default: 50.'
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                nextToken:
+                  description: The first stage to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+                  type: string
+                  pattern: '^[a-zA-Z0-9+/=_-]*$'
+                  minLength: 0
+                  maxLength: 1024
+                stageArn:
+                  description: Stage ARN.
                   type: string
                   pattern: '^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$'
                   minLength: 1
@@ -852,11 +1218,11 @@ components:
         duration:
           allOf:
             - $ref: '#/components/schemas/ParticipantTokenDurationMinutes'
-            - description: 'Duration (in minutes), after which the corresponding participant token expires. Default: 60 (1 hour).'
+            - description: 'Duration (in minutes), after which the corresponding participant token expires. Default: 720 (12 hours).'
         userId:
           allOf:
             - $ref: '#/components/schemas/ParticipantTokenUserId'
-            - description: 'Name that can be specified to help identify the corresponding participant token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+            - description: 'Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
       description: Object specifying a participant token configuration in a stage.
     TagValue:
       type: string
@@ -869,13 +1235,66 @@ components:
     DisconnectParticipantResponse:
       type: object
       properties: {}
+    GetParticipantResponse:
+      type: object
+      properties:
+        participant:
+          allOf:
+            - $ref: '#/components/schemas/Participant'
+            - description: The participant that is returned.
     GetStageResponse:
       type: object
       properties:
         stage:
           allOf:
             - $ref: '#/components/schemas/Stage'
-            - description: <p/>
+            - description: The stage that is returned.
+    GetStageSessionResponse:
+      type: object
+      properties:
+        stageSession:
+          allOf:
+            - $ref: '#/components/schemas/StageSession'
+            - description: The stage session that is returned.
+    ListParticipantEventsResponse:
+      type: object
+      required:
+        - events
+      properties:
+        events:
+          allOf:
+            - $ref: '#/components/schemas/EventList'
+            - description: List of the matching events.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more rooms than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set. '
+    ListParticipantsResponse:
+      type: object
+      required:
+        - participants
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more rooms than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+        participants:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantList'
+            - description: List of the matching participants (summary information only).
+    ListStageSessionsResponse:
+      type: object
+      required:
+        - stageSessions
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: 'If there are more rooms than <code>maxResults</code>, use <code>nextToken</code> in the request to get the next set.'
+        stageSessions:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionList'
+            - description: List of matching stage sessions.
     ListStagesResponse:
       type: object
       required:
@@ -915,7 +1334,7 @@ components:
         stage:
           allOf:
             - $ref: '#/components/schemas/Stage'
-            - description: 'The updated stage. '
+            - description: The updated stage.
     ParticipantTokenAttributes:
       type: object
       additionalProperties:
@@ -956,7 +1375,7 @@ components:
         duration:
           allOf:
             - $ref: '#/components/schemas/ParticipantTokenDurationMinutes'
-            - description: 'Duration (in minutes), after which the token expires. Default: 60 (1 hour).'
+            - description: 'Duration (in minutes), after which the token expires. Default: 720 (12 hours).'
         stageArn:
           allOf:
             - $ref: '#/components/schemas/StageArn'
@@ -979,7 +1398,7 @@ components:
         duration:
           allOf:
             - $ref: '#/components/schemas/ParticipantTokenDurationMinutes'
-            - description: 'Duration (in minutes), after which the participant token expires. Default: 60 (1 hour).'
+            - description: 'Duration (in minutes), after which the participant token expires. Default: 720 (12 hours).'
         expirationTime:
           allOf:
             - $ref: '#/components/schemas/ParticipantTokenExpirationTime'
@@ -995,7 +1414,7 @@ components:
         userId:
           allOf:
             - $ref: '#/components/schemas/ParticipantTokenUserId'
-            - description: 'Name to help identify the token. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
+            - description: 'Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information.</i> '
       description: Object specifying a participant token in a stage.
     StageName:
       type: string
@@ -1082,7 +1501,7 @@ components:
         participantId:
           allOf:
             - $ref: '#/components/schemas/ParticipantTokenId'
-            - description: Identifier of the participant to be disconnected. This is returned by <a>CreateParticipantToken</a>.
+            - description: Identifier of the participant to be disconnected. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.
         reason:
           allOf:
             - $ref: '#/components/schemas/DisconnectParticipantReason'
@@ -1091,6 +1510,108 @@ components:
           allOf:
             - $ref: '#/components/schemas/StageArn'
             - description: ARN of the stage to which the participant is attached.
+    EventErrorCode:
+      type: string
+      enum:
+        - INSUFFICIENT_CAPABILITIES
+    Time:
+      type: string
+      format: date-time
+    EventName:
+      type: string
+      enum:
+        - JOINED
+        - LEFT
+        - PUBLISH_STARTED
+        - PUBLISH_STOPPED
+        - SUBSCRIBE_STARTED
+        - SUBSCRIBE_STOPPED
+        - PUBLISH_ERROR
+        - SUBSCRIBE_ERROR
+        - JOIN_ERROR
+    ParticipantId:
+      type: string
+    Event:
+      type: object
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/EventErrorCode'
+            - description: 'If the event is an error event, the error code is provided to give insight into the specific error that occurred. If the event is not an error event, this field is null. <code>INSUFFICIENT_CAPABILITIES</code> indicates that the participant tried to take an action that the participant’s token is not allowed to do. For more information about participant capabilities, see the <code>capabilities</code> field in <a>CreateParticipantToken</a>.'
+        eventTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: ISO 8601 timestamp (returned as a string) for when the event occurred.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/EventName'
+            - description: The name of the event.
+        participantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: Unique identifier for the participant who triggered the event. This is assigned by IVS.
+        remoteParticipantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: 'Unique identifier for the remote participant. For a subscribe event, this is the publisher. For a publish or join event, this is null. This is assigned by IVS.'
+      description: An occurrence during a stage session.
+    EventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    StageSessionId:
+      type: string
+      pattern: '^st-[a-zA-Z0-9]+$'
+      minLength: 16
+      maxLength: 16
+    GetParticipantRequest:
+      type: object
+      required:
+        - participantId
+        - sessionId
+        - stageArn
+      title: GetParticipantRequest
+      properties:
+        participantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: Unique identifier for the participant. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionId'
+            - description: ID of a session within the stage.
+        stageArn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: Stage ARN.
+    Participant:
+      type: object
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantAttributes'
+            - description: 'Application-provided attributes to encode into the token and attach to a stage. Map keys and values can contain UTF-8 encoded text. The maximum length of this field is 1 KB total. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information</i>.'
+        firstJoinTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
+        participantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: 'Unique identifier for this participant, assigned by IVS.'
+        published:
+          allOf:
+            - $ref: '#/components/schemas/Published'
+            - description: Whether the participant ever published to the stage session.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantState'
+            - description: Whether the participant is connected to or disconnected from the stage.
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: 'Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information</i>.'
+      description: Object describing a participant that has joined a stage.
     GetStageRequest:
       type: object
       required:
@@ -1101,7 +1622,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/StageArn'
             - description: ARN of the stage for which the information is to be retrieved.
-    MaxStageResults:
+    GetStageSessionRequest:
+      type: object
+      required:
+        - sessionId
+        - stageArn
+      title: GetStageSessionRequest
+      properties:
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionId'
+            - description: ID of a session within the stage.
+        stageArn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: ARN of the stage for which the information is to be retrieved.
+    StageSession:
+      type: object
+      properties:
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionId'
+            - description: ID of the session within the stage.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: ' ISO 8601 timestamp (returned as a string) when this stage session began.'
+      description: 'A stage session begins when the first participant joins a stage and ends after the last participant leaves the stage. A stage session helps with debugging stages by grouping events and participants into shorter periods of time (i.e., a session), which is helpful when stages are used over long periods of time.'
+    MaxParticipantEventResults:
       type: integer
       minimum: 1
       maximum: 100
@@ -1110,6 +1662,118 @@ components:
       pattern: '^[a-zA-Z0-9+/=_-]*$'
       minLength: 0
       maxLength: 1024
+    ListParticipantEventsRequest:
+      type: object
+      required:
+        - participantId
+        - sessionId
+        - stageArn
+      title: ListParticipantEventsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxParticipantEventResults'
+            - description: 'Maximum number of results to return. Default: 50.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+        participantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: Unique identifier for this participant. This is assigned by IVS and returned by <a>CreateParticipantToken</a>.
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionId'
+            - description: ID of a session within the stage.
+        stageArn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: Stage ARN.
+    Published:
+      type: boolean
+    ParticipantState:
+      type: string
+      enum:
+        - CONNECTED
+        - DISCONNECTED
+    UserId:
+      type: string
+      minLength: 0
+      maxLength: 128
+    MaxParticipantResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListParticipantsRequest:
+      type: object
+      required:
+        - sessionId
+        - stageArn
+      title: ListParticipantsRequest
+      properties:
+        filterByPublished:
+          allOf:
+            - $ref: '#/components/schemas/Published'
+            - description: 'Filters the response list to only show participants who published during the stage session. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, or <code>filterByState</code> can be provided per request.'
+        filterByState:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantState'
+            - description: 'Filters the response list to only show participants in the specified state. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, or <code>filterByState</code> can be provided per request.'
+        filterByUserId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: 'Filters the response list to match the specified user ID. Only one of <code>filterByUserId</code>, <code>filterByPublished</code>, or <code>filterByState</code> can be provided per request. A <code>userId</code> is a customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxParticipantResults'
+            - description: 'Maximum number of results to return. Default: 50.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first participant to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionId'
+            - description: ID of the session within the stage.
+        stageArn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: Stage ARN.
+    ParticipantList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParticipantSummary'
+    MaxStageSessionResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListStageSessionsRequest:
+      type: object
+      required:
+        - stageArn
+      title: ListStageSessionsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxStageSessionResults'
+            - description: 'Maximum number of results to return. Default: 50.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The first stage to retrieve. This is used for pagination; see the <code>nextToken</code> response field.
+        stageArn:
+          allOf:
+            - $ref: '#/components/schemas/StageArn'
+            - description: Stage ARN.
+    StageSessionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StageSessionSummary'
+    MaxStageResults:
+      type: integer
+      minimum: 1
+      maximum: 100
     ListStagesRequest:
       type: object
       title: ListStagesRequest
@@ -1135,17 +1799,56 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ParticipantAttributes:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    ParticipantSummary:
+      type: object
+      properties:
+        firstJoinTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: ISO 8601 timestamp (returned as a string) when the participant first joined the stage session.
+        participantId:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantId'
+            - description: 'Unique identifier for this participant, assigned by IVS.'
+        published:
+          allOf:
+            - $ref: '#/components/schemas/Published'
+            - description: Whether the participant ever published to the stage session.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ParticipantState'
+            - description: Whether the participant is connected to or disconnected from the stage.
+        userId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: 'Customer-assigned name to help identify the token; this can be used to link a participant to a user in the customer’s own systems. This can be any UTF-8 encoded text. <i>This field is exposed to all stage participants and should not be used for personally identifying, confidential, or sensitive information</i>.'
+      description: Summary object describing a participant that has joined a stage.
     ParticipantTokenExpirationTime:
       type: string
       format: date-time
     ParticipantTokenString:
       type: string
       format: password
-    StageSessionId:
-      type: string
-      pattern: '^st-[a-zA-Z0-9]+$'
-      minLength: 16
-      maxLength: 16
+    StageSessionSummary:
+      type: object
+      properties:
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: ISO 8601 timestamp (returned as a string) when the stage session ended. This is null if the stage is active.
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/StageSessionId'
+            - description: ID of the session within the stage.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: ' ISO 8601 timestamp (returned as a string) when this stage session began.'
+      description: Summary information about a stage session.
     StageSummary:
       type: object
       required:

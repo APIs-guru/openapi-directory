@@ -249,6 +249,96 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.CancelCapacityReservation:
+    post:
+      operationId: CancelCapacityReservation
+      description: Cancels the capacity reservation with the specified name.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelCapacityReservationOutput'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelCapacityReservationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.CancelCapacityReservation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.CreateCapacityReservation:
+    post:
+      operationId: CreateCapacityReservation
+      description: Creates a capacity reservation with the specified name and number of requested data processing units.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCapacityReservationOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCapacityReservationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.CreateCapacityReservation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonAthena.CreateDataCatalog:
     post:
       operationId: CreateDataCatalog
@@ -964,6 +1054,96 @@ paths:
             type: string
             enum:
               - AmazonAthena.GetCalculationExecutionStatus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.GetCapacityAssignmentConfiguration:
+    post:
+      operationId: GetCapacityAssignmentConfiguration
+      description: 'Gets the capacity assignment configuration for a capacity reservation, if one exists.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCapacityAssignmentConfigurationOutput'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCapacityAssignmentConfigurationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.GetCapacityAssignmentConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.GetCapacityReservation:
+    post:
+      operationId: GetCapacityReservation
+      description: Returns information about the capacity reservation with the specified name.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCapacityReservationOutput'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetCapacityReservationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.GetCapacityReservation
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1743,6 +1923,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.ListCapacityReservations:
+    post:
+      operationId: ListCapacityReservations
+      description: Lists the capacity reservations for the current account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCapacityReservationsOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListCapacityReservationsInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.ListCapacityReservations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonAthena.ListDataCatalogs:
     post:
       operationId: ListDataCatalogs
@@ -2385,7 +2622,7 @@ paths:
   /#X-Amz-Target=AmazonAthena.ListTagsForResource:
     post:
       operationId: ListTagsForResource
-      description: Lists the tags associated with an Athena workgroup or data catalog resource.
+      description: Lists the tags associated with an Athena resource.
       responses:
         '200':
           description: Success
@@ -2494,6 +2731,51 @@ paths:
             type: string
             enum:
               - AmazonAthena.ListWorkGroups
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.PutCapacityAssignmentConfiguration:
+    post:
+      operationId: PutCapacityAssignmentConfiguration
+      description: 'Puts a new capacity assignment configuration for a specified capacity reservation. If a capacity assignment configuration already exists for the capacity reservation, replaces the existing capacity assignment configuration.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutCapacityAssignmentConfigurationOutput'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutCapacityAssignmentConfigurationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.PutCapacityAssignmentConfiguration
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2766,7 +3048,7 @@ paths:
   /#X-Amz-Target=AmazonAthena.TagResource:
     post:
       operationId: TagResource
-      description: 'Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see <a href="https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.'
+      description: 'Adds one or more tags to an Athena resource. A tag is a label that you assign to a resource. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups, data catalogs, or capacity reservations by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter the resources in your account. For best practices, see <a href="https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas.'
       responses:
         '200':
           description: Success
@@ -2868,7 +3150,7 @@ paths:
   /#X-Amz-Target=AmazonAthena.UntagResource:
     post:
       operationId: UntagResource
-      description: Removes one or more tags from a data catalog or workgroup resource.
+      description: Removes one or more tags from an Athena resource.
       responses:
         '200':
           description: Success
@@ -2908,6 +3190,51 @@ paths:
             type: string
             enum:
               - AmazonAthena.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.UpdateCapacityReservation:
+    post:
+      operationId: UpdateCapacityReservation
+      description: Updates the number of requested data processing units for the capacity reservation with the specified name.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCapacityReservationOutput'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCapacityReservationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.UpdateCapacityReservation
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3328,6 +3655,41 @@ components:
             - $ref: '#/components/schemas/QueryExecutionIdList'
             - description: An array of query execution IDs.
       description: Contains an array of query execution IDs.
+    CancelCapacityReservationOutput:
+      type: object
+      properties: {}
+    CancelCapacityReservationInput:
+      type: object
+      required:
+        - Name
+      title: CancelCapacityReservationInput
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the capacity reservation to cancel.
+    CreateCapacityReservationOutput:
+      type: object
+      properties: {}
+    CreateCapacityReservationInput:
+      type: object
+      required:
+        - TargetDpus
+        - Name
+      title: CreateCapacityReservationInput
+      properties:
+        TargetDpus:
+          allOf:
+            - $ref: '#/components/schemas/TargetDpusInteger'
+            - description: The number of requested data processing units.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the capacity reservation to create.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the capacity reservation.
     CreateDataCatalogOutput:
       type: object
       properties: {}
@@ -3680,6 +4042,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/CalculationExecutionId'
             - description: The calculation execution UUID.
+    GetCapacityAssignmentConfigurationOutput:
+      type: object
+      required:
+        - CapacityAssignmentConfiguration
+      properties:
+        CapacityAssignmentConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CapacityAssignmentConfiguration'
+            - description: The requested capacity assignment configuration for the specified capacity reservation.
+    GetCapacityAssignmentConfigurationInput:
+      type: object
+      required:
+        - CapacityReservationName
+      title: GetCapacityAssignmentConfigurationInput
+      properties:
+        CapacityReservationName:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the capacity reservation to retrieve the capacity assignment configuration for.
+    GetCapacityReservationOutput:
+      type: object
+      required:
+        - CapacityReservation
+      properties:
+        CapacityReservation:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservation'
+            - description: The requested capacity reservation structure.
+    GetCapacityReservationInput:
+      type: object
+      required:
+        - Name
+      title: GetCapacityReservationInput
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the capacity reservation.
     GetDataCatalogOutput:
       type: object
       properties:
@@ -4049,6 +4449,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/SessionManagerToken'
             - description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the <code>NextToken</code> from the response object of the previous page call.'
+    ListCapacityReservationsOutput:
+      type: object
+      required:
+        - CapacityReservations
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call.'
+        CapacityReservations:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationsList'
+            - description: The capacity reservations for the current account.
+    ListCapacityReservationsInput:
+      type: object
+      title: ListCapacityReservationsInput
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: A token generated by the Athena service that specifies where to continue pagination if a previous request was truncated.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxCapacityReservationsCount'
+            - description: Specifies the maximum number of results to return.
     ListDataCatalogsOutput:
       type: object
       properties:
@@ -4433,6 +4858,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxWorkGroupsCount'
             - description: The maximum number of workgroups to return in this request.
+    PutCapacityAssignmentConfigurationOutput:
+      type: object
+      properties: {}
+    PutCapacityAssignmentConfigurationInput:
+      type: object
+      required:
+        - CapacityReservationName
+        - CapacityAssignments
+      title: PutCapacityAssignmentConfigurationInput
+      properties:
+        CapacityReservationName:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the capacity reservation to put a capacity assignment configuration for.
+        CapacityAssignments:
+          allOf:
+            - $ref: '#/components/schemas/CapacityAssignmentsList'
+            - description: The list of assignments for the capacity assignment configuration.
     StartCalculationExecutionResponse:
       type: object
       properties:
@@ -4598,11 +5041,11 @@ components:
         ResourceARN:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Specifies the ARN of the Athena resource (workgroup or data catalog) to which tags are to be added.
+            - description: Specifies the ARN of the Athena resource to which tags are to be added.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'A collection of one or more tags, separated by commas, to be added to an Athena workgroup or data catalog resource.'
+            - description: 'A collection of one or more tags, separated by commas, to be added to an Athena resource.'
     TerminateSessionResponse:
       type: object
       properties:
@@ -4638,6 +5081,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: A comma-separated list of one or more tag keys whose tags are to be removed from the specified resource.
+    UpdateCapacityReservationOutput:
+      type: object
+      properties: {}
+    UpdateCapacityReservationInput:
+      type: object
+      required:
+        - TargetDpus
+        - Name
+      title: UpdateCapacityReservationInput
+      properties:
+        TargetDpus:
+          allOf:
+            - $ref: '#/components/schemas/TargetDpusInteger'
+            - description: The new number of requested data processing units.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the capacity reservation.
     UpdateDataCatalogOutput:
       type: object
       properties: {}
@@ -4814,6 +5275,9 @@ components:
       type: integer
       minimum: 0
       maximum: 10080
+    AllocatedDpusInteger:
+      type: integer
+      minimum: 0
     AmazonResourceName:
       type: string
       minLength: 1
@@ -5048,6 +5512,123 @@ components:
         $ref: '#/components/schemas/CalculationSummary'
       minItems: 0
       maxItems: 100
+    CapacityReservationName:
+      type: string
+      pattern: '[a-zA-Z0-9._-]+'
+      minLength: 1
+      maxLength: 128
+    CapacityAllocationStatus:
+      type: string
+      enum:
+        - PENDING
+        - SUCCEEDED
+        - FAILED
+    Timestamp:
+      type: string
+      format: date-time
+    CapacityAllocation:
+      type: object
+      required:
+        - Status
+        - RequestTime
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CapacityAllocationStatus'
+            - description: The status of the capacity allocation.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The status message of the capacity allocation.
+        RequestTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the capacity allocation was requested.
+        RequestCompletionTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the capacity allocation request was completed.
+      description: Contains the submission time of a single allocation request for a capacity reservation and the most recent status of the attempted allocation.
+    WorkGroupNamesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkGroupName'
+    CapacityAssignment:
+      type: object
+      properties:
+        WorkGroupNames:
+          allOf:
+            - $ref: '#/components/schemas/WorkGroupNamesList'
+            - description: The list of workgroup names for the capacity assignment.
+      description: A mapping between one or more workgroups and a capacity reservation.
+    CapacityAssignmentsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CapacityAssignment'
+    CapacityAssignmentConfiguration:
+      type: object
+      properties:
+        CapacityReservationName:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the reservation that the capacity assignment configuration is for.
+        CapacityAssignments:
+          allOf:
+            - $ref: '#/components/schemas/CapacityAssignmentsList'
+            - description: The list of assignments that make up the capacity assignment configuration.
+      description: 'Assigns Athena workgroups (and hence their queries) to capacity reservations. A capacity reservation can have only one capacity assignment configuration, but the capacity assignment configuration can be made up of multiple individual assignments. Each assignment specifies how Athena queries can consume capacity from the capacity reservation that their workgroup is mapped to.'
+    CapacityReservationStatus:
+      type: string
+      enum:
+        - PENDING
+        - ACTIVE
+        - CANCELLING
+        - CANCELLED
+        - FAILED
+        - UPDATE_PENDING
+    TargetDpusInteger:
+      type: integer
+      minimum: 24
+    CapacityReservation:
+      type: object
+      required:
+        - Name
+        - Status
+        - TargetDpus
+        - AllocatedDpus
+        - CreationTime
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the capacity reservation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationStatus'
+            - description: The status of the capacity reservation.
+        TargetDpus:
+          allOf:
+            - $ref: '#/components/schemas/TargetDpusInteger'
+            - description: The number of data processing units requested.
+        AllocatedDpus:
+          allOf:
+            - $ref: '#/components/schemas/AllocatedDpusInteger'
+            - description: The number of data processing units currently allocated.
+        LastAllocation:
+          $ref: '#/components/schemas/CapacityAllocation'
+        LastSuccessfulAllocationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time of the most recent capacity allocation that succeeded.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time in UTC epoch millis when the capacity reservation was created.
+      description: 'A reservation for a specified number of data processing units (DPUs). When a reservation is initially created, it has no DPUs. Athena allocates DPUs until the allocated amount equals the requested amount.'
+    CapacityReservationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CapacityReservation'
     CatalogNameString:
       type: string
       minLength: 1
@@ -5153,6 +5734,10 @@ components:
       type: integer
       minimum: 1
       maximum: 1
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
     DataCatalogType:
       type: string
       enum:
@@ -5163,10 +5748,6 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/ParametersMapValue'
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
     DatabaseString:
       type: string
       minLength: 1
@@ -5373,7 +5954,7 @@ components:
         CoordinatorDpuSize:
           allOf:
             - $ref: '#/components/schemas/CoordinatorDpuSize'
-            - description: The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session.
+            - description: The number of DPUs to use for the coordinator. A coordinator is a special executor that orchestrates processing work and manages other executors in a notebook session. The default is 1.
         MaxConcurrentDpus:
           allOf:
             - $ref: '#/components/schemas/MaxConcurrentDpus'
@@ -5381,11 +5962,15 @@ components:
         DefaultExecutorDpuSize:
           allOf:
             - $ref: '#/components/schemas/DefaultExecutorDpuSize'
-            - description: The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena.
+            - description: The default number of DPUs to use for executors. An executor is the smallest unit of compute that a notebook session can request from Athena. The default is 1.
         AdditionalConfigs:
           allOf:
             - $ref: '#/components/schemas/ParametersMap'
             - description: 'Contains additional notebook engine <code>MAP&lt;string, string&gt;</code> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the <a>StartSessionRequest$NotebookVersion</a> field, and then add a key named <code>NotebookId</code> to <code>AdditionalConfigs</code> that has the value of the Athena notebook ID.'
+        SparkProperties:
+          allOf:
+            - $ref: '#/components/schemas/ParametersMap'
+            - description: 'Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.'
       description: Contains data processing unit (DPU) configuration settings and parameter mappings for a notebook engine.
     EngineVersion:
       type: object
@@ -5797,6 +6382,10 @@ components:
     SessionManagerToken:
       type: string
       maxLength: 2048
+    MaxCapacityReservationsCount:
+      type: integer
+      minimum: 1
+      maximum: 50
     MaxDataCatalogsCount:
       type: integer
       minimum: 2
@@ -6268,9 +6857,6 @@ components:
             - $ref: '#/components/schemas/SessionStatus'
             - description: Contains information about the session status.
       description: Contains summary information about a session.
-    Timestamp:
-      type: string
-      format: date-time
     TableTypeString:
       type: string
       maxLength: 255
@@ -6293,7 +6879,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagValue'
             - description: 'A tag value. The tag value length is from 0 to 256 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag values are case-sensitive. '
-      description: 'A label that you assign to a resource. In Athena, a resource can be a workgroup or data catalog. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups or data catalogs in your account. For best practices, see <a href="https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas. '
+      description: 'A label that you assign to a resource. Athena resources include workgroups, data catalogs, and capacity reservations. Each tag consists of a key and an optional value, both of which you define. For example, you can use tags to categorize Athena resources by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter the resources in your account. For best practices, see <a href="https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one tag, separate them by commas. '
     TagKeyList:
       type: array
       items:

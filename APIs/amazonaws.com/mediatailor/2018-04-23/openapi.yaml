@@ -1660,10 +1660,14 @@ paths:
                   description: 'The configuration for avail suppression, also known as ad suppression. For more information about ad suppression, see <a href="https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html">Ad Suppression</a>.'
                   type: object
                   properties:
+                    FillPolicy:
+                      allOf:
+                        - $ref: '#/components/schemas/FillPolicy'
+                        - description: Defines the policy to apply to the avail suppression mode. <code>BEHIND_LIVE_EDGE</code> will always use the full avail suppression policy. <code>AFTER_LIVE_EDGE</code> mode can be used to invoke partial ad break fills when a session starts mid-break.
                     Mode:
                       allOf:
                         - $ref: '#/components/schemas/Mode'
-                        - description: 'Sets the ad suppression mode. By default, ad suppression is off and all ad breaks are filled with ads or slate. When Mode is set to <code>BEHIND_LIVE_EDGE</code>, ad suppression is active and MediaTailor won''t fill ad breaks on or behind the ad suppression Value time in the manifest lookback window.'
+                        - description: 'Sets the ad suppression mode. By default, ad suppression is off and all ad breaks are filled with ads or slate. When Mode is set to <code>BEHIND_LIVE_EDGE</code>, ad suppression is active and MediaTailor won''t fill ad breaks on or behind the ad suppression Value time in the manifest lookback window. When Mode is set to <code>AFTER_LIVE_EDGE</code>, ad suppression is active and MediaTailor won''t fill ad breaks that are within the live edge plus the avail suppression value.'
                     Value:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -2828,11 +2832,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'The URL prefix for the parent manifest for the stream, minus the asset ID. The maximum length is 512 characters.'
+    FillPolicy:
+      type: string
+      enum:
+        - FULL_AVAIL_ONLY
+        - PARTIAL_AVAIL
     Mode:
       type: string
       enum:
         - 'OFF'
         - BEHIND_LIVE_EDGE
+        - AFTER_LIVE_EDGE
     OriginManifestType:
       type: string
       enum:
@@ -3182,10 +3192,14 @@ components:
     AvailSuppression:
       type: object
       properties:
+        FillPolicy:
+          allOf:
+            - $ref: '#/components/schemas/FillPolicy'
+            - description: Defines the policy to apply to the avail suppression mode. <code>BEHIND_LIVE_EDGE</code> will always use the full avail suppression policy. <code>AFTER_LIVE_EDGE</code> mode can be used to invoke partial ad break fills when a session starts mid-break.
         Mode:
           allOf:
             - $ref: '#/components/schemas/Mode'
-            - description: 'Sets the ad suppression mode. By default, ad suppression is off and all ad breaks are filled with ads or slate. When Mode is set to <code>BEHIND_LIVE_EDGE</code>, ad suppression is active and MediaTailor won''t fill ad breaks on or behind the ad suppression Value time in the manifest lookback window.'
+            - description: 'Sets the ad suppression mode. By default, ad suppression is off and all ad breaks are filled with ads or slate. When Mode is set to <code>BEHIND_LIVE_EDGE</code>, ad suppression is active and MediaTailor won''t fill ad breaks on or behind the ad suppression Value time in the manifest lookback window. When Mode is set to <code>AFTER_LIVE_EDGE</code>, ad suppression is active and MediaTailor won''t fill ad breaks that are within the live edge plus the avail suppression value.'
         Value:
           allOf:
             - $ref: '#/components/schemas/__string'

@@ -118,7 +118,7 @@ paths:
   /members/associate:
     post:
       operationId: AssociateMember
-      description: Associates an Amazon Web Services account with an Amazon Inspector delegated administrator.
+      description: 'Associates an Amazon Web Services account with an Amazon Inspector delegated administrator. An HTTP 200 response indicates the association was successfully started, but doesn’t indicate whether it was completed. You can check if the association completed by using <a href="https://docs.aws.amazon.com/inspector/v2/APIReference/API_ListMembers.html">ListMembers</a> for multiple accounts or <a href="https://docs.aws.amazon.com/inspector/v2/APIReference/API_GetMember.html">GetMembers</a> for a single account.'
       responses:
         '200':
           description: Success
@@ -289,6 +289,124 @@ paths:
                   items:
                     $ref: '#/components/schemas/MeteringAccountId'
                   minItems: 1
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ec2deepinspectionstatus/member/batch/get:
+    post:
+      operationId: BatchGetMemberEc2DeepInspectionStatus
+      description: Retrieves Amazon Inspector deep inspection activation status of multiple member accounts within your organization. You must be the delegated administrator of an organization in Amazon Inspector to use this API.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetMemberEc2DeepInspectionStatusResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountIds:
+                  description: The unique identifiers for the Amazon Web Services accounts to retrieve Amazon Inspector deep inspection activation status for. <pre><code> &lt;/p&gt; </code></pre>
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AccountId'
+                  minItems: 0
+                  maxItems: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ec2deepinspectionstatus/member/batch/update:
+    post:
+      operationId: BatchUpdateMemberEc2DeepInspectionStatus
+      description: Activates or deactivates Amazon Inspector deep inspection for the provided member accounts in your organization. You must be the delegated administrator of an organization in Amazon Inspector to use this API.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchUpdateMemberEc2DeepInspectionStatusResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - accountIds
+              properties:
+                accountIds:
+                  description: The unique identifiers for the Amazon Web Services accounts to change Amazon Inspector deep inspection status for.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MemberAccountEc2DeepInspectionStatus'
+                  minItems: 0
                   maxItems: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -613,7 +731,7 @@ paths:
   /reporting/create:
     post:
       operationId: CreateFindingsReport
-      description: Creates a finding report.
+      description: 'Creates a finding report. By default only <code>ACTIVE</code> findings are returned in the report. To see <code>SUPRESSED</code> or <code>CLOSED</code> findings you must specify a value for the <code>findingStatus</code> filter criteria. '
       responses:
         '200':
           description: Success
@@ -835,7 +953,7 @@ paths:
                     keyPrefix:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The prefix of the KMS key used to export findings.
+                        - description: The prefix of the Amazon S3 bucket used to export findings.
                     kmsKeyArn:
                       allOf:
                         - $ref: '#/components/schemas/String'
@@ -1385,6 +1503,50 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ec2deepinspectionconfiguration/get:
+    post:
+      operationId: GetEc2DeepInspectionConfiguration
+      description: 'Retrieves the activation status of Amazon Inspector deep inspection and custom paths associated with your account. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEc2DeepInspectionConfigurationResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
           description: InternalServerException
           content:
             application/json:
@@ -2642,6 +2804,78 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /vulnerabilities/search:
+    post:
+      operationId: SearchVulnerabilities
+      description: Lists Amazon Inspector coverage details for a specific vulnerability.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchVulnerabilitiesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - filterCriteria
+              properties:
+                filterCriteria:
+                  description: 'Details on the criteria used to define the filter for a vulnerability search. '
+                  type: object
+                  properties:
+                    vulnerabilityIds:
+                      allOf:
+                        - $ref: '#/components/schemas/VulnIdList'
+                        - description: The IDs for specific vulnerabilities.
+                nextToken:
+                  description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.'
+                  type: string
+                  minLength: 0
+                  maxLength: 1000000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
@@ -2757,6 +2991,67 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/EcrRescanDuration'
                         - description: The ECR automated re-scan duration defines how long an ECR image will be actively scanned by Amazon Inspector. When the number of days since an image was last pushed exceeds the automated re-scan duration the monitoring state of that image becomes <code>inactive</code> and all associated findings are scheduled for closure.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ec2deepinspectionconfiguration/update:
+    post:
+      operationId: UpdateEc2DeepInspectionConfiguration
+      description: 'Activates, deactivates Amazon Inspector deep inspection, or updates custom paths for your account. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEc2DeepInspectionConfigurationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activateDeepInspection:
+                  description: 'Specify <code>TRUE</code> to activate Amazon Inspector deep inspection in your account, or <code>FALSE</code> to deactivate. Member accounts in an organization cannot deactivate deep inspection, instead the delegated administrator for the organization can deactivate a member account using <a href="https://docs.aws.amazon.com/inspector/v2/APIReference/API_BatchUpdateMemberEc2DeepInspectionStatus.html">BatchUpdateMemberEc2DeepInspectionStatus</a>.'
+                  type: boolean
+                packagePaths:
+                  description: The Amazon Inspector deep inspection custom paths you are adding for your account.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Path'
+                  minItems: 0
+                  maxItems: 5
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3006,6 +3301,66 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ec2deepinspectionconfiguration/org/update:
+    post:
+      operationId: UpdateOrgEc2DeepInspectionConfiguration
+      description: Updates the Amazon Inspector deep inspection custom paths for your organization. You must be an Amazon Inspector delegated administrator to use this API.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOrgEc2DeepInspectionConfigurationResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - orgPackagePaths
+              properties:
+                orgPackagePaths:
+                  description: The Amazon Inspector deep inspection custom paths you are adding for your organization.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Path'
+                  minItems: 0
+                  maxItems: 5
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /organizationconfiguration/update:
     post:
       operationId: UpdateOrganizationConfiguration
@@ -3066,7 +3421,7 @@ paths:
                     lambda:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: 'Represents whether AWS Lambda scans are automatically enabled for new members of your Amazon Inspector organization. '
+                        - description: 'Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3176,6 +3531,43 @@ components:
     MeteringAccountId:
       type: string
       pattern: '[0-9]{12}'
+    BatchGetMemberEc2DeepInspectionStatusResponse:
+      type: object
+      properties:
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/MemberAccountEc2DeepInspectionStatusStateList'
+            - description: An array of objects that provide details on the activation status of Amazon Inspector deep inspection for each of the requested accounts. <pre><code> &lt;/p&gt; </code></pre>
+        failedAccountIds:
+          allOf:
+            - $ref: '#/components/schemas/FailedMemberAccountEc2DeepInspectionStatusStateList'
+            - description: An array of objects that provide details on any accounts that failed to activate Amazon Inspector deep inspection and why. <pre><code> &lt;/p&gt; </code></pre>
+    BatchUpdateMemberEc2DeepInspectionStatusResponse:
+      type: object
+      properties:
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/MemberAccountEc2DeepInspectionStatusStateList'
+            - description: 'An array of objects that provide details for each of the accounts that Amazon Inspector deep inspection status was successfully changed for. '
+        failedAccountIds:
+          allOf:
+            - $ref: '#/components/schemas/FailedMemberAccountEc2DeepInspectionStatusStateList'
+            - description: 'An array of objects that provide details for each of the accounts that Amazon Inspector deep inspection status could not be successfully changed for. '
+    MemberAccountEc2DeepInspectionStatus:
+      type: object
+      required:
+        - accountId
+        - activateDeepInspection
+      properties:
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The unique identifier for the Amazon Web Services account of the organization member.
+        activateDeepInspection:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether Amazon Inspector deep inspection is active in the account. If <code>TRUE</code> Amazon Inspector deep inspection is active, if <code>FALSE</code> it is not active.'
+      description: An object that contains details about the status of Amazon Inspector deep inspection for a member account in your organization.
     CancelFindingsReportResponse:
       type: object
       required:
@@ -3339,6 +3731,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/DelegatedAdmin'
             - description: The Amazon Web Services account ID of the Amazon Inspector delegated administrator.
+    GetEc2DeepInspectionConfigurationResponse:
+      type: object
+      properties:
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: An error message explaining why Amazon Inspector deep inspection configurations could not be retrieved for your account.
+        orgPackagePaths:
+          allOf:
+            - $ref: '#/components/schemas/PathList'
+            - description: The Amazon Inspector deep inspection custom paths for your organization.
+        packagePaths:
+          allOf:
+            - $ref: '#/components/schemas/PathList'
+            - description: The Amazon Inspector deep inspection custom paths for your account.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Ec2DeepInspectionStatus'
+            - description: The activation status of Amazon Inspector deep inspection in your account.
     GetFindingsReportStatusResponse:
       type: object
       properties:
@@ -3801,6 +4212,25 @@ components:
     UsageAccountId:
       type: string
       pattern: '[0-9]{12}'
+    SearchVulnerabilitiesResponse:
+      type: object
+      required:
+        - vulnerabilities
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination parameter to be used on the next list operation to retrieve more items.
+        vulnerabilities:
+          allOf:
+            - $ref: '#/components/schemas/Vulnerabilities'
+            - description: Details about the listed vulnerability.
+    VulnIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VulnId'
+      minItems: 1
+      maxItems: 1
     TagResourceResponse:
       type: object
       properties: {}
@@ -3821,6 +4251,30 @@ components:
         - LIFETIME
         - DAYS_30
         - DAYS_180
+    UpdateEc2DeepInspectionConfigurationResponse:
+      type: object
+      properties:
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: An error message explaining why new Amazon Inspector deep inspection custom paths could not be added.
+        orgPackagePaths:
+          allOf:
+            - $ref: '#/components/schemas/PathList'
+            - description: The current Amazon Inspector deep inspection custom paths for the organization.
+        packagePaths:
+          allOf:
+            - $ref: '#/components/schemas/PathList'
+            - description: The current Amazon Inspector deep inspection custom paths for your account.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Ec2DeepInspectionStatus'
+            - description: The status of Amazon Inspector deep inspection in your account.
+    Path:
+      type: string
+      pattern: '^(?:/(?:\.[-\w]+|[-\w]+(?:\.[-\w]+)?))+/?$'
+      minLength: 1
+      maxLength: 512
     UpdateFilterResponse:
       type: object
       required:
@@ -3830,6 +4284,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterArn'
             - description: The Amazon Resource Number (ARN) of the successfully updated filter.
+    UpdateOrgEc2DeepInspectionConfigurationResponse:
+      type: object
+      properties: {}
     UpdateOrganizationConfigurationResponse:
       type: object
       required:
@@ -3858,7 +4315,7 @@ components:
         lambda:
           allOf:
             - $ref: '#/components/schemas/Status'
-            - description: The status of Amazon Inspector scanning for AWS Lambda function resources.
+            - description: The status of Amazon Inspector scanning for AWS Lambda function.
       description: Details the status of Amazon Inspector for each resource type Amazon Inspector scans.
     Status:
       type: string
@@ -4416,6 +4873,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountId'
             - description: The Amazon Web Services account ID of the member account to be associated.
+    FirstSeen:
+      type: string
+      format: date-time
+    LastSeen:
+      type: string
+      format: date-time
+    Targets:
+      type: array
+      items:
+        $ref: '#/components/schemas/Target'
+      minItems: 0
+    Ttps:
+      type: array
+      items:
+        $ref: '#/components/schemas/Ttp'
+      minItems: 0
+    AtigData:
+      type: object
+      properties:
+        firstSeen:
+          allOf:
+            - $ref: '#/components/schemas/FirstSeen'
+            - description: The date and time this vulnerability was first observed.
+        lastSeen:
+          allOf:
+            - $ref: '#/components/schemas/LastSeen'
+            - description: The date and time this vulnerability was last observed.
+        targets:
+          allOf:
+            - $ref: '#/components/schemas/Targets'
+            - description: The commercial sectors this vulnerability targets.
+        ttps:
+          allOf:
+            - $ref: '#/components/schemas/Ttps'
+            - description: 'The <a href="https://attack.mitre.org/">MITRE ATT&amp;CK</a> tactics, techniques, and procedures (TTPs) associated with vulnerability.'
+      description: The Amazon Web Services Threat Intel Group (ATIG) details for a specific vulnerability.
     AutoEnable:
       type: object
       required:
@@ -4433,7 +4926,7 @@ components:
         lambda:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Represents whether AWS Lambda scans are automatically enabled for new members of your Amazon Inspector organization. '
+            - description: 'Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization. '
       description: Represents which scan types are automatically enabled for new members of your Amazon Inspector organization.
     NonEmptyString:
       type: string
@@ -4699,6 +5192,42 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FreeTrialInfoError'
+    BatchGetMemberEc2DeepInspectionStatusRequest:
+      type: object
+      title: BatchGetMemberEc2DeepInspectionStatusRequest
+      properties:
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/AccountIdSet'
+            - description: The unique identifiers for the Amazon Web Services accounts to retrieve Amazon Inspector deep inspection activation status for. <pre><code> &lt;/p&gt; </code></pre>
+    MemberAccountEc2DeepInspectionStatusStateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberAccountEc2DeepInspectionStatusState'
+      minItems: 0
+      maxItems: 100
+    FailedMemberAccountEc2DeepInspectionStatusStateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FailedMemberAccountEc2DeepInspectionStatusState'
+      minItems: 0
+      maxItems: 100
+    MemberAccountEc2DeepInspectionStatusList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MemberAccountEc2DeepInspectionStatus'
+      minItems: 0
+      maxItems: 100
+    BatchUpdateMemberEc2DeepInspectionStatusRequest:
+      type: object
+      required:
+        - accountIds
+      title: BatchUpdateMemberEc2DeepInspectionStatusRequest
+      properties:
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/MemberAccountEc2DeepInspectionStatusList'
+            - description: The unique identifiers for the Amazon Web Services accounts to change Amazon Inspector deep inspection status for.
     ReportId:
       type: string
       pattern: '\b[a-f0-9]{8}\b-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-\b[a-f0-9]{12}\b'
@@ -4712,6 +5241,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReportId'
             - description: The ID of the report to be canceled.
+    CisaAction:
+      type: string
+      minLength: 0
+    CisaDateAdded:
+      type: string
+      format: date-time
+    CisaDateDue:
+      type: string
+      format: date-time
+    CisaData:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/CisaAction'
+            - description: The remediation action recommended by CISA for this vulnerability.
+        dateAdded:
+          allOf:
+            - $ref: '#/components/schemas/CisaDateAdded'
+            - description: The date and time CISA added this vulnerability to their catalogue.
+        dateDue:
+          allOf:
+            - $ref: '#/components/schemas/CisaDateDue'
+            - description: The date and time CISA expects a fix to have been provided vulnerability.
+      description: The Cybersecurity and Infrastructure Security Agency (CISA) details for a specific vulnerability.
     ClientToken:
       type: string
       minLength: 1
@@ -5161,7 +5715,7 @@ components:
         keyPrefix:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The prefix of the KMS key used to export findings.
+            - description: The prefix of the Amazon S3 bucket used to export findings.
         kmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5190,6 +5744,42 @@ components:
       type: string
       enum:
         - USD
+    Cvss2BaseScore:
+      type: number
+      format: double
+    Cvss2ScoringVector:
+      type: string
+      minLength: 0
+    Cvss2:
+      type: object
+      properties:
+        baseScore:
+          allOf:
+            - $ref: '#/components/schemas/Cvss2BaseScore'
+            - description: The CVSS v2 base score for the vulnerability.
+        scoringVector:
+          allOf:
+            - $ref: '#/components/schemas/Cvss2ScoringVector'
+            - description: The scoring vector associated with the CVSS v2 score.
+      description: The Common Vulnerability Scoring System (CVSS) version 2 details for the vulnerability.
+    Cvss3BaseScore:
+      type: number
+      format: double
+    Cvss3ScoringVector:
+      type: string
+      minLength: 0
+    Cvss3:
+      type: object
+      properties:
+        baseScore:
+          allOf:
+            - $ref: '#/components/schemas/Cvss3BaseScore'
+            - description: The CVSS v3 base score for the vulnerability.
+        scoringVector:
+          allOf:
+            - $ref: '#/components/schemas/Cvss3ScoringVector'
+            - description: The scoring vector associated with the CVSS v3 score.
+      description: The Common Vulnerability Scoring System (CVSS) version 3 details for the vulnerability.
     Double:
       type: number
       format: double
@@ -5274,6 +5864,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CvssScore'
+    Cwe:
+      type: string
+      minLength: 0
+    Cwes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Cwe'
+      minItems: 0
     DateFilter:
       type: object
       properties:
@@ -5350,6 +5948,12 @@ components:
       type: object
       title: DescribeOrganizationConfigurationRequest
       properties: {}
+    DetectionPlatforms:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 0
+      maxItems: 100
     DisableDelegatedAdminAccountRequest:
       type: object
       required:
@@ -5388,6 +5992,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountId'
             - description: The Amazon Web Services account ID of the member account to disassociate.
+    Ec2DeepInspectionStatus:
+      type: string
+      enum:
+        - ACTIVATED
+        - DEACTIVATED
+        - PENDING
+        - FAILED
     Ec2InstanceSortBy:
       type: string
       enum:
@@ -5525,6 +6136,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnableResourceTypeList'
             - description: The resource scan types you want to enable.
+    EpssScore:
+      type: number
+      format: double
+    Epss:
+      type: object
+      properties:
+        score:
+          allOf:
+            - $ref: '#/components/schemas/EpssScore'
+            - description: The Exploit Prediction Scoring System (EPSS) score.
+      description: Details about the Exploit Prediction Scoring System (EPSS) score.
     ErrorCode:
       type: string
       enum:
@@ -5549,6 +6171,18 @@ components:
       enum:
         - 'YES'
         - 'NO'
+    ExploitObserved:
+      type: object
+      properties:
+        firstSeen:
+          allOf:
+            - $ref: '#/components/schemas/FirstSeen'
+            - description: The date an time when the exploit was first seen.
+        lastSeen:
+          allOf:
+            - $ref: '#/components/schemas/LastSeen'
+            - description: The date an time when the exploit was last seen.
+      description: Contains information on when this exploit was observed.
     ExploitabilityDetails:
       type: object
       properties:
@@ -5592,6 +6226,24 @@ components:
             - $ref: '#/components/schemas/Status'
             - description: The status of Amazon Inspector for the account.
       description: An object with details on why an account failed to enable Amazon Inspector.
+    FailedMemberAccountEc2DeepInspectionStatusState:
+      type: object
+      required:
+        - accountId
+      properties:
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The unique identifier for the Amazon Web Services account of the organization member that failed to activate Amazon Inspector deep inspection.
+        ec2ScanStatus:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: The status of EC2 scanning in the account that failed to activate Amazon Inspector deep inspection.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The error message explaining why the account failed to activate Amazon Inspector deep inspection.
+      description: An object that contains details about a member account in your organization that failed to activate Amazon Inspector deep inspection.
     FilePath:
       type: string
       minLength: 1
@@ -5667,8 +6319,9 @@ components:
       maxLength: 1024
     FindingArn:
       type: string
+      pattern: '^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:finding/[a-f0-9]{32}$'
       minLength: 1
-      maxLength: 1024
+      maxLength: 100
     FixAvailable:
       type: string
       enum:
@@ -5979,6 +6632,16 @@ components:
       type: object
       title: GetDelegatedAdminAccountRequest
       properties: {}
+    GetEc2DeepInspectionConfigurationRequest:
+      type: object
+      title: GetEc2DeepInspectionConfigurationRequest
+      properties: {}
+    PathList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Path'
+      minItems: 0
+      maxItems: 5
     GetFindingsReportStatusRequest:
       type: object
       title: GetFindingsReportStatusRequest
@@ -6368,6 +7031,24 @@ components:
             - $ref: '#/components/schemas/MapValue'
             - description: The tag value used in the filter.
       description: An object that describes details of a map filter.
+    MemberAccountEc2DeepInspectionStatusState:
+      type: object
+      required:
+        - accountId
+      properties:
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The unique identifier for the Amazon Web Services account of the organization member
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The error message explaining why the account failed to activate Amazon Inspector deep inspection.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Ec2DeepInspectionStatus'
+            - description: The state of Amazon Inspector deep inspection in the member account.
+      description: An object that contains details about the state of Amazon Inspector deep inspection for a member account.
     MonthlyCostEstimate:
       type: number
       format: double
@@ -6490,6 +7171,7 @@ components:
         - PYTHONPKG
         - NODEPKG
         - POM
+        - GEMSPEC
     PackageName:
       type: string
       minLength: 1
@@ -6557,6 +7239,15 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The recommended course of action to remediate the finding.
       description: Details about the recommended course of action to remediate the finding.
+    RelatedVulnerability:
+      type: string
+      minLength: 0
+    RelatedVulnerabilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/RelatedVulnerability'
+      minItems: 0
+      maxItems: 100
     RepositorySortBy:
       type: string
       enum:
@@ -6639,11 +7330,47 @@ components:
         - STALE_INVENTORY
         - EXCLUDED_BY_TAG
         - UNSUPPORTED_RUNTIME
+        - UNSUPPORTED_MEDIA_TYPE
+        - UNSUPPORTED_CONFIG_FILE
+        - DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED
+        - DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED
+        - DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED
+        - DEEP_INSPECTION_NO_INVENTORY
     ScanStatusCode:
       type: string
       enum:
         - ACTIVE
         - INACTIVE
+    SearchVulnerabilitiesFilterCriteria:
+      type: object
+      required:
+        - vulnerabilityIds
+      properties:
+        vulnerabilityIds:
+          allOf:
+            - $ref: '#/components/schemas/VulnIdList'
+            - description: The IDs for specific vulnerabilities.
+      description: 'Details on the criteria used to define the filter for a vulnerability search. '
+    SearchVulnerabilitiesRequest:
+      type: object
+      required:
+        - filterCriteria
+      title: SearchVulnerabilitiesRequest
+      properties:
+        filterCriteria:
+          allOf:
+            - $ref: '#/components/schemas/SearchVulnerabilitiesFilterCriteria'
+            - description: The criteria used to filter the results of a vulnerability search.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request to a list action. For subsequent calls, use the <code>NextToken</code> value returned from the previous request to continue listing results after the first page.'
+    Vulnerabilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/Vulnerability'
+      minItems: 0
+      maxItems: 1
     SecurityGroupId:
       type: string
       pattern: '^sg-([a-z0-9]{8}|[a-z0-9]{17}|\*)$'
@@ -6696,12 +7423,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags to be added to a resource.
+    Target:
+      type: string
+      minLength: 0
+      maxLength: 50
     TitleSortBy:
       type: string
       enum:
         - CRITICAL
         - HIGH
         - ALL
+    Ttp:
+      type: string
+      minLength: 0
+      maxLength: 30
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -6716,6 +7451,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/EcrConfiguration'
             - description: Specifies how the ECR automated re-scan will be updated for your environment.
+    UpdateEc2DeepInspectionConfigurationRequest:
+      type: object
+      title: UpdateEc2DeepInspectionConfigurationRequest
+      properties:
+        activateDeepInspection:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Specify <code>TRUE</code> to activate Amazon Inspector deep inspection in your account, or <code>FALSE</code> to deactivate. Member accounts in an organization cannot deactivate deep inspection, instead the delegated administrator for the organization can deactivate a member account using <a href="https://docs.aws.amazon.com/inspector/v2/APIReference/API_BatchUpdateMemberEc2DeepInspectionStatus.html">BatchUpdateMemberEc2DeepInspectionStatus</a>.'
+        packagePaths:
+          allOf:
+            - $ref: '#/components/schemas/PathList'
+            - description: The Amazon Inspector deep inspection custom paths you are adding for your account.
     UpdateFilterRequest:
       type: object
       required:
@@ -6746,6 +7493,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterReason'
             - description: The reason the filter was updated.
+    UpdateOrgEc2DeepInspectionConfigurationRequest:
+      type: object
+      required:
+        - orgPackagePaths
+      title: UpdateOrgEc2DeepInspectionConfigurationRequest
+      properties:
+        orgPackagePaths:
+          allOf:
+            - $ref: '#/components/schemas/PathList'
+            - description: The Amazon Inspector deep inspection custom paths you are adding for your organization.
     UpdateOrganizationConfigurationRequest:
       type: object
       required:
@@ -6803,6 +7560,111 @@ components:
             - $ref: '#/components/schemas/UsageList'
             - description: An object representing the total usage for an account.
       description: The total of usage for an account ID.
+    VendorCreatedAt:
+      type: string
+      format: date-time
+    VendorSeverity:
+      type: string
+      minLength: 1
+      maxLength: 64
+    VendorUpdatedAt:
+      type: string
+      format: date-time
+    VulnId:
+      type: string
+      pattern: '^CVE-[12][0-9]{3}-[0-9]{1,10}$'
+    Vulnerability:
+      type: object
+      required:
+        - id
+      properties:
+        atigData:
+          allOf:
+            - $ref: '#/components/schemas/AtigData'
+            - description: An object that contains information about the Amazon Web Services Threat Intel Group (ATIG) details for the vulnerability.
+        cisaData:
+          allOf:
+            - $ref: '#/components/schemas/CisaData'
+            - description: An object that contains the Cybersecurity and Infrastructure Security Agency (CISA) details for the vulnerability.
+        cvss2:
+          allOf:
+            - $ref: '#/components/schemas/Cvss2'
+            - description: An object that contains the Common Vulnerability Scoring System (CVSS) Version 2 details for the vulnerability.
+        cvss3:
+          allOf:
+            - $ref: '#/components/schemas/Cvss3'
+            - description: An object that contains the Common Vulnerability Scoring System (CVSS) Version 3 details for the vulnerability.
+        cwes:
+          allOf:
+            - $ref: '#/components/schemas/Cwes'
+            - description: The Common Weakness Enumeration (CWE) associated with the vulnerability.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilityDescription'
+            - description: A description of the vulnerability.
+        detectionPlatforms:
+          allOf:
+            - $ref: '#/components/schemas/DetectionPlatforms'
+            - description: Platforms that the vulnerability can be detected on.
+        epss:
+          allOf:
+            - $ref: '#/components/schemas/Epss'
+            - description: An object that contains the Exploit Prediction Scoring System (EPSS) score.
+        exploitObserved:
+          allOf:
+            - $ref: '#/components/schemas/ExploitObserved'
+            - description: An object that contains details on when the exploit was observed.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The ID for the specific vulnerability.
+        referenceUrls:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilityReferenceUrls'
+            - description: 'Links to various resources with more information on this vulnerability. '
+        relatedVulnerabilities:
+          allOf:
+            - $ref: '#/components/schemas/RelatedVulnerabilities'
+            - description: A list of related vulnerabilities.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilitySource'
+            - description: The source of the vulnerability information.
+        sourceUrl:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilitySourceUrl'
+            - description: A link to the official source material for this vulnerability.
+        vendorCreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/VendorCreatedAt'
+            - description: The date and time when the vendor created this vulnerability.
+        vendorSeverity:
+          allOf:
+            - $ref: '#/components/schemas/VendorSeverity'
+            - description: The severity assigned by the vendor.
+        vendorUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/VendorUpdatedAt'
+            - description: The date and time when the vendor last updated this vulnerability.
+      description: Contains details about a specific vulnerability Amazon Inspector can detect.
+    VulnerabilityDescription:
+      type: string
+    VulnerabilityReferenceUrls:
+      type: array
+      items:
+        $ref: '#/components/schemas/VulnerabilityReferenceUrl'
+      minItems: 0
+      maxItems: 100
+    VulnerabilitySource:
+      type: string
+      enum:
+        - NVD
+    VulnerabilitySourceUrl:
+      type: string
+      minLength: 0
+    VulnerabilityReferenceUrl:
+      type: string
+      minLength: 0
     VulnerablePackageRemediation:
       type: string
       minLength: 1

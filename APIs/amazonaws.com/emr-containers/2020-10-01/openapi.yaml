@@ -975,6 +975,105 @@ paths:
             pattern: '[0-9a-z]+'
             minLength: 1
             maxLength: 64
+  '/virtualclusters/{virtualClusterId}/endpoints/{endpointId}/credentials':
+    post:
+      operationId: GetManagedEndpointSessionCredentials
+      description: 'Generate a session token to connect to a managed endpoint. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetManagedEndpointSessionCredentialsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: RequestThrottledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestThrottledException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: endpointId
+          in: path
+          required: true
+          description: 'The ARN of the managed endpoint for which the request is submitted. '
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 2048
+        - name: virtualClusterId
+          in: path
+          required: true
+          description: 'The ARN of the Virtual Cluster which the Managed Endpoint belongs to. '
+          schema:
+            type: string
+            pattern: .*\S.*
+            minLength: 1
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - executionRoleArn
+                - credentialType
+              properties:
+                executionRoleArn:
+                  description: 'The IAM Execution Role ARN that will be used by the job run. '
+                  type: string
+                  pattern: '^arn:(aws[a-zA-Z0-9-]*):iam::(\d{12})?:(role((\u002F)|(\u002F[\u0021-\u007F]+\u002F))[\w+=,.@-]+)$'
+                  minLength: 20
+                  maxLength: 2048
+                credentialType:
+                  description: Type of the token requested. Currently supported and default value of this field is “TOKEN.”
+                  type: string
+                  pattern: ^.*\S.*$
+                  minLength: 1
+                  maxLength: 64
+                durationInSeconds:
+                  description: Duration in seconds for which the session token is valid. The default duration is 15 minutes and the maximum is 12 hours.
+                  type: integer
+                logContext:
+                  description: String identifier used to separate sections of the execution logs uploaded to S3.
+                  type: string
+                  pattern: '^((?!.*-s3alias)(?!xn--.*)[a-z0-9][-a-z0-9.]*)?[a-z0-9]$'
+                  minLength: 3
+                  maxLength: 63
+                clientToken:
+                  description: The client idempotency token of the job run request.
+                  type: string
+                  pattern: .*\S.*
+                  minLength: 1
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/virtualclusters/{virtualClusterId}/jobruns':
     get:
       operationId: ListJobRuns
@@ -1603,6 +1702,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/VirtualCluster'
             - description: This output displays information about the specified virtual cluster.
+    GetManagedEndpointSessionCredentialsResponse:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: The identifier of the session token returned.
+        credentials:
+          allOf:
+            - $ref: '#/components/schemas/Credentials'
+            - description: The structure containing the session credentials.
+        expiresAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the session token will expire.
+    RequestThrottledException: {}
     ListJobRunsResponse:
       type: object
       properties:
@@ -2028,6 +2143,24 @@ components:
       pattern: '^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\d{12}):\/virtualclusters\/[0-9a-zA-Z]+$'
       minLength: 60
       maxLength: 1024
+    CredentialType:
+      type: string
+      pattern: ^.*\S.*$
+      minLength: 1
+      maxLength: 64
+    Token:
+      type: string
+      pattern: ^.*\S.*$
+      minLength: 1
+      format: password
+    Credentials:
+      type: object
+      properties:
+        token:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: The actual session token being returned.
+      description: The structure containing the session token being returned.
     DeleteJobTemplateRequest:
       type: object
       title: DeleteJobTemplateRequest
@@ -2334,6 +2467,43 @@ components:
       minLength: 1
       maxLength: 256
       format: password
+    String2048:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 2048
+    LogContext:
+      type: string
+      pattern: '^((?!.*-s3alias)(?!xn--.*)[a-z0-9][-a-z0-9.]*)?[a-z0-9]$'
+      minLength: 3
+      maxLength: 63
+    GetManagedEndpointSessionCredentialsRequest:
+      type: object
+      required:
+        - executionRoleArn
+        - credentialType
+      title: GetManagedEndpointSessionCredentialsRequest
+      properties:
+        executionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleArn'
+            - description: 'The IAM Execution Role ARN that will be used by the job run. '
+        credentialType:
+          allOf:
+            - $ref: '#/components/schemas/CredentialType'
+            - description: Type of the token requested. Currently supported and default value of this field is “TOKEN.”
+        durationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/JavaInteger'
+            - description: Duration in seconds for which the session token is valid. The default duration is 15 minutes and the maximum is 12 hours.
+        logContext:
+          allOf:
+            - $ref: '#/components/schemas/LogContext'
+            - description: String identifier used to separate sections of the execution logs uploaded to S3.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client idempotency token of the job run request.
     JobArn:
       type: string
       pattern: '^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\d{12}):\/virtualclusters\/[0-9a-zA-Z]+\/jobruns\/[0-9a-zA-Z]+$'
@@ -2373,11 +2543,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/JobRun'
-    String2048:
-      type: string
-      pattern: .*\S.*
-      minLength: 1
-      maxLength: 2048
     JobTemplates:
       type: array
       items:

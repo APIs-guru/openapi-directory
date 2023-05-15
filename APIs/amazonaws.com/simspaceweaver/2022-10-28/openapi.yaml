@@ -3,7 +3,7 @@ info:
   version: '2022-10-28'
   x-release: v4
   title: AWS SimSpace Weaver
-  description: '<p>Amazon Web Services SimSpace Weaver (SimSpace Weaver) is a managed service that you can use to build and operate large-scale spatial simulations in the Amazon Web Services Cloud. For example, you can create a digital twin of a city, crowd simulations with millions of people and objects, and massilvely-multiplayer games with hundreds of thousands of connected players. For more information about SimSpace Weaver, see the <i> <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/">Amazon Web Services SimSpace Weaver User Guide</a> </i>.</p> <p>This API reference describes the API operations and data types that you can use to communicate directly with SimSpace Weaver.</p> <p>SimSpace Weaver also provides the SimSpace Weaver app SDK, which you use for app development. The SimSpace Weaver app SDK API reference is included in the SimSpace Weaver app SDK documentation, which is part of the SimSpace Weaver app SDK distributable package.</p>'
+  description: '<p>SimSpace Weaver (SimSpace Weaver) is a managed service that you can use to build and operate large-scale spatial simulations in the Amazon Web Services Cloud. For example, you can create a digital twin of a city, crowd simulations with millions of people and objects, and massively multiplayer games with hundreds of thousands of connected players. For more information about SimSpace Weaver, see the <i> <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/">SimSpace Weaver User Guide</a> </i>.</p> <p>This API reference describes the API operations and data types that you can use to communicate directly with SimSpace Weaver.</p> <p>SimSpace Weaver also provides the SimSpace Weaver app SDK, which you use for app development. The SimSpace Weaver app SDK API reference is included in the SimSpace Weaver app SDK documentation. This documentation is part of the SimSpace Weaver app SDK distributable package.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -115,6 +115,84 @@ servers:
     description: The AWS SimSpace Weaver endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /createsnapshot:
+    post:
+      operationId: CreateSnapshot
+      description: '<p>Creates a snapshot of the specified simulation. A snapshot is a file that contains simulation state data at a specific time. The state data saved in a snapshot includes entity data from the State Fabric, the simulation configuration specified in the schema, and the clock tick number. You can use the snapshot to initialize a new simulation. For more information about snapshots, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html">Snapshots</a> in the <i>SimSpace Weaver User Guide</i>. </p> <p>You specify a <code>Destination</code> when you create a snapshot. The <code>Destination</code> is the name of an Amazon S3 bucket and an optional <code>ObjectKeyPrefix</code>. The <code>ObjectKeyPrefix</code> is usually the name of a folder in the bucket. SimSpace Weaver creates a <code>snapshot</code> folder inside the <code>Destination</code> and places the snapshot file there.</p> <p>The snapshot file is an Amazon S3 object. It has an object key with the form: <code> <i>object-key-prefix</i>/snapshot/<i>simulation-name</i>-<i>YYMMdd</i>-<i>HHmm</i>-<i>ss</i>.zip</code>, where: </p> <ul> <li> <p> <code> <i>YY</i> </code> is the 2-digit year</p> </li> <li> <p> <code> <i>MM</i> </code> is the 2-digit month</p> </li> <li> <p> <code> <i>dd</i> </code> is the 2-digit day of the month</p> </li> <li> <p> <code> <i>HH</i> </code> is the 2-digit hour (24-hour clock)</p> </li> <li> <p> <code> <i>mm</i> </code> is the 2-digit minutes</p> </li> <li> <p> <code> <i>ss</i> </code> is the 2-digit seconds</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSnapshotOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Destination
+                - Simulation
+              properties:
+                Destination:
+                  description: An Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates a file.
+                  type: object
+                  properties:
+                    BucketName:
+                      allOf:
+                        - $ref: '#/components/schemas/BucketName'
+                        - description: 'The name of an Amazon S3 bucket. For more information about buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html">Creating, configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+                    ObjectKeyPrefix:
+                      allOf:
+                        - $ref: '#/components/schemas/ObjectKeyPrefix'
+                        - description: 'A string prefix for an Amazon S3 object key. It''s usually a folder name. For more information about folders in Amazon S3, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html">Organizing objects in the Amazon S3 console using folders</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+                Simulation:
+                  description: The name of the simulation.
+                  type: string
+                  pattern: '^[a-zA-Z0-9_.-]+$'
+                  minLength: 1
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /deleteapp#app&domain&simulation:
     delete:
       operationId: DeleteApp
@@ -195,7 +273,7 @@ paths:
   /deletesimulation#simulation:
     delete:
       operationId: DeleteSimulation
-      description: <p>Deletes all SimSpace Weaver resources assigned to the given simulation.</p> <note> <p>Your simulation uses resources in other Amazon Web Services services. This API operation doesn't delete resources in other Amazon Web Services services.</p> </note>
+      description: <p>Deletes all SimSpace Weaver resources assigned to the given simulation.</p> <note> <p>Your simulation uses resources in other Amazon Web Services. This API operation doesn't delete resources in other Amazon Web Services.</p> </note>
       responses:
         '200':
           description: Success
@@ -295,7 +373,7 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9_.-]+$'
             minLength: 1
-            maxLength: 64
+            maxLength: 256
         - name: domain
           in: query
           required: true
@@ -430,7 +508,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'If SimSpace Weaver returns <code>nextToken</code>, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn''t valid, you receive an <i>HTTP 400 ValidationException</i> error.'
+          description: 'If SimSpace Weaver returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn''t valid, then you receive an <i>HTTP 400 ValidationException</i> error.'
           schema:
             type: string
         - name: simulation
@@ -502,7 +580,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'If SimSpace Weaver returns <code>nextToken</code>, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn''t valid, you receive an <i>HTTP 400 ValidationException</i> error.'
+          description: 'If SimSpace Weaver returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn''t valid, then you receive an <i>HTTP 400 ValidationException</i> error.'
           schema:
             type: string
         - name: MaxResults
@@ -692,7 +770,7 @@ paths:
                   minLength: 1
                   maxLength: 64
                 LaunchOverrides:
-                  description: Options that apply when the app starts. These optiAons override default behavior.
+                  description: Options that apply when the app starts. These options override default behavior.
                   type: object
                   properties:
                     LaunchCommands:
@@ -787,7 +865,7 @@ paths:
   /startsimulation:
     post:
       operationId: StartSimulation
-      description: Starts a simulation with the given name and schema.
+      description: 'Starts a simulation with the given name. You must choose to start your simulation from a schema or from a snapshot. For more information about the schema, see the <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/schema-reference.html">schema reference</a> in the <i>SimSpace Weaver User Guide</i>. For more information about snapshots, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/working-with_snapshots.html">Snapshots</a> in the <i>SimSpace Weaver User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -835,7 +913,6 @@ paths:
               required:
                 - Name
                 - RoleArn
-                - SchemaS3Location
               properties:
                 ClientToken:
                   description: A value that you provide to ensure that repeated calls to this API operation using the same parameters complete only once. A <code>ClientToken</code> is also known as an <i>idempotency token</i>. A <code>ClientToken</code> expires after 24 hours.
@@ -850,7 +927,7 @@ paths:
                   minLength: 0
                   maxLength: 500
                 MaximumDuration:
-                  description: 'The maximum running time of the simulation, specified as a number of months (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit.'
+                  description: 'The maximum running time of the simulation, specified as a number of minutes (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit. The maximum value is <code>14D</code>, or its equivalent in the other units. The default value is <code>14D</code>. A value equivalent to <code>0</code> makes the simulation immediately transition to <code>Stopping</code> as soon as it reaches <code>Started</code>.'
                   type: string
                   pattern: '^\d{1,5}[mhdMHD]$'
                   minLength: 2
@@ -868,7 +945,19 @@ paths:
                   minLength: 0
                   maxLength: 1600
                 SchemaS3Location:
-                  description: 'A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver stores simulation data, such as your app zip files and schema file. For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.'
+                  description: 'A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver stores simulation data, such as your app .zip files and schema file. For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.'
+                  type: object
+                  properties:
+                    BucketName:
+                      allOf:
+                        - $ref: '#/components/schemas/BucketName'
+                        - description: 'The name of an Amazon S3 bucket. For more information about buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html">Creating, configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+                    ObjectKey:
+                      allOf:
+                        - $ref: '#/components/schemas/ObjectKey'
+                        - description: 'The key name of an object in Amazon S3. For more information about Amazon S3 objects and object keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html">Uploading, downloading, and working with objects in Amazon S3</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+                SnapshotS3Location:
+                  description: 'A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver stores simulation data, such as your app .zip files and schema file. For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.'
                   type: object
                   properties:
                     BucketName:
@@ -1041,7 +1130,7 @@ paths:
   /stopsimulation:
     post:
       operationId: StopSimulation
-      description: '<p>Stops the given simulation.</p> <important> <p>You can''t restart a simulation after you stop it. If you need to restart a simulation, you must stop it, delete it, and start a new instance of it.</p> </important>'
+      description: '<p>Stops the given simulation.</p> <important> <p>You can''t restart a simulation after you stop it. If you want to restart a simulation, then you must stop it, delete it, and start a new instance of it.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1206,14 +1295,25 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
-    DeleteAppOutput:
+    CreateSnapshotOutput:
       type: object
       properties: {}
+    BucketName:
+      type: string
+      minLength: 3
+      maxLength: 63
+    ObjectKeyPrefix:
+      type: string
+      minLength: 0
+      maxLength: 1024
     ResourceNotFoundException: {}
     InternalServerException: {}
     AccessDeniedException: {}
     ValidationException: {}
     ConflictException: {}
+    DeleteAppOutput:
+      type: object
+      properties: {}
     DeleteSimulationOutput:
       type: object
       properties: {}
@@ -1236,7 +1336,7 @@ components:
           $ref: '#/components/schemas/LaunchOverrides'
         Name:
           allOf:
-            - $ref: '#/components/schemas/SimSpaceWeaverResourceName'
+            - $ref: '#/components/schemas/SimSpaceWeaverLongResourceName'
             - description: The name of the app.
         Simulation:
           allOf:
@@ -1280,7 +1380,7 @@ components:
         MaximumDuration:
           allOf:
             - $ref: '#/components/schemas/TimeToLiveString'
-            - description: 'The maximum running time of the simulation, specified as a number of months (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit.'
+            - description: 'The maximum running time of the simulation, specified as a number of minutes (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit. The maximum value is <code>14D</code>, or its equivalent in the other units. The default value is <code>14D</code>. A value equivalent to <code>0</code> makes the simulation immediately transition to <code>Stopping</code> as soon as it reaches <code>Started</code>.'
         Name:
           allOf:
             - $ref: '#/components/schemas/SimSpaceWeaverResourceName'
@@ -1292,11 +1392,18 @@ components:
         SchemaError:
           allOf:
             - $ref: '#/components/schemas/OptionalString'
-            - description: An error message that SimSpace Weaver returns only if there is a problem with the simulation schema.
+            - deprecated: true
+              description: 'An error message that SimSpace Weaver returns only if there is a problem with the simulation schema.SchemaError is no longer used, check StartError instead.'
         SchemaS3Location:
           allOf:
             - $ref: '#/components/schemas/S3Location'
             - description: 'The location of the simulation schema in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.'
+        SnapshotS3Location:
+          $ref: '#/components/schemas/S3Location'
+        StartError:
+          allOf:
+            - $ref: '#/components/schemas/OptionalString'
+            - description: An error message that SimSpace Weaver returns only if a problem occurs when the simulation is in the <code>STARTING</code> state.
         Status:
           allOf:
             - $ref: '#/components/schemas/SimulationStatus'
@@ -1315,14 +1422,14 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/OptionalString'
-            - description: 'If SimSpace Weaver returns <code>nextToken</code>, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn''t valid, you receive an <i>HTTP 400 ValidationException</i> error.'
+            - description: 'If SimSpace Weaver returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn''t valid, then you receive an <i>HTTP 400 ValidationException</i> error.'
     ListSimulationsOutput:
       type: object
       properties:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/OptionalString'
-            - description: 'If SimSpace Weaver returns <code>nextToken</code>, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn''t valid, you receive an <i>HTTP 400 ValidationException</i> error.'
+            - description: 'If SimSpace Weaver returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn''t valid, then you receive an <i>HTTP 400 ValidationException</i> error.'
         Simulations:
           allOf:
             - $ref: '#/components/schemas/SimulationList'
@@ -1372,10 +1479,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/UUID'
             - description: A universally unique identifier (UUID) for this simulation.
-    BucketName:
-      type: string
-      minLength: 3
-      maxLength: 63
     ObjectKey:
       type: string
       minLength: 1
@@ -1453,11 +1556,38 @@ components:
             - $ref: '#/components/schemas/LogGroupArn'
             - description: 'The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group for the simulation. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>. For more information about log groups, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with log groups and log streams</a> in the <i>Amazon CloudWatch Logs User Guide</i>.'
       description: 'The Amazon CloudWatch Logs log group for the simulation. For more information about log groups, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with log groups and log streams</a> in the <i>Amazon CloudWatch Logs User Guide</i>.'
+    S3Destination:
+      type: object
+      properties:
+        BucketName:
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: 'The name of an Amazon S3 bucket. For more information about buckets, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html">Creating, configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+        ObjectKeyPrefix:
+          allOf:
+            - $ref: '#/components/schemas/ObjectKeyPrefix'
+            - description: 'A string prefix for an Amazon S3 object key. It''s usually a folder name. For more information about folders in Amazon S3, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html">Organizing objects in the Amazon S3 console using folders</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+      description: An Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates a file.
     SimSpaceWeaverResourceName:
       type: string
       pattern: '^[a-zA-Z0-9_.-]+$'
       minLength: 1
       maxLength: 64
+    CreateSnapshotInput:
+      type: object
+      required:
+        - Destination
+        - Simulation
+      title: CreateSnapshotInput
+      properties:
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/S3Destination'
+            - description: The Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates the snapshot file.
+        Simulation:
+          allOf:
+            - $ref: '#/components/schemas/SimSpaceWeaverResourceName'
+            - description: The name of the simulation.
     DeleteAppInput:
       type: object
       title: DeleteAppInput
@@ -1466,6 +1596,11 @@ components:
       type: object
       title: DeleteSimulationInput
       properties: {}
+    SimSpaceWeaverLongResourceName:
+      type: string
+      pattern: '^[a-zA-Z0-9_.-]+$'
+      minLength: 1
+      maxLength: 256
     DescribeAppInput:
       type: object
       title: DescribeAppInput
@@ -1485,7 +1620,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppPortMappings'
             - description: The inbound TCP/UDP port numbers of the app. The combination of an IP address and a port number form a network endpoint.
-      description: Information about the network endpoint that you can use to connect to your custom or service app.
+      description: 'Information about the network endpoint that you can use to connect to your custom or service app. For more information about SimSpace Weaver apps, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_apps">Key concepts: Apps</a> in the <i>SimSpace Weaver User Guide</i>..'
     LaunchOverrides:
       type: object
       properties:
@@ -1493,7 +1628,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/LaunchCommandList'
             - description: App launch commands and command line parameters that override the launch command configured in the simulation schema.
-      description: Options that apply when the app starts. These optiAons override default behavior.
+      description: Options that apply when the app starts. These options override default behavior.
     SimulationAppStatus:
       type: string
       enum:
@@ -1535,7 +1670,7 @@ components:
         Domains:
           allOf:
             - $ref: '#/components/schemas/DomainList'
-            - description: 'A list of domains for the simulation. For more information about domains, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html">Key concepts</a> in the <i>Amazon Web Services SimSpace Weaver User Guide</i>.'
+            - description: 'A list of domains for the simulation. For more information about domains, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains">Key concepts: Domains</a> in the <i>SimSpace Weaver User Guide</i>.'
       description: 'A collection of additional state information, such as domain and clock configuration.'
     LoggingConfiguration:
       type: object
@@ -1568,7 +1703,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ObjectKey'
             - description: 'The key name of an object in Amazon S3. For more information about Amazon S3 objects and object keys, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html">Uploading, downloading, and working with objects in Amazon S3</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
-      description: 'A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver stores simulation data, such as your app zip files and schema file. For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.'
+      description: 'A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver stores simulation data, such as your app .zip files and schema file. For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.'
     SimulationStatus:
       type: string
       enum:
@@ -1580,6 +1715,7 @@ components:
         - FAILED
         - DELETING
         - DELETED
+        - SNAPSHOT_IN_PROGRESS
     SimulationTargetStatus:
       type: string
       enum:
@@ -1600,12 +1736,12 @@ components:
         Lifecycle:
           allOf:
             - $ref: '#/components/schemas/LifecycleManagementStrategy'
-            - description: '<p>The type of lifecycle management for apps in the domain. This value indicates whether apps in this domain are <i>managed</i> (SimSpace Weaver starts and stops the apps) or <i>unmanaged</i> (you must start and stop the apps).</p> <p class="title"> <b>Lifecycle types</b> </p> <ul> <li> <p> <code>PerWorker</code> – Managed: SimSpace Weaver starts 1 app on each worker</p> </li> <li> <p> <code>BySpatialSubdivision</code> – Managed: SimSpace Weaver starts 1 app for each spatial partition</p> </li> <li> <p> <code>ByRequest</code> – Unmanaged: You use the <b>StartApp</b> API to start the apps and use the <b>StopApp</b> API to stop the apps.</p> </li> </ul> <note> <p>The lifecycle types will change when the service is released for general availability (GA).</p> </note>'
+            - description: '<p>The type of lifecycle management for apps in the domain. Indicates whether apps in this domain are <i>managed</i> (SimSpace Weaver starts and stops the apps) or <i>unmanaged</i> (you must start and stop the apps).</p> <p class="title"> <b>Lifecycle types</b> </p> <ul> <li> <p> <code>PerWorker</code> – Managed: SimSpace Weaver starts one app on each worker.</p> </li> <li> <p> <code>BySpatialSubdivision</code> – Managed: SimSpace Weaver starts one app for each spatial partition.</p> </li> <li> <p> <code>ByRequest</code> – Unmanaged: You use the <code>StartApp</code> API to start the apps and use the <code>StopApp</code> API to stop the apps.</p> </li> </ul>'
         Name:
           allOf:
             - $ref: '#/components/schemas/SimSpaceWeaverResourceName'
             - description: The name of the domain.
-      description: '<p>A collection of app instances that run the same executable app code and have the same launch options and commands.</p> <p>For more information about domains, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html">Key concepts</a> in the <i>Amazon Web Services SimSpace Weaver User Guide</i>.</p>'
+      description: '<p>A collection of app instances that run the same executable app code and have the same launch options and commands.</p> <p>For more information about domains, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains">Key concepts: Domains</a> in the <i>SimSpace Weaver User Guide</i>.</p>'
     DomainList:
       type: array
       items:
@@ -1669,10 +1805,10 @@ components:
         Domain:
           allOf:
             - $ref: '#/components/schemas/SimSpaceWeaverResourceName'
-            - description: 'The domain of the app. For more information about domains, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html">Key concepts</a> in the <i>Amazon Web Services SimSpace Weaver User Guide</i>.'
+            - description: 'The domain of the app. For more information about domains, see <a href="https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html#what-is_key-concepts_domains">Key concepts: Domains</a> in the <i>SimSpace Weaver User Guide</i>.'
         Name:
           allOf:
-            - $ref: '#/components/schemas/SimSpaceWeaverResourceName'
+            - $ref: '#/components/schemas/SimSpaceWeaverLongResourceName'
             - description: The name of the app.
         Simulation:
           allOf:
@@ -1686,7 +1822,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SimulationAppTargetStatus'
             - description: The desired status of the app.
-      description: A collection of metadata about an app.
+      description: A collection of metadata about the app.
     SimulationClock:
       type: object
       properties:
@@ -1768,7 +1904,6 @@ components:
       required:
         - Name
         - RoleArn
-        - SchemaS3Location
       title: StartSimulationInput
       properties:
         ClientToken:
@@ -1782,7 +1917,7 @@ components:
         MaximumDuration:
           allOf:
             - $ref: '#/components/schemas/TimeToLiveString'
-            - description: 'The maximum running time of the simulation, specified as a number of months (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit.'
+            - description: 'The maximum running time of the simulation, specified as a number of minutes (m or M), hours (h or H), or days (d or D). The simulation stops when it reaches this limit. The maximum value is <code>14D</code>, or its equivalent in the other units. The default value is <code>14D</code>. A value equivalent to <code>0</code> makes the simulation immediately transition to <code>Stopping</code> as soon as it reaches <code>Started</code>.'
         Name:
           allOf:
             - $ref: '#/components/schemas/SimSpaceWeaverResourceName'
@@ -1794,7 +1929,11 @@ components:
         SchemaS3Location:
           allOf:
             - $ref: '#/components/schemas/S3Location'
-            - description: 'The location of the simulation schema in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.'
+            - description: '<p>The location of the simulation schema in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.</p> <p>Provide a <code>SchemaS3Location</code> to start your simulation from a schema.</p> <p>If you provide a <code>SchemaS3Location</code> then you can''t provide a <code>SnapshotS3Location</code>.</p>'
+        SnapshotS3Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: '<p>The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.</p> <p>Provide a <code>SnapshotS3Location</code> to start your simulation from a snapshot.</p> <p>If you provide a <code>SnapshotS3Location</code> then you can''t provide a <code>SchemaS3Location</code>.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'

@@ -2214,6 +2214,13 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.
+                DatasetParameters:
+                  description: The parameter declarations of the dataset.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DatasetParameter'
+                  minItems: 1
+                  maxItems: 32
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3742,7 +3749,7 @@ paths:
                 - AssignmentStatus
               properties:
                 AssignmentName:
-                  description: 'The name of the assignment, also called a rule. It must be unique within an Amazon Web Services account.'
+                  description: 'The name of the assignment, also called a rule. The name must be unique within the Amazon Web Services account.'
                   type: string
                   pattern: '(?=^.{2,256}$)(?!.*\s)[0-9a-zA-Z-_.:=+@]*$'
                   minLength: 1
@@ -5738,6 +5745,617 @@ paths:
                   description: The version number of the theme that the alias should reference.
                   type: integer
                   minimum: 1
+  '/accounts/{AwsAccountId}/topics':
+    post:
+      operationId: CreateTopic
+      description: Creates a new Q topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTopicResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that you want to create a topic in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TopicId
+                - Topic
+              properties:
+                TopicId:
+                  description: The ID for the topic that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+                  type: string
+                  pattern: '^[A-Za-z0-9-_.\\+]*$'
+                  maxLength: 256
+                Topic:
+                  description: 'A structure that describes the details of a topic, such as its name, description, and associated data sets.'
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceName'
+                        - description: The name of the topic.
+                    Description:
+                      allOf:
+                        - $ref: '#/components/schemas/LimitedString'
+                        - description: The description of the topic.
+                    DataSets:
+                      allOf:
+                        - $ref: '#/components/schemas/Datasets'
+                        - description: The data sets that the topic is associated with.
+                Tags:
+                  description: Contains a map of the key-value pairs for the resource tag or tags that are assigned to the dataset.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListTopics
+      description: Lists all of the topics within an account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTopicsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topics that you want to list.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: 'The token for the next set of results, or null if there are no more results.'
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/accounts/{AwsAccountId}/topics/{TopicId}/schedules':
+    post:
+      operationId: CreateTopicRefreshSchedule
+      description: Creates a topic refresh schedule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTopicRefreshScheduleResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topic you're creating a refresh schedule for.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DatasetArn
+                - RefreshSchedule
+              properties:
+                DatasetArn:
+                  description: The Amazon Resource Name (ARN) of the dataset.
+                  type: string
+                DatasetName:
+                  description: The name of the dataset.
+                  type: string
+                RefreshSchedule:
+                  description: A structure that represents a topic refresh schedule.
+                  type: object
+                  properties:
+                    IsEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: A Boolean value that controls whether to schedule is enabled.
+                    BasedOnSpiceSchedule:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: A Boolean value that controls whether to schedule runs at the same schedule that is specified in SPICE dataset.
+                    StartingAt:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: The starting date and time for the refresh schedule.
+                    Timezone:
+                      allOf:
+                        - $ref: '#/components/schemas/LimitedString'
+                        - description: The timezone that you want the refresh schedule to use.
+                    RepeatAt:
+                      allOf:
+                        - $ref: '#/components/schemas/LimitedString'
+                        - description: 'The time of day when the refresh should run, for example, Monday-Sunday.'
+                    TopicScheduleType:
+                      allOf:
+                        - $ref: '#/components/schemas/TopicScheduleType'
+                        - description: 'The type of refresh schedule. Valid values for this structure are <code>HOURLY</code>, <code>DAILY</code>, <code>WEEKLY</code>, and <code>MONTHLY</code>.'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListTopicRefreshSchedules
+      description: Lists all of the refresh schedules for a topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTopicRefreshSchedulesResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topic whose refresh schedule you want described.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID for the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+  '/accounts/{AwsAccountId}/vpc-connections':
+    post:
+      operationId: CreateVPCConnection
+      description: Creates a new VPC connection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateVPCConnectionResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID of the account where you want to create a new VPC connection.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - VPCConnectionId
+                - Name
+                - SubnetIds
+                - SecurityGroupIds
+                - RoleArn
+              properties:
+                VPCConnectionId:
+                  description: The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+                  type: string
+                  pattern: '[\w\-]+'
+                  minLength: 1
+                  maxLength: 1000
+                Name:
+                  description: The display name for the VPC connection.
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                SubnetIds:
+                  description: A list of subnet IDs for the VPC connection.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SubnetId'
+                  minItems: 2
+                  maxItems: 15
+                SecurityGroupIds:
+                  description: A list of security group IDs for the VPC connection.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SecurityGroupId'
+                  minItems: 1
+                  maxItems: 16
+                DnsResolvers:
+                  description: A list of IP addresses of DNS resolver endpoints for the VPC connection.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/IPv4Address'
+                  maxItems: 15
+                RoleArn:
+                  description: The IAM role to associate with the VPC connection.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                Tags:
+                  description: A map of the key-value pairs for the resource tag or tags assigned to the VPC connection.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 1
+                  maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListVPCConnections
+      description: Lists all of the VPC connections in the current set Amazon Web Services Region of an Amazon Web Services account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVPCConnectionsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID of the account that contains the VPC connections that you want to list.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: 'The token for the next set of results, or null if there are no more results.'
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   '/accounts/{AwsAccountId}/data-sets/{DataSetId}':
     delete:
       operationId: DeleteDataSet
@@ -6039,6 +6657,13 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.
+                DatasetParameters:
+                  description: The parameter declarations of the dataset.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/DatasetParameter'
+                  minItems: 1
+                  maxItems: 32
   '/accounts/{AwsAccountId}/data-sets/{DataSetId}/refresh-properties':
     delete:
       operationId: DeleteDataSetRefreshProperties
@@ -7230,6 +7855,530 @@ paths:
           description: The ID of the refresh schedule.
           schema:
             type: string
+  '/accounts/{AwsAccountId}/topics/{TopicId}':
+    delete:
+      operationId: DeleteTopic
+      description: Deletes a topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTopicResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topic that you want to delete.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeTopic
+      description: Describes a topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTopicResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+    put:
+      operationId: UpdateTopic
+      description: Updates a topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTopicResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topic that you want to update.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Topic
+              properties:
+                Topic:
+                  description: 'A structure that describes the details of a topic, such as its name, description, and associated data sets.'
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceName'
+                        - description: The name of the topic.
+                    Description:
+                      allOf:
+                        - $ref: '#/components/schemas/LimitedString'
+                        - description: The description of the topic.
+                    DataSets:
+                      allOf:
+                        - $ref: '#/components/schemas/Datasets'
+                        - description: The data sets that the topic is associated with.
+  '/accounts/{AwsAccountId}/topics/{TopicId}/schedules/{DatasetId}':
+    delete:
+      operationId: DeleteTopicRefreshSchedule
+      description: Deletes a topic refresh schedule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTopicRefreshScheduleResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+        - name: DatasetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeTopicRefreshSchedule
+      description: Deletes a topic refresh schedule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTopicRefreshScheduleResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that contains the refresh schedule that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+        - name: DatasetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+    put:
+      operationId: UpdateTopicRefreshSchedule
+      description: Updates a topic refresh schedule.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTopicRefreshScheduleResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topic whose refresh schedule you want to update.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+        - name: DatasetId
+          in: path
+          required: true
+          description: The ID of the dataset.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RefreshSchedule
+              properties:
+                RefreshSchedule:
+                  description: A structure that represents a topic refresh schedule.
+                  type: object
+                  properties:
+                    IsEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: A Boolean value that controls whether to schedule is enabled.
+                    BasedOnSpiceSchedule:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: A Boolean value that controls whether to schedule runs at the same schedule that is specified in SPICE dataset.
+                    StartingAt:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: The starting date and time for the refresh schedule.
+                    Timezone:
+                      allOf:
+                        - $ref: '#/components/schemas/LimitedString'
+                        - description: The timezone that you want the refresh schedule to use.
+                    RepeatAt:
+                      allOf:
+                        - $ref: '#/components/schemas/LimitedString'
+                        - description: 'The time of day when the refresh should run, for example, Monday-Sunday.'
+                    TopicScheduleType:
+                      allOf:
+                        - $ref: '#/components/schemas/TopicScheduleType'
+                        - description: 'The type of refresh schedule. Valid values for this structure are <code>HOURLY</code>, <code>DAILY</code>, <code>WEEKLY</code>, and <code>MONTHLY</code>.'
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}':
     delete:
       operationId: DeleteUser
@@ -7598,6 +8747,267 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/vpc-connections/{VPCConnectionId}':
+    delete:
+      operationId: DeleteVPCConnection
+      description: Deletes a VPC connection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVPCConnectionResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID of the account where you want to delete a VPC connection.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: VPCConnectionId
+          in: path
+          required: true
+          description: The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeVPCConnection
+      description: Describes a VPC connection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeVPCConnectionResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID of the account that contains the VPC connection that you want described.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: VPCConnectionId
+          in: path
+          required: true
+          description: The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+    put:
+      operationId: UpdateVPCConnection
+      description: Updates a VPC connection.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVPCConnectionResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The Amazon Web Services account ID of the account that contains the VPC connection that you want to update.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: VPCConnectionId
+          in: path
+          required: true
+          description: The ID of the VPC connection that you're updating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - SubnetIds
+                - SecurityGroupIds
+                - RoleArn
+              properties:
+                Name:
+                  description: The display name for the VPC connection.
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                SubnetIds:
+                  description: A list of subnet IDs for the VPC connection.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SubnetId'
+                  minItems: 2
+                  maxItems: 15
+                SecurityGroupIds:
+                  description: A list of security group IDs for the VPC connection.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SecurityGroupId'
+                  minItems: 1
+                  maxItems: 16
+                DnsResolvers:
+                  description: A list of IP addresses of DNS resolver endpoints for the VPC connection.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/IPv4Address'
+                  maxItems: 15
+                RoleArn:
+                  description: An IAM role associated with the VPC connection.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
   '/accounts/{AwsAccountId}/settings':
     get:
       operationId: DescribeAccountSettings
@@ -8937,7 +10347,7 @@ paths:
         - name: AssignmentName
           in: path
           required: true
-          description: 'The name of the assignment, also called a rule. This name must be unique within an Amazon Web Services account.'
+          description: 'The name of the assignment, also called a rule. The name must be unique within the Amazon Web Services account.'
           schema:
             type: string
             pattern: '(?=^.{2,256}$)(?!.*\s)[0-9a-zA-Z-_.:=+@]*$'
@@ -9033,7 +10443,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateIpRestriction
-      description: 'Updates the content and status of IP rules. To use this operation, you need to provide the entire map of rules. You can use the <code>DescribeIpRestriction</code> operation to get the current rule map.'
+      description: 'Updates the content and status of IP rules. To use this operation, you must provide the entire map of rules. You can use the <code>DescribeIpRestriction</code> operation to get the current rule map.'
       responses:
         '200':
           description: Success
@@ -9532,6 +10942,241 @@ paths:
                   items:
                     $ref: '#/components/schemas/ResourcePermission'
                   maxItems: 100
+  '/accounts/{AwsAccountId}/topics/{TopicId}/permissions':
+    get:
+      operationId: DescribeTopicPermissions
+      description: Describes the permissions of a topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTopicPermissionsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topic that you want described.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateTopicPermissions
+      description: Updates the permissions of a topic.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTopicPermissionsResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '487':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topic that you want to update the permissions for.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                GrantPermissions:
+                  description: The resource permissions that you want to grant to the topic.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourcePermission'
+                  maxItems: 100
+                RevokePermissions:
+                  description: The resource permissions that you want to revoke from the topic.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ResourcePermission'
+                  maxItems: 100
+  '/accounts/{AwsAccountId}/topics/{TopicId}/refresh/{RefreshId}':
+    get:
+      operationId: DescribeTopicRefresh
+      description: Describes the status of a topic refresh.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTopicRefreshResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that contains the topic whose refresh you want to describe.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: TopicId
+          in: path
+          required: true
+          description: The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.\\+]*$'
+            maxLength: 256
+        - name: RefreshId
+          in: path
+          required: true
+          description: 'The ID of the refresh, which is performed when the topic is created or updated.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/accounts/{AwsAccountId}/embed-url/anonymous-user':
     post:
       operationId: GenerateEmbedUrlForAnonymousUser
@@ -10608,10 +12253,10 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments':
+  '/accounts/{AwsAccountId}/namespaces/{Namespace}/v2/iam-policy-assignments':
     get:
       operationId: ListIAMPolicyAssignments
-      description: Lists IAM policy assignments in the current Amazon QuickSight account.
+      description: Lists the IAM policy assignments in the current Amazon QuickSight account.
       responses:
         '200':
           description: Success
@@ -10665,6 +12310,16 @@ paths:
             pattern: '^[0-9]{12}$'
             minLength: 12
             maxLength: 12
+        - name: assignment-status
+          in: query
+          required: false
+          description: The status of the assignments.
+          schema:
+            type: string
+            enum:
+              - ENABLED
+              - DRAFT
+              - DISABLED
         - name: Namespace
           in: path
           required: true
@@ -10687,20 +12342,6 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                AssignmentStatus:
-                  description: The status of the assignments.
-                  type: string
-                  enum:
-                    - ENABLED
-                    - DRAFT
-                    - DISABLED
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -10712,7 +12353,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/users/{UserName}/iam-policy-assignments':
     get:
       operationId: ListIAMPolicyAssignmentsForUser
-      description: 'Lists all the IAM policy assignments, including the Amazon Resource Names (ARNs) for the IAM policies assigned to the specified user and group or groups that the user belongs to.'
+      description: 'Lists all of the IAM policy assignments, including the Amazon Resource Names (ARNs), for the IAM policies assigned to the specified user and group, or groups that the user belongs to.'
       responses:
         '200':
           description: Success
@@ -11074,7 +12715,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: '<p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the <code>TagResource</code> operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, and template. </p> <p>Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:</p> <ul> <li> <p>You can''t use tags to track costs for Amazon QuickSight. This isn''t possible because you can''t tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.</p> </li> <li> <p>Amazon QuickSight doesn''t currently support the tag editor for Resource Groups.</p> </li> </ul>'
+      description: '<p>Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight resource. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the <code>TagResource</code> operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a resource. Amazon QuickSight supports tagging on data set, data source, dashboard, template, and topic. </p> <p>Tagging for Amazon QuickSight works in a similar way to tagging for other Amazon Web Services services, except for the following:</p> <ul> <li> <p>You can''t use tags to track costs for Amazon QuickSight. This isn''t possible because you can''t tag the resources that Amazon QuickSight costs are based on, for example Amazon QuickSight storage capacity (SPICE), number of users, type of users, and usage metrics.</p> </li> <li> <p>Amazon QuickSight doesn''t currently support the tag editor for Resource Groups.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -13217,7 +14858,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CalculatedField'
-      maxItems: 100
+      maxItems: 500
     ParameterDeclarationList:
       type: array
       items:
@@ -13502,6 +15143,26 @@ components:
       description: 'A rule defined to grant access on one or more restricted columns. Each dataset can have multiple rules. To create a restricted column, you add it to one or more rules. Each rule must contain at least one column and at least one user or group. To be able to see a restricted column, a user or group needs to be added to a rule for that column.'
     Boolean:
       type: boolean
+    DatasetParameter:
+      type: object
+      properties:
+        StringDatasetParameter:
+          allOf:
+            - $ref: '#/components/schemas/StringDatasetParameter'
+            - description: A string parameter that is created in the dataset.
+        DecimalDatasetParameter:
+          allOf:
+            - $ref: '#/components/schemas/DecimalDatasetParameter'
+            - description: A decimal parameter that is created in the dataset.
+        IntegerDatasetParameter:
+          allOf:
+            - $ref: '#/components/schemas/IntegerDatasetParameter'
+            - description: An integer parameter that is created in the dataset.
+        DateTimeDatasetParameter:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeDatasetParameter'
+            - description: A date time parameter that is created in the dataset.
+      description: A dataset parameter.
     CreateDataSourceResponse:
       type: object
       properties:
@@ -13661,11 +15322,11 @@ components:
         Port:
           allOf:
             - $ref: '#/components/schemas/Port'
-            - description: Port.
+            - description: The port.
         Database:
           allOf:
             - $ref: '#/components/schemas/Database'
-            - description: Database.
+            - description: The database.
       description: The parameters for Oracle.
     PostgreSqlParameters:
       type: object
@@ -14001,7 +15662,7 @@ components:
         AssignmentName:
           allOf:
             - $ref: '#/components/schemas/IAMPolicyAssignmentName'
-            - description: The name of the assignment. This name must be unique within the Amazon Web Services account.
+            - description: The name of the assignment. The name must be unique within the Amazon Web Services account.
         AssignmentId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -14353,6 +16014,113 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Web Services request ID for this operation.
+    CreateTopicResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID for the topic that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        RefreshArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic refresh.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    ResourceName:
+      type: string
+      minLength: 1
+      maxLength: 128
+    LimitedString:
+      type: string
+      maxLength: 256
+    Datasets:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatasetMetadata'
+    CreateTopicRefreshScheduleResponse:
+      type: object
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        TopicArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+    NullableBoolean:
+      type: boolean
+    TopicScheduleType:
+      type: string
+      enum:
+        - HOURLY
+        - DAILY
+        - WEEKLY
+        - MONTHLY
+    CreateVPCConnectionResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the VPC connection.
+        VPCConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceIdRestricted'
+            - description: The ID for the VPC connection that you're creating. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        CreationStatus:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceStatus'
+            - description: The status of the creation of the VPC connection.
+        AvailabilityStatus:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionAvailabilityStatus'
+            - description: The availability status of the VPC connection.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    SubnetId:
+      type: string
+      pattern: '^subnet-[0-9a-z]*$'
+      minLength: 1
+      maxLength: 255
+    SecurityGroupId:
+      type: string
+      pattern: '^sg-[0-9a-z]*$'
+      minLength: 1
+      maxLength: 255
+    IPv4Address:
+      type: string
+      minLength: 7
+      maxLength: 15
     DeleteAccountCustomizationResponse:
       type: object
       properties:
@@ -14647,6 +16415,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/ShortRestrictiveResourceId'
             - description: An ID for the theme associated with the deletion.
+    DeleteTopicResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that you want to delete. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    DeleteTopicRefreshScheduleResponse:
+      type: object
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        TopicArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
     DeleteUserResponse:
       type: object
       properties:
@@ -14661,6 +16471,33 @@ components:
     DeleteUserByPrincipalIdResponse:
       type: object
       properties:
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    DeleteVPCConnectionResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the deleted VPC connection.
+        VPCConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceIdUnrestricted'
+            - description: The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+        DeletionStatus:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceStatus'
+            - description: The deletion status of the VPC connection.
+        AvailabilityStatus:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionAvailabilityStatus'
+            - description: The availability status of the VPC connection.
         RequestId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -15289,6 +17126,94 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    DescribeTopicResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        Topic:
+          allOf:
+            - $ref: '#/components/schemas/TopicDetails'
+            - description: The definition of a topic.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    DescribeTopicPermissionsResponse:
+      type: object
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        TopicArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        Permissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePermissionList'
+            - description: A list of resource permissions that are configured to the topic.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+    DescribeTopicRefreshResponse:
+      type: object
+      properties:
+        RefreshDetails:
+          allOf:
+            - $ref: '#/components/schemas/TopicRefreshDetails'
+            - description: 'Details of the refresh, which is performed when the topic is created or updated.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    DescribeTopicRefreshScheduleResponse:
+      type: object
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that contains the refresh schedule that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        TopicArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset.
+        RefreshSchedule:
+          allOf:
+            - $ref: '#/components/schemas/TopicRefreshSchedule'
+            - description: The definition of a refresh schedule.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
     DescribeUserResponse:
       type: object
       properties:
@@ -15296,6 +17221,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/User'
             - description: The user name.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    DescribeVPCConnectionResponse:
+      type: object
+      properties:
+        VPCConnection:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnection'
+            - description: A response object that provides information for the specified VPC connection.
         RequestId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -15868,6 +17808,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Web Services request ID for this operation.
+    ListTopicRefreshSchedulesResponse:
+      type: object
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID for the topic that you want to describe. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        TopicArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        RefreshSchedules:
+          allOf:
+            - $ref: '#/components/schemas/TopicRefreshScheduleSummaries'
+            - description: The list of topic refresh schedules.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+    ListTopicsResponse:
+      type: object
+      properties:
+        TopicsSummaries:
+          allOf:
+            - $ref: '#/components/schemas/TopicSummaries'
+            - description: A list of topic summaries.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of results, or null if there are no more results.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
     ListUserGroupsResponse:
       type: object
       properties:
@@ -15898,6 +17880,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A pagination token that can be used in a subsequent request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    ListVPCConnectionsResponse:
+      type: object
+      properties:
+        VPCConnectionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionSummaryList'
+            - description: A <code>VPCConnectionSummaries</code> object that returns a summary of VPC connection objects.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of results, or null if there are no more results.'
         RequestId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -16728,6 +18729,75 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusCode'
             - description: The HTTP status of the request.
+    UpdateTopicResponse:
+      type: object
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        RefreshArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic refresh.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    UpdateTopicPermissionsResponse:
+      type: object
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        TopicArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        Permissions:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePermissionList'
+            - description: A list of resource permissions on the topic.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+    UpdateTopicRefreshScheduleResponse:
+      type: object
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID of the topic that you want to modify. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        TopicArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
     UpdateUserResponse:
       type: object
       properties:
@@ -16735,6 +18805,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/User'
             - description: The Amazon QuickSight user.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    UpdateVPCConnectionResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the VPC connection.
+        VPCConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceIdUnrestricted'
+            - description: The ID of the VPC connection that you are updating. This ID is a unique identifier for each Amazon Web Services Region in anAmazon Web Services account.
+        UpdateStatus:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceStatus'
+            - description: The update status of the VPC connection's last update.
+        AvailabilityStatus:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionAvailabilityStatus'
+            - description: The availability status of the VPC connection.
         RequestId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -16890,6 +18987,10 @@ components:
             - $ref: '#/components/schemas/DateAggregationFunction'
             - description: '<p>Aggregation for date values.</p> <ul> <li> <p> <code>COUNT</code>: Aggregate by the total number of values, including duplicates.</p> </li> <li> <p> <code>DISTINCT_COUNT</code>: Aggregate by the total number of distinct values.</p> </li> <li> <p> <code>MIN</code>: Select the smallest date value.</p> </li> <li> <p> <code>MAX</code>: Select the largest date value.</p> </li> </ul>'
       description: '<p>An aggregation function aggregates values from a dimension or measure.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
+    AggregationFunctionParameters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/LimitedString'
     ColumnIdentifier:
       type: object
       required:
@@ -17329,6 +19430,25 @@ components:
         - IAM_AND_QUICKSIGHT
         - IAM_ONLY
         - ACTIVE_DIRECTORY
+    AuthorSpecifiedAggregation:
+      type: string
+      enum:
+        - COUNT
+        - DISTINCT_COUNT
+        - MIN
+        - MAX
+        - MEDIAN
+        - SUM
+        - AVERAGE
+        - STDEV
+        - STDEVP
+        - VAR
+        - VARP
+        - PERCENTILE
+    AuthorSpecifiedAggregations:
+      type: array
+      items:
+        $ref: '#/components/schemas/AuthorSpecifiedAggregation'
     AwsAccountId:
       type: string
       pattern: '^[0-9]{12}$'
@@ -17767,6 +19887,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataLabelOverlap'
             - description: Determines whether overlap is enabled or disabled for the data labels.
+        TotalsVisibility:
+          allOf:
+            - $ref: '#/components/schemas/Visibility'
+            - description: Determines the visibility of the total.
       description: The options that determine the presentation of the data labels.
     TooltipOptions:
       type: object
@@ -18048,6 +20172,16 @@ components:
             - $ref: '#/components/schemas/FreeFormSectionLayoutConfiguration'
             - description: The free-form layout configuration of a section.
       description: The layout configuration of a section.
+    BookmarksConfigurations:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value that determines whether a user can bookmark an embedded dashboard.
+      description: The bookmarks configuration of an embedded dashboard.
     BooleanObject:
       type: boolean
     BorderStyle:
@@ -18302,6 +20436,11 @@ components:
       type: string
       minLength: 1
       maxLength: 2048
+    CalculatedFieldExpression:
+      type: string
+      minLength: 1
+      maxLength: 32000
+      format: password
     CalculatedField:
       type: object
       required:
@@ -18319,7 +20458,7 @@ components:
             - description: The name of the calculated field.
         Expression:
           allOf:
-            - $ref: '#/components/schemas/Expression'
+            - $ref: '#/components/schemas/CalculatedFieldExpression'
             - description: The expression of the calculated field.
       description: The calculated field of an analysis.
     CalculatedMeasureField:
@@ -18591,6 +20730,11 @@ components:
             - $ref: '#/components/schemas/FilterNullOption'
             - description: '<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>'
       description: A custom filter that filters based on a single value. This filter can be partially matched.
+    CategoryFilterFunction:
+      type: string
+      enum:
+        - EXACT
+        - CONTAINS
     CategoryFilterMatchOperator:
       type: string
       enum:
@@ -18604,9 +20748,35 @@ components:
       type: string
       enum:
         - FILTER_ALL_VALUES
+    CategoryFilterType:
+      type: string
+      enum:
+        - CUSTOM_FILTER
+        - CUSTOM_FILTER_LIST
+        - FILTER_LIST
     CategoryValue:
       type: string
       maxLength: 512
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    CellValueSynonym:
+      type: object
+      properties:
+        CellValue:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The cell value.
+        Synonyms:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Other names or aliases for the cell value.
+      description: A structure that represents the cell value synonym.
+    CellValueSynonyms:
+      type: array
+      items:
+        $ref: '#/components/schemas/CellValueSynonym'
     ClusterId:
       type: string
       minLength: 1
@@ -18635,6 +20805,14 @@ components:
             - $ref: '#/components/schemas/ClusterMarker'
             - description: The cluster marker that is a part of the cluster marker configuration
       description: The cluster marker configuration of the geospatial map selected point style.
+    CollectiveConstant:
+      type: object
+      properties:
+        ValueList:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of values for the collective constant.
+      description: A structure that represents a collective constant.
     ColorFillType:
       type: string
       enum:
@@ -18724,6 +20902,11 @@ components:
             - $ref: '#/components/schemas/ColumnRole'
             - description: The role of the column.
       description: The general configuration of a column.
+    ColumnDataRole:
+      type: string
+      enum:
+        - DIMENSION
+        - MEASURE
     ColumnDescriptiveText:
       type: string
       minLength: 0
@@ -18885,6 +21068,12 @@ components:
         $ref: '#/components/schemas/ColumnName'
       minItems: 1
       maxItems: 16
+    ColumnOrderingType:
+      type: string
+      enum:
+        - GREATER_IS_BETTER
+        - LESSER_IS_BETTER
+        - SPECIFIED
     ColumnSchema:
       type: object
       properties:
@@ -19128,6 +21317,27 @@ components:
             - $ref: '#/components/schemas/ColumnHierarchyList'
             - description: The column hierarchy that is used during drill-downs and drill-ups.
       description: '<p>A combo chart.</p> <p>The <code>ComboChartVisual</code> includes stacked bar combo charts and clustered bar combo charts</p> <p>For more information, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/combo-charts.html">Using combo charts</a> in the <i>Amazon QuickSight User Guide</i>.</p>'
+    UndefinedSpecifiedValueType:
+      type: string
+      enum:
+        - LEAST
+        - MOST
+    ComparativeOrder:
+      type: object
+      properties:
+        UseOrdering:
+          allOf:
+            - $ref: '#/components/schemas/ColumnOrderingType'
+            - description: 'The ordering type for a column. Valid values for this structure are <code>GREATER_IS_BETTER</code>, <code>LESSER_IS_BETTER</code> and <code>SPECIFIED</code>.'
+        SpecifedOrder:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The list of columns to be used in the ordering.
+        TreatUndefinedSpecifiedValues:
+          allOf:
+            - $ref: '#/components/schemas/UndefinedSpecifiedValueType'
+            - description: The treat of undefined specified values. Valid values for this structure are <code>LEAST</code> and <code>MOST</code>.
+      description: A structure that represents a comparative order.
     ComparisonMethod:
       type: string
       enum:
@@ -19731,6 +21941,12 @@ components:
         - BARS
         - FOUR_COLOR_ARROW
         - FOUR_GRAY_ARROW
+    ConstantType:
+      type: string
+      enum:
+        - SINGULAR
+        - RANGE
+        - COLLECTIVE
     ContributorDimensionList:
       type: array
       items:
@@ -20072,10 +22288,6 @@ components:
             - description: '<p>The definition of a dashboard.</p> <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p> <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in order for the request to be valid.</p>'
     ResourceId:
       type: string
-    ResourceName:
-      type: string
-      minLength: 1
-      maxLength: 128
     PhysicalTableMap:
       type: object
       minProperties: 0
@@ -20154,6 +22366,12 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.
       description: The usage configuration to apply to child datasets that reference this dataset as a source.
+    DatasetParameterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatasetParameter'
+      minItems: 1
+      maxItems: 32
     CreateDataSetRequest:
       type: object
       required:
@@ -20213,6 +22431,10 @@ components:
             - description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.
         DataSetUsageConfiguration:
           $ref: '#/components/schemas/DataSetUsageConfiguration'
+        DatasetParameters:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterList'
+            - description: The parameter declarations of the dataset.
     DataSourceType:
       type: string
       enum:
@@ -20548,7 +22770,7 @@ components:
         AssignmentName:
           allOf:
             - $ref: '#/components/schemas/IAMPolicyAssignmentName'
-            - description: 'The name of the assignment, also called a rule. It must be unique within an Amazon Web Services account.'
+            - description: 'The name of the assignment, also called a rule. The name must be unique within the Amazon Web Services account.'
         AssignmentStatus:
           allOf:
             - $ref: '#/components/schemas/AssignmentStatus'
@@ -20832,6 +23054,173 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A map of the key-value pairs for the resource tag or tags that you want to add to the resource.
+    TopicId:
+      type: string
+      pattern: '^[A-Za-z0-9-_.\\+]*$'
+      maxLength: 256
+    TopicRefreshSchedule:
+      type: object
+      required:
+        - IsEnabled
+        - BasedOnSpiceSchedule
+      properties:
+        IsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A Boolean value that controls whether to schedule is enabled.
+        BasedOnSpiceSchedule:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value that controls whether to schedule runs at the same schedule that is specified in SPICE dataset.
+        StartingAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The starting date and time for the refresh schedule.
+        Timezone:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The timezone that you want the refresh schedule to use.
+        RepeatAt:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: 'The time of day when the refresh should run, for example, Monday-Sunday.'
+        TopicScheduleType:
+          allOf:
+            - $ref: '#/components/schemas/TopicScheduleType'
+            - description: 'The type of refresh schedule. Valid values for this structure are <code>HOURLY</code>, <code>DAILY</code>, <code>WEEKLY</code>, and <code>MONTHLY</code>.'
+      description: A structure that represents a topic refresh schedule.
+    CreateTopicRefreshScheduleRequest:
+      type: object
+      required:
+        - DatasetArn
+        - RefreshSchedule
+      title: CreateTopicRefreshScheduleRequest
+      properties:
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the dataset.
+        RefreshSchedule:
+          allOf:
+            - $ref: '#/components/schemas/TopicRefreshSchedule'
+            - description: The definition of a refresh schedule.
+    TopicDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the topic.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The description of the topic.
+        DataSets:
+          allOf:
+            - $ref: '#/components/schemas/Datasets'
+            - description: The data sets that the topic is associated with.
+      description: 'A structure that describes the details of a topic, such as its name, description, and associated data sets.'
+    CreateTopicRequest:
+      type: object
+      required:
+        - TopicId
+        - Topic
+      title: CreateTopicRequest
+      properties:
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID for the topic that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        Topic:
+          allOf:
+            - $ref: '#/components/schemas/TopicDetails'
+            - description: The definition of a topic to create.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Contains a map of the key-value pairs for the resource tag or tags that are assigned to the dataset.
+    VPCConnectionResourceIdRestricted:
+      type: string
+      pattern: '[\w\-]+'
+      minLength: 1
+      maxLength: 1000
+    SubnetIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
+      minItems: 2
+      maxItems: 15
+    SecurityGroupIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupId'
+      minItems: 1
+      maxItems: 16
+    DnsResolverList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IPv4Address'
+      maxItems: 15
+    CreateVPCConnectionRequest:
+      type: object
+      required:
+        - VPCConnectionId
+        - Name
+        - SubnetIds
+        - SecurityGroupIds
+        - RoleArn
+      title: CreateVPCConnectionRequest
+      properties:
+        VPCConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceIdRestricted'
+            - description: The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The display name for the VPC connection.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: A list of subnet IDs for the VPC connection.
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdList'
+            - description: A list of security group IDs for the VPC connection.
+        DnsResolvers:
+          allOf:
+            - $ref: '#/components/schemas/DnsResolverList'
+            - description: A list of IP addresses of DNS resolver endpoints for the VPC connection.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The IAM role to associate with the VPC connection.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A map of the key-value pairs for the resource tag or tags assigned to the VPC connection.
+    VPCConnectionResourceStatus:
+      type: string
+      enum:
+        - CREATION_IN_PROGRESS
+        - CREATION_SUCCESSFUL
+        - CREATION_FAILED
+        - UPDATE_IN_PROGRESS
+        - UPDATE_SUCCESSFUL
+        - UPDATE_FAILED
+        - DELETION_IN_PROGRESS
+        - DELETION_FAILED
+        - DELETED
+    VPCConnectionAvailabilityStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - UNAVAILABLE
+        - PARTIALLY_AVAILABLE
     Username:
       type: string
       minLength: 1
@@ -20951,6 +23340,11 @@ components:
             - $ref: '#/components/schemas/NullValueFormatConfiguration'
             - description: The options that determine the null value format configuration.
       description: The options that determine the currency display format configuration.
+    CustomActionColumnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnIdentifier'
+      maxItems: 10
     FilterOperationSelectedFieldsConfiguration:
       type: object
       properties:
@@ -20962,6 +23356,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SelectedFieldOptions'
             - description: '<p>A structure that contains the options that choose which fields are filtered in the <code>CustomActionFilterOperation</code>.</p> <p>Valid values are defined as follows:</p> <ul> <li> <p> <code>ALL_FIELDS</code>: Applies the filter operation to all fields.</p> </li> </ul>'
+        SelectedColumns:
+          allOf:
+            - $ref: '#/components/schemas/CustomActionColumnList'
+            - description: The selected columns of a dataset.
       description: '<p>The configuration of selected fields in the<code>CustomActionFilterOperation</code>.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
     FilterOperationTargetVisualsConfiguration:
       type: object
@@ -21426,6 +23824,29 @@ components:
             - $ref: '#/components/schemas/DashboardBehavior'
             - description: The status of the export hidden fields options of a dashbaord.
       description: Determines if hidden fields are included in an exported dashboard.
+    TopicTimeGranularity:
+      type: string
+      enum:
+        - SECOND
+        - MINUTE
+        - HOUR
+        - DAY
+        - WEEK
+        - MONTH
+        - QUARTER
+        - YEAR
+    DataAggregation:
+      type: object
+      properties:
+        DatasetRowDateGranularity:
+          allOf:
+            - $ref: '#/components/schemas/TopicTimeGranularity'
+            - description: The level of time precision that is used to aggregate <code>DateTime</code> values.
+        DefaultDateColumnName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The column name for the default date.
+      description: A structure that represents a data aggregation.
     DataBarsOptions:
       type: object
       required:
@@ -21731,6 +24152,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSetUsageConfiguration'
             - description: The usage configuration to apply to child datasets that reference this dataset as a source.
+        DatasetParameters:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterList'
+            - description: The parameters that are declared in a dataset.
       description: Dataset.
     DataSetSchema:
       type: object
@@ -21987,6 +24412,175 @@ components:
       type: string
       minLength: 1
       maxLength: 4096
+    TopicFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicFilter'
+    TopicColumns:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicColumn'
+    TopicCalculatedFields:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicCalculatedField'
+    TopicNamedEntities:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicNamedEntity'
+    DatasetMetadata:
+      type: object
+      required:
+        - DatasetArn
+      properties:
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The name of the dataset.
+        DatasetDescription:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The description of the dataset.
+        DataAggregation:
+          allOf:
+            - $ref: '#/components/schemas/DataAggregation'
+            - description: The definition of a data aggregation.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/TopicFilters'
+            - description: The list of filter definitions.
+        Columns:
+          allOf:
+            - $ref: '#/components/schemas/TopicColumns'
+            - description: The list of column definitions.
+        CalculatedFields:
+          allOf:
+            - $ref: '#/components/schemas/TopicCalculatedFields'
+            - description: The list of calculated field definitions.
+        NamedEntities:
+          allOf:
+            - $ref: '#/components/schemas/TopicNamedEntities'
+            - description: The list of named entities definitions.
+      description: A structure that represents a dataset.
+    StringDatasetParameter:
+      type: object
+      required:
+        - Id
+        - Name
+        - ValueType
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterId'
+            - description: An identifier for the string parameter that is created in the dataset.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterName'
+            - description: The name of the string parameter that is created in the dataset.
+        ValueType:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterValueType'
+            - description: The value type of the dataset parameter. Valid values are <code>single value</code> or <code>multi value</code>.
+        DefaultValues:
+          allOf:
+            - $ref: '#/components/schemas/StringDatasetParameterDefaultValues'
+            - description: A list of default values for a given string dataset parameter type. This structure only accepts static values.
+      description: A string parameter for a dataset.
+    DecimalDatasetParameter:
+      type: object
+      required:
+        - Id
+        - Name
+        - ValueType
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterId'
+            - description: An identifier for the decimal parameter created in the dataset.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterName'
+            - description: The name of the decimal parameter that is created in the dataset.
+        ValueType:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterValueType'
+            - description: The value type of the dataset parameter. Valid values are <code>single value</code> or <code>multi value</code>.
+        DefaultValues:
+          allOf:
+            - $ref: '#/components/schemas/DecimalDatasetParameterDefaultValues'
+            - description: A list of default values for a given decimal parameter. This structure only accepts static values.
+      description: A decimal parameter for a dataset.
+    IntegerDatasetParameter:
+      type: object
+      required:
+        - Id
+        - Name
+        - ValueType
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterId'
+            - description: An identifier for the integer parameter created in the dataset.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterName'
+            - description: The name of the integer parameter that is created in the dataset.
+        ValueType:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterValueType'
+            - description: The value type of the dataset parameter. Valid values are <code>single value</code> or <code>multi value</code>.
+        DefaultValues:
+          allOf:
+            - $ref: '#/components/schemas/IntegerDatasetParameterDefaultValues'
+            - description: A list of default values for a given integer parameter. This structure only accepts static values.
+      description: An integer parameter for a dataset.
+    DateTimeDatasetParameter:
+      type: object
+      required:
+        - Id
+        - Name
+        - ValueType
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterId'
+            - description: An identifier for the parameter that is created in the dataset.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterName'
+            - description: The name of the date time parameter that is created in the dataset.
+        ValueType:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterValueType'
+            - description: The value type of the dataset parameter. Valid values are <code>single value</code> or <code>multi value</code>.
+        TimeGranularity:
+          allOf:
+            - $ref: '#/components/schemas/TimeGranularity'
+            - description: The time granularity of the date time parameter.
+        DefaultValues:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeDatasetParameterDefaultValues'
+            - description: A list of default values for a given date time parameter. This structure only accepts static values.
+      description: A date time parameter for a dataset.
+    DatasetParameterId:
+      type: string
+      pattern: '^[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
+    DatasetParameterName:
+      type: string
+      pattern: '^[a-zA-Z0-9]+$'
+      minLength: 1
+      maxLength: 2048
+    DatasetParameterValueType:
+      type: string
+      enum:
+        - MULTI_VALUED
+        - SINGLE_VALUED
     DateTimeFormatConfiguration:
       type: object
       properties:
@@ -22053,6 +24647,24 @@ components:
             - $ref: '#/components/schemas/DateTimeFormatConfiguration'
             - description: The format configuration of the field.
       description: The measure type field with date type columns.
+    DateTimeDatasetParameterDefaultValues:
+      type: object
+      properties:
+        StaticValues:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeDatasetParameterValueList'
+            - description: A list of static default values for a given date time parameter.
+      description: The default values of a date time parameter.
+    DateTimeDatasetParameterDefaultValue:
+      type: string
+      description: The default value for the date time parameter.
+      format: date-time
+    DateTimeDatasetParameterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DateTimeDatasetParameterDefaultValue'
+      minItems: 1
+      maxItems: 32
     SensitiveTimestamp:
       type: string
       format: date-time
@@ -22160,6 +24772,13 @@ components:
             - $ref: '#/components/schemas/SensitiveTimestamp'
             - description: A custom value that's used when the value of a parameter isn't set.
       description: The configuration that defines the default value of a <code>DateTime</code> parameter when a value has not been set.
+    MappedDataSetParameters:
+      type: array
+      description: A list of dataset parameters that are mapped to an analysis parameter.
+      items:
+        $ref: '#/components/schemas/MappedDataSetParameter'
+      minItems: 0
+      maxItems: 150
     DateTimeParameterDeclaration:
       type: object
       required:
@@ -22181,6 +24800,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTimeValueWhenUnsetConfiguration'
             - description: The configuration that defines the default value of a <code>DateTime</code> parameter when a value has not been set.
+        MappedDataSetParameters:
+          $ref: '#/components/schemas/MappedDataSetParameters'
       description: A parameter declaration for the <code>DateTime</code> data type.
     DateTimePickerControlDisplayOptions:
       type: object
@@ -22214,6 +24835,24 @@ components:
         - THURSDAY
         - FRIDAY
         - SATURDAY
+    DecimalDatasetParameterDefaultValues:
+      type: object
+      properties:
+        StaticValues:
+          allOf:
+            - $ref: '#/components/schemas/DecimalDatasetParameterValueList'
+            - description: A list of static default values for a given decimal parameter.
+      description: The default values of a decimal parameter.
+    DecimalDatasetParameterDefaultValue:
+      type: number
+      description: The default value for the decimal parameter.
+      format: double
+    DecimalDatasetParameterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DecimalDatasetParameterDefaultValue'
+      minItems: 1
+      maxItems: 32
     SensitiveDoubleObject:
       type: number
       format: double
@@ -22287,6 +24926,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/DecimalValueWhenUnsetConfiguration'
             - description: The configuration that defines the default value of a <code>Decimal</code> parameter when a value has not been set.
+        MappedDataSetParameters:
+          $ref: '#/components/schemas/MappedDataSetParameters'
       description: A parameter declaration for the <code>Decimal</code> data type.
     DecimalPlaces:
       type: integer
@@ -22295,6 +24936,88 @@ components:
     SensitiveDouble:
       type: number
       format: double
+    DefaultAggregation:
+      type: string
+      enum:
+        - SUM
+        - MAX
+        - MIN
+        - COUNT
+        - DISTINCT_COUNT
+        - AVERAGE
+    DisplayFormat:
+      type: string
+      enum:
+        - AUTO
+        - PERCENT
+        - CURRENCY
+        - NUMBER
+        - DATE
+        - STRING
+    DisplayFormatOptions:
+      type: object
+      properties:
+        UseBlankCellFormat:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value that indicates whether to use blank cell format.
+        BlankCellFormat:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: Determines the blank cell format.
+        DateFormat:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: Determines the <code>DateTime</code> format.
+        DecimalSeparator:
+          allOf:
+            - $ref: '#/components/schemas/TopicNumericSeparatorSymbol'
+            - description: Determines the decimal separator.
+        GroupingSeparator:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: Determines the grouping separator.
+        UseGrouping:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value that indicates whether to use grouping.
+        FractionDigits:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Determines the number of fraction digits.
+        Prefix:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The prefix value for a display format.
+        Suffix:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The suffix value for a display format.
+        UnitScaler:
+          allOf:
+            - $ref: '#/components/schemas/NumberScale'
+            - description: 'The unit scaler. Valid values for this structure are: <code>NONE</code>, <code>AUTO</code>, <code>THOUSANDS</code>, <code>MILLIONS</code>, <code>BILLIONS</code>, and <code>TRILLIONS</code>.'
+        NegativeFormat:
+          allOf:
+            - $ref: '#/components/schemas/NegativeFormat'
+            - description: The negative format.
+        CurrencySymbol:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: 'The currency symbol, such as <code>USD</code>.'
+      description: A structure that represents additional options for display formatting.
+    DefaultFormatting:
+      type: object
+      properties:
+        DisplayFormat:
+          allOf:
+            - $ref: '#/components/schemas/DisplayFormat'
+            - description: 'The display format. Valid values for this structure are <code>AUTO</code>, <code>PERCENT</code>, <code>CURRENCY</code>, <code>NUMBER</code>, <code>DATE</code>, and <code>STRING</code>.'
+        DisplayFormatOptions:
+          allOf:
+            - $ref: '#/components/schemas/DisplayFormatOptions'
+            - description: The additional options for display formatting.
+      description: A structure that represents a default formatting definition.
     FreeFormLayoutCanvasSizeOptions:
       type: object
       properties:
@@ -22450,6 +25173,14 @@ components:
       type: object
       title: DeleteThemeRequest
       properties: {}
+    DeleteTopicRefreshScheduleRequest:
+      type: object
+      title: DeleteTopicRefreshScheduleRequest
+      properties: {}
+    DeleteTopicRequest:
+      type: object
+      title: DeleteTopicRequest
+      properties: {}
     DeleteUserByPrincipalIdRequest:
       type: object
       title: DeleteUserByPrincipalIdRequest
@@ -22462,6 +25193,14 @@ components:
     DeleteUserRequest:
       type: object
       title: DeleteUserRequest
+      properties: {}
+    VPCConnectionResourceIdUnrestricted:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    DeleteVPCConnectionRequest:
+      type: object
+      title: DeleteVPCConnectionRequest
       properties: {}
     Delimiter:
       type: string
@@ -22677,8 +25416,6 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/IpRestrictionRuleDescription'
-    NullableBoolean:
-      type: boolean
     DescribeNamespaceRequest:
       type: object
       title: DescribeNamespaceRequest
@@ -22806,6 +25543,38 @@ components:
             - $ref: '#/components/schemas/ThemeType'
             - description: 'The type of theme, based on how it was created. Valid values include: <code>QUICKSIGHT</code> and <code>CUSTOM</code>.'
       description: Summary information about a theme.
+    DescribeTopicPermissionsRequest:
+      type: object
+      title: DescribeTopicPermissionsRequest
+      properties: {}
+    DescribeTopicRefreshRequest:
+      type: object
+      title: DescribeTopicRefreshRequest
+      properties: {}
+    TopicRefreshDetails:
+      type: object
+      properties:
+        RefreshArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic refresh.
+        RefreshId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The ID of the refresh, which occurs as a result of topic creation or topic update.'
+        RefreshStatus:
+          allOf:
+            - $ref: '#/components/schemas/TopicRefreshStatus'
+            - description: 'The status of the refresh job that indicates whether the job is still running, completed successfully, or failed.'
+      description: The details about the refresh of a topic.
+    DescribeTopicRefreshScheduleRequest:
+      type: object
+      title: DescribeTopicRefreshScheduleRequest
+      properties: {}
+    DescribeTopicRequest:
+      type: object
+      title: DescribeTopicRequest
+      properties: {}
     DescribeUserRequest:
       type: object
       title: DescribeUserRequest
@@ -22858,6 +25627,62 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The identity ID for the user in the external login provider.
       description: 'A registered user of Amazon QuickSight. '
+    DescribeVPCConnectionRequest:
+      type: object
+      title: DescribeVPCConnectionRequest
+      properties: {}
+    VPCConnection:
+      type: object
+      properties:
+        VPCConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceIdUnrestricted'
+            - description: The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the VPC connection.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The display name for the VPC connection.
+        VPCId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon EC2 VPC ID associated with the VPC connection.
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdList'
+            - description: The Amazon EC2 security group IDs associated with the VPC connection.
+        DnsResolvers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of IP addresses of DNS resolver endpoints for the VPC connection.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceStatus'
+            - description: The status of the VPC connection.
+        AvailabilityStatus:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionAvailabilityStatus'
+            - description: The availability status of the VPC connection.
+        NetworkInterfaces:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInterfaceList'
+            - description: A list of network interfaces.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the IAM role associated with the VPC connection.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the VPC connection was created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the VPC connection was last updated.
+      description: The structure of a VPC connection.
     SelectAllValueOptions:
       type: string
       enum:
@@ -22881,6 +25706,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/FieldId'
             - description: The source field ID of the destination parameter.
+        SourceColumn:
+          $ref: '#/components/schemas/ColumnIdentifier'
       description: '<p>The configuration of destination parameter values.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
     NumericalDimensionField:
       type: object
@@ -22905,6 +25732,23 @@ components:
             - $ref: '#/components/schemas/NumberFormatConfiguration'
             - description: The format configuration of the field.
       description: The dimension type field with numerical type columns.
+    TopicNumericSeparatorSymbol:
+      type: string
+      enum:
+        - COMMA
+        - DOT
+    NegativeFormat:
+      type: object
+      properties:
+        Prefix:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The prefix for a negative format.
+        Suffix:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The suffix for a negative format.
+      description: A structure that represents a negative format.
     DonutCenterOptions:
       type: object
       properties:
@@ -23691,6 +26535,12 @@ components:
             - $ref: '#/components/schemas/TopBottomFilter'
             - description: A <code>TopBottomFilter</code> filters data to the top or bottom values for a given column.
       description: '<p>With a <code>Filter</code>, you can remove portions of data from a particular visual or view.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
+    FilterClass:
+      type: string
+      enum:
+        - ENFORCED_VALUE_FILTER
+        - CONDITIONAL_VALUE_FILTER
+        - NAMED_VALUE_FILTER
     FilterDateTimePickerControl:
       type: object
       required:
@@ -24820,10 +27670,6 @@ components:
         $ref: '#/components/schemas/SessionTag'
       minItems: 1
       maxItems: 50
-    StringList:
-      type: array
-      items:
-        $ref: '#/components/schemas/String'
     GenerateEmbedUrlForAnonymousUserRequest:
       type: object
       required:
@@ -25688,6 +28534,23 @@ components:
       type: string
       minLength: 1
       maxLength: 64
+    IntegerDatasetParameterDefaultValues:
+      type: object
+      properties:
+        StaticValues:
+          allOf:
+            - $ref: '#/components/schemas/IntegerDatasetParameterValueList'
+            - description: A list of static default values for a given integer parameter.
+      description: The default values of an integer parameter.
+    IntegerDatasetParameterDefaultValue:
+      type: integer
+      description: The default value for the integer parameter.
+    IntegerDatasetParameterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IntegerDatasetParameterDefaultValue'
+      minItems: 1
+      maxItems: 32
     SensitiveLongObject:
       type: integer
     IntegerDefaultValues:
@@ -25755,6 +28618,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerValueWhenUnsetConfiguration'
             - description: A parameter declaration for the <code>Integer</code> data type.
+        MappedDataSetParameters:
+          $ref: '#/components/schemas/MappedDataSetParameters'
       description: A parameter declaration for the <code>Integer</code> data type.
     SensitiveLong:
       type: integer
@@ -25770,6 +28635,7 @@ components:
     LogicalTableId:
       type: string
       pattern: '[0-9a-zA-Z-]*'
+      description: An identifier for the logical table that is defined in the dataset
       minLength: 1
       maxLength: 64
     JoinKeyProperties:
@@ -26387,11 +29253,7 @@ components:
     ListIAMPolicyAssignmentsRequest:
       type: object
       title: ListIAMPolicyAssignmentsRequest
-      properties:
-        AssignmentStatus:
-          allOf:
-            - $ref: '#/components/schemas/AssignmentStatus'
-            - description: The status of the assignments.
+      properties: {}
     ListIngestionsRequest:
       type: object
       title: ListIngestionsRequest
@@ -26478,6 +29340,22 @@ components:
       items:
         $ref: '#/components/schemas/ThemeSummary'
       maxItems: 100
+    ListTopicRefreshSchedulesRequest:
+      type: object
+      title: ListTopicRefreshSchedulesRequest
+      properties: {}
+    TopicRefreshScheduleSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicRefreshScheduleSummary'
+    ListTopicsRequest:
+      type: object
+      title: ListTopicsRequest
+      properties: {}
+    TopicSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/TopicSummary'
     ListUserGroupsRequest:
       type: object
       title: ListUserGroupsRequest
@@ -26490,6 +29368,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/User'
+    ListVPCConnectionsRequest:
+      type: object
+      title: ListVPCConnectionsRequest
+      properties: {}
+    VPCConnectionSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/VPCConnectionSummary'
     LogicalTableAlias:
       type: string
       minLength: 1
@@ -26573,6 +29459,21 @@ components:
             - $ref: '#/components/schemas/S3Key'
             - description: Amazon S3 key that identifies an object.
       description: Amazon S3 manifest file location.
+    MappedDataSetParameter:
+      type: object
+      required:
+        - DataSetIdentifier
+        - DataSetParameterName
+      properties:
+        DataSetIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/DataSetIdentifier'
+            - description: A unique name that identifies a dataset within the analysis or dashboard.
+        DataSetParameterName:
+          allOf:
+            - $ref: '#/components/schemas/ParameterName'
+            - description: The name of the dataset parameter.
+      description: A dataset parameter that is mapped to an analysis parameter.
     MarginStyle:
       type: object
       properties:
@@ -26623,6 +29524,96 @@ components:
             - $ref: '#/components/schemas/MissingDataTreatmentOption'
             - description: '<p>The treatment option that determines how missing data should be rendered. Choose from the following options:</p> <ul> <li> <p> <code>INTERPOLATE</code>: Interpolate missing values between the prior and the next known value.</p> </li> <li> <p> <code>SHOW_AS_ZERO</code>: Show missing values as the value <code>0</code>.</p> </li> <li> <p> <code>SHOW_AS_BLANK</code>: Display a blank space when rendering missing data.</p> </li> </ul>'
       description: The configuration options that determine how missing data is treated during the rendering of a line chart.
+    NamedEntityAggType:
+      type: string
+      enum:
+        - SUM
+        - MIN
+        - MAX
+        - COUNT
+        - AVERAGE
+        - DISTINCT_COUNT
+        - STDEV
+        - STDEVP
+        - VAR
+        - VARP
+        - PERCENTILE
+        - MEDIAN
+        - CUSTOM
+    PropertyRole:
+      type: string
+      enum:
+        - PRIMARY
+        - ID
+    PropertyUsage:
+      type: string
+      enum:
+        - INHERIT
+        - DIMENSION
+        - MEASURE
+    NamedEntityDefinitionMetric:
+      type: object
+      properties:
+        Aggregation:
+          allOf:
+            - $ref: '#/components/schemas/NamedEntityAggType'
+            - description: 'The aggregation of a named entity. Valid values for this structure are <code>SUM</code>, <code>MIN</code>, <code>MAX</code>, <code>COUNT</code>, <code>AVERAGE</code>, <code>DISTINCT_COUNT</code>, <code>STDEV</code>, <code>STDEVP</code>, <code>VAR</code>, <code>VARP</code>, <code>PERCENTILE</code>, <code>MEDIAN</code>, and <code>CUSTOM</code>.'
+        AggregationFunctionParameters:
+          allOf:
+            - $ref: '#/components/schemas/AggregationFunctionParameters'
+            - description: The additional parameters for an aggregation function.
+      description: A structure that represents a metric.
+    NamedEntityDefinition:
+      type: object
+      properties:
+        FieldName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The name of the entity.
+        PropertyName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The property name to be used for the named entity.
+        PropertyRole:
+          allOf:
+            - $ref: '#/components/schemas/PropertyRole'
+            - description: The property role. Valid values for this structure are <code>PRIMARY</code> and <code>ID</code>.
+        PropertyUsage:
+          allOf:
+            - $ref: '#/components/schemas/PropertyUsage'
+            - description: 'The property usage. Valid values for this structure are <code>INHERIT</code>, <code>DIMENSION</code>, and <code>MEASURE</code>.'
+        Metric:
+          allOf:
+            - $ref: '#/components/schemas/NamedEntityDefinitionMetric'
+            - description: The definition of a metric.
+      description: A structure that represents a named entity.
+    NamedEntityDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/NamedEntityDefinition'
+    NamedFilterAggType:
+      type: string
+      enum:
+        - NO_AGGREGATION
+        - SUM
+        - AVERAGE
+        - COUNT
+        - DISTINCT_COUNT
+        - MAX
+        - MEDIAN
+        - MIN
+        - STDEV
+        - STDEVP
+        - VAR
+        - VARP
+    NamedFilterType:
+      type: string
+      enum:
+        - CATEGORY_FILTER
+        - NUMERIC_EQUALITY_FILTER
+        - NUMERIC_RANGE_FILTER
+        - DATE_RANGE_FILTER
+        - RELATIVE_DATE_FILTER
     NamespaceErrorType:
       type: string
       enum:
@@ -26645,6 +29636,77 @@ components:
       enum:
         - POSITIVE
         - NEGATIVE
+    NetworkInterfaceStatus:
+      type: string
+      enum:
+        - CREATING
+        - AVAILABLE
+        - CREATION_FAILED
+        - UPDATING
+        - UPDATE_FAILED
+        - DELETING
+        - DELETED
+        - DELETION_FAILED
+        - DELETION_SCHEDULED
+        - ATTACHMENT_FAILED_ROLLBACK_FAILED
+    NetworkInterfaceId:
+      type: string
+      pattern: '^eni-[0-9a-z]*$'
+      maxLength: 255
+    NetworkInterface:
+      type: object
+      properties:
+        SubnetId:
+          allOf:
+            - $ref: '#/components/schemas/SubnetId'
+            - description: The subnet ID associated with the network interface.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The availability zone that the network interface resides in.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An error message.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInterfaceStatus'
+            - description: The status of the network interface.
+        NetworkInterfaceId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInterfaceId'
+            - description: The network interface ID.
+      description: The structure that contains information about a network interface.
+    NetworkInterfaceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkInterface'
+    StringDatasetParameterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StringDatasetParameterDefaultValue'
+      minItems: 1
+      maxItems: 32
+    NewDefaultValues:
+      type: object
+      properties:
+        StringStaticValues:
+          allOf:
+            - $ref: '#/components/schemas/StringDatasetParameterValueList'
+            - description: A list of static default values for a given string parameter.
+        DecimalStaticValues:
+          allOf:
+            - $ref: '#/components/schemas/DecimalDatasetParameterValueList'
+            - description: A list of static default values for a given decimal parameter.
+        DateTimeStaticValues:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeDatasetParameterValueList'
+            - description: A list of static default values for a given date time parameter.
+        IntegerStaticValues:
+          allOf:
+            - $ref: '#/components/schemas/IntegerDatasetParameterValueList'
+            - description: A list of static default values for a given integer parameter.
+      description: The configuration that overrides the existing default values for a dataset parameter that is inherited from another dataset.
     NullString:
       type: string
       minLength: 1
@@ -26729,8 +29791,26 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/ColumnDataType'
-            - description: Type.
+            - description: The type.
       description: Output column.
+    OverrideDatasetParameterOperation:
+      type: object
+      required:
+        - ParameterName
+      properties:
+        ParameterName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterName'
+            - description: The name of the parameter to be overridden with different values.
+        NewParameterName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterName'
+            - description: The new name for the parameter.
+        NewDefaultValues:
+          allOf:
+            - $ref: '#/components/schemas/NewDefaultValues'
+            - description: The new default values for the parameter.
+      description: A transform operation that overrides the dataset parameter values that are defined in another dataset.
     PageNumber:
       type: integer
       minimum: 0
@@ -27055,6 +30135,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/StringValueWhenUnsetConfiguration'
             - description: The configuration that defines the default value of a <code>String</code> parameter when a value has not been set.
+        MappedDataSetParameters:
+          $ref: '#/components/schemas/MappedDataSetParameters'
       description: A parameter declaration for the <code>String</code> data type.
     ParameterDeclaration:
       type: object
@@ -27978,6 +31060,18 @@ components:
             - $ref: '#/components/schemas/ColumnHierarchyList'
             - description: The column hierarchy that is used during drill-downs and drill-ups.
       description: A radar chart visual.
+    RangeConstant:
+      type: object
+      properties:
+        Minimum:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The minimum value for a range constant.
+        Maximum:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The maximum value for a range constant.
+      description: A structure that represents a range constant.
     ReferenceLineDataConfiguration:
       type: object
       properties:
@@ -28080,7 +31174,6 @@ components:
       type: object
       required:
         - Column
-        - MeasureAggregationFunction
         - Calculation
       properties:
         Column:
@@ -28242,6 +31335,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatePersistenceConfigurations'
             - description: The state persistence settings of an embedded dashboard.
+        Bookmarks:
+          allOf:
+            - $ref: '#/components/schemas/BookmarksConfigurations'
+            - description: The bookmarks configuration for an embedded dashboard in Amazon QuickSight.
       description: The feature configuration for an embedded dashboard.
     RelationalTableCatalog:
       type: string
@@ -28360,7 +31457,7 @@ components:
       items:
         $ref: '#/components/schemas/ShortRestrictiveResourceId'
       minItems: 1
-      maxItems: 30
+      maxItems: 50
     TargetVisualOptions:
       type: string
       enum:
@@ -28466,6 +31563,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MeasureFieldList'
             - description: The size field well of a scatter plot.
+        Label:
+          allOf:
+            - $ref: '#/components/schemas/DimensionFieldList'
+            - description: The label field well of a scatter plot.
       description: The aggregated field well of a scatter plot.
     ScatterPlotFieldWells:
       type: object
@@ -28473,11 +31574,11 @@ components:
         ScatterPlotCategoricallyAggregatedFieldWells:
           allOf:
             - $ref: '#/components/schemas/ScatterPlotCategoricallyAggregatedFieldWells'
-            - description: The aggregated field wells of a scatter plot. Scatter plots that have a field in the category (group/color) field will have aggregated field wells. The x and y-axes of these scatter plots are aggregated by category.
+            - description: 'The aggregated field wells of a scatter plot. The x and y-axes of scatter plots with aggregated field wells are aggregated by category, label, or both.'
         ScatterPlotUnaggregatedFieldWells:
           allOf:
             - $ref: '#/components/schemas/ScatterPlotUnaggregatedFieldWells'
-            - description: The unaggregated field wells of a scatter plot. Scatter plots without a category field well have unaggregated field wells. The x and y-axes of these scatter plots are unaggregated.
+            - description: The unaggregated field wells of a scatter plot. The x and y-axes of these scatter plots are unaggregated.
       description: '<p>The field well configuration of a scatter plot.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
     ScatterPlotConfiguration:
       type: object
@@ -28534,6 +31635,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MeasureFieldList'
             - description: The size field well of a scatter plot.
+        Category:
+          allOf:
+            - $ref: '#/components/schemas/DimensionFieldList'
+            - description: The category field well of a scatter plot.
+        Label:
+          allOf:
+            - $ref: '#/components/schemas/DimensionFieldList'
+            - description: The label field well of a scatter plot.
       description: The unaggregated field wells of a scatter plot.
     ScatterPlotVisual:
       type: object
@@ -28737,10 +31846,62 @@ components:
       enum:
         - BASIC
         - DETAILED
+    TypeParameters:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/LimitedString'
+    SemanticEntityType:
+      type: object
+      properties:
+        TypeName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The semantic entity type name.
+        SubTypeName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The semantic entity sub type name.
+        TypeParameters:
+          allOf:
+            - $ref: '#/components/schemas/TypeParameters'
+            - description: The semantic entity type parameters.
+      description: A structure that represents a semantic entity type.
     SensitiveStringList:
       type: array
       items:
         $ref: '#/components/schemas/SensitiveString'
+    SemanticType:
+      type: object
+      properties:
+        TypeName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The semantic type name.
+        SubTypeName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The semantic type sub type name.
+        TypeParameters:
+          allOf:
+            - $ref: '#/components/schemas/TypeParameters'
+            - description: The semantic type parameters.
+        TruthyCellValue:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The semantic type truthy cell value.
+        TruthyCellValueSynonyms:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveStringList'
+            - description: The other names or aliases for the true cell value.
+        FalseyCellValue:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: The semantic type falsey cell value.
+        FalseyCellValueSynonyms:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveStringList'
+            - description: The other names or aliases for the false cell value.
+      description: A structure that represents a semantic type.
     SensitiveStringObject:
       type: string
       format: password
@@ -28821,7 +31982,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Visual'
-      maxItems: 30
+      maxItems: 50
     SheetTextBoxList:
       type: array
       items:
@@ -28987,6 +32148,19 @@ components:
     Warehouse:
       type: string
       maxLength: 128
+    StringDatasetParameterDefaultValues:
+      type: object
+      properties:
+        StaticValues:
+          allOf:
+            - $ref: '#/components/schemas/StringDatasetParameterValueList'
+            - description: A list of static default values for a given string parameter.
+      description: The default values of a string parameter.
+    StringDatasetParameterDefaultValue:
+      type: string
+      description: The default value for the string parameter.
+      minLength: 0
+      maxLength: 512
     StringDefaultValues:
       type: object
       properties:
@@ -29026,6 +32200,10 @@ components:
             - $ref: '#/components/schemas/SensitiveString'
             - description: A custom value that's used when the value of a parameter isn't set.
       description: The configuration that defines the default value of a <code>String</code> parameter when a value has not been set.
+    Synonyms:
+      type: array
+      items:
+        $ref: '#/components/schemas/LimitedString'
     TableAggregatedFieldWells:
       type: object
       properties:
@@ -29734,6 +32912,392 @@ components:
       type: integer
       minimum: 1
       maximum: 20
+    TopicCalculatedField:
+      type: object
+      required:
+        - CalculatedFieldName
+        - Expression
+      properties:
+        CalculatedFieldName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The calculated field name.
+        CalculatedFieldDescription:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The calculated field description.
+        Expression:
+          allOf:
+            - $ref: '#/components/schemas/Expression'
+            - description: The calculated field expression.
+        CalculatedFieldSynonyms:
+          allOf:
+            - $ref: '#/components/schemas/Synonyms'
+            - description: The other names or aliases for the calculated field.
+        IsIncludedInTopic:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A boolean value that indicates if a calculated field is included in the topic.
+        DisableIndexing:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A Boolean value that indicates if a calculated field is visible in the autocomplete.
+        ColumnDataRole:
+          allOf:
+            - $ref: '#/components/schemas/ColumnDataRole'
+            - description: The column data role for a calculated field. Valid values for this structure are <code>DIMENSION</code> and <code>MEASURE</code>.
+        TimeGranularity:
+          allOf:
+            - $ref: '#/components/schemas/TopicTimeGranularity'
+            - description: The level of time precision that is used to aggregate <code>DateTime</code> values.
+        DefaultFormatting:
+          allOf:
+            - $ref: '#/components/schemas/DefaultFormatting'
+            - description: The default formatting definition.
+        Aggregation:
+          allOf:
+            - $ref: '#/components/schemas/DefaultAggregation'
+            - description: 'The default aggregation. Valid values for this structure are <code>SUM</code>, <code>MAX</code>, <code>MIN</code>, <code>COUNT</code>, <code>DISTINCT_COUNT</code>, and <code>AVERAGE</code>.'
+        ComparativeOrder:
+          allOf:
+            - $ref: '#/components/schemas/ComparativeOrder'
+            - description: The order in which data is displayed for the calculated field when it's used in a comparative context.
+        SemanticType:
+          allOf:
+            - $ref: '#/components/schemas/SemanticType'
+            - description: The semantic type.
+        AllowedAggregations:
+          allOf:
+            - $ref: '#/components/schemas/AuthorSpecifiedAggregations'
+            - description: 'The list of aggregation types that are allowed for the calculated field. Valid values for this structure are <code>COUNT</code>, <code>DISTINCT_COUNT</code>, <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>SUM</code>, <code>AVERAGE</code>, <code>STDEV</code>, <code>STDEVP</code>, <code>VAR</code>, <code>VARP</code>, and <code>PERCENTILE</code>.'
+        NotAllowedAggregations:
+          allOf:
+            - $ref: '#/components/schemas/AuthorSpecifiedAggregations'
+            - description: 'The list of aggregation types that are not allowed for the calculated field. Valid values for this structure are <code>COUNT</code>, <code>DISTINCT_COUNT</code>, <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>SUM</code>, <code>AVERAGE</code>, <code>STDEV</code>, <code>STDEVP</code>, <code>VAR</code>, <code>VARP</code>, and <code>PERCENTILE</code>.'
+        NeverAggregateInFilter:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value that indicates whether to never aggregate calculated field in filters.
+        CellValueSynonyms:
+          allOf:
+            - $ref: '#/components/schemas/CellValueSynonyms'
+            - description: The other names or aliases for the calculated field cell value.
+      description: A structure that represents a calculated field.
+    TopicCategoryFilterConstant:
+      type: object
+      properties:
+        ConstantType:
+          allOf:
+            - $ref: '#/components/schemas/ConstantType'
+            - description: The type of category filter constant. This element is used to specify whether a constant is a singular or collective. Valid values are <code>SINGULAR</code> and <code>COLLECTIVE</code>.
+        SingularConstant:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: A singular constant used in a category filter. This element is used to specify a single value for the constant.
+        CollectiveConstant:
+          allOf:
+            - $ref: '#/components/schemas/CollectiveConstant'
+            - description: A collective constant used in a category filter. This element is used to specify a list of values for the constant.
+      description: A constant used in a category filter.
+    TopicCategoryFilter:
+      type: object
+      properties:
+        CategoryFilterFunction:
+          allOf:
+            - $ref: '#/components/schemas/CategoryFilterFunction'
+            - description: The category filter function. Valid values for this structure are <code>EXACT</code> and <code>CONTAINS</code>.
+        CategoryFilterType:
+          allOf:
+            - $ref: '#/components/schemas/CategoryFilterType'
+            - description: The category filter type. This element is used to specify whether a filter is a simple category filter or an inverse category filter.
+        Constant:
+          allOf:
+            - $ref: '#/components/schemas/TopicCategoryFilterConstant'
+            - description: The constant used in a category filter.
+        Inverse:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value that indicates if the filter is inverse.
+      description: A structure that represents a category filter.
+    TopicColumn:
+      type: object
+      required:
+        - ColumnName
+      properties:
+        ColumnName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The name of the column.
+        ColumnFriendlyName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: A user-friendly name for the column.
+        ColumnDescription:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: A description of the column and its contents.
+        ColumnSynonyms:
+          allOf:
+            - $ref: '#/components/schemas/Synonyms'
+            - description: The other names or aliases for the column.
+        ColumnDataRole:
+          allOf:
+            - $ref: '#/components/schemas/ColumnDataRole'
+            - description: The role of the column in the data. Valid values are <code>DIMENSION</code> and <code>MEASURE</code>.
+        Aggregation:
+          allOf:
+            - $ref: '#/components/schemas/DefaultAggregation'
+            - description: 'The type of aggregation that is performed on the column data when it''s queried. Valid values for this structure are <code>SUM</code>, <code>MAX</code>, <code>MIN</code>, <code>COUNT</code>, <code>DISTINCT_COUNT</code>, and <code>AVERAGE</code>.'
+        IsIncludedInTopic:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value that indicates whether the column is included in the query results.
+        DisableIndexing:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A Boolean value that indicates whether the column shows in the autocomplete functionality.
+        ComparativeOrder:
+          allOf:
+            - $ref: '#/components/schemas/ComparativeOrder'
+            - description: The order in which data is displayed for the column when it's used in a comparative context.
+        SemanticType:
+          allOf:
+            - $ref: '#/components/schemas/SemanticType'
+            - description: The semantic type of data contained in the column.
+        TimeGranularity:
+          allOf:
+            - $ref: '#/components/schemas/TopicTimeGranularity'
+            - description: The level of time precision that is used to aggregate <code>DateTime</code> values.
+        AllowedAggregations:
+          allOf:
+            - $ref: '#/components/schemas/AuthorSpecifiedAggregations'
+            - description: 'The list of aggregation types that are allowed for the column. Valid values for this structure are <code>COUNT</code>, <code>DISTINCT_COUNT</code>, <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>SUM</code>, <code>AVERAGE</code>, <code>STDEV</code>, <code>STDEVP</code>, <code>VAR</code>, <code>VARP</code>, and <code>PERCENTILE</code>.'
+        NotAllowedAggregations:
+          allOf:
+            - $ref: '#/components/schemas/AuthorSpecifiedAggregations'
+            - description: 'The list of aggregation types that are not allowed for the column. Valid values for this structure are <code>COUNT</code>, <code>DISTINCT_COUNT</code>, <code>MIN</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>SUM</code>, <code>AVERAGE</code>, <code>STDEV</code>, <code>STDEVP</code>, <code>VAR</code>, <code>VARP</code>, and <code>PERCENTILE</code>.'
+        DefaultFormatting:
+          allOf:
+            - $ref: '#/components/schemas/DefaultFormatting'
+            - description: The default formatting used for values in the column.
+        NeverAggregateInFilter:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean value that indicates whether to aggregate the column data when it's used in a filter context.
+        CellValueSynonyms:
+          allOf:
+            - $ref: '#/components/schemas/CellValueSynonyms'
+            - description: The other names or aliases for the column cell value.
+      description: Represents a column in a dataset.
+    TopicRangeFilterConstant:
+      type: object
+      properties:
+        ConstantType:
+          allOf:
+            - $ref: '#/components/schemas/ConstantType'
+            - description: The data type of the constant value that is used in a range filter. Valid values for this structure are <code>RANGE</code>.
+        RangeConstant:
+          allOf:
+            - $ref: '#/components/schemas/RangeConstant'
+            - description: The value of the constant that is used to specify the endpoints of a range filter.
+      description: A constant value that is used in a range filter to specify the endpoints of the range.
+    TopicDateRangeFilter:
+      type: object
+      properties:
+        Inclusive:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A Boolean value that indicates whether the date range filter should include the boundary values. If set to true, the filter includes the start and end dates. If set to false, the filter excludes them.'
+        Constant:
+          allOf:
+            - $ref: '#/components/schemas/TopicRangeFilterConstant'
+            - description: The constant used in a date range filter.
+      description: A filter used to restrict data based on a range of dates or times.
+    TopicNumericEqualityFilter:
+      type: object
+      properties:
+        Constant:
+          allOf:
+            - $ref: '#/components/schemas/TopicSingularFilterConstant'
+            - description: The constant used in a numeric equality filter.
+        Aggregation:
+          allOf:
+            - $ref: '#/components/schemas/NamedFilterAggType'
+            - description: 'An aggregation function that specifies how to calculate the value of a numeric field for a topic. Valid values for this structure are <code>NO_AGGREGATION</code>, <code>SUM</code>, <code>AVERAGE</code>, <code>COUNT</code>, <code>DISTINCT_COUNT</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>MIN</code>, <code>STDEV</code>, <code>STDEVP</code>, <code>VAR</code>, and <code>VARP</code>.'
+      description: A filter that filters topics based on the value of a numeric field. The filter includes only topics whose numeric field value matches the specified value.
+    TopicNumericRangeFilter:
+      type: object
+      properties:
+        Inclusive:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A Boolean value that indicates whether the endpoints of the numeric range are included in the filter. If set to true, topics whose numeric field value is equal to the endpoint values will be included in the filter. If set to false, topics whose numeric field value is equal to the endpoint values will be excluded from the filter.'
+        Constant:
+          allOf:
+            - $ref: '#/components/schemas/TopicRangeFilterConstant'
+            - description: The constant used in a numeric range filter.
+        Aggregation:
+          allOf:
+            - $ref: '#/components/schemas/NamedFilterAggType'
+            - description: 'An aggregation function that specifies how to calculate the value of a numeric field for a topic, Valid values for this structure are <code>NO_AGGREGATION</code>, <code>SUM</code>, <code>AVERAGE</code>, <code>COUNT</code>, <code>DISTINCT_COUNT</code>, <code>MAX</code>, <code>MEDIAN</code>, <code>MIN</code>, <code>STDEV</code>, <code>STDEVP</code>, <code>VAR</code>, and <code>VARP</code>.'
+      description: A filter that filters topics based on the value of a numeric field. The filter includes only topics whose numeric field value falls within the specified range.
+    TopicRelativeDateFilter:
+      type: object
+      properties:
+        TimeGranularity:
+          allOf:
+            - $ref: '#/components/schemas/TopicTimeGranularity'
+            - description: The level of time precision that is used to aggregate <code>DateTime</code> values.
+        RelativeDateFilterFunction:
+          allOf:
+            - $ref: '#/components/schemas/TopicRelativeDateFilterFunction'
+            - description: 'The function to be used in a relative date filter to determine the range of dates to include in the results. Valid values for this structure are <code>BEFORE</code>, <code>AFTER</code>, and <code>BETWEEN</code>.'
+        Constant:
+          allOf:
+            - $ref: '#/components/schemas/TopicSingularFilterConstant'
+            - description: The constant used in a relative date filter.
+      description: A structure that represents a relative date filter.
+    TopicFilter:
+      type: object
+      required:
+        - FilterName
+        - OperandFieldName
+      properties:
+        FilterDescription:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: A description of the filter used to select items for a topic.
+        FilterClass:
+          allOf:
+            - $ref: '#/components/schemas/FilterClass'
+            - description: 'The class of the filter. Valid values for this structure are <code>ENFORCED_VALUE_FILTER</code>, <code>CONDITIONAL_VALUE_FILTER</code>, and <code>NAMED_VALUE_FILTER</code>.'
+        FilterName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The name of the filter.
+        FilterSynonyms:
+          allOf:
+            - $ref: '#/components/schemas/Synonyms'
+            - description: The other names or aliases for the filter.
+        OperandFieldName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The name of the field that the filter operates on.
+        FilterType:
+          allOf:
+            - $ref: '#/components/schemas/NamedFilterType'
+            - description: 'The type of the filter. Valid values for this structure are <code>CATEGORY_FILTER</code>, <code>NUMERIC_EQUALITY_FILTER</code>, <code>NUMERIC_RANGE_FILTER</code>, <code>DATE_RANGE_FILTER</code>, and <code>RELATIVE_DATE_FILTER</code>.'
+        CategoryFilter:
+          allOf:
+            - $ref: '#/components/schemas/TopicCategoryFilter'
+            - description: The category filter that is associated with this filter.
+        NumericEqualityFilter:
+          allOf:
+            - $ref: '#/components/schemas/TopicNumericEqualityFilter'
+            - description: The numeric equality filter.
+        NumericRangeFilter:
+          allOf:
+            - $ref: '#/components/schemas/TopicNumericRangeFilter'
+            - description: The numeric range filter.
+        DateRangeFilter:
+          allOf:
+            - $ref: '#/components/schemas/TopicDateRangeFilter'
+            - description: The date range filter.
+        RelativeDateFilter:
+          allOf:
+            - $ref: '#/components/schemas/TopicRelativeDateFilter'
+            - description: The relative date filter.
+      description: A structure that represents a filter used to select items for a topic.
+    TopicNamedEntity:
+      type: object
+      required:
+        - EntityName
+      properties:
+        EntityName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The name of the named entity.
+        EntityDescription:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The description of the named entity.
+        EntitySynonyms:
+          allOf:
+            - $ref: '#/components/schemas/Synonyms'
+            - description: The other names or aliases for the named entity.
+        SemanticEntityType:
+          allOf:
+            - $ref: '#/components/schemas/SemanticEntityType'
+            - description: The type of named entity that a topic represents.
+        Definition:
+          allOf:
+            - $ref: '#/components/schemas/NamedEntityDefinitions'
+            - description: The definition of a named entity.
+      description: A structure that represents a named entity.
+    TopicSingularFilterConstant:
+      type: object
+      properties:
+        ConstantType:
+          allOf:
+            - $ref: '#/components/schemas/ConstantType'
+            - description: The type of the singular filter constant. Valid values for this structure are <code>SINGULAR</code>.
+        SingularConstant:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The value of the singular filter constant.
+      description: 'A structure that represents a singular filter constant, used in filters to specify a single value to match against.'
+    TopicRefreshStatus:
+      type: string
+      enum:
+        - INITIALIZED
+        - RUNNING
+        - FAILED
+        - COMPLETED
+        - CANCELLED
+    TopicRefreshScheduleSummary:
+      type: object
+      properties:
+        DatasetId:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The ID of the dataset.
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/LimitedString'
+            - description: The name of the dataset.
+        RefreshSchedule:
+          allOf:
+            - $ref: '#/components/schemas/TopicRefreshSchedule'
+            - description: The definition of a refresh schedule.
+      description: A summary of the refresh schedule details for a dataset.
+    TopicRelativeDateFilterFunction:
+      type: string
+      enum:
+        - PREVIOUS
+        - THIS
+        - LAST
+        - NEXT
+        - NOW
+    TopicSummary:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the topic.
+        TopicId:
+          allOf:
+            - $ref: '#/components/schemas/TopicId'
+            - description: The ID for the topic. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the topic.
+      description: A topic summary.
     UntagColumnOperation:
       type: object
       required:
@@ -29778,6 +33342,8 @@ components:
             - description: An operation that tags a column with additional information.
         UntagColumnOperation:
           $ref: '#/components/schemas/UntagColumnOperation'
+        OverrideDatasetParameterOperation:
+          $ref: '#/components/schemas/OverrideDatasetParameterOperation'
       description: 'A data transformation on a logical table. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
     TreeMapDimensionFieldList:
       type: array
@@ -30110,6 +33676,10 @@ components:
             - description: 'A set of one or more definitions of a <code> <a href="https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html">ColumnLevelPermissionRule</a> </code>.'
         DataSetUsageConfiguration:
           $ref: '#/components/schemas/DataSetUsageConfiguration'
+        DatasetParameters:
+          allOf:
+            - $ref: '#/components/schemas/DatasetParameterList'
+            - description: The parameter declarations of the dataset.
     UpdateDataSourcePermissionsRequest:
       type: object
       title: UpdateDataSourcePermissionsRequest
@@ -30310,6 +33880,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/ThemeConfiguration'
             - description: 'The theme configuration, which contains the theme display properties.'
+    UpdateTopicPermissionsRequest:
+      type: object
+      title: UpdateTopicPermissionsRequest
+      properties:
+        GrantPermissions:
+          allOf:
+            - $ref: '#/components/schemas/UpdateResourcePermissionList'
+            - description: The resource permissions that you want to grant to the topic.
+        RevokePermissions:
+          allOf:
+            - $ref: '#/components/schemas/UpdateResourcePermissionList'
+            - description: The resource permissions that you want to revoke from the topic.
+    UpdateTopicRefreshScheduleRequest:
+      type: object
+      required:
+        - RefreshSchedule
+      title: UpdateTopicRefreshScheduleRequest
+      properties:
+        RefreshSchedule:
+          allOf:
+            - $ref: '#/components/schemas/TopicRefreshSchedule'
+            - description: The definition of a refresh schedule.
+    UpdateTopicRequest:
+      type: object
+      required:
+        - Topic
+      title: UpdateTopicRequest
+      properties:
+        Topic:
+          allOf:
+            - $ref: '#/components/schemas/TopicDetails'
+            - description: The definition of the topic that you want to update.
     UpdateUserRequest:
       type: object
       required:
@@ -30345,6 +33947,87 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The identity ID for a user in the external login provider.
+    UpdateVPCConnectionRequest:
+      type: object
+      required:
+        - Name
+        - SubnetIds
+        - SecurityGroupIds
+        - RoleArn
+      title: UpdateVPCConnectionRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The display name for the VPC connection.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: A list of subnet IDs for the VPC connection.
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdList'
+            - description: A list of security group IDs for the VPC connection.
+        DnsResolvers:
+          allOf:
+            - $ref: '#/components/schemas/DnsResolverList'
+            - description: A list of IP addresses of DNS resolver endpoints for the VPC connection.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: An IAM role associated with the VPC connection.
+    VPCConnectionSummary:
+      type: object
+      properties:
+        VPCConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceIdUnrestricted'
+            - description: The ID of the VPC connection that you're creating. This ID is a unique identifier for each Amazon Web Services Region in an Amazon Web Services account.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the VPC connection.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The display name for the VPC connection.
+        VPCId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon EC2 VPC ID associated with the VPC connection.
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdList'
+            - description: The Amazon EC2 security group IDs associated with the VPC connection.
+        DnsResolvers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of IP addresses of DNS resolver endpoints for the VPC connection.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceStatus'
+            - description: The status of the VPC connection.
+        AvailabilityStatus:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionAvailabilityStatus'
+            - description: The availability status of the VPC connection.
+        NetworkInterfaces:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInterfaceList'
+            - description: A list of network interfaces.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the IAM role associated with the VPC connection.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the VPC connection was created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the VPC connection was last updated.
+      description: The summary metadata that describes a VPC connection.
     WaterfallVisual:
       type: object
       required:

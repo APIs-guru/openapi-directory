@@ -537,7 +537,7 @@ paths:
                     DedicatedMasterCount:
                       allOf:
                         - $ref: '#/components/schemas/IntegerClass'
-                        - description: 'Number of dedicated master nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.'
+                        - description: 'Number of dedicated master nodes in the cluster. This number must be greater than 2 and not 4, otherwise you receive a validation exception.'
                     WarmEnabled:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
@@ -554,6 +554,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ColdStorageOptions'
                         - description: Container for cold storage configuration options.
+                    MultiAZWithStandbyEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html">Configuring a multi-AZ domain in Amazon OpenSearch Service</a>. '
                 EBSOptions:
                   description: Container for the parameters required to enable EBS-based storage for an OpenSearch Service domain.
                   type: object
@@ -650,7 +654,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/String'
                 LogPublishingOptions:
-                  description: Key-value pairs to configure slow log publishing.
+                  description: Key-value pairs to configure log publishing.
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/LogPublishingOption'
@@ -730,7 +734,7 @@ paths:
                     Enabled:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 13, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
+                        - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 16, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
                     OffPeakWindow:
                       allOf:
                         - $ref: '#/components/schemas/OffPeakWindow'
@@ -906,7 +910,7 @@ paths:
                   minLength: 3
                   maxLength: 28
                 PackageType:
-                  description: Type of package.
+                  description: The type of package.
                   type: string
                   enum:
                     - TXT-DICTIONARY
@@ -1554,7 +1558,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateDomainConfig
-      description: Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.
+      description: Modifies the cluster configuration of the specified Amazon OpenSearch Service domain.sl
       responses:
         '200':
           description: Success
@@ -1647,7 +1651,7 @@ paths:
                     DedicatedMasterCount:
                       allOf:
                         - $ref: '#/components/schemas/IntegerClass'
-                        - description: 'Number of dedicated master nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.'
+                        - description: 'Number of dedicated master nodes in the cluster. This number must be greater than 2 and not 4, otherwise you receive a validation exception.'
                     WarmEnabled:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
@@ -1664,6 +1668,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ColdStorageOptions'
                         - description: Container for cold storage configuration options.
+                    MultiAZWithStandbyEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html">Configuring a multi-AZ domain in Amazon OpenSearch Service</a>. '
                 EBSOptions:
                   description: Container for the parameters required to enable EBS-based storage for an OpenSearch Service domain.
                   type: object
@@ -1848,7 +1856,7 @@ paths:
                     Enabled:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 13, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
+                        - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 16, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
                     OffPeakWindow:
                       allOf:
                         - $ref: '#/components/schemas/OffPeakWindow'
@@ -1861,6 +1869,132 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: Whether automatic service software updates are enabled for the domain.
+  '/2021-01-01/opensearch/domain/{DomainName}/health':
+    get:
+      operationId: DescribeDomainHealth
+      description: 'Returns information about domain and node health, the standby Availability Zone, number of nodes per Availability Zone, and shard count per node.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDomainHealthResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The name of the domain.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]+'
+            description: The name of an OpenSearch Service domain. Domain names are unique across the domains owned by an account within an Amazon Web Services Region.
+            minLength: 3
+            maxLength: 28
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2021-01-01/opensearch/domain/{DomainName}/nodes':
+    get:
+      operationId: DescribeDomainNodes
+      description: 'Returns information about domain and nodes, including data nodes, master nodes, ultrawarm nodes, Availability Zone(s), standby nodes, node configurations, and node states.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDomainNodesResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: DisabledOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisabledOperationException'
+        '485':
+          description: DependencyFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DependencyFailureException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The name of the domain.
+          schema:
+            type: string
+            pattern: '[a-z][a-z0-9\-]+'
+            description: The name of an OpenSearch Service domain. Domain names are unique across the domains owned by an account within an Amazon Web Services Region.
+            minLength: 3
+            maxLength: 28
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2021-01-01/opensearch/domain-info:
     post:
       operationId: DescribeDomains
@@ -2725,7 +2859,7 @@ paths:
   '/2021-01-01/packages/{PackageID}/history':
     get:
       operationId: GetPackageVersionHistory
-      description: 'Returns a list of Amazon OpenSearch Service package versions, along with their creation time and commit message. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html">Custom packages for Amazon OpenSearch Service</a>.'
+      description: 'Returns a list of Amazon OpenSearch Service package versions, along with their creation time, commit message, and plugin properties (if the package is a zip plugin package). For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/custom-packages.html">Custom packages for Amazon OpenSearch Service</a>.'
       responses:
         '200':
           description: Success
@@ -3115,7 +3249,7 @@ paths:
         - name: EngineVersion
           in: path
           required: true
-          description: 'Version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y. Defaults to the latest version of OpenSearch.'
+          description: 'The version of OpenSearch or Elasticsearch, in the format Elasticsearch_X.Y or OpenSearch_X.Y. Defaults to the latest version of OpenSearch.'
           schema:
             type: string
             pattern: '^Elasticsearch_[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
@@ -3124,7 +3258,7 @@ paths:
         - name: domainName
           in: query
           required: false
-          description: Name of the domain to list instance type details for.
+          description: The name of the domain.
           schema:
             type: string
             pattern: '[a-z][a-z0-9\-]+'
@@ -3146,6 +3280,21 @@ paths:
           schema:
             type: string
             description: 'When <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page.'
+        - name: retrieveAZs
+          in: query
+          required: false
+          description: An optional parameter that specifies the Availability Zones for the domain.
+          schema:
+            type: boolean
+        - name: instanceType
+          in: query
+          required: false
+          description: An optional parameter that lists information for a given instance type.
+          schema:
+            type: string
+            pattern: ^.*\..*\.search$
+            minLength: 10
+            maxLength: 40
         - name: MaxResults
           in: query
           schema:
@@ -4798,6 +4947,71 @@ components:
             - $ref: '#/components/schemas/DomainConfig'
             - description: Container for the configuration of the OpenSearch Service domain.
       description: Contains the configuration information of the requested domain.
+    DescribeDomainHealthResponse:
+      type: object
+      properties:
+        DomainState:
+          allOf:
+            - $ref: '#/components/schemas/DomainState'
+            - description: <p>The current state of the domain.</p> <ul> <li> <p> <code>Processing</code> - The domain has updates in progress.</p> </li> <li> <p> <code>Active</code> - Requested changes have been processed and deployed to the domain.</p> </li> </ul>
+        AvailabilityZoneCount:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfAZs'
+            - description: 'The number of Availability Zones configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.'
+        ActiveAvailabilityZoneCount:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfAZs'
+            - description: 'The number of active Availability Zones configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.'
+        StandByAvailabilityZoneCount:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfAZs'
+            - description: 'The number of standby Availability Zones configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.'
+        DataNodeCount:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfNodes'
+            - description: 'The number of data nodes configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.'
+        DedicatedMaster:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A boolean that indicates if dedicated master nodes are activated for the domain.
+        MasterEligibleNodeCount:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfNodes'
+            - description: 'The number of nodes that can be elected as a master node. If dedicated master nodes is turned on, this value is the number of dedicated master nodes configured for the domain. If the service is unable to fetch this information, it will return <code>NotAvailable</code>.'
+        WarmNodeCount:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfNodes'
+            - description: The number of warm nodes configured for the domain.
+        MasterNode:
+          allOf:
+            - $ref: '#/components/schemas/MasterNodeStatus'
+            - description: '<p>Indicates whether the domain has an elected master node.</p> <ul> <li> <p> <b>Available</b> - The domain has an elected master node.</p> </li> <li> <p> <b>UnAvailable</b> - The master node hasn''t yet been elected, and a quorum to elect a new master node hasn''t been reached.</p> </li> </ul>'
+        ClusterHealth:
+          allOf:
+            - $ref: '#/components/schemas/DomainHealth'
+            - description: '<p>The current health status of your cluster.</p> <ul> <li> <p> <code>Red</code> - At least one primary shard is not allocated to any node.</p> </li> <li> <p> <code>Yellow</code> - All primary shards are allocated to nodes, but some replicas aren’t.</p> </li> <li> <p> <code>Green</code> - All primary shards and their replicas are allocated to nodes.</p> </li> <li> <p> <code>NotAvailable</code> - Unable to retrieve cluster health.</p> </li> </ul>'
+        TotalShards:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfShards'
+            - description: The total number of primary and replica shards for the domain.
+        TotalUnAssignedShards:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfShards'
+            - description: The total number of primary and replica shards not allocated to any of the nodes for the cluster.
+        EnvironmentInformation:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentInfoList'
+            - description: 'A list of <code>EnvironmentInfo</code> for the domain. '
+      description: The result of a <code>DescribeDomainHealth</code> request. Contains health information for the requested domain.
+    DescribeDomainNodesResponse:
+      type: object
+      properties:
+        DomainNodesStatusList:
+          allOf:
+            - $ref: '#/components/schemas/DomainNodesStatusList'
+            - description: Contains nodes information list <code>DomainNodesStatusList</code> with details about the all nodes on the requested domain.
+      description: 'The result of a <code>DescribeDomainNodes</code> request. Contains information about the nodes on the requested domain. '
+    DependencyFailureException: {}
     DescribeDomainsResponse:
       type: object
       required:
@@ -4896,7 +5110,7 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/DescribePackagesFilterValues'
-            - description: A list of values for the specified filter field.
+            - description: A non-empty list of values for the specified filter field.
       description: A filter to apply to the <code>DescribePackage</code> response.
     DescribeReservedInstanceOfferingsResponse:
       type: object
@@ -5536,7 +5750,7 @@ components:
         ReferencePath:
           allOf:
             - $ref: '#/components/schemas/ReferencePath'
-            - description: Denotes the location of the package on the OpenSearch Service cluster nodes. It's the same as <code>synonym_path</code> for dictionary files.
+            - description: The relative path of the package on the OpenSearch Service cluster nodes. This is <code>synonym_path</code> when the package is for synonym files.
         ErrorDetails:
           allOf:
             - $ref: '#/components/schemas/ErrorDetails'
@@ -5772,6 +5986,58 @@ components:
     UIntValue:
       type: integer
       minimum: 0
+    AvailabilityZone:
+      type: string
+      minLength: 1
+      maxLength: 15
+    ZoneStatus:
+      type: string
+      enum:
+        - Active
+        - StandBy
+        - NotAvailable
+    NumberOfNodes:
+      type: string
+      pattern: ^((\d+)|(NotAvailable))$
+    NumberOfShards:
+      type: string
+      pattern: ^((\d+)|(NotAvailable))$
+    AvailabilityZoneInfo:
+      type: object
+      properties:
+        AvailabilityZoneName:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: The name of the Availability Zone.
+        ZoneStatus:
+          allOf:
+            - $ref: '#/components/schemas/ZoneStatus'
+            - description: <p>The current state of the Availability Zone. Current options are <code>Active</code> and <code>StandBy</code>.</p> <ul> <li> <p> <code>Active</code> - Data nodes in the Availability Zone are in use.</p> </li> <li> <p> <code>StandBy</code> - Data nodes in the Availability Zone are in a standby state.</p> </li> <li> <p> <code>NotAvailable</code> - Unable to retrieve information.</p> </li> </ul>
+        ConfiguredDataNodeCount:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfNodes'
+            - description: The total number of data nodes configured in the Availability Zone.
+        AvailableDataNodeCount:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfNodes'
+            - description: The number of data nodes active in the Availability Zone.
+        TotalShards:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfShards'
+            - description: The total number of primary and replica shards in the Availability Zone.
+        TotalUnAssignedShards:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfShards'
+            - description: The total number of primary and replica shards that aren't allocated to any of the nodes in the Availability Zone.
+      description: Information about an Availability Zone on a domain.
+    AvailabilityZoneInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZoneInfo'
+    AvailabilityZoneList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AvailabilityZone'
     BackendRole:
       type: string
       minLength: 1
@@ -5964,7 +6230,7 @@ components:
         DedicatedMasterCount:
           allOf:
             - $ref: '#/components/schemas/IntegerClass'
-            - description: 'Number of dedicated master nodes in the cluster. This number must be greater than 1, otherwise you receive a validation exception.'
+            - description: 'Number of dedicated master nodes in the cluster. This number must be greater than 2 and not 4, otherwise you receive a validation exception.'
         WarmEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -5981,6 +6247,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ColdStorageOptions'
             - description: Container for cold storage configuration options.
+        MultiAZWithStandbyEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A boolean that indicates whether a multi-AZ domain is turned on with a standby AZ. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-multiaz.html">Configuring a multi-AZ domain in Amazon OpenSearch Service</a>. '
       description: 'Container for the cluster configuration of an OpenSearch Service domain. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html">Creating and managing Amazon OpenSearch Service domains</a>.'
     ClusterConfigStatus:
       type: object
@@ -6183,7 +6453,7 @@ components:
         Enabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 13, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
+            - description: '<p>Whether to enable an off-peak window.</p> <p>This option is only available when modifying a domain created prior to February 16, 2023, not when creating a new domain. All domains created after this date have the off-peak window enabled by default. You can''t disable the off-peak window after it''s enabled for a domain.</p>'
         OffPeakWindow:
           allOf:
             - $ref: '#/components/schemas/OffPeakWindow'
@@ -6250,7 +6520,7 @@ components:
         LogPublishingOptions:
           allOf:
             - $ref: '#/components/schemas/LogPublishingOptions'
-            - description: Key-value pairs to configure slow log publishing.
+            - description: Key-value pairs to configure log publishing.
         DomainEndpointOptions:
           allOf:
             - $ref: '#/components/schemas/DomainEndpointOptions'
@@ -6476,7 +6746,7 @@ components:
         PackageType:
           allOf:
             - $ref: '#/components/schemas/PackageType'
-            - description: Type of package.
+            - description: The type of package.
         PackageDescription:
           allOf:
             - $ref: '#/components/schemas/PackageDescription'
@@ -6496,7 +6766,7 @@ components:
         PackageName:
           allOf:
             - $ref: '#/components/schemas/PackageName'
-            - description: User-specified name of the package.
+            - description: The user-specified name of the package.
         PackageType:
           allOf:
             - $ref: '#/components/schemas/PackageType'
@@ -6508,7 +6778,7 @@ components:
         PackageStatus:
           allOf:
             - $ref: '#/components/schemas/PackageStatus'
-            - description: Current status of the package.
+            - description: 'The current status of the package. The available options are <code>AVAILABLE</code>, <code>COPYING</code>, <code>COPY_FAILED</code>, <code>VALIDATNG</code>, <code>VALIDATION_FAILED</code>, <code>DELETING</code>, and <code>DELETE_FAILED</code>.'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/CreatedAt'
@@ -6748,7 +7018,7 @@ components:
         LogPublishingOptions:
           allOf:
             - $ref: '#/components/schemas/LogPublishingOptionsStatus'
-            - description: Key-value pairs to configure slow log publishing.
+            - description: Key-value pairs to configure log publishing.
         DomainEndpointOptions:
           allOf:
             - $ref: '#/components/schemas/DomainEndpointOptionsStatus'
@@ -6774,6 +7044,46 @@ components:
             - $ref: '#/components/schemas/SoftwareUpdateOptionsStatus'
             - description: Software update options for the domain.
       description: Container for the configuration of an OpenSearch Service domain.
+    DescribeDomainHealthRequest:
+      type: object
+      title: DescribeDomainHealthRequest
+      properties: {}
+      description: Container for the parameters to the <code>DescribeDomainHealth</code> operation.
+    DomainState:
+      type: string
+      enum:
+        - Active
+        - Processing
+        - NotAvailable
+    NumberOfAZs:
+      type: string
+      pattern: ^((\d+)|(NotAvailable))$
+    MasterNodeStatus:
+      type: string
+      enum:
+        - Available
+        - UnAvailable
+    DomainHealth:
+      type: string
+      enum:
+        - Red
+        - Yellow
+        - Green
+        - NotAvailable
+    EnvironmentInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EnvironmentInfo'
+    DescribeDomainNodesRequest:
+      type: object
+      title: DescribeDomainNodesRequest
+      properties: {}
+      description: Container for the parameters to the <code>DescribeDomainNodes</code> operation.
+    DomainNodesStatusList:
+      type: array
+      description: List of <code>DomainNodesStatus</code> with details about nodes on the requested domain.
+      items:
+        $ref: '#/components/schemas/DomainNodesStatus'
     DescribeDomainRequest:
       type: object
       title: DescribeDomainRequest
@@ -6911,6 +7221,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DescribePackagesFilterValue'
+      minItems: 1
     DescribePackagesFilterList:
       type: array
       description: A list of <code>DescribePackagesFilter</code> to filter the packages included in a <code>DescribePackages</code> response.
@@ -7153,6 +7464,63 @@ components:
       description: Contains a list of information about a domain.
       items:
         $ref: '#/components/schemas/DomainInfo'
+    NodeId:
+      type: string
+      minLength: 10
+      maxLength: 40
+    NodeType:
+      type: string
+      enum:
+        - Data
+        - Ultrawarm
+        - Master
+    NodeStatus:
+      type: string
+      enum:
+        - Active
+        - StandBy
+        - NotAvailable
+    StorageTypeName:
+      type: string
+      description: '<p>The type of storage that the domain uses. Can be one of the following:</p> <dl> <dt>instance</dt> <dd> <p>Built-in storage available for the instance.</p> </dd> <dt>ebs</dt> <dd> <p>Elastic Block Storage (EBS) attached to the instance.</p> </dd> </dl>'
+    VolumeSize:
+      type: string
+    DomainNodesStatus:
+      type: object
+      properties:
+        NodeId:
+          allOf:
+            - $ref: '#/components/schemas/NodeId'
+            - description: The ID of the node.
+        NodeType:
+          allOf:
+            - $ref: '#/components/schemas/NodeType'
+            - description: 'Indicates whether the nodes is a data, master, or ultrawarm node.'
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZone'
+            - description: The Availability Zone of the node.
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/OpenSearchPartitionInstanceType'
+            - description: The instance type information of the node.
+        NodeStatus:
+          allOf:
+            - $ref: '#/components/schemas/NodeStatus'
+            - description: Indicates if the node is active or in standby.
+        StorageType:
+          allOf:
+            - $ref: '#/components/schemas/StorageTypeName'
+            - description: 'Indicates if the node has EBS or instance storage. '
+        StorageVolumeType:
+          allOf:
+            - $ref: '#/components/schemas/VolumeType'
+            - description: 'If the nodes has EBS storage, indicates if the volume type is GP2 or GP3. Only applicable for data nodes. '
+        StorageSize:
+          allOf:
+            - $ref: '#/components/schemas/VolumeSize'
+            - description: 'The storage size of the node, in GiB.'
+      description: Container for information about nodes on the domain.
     DomainPackageStatus:
       type: string
       enum:
@@ -7232,6 +7600,14 @@ components:
       enum:
         - HOURS
       description: The unit of a maintenance schedule duration. Valid value is <code>HOUR</code>.
+    EnvironmentInfo:
+      type: object
+      properties:
+        AvailabilityZoneInformation:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneInfoList'
+            - description: ' A list of <code>AvailabilityZoneInfo</code> for the domain.'
+      description: Information about the active domain environment.
     ErrorType:
       type: string
     ErrorMessage:
@@ -7379,11 +7755,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceRoleList'
             - description: 'Whether the instance acts as a data node, a dedicated master node, or an UltraWarm node.'
+        AvailabilityZones:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZoneList'
+            - description: The supported Availability Zones for the instance type.
       description: Lists all instance types and available features for a given OpenSearch or Elasticsearch version.
     InstanceTypeDetailsList:
       type: array
       items:
         $ref: '#/components/schemas/InstanceTypeDetails'
+    InstanceTypeString:
+      type: string
+      pattern: ^.*\..*\.search$
+      minLength: 10
+      maxLength: 40
     Integer:
       type: integer
     Issue:
@@ -7853,9 +8238,6 @@ components:
     StorageSubTypeName:
       type: string
       description: '<p> Sub-type of the given EBS storage type. List of available sub-storage options. The <code>instance</code> storage type has no storage sub-type. The <code>ebs</code> storage type has the following valid sub-types: </p> <ul> <li> <p> <code>standard</code> </p> </li> <li> <p> <code>gp2</code> </p> </li> <li> <p> <code>gp3</code> </p> </li> <li> <p> <code>io1</code> </p> </li> </ul>'
-    StorageTypeName:
-      type: string
-      description: '<p>The type of storage that the domain uses. Can be one of the following:</p> <dl> <dt>instance</dt> <dd> <p>Built-in storage available for the instance.</p> </dd> <dt>ebs</dt> <dd> <p>Elastic Block Storage (EBS) attached to the instance.</p> </dd> </dl>'
     StorageTypeLimitList:
       type: array
       items:
@@ -7927,7 +8309,7 @@ components:
         AdvancedOptions:
           allOf:
             - $ref: '#/components/schemas/AdvancedOptions'
-            - description: '<p>Key-value pairs to specify advanced configuration options. The following key-value pairs are supported:</p> <ul> <li> <p> <code>"rest.action.multi.allow_explicit_index": "true" | "false"</code> - Note the use of a string rather than a boolean. Specifies whether explicit references to indexes are allowed inside the body of HTTP requests. If you want to configure access policies for domain sub-resources, such as specific indexes and domain APIs, you must disable this property. Default is true.</p> </li> <li> <p> <code>"indices.fielddata.cache.size": "80" </code> - Note the use of a string rather than a boolean. Specifies the percentage of heap space allocated to field data. Default is unbounded.</p> </li> <li> <p> <code>"indices.query.bool.max_clause_count": "1024"</code> - Note the use of a string rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries with more than the permitted number of clauses result in a <code>TooManyClauses</code> error.</p> </li> <li> <p> <code>"override_main_response_version": "true" | "false"</code> - Note the use of a string rather than a boolean. Specifies whether the domain reports its version as 7.10 to allow Elasticsearch OSS clients and plugins to continue working with it. Default is false when creating a domain and true when upgrading a domain.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options">Advanced cluster parameters</a>.</p>'
+            - description: '<p>Key-value pairs to specify advanced configuration options. The following key-value pairs are supported:</p> <ul> <li> <p> <code>"rest.action.multi.allow_explicit_index": "true" | "false"</code> - Note the use of a string rather than a boolean. Specifies whether explicit references to indexes are allowed inside the body of HTTP requests. If you want to configure access policies for domain sub-resources, such as specific indexes and domain APIs, you must disable this property. Default is true.</p> </li> <li> <p> <code>"indices.fielddata.cache.size": "80" </code> - Note the use of a string rather than a boolean. Specifies the percentage of heap space allocated to field data. Default is unbounded.</p> </li> <li> <p> <code>"indices.query.bool.max_clause_count": "1024"</code> - Note the use of a string rather than a boolean. Specifies the maximum number of clauses allowed in a Lucene boolean query. Default is 1,024. Queries with more than the permitted number of clauses result in a <code>TooManyClauses</code> error.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html#createdomain-configure-advanced-options">Advanced cluster parameters</a>.</p>'
         AccessPolicies:
           allOf:
             - $ref: '#/components/schemas/PolicyDocument'

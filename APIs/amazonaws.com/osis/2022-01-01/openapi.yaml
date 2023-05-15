@@ -116,7 +116,7 @@ paths:
   /2022-01-01/osis/createPipeline:
     post:
       operationId: CreatePipeline
-      description: 'Creates an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html">Creating and managing OpenSearch Ingestion pipelines</a>.'
+      description: 'Creates an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html">Creating Amazon OpenSearch Ingestion pipelines</a>.'
       responses:
         '200':
           description: Success
@@ -228,7 +228,7 @@ paths:
   '/2022-01-01/osis/deletePipeline/{PipelineName}':
     delete:
       operationId: DeletePipeline
-      description: 'Deletes an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#delete-pipeline">Deleting pipelines</a>.'
+      description: 'Deletes an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/delete-pipeline.html">Deleting Amazon OpenSearch Ingestion pipelines</a>.'
       responses:
         '200':
           description: Success
@@ -340,7 +340,7 @@ paths:
   '/2022-01-01/osis/getPipelineBlueprint/{BlueprintName}':
     get:
       operationId: GetPipelineBlueprint
-      description: Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are templates for the configuration needed for a <code>CreatePipeline</code> request.
+      description: 'Retrieves information about a specific blueprint for OpenSearch Ingestion. Blueprints are templates for the configuration needed for a <code>CreatePipeline</code> request. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint">Using blueprints to create a pipeline</a>.'
       responses:
         '200':
           description: Success
@@ -390,7 +390,7 @@ paths:
   '/2022-01-01/osis/getPipelineChangeProgress/{PipelineName}':
     get:
       operationId: GetPipelineChangeProgress
-      description: '<p>Returns progress information for the current change happening on an OpenSearch Ingestion pipeline. Currently, this operation only returns information when a pipeline is being created.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html">Creating and managing OpenSearch Ingestion pipelines</a>.</p>'
+      description: '<p>Returns progress information for the current change happening on an OpenSearch Ingestion pipeline. Currently, this operation only returns information when a pipeline is being created.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#get-pipeline-progress">Tracking the status of pipeline creation</a>.</p>'
       responses:
         '200':
           description: Success
@@ -443,7 +443,7 @@ paths:
   /2022-01-01/osis/listPipelineBlueprints:
     post:
       operationId: ListPipelineBlueprints
-      description: Retrieves a list of all available blueprints for Data Prepper.
+      description: 'Retrieves a list of all available blueprints for Data Prepper. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint">Using blueprints to create a pipeline</a>.'
       responses:
         '200':
           description: Success
@@ -487,7 +487,7 @@ paths:
   /2022-01-01/osis/listPipelines:
     get:
       operationId: ListPipelines
-      description: 'Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html">Creating and managing OpenSearch Ingestion pipelines</a>.'
+      description: 'Lists all OpenSearch Ingestion pipelines in the current Amazon Web Services account and Region. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/list-pipeline.html">Viewing Amazon OpenSearch Ingestion pipelines</a>.'
       responses:
         '200':
           description: Success
@@ -560,7 +560,7 @@ paths:
   /2022-01-01/osis/listTagsForResource/#arn:
     get:
       operationId: ListTagsForResource
-      description: 'Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging OpenSearch Ingestion pipelines</a>.'
+      description: 'Lists all resource tags associated with an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging Amazon OpenSearch Ingestion pipelines</a>.'
       responses:
         '200':
           description: Success
@@ -613,7 +613,7 @@ paths:
   '/2022-01-01/osis/startPipeline/{PipelineName}':
     put:
       operationId: StartPipeline
-      description: 'Starts an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#start-pipeline">Starting pipelines</a>.'
+      description: 'Starts an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--start">Starting an OpenSearch Ingestion pipeline</a>.'
       responses:
         '200':
           description: Success
@@ -672,7 +672,7 @@ paths:
   '/2022-01-01/osis/stopPipeline/{PipelineName}':
     put:
       operationId: StopPipeline
-      description: 'Stops an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html#stop-pipeline">Stopping pipelines</a>.'
+      description: 'Stops an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/pipeline--stop-start.html#pipeline--stop">Stopping an OpenSearch Ingestion pipeline</a>.'
       responses:
         '200':
           description: Success
@@ -731,7 +731,7 @@ paths:
   /2022-01-01/osis/tagResource/#arn:
     post:
       operationId: TagResource
-      description: 'Tags an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging OpenSearch Ingestion pipelines</a>.'
+      description: 'Tags an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging Amazon OpenSearch Ingestion pipelines</a>.'
       responses:
         '200':
           description: Success
@@ -804,7 +804,7 @@ paths:
   /2022-01-01/osis/untagResource/#arn:
     post:
       operationId: UntagResource
-      description: 'Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging OpenSearch Ingestion pipelines</a>.'
+      description: 'Removes one or more tags from an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/tag-pipeline.html">Tagging Amazon OpenSearch Ingestion pipelines</a>.'
       responses:
         '200':
           description: Success
@@ -871,7 +871,7 @@ paths:
   '/2022-01-01/osis/updatePipeline/{PipelineName}':
     put:
       operationId: UpdatePipeline
-      description: 'Updates an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html">Creating and managing OpenSearch Ingestion pipelines</a>.'
+      description: 'Updates an OpenSearch Ingestion pipeline. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/update-pipeline.html">Updating Amazon OpenSearch Ingestion pipelines</a>.'
       responses:
         '200':
           description: Success
@@ -964,7 +964,7 @@ paths:
   /2022-01-01/osis/validatePipeline:
     post:
       operationId: ValidatePipeline
-      description: 'Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/manage-pipeline.html">Creating and managing OpenSearch Ingestion pipelines</a>.'
+      description: 'Checks whether an OpenSearch Ingestion pipeline configuration is valid prior to creation. For more information, see <a href="https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html">Creating Amazon OpenSearch Ingestion pipelines</a>.'
       responses:
         '200':
           description: Success

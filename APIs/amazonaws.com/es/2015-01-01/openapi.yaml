@@ -4419,7 +4419,7 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/DescribePackagesFilterValues'
-            - description: A list of values for the specified field.
+            - description: A non-empty list of values for the specified field.
       description: Filter to apply in <code>DescribePackage</code> response.
     DescribeReservedElasticsearchInstanceOfferingsResponse:
       type: object
@@ -6196,6 +6196,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DescribePackagesFilterValue'
+      minItems: 1
     DescribePackagesFilterList:
       type: array
       description: A list of <code>DescribePackagesFilter</code> to filter the packages included in a <code>DescribePackages</code> response.

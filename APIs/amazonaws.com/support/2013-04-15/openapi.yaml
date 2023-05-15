@@ -399,6 +399,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSSupport_20130415.DescribeCreateCaseOptions:
+    post:
+      operationId: DescribeCreateCaseOptions
+      description: '<p>Returns a list of CreateCaseOption types along with the corresponding supported hours and language availability. You can specify the <code>language</code> <code>categoryCode</code>, <code>issueType</code> and <code>serviceCode</code> used to retrieve the CreateCaseOptions.</p> <note> <ul> <li> <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support API. </p> </li> <li> <p>If you call the Amazon Web Services Support API from an account that doesn''t have a Business, Enterprise On-Ramp, or Enterprise Support plan, the <code>SubscriptionRequiredException</code> error message appears. For information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeCreateCaseOptionsResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeCreateCaseOptionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSSupport_20130415.DescribeCreateCaseOptions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSSupport_20130415.DescribeServices:
     post:
       operationId: DescribeServices
@@ -477,6 +522,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSSupport_20130415.DescribeSupportedLanguages:
+    post:
+      operationId: DescribeSupportedLanguages
+      description: '<p>Returns a list of supported languages for a specified <code>categoryCode</code>, <code>issueType</code> and <code>serviceCode</code>. The returned supported languages will include a ISO 639-1 code for the <code>language</code>, and the language display name.</p> <note> <ul> <li> <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support API. </p> </li> <li> <p>If you call the Amazon Web Services Support API from an account that doesn''t have a Business, Enterprise On-Ramp, or Enterprise Support plan, the <code>SubscriptionRequiredException</code> error message appears. For information about changing your support plan, see <a href="http://aws.amazon.com/premiumsupport/">Amazon Web Services Support</a>.</p> </li> </ul> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSupportedLanguagesResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeSupportedLanguagesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSSupport_20130415.DescribeSupportedLanguages
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSSupport_20130415.DescribeTrustedAdvisorCheckRefreshStatuses:
     post:
       operationId: DescribeTrustedAdvisorCheckRefreshStatuses
@@ -494,6 +584,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       requestBody:
         required: true
         content:
@@ -533,6 +629,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       requestBody:
         required: true
         content:
@@ -572,6 +674,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       requestBody:
         required: true
         content:
@@ -611,6 +719,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       requestBody:
         required: true
         content:
@@ -873,7 +987,7 @@ components:
         language:
           allOf:
             - $ref: '#/components/schemas/Language'
-            - description: The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.
+            - description: 'The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.'
         issueType:
           allOf:
             - $ref: '#/components/schemas/IssueType'
@@ -950,7 +1064,7 @@ components:
         language:
           allOf:
             - $ref: '#/components/schemas/Language'
-            - description: The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.
+            - description: 'The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.'
         includeCommunications:
           allOf:
             - $ref: '#/components/schemas/IncludeCommunications'
@@ -993,6 +1107,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of results to return before paginating.
+    DescribeCreateCaseOptionsResponse:
+      type: object
+      properties:
+        languageAvailability:
+          allOf:
+            - $ref: '#/components/schemas/ValidatedLanguageAvailability'
+            - description: '<p>Language availability can be any of the following:</p> <ul> <li> <p> available </p> </li> <li> <p> best_effort </p> </li> <li> <p> unavailable </p> </li> </ul>'
+        communicationTypes:
+          allOf:
+            - $ref: '#/components/schemas/CommunicationTypeOptionsList'
+            - description: ' A JSON-formatted array that contains the available communication type options, along with the available support timeframes for the given inputs. '
+    DescribeCreateCaseOptionsRequest:
+      type: object
+      required:
+        - issueType
+        - serviceCode
+        - language
+        - categoryCode
+      title: DescribeCreateCaseOptionsRequest
+      properties:
+        issueType:
+          allOf:
+            - $ref: '#/components/schemas/IssueType'
+            - description: 'The type of issue for the case. You can specify <code>customer-service</code> or <code>technical</code>. If you don''t specify a value, the default is <code>technical</code>.'
+        serviceCode:
+          allOf:
+            - $ref: '#/components/schemas/ServiceCode'
+            - description: The code for the Amazon Web Services service. You can use the <a>DescribeServices</a> operation to get the possible <code>serviceCode</code> values.
+        language:
+          allOf:
+            - $ref: '#/components/schemas/Language'
+            - description: 'The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.'
+        categoryCode:
+          allOf:
+            - $ref: '#/components/schemas/CategoryCode'
+            - description: The category of problem for the support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each Amazon Web Services service defines its own set of category codes.
+    ThrottlingException: {}
     DescribeServicesResponse:
       type: object
       properties:
@@ -1012,7 +1163,7 @@ components:
         language:
           allOf:
             - $ref: '#/components/schemas/Language'
-            - description: The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.
+            - description: 'The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.'
     DescribeSeverityLevelsResponse:
       type: object
       properties:
@@ -1028,7 +1179,34 @@ components:
         language:
           allOf:
             - $ref: '#/components/schemas/Language'
-            - description: The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.
+            - description: 'The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.'
+    DescribeSupportedLanguagesResponse:
+      type: object
+      properties:
+        supportedLanguages:
+          allOf:
+            - $ref: '#/components/schemas/SupportedLanguagesList'
+            - description: ' A JSON-formatted array that contains the available ISO 639-1 language codes. '
+    DescribeSupportedLanguagesRequest:
+      type: object
+      required:
+        - issueType
+        - serviceCode
+        - categoryCode
+      title: DescribeSupportedLanguagesRequest
+      properties:
+        issueType:
+          allOf:
+            - $ref: '#/components/schemas/ValidatedIssueTypeString'
+            - description: The type of issue for the case. You can specify <code>customer-service</code> or <code>technical</code>.
+        serviceCode:
+          allOf:
+            - $ref: '#/components/schemas/ValidatedServiceCode'
+            - description: The code for the Amazon Web Services service. You can use the <a>DescribeServices</a> operation to get the possible <code>serviceCode</code> values.
+        categoryCode:
+          allOf:
+            - $ref: '#/components/schemas/ValidatedCategoryCode'
+            - description: The category of problem for the support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each Amazon Web Services service defines its own set of category codes.
     DescribeTrustedAdvisorCheckRefreshStatusesResponse:
       type: object
       required:
@@ -1295,8 +1473,8 @@ components:
         language:
           allOf:
             - $ref: '#/components/schemas/Language'
-            - description: The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.
-      description: '<p>A JSON-formatted object that contains the metadata for a support case. It is contained in the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ul> <li> <p> <b>caseId</b> - The support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p> </li> <li> <p> <b>categoryCode</b> - The category of problem for the support case. Corresponds to the <code>CategoryCode</code> values returned by a call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>displayId</b> - The identifier for the case on pages in the Amazon Web Services Support Center.</p> </li> <li> <p> <b>language</b> - The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports English ("en") and Japanese ("ja"). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.</p> </li> <li> <p> <b>nextToken</b> - A resumption point for pagination.</p> </li> <li> <p> <b>recentCommunications</b> - One or more <a>Communication</a> objects. Fields of these objects are <code>attachments</code>, <code>body</code>, <code>caseId</code>, <code>submittedBy</code>, and <code>timeCreated</code>.</p> </li> <li> <p> <b>serviceCode</b> - The identifier for the Amazon Web Services service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>severityCode</b> - The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>. The possible values are: <code>low</code>, <code>normal</code>, <code>high</code>, <code>urgent</code>, and <code>critical</code>.</p> </li> <li> <p> <b>status</b> - The status of the case in the Amazon Web Services Support Center. Valid values:</p> <ul> <li> <p> <code>opened</code> </p> </li> <li> <p> <code>pending-customer-action</code> </p> </li> <li> <p> <code>reopened</code> </p> </li> <li> <p> <code>resolved</code> </p> </li> <li> <p> <code>unassigned</code> </p> </li> <li> <p> <code>work-in-progress</code> </p> </li> </ul> </li> <li> <p> <b>subject</b> - The subject line of the case.</p> </li> <li> <p> <b>submittedBy</b> - The email address of the account that submitted the case.</p> </li> <li> <p> <b>timeCreated</b> - The time the case was created, in ISO-8601 format.</p> </li> </ul>'
+            - description: 'The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.'
+      description: '<p>A JSON-formatted object that contains the metadata for a support case. It is contained in the response from a <a>DescribeCases</a> request. <b>CaseDetails</b> contains the following fields:</p> <ul> <li> <p> <b>caseId</b> - The support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i>.</p> </li> <li> <p> <b>categoryCode</b> - The category of problem for the support case. Corresponds to the <code>CategoryCode</code> values returned by a call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>displayId</b> - The identifier for the case on pages in the Amazon Web Services Support Center.</p> </li> <li> <p> <b>language</b> - The language in which Amazon Web Services Support handles the case. Amazon Web Services Support currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the <code>language</code> parameter if you want support in that language.</p> </li> <li> <p> <b>nextToken</b> - A resumption point for pagination.</p> </li> <li> <p> <b>recentCommunications</b> - One or more <a>Communication</a> objects. Fields of these objects are <code>attachments</code>, <code>body</code>, <code>caseId</code>, <code>submittedBy</code>, and <code>timeCreated</code>.</p> </li> <li> <p> <b>serviceCode</b> - The identifier for the Amazon Web Services service that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p> </li> <li> <p> <b>severityCode</b> - The severity code assigned to the case. Contains one of the values returned by the call to <a>DescribeSeverityLevels</a>. The possible values are: <code>low</code>, <code>normal</code>, <code>high</code>, <code>urgent</code>, and <code>critical</code>.</p> </li> <li> <p> <b>status</b> - The status of the case in the Amazon Web Services Support Center. Valid values:</p> <ul> <li> <p> <code>opened</code> </p> </li> <li> <p> <code>pending-customer-action</code> </p> </li> <li> <p> <code>reopened</code> </p> </li> <li> <p> <code>resolved</code> </p> </li> <li> <p> <code>unassigned</code> </p> </li> <li> <p> <code>work-in-progress</code> </p> </li> </ul> </li> <li> <p> <b>subject</b> - The subject line of the case.</p> </li> <li> <p> <b>submittedBy</b> - The email address of the account that submitted the case.</p> </li> <li> <p> <b>timeCreated</b> - The time the case was created, in ISO-8601 format.</p> </li> </ul>'
     CaseIdList:
       type: array
       items:
@@ -1329,6 +1507,12 @@ components:
         $ref: '#/components/schemas/Category'
     CcEmailAddress:
       type: string
+    Code:
+      type: string
+    ValidatedCommunicationBody:
+      type: string
+      minLength: 1
+      maxLength: 8000
     Communication:
       type: object
       properties:
@@ -1338,12 +1522,12 @@ components:
             - description: 'The support case ID requested or returned in the call. The case ID is an alphanumeric string formatted as shown in this example: case-<i>12345678910-2013-c4c1d2bf33c5cf47</i> '
         body:
           allOf:
-            - $ref: '#/components/schemas/CommunicationBody'
+            - $ref: '#/components/schemas/ValidatedCommunicationBody'
             - description: The text of the communication between the customer and Amazon Web Services Support.
         submittedBy:
           allOf:
             - $ref: '#/components/schemas/SubmittedBy'
-            - description: 'The identity of the account that submitted, or responded to, the support case. Customer entries include the role or IAM user as well as the email address. For example, "AdminRole (Role) &lt;janedoe@example.com&gt;. Entries from the Amazon Web Services Support team display "Amazon Web Services," and don''t show an email address. '
+            - description: 'The identity of the account that submitted, or responded to, the support case. Customer entries include the IAM role as well as the email address (for example, "AdminRole (Role) &lt;janedoe@example.com&gt;). Entries from the Amazon Web Services Support team display "Amazon Web Services," and don''t show an email address. '
         timeCreated:
           allOf:
             - $ref: '#/components/schemas/TimeCreated'
@@ -1357,8 +1541,56 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Communication'
+    Type:
+      type: string
+    SupportedHoursList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedHour'
+    DatesWithoutSupportList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DateInterval'
+    CommunicationTypeOptions:
+      type: object
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Type'
+            - description: ' A string value indicating the communication type. At the moment the type value can assume one of 3 values at the moment chat, web and call. '
+        supportedHours:
+          allOf:
+            - $ref: '#/components/schemas/SupportedHoursList'
+            - description: ' A JSON-formatted list containing time ranges when support is available. '
+        datesWithoutSupport:
+          allOf:
+            - $ref: '#/components/schemas/DatesWithoutSupportList'
+            - description: ' A JSON-formatted list containing date and time ranges for periods without support '
+      description: '<p>A JSON-formatted object that contains the CommunicationTypeOptions for creating a case for a certain communication channel. It is contained in the response from a <a>DescribeCreateCaseOptions</a> request. <b>CommunicationTypeOptions</b> contains the following fields:</p> <ul> <li> <p> <b>datesWithoutSupport</b> - A JSON-formatted list containing date and time ranges for periods without support in UTC time. Date and time format is RFC 3339 : ''yyyy-MM-dd''T''HH:mm:ss.SSSZZ''. </p> </li> <li> <p> <b>supportedHours</b> - A JSON-formatted list containing time ranges when support are available. Time format is RFC 3339 : ''HH:mm:ss.SSS''. </p> </li> <li> <p> <b>type</b> - A string value indicating the communication type that the aforementioned rules apply to. At the moment the type value can assume one of 3 values at the moment <code>chat</code>, <code>web</code> and <code>call</code>. </p> </li> </ul>'
+    CommunicationTypeOptionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CommunicationTypeOptions'
+      minItems: 1
+      maxItems: 100
     IssueType:
       type: string
+    ValidatedDateTime:
+      type: string
+      minLength: 8
+      maxLength: 30
+    DateInterval:
+      type: object
+      properties:
+        startDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ValidatedDateTime'
+            - description: ' A JSON object containing start and date time (UTC). Date and time format is RFC 3339 : ''yyyy-MM-dd''T''HH:mm:ss.SSSZZ''. '
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ValidatedDateTime'
+            - description: ' End Date Time (UTC). RFC 3339 format : ''yyyy-MM-dd''T''HH:mm:ss.SSSZZ''. '
+      description: 'Date and time (UTC) format in RFC 3339 : ''yyyy-MM-dd''T''HH:mm:ss.SSSZZ''.'
     IncludeResolvedCases:
       type: boolean
     NextToken:
@@ -1369,6 +1601,10 @@ components:
       maximum: 100
     IncludeCommunications:
       type: boolean
+    ValidatedLanguageAvailability:
+      type: string
+      minLength: 0
+      maxLength: 100
     ServiceCodeList:
       type: array
       items:
@@ -1383,6 +1619,24 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SeverityLevel'
+    ValidatedIssueTypeString:
+      type: string
+      minLength: 9
+      maxLength: 22
+    ValidatedServiceCode:
+      type: string
+      minLength: 0
+      maxLength: 100
+    ValidatedCategoryCode:
+      type: string
+      minLength: 0
+      maxLength: 100
+    SupportedLanguagesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedLanguage'
+      minItems: 0
+      maxItems: 100
     StringList:
       type: array
       items:
@@ -1434,9 +1688,13 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TrustedAdvisorCheckDescription'
+    Display:
+      type: string
     Double:
       type: number
       format: double
+    EndTime:
+      type: string
     Long:
       type: integer
     TrustedAdvisorCheckRefreshStatus:
@@ -1493,6 +1751,36 @@ components:
             - $ref: '#/components/schemas/SeverityLevelName'
             - description: '<p>The name of the severity level that corresponds to the severity level code.</p> <note> <p>The values returned by the API are different from the values that appear in the Amazon Web Services Support Center. For example, the API uses the code <code>low</code>, but the name appears as General guidance in Support Center. </p> <p>The following are the API code names and how they appear in the console:</p> <ul> <li> <p> <code>low</code> - General guidance</p> </li> <li> <p> <code>normal</code> - System impaired</p> </li> <li> <p> <code>high</code> - Production system impaired</p> </li> <li> <p> <code>urgent</code> - Production system down</p> </li> <li> <p> <code>critical</code> - Business-critical system down</p> </li> </ul> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity">Choosing a severity</a> in the <i>Amazon Web Services Support User Guide</i>.</p>'
       description: 'A code and name pair that represents the severity level of a support case. The available values depend on the support plan for the account. For more information, see <a href="https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity">Choosing a severity</a> in the <i>Amazon Web Services Support User Guide</i>.'
+    StartTime:
+      type: string
+    SupportedHour:
+      type: object
+      properties:
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/StartTime'
+            - description: ' Start Time. RFC 3339 format <code>''HH:mm:ss.SSS''</code>. '
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/EndTime'
+            - description: ' End Time. RFC 3339 format <code>''HH:mm:ss.SSS''</code>. '
+      description: 'Time range object with <code>startTime</code> and <code>endTime</code> range in RFC 3339 format. <code>''HH:mm:ss.SSS''</code>.'
+    SupportedLanguage:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/Code'
+            - description: ' 2 digit ISO 639-1 code. e.g. <code>en</code> '
+        language:
+          allOf:
+            - $ref: '#/components/schemas/Language'
+            - description: ' Full language description e.g. <code>ENGLISH</code> '
+        display:
+          allOf:
+            - $ref: '#/components/schemas/Display'
+            - description: ' Language display value e.g. <code>ENGLISH</code> '
+      description: ' A JSON-formatted object that contains the available ISO 639-1 language <code>code</code>, <code>language</code> name and langauge <code>display</code> value. The language code is what should be used in the <a>CreateCase</a> call. '
     TrustedAdvisorCostOptimizingSummary:
       type: object
       required:

@@ -520,6 +520,15 @@ paths:
 
                                         <p>Information about the broker access configuration.</p>
                                      
+                    ZoneIds:
+                      allOf:
+                        - $ref: '#/components/schemas/__listOf__string'
+                        - xml:
+                            name: zoneIds
+                          description: |2-
+
+                                        <p>The list of zoneIds for the cluster in the virtual private cloud (VPC).</p>
+                                     
                 clientAuthentication:
                   description: |2-
 
@@ -1246,6 +1255,120 @@ paths:
             type: string
           description: Pagination token
           required: false
+  /v1/vpc-connection:
+    post:
+      operationId: CreateVpcConnection
+      description: |2-
+
+                    <p>Creates a new MSK VPC connection.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateVpcConnectionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - targetClusterArn
+                - authentication
+                - vpcId
+                - clientSubnets
+                - securityGroups
+              properties:
+                targetClusterArn:
+                  description: |2-
+
+                                <p>The cluster Amazon Resource Name (ARN) for the VPC connection.</p>
+                             
+                  type: string
+                authentication:
+                  description: |2-
+
+                                <p>The authentication type of VPC connection.</p>
+                             
+                  type: string
+                vpcId:
+                  description: |2-
+
+                                <p>The VPC ID of VPC connection.</p>
+                             
+                  type: string
+                clientSubnets:
+                  description: |2-
+
+                                <p>The list of client subnets.</p>
+                             
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                securityGroups:
+                  description: |2-
+
+                                <p>The list of security groups.</p>
+                             
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/__string'
+                tags:
+                  description: |2-
+
+                                <p>A map of tags for the VPC connection.</p>
+                             
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/__string'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/clusters/{clusterArn}':
     delete:
       operationId: DeleteCluster
@@ -1364,6 +1487,171 @@ paths:
                      
           schema:
             type: string
+  '/v1/clusters/{clusterArn}/policy':
+    delete:
+      operationId: DeleteClusterPolicy
+      description: |2-
+
+                    <p>Deletes the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClusterPolicyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                     
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetClusterPolicy
+      description: |2-
+
+                    <p>Get the MSK cluster policy specified by the Amazon Resource Name (ARN) in the request.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetClusterPolicyResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                        
+          schema:
+            type: string
+    put:
+      operationId: PutClusterPolicy
+      description: |2-
+
+                    <p>Creates or updates the MSK cluster policy specified by the cluster Amazon Resource Name (ARN) in the request.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutClusterPolicyResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                     
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - policy
+              properties:
+                currentVersion:
+                  description: |2-
+
+                                <p>The policy version.</p>
+                             
+                  type: string
+                policy:
+                  description: |2-
+
+                                <p>The policy.</p>
+                             
+                  type: string
   '/v1/configurations/{arn}':
     delete:
       operationId: DeleteConfiguration
@@ -1560,6 +1848,121 @@ paths:
                                    When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
                              
                   type: string
+  '/v1/vpc-connection/{arn}':
+    delete:
+      operationId: DeleteVpcConnection
+      description: |2-
+
+                    <p>Deletes a MSK VPC connection.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVpcConnectionResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.</p>
+                     
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeVpcConnection
+      description: |2-
+
+                    <p>Returns a description of this MSK VPC connection.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeVpcConnectionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters:
+        - name: arn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.</p>
+               
+          schema:
+            type: string
   '/api/v2/clusters/{clusterArn}':
     get:
       operationId: DescribeClusterV2
@@ -2357,6 +2760,264 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
+  '/v1/clusters/{clusterArn}/client-vpc-connections':
+    get:
+      operationId: ListClientVpcConnections
+      description: |2-
+
+                    <p>Returns a list of all the VPC connections in this Region.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListClientVpcConnectionsResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                     
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+                     
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+                        To get the next batch, provide this token in your next request.</p>
+                     
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /v1/vpc-connections:
+    get:
+      operationId: ListVpcConnections
+      description: |2-
+
+                    <p>Returns a list of all the VPC connections in this Region.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListVpcConnectionsResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>
+                     
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: |2-
+
+                        <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+                        To get the next batch, provide this token in your next request.</p>
+                     
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/clusters/{clusterArn}/client-vpc-connection':
+    put:
+      operationId: RejectClientVpcConnection
+      description: |2-
+
+                    <p>Returns empty response.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RejectClientVpcConnectionResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '483':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: |2-
+
+                        <p>The Amazon Resource Name (ARN) of the cluster.</p>
+                     
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - vpcConnectionArn
+              properties:
+                vpcConnectionArn:
+                  description: |2-
+
+                                <p>The VPC connection ARN.</p>
+                             
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/clusters/{clusterArn}/reboot-broker':
     put:
       operationId: RebootBroker
@@ -2874,6 +3535,15 @@ paths:
                           description: |2-
 
                                         <p>Public access control for brokers.</p>
+                                     
+                    VpcConnectivity:
+                      allOf:
+                        - $ref: '#/components/schemas/VpcConnectivity'
+                        - xml:
+                            name: vpcConnectivity
+                          description: |2-
+
+                                        <p>VPC connectivity access control for brokers.</p>
                                      
                 currentVersion:
                   description: |2-
@@ -3660,6 +4330,15 @@ components:
 
                             <p>Public access control for brokers.</p>
                          
+        VpcConnectivity:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectivity'
+            - xml:
+                name: vpcConnectivity
+              description: |2-
+
+                            <p>VPC connectivity access control for brokers.</p>
+                         
       description: |2-
 
                     <p>Information about the broker access configuration.</p>
@@ -3924,6 +4603,15 @@ components:
 
                             <p>Information about the broker access configuration.</p>
                          
+        ZoneIds:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: zoneIds
+              description: |2-
+
+                            <p>The list of zoneIds for the cluster in the virtual private cloud (VPC).</p>
+                         
       description: |2-
 
                     <p>Describes the setup to be used for Apache Kafka broker nodes in the cluster.</p>
@@ -4136,6 +4824,81 @@ components:
 
                             <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
                          
+    CreateVpcConnectionResponse:
+      type: object
+      properties:
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcConnectionArn
+              description: |2-
+
+                            <p>The VPC connection ARN.</p>
+                         
+        State:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectionState'
+            - xml:
+                name: state
+              description: |2-
+
+                            <p>The State of Vpc Connection.</p>
+                         
+        Authentication:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: authentication
+              description: |2-
+
+                            <p>The authentication type of VPC connection.</p>
+                         
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcId
+              description: |2-
+
+                            <p>The VPC ID of the VPC connection.</p>
+                         
+        ClientSubnets:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: clientSubnets
+              description: |2-
+
+                            <p>The list of client subnets.</p>
+                         
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroups
+              description: |2-
+
+                            <p>The list of security groups.</p>
+                         
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: creationTime
+              description: |2-
+
+                            <p>The creation time of VPC connection.</p>
+                         
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: |2-
+
+                            <p>A map of tags for the VPC connection.</p>
+                         
     DeleteClusterResponse:
       type: object
       properties:
@@ -4157,6 +4920,9 @@ components:
 
                             <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
                          
+    DeleteClusterPolicyResponse:
+      type: object
+      properties: {}
     DeleteConfigurationResponse:
       type: object
       properties:
@@ -4177,6 +4943,27 @@ components:
               description: |2-
 
                             <p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>
+                         
+    DeleteVpcConnectionResponse:
+      type: object
+      properties:
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcConnectionArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.</p>
+                         
+        State:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectionState'
+            - xml:
+                name: state
+              description: |2-
+
+                            <p>The state of the VPC connection.</p>
                          
     DescribeClusterResponse:
       type: object
@@ -4329,6 +5116,90 @@ components:
                             <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
                                When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
                          
+    DescribeVpcConnectionResponse:
+      type: object
+      properties:
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcConnectionArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) that uniquely identifies a MSK VPC connection.</p>
+                   
+        TargetClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: targetClusterArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) that uniquely identifies an MSK cluster.</p>
+                   
+        State:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectionState'
+            - xml:
+                name: state
+              description: |2-
+
+                            <p>The state of VPC connection.</p>
+                   
+        Authentication:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: authentication
+              description: |2-
+
+                            <p>The authentication type of VPC connection.</p>
+                   
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcId
+              description: |2-
+
+                            <p>The VPC Id for the VPC connection.</p>
+                   
+        Subnets:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: subnets
+              description: |2-
+
+                            <p>The list of subnets for the VPC connection.</p>
+                   
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroups
+              description: |2-
+
+                            <p>The list of security groups for the VPC connection.</p>
+                   
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: creationTime
+              description: |2-
+
+                            <p>The creation time of the VPC connection.</p>
+                   
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: |2-
+
+                            <p>A map of tags for the VPC connection.</p>
+                         
     BatchDisassociateScramSecretResponse:
       type: object
       properties:
@@ -4416,6 +5287,33 @@ components:
 
                             <p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>
                          
+        BootstrapBrokerStringVpcConnectivityTls:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bootstrapBrokerStringVpcConnectivityTls
+              description: |2-
+
+                            <p>A string containing one or more DNS names (or IP) and TLS port pairs for VPC connectivity.</p>
+                         
+        BootstrapBrokerStringVpcConnectivitySaslScram:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bootstrapBrokerStringVpcConnectivitySaslScram
+              description: |2-
+
+                            <p>A string containing one or more DNS names (or IP) and SASL/SCRAM port pairs for VPC connectivity.</p>
+                         
+        BootstrapBrokerStringVpcConnectivitySaslIam:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: bootstrapBrokerStringVpcConnectivitySaslIam
+              description: |2-
+
+                            <p>A string containing one or more DNS names (or IP) and SASL/IAM port pairs for VPC connectivity.</p>
+                         
     GetCompatibleKafkaVersionsResponse:
       type: object
       properties:
@@ -4427,6 +5325,27 @@ components:
               description: |2-
 
                             <p>A list of CompatibleKafkaVersion objects.</p>
+                            
+    GetClusterPolicyResponse:
+      type: object
+      properties:
+        CurrentVersion:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: currentVersion
+              description: |2-
+
+                            <p>The version of cluster policy.</p>
+                            
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: policy
+              description: |2-
+
+                            <p>The cluster policy.</p>
                             
     ListClusterOperationsResponse:
       type: object
@@ -4604,6 +5523,65 @@ components:
 
                             <p>The key-value pair for the resource tag.</p>
                          
+    ListClientVpcConnectionsResponse:
+      type: object
+      properties:
+        ClientVpcConnections:
+          allOf:
+            - $ref: '#/components/schemas/__listOfClientVpcConnection'
+            - xml:
+                name: clientVpcConnections
+              description: |2-
+
+                            <p>List of client VPC connections.</p>
+                         
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: |2-
+
+                            <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. 
+                               To get another batch of configurations, provide this token in your next request.</p>
+                         
+    ListVpcConnectionsResponse:
+      type: object
+      properties:
+        VpcConnections:
+          allOf:
+            - $ref: '#/components/schemas/__listOfVpcConnection'
+            - xml:
+                name: vpcConnections
+              description: |2-
+
+                            <p>List of VPC connections.</p>
+                         
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: |2-
+
+                            <p>The paginated results marker. When the result of a ListClientVpcConnections operation is truncated, the call returns NextToken in the response. 
+                               To get another batch of configurations, provide this token in your next request.</p>
+                         
+    RejectClientVpcConnectionResponse:
+      type: object
+      properties: {}
+    PutClusterPolicyResponse:
+      type: object
+      properties:
+        CurrentVersion:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: currentVersion
+              description: |2-
+
+                            <p>The policy version.</p>
+                         
     RebootBrokerResponse:
       type: object
       properties:
@@ -4779,6 +5757,19 @@ components:
                             <p>The value DISABLED indicates that public access is turned off. SERVICE_PROVIDED_EIPS indicates that public access is turned on.</p>
                          
       description: Public access control for brokers.
+    VpcConnectivity:
+      type: object
+      properties:
+        ClientAuthentication:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectivityClientAuthentication'
+            - xml:
+                name: clientAuthentication
+              description: |2-
+
+                            <p>Includes all client authentication information for VPC connectivity.</p>
+                         
+      description: VPC connectivity access control for brokers.
     UpdateClusterConfigurationResponse:
       type: object
       properties:
@@ -5083,6 +6074,72 @@ components:
       description: |2-
 
                     <p>BrokerNodeInfo</p>
+                 
+    VpcConnectivitySasl:
+      type: object
+      properties:
+        Scram:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectivityScram'
+            - xml:
+                name: scram
+              description: |2-
+
+                            <p>Details for SASL/SCRAM client authentication for VPC connectivity.</p>
+                         
+        Iam:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectivityIam'
+            - xml:
+                name: iam
+              description: |2-
+
+                            <p>Details for SASL/IAM client authentication for VPC connectivity.</p>
+                         
+      description: |2-
+
+                    <p>Details for SASL client authentication for VPC connectivity.</p>
+                 
+    VpcConnectivityTls:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: enabled
+              description: |2-
+
+                            <p>TLS authentication is on or off for VPC connectivity.</p>
+                         
+      description: |2-
+
+                    <p>Details for TLS client authentication for VPC connectivity.</p>
+                 
+    VpcConnectivityClientAuthentication:
+      type: object
+      properties:
+        Sasl:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectivitySasl'
+            - xml:
+                name: sasl
+              description: |2-
+
+                            <p>SASL authentication type details for VPC connectivity.</p>
+                         
+        Tls:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectivityTls'
+            - xml:
+                name: tls
+              description: |2-
+
+                            <p>TLS authentication type details for VPC connectivity.</p>
+                         
+      description: |2-
+
+                    <p>Includes all client authentication information for VPC connectivity.</p>
                  
     ServerlessSasl:
       type: object
@@ -5728,6 +6785,49 @@ components:
 
                     <p>Information about cluster attributes that can be updated via update APIs.</p>
                  
+    VpcConnectionInfo:
+      type: object
+      properties:
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcConnectionArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) of the VPC connection.</p>
+                         
+        Owner:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: owner
+              description: |2-
+
+                            <p>The owner of the VPC Connection.</p>
+                         
+        UserIdentity:
+          allOf:
+            - $ref: '#/components/schemas/UserIdentity'
+            - xml:
+                name: userIdentity
+              description: |2-
+
+                            <p>Description of the requester that calls the API operation.</p>
+                         
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: creationTime
+              description: |2-
+
+                            <p>The time when Amazon MSK creates the VPC Connnection.</p>
+                         
+      description: |2-
+
+                    <p>Description of the VPC connection.</p>
+                 
     ClusterOperationInfo:
       type: object
       properties:
@@ -5829,6 +6929,15 @@ components:
               description: |2-
 
                             <p>Information about cluster attributes after a cluster is updated.</p>
+                         
+        VpcConnectionInfo:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectionInfo'
+            - xml:
+                name: vpcConnectionInfo
+              description: |2-
+
+                            <p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>
                          
       description: |2-
 
@@ -6029,6 +7138,139 @@ components:
       description: |2-
 
                     <p>Serverless cluster request.</p>
+                 
+    VpcConnectionState:
+      type: string
+      enum:
+        - CREATING
+        - AVAILABLE
+        - INACTIVE
+        - DEACTIVATING
+        - DELETING
+        - FAILED
+        - REJECTED
+        - REJECTING
+      description: |2-
+
+                    <p>The state of a VPC connection.</p>
+                 
+    ClientVpcConnection:
+      type: object
+      required:
+        - VpcConnectionArn
+      properties:
+        Authentication:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: authentication
+              description: |2-
+
+                            <p>Information about the auth scheme of Vpc Connection.</p>
+                         
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: creationTime
+              description: |2-
+
+                            <p>Creation time of the Vpc Connection.</p>
+                         
+        State:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectionState'
+            - xml:
+                name: state
+              description: |2-
+
+                            <p>State of the Vpc Connection.</p>
+                         
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcConnectionArn
+              description: |2-
+
+                            <p>The ARN that identifies the Vpc Connection.</p>
+                         
+        Owner:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: owner
+              description: |2-
+
+                            <p>The Owner of the Vpc Connection.</p>
+                         
+      description: |2-
+
+                    <p>The client VPC connection object.</p>
+                 
+    VpcConnection:
+      type: object
+      required:
+        - VpcConnectionArn
+        - TargetClusterArn
+      properties:
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcConnectionArn
+              description: |2-
+
+                            <p>The ARN that identifies the Vpc Connection.</p>
+                         
+        TargetClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: targetClusterArn
+              description: |2-
+
+                            <p>The ARN that identifies the Cluster which the Vpc Connection belongs to.</p>
+                         
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: creationTime
+              description: |2-
+
+                            <p>Creation time of the Vpc Connection.</p>
+                         
+        Authentication:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: authentication
+              description: |2-
+
+                            <p>Information about the auth scheme of Vpc Connection.</p>
+                         
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcId
+              description: |2-
+
+                            <p>The vpcId that belongs to the Vpc Connection.</p>
+                         
+        State:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectionState'
+            - xml:
+                name: state
+              description: |2-
+
+                            <p>State of the Vpc Connection.</p>
+                         
+      description: |2-
+
+                    <p>The VPC connection object.</p>
                  
     CompatibleKafkaVersion:
       type: object
@@ -6385,13 +7627,85 @@ components:
                             <p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. 
                                When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>
                          
+    CreateVpcConnectionRequest:
+      type: object
+      required:
+        - TargetClusterArn
+        - Authentication
+        - VpcId
+        - ClientSubnets
+        - SecurityGroups
+      title: CreateVpcConnectionRequest
+      properties:
+        TargetClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: targetClusterArn
+              description: |2-
+
+                            <p>The cluster Amazon Resource Name (ARN) for the VPC connection.</p>
+                         
+        Authentication:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: authentication
+              description: |2-
+
+                            <p>The authentication type of VPC connection.</p>
+                         
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcId
+              description: |2-
+
+                            <p>The VPC ID of VPC connection.</p>
+                         
+        ClientSubnets:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: clientSubnets
+              description: |2-
+
+                            <p>The list of client subnets.</p>
+                         
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - xml:
+                name: securityGroups
+              description: |2-
+
+                            <p>The list of security groups.</p>
+                         
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/__mapOf__string'
+            - xml:
+                name: tags
+              description: |2-
+
+                            <p>A map of tags for the VPC connection.</p>
+                         
     DeleteClusterRequest:
       type: object
       title: DeleteClusterRequest
       properties: {}
+    DeleteClusterPolicyRequest:
+      type: object
+      title: DeleteClusterPolicyRequest
+      properties: {}
     DeleteConfigurationRequest:
       type: object
       title: DeleteConfigurationRequest
+      properties: {}
+    DeleteVpcConnectionRequest:
+      type: object
+      title: DeleteVpcConnectionRequest
       properties: {}
     DescribeClusterOperationRequest:
       type: object
@@ -6412,6 +7726,10 @@ components:
     DescribeConfigurationRevisionRequest:
       type: object
       title: DescribeConfigurationRevisionRequest
+      properties: {}
+    DescribeVpcConnectionRequest:
+      type: object
+      title: DescribeVpcConnectionRequest
       properties: {}
     BatchDisassociateScramSecretRequest:
       type: object
@@ -6473,6 +7791,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CompatibleKafkaVersion'
+    GetClusterPolicyRequest:
+      type: object
+      title: GetClusterPolicyRequest
+      properties: {}
     KafkaVersionStatus:
       type: string
       enum:
@@ -6559,6 +7881,37 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ListClientVpcConnectionsRequest:
+      type: object
+      title: ListClientVpcConnectionsRequest
+      properties: {}
+    __listOfClientVpcConnection:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClientVpcConnection'
+    ListVpcConnectionsRequest:
+      type: object
+      title: ListVpcConnectionsRequest
+      properties: {}
+    __listOfVpcConnection:
+      type: array
+      items:
+        $ref: '#/components/schemas/VpcConnection'
+    RejectClientVpcConnectionRequest:
+      type: object
+      required:
+        - VpcConnectionArn
+      title: RejectClientVpcConnectionRequest
+      properties:
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcConnectionArn
+              description: |2-
+
+                            <p>The VPC connection ARN.</p>
+                         
     __listOfBrokerEBSVolumeInfo:
       type: array
       items:
@@ -6660,6 +8013,30 @@ components:
 
                     <p>Prometheus settings.</p>
                  
+    PutClusterPolicyRequest:
+      type: object
+      required:
+        - Policy
+      title: PutClusterPolicyRequest
+      properties:
+        CurrentVersion:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: currentVersion
+              description: |2-
+
+                            <p>The policy version.</p>
+                         
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: policy
+              description: |2-
+
+                            <p>The policy.</p>
+                         
     RebootBrokerRequest:
       type: object
       required:
@@ -6707,6 +8084,38 @@ components:
       description: |2-
 
                     <p>Details for SASL/SCRAM client authentication.</p>
+                 
+    VpcConnectivityScram:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: enabled
+              description: |2-
+
+                            <p>SASL/SCRAM authentication is on or off for VPC connectivity.</p>
+                         
+      description: |2-
+
+                    <p>Details for SASL/SCRAM client authentication for VPC connectivity.</p>
+                 
+    VpcConnectivityIam:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: enabled
+              description: |2-
+
+                            <p>SASL/IAM authentication is on or off for VPC connectivity.</p>
+                         
+      description: |2-
+
+                    <p>Details for IAM access control for VPC connectivity.</p>
                  
     NodeType:
       type: string
@@ -7185,5 +8594,39 @@ components:
                             <p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>
                          
       description: Request body for UpdateConnectivity.
+    UserIdentityType:
+      type: string
+      enum:
+        - AWSACCOUNT
+        - AWSSERVICE
+      description: |2-
+
+                    <p>The identity type of the requester that calls the API operation.</p>
+                 
+    UserIdentity:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/UserIdentityType'
+            - xml:
+                name: type
+              description: |2-
+
+                            <p>The identity type of the requester that calls the API operation.</p>
+                         
+        PrincipalId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: principalId
+              description: |2-
+
+                            <p>A unique identifier for the requester that calls the API operation.</p>
+                         
+      description: |2-
+
+                    <p>Description of the requester that calls the API operation.</p>
+                 
 security:
   - hmac: []

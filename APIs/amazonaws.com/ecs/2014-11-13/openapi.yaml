@@ -206,6 +206,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: NamespaceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceNotFoundException'
       requestBody:
         required: true
         content:
@@ -3113,6 +3119,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: NamespaceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NamespaceNotFoundException'
       requestBody:
         required: true
         content:
@@ -3797,6 +3809,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClusterServiceConnectDefaultsRequest'
             - description: '<p>Use this parameter to set a default Service Connect namespace. After you set a default Service Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as client services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to <code>true</code> in the <code>ServiceConnectConfiguration</code>. You can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default parameter.</p> <p>Tasks that run in a namespace can use short names to connect to services in the namespace. Tasks can connect to services across all of the clusters in the namespace. Tasks connect through a managed proxy container that collects logs and metrics for increased visibility. Only the tasks that Amazon ECS services create are supported with Service Connect. For more information, see <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>'
+    NamespaceNotFoundException: {}
     CreateServiceResponse:
       type: object
       example:
@@ -3936,7 +3949,6 @@ components:
     PlatformUnknownException: {}
     PlatformTaskDefinitionIncompatibilityException: {}
     AccessDeniedException: {}
-    NamespaceNotFoundException: {}
     CreateTaskSetResponse:
       type: object
       properties:
@@ -5082,7 +5094,7 @@ components:
         value:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account setting value for the specified principal ARN. Accepted values are <code>enabled</code> and <code>disabled</code>.
+            - description: 'The account setting value for the specified principal ARN. Accepted values are <code>enabled</code>, <code>disabled</code>, <code>on</code>, and <code>off</code>.'
         principalArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5113,7 +5125,7 @@ components:
         value:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The account setting value for the specified principal ARN. Accepted values are <code>enabled</code> and <code>disabled</code>.
+            - description: 'The account setting value for the specified principal ARN. Accepted values are <code>enabled</code>, <code>disabled</code>, <code>on</code>, and <code>off</code>.'
     PutAttributesResponse:
       type: object
       properties:

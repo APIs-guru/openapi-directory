@@ -3,7 +3,7 @@ info:
   version: '2018-05-10'
   x-release: v4
   title: IAM Roles Anywhere
-  description: '<p>AWS Identity and Access Management Roles Anywhere provides a secure way for your workloads such as servers, containers, and applications running outside of AWS to obtain Temporary AWS credentials. Your workloads can use the same IAM policies and roles that you have configured with native AWS applications to access AWS resources. Using IAM Roles Anywhere will eliminate the need to manage long term credentials for workloads running outside of AWS.</p> <p>To use IAM Roles Anywhere customer workloads will need to use X.509 certificates issued by their Certificate Authority (CA) . The Certificate Authority (CA) needs to be registered with IAM Roles Anywhere as a trust anchor to establish trust between customer PKI and IAM Roles Anywhere. Customers who do not manage their own PKI system can use AWS Certificate Manager Private Certificate Authority (ACM PCA) to create a Certificate Authority and use that to establish trust with IAM Roles Anywhere</p> <p>This guide describes the IAM rolesanywhere operations that you can call programmatically. For general information about IAM Roles Anywhere see <a href="https://docs.aws.amazon.com/">https://docs.aws.amazon.com/</a> </p>'
+  description: '<p>Identity and Access Management Roles Anywhere provides a secure way for your workloads such as servers, containers, and applications that run outside of Amazon Web Services to obtain temporary Amazon Web Services credentials. Your workloads can use the same IAM policies and roles you have for native Amazon Web Services applications to access Amazon Web Services resources. Using IAM Roles Anywhere eliminates the need to manage long-term credentials for workloads running outside of Amazon Web Services.</p> <p> To use IAM Roles Anywhere, your workloads must use X.509 certificates issued by their certificate authority (CA). You register the CA with IAM Roles Anywhere as a trust anchor to establish trust between your public key infrastructure (PKI) and IAM Roles Anywhere. If you don''t manage your own PKI system, you can use Private Certificate Authority to create a CA and then use that to establish trust with IAM Roles Anywhere. </p> <p>This guide describes the IAM Roles Anywhere operations that you can call programmatically. For more information about IAM Roles Anywhere, see the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/userguide/introduction.html">IAM Roles Anywhere User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -117,7 +117,7 @@ paths:
   /profiles:
     post:
       operationId: CreateProfile
-      description: '<p>Creates a profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateProfile</code>. </p>'
+      description: '<p>Creates a <i>profile</i>, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateProfile</code>. </p>'
       responses:
         '201':
           description: Success
@@ -152,7 +152,7 @@ paths:
                   description: ' The number of seconds the vended session credentials are valid for. '
                   type: integer
                   minimum: 900
-                  maximum: 43200
+                  maximum: 3600
                 enabled:
                   description: Specifies whether the profile is enabled.
                   type: boolean
@@ -170,10 +170,10 @@ paths:
                   minLength: 1
                   maxLength: 255
                 requireInstanceProperties:
-                  description: 'Specifies whether instance properties are required in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile. '
+                  description: 'Specifies whether instance properties are required in temporary credential requests with this profile. '
                   type: boolean
                 roleArns:
-                  description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+                  description: A list of IAM roles that this profile can assume in a temporary credential request.
                   type: array
                   items:
                     $ref: '#/components/schemas/RoleArn'
@@ -188,7 +188,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 0
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -223,7 +223,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+          description: 'A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.'
           schema:
             type: string
             minLength: 1
@@ -237,7 +237,7 @@ paths:
   /trustanchors:
     post:
       operationId: CreateTrustAnchor
-      description: '<p>Creates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateTrustAnchor</code>. </p>'
+      description: '<p>Creates a trust anchor to establish trust between IAM Roles Anywhere and your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:CreateTrustAnchor</code>. </p>'
       responses:
         '201':
           description: Success
@@ -277,6 +277,13 @@ paths:
                   pattern: '^[ a-zA-Z0-9-_]*$'
                   minLength: 1
                   maxLength: 255
+                notificationSettings:
+                  description: A list of notification settings to be associated to the trust anchor.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NotificationSetting'
+                  minItems: 0
+                  maxItems: 50
                 source:
                   description: The trust anchor type and its related certificate data.
                   type: object
@@ -295,7 +302,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 0
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -330,7 +337,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+          description: 'A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.'
           schema:
             type: string
             minLength: 1
@@ -410,7 +417,7 @@ paths:
             maxLength: 36
     patch:
       operationId: UpdateCrl
-      description: '<p>Updates the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateCrl</code>. </p>'
+      description: '<p>Updates the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateCrl</code>. </p>'
       responses:
         '200':
           description: Success
@@ -454,7 +461,7 @@ paths:
               type: object
               properties:
                 crlData:
-                  description: The x509 v3 specified certificate revocation list
+                  description: The x509 v3 specified certificate revocation list (CRL).
                   type: string
                   minLength: 1
                   maxLength: 300000
@@ -539,7 +546,7 @@ paths:
             maxLength: 36
     patch:
       operationId: UpdateProfile
-      description: '<p>Updates the profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can scope-down permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateProfile</code>. </p>'
+      description: '<p>Updates a <i>profile</i>, a list of the roles that IAM Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateProfile</code>. </p>'
       responses:
         '200':
           description: Success
@@ -586,7 +593,7 @@ paths:
                   description: ' The number of seconds the vended session credentials are valid for. '
                   type: integer
                   minimum: 900
-                  maximum: 43200
+                  maximum: 3600
                 managedPolicyArns:
                   description: 'A list of managed policy ARNs that apply to the vended session credentials. '
                   type: array
@@ -601,7 +608,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 roleArns:
-                  description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+                  description: A list of IAM roles that this profile can assume in a temporary credential request.
                   type: array
                   items:
                     $ref: '#/components/schemas/RoleArn'
@@ -693,7 +700,7 @@ paths:
             maxLength: 36
     patch:
       operationId: UpdateTrustAnchor
-      description: '<p>Updates the trust anchor.You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateTrustAnchor</code>. </p>'
+      description: '<p>Updates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by the CA in exchange for temporary Amazon Web Services credentials.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:UpdateTrustAnchor</code>. </p>'
       responses:
         '200':
           description: Success
@@ -798,7 +805,7 @@ paths:
   '/profile/{profileId}/disable':
     post:
       operationId: DisableProfile
-      description: '<p>Disables a profile. When disabled, <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile fail.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableProfile</code>. </p>'
+      description: '<p>Disables a profile. When disabled, temporary credential requests with this profile fail.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableProfile</code>. </p>'
       responses:
         '200':
           description: Success
@@ -839,7 +846,7 @@ paths:
   '/trustanchor/{trustAnchorId}/disable':
     post:
       operationId: DisableTrustAnchor
-      description: '<p>Disables a trust anchor. When disabled, <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests specifying this trust anchor are unauthorized.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableTrustAnchor</code>. </p>'
+      description: '<p>Disables a trust anchor. When disabled, temporary credential requests specifying this trust anchor are unauthorized.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:DisableTrustAnchor</code>. </p>'
       responses:
         '200':
           description: Success
@@ -921,7 +928,7 @@ paths:
   '/profile/{profileId}/enable':
     post:
       operationId: EnableProfile
-      description: '<p>Enables the roles in a profile to receive session credentials in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a>. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableProfile</code>. </p>'
+      description: '<p>Enables temporary credential requests for a profile. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:EnableProfile</code>. </p>'
       responses:
         '200':
           description: Success
@@ -1003,7 +1010,7 @@ paths:
   '/subject/{subjectId}':
     get:
       operationId: GetSubject
-      description: '<p>Gets a Subject. A Subject associates a certificate identity with authentication attempts by CreateSession. The Subject resources stores audit information such as status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetSubject</code>. </p>'
+      description: '<p>Gets a <i>subject</i>, which associates a certificate identity with authentication attempts. The subject stores auditing information such as the status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:GetSubject</code>. </p>'
       responses:
         '200':
           description: Success
@@ -1044,7 +1051,7 @@ paths:
   /crls:
     post:
       operationId: ImportCrl
-      description: '<p>Imports the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ImportCrl</code>. </p>'
+      description: '<p>Imports the certificate revocation list (CRL). A CRL is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the CRL before issuing credentials. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ImportCrl</code>. </p>'
       responses:
         '201':
           description: Success
@@ -1077,7 +1084,7 @@ paths:
                 - trustAnchorArn
               properties:
                 crlData:
-                  description: The x509 v3 specified certificate revocation list
+                  description: The x509 v3 specified certificate revocation list (CRL).
                   type: string
                   minLength: 1
                   maxLength: 300000
@@ -1096,7 +1103,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 0
-                  maxItems: 50
+                  maxItems: 200
                 trustAnchorArn:
                   description: The ARN of the TrustAnchor the certificate revocation list (CRL) will provide revocation for.
                   type: string
@@ -1113,7 +1120,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListCrls
-      description: '<p>Lists all Crls in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListCrls</code>. </p>'
+      description: '<p>Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:ListCrls</code>. </p>'
       responses:
         '200':
           description: Success
@@ -1137,7 +1144,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+          description: 'A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.'
           schema:
             type: string
             minLength: 1
@@ -1175,7 +1182,7 @@ paths:
         - name: nextToken
           in: query
           required: false
-          description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+          description: 'A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.'
           schema:
             type: string
             minLength: 1
@@ -1232,6 +1239,128 @@ paths:
             type: string
             minLength: 1
             maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /put-notifications-settings:
+    patch:
+      operationId: PutNotificationSettings
+      description: '<p>Attaches a list of <i>notification settings</i> to a trust anchor.</p> <p>A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.</p> <p> <b>Required permissions: </b> <code>rolesanywhere:PutNotificationSettings</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutNotificationSettingsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - notificationSettings
+                - trustAnchorId
+              properties:
+                notificationSettings:
+                  description: A list of notification settings to be associated to the trust anchor.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NotificationSetting'
+                  minItems: 0
+                  maxItems: 50
+                trustAnchorId:
+                  description: The unique identifier of the trust anchor.
+                  type: string
+                  pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+                  minLength: 36
+                  maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /reset-notifications-settings:
+    patch:
+      operationId: ResetNotificationSettings
+      description: '<p>Resets the <i>custom notification setting</i> to IAM Roles Anywhere default setting. </p> <p> <b>Required permissions: </b> <code>rolesanywhere:ResetNotificationSettings</code>. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetNotificationSettingsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - notificationSettingKeys
+                - trustAnchorId
+              properties:
+                notificationSettingKeys:
+                  description: 'A list of notification setting keys to reset. A notification setting key includes the event and the channel. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/NotificationSettingKey'
+                  minItems: 0
+                  maxItems: 50
+                trustAnchorId:
+                  description: The unique identifier of the trust anchor.
+                  type: string
+                  pattern: '[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}'
+                  minLength: 36
+                  maxLength: 36
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1297,7 +1426,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/Tag'
                   minItems: 0
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1357,7 +1486,7 @@ paths:
                   items:
                     $ref: '#/components/schemas/TagKey'
                   minItems: 0
-                  maxItems: 50
+                  maxItems: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1460,16 +1589,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/TrustAnchorDetail'
             - description: 'The state of the trust anchor after a read or write operation. '
+    NotificationSetting:
+      type: object
+      required:
+        - enabled
+        - event
+      properties:
+        channel:
+          allOf:
+            - $ref: '#/components/schemas/NotificationChannel'
+            - description: '<p>The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p> <note> <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to ''ALL'' channels.</p> </note>'
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the notification setting is enabled.
+        event:
+          allOf:
+            - $ref: '#/components/schemas/NotificationEvent'
+            - description: The event to which this notification setting is applied.
+        threshold:
+          allOf:
+            - $ref: '#/components/schemas/NotificationSettingThresholdInteger'
+            - description: The number of days before a notification event. This value is required for a notification setting that is enabled.
+      description: ' Customizable notification settings that will be applied to notification events. IAM Roles Anywhere consumes these settings while notifying across multiple channels - CloudWatch metrics, EventBridge, and Health Dashboard. '
     SourceData:
       type: object
       properties:
         acmPcaArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The root certificate of the Certificate Manager Private Certificate Authority specified by this ARN is used in trust validation for <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operations. Included for trust anchors of type <code>AWS_ACM_PCA</code>. '
+            - description: ' The root certificate of the Private Certificate Authority specified by this ARN is used in trust validation for temporary credential requests. Included for trust anchors of type <code>AWS_ACM_PCA</code>. '
         x509CertificateData:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/SourceDataX509CertificateDataString'
             - description: 'The PEM-encoded data for the certificate anchor. Included for trust anchors of type <code>CERTIFICATE_BUNDLE</code>. '
       description: 'The data field of the trust anchor depending on its type. '
     TrustAnchorType:
@@ -1505,14 +1657,14 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+            - description: 'A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.'
     ListProfilesResponse:
       type: object
       properties:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+            - description: 'A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.'
         profiles:
           allOf:
             - $ref: '#/components/schemas/ProfileDetails'
@@ -1523,7 +1675,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+            - description: 'A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.'
         subjects:
           allOf:
             - $ref: '#/components/schemas/SubjectSummaries'
@@ -1541,11 +1693,39 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.'
+            - description: 'A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.'
         trustAnchors:
           allOf:
             - $ref: '#/components/schemas/TrustAnchorDetails'
             - description: A list of trust anchors.
+    PutNotificationSettingsResponse:
+      type: object
+      required:
+        - trustAnchor
+      properties:
+        trustAnchor:
+          $ref: '#/components/schemas/TrustAnchorDetail'
+    ResetNotificationSettingsResponse:
+      type: object
+      required:
+        - trustAnchor
+      properties:
+        trustAnchor:
+          $ref: '#/components/schemas/TrustAnchorDetail'
+    NotificationSettingKey:
+      type: object
+      required:
+        - event
+      properties:
+        channel:
+          allOf:
+            - $ref: '#/components/schemas/NotificationChannel'
+            - description: The specified channel of notification.
+        event:
+          allOf:
+            - $ref: '#/components/schemas/NotificationEvent'
+            - description: The notification setting event to reset.
+      description: 'A notification setting key to reset. A notification setting key includes the event and the channel. '
     TagResourceResponse:
       type: object
       properties: {}
@@ -1570,7 +1750,7 @@ components:
     CreateProfileRequestDurationSecondsInteger:
       type: integer
       minimum: 900
-      maximum: 43200
+      maximum: 3600
     ManagedPolicyList:
       type: array
       items:
@@ -1595,7 +1775,7 @@ components:
       items:
         $ref: '#/components/schemas/Tag'
       minItems: 0
-      maxItems: 50
+      maxItems: 200
     CreateProfileRequest:
       type: object
       required:
@@ -1622,11 +1802,11 @@ components:
         requireInstanceProperties:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Specifies whether instance properties are required in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile. '
+            - description: 'Specifies whether instance properties are required in temporary credential requests with this profile. '
         roleArns:
           allOf:
             - $ref: '#/components/schemas/RoleArnList'
-            - description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+            - description: A list of IAM roles that this profile can assume in a temporary credential request.
         sessionPolicy:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1635,6 +1815,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags to attach to the profile.
+    NotificationSettings:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationSetting'
+      minItems: 0
+      maxItems: 50
     Source:
       type: object
       properties:
@@ -1662,6 +1848,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the trust anchor.
+        notificationSettings:
+          allOf:
+            - $ref: '#/components/schemas/NotificationSettings'
+            - description: A list of notification settings to be associated to the trust anchor.
         source:
           allOf:
             - $ref: '#/components/schemas/Source'
@@ -1680,7 +1870,7 @@ components:
         failed:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates whether the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation was successful. '
+            - description: 'Indicates whether the temporary credential request was successful. '
         issuer:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1688,7 +1878,7 @@ components:
         seenAt:
           allOf:
             - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: 'The ISO-8601 time stamp of when the certificate was last used in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+            - description: The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.
         serialNumber:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1697,7 +1887,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The PEM-encoded data of the certificate.
-      description: 'A record of a presented X509 credential to <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a>. '
+      description: 'A record of a presented X509 credential from a temporary credential request. '
     CredentialSummaries:
       type: array
       items:
@@ -1770,7 +1960,7 @@ components:
         crlData:
           allOf:
             - $ref: '#/components/schemas/ImportCrlRequestCrlDataBlob'
-            - description: The x509 v3 specified certificate revocation list
+            - description: The x509 v3 specified certificate revocation list (CRL).
         enabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -1793,13 +1983,13 @@ components:
         failed:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates whether the <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation was successful. '
+            - description: 'Indicates whether the temporary credential request was successful. '
         properties:
           description: 'A list of instanceProperty objects. '
         seenAt:
           allOf:
             - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: 'The ISO-8601 time stamp of when the certificate was last used in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+            - description: The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.
       description: A key-value pair you set that identifies a property of the authenticating instance.
     InstanceProperties:
       type: array
@@ -1845,6 +2035,66 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TrustAnchorDetail'
+    NotificationChannel:
+      type: string
+      enum:
+        - ALL
+    NotificationEvent:
+      type: string
+      enum:
+        - CA_CERTIFICATE_EXPIRY
+        - END_ENTITY_CERTIFICATE_EXPIRY
+    NotificationSettingThresholdInteger:
+      type: integer
+      minimum: 1
+      maximum: 360
+    NotificationSettingDetailConfiguredByString:
+      type: string
+      minLength: 1
+      maxLength: 200
+    NotificationSettingDetailThresholdInteger:
+      type: integer
+      minimum: 1
+      maximum: 360
+    NotificationSettingDetail:
+      type: object
+      required:
+        - enabled
+        - event
+      properties:
+        channel:
+          allOf:
+            - $ref: '#/components/schemas/NotificationChannel'
+            - description: '<p>The specified channel of notification. IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p> <note> <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to ''ALL'' channels.</p> </note>'
+        configuredBy:
+          allOf:
+            - $ref: '#/components/schemas/NotificationSettingDetailConfiguredByString'
+            - description: 'The principal that configured the notification setting. For default settings configured by IAM Roles Anywhere, the value is <code>rolesanywhere.amazonaws.com</code>, and for customized notifications settings, it is the respective account ID. '
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the notification setting is enabled.
+        event:
+          allOf:
+            - $ref: '#/components/schemas/NotificationEvent'
+            - description: The event to which this notification setting is applied.
+        threshold:
+          allOf:
+            - $ref: '#/components/schemas/NotificationSettingDetailThresholdInteger'
+            - description: The number of days before a notification event.
+      description: '<p>The state of a notification setting.</p> <p>A notification setting includes information such as event name, threshold, status of the notification setting, and the channel to notify.</p>'
+    NotificationSettingDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationSettingDetail'
+      minItems: 0
+      maxItems: 50
+    NotificationSettingKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationSettingKey'
+      minItems: 0
+      maxItems: 50
     ProfileArn:
       type: string
       pattern: '^arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:profile.*)$'
@@ -1888,11 +2138,11 @@ components:
         requireInstanceProperties:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Specifies whether instance properties are required in <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> requests with this profile. '
+            - description: 'Specifies whether instance properties are required in temporary credential requests with this profile. '
         roleArns:
           allOf:
             - $ref: '#/components/schemas/RoleArnList'
-            - description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+            - description: A list of IAM roles that this profile can assume in a temporary credential request.
         sessionPolicy:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1902,6 +2152,72 @@ components:
             - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
             - description: 'The ISO-8601 timestamp when the profile was last updated. '
       description: The state of the profile after a read or write operation.
+    PutNotificationSettingsRequest:
+      type: object
+      required:
+        - notificationSettings
+        - trustAnchorId
+      title: PutNotificationSettingsRequest
+      properties:
+        notificationSettings:
+          allOf:
+            - $ref: '#/components/schemas/NotificationSettings'
+            - description: A list of notification settings to be associated to the trust anchor.
+        trustAnchorId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique identifier of the trust anchor.
+    TrustAnchorDetail:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the trust anchor was created. '
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the trust anchor is enabled.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the trust anchor.
+        notificationSettings:
+          allOf:
+            - $ref: '#/components/schemas/NotificationSettingDetails'
+            - description: A list of notification settings to be associated to the trust anchor.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: The trust anchor type and its related certificate data.
+        trustAnchorArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the trust anchor.
+        trustAnchorId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique identifier of the trust anchor.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: 'The ISO-8601 timestamp when the trust anchor was last updated. '
+      description: 'The state of the trust anchor after a read or write operation. '
+    ResetNotificationSettingsRequest:
+      type: object
+      required:
+        - notificationSettingKeys
+        - trustAnchorId
+      title: ResetNotificationSettingsRequest
+      properties:
+        notificationSettingKeys:
+          allOf:
+            - $ref: '#/components/schemas/NotificationSettingKeys'
+            - description: 'A list of notification setting keys to reset. A notification setting key includes the event and the channel. '
+        trustAnchorId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique identifier of the trust anchor.
     ScalarCrlRequest:
       type: object
       title: ScalarCrlRequest
@@ -1918,6 +2234,10 @@ components:
       type: object
       title: ScalarTrustAnchorRequest
       properties: {}
+    SourceDataX509CertificateDataString:
+      type: string
+      minLength: 1
+      maxLength: 8000
     SubjectDetail:
       type: object
       properties:
@@ -1928,7 +2248,7 @@ components:
         credentials:
           allOf:
             - $ref: '#/components/schemas/CredentialSummaries'
-            - description: The temporary session credentials vended at the last authenticating call with this Subject.
+            - description: The temporary session credentials vended at the last authenticating call with this subject.
         enabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -1940,7 +2260,7 @@ components:
         lastSeenAt:
           allOf:
             - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: The ISO-8601 timestamp of the last time this Subject requested temporary session credentials.
+            - description: The ISO-8601 timestamp of the last time this subject requested temporary session credentials.
         subjectArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1964,15 +2284,15 @@ components:
         createdAt:
           allOf:
             - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: 'The ISO-8601 time stamp of when the certificate was first used in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+            - description: The ISO-8601 time stamp of when the certificate was first used in a temporary credential request.
         enabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'The enabled status of the Subject. '
+            - description: 'The enabled status of the subject. '
         lastSeenAt:
           allOf:
             - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: 'The ISO-8601 time stamp of when the certificate was last used in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+            - description: The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.
         subjectArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1989,7 +2309,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The x509 principal identifier of the authenticating certificate.
-      description: A summary representation of Subject resources returned in read operations; primarily ListSubjects.
+      description: A summary representation of subjects.
     TagValue:
       type: string
       pattern: '^[ a-zA-Z0-9_.:/=+@-]*$'
@@ -2001,7 +2321,7 @@ components:
       items:
         $ref: '#/components/schemas/TagKey'
       minItems: 0
-      maxItems: 50
+      maxItems: 200
     TagResourceRequest:
       type: object
       required:
@@ -2017,38 +2337,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags to attach to the resource.
-    TrustAnchorDetail:
-      type: object
-      properties:
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: 'The ISO-8601 timestamp when the trust anchor was created. '
-        enabled:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether the trust anchor is enabled.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/ResourceName'
-            - description: The name of the trust anchor.
-        source:
-          allOf:
-            - $ref: '#/components/schemas/Source'
-            - description: The trust anchor type and its related certificate data.
-        trustAnchorArn:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The ARN of the trust anchor.
-        trustAnchorId:
-          allOf:
-            - $ref: '#/components/schemas/Uuid'
-            - description: The unique identifier of the trust anchor.
-        updatedAt:
-          allOf:
-            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
-            - description: 'The ISO-8601 timestamp when the trust anchor was last updated. '
-      description: 'The state of the trust anchor after a read or write operation. '
     UntagResourceRequest:
       type: object
       required:
@@ -2075,7 +2363,7 @@ components:
         crlData:
           allOf:
             - $ref: '#/components/schemas/UpdateCrlRequestCrlDataBlob'
-            - description: The x509 v3 specified certificate revocation list
+            - description: The x509 v3 specified certificate revocation list (CRL).
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -2083,7 +2371,7 @@ components:
     UpdateProfileRequestDurationSecondsInteger:
       type: integer
       minimum: 900
-      maximum: 43200
+      maximum: 3600
     UpdateProfileRequestSessionPolicyString:
       type: string
       minLength: 1
@@ -2107,7 +2395,7 @@ components:
         roleArns:
           allOf:
             - $ref: '#/components/schemas/RoleArnList'
-            - description: 'A list of IAM roles that this profile can assume in a <a href="https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html">CreateSession</a> operation.'
+            - description: A list of IAM roles that this profile can assume in a temporary credential request.
         sessionPolicy:
           allOf:
             - $ref: '#/components/schemas/UpdateProfileRequestSessionPolicyString'

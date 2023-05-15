@@ -3566,6 +3566,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
           description: InternalServerErrorException
           content:
             application/json:
@@ -3604,6 +3610,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
           description: InternalServerErrorException
           content:
             application/json:
@@ -3633,6 +3645,57 @@ paths:
                   maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  /malware-scan/start:
+    post:
+      operationId: StartMalwareScan
+      description: 'Initiates the malware scan. Invoking this API will automatically create the <a href="https://docs.aws.amazon.com/guardduty/latest/ug/slr-permissions-malware-protection.html">Service-linked role </a> in the corresponding account.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMalwareScanResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceArn
+              properties:
+                resourceArn:
+                  description: Amazon Resource Name (ARN) of the resource for which you invoked the API.
+                  type: string
+                  pattern: '^arn:[A-Za-z-]+:[A-Za-z0-9]+:[A-Za-z0-9-]+:\d+:(([A-Za-z0-9-]+)[:\/])?[A-Za-z0-9-]*$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/detector/{detectorId}/member/start':
     post:
       operationId: StartMonitoringMembers
@@ -3819,6 +3882,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/BadRequestException'
         '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
           description: InternalServerErrorException
           content:
             application/json:
@@ -4944,6 +5013,7 @@ components:
             - xml:
                 name: tags
               description: The tags associated with the resource.
+    AccessDeniedException: {}
     ListThreatIntelSetsResponse:
       type: object
       required:
@@ -4961,6 +5031,16 @@ components:
             - xml:
                 name: nextToken
               description: The pagination parameter to be used on the next list operation to retrieve more items.
+    StartMalwareScanResponse:
+      type: object
+      properties:
+        ScanId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - xml:
+                name: scanId
+              description: 'A unique identifier that gets generated when you invoke the API without any error. Each malware scan has a corresponding scan ID. Using this scan ID, you can monitor the status of your malware scan.'
+    ConflictException: {}
     StartMonitoringMembersResponse:
       type: object
       required:
@@ -6574,6 +6654,7 @@ components:
         - GUARDDUTY_FINDING_ID
         - SCAN_START_TIME
         - SCAN_STATUS
+        - SCAN_TYPE
     DNSLogsConfigurationResult:
       type: object
       required:
@@ -7150,6 +7231,11 @@ components:
                 name: threatDetectedByName
               description: Contains details about identified threats organized by threat name.
       description: Contains a complete view providing malware scan result details.
+    ScanType:
+      type: string
+      enum:
+        - GUARDDUTY_INITIATED
+        - ON_DEMAND
     EbsVolumeScanDetails:
       type: object
       properties:
@@ -7189,6 +7275,12 @@ components:
             - xml:
                 name: scanDetections
               description: Contains a complete view providing malware scan result details.
+        ScanType:
+          allOf:
+            - $ref: '#/components/schemas/ScanType'
+            - xml:
+                name: scanType
+              description: Specifies the scan type that invoked the malware scan.
       description: Contains details from the malware scan that created a finding.
     EbsVolumesResult:
       type: object
@@ -9549,6 +9641,9 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/S3BucketDetail'
+    ResourceArn:
+      type: string
+      pattern: '^arn:[A-Za-z-]+:[A-Za-z0-9]+:[A-Za-z0-9-]+:\d+:(([A-Za-z0-9-]+)[:\/])?[A-Za-z0-9-]*$'
     ResourceDetails:
       type: object
       properties:
@@ -9757,6 +9852,7 @@ components:
         - RUNNING
         - COMPLETED
         - FAILED
+        - SKIPPED
     TriggerDetails:
       type: object
       properties:
@@ -9870,6 +9966,12 @@ components:
             - xml:
                 name: attachedVolumes
               description: List of volumes that were attached to the original instance to be scanned.
+        ScanType:
+          allOf:
+            - $ref: '#/components/schemas/ScanType'
+            - xml:
+                name: scanType
+              description: Specifies the scan type that invoked the malware scan.
       description: Contains information about a malware scan.
     ScanCondition:
       type: object
@@ -10017,6 +10119,18 @@ components:
                 name: type
               description: Describes the type of the additional information.
       description: Additional information about the generated finding.
+    StartMalwareScanRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: StartMalwareScanRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: resourceArn
+              description: Amazon Resource Name (ARN) of the resource for which you invoked the API.
     StartMonitoringMembersRequest:
       type: object
       required:

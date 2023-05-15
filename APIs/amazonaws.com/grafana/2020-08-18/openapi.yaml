@@ -317,6 +317,11 @@ paths:
                   type: string
                   minLength: 2
                   maxLength: 65536
+                grafanaVersion:
+                  description: <p>Specifies the version of Grafana to support in the new workspace.</p> <p>Supported values are <code>8.4</code> and <code>9.4</code>.</p>
+                  type: string
+                  minLength: 1
+                  maxLength: 255
                 networkAccessControl:
                   description: '<p>The configuration settings for in-bound network access to your workspace.</p> <p>When this is configured, only listed IP addresses and VPC endpoints will be able to access your workspace. Standard Grafana authentication and authorization will still be required.</p> <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will be allowed. Standard Grafana authentication and authorization will still be required.</p>'
                   type: object
@@ -2070,6 +2075,10 @@ components:
       type: string
       minLength: 2
       maxLength: 65536
+    GrafanaVersion:
+      type: string
+      minLength: 1
+      maxLength: 255
     NetworkAccessConfiguration:
       type: object
       required:
@@ -2168,6 +2177,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OverridableConfigurationJson'
             - description: 'The configuration string for the workspace that you create. For more information about the format and configuration options available, see <a href="https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html">Working in your Grafana workspace</a>.'
+        grafanaVersion:
+          allOf:
+            - $ref: '#/components/schemas/GrafanaVersion'
+            - description: <p>Specifies the version of Grafana to support in the new workspace.</p> <p>Supported values are <code>8.4</code> and <code>9.4</code>.</p>
         networkAccessControl:
           allOf:
             - $ref: '#/components/schemas/NetworkAccessConfiguration'
@@ -2244,10 +2257,6 @@ components:
       type: string
       minLength: 1
       maxLength: 2048
-    GrafanaVersion:
-      type: string
-      minLength: 1
-      maxLength: 255
     IdpMetadataUrl:
       type: string
       minLength: 1

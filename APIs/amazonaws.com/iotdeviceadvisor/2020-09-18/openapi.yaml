@@ -436,6 +436,23 @@ paths:
             type: string
             minLength: 20
             maxLength: 2048
+        - name: deviceRoleArn
+          in: query
+          required: false
+          description: The device role ARN of the device. This is an optional parameter.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+        - name: authenticationMethod
+          in: query
+          required: false
+          description: The authentication method used during the device connection.
+          schema:
+            type: string
+            enum:
+              - X509ClientCertificate
+              - SignatureVersion4
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1005,6 +1022,8 @@ components:
       enum:
         - MqttV3_1_1
         - MqttV5
+        - MqttV3_1_1_OverWebSocket
+        - MqttV5_OverWebSocket
     String256:
       type: string
       minLength: 1
@@ -1165,12 +1184,16 @@ components:
         thingArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Lists devices thing ARN.
+            - description: Lists device's thing ARN.
         certificateArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: Lists devices certificate ARN.
-      description: Information of a test device. A thing ARN or a certificate ARN is required.
+            - description: Lists device's certificate ARN.
+        deviceRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/AmazonResourceName'
+            - description: Lists device's role ARN.
+      description: 'Information of a test device. A thing ARN, certificate ARN or device role ARN is required.'
     SelectedTestList:
       type: array
       items:
@@ -1220,6 +1243,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: Timestamp of when the test suite was updated.
+    AuthenticationMethod:
+      type: string
+      enum:
+        - X509ClientCertificate
+        - SignatureVersion4
     SuiteDefinitionConfiguration:
       type: object
       required:

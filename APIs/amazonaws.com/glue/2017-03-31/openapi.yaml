@@ -19222,6 +19222,183 @@ components:
             - $ref: '#/components/schemas/AggFunction'
             - description: '<p>Specifies the aggregation function to apply.</p> <p>Possible aggregation functions include: avg countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop</p>'
       description: Specifies the set of parameters needed to perform aggregation in the aggregate transform.
+    AmazonRedshiftAdvancedOption:
+      type: object
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The key when specifying a key-value pair.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The value when specifying a key-value pair.
+      description: Specifies an Amazon Redshift data store.
+    AmazonRedshiftAdvancedOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AmazonRedshiftAdvancedOption'
+    GenericLimitedString:
+      type: string
+      pattern: '[A-Za-z0-9_-]*'
+    Option:
+      type: object
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: Specifies the value of the option.
+        Label:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: Specifies the label of the option.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: Specifies the description of the option.
+      description: Specifies an option value.
+    BooleanValue:
+      type: boolean
+    OptionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Option'
+    AmazonRedshiftNodeData:
+      type: object
+      properties:
+        AccessType:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: The access type for the Redshift connection. Can be a direct connection or catalog connections.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: The source type to specify whether a specific table is the source or a custom query.
+        Connection:
+          allOf:
+            - $ref: '#/components/schemas/Option'
+            - description: The Glue connection to the Redshift cluster.
+        Schema:
+          allOf:
+            - $ref: '#/components/schemas/Option'
+            - description: The Redshift schema name when working with a direct connection.
+        Table:
+          allOf:
+            - $ref: '#/components/schemas/Option'
+            - description: The Redshift table name when working with a direct connection.
+        CatalogDatabase:
+          allOf:
+            - $ref: '#/components/schemas/Option'
+            - description: The name of the Glue Data Catalog database when working with a data catalog.
+        CatalogTable:
+          allOf:
+            - $ref: '#/components/schemas/Option'
+            - description: The Glue Data Catalog table name when working with a data catalog.
+        CatalogRedshiftSchema:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The Redshift schema name when working with a data catalog.
+        CatalogRedshiftTable:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The database table to read from.
+        TempDir:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: The Amazon S3 path where temporary data can be staged when copying out of the database.
+        IamRole:
+          allOf:
+            - $ref: '#/components/schemas/Option'
+            - description: Optional. The role name use when connection to S3. The IAM role ill default to the role on the job when left blank.
+        AdvancedOptions:
+          allOf:
+            - $ref: '#/components/schemas/AmazonRedshiftAdvancedOptions'
+            - description: Optional values when connecting to the Redshift cluster.
+        SampleQuery:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The SQL used to fetch the data from a Redshift sources when the SourceType is 'query'.
+        PreAction:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The SQL used before a MERGE or APPEND with upsert is run.
+        PostAction:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The SQL used before a MERGE or APPEND with upsert is run.
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies how writing to a Redshift cluser will occur.
+        TablePrefix:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: Specifies the prefix to a table.
+        Upsert:
+          allOf:
+            - $ref: '#/components/schemas/BooleanValue'
+            - description: The action used on Redshift sinks when doing an APPEND.
+        MergeAction:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: The action used when to detemine how a MERGE in a Redshift sink will be handled.
+        MergeWhenMatched:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: The action used when to detemine how a MERGE in a Redshift sink will be handled when an existing record matches a new record.
+        MergeWhenNotMatched:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: The action used when to detemine how a MERGE in a Redshift sink will be handled when an existing record doesn't match a new record.
+        MergeClause:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The SQL used in a custom merge to deal with matching records.
+        CrawlerConnection:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies the name of the connection that is associated with the catalog table used.
+        TableSchema:
+          allOf:
+            - $ref: '#/components/schemas/OptionList'
+            - description: The array of schema output for a given node.
+        StagingTable:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The name of the temporary staging table that is used when doing a MERGE or APPEND with upsert.
+        SelectedColumns:
+          allOf:
+            - $ref: '#/components/schemas/OptionList'
+            - description: The list of column names used to determine a matching record when doing a MERGE or APPEND with upsert.
+      description: Specifies an Amazon Redshift node.
+    AmazonRedshiftSource:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NodeName'
+            - description: The name of the Amazon Redshift source.
+        Data:
+          allOf:
+            - $ref: '#/components/schemas/AmazonRedshiftNodeData'
+            - description: Specifies the data of the Amazon Reshift source node.
+      description: Specifies an Amazon Redshift source.
+    AmazonRedshiftTarget:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NodeName'
+            - description: The name of the Amazon Redshift target.
+        Data:
+          allOf:
+            - $ref: '#/components/schemas/AmazonRedshiftNodeData'
+            - description: Specifies the data of the Amazon Reshift target node.
+        Inputs:
+          allOf:
+            - $ref: '#/components/schemas/OneInput'
+            - description: The nodes that are inputs to the data target.
+      description: Specifies an Amazon Redshift target.
     Mappings:
       type: array
       items:
@@ -19906,8 +20083,6 @@ components:
             - description: The number of null values in the column.
       description: Defines column statistics supported for Boolean data columns.
     BooleanNullable:
-      type: boolean
-    BooleanValue:
       type: boolean
     ValueString:
       type: string
@@ -21898,6 +22073,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnclosedInStringProperty'
             - description: This field is not used and will be deprecated in future release.
+        OutputSchemas:
+          allOf:
+            - $ref: '#/components/schemas/GlueSchemas'
+            - description: Specifies the data schema for the dynamic transform.
       description: Specifies the set of parameters needed to perform the dynamic transform.
     EvaluateDataQuality:
       type: object
@@ -22488,6 +22667,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3DeltaDirectTarget'
             - description: Specifies a target that writes to a Delta Lake data source in Amazon S3.
+        AmazonRedshiftSource:
+          allOf:
+            - $ref: '#/components/schemas/AmazonRedshiftSource'
+            - description: Specifies a target that writes to a data source in Amazon Redshift.
+        AmazonRedshiftTarget:
+          allOf:
+            - $ref: '#/components/schemas/AmazonRedshiftTarget'
+            - description: Specifies a target that writes to a data target in Amazon Redshift.
       description: ' <code>CodeGenConfigurationNode</code> enumerates all valid Node types. One and only one of its member variables can be populated.'
     CodeGenConfigurationNodes:
       type: object
@@ -23821,6 +24008,8 @@ components:
         - G.1X
         - G.2X
         - G.025X
+        - G.4X
+        - G.8X
     GlueVersionString:
       type: string
       pattern: ^\w+\.\w+$
@@ -24288,9 +24477,6 @@ components:
       pattern: '([\u0020-\u007E\r\s\n])*'
       minLength: 1
       maxLength: 65536
-    GenericLimitedString:
-      type: string
-      pattern: '[A-Za-z0-9_-]*'
     DQResultsPublishingOptions:
       type: object
       properties:
@@ -25486,11 +25672,11 @@ components:
         MaxCapacity:
           allOf:
             - $ref: '#/components/schemas/NullableDouble'
-            - description: '<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul> <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>'
+            - description: '<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href="https://aws.amazon.com/glue/pricing/">Glue pricing page</a>.</p> <p>For Glue version 2.0 or later jobs, you cannot specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p> <p>Do not set <code>MaxCapacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>'
         WorkerType:
           allOf:
             - $ref: '#/components/schemas/WorkerType'
-            - description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.025X</code> worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for low volume streaming jobs. This worker type is only available for Glue version 3.0 streaming jobs.</p> </li> </ul>'
+            - description: '<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, G.2X, or G.025X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for workloads such as data transforms, joins, and queries, to offers a scalable and cost effective way to run most jobs.</p> </li> <li> <p>For the <code>G.4X</code> worker type, each worker maps to 4 DPU (16 vCPU, 64 GB of memory, 256 GB disk), and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later jobs.</p> </li> <li> <p>For the <code>G.8X</code> worker type, each worker maps to 8 DPU (32 vCPU, 128 GB of memory, 512 GB disk), and provides 1 executor per worker. We recommend this worker type for jobs whose workloads contain your most demanding transforms, aggregations, joins, and queries. This worker type is available only for Glue version 3.0 or later jobs.</p> </li> <li> <p>For the <code>G.025X</code> worker type, each worker maps to 0.25 DPU (2 vCPU, 4 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for low volume streaming jobs. This worker type is only available for Glue version 3.0 streaming jobs.</p> </li> </ul>'
         NumberOfWorkers:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
