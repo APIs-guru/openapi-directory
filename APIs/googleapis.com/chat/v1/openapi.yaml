@@ -85,6 +85,11 @@ paths:
       description: Lists spaces the caller is a member of. Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts). Supports [user authentication](https://developers.google.com/chat/api/guides/auth/users) as part of the [Google Workspace Developer Preview Program](https://developers.google.com/workspace/preview), which grants early access to certain features. [User authentication](https://developers.google.com/chat/api/guides/auth/users) requires the `chat.spaces` or `chat.spaces.readonly` authorization scope. Lists spaces visible to the caller or authenticated user. Group chats and DMs aren't listed until the first message is sent.
       operationId: chat.spaces.list
       parameters:
+        - description: 'Optional. A query filter. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users). You can filter spaces by the space type ([`space_type`](https://developers.google.com/chat/api/reference/rest/v1/spaces#spacetype)). To filter by space type, you must specify valid `enum` value, such as `SPACE` or `GROUP_CHAT` (the `space_type` cannot be `SPACE_TYPE_UNSPECIFIED`). To query for multiple space types, use the `OR` operator. For example, the following queries are valid: ``` space_type = "SPACE" spaceType = "GROUP_CHAT" OR spaceType = "DIRECT_MESSAGE" ``` Invalid queries are rejected by the server with an `INVALID_ARGUMENT` error. With [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts), this field is ignored and the query always returns all spaces. But Chat API still validates the query syntax with service accounts, so invalid queries are still rejected. [Developer Preview](https://developers.google.com/workspace/preview).'
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: Optional. The maximum number of spaces to return. The service may return fewer than this value. If unspecified, at most 100 spaces are returned. The maximum value is 1000; values above 1000 are coerced to 1000. Negative values return an `INVALID_ARGUMENT` error.
           in: query
           name: pageSize
@@ -129,17 +134,137 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Creates a named space. Spaces grouped by topics or that have guest access are not supported. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.spaces.create` or `chat.spaces` scope."
+      operationId: chat.spaces.create
+      parameters:
+        - description: Optional. A unique identifier for this request. A random UUID is recommended. Specifying an existing request ID returns the space created with that ID instead of creating a new space. Specifying an existing request ID from the same Chat app with a different authenticated user returns an error.
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Space"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Space"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.create
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.create
+      tags:
+        - spaces
+  /v1/spaces:findDirectMessage:
+    get:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Returns the existing direct message with the specified user. With [user authentication](https://developers.google.com/chat/api/guides/auth/users), returns the direct message space between the specified user and the authenticated user. With [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts), returns the direct message space between the specified user and the calling Chat app. If no direct message space is found, returns a `404 NOT_FOUND` error. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) or [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts)."
+      operationId: chat.spaces.findDirectMessage
+      parameters:
+        - description: "Required. Resource name of the user to find direct message with. Format: users/{user}, where `{user}` is either the `{person_id}` for the [person](https://developers.google.com/people/api/rest/v1/people) from the People API, or the `id` for the [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. For example, if the People API `Person.resourceName` is `people/123456789`, you can find a direct message with that person by using `users/123456789` as the `name`."
+          in: query
+          name: name
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Space"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.bot
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.readonly
+      tags:
+        - spaces
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/spaces:setup:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Creates a space and adds specified users to it. The calling user is automatically added to the space, and shouldn't be specified as a membership in the request. To specify the human members to add, add memberships with the appropriate `member.name` in the `SetUpSpaceRequest`. To add a human user, use `users/{user}`, where `{user}` is either the `{person_id}` for the [person](https://developers.google.com/people/api/rest/v1/people) from the People API, or the `id` for the [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. For example, if the People API `Person` `resourceName` is `people/123456789`, you can add the user to the space by including a membership with `users/123456789` as the `member.name`. For a space or group chat, if the caller blocks or is blocked by some members, then those members aren't added to the created space. To create a direct message (DM) between the calling user and another human user, specify exactly one membership to represent the human user. If one user blocks the other, the request fails and the DM isn't created. To create a DM between the calling user and the calling app, set `Space.singleUserBotDm` to true and don't specify any memberships. You can only use this method to add app memberships to DMs. To add the calling app as a member of other space types, use [create membership](https://developers.google.com/chat/api/reference/rest/v1/spaces.members/create) If a DM already exists between two users, even when one user blocks the other at the time a request is made, then the existing DM is returned. Spaces with threaded replies or guest access are not supported. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.spaces.create` or `chat.spaces` scope."
+      operationId: chat.spaces.setup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetUpSpaceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Space"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.spaces.create
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.spaces.create
+      tags:
+        - spaces
   "/v1/{name}":
     delete:
-      description: Deletes a message. For example usage, see [Delete a message](https://developers.google.com/chat/api/guides/crudl/messages#delete_a_message). Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts). Supports [user authentication](https://developers.google.com/chat/api/guides/auth/users) as part of the [Google Workspace Developer Preview Program](https://developers.google.com/workspace/preview), which grants early access to certain features. [User authentication](https://developers.google.com/chat/api/guides/auth/users) requires the `chat.messages` authorization scope.
-      operationId: chat.spaces.messages.delete
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Deletes a reaction to a message. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.messages` or `chat.messages.reactions` scope."
+      operationId: chat.spaces.messages.reactions.delete
       parameters:
-        - description: 'Required. Resource name of the message to be deleted, in the form "spaces/*/messages/*" Example: spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB'
+        - description: "Required. Name of the reaction to delete. Format: spaces/{space}/messages/{message}/reactions/{reaction}"
           in: path
           name: name
           required: true
           schema:
             type: string
+        - description: When `true`, deleting a message also deletes its threaded replies. When `false`, if a message has threaded replies, deletion fails. Only applies when [authenticating as a user](https://developers.google.com/chat/api/guides/auth/users). Has no effect when [authenticating with a service account] (https://developers.google.com/chat/api/guides/auth/service-accounts).
+          in: query
+          name: force
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -149,13 +274,13 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/chat.bot
+            - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
-            - https://www.googleapis.com/auth/chat.bot
+            - https://www.googleapis.com/auth/chat.messages
         - Oauth2:
-            - https://www.googleapis.com/auth/chat.messages
+            - https://www.googleapis.com/auth/chat.messages.reactions
           Oauth2c:
-            - https://www.googleapis.com/auth/chat.messages
+            - https://www.googleapis.com/auth/chat.messages.reactions
       tags:
         - spaces
     get:
@@ -288,6 +413,52 @@ paths:
             - https://www.googleapis.com/auth/chat.messages
       tags:
         - spaces
+  "/v1/{parent}/attachments:upload":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Uploads an attachment. Requires user [authentication](https://developers.google.com/chat/api/guides/auth/users). You can upload attachments up to 200 MB. Certain file types aren't supported. For details, see [File types blocked by Google Chat](https://support.google.com/chat/answer/7651457?&co=GENIE.Platform%3DDesktop#File%20types%20blocked%20in%20Google%20Chat)."
+      operationId: chat.media.upload
+      parameters:
+        - description: Required. Resource name of the Chat space in which the attachment is uploaded. Format "spaces/{space}".
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/UploadAttachmentRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadAttachmentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.create
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.create
+      tags:
+        - media
   "/v1/{parent}/members":
     get:
       description: Lists memberships in a space. Requires [authentication](https://developers.google.com/chat/api/guides/auth/). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts). Supports [user authentication](https://developers.google.com/chat/api/guides/auth/users) as part of the [Google Workspace Developer Preview Program](https://developers.google.com/workspace/preview), which grants early access to certain features. [User authentication](https://developers.google.com/chat/api/guides/auth/users) requires the `chat.memberships` or `chat.memberships.readonly` authorization scope.
@@ -297,6 +468,11 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: "Optional. A query filter. You can filter memberships by a member's role ([`role`](https://developers.google.com/chat/api/reference/rest/v1/spaces.members#membershiprole)) and type ([`member.type`](https://developers.google.com/chat/api/reference/rest/v1/User#type)). To filter by role, set `role` to `ROLE_MEMBER` or `ROLE_MANAGER`. To filter by type, set `member.type` to `HUMAN` or `BOT`. To filter by both role and type, use the `AND` operator. To filter by either role or type, use the `OR` operator. For example, the following queries are valid: ``` role = \"ROLE_MANAGER\" OR role = \"ROLE_MEMBER\" member.type = \"HUMAN\" AND role = \"ROLE_MANAGER\" ``` The following queries are invalid: ``` member.type = \"HUMAN\" AND member.type = \"BOT\" role = \"ROLE_MANAGER\" AND role = \"ROLE_MEMBER\" ``` Invalid queries are rejected by the server with an `INVALID_ARGUMENT` error."
+          in: query
+          name: filter
           schema:
             type: string
         - description: The maximum number of memberships to return. The service may return fewer than this value. If unspecified, at most 100 memberships are returned. The maximum value is 1000; values above 1000 are coerced to 1000. Negative values return an INVALID_ARGUMENT error.
@@ -309,6 +485,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Optional. When `true`, also returns memberships associated with invited members, in addition to other types of memberships. If a filter is set, invited memberships that don't match the filter criteria aren't returned. Currently requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).
+          in: query
+          name: showInvited
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -343,7 +524,93 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Creates a human membership or app membership for the calling app. Creating memberships for other apps is not supported. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.memberships` (for human membership) or `chat.memberships.app` (for app membership) scope. To specify the member to add, set the `membership.member.name` in the `CreateMembershipRequest`: - To add the calling app to the space, use `users/app`. - To add a human user, use `users/{user}`, where `{user}` is either the `{person_id}` for the [person](https://developers.google.com/people/api/rest/v1/people) from the People API, or the `id` for the [user](https://developers.google.com/admin-sdk/directory/reference/rest/v1/users) in the Admin SDK Directory API. For example, if the People API `Person` `resourceName` is `people/123456789`, the user can be added to the space by setting the `membership.member.name` to `users/123456789`."
+      operationId: chat.spaces.members.create
+      parameters:
+        - description: "Required. The resource name of the space for which to create the membership. Format: spaces/{space}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Membership"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Membership"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.memberships.app
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.memberships.app
+      tags:
+        - spaces
   "/v1/{parent}/messages":
+    get:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Lists messages in a space that the caller is a member of, including messages from blocked members and spaces. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.messages` or `chat.messages.readonly` authorization scope. This method is only supported in spaces that don't allow users from outside the Workspace organization to join."
+      operationId: chat.spaces.messages.list
+      parameters:
+        - description: "Required. The resource name of the space to list messages from. Format: spaces/{space}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'A query filter. You can filter messages by date (`create_time`) and thread (`thread.name`). To filter messages by the date they were created, specify the `create_time` with a timestamp in [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and double quotation marks. For example, `"2023-04-21T11:30:00-04:00"`. You can use the greater than operator `>` to list messages that were created after a timestamp, or the less than operator `<` to list messages that were created before a timestamp. To filter messages within a time interval, use the `AND` operator between two timestamps. To filter by thread, specify the `thread.name`, formatted as `spaces/{space}/threads/{thread}`. You can only specify one `thread.name` per query. To filter by both thread and date, use the `AND` operator in your query. For example, the following queries are valid: ``` create_time > "2012-04-21T11:30:00-04:00" create_time > "2012-04-21T11:30:00-04:00" AND thread.name = spaces/AAAAAAAAAAA/threads/123 create_time > "2012-04-21T11:30:00+00:00" AND create_time < "2013-01-01T00:00:00+00:00" AND thread.name = spaces/AAAAAAAAAAA/threads/123 thread.name = spaces/AAAAAAAAAAA/threads/123 ``` Invalid queries are rejected by the server with an `INVALID_ARGUMENT` error.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "Optional, if resuming from a previous query. How the list of messages is ordered. Specify a value to order by and an ordering operation. Valid ordering operation values are: - `ASC` for ascending. - `DESC` for descending. The default ordering is `create_time ASC`."
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of messages returned. The service may return fewer messages than this value. If unspecified, at most 25 are returned. The maximum value is 1000; values above 1000 are coerced to 1000. Negative values return an `INVALID_ARGUMENT` error.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional, if resuming from a previous query. A page token received from a previous list messages call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided should match the call that provided the page token. Passing different values to the other parameters may lead to unexpected results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Whether to include deleted messages. Deleted messages include deleted time and metadata about their deletion, but message content is unavailable.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListMessagesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+      tags:
+        - spaces
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -415,6 +682,107 @@ paths:
             - https://www.googleapis.com/auth/chat.messages.create
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages.create
+      tags:
+        - spaces
+  "/v1/{parent}/reactions":
+    get:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Lists reactions to a message. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and `chat.messages`, `chat.messages.readonly`, `chat.messages.reactions`, or `chat.messages.reactions.readonly` scope."
+      operationId: chat.spaces.messages.reactions.list
+      parameters:
+        - description: "Required. The message users reacted to. Format: spaces/{space}/messages/{message}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'Optional. A query filter. You can filter reactions by [emoji](https://developers.google.com/chat/api/reference/rest/v1/Emoji) (either `emoji.unicode` or `emoji.custom_emoji.uid`) and [user](https://developers.google.com/chat/api/reference/rest/v1/User) (`user.name`). To filter reactions for multiple emojis or users, join similar fields with the `OR` operator, such as `emoji.unicode = "🙂" OR emoji.unicode = "👍"` and `user.name = "users/AAAAAA" OR user.name = "users/BBBBBB"`. To filter reactions by emoji and user, use the `AND` operator, such as `emoji.unicode = "🙂" AND user.name = "users/AAAAAA"`. If your query uses both `AND` and `OR`, group them with parentheses. For example, the following queries are valid: ``` user.name = "users/{user}" emoji.unicode = "🙂" emoji.custom_emoji.uid = "{uid}" emoji.unicode = "🙂" OR emoji.unicode = "👍" emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "{uid}" emoji.unicode = "🙂" AND user.name = "users/{user}" (emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "{uid}") AND user.name = "users/{user}" ``` The following queries are invalid: ``` emoji.unicode = "🙂" AND emoji.unicode = "👍" emoji.unicode = "🙂" AND emoji.custom_emoji.uid = "{uid}" emoji.unicode = "🙂" OR user.name = "users/{user}" emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "{uid}" OR user.name = "users/{user}" emoji.unicode = "🙂" OR emoji.custom_emoji.uid = "{uid}" AND user.name = "users/{user}" ``` Invalid queries are rejected by the server with an `INVALID_ARGUMENT` error.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of reactions returned. The service may return fewer reactions than this value. If unspecified, the default value is 25. The maximum value is 200; values above 200 are changed to 200.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. (If resuming from a previous query.) A page token received from a previous list reactions call. Provide this to retrieve the subsequent page. When paginating, the filter value should match the call that provided the page token. Passing a different value may lead to unexpected results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListReactionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+      tags:
+        - spaces
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview): Creates a reaction and adds it to a message. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.messages`, `chat.messages.reactions`, or `chat.messages.reactions.create` scope. Only unicode emoji are supported."
+      operationId: chat.spaces.messages.reactions.create
+      parameters:
+        - description: "Required. The message where the reaction is created. Format: spaces/{space}/messages/{message}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Reaction"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reaction"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.reactions.create
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.reactions.create
       tags:
         - spaces
 components:
@@ -612,6 +980,9 @@ components:
       type: object
     AttachmentDataRef:
       properties:
+        attachmentUploadToken:
+          description: Opaque token containing a reference to an uploaded attachment. Treated by clients as an opaque string and used to create or update Chat messages with attachments. [Developer Preview](https://developers.google.com/workspace/preview).
+          type: string
         resourceName:
           description: The resource name of the attachment data. This is used with the media API to download the attachment data.
           type: string
@@ -764,6 +1135,13 @@ components:
           description: The full `locale.displayName` in the format of [ISO 639 language code]-[ISO 3166 country/region code] such as "en-US".
           type: string
       type: object
+    CustomEmoji:
+      description: Represents a custom emoji. [Developer Preview](https://developers.google.com/workspace/preview).
+      properties:
+        uid:
+          description: Unique key for the custom emoji resource.
+          type: string
+      type: object
     DateInput:
       description: Date input values.
       properties:
@@ -784,6 +1162,21 @@ components:
         msSinceEpoch:
           description: Time since epoch time, in milliseconds.
           format: int64
+          type: string
+      type: object
+    DeletionMetadata:
+      description: Information about a deleted message. A message is deleted when `delete_time` is set. [Developer Preview](https://developers.google.com/workspace/preview).
+      properties:
+        deletionType:
+          description: Indicates who deleted the message.
+          enum:
+            - DELETION_TYPE_UNSPECIFIED
+            - CREATOR
+            - SPACE_OWNER
+            - ADMIN
+            - APP_MESSAGE_EXPIRY
+            - CREATOR_VIA_APP
+            - SPACE_OWNER_VIA_APP
           type: string
       type: object
     DeprecatedEvent:
@@ -861,6 +1254,28 @@ components:
         driveFileId:
           description: The id for the drive file, for use with the Drive API.
           type: string
+      type: object
+    Emoji:
+      description: An emoji that is used as a reaction to a message. [Developer Preview](https://developers.google.com/workspace/preview).
+      properties:
+        customEmoji:
+          $ref: "#/components/schemas/CustomEmoji"
+          description: Output only. A custom emoji.
+          readOnly: true
+        unicode:
+          description: A basic emoji represented by a unicode string.
+          type: string
+      type: object
+    EmojiReactionSummary:
+      description: The number of people who reacted to a message with a specific emoji. [Developer Preview](https://developers.google.com/workspace/preview).
+      properties:
+        emoji:
+          $ref: "#/components/schemas/Emoji"
+          description: Emoji associated with the reactions.
+        reactionCount:
+          description: The total number of reactions using the associated emoji.
+          format: int32
+          type: integer
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
@@ -1016,6 +1431,11 @@ components:
         secondaryButton:
           $ref: "#/components/schemas/GoogleAppsCardV1Button"
           description: The secondary button of the fixed footer. The button must be a text button with text and color set. `primaryButton` must be set if `secondaryButton` is set.
+        widgets:
+          description: A list of widgets included in the card footer. Primary button and secondary button are rendered below these widgets.
+          items:
+            $ref: "#/components/schemas/GoogleAppsCardV1FooterWidget"
+          type: array
       type: object
     GoogleAppsCardV1CardHeader:
       description: Represents a card header.
@@ -1039,31 +1459,72 @@ components:
           description: "Required. The title of the card header. The header has a fixed height: if both a title and subtitle are specified, each takes up one line. If only the title is specified, it takes up both lines."
           type: string
       type: object
+    GoogleAppsCardV1Column:
+      description: A column.
+      properties:
+        horizontalAlignment:
+          description: Specifies whether widgets align to the left, right, or center of a column.
+          enum:
+            - HORIZONTAL_ALIGNMENT_UNSPECIFIED
+            - START
+            - CENTER
+            - END
+          type: string
+        horizontalSizeStyle:
+          description: Specifies how a column fills the width of the card.
+          enum:
+            - HORIZONTAL_SIZE_STYLE_UNSPECIFIED
+            - FILL_AVAILABLE_SPACE
+            - FILL_MINIMUM_SPACE
+          type: string
+        verticalAlignment:
+          description: Specifies whether widgets align to the top, bottom, or center of a column.
+          enum:
+            - VERTICAL_ALIGNMENT_UNSPECIFIED
+            - CENTER
+            - TOP
+            - BOTTOM
+          type: string
+        widgets:
+          description: An array of widgets included in a column. Widgets appear in the order that they are specified.
+          items:
+            $ref: "#/components/schemas/GoogleAppsCardV1Widgets"
+          type: array
+      type: object
+    GoogleAppsCardV1Columns:
+      description: "The `Columns` widget displays up to 2 columns in a card message or dialog. You can add widgets to each column; the widgets appear in the order that they are specified. The height of each column is determined by the taller column. For example, if the first column is taller than the second column, both columns have the height of the first column. Because each column can contain a different number of widgets, you can't define rows or align widgets between the columns. Columns are displayed side-by-side. You can customize the width of each column using the `HorizontalSizeStyle` field. If the user's screen width is too narrow, the second column wraps below the first: * On web, the second column wraps if the screen width is less than or equal to 480 pixels. * On iOS devices, the second column wraps if the screen width is less than or equal to 300 pt. * On Android devices, the second column wraps if the screen width is less than or equal to 320 dp. To include more than 2 columns, or to use rows, use the `Grid` widget. Supported by Chat apps, but not Google Workspace Add-ons."
+      properties:
+        columnItems:
+          description: An array of columns. You can include up to 2 columns in a card or dialog.
+          items:
+            $ref: "#/components/schemas/GoogleAppsCardV1Column"
+          type: array
+      type: object
     GoogleAppsCardV1DateTimePicker:
-      description: Lets users specify a date, a time, or both a date and a time. Accepts text input from users, but features an interactive date and time selector that helps users enter correctly-formatted dates and times. If users enter a date or time incorrectly, the widget shows an error that prompts users to enter the correct format. Not supported by Chat apps. Support by Chat apps coming soon.
+      description: Lets users input a date, a time, or both a date and a time. Users can input text or use the picker to select dates and times. If users input an invalid date or time, the picker shows an error that prompts users to input the information correctly.
       properties:
         label:
-          description: The text that prompts users to enter a date, time, or datetime. Specify text that helps the user enter the information your app needs. For example, if users are setting an appointment, then a label like "Appointment date" or "Appointment date and time" might work well.
+          description: The text that prompts users to input a date, a time, or a date and time. For example, if users are scheduling an appointment, use a label such as `Appointment date` or `Appointment date and time`.
           type: string
         name:
-          description: The name by which the datetime picker is identified in a form input event. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/how-tos/dialogs#receive_form_data_from_dialogs).
+          description: The name by which the `DateTimePicker` is identified in a form input event. For details about working with form inputs, see [Receive form data](https://developers.google.com/chat/how-tos/dialogs#receive_form_data_from_dialogs).
           type: string
         onChangeAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
-          description: Triggered when the user clicks **Save** or **Clear** from the datetime picker interface.
+          description: Triggered when the user clicks **Save** or **Clear** from the `DateTimePicker` interface.
         timezoneOffsetDate:
-          description: The number representing the time zone offset from UTC, in minutes. If set, the `value_ms_epoch` is displayed in the specified time zone. If not set, it uses the user's time zone setting on the client side.
+          description: The number representing the time zone offset from UTC, in minutes. If set, the `value_ms_epoch` is displayed in the specified time zone. If unset, the value defaults to the user's time zone setting.
           format: int32
           type: integer
         type:
-          description: What kind of date and time input the datetime picker supports.
+          description: Whether the widget supports inputting a date, a time, or the date and time.
           enum:
             - DATE_AND_TIME
             - DATE_ONLY
             - TIME_ONLY
           type: string
         valueMsEpoch:
-          description: The value displayed as the default value before user input or previous user input, represented in milliseconds ([Epoch time](https://en.wikipedia.org/wiki/Unix_time)). For `DATE_AND_TIME` type, the full epoch value is used. For `DATE_ONLY` type, only date of the epoch time is used. For `TIME_ONLY` type, only time of the epoch time is used. For example, to represent 3:00 AM, set epoch time to `3 * 60 * 60 * 1000`.
+          description: "The default value displayed in the widget, in milliseconds since [Unix epoch time](https://en.wikipedia.org/wiki/Unix_time). Specify the value based on the type of picker (`DateTimePickerType`): * `DATE_AND_TIME`: a calendar date and time in UTC. For example, to represent January 1, 2023 at 12:00 PM UTC, use `1672574400000`. * `DATE_ONLY`: a calendar date at 00:00:00 UTC. For example, to represent January 1, 2023, use `1672531200000`. * `TIME_ONLY`: a time in UTC. For example, to represent 12:00 PM, use `43200000` (or `12 * 60 * 60 * 1000`)."
           format: int64
           type: string
       type: object
@@ -1105,8 +1566,27 @@ components:
       description: 'Displays a divider between widgets, a horizontal line. For example, the following JSON creates a divider: ``` "divider": {} ```'
       properties: {}
       type: object
+    GoogleAppsCardV1FooterWidget:
+      description: The CardFixedFooter can contain a list of these widgets.
+      properties:
+        buttonList:
+          $ref: "#/components/schemas/GoogleAppsCardV1ButtonList"
+          description: ButtonList widget.
+        dateTimePicker:
+          $ref: "#/components/schemas/GoogleAppsCardV1DateTimePicker"
+          description: DateTimePicker widget.
+        decoratedText:
+          $ref: "#/components/schemas/GoogleAppsCardV1DecoratedText"
+          description: DecoratedText widget.
+        textInput:
+          $ref: "#/components/schemas/GoogleAppsCardV1TextInput"
+          description: TextInput widget.
+        textParagraph:
+          $ref: "#/components/schemas/GoogleAppsCardV1TextParagraph"
+          description: TextParagraph widget.
+      type: object
     GoogleAppsCardV1Grid:
-      description: 'Displays a grid with a collection of items. A grid supports any number of columns and items. The number of rows is determined by items divided by columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. For example, the following JSON creates a 2 column grid with a single item: ``` "grid": { "title": "A fine collection of items", "columnCount": 2, "borderStyle": { "type": "STROKE", "cornerRadius": 4 }, "items": [ { "image": { "imageUri": "https://www.example.com/image.png", "cropStyle": { "type": "SQUARE" }, "borderStyle": { "type": "STROKE" } }, "title": "An item", "textAlignment": "CENTER" } ], "onClick": { "openLink": { "url": "https://www.example.com" } } } ```'
+      description: 'Displays a grid with a collection of items. Items can only include text or images. A grid supports any number of columns and items. The number of rows is determined by items divided by columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. For responsive columns, or to include more than text or images, use `Columns`. For example, the following JSON creates a 2 column grid with a single item: ``` "grid": { "title": "A fine collection of items", "columnCount": 2, "borderStyle": { "type": "STROKE", "cornerRadius": 4 }, "items": [ { "image": { "imageUri": "https://www.example.com/image.png", "cropStyle": { "type": "SQUARE" }, "borderStyle": { "type": "STROKE" } }, "title": "An item", "textAlignment": "CENTER" } ], "onClick": { "openLink": { "url": "https://www.example.com" } } } ```'
       properties:
         borderStyle:
           $ref: "#/components/schemas/GoogleAppsCardV1BorderStyle"
@@ -1128,7 +1608,7 @@ components:
           type: string
       type: object
     GoogleAppsCardV1GridItem:
-      description: Represents a single item in the grid layout.
+      description: Represents an item in a grid layout. Items can contain text, an image, or both text and an image.
       properties:
         id:
           description: A user-specified identifier for this grid item. This identifier is returned in the parent Grid's onClick callback parameters.
@@ -1391,9 +1871,12 @@ components:
         buttonList:
           $ref: "#/components/schemas/GoogleAppsCardV1ButtonList"
           description: 'A list of buttons. For example, the following JSON creates two buttons. The first is a blue text button and the second is an image button that opens a link: ``` "buttonList": { "buttons": [ { "text": "Edit", "color": { "red": 0, "green": 0, "blue": 1, "alpha": 1 }, "disabled": true, }, { "icon": { "knownIcon": "INVITE", "altText": "check calendar" }, "onClick": { "openLink": { "url": "https://example.com/calendar" } } } ] } ```'
+        columns:
+          $ref: "#/components/schemas/GoogleAppsCardV1Columns"
+          description: 'Displays up to 2 columns. To include more than 2 columns, or to use rows, use the `Grid` widget. For example, the following JSON creates 2 columns that each contain text paragraphs: ``` "columns": { "columnItems": [ { "horizontalSizeStyle": "FILL_AVAILABLE_SPACE", "horizontalAlignment": "CENTER", "verticalAlignment": "CENTER", "widgets": [ { "textParagraph": { "text": "First column text paragraph" } } ] }, { "horizontalSizeStyle": "FILL_AVAILABLE_SPACE", "horizontalAlignment": "CENTER", "verticalAlignment": "CENTER", "widgets": [ { "textParagraph": { "text": "Second column text paragraph" } } ] } ] } ```'
         dateTimePicker:
           $ref: "#/components/schemas/GoogleAppsCardV1DateTimePicker"
-          description: 'Displays a selection/input widget for date, time, or date and time. Not supported by Chat apps. Support by Chat apps is coming soon. For example, the following JSON creates a datetime picker to schedule an appointment: ``` "dateTimePicker": { "name": "appointment_time", "label": "Book your appointment at:", "type": "DATE_AND_TIME", "valueMsEpoch": "796435200000" } ```'
+          description: 'Displays a widget that lets users input a date, time, or date and time. For example, the following JSON creates a date time picker to schedule an appointment: ``` "dateTimePicker": { "name": "appointment_time", "label": "Book your appointment at:", "type": "DATE_AND_TIME", "valueMsEpoch": "796435200000" } ```'
         decoratedText:
           $ref: "#/components/schemas/GoogleAppsCardV1DecoratedText"
           description: 'Displays a decorated text item. For example, the following JSON creates a decorated text widget showing email address: ``` "decoratedText": { "icon": { "knownIcon": "EMAIL" }, "topLabel": "Email Address", "text": "sasha@example.com", "bottomLabel": "This is a new Email address!", "switchControl": { "name": "has_send_welcome_email_to_sasha", "selected": false, "controlType": "CHECKBOX" } } ```'
@@ -1403,6 +1886,14 @@ components:
         grid:
           $ref: "#/components/schemas/GoogleAppsCardV1Grid"
           description: 'Displays a grid with a collection of items. A grid supports any number of columns and items. The number of rows is determined by the upper bounds of the number items divided by the number of columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. For example, the following JSON creates a 2 column grid with a single item: ``` "grid": { "title": "A fine collection of items", "columnCount": 2, "borderStyle": { "type": "STROKE", "cornerRadius": 4 }, "items": [ { "image": { "imageUri": "https://www.example.com/image.png", "cropStyle": { "type": "SQUARE" }, "borderStyle": { "type": "STROKE" } }, "title": "An item", "textAlignment": "CENTER" } ], "onClick": { "openLink": { "url": "https://www.example.com" } } } ```'
+        horizontalAlignment:
+          description: Specifies whether widgets align to the left, right, or center of a column.
+          enum:
+            - HORIZONTAL_ALIGNMENT_UNSPECIFIED
+            - START
+            - CENTER
+            - END
+          type: string
         image:
           $ref: "#/components/schemas/GoogleAppsCardV1Image"
           description: 'Displays an image. For example, the following JSON creates an image with alternative text: ``` "image": { "imageUrl": "https://developers.google.com/chat/images/quickstart-app-avatar.png", "altText": "Chat app avatar" } ```'
@@ -1415,6 +1906,31 @@ components:
         textParagraph:
           $ref: "#/components/schemas/GoogleAppsCardV1TextParagraph"
           description: 'Displays a text paragraph. Supports simple HTML formatted text. For more information about formatting text, see Formatting text in Google Chat apps and Formatting text in Google Workspace Add-ons. For example, the following JSON creates a bolded text: ``` "textParagraph": { "text": " *bold text*" } ```'
+      type: object
+    GoogleAppsCardV1Widgets:
+      description: The supported widgets that you can include in a column.
+      properties:
+        buttonList:
+          $ref: "#/components/schemas/GoogleAppsCardV1ButtonList"
+          description: ButtonList widget.
+        dateTimePicker:
+          $ref: "#/components/schemas/GoogleAppsCardV1DateTimePicker"
+          description: DateTimePicker widget.
+        decoratedText:
+          $ref: "#/components/schemas/GoogleAppsCardV1DecoratedText"
+          description: DecoratedText widget.
+        image:
+          $ref: "#/components/schemas/GoogleAppsCardV1Image"
+          description: Image widget.
+        selectionInput:
+          $ref: "#/components/schemas/GoogleAppsCardV1SelectionInput"
+          description: SelectionInput widget.
+        textInput:
+          $ref: "#/components/schemas/GoogleAppsCardV1TextInput"
+          description: TextInput widget.
+        textParagraph:
+          $ref: "#/components/schemas/GoogleAppsCardV1TextParagraph"
+          description: TextParagraph widget.
       type: object
     Image:
       description: An image that is specified by a URL and can have an onclick action.
@@ -1565,6 +2081,28 @@ components:
           description: A token that can be sent as `pageToken` to retrieve the next page of results. If empty, there are no subsequent pages.
           type: string
       type: object
+    ListMessagesResponse:
+      properties:
+        messages:
+          description: List of messages.
+          items:
+            $ref: "#/components/schemas/Message"
+          type: array
+        nextPageToken:
+          description: A token that can be sent as `pageToken` to retrieve the next page of results. If empty, there are no subsequent pages.
+          type: string
+      type: object
+    ListReactionsResponse:
+      properties:
+        nextPageToken:
+          description: Continuation token to retrieve the next page of results. It will be empty for the last page of results.
+          type: string
+        reactions:
+          description: List of reactions in the requested (or first) page.
+          items:
+            $ref: "#/components/schemas/Reaction"
+          type: array
+      type: object
     ListSpacesResponse:
       properties:
         nextPageToken:
@@ -1630,7 +2168,7 @@ components:
           $ref: "#/components/schemas/ActionResponse"
           description: Input only. Parameters that a Chat app can use to configure how its response is posted.
         annotations:
-          description: Output only. Annotations associated with the text in this message.
+          description: Output only. Annotations associated with the `text` in this message.
           items:
             $ref: "#/components/schemas/Annotation"
           readOnly: true
@@ -1662,6 +2200,21 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        deleteTime:
+          description: Output only. The time at which the message was deleted in Google Chat server. If the message is never deleted, this field is empty. [Developer Preview](https://developers.google.com/workspace/preview).
+          format: google-datetime
+          readOnly: true
+          type: string
+        deletionMetadata:
+          $ref: "#/components/schemas/DeletionMetadata"
+          description: Output only. Information about a deleted message. A message is deleted when `delete_time` is set. [Developer Preview](https://developers.google.com/workspace/preview).
+          readOnly: true
+        emojiReactionSummaries:
+          description: Output only. The list of emoji reaction summaries on the message. [Developer Preview](https://developers.google.com/workspace/preview).
+          items:
+            $ref: "#/components/schemas/EmojiReactionSummary"
+          readOnly: true
+          type: array
         fallbackText:
           description: A plain-text description of the message's cards, used when the actual cards cannot be displayed (e.g. mobile notifications).
           type: string
@@ -1716,6 +2269,20 @@ components:
           description: The URL to open.
           type: string
       type: object
+    Reaction:
+      description: A reaction to a message. [Developer Preview](https://developers.google.com/workspace/preview).
+      properties:
+        emoji:
+          $ref: "#/components/schemas/Emoji"
+          description: The emoji used in the reaction.
+        name:
+          description: "The resource name of the reaction. Format: spaces/{space}/messages/{message}/reactions/{reaction}"
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+          description: Output only. The user who created the reaction.
+          readOnly: true
+      type: object
     Section:
       description: A section contains a collection of widgets that are rendered (vertically) in the order that they are specified. Across all platforms, cards have a narrow fixed width, so there is currently no need for layout properties (e.g. float).
       properties:
@@ -1727,6 +2294,21 @@ components:
           items:
             $ref: "#/components/schemas/WidgetMarkup"
           type: array
+      type: object
+    SetUpSpaceRequest:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview)."
+      properties:
+        memberships:
+          description: "Optional. The initial set of in-domain users invited to join the space. The calling user is automatically added to the space, and shouldn't be specified as a membership. The set currently allows up to 20 memberships (in addition to the caller). The `Membership.member` field must contain a user with `name` populated and `User.Type.HUMAN`. All other fields are ignored. Optional when setting `Space.spaceType` to `SPACE`. Required when setting `Space.spaceType` to `GROUP_CHAT`, along with at least two memberships. Required when setting `Space.spaceType` to `DIRECT_MESSAGE` with a human user, along with exactly one membership. Must be empty when creating a 1:1 conversation between a human and the calling Chat app (when setting `Space.spaceType` to `DIRECT_MESSAGE` and `Space.singleUserBotDm` to `true`). Not supported: Inviting guest users, or adding other Chat apps."
+          items:
+            $ref: "#/components/schemas/Membership"
+          type: array
+        requestId:
+          description: Optional. A unique identifier for this request. A random UUID is recommended. Specifying an existing request ID returns the space created with that ID instead of creating a new space. Specifying an existing request ID from the same Chat app with a different authenticated user returns an error.
+          type: string
+        space:
+          $ref: "#/components/schemas/Space"
+          description: Required. The `Space.spaceType` field is required. To create a space, set `Space.spaceType` to `SPACE` and set `Space.displayName`. To create a group chat, set `Space.spaceType` to `GROUP_CHAT`. Don't set `Space.displayName`. To create a 1:1 conversation between humans, set `Space.spaceType` to `DIRECT_MESSAGE` and set `Space.singleUserBotDm` to `false`. Don't set `Space.displayName` or `Space.spaceDetails`. To create an 1:1 conversation between a human and the calling Chat app, set `Space.spaceType` to `DIRECT_MESSAGE` and `Space.singleUserBotDm` to `true`. Don't set `Space.displayName` or `Space.spaceDetails`. If a `DIRECT_MESSAGE` space already exists, that space is returned instead of creating a new space.
       type: object
     SlashCommand:
       description: A [slash command](https://developers.google.com/chat/how-tos/slash-commands) in Google Chat.
@@ -1779,6 +2361,13 @@ components:
         spaceDetails:
           $ref: "#/components/schemas/SpaceDetails"
           description: Details about the space including description and rules.
+        spaceHistoryState:
+          description: The message history state for messages and threads in this space. [Developer Preview](https://developers.google.com/workspace/preview).
+          enum:
+            - HISTORY_STATE_UNSPECIFIED
+            - HISTORY_OFF
+            - HISTORY_ON
+          type: string
         spaceThreadingState:
           description: Output only. The threading state in the Chat space.
           enum:
@@ -1787,6 +2376,14 @@ components:
             - GROUPED_MESSAGES
             - UNTHREADED_MESSAGES
           readOnly: true
+          type: string
+        spaceType:
+          description: The type of space. Required when creating or updating a space. Output only for other usage. [Developer Preview](https://developers.google.com/workspace/preview).
+          enum:
+            - SPACE_TYPE_UNSPECIFIED
+            - SPACE
+            - GROUP_CHAT
+            - DIRECT_MESSAGE
           type: string
         threaded:
           description: "Output only. Deprecated: Use `spaceThreadingState` instead. Whether messages are threaded in this space."
@@ -1887,6 +2484,19 @@ components:
           format: int32
           type: integer
       type: object
+    UploadAttachmentRequest:
+      description: "[Developer Preview](https://developers.google.com/workspace/preview)."
+      properties:
+        filename:
+          description: Required. The filename of the attachment, including the file extension.
+          type: string
+      type: object
+    UploadAttachmentResponse:
+      properties:
+        attachmentDataRef:
+          $ref: "#/components/schemas/AttachmentDataRef"
+          description: Reference to the uploaded attachment.
+      type: object
     User:
       description: A user in Google Chat.
       properties:
@@ -1952,12 +2562,18 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/chat.bot: "Private Service: https://www.googleapis.com/auth/chat.bot"
+            https://www.googleapis.com/auth/chat.delete: Delete conversations and spaces & remove access to associated files in Google Chat
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+            https://www.googleapis.com/auth/chat.memberships.app: Add and remove itself from conversations in Google Chat
             https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
             https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
             https://www.googleapis.com/auth/chat.messages.create: Compose and send messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.reactions: View, add, and delete reactions to messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.reactions.create: Add reactions to messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.reactions.readonly: View reactions to messages in Google Chat
             https://www.googleapis.com/auth/chat.messages.readonly: View messages and reactions in Google Chat
             https://www.googleapis.com/auth/chat.spaces: Create conversations and spaces and view or update metadata (including history settings) in Google Chat
+            https://www.googleapis.com/auth/chat.spaces.create: Create new conversations in Google Chat
             https://www.googleapis.com/auth/chat.spaces.readonly: View chat and spaces in Google Chat
       type: oauth2
     Oauth2c:
@@ -1967,12 +2583,18 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/chat.bot: "Private Service: https://www.googleapis.com/auth/chat.bot"
+            https://www.googleapis.com/auth/chat.delete: Delete conversations and spaces & remove access to associated files in Google Chat
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+            https://www.googleapis.com/auth/chat.memberships.app: Add and remove itself from conversations in Google Chat
             https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
             https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
             https://www.googleapis.com/auth/chat.messages.create: Compose and send messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.reactions: View, add, and delete reactions to messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.reactions.create: Add reactions to messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.reactions.readonly: View reactions to messages in Google Chat
             https://www.googleapis.com/auth/chat.messages.readonly: View messages and reactions in Google Chat
             https://www.googleapis.com/auth/chat.spaces: Create conversations and spaces and view or update metadata (including history settings) in Google Chat
+            https://www.googleapis.com/auth/chat.spaces.create: Create new conversations in Google Chat
             https://www.googleapis.com/auth/chat.spaces.readonly: View chat and spaces in Google Chat
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

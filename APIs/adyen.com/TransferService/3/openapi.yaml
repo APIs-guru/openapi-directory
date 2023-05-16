@@ -55,7 +55,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-04-26T16:27:03Z
+  x-timestamp: 2023-05-10T13:27:06Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -1570,7 +1570,7 @@ components:
           x-addedInVersion: "2"
         referenceForBeneficiary:
           description: |2-
-             A reference that is sent to the recipient. This reference is also sent in all notification webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.
+             A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.
 
              Supported characters: **a-z**, **A-Z**, **0-9**. The maximum length depends on the `category`.
 
@@ -1737,7 +1737,7 @@ components:
           x-addedInVersion: "2"
         referenceForBeneficiary:
           description: |2-
-             A reference that is sent to the recipient. This reference is also sent in all notification webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.
+             A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.
 
              Supported characters: **a-z**, **A-Z**, **0-9**. The maximum length depends on the `category`.
 

@@ -59,7 +59,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-05-03T10:31:56Z
+  x-timestamp: 2023-05-15T18:27:06Z
 tags:
   - name: Modifications
   - name: Orders
@@ -6329,6 +6329,9 @@ components:
             - scheme
             - networkToken
             - giftcard
+            - mealVoucher_FR_groupeup
+            - mealVoucher_FR_natixis
+            - mealVoucher_FR_sodexo
             - alliancedata
             - card
           type: string
@@ -7104,7 +7107,7 @@ components:
           description: Set to **false** to hide the button that lets the shopper remove a stored payment method.
           type: boolean
         splits:
-          description: An array of objects specifying how the payment should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
@@ -8130,6 +8133,7 @@ components:
             - pix
             - bizum
             - alma
+            - paypo
             - molpay_fpx
             - konbini
             - directEbanking
@@ -8771,7 +8775,7 @@ components:
           description: Set to **false** to hide the button that lets the shopper remove a stored payment method.
           type: boolean
         splits:
-          description: An array of objects specifying how the payment should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
@@ -10744,6 +10748,12 @@ components:
             - Default
             - MarketPlace
             - PaymentFee
+            - PaymentFeeAcquiring
+            - PaymentFeeAdyen
+            - PaymentFeeAdyenCommission
+            - PaymentFeeAdyenMarkup
+            - PaymentFeeInterchange
+            - PaymentFeeSchemeFee
             - Remainder
             - Surcharge
             - Tip

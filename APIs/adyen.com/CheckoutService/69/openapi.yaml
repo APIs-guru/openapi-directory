@@ -59,7 +59,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-05-03T10:31:56Z
+  x-timestamp: 2023-05-15T18:27:06Z
 tags:
   - name: Modifications
   - name: Orders
@@ -1192,6 +1192,8 @@ paths:
                   $ref: "#/components/examples/post-payments-ideal-200"
                 sofort:
                   $ref: "#/components/examples/post-payments-sofort-200"
+                split:
+                  $ref: "#/components/examples/post-payments-split-200"
                 subscription-first-transaction:
                   $ref: "#/components/examples/post-payments-subscription-first-transaction-200"
               schema:
@@ -1950,6 +1952,8 @@ paths:
                 $ref: "#/components/examples/post-sessions-01.klarna"
               enableOneClick:
                 $ref: "#/components/examples/post-sessions-enableOneClick"
+              split:
+                $ref: "#/components/examples/post-sessions-split"
             schema:
               $ref: "#/components/schemas/CreateCheckoutSessionRequest"
       responses:
@@ -4879,11 +4883,11 @@ components:
           url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1zmzAQ-DXmzYwE5sMPenAJjmmdtqHGTfuSkcUFaGyJSIKa-PoexHU7nc4wErN7c7e7p4PmskxUCaxsNAibHrh8bmTliE5rkGKYuLTInRNoUXNpV0KoTlq2A2PvLtiVzKSFSnPbKOnaoQWWbNLkw6di93ibfkzzLPlvZQ-a4M0CeqVzeIJxPjBj9ajnD2E7LW*45Wy5pCGN4mXg0SAKF**uNV*aitGvXrK3tw-forjdn5fdWp*LIg88UtzbtviRHVN1X9lNuJ15658z-8Zp*XACtHea3FFCiKPBFPmW1da2M3*FhfgdleDHWhmLSExigpCoQTyrzppatS1oRAzovhFg8PfzW9tMCnVCHzm85YxMT3*3u9Tcga1VOfPX-0SN6v4Oe*aFegoBtSE1qsNBwSgwGCXiMahOz3Fgy*Xg4j2Brus6BsyY9J4fm7KxA-OIR*dkMSfxjoboyCN40OC7c-EybklzMW6JpdhoVAaOwRcyvYu2O7i9514WEYVRFNHYX7ivWf-g796HZdwPqVevzo*irOtzQbLi9Wnxsn1JN9u0gqEs1S-zMtxA
         resultCode: RedirectShopper
     post-payments-split:
-      summary: Split a payment between a sub-merchant and a platform account
+      summary: Split a payment between balance accounts
       value:
         amount:
-          currency: EUR
-          value: 6200
+          currency: USD
+          value: 40000
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
           cvc: "737"
@@ -4892,19 +4896,51 @@ components:
           holderName: John Smith
           number: "4111111111111111"
           type: scheme
+        platformChargebackLogic:
+          behavior: deductFromOneBalanceAccount
+          targetAccount: BA00000000000000000000001
         reference: YOUR_ORDER_NUMBER
         returnUrl: https://your-company.com/...
         splits:
-          - account: "151272963"
+          - account: BA00000000000000000000001
             amount:
-              value: 6000
-            description: "Porcelain Doll: Eliza (20cm)"
-            reference: "6124145"
-            type: MarketPlace
+              value: 39600
+            description: Your description for the sale amount
+            reference: Your reference for the sale amount
+            type: BalanceAcocount
           - amount:
-              value: 200
-            reference: "6124146"
+              value: 400
+            description: Your description for the commission
+            reference: Your reference for the commission
             type: Commission
+          - account: BA00000000000000000000001
+            description: Your description for the fees
+            reference: Your reference for the fees
+            type: PaymentFee
+    post-payments-split-200:
+      summary: Example response for request 'split'
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: YOUR_ACQUIRER_REFERENCE
+          authCode: "008304"
+          avsResult: 5 No AVS data provided
+          avsResultRaw: "5"
+          cardHolderName: John Smith
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          issuerCountry: NL
+          paymentMethod: visa
+          refusalReasonRaw: AUTHORISED
+        amount:
+          currency: USD
+          value: 40000
+        merchantReference: YOUR_ORDER_NUMBER
+        paymentMethod:
+          brand: visa
+          type: scheme
+        pspReference: 993617895204576J
+        resultCode: Authorised
     post-payments-subscription-first-transaction:
       summary: Tokenize card details for a subscription
       value:
@@ -5108,6 +5144,65 @@ components:
         shopperInteraction: Ecommerce
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         storePaymentMethod: true
+    post-sessions-split:
+      summary: Split a payment between balance accounts
+      value:
+        amount:
+          currency: USD
+          value: 40000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          expiryMonth: "03"
+          expiryYear: "2030"
+          holderName: John Smith
+          number: "4111111111111111"
+          type: scheme
+        platformChargebackLogic:
+          behavior: deductFromOneBalanceAccount
+          targetAccount: BA00000000000000000000001
+        reference: YOUR_ORDER_NUMBER
+        returnUrl: https://your-company.com/...
+        splits:
+          - account: BA00000000000000000000001
+            amount:
+              value: 39600
+            description: Your description for the sale amount
+            reference: Your reference for the sale amount
+            type: BalanceAccount
+          - amount:
+              value: 400
+            description: Your description for the commission
+            reference: Your reference for the commission
+            type: Commission
+          - account: BA00000000000000000000001
+            description: Your description for the fees
+            reference: Your reference for the fees
+            type: PaymentFee
+    post-sessions-split-200:
+      summary: Example response for request 'split'
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: YOUR_ACQUIRER_REFERENCE
+          authCode: "008304"
+          avsResult: 5 No AVS data provided
+          avsResultRaw: "5"
+          cardHolderName: John Smith
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          issuerCountry: NL
+          paymentMethod: visa
+          refusalReasonRaw: AUTHORISED
+        amount:
+          currency: USD
+          value: 40000
+        merchantReference: YOUR_ORDER_NUMBER
+        paymentMethod:
+          brand: visa
+          type: scheme
+        pspReference: 993617895204576J
+        resultCode: Authorised
   headers:
     Idempotency-Key:
       description: The idempotency key used for processing the request. Present if the key was provided in the request.
@@ -7344,6 +7439,9 @@ components:
             - scheme
             - networkToken
             - giftcard
+            - mealVoucher_FR_groupeup
+            - mealVoucher_FR_natixis
+            - mealVoucher_FR_sodexo
             - alliancedata
             - card
           type: string
@@ -8481,7 +8579,7 @@ components:
           description: Boolean value indicating whether the card payment method should be split into separate debit and credit options.
           type: boolean
         splits:
-          description: An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
@@ -8766,7 +8864,7 @@ components:
           description: Boolean value indicating whether the card payment method should be split into separate debit and credit options.
           type: boolean
         splits:
-          description: An array of objects specifying how the payment should be split when using [Adyen for Platforms](https://docs.adyen.com/platforms/processing-payments#providing-split-information) or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
@@ -9054,7 +9152,7 @@ components:
           type: boolean
           x-addedInVersion: "69"
         splits:
-          description: An array of objects specifying how the payment should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
@@ -10465,6 +10563,7 @@ components:
             - pix
             - bizum
             - alma
+            - paypo
             - molpay_fpx
             - konbini
             - directEbanking
@@ -11257,7 +11356,7 @@ components:
           type: boolean
           x-addedInVersion: "69"
         splits:
-          description: An array of objects specifying how the payment should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
             $ref: "#/components/schemas/Split"
           type: array
@@ -13543,6 +13642,12 @@ components:
             - Default
             - MarketPlace
             - PaymentFee
+            - PaymentFeeAcquiring
+            - PaymentFeeAdyen
+            - PaymentFeeAdyenCommission
+            - PaymentFeeAdyenMarkup
+            - PaymentFeeInterchange
+            - PaymentFeeSchemeFee
             - Remainder
             - Surcharge
             - Tip

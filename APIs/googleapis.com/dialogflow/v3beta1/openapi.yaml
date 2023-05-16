@@ -3670,6 +3670,14 @@ components:
         reachedEndPage:
           description: Whether turn resulted in End Session page.
           type: boolean
+        sentimentMagnitude:
+          description: Sentiment magnitude of the user utterance if [sentiment](https://cloud.google.com/dialogflow/cx/docs/concept/sentiment) was enabled.
+          format: float
+          type: number
+        sentimentScore:
+          description: Sentiment score of the user utterance if [sentiment](https://cloud.google.com/dialogflow/cx/docs/concept/sentiment) was enabled.
+          format: float
+          type: number
         userEscalated:
           description: Whether user was specifically asking for a live agent.
           type: boolean
@@ -3718,8 +3726,28 @@ components:
             format: byte
             type: string
           type: array
+        httpMethod:
+          description: Optional. HTTP method for the flexible webhook calls. Standard webhook always uses POST.
+          enum:
+            - HTTP_METHOD_UNSPECIFIED
+            - POST
+            - GET
+            - HEAD
+            - PUT
+            - DELETE
+            - PATCH
+            - OPTIONS
+          type: string
+        parameterMapping:
+          additionalProperties:
+            type: string
+          description: "Optional. Maps the values extracted from specific fields of the flexible webhook response into session parameters. - Key: session parameter name - Value: field path in the webhook response"
+          type: object
         password:
           description: The password for HTTP Basic authentication.
+          type: string
+        requestBody:
+          description: Optional. Defines a custom JSON object as request body to send to flexible webhook.
           type: string
         requestHeaders:
           additionalProperties:
@@ -3731,6 +3759,13 @@ components:
           type: string
         username:
           description: The user name for HTTP Basic authentication.
+          type: string
+        webhookType:
+          description: Optional. Type of the webhook.
+          enum:
+            - WEBHOOK_TYPE_UNSPECIFIED
+            - STANDARD
+            - FLEXIBLE
           type: string
       type: object
     GoogleCloudDialogflowCxV3WebhookRequest:
@@ -6353,6 +6388,14 @@ components:
         reachedEndPage:
           description: Whether turn resulted in End Session page.
           type: boolean
+        sentimentMagnitude:
+          description: Sentiment magnitude of the user utterance if [sentiment](https://cloud.google.com/dialogflow/cx/docs/concept/sentiment) was enabled.
+          format: float
+          type: number
+        sentimentScore:
+          description: Sentiment score of the user utterance if [sentiment](https://cloud.google.com/dialogflow/cx/docs/concept/sentiment) was enabled.
+          format: float
+          type: number
         userEscalated:
           description: Whether user was specifically asking for a live agent.
           type: boolean
@@ -6538,8 +6581,28 @@ components:
             format: byte
             type: string
           type: array
+        httpMethod:
+          description: Optional. HTTP method for the flexible webhook calls. Standard webhook always uses POST.
+          enum:
+            - HTTP_METHOD_UNSPECIFIED
+            - POST
+            - GET
+            - HEAD
+            - PUT
+            - DELETE
+            - PATCH
+            - OPTIONS
+          type: string
+        parameterMapping:
+          additionalProperties:
+            type: string
+          description: "Optional. Maps the values extracted from specific fields of the flexible webhook response into session parameters. - Key: session parameter name - Value: field path in the webhook response"
+          type: object
         password:
           description: The password for HTTP Basic authentication.
+          type: string
+        requestBody:
+          description: Optional. Defines a custom JSON object as request body to send to flexible webhook.
           type: string
         requestHeaders:
           additionalProperties:
@@ -6551,6 +6614,13 @@ components:
           type: string
         username:
           description: The user name for HTTP Basic authentication.
+          type: string
+        webhookType:
+          description: Optional. Type of the webhook.
+          enum:
+            - WEBHOOK_TYPE_UNSPECIFIED
+            - STANDARD
+            - FLEXIBLE
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1WebhookRequest:
@@ -9609,6 +9679,14 @@ components:
         reachedEndPage:
           description: Whether turn resulted in End Session page.
           type: boolean
+        sentimentMagnitude:
+          description: Sentiment magnitude of the user utterance if [sentiment](https://cloud.google.com/dialogflow/cx/docs/concept/sentiment) was enabled.
+          format: float
+          type: number
+        sentimentScore:
+          description: Sentiment score of the user utterance if [sentiment](https://cloud.google.com/dialogflow/cx/docs/concept/sentiment) was enabled.
+          format: float
+          type: number
         triggeredAbandonmentEvent:
           description: Whether agent has triggered the event corresponding to user abandoning the conversation.
           type: boolean

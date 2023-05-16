@@ -8,7 +8,7 @@ info:
     url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
   description: |-
-    Adyen sends notifications through webhooks to inform your system about incoming and outgoing transfers in your platform.
+    Adyen sends webhooks to inform your system about incoming and outgoing transfers in your platform.
 
     You can use these webhooks to build your implementation. For example, you can use this information to update balances in your own dashboards or to keep track of incoming funds.
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
@@ -25,7 +25,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformTransferNotification-v3
-  x-timestamp: 2023-04-26T16:27:04Z
+  x-timestamp: 2023-05-15T18:27:47Z
 tags: []
 components:
   examples: {}
@@ -917,14 +917,14 @@ components:
           type: string
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
-          x-deprecatedMessage: Use the [modificationMerchantReference](https://docs.adyen.com/api-explorer/accounting-webhooks/latest/post/balancePlatform.transfer.created#request-data-categoryData-platformPayment-modificationMerchantReference) in the `categoryData` object instead.
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         modificationPspReference:
           deprecated: true
           description: The capture reference included in the transfer.
           type: string
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
-          x-deprecatedMessage: Use the [modificationPspReference](https://docs.adyen.com/api-explorer/accounting-webhooks/latest/post/balancePlatform.transfer.created#request-data-categoryData-platformPayment-modificationPspReference) in the `categoryData` object instead.
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         panEntryMode:
           deprecated: true
           description: |-
@@ -942,7 +942,7 @@ components:
           type: string
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
-          x-deprecatedMessage: Use the [panEntryMode](https://docs.adyen.com/api-explorer/accounting-webhooks/latest/post/balancePlatform.transfer.created#request-data-categoryData-issuedCard-panEntryMode) in the `categoryData` object instead.
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         paymentInstrument:
           $ref: "#/components/schemas/PaymentInstrument"
           description: Contains information about the payment instrument used in the transfer.
@@ -960,7 +960,7 @@ components:
           type: string
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
-          x-deprecatedMessage: Use the [paymentMerchantReference](https://docs.adyen.com/api-explorer/accounting-webhooks/latest/post/balancePlatform.transfer.created#request-data-categoryData-platformPayment-paymentMerchantReference) in the `categoryData` object instead.
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         priority:
           description: |-
             The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for transfers with `category` **bank**.
@@ -1003,14 +1003,14 @@ components:
           type: string
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
-          x-deprecatedMessage: Use the [processingType](https://docs.adyen.com/api-explorer/accounting-webhooks/latest/post/balancePlatform.transfer.created#request-data-categoryData-issuedCard-processingType) in the `categoryData` object instead.
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         pspPaymentReference:
           deprecated: true
           description: The payment reference included in the transfer.
           type: string
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
-          x-deprecatedMessage: Use the [pspPaymentReference](https://docs.adyen.com/api-explorer/accounting-webhooks/latest/post/balancePlatform.transfer.created#request-data-categoryData-platformPayment-pspPaymentReference) in the `categoryData` object instead.
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         reason:
           description: Additional information about the status of the transfer.
           enum:
@@ -1036,7 +1036,7 @@ components:
           x-addedInVersion: "2"
         referenceForBeneficiary:
           description: |2-
-             A reference that is sent to the recipient. This reference is also sent in all notification webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.
+             A reference that is sent to the recipient. This reference is also sent in all webhooks related to the transfer, so you can use it to track statuses for both the source and recipient of funds.
 
              Supported characters: **a-z**, **A-Z**, **0-9**. The maximum length depends on the `category`.
 
@@ -1048,8 +1048,11 @@ components:
           x-addedInVersion: "2"
         relayedAuthorisationData:
           $ref: "#/components/schemas/RelayedAuthorisationData"
+          deprecated: true
           description: If you are using relayed authorisation, this object contains information from the relayed authorisation response from your server.
           x-addedInVersion: "3"
+          x-deprecatedInVersion: "3"
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         sequenceNumber:
           description: |-
             The sequence number of the transfer notification. The numbers start from 1 and increase with each new notification for a specific transfer.
@@ -1144,7 +1147,7 @@ components:
           description: Contains the results of the evaluation of the transaction rules.
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
-          x-deprecatedMessage: Use the [transactionRulesResult](https://docs.adyen.com/api-explorer/accounting-webhooks/latest/post/balancePlatform.transfer.created#request-data-categoryData-issuedCard-transactionRulesResult) in the `categoryData` object instead.
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         type:
           description: The type of transfer or transaction. For example, **refund**, **payment**, **internalTransfer**, **bankTransfer**.
           enum:
@@ -1184,7 +1187,7 @@ components:
           type: array
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
-          x-deprecatedMessage: Use the [validationFacts](https://docs.adyen.com/api-explorer/accounting-webhooks/latest/post/balancePlatform.transfer.created#request-data-categoryData-issuedCard-validationFacts) in the `categoryData` object instead.
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
       required:
         - category
         - amount
@@ -1202,7 +1205,7 @@ components:
             Possible values: **test**, **live**.
           type: string
         type:
-          description: The type of the notification.
+          description: The type of webhook.
           enum:
             - balancePlatform.transfer.created
             - balancePlatform.transfer.updated

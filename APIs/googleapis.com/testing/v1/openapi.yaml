@@ -672,6 +672,11 @@ components:
         packageName:
           description: Full Java-style package name for this application, e.g. "com.example.foo".
           type: string
+        services:
+          description: Services contained in the tag.
+          items:
+            $ref: "#/components/schemas/Service"
+          type: array
         targetSdkVersion:
           description: Specifies the API Level on which the application is designed to run.
           format: int32
@@ -1271,6 +1276,18 @@ components:
         timeout:
           description: Timeout in seconds for each intent.
           format: google-duration
+          type: string
+      type: object
+    Service:
+      description: The section of an tag. https://developer.android.com/guide/topics/manifest/service-element
+      properties:
+        intentFilter:
+          description: Intent filters in the service
+          items:
+            $ref: "#/components/schemas/IntentFilter"
+          type: array
+        name:
+          description: The android:name value
           type: string
       type: object
     Shard:

@@ -3261,19 +3261,6 @@ components:
         bakExportOptions:
           description: Options for exporting BAK files (SQL Server-only)
           properties:
-            bakType:
-              description: Type of this bak file will be export, FULL or DIFF, SQL Server only
-              enum:
-                - BAK_TYPE_UNSPECIFIED
-                - FULL
-                - DIFF
-              type: string
-            copyOnly:
-              description: Whether or not the export will be exeucted with COPY_ONLY, SQL Server only deprecated as the behavior should default to copy_only = true use differential_base instead
-              type: boolean
-            differentialBase:
-              description: Whether or not the backup can be use as differential base only non copy only backup can be served as differential base
-              type: boolean
             stripeCount:
               description: Option for specifying how many stripes to use for the export. If blank, and the value of the striped field is true, the number of stripes is automatically chosen.
               format: int32
@@ -3484,13 +3471,6 @@ components:
         bakImportOptions:
           description: Import parameters specific to SQL Server .BAK files
           properties:
-            bakType:
-              description: Type of the bak content, FULL or DIFF.
-              enum:
-                - BAK_TYPE_UNSPECIFIED
-                - FULL
-                - DIFF
-              type: string
             encryptionOptions:
               properties:
                 certPath:
@@ -3503,12 +3483,6 @@ components:
                   description: Path to the Certificate Private Key (.pvk) in Cloud Storage, in the form `gs://bucketName/fileName`. The instance must have write permissions to the bucket and read access to the file.
                   type: string
               type: object
-            noRecovery:
-              description: Whether or not the backup importing will restore database with NORECOVERY option Applies only to Cloud SQL for SQL Server.
-              type: boolean
-            recoveryOnly:
-              description: Whether or not the backup importing request will just bring database online without downloading Bak content only one of "no_recovery" and "recovery_only" can be true otherwise error will return. Applies only to Cloud SQL for SQL Server.
-              type: boolean
             striped:
               description: Whether or not the backup set being restored is striped. Applies only to Cloud SQL for SQL Server.
               type: boolean
@@ -4299,7 +4273,6 @@ components:
             - UNSUPPORTED_STORAGE_ENGINE
             - LIMITED_SUPPORT_TABLES
             - EXISTING_DATA_IN_REPLICA
-            - MISSING_OPTIONAL_PRIVILEGES
           type: string
       type: object
     SqlInstancesGetDiskShrinkConfigResponse:
