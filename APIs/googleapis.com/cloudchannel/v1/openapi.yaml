@@ -224,6 +224,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: "Optional. Resource name of the new target Billing Account. Provide this Billing Account when setting up billing for a trial subscription. Format: accounts/{account_id}/billing_accounts/{billing_account_id}. This field is only relevant for multi-currency accounts. It should be left empty for single currency accounts."
+          in: query
+          name: changeOfferPurchase.billingAccount
+          schema:
+            type: string
         - description: "Required. Resource name of the entitlement. Format: accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}"
           in: query
           name: changeOfferPurchase.entitlement
@@ -232,6 +237,11 @@ paths:
         - description: "Optional. Resource name of the new target SKU. Provide this SKU when upgrading or downgrading an entitlement. Format: products/{product_id}/skus/{sku_id}"
           in: query
           name: changeOfferPurchase.newSku
+          schema:
+            type: string
+        - description: "Optional. Billing account that the result should be restricted to. Format: accounts/{account_id}/billing_accounts/{billing_account_id}."
+          in: query
+          name: createEntitlementPurchase.billingAccount
           schema:
             type: string
         - description: "Required. SKU that the result should be restricted to. Format: products/{product_id}/skus/{sku_id}."
@@ -1991,6 +2001,9 @@ components:
     GoogleCloudChannelV1ChangeOfferRequest:
       description: Request message for CloudChannelService.ChangeOffer.
       properties:
+        billingAccount:
+          description: Optional. The billing account resource name that is used to pay for this entitlement when setting up billing on a trial subscription. This field is only relevant for multi-currency accounts. It should be left empty for single currency accounts.
+          type: string
         offer:
           description: "Required. New Offer. Format: accounts/{account_id}/offers/{offer_id}."
           type: string
@@ -2790,6 +2803,9 @@ components:
     GoogleCloudChannelV1ListTransferableOffersRequest:
       description: Request message for CloudChannelService.ListTransferableOffers
       properties:
+        billingAccount:
+          description: "Optional. The Billing Account to look up Offers for. Format: accounts/{account_id}/billing_accounts/{billing_account_id}. This field is only relevant for multi-currency accounts. It should be left empty for single currency accounts."
+          type: string
         cloudIdentityId:
           description: Customer's Cloud Identity ID
           type: string
@@ -2988,6 +3004,7 @@ components:
             - INT64
             - STRING
             - DOUBLE
+            - BOOLEAN
           type: string
       type: object
     GoogleCloudChannelV1PercentageAdjustment:

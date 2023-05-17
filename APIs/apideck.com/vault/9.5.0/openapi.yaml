@@ -2312,6 +2312,7 @@ components:
               - hris.employee.created
               - hris.employee.updated
               - hris.employee.deleted
+              - hris.employee.terminated
               - hris.company.created
               - hris.company.updated
               - hris.company.deleted
@@ -2321,6 +2322,9 @@ components:
               - issue-tracking.ticket.created
               - issue-tracking.ticket.updated
               - issue-tracking.ticket.deleted
+              - ats.application.created
+              - ats.application.updated
+              - ats.application.deleted
             example: crm.company.created
             type: string
             x-apideck-enum-id: webhooks.event_type
