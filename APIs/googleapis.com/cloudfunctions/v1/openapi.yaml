@@ -925,6 +925,19 @@ components:
           description: The generated Google Cloud Storage signed URL that should be used for a function source code upload. The uploaded file should be a zip archive which contains a function.
           type: string
       type: object
+    GoogleCloudFunctionsV2LocationMetadata:
+      description: Extra GCF specific location information.
+      properties:
+        environments:
+          description: The Cloud Function environments this location supports.
+          items:
+            enum:
+              - ENVIRONMENT_UNSPECIFIED
+              - GEN_1
+              - GEN_2
+            type: string
+          type: array
+      type: object
     GoogleCloudFunctionsV2OperationMetadata:
       description: Represents the metadata of the long-running operation.
       properties:
@@ -1017,6 +1030,19 @@ components:
           description: One-word CamelCase type of the state message.
           type: string
       type: object
+    GoogleCloudFunctionsV2alphaLocationMetadata:
+      description: Extra GCF specific location information.
+      properties:
+        environments:
+          description: The Cloud Function environments this location supports.
+          items:
+            enum:
+              - ENVIRONMENT_UNSPECIFIED
+              - GEN_1
+              - GEN_2
+            type: string
+          type: array
+      type: object
     GoogleCloudFunctionsV2alphaOperationMetadata:
       description: Represents the metadata of the long-running operation.
       properties:
@@ -1108,6 +1134,19 @@ components:
         type:
           description: One-word CamelCase type of the state message.
           type: string
+      type: object
+    GoogleCloudFunctionsV2betaLocationMetadata:
+      description: Extra GCF specific location information.
+      properties:
+        environments:
+          description: The Cloud Function environments this location supports.
+          items:
+            enum:
+              - ENVIRONMENT_UNSPECIFIED
+              - GEN_1
+              - GEN_2
+            type: string
+          type: array
       type: object
     GoogleCloudFunctionsV2betaOperationMetadata:
       description: Represents the metadata of the long-running operation.

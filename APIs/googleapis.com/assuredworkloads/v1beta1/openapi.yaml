@@ -611,45 +611,6 @@ components:
             type: string
           type: array
       type: object
-    GoogleCloudAssuredworkloadsV1beta1CreateWorkloadOperationMetadata:
-      description: Operation metadata to give request details of CreateWorkload.
-      properties:
-        complianceRegime:
-          description: Optional. Compliance controls that should be applied to the resources managed by the workload.
-          enum:
-            - COMPLIANCE_REGIME_UNSPECIFIED
-            - IL4
-            - CJIS
-            - FEDRAMP_HIGH
-            - FEDRAMP_MODERATE
-            - US_REGIONAL_ACCESS
-            - HIPAA
-            - HITRUST
-            - EU_REGIONS_AND_SUPPORT
-            - CA_REGIONS_AND_SUPPORT
-            - ITAR
-            - AU_REGIONS_AND_US_SUPPORT
-            - ASSURED_WORKLOADS_FOR_PARTNERS
-            - ISR_REGIONS
-            - ISR_REGIONS_AND_SUPPORT
-            - CA_PROTECTED_B
-          type: string
-        createTime:
-          description: Optional. Time when the operation was created.
-          format: google-datetime
-          type: string
-        displayName:
-          description: Optional. The display name of the workload.
-          type: string
-        parent:
-          description: Optional. The parent of the workload.
-          type: string
-        resourceSettings:
-          description: Optional. Resource properties in the input that are used for creating/customizing workload resources.
-          items:
-            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadResourceSettings"
-          type: array
-      type: object
     GoogleCloudAssuredworkloadsV1beta1ListViolationsResponse:
       description: Response of ListViolations endpoint.
       properties:
@@ -924,9 +885,6 @@ components:
             - SOVEREIGN_CONTROLS_BY_SIA_MINSAIT
             - SOVEREIGN_CONTROLS_BY_PSN
           type: string
-        partnerPermissions:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadPartnerPermissions"
-          description: Optional. Permissions granted to the AW Partner SA account for the customer workload
         provisionedResourcesParent:
           description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"
           type: string
@@ -1053,16 +1011,6 @@ components:
           description: Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key Management Service automatically rotates a key. Must be at least 24 hours and at most 876,000 hours.
           format: google-duration
           type: string
-      type: object
-    GoogleCloudAssuredworkloadsV1beta1WorkloadPartnerPermissions:
-      description: Permissions granted to the AW Partner SA account for the customer workload
-      properties:
-        dataLogsViewer:
-          description: Allow the partner to view inspectability logs and monitoring violations.
-          type: boolean
-        remediateFolderViolations:
-          description: Allow partner to monitor folder and remediate violations
-          type: boolean
       type: object
     GoogleCloudAssuredworkloadsV1beta1WorkloadResourceInfo:
       description: Represent the resources that are children of this Workload.

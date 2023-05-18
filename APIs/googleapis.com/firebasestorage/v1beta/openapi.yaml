@@ -46,7 +46,7 @@ paths:
       description: Links a Google Cloud Storage bucket to a Firebase project.
       operationId: firebasestorage.projects.buckets.addFirebase
       parameters:
-        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_number}/buckets/{bucket_id}`.
+        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_id_or_number}/buckets/{bucket_id}`.
           in: path
           name: bucket
           required: true
@@ -92,7 +92,7 @@ paths:
       description: Unlinks a linked Google Cloud Storage bucket from a Firebase project.
       operationId: firebasestorage.projects.buckets.removeFirebase
       parameters:
-        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_number}/buckets/{bucket_id}`.
+        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_id_or_number}/buckets/{bucket_id}`.
           in: path
           name: bucket
           required: true
@@ -126,7 +126,7 @@ paths:
       description: Gets a single linked storage bucket.
       operationId: firebasestorage.projects.buckets.get
       parameters:
-        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_number}/buckets/{bucket_id}`.
+        - description: Required. Resource name of the bucket, mirrors the ID of the underlying Google Cloud Storage bucket, `projects/{project_id_or_number}/buckets/{bucket_id}`.
           in: path
           name: name
           required: true
@@ -167,7 +167,7 @@ paths:
       description: Lists the linked storage buckets for a project.
       operationId: firebasestorage.projects.buckets.list
       parameters:
-        - description: Required. Resource name of the parent Firebase project, `projects/{project_number}`.
+        - description: Required. Resource name of the parent Firebase project, `projects/{project_id_or_number}`.
           in: path
           name: parent
           required: true

@@ -1366,7 +1366,7 @@ components:
           type: integer
       type: object
     TaskGroup:
-      description: A TaskGroup contains one or multiple Tasks that share the same Runnable but with different runtime parameters.
+      description: A TaskGroup defines one or more Tasks that all share the same TaskSpec.
       properties:
         name:
           description: 'Output only. TaskGroup name. The system generates this field based on parent Job name. For example: "projects/123456/locations/us-west1/jobs/job01/taskGroups/group01".'
@@ -1382,6 +1382,13 @@ components:
         requireHostsFile:
           description: When true, Batch will populate a file with a list of all VMs assigned to the TaskGroup and set the BATCH_HOSTS_FILE environment variable to the path of that file. Defaults to false.
           type: boolean
+        schedulingPolicy:
+          description: Scheduling policy for Tasks in the TaskGroup. The default value is AS_SOON_AS_POSSIBLE.
+          enum:
+            - SCHEDULING_POLICY_UNSPECIFIED
+            - AS_SOON_AS_POSSIBLE
+            - IN_ORDER
+          type: string
         taskCount:
           description: Number of Tasks in the TaskGroup. Default is 1.
           format: int64
@@ -1391,7 +1398,7 @@ components:
           format: int64
           type: string
         taskEnvironments:
-          description: An array of environment variable mappings, which are passed to Tasks with matching indices. If task_environments is used then task_count should not be specified in the request (and will be ignored). Task count will be the length of task_environments. Tasks get a BATCH_TASK_INDEX and BATCH_TASK_COUNT environment variable, in addition to any environment variables set in task_environments, specifying the number of Tasks in the Task's parent TaskGroup, and the specific Task's index in the TaskGroup (0 through BATCH_TASK_COUNT - 1). task_environments supports up to 200 entries.
+          description: An array of environment variable mappings, which are passed to Tasks with matching indices. If task_environments is used then task_count should not be specified in the request (and will be ignored). Task count will be the length of task_environments. Tasks get a BATCH_TASK_INDEX and BATCH_TASK_COUNT environment variable, in addition to any environment variables set in task_environments, specifying the number of Tasks in the Task's parent TaskGroup, and the specific Task's index in the TaskGroup (0 through BATCH_TASK_COUNT - 1).
           items:
             $ref: "#/components/schemas/Environment"
           type: array

@@ -1992,11 +1992,11 @@ components:
           description: An overview of the changes that were made on the `item`.
       type: object
     GooglePrivacyDlpV2DeidentifyDataSourceDetails:
-      description: The results of a Deidentify action from an Inspect job.
+      description: The results of a Deidentify action from an inspect job.
       properties:
         deidentifyStats:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyDataSourceStats"
-          description: Stats about de-identification.
+          description: Stats about the de-identification operation.
         requestedOptions:
           $ref: "#/components/schemas/GooglePrivacyDlpV2RequestedDeidentifyOptions"
           description: De-identification config used for the request.
@@ -3764,13 +3764,13 @@ components:
       properties:
         snapshotDeidentifyTemplate:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
-          description: Snapshot of the state of the DeidentifyTemplate from the Deidentify action at the time this job was run.
+          description: Snapshot of the state of the `DeidentifyTemplate` from the Deidentify action at the time this job was run.
         snapshotImageRedactTemplate:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
-          description: Snapshot of the state of the image redact DeidentifyTemplate from the Deidentify action at the time this job was run.
+          description: Snapshot of the state of the image transformation `DeidentifyTemplate` from the `Deidentify` action at the time this job was run.
         snapshotStructuredDeidentifyTemplate:
           $ref: "#/components/schemas/GooglePrivacyDlpV2DeidentifyTemplate"
-          description: Snapshot of the state of the structured DeidentifyTemplate from the Deidentify action at the time this job was run.
+          description: Snapshot of the state of the structured `DeidentifyTemplate` from the `Deidentify` action at the time this job was run.
       type: object
     GooglePrivacyDlpV2RequestedOptions:
       description: Snapshot of the inspection configuration.
@@ -3858,10 +3858,10 @@ components:
           type: array
       type: object
     GooglePrivacyDlpV2SensitivityScore:
-      description: Score is a summary of all elements in the data profile. A higher number means more sensitive.
+      description: Score is calculated from of all elements in the data profile. A higher level means the data is more sensitive.
       properties:
         score:
-          description: The score applied to the resource.
+          description: The sensitivity score applied to the resource.
           enum:
             - SENSITIVITY_SCORE_UNSPECIFIED
             - SENSITIVITY_LOW
@@ -4044,7 +4044,7 @@ components:
           description: The BigQuery location where the dataset's data is stored. See https://cloud.google.com/bigquery/docs/locations for supported locations.
           type: string
         datasetProjectId:
-          description: The GCP project ID that owns the BigQuery dataset.
+          description: The Google Cloud project ID that owns the BigQuery dataset.
           type: string
         encryptionStatus:
           description: How the table is encrypted.
