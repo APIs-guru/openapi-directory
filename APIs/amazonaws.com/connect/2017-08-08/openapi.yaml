@@ -2350,6 +2350,103 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/prompts/{InstanceId}':
+    put:
+      operationId: CreatePrompt
+      description: 'Creates a prompt. For more information about prompts, such as supported file types and maximum length, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html">Create prompts</a> in the <i>Amazon Connect Administrator''s Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePromptResponse'
+        '480':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - S3Uri
+              properties:
+                Name:
+                  description: The name of the prompt.
+                  type: string
+                  minLength: 1
+                  maxLength: 127
+                Description:
+                  description: The description of the prompt.
+                  type: string
+                  minLength: 1
+                  maxLength: 250
+                S3Uri:
+                  description: The URI for the S3 bucket where the prompt is stored.
+                  type: string
+                  pattern: 's3://\S+/.+'
+                  minLength: 1
+                  maxLength: 512
+                Tags:
+                  description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/queues/{InstanceId}':
     put:
       operationId: CreateQueue
@@ -5105,6 +5202,205 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/prompts/{InstanceId}/{PromptId}':
+    delete:
+      operationId: DeletePrompt
+      description: Deletes a prompt.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: PromptId
+          in: path
+          required: true
+          description: A unique identifier for the prompt.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribePrompt
+      description: Describes the prompt.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePromptResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: PromptId
+          in: path
+          required: true
+          description: A unique identifier for the prompt.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+    post:
+      operationId: UpdatePrompt
+      description: Updates a prompt.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePromptResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: PromptId
+          in: path
+          required: true
+          description: A unique identifier for the prompt.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the prompt.
+                  type: string
+                  minLength: 1
+                  maxLength: 127
+                Description:
+                  description: A description of the prompt.
+                  type: string
+                  minLength: 1
+                  maxLength: 250
+                S3Uri:
+                  description: The URI for the S3 bucket where the prompt is stored.
+                  type: string
+                  pattern: 's3://\S+/.+'
+                  minLength: 1
+                  maxLength: 512
   '/quick-connects/{InstanceId}/{QuickConnectId}':
     delete:
       operationId: DeleteQuickConnect
@@ -8731,6 +9027,72 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/prompts/{InstanceId}/{PromptId}/file':
+    get:
+      operationId: GetPromptFile
+      description: Gets the prompt file.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPromptFileResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: PromptId
+          in: path
+          required: true
+          description: A unique identifier for the prompt.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 256
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -16025,6 +16387,17 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+    CreatePromptResponse:
+      type: object
+      properties:
+        PromptARN:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the prompt.
+        PromptId:
+          allOf:
+            - $ref: '#/components/schemas/PromptId'
+            - description: A unique identifier for the prompt.
     CreateQueueResponse:
       type: object
       properties:
@@ -16488,6 +16861,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClaimedPhoneNumberSummary'
             - description: Information about a phone number that's been claimed to your Amazon Connect instance or traffic distribution group.
+    DescribePromptResponse:
+      type: object
+      properties:
+        Prompt:
+          allOf:
+            - $ref: '#/components/schemas/Prompt'
+            - description: Information about the prompt.
     DescribeQueueResponse:
       type: object
       properties:
@@ -16778,6 +17158,13 @@ components:
             - $ref: '#/components/schemas/MetricFiltersV2List'
             - description: Contains the filters to be used when returning data.
       description: Contains information about the metric.
+    GetPromptFileResponse:
+      type: object
+      properties:
+        PromptPresignedUrl:
+          allOf:
+            - $ref: '#/components/schemas/PromptPresignedUrl'
+            - description: A generated URL to the prompt that can be given to an unauthorized user so they can access the prompt in S3.
     GetTaskTemplateResponse:
       type: object
       required:
@@ -17952,6 +18339,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: The Amazon Resource Name (ARN) of the phone number.
+    UpdatePromptResponse:
+      type: object
+      properties:
+        PromptARN:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the prompt.
+        PromptId:
+          allOf:
+            - $ref: '#/components/schemas/PromptId'
+            - description: A unique identifier for the prompt.
     UpdateTaskTemplateResponse:
       type: object
       properties:
@@ -19419,6 +19817,42 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+    PromptDescription:
+      type: string
+      minLength: 1
+      maxLength: 250
+    S3Uri:
+      type: string
+      pattern: 's3://\S+/.+'
+      minLength: 1
+      maxLength: 512
+    CreatePromptRequest:
+      type: object
+      required:
+        - Name
+        - S3Uri
+      title: CreatePromptRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CommonNameLength127'
+            - description: The name of the prompt.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/PromptDescription'
+            - description: The description of the prompt.
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The URI for the S3 bucket where the prompt is stored.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+    PromptId:
+      type: string
+      minLength: 1
+      maxLength: 256
     QueueDescription:
       type: string
       minLength: 1
@@ -20221,6 +20655,10 @@ components:
       type: object
       title: DeleteIntegrationAssociationRequest
       properties: {}
+    DeletePromptRequest:
+      type: object
+      title: DeletePromptRequest
+      properties: {}
     DeleteQuickConnectRequest:
       type: object
       title: DeleteQuickConnectRequest
@@ -20543,6 +20981,34 @@ components:
       type: object
       title: DescribePhoneNumberRequest
       properties: {}
+    DescribePromptRequest:
+      type: object
+      title: DescribePromptRequest
+      properties: {}
+    Prompt:
+      type: object
+      properties:
+        PromptARN:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the prompt.
+        PromptId:
+          allOf:
+            - $ref: '#/components/schemas/PromptId'
+            - description: A unique identifier for the prompt.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CommonNameLength127'
+            - description: The name of the prompt.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/PromptDescription'
+            - description: A description for the prompt.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+      description: Information about a prompt.
     DescribeQueueRequest:
       type: object
       title: DescribeQueueRequest
@@ -21924,6 +22390,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MetricResultV2'
+    GetPromptFileRequest:
+      type: object
+      title: GetPromptFileRequest
+      properties: {}
+    PromptPresignedUrl:
+      type: string
+      minLength: 1
+      maxLength: 2000
     SnapshotVersion:
       type: string
     GetTaskTemplateRequest:
@@ -22945,10 +23419,6 @@ components:
       type: integer
       minimum: 1
       maximum: 99
-    PromptId:
-      type: string
-      minLength: 1
-      maxLength: 256
     PromptName:
       type: string
       minLength: 1
@@ -24423,6 +24893,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
+    UpdatePromptRequest:
+      type: object
+      title: UpdatePromptRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CommonNameLength127'
+            - description: The name of the prompt.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/PromptDescription'
+            - description: A description of the prompt.
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The URI for the S3 bucket where the prompt is stored.
     UpdateQueueHoursOfOperationRequest:
       type: object
       required:

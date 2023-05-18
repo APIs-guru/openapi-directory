@@ -1265,6 +1265,7 @@ paths:
             schema:
               type: object
               required:
+                - ExecutionRoleArn
                 - InputConfig
                 - JobConfig
                 - Name
@@ -1284,10 +1285,6 @@ paths:
                   description: Input configuration information.
                   type: object
                   properties:
-                    DataSourceConfig:
-                      allOf:
-                        - $ref: '#/components/schemas/EojDataSourceConfigInput'
-                        - description: The location of the input data.&gt;
                     PreviousEarthObservationJobArn:
                       allOf:
                         - $ref: '#/components/schemas/EarthObservationJobArn'
@@ -2141,6 +2138,7 @@ components:
         - Arn
         - CreationTime
         - DurationInSeconds
+        - ExecutionRoleArn
         - JobConfig
         - Name
         - Status
@@ -2185,14 +2183,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Each tag consists of a key and a value.
-    EojDataSourceConfigInput:
-      type: object
-      properties:
-        S3Data:
-          allOf:
-            - $ref: '#/components/schemas/S3DataInput'
-            - description: The input structure for S3Data; representing the Amazon S3 location of the input data objects.
-      description: Union representing different data sources to be used as input for an Earth Observation job.
     EarthObservationJobArn:
       type: string
       pattern: '^arn:aws[a-z-]{0,12}:sagemaker-geospatial:[a-z0-9-]{1,25}:[0-9]{12}:earth-observation-job/[a-z0-9]{12,}$'
@@ -2747,25 +2737,6 @@ components:
             - $ref: '#/components/schemas/Float'
             - description: Upper bound for EoCloudCover.
       description: The structure representing the EoCloudCover filter.
-    S3DataInput:
-      type: object
-      required:
-        - MetadataProvider
-        - S3Uri
-      properties:
-        KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKey'
-            - description: The Key Management Service key ID for server-side encryption.
-        MetadataProvider:
-          allOf:
-            - $ref: '#/components/schemas/MetadataProvider'
-            - description: Metadata provider from whom the Amazon S3 data has been acquired.
-        S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/S3Uri'
-            - description: The URL to the Amazon S3 input.
-      description: Path to Amazon S3 storage location for input data.
     ExecutionRoleArn:
       type: string
       pattern: '^arn:(aws[a-z-]*):iam::([0-9]{12}):role/[a-zA-Z0-9+=,.@_/-]+$'
@@ -2952,10 +2923,6 @@ components:
     InputConfigOutput:
       type: object
       properties:
-        DataSourceConfig:
-          allOf:
-            - $ref: '#/components/schemas/EojDataSourceConfigInput'
-            - description: The location of the input data.
         PreviousEarthObservationJobArn:
           allOf:
             - $ref: '#/components/schemas/EarthObservationJobArn'
@@ -3113,10 +3080,6 @@ components:
     InputConfigInput:
       type: object
       properties:
-        DataSourceConfig:
-          allOf:
-            - $ref: '#/components/schemas/EojDataSourceConfigInput'
-            - description: The location of the input data.&gt;
         PreviousEarthObservationJobArn:
           allOf:
             - $ref: '#/components/schemas/EarthObservationJobArn'
@@ -3372,10 +3335,6 @@ components:
       type: string
       enum:
         - AND
-    MetadataProvider:
-      type: string
-      enum:
-        - PLANET_ORDER
     Operation:
       type: object
       required:
@@ -3606,6 +3565,7 @@ components:
     StartEarthObservationJobInput:
       type: object
       required:
+        - ExecutionRoleArn
         - InputConfig
         - JobConfig
         - Name

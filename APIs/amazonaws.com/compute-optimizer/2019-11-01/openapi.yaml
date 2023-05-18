@@ -3630,6 +3630,8 @@ components:
         - EffectiveRecommendationPreferencesExternalMetricsSource
         - InstanceState
         - Tags
+        - ExternalMetricStatusCode
+        - ExternalMetricStatusReason
     ExportableLambdaFunctionField:
       type: string
       enum:
@@ -3693,6 +3695,33 @@ components:
         - RecommendationOptionsEstimatedMonthlySavingsValue
         - RootVolume
         - Tags
+    ExternalMetricStatusCode:
+      type: string
+      enum:
+        - NO_EXTERNAL_METRIC_SET
+        - INTEGRATION_SUCCESS
+        - DATADOG_INTEGRATION_ERROR
+        - DYNATRACE_INTEGRATION_ERROR
+        - NEWRELIC_INTEGRATION_ERROR
+        - INSTANA_INTEGRATION_ERROR
+        - INSUFFICIENT_DATADOG_METRICS
+        - INSUFFICIENT_DYNATRACE_METRICS
+        - INSUFFICIENT_NEWRELIC_METRICS
+        - INSUFFICIENT_INSTANA_METRICS
+    ExternalMetricStatusReason:
+      type: string
+    ExternalMetricStatus:
+      type: object
+      properties:
+        statusCode:
+          allOf:
+            - $ref: '#/components/schemas/ExternalMetricStatusCode'
+            - description: ' The status code for Compute Optimizer''s integration with an external metrics provider. '
+        statusReason:
+          allOf:
+            - $ref: '#/components/schemas/ExternalMetricStatusReason'
+            - description: ' The reason for Compute Optimizer''s integration status with your external metric provider. '
+      description: ' Describes Compute Optimizer''s integration status with your chosen external metric provider. For example, Datadog. '
     ExternalMetricsSource:
       type: string
       enum:
@@ -3927,6 +3956,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: ' A list of tags assigned to your Amazon EC2 instance recommendations. '
+        externalMetricStatus:
+          allOf:
+            - $ref: '#/components/schemas/ExternalMetricStatus'
+            - description: ' An object that describes Compute Optimizer''s integration status with your external metrics provider. '
       description: Describes an Amazon EC2 instance recommendation.
     InstanceRecommendationFindingReasonCode:
       type: string
