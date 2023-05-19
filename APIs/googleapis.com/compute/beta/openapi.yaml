@@ -59,6 +59,7 @@ tags:
   - name: instanceGroups
   - name: instances
   - name: instanceTemplates
+  - name: instantSnapshots
   - name: interconnectAttachments
   - name: interconnectLocations
   - name: interconnectRemoteLocations
@@ -91,6 +92,7 @@ tags:
   - name: regionInstanceGroups
   - name: regionInstances
   - name: regionInstanceTemplates
+  - name: regionInstantSnapshots
   - name: regionNetworkEndpointGroups
   - name: regionNetworkFirewallPolicies
   - name: regionNotificationEndpoints
@@ -2953,6 +2955,83 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - instances
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/aggregated/instantSnapshots":
+    get:
+      description: Retrieves an aggregated list of instantSnapshots.
+      operationId: compute.instantSnapshots.aggregatedList
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+          in: query
+          name: includeAllScopes
+          schema:
+            type: boolean
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshotAggregatedList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - instantSnapshots
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -26558,6 +26637,544 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstances
+  "/projects/{project}/regions/{region}/instantSnapshots":
+    get:
+      description: Retrieves the list of InstantSnapshot resources contained within the specified region.
+      operationId: compute.regionInstantSnapshots.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshotList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates an instant snapshot in the specified region.
+      operationId: compute.regionInstantSnapshots.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstantSnapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+  "/projects/{project}/regions/{region}/instantSnapshots/{instantSnapshot}":
+    delete:
+      description: Deletes the specified InstantSnapshot resource. Keep in mind that deleting a single instantSnapshot might not necessarily delete all the data on that instantSnapshot. If any data on the instantSnapshot that is marked for deletion is needed for subsequent instantSnapshots, the data will be moved to the next corresponding instantSnapshot. For more information, see Deleting instantSnapshots.
+      operationId: compute.regionInstantSnapshots.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the InstantSnapshot resource to delete.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+    get:
+      description: Returns the specified InstantSnapshot resource in the specified region.
+      operationId: compute.regionInstantSnapshots.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the InstantSnapshot resource to return.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/instantSnapshots/{instantSnapshot}/export":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Export the changed blocks between two instant snapshots to a customer's bucket in the user specified format.
+      operationId: compute.regionInstantSnapshots.export
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the instant snapshot to export.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionInstantSnapshotsExportRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+  "/projects/{project}/regions/{region}/instantSnapshots/{resource}/getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.regionInstantSnapshots.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/instantSnapshots/{resource}/setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.regionInstantSnapshots.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionSetPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+  "/projects/{project}/regions/{region}/instantSnapshots/{resource}/setLabels":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the labels on a instantSnapshot in the given region. To learn more about labels, read the Labeling Resources documentation.
+      operationId: compute.regionInstantSnapshots.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionSetLabelsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionInstantSnapshots
+  "/projects/{project}/regions/{region}/instantSnapshots/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.regionInstantSnapshots.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionInstantSnapshots
   "/projects/{project}/regions/{region}/interconnectAttachments":
     get:
       description: Retrieves the list of interconnect attachments contained within the specified region.
@@ -43581,6 +44198,544 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - instances
+  "/projects/{project}/zones/{zone}/instantSnapshots":
+    get:
+      description: Retrieves the list of InstantSnapshot resources contained within the specified zone.
+      operationId: compute.instantSnapshots.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshotList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - instantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Creates an instant snapshot in the specified zone.
+      operationId: compute.instantSnapshots.insert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstantSnapshot"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - instantSnapshots
+  "/projects/{project}/zones/{zone}/instantSnapshots/{instantSnapshot}":
+    delete:
+      description: Deletes the specified InstantSnapshot resource. Keep in mind that deleting a single instantSnapshot might not necessarily delete all the data on that instantSnapshot. If any data on the instantSnapshot that is marked for deletion is needed for subsequent instantSnapshots, the data will be moved to the next corresponding instantSnapshot. For more information, see Deleting instantSnapshots.
+      operationId: compute.instantSnapshots.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name of the InstantSnapshot resource to delete.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - instantSnapshots
+    get:
+      description: Returns the specified InstantSnapshot resource in the specified zone.
+      operationId: compute.instantSnapshots.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name of the InstantSnapshot resource to return.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InstantSnapshot"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - instantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/zones/{zone}/instantSnapshots/{instantSnapshot}/export":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Export the changed blocks between two instant snapshots to a customer's bucket in the user specified format.
+      operationId: compute.instantSnapshots.export
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name of the instant snapshot to export.
+          in: path
+          name: instantSnapshot
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstantSnapshotsExportRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - instantSnapshots
+  "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.instantSnapshots.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: Requested IAM Policy version.
+          in: query
+          name: optionsRequestedPolicyVersion
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - instantSnapshots
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.instantSnapshots.setIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZoneSetPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Policy"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - instantSnapshots
+  "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/setLabels":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the labels on a instantSnapshot in the given zone. To learn more about labels, read the Labeling Resources documentation.
+      operationId: compute.instantSnapshots.setLabels
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ZoneSetLabelsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - instantSnapshots
+  "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/testIamPermissions":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.instantSnapshots.testIamPermissions
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestPermissionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - instantSnapshots
   "/projects/{project}/zones/{zone}/machineTypes":
     get:
       description: Retrieves a list of machine types available to the specified project.
@@ -49569,6 +50724,12 @@ components:
         sourceImageId:
           description: "[Output Only] The ID value of the image used to create this disk. This value identifies the exact image that was used to create this persistent disk. For example, if you created the persistent disk from an image that was later deleted and recreated under the same name, the source image ID would identify the exact version of the image that was used."
           type: string
+        sourceInstantSnapshot:
+          description: "The source instant snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /instantSnapshots/instantSnapshot - projects/project/zones/zone/instantSnapshots/instantSnapshot - zones/zone/instantSnapshots/instantSnapshot "
+          type: string
+        sourceInstantSnapshotId:
+          description: "[Output Only] The unique ID of the instant snapshot used to create this disk. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact version of the instant snapshot that was used."
+          type: string
         sourceSnapshot:
           description: "The source snapshot used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project /global/snapshots/snapshot - projects/project/global/snapshots/snapshot - global/snapshots/snapshot "
           type: string
@@ -53681,7 +54842,7 @@ components:
           description: The URL for the health check that signals autohealing.
           type: string
         initialDelaySec:
-          description: The number of seconds that the managed instance group waits before it applies autohealing policies to new instances or recently recreated instances. This initial delay allows instances to initialize and run their startup scripts before the instance group determines that they are UNHEALTHY. This prevents the managed instance group from recreating its instances prematurely. This value must be from range [0, 3600].
+          description: The initial delay is the number of seconds that a new VM takes to initialize and run its startup script. During a VM's initial delay period, the MIG ignores unsuccessful health checks because the VM might be in the startup process. This prevents the MIG from prematurely recreating a VM. If the health check receives a healthy response during the initial delay, it indicates that the startup process is complete and the VM is ready. The value of initial delay must be between 0 and 3600 seconds. The default value is 0.
           format: int32
           type: integer
       type: object
@@ -55114,6 +56275,322 @@ components:
           items:
             $ref: "#/components/schemas/CustomerEncryptionKeyProtectedDisk"
           type: array
+      type: object
+    InstantSnapshot:
+      description: Represents a InstantSnapshot resource. You can use instant snapshots to create disk rollback points quickly..
+      properties:
+        architecture:
+          description: "[Output Only] The architecture of the instant snapshot. Valid values are ARM64 or X86_64."
+          enum:
+            - ARCHITECTURE_UNSPECIFIED
+            - ARM64
+            - X86_64
+          type: string
+        creationTimestamp:
+          description: "[Output Only] Creation timestamp in RFC3339 text format."
+          type: string
+        description:
+          description: An optional description of this resource. Provide this property when you create the resource.
+          type: string
+        diskSizeGb:
+          description: "[Output Only] Size of the source disk, specified in GB."
+          format: int64
+          type: string
+        id:
+          description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
+          format: uint64
+          type: string
+        kind:
+          default: compute#instantSnapshot
+          description: "[Output Only] Type of the resource. Always compute#instantSnapshot for InstantSnapshot resources."
+          type: string
+        labelFingerprint:
+          description: A fingerprint for the labels being applied to this InstantSnapshot, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a InstantSnapshot.
+          format: byte
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels to apply to this InstantSnapshot. These can be later modified by the setLabels method. Label values may be empty.
+          type: object
+        name:
+          description: Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        region:
+          description: "[Output Only] URL of the region where the instant snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
+          type: string
+        resourceStatus:
+          $ref: "#/components/schemas/InstantSnapshotResourceStatus"
+          description: "[Output Only] Status information for the instant snapshot resource."
+        satisfiesPzs:
+          description: "[Output Only] Reserved for future use."
+          type: boolean
+        selfLink:
+          description: "[Output Only] Server-defined URL for the resource."
+          type: string
+        selfLinkWithId:
+          description: "[Output Only] Server-defined URL for this resource's resource id."
+          type: string
+        sourceDisk:
+          description: "URL of the source disk used to create this instant snapshot. Note that the source disk must be in the same zone/region as the instant snapshot to be created. This can be a full or valid partial URL. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk "
+          type: string
+        sourceDiskId:
+          description: "[Output Only] The ID value of the disk used to create this InstantSnapshot. This value may be used to determine whether the InstantSnapshot was taken from the current or a previous instance of a given disk name."
+          type: string
+        status:
+          description: "[Output Only] The status of the instantSnapshot. This can be CREATING, DELETING, FAILED, or READY."
+          enum:
+            - CREATING
+            - DELETING
+            - FAILED
+            - READY
+          type: string
+        zone:
+          description: "[Output Only] URL of the zone where the instant snapshot resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body."
+          type: string
+      type: object
+    InstantSnapshotAggregatedList:
+      properties:
+        id:
+          description: "[Output Only] Unique identifier for the resource; defined by the server."
+          type: string
+        items:
+          additionalProperties:
+            $ref: "#/components/schemas/InstantSnapshotsScopedList"
+            description: "[Output Only] Name of the scope containing this set of instantSnapshots."
+          description: A list of InstantSnapshotsScopedList resources.
+          type: object
+        kind:
+          default: compute#instantSnapshotAggregatedList
+          description: "[Output Only] Type of resource. Always compute#instantSnapshotAggregatedList for aggregated lists of instantSnapshots."
+          type: string
+        nextPageToken:
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for this resource."
+          type: string
+        unreachables:
+          description: "[Output Only] Unreachable resources."
+          items:
+            type: string
+          type: array
+        warning:
+          description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
+      type: object
+    InstantSnapshotExportParams:
+      properties:
+        baseInstantSnapshot:
+          description: An optional base instant snapshot that this resource is compared against. If not specified, all blocks of this resource are exported. The base instant snapshot and this resource must be created from the same disk. The base instant snapshot must be created earlier in time than this resource.
+          type: string
+        bucketName:
+          description: The name of an existing bucket in Cloud Storage where the changed blocks will be stored. The Google Service Account must have read and write access to this bucket. The bucket has to be in the same region as this resource.
+          type: string
+        encryptionKey:
+          $ref: "#/components/schemas/CustomerEncryptionKey"
+          description: Encryption key used to encrypt the instant snapshot.
+        objectName:
+          description: Name of the output Bigstore object storing the changed blocks. Object name must be less than 1024 bytes in length.
+          type: string
+        outputType:
+          description: The format of the output file.
+          enum:
+            - INVALID
+            - METADATA_AND_DATA
+            - METADATA_ONLY
+          type: string
+      type: object
+    InstantSnapshotList:
+      description: Contains a list of InstantSnapshot resources.
+      properties:
+        id:
+          description: "[Output Only] Unique identifier for the resource; defined by the server."
+          type: string
+        items:
+          description: A list of InstantSnapshot resources.
+          items:
+            $ref: "#/components/schemas/InstantSnapshot"
+          type: array
+        kind:
+          default: compute#instantSnapshotList
+          description: Type of resource.
+          type: string
+        nextPageToken:
+          description: "[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results."
+          type: string
+        selfLink:
+          description: "[Output Only] Server-defined URL for this resource."
+          type: string
+        warning:
+          description: "[Output Only] Informational warning message."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
+      type: object
+    InstantSnapshotResourceStatus:
+      properties:
+        storageSizeBytes:
+          description: "[Output Only] The storage size of this instant snapshot."
+          format: int64
+          type: string
+      type: object
+    InstantSnapshotsExportRequest:
+      properties:
+        exportParams:
+          $ref: "#/components/schemas/InstantSnapshotExportParams"
+          description: Parameters to export the changed blocks.
+      type: object
+    InstantSnapshotsScopedList:
+      properties:
+        instantSnapshots:
+          description: "[Output Only] A list of instantSnapshots contained in this scope."
+          items:
+            $ref: "#/components/schemas/InstantSnapshot"
+          type: array
+        warning:
+          description: "[Output Only] Informational warning which replaces the list of instantSnapshots when the list is empty."
+          properties:
+            code:
+              description: "[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response."
+              enum:
+                - CLEANUP_FAILED
+                - DEPRECATED_RESOURCE_USED
+                - DEPRECATED_TYPE_USED
+                - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+                - EXPERIMENTAL_TYPE_USED
+                - EXTERNAL_API_WARNING
+                - FIELD_VALUE_OVERRIDEN
+                - INJECTED_KERNELS_DEPRECATED
+                - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
+                - LARGE_DEPLOYMENT_WARNING
+                - MISSING_TYPE_DEPENDENCY
+                - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+                - NEXT_HOP_CANNOT_IP_FORWARD
+                - NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE
+                - NEXT_HOP_INSTANCE_NOT_FOUND
+                - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+                - NEXT_HOP_NOT_RUNNING
+                - NOT_CRITICAL_ERROR
+                - NO_RESULTS_ON_PAGE
+                - PARTIAL_SUCCESS
+                - REQUIRED_TOS_AGREEMENT
+                - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+                - RESOURCE_NOT_DELETED
+                - SCHEMA_VALIDATION_IGNORED
+                - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+                - UNDECLARED_PROPERTIES
+                - UNREACHABLE
+              type: string
+            data:
+              description: '[Output Only] Metadata about this warning in key: value format. For example: "data": [ { "key": "scope", "value": "zones/us-east1-d" } '
+              items:
+                properties:
+                  key:
+                    description: "[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding)."
+                    type: string
+                  value:
+                    description: "[Output Only] A warning data value corresponding to the key."
+                    type: string
+                type: object
+              type: array
+            message:
+              description: "[Output Only] A human-readable description of the warning code."
+              type: string
+          type: object
       type: object
     Int64RangeMatch:
       description: HttpRouteRuleMatch criteria for field values that must stay within the specified integer range.
@@ -62023,6 +63500,12 @@ components:
             $ref: "#/components/schemas/NamedPort"
           type: array
       type: object
+    RegionInstantSnapshotsExportRequest:
+      properties:
+        exportParams:
+          $ref: "#/components/schemas/InstantSnapshotExportParams"
+          description: Parameters to export the changed blocks.
+      type: object
     RegionList:
       description: Contains a list of region resources.
       properties:
@@ -64754,6 +66237,9 @@ components:
         expr:
           $ref: "#/components/schemas/Expr"
           description: User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header. Expressions containing `evaluateThreatIntelligence` require Cloud Armor Managed Protection Plus tier and are not supported in Edge Policies nor in Regional Policies. Expressions containing `evaluatePreconfiguredExpr('sourceiplist-*')` require Cloud Armor Managed Protection Plus tier and are only supported in Global Security Policies.
+        exprOptions:
+          $ref: "#/components/schemas/SecurityPolicyRuleMatcherExprOptions"
+          description: The configuration options available when specifying a user defined CEVAL expression (i.e., 'expr').
         versionedExpr:
           description: "Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC_IPS_V1 - must specify the corresponding src_ip_range field in config."
           enum:
@@ -64786,6 +66272,25 @@ components:
           type: string
         ports:
           description: 'An optional list of ports to which this rule applies. This field is only applicable for UDP or TCP protocol. Each entry must be either an integer or a range. If not specified, this rule applies to connections through any port. Example inputs include: ["22"], ["80","443"], and ["12345-12349"]. This field may only be specified when versioned_expr is set to FIREWALL.'
+          items:
+            type: string
+          type: array
+      type: object
+    SecurityPolicyRuleMatcherExprOptions:
+      properties:
+        recaptchaOptions:
+          $ref: "#/components/schemas/SecurityPolicyRuleMatcherExprOptionsRecaptchaOptions"
+          description: reCAPTCHA configuration options to be applied for the rule. If the rule does not evaluate reCAPTCHA tokens, this field will have no effect.
+      type: object
+    SecurityPolicyRuleMatcherExprOptionsRecaptchaOptions:
+      properties:
+        actionTokenSiteKeys:
+          description: A list of site keys to be used during the validation of reCAPTCHA action-tokens. The provided site keys need to be created from reCAPTCHA API under the same project where the security policy is created.
+          items:
+            type: string
+          type: array
+        sessionTokenSiteKeys:
+          description: A list of site keys to be used during the validation of reCAPTCHA session-tokens. The provided site keys need to be created from reCAPTCHA API under the same project where the security policy is created.
           items:
             type: string
           type: array
@@ -65020,10 +66525,10 @@ components:
           $ref: "#/components/schemas/AWSV4Signature"
           description: The configuration needed to generate a signature for access to private storage buckets that support AWS's Signature Version 4 for authentication. Allowed only for INTERNET_IP_PORT and INTERNET_FQDN_PORT NEG backends.
         clientTlsPolicy:
-          description: "Optional. A URL referring to a networksecurity.ClientTlsPolicy resource that describes how clients should authenticate with this service's backends. clientTlsPolicy only applies to a global BackendService with the loadBalancingScheme set to INTERNAL_SELF_MANAGED. If left blank, communications are not encrypted. Note: This field currently has no impact."
+          description: Optional. A URL referring to a networksecurity.ClientTlsPolicy resource that describes how clients should authenticate with this service's backends. clientTlsPolicy only applies to a global BackendService with the loadBalancingScheme set to INTERNAL_SELF_MANAGED. If left blank, communications are not encrypted.
           type: string
         subjectAltNames:
-          description: "Optional. A list of Subject Alternative Names (SANs) that the client verifies during a mutual TLS handshake with an server/endpoint for this BackendService. When the server presents its X.509 certificate to the client, the client inspects the certificate's subjectAltName field. If the field contains one of the specified values, the communication continues. Otherwise, it fails. This additional check enables the client to verify that the server is authorized to run the requested service. Note that the contents of the server certificate's subjectAltName field are configured by the Public Key Infrastructure which provisions server identities. Only applies to a global BackendService with loadBalancingScheme set to INTERNAL_SELF_MANAGED. Only applies when BackendService has an attached clientTlsPolicy with clientCertificate (mTLS mode). Note: This field currently has no impact."
+          description: Optional. A list of Subject Alternative Names (SANs) that the client verifies during a mutual TLS handshake with an server/endpoint for this BackendService. When the server presents its X.509 certificate to the client, the client inspects the certificate's subjectAltName field. If the field contains one of the specified values, the communication continues. Otherwise, it fails. This additional check enables the client to verify that the server is authorized to run the requested service. Note that the contents of the server certificate's subjectAltName field are configured by the Public Key Infrastructure which provisions server identities. Only applies to a global BackendService with loadBalancingScheme set to INTERNAL_SELF_MANAGED. Only applies when BackendService has an attached clientTlsPolicy with clientCertificate (mTLS mode).
           items:
             type: string
           type: array
@@ -65614,6 +67119,12 @@ components:
           description: The customer-supplied encryption key of the source disk. Required if the source disk is protected by a customer-supplied encryption key.
         sourceDiskId:
           description: "[Output Only] The ID value of the disk used to create this snapshot. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given disk name."
+          type: string
+        sourceInstantSnapshot:
+          description: "The source instant snapshot used to create this snapshot. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /instantSnapshots/instantSnapshot - projects/project/zones/zone/instantSnapshots/instantSnapshot - zones/zone/instantSnapshots/instantSnapshot "
+          type: string
+        sourceInstantSnapshotId:
+          description: "[Output Only] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used."
           type: string
         sourceSnapshotSchedulePolicy:
           description: "[Output Only] URL of the resource policy which created this scheduled snapshot."

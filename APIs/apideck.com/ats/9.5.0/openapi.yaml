@@ -318,7 +318,7 @@ tags:
     name: Applications
     x-apideck-model:
       $ref: "#/components/schemas/Application"
-    x-apideck-resource-id: Applications
+    x-apideck-resource-id: applications
 paths:
   /ats/applicants:
     get:
@@ -1883,7 +1883,6 @@ components:
           nullable: true
           title: Status
           type: string
-          x-apideck-enum-id: applications.status
         updated_at:
           $ref: "#/components/schemas/UpdatedAt"
         updated_by:
@@ -3186,6 +3185,10 @@ components:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
           $ref: "#/components/schemas/CreatedBy"
+        custom_fields:
+          items:
+            $ref: "#/components/schemas/CustomField"
+          type: array
         deleted:
           $ref: "#/components/schemas/Deleted"
         department:
@@ -3249,6 +3252,12 @@ components:
           type: string
         language:
           $ref: "#/components/schemas/Language"
+        location:
+          description: Specifies the location for the job posting.
+          example: San Francisco
+          nullable: true
+          title: Location
+          type: string
         owner_id:
           $ref: "#/components/schemas/OwnerId"
         published_at:
@@ -3327,7 +3336,7 @@ components:
       type: object
       x-apideck-schema-id: Job
       x-apideck-weights:
-        addresses: high
+        addresses: low
         available_to_employees: medium
         blocks: edge-case
         branch: low
@@ -3336,34 +3345,36 @@ components:
         closing_html: edge-case
         code: low
         confidential: medium
-        created_at: medium
+        created_at: critical
         created_by: edge-case
+        custom_fields: critical
         deleted: medium
         department: medium
-        description: medium
-        description_html: edge-case
+        description: critical
+        description_html: critical
         employment_terms: low
         experience: low
         followers: low
         hiring_managers: low
         id: high
-        job_portal_url: low
+        job_portal_url: medium
         language: medium
+        location: critical
         owner_id: high
         published_at: high
         record_url: low
         recruiters: low
         remote: low
         requisition_id: medium
-        salary: high
+        salary: critical
         sequence: low
         slug: low
-        status: high
+        status: critical
         tags: low
         title: critical
         updated_at: medium
         updated_by: edge-case
-        url: medium
+        url: critical
         visibility: low
     JobStatus:
       description: The status of the job.

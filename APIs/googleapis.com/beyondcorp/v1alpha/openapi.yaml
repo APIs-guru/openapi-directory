@@ -1430,6 +1430,53 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{parent}/partnerTenants":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new BeyondCorp Enterprise partnerTenant in a given organization and can only be called by onboarded BeyondCorp Enterprise partner.
+      operationId: beyondcorp.organizations.locations.global.partnerTenants.create
+      parameters:
+        - description: "Required. The resource name of the PartnerTenant using the form: `organizations/{organization_id}/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerTenant"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1alpha/{parent}/proxyConfigs":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1444,7 +1491,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new BeyondCorp Enterprise ProxyConfiguration in a given organization and tenant. Can only be called by on onboarded Beyondcorp Enterprise partner.
+      description: Creates a new BeyondCorp Enterprise ProxyConfiguration in a given organization and PartnerTenant. Can only be called by on onboarded Beyondcorp Enterprise partner.
       operationId: beyondcorp.organizations.locations.global.tenants.proxyConfigs.create
       parameters:
         - description: "Required. The resource name of the ProxyConfig using the form: `organizations/{organization_id}/locations/global/tenants/{tenant_id}`"
@@ -2919,18 +2966,21 @@ components:
           readOnly: true
           type: string
       type: object
-    GoogleCloudBeyondcorpPartnerservicesV1alphaAuthenticationInfo:
-      description: Message contains the authentication information to validate against the proxy server.
+    GoogleCloudBeyondcorpPartnerservicesV1alphaEncryptionInfo:
+      description: Message contains the JWT encryption information for the proxy server.
       properties:
         encryptionSaEmail:
-          description: Optional. Service Account for encrypting the JWT.
+          description: Optional. Service Account for encryption key.
+          type: string
+        jwk:
+          description: Optional. JWK in string.
           type: string
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerMetadata:
-      description: Metadata associated with Tenant and is provided by the Partner.
+      description: Metadata associated with PartnerTenant and is provided by the Partner.
       properties:
         partnerTenantId:
-          description: Optional. UUID used by the Partner to refer to the Tenant in their internal systems.
+          description: Optional. UUID used by the Partner to refer to the PartnerTenant in their internal systems.
           type: string
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerServiceOperationMetadata:
@@ -2967,12 +3017,39 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerTenant:
+      description: Information about a BeyoncCorp Enterprise PartnerTenant.
+      properties:
+        createTime:
+          description: Output only. Timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Optional. An arbitrary caller-provided name for the PartnerTenant. Cannot exceed 64 characters.
+          type: string
+        googleGroupEmail:
+          description: Optional. Google group email to which the PartnerTenant is enabled.
+          type: string
+        googleGroupId:
+          description: Optional. Google group ID to which the PartnerTenant is enabled.
+          type: string
+        name:
+          description: Output only. Unique resource name of the PartnerTenant. The name is ignored when creating PartnerTenant.
+          readOnly: true
+          type: string
+        partnerMetadata:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerMetadata"
+          description: Optional. Metadata provided by the Partner associated with PartnerTenant.
+        updateTime:
+          description: Output only. Timestamp when the resource was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaProxyConfig:
       description: Proxy Configuration of a Tenant.
       properties:
-        authenticationInfo:
-          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaAuthenticationInfo"
-          description: Optional. Information to facilitate Authentication against the proxy server.
         createTime:
           description: Output only. Timestamp when the resource was created.
           format: google-datetime
@@ -2981,6 +3058,9 @@ components:
         displayName:
           description: Optional. An arbitrary caller-provided name for the ProxyConfig. Cannot exceed 64 characters.
           type: string
+        encryptionInfo:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaEncryptionInfo"
+          description: Optional. Information to encrypt JWT for the proxy server.
         name:
           description: Output only. ProxyConfig resource name.
           readOnly: true
