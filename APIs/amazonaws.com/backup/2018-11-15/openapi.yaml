@@ -4326,7 +4326,7 @@ paths:
                   description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartBackupJob</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
                   type: string
                 StartWindowMinutes:
-                  description: 'A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional, and the default is 8 hours. If this value is included, it must be at least 60 minutes to avoid errors.'
+                  description: '<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional, and the default is 8 hours. If this value is included, it must be at least 60 minutes to avoid errors.</p> <p>During the start window, the backup job status remains in <code>CREATED</code> status until it has successfully begun or until the start window time has run out. If within the start window time Backup receives an error that allows the job to be retried, Backup will automatically retry to begin the job at least every 10 minutes until the backup successfully begins (the job status changes to <code>RUNNING</code>) or until the job status changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>'
                   type: integer
                 CompleteWindowMinutes:
                   description: 'A value in minutes during which a successfully started backup must complete, or else Backup will cancel the job. This value is optional. This value begins counting down from when the backup was scheduled. It does not add additional time for <code>StartWindowMinutes</code>, or if the backup started later than scheduled.'
@@ -4581,7 +4581,7 @@ paths:
                   description: A customer-chosen string that you can use to distinguish between otherwise identical calls to <code>StartRestoreJob</code>. Retrying a successful request with the same idempotency token results in a success message with no action taken.
                   type: string
                 ResourceType:
-                  description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>DocumentDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p> </li> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>FSx</code> for Amazon FSx</p> </li> <li> <p> <code>Neptune</code> for Amazon Neptune</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> <li> <p> <code>S3</code> for Amazon S3</p> </li> <li> <p> <code>VirtualMachine</code> for virtual machines</p> </li> </ul>'
+                  description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>DocumentDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p> </li> <li> <p> <code>CloudFormation</code> for CloudFormation</p> </li> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>FSx</code> for Amazon FSx</p> </li> <li> <p> <code>Neptune</code> for Amazon Neptune</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Redshift</code> for Amazon Redshift</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> <li> <p> <code>S3</code> for Amazon S3</p> </li> <li> <p> <code>Timestream</code> for Amazon Timestream</p> </li> <li> <p> <code>VirtualMachine</code> for virtual machines</p> </li> </ul>'
                   type: string
                   pattern: '^[a-zA-Z0-9\-\_\.]{1,50}$'
     parameters:
@@ -6250,7 +6250,7 @@ components:
         StartWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
-            - description: 'A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional. If this value is included, it must be at least 60 minutes to avoid errors.'
+            - description: '<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional. If this value is included, it must be at least 60 minutes to avoid errors.</p> <p>During the start window, the backup job status remains in <code>CREATED</code> status until it has successfully begun or until the start window time has run out. If within the start window time Backup receives an error that allows the job to be retried, Backup will automatically retry to begin the job at least every 10 minutes until the backup successfully begins (the job status changes to <code>RUNNING</code>) or until the job status changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>'
         CompletionWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
@@ -6297,7 +6297,7 @@ components:
         StartWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
-            - description: 'A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional. If this value is included, it must be at least 60 minutes to avoid errors.'
+            - description: '<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional. If this value is included, it must be at least 60 minutes to avoid errors.</p> <p>During the start window, the backup job status remains in <code>CREATED</code> status until it has successfully begun or until the start window time has run out. If within the start window time Backup receives an error that allows the job to be retried, Backup will automatically retry to begin the job at least every 10 minutes until the backup successfully begins (the job status changes to <code>RUNNING</code>) or until the job status changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>'
         CompletionWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
@@ -7520,6 +7520,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: This is the Amazon Resource Name (ARN) of the parent (composite) recovery point.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: This is the Amazon Resource Name (ARN) that uniquely identifies a saved resource.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: This is the Amazon Web Services resource type that is saved as a recovery point.
+        BackupVaultName:
+          allOf:
+            - $ref: '#/components/schemas/BackupVaultName'
+            - description: This is the name of the backup vault (the logical container in which backups are stored).
       description: 'This is a recovery point which is a child (nested) recovery point of a parent (composite) recovery point. These recovery points can be disassociated from their parent (composite) recovery point, in which case they will no longer be a member.'
     ReportDestination:
       type: object
@@ -7616,7 +7628,7 @@ components:
         StartWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
-            - description: 'A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional, and the default is 8 hours. If this value is included, it must be at least 60 minutes to avoid errors.'
+            - description: '<p>A value in minutes after a backup is scheduled before a job will be canceled if it doesn''t start successfully. This value is optional, and the default is 8 hours. If this value is included, it must be at least 60 minutes to avoid errors.</p> <p>During the start window, the backup job status remains in <code>CREATED</code> status until it has successfully begun or until the start window time has run out. If within the start window time Backup receives an error that allows the job to be retried, Backup will automatically retry to begin the job at least every 10 minutes until the backup successfully begins (the job status changes to <code>RUNNING</code>) or until the job status changes to <code>EXPIRED</code> (which is expected to occur when the start window time is over).</p>'
         CompleteWindowMinutes:
           allOf:
             - $ref: '#/components/schemas/WindowMinutes'
@@ -7698,7 +7710,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>DocumentDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p> </li> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>FSx</code> for Amazon FSx</p> </li> <li> <p> <code>Neptune</code> for Amazon Neptune</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> <li> <p> <code>S3</code> for Amazon S3</p> </li> <li> <p> <code>VirtualMachine</code> for virtual machines</p> </li> </ul>'
+            - description: '<p>Starts a job to restore a recovery point for one of the following resources:</p> <ul> <li> <p> <code>Aurora</code> for Amazon Aurora</p> </li> <li> <p> <code>DocumentDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p> </li> <li> <p> <code>CloudFormation</code> for CloudFormation</p> </li> <li> <p> <code>DynamoDB</code> for Amazon DynamoDB</p> </li> <li> <p> <code>EBS</code> for Amazon Elastic Block Store</p> </li> <li> <p> <code>EC2</code> for Amazon Elastic Compute Cloud</p> </li> <li> <p> <code>EFS</code> for Amazon Elastic File System</p> </li> <li> <p> <code>FSx</code> for Amazon FSx</p> </li> <li> <p> <code>Neptune</code> for Amazon Neptune</p> </li> <li> <p> <code>RDS</code> for Amazon Relational Database Service</p> </li> <li> <p> <code>Redshift</code> for Amazon Redshift</p> </li> <li> <p> <code>Storage Gateway</code> for Storage Gateway</p> </li> <li> <p> <code>S3</code> for Amazon S3</p> </li> <li> <p> <code>Timestream</code> for Amazon Timestream</p> </li> <li> <p> <code>VirtualMachine</code> for virtual machines</p> </li> </ul>'
     StopBackupJobInput:
       type: object
       title: StopBackupJobInput

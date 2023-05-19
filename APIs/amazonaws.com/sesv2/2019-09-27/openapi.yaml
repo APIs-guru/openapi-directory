@@ -1903,7 +1903,7 @@ paths:
         - name: EmailAddress
           in: path
           required: true
-          description: The contact's email addres.
+          description: The contact's email address.
           schema:
             type: string
     put:
@@ -1950,7 +1950,7 @@ paths:
         - name: EmailAddress
           in: path
           required: true
-          description: The contact's email addres.
+          description: The contact's email address.
           schema:
             type: string
       requestBody:
@@ -4194,6 +4194,72 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v2/email/dedicated-ip-pools/{PoolName}/scaling':
+    put:
+      operationId: PutDedicatedIpPoolScalingAttributes
+      description: <p>Used to convert a dedicated IP pool to a different scaling mode.</p> <note> <p> <code>MANAGED</code> pools cannot be converted to <code>STANDARD</code> scaling mode.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutDedicatedIpPoolScalingAttributesResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+      parameters:
+        - name: PoolName
+          in: path
+          required: true
+          description: The name of the dedicated IP pool.
+          schema:
+            type: string
+            description: The name of a dedicated IP pool.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ScalingMode
+              properties:
+                ScalingMode:
+                  description: <p>The scaling mode to apply to the dedicated IP pool.</p> <note> <p>Changing the scaling mode from <code>MANAGED</code> to <code>STANDARD</code> is not supported.</p> </note>
+                  type: string
+                  enum:
+                    - STANDARD
+                    - MANAGED
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v2/email/dedicated-ips/{IP}/warmup':
     put:
       operationId: PutDedicatedIpWarmupAttributes
@@ -5635,7 +5701,7 @@ components:
         EmailAddress:
           allOf:
             - $ref: '#/components/schemas/EmailAddress'
-            - description: The contact's email addres.
+            - description: The contact's email address.
         TopicPreferences:
           allOf:
             - $ref: '#/components/schemas/TopicPreferenceList'
@@ -6191,6 +6257,11 @@ components:
       description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
     PutDedicatedIpInPoolResponse:
       type: object
+      properties: {}
+      description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
+    PutDedicatedIpPoolScalingAttributesResponse:
+      type: object
+      example: {}
       properties: {}
       description: 'An HTTP 200 response if the request succeeds, or an error message if the request fails.'
     PutDedicatedIpWarmupAttributesResponse:
@@ -7364,7 +7435,7 @@ components:
         ScalingMode:
           allOf:
             - $ref: '#/components/schemas/ScalingMode'
-            - description: <p>The type of the dedicated IP pool.</p> <ul> <li> <p> <code>STANDARD</code> – A dedicated IP pool where the customer can control which IPs are part of the pool.</p> </li> <li> <p> <code>MANAGED</code> – A dedicated IP pool where the reputation and number of IPs is automatically managed by Amazon SES.</p> </li> </ul>
+            - description: <p>The type of the dedicated IP pool.</p> <ul> <li> <p> <code>STANDARD</code> – A dedicated IP pool where you can control which IPs are part of the pool.</p> </li> <li> <p> <code>MANAGED</code> – A dedicated IP pool where the reputation and number of IPs are automatically managed by Amazon SES.</p> </li> </ul>
       description: Contains information about a dedicated IP pool.
     DeleteConfigurationSetEventDestinationRequest:
       type: object
@@ -8398,6 +8469,17 @@ components:
             - $ref: '#/components/schemas/PoolName'
             - description: The name of the IP pool that you want to add the dedicated IP address to. You have to specify an IP pool that already exists.
       description: A request to move a dedicated IP address to a dedicated IP pool.
+    PutDedicatedIpPoolScalingAttributesRequest:
+      type: object
+      required:
+        - ScalingMode
+      title: PutDedicatedIpPoolScalingAttributesRequest
+      properties:
+        ScalingMode:
+          allOf:
+            - $ref: '#/components/schemas/ScalingMode'
+            - description: <p>The scaling mode to apply to the dedicated IP pool.</p> <note> <p>Changing the scaling mode from <code>MANAGED</code> to <code>STANDARD</code> is not supported.</p> </note>
+      description: A request to convert a dedicated IP pool to a different scaling mode.
     PutDedicatedIpWarmupAttributesRequest:
       type: object
       required:

@@ -1,0 +1,3325 @@
+openapi: 3.0.0
+info:
+  version: '2022-12-25'
+  x-release: v4
+  title: AWS Elemental MediaPackage v2
+  description: '<note> <p>This guide is intended for creating AWS Elemental MediaPackage resources in MediaPackage Version 2 (v2) starting from May 2023. To get started with MediaPackage v2, create your MediaPackage resources. There isn''t an automated process to migrate your resources from MediaPackage v1 to MediaPackage v2. </p> <p>The names of the entities that you use to access this API, like URLs and ARNs, all have the versioning information added, like "v2", to distinguish from the prior version. If you used MediaPackage prior to this release, you can''t use the MediaPackage v2 CLI or the MediaPackage v2 API to access any MediaPackage v1 resources.</p> <p>If you created resources in MediaPackage v1, use video on demand (VOD) workflows, and aren''t looking to migrate to MediaPackage v2 yet, see the <a href="https://docs.aws.amazon.com/mediapackage/latest/apireference/what-is.html">MediaPackage v1 Live API Reference</a>.</p> </note> <p>This is the AWS Elemental MediaPackage v2 Live REST API Reference. It describes all the MediaPackage API operations for live content in detail, and provides sample requests, responses, and errors for the supported web services protocols.</p> <p>We assume that you have the IAM permissions that you need to use MediaPackage via the REST API. We also assume that you are familiar with the features and operations of MediaPackage, as described in the AWS Elemental MediaPackage User Guide.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: mediapackagev2
+  x-aws-signingName: mediapackagev2
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/mediapackagev2-2022-12-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/mediapackagev2/'
+servers:
+  - url: 'http://mediapackagev2.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The mediapackagev2 multi-region endpoint
+  - url: 'https://mediapackagev2.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The mediapackagev2 multi-region endpoint
+  - url: 'http://mediapackagev2.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The mediapackagev2 endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://mediapackagev2.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The mediapackagev2 endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/channelGroup/{ChannelGroupName}/channel':
+    post:
+      operationId: CreateChannel
+      description: 'Create a channel to start receiving content streams. The channel represents the input to MediaPackage for incoming live content from an encoder such as AWS Elemental MediaLive. The channel receives content, and after packaging it, outputs it through an origin endpoint to downstream devices (such as video players or CDNs) that request the content. You can create only one channel with each request. We recommend that you spread out channels between channel groups, such as putting redundant channels in the same AWS Region in different channel groups.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChannelResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: x-amzn-client-token
+          in: header
+          required: false
+          description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
+          schema:
+            type: string
+            pattern: '[\S]+'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ChannelName
+              properties:
+                ChannelName:
+                  description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. You can''t change the name after you create the channel.'
+                  type: string
+                  pattern: '[a-zA-Z0-9_-]+'
+                  minLength: 1
+                  maxLength: 256
+                Description:
+                  description: Enter any descriptive text that helps you to identify the channel.
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+                tags:
+                  description: '<p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListChannels
+      description: 'Retrieves all channels in a specific channel group that are configured in AWS Elemental MediaPackage, including the origin endpoints that are associated with it.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token from the GET list request. Use the token to fetch the next page of results.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /channelGroup:
+    post:
+      operationId: CreateChannelGroup
+      description: 'Create a channel group to group your channels and origin endpoints. A channel group is the top-level resource that consists of channels and origin endpoints that are associated with it and that provides predictable URLs for stream delivery. All channels and origin endpoints within the channel group are guaranteed to share the DNS. You can create only one channel group with each request. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChannelGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: x-amzn-client-token
+          in: header
+          required: false
+          description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
+          schema:
+            type: string
+            pattern: '[\S]+'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ChannelGroupName
+              properties:
+                ChannelGroupName:
+                  description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region. You can''t use spaces in the name. You can''t change the name after you create the channel group.'
+                  type: string
+                  pattern: '[a-zA-Z0-9_-]+'
+                  minLength: 1
+                  maxLength: 256
+                Description:
+                  description: Enter any descriptive text that helps you to identify the channel group.
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+                tags:
+                  description: '<p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListChannelGroups
+      description: 'Retrieves all channel groups that are configured in AWS Elemental MediaPackage, including the channels and origin endpoints that are associated with it.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChannelGroupsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token from the GET list request. Use the token to fetch the next page of results.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint':
+    post:
+      operationId: CreateOriginEndpoint
+      description: 'The endpoint is attached to a channel, and represents the output of the live content. You can associate multiple endpoints to a single channel. Each endpoint gives players and downstream CDNs (such as Amazon CloudFront) access to the content for playback. Content can''t be served from a channel until it has an endpoint. You can create only one endpoint with each request. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOriginEndpointResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: x-amzn-client-token
+          in: header
+          required: false
+          description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
+          schema:
+            type: string
+            pattern: '[\S]+'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - OriginEndpointName
+                - ContainerType
+              properties:
+                OriginEndpointName:
+                  description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and must be unique for your account in the AWS Region and channel. You can''t use spaces in the name. You can''t change the name after you create the endpoint.'
+                  type: string
+                  pattern: '[a-zA-Z0-9_-]+'
+                  minLength: 1
+                  maxLength: 256
+                ContainerType:
+                  description: 'The type of container to attach to this origin endpoint. A container type is a file format that encapsulates one or more media streams, such as audio and video, into a single file. You can''t change the container type after you create the endpoint.'
+                  type: string
+                  enum:
+                    - TS
+                    - CMAF
+                Segment:
+                  description: 'The segment configuration, including the segment name, duration, and other configuration values.'
+                  type: object
+                  properties:
+                    SegmentDurationSeconds:
+                      allOf:
+                        - $ref: '#/components/schemas/SegmentSegmentDurationSecondsInteger'
+                        - description: 'The duration (in seconds) of each segment. Enter a value equal to, or a multiple of, the input segment duration. If the value that you enter is different from the input segment duration, MediaPackage rounds segments to the nearest multiple of the input segment duration.'
+                    SegmentName:
+                      allOf:
+                        - $ref: '#/components/schemas/SegmentSegmentNameString'
+                        - description: The name that describes the segment. The name is the base name of the segment used in all content manifests inside of the endpoint. You can't use spaces in the name.
+                    TsUseAudioRenditionGroup:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'When selected, MediaPackage bundles all audio tracks in a rendition group. All other tracks in the stream can be used with any audio rendition from the group.'
+                    IncludeIframeOnlyStreams:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'When selected, the stream set includes an additional I-frame only stream, along with the other tracks. If false, this extra stream is not included. MediaPackage generates an I-frame only stream from the first rendition in the manifest. The service inserts EXT-I-FRAMES-ONLY tags in the output manifest, and then generates and includes an I-frames only playlist in the stream. This playlist permits player functionality like fast forward and rewind.'
+                    TsIncludeDvbSubtitles:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'By default, MediaPackage excludes all digital video broadcasting (DVB) subtitles from the output. When selected, MediaPackage passes through DVB subtitles into the output.'
+                    Scte:
+                      allOf:
+                        - $ref: '#/components/schemas/Scte'
+                        - description: The SCTE configuration options in the segment settings.
+                    Encryption:
+                      $ref: '#/components/schemas/Encryption'
+                Description:
+                  description: Enter any descriptive text that helps you to identify the origin endpoint.
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+                StartoverWindowSeconds:
+                  description: 'The size of the window (in seconds) to create a window of the live stream that''s available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).'
+                  type: integer
+                  minimum: 60
+                  maximum: 1209600
+                HlsManifests:
+                  description: An HTTP live streaming (HLS) manifest configuration.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateHlsManifestConfiguration'
+                LowLatencyHlsManifests:
+                  description: A low-latency HLS manifest configuration.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateLowLatencyHlsManifestConfiguration'
+                Tags:
+                  description: '<p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListOriginEndpoints
+      description: Retrieves all origin endpoints in a specific channel that are configured in AWS Elemental MediaPackage.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOriginEndpointsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token from the GET list request. Use the token to fetch the next page of results.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/channelGroup/{ChannelGroupName}/channel/{ChannelName}/':
+    delete:
+      operationId: DeleteChannel
+      description: Delete a channel to stop AWS Elemental MediaPackage from receiving further content. You must delete the channel's origin endpoints before you can delete the channel.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteChannelResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetChannel
+      description: 'Retrieves the specified channel that''s configured in AWS Elemental MediaPackage, including the origin endpoints that are associated with it.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChannelResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    put:
+      operationId: UpdateChannel
+      description: '<p>Update the specified channel. You can edit if MediaPackage sends ingest or egress access logs to the CloudWatch log group, if content will be encrypted, the description on a channel, and your channel''s policy settings. You can''t edit the name of the channel or CloudFront distribution details.</p> <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateChannelResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: Any descriptive information that you want to add to the channel for future identification purposes.
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+  '/channelGroup/{ChannelGroupName}':
+    delete:
+      operationId: DeleteChannelGroup
+      description: 'Delete a channel group. You must delete the channel group''s channels and origin endpoints before you can delete the channel group. If you delete a channel group, you''ll lose access to the egress domain and will have to create a new channel group to replace it.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteChannelGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetChannelGroup
+      description: 'Retrieves the specified channel group that''s configured in AWS Elemental MediaPackage, including the channels and origin endpoints that are associated with it.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChannelGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    put:
+      operationId: UpdateChannelGroup
+      description: <p>Update the specified channel group. You can edit the description on a channel group for easier identification later from the AWS Elemental MediaPackage console. You can't edit the name of the channel group.</p> <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateChannelGroupResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: Any descriptive information that you want to add to the channel group for future identification purposes.
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+  '/channelGroup/{ChannelGroupName}/channel/{ChannelName}/policy':
+    delete:
+      operationId: DeleteChannelPolicy
+      description: Delete a channel policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteChannelPolicyResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetChannelPolicy
+      description: 'Retrieves the specified channel policy that''s configured in AWS Elemental MediaPackage. With policies, you can specify who has access to AWS resources and what actions they can perform on those resources.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChannelPolicyResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    put:
+      operationId: PutChannelPolicy
+      description: 'Attaches an IAM policy to the specified channel. With policies, you can specify who has access to AWS resources and what actions they can perform on those resources. You can attach only one policy with each request.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutChannelPolicyResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Policy
+              properties:
+                Policy:
+                  description: The policy to attach to the specified channel.
+                  type: string
+                  minLength: 0
+                  maxLength: 6144
+  '/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}':
+    delete:
+      operationId: DeleteOriginEndpoint
+      description: Origin endpoints can serve content until they're deleted. Delete the endpoint if it should no longer respond to playback requests. You must delete all endpoints from a channel before you can delete the channel.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOriginEndpointResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: OriginEndpointName
+          in: path
+          required: true
+          description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetOriginEndpoint
+      description: Retrieves the specified origin endpoint that's configured in AWS Elemental MediaPackage to obtain its playback URL and to view the packaging settings that it's currently using.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOriginEndpointResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: OriginEndpointName
+          in: path
+          required: true
+          description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    put:
+      operationId: UpdateOriginEndpoint
+      description: <p>Update the specified origin endpoint. Edit the packaging preferences on an endpoint to optimize the viewing experience. You can't edit the name of the endpoint.</p> <p>Any edits you make that impact the video output may not be reflected for a few minutes.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOriginEndpointResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: OriginEndpointName
+          in: path
+          required: true
+          description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ContainerType
+              properties:
+                ContainerType:
+                  description: 'The type of container attached to this origin endpoint. A container type is a file format that encapsulates one or more media streams, such as audio and video, into a single file. '
+                  type: string
+                  enum:
+                    - TS
+                    - CMAF
+                Segment:
+                  description: 'The segment configuration, including the segment name, duration, and other configuration values.'
+                  type: object
+                  properties:
+                    SegmentDurationSeconds:
+                      allOf:
+                        - $ref: '#/components/schemas/SegmentSegmentDurationSecondsInteger'
+                        - description: 'The duration (in seconds) of each segment. Enter a value equal to, or a multiple of, the input segment duration. If the value that you enter is different from the input segment duration, MediaPackage rounds segments to the nearest multiple of the input segment duration.'
+                    SegmentName:
+                      allOf:
+                        - $ref: '#/components/schemas/SegmentSegmentNameString'
+                        - description: The name that describes the segment. The name is the base name of the segment used in all content manifests inside of the endpoint. You can't use spaces in the name.
+                    TsUseAudioRenditionGroup:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'When selected, MediaPackage bundles all audio tracks in a rendition group. All other tracks in the stream can be used with any audio rendition from the group.'
+                    IncludeIframeOnlyStreams:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'When selected, the stream set includes an additional I-frame only stream, along with the other tracks. If false, this extra stream is not included. MediaPackage generates an I-frame only stream from the first rendition in the manifest. The service inserts EXT-I-FRAMES-ONLY tags in the output manifest, and then generates and includes an I-frames only playlist in the stream. This playlist permits player functionality like fast forward and rewind.'
+                    TsIncludeDvbSubtitles:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'By default, MediaPackage excludes all digital video broadcasting (DVB) subtitles from the output. When selected, MediaPackage passes through DVB subtitles into the output.'
+                    Scte:
+                      allOf:
+                        - $ref: '#/components/schemas/Scte'
+                        - description: The SCTE configuration options in the segment settings.
+                    Encryption:
+                      $ref: '#/components/schemas/Encryption'
+                Description:
+                  description: Any descriptive information that you want to add to the origin endpoint for future identification purposes.
+                  type: string
+                  minLength: 0
+                  maxLength: 1024
+                StartoverWindowSeconds:
+                  description: 'The size of the window (in seconds) to create a window of the live stream that''s available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).'
+                  type: integer
+                  minimum: 60
+                  maximum: 1209600
+                HlsManifests:
+                  description: An HTTP live streaming (HLS) manifest configuration.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateHlsManifestConfiguration'
+                LowLatencyHlsManifests:
+                  description: A low-latency HLS manifest configuration.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateLowLatencyHlsManifestConfiguration'
+  '/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/policy':
+    delete:
+      operationId: DeleteOriginEndpointPolicy
+      description: Delete an origin endpoint policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOriginEndpointPolicyResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: OriginEndpointName
+          in: path
+          required: true
+          description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetOriginEndpointPolicy
+      description: Retrieves the specified origin endpoint policy that's configured in AWS Elemental MediaPackage.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOriginEndpointPolicyResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: OriginEndpointName
+          in: path
+          required: true
+          description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+    post:
+      operationId: PutOriginEndpointPolicy
+      description: Attaches an IAM policy to the specified origin endpoint. You can attach only one policy with each request.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutOriginEndpointPolicyResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: ChannelGroupName
+          in: path
+          required: true
+          description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: ChannelName
+          in: path
+          required: true
+          description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+        - name: OriginEndpointName
+          in: path
+          required: true
+          description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 256
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Policy
+              properties:
+                Policy:
+                  description: The policy to attach to the specified origin endpoint.
+                  type: string
+                  minLength: 0
+                  maxLength: 6144
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags assigned to a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The ARN of the CloudWatch resource that you want to view tags for.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: '<p>Assigns one of more tags (key-value pairs) to the specified MediaPackage resource.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The ARN of the MediaPackage resource that you're adding tags to.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes one or more tags from the specified resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The ARN of the MediaPackage resource that you're removing tags from.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The list of tag keys to remove from the resource.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateChannelResponse:
+      type: object
+      required:
+        - Arn
+        - ChannelName
+        - ChannelGroupName
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description for your channel.
+        IngestEndpoints:
+          $ref: '#/components/schemas/IngestEndpointList'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The comma-separated list of tag key:value pairs assigned to the channel.'
+    TagValue:
+      type: string
+    ThrottlingException: {}
+    ConflictException: {}
+    InternalServerException: {}
+    AccessDeniedException: {}
+    ValidationException: {}
+    ResourceNotFoundException: {}
+    ServiceQuotaExceededException: {}
+    CreateChannelGroupResponse:
+      type: object
+      required:
+        - ChannelGroupName
+        - Arn
+        - EgressDomain
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        EgressDomain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The output domain where the source stream should be sent. Integrate the egress domain with a downstream CDN (such as Amazon CloudFront) or playback device.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel group was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel group was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description for your channel group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The comma-separated list of tag key:value pairs assigned to the channel group.'
+    CreateOriginEndpointResponse:
+      type: object
+      required:
+        - Arn
+        - ChannelGroupName
+        - ChannelName
+        - OriginEndpointName
+        - ContainerType
+        - Segment
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+        OriginEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel.'
+        ContainerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: The type of container attached to this origin endpoint.
+        Segment:
+          allOf:
+            - $ref: '#/components/schemas/Segment'
+            - description: 'The segment configuration, including the segment name, duration, and other configuration values.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the origin endpoint was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the origin endpoint was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The description for your origin endpoint.
+        StartoverWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window.
+        HlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/GetHlsManifests'
+            - description: An HTTP live streaming (HLS) manifest configuration.
+        LowLatencyHlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/GetLowLatencyHlsManifests'
+            - description: A low-latency HLS manifest configuration.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The comma-separated list of tag key:value pairs assigned to the origin endpoint.'
+    SegmentSegmentDurationSecondsInteger:
+      type: integer
+      minimum: 1
+      maximum: 30
+    SegmentSegmentNameString:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      minLength: 1
+      maxLength: 256
+    Boolean:
+      type: boolean
+    Scte:
+      type: object
+      properties:
+        ScteFilter:
+          allOf:
+            - $ref: '#/components/schemas/ScteFilterList'
+            - description: The SCTE-35 message types that you want to be treated as ad markers in the output.
+      description: The SCTE configuration.
+    Encryption:
+      type: object
+      required:
+        - EncryptionMethod
+        - SpekeKeyProvider
+      properties:
+        ConstantInitializationVector:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConstantInitializationVectorString'
+            - description: 'A 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don''t specify a value, then MediaPackage creates the constant initialization vector (IV).'
+        EncryptionMethod:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMethod'
+            - description: The encryption method to use.
+        KeyRotationIntervalSeconds:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyRotationIntervalSecondsInteger'
+            - description: '<p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don''t enter an interval, content keys aren''t rotated.</p> <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code> </p>'
+        SpekeKeyProvider:
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProvider'
+            - description: The parameters for the SPEKE key provider.
+      description: The parameters for encrypting content.
+    CreateHlsManifestConfiguration:
+      type: object
+      required:
+        - ManifestName
+      properties:
+        ManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ManifestName'
+            - description: 'A short short string that''s appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can''t use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        ChildManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ManifestName'
+            - description: 'A short string that''s appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default manifest name, index, with an added suffix to distinguish it from the manifest name. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        ScteHls:
+          $ref: '#/components/schemas/ScteHls'
+        ManifestWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/CreateHlsManifestConfigurationManifestWindowSecondsInteger'
+            - description: The total duration (in seconds) of the manifest's content.
+        ProgramDateTimeIntervalSeconds:
+          allOf:
+            - $ref: '#/components/schemas/CreateHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger'
+            - description: '<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don''t enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren''t included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>'
+      description: Create an HTTP live streaming (HLS) manifest configuration.
+    CreateLowLatencyHlsManifestConfiguration:
+      type: object
+      required:
+        - ManifestName
+      properties:
+        ManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ManifestName'
+            - description: 'A short short string that''s appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can''t use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        ChildManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ManifestName'
+            - description: 'A short string that''s appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default manifest name, index, with an added suffix to distinguish it from the manifest name. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        ScteHls:
+          $ref: '#/components/schemas/ScteHls'
+        ManifestWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/CreateLowLatencyHlsManifestConfigurationManifestWindowSecondsInteger'
+            - description: The total duration (in seconds) of the manifest's content.
+        ProgramDateTimeIntervalSeconds:
+          allOf:
+            - $ref: '#/components/schemas/CreateLowLatencyHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger'
+            - description: '<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don''t enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren''t included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>'
+      description: Create a low-latency HTTP live streaming (HLS) manifest configuration.
+    DeleteChannelResponse:
+      type: object
+      properties: {}
+    DeleteChannelGroupResponse:
+      type: object
+      properties: {}
+    DeleteChannelPolicyResponse:
+      type: object
+      properties: {}
+    DeleteOriginEndpointResponse:
+      type: object
+      properties: {}
+    DeleteOriginEndpointPolicyResponse:
+      type: object
+      properties: {}
+    GetChannelResponse:
+      type: object
+      required:
+        - Arn
+        - ChannelName
+        - ChannelGroupName
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description for your channel.
+        IngestEndpoints:
+          $ref: '#/components/schemas/IngestEndpointList'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The comma-separated list of tag key:value pairs assigned to the channel.'
+    GetChannelGroupResponse:
+      type: object
+      required:
+        - ChannelGroupName
+        - Arn
+        - EgressDomain
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        EgressDomain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The output domain where the source stream should be sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel group was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel group was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description for your channel group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - xml:
+                name: tags
+              description: 'The comma-separated list of tag key:value pairs assigned to the channel group.'
+    GetChannelPolicyResponse:
+      type: object
+      required:
+        - ChannelGroupName
+        - ChannelName
+        - Policy
+      properties:
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The policy assigned to the channel.
+    GetOriginEndpointResponse:
+      type: object
+      required:
+        - Arn
+        - ChannelGroupName
+        - ChannelName
+        - OriginEndpointName
+        - ContainerType
+        - Segment
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+        OriginEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel.'
+        ContainerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: The type of container attached to this origin endpoint.
+        Segment:
+          $ref: '#/components/schemas/Segment'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the origin endpoint was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the origin endpoint was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The description for your origin endpoint.
+        StartoverWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window.
+        HlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/GetHlsManifests'
+            - description: An HTTP live streaming (HLS) manifest configuration.
+        LowLatencyHlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/GetLowLatencyHlsManifests'
+            - description: A low-latency HLS manifest configuration.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The comma-separated list of tag key:value pairs assigned to the origin endpoint.'
+    GetOriginEndpointPolicyResponse:
+      type: object
+      required:
+        - ChannelGroupName
+        - ChannelName
+        - OriginEndpointName
+        - Policy
+      properties:
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+        OriginEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel.'
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The policy assigned to the origin endpoint.
+    ListChannelGroupsResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/ChannelGroupsList'
+            - description: The objects being returned.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token from the GET list request. Use the token to fetch the next page of results.
+    ListChannelsResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/ChannelList'
+            - description: The objects being returned.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token from the GET list request.
+    ListOriginEndpointsResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/OriginEndpointsList'
+            - description: The objects being returned.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token from the GET list request. Use the token to fetch the next page of results.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - xml:
+                name: tags
+              description: Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.
+    PutChannelPolicyResponse:
+      type: object
+      properties: {}
+    PutOriginEndpointPolicyResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+    UpdateChannelResponse:
+      type: object
+      required:
+        - Arn
+        - ChannelName
+        - ChannelGroupName
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description for your channel.
+        IngestEndpoints:
+          $ref: '#/components/schemas/IngestEndpointList'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - xml:
+                name: tags
+              description: 'The comma-separated list of tag key:value pairs assigned to the channel.'
+    UpdateChannelGroupResponse:
+      type: object
+      required:
+        - ChannelGroupName
+        - Arn
+        - EgressDomain
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        EgressDomain:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The output domain where the source stream is sent. Integrate the domain with a downstream CDN (such as Amazon CloudFront) or playback device.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel group was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel group was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description for your channel group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - xml:
+                name: tags
+              description: 'The comma-separated list of tag key:value pairs assigned to the channel group.'
+    UpdateOriginEndpointResponse:
+      type: object
+      required:
+        - Arn
+        - ChannelGroupName
+        - ChannelName
+        - OriginEndpointName
+        - ContainerType
+        - Segment
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN associated with the resource.
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group.'
+        OriginEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel.'
+        ContainerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: The type of container attached to this origin endpoint.
+        Segment:
+          allOf:
+            - $ref: '#/components/schemas/Segment'
+            - description: 'The segment configuration, including the segment name, duration, and other configuration values.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the origin endpoint was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the origin endpoint was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The description of the origin endpoint.
+        StartoverWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window.
+        HlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/GetHlsManifests'
+            - description: An HTTP live streaming (HLS) manifest configuration.
+        LowLatencyHlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/GetLowLatencyHlsManifests'
+            - description: A low-latency HLS manifest configuration.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - xml:
+                name: tags
+              description: 'The comma-separated list of tag key:value pairs assigned to the origin endpoint.'
+    AdMarkerHls:
+      type: string
+      enum:
+        - DATERANGE
+    String:
+      type: string
+    Timestamp:
+      type: string
+      format: date-time
+    ChannelGroupListConfiguration:
+      type: object
+      required:
+        - ChannelGroupName
+        - Arn
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel group was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel group was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Any descriptive information that you want to add to the channel group for future identification purposes.
+      description: The configuration of the channel group.
+    ChannelGroupsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelGroupListConfiguration'
+    ChannelListConfiguration:
+      type: object
+      required:
+        - Arn
+        - ChannelName
+        - ChannelGroupName
+        - CreatedAt
+        - ModifiedAt
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the channel was modified.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Any descriptive information that you want to add to the channel for future identification purposes.
+      description: The configuration of the channel.
+    ChannelList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChannelListConfiguration'
+    CmafEncryptionMethod:
+      type: string
+      enum:
+        - CENC
+        - CBCS
+    ContainerType:
+      type: string
+      enum:
+        - TS
+        - CMAF
+    ResourceName:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      minLength: 1
+      maxLength: 256
+    IdempotencyToken:
+      type: string
+      pattern: '[\S]+'
+      minLength: 1
+      maxLength: 256
+    ResourceDescription:
+      type: string
+      minLength: 0
+      maxLength: 1024
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateChannelGroupRequest:
+      type: object
+      required:
+        - ChannelGroupName
+      title: CreateChannelGroupRequest
+      properties:
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region. You can''t use spaces in the name. You can''t change the name after you create the channel group.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Enter any descriptive text that helps you to identify the channel group.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - xml:
+                name: tags
+              description: '<p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>'
+    CreateChannelRequest:
+      type: object
+      required:
+        - ChannelName
+      title: CreateChannelRequest
+      properties:
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. You can''t change the name after you create the channel.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Enter any descriptive text that helps you to identify the channel.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - xml:
+                name: tags
+              description: '<p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>'
+    IngestEndpointList:
+      type: array
+      description: The list of ingest endpoints.
+      items:
+        $ref: '#/components/schemas/IngestEndpoint'
+    ManifestName:
+      type: string
+      pattern: '[a-zA-Z0-9-]+'
+      minLength: 1
+      maxLength: 256
+    ScteHls:
+      type: object
+      properties:
+        AdMarkerHls:
+          allOf:
+            - $ref: '#/components/schemas/AdMarkerHls'
+            - description: '<p>Ad markers indicate when ads should be inserted during playback. If you include ad markers in the content stream in your upstream encoders, then you need to inform MediaPackage what to do with the ad markers in the output. Choose what you want MediaPackage to do with the ad markers.</p> <p>Value description: </p> <ul> <li> <p>DATERANGE - Insert EXT-X-DATERANGE tags to signal ad and program transition events in TS and CMAF manifests. If you use DATERANGE, you must set a programDateTimeIntervalSeconds value of 1 or higher. To learn more about DATERANGE, see <a href="http://docs.aws.amazon.com/mediapackage/latest/ug/scte-35-ad-marker-ext-x-daterange.html">SCTE-35 Ad Marker EXT-X-DATERANGE</a>.</p> </li> </ul>'
+      description: The SCTE configuration.
+    CreateHlsManifestConfigurationManifestWindowSecondsInteger:
+      type: integer
+      minimum: 30
+      maximum: 900
+    CreateHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger:
+      type: integer
+      minimum: 1
+      maximum: 1209600
+    CreateHlsManifests:
+      type: array
+      items:
+        $ref: '#/components/schemas/CreateHlsManifestConfiguration'
+    CreateLowLatencyHlsManifestConfigurationManifestWindowSecondsInteger:
+      type: integer
+      minimum: 30
+      maximum: 900
+    CreateLowLatencyHlsManifestConfigurationProgramDateTimeIntervalSecondsInteger:
+      type: integer
+      minimum: 1
+      maximum: 1209600
+    CreateLowLatencyHlsManifests:
+      type: array
+      items:
+        $ref: '#/components/schemas/CreateLowLatencyHlsManifestConfiguration'
+    Segment:
+      type: object
+      properties:
+        SegmentDurationSeconds:
+          allOf:
+            - $ref: '#/components/schemas/SegmentSegmentDurationSecondsInteger'
+            - description: 'The duration (in seconds) of each segment. Enter a value equal to, or a multiple of, the input segment duration. If the value that you enter is different from the input segment duration, MediaPackage rounds segments to the nearest multiple of the input segment duration.'
+        SegmentName:
+          allOf:
+            - $ref: '#/components/schemas/SegmentSegmentNameString'
+            - description: The name that describes the segment. The name is the base name of the segment used in all content manifests inside of the endpoint. You can't use spaces in the name.
+        TsUseAudioRenditionGroup:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When selected, MediaPackage bundles all audio tracks in a rendition group. All other tracks in the stream can be used with any audio rendition from the group.'
+        IncludeIframeOnlyStreams:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When selected, the stream set includes an additional I-frame only stream, along with the other tracks. If false, this extra stream is not included. MediaPackage generates an I-frame only stream from the first rendition in the manifest. The service inserts EXT-I-FRAMES-ONLY tags in the output manifest, and then generates and includes an I-frames only playlist in the stream. This playlist permits player functionality like fast forward and rewind.'
+        TsIncludeDvbSubtitles:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'By default, MediaPackage excludes all digital video broadcasting (DVB) subtitles from the output. When selected, MediaPackage passes through DVB subtitles into the output.'
+        Scte:
+          allOf:
+            - $ref: '#/components/schemas/Scte'
+            - description: The SCTE configuration options in the segment settings.
+        Encryption:
+          $ref: '#/components/schemas/Encryption'
+      description: 'The segment configuration, including the segment name, duration, and other configuration values.'
+    CreateOriginEndpointRequestStartoverWindowSecondsInteger:
+      type: integer
+      minimum: 60
+      maximum: 1209600
+    CreateOriginEndpointRequest:
+      type: object
+      required:
+        - OriginEndpointName
+        - ContainerType
+      title: CreateOriginEndpointRequest
+      properties:
+        OriginEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and must be unique for your account in the AWS Region and channel. You can''t use spaces in the name. You can''t change the name after you create the endpoint.'
+        ContainerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: 'The type of container to attach to this origin endpoint. A container type is a file format that encapsulates one or more media streams, such as audio and video, into a single file. You can''t change the container type after you create the endpoint.'
+        Segment:
+          allOf:
+            - $ref: '#/components/schemas/Segment'
+            - description: 'The segment configuration, including the segment name, duration, and other configuration values.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Enter any descriptive text that helps you to identify the origin endpoint.
+        StartoverWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/CreateOriginEndpointRequestStartoverWindowSecondsInteger'
+            - description: 'The size of the window (in seconds) to create a window of the live stream that''s available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).'
+        HlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/CreateHlsManifests'
+            - description: An HTTP live streaming (HLS) manifest configuration.
+        LowLatencyHlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/CreateLowLatencyHlsManifests'
+            - description: A low-latency HLS manifest configuration.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: '<p>A comma-separated list of tag key:value pairs that you define. For example:</p> <p> <code>"Key1": "Value1",</code> </p> <p> <code>"Key2": "Value2"</code> </p>'
+    Integer:
+      type: integer
+    GetHlsManifests:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetHlsManifestConfiguration'
+    GetLowLatencyHlsManifests:
+      type: array
+      items:
+        $ref: '#/components/schemas/GetLowLatencyHlsManifestConfiguration'
+    DeleteChannelGroupRequest:
+      type: object
+      title: DeleteChannelGroupRequest
+      properties: {}
+    DeleteChannelPolicyRequest:
+      type: object
+      title: DeleteChannelPolicyRequest
+      properties: {}
+    DeleteChannelRequest:
+      type: object
+      title: DeleteChannelRequest
+      properties: {}
+    DeleteOriginEndpointPolicyRequest:
+      type: object
+      title: DeleteOriginEndpointPolicyRequest
+      properties: {}
+    DeleteOriginEndpointRequest:
+      type: object
+      title: DeleteOriginEndpointRequest
+      properties: {}
+    DrmSystem:
+      type: string
+      enum:
+        - CLEAR_KEY_AES_128
+        - FAIRPLAY
+        - PLAYREADY
+        - WIDEVINE
+    EncryptionConstantInitializationVectorString:
+      type: string
+      pattern: '[0-9a-fA-F]+'
+      minLength: 32
+      maxLength: 32
+    EncryptionMethod:
+      type: object
+      properties:
+        TsEncryptionMethod:
+          allOf:
+            - $ref: '#/components/schemas/TsEncryptionMethod'
+            - description: The encryption method to use.
+        CmafEncryptionMethod:
+          allOf:
+            - $ref: '#/components/schemas/CmafEncryptionMethod'
+            - description: The encryption method to use.
+      description: The encryption type.
+    EncryptionKeyRotationIntervalSecondsInteger:
+      type: integer
+      minimum: 300
+      maximum: 31536000
+    SpekeKeyProvider:
+      type: object
+      required:
+        - EncryptionContractConfiguration
+        - ResourceId
+        - DrmSystems
+        - RoleArn
+        - Url
+      properties:
+        EncryptionContractConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionContractConfiguration'
+            - description: 'Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.'
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProviderResourceIdString'
+            - description: '<p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p> <p>The following example shows a resource ID: <code>MovieNight20171126093045</code> </p>'
+        DrmSystems:
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProviderDrmSystemsList'
+            - description: The DRM solution provider you're using to protect your content during distribution.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProviderRoleArnString'
+            - description: '<p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p> <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code> </p>'
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/SpekeKeyProviderUrlString'
+            - description: '<p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>'
+      description: The parameters for the SPEKE key provider.
+    PresetSpeke20Audio:
+      type: string
+      enum:
+        - PRESET_AUDIO_1
+        - PRESET_AUDIO_2
+        - PRESET_AUDIO_3
+        - SHARED
+        - UNENCRYPTED
+    PresetSpeke20Video:
+      type: string
+      enum:
+        - PRESET_VIDEO_1
+        - PRESET_VIDEO_2
+        - PRESET_VIDEO_3
+        - PRESET_VIDEO_4
+        - PRESET_VIDEO_5
+        - PRESET_VIDEO_6
+        - PRESET_VIDEO_7
+        - PRESET_VIDEO_8
+        - SHARED
+        - UNENCRYPTED
+    EncryptionContractConfiguration:
+      type: object
+      required:
+        - PresetSpeke20Audio
+        - PresetSpeke20Video
+      properties:
+        PresetSpeke20Audio:
+          allOf:
+            - $ref: '#/components/schemas/PresetSpeke20Audio'
+            - description: '<p>A collection of audio encryption presets.</p> <p>Value description: </p> <ul> <li> <p>PRESET-AUDIO-1 - Use one content key to encrypt all of the audio tracks in your stream.</p> </li> <li> <p>PRESET-AUDIO-2 - Use one content key to encrypt all of the stereo audio tracks and one content key to encrypt all of the multichannel audio tracks.</p> </li> <li> <p>PRESET-AUDIO-3 - Use one content key to encrypt all of the stereo audio tracks, one content key to encrypt all of the multichannel audio tracks with 3 to 6 channels, and one content key to encrypt all of the multichannel audio tracks with more than 6 channels.</p> </li> <li> <p>SHARED - Use the same content key for all of the audio and video tracks in your stream.</p> </li> <li> <p>UNENCRYPTED - Don''t encrypt any of the audio tracks in your stream.</p> </li> </ul>'
+        PresetSpeke20Video:
+          allOf:
+            - $ref: '#/components/schemas/PresetSpeke20Video'
+            - description: '<p>A collection of video encryption presets.</p> <p>Value description: </p> <ul> <li> <p>PRESET-VIDEO-1 - Use one content key to encrypt all of the video tracks in your stream.</p> </li> <li> <p>PRESET-VIDEO-2 - Use one content key to encrypt all of the SD video tracks and one content key for all HD and higher resolutions video tracks.</p> </li> <li> <p>PRESET-VIDEO-3 - Use one content key to encrypt all of the SD video tracks, one content key for HD video tracks and one content key for all UHD video tracks.</p> </li> <li> <p>PRESET-VIDEO-4 - Use one content key to encrypt all of the SD video tracks, one content key for HD video tracks, one content key for all UHD1 video tracks and one content key for all UHD2 video tracks.</p> </li> <li> <p>PRESET-VIDEO-5 - Use one content key to encrypt all of the SD video tracks, one content key for HD1 video tracks, one content key for HD2 video tracks, one content key for all UHD1 video tracks and one content key for all UHD2 video tracks.</p> </li> <li> <p>PRESET-VIDEO-6 - Use one content key to encrypt all of the SD video tracks, one content key for HD1 video tracks, one content key for HD2 video tracks and one content key for all UHD video tracks.</p> </li> <li> <p>PRESET-VIDEO-7 - Use one content key to encrypt all of the SD+HD1 video tracks, one content key for HD2 video tracks and one content key for all UHD video tracks.</p> </li> <li> <p>PRESET-VIDEO-8 - Use one content key to encrypt all of the SD+HD1 video tracks, one content key for HD2 video tracks, one content key for all UHD1 video tracks and one content key for all UHD2 video tracks.</p> </li> <li> <p>SHARED - Use the same content key for all of the video and audio tracks in your stream.</p> </li> <li> <p>UNENCRYPTED - Don''t encrypt any of the video tracks in your stream.</p> </li> </ul>'
+      description: 'Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.'
+    TsEncryptionMethod:
+      type: string
+      enum:
+        - AES_128
+        - SAMPLE_AES
+    GetChannelGroupRequest:
+      type: object
+      title: GetChannelGroupRequest
+      properties: {}
+    GetChannelPolicyRequest:
+      type: object
+      title: GetChannelPolicyRequest
+      properties: {}
+    GetChannelRequest:
+      type: object
+      title: GetChannelRequest
+      properties: {}
+    GetHlsManifestConfiguration:
+      type: object
+      required:
+        - ManifestName
+        - Url
+      properties:
+        ManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'A short short string that''s appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can''t use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The egress domain URL for stream delivery from MediaPackage.
+        ChildManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'A short string that''s appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        ManifestWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total duration (in seconds) of the manifest's content.
+        ProgramDateTimeIntervalSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don''t enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren''t included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>'
+        ScteHls:
+          $ref: '#/components/schemas/ScteHls'
+      description: Retrieve the HTTP live streaming (HLS) manifest configuration.
+    GetLowLatencyHlsManifestConfiguration:
+      type: object
+      required:
+        - ManifestName
+        - Url
+      properties:
+        ManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'A short short string that''s appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can''t use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The egress domain URL for stream delivery from MediaPackage.
+        ChildManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'A short string that''s appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        ManifestWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total duration (in seconds) of the manifest's content.
+        ProgramDateTimeIntervalSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don''t enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren''t included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player. ID3Timed metadata messages generate every 5 seconds whenever the content is ingested.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>'
+        ScteHls:
+          $ref: '#/components/schemas/ScteHls'
+      description: Retrieve the low-latency HTTP live streaming (HLS) manifest configuration.
+    GetOriginEndpointPolicyRequest:
+      type: object
+      title: GetOriginEndpointPolicyRequest
+      properties: {}
+    GetOriginEndpointRequest:
+      type: object
+      title: GetOriginEndpointRequest
+      properties: {}
+    IngestEndpoint:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The system-generated unique identifier for the IngestEndpoint.
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ingest domain URL where the source stream should be sent.
+      description: The ingest domain URL where the source stream should be sent.
+    ListResourceMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListChannelGroupsRequest:
+      type: object
+      title: ListChannelGroupsRequest
+      properties: {}
+    ListChannelsRequest:
+      type: object
+      title: ListChannelsRequest
+      properties: {}
+    ListHlsManifestConfiguration:
+      type: object
+      required:
+        - ManifestName
+      properties:
+        ManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'A short short string that''s appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can''t use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        ChildManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'A short string that''s appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The egress domain URL for stream delivery from MediaPackage.
+      description: List the HTTP live streaming (HLS) manifest configuration.
+    ListHlsManifests:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListHlsManifestConfiguration'
+    ListLowLatencyHlsManifestConfiguration:
+      type: object
+      required:
+        - ManifestName
+      properties:
+        ManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'A short short string that''s appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can''t use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        ChildManifestName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'A short string that''s appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don''t enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.'
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The egress domain URL for stream delivery from MediaPackage.
+      description: List the low-latency HTTP live streaming (HLS) manifest configuration.
+    ListLowLatencyHlsManifests:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListLowLatencyHlsManifestConfiguration'
+    ListOriginEndpointsRequest:
+      type: object
+      title: ListOriginEndpointsRequest
+      properties: {}
+    OriginEndpointsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OriginEndpointListConfiguration'
+    TagArn:
+      type: string
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    OriginEndpointListConfiguration:
+      type: object
+      required:
+        - Arn
+        - ChannelGroupName
+        - ChannelName
+        - OriginEndpointName
+        - ContainerType
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) associated with the resource.
+        ChannelGroupName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel group. The name is the primary identifier for the channel group, and must be unique for your account in the AWS Region.'
+        ChannelName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the channel. The name is the primary identifier for the channel, and must be unique for your account in the AWS Region and channel group. '
+        OriginEndpointName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: 'The name that describes the origin endpoint. The name is the primary identifier for the origin endpoint, and and must be unique for your account in the AWS Region and channel. '
+        ContainerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: 'The type of container attached to this origin endpoint. A container type is a file format that encapsulates one or more media streams, such as audio and video, into a single file. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Any descriptive information that you want to add to the origin endpoint for future identification purposes.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the origin endpoint was created.
+        ModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the origin endpoint was modified.
+        HlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/ListHlsManifests'
+            - description: An HTTP live streaming (HLS) manifest configuration.
+        LowLatencyHlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/ListLowLatencyHlsManifests'
+            - description: A low-latency HLS manifest configuration.
+      description: The configuration of the origin endpoint.
+    PolicyText:
+      type: string
+      minLength: 0
+      maxLength: 6144
+    PutChannelPolicyRequest:
+      type: object
+      required:
+        - Policy
+      title: PutChannelPolicyRequest
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/PolicyText'
+            - description: The policy to attach to the specified channel.
+    PutOriginEndpointPolicyRequest:
+      type: object
+      required:
+        - Policy
+      title: PutOriginEndpointPolicyRequest
+      properties:
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/PolicyText'
+            - description: The policy to attach to the specified origin endpoint.
+    ScteFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScteFilter'
+      minItems: 0
+      maxItems: 100
+    ScteFilter:
+      type: string
+      enum:
+        - SPLICE_INSERT
+        - BREAK
+        - PROVIDER_ADVERTISEMENT
+        - DISTRIBUTOR_ADVERTISEMENT
+        - PROVIDER_PLACEMENT_OPPORTUNITY
+        - DISTRIBUTOR_PLACEMENT_OPPORTUNITY
+        - PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY
+        - DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+        - PROGRAM
+    SpekeKeyProviderResourceIdString:
+      type: string
+      pattern: '[0-9a-zA-Z_-]+'
+      minLength: 1
+      maxLength: 256
+    SpekeKeyProviderDrmSystemsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DrmSystem'
+      minItems: 1
+      maxItems: 4
+    SpekeKeyProviderRoleArnString:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    SpekeKeyProviderUrlString:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - xml:
+                name: tags
+              description: Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateChannelGroupRequest:
+      type: object
+      title: UpdateChannelGroupRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Any descriptive information that you want to add to the channel group for future identification purposes.
+    UpdateChannelRequest:
+      type: object
+      title: UpdateChannelRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Any descriptive information that you want to add to the channel for future identification purposes.
+    UpdateOriginEndpointRequestStartoverWindowSecondsInteger:
+      type: integer
+      minimum: 60
+      maximum: 1209600
+    UpdateOriginEndpointRequest:
+      type: object
+      required:
+        - ContainerType
+      title: UpdateOriginEndpointRequest
+      properties:
+        ContainerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: 'The type of container attached to this origin endpoint. A container type is a file format that encapsulates one or more media streams, such as audio and video, into a single file. '
+        Segment:
+          allOf:
+            - $ref: '#/components/schemas/Segment'
+            - description: 'The segment configuration, including the segment name, duration, and other configuration values.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: Any descriptive information that you want to add to the origin endpoint for future identification purposes.
+        StartoverWindowSeconds:
+          allOf:
+            - $ref: '#/components/schemas/UpdateOriginEndpointRequestStartoverWindowSecondsInteger'
+            - description: 'The size of the window (in seconds) to create a window of the live stream that''s available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).'
+        HlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/CreateHlsManifests'
+            - description: An HTTP live streaming (HLS) manifest configuration.
+        LowLatencyHlsManifests:
+          allOf:
+            - $ref: '#/components/schemas/CreateLowLatencyHlsManifests'
+            - description: A low-latency HLS manifest configuration.
+security:
+  - hmac: []
