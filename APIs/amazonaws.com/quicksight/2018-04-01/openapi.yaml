@@ -9393,6 +9393,118 @@ paths:
                   items:
                     $ref: '#/components/schemas/ResourcePermission'
                   maxItems: 100
+  '/accounts/{AwsAccountId}/asset-bundle-export-jobs/{AssetBundleExportJobId}':
+    get:
+      operationId: DescribeAssetBundleExportJob
+      description: '<p>Describes an existing export job.</p> <p>Poll job descriptions after a job starts to know the status of the job. When a job succeeds, a URL is provided to download the exported assets'' data from. Download URLs are valid for five minutes after they are generated. You can call the <code>DescribeAssetBundleExportJob</code> API for a new download URL as needed.</p> <p>Job descriptions are available for 14 days after the job starts.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAssetBundleExportJobResponse'
+        '480':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID of the Amazon Web Services account the export job is executed in. '
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AssetBundleExportJobId
+          in: path
+          required: true
+          description: The ID of the job that you want described. The job ID is set when you start a new job with a <code>StartAssetBundleExportJob</code> API call.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 512
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/asset-bundle-import-jobs/{AssetBundleImportJobId}':
+    get:
+      operationId: DescribeAssetBundleImportJob
+      description: <p>Describes an existing import job.</p> <p>Poll job descriptions after starting a job to know when it has succeeded or failed. Job descriptions are available for 14 days after job starts.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAssetBundleImportJobResponse'
+        '480':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID of the Amazon Web Services account the import job was executed in. '
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: AssetBundleImportJobId
+          in: path
+          required: true
+          description: The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleImportJob</code> API call.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 512
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/definition':
     get:
       operationId: DescribeDashboardDefinition
@@ -11764,6 +11876,176 @@ paths:
           in: query
           required: false
           description: The maximum number of results to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/asset-bundle-export-jobs':
+    get:
+      operationId: ListAssetBundleExportJobs
+      description: 'Lists all asset bundle export jobs that have been taken place in the last 14 days. Jobs created more than 14 days ago are deleted forever and are not returned. If you are using the same job ID for multiple jobs, <code>ListAssetBundleExportJobs</code> only returns the most recent job that uses the repeated job ID.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssetBundleExportJobsResponse'
+        '480':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID of the Amazon Web Services account that the export jobs were executed in. '
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: 'The token for the next set of results, or null if there are no more results.'
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/asset-bundle-import-jobs':
+    get:
+      operationId: ListAssetBundleImportJobs
+      description: 'Lists all asset bundle import jobs that have taken place in the last 14 days. Jobs created more than 14 days ago are deleted forever and are not returned. If you are using the same job ID for multiple jobs, <code>ListAssetBundleImportJobs</code> only returns the most recent job that uses the repeated job ID.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssetBundleImportJobsResponse'
+        '480':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that the import jobs were executed in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: next-token
+          in: query
+          required: false
+          description: 'The token for the next set of results, or null if there are no more results.'
+          schema:
+            type: string
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to be returned per request.
           schema:
             type: integer
             minimum: 1
@@ -14407,6 +14689,287 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/asset-bundle-export-jobs/export':
+    post:
+      operationId: StartAssetBundleExportJob
+      description: '<p>Starts an Asset Bundle export job.</p> <p>An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a <code>DescribeAssetBundleExportJob</code> API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a <code>DescribeAssetBundleExportJob</code> API call. Each Amazon QuickSight account can run up to 10 export jobs concurrently.</p> <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartAssetBundleExportJobResponse'
+        '480':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account to export assets from.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AssetBundleExportJobId
+                - ResourceArns
+                - ExportFormat
+              properties:
+                AssetBundleExportJobId:
+                  description: 'The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.'
+                  type: string
+                  pattern: '[\w\-]+'
+                  minLength: 1
+                  maxLength: 512
+                ResourceArns:
+                  description: <p>An array of resource ARNs to export. The following resources are supported.</p> <ul> <li> <p> <code>Analysis</code> </p> </li> <li> <p> <code>Dashboard</code> </p> </li> <li> <p> <code>DataSet</code> </p> </li> <li> <p> <code>DataSource</code> </p> </li> <li> <p> <code>RefreshSchedule</code> </p> </li> <li> <p> <code>Theme</code> </p> </li> <li> <p> <code>VPCConnection</code> </p> </li> </ul> <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Arn'
+                  minItems: 1
+                  maxItems: 100
+                IncludeAllDependencies:
+                  description: 'A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the <code>ResourceArns</code> parameter. If you set <code>IncludeAllDependencies</code> to <code>TRUE</code>, any theme, dataset, and dataource resource that is a dependency of the dashboard is also exported.'
+                  type: boolean
+                ExportFormat:
+                  description: The export data format.
+                  type: string
+                  enum:
+                    - CLOUDFORMATION_JSON
+                    - QUICKSIGHT_JSON
+                CloudFormationOverridePropertyConfiguration:
+                  description: An optional collection of CloudFormation property configurations that control how the export job is generated.
+                  type: object
+                  properties:
+                    ResourceIdOverrideConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleExportJobResourceIdOverrideConfiguration'
+                        - description: An optional list of structures that control how resource IDs are parameterized in the returned CloudFormation template.
+                    VPCConnections:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleExportJobVPCConnectionOverridePropertiesList'
+                        - description: An optional list of structures that control how <code>VPCConnection</code> resources are parameterized in the returned CloudFormation template.
+                    RefreshSchedules:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleExportJobRefreshScheduleOverridePropertiesList'
+                        - description: An optional list of structures that control how <code>RefreshSchedule</code> resources are parameterized in the returned CloudFormation template.
+                    DataSources:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleExportJobDataSourceOverridePropertiesList'
+                        - description: An optional list of structures that control how <code>DataSource</code> resources are parameterized in the returned CloudFormation template.
+                    DataSets:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleExportJobDataSetOverridePropertiesList'
+                        - description: An optional list of structures that control how <code>DataSet</code> resources are parameterized in the returned CloudFormation template.
+                    Themes:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleExportJobThemeOverridePropertiesList'
+                        - description: An optional list of structures that control how <code>Theme</code> resources are parameterized in the returned CloudFormation template.
+                    Analyses:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleExportJobAnalysisOverridePropertiesList'
+                        - description: An optional list of structures that control how <code>Analysis</code> resources are parameterized in the returned CloudFormation template.
+                    Dashboards:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleExportJobDashboardOverridePropertiesList'
+                        - description: An optional list of structures that control how <code>Dashboard</code> resources are parameterized in the returned CloudFormation template.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/asset-bundle-import-jobs/import':
+    post:
+      operationId: StartAssetBundleImportJob
+      description: '<p>Starts an Asset Bundle import job.</p> <p>An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 10 import jobs concurrently.</p> <p>The API caller must have the necessary <code>"create"</code>, <code>"describe"</code>, and <code>"update"</code> permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartAssetBundleImportJobResponse'
+        '480':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: 'The ID of the Amazon Web Services account to import assets into. '
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AssetBundleImportJobId
+                - AssetBundleImportSource
+              properties:
+                AssetBundleImportJobId:
+                  description: 'The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.'
+                  type: string
+                  pattern: '[\w\-]+'
+                  minLength: 1
+                  maxLength: 512
+                AssetBundleImportSource:
+                  description: The source of the asset bundle zip file that contains the data that you want to import.
+                  type: object
+                  properties:
+                    Body:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportBodyBlob'
+                        - description: '<p>The bytes of the Base64 encoded asset bundle import zip file. This file can''t exceed 20MB.</p> <p>If you are calling the APIs from the Amazon Web Services Java, JavaScript, Python, or PHP SDKs, the SDK encodes Base64 automatically to allow the direct setting of the zip file''s bytes. If you are using a SDK of a different language or are receiving related errors, try to Base64 encode your data.</p>'
+                    S3Uri:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Uri'
+                        - description: The Amazon S3 uri for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 20MB.
+                OverrideParameters:
+                  description: A list of overrides that modify the asset bundle resource configuration before the resource is imported.
+                  type: object
+                  properties:
+                    ResourceIdOverrideConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportJobResourceIdOverrideConfiguration'
+                        - description: An optional structure that configures resource ID overrides to be applied within the import job.
+                    VPCConnections:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportJobVPCConnectionOverrideParametersList'
+                        - description: A list of overrides for any <code>VPCConnection</code> resources that are present in the asset bundle that is imported.
+                    RefreshSchedules:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportJobRefreshScheduleOverrideParametersList'
+                        - description: A list of overrides for any <code>RefreshSchedule</code> resources that are present in the asset bundle that is imported.
+                    DataSources:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportJobDataSourceOverrideParametersList'
+                        - description: ' A list of overrides for any <code>DataSource</code> resources that are present in the asset bundle that is imported.'
+                    DataSets:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportJobDataSetOverrideParametersList'
+                        - description: A list of overrides for any <code>DataSet</code> resources that are present in the asset bundle that is imported.
+                    Themes:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportJobThemeOverrideParametersList'
+                        - description: A list of overrides for any <code>Theme</code> resources that are present in the asset bundle that is imported.
+                    Analyses:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportJobAnalysisOverrideParametersList'
+                        - description: A list of overrides for any <code>Analysis</code> resources that are present in the asset bundle that is imported.
+                    Dashboards:
+                      allOf:
+                        - $ref: '#/components/schemas/AssetBundleImportJobDashboardOverrideParametersList'
+                        - description: A list of overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.
+                FailureAction:
+                  description: '<p>The failure action for the import job.</p> <p>If you choose <code>ROLLBACK</code>, failed import jobs will attempt to undo any asset changes caused by the failed job.</p> <p>If you choose <code>DO_NOTHING</code>, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly leaving the Amazon QuickSight account in an inconsistent state.</p>'
+                  type: string
+                  enum:
+                    - DO_NOTHING
+                    - ROLLBACK
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/resources/{ResourceArn}/tags#keys':
     delete:
       operationId: UntagResource
@@ -15572,7 +16135,7 @@ components:
       properties:
         Username:
           allOf:
-            - $ref: '#/components/schemas/Username'
+            - $ref: '#/components/schemas/DbUsername'
             - description: User name.
         Password:
           allOf:
@@ -16636,6 +17199,112 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Web Services request ID for this operation.
+    DescribeAssetBundleExportJobResponse:
+      type: object
+      properties:
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobStatus'
+            - description: <p>Indicates tha status of a job through its queueing and execution.</p> <p>Poll this <code>DescribeAssetBundleExportApi</code> until <code>JobStatus</code> is either <code>SUCCESSFUL</code> or <code>FAILED</code>.</p>
+        DownloadUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The URL to download the exported asset bundle data from.</p> <p>This URL is available only after the job has succeeded. This URL is valid for 5 minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed.</p> <p>The downloaded asset bundle is a zip file named <code>assetbundle-{jobId}.qs</code>. The file has a <code>.qs</code> extension.</p> <p>This URL can''t be used in a <code>StartAssetBundleImportJob</code> API call and should only be used for download purposes.</p>'
+        Errors:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobErrorList'
+            - description: <p>An array of error records that describes any failures that occurred during the export job processing.</p> <p>Error records accumulate while the job runs. The complete set of error records is available after the job has completed and failed.</p>
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the export job.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the export job was created.
+        AssetBundleExportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleExportJob</code> API call.
+        AwsAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccountId'
+            - description: 'The ID of the Amazon Web Services account that the export job was executed in. '
+        ResourceArns:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleResourceArns'
+            - description: A list of resource ARNs that exported with the job.
+        IncludeAllDependencies:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The include dependencies flag.
+        ExportFormat:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportFormat'
+            - description: The format of the export.
+        CloudFormationOverridePropertyConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleCloudFormationOverridePropertyConfiguration'
+            - description: The CloudFormation override property configuration for the export job.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the response.
+    DescribeAssetBundleImportJobResponse:
+      type: object
+      properties:
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobStatus'
+            - description: <p>Indicates tha status of a job through its queueing and execution.</p> <p>Poll this <code>DescribeAssetBundleImport</code> API until <code>JobStatus</code> returns one of the following values.</p> <ul> <li> <p> <code>SUCCESSFUL</code> </p> </li> <li> <p> <code>FAILED</code> </p> </li> <li> <p> <code>FAILED_ROLLBACK_COMPLETED</code> </p> </li> <li> <p> <code>FAILED_ROLLBACK_ERROR</code> </p> </li> </ul>
+        Errors:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobErrorList'
+            - description: <p>An array of error records that describes any failures that occurred during the export job processing.</p> <p>Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.</p>
+        RollbackErrors:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobErrorList'
+            - description: <p>An array of error records that describes any failures that occurred while an import job was attempting a rollback.</p> <p>Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.</p>
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the import job.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the import job was created.
+        AssetBundleImportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleImportJob</code> API call.
+        AwsAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccountId'
+            - description: 'The ID of the Amazon Web Services account the import job was executed in. '
+        AssetBundleImportSource:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportSourceDescription'
+            - description: The source of the asset bundle zip file that contains the data that is imported by the job.
+        OverrideParameters:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobOverrideParameters'
+            - description: Optional overrides to be applied to the resource configuration before import.
+        FailureAction:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportFailureAction'
+            - description: The failure action for the import job.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the response.
     DescribeDashboardResponse:
       type: object
       properties:
@@ -17436,6 +18105,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Web Services request ID for this operation.
+    ListAssetBundleExportJobsResponse:
+      type: object
+      properties:
+        AssetBundleExportJobSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobSummaryList'
+            - description: A list of export job summaries.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of results, or null if there are no more results.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request.
+    ListAssetBundleImportJobsResponse:
+      type: object
+      properties:
+        AssetBundleImportJobSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobSummaryList'
+            - description: A list of import job summaries.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of results, or null if there are no more results.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the response.
     ListDashboardVersionsResponse:
       type: object
       properties:
@@ -18191,6 +18898,152 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'The value of the named item, in this case <code>GROUP_NAME</code>, that you want to use as a filter.'
       description: A <code>GroupSearchFilter</code> object that you want to apply to your search.
+    StartAssetBundleExportJobResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the export job.
+        AssetBundleExportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: 'The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services response ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the response.
+    AssetBundleExportJobResourceIdOverrideConfiguration:
+      type: object
+      properties:
+        PrefixForAllResources:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.
+      description: An optional structure that configures resource ID overrides for the export job.
+    AssetBundleExportJobVPCConnectionOverridePropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobVPCConnectionOverrideProperties'
+      minItems: 1
+      maxItems: 50
+    AssetBundleExportJobRefreshScheduleOverridePropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobRefreshScheduleOverrideProperties'
+      minItems: 1
+      maxItems: 50
+    AssetBundleExportJobDataSourceOverridePropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobDataSourceOverrideProperties'
+      minItems: 1
+      maxItems: 50
+    AssetBundleExportJobDataSetOverridePropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobDataSetOverrideProperties'
+      minItems: 1
+      maxItems: 50
+    AssetBundleExportJobThemeOverridePropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobThemeOverrideProperties'
+      minItems: 1
+      maxItems: 50
+    AssetBundleExportJobAnalysisOverridePropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobAnalysisOverrideProperties'
+      minItems: 1
+      maxItems: 50
+    AssetBundleExportJobDashboardOverridePropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobDashboardOverrideProperties'
+      minItems: 1
+      maxItems: 50
+    StartAssetBundleImportJobResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the import job.
+        AssetBundleImportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: 'The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.'
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services response ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the response.
+    AssetBundleImportBodyBlob:
+      type: string
+      minLength: 0
+      maxLength: 20971520
+      format: password
+    S3Uri:
+      type: string
+      pattern: '^(https|s3)://([^/]+)/?(.*)$'
+    AssetBundleImportJobResourceIdOverrideConfiguration:
+      type: object
+      properties:
+        PrefixForAllResources:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.
+      description: An optional structure that configures resource ID overrides for the import job
+    AssetBundleImportJobVPCConnectionOverrideParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobVPCConnectionOverrideParameters'
+      minItems: 1
+      maxItems: 50
+    AssetBundleImportJobRefreshScheduleOverrideParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobRefreshScheduleOverrideParameters'
+      minItems: 1
+      maxItems: 50
+    AssetBundleImportJobDataSourceOverrideParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobDataSourceOverrideParameters'
+      minItems: 1
+      maxItems: 50
+    AssetBundleImportJobDataSetOverrideParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobDataSetOverrideParameters'
+      minItems: 1
+      maxItems: 50
+    AssetBundleImportJobThemeOverrideParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobThemeOverrideParameters'
+      minItems: 1
+      maxItems: 50
+    AssetBundleImportJobAnalysisOverrideParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobAnalysisOverrideParameters'
+      minItems: 1
+      maxItems: 50
+    AssetBundleImportJobDashboardOverrideParametersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobDashboardOverrideParameters'
+      minItems: 1
+      maxItems: 50
     TagResourceResponse:
       type: object
       properties:
@@ -19398,6 +20251,726 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Arn'
+    AssetBundleCloudFormationOverridePropertyConfiguration:
+      type: object
+      properties:
+        ResourceIdOverrideConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobResourceIdOverrideConfiguration'
+            - description: An optional list of structures that control how resource IDs are parameterized in the returned CloudFormation template.
+        VPCConnections:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobVPCConnectionOverridePropertiesList'
+            - description: An optional list of structures that control how <code>VPCConnection</code> resources are parameterized in the returned CloudFormation template.
+        RefreshSchedules:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobRefreshScheduleOverridePropertiesList'
+            - description: An optional list of structures that control how <code>RefreshSchedule</code> resources are parameterized in the returned CloudFormation template.
+        DataSources:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobDataSourceOverridePropertiesList'
+            - description: An optional list of structures that control how <code>DataSource</code> resources are parameterized in the returned CloudFormation template.
+        DataSets:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobDataSetOverridePropertiesList'
+            - description: An optional list of structures that control how <code>DataSet</code> resources are parameterized in the returned CloudFormation template.
+        Themes:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobThemeOverridePropertiesList'
+            - description: An optional list of structures that control how <code>Theme</code> resources are parameterized in the returned CloudFormation template.
+        Analyses:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobAnalysisOverridePropertiesList'
+            - description: An optional list of structures that control how <code>Analysis</code> resources are parameterized in the returned CloudFormation template.
+        Dashboards:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobDashboardOverridePropertiesList'
+            - description: An optional list of structures that control how <code>Dashboard</code> resources are parameterized in the returned CloudFormation template.
+      description: An optional collection of CloudFormation property configurations that control how the export job is generated.
+    AssetBundleExportFormat:
+      type: string
+      enum:
+        - CLOUDFORMATION_JSON
+        - QUICKSIGHT_JSON
+    AssetBundleExportJobAnalysisPropertyToOverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobAnalysisPropertyToOverride'
+      minItems: 1
+      maxItems: 10
+    AssetBundleExportJobAnalysisOverrideProperties:
+      type: object
+      required:
+        - Properties
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the specific <code>Analysis</code> resource whose override properties are configured in this structure.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobAnalysisPropertyToOverrideList'
+            - description: A list of <code>Analysis</code> resource properties to generate variables for in the returned CloudFormation template.
+      description: Controls how a specific <code>Analysis</code> resource is parameterized in the returned CloudFormation template.
+    AssetBundleExportJobAnalysisPropertyToOverride:
+      type: string
+      enum:
+        - Name
+    AssetBundleExportJobDashboardPropertyToOverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobDashboardPropertyToOverride'
+      minItems: 1
+      maxItems: 10
+    AssetBundleExportJobDashboardOverrideProperties:
+      type: object
+      required:
+        - Properties
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the specific <code>Dashboard</code> resource whose override properties are configured in this structure.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobDashboardPropertyToOverrideList'
+            - description: A list of <code>Dashboard</code> resource properties to generate variables for in the returned CloudFormation template.
+      description: Controls how a specific <code>Dashboard</code> resource is parameterized in the returned CloudFormation template.
+    AssetBundleExportJobDashboardPropertyToOverride:
+      type: string
+      enum:
+        - Name
+    AssetBundleExportJobDataSetPropertyToOverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobDataSetPropertyToOverride'
+      minItems: 1
+      maxItems: 10
+    AssetBundleExportJobDataSetOverrideProperties:
+      type: object
+      required:
+        - Properties
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the specific <code>DataSet</code> resource whose override properties are configured in this structure.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobDataSetPropertyToOverrideList'
+            - description: A list of <code>DataSet</code> resource properties to generate variables for in the returned CloudFormation template.
+      description: Controls how a specific <code>DataSet</code> resource is parameterized in the returned CloudFormation template.
+    AssetBundleExportJobDataSetPropertyToOverride:
+      type: string
+      enum:
+        - Name
+    AssetBundleExportJobDataSourcePropertyToOverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobDataSourcePropertyToOverride'
+      minItems: 1
+      maxItems: 10
+    AssetBundleExportJobDataSourceOverrideProperties:
+      type: object
+      required:
+        - Properties
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the specific <code>DataSource</code> resource whose override properties are configured in this structure.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobDataSourcePropertyToOverrideList'
+            - description: A list of <code>DataSource</code> resource properties to generate variables for in the returned CloudFormation template.
+      description: Controls how a specific <code>DataSource</code> resource is parameterized in the returned CloudFormation template.
+    AssetBundleExportJobDataSourcePropertyToOverride:
+      type: string
+      enum:
+        - Name
+        - DisableSsl
+        - SecretArn
+        - Username
+        - Password
+        - Domain
+        - WorkGroup
+        - Host
+        - Port
+        - Database
+        - DataSetName
+        - Catalog
+        - InstanceId
+        - ClusterId
+        - ManifestFileLocation
+        - Warehouse
+        - RoleArn
+    AssetBundleExportJobError:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the resource whose processing caused an error.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The specific error type of the error that occurred.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A description of the error.
+      description: Describes an error that occurred during an Asset Bundle export job.
+    AssetBundleExportJobErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobError'
+    AssetBundleExportJobRefreshSchedulePropertyToOverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobRefreshSchedulePropertyToOverride'
+      minItems: 1
+      maxItems: 10
+    AssetBundleExportJobRefreshScheduleOverrideProperties:
+      type: object
+      required:
+        - Properties
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the specific <code>RefreshSchedule</code> resource whose override properties are configured in this structure.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobRefreshSchedulePropertyToOverrideList'
+            - description: A list of <code>RefreshSchedule</code> resource properties to generate variables for in the returned CloudFormation template.
+      description: Controls how a specific <code>RefreshSchedule</code> resource is parameterized in the returned CloudFormation template.
+    AssetBundleExportJobRefreshSchedulePropertyToOverride:
+      type: string
+      enum:
+        - StartAfterDateTime
+    AssetBundleExportJobStatus:
+      type: string
+      enum:
+        - QUEUED_FOR_IMMEDIATE_EXECUTION
+        - IN_PROGRESS
+        - SUCCESSFUL
+        - FAILED
+    AssetBundleExportJobSummary:
+      type: object
+      properties:
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobStatus'
+            - description: The current status of the export job.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the export job.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the export job was created.
+        AssetBundleExportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: The ID of the export job.
+        IncludeAllDependencies:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The flag that determines the inclusion of resource dependencies in the returned asset bundle.
+        ExportFormat:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportFormat'
+            - description: The format for the export job.
+      description: A summary of the export job that includes details of the job's configuration and its current status.
+    AssetBundleExportJobSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobSummary'
+    AssetBundleExportJobThemePropertyToOverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobThemePropertyToOverride'
+      minItems: 1
+      maxItems: 10
+    AssetBundleExportJobThemeOverrideProperties:
+      type: object
+      required:
+        - Properties
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the specific <code>Theme</code> resource whose override properties are configured in this structure.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobThemePropertyToOverrideList'
+            - description: A list of <code>Theme</code> resource properties to generate variables for in the returned CloudFormation template.
+      description: Controls how a specific <code>Theme</code> resource is parameterized in the returned CloudFormation template.
+    AssetBundleExportJobThemePropertyToOverride:
+      type: string
+      enum:
+        - Name
+    AssetBundleExportJobVPCConnectionPropertyToOverrideList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleExportJobVPCConnectionPropertyToOverride'
+      minItems: 1
+      maxItems: 10
+    AssetBundleExportJobVPCConnectionOverrideProperties:
+      type: object
+      required:
+        - Properties
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the specific <code>VPCConnection</code> resource whose override properties are configured in this structure.
+        Properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportJobVPCConnectionPropertyToOverrideList'
+            - description: A list of <code>VPCConnection</code> resource properties to generate variables for in the returned CloudFormation template.
+      description: Controls how a specific <code>VPCConnection</code> resource is parameterized in the outputted CloudFormation template.
+    AssetBundleExportJobVPCConnectionPropertyToOverride:
+      type: string
+      enum:
+        - Name
+        - DnsResolvers
+        - RoleArn
+    AssetBundleImportFailureAction:
+      type: string
+      enum:
+        - DO_NOTHING
+        - ROLLBACK
+    ResourceId:
+      type: string
+    AssetBundleImportJobAnalysisOverrideParameters:
+      type: object
+      required:
+        - AnalysisId
+      properties:
+        AnalysisId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the analysis that you ant to apply overrides to.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: A new name for the analysis.
+      description: The override parameters for a single analysis that is being imported.
+    AssetBundleImportJobDashboardOverrideParameters:
+      type: object
+      required:
+        - DashboardId
+      properties:
+        DashboardId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the dashboard that you want to apply overrides to.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: A new name for the dashboard.
+      description: The override parameters for a single dashboard that is being imported.
+    AssetBundleImportJobDataSetOverrideParameters:
+      type: object
+      required:
+        - DataSetId
+      properties:
+        DataSetId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the dataset to apply overrides to.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: A new name for the dataset.
+      description: The override parameters for a single dataset that is being imported.
+    DbUsername:
+      type: string
+      minLength: 1
+      maxLength: 64
+    Password:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    AssetBundleImportJobDataSourceCredentialPair:
+      type: object
+      required:
+        - Username
+        - Password
+      properties:
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/DbUsername'
+            - description: The username for the data source connection.
+        Password:
+          allOf:
+            - $ref: '#/components/schemas/Password'
+            - description: The password for the data source connection.
+      description: A username and password credential pair to use to import a data source resource.
+    AssetBundleImportJobDataSourceCredentials:
+      type: object
+      properties:
+        CredentialPair:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobDataSourceCredentialPair'
+            - description: A username and password credential pair to be used to create the imported data source. Leave this field blank if you are using an Secrets Manager Secret to provide credentials.
+        SecretArn:
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: The ARN of the Secrets Manager Secret to be used to create the imported data source leave this field blank if you aren't using a Secret in place of a credential pair.
+      description: The login credentials to use to import a data source resource.
+    DataSourceParameters:
+      type: object
+      properties:
+        AmazonElasticsearchParameters:
+          allOf:
+            - $ref: '#/components/schemas/AmazonElasticsearchParameters'
+            - description: The parameters for OpenSearch.
+        AthenaParameters:
+          allOf:
+            - $ref: '#/components/schemas/AthenaParameters'
+            - description: The parameters for Amazon Athena.
+        AuroraParameters:
+          allOf:
+            - $ref: '#/components/schemas/AuroraParameters'
+            - description: The parameters for Amazon Aurora MySQL.
+        AuroraPostgreSqlParameters:
+          allOf:
+            - $ref: '#/components/schemas/AuroraPostgreSqlParameters'
+            - description: The parameters for Amazon Aurora.
+        AwsIotAnalyticsParameters:
+          allOf:
+            - $ref: '#/components/schemas/AwsIotAnalyticsParameters'
+            - description: The parameters for IoT Analytics.
+        JiraParameters:
+          allOf:
+            - $ref: '#/components/schemas/JiraParameters'
+            - description: The parameters for Jira.
+        MariaDbParameters:
+          allOf:
+            - $ref: '#/components/schemas/MariaDbParameters'
+            - description: The parameters for MariaDB.
+        MySqlParameters:
+          allOf:
+            - $ref: '#/components/schemas/MySqlParameters'
+            - description: The parameters for MySQL.
+        OracleParameters:
+          allOf:
+            - $ref: '#/components/schemas/OracleParameters'
+            - description: The parameters for Oracle.
+        PostgreSqlParameters:
+          allOf:
+            - $ref: '#/components/schemas/PostgreSqlParameters'
+            - description: The parameters for PostgreSQL.
+        PrestoParameters:
+          allOf:
+            - $ref: '#/components/schemas/PrestoParameters'
+            - description: The parameters for Presto.
+        RdsParameters:
+          allOf:
+            - $ref: '#/components/schemas/RdsParameters'
+            - description: The parameters for Amazon RDS.
+        RedshiftParameters:
+          allOf:
+            - $ref: '#/components/schemas/RedshiftParameters'
+            - description: The parameters for Amazon Redshift.
+        S3Parameters:
+          allOf:
+            - $ref: '#/components/schemas/S3Parameters'
+            - description: The parameters for S3.
+        ServiceNowParameters:
+          allOf:
+            - $ref: '#/components/schemas/ServiceNowParameters'
+            - description: The parameters for ServiceNow.
+        SnowflakeParameters:
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeParameters'
+            - description: The parameters for Snowflake.
+        SparkParameters:
+          allOf:
+            - $ref: '#/components/schemas/SparkParameters'
+            - description: The parameters for Spark.
+        SqlServerParameters:
+          allOf:
+            - $ref: '#/components/schemas/SqlServerParameters'
+            - description: The parameters for SQL Server.
+        TeradataParameters:
+          allOf:
+            - $ref: '#/components/schemas/TeradataParameters'
+            - description: The parameters for Teradata.
+        TwitterParameters:
+          allOf:
+            - $ref: '#/components/schemas/TwitterParameters'
+            - description: The parameters for Twitter.
+        AmazonOpenSearchParameters:
+          allOf:
+            - $ref: '#/components/schemas/AmazonOpenSearchParameters'
+            - description: The parameters for OpenSearch.
+        ExasolParameters:
+          allOf:
+            - $ref: '#/components/schemas/ExasolParameters'
+            - description: The parameters for Exasol.
+        DatabricksParameters:
+          allOf:
+            - $ref: '#/components/schemas/DatabricksParameters'
+            - description: The required parameters that are needed to connect to a Databricks data source.
+      description: 'The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
+    VpcConnectionProperties:
+      type: object
+      required:
+        - VpcConnectionArn
+      properties:
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the VPC connection.
+      description: VPC connection properties.
+    SslProperties:
+      type: object
+      properties:
+        DisableSsl:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: A Boolean option to control whether SSL should be disabled.
+      description: Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your underlying data source.
+    AssetBundleImportJobDataSourceOverrideParameters:
+      type: object
+      required:
+        - DataSourceId
+      properties:
+        DataSourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the data source to apply overrides to.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: A new name for the data source.
+        DataSourceParameters:
+          $ref: '#/components/schemas/DataSourceParameters'
+        VpcConnectionProperties:
+          $ref: '#/components/schemas/VpcConnectionProperties'
+        SslProperties:
+          $ref: '#/components/schemas/SslProperties'
+        Credentials:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobDataSourceCredentials'
+            - description: An optional structure that provides the credentials to be used to create the imported data source.
+      description: The override parameters for a single data source that is being imported.
+    AssetBundleImportJobError:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the resource whose processing caused an error.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The specific error type or the error that occurred.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: A description of the error.
+      description: Describes an error that occurred within an Asset Bundle import execution.
+    AssetBundleImportJobErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobError'
+    AssetBundleImportJobOverrideParameters:
+      type: object
+      properties:
+        ResourceIdOverrideConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobResourceIdOverrideConfiguration'
+            - description: An optional structure that configures resource ID overrides to be applied within the import job.
+        VPCConnections:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobVPCConnectionOverrideParametersList'
+            - description: A list of overrides for any <code>VPCConnection</code> resources that are present in the asset bundle that is imported.
+        RefreshSchedules:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobRefreshScheduleOverrideParametersList'
+            - description: A list of overrides for any <code>RefreshSchedule</code> resources that are present in the asset bundle that is imported.
+        DataSources:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobDataSourceOverrideParametersList'
+            - description: ' A list of overrides for any <code>DataSource</code> resources that are present in the asset bundle that is imported.'
+        DataSets:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobDataSetOverrideParametersList'
+            - description: A list of overrides for any <code>DataSet</code> resources that are present in the asset bundle that is imported.
+        Themes:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobThemeOverrideParametersList'
+            - description: A list of overrides for any <code>Theme</code> resources that are present in the asset bundle that is imported.
+        Analyses:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobAnalysisOverrideParametersList'
+            - description: A list of overrides for any <code>Analysis</code> resources that are present in the asset bundle that is imported.
+        Dashboards:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobDashboardOverrideParametersList'
+            - description: A list of overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.
+      description: A list of overrides that modify the asset bundle resource configuration before the resource is imported.
+    AssetBundleImportJobRefreshScheduleOverrideParameters:
+      type: object
+      required:
+        - DataSetId
+        - ScheduleId
+      properties:
+        DataSetId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: A partial identifier for the specific <code>RefreshSchedule</code> resource that is being overridden. This structure is used together with the <code>ScheduleID</code> structure.
+        ScheduleId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A partial identifier for the specific <code>RefreshSchedule</code> resource being overridden. This structure is used together with the <code>DataSetId</code> structure.
+        StartAfterDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: An override for the <code>StartAfterDateTime</code> of a <code>RefreshSchedule</code> to ensure that the <code>StartAfterDateTime</code> is set to a time that takes place in the future.
+      description: A list of overrides for a specific <code>RefreshsSchedule</code> resource that is present in the asset bundle that is imported.
+    AssetBundleImportJobStatus:
+      type: string
+      enum:
+        - QUEUED_FOR_IMMEDIATE_EXECUTION
+        - IN_PROGRESS
+        - SUCCESSFUL
+        - FAILED
+        - FAILED_ROLLBACK_IN_PROGRESS
+        - FAILED_ROLLBACK_COMPLETED
+        - FAILED_ROLLBACK_ERROR
+    AssetBundleImportJobSummary:
+      type: object
+      properties:
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobStatus'
+            - description: The current status of the import job.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the import job.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the import job was created.
+        AssetBundleImportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: 'The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.'
+        FailureAction:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportFailureAction'
+            - description: The failure action for the import job.
+      description: A summary of the import job that includes details of the requested job's configuration and its current status.
+    AssetBundleImportJobSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetBundleImportJobSummary'
+    AssetBundleImportJobThemeOverrideParameters:
+      type: object
+      required:
+        - ThemeId
+      properties:
+        ThemeId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the theme to apply overrides to.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: A new name for the theme.
+      description: The override parameters for a single theme that is imported.
+    VPCConnectionResourceIdUnrestricted:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    SubnetIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
+      minItems: 2
+      maxItems: 15
+    SecurityGroupIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupId'
+      minItems: 1
+      maxItems: 16
+    DnsResolverList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IPv4Address'
+      maxItems: 15
+    RoleArn:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    AssetBundleImportJobVPCConnectionOverrideParameters:
+      type: object
+      required:
+        - VPCConnectionId
+      properties:
+        VPCConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/VPCConnectionResourceIdUnrestricted'
+            - description: The ID of the VPC Connection to apply overrides to.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: A new name for the VPC connection.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: A list of new subnet IDs for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdList'
+            - description: A new security group ID for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.
+        DnsResolvers:
+          allOf:
+            - $ref: '#/components/schemas/DnsResolverList'
+            - description: An optional override of dns resolvers to be used by the VPC connection.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: An optional override of the role ARN to be used by the VPC connection.
+      description: The override parameters for a single VPC connection that is imported.
+    AssetBundleImportSource:
+      type: object
+      properties:
+        Body:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportBodyBlob'
+            - description: '<p>The bytes of the Base64 encoded asset bundle import zip file. This file can''t exceed 20MB.</p> <p>If you are calling the APIs from the Amazon Web Services Java, JavaScript, Python, or PHP SDKs, the SDK encodes Base64 automatically to allow the direct setting of the zip file''s bytes. If you are using a SDK of a different language or are receiving related errors, try to Base64 encode your data.</p>'
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 uri for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 20MB.
+      description: The source of the asset bundle zip file that contains the data that you want to import.
+    AssetBundleImportSourceDescription:
+      type: object
+      properties:
+        Body:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for 5 minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The downloaded asset bundle is a <code>.qs</code> zip file.
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 uri that you provided at the start of the import job.
+      description: A description of the import source that you provide at the start of an import job. This value is set to either <code>Body</code> or <code>S3Uri</code> depending on how the <code>StartAssetBundleImportJobRequest</code> is configured.
+    AssetBundleResourceArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      minItems: 1
+      maxItems: 100
     AssignmentStatus:
       type: string
       enum:
@@ -19408,10 +20981,6 @@ components:
       type: string
       minLength: 1
       maxLength: 128
-    RoleArn:
-      type: string
-      minLength: 20
-      maxLength: 2048
     Host:
       type: string
       minLength: 1
@@ -20803,7 +22372,7 @@ components:
         ClusterMarker:
           allOf:
             - $ref: '#/components/schemas/ClusterMarker'
-            - description: The cluster marker that is a part of the cluster marker configuration
+            - description: The cluster marker that is a part of the cluster marker configuration.
       description: The cluster marker configuration of the geospatial map selected point style.
     CollectiveConstant:
       type: object
@@ -22286,8 +23855,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/DashboardVersionDefinition'
             - description: '<p>The definition of a dashboard.</p> <p>A definition is the data model of all features in a Dashboard, Template, or Analysis.</p> <p>Either a <code>SourceEntity</code> or a <code>Definition</code> must be provided in order for the request to be valid.</p>'
-    ResourceId:
-      type: string
     PhysicalTableMap:
       type: object
       minProperties: 0
@@ -22464,102 +24031,6 @@ components:
         - AMAZON_OPENSEARCH
         - EXASOL
         - DATABRICKS
-    DataSourceParameters:
-      type: object
-      properties:
-        AmazonElasticsearchParameters:
-          allOf:
-            - $ref: '#/components/schemas/AmazonElasticsearchParameters'
-            - description: The parameters for OpenSearch.
-        AthenaParameters:
-          allOf:
-            - $ref: '#/components/schemas/AthenaParameters'
-            - description: The parameters for Amazon Athena.
-        AuroraParameters:
-          allOf:
-            - $ref: '#/components/schemas/AuroraParameters'
-            - description: The parameters for Amazon Aurora MySQL.
-        AuroraPostgreSqlParameters:
-          allOf:
-            - $ref: '#/components/schemas/AuroraPostgreSqlParameters'
-            - description: The parameters for Amazon Aurora.
-        AwsIotAnalyticsParameters:
-          allOf:
-            - $ref: '#/components/schemas/AwsIotAnalyticsParameters'
-            - description: The parameters for IoT Analytics.
-        JiraParameters:
-          allOf:
-            - $ref: '#/components/schemas/JiraParameters'
-            - description: The parameters for Jira.
-        MariaDbParameters:
-          allOf:
-            - $ref: '#/components/schemas/MariaDbParameters'
-            - description: The parameters for MariaDB.
-        MySqlParameters:
-          allOf:
-            - $ref: '#/components/schemas/MySqlParameters'
-            - description: The parameters for MySQL.
-        OracleParameters:
-          allOf:
-            - $ref: '#/components/schemas/OracleParameters'
-            - description: The parameters for Oracle.
-        PostgreSqlParameters:
-          allOf:
-            - $ref: '#/components/schemas/PostgreSqlParameters'
-            - description: The parameters for PostgreSQL.
-        PrestoParameters:
-          allOf:
-            - $ref: '#/components/schemas/PrestoParameters'
-            - description: The parameters for Presto.
-        RdsParameters:
-          allOf:
-            - $ref: '#/components/schemas/RdsParameters'
-            - description: The parameters for Amazon RDS.
-        RedshiftParameters:
-          allOf:
-            - $ref: '#/components/schemas/RedshiftParameters'
-            - description: The parameters for Amazon Redshift.
-        S3Parameters:
-          allOf:
-            - $ref: '#/components/schemas/S3Parameters'
-            - description: The parameters for S3.
-        ServiceNowParameters:
-          allOf:
-            - $ref: '#/components/schemas/ServiceNowParameters'
-            - description: The parameters for ServiceNow.
-        SnowflakeParameters:
-          allOf:
-            - $ref: '#/components/schemas/SnowflakeParameters'
-            - description: The parameters for Snowflake.
-        SparkParameters:
-          allOf:
-            - $ref: '#/components/schemas/SparkParameters'
-            - description: The parameters for Spark.
-        SqlServerParameters:
-          allOf:
-            - $ref: '#/components/schemas/SqlServerParameters'
-            - description: The parameters for SQL Server.
-        TeradataParameters:
-          allOf:
-            - $ref: '#/components/schemas/TeradataParameters'
-            - description: The parameters for Teradata.
-        TwitterParameters:
-          allOf:
-            - $ref: '#/components/schemas/TwitterParameters'
-            - description: The parameters for Twitter.
-        AmazonOpenSearchParameters:
-          allOf:
-            - $ref: '#/components/schemas/AmazonOpenSearchParameters'
-            - description: The parameters for OpenSearch.
-        ExasolParameters:
-          allOf:
-            - $ref: '#/components/schemas/ExasolParameters'
-            - description: The parameters for Exasol.
-        DatabricksParameters:
-          allOf:
-            - $ref: '#/components/schemas/DatabricksParameters'
-            - description: The required parameters that are needed to connect to a Databricks data source.
-      description: 'The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
     DataSourceCredentials:
       type: object
       properties:
@@ -22576,24 +24047,6 @@ components:
             - $ref: '#/components/schemas/SecretArn'
             - description: The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.
       description: 'Data source credentials. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.'
-    VpcConnectionProperties:
-      type: object
-      required:
-        - VpcConnectionArn
-      properties:
-        VpcConnectionArn:
-          allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) for the VPC connection.
-      description: VPC connection properties.
-    SslProperties:
-      type: object
-      properties:
-        DisableSsl:
-          allOf:
-            - $ref: '#/components/schemas/Boolean'
-            - description: A Boolean option to control whether SSL should be disabled.
-      description: Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your underlying data source.
     CreateDataSourceRequest:
       type: object
       required:
@@ -23148,23 +24601,6 @@ components:
       pattern: '[\w\-]+'
       minLength: 1
       maxLength: 1000
-    SubnetIdList:
-      type: array
-      items:
-        $ref: '#/components/schemas/SubnetId'
-      minItems: 2
-      maxItems: 15
-    SecurityGroupIdList:
-      type: array
-      items:
-        $ref: '#/components/schemas/SecurityGroupId'
-      minItems: 1
-      maxItems: 16
-    DnsResolverList:
-      type: array
-      items:
-        $ref: '#/components/schemas/IPv4Address'
-      maxItems: 15
     CreateVPCConnectionRequest:
       type: object
       required:
@@ -23221,14 +24657,6 @@ components:
         - AVAILABLE
         - UNAVAILABLE
         - PARTIALLY_AVAILABLE
-    Username:
-      type: string
-      minLength: 1
-      maxLength: 64
-    Password:
-      type: string
-      minLength: 1
-      maxLength: 1024
     DataSourceParametersList:
       type: array
       items:
@@ -25194,10 +26622,6 @@ components:
       type: object
       title: DeleteUserRequest
       properties: {}
-    VPCConnectionResourceIdUnrestricted:
-      type: string
-      minLength: 1
-      maxLength: 1000
     DeleteVPCConnectionRequest:
       type: object
       title: DeleteVPCConnectionRequest
@@ -25231,6 +26655,14 @@ components:
     DescribeAnalysisRequest:
       type: object
       title: DescribeAnalysisRequest
+      properties: {}
+    DescribeAssetBundleExportJobRequest:
+      type: object
+      title: DescribeAssetBundleExportJobRequest
+      properties: {}
+    DescribeAssetBundleImportJobRequest:
+      type: object
+      title: DescribeAssetBundleImportJobRequest
       properties: {}
     DescribeDashboardDefinitionRequest:
       type: object
@@ -27784,6 +29216,38 @@ components:
             - $ref: '#/components/schemas/Longitude'
             - description: The longitude of the east bound of the geospatial coordinate bounds.
       description: 'The bound options (north, south, west, east) of the geospatial window options.'
+    GeospatialHeatmapDataColorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GeospatialHeatmapDataColor'
+      minItems: 2
+      maxItems: 2
+    GeospatialHeatmapColorScale:
+      type: object
+      properties:
+        Colors:
+          allOf:
+            - $ref: '#/components/schemas/GeospatialHeatmapDataColorList'
+            - description: The list of colors to be used in heatmap point style.
+      description: The color scale specification for the heatmap point style.
+    GeospatialHeatmapConfiguration:
+      type: object
+      properties:
+        HeatmapColor:
+          allOf:
+            - $ref: '#/components/schemas/GeospatialHeatmapColorScale'
+            - description: The color scale specification for the heatmap point style.
+      description: The heatmap configuration of the geospatial point style.
+    GeospatialHeatmapDataColor:
+      type: object
+      required:
+        - Color
+      properties:
+        Color:
+          allOf:
+            - $ref: '#/components/schemas/HexColor'
+            - description: The hex color to be used in the heatmap point style.
+      description: The color to be used in the heatmap point style.
     GeospatialMapAggregatedFieldWells:
       type: object
       properties:
@@ -27819,6 +29283,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClusterMarkerConfiguration'
             - description: The cluster marker configuration of the geospatial point style.
+        HeatmapConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/GeospatialHeatmapConfiguration'
+            - description: The heatmap configuration of the geospatial point style.
       description: The point style of the geospatial map.
     GeospatialMapConfiguration:
       type: object
@@ -27885,6 +29353,7 @@ components:
       enum:
         - POINT
         - CLUSTER
+        - HEATMAP
     MapZoomMode:
       type: string
       enum:
@@ -29205,6 +30674,14 @@ components:
     ListAnalysesRequest:
       type: object
       title: ListAnalysesRequest
+      properties: {}
+    ListAssetBundleExportJobsRequest:
+      type: object
+      title: ListAssetBundleExportJobsRequest
+      properties: {}
+    ListAssetBundleImportJobsRequest:
+      type: object
+      title: ListAssetBundleImportJobsRequest
       properties: {}
     ListControlSearchOptions:
       type: object
@@ -32148,6 +33625,57 @@ components:
     Warehouse:
       type: string
       maxLength: 128
+    StartAssetBundleExportJobRequest:
+      type: object
+      required:
+        - AssetBundleExportJobId
+        - ResourceArns
+        - ExportFormat
+      title: StartAssetBundleExportJobRequest
+      properties:
+        AssetBundleExportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: 'The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.'
+        ResourceArns:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleResourceArns'
+            - description: <p>An array of resource ARNs to export. The following resources are supported.</p> <ul> <li> <p> <code>Analysis</code> </p> </li> <li> <p> <code>Dashboard</code> </p> </li> <li> <p> <code>DataSet</code> </p> </li> <li> <p> <code>DataSource</code> </p> </li> <li> <p> <code>RefreshSchedule</code> </p> </li> <li> <p> <code>Theme</code> </p> </li> <li> <p> <code>VPCConnection</code> </p> </li> </ul> <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>
+        IncludeAllDependencies:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the <code>ResourceArns</code> parameter. If you set <code>IncludeAllDependencies</code> to <code>TRUE</code>, any theme, dataset, and dataource resource that is a dependency of the dashboard is also exported.'
+        ExportFormat:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleExportFormat'
+            - description: The export data format.
+        CloudFormationOverridePropertyConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleCloudFormationOverridePropertyConfiguration'
+            - description: <p>An optional collection of structures that generate CloudFormation parameters to override the existing resource property values when the resource is exported to a new CloudFormation template.</p> <p>Use this field if the <code>ExportFormat</code> field of a <code>StartAssetBundleExportJobRequest</code> API call is set to <code>CLOUDFORMATION_JSON</code>.</p>
+    StartAssetBundleImportJobRequest:
+      type: object
+      required:
+        - AssetBundleImportJobId
+        - AssetBundleImportSource
+      title: StartAssetBundleImportJobRequest
+      properties:
+        AssetBundleImportJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: 'The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.'
+        AssetBundleImportSource:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportSource'
+            - description: The source of the asset bundle zip file that contains the data that you want to import.
+        OverrideParameters:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportJobOverrideParameters'
+            - description: Optional overrides to be applied to the resource configuration before import.
+        FailureAction:
+          allOf:
+            - $ref: '#/components/schemas/AssetBundleImportFailureAction'
+            - description: '<p>The failure action for the import job.</p> <p>If you choose <code>ROLLBACK</code>, failed import jobs will attempt to undo any asset changes caused by the failed job.</p> <p>If you choose <code>DO_NOTHING</code>, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly leaving the Amazon QuickSight account in an inconsistent state.</p>'
     StringDatasetParameterDefaultValues:
       type: object
       properties:
