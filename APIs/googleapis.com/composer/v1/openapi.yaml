@@ -32,6 +32,127 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1/{environment}:databaseFailover":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Triggers database failover (only for highly resilient environments).
+      operationId: composer.projects.locations.environments.databaseFailover
+      parameters:
+        - description: 'Target environment: "projects/{projectId}/locations/{locationId}/environments/{environmentId}"'
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DatabaseFailoverRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{environment}:executeAirflowCommand":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Executes Airflow CLI command.
+      operationId: composer.projects.locations.environments.executeAirflowCommand
+      parameters:
+        - description: 'The resource name of the environment in the form: "projects/{projectId}/locations/{locationId}/environments/{environmentId}".'
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExecuteAirflowCommandRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExecuteAirflowCommandResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{environment}:fetchDatabaseProperties":
+    get:
+      description: Fetches database properties.
+      operationId: composer.projects.locations.environments.fetchDatabaseProperties
+      parameters:
+        - description: 'Required. The resource name of the environment, in the form: "projects/{projectId}/locations/{locationId}/environments/{environmentId}"'
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FetchDatabasePropertiesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{environment}:loadSnapshot":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -74,6 +195,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{environment}:pollAirflowCommand":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Polls Airflow CLI command execution and fetches logs.
+      operationId: composer.projects.locations.environments.pollAirflowCommand
+      parameters:
+        - description: 'The resource name of the environment in the form: "projects/{projectId}/locations/{locationId}/environments/{environmentId}"'
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PollAirflowCommandRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PollAirflowCommandResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{environment}:saveSnapshot":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -108,6 +271,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{environment}:stopAirflowCommand":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Stops Airflow CLI command execution.
+      operationId: composer.projects.locations.environments.stopAirflowCommand
+      parameters:
+        - description: 'The resource name of the environment in the form: "projects/{projectId}/locations/{locationId}/environments/{environmentId}".'
+          in: path
+          name: environment
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StopAirflowCommandRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StopAirflowCommandResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -522,6 +727,14 @@ components:
           description: "Optional. Cloud SQL machine type used by Airflow database. It has to be one of: db-n1-standard-2, db-n1-standard-4, db-n1-standard-8 or db-n1-standard-16. If not specified, db-n1-standard-2 will be used. Supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*."
           type: string
       type: object
+    DatabaseFailoverRequest:
+      description: Request to trigger database failover (only for highly resilient environments).
+      properties: {}
+      type: object
+    DatabaseFailoverResponse:
+      description: Response for DatabaseFailoverRequest.
+      properties: {}
+      type: object
     Date:
       description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
       properties:
@@ -634,6 +847,12 @@ components:
         recoveryConfig:
           $ref: "#/components/schemas/RecoveryConfig"
           description: Optional. The Recovery settings configuration of an environment. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
+        resilienceMode:
+          description: Optional. Resilience mode of the Cloud Composer Environment. This field is supported for Cloud Composer environments in versions composer-2.2.0-airflow-*.*.* and newer.
+          enum:
+            - RESILIENCE_MODE_UNSPECIFIED
+            - HIGH_RESILIENCE
+          type: string
         softwareConfig:
           $ref: "#/components/schemas/SoftwareConfig"
           description: The configuration settings for software inside the environment.
@@ -646,6 +865,61 @@ components:
         workloadsConfig:
           $ref: "#/components/schemas/WorkloadsConfig"
           description: Optional. The workloads configuration settings for the GKE cluster associated with the Cloud Composer environment. The GKE cluster runs Airflow scheduler, web server and workers workloads. This field is supported for Cloud Composer environments in versions composer-2.*.*-airflow-*.*.* and newer.
+      type: object
+    ExecuteAirflowCommandRequest:
+      description: Execute Airflow Command request.
+      properties:
+        command:
+          description: Airflow command.
+          type: string
+        parameters:
+          description: Parameters for the Airflow command/subcommand as an array of arguments. It may contain positional arguments like `["my-dag-id"]`, key-value parameters like `["--foo=bar"]` or `["--foo","bar"]`, or other flags like `["-f"]`.
+          items:
+            type: string
+          type: array
+        subcommand:
+          description: Airflow subcommand.
+          type: string
+      type: object
+    ExecuteAirflowCommandResponse:
+      description: Response to ExecuteAirflowCommandRequest.
+      properties:
+        error:
+          description: Error message. Empty if there was no error.
+          type: string
+        executionId:
+          description: The unique ID of the command execution for polling.
+          type: string
+        pod:
+          description: The name of the pod where the command is executed.
+          type: string
+        podNamespace:
+          description: The namespace of the pod where the command is executed.
+          type: string
+      type: object
+    ExitInfo:
+      description: Information about how a command ended.
+      properties:
+        error:
+          description: Error message. Empty if there was no error.
+          type: string
+        exitCode:
+          description: The exit code from the command execution.
+          format: int32
+          type: integer
+      type: object
+    FetchDatabasePropertiesResponse:
+      description: Response for FetchDatabasePropertiesRequest.
+      properties:
+        isFailoverReplicaAvailable:
+          description: The availability status of the failover replica. A false status indicates that the failover replica is out of sync. The primary instance can only fail over to the failover replica when the status is true.
+          type: boolean
+        primaryGceZone:
+          description: The Compute Engine zone that the instance is currently serving from.
+          type: string
+        secondaryGceZone:
+          description: The Compute Engine zone that the failover instance is currently serving from for a regional Cloud SQL instance.
+          type: string
       type: object
     IPAllocationPolicy:
       description: Configuration for controlling how IPs are allocated in the GKE cluster running the Apache Airflow software.
@@ -689,6 +963,17 @@ components:
         upgradeDisabled:
           description: Whether it is impossible to upgrade an environment running with the image version.
           type: boolean
+      type: object
+    Line:
+      description: Contains information about a single line from logs.
+      properties:
+        content:
+          description: Text content of the log line.
+          type: string
+        lineNumber:
+          description: Number of the line.
+          format: int32
+          type: integer
       type: object
     ListEnvironmentsResponse:
       description: The environments in a project and location.
@@ -870,6 +1155,7 @@ components:
             - CHECK
             - SAVE_SNAPSHOT
             - LOAD_SNAPSHOT
+            - DATABASE_FAILOVER
           type: string
         resource:
           description: Output only. The resource being operated on, as a [relative resource name]( /apis/design/resource_names#relative_resource_name).
@@ -887,6 +1173,38 @@ components:
             - SUCCESSFUL
             - FAILED
           type: string
+      type: object
+    PollAirflowCommandRequest:
+      description: Poll Airflow Command request.
+      properties:
+        executionId:
+          description: The unique ID of the command execution.
+          type: string
+        nextLineNumber:
+          description: Line number from which new logs should be fetched.
+          format: int32
+          type: integer
+        pod:
+          description: The name of the pod where the command is executed.
+          type: string
+        podNamespace:
+          description: The namespace of the pod where the command is executed.
+          type: string
+      type: object
+    PollAirflowCommandResponse:
+      description: Response to PollAirflowCommandRequest.
+      properties:
+        exitInfo:
+          $ref: "#/components/schemas/ExitInfo"
+          description: The result exit status of the command.
+        output:
+          description: Output from the command execution. It may not contain the full output and the caller may need to poll for more lines.
+          items:
+            $ref: "#/components/schemas/Line"
+          type: array
+        outputEnd:
+          description: Whether the command execution has finished and there is no more output.
+          type: boolean
       type: object
     PrivateClusterConfig:
       description: Configuration options for the private GKE cluster in a Cloud Composer environment.
@@ -1041,6 +1359,34 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    StopAirflowCommandRequest:
+      description: Stop Airflow Command request.
+      properties:
+        executionId:
+          description: The unique ID of the command execution.
+          type: string
+        force:
+          description: If true, the execution is terminated forcefully (SIGKILL). If false, the execution is stopped gracefully, giving it time for cleanup.
+          type: boolean
+        pod:
+          description: The name of the pod where the command is executed.
+          type: string
+        podNamespace:
+          description: The namespace of the pod where the command is executed.
+          type: string
+      type: object
+    StopAirflowCommandResponse:
+      description: Response to StopAirflowCommandRequest.
+      properties:
+        isDone:
+          description: Whether the execution is still running.
+          type: boolean
+        output:
+          description: Output message from stopping execution request.
+          items:
+            type: string
+          type: array
       type: object
     WebServerConfig:
       description: The configuration settings for the Airflow web server App Engine instance. Supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*

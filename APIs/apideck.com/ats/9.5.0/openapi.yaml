@@ -3335,6 +3335,15 @@ components:
           x-apideck-enum-id: jobs.visibility
       type: object
       x-apideck-schema-id: Job
+      x-apideck-strict-any-of:
+        - required:
+            - description_html
+        - required:
+            - description
+      x-apideck-strict-required:
+        - title
+        - status
+        - location
       x-apideck-weights:
         addresses: low
         available_to_employees: medium
@@ -3351,7 +3360,7 @@ components:
         deleted: medium
         department: medium
         description: critical
-        description_html: critical
+        description_html: high
         employment_terms: low
         experience: low
         followers: low

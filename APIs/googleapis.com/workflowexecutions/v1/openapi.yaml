@@ -407,7 +407,7 @@ components:
           type: string
         stateError:
           $ref: "#/components/schemas/StateError"
-          description: Output only. Error regarding the state of the Execution resource. For example, this field will have error details if the Execution data is unavailable due to revoked KMS key permissions.
+          description: Output only. Error regarding the state of the Execution resource. For example, this field will have error details if the execution data is unavailable due to revoked KMS key permissions.
           readOnly: true
         status:
           $ref: "#/components/schemas/Status"

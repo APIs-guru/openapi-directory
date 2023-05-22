@@ -28,8 +28,182 @@ info:
 externalDocs:
   url: https://cloud.google.com/networking
 tags:
+  - name: organizations
   - name: projects
 paths:
+  "/v1/{addressGroup}:addItems":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Adds items to an address group.
+      operationId: networksecurity.projects.locations.addressGroups.addItems
+      parameters:
+        - description: Required. A name of the AddressGroup to add items to. Must be in the format `projects|organization/*/locations/{location}/addressGroups/*`.
+          in: path
+          name: addressGroup
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddAddressGroupItemsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{addressGroup}:cloneItems":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Clones items from one address group to another.
+      operationId: networksecurity.projects.locations.addressGroups.cloneItems
+      parameters:
+        - description: Required. A name of the AddressGroup to clone items to. Must be in the format `projects|organization/*/locations/{location}/addressGroups/*`.
+          in: path
+          name: addressGroup
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CloneAddressGroupItemsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{addressGroup}:listReferences":
+    get:
+      description: Lists references of an address group.
+      operationId: networksecurity.projects.locations.addressGroups.listReferences
+      parameters:
+        - description: Required. A name of the AddressGroup to clone items to. Must be in the format `projects|organization/*/locations/{location}/addressGroups/*`.
+          in: path
+          name: addressGroup
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of references to return. If unspecified, server will pick an appropriate default. Server may return fewer items than requested. A caller should only rely on response's next_page_token to determine if there are more AddressGroupUsers left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAddressGroupReferencesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{addressGroup}:removeItems":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Removes items from an address group.
+      operationId: networksecurity.projects.locations.addressGroups.removeItems
+      parameters:
+        - description: Required. A name of the AddressGroup to remove items from. Must be in the format `projects|organization/*/locations/{location}/addressGroups/*`.
+          in: path
+          name: addressGroup
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveAddressGroupItemsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}":
     delete:
       description: Deletes a single UrlList.
@@ -268,6 +442,92 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/addressGroups":
+    get:
+      description: Lists address groups in a given project and location.
+      operationId: networksecurity.projects.locations.addressGroups.list
+      parameters:
+        - description: Required. The project and location from which the AddressGroups should be listed, specified in the format `projects/*/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of AddressGroups to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last `ListAddressGroupsResponse` Indicates that this is a continuation of a prior `ListAddressGroups` call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAddressGroupsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new address group in a given project and location.
+      operationId: networksecurity.projects.locations.addressGroups.create
+      parameters:
+        - description: Required. The parent resource of the AddressGroup. Must be in the format `projects/*/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Short name of the AddressGroup resource to be created. This value should be 1-63 characters long, containing only letters, numbers, hyphens, and underscores, and should not start with a number. E.g. "authz_policy".
+          in: query
+          name: addressGroupId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddressGroup"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -1045,6 +1305,63 @@ components:
       schema:
         type: string
   schemas:
+    AddAddressGroupItemsRequest:
+      description: Request used by the AddAddressGroupItems method.
+      properties:
+        items:
+          description: Required. List of items to add.
+          items:
+            type: string
+          type: array
+        requestId:
+          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
+      type: object
+    AddressGroup:
+      description: AddressGroup is a resource that specifies how a collection of IP/DNS used in Firewall Policy.
+      properties:
+        capacity:
+          description: Required. Capacity of the Address Group
+          format: int32
+          type: integer
+        createTime:
+          description: Output only. The timestamp when the resource was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Free-text description of the resource.
+          type: string
+        items:
+          description: Optional. List of items.
+          items:
+            type: string
+          type: array
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Set of label tags associated with the AddressGroup resource.
+          type: object
+        name:
+          description: Required. Name of the AddressGroup resource. It matches pattern `projects/*/locations/{location}/addressGroups/`.
+          type: string
+        selfLink:
+          description: Output only. Server-defined fully-qualified URL for this resource.
+          readOnly: true
+          type: string
+        type:
+          description: Required. The type of the Address Group. Possible values are "IPv4" or "IPV6".
+          enum:
+            - TYPE_UNSPECIFIED
+            - IPV4
+            - IPV6
+          type: string
+        updateTime:
+          description: Output only. The timestamp when the resource was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     AuthorizationPolicy:
       description: AuthorizationPolicy is a resource that specifies how a server should authorize incoming connections. This resource in itself does not change the configuration unless it's attached to a target https proxy or endpoint config selector resource.
       properties:
@@ -1127,6 +1444,16 @@ components:
           description: Output only. The timestamp when the resource was updated.
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    CloneAddressGroupItemsRequest:
+      description: Request used by the CloneAddressGroupItems method.
+      properties:
+        requestId:
+          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
+        sourceAddressGroup:
+          description: Required. Source address group to clone items from.
           type: string
       type: object
     Destination:
@@ -1360,6 +1687,41 @@ components:
           description: "Required. The value of the header must match the regular expression specified in regexMatch. For regular expression grammar, please see: en.cppreference.com/w/cpp/regex/ecmascript For matching against a port specified in the HTTP request, use a headerMatch with headerName set to Host and a regular expression that satisfies the RFC2616 Host header's port specifier."
           type: string
       type: object
+    ListAddressGroupReferencesResponse:
+      description: Response of the ListAddressGroupReferences method.
+      properties:
+        addressGroupReferences:
+          description: A list of references that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/ListAddressGroupReferencesResponseAddressGroupReference"
+          type: array
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
+          type: string
+      type: object
+    ListAddressGroupReferencesResponseAddressGroupReference:
+      description: The Reference of AddressGroup.
+      properties:
+        firewallPolicy:
+          description: FirewallPolicy that is using the Address Group.
+          type: string
+        rulePriority:
+          description: Rule priority of the FirewallPolicy that is using the Address Group.
+          format: int32
+          type: integer
+      type: object
+    ListAddressGroupsResponse:
+      description: Response returned by the ListAddressGroups method.
+      properties:
+        addressGroups:
+          description: List of AddressGroups resources.
+          items:
+            $ref: "#/components/schemas/AddressGroup"
+          type: array
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
+          type: string
+      type: object
     ListAuthorizationPoliciesResponse:
       description: Response returned by the ListAuthorizationPolicies method.
       properties:
@@ -1585,6 +1947,18 @@ components:
         verb:
           description: Output only. Name of the verb executed by the operation.
           readOnly: true
+          type: string
+      type: object
+    RemoveAddressGroupItemsRequest:
+      description: Request used by the RemoveAddressGroupItems method.
+      properties:
+        items:
+          description: Required. List of items to remove.
+          items:
+            type: string
+          type: array
+        requestId:
+          description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           type: string
       type: object
     Rule:

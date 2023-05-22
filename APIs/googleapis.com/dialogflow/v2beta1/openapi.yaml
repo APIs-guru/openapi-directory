@@ -6947,6 +6947,10 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1ArticleAnswer"
           description: Output only. The article suggestion answer.
           readOnly: true
+        dialogflowAssistAnswer:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1DialogflowAssistAnswer"
+          description: Output only. The Dialogflow assist answer.
+          readOnly: true
         faqAnswer:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1FaqAnswer"
           description: Output only. The FAQ answer.
@@ -6985,6 +6989,9 @@ components:
         requestId:
           description: A unique identifier for this request. Restricted to 36 ASCII characters. A random UUID is recommended. This request is only idempotent if a `request_id` is provided.
           type: string
+        suggestionInput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestionInput"
+          description: An input representing the selection of a suggestion.
         textInput:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1TextInput"
           description: The natural language text to be processed.
@@ -7338,6 +7345,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - DIALOGFLOW_ASSIST
             - CONVERSATION_SUMMARIZATION
           type: string
       type: object
@@ -7359,6 +7367,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - DIALOGFLOW_ASSIST
             - CONVERSATION_SUMMARIZATION
           type: string
       type: object
@@ -7586,6 +7595,19 @@ components:
         webhookStatus:
           $ref: "#/components/schemas/GoogleRpcStatus"
           description: Specifies the status of the webhook request.
+      type: object
+    GoogleCloudDialogflowV2beta1DialogflowAssistAnswer:
+      description: Represents a Dialogflow assist answer.
+      properties:
+        answerRecord:
+          description: The name of answer record, in the format of "projects//locations//answerRecords/"
+          type: string
+        intentSuggestion:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1IntentSuggestion"
+          description: An intent suggestion generated from conversation.
+        queryResult:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1QueryResult"
+          description: Result from v2 agent.
       type: object
     GoogleCloudDialogflowV2beta1Document:
       description: "A knowledge document to be used by a KnowledgeBase. For more information, see the [knowledge base guide](https://cloud.google.com/dialogflow/docs/how/knowledge-bases). Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`."
@@ -8056,7 +8078,7 @@ components:
       description: Config for suggestion query.
       properties:
         confidenceThreshold:
-          description: "Confidence threshold of query result. Agent Assist gives each suggestion a score in the range [0.0, 1.0], based on the relevance between the suggestion and the current conversation context. A score of 0.0 has no relevance, while a score of 1.0 has high relevance. Only suggestions with a score greater than or equal to the value of this field are included in the results. For a baseline model (the default), the recommended value is in the range [0.05, 0.1]. For a custom model, there is no recommended value. Tune this value by starting from a very low value and slowly increasing until you have desired results. If this field is not set, it is default to 0.0, which means that all suggestions are returned. Supported features: ARTICLE_SUGGESTION, FAQ, SMART_REPLY, SMART_COMPOSE, KNOWLEDGE_SEARCH, KNOWLEDGE_ASSIST."
+          description: "Confidence threshold of query result. Agent Assist gives each suggestion a score in the range [0.0, 1.0], based on the relevance between the suggestion and the current conversation context. A score of 0.0 has no relevance, while a score of 1.0 has high relevance. Only suggestions with a score greater than or equal to the value of this field are included in the results. For a baseline model (the default), the recommended value is in the range [0.05, 0.1]. For a custom model, there is no recommended value. Tune this value by starting from a very low value and slowly increasing until you have desired results. If this field is not set, it is default to 0.0, which means that all suggestions are returned. Supported features: ARTICLE_SUGGESTION, FAQ, SMART_REPLY, SMART_COMPOSE, KNOWLEDGE_SEARCH, KNOWLEDGE_ASSIST, ENTITY_EXTRACTION."
           format: float
           type: number
         contextFilterSettings:
@@ -8094,6 +8116,16 @@ components:
       properties:
         agent:
           description: "Required. The name of a dialogflow virtual agent used for end user side intent detection and suggestion. Format: `projects//locations//agent`. When multiple agents are allowed in the same Dialogflow project."
+          type: string
+        humanAgentSideConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDialogflowQuerySourceHumanAgentSideConfig"
+          description: The Dialogflow assist configuration for human agent.
+      type: object
+    GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDialogflowQuerySourceHumanAgentSideConfig:
+      description: The configuration used for human agent side Dialogflow assist suggestion.
+      properties:
+        agent:
+          description: "Optional. The name of a dialogflow virtual agent used for intent detection and suggestion triggered by human agent. Format: `projects//locations//agent`."
           type: string
       type: object
     GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDocumentQuerySource:
@@ -8407,6 +8439,16 @@ components:
           type: string
         parentFollowupIntentName:
           description: "The unique identifier of the followup intent's parent. Format: `projects//agent/intents/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1IntentInput:
+      description: Represents the intent to trigger programmatically rather than as a result of natural language processing. The intent input is only used for V3 agent.
+      properties:
+        intent:
+          description: "Required. The unique identifier of the intent in V3 agent. Format: `projects//locations//locations//agents//intents/`."
+          type: string
+        languageCode:
+          description: Required. The language of this conversational query. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes.
           type: string
       type: object
     GoogleCloudDialogflowV2beta1IntentMessage:
@@ -9044,6 +9086,19 @@ components:
           type: array
         value:
           description: "Optional. The definition of the parameter value. It can be: - a constant string, - a parameter value defined as `$parameter_name`, - an original parameter value defined as `$parameter_name.original`, - a parameter value from some context defined as `#context_name.parameter_name`."
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1IntentSuggestion:
+      description: Represents an intent suggestion.
+      properties:
+        description:
+          description: "Human readable description for better understanding an intent like its scope, content, result etc. Maximum character limit: 140 characters."
+          type: string
+        displayName:
+          description: The display name of the intent.
+          type: string
+        intentV2:
+          description: "The unique identifier of this intent. Format: `projects//locations//agent/intents/`."
           type: string
       type: object
     GoogleCloudDialogflowV2beta1IntentTrainingPhrase:
@@ -9776,6 +9831,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - DIALOGFLOW_ASSIST
             - CONVERSATION_SUMMARIZATION
           type: string
       type: object
@@ -9879,9 +9935,6 @@ components:
     GoogleCloudDialogflowV2beta1SuggestConversationSummaryRequest:
       description: The request message for Conversations.SuggestConversationSummary.
       properties:
-        assistQueryParams:
-          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1AssistQueryParameters"
-          description: Parameters for a human assist query.
         contextSize:
           description: Max number of messages prior to and including [latest_message] to use as context when compiling the suggestion. By default 500 and at most 1000.
           format: int32
@@ -9918,6 +9971,22 @@ components:
             type: string
           description: The summary content that is divided into sections. The key is the section's name and the value is the section's content. There is no specific format for the key or value.
           type: object
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestDialogflowAssistsResponse:
+      description: The response message for Participants.SuggestDialogflowAssists.
+      properties:
+        contextSize:
+          description: Number of messages prior to and including latest_message to compile the suggestion. It may be smaller than the SuggestDialogflowAssistsRequest.context_size field in the request if there aren't that many messages in the conversation.
+          format: int32
+          type: integer
+        dialogflowAssistAnswers:
+          description: Output only. Multiple reply options provided by Dialogflow assist service. The order is based on the rank of the model prediction.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1DialogflowAssistAnswer"
+          type: array
+        latestMessage:
+          description: "The name of the latest conversation message used to suggest answer. Format: `projects//locations//conversations//messages/`."
+          type: string
       type: object
     GoogleCloudDialogflowV2beta1SuggestFaqAnswersRequest:
       description: The request message for Participants.SuggestFaqAnswers.
@@ -10061,8 +10130,27 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - DIALOGFLOW_ASSIST
             - CONVERSATION_SUMMARIZATION
           type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SuggestionInput:
+      description: Represents the selection of a suggestion.
+      properties:
+        answerRecord:
+          description: "Required. The ID of a suggestion selected by the human agent. The suggestion(s) were generated in a previous call to request Dialogflow assist. The format is: `projects//locations//answerRecords/` where is an alphanumeric string."
+          type: string
+        intentInput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1IntentInput"
+          description: The intent to be triggered on V3 agent.
+        parameters:
+          additionalProperties:
+            description: Properties of the object.
+          description: "In Dialogflow assist for v3, the user can submit a form by sending a SuggestionInput. The form is uniquely determined by the answer_record field, which identifies a v3 QueryResult containing the current page. The form parameters are specified via the parameters field. Depending on your protocol or client library language, this is a map, associative array, symbol table, dictionary, or JSON object composed of a collection of (MapKey, MapValue) pairs: - MapKey type: string - MapKey value: parameter name - MapValue type: - If parameter's entity type is a composite entity: map - Else: depending on parameter value type, could be one of string, number, boolean, null, list or map - MapValue value: - If parameter's entity type is a composite entity: map from composite entity property names to property values - Else: parameter value"
+          type: object
+        textOverride:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1TextInput"
+          description: Optional. If the customer edited the suggestion before using it, include the revised text here.
       type: object
     GoogleCloudDialogflowV2beta1SuggestionResult:
       description: One response of different type of suggestion response which is used in the response of Participants.AnalyzeContent and Participants.AnalyzeContent, as well as HumanAgentAssistantEvent.
@@ -10073,6 +10161,9 @@ components:
         suggestArticlesResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestArticlesResponse"
           description: SuggestArticlesResponse if request is for ARTICLE_SUGGESTION.
+        suggestDialogflowAssistsResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestDialogflowAssistsResponse"
+          description: SuggestDialogflowAssistsResponse if request is for DIALOGFLOW_ASSIST.
         suggestFaqAnswersResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse"
           description: SuggestFaqAnswersResponse if request is for FAQ_ANSWER.

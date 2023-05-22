@@ -4844,6 +4844,7 @@ components:
             - SCALAR_FUNCTION
             - PROCEDURE
             - TABLE_VALUED_FUNCTION
+            - AGGREGATE_FUNCTION
           type: string
         sparkOptions:
           $ref: "#/components/schemas/SparkOptions"
@@ -5212,12 +5213,32 @@ components:
         model:
           $ref: "#/components/schemas/ModelDefinition"
           description: "[Output-only, Beta] Present iff this table represents a ML model. Describes the training information for the model, and it is required to run 'PREDICT' queries."
+        numActiveLogicalBytes:
+          description: "[Output-only] Number of logical bytes that are less than 90 days old."
+          format: int64
+          type: string
+        numActivePhysicalBytes:
+          description: "[Output-only] Number of physical bytes less than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
+          format: int64
+          type: string
         numBytes:
           description: "[Output-only] The size of this table in bytes, excluding any data in the streaming buffer."
           format: int64
           type: string
         numLongTermBytes:
           description: '[Output-only] The number of bytes in the table that are considered "long-term storage".'
+          format: int64
+          type: string
+        numLongTermLogicalBytes:
+          description: "[Output-only] Number of logical bytes that are more than 90 days old."
+          format: int64
+          type: string
+        numLongTermPhysicalBytes:
+          description: "[Output-only] Number of physical bytes more than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
+          format: int64
+          type: string
+        numPartitions:
+          description: "[Output-only] The number of partitions present in the table or materialized view. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
           format: int64
           type: string
         numPhysicalBytes:
@@ -5228,35 +5249,15 @@ components:
           description: "[Output-only] The number of rows of data in this table, excluding any data in the streaming buffer."
           format: uint64
           type: string
-        num_active_logical_bytes:
-          description: "[Output-only] Number of logical bytes that are less than 90 days old."
-          format: int64
-          type: string
-        num_active_physical_bytes:
-          description: "[Output-only] Number of physical bytes less than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
-          format: int64
-          type: string
-        num_long_term_logical_bytes:
-          description: "[Output-only] Number of logical bytes that are more than 90 days old."
-          format: int64
-          type: string
-        num_long_term_physical_bytes:
-          description: "[Output-only] Number of physical bytes more than 90 days old. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
-          format: int64
-          type: string
-        num_partitions:
-          description: "[Output-only] The number of partitions present in the table or materialized view. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
-          format: int64
-          type: string
-        num_time_travel_physical_bytes:
+        numTimeTravelPhysicalBytes:
           description: "[Output-only] Number of physical bytes used by time travel storage (deleted or changed data). This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
           format: int64
           type: string
-        num_total_logical_bytes:
+        numTotalLogicalBytes:
           description: "[Output-only] Total number of logical bytes in the table or materialized view."
           format: int64
           type: string
-        num_total_physical_bytes:
+        numTotalPhysicalBytes:
           description: "[Output-only] The physical size of this table in bytes. This also includes storage used for time travel. This data is not kept in real time, and might be delayed by a few seconds to a few minutes."
           format: int64
           type: string
@@ -5279,6 +5280,9 @@ components:
         streamingBuffer:
           $ref: "#/components/schemas/Streamingbuffer"
           description: "[Output-only] Contains information regarding this table's streaming buffer, if one is present. This field will be absent if the table is not being streamed to or if there is no data in the streaming buffer."
+        tableConstraints:
+          $ref: "#/components/schemas/TableConstraints"
+          description: "[Optional] The table constraints on the table."
         tableReference:
           $ref: "#/components/schemas/TableReference"
           description: "[Required] Reference describing the ID of this table."
@@ -5295,6 +5299,43 @@ components:
     TableCell:
       properties:
         v: {}
+      type: object
+    TableConstraints:
+      properties:
+        foreign_keys:
+          description: "[Optional] The foreign keys of the tables."
+          items:
+            properties:
+              column_references:
+                items:
+                  properties:
+                    referenced_column:
+                      type: string
+                    referencing_column:
+                      type: string
+                  type: object
+                type: array
+              name:
+                type: string
+              referenced_table:
+                properties:
+                  datasetId:
+                    type: string
+                  projectId:
+                    type: string
+                  tableId:
+                    type: string
+                type: object
+            type: object
+          type: array
+        primary_key:
+          description: "[Optional] The primary key of the table."
+          properties:
+            columns:
+              items:
+                type: string
+              type: array
+          type: object
       type: object
     TableDataInsertAllRequest:
       properties:
@@ -5560,6 +5601,9 @@ components:
       properties:
         adjustStepChanges:
           description: If true, detect step changes and make data adjustment in the input time series.
+          type: boolean
+        approxGlobalFeatureContrib:
+          description: Whether to use approximate feature contribution method in XGBoost model explanation for global explain.
           type: boolean
         autoArima:
           description: Whether to enable auto ARIMA or not.

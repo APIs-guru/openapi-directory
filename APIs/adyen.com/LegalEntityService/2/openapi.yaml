@@ -47,7 +47,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-05-15T17:21:01Z
+  x-timestamp: 2023-05-22T18:22:29Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2619,7 +2619,14 @@ components:
     BusinessLine:
       properties:
         capability:
-          description: The capability for which you are creating the business line. For example, **receivePayments**.
+          description: |-
+            The capability for which you are creating the business line.
+
+            Possible values: **receivePayments**, **receiveFromPlatformPayments**, **issueBankAccount**
+          enum:
+            - receivePayments
+            - receiveFromPlatformPayments
+            - issueBankAccount
           type: string
         id:
           description: The unique identifier of the business line.
@@ -2661,7 +2668,14 @@ components:
     BusinessLineInfo:
       properties:
         capability:
-          description: The capability for which you are creating the business line. For example, **receivePayments**.
+          description: |-
+            The capability for which you are creating the business line.
+
+            Possible values: **receivePayments**, **receiveFromPlatformPayments**, **issueBankAccount**
+          enum:
+            - receivePayments
+            - receiveFromPlatformPayments
+            - issueBankAccount
           type: string
         industryCode:
           description: A code that represents the industry of the legal entity. For example, **4431A** for computer software stores.
@@ -2699,6 +2713,10 @@ components:
       properties:
         capability:
           description: The capability for which you are creating the business line. For example, **receivePayments**.
+          enum:
+            - receivePayments
+            - receiveFromPlatformPayments
+            - issueBankAccount
           type: string
         industryCode:
           description: A code that represents the industry of your legal entity. For example, **4431A** for computer software stores.
@@ -2763,6 +2781,7 @@ components:
             - BankAccount
             - Document
             - LegalEntity
+            - product
           type: string
       type: object
     CapabilityProblemEntity-recursive:
@@ -2779,6 +2798,7 @@ components:
             - BankAccount
             - Document
             - LegalEntity
+            - product
           type: string
       type: object
     CapabilitySettings:
