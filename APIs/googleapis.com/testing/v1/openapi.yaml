@@ -1293,17 +1293,25 @@ components:
     Shard:
       description: Output only. Details about the shard.
       properties:
+        estimatedShardDuration:
+          description: Output only. The estimated shard duration based on previous test case timing records, if available.
+          format: google-duration
+          readOnly: true
+          type: string
         numShards:
           description: Output only. The total number of shards.
           format: int32
+          readOnly: true
           type: integer
         shardIndex:
           description: Output only. The index of the shard among all the shards.
           format: int32
+          readOnly: true
           type: integer
         testTargetsForShard:
           $ref: "#/components/schemas/TestTargetsForShard"
           description: Output only. Test targets for each shard. Only set for manual sharding.
+          readOnly: true
       type: object
     ShardingOption:
       description: Options for enabling sharding.

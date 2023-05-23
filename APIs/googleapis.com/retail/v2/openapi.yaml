@@ -4062,6 +4062,9 @@ components:
           description: Output only. Google Cloud project ID.
           readOnly: true
           type: string
+        source:
+          description: Optional. An optional arbitrary string that could be used as a tag for tracking link source.
+          type: string
         state:
           description: Output only. Represents the state of the link.
           enum:
@@ -4571,6 +4574,9 @@ components:
         projectId:
           description: Output only. Google Cloud project ID.
           readOnly: true
+          type: string
+        source:
+          description: Optional. An optional arbitrary string that could be used as a tag for tracking link source.
           type: string
         state:
           description: Output only. Represents the state of the link.

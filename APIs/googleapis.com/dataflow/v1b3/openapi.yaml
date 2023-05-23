@@ -4646,6 +4646,9 @@ components:
         dropLateData:
           description: Indicates whether the pipeline allows late-arriving data.
           type: boolean
+        dynamicDestinations:
+          description: If true, then this location represents dynamic topics.
+          type: boolean
         idLabel:
           description: If set, contains a pubsub label from which to extract record ids. If left empty, record deduplication will be strictly best effort.
           type: string
