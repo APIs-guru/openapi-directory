@@ -793,6 +793,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
       requestBody:
         required: true
         content:
@@ -1327,6 +1333,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
       requestBody:
         required: true
         content:
