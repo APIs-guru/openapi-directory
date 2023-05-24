@@ -172,7 +172,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
       requestBody:
         required: true
         content:
@@ -1721,7 +1721,7 @@ paths:
                 Title:
                   description: A title of the evaluation form.
                   type: string
-                  minLength: 0
+                  minLength: 1
                   maxLength: 128
                 Description:
                   description: The description of the evaluation form.
@@ -1733,7 +1733,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/EvaluationFormItem'
-                  minItems: 0
+                  minItems: 1
                   maxItems: 100
                 ScoringStrategy:
                   description: Information about scoring strategy for an evaluation form.
@@ -4148,7 +4148,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
       requestBody:
         required: true
         content:
@@ -4223,7 +4223,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4282,7 +4282,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
     post:
       operationId: UpdateContactEvaluation
       description: 'Updates details about a contact evaluation in the specified Amazon Connect instance. A contact evaluation must be in draft state. Answers included in the request are merged with existing answers for the given evaluation. An answer or note can be deleted by passing an empty object (<code>{}</code>) to the question identifier. '
@@ -4339,7 +4339,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
       requestBody:
         required: true
         content:
@@ -4680,7 +4680,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
         - name: version
           in: query
           required: false
@@ -4746,7 +4746,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
         - name: version
           in: query
           required: false
@@ -4816,7 +4816,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
       requestBody:
         required: true
         content:
@@ -4838,7 +4838,7 @@ paths:
                 Title:
                   description: A title of the evaluation form.
                   type: string
-                  minLength: 0
+                  minLength: 1
                   maxLength: 128
                 Description:
                   description: The description of the evaluation form.
@@ -4850,7 +4850,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/EvaluationFormItem'
-                  minItems: 0
+                  minItems: 1
                   maxItems: 100
                 ScoringStrategy:
                   description: Information about scoring strategy for an evaluation form.
@@ -9909,7 +9909,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
         - name: maxResults
           in: query
           required: false
@@ -13143,7 +13143,7 @@ paths:
                   description: The unique identifier for the evaluation form.
                   type: string
                   minLength: 1
-                  maxLength: 50
+                  maxLength: 500
                 ClientToken:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
                   type: string
@@ -13826,7 +13826,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 50
+            maxLength: 500
       requestBody:
         required: true
         content:
@@ -18448,7 +18448,7 @@ components:
     ResourceId:
       type: string
       minLength: 1
-      maxLength: 50
+      maxLength: 500
     VersionNumber:
       type: integer
       minimum: 1
@@ -19562,7 +19562,7 @@ components:
             - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
     EvaluationFormTitle:
       type: string
-      minLength: 0
+      minLength: 1
       maxLength: 128
     EvaluationFormDescription:
       type: string
@@ -19572,7 +19572,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/EvaluationFormItem'
-      minItems: 0
+      minItems: 1
       maxItems: 100
     EvaluationFormScoringStrategy:
       type: object
@@ -21668,6 +21668,7 @@ components:
       required:
         - Title
         - RefId
+        - Items
       properties:
         Title:
           allOf:
@@ -21817,7 +21818,7 @@ components:
       maxLength: 1024
     ReferenceId:
       type: string
-      minLength: 0
+      minLength: 1
       maxLength: 40
     EvaluationFormQuestionType:
       type: string

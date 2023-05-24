@@ -17878,6 +17878,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'If <code>True</code>, no inbound or outbound network calls can be made to or from the model container.'
+        DeploymentRecommendation:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentRecommendation'
+            - description: A set of recommended deployment configurations for the model.
     DescribeModelInput:
       type: object
       required:
@@ -31003,6 +31007,33 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DeployedImage'
+    RecommendationStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+        - NOT_APPLICABLE
+    RealTimeInferenceRecommendations:
+      type: array
+      items:
+        $ref: '#/components/schemas/RealTimeInferenceRecommendation'
+      minItems: 0
+      maxItems: 3
+    DeploymentRecommendation:
+      type: object
+      required:
+        - RecommendationStatus
+      properties:
+        RecommendationStatus:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationStatus'
+            - description: Status of the deployment recommendation. <code>NOT_APPLICABLE</code> means that SageMaker is unable to provide a default recommendation for the model using the information provided.
+        RealTimeInferenceRecommendations:
+          allOf:
+            - $ref: '#/components/schemas/RealTimeInferenceRecommendations'
+            - description: 'A list of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html">RealTimeInferenceRecommendation</a> items.'
+      description: A set of recommended deployment configurations for the model.
     DeviceSelectionConfig:
       type: object
       required:
@@ -36020,6 +36051,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: 'A list of key-value pairs associated with the model. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.'
+        DeploymentRecommendation:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentRecommendation'
+            - description: A set of recommended deployment configurations for the model.
       description: 'The properties of a model as returned by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html">Search</a> API.'
     MonitoringGroundTruthS3Input:
       type: object
@@ -38963,6 +38998,25 @@ components:
             - $ref: '#/components/schemas/RStudioServerProUserGroup'
             - description: The level of permissions that the user has within the <code>RStudioServerPro</code> app. This value defaults to `User`. The `Admin` value allows the user access to the RStudio Administrative Dashboard.
       description: A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app. <code>RStudioServerProAppSettings</code> cannot be updated. The <code>RStudioServerPro</code> app must be deleted and a new one created to make any changes.
+    RealTimeInferenceRecommendation:
+      type: object
+      required:
+        - RecommendationId
+        - InstanceType
+      properties:
+        RecommendationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The recommendation ID which uniquely identifies each recommendation.
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/ProductionVariantInstanceType'
+            - description: The recommended instance type for Real-Time Inference.
+        Environment:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentMap'
+            - description: The recommended environment variables to set in the model container for Real-Time Inference.
+      description: The recommended configuration to use for Real-Time Inference.
     RecommendationFailureReason:
       type: string
     RecommendationJobCompiledOutputConfig:
