@@ -1019,7 +1019,7 @@ components:
           type: string
       type: object
     ApplicationPolicy:
-      description: Policy for an individual app.
+      description: "Policy for an individual app. Note: Application availability on a given device cannot be changed using this policy if installAppsDisabled is enabled."
       properties:
         accessibleTrackIds:
           description: List of the app’s track IDs that a device belonging to the enterprise can access. If the list contains multiple track IDs, devices receive the latest version among all accessible tracks. If the list contains no track IDs, devices only have access to the app’s production track. More details about each track are available in AppTrackInfo.
@@ -1632,7 +1632,7 @@ components:
       description: Covers controls for device connectivity such as Wi-Fi, USB data access, keyboard/mouse connections, and more.
       properties:
         usbDataAccess:
-          description: Controls what can be transferred via USB, files and/or data. This is supported only on company-owned devices.
+          description: Controls what files and/or data can be transferred via USB. Supported only on company-owned devices.
           enum:
             - USB_DATA_ACCESS_UNSPECIFIED
             - ALLOW_USB_DATA_TRANSFER

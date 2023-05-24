@@ -357,6 +357,11 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/JournalEntry"
     x-apideck-resource-id: journal-entries
+  - description: ""
+    name: Purchase Orders
+    x-apideck-model:
+      $ref: "#/components/schemas/PurchaseOrder"
+    x-apideck-resource-id: purchase-orders
 paths:
   /accounting/balance-sheet:
     get:
@@ -542,6 +547,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 },
@@ -791,6 +797,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 },
@@ -1458,6 +1465,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 ],
@@ -1711,6 +1719,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 ],
@@ -2327,6 +2336,7 @@ paths:
                   fax: '122-111-1111',
                   email: 'elon@musk.com',
                   website: 'https://elonmusk.com',
+                  notes: 'Address notes or delivery instructions.',
                   row_version: '1-12345'
                 },
                 shipping_address: {
@@ -2352,6 +2362,7 @@ paths:
                   fax: '122-111-1111',
                   email: 'elon@musk.com',
                   website: 'https://elonmusk.com',
+                  notes: 'Address notes or delivery instructions.',
                   row_version: '1-12345'
                 },
                 template_id: '123456',
@@ -2602,6 +2613,7 @@ paths:
                   fax: '122-111-1111',
                   email: 'elon@musk.com',
                   website: 'https://elonmusk.com',
+                  notes: 'Address notes or delivery instructions.',
                   row_version: '1-12345'
                 },
                 shipping_address: {
@@ -2627,6 +2639,7 @@ paths:
                   fax: '122-111-1111',
                   email: 'elon@musk.com',
                   website: 'https://elonmusk.com',
+                  notes: 'Address notes or delivery instructions.',
                   row_version: '1-12345'
                 },
                 template_id: '123456',
@@ -3511,6 +3524,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 },
@@ -3735,6 +3749,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 },
@@ -3807,6 +3822,509 @@ paths:
 
             try {
               const { data } = await apideck.accounting.profitAndLossOne({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  /accounting/purchase-orders:
+    get:
+      description: List Purchase Orders
+      operationId: purchaseOrdersAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPurchaseOrdersResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Purchase Orders
+      tags:
+        - Purchase Orders
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.purchaseOrdersAll({})
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    post:
+      description: Create Purchase Order
+      operationId: purchaseOrdersAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PurchaseOrder"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreatePurchaseOrderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Purchase Order
+      tags:
+        - Purchase Orders
+      x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: xero
+          description: "Xero accepts a shipping address as a string instead of separate fields. Ie: `23 Main Street\r
+
+            Central City\r
+
+            Marineville\r
+
+            1234\r
+
+            `"
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              purchaseOrder: {
+                po_number: '90000117',
+                reference: '123456',
+                supplier: {
+                  id: '12345',
+                  display_name: 'Windsurf Shop',
+                  address: {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
+                    row_version: '1-12345'
+                  }
+                },
+                status: 'open',
+                issued_date: '2020-09-30',
+                delivery_date: '2020-09-30',
+                expected_arrival_date: '2020-09-30',
+                currency: 'USD',
+                currency_rate: 0.69,
+                sub_total: 27500,
+                total_tax: 2500,
+                total: 27500,
+                tax_inclusive: true,
+                line_items: [
+                  {
+                    row_id: '12345',
+                    code: '120-C',
+                    line_number: 1,
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    type: 'sales_item',
+                    tax_amount: 27500,
+                    total_amount: 27500,
+                    quantity: 1,
+                    unit_price: 27500.5,
+                    unit_of_measure: 'pc.',
+                    discount_percentage: 0.01,
+                    discount_amount: 19.99,
+                    location_id: '1234',
+                    department_id: '1234',
+                    item: {
+                      id: '12344'
+                    },
+                    tax_rate: {
+                      id: '123456'
+                    },
+                    ledger_account: {
+                      id: '123456',
+                      nominal_code: 'N091',
+                      code: '453'
+                    },
+                    row_version: '1-12345'
+                  }
+                ],
+                shipping_address: {
+                  id: '123',
+                  type: 'primary',
+                  string: '25 Spring Street, Blackburn, VIC 3130',
+                  name: 'HQ US',
+                  line1: 'Main street',
+                  line2: 'apt #',
+                  line3: 'Suite #',
+                  line4: 'delivery instructions',
+                  street_number: '25',
+                  city: 'San Francisco',
+                  state: 'CA',
+                  postal_code: '94104',
+                  country: 'US',
+                  latitude: '40.759211',
+                  longitude: '-73.984638',
+                  county: 'Santa Clara',
+                  contact_name: 'Elon Musk',
+                  salutation: 'Mr',
+                  phone_number: '111-111-1111',
+                  fax: '122-111-1111',
+                  email: 'elon@musk.com',
+                  website: 'https://elonmusk.com',
+                  notes: 'Address notes or delivery instructions.',
+                  row_version: '1-12345'
+                },
+                ledger_account: {
+                  id: '123456',
+                  nominal_code: 'N091',
+                  code: '453'
+                },
+                template_id: '123456',
+                row_version: '1-12345'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.purchaseOrdersAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/accounting/purchase-orders/{id}":
+    delete:
+      description: Delete Purchase Order
+      operationId: purchaseOrdersDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeletePurchaseOrderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Purchase Order
+      tags:
+        - Purchase Orders
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.purchaseOrdersDelete({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    get:
+      description: Get Purchase Order
+      operationId: purchaseOrdersOne
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetPurchaseOrderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Get Purchase Order
+      tags:
+        - Purchase Orders
+      x-apideck-api: accounting
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.accounting.purchaseOrdersOne({
+                id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    patch:
+      description: Update Purchase Order
+      operationId: purchaseOrdersUpdate
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PurchaseOrder"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdatePurchaseOrderResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Purchase Order
+      tags:
+        - Purchase Orders
+      x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: xero
+          description: "Xero accepts a shipping address as a string instead of separate fields. Ie: `23 Main Street\r
+
+            Central City\r
+
+            Marineville\r
+
+            1234\r
+
+            `"
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              purchaseOrder: {
+                po_number: '90000117',
+                reference: '123456',
+                supplier: {
+                  id: '12345',
+                  display_name: 'Windsurf Shop',
+                  address: {
+                    id: '123',
+                    type: 'primary',
+                    string: '25 Spring Street, Blackburn, VIC 3130',
+                    name: 'HQ US',
+                    line1: 'Main street',
+                    line2: 'apt #',
+                    line3: 'Suite #',
+                    line4: 'delivery instructions',
+                    street_number: '25',
+                    city: 'San Francisco',
+                    state: 'CA',
+                    postal_code: '94104',
+                    country: 'US',
+                    latitude: '40.759211',
+                    longitude: '-73.984638',
+                    county: 'Santa Clara',
+                    contact_name: 'Elon Musk',
+                    salutation: 'Mr',
+                    phone_number: '111-111-1111',
+                    fax: '122-111-1111',
+                    email: 'elon@musk.com',
+                    website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
+                    row_version: '1-12345'
+                  }
+                },
+                status: 'open',
+                issued_date: '2020-09-30',
+                delivery_date: '2020-09-30',
+                expected_arrival_date: '2020-09-30',
+                currency: 'USD',
+                currency_rate: 0.69,
+                sub_total: 27500,
+                total_tax: 2500,
+                total: 27500,
+                tax_inclusive: true,
+                line_items: [
+                  {
+                    row_id: '12345',
+                    code: '120-C',
+                    line_number: 1,
+                    description:
+                      'Model Y is a fully electric, mid-size SUV, with seating for up to seven, dual motor AWD and unparalleled protection.',
+                    type: 'sales_item',
+                    tax_amount: 27500,
+                    total_amount: 27500,
+                    quantity: 1,
+                    unit_price: 27500.5,
+                    unit_of_measure: 'pc.',
+                    discount_percentage: 0.01,
+                    discount_amount: 19.99,
+                    location_id: '1234',
+                    department_id: '1234',
+                    item: {
+                      id: '12344'
+                    },
+                    tax_rate: {
+                      id: '123456'
+                    },
+                    ledger_account: {
+                      id: '123456',
+                      nominal_code: 'N091',
+                      code: '453'
+                    },
+                    row_version: '1-12345'
+                  }
+                ],
+                shipping_address: {
+                  id: '123',
+                  type: 'primary',
+                  string: '25 Spring Street, Blackburn, VIC 3130',
+                  name: 'HQ US',
+                  line1: 'Main street',
+                  line2: 'apt #',
+                  line3: 'Suite #',
+                  line4: 'delivery instructions',
+                  street_number: '25',
+                  city: 'San Francisco',
+                  state: 'CA',
+                  postal_code: '94104',
+                  country: 'US',
+                  latitude: '40.759211',
+                  longitude: '-73.984638',
+                  county: 'Santa Clara',
+                  contact_name: 'Elon Musk',
+                  salutation: 'Mr',
+                  phone_number: '111-111-1111',
+                  fax: '122-111-1111',
+                  email: 'elon@musk.com',
+                  website: 'https://elonmusk.com',
+                  notes: 'Address notes or delivery instructions.',
+                  row_version: '1-12345'
+                },
+                ledger_account: {
+                  id: '123456',
+                  nominal_code: 'N091',
+                  code: '453'
+                },
+                template_id: '123456',
+                row_version: '1-12345'
+              }
+            }
+
+            try {
+              const { data } = await apideck.accounting.purchaseOrdersUpdate(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
@@ -3949,6 +4467,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 ],
@@ -4197,6 +4716,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 ],
@@ -4778,6 +5298,12 @@ components:
           schema:
             $ref: "#/components/schemas/CreatePaymentResponse"
       description: Payment created
+    CreatePurchaseOrderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreatePurchaseOrderResponse"
+      description: PurchaseOrders
     CreateSupplierResponse:
       content:
         application/json:
@@ -4838,6 +5364,12 @@ components:
           schema:
             $ref: "#/components/schemas/DeletePaymentResponse"
       description: Payment deleted
+    DeletePurchaseOrderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/DeletePurchaseOrderResponse"
+      description: PurchaseOrders
     DeleteSupplierResponse:
       content:
         application/json:
@@ -4964,6 +5496,18 @@ components:
           schema:
             $ref: "#/components/schemas/GetProfitAndLossResponse"
       description: Profit & Loss Report
+    GetPurchaseOrderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPurchaseOrderResponse"
+      description: PurchaseOrders
+    GetPurchaseOrdersResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/GetPurchaseOrdersResponse"
+      description: PurchaseOrders
     GetSupplierResponse:
       content:
         application/json:
@@ -5012,6 +5556,12 @@ components:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
+    PurchaseOrder:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PurchaseOrder"
+      description: PurchaseOrders
     TooManyRequestsResponse:
       content:
         application/json:
@@ -5084,6 +5634,12 @@ components:
           schema:
             $ref: "#/components/schemas/UpdatePaymentResponse"
       description: Payment Updated
+    UpdatePurchaseOrderResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/UpdatePurchaseOrderResponse"
+      description: PurchaseOrders
     UpdateSupplierResponse:
       content:
         application/json:
@@ -5270,41 +5826,14 @@ components:
         - accounting.supplier.created
         - accounting.supplier.updated
         - accounting.supplier.deleted
+        - accounting.purchase-order.created
+        - accounting.purchase-order.updated
+        - accounting.purchase-order.deleted
       type: string
       x-apideck-enum-id: accounting.events
     AccountingWebhookEvent:
       allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-          x-apideck-schema-id: WebhookEvent
+        - $ref: "#/components/schemas/WebhookEvent/allOf/0"
         - properties:
             event_type:
               $ref: "#/components/schemas/AccountingEventType"
@@ -5380,6 +5909,11 @@ components:
         name:
           example: HQ US
           nullable: true
+          type: string
+        notes:
+          example: Address notes or delivery instructions.
+          nullable: true
+          title: Notes
           type: string
         phone_number:
           example: 111-111-1111
@@ -6952,6 +7486,38 @@ components:
         - data
       type: object
       x-apideck-schema-id: CreatePaymentResponse
+    CreatePurchaseOrderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: add
+          type: string
+        resource:
+          description: Unified API resource name
+          example: PurchaseOrders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     CreateSupplierResponse:
       properties:
         data:
@@ -8101,6 +8667,38 @@ components:
         - data
       type: object
       x-apideck-schema-id: DeletePaymentResponse
+    DeletePurchaseOrderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: delete
+          type: string
+        resource:
+          description: Unified API resource name
+          example: PurchaseOrders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     DeleteSupplierResponse:
       properties:
         data:
@@ -8882,6 +9480,76 @@ components:
         - data
       type: object
       x-apideck-schema-id: GetProfitAndLossResponse
+    GetPurchaseOrderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/PurchaseOrder"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: PurchaseOrders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+    GetPurchaseOrdersResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/PurchaseOrder"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: PurchaseOrders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     GetSupplierResponse:
       properties:
         data:
@@ -10839,6 +11507,134 @@ components:
         title: medium
         total: medium
         type: critical
+    PurchaseOrder:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        currency:
+          $ref: "#/components/schemas/Currency"
+        currency_rate:
+          $ref: "#/components/schemas/CurrencyRate"
+        delivery_date:
+          description: The date on which the purchase order is to be delivered - YYYY-MM-DD.
+          example: 2020-09-30
+          format: date
+          nullable: true
+          title: Delivery date
+          type: string
+        downstream_id:
+          $ref: "#/components/schemas/DownstreamId"
+        expected_arrival_date:
+          description: The date on which the order is expected to arrive - YYYY-MM-DD.
+          example: 2020-09-30
+          format: date
+          nullable: true
+          title: Expected arrival date
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        issued_date:
+          description: Date purchase order was issued - YYYY-MM-DD.
+          example: 2020-09-30
+          format: date
+          nullable: true
+          title: Posted date
+          type: string
+        ledger_account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
+        line_items:
+          items:
+            $ref: "#/components/schemas/InvoiceLineItem"
+          type: array
+        po_number:
+          description: A PO Number uniquely identifies a purchase order and is generally defined by the buyer.
+          example: "90000117"
+          nullable: true
+          title: Purchase Order number
+          type: string
+        reference:
+          description: Optional purchase order reference.
+          example: "123456"
+          nullable: true
+          title: Purchase order reference
+          type: string
+        row_version:
+          $ref: "#/components/schemas/RowVersion"
+        shipping_address:
+          $ref: "#/components/schemas/Address"
+        status:
+          enum:
+            - draft
+            - open
+            - closed
+            - deleted
+            - billed
+            - other
+          example: open
+          nullable: true
+          title: Purchase order status
+          type: string
+          x-apideck-enum-id: purchase-orders.status
+        sub_total:
+          description: Sub-total amount, normally before tax.
+          example: 27500
+          nullable: true
+          title: Sub-total amount
+          type: number
+        supplier:
+          $ref: "#/components/schemas/LinkedSupplier"
+        tax_inclusive:
+          $ref: "#/components/schemas/TaxInclusive"
+        template_id:
+          description: Optional purchase order template
+          example: "123456"
+          nullable: true
+          title: Template
+          type: string
+        total:
+          description: Total amount of invoice, including tax.
+          example: 27500
+          nullable: true
+          title: Total amount
+          type: number
+        total_tax:
+          description: Total tax amount applied to this invoice.
+          example: 2500
+          nullable: true
+          title: Total tax amount
+          type: number
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+        updated_by:
+          $ref: "#/components/schemas/UpdatedBy"
+      type: object
+      x-apideck-schema-id: PurchaseOrder
+      x-apideck-weights:
+        created_at: high
+        created_by: low
+        currency: medium
+        currency_rate: low
+        delivery_date: medium
+        downstream_id: low
+        expected_arrival_date: medium
+        id: critical
+        issued_date: edge-case
+        ledger_account: edge-case
+        line_items: critical
+        po_number: low
+        row_version: edge-case
+        shipping_address: medium
+        status: critical
+        sub_total: high
+        supplier: high
+        tax_inclusive: low
+        total: critical
+        total_tax: high
+        updated_at: high
+        updated_by: low
     Quantity:
       example: 1
       nullable: true
@@ -11665,6 +12461,38 @@ components:
         - data
       type: object
       x-apideck-schema-id: UpdatePaymentResponse
+    UpdatePurchaseOrderResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/UnifiedId"
+        operation:
+          description: Operation performed
+          example: update
+          type: string
+        resource:
+          description: Unified API resource name
+          example: PurchaseOrders
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: quickbooks
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
     UpdateSupplierResponse:
       properties:
         data:
@@ -11746,6 +12574,44 @@ components:
       readOnly: true
       title: Updated by
       type: string
+    WebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+          x-apideck-schema-id: WebhookEvent
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/AccountingEventType"
+          type: object
+      x-sdk-exclude: true
     Website:
       additionalProperties: false
       properties:
@@ -12351,6 +13217,117 @@ x-webhooks:
       tags:
         - Webhook Events
       x-apideck-event-type: accounting.ledger_account.updated
+  PurchaseOrderCreated:
+    post:
+      description: Event broadcast when a purchase order has been created.
+      operationId: purchaseOrderCreated
+      parameters:
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: purchase-order
+                entity_url: https://unify.apideck.com/accounting/purchase-orders/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.purchase-order.created
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      security: []
+      summary: Purchase order Created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: accounting.purchase-order.created
+  PurchaseOrderDeleted:
+    post:
+      description: Event broadcast when a purchase order has been deleted.
+      operationId: purchaseOrderDeleted
+      parameters:
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: purchase-order
+                entity_url: https://unify.apideck.com/accounting/purchase-orders/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.purchase-order.deleted
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      security: []
+      summary: Purchase order Deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: accounting.purchase-order.deleted
+  PurchaseOrderUpdated:
+    post:
+      description: Event broadcast when a purchase order has been updated.
+      operationId: purchaseOrderUpdated
+      parameters:
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              payload:
+                consumer_id: test_user_id
+                entity_id: 123456ASDF
+                entity_type: purchase-order
+                entity_url: https://unify.apideck.com/accounting/purchase-orders/123456ASDF
+                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                event_type: accounting.purchase-order.updated
+                occurred_at: 2020-01-01T00:00:00.000Z
+                service_id: xero
+                unified_api: accounting
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      security: []
+      summary: Purchase order Updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: accounting.purchase-order.updated
   TaxRateCreated:
     post:
       description: Event broadcast when a tax has been rate created.

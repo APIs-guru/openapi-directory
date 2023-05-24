@@ -482,6 +482,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 ],
@@ -739,6 +740,7 @@ paths:
                     fax: '122-111-1111',
                     email: 'elon@musk.com',
                     website: 'https://elonmusk.com',
+                    notes: 'Address notes or delivery instructions.',
                     row_version: '1-12345'
                   }
                 ],
@@ -1474,6 +1476,11 @@ components:
         name:
           example: HQ US
           nullable: true
+          type: string
+        notes:
+          example: Address notes or delivery instructions.
+          nullable: true
+          title: Notes
           type: string
         phone_number:
           example: 111-111-1111

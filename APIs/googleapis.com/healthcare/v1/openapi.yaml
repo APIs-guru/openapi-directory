@@ -2620,7 +2620,7 @@ components:
             $ref: "#/components/schemas/Entity"
           type: array
         entityMentions:
-          description: entity_mentions contains all the annotated medical entities that were mentioned in the provided document.
+          description: The `entity_mentions` field contains all the annotated medical entities that were mentioned in the provided document.
           items:
             $ref: "#/components/schemas/EntityMention"
           type: array
@@ -3274,7 +3274,7 @@ components:
           description: Whether to send full FHIR resource to this Pub/Sub topic.
           type: boolean
         sendPreviousResourceOnDelete:
-          description: Whether to send full FHIR resource to this pubsub topic for deleting FHIR resource. Note that setting this to true does not guarantee that all previous resources will be sent in the format of full FHIR resource. When a resource change is too large or during heavy traffic, only the resource name will be sent. Clients should always check the "payloadType" label from a Pub/Sub message to determine whether it needs to fetch the full previous resource as a separate operation.
+          description: Whether to send full FHIR resource to this Pub/Sub topic for deleting FHIR resource. Note that setting this to true does not guarantee that all previous resources will be sent in the format of full FHIR resource. When a resource change is too large or during heavy traffic, only the resource name will be sent. Clients should always check the "payloadType" label from a Pub/Sub message to determine whether it needs to fetch the full previous resource as a separate operation.
           type: boolean
       type: object
     FhirStore:
