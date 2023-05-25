@@ -196,7 +196,7 @@ paths:
                     EndpointType:
                       allOf:
                         - $ref: '#/components/schemas/ApiGatewayEndpointType'
-                        - description: '<p>The type of endpoint to use for the API Gateway proxy. If no value is specified in the request, the value is set to <code>REGIONAL</code> by default.</p> <p>If the value is set to <code>PRIVATE</code> in the request, this creates a private API endpoint that is isolated from the public internet. The private endpoint can only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that have been granted access. </p>'
+                        - description: '<p>The type of endpoint to use for the API Gateway proxy. If no value is specified in the request, the value is set to <code>REGIONAL</code> by default.</p> <p>If the value is set to <code>PRIVATE</code> in the request, this creates a private API endpoint that is isolated from the public internet. The private endpoint can only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) interface endpoints for the Amazon API Gateway that has been granted access. For more information about creating a private connection with Refactor Spaces and interface endpoint (Amazon Web Services PrivateLink) availability, see <a href="https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/vpc-interface-endpoints.html">Access Refactor Spaces using an interface endpoint (Amazon Web Services PrivateLink)</a>.</p>'
                     StageName:
                       allOf:
                         - $ref: '#/components/schemas/StageName'
@@ -626,6 +626,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/RouteActivationState'
                         - description: 'If set to <code>ACTIVE</code>, traffic is forwarded to this route’s service after the route is created. '
+                    AppendSourcePath:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: 'If set to <code>true</code>, this option appends the source path to the service URL endpoint.'
                     IncludeChildPaths:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
@@ -637,7 +641,7 @@ paths:
                     SourcePath:
                       allOf:
                         - $ref: '#/components/schemas/UriPath'
-                        - description: The path to use to match traffic. Paths must start with <code>/</code> and are relative to the base of the application.
+                        - description: 'This is the path that Refactor Spaces uses to match traffic. Paths must start with <code>/</code> and are relative to the base of the application. To use path parameters in the source path, add a variable in curly braces. For example, the resource path {user} represents a path parameter called ''user''.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2283,7 +2287,7 @@ components:
         $ref: '#/components/schemas/HttpMethod'
     UriPath:
       type: string
-      pattern: '^(/[a-zA-Z0-9._-]+)+$'
+      pattern: '^(/([a-zA-Z0-9._:-]+|\{[a-zA-Z0-9._:-]+\}))+$'
       minLength: 1
       maxLength: 2048
     CreateServiceResponse:
@@ -2594,6 +2598,10 @@ components:
     GetRouteResponse:
       type: object
       properties:
+        AppendSourcePath:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If set to <code>true</code>, this option appends the source path to the service URL endpoint.'
         ApplicationId:
           allOf:
             - $ref: '#/components/schemas/ApplicationId'
@@ -2653,7 +2661,7 @@ components:
         SourcePath:
           allOf:
             - $ref: '#/components/schemas/UriPath'
-            - description: 'The path to use to match traffic. Paths must start with <code>/</code> and are relative to the base of the application. '
+            - description: 'This is the path that Refactor Spaces uses to match traffic. Paths must start with <code>/</code> and are relative to the base of the application. To use path parameters in the source path, add a variable in curly braces. For example, the resource path {user} represents a path parameter called ''user''.'
         State:
           allOf:
             - $ref: '#/components/schemas/RouteState'
@@ -2909,7 +2917,7 @@ components:
         EndpointType:
           allOf:
             - $ref: '#/components/schemas/ApiGatewayEndpointType'
-            - description: '<p>The type of endpoint to use for the API Gateway proxy. If no value is specified in the request, the value is set to <code>REGIONAL</code> by default.</p> <p>If the value is set to <code>PRIVATE</code> in the request, this creates a private API endpoint that is isolated from the public internet. The private endpoint can only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that have been granted access. </p>'
+            - description: '<p>The type of endpoint to use for the API Gateway proxy. If no value is specified in the request, the value is set to <code>REGIONAL</code> by default.</p> <p>If the value is set to <code>PRIVATE</code> in the request, this creates a private API endpoint that is isolated from the public internet. The private endpoint can only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) interface endpoints for the Amazon API Gateway that has been granted access. For more information about creating a private connection with Refactor Spaces and interface endpoint (Amazon Web Services PrivateLink) availability, see <a href="https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/vpc-interface-endpoints.html">Access Refactor Spaces using an interface endpoint (Amazon Web Services PrivateLink)</a>.</p>'
         StageName:
           allOf:
             - $ref: '#/components/schemas/StageName'
@@ -3207,6 +3215,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RouteActivationState'
             - description: 'If set to <code>ACTIVE</code>, traffic is forwarded to this route’s service after the route is created. '
+        AppendSourcePath:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If set to <code>true</code>, this option appends the source path to the service URL endpoint.'
         IncludeChildPaths:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -3218,7 +3230,7 @@ components:
         SourcePath:
           allOf:
             - $ref: '#/components/schemas/UriPath'
-            - description: The path to use to match traffic. Paths must start with <code>/</code> and are relative to the base of the application.
+            - description: 'This is the path that Refactor Spaces uses to match traffic. Paths must start with <code>/</code> and are relative to the base of the application. To use path parameters in the source path, add a variable in curly braces. For example, the resource path {user} represents a path parameter called ''user''.'
       description: 'The configuration for the URI path route type. '
     CreateRouteRequest:
       type: object
@@ -3654,6 +3666,10 @@ components:
     RouteSummary:
       type: object
       properties:
+        AppendSourcePath:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If set to <code>true</code>, this option appends the source path to the service URL endpoint.'
         ApplicationId:
           allOf:
             - $ref: '#/components/schemas/ApplicationId'
@@ -3713,7 +3729,7 @@ components:
         SourcePath:
           allOf:
             - $ref: '#/components/schemas/UriPath'
-            - description: The path to use to match traffic. Paths must start with <code>/</code> and are relative to the base of the application.
+            - description: 'This is the path that Refactor Spaces uses to match traffic. Paths must start with <code>/</code> and are relative to the base of the application. To use path parameters in the source path, add a variable in curly braces. For example, the resource path {user} represents a path parameter called ''user''.'
         State:
           allOf:
             - $ref: '#/components/schemas/RouteState'
