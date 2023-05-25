@@ -11,7 +11,7 @@ info:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Cloud Data Loss Prevention (DLP) API
+  title: Cloud Data Loss Prevention (DLP)
   version: v2
   x-apiClientRegistration:
     url: https://console.developers.google.com
@@ -3327,6 +3327,9 @@ components:
           description: Approximate percentage of non-null rows that contained data detected by this infotype.
           format: int32
           type: integer
+        excludedFromAnalysis:
+          description: Whether this infoType was excluded from sensitivity and risk analysis due to factors such as low prevalence (subject to change).
+          type: boolean
         infoType:
           $ref: "#/components/schemas/GooglePrivacyDlpV2InfoType"
           description: The other infoType.
@@ -3438,7 +3441,7 @@ components:
       properties:
         status:
           $ref: "#/components/schemas/GoogleRpcStatus"
-          description: Profiling status code and optional message
+          description: Profiling status code and optional message. status.code will be 0 (default value) for OK.
         timestamp:
           description: Time when the profile generation status was updated
           format: google-datetime

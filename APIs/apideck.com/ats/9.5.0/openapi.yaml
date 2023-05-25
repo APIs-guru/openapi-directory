@@ -2688,6 +2688,10 @@ components:
             - example: true
               nullable: true
               type: boolean
+            - example:
+                foo: bar
+              nullable: true
+              type: object
             - items:
                 type: string
               type: array
@@ -3253,12 +3257,31 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         job_portal_url:
+          deprecated: true
           description: URL of the job portal
           nullable: true
           title: URL
           type: string
         language:
           $ref: "#/components/schemas/Language"
+        links:
+          items:
+            properties:
+              type:
+                enum:
+                  - job_portal
+                  - job_description
+                example: job_portal
+                type: string
+              url:
+                example: https://app.intercom.io/contacts/12345
+                type: string
+            type: object
+            x-apideck-weights:
+              type: critical
+              url: critical
+          minLength: 1
+          type: array
         location:
           description: Specifies the location for the job posting.
           example: San Francisco
@@ -3270,7 +3293,11 @@ components:
         published_at:
           $ref: "#/components/schemas/PublishedAt"
         record_url:
-          $ref: "#/components/schemas/RecordUrl"
+          deprecated: true
+          example: https://app.intercom.io/contacts/12345
+          nullable: true
+          title: Record URL
+          type: string
         recruiters:
           description: The recruiter is generally someone who is tasked to help the hiring manager find and screen qualified applicant
           example:
@@ -3328,6 +3355,7 @@ components:
         updated_by:
           $ref: "#/components/schemas/UpdatedBy"
         url:
+          deprecated: true
           description: URL of the job description
           nullable: true
           title: URL
@@ -3342,15 +3370,11 @@ components:
           x-apideck-enum-id: jobs.visibility
       type: object
       x-apideck-schema-id: Job
-      x-apideck-strict-any-of:
+      x-apideck-strict-one-of:
         - required:
             - description_html
         - required:
             - description
-      x-apideck-strict-required:
-        - title
-        - status
-        - location
       x-apideck-weights:
         addresses: low
         available_to_employees: medium
@@ -3366,7 +3390,7 @@ components:
         custom_fields: critical
         deleted: medium
         department: medium
-        description: critical
+        description: high
         description_html: high
         employment_terms: low
         experience: low
@@ -3375,6 +3399,7 @@ components:
         id: high
         job_portal_url: medium
         language: medium
+        links: critical
         location: critical
         owner_id: high
         published_at: high
@@ -3390,7 +3415,7 @@ components:
         title: critical
         updated_at: medium
         updated_by: edge-case
-        url: critical
+        url: high
         visibility: low
     JobStatus:
       description: The status of the job.

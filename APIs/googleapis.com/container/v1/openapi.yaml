@@ -4350,6 +4350,25 @@ components:
             type: string
           type: array
       type: object
+    NodeAffinity:
+      description: Specifies the NodeAffinity key, values, and affinity operator according to [shared sole tenant node group affinities](https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes#node_affinity_and_anti-affinity).
+      properties:
+        key:
+          description: Key for NodeAffinity.
+          type: string
+        operator:
+          description: Operator for NodeAffinity.
+          enum:
+            - OPERATOR_UNSPECIFIED
+            - IN
+            - NOT_IN
+          type: string
+        values:
+          description: Values for NodeAffinity.
+          items:
+            type: string
+          type: array
+      type: object
     NodeConfig:
       description: Parameters that describe the nodes in a cluster. GKE Autopilot clusters do not recognize parameters in `NodeConfig`. Use AutoprovisioningNodePoolDefaults instead.
       properties:
@@ -4449,6 +4468,9 @@ components:
         shieldedInstanceConfig:
           $ref: "#/components/schemas/ShieldedInstanceConfig"
           description: Shielded Instance options.
+        soleTenantConfig:
+          $ref: "#/components/schemas/SoleTenantConfig"
+          description: Parameters for node pools to be backed by shared sole tenant node groups.
         spot:
           description: Spot flag for enabling Spot VM, which is a rebrand of the existing preemptible flag.
           type: boolean
@@ -5354,6 +5376,15 @@ components:
         enabled:
           description: Whether Shielded Nodes features are enabled on all nodes in this cluster.
           type: boolean
+      type: object
+    SoleTenantConfig:
+      description: SoleTenantConfig contains the NodeAffinities to specify what shared sole tenant node groups should back the node pool.
+      properties:
+        nodeAffinities:
+          description: NodeAffinities used to match to a shared sole tenant node group.
+          items:
+            $ref: "#/components/schemas/NodeAffinity"
+          type: array
       type: object
     StandardRolloutPolicy:
       description: Standard rollout policy is the default policy for blue-green.

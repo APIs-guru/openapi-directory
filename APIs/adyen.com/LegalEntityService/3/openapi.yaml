@@ -47,7 +47,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-05-22T18:22:30Z
+  x-timestamp: 2023-05-25T17:22:33Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2810,6 +2810,7 @@ components:
             - $ref: "#/components/schemas/NumberAndBicAccountIdentification"
             - $ref: "#/components/schemas/PLLocalAccountIdentification"
             - $ref: "#/components/schemas/SELocalAccountIdentification"
+            - $ref: "#/components/schemas/SGLocalAccountIdentification"
             - $ref: "#/components/schemas/UKLocalAccountIdentification"
             - $ref: "#/components/schemas/USLocalAccountIdentification"
           x-addedInVersion: "3"
@@ -4155,6 +4156,29 @@ components:
         - type
         - accountNumber
         - clearingNumber
+      type: object
+    SGLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 4- to 19-digit bank account number, without separators or whitespace.
+          maxLength: 19
+          minLength: 4
+          type: string
+        bic:
+          description: The bank's 8- or 11-character BIC or SWIFT code.
+          maxLength: 11
+          minLength: 8
+          type: string
+        type:
+          default: sgLocal
+          description: "**sgLocal**"
+          enum:
+            - sgLocal
+          type: string
+      required:
+        - accountNumber
+        - bic
       type: object
     ServiceError:
       properties:
