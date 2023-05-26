@@ -47,7 +47,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-05-25T17:22:32Z
+  x-timestamp: 2023-05-25T18:23:16Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2896,9 +2896,9 @@ components:
             * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.
 
             When uploading other documents:
-            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**.
+            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.
 
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, or **proofOfIndividualTaxId**.
+            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.
 
             * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.
 
@@ -2917,6 +2917,7 @@ components:
             - proofOfOrganizationTaxInfo
             - proofOfIndustry
             - constitutionalDocument
+            - proofOfFundingOrWealthSource
           type: string
       required:
         - type
@@ -3086,9 +3087,9 @@ components:
             * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.
 
             When uploading other documents:
-            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, or **proofOfIndustry**.
+            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.
 
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, or **proofOfIndividualTaxId**.
+            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.
 
             * For **soleProprietorship**, the `type` values can be **constitutionalDocument**, **proofOfAddress**, or **proofOfIndustry**.
 
@@ -3107,6 +3108,7 @@ components:
             - proofOfOrganizationTaxInfo
             - proofOfIndustry
             - constitutionalDocument
+            - proofOfFundingOrWealthSource
           type: string
       required:
         - type

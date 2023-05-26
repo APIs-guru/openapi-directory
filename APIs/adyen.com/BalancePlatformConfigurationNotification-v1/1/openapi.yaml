@@ -1,6 +1,4 @@
 openapi: 3.1.0
-servers:
-  - url: https://balanceplatform-api-test.adyen.com/bcl/v1
 info:
   contact:
     email: developer-experience@adyen.com
@@ -8,7 +6,7 @@ info:
     url: https://www.adyen.help/hc/en-us/community/topics
     x-twitter: Adyen
   description: |-
-    Adyen sends notifications through webhooks to inform your system about events that occur in your platform. These events include, for example, when an account holder's capabilities are updated, or when a sweep configuration is created or updated. 
+    Adyen sends webhooks to inform your system about events that occur in your platform. These events include, for example, when an account holder's capabilities are updated, or when a sweep configuration is created or updated. 
     When an event occurs, Adyen makes an HTTP POST request to a URL on your server and includes the details of the event in the request body.
 
     You can use these webhooks to build your implementation. For example, you can use this information to update internal statuses when the status of a capability is changed.
@@ -26,7 +24,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformConfigurationNotification-v1
-  x-timestamp: 2023-04-26T16:26:46Z
+  x-timestamp: 2023-05-25T20:25:14Z
 tags: []
 components:
   examples:
@@ -291,6 +289,14 @@ components:
         legalEntityId:
           description: The unique identifier of the [legal entity](https://docs.adyen.com/api-explorer/legalentity/latest/post/legalEntities#responses-200-id) associated with the account holder. Adyen performs a verification process against the legal entity of the account holder.
           type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            A set of key and value pairs for general use by the merchant.
+            The keys do not have specific names and may be used for storing miscellaneous data as desired.
+            > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+          type: object
         primaryBalanceAccount:
           description: The ID of the account holder's primary balance account. By default, this is set to the first balance account that you create for the account holder. To assign a different balance account, send a PATCH request.
           type: string
@@ -343,7 +349,7 @@ components:
             - notApplicable
           type: string
         allowedSettings:
-          $ref: "#/components/schemas/JSONObject"
+          $ref: "#/components/schemas/CapabilitySettings"
           description: A JSON object containing the settings that are allowed for the account holder.
         enabled:
           description: Indicates whether the capability is enabled. If **false**, the capability is temporarily disabled for the account holder.
@@ -368,7 +374,7 @@ components:
             - notApplicable
           type: string
         requestedSettings:
-          $ref: "#/components/schemas/JSONObject"
+          $ref: "#/components/schemas/CapabilitySettings"
           description: A JSON object containing the settings that were requested for the account holder.
         transferInstruments:
           description: "Contains the status of the transfer instruments associated with this capability. "
@@ -416,7 +422,7 @@ components:
             Possible values: **test**, **live**.
           type: string
         type:
-          description: Type of notification.
+          description: Type of webhook.
           enum:
             - balancePlatform.accountHolder.updated
             - balancePlatform.accountHolder.created
@@ -608,6 +614,14 @@ components:
         id:
           description: The unique identifier of the balance account.
           type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            A set of key and value pairs for general use by the merchant.
+            The keys do not have specific names and may be used for storing miscellaneous data as desired.
+            > Note that during an update of metadata, the omission of existing key-value pairs will result in the deletion of those key-value pairs.
+          type: object
         paymentInstruments:
           description: List of [payment instruments](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/paymentInstruments) associated with the balance account.
           items:
@@ -663,7 +677,7 @@ components:
             Possible values: **test**, **live**.
           type: string
         type:
-          description: Type of notification.
+          description: Type of webhook.
           enum:
             - balancePlatform.balanceAccount.updated
             - balancePlatform.balanceAccount.created
@@ -722,6 +736,36 @@ components:
         - country
       type: object
     CapabilityProblem:
+      type: object
+    CapabilitySettings:
+      properties:
+        amountPerIndustry:
+          additionalProperties:
+            $ref: "#/components/schemas/Amount"
+          description: ""
+          type: object
+        authorizedCardUsers:
+          description: ""
+          type: boolean
+        fundingSource:
+          description: ""
+          items:
+            enum:
+              - credit
+              - debit
+              - prepaid
+            type: string
+          type: array
+        interval:
+          description: ""
+          enum:
+            - daily
+            - monthly
+            - weekly
+          type: string
+        maxAmount:
+          $ref: "#/components/schemas/Amount"
+          description: ""
       type: object
     Card:
       properties:
@@ -850,8 +894,8 @@ components:
         card:
           $ref: "#/components/schemas/CardOrderItemDeliveryStatus"
           description: Card delivery status.
-        cardOrderItemReference:
-          description: The unique identifier of the card order.
+        cardOrderItemId:
+          description: The unique identifier of the card order item.
           type: string
         creationDate:
           description: The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
@@ -860,8 +904,8 @@ components:
         id:
           description: The ID of the resource.
           type: string
-        paymentInstrumentReference:
-          description: The unique identifier of the payment instrument related to the card order.
+        paymentInstrumentId:
+          description: The unique identifier of the payment instrument related to the card order item.
           type: string
         pin:
           $ref: "#/components/schemas/CardOrderItemDeliveryStatus"
@@ -905,7 +949,7 @@ components:
             Possible values: **test**, **live**.
           type: string
         type:
-          description: Type of notification.
+          description: Type of webhook.
           enum:
             - balancePlatform.cardorder.created
             - balancePlatform.cardorder.updated
@@ -995,7 +1039,7 @@ components:
 
             * **monthly**: push out funds every first of the month at 07:00 AM CET.
 
-            * **balance**: pull in funds instantly if the balance is less than or equal to the `triggerAmount`. You can only use this for sweeps of `type` **pull** and when the source is a `merchantAccount` or `transferInstrument`.
+            * **balance**: pull in funds instantly if the balance is less than or equal to the `triggerAmount`. You can only use this for sweeps of `type` **pull** and when the source is a `merchantAccount` or `transferInstrument`.If the source is transferInstrument, merchant account identifier is still required, with which you want to process the transaction.
           enum:
             - daily
             - weekly
@@ -1030,22 +1074,6 @@ components:
       required:
         - type
         - iban
-      type: object
-    JSONObject:
-      properties:
-        paths:
-          items:
-            $ref: "#/components/schemas/JSONPath"
-          type: array
-        rootPath:
-          $ref: "#/components/schemas/JSONPath"
-      type: object
-    JSONPath:
-      properties:
-        content:
-          items:
-            type: string
-          type: array
       type: object
     Name:
       properties:
@@ -1188,7 +1216,7 @@ components:
             Possible values: **test**, **live**.
           type: string
         type:
-          description: Type of notification.
+          description: Type of webhook.
           enum:
             - balancePlatform.paymentInstrument.created
             - balancePlatform.paymentInstrument.updated
@@ -1374,7 +1402,7 @@ components:
             Possible values: **test**, **live**.
           type: string
         type:
-          description: Type of notification.
+          description: Type of webhook.
           enum:
             - balancePlatform.balanceAccountSweep.created
             - balancePlatform.balanceAccountSweep.updated
@@ -1518,7 +1546,7 @@ components:
 
             * **monthly**: push out funds every first of the month at 07:00 AM CET.
 
-            * **balance**: pull in funds instantly if the balance is less than or equal to the `triggerAmount`. You can only use this for sweeps of `type` **pull** and when the source is a `merchantAccount` or `transferInstrument`.
+            * **balance**: pull in funds instantly if the balance is less than or equal to the `triggerAmount`. You can only use this for sweeps of `type` **pull** and when the source is a `merchantAccount` or `transferInstrument`.If the source is transferInstrument, merchant account identifier is still required, with which you want to process the transaction.
           enum:
             - daily
             - weekly
@@ -1832,7 +1860,7 @@ webhooks:
     post:
       description: |-
         Adyen sends this webhook when you successfully [create a payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments). 
-        >The notification does not include the card number when creating virtual cards. You can only get the card number in the response of the POST [/paymentInstruments](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments#responses-200-card-number) request.
+        >The webhook does not include the card number when creating virtual cards. You can only get the card number in the response of the POST [/paymentInstruments](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/paymentInstruments#responses-200-card-number) request.
       operationId: post-balancePlatform.paymentInstrument.created
       requestBody:
         content:

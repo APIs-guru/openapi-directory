@@ -59,7 +59,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-05-23T19:25:26Z
+  x-timestamp: 2023-05-25T10:25:40Z
 tags:
   - name: Modifications
   - name: Orders
@@ -861,8 +861,8 @@ paths:
                 $ref: "#/components/examples/post-paymentMethods-basic"
               filtered:
                 $ref: "#/components/examples/post-paymentMethods-filtered"
-              include-oneclick:
-                $ref: "#/components/examples/post-paymentMethods-include-oneclick"
+              include-stored:
+                $ref: "#/components/examples/post-paymentMethods-include-stored"
             schema:
               $ref: "#/components/schemas/PaymentMethodsRequest"
       responses:
@@ -874,8 +874,8 @@ paths:
                   $ref: "#/components/examples/post-paymentMethods-basic-200"
                 filtered:
                   $ref: "#/components/examples/post-paymentMethods-filtered-200"
-                include-oneclick:
-                  $ref: "#/components/examples/post-paymentMethods-include-oneclick-200"
+                include-stored:
+                  $ref: "#/components/examples/post-paymentMethods-include-stored-200"
               schema:
                 $ref: "#/components/schemas/PaymentMethodsResponse"
           description: OK - the request has succeeded.
@@ -1138,8 +1138,40 @@ paths:
         content:
           application/json:
             examples:
+              applepay:
+                $ref: "#/components/examples/post-payments-applepay"
+              card-3d-secure-2-web:
+                $ref: "#/components/examples/post-payments-card-3d-secure-2-web"
+              card-3d-secure-direct:
+                $ref: "#/components/examples/post-payments-card-3d-secure-direct"
+              card-direct:
+                $ref: "#/components/examples/post-payments-card-direct"
+              card-securedfields:
+                $ref: "#/components/examples/post-payments-card-securedfields"
+              enableOneClick-SF:
+                $ref: "#/components/examples/post-payments-enableOneClick-SF"
+              enableOneClick-raw:
+                $ref: "#/components/examples/post-payments-enableOneClick-raw"
+              giropay:
+                $ref: "#/components/examples/post-payments-giropay"
+              googlepay:
+                $ref: "#/components/examples/post-payments-googlepay"
+              ideal:
+                $ref: "#/components/examples/post-payments-ideal"
+              klarna:
+                $ref: "#/components/examples/post-payments-klarna"
+              oneclick-direct:
+                $ref: "#/components/examples/post-payments-oneclick-direct"
+              oneclick-securedfields:
+                $ref: "#/components/examples/post-payments-oneclick-securedfields"
+              recurring:
+                $ref: "#/components/examples/post-payments-recurring"
+              sofort:
+                $ref: "#/components/examples/post-payments-sofort"
               split:
                 $ref: "#/components/examples/post-payments-split"
+              subscription-first-transaction:
+                $ref: "#/components/examples/post-payments-subscription-first-transaction"
             schema:
               $ref: "#/components/schemas/CheckoutPaymentRequest"
       responses:
@@ -1147,8 +1179,24 @@ paths:
           content:
             application/json:
               examples:
+                card-direct:
+                  $ref: "#/components/examples/post-payments-card-direct-200"
+                card-securedfields:
+                  $ref: "#/components/examples/post-payments-card-securedfields-200"
+                enableOneClick-SF:
+                  $ref: "#/components/examples/post-payments-enableOneClick-SF-200"
+                enableOneClick-raw:
+                  $ref: "#/components/examples/post-payments-enableOneClick-raw-200"
+                giropay:
+                  $ref: "#/components/examples/post-payments-giropay-200"
+                ideal:
+                  $ref: "#/components/examples/post-payments-ideal-200"
+                sofort:
+                  $ref: "#/components/examples/post-payments-sofort-200"
                 split:
                   $ref: "#/components/examples/post-payments-split-200"
+                subscription-first-transaction:
+                  $ref: "#/components/examples/post-payments-subscription-first-transaction-200"
               schema:
                 $ref: "#/components/schemas/PaymentResponse"
           description: OK - the request has succeeded.
@@ -1899,8 +1947,14 @@ paths:
         content:
           application/json:
             examples:
+              00.success:
+                $ref: "#/components/examples/post-sessions-00.success"
+              01.klarna:
+                $ref: "#/components/examples/post-sessions-01.klarna"
               enableOneClick:
                 $ref: "#/components/examples/post-sessions-enableOneClick"
+              split:
+                $ref: "#/components/examples/post-sessions-split"
             schema:
               $ref: "#/components/schemas/CreateCheckoutSessionRequest"
       responses:
@@ -4103,7 +4157,7 @@ components:
             type: winkelcheque
           - name: Your Gift
             type: yourgift
-    post-paymentMethods-include-oneclick:
+    post-paymentMethods-include-stored:
       summary: Get payment methods including stored card details
       value:
         amount:
@@ -4111,9 +4165,9 @@ components:
           value: 1000
         countryCode: NL
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
-    post-paymentMethods-include-oneclick-200:
-      summary: Example response for request 'include-oneclick'
+        shopperReference: YOUR_SHOPPER_REFERENCE
+    post-paymentMethods-include-stored-200:
+      summary: Example response that includes stored payment methods
       value:
         paymentMethods:
           - details:
@@ -4419,6 +4473,22 @@ components:
             type: winkelcheque
           - name: Your Gift
             type: yourgift
+        storedPaymentMethods:
+          - brand: visa
+            expiryMonth: "10"
+            expiryYear: "30"
+            holderName: John Smith
+            id: "7219687191761347"
+            issuerName: ISSUER_NAME
+            lastFour: "1111"
+            name: VISA
+            shopperEmail: john.smith@example.com
+            shopperReference: YOUR_SHOPPER_REFERENCE
+            supportedRecurringProcessingModels:
+              - CardOnFile
+              - Subscription
+              - UnscheduledCardOnFile
+            type: scheme
     post-paymentSession-android:
       summary: Set up a payment session (Android)
       value:
@@ -4519,6 +4589,143 @@ components:
       summary: Example response for request 'web'
       value:
         paymentSession: eyJjaGVja291dHNob3BwZXJCYXN...
+    post-payments-applepay:
+      summary: Make an Apple Pay payment
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          applePayToken: VNRWtuNlNEWkRCSm1xWndjMDFFbktkQU...
+          type: applepay
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-card-3d-secure-2-web:
+      summary: Make a card payment with 3D Secure 2 native authentication
+      value:
+        amount:
+          currency: EUR
+          value: 1000
+        authenticationData:
+          threeDSRequestData:
+            nativeThreeDS: preferred
+        billingAddress:
+          city: New York
+          country: US
+          houseNumberOrName: 37C
+          postalCode: "10039"
+          stateOrProvince: NY
+          street: Redwood Block
+        browserInfo:
+          acceptHeader: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+          colorDepth: 24
+          javaEnabled: true
+          language: nl-NL
+          screenHeight: 723
+          screenWidth: 1536
+          timeZoneOffset: 0
+          userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36
+        channel: Web
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        origin: https://your-company.com
+        paymentMethod:
+          encryptedCardNumber: test_4035501428146300
+          encryptedExpiryMonth: test_03
+          encryptedExpiryYear: test_2030
+          encryptedSecurityCode: test_737
+          holderName: John Smith
+          type: scheme
+        reference: YOUR_ORDER_NUMBER
+        returnUrl: https://your-company.com/checkout/
+        shopperEmail: s.hopper@test.com
+        shopperIP: 192.0.2.1
+    post-payments-card-3d-secure-direct:
+      summary: Make card payment with 3D Secure redirect authentication
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        browserInfo:
+          acceptHeader: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+          colorDepth: 10
+          javaEnabled: true
+          language: en
+          screenHeight: 2000
+          screenWidth: 3000
+          timeZoneOffset: 5
+          userAgent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9) Gecko/2008052912 Firefox/3.0
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          expiryMonth: "03"
+          expiryYear: "2030"
+          holderName: John Smith
+          number: "4212345678901237"
+          type: scheme
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-card-direct:
+      summary: Make a card payment
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          expiryMonth: "03"
+          expiryYear: "2030"
+          holderName: John Smith
+          number: "4111111111111111"
+          type: scheme
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-card-direct-200:
+      summary: Example response for request 'card-direct'
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: 8PQMP9VEP3H
+          authCode: "044925"
+          avsResult: 4 AVS not supported for this card type
+          avsResultRaw: "4"
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          refusalReasonRaw: AUTHORISED
+        merchantReference: string
+        pspReference: 993617895204576J
+        resultCode: Authorised
+    post-payments-card-securedfields:
+      summary: Make a card payment (using encrypted card details)
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          encryptedCardNumber: test_4111111111111111
+          encryptedExpiryMonth: test_03
+          encryptedExpiryYear: test_2030
+          encryptedSecurityCode: test_737
+          type: scheme
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-card-securedfields-200:
+      summary: Example response for request 'card-securedfields'
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: 8PQMP9VIE9N
+          authCode: "065696"
+          avsResult: 4 AVS not supported for this card type
+          avsResultRaw: "4"
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          refusalReasonRaw: AUTHORISED
+        merchantReference: string
+        pspReference: 993617895215577D
+        resultCode: Authorised
     post-payments-details-3d-secure-2-native:
       summary: Submit 3D Secure 2 authentication result
       value:
@@ -4529,10 +4736,275 @@ components:
       value:
         details:
           redirectResult: X6XtfGC3!Y...
+    post-payments-enableOneClick-SF:
+      summary: Tokenize card details for one-off payments (using encrypted card details)
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          encryptedCardNumber: test_4111111111111111
+          encryptedExpiryMonth: test_03
+          encryptedExpiryYear: test_2030
+          encryptedSecurityCode: test_737
+          type: scheme
+        recurringProcessingModel: CardOnFile
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+        shopperInteraction: Ecommerce
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+        storePaymentMethod: true
+    post-payments-enableOneClick-SF-200:
+      summary: Example response for request 'enableOneClick-SF'
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: 8PQMP9VC172
+          authCode: "082338"
+          avsResult: 4 AVS not supported for this card type
+          avsResultRaw: "4"
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          recurring.recurringDetailReference: "9916178934434753"
+          recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+          recurringProcessingModel: CardOnFile
+          refusalReasonRaw: AUTHORISED
+        merchantReference: string
+        pspReference: 993617895195570C
+        resultCode: Authorised
+    post-payments-enableOneClick-raw:
+      summary: Tokenize card details for one-off payments
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          expiryMonth: "03"
+          expiryYear: "2030"
+          holderName: John Smith
+          number: "4111111111111111"
+          type: scheme
+        recurringProcessingModel: CardOnFile
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+        shopperInteraction: Ecommerce
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+        storePaymentMethod: true
+    post-payments-enableOneClick-raw-200:
+      summary: Example response for request 'enableOneClick-raw'
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: 8PQMP9VCKO0
+          authCode: "003704"
+          avsResult: 4 AVS not supported for this card type
+          avsResultRaw: "4"
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          recurring.recurringDetailReference: "9916178934434753"
+          recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+          recurringProcessingModel: CardOnFile
+          refusalReasonRaw: AUTHORISED
+        merchantReference: string
+        pspReference: 993617895197573E
+        resultCode: Authorised
+    post-payments-giropay:
+      summary: Make a giropay payment
+      value:
+        amount:
+          currency: EUR
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          type: giropay
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-giropay-200:
+      summary: Example response for request 'giropay'
+      value:
+        action:
+          method: GET
+          paymentMethodType: giropay
+          type: redirect
+          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFoT5zoMfIkpbmqRtSDhVfakcswUrxKa24UJ--Rku16tOJ1m71oy1O7ProyS8SkUFuGZSdGS0aS8lcDrOYFYW9hkkbQjXK0pFzzU*gNLbK-ZF5lxDLYlmgjt67ACn91m6fioPb3fZY1bk6X9fDiCVyThEX3QB7zD1B6y0ZLz*Ruhe8huiCV4uUYTiZBmiZRBH6G-tPatx*7CG-fFJtt1OslMx7P3oMd9dVq9pOyq9e6Z36*1LF6F689Pyb2xj*QzG3Hn2hlzXtSWostjgRuvO8leWd2tOKyhpG6G0QRI3cQ1EG6An0WvViK4DaRAFcmAUlLk*-y6bcyrOxkUBFZNAtWEG9Kfc9c0WdCMqy7-9Z9BG3fdRW14k5xEYbYaa1JlG4SQwnCSaMIpeLkzDjvDRMXkGHcexFahpzj9IyyqmR*y5Hlq4wcJNDigyjtDShDB4ta9eph1JQqcd4cwUmpSBrU6Mz7*i64-O4DnXNcRRHMco8QPnMx9e-MNDVCXDmHnN6vJGq6a5lG5efr4HH5uP7H6T1TBWlfgFnQraMA
+        details:
+          - key: payload
+            type: text
+        paymentData: Ab02b4c0!BQABAgAt9sA8lQOSEpwOpedJBZvOI6J4xAEGqCpPCfZkvEQPbXSQBP0O+HEElyemCjzTkp4G70QJLaMvq6IlQ5uPk8rlFoPbTb59E9vrOS4IXxlxQH2TQ6iAAGJvU/SIBHAqENNbg1MjG5HR04c6GgpmaO/9LISgGVlqyoY8FlyHvJQcPcMqkK1hYh0mGmbHLtXqyCAx6yRIOGpV3aaI3GMNkSwf3007BwxJBNd7o0o3XktxLuqU8T9OJquwqWoD2FtfUZ9ZEPk2m5/AbOvhoFYuWrKCW1xptWw04m3JyAJHB2F7gPMjwAi5rE0hlMu3d19WucrxsXakeA/noqubbvsHqqtWdRAn+2fMrpOacX5C4VDdE/xrED6iHM6VoqCztCH8mBtyPxPPU5DMnfxUmmeTrIrrf8j95S1FBman8UORs3jiFtCgCD6uS7y0cFSs6J2DWijpO0chjxNM4xR4q5gedL2idE6rRjZjm6cLhrM21XeroNvQYJtoW2q+gDxl9o/3M74jP+3sPafBZMkdHZ8vUdCueHDdw7bST5UCPHRnEfNHy5XaYf2kG0meaE3tpAAmoCNO2qPdcozHJZggVl9lqHQ394BLpLfYr3YROyWu+36HQRZoa2U2Yz/sFYhF81Iimx6FQWEtLZzT/kGJHsXawb68gqd7xf9jo4p6qokklGkzCRC3iOTKmbnmADUPLdy/qNw7AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifX48+5ZqamGvpSW2oKGEqf2KQdVyjcJrlnNiJKp613bt+5k9/OD8G/5T00dp7aNtQx9nGc+mWf17T7VZ6OmooTBV9bmL0ZcGccD+z4UvQbxjXYnMXKLfQmHKi58x6skXW0y3PhxfCLbm/BClmKuCIrACpLmqX/Mu9mJU4DpdOFMpf047WLI9T9yFQ/6ciUpi09DD89bOGQwvlVTkJhvPu31u7OZCd1r8sZ+NsyoEv5Pe3VPRh6R+OoGuY8cDOt9GhMfjGxp7whTcxtKzwnvETJrMrsRfCVIXv95DefR/YsVL8kchNmljNwwzvCGWACeNM7lY6/96+d27Cf2VBf5fS9EcSGtlZpYpNXsdOMLyJBYdiCujp6r1Sd68jsLJG8/XGw9MPODz8Bhqg5XSLuukhGlmVgSkp/TwHwl+p0bhnS0fz+VWDp90mrEY1B8vxFe4yZ1v0sWWaX5USb1/sEZVT3X/1X2qFCbpM6jr498Kk3w3dUGPmDlZ+XiFk0HUt2800jTYrTZYRMjQjnEOrL15aW5h2ynCtxAJXewfk+9NSYjqScbvHKjLGA8FUB6v5TVhsf+sNFSf/zVtNs+PczPZDZMLTiUnZih36iAu5f4HYjl1o4/K+V1JSKHjegDggW+RCUokGH6kKRnMcs2pU3KoG9kOdGDBOQYj94a+CPWfgE7j97v2bQxmbFHOWgJLzX0lPGM3RR5dDboH3k2BrDHb92K88i+2IHMO8WvrW2qhkB4lGpecupG0XEBOUTH4Lnc3TzUFgsDCvF8mnLweIbRyohzd4SAfn2W4wR7QK1S0
+        redirect:
+          method: GET
+          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFoT5zoMfIkpbmqRtSDhVfakcswUrxKa24UJ--Rku16tOJ1m71oy1O7ProyS8SkUFuGZSdGS0aS8lcDrOYFYW9hkkbQjXK0pFzzU*gNLbK-ZF5lxDLYlmgjt67ACn91m6fioPb3fZY1bk6X9fDiCVyThEX3QB7zD1B6y0ZLz*Ruhe8huiCV4uUYTiZBmiZRBH6G-tPatx*7CG-fFJtt1OslMx7P3oMd9dVq9pOyq9e6Z36*1LF6F689Pyb2xj*QzG3Hn2hlzXtSWostjgRuvO8leWd2tOKyhpG6G0QRI3cQ1EG6An0WvViK4DaRAFcmAUlLk*-y6bcyrOxkUBFZNAtWEG9Kfc9c0WdCMqy7-9Z9BG3fdRW14k5xEYbYaa1JlG4SQwnCSaMIpeLkzDjvDRMXkGHcexFahpzj9IyyqmR*y5Hlq4wcJNDigyjtDShDB4ta9eph1JQqcd4cwUmpSBrU6Mz7*i64-O4DnXNcRRHMco8QPnMx9e-MNDVCXDmHnN6vJGq6a5lG5efr4HH5uP7H6T1TBWlfgFnQraMA
+        resultCode: RedirectShopper
+    post-payments-googlepay:
+      summary: Make a Google Pay payment
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YourMerchantAccount
+        paymentMethod:
+          googlePayToken: ==Payload as retrieved from Google Pay response==
+          type: paywithgoogle
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-ideal:
+      summary: Make an iDEAL payment
+      value:
+        amount:
+          currency: EUR
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          issuer: "1121"
+          type: ideal
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-ideal-200:
+      summary: Example response for request 'ideal'
+      value:
+        action:
+          method: GET
+          paymentMethodType: ideal
+          type: redirect
+          url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUl1zmzAQ-DXwZgaB*XrQg0Nwg2s3DTVtJy8ZRbqAYlsikmCMf30FddNMpzOak2bvZm-3Ts*KCJZLBpgzIEeX9kqBoOMMFXXlcq17UCXDCAXIPYGiLRFmRanshcF70GZ3xd6TpTDQKGK4FJ4ZO8D5XZF-vq-3T5*KL0VV5v*tHEBpe*Pob5cKXmBSA1gbxUXzIWF6JW6JITjLUIySNItQliVxsH6v*cYbnNSHZsMfcydYr8SrE9yY7HRjavMAlyyIjhuK*tzszj9ew-uHrN854a3bkfEE1uBp9od833cV6Lra4taYzglXlsueo6Tk2EptLJL6qW8h2gI9yN7oVnYdKItoUAOnoO3z62-aUlB5sk4qYFwBNTYzoD9015odmFYyJ1z-M2yr7uO4nSBW8xisNpua1NlG0SQwmiTaMMpeLWzDjojRs-cMep7natDTrL*TI2fcjDjwA7Twlws-3aPYOkKZDVH26F69THtShE57woUlmpSBqw9czP*k65*9IfCuq0jiJElQGi69Szn8DPebmKXDWATt6vxEWduea7*sLy-Lt*1bcbctGhgZk78A5S7dyQ
+        details:
+          - key: payload
+            type: text
+        paymentData: Ab02b4c0!BQABAgCINC3kOq5nsaj4k+VaArf6VIiTWkYALwijaS+VOvzTSf76Un3WYBgKJlEBqALZW3vlw+IDQGw5jqkVBO4axEJEFKu5fDL2RkeHbm+aHY7tlRVsjvNIcVTNbMtHJcclHakOVTrtTCQfspf11XGsmENUaL45bdeu07iDBtpnIvd39p6g8OVaLcSIGaA8Zosd93hs0h3lvIePt3QTekeOUH+zrMMfLyy/4QKBZtLjnWo3/4U0e2tsneOudynW0l5i+VyobWOZb7yZUj7v9GMVpAZ3YEqNZ1aWJlSmty9TJTpXp4PQQcNeELQAfTu4zaarMq5btRZpcmDRvSOQK0Qo/PvfWrv/si0c1NPr5EM43ebdkLiDEUSIGBDTellblheOaRsgD0JlrNLOHSpS6iCiyY5FQaWx7FpnYReP/un2f/2mMGxdehif1MqWWZzgAhjdA4kksQVb8eMIGLY2IveJ4iTmDAkFbhIATs2SuWhYBGqFnBGeH1jlJCJDDV8/XJ0IcX1/r0qC3wsUFecoElZ6gts+4tlfPUoeuSH/NFmyBEzrjZbgCqCH9YVXa/+W+dwQCOQ0G7K4SJepnlNcmpCtI29zMZgeRqmtzI0hImvQYt188MXK44ieh2wsmpVv6Y9EGIgJVR+t1IZKizm6Q2D5MCUC1uAVwu2iw7Xt5Re1XcWSaBC/nZt2iHaZF7kpgIXfrFshAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifVTgdc9kCwE5LJyeGFVSr+P70S1hwc62Ad03Oy1Ksxr823klh1hxYQDWBJETNf/YmYC9cHDGr6LxMQ8OOnwfg2xjsVU7ZUwWJbHid1vU/oJzHBXe54lHMNNre0HaQD6TSokVpazQsY3hRB84uevmeT7KVal98iqXd755VuiIxwHhhywaub1ogyQQEVxNGWx2+vL5Vh8NKmoghZQ+NLSZWRn77hJTGV+lKJdseGA9nV7DSlWodNmZ8RyRfQoqwtaK9woQ87PIN7XqSznZMS1HWMOE/aDLEXLJEfozHWrHuGVmn6Hupt/fBnm1GckSsMGeQNKS+4XmKGrJefrHDmdoZVBaZS9UjxfKjD2sCwu5vutgb6SLrECgCvu3q5/LTyFeTuPV1ZZrlpapC6umnWmSKmj/SdnhXJO00PNuFT2WY/GyH0cyA498zApE6VtLx2e9IvS01Oex6ZCRFDJ6sDCBzVN5g60vsm9tBut6trpQWyryqVM2cQ39xh9olCQ5Ml+2h4YFV5gA+1c0i+e6SeMtFJN788NW2EnQT/2pzM/rNAaSVwSf8vJcx3ZB9n8Pf8xi2buKZFEkyJpZJSg22JC/38D1E0tPRpQ7gZ1Z86meAGXnfKUtA+w2FllB2Y0dMrqi8jXnS/mqMPBmPVnIxUW96e40cB7W8E0VDf1IKx/wQphI8/vM3UOSqC81agmnyQ3nIDrAy8vqMOD+d1xcoElzRNy0OxU6v/90IKkhfAKr3Tur7Vb3FD6Pi/XrujJX95UlRd7fmaAI7Po1cIh1v7HEhsCNoh1z7WFNag==
+        redirect:
+          method: GET
+          url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUl1zmzAQ-DXwZgaB*XrQg0Nwg2s3DTVtJy8ZRbqAYlsikmCMf30FddNMpzOak2bvZm-3Ts*KCJZLBpgzIEeX9kqBoOMMFXXlcq17UCXDCAXIPYGiLRFmRanshcF70GZ3xd6TpTDQKGK4FJ4ZO8D5XZF-vq-3T5*KL0VV5v*tHEBpe*Pob5cKXmBSA1gbxUXzIWF6JW6JITjLUIySNItQliVxsH6v*cYbnNSHZsMfcydYr8SrE9yY7HRjavMAlyyIjhuK*tzszj9ew-uHrN854a3bkfEE1uBp9od833cV6Lra4taYzglXlsueo6Tk2EptLJL6qW8h2gI9yN7oVnYdKItoUAOnoO3z62-aUlB5sk4qYFwBNTYzoD9015odmFYyJ1z-M2yr7uO4nSBW8xisNpua1NlG0SQwmiTaMMpeLWzDjojRs-cMep7natDTrL*TI2fcjDjwA7Twlws-3aPYOkKZDVH26F69THtShE57woUlmpSBqw9czP*k65*9IfCuq0jiJElQGi69Szn8DPebmKXDWATt6vxEWduea7*sLy-Lt*1bcbctGhgZk78A5S7dyQ
+        resultCode: RedirectShopper
+    post-payments-klarna:
+      summary: Make a Klarna payment
+      value:
+        amount:
+          currency: SEK
+          value: 1000
+        billingAddress:
+          city: Ankeborg
+          country: SE
+          houseNumberOrName: "1"
+          postalCode: "12345"
+          street: Stargatan
+        countryCode: SE
+        deliveryAddress:
+          city: Ankeborg
+          country: SE
+          houseNumberOrName: "1"
+          postalCode: "12345"
+          street: Stargatan
+        lineItems:
+          - amountExcludingTax: 331
+            amountIncludingTax: 400
+            description: Shoes
+            id: "Item #1"
+            imageUrl: URL_TO_PICTURE_OF_PURCHASED_ITEM
+            productUrl: URL_TO_PURCHASED_ITEM
+            quantity: 1
+            taxAmount: 69
+            taxPercentage: 2100
+          - amountExcludingTax: 248
+            amountIncludingTax: 300
+            description: Socks
+            id: "Item #2"
+            imageUrl: URL_TO_PICTURE_OF_PURCHASED_ITEM
+            productUrl: URL_TO_PURCHASED_ITEM
+            quantity: 2
+            taxAmount: 52
+            taxPercentage: 2100
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          type: klarna
+        reference: YOUR_ORDER_REFERENCE
+        returnUrl: https://www.your-company.com/...
+        shopperEmail: youremail@email.com
+        shopperLocale: en_US
+        shopperName:
+          firstName: Testperson-se
+          gender: UNKNOWN
+          lastName: Approved
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+        telephoneNumber: +46 840 839 298
+    post-payments-oneclick-direct:
+      summary: Make a one-off payment with a token and CVV
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          storedPaymentMethodId: "8416038790273850"
+          type: scheme
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID_6738oneoff
+    post-payments-oneclick-securedfields:
+      summary: Make a one-off payment with a token and CVV (using encrypted card details)
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          encryptedSecurityCode: adyenjs_0_1_18$MT6ppy0FAMVMLH...
+          storedPaymentMethodId: "8416038790273850"
+          type: scheme
+        recurringProcessingModel: CardOnFile
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+        shopperInteraction: ContAuth
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID_6738oneoff
+    post-payments-recurring:
+      summary: Make a card payment with a token
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          storedPaymentMethodId: "8316038796685850"
+          type: scheme
+        recurringProcessingModel: Subscription
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+        shopperInteraction: ContAuth
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3subscription
     post-payments-result-basic:
       summary: Verify payment results
       value:
         payload: VALUE_YOU_GET_FROM_CHECKOUT_SDK
+    post-payments-sofort:
+      summary: Make a Sofort payment
+      value:
+        amount:
+          currency: EUR
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          type: directEbanking
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-sofort-200:
+      summary: Example response for request 'sofort'
+      value:
+        action:
+          method: GET
+          paymentMethodType: directEbanking
+          type: redirect
+          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1zmzAQ-DXmzYwE5sMPenAJjmmdtqHGTfuSkcUFaGyJSIKa-PoexHU7nc4wErN7c7e7p4PmskxUCaxsNAibHrh8bmTliE5rkGKYuLTInRNoUXNpV0KoTlq2A2PvLtiVzKSFSnPbKOnaoQWWbNLkw6di93ibfkzzLPlvZQ-a4M0CeqVzeIJxPjBj9ajnD2E7LW*45Wy5pCGN4mXg0SAKF**uNV*aitGvXrK3tw-forjdn5fdWp*LIg88UtzbtviRHVN1X9lNuJ15658z-8Zp*XACtHea3FFCiKPBFPmW1da2M3*FhfgdleDHWhmLSExigpCoQTyrzppatS1oRAzovhFg8PfzW9tMCnVCHzm85YxMT3*3u9Tcga1VOfPX-0SN6v4Oe*aFegoBtSE1qsNBwSgwGCXiMahOz3Fgy*Xg4j2Brus6BsyY9J4fm7KxA-OIR*dkMSfxjoboyCN40OC7c-EybklzMW6JpdhoVAaOwRcyvYu2O7i9514WEYVRFNHYX7ivWf-g796HZdwPqVevzo*irOtzQbLi9Wnxsn1JN9u0gqEs1S-zMtxA
+        details:
+          - key: payload
+            type: text
+        paymentData: Ab02b4c0!BQABAgB1H7lBY8Uxf1bWoNkA9C2/BuD1Fa2+f3+u8Q3sZLCf6/nmkhPEg1CleH0L6NnNoxwgiHBzmljYF6QFoshWsEZ4Hp1fyq9S/IGHFcl6GlQHlQf/RATlCw21Il1BDhcjSib3JpxXWk/NeZbk/ZEvNrWNQOmHo0/eYxCSLl7OgE+PVyKfWogK8awCPNcqV52wgy27P7MlKQaZVfMTTlMfA2tS+xnGgXCXK+BpdLGXagCyRkhmi4QQLVv/sgSv4Zycu829yhaorOkum7hKEW3Os/DaIZbZjKglVpfFk4N2Qsa8ReydNGI1EeX9CfntJMFOMIWJeyfTimHhxZvUnIJ1cgIBLA8rdSxf3xExRXnK8xphXX+Aah4BIgRmLfOsnwsf6lnYcvPKg/3rMV/gK/g9iOC32wMGbzB7J+nPbW+ht5LJOK9ax/63H1bLT2Zm5UxcbzZsm8BccCyGqkMq8vZAE262urS4rGLzDCZXyJ22bq9yzQ/wUDVMhbTn55Cxotx+FwIhQA2SF0yZ+wgi1ty9ovl251eYbRdWNasvCwPaXxdTCVVD7wrdQbC5wQTpQO64EnQvYfiRerVQ5mCAu82VL4dCesNHvpKv2hKENa3p9ZFRJrle6wIUYX5fyscZDvEoqHvuqF+SpTXANK9PKGl6aaTCpg497/2x3wSU9Sxf8lzsrxAymOZnLENryrDr0v9IrYfDAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifexJovSnPKAg5NtTcILGEFLB/SoybKa3lEbVdUI76QewA8VFXNI8Ulnwlriy07AS4NDbZSfSfNYijSBS1uVsfo9kiabnFe0CQ29377TnsI1Bliv/CM6lBFp9SWQcLgSQQZkD1j4daab9L33mkUhQ/6Q+ERVtx2g+MAYNjl4xyJrc2IOQQ+0IUVGUZgJ4xKNTbf4TN0+EZXPvqxQ3ejsdtE3UhGjlZGS4HND7nkdljh/AfN5+JLe0fnvEgdfPZFttHCvdoOwosLL4ACSD5HH5v3Dc6wXuHAILopU+P/JUWa04gKInYMc1ABOzR9kOwzOHvWey7vrjONxyvUgietuYsuXkyozuL+hCgaJ4uZAIIvKqR/uTAZm76T82ds8+OcWoVgywHJRp+Vgn9Q2N5zf36DI/OWkQuYgRITz0NlT9QTjFwuWi15igdBlfufW/Gzp3mUXfYwj5GfJQBALOIGMzr9VEH6iukqHnA6tpdDOqAo9l5gsjzbPIMGkz66memwj5ZkxSSN69mgi+VEhOebAxSDDbGX0ONGY4gu12UQiiCOYx29LH3D7ANQTOjuyMmFBnHzMMRf+RoSzfrPLqiGvEC7b4vHwdzqCYNsz/cFAEouXFrZ72zzoWgpx62j/yKacRSW/PjmnEK/BOzjcovKfE3+thEybC0sjvDQSrMxQ34BvZM/+pWLXK5dY2QlBlHzRVPxmcw0tqO7dIcklC9GtEBrcr6Oc4U9ry0USIRLphRlP2eC4DOudUhbJ9AjujilVAocGy/BXOufpLJuhbaprux++0RRpxQ3ZdpMP//TiWuw==
+        redirect:
+          method: GET
+          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1zmzAQ-DXmzYwE5sMPenAJjmmdtqHGTfuSkcUFaGyJSIKa-PoexHU7nc4wErN7c7e7p4PmskxUCaxsNAibHrh8bmTliE5rkGKYuLTInRNoUXNpV0KoTlq2A2PvLtiVzKSFSnPbKOnaoQWWbNLkw6di93ibfkzzLPlvZQ-a4M0CeqVzeIJxPjBj9ajnD2E7LW*45Wy5pCGN4mXg0SAKF**uNV*aitGvXrK3tw-forjdn5fdWp*LIg88UtzbtviRHVN1X9lNuJ15658z-8Zp*XACtHea3FFCiKPBFPmW1da2M3*FhfgdleDHWhmLSExigpCoQTyrzppatS1oRAzovhFg8PfzW9tMCnVCHzm85YxMT3*3u9Tcga1VOfPX-0SN6v4Oe*aFegoBtSE1qsNBwSgwGCXiMahOz3Fgy*Xg4j2Brus6BsyY9J4fm7KxA-OIR*dkMSfxjoboyCN40OC7c-EybklzMW6JpdhoVAaOwRcyvYu2O7i9514WEYVRFNHYX7ivWf-g796HZdwPqVevzo*irOtzQbLi9Wnxsn1JN9u0gqEs1S-zMtxA
+        resultCode: RedirectShopper
     post-payments-split:
       summary: Split a payment between balance accounts
       value:
@@ -4593,6 +5065,176 @@ components:
           type: scheme
         pspReference: 993617895204576J
         resultCode: Authorised
+    post-payments-subscription-first-transaction:
+      summary: Tokenize card details for a subscription
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          expiryMonth: "03"
+          expiryYear: "2030"
+          holderName: John Smith
+          number: "4111111111111111"
+          type: scheme
+        recurringProcessingModel: Subscription
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+        shopperInteraction: Ecommerce
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+        storePaymentMethod: true
+    post-payments-subscription-first-transaction-200:
+      summary: Example response for request 'subscription-first-transaction'
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: 8PQMP9VD896
+          authCode: "098871"
+          avsResult: 4 AVS not supported for this card type
+          avsResultRaw: "4"
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          recurring.recurringDetailReference: "9916178934434753"
+          recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID_IOfW3k9G2PvXFu2j
+          recurringProcessingModel: Subscription
+          refusalReasonRaw: AUTHORISED
+        merchantReference: string
+        pspReference: 993617895199574A
+        resultCode: Authorised
+    post-sessions-00.success:
+      description: Example request for creating a payment session
+      summary: Create a payment session
+      value:
+        amount:
+          currency: EUR
+          value: 100
+        countryCode: NL
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_PAYMENT_REFERENCE
+        returnUrl: https://your-company.com/checkout?shopperOrder=12xy..
+    post-sessions-00.success-200:
+      description: Example response for creating a payment session
+      summary: "Response code: 201. Success."
+      value:
+        amount:
+          currency: EUR
+          value: 100
+        countryCode: NL
+        expiresAt: 2022-01-11T13:53:18+01:00
+        id: CS451F2AB1ED897A94
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_PAYMENT_REFERENCE
+        returnUrl: https://your-company.com/checkout?shopperOrder=12xy..
+        sessionData: Ab02b4c0!BQABAgBfYI29...
+    post-sessions-01.klarna:
+      description: Example request for creating a payment session when Klarna is one of the available payment methods
+      summary: Create a payment session including Klarna fields
+      value:
+        amount:
+          currency: SEK
+          value: 1000
+        billingAddress:
+          city: Ankeborg
+          country: SE
+          houseNumberOrName: "1"
+          postalCode: "12345"
+          street: Stargatan
+        countryCode: SE
+        dateOfBirth: 1996-09-04
+        deliveryAddress:
+          city: Ankeborg
+          country: SE
+          houseNumberOrName: "1"
+          postalCode: "12345"
+          street: Stargatan
+        lineItems:
+          - amountExcludingTax: 331
+            amountIncludingTax: 400
+            description: Shoes
+            id: "Item #1"
+            imageUrl: URL_TO_PICTURE_OF_PURCHASED_ITEM
+            productUrl: URL_TO_PURCHASED_ITEM
+            quantity: 1
+            taxAmount: 69
+            taxPercentage: 2100
+          - amountExcludingTax: 248
+            amountIncludingTax: 300
+            description: Socks
+            id: "Item #2"
+            imageUrl: URL_TO_PICTURE_OF_PURCHASED_ITEM
+            productUrl: URL_TO_PURCHASED_ITEM
+            quantity: 2
+            taxAmount: 52
+            taxPercentage: 2100
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_ORDER_REFERENCE
+        returnUrl: https://example.org
+        shopperEmail: youremail@email.com
+        shopperLocale: en_US
+        shopperName:
+          firstName: Testperson-se
+          gender: UNKNOWN
+          lastName: Approved
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        socialSecurityNumber: "0108"
+        telephoneNumber: +46 840 839 298
+    post-sessions-01.klarna-200:
+      description: "Example "
+      summary: "Response code: 201. Success."
+      value:
+        amount:
+          currency: SEK
+          value: 1000
+        billingAddress:
+          city: Ankeborg
+          country: SE
+          houseNumberOrName: "1"
+          postalCode: "12345"
+          street: Stargatan
+        countryCode: SE
+        dateOfBirth: 1996-09-04T02:00:00+02:00
+        deliveryAddress:
+          city: Ankeborg
+          country: SE
+          houseNumberOrName: "1"
+          postalCode: "12345"
+          street: Stargatan
+        expiresAt: 2022-01-11T13:57:52+01:00
+        id: CSC52E9932D39ADAF3
+        lineItems:
+          - amountExcludingTax: 331
+            amountIncludingTax: 400
+            description: Shoes
+            id: "Item #1"
+            imageUrl: URL_TO_PICTURE_OF_PURCHASED_ITEM
+            productUrl: URL_TO_PURCHASED_ITEM
+            quantity: 1
+            taxAmount: 69
+            taxPercentage: 2100
+          - amountExcludingTax: 248
+            amountIncludingTax: 300
+            description: Socks
+            id: "Item #2"
+            imageUrl: URL_TO_PICTURE_OF_PURCHASED_ITEM
+            productUrl: URL_TO_PURCHASED_ITEM
+            quantity: 2
+            taxAmount: 52
+            taxPercentage: 2100
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_ORDER_REFERENCE
+        returnUrl: https://example.org
+        sessionData: Ab02b4c0!BQABAgBfYI29...
+        shopperEmail: youremail@email.com
+        shopperLocale: en_US
+        shopperName:
+          firstName: Testperson-se
+          gender: UNKNOWN
+          lastName: Approved
+        shopperReference: YOUR_UNIQUE_SHOPPER_ID
+        socialSecurityNumber: "0108"
+        telephoneNumber: +46 840 839 298
     post-sessions-enableOneClick:
       description: Example request for tokenizing card details for one-off payments without asking shopper
       summary: Tokenize card details for one-off payments without asking shopper
@@ -4626,6 +5268,65 @@ components:
         shopperInteraction: Ecommerce
         shopperReference: YOUR_SHOPPER_REFERENCE
         storePaymentMethod: true
+    post-sessions-split:
+      summary: Split a payment between balance accounts
+      value:
+        amount:
+          currency: USD
+          value: 40000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          expiryMonth: "03"
+          expiryYear: "2030"
+          holderName: John Smith
+          number: "4111111111111111"
+          type: scheme
+        platformChargebackLogic:
+          behavior: deductFromOneBalanceAccount
+          targetAccount: BA00000000000000000000001
+        reference: YOUR_ORDER_NUMBER
+        returnUrl: https://your-company.com/...
+        splits:
+          - account: BA00000000000000000000001
+            amount:
+              value: 39600
+            description: Your description for the sale amount
+            reference: Your reference for the sale amount
+            type: BalanceAccount
+          - amount:
+              value: 400
+            description: Your description for the commission
+            reference: Your reference for the commission
+            type: Commission
+          - account: BA00000000000000000000001
+            description: Your description for the fees
+            reference: Your reference for the fees
+            type: PaymentFee
+    post-sessions-split-200:
+      summary: Example response for request 'split'
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: YOUR_ACQUIRER_REFERENCE
+          authCode: "008304"
+          avsResult: 5 No AVS data provided
+          avsResultRaw: "5"
+          cardHolderName: John Smith
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          issuerCountry: NL
+          paymentMethod: visa
+          refusalReasonRaw: AUTHORISED
+        amount:
+          currency: USD
+          value: 40000
+        merchantReference: YOUR_ORDER_NUMBER
+        paymentMethod:
+          brand: visa
+          type: scheme
+        pspReference: 993617895204576J
+        resultCode: Authorised
   headers:
     Idempotency-Key:
       description: The idempotency key used for processing the request. Present if the key was provided in the request.

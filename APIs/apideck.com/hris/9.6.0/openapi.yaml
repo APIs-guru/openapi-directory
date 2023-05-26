@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 9.5.0
+  version: 9.6.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1290,6 +1290,10 @@ paths:
                 tax_id: '234-32-0000',
                 dietary_preference: 'Veggie',
                 food_allergies: ['No allergies'],
+                probation_period: {
+                  start_date: '2021-10-01',
+                  end_date: '2021-11-28'
+                },
                 tags: ['New'],
                 row_version: '1-12345',
                 deleted: true
@@ -1633,6 +1637,10 @@ paths:
                 tax_id: '234-32-0000',
                 dietary_preference: 'Veggie',
                 food_allergies: ['No allergies'],
+                probation_period: {
+                  start_date: '2021-10-01',
+                  end_date: '2021-11-28'
+                },
                 tags: ['New'],
                 row_version: '1-12345',
                 deleted: true
@@ -4294,6 +4302,24 @@ components:
           nullable: true
           title: Preferred name
           type: string
+        probation_period:
+          properties:
+            end_date:
+              description: The date that the employee ended their probation period at the company.
+              example: 2021-11-28
+              format: date
+              nullable: true
+              title: Probation end date
+              type: string
+            start_date:
+              description: The date that the employee started their probation period at the company.
+              example: 2021-10-01
+              format: date
+              nullable: true
+              title: Probation start date
+              type: string
+          title: Probation period
+          type: object
         pronouns:
           description: The preferred pronouns of the person.
           example: she,her
@@ -4453,6 +4479,7 @@ components:
         photo_url: medium
         preferred_language: high
         preferred_name: medium
+        probation_period: low
         pronouns: medium
         row_version: edge-case
         salutation: medium

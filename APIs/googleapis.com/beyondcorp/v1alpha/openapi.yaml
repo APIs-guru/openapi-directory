@@ -908,6 +908,53 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha/{parent}/browserDlpRules":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new BrowserDlpRule in a given organization and PartnerTenant.
+      operationId: beyondcorp.organizations.locations.global.partnerTenants.browserDlpRules.create
+      parameters:
+        - description: "Required. The resource name of the BrowserDlpRule parent using the form: `organizations/{organization_id}/locations/global/partnerTenants/{partner_tenant_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaBrowserDlpRule"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1alpha/{parent}/clientConnectorServices":
     get:
       description: Lists ClientConnectorServices in a given project and location.
@@ -1431,6 +1478,50 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v1alpha/{parent}/partnerTenants":
+    get:
+      description: Lists PartnerTenants in a given organization.
+      operationId: beyondcorp.organizations.locations.global.partnerTenants.list
+      parameters:
+        - description: "Required. The parent organization to which the PartnerTenants belong. Format: `organizations/{organization_id}/locations/global`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: 'Optional. Filter partnerTenants to be returned. See [List Sub-Collections] (https://cloud.google.com/apis/design/design_patterns#list_sub-collections) for more details. All fields can be used in the filter. Usage: field_filter="fieldName1=fieldVal1 AND fieldName2=fieldVal2". NOTE: Only `AND` conditions are allowed.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results. Currently, only ordering by the "name" and "create_time" fields are supported. See [Sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) for more information.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. The service may return fewer than this value. If unspecified, at most 50 items will be returned. The maximum value is 1000; values above 1000 are coerced to 1000. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaListPartnerTenantsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1447,7 +1538,7 @@ paths:
       description: Creates a new BeyondCorp Enterprise partnerTenant in a given organization and can only be called by onboarded BeyondCorp Enterprise partner.
       operationId: beyondcorp.organizations.locations.global.partnerTenants.create
       parameters:
-        - description: "Required. The resource name of the PartnerTenant using the form: `organizations/{organization_id}/locations/global`"
+        - description: "Required. The resource name of the parent organization using the form: `organizations/{organization_id}/locations/global`"
           in: path
           name: parent
           required: true
@@ -1491,10 +1582,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new BeyondCorp Enterprise ProxyConfiguration in a given organization and PartnerTenant. Can only be called by on onboarded Beyondcorp Enterprise partner.
+      description: Creates a new BeyondCorp Enterprise ProxyConfig in a given organization and Tenant. Can only be called by on onboarded Beyondcorp Enterprise partner.
       operationId: beyondcorp.organizations.locations.global.tenants.proxyConfigs.create
       parameters:
-        - description: "Required. The resource name of the ProxyConfig using the form: `organizations/{organization_id}/locations/global/tenants/{tenant_id}`"
+        - description: "Required. The resource name of the Tenant using the form: `organizations/{organization_id}/locations/global/tenants/{tenant_id}`"
           in: path
           name: parent
           required: true
@@ -2966,6 +3057,20 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaBrowserDlpRule:
+      description: Browser DLP Rule for a PartnerTenant
+      properties:
+        group:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaGroup"
+          description: Required. The group to which this Rule should be applied to.
+        name:
+          description: Output only. Unique resource name. The name is ignored when creating BrowserDlpRule.
+          readOnly: true
+          type: string
+        ruleSetting:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaRuleSetting"
+          description: Required. The policy settings to apply.
+      type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaEncryptionInfo:
       description: Message contains the JWT encryption information for the proxy server.
       properties:
@@ -2975,6 +3080,33 @@ components:
         jwk:
           description: Optional. JWK in string.
           type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaGroup:
+      description: Message to capture group information
+      properties:
+        email:
+          description: The group email id
+          type: string
+        id:
+          description: Google group id
+          type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaListPartnerTenantsResponse:
+      description: Message for response to listing PartnerTenants.
+      properties:
+        nextPageToken:
+          description: A token which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        partnerTenants:
+          description: The list of PartnerTenant objects.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerTenant"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerMetadata:
       description: Metadata associated with PartnerTenant and is provided by the Partner.
@@ -3086,6 +3218,18 @@ components:
         pacUri:
           description: Required. Proxy Auto-Configuration (PAC) URI.
           type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaRuleSetting:
+      description: Message to capture settings for a BrowserDlpRule
+      properties:
+        type:
+          description: Required. Immutable. The type of the Setting. .
+          type: string
+        value:
+          additionalProperties:
+            description: Properties of the object.
+          description: Required. The value of the Setting.
+          type: object
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaTenant:
       description: Information about a BeyoncCorp Enterprise Tenant.

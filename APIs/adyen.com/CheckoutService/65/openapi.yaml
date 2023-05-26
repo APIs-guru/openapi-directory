@@ -59,7 +59,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-05-23T19:25:24Z
+  x-timestamp: 2023-05-25T10:25:38Z
 tags:
   - name: Modifications
   - name: Orders
@@ -858,8 +858,8 @@ paths:
                 $ref: "#/components/examples/post-paymentMethods-basic"
               filtered:
                 $ref: "#/components/examples/post-paymentMethods-filtered"
-              include-oneclick:
-                $ref: "#/components/examples/post-paymentMethods-include-oneclick"
+              include-stored:
+                $ref: "#/components/examples/post-paymentMethods-include-stored"
             schema:
               $ref: "#/components/schemas/PaymentMethodsRequest"
       responses:
@@ -871,8 +871,8 @@ paths:
                   $ref: "#/components/examples/post-paymentMethods-basic-200"
                 filtered:
                   $ref: "#/components/examples/post-paymentMethods-filtered-200"
-                include-oneclick:
-                  $ref: "#/components/examples/post-paymentMethods-include-oneclick-200"
+                include-stored:
+                  $ref: "#/components/examples/post-paymentMethods-include-stored-200"
               schema:
                 $ref: "#/components/schemas/PaymentMethodsResponse"
           description: OK - the request has succeeded.
@@ -4002,7 +4002,7 @@ components:
             type: winkelcheque
           - name: Your Gift
             type: yourgift
-    post-paymentMethods-include-oneclick:
+    post-paymentMethods-include-stored:
       summary: Get payment methods including stored card details
       value:
         amount:
@@ -4010,9 +4010,9 @@ components:
           value: 1000
         countryCode: NL
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-        shopperReference: YOUR_UNIQUE_SHOPPER_ID
-    post-paymentMethods-include-oneclick-200:
-      summary: Example response for request 'include-oneclick'
+        shopperReference: YOUR_SHOPPER_REFERENCE
+    post-paymentMethods-include-stored-200:
+      summary: Example response that includes stored payment methods
       value:
         paymentMethods:
           - details:
@@ -4318,6 +4318,22 @@ components:
             type: winkelcheque
           - name: Your Gift
             type: yourgift
+        storedPaymentMethods:
+          - brand: visa
+            expiryMonth: "10"
+            expiryYear: "30"
+            holderName: John Smith
+            id: "7219687191761347"
+            issuerName: ISSUER_NAME
+            lastFour: "1111"
+            name: VISA
+            shopperEmail: john.smith@example.com
+            shopperReference: YOUR_SHOPPER_REFERENCE
+            supportedRecurringProcessingModels:
+              - CardOnFile
+              - Subscription
+              - UnscheduledCardOnFile
+            type: scheme
     post-paymentSession-android:
       summary: Set up a payment session (Android)
       value:

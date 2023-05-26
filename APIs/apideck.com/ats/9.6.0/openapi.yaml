@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: ATS API
-  version: 9.5.0
+  version: 9.6.0
   x-apideck-api: ats
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3323,6 +3323,10 @@ components:
           properties:
             currency:
               $ref: "#/components/schemas/Currency"
+            interval:
+              example: year
+              nullable: true
+              type: string
             max:
               description: Maximum salary payable for the job role.
               example: 10000
@@ -3334,6 +3338,7 @@ components:
           type: object
           x-apideck-weights:
             currency: medium
+            interval: edge-case
             max: medium
             min: medium
         sequence:
@@ -3370,7 +3375,7 @@ components:
           x-apideck-enum-id: jobs.visibility
       type: object
       x-apideck-schema-id: Job
-      x-apideck-strict-one-of:
+      x-apideck-strict-any-of:
         - required:
             - description_html
         - required:
