@@ -1607,16 +1607,16 @@ paths:
                   minItems: 0
                   maxItems: 200
                 RedundancyPercent:
-                  description: 'The percentage of added redundant fragments. For example, if firmware file is 100 bytes and fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
+                  description: 'The percentage of the added fragments that are redundant. For example, if the size of the firmware image file is 100 bytes and the fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
                   type: integer
                   minimum: 0
                   maximum: 100
                 FragmentSizeBytes:
-                  description: The size of each fragment in bytes. Currently only supported in fuota tasks with multicast groups.
+                  description: The size of each fragment in bytes. This parameter is supported only for FUOTA tasks with multicast groups.
                   type: integer
                   minimum: 1
                 FragmentIntervalMS:
-                  description: The interval of sending fragments in milliseconds. Currently the interval will be rounded to the nearest second. Note that this interval only controls the timing when the cloud sends the fragments down. The actual delay of receiving fragments at device side depends on the device's class and the communication delay with the cloud.
+                  description: '<p>The interval for sending fragments in milliseconds, rounded to the nearest second.</p> <note> <p>This interval only determines the timing for when the Cloud sends down the fragments to yor device. There can be a delay for when your device will receive these fragments. This delay depends on the device''s class and the communication delay with the cloud.</p> </note>'
                   type: integer
                   minimum: 1
     parameters:
@@ -1918,6 +1918,8 @@ paths:
                       $ref: '#/components/schemas/WirelessDeviceFrameInfo'
                     LogLevel:
                       $ref: '#/components/schemas/LogLevel'
+                    MulticastFrameInfo:
+                      $ref: '#/components/schemas/MulticastFrameInfo'
                 WirelessDevices:
                   description: Wireless device resources to add to the network analyzer configuration. Provide the <code>WirelessDeviceId</code> of the resource to add in the input array.
                   type: array
@@ -1947,6 +1949,13 @@ paths:
                   pattern: '^[a-zA-Z0-9-_]+$'
                   minLength: 1
                   maxLength: 64
+                MulticastGroups:
+                  description: Multicast Group resources to add to the network analyzer configruation. Provide the <code>MulticastGroupId</code> of the resource to add in the input array.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MulticastGroupId'
+                  minItems: 0
+                  maxItems: 10
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3499,16 +3508,16 @@ paths:
                   minLength: 1
                   maxLength: 2048
                 RedundancyPercent:
-                  description: 'The percentage of added redundant fragments. For example, if firmware file is 100 bytes and fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
+                  description: 'The percentage of the added fragments that are redundant. For example, if the size of the firmware image file is 100 bytes and the fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
                   type: integer
                   minimum: 0
                   maximum: 100
                 FragmentSizeBytes:
-                  description: The size of each fragment in bytes. Currently only supported in fuota tasks with multicast groups.
+                  description: The size of each fragment in bytes. This parameter is supported only for FUOTA tasks with multicast groups.
                   type: integer
                   minimum: 1
                 FragmentIntervalMS:
-                  description: The interval of sending fragments in milliseconds. Currently the interval will be rounded to the nearest second. Note that this interval only controls the timing when the cloud sends the fragments down. The actual delay of receiving fragments at device side depends on the device's class and the communication delay with the cloud.
+                  description: '<p>The interval for sending fragments in milliseconds, rounded to the nearest second.</p> <note> <p>This interval only determines the timing for when the Cloud sends down the fragments to yor device. There can be a delay for when your device will receive these fragments. This delay depends on the device''s class and the communication delay with the cloud.</p> </note>'
                   type: integer
                   minimum: 1
   '/multicast-groups/{Id}':
@@ -3885,6 +3894,8 @@ paths:
                       $ref: '#/components/schemas/WirelessDeviceFrameInfo'
                     LogLevel:
                       $ref: '#/components/schemas/LogLevel'
+                    MulticastFrameInfo:
+                      $ref: '#/components/schemas/MulticastFrameInfo'
                 WirelessDevicesToAdd:
                   description: Wireless device resources to add to the network analyzer configuration. Provide the <code>WirelessDeviceId</code> of the resource to add in the input array.
                   type: array
@@ -3913,6 +3924,20 @@ paths:
                   description: The description of the new resource.
                   type: string
                   maxLength: 2048
+                MulticastGroupsToAdd:
+                  description: Multicast group resources to add to the network analyzer configuration. Provide the <code>MulticastGroupId</code> of the resource to add in the input array.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MulticastGroupId'
+                  minItems: 0
+                  maxItems: 10
+                MulticastGroupsToRemove:
+                  description: Multicast group resources to remove from the network analyzer configuration. Provide the <code>MulticastGroupId</code> of the resource to remove in the input array.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MulticastGroupId'
+                  minItems: 0
+                  maxItems: 10
   '/wireless-devices/{Id}/data#messageId':
     delete:
       operationId: DeleteQueuedMessages
@@ -8225,12 +8250,22 @@ components:
         - ERROR
         - DISABLED
       description: 'The log level for a log message. The log levels can be disabled, or set to <code>ERROR</code> to display less verbose logs containing only error information, or to <code>INFO</code> for more detailed logs.'
+    MulticastFrameInfo:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+      description: ' <code>FrameInfo</code> of your multicast group resources for the trace content. Use FrameInfo to debug the multicast communication between your LoRaWAN end devices and the network server.'
     WirelessDeviceId:
       type: string
       description: The ID of the wireless device.
       maxLength: 256
     WirelessGatewayId:
       type: string
+      maxLength: 256
+    MulticastGroupId:
+      type: string
+      description: The ID of the multicast group.
       maxLength: 256
     CreateServiceProfileResponse:
       type: object
@@ -8669,6 +8704,10 @@ components:
             - description: The Amazon Resource Name of the new resource.
         Name:
           $ref: '#/components/schemas/NetworkAnalyzerConfigurationName'
+        MulticastGroups:
+          allOf:
+            - $ref: '#/components/schemas/NetworkAnalyzerMulticastGroupList'
+            - description: List of multicast group resources that have been added to the network analyzer configuration.
     GetPartnerAccountResponse:
       type: object
       properties:
@@ -8969,7 +9008,7 @@ components:
         LastUplinkReceivedAt:
           allOf:
             - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+            - description: <p>The date and time when the most recent uplink was received.</p> <note> <p>This value is only valid for 3 months.</p> </note>
         LoRaWAN:
           allOf:
             - $ref: '#/components/schemas/LoRaWANDeviceMetadata'
@@ -9037,7 +9076,7 @@ components:
         LastUplinkReceivedAt:
           allOf:
             - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+            - description: <p>The date and time when the most recent uplink was received.</p> <note> <p>This value is only valid for 3 months.</p> </note>
         ConnectionStatus:
           allOf:
             - $ref: '#/components/schemas/ConnectionStatus'
@@ -9056,7 +9095,7 @@ components:
         LastUplinkReceivedAt:
           allOf:
             - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+            - description: <p>The date and time when the most recent uplink was received.</p> <note> <p>This value is only valid for 3 months.</p> </note>
         TaskCreatedAt:
           allOf:
             - $ref: '#/components/schemas/ISODateTimeString'
@@ -9754,10 +9793,6 @@ components:
       type: string
       description: The ID of a FUOTA task.
       maxLength: 256
-    MulticastGroupId:
-      type: string
-      description: The ID of the multicast group.
-      maxLength: 256
     AssociateMulticastGroupWithFuotaTaskRequest:
       type: object
       required:
@@ -10260,16 +10295,16 @@ components:
       maxLength: 2048
     RedundancyPercent:
       type: integer
-      description: 'The percentage of added redundant fragments. For example, if firmware file is 100 bytes and fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
+      description: 'The percentage of the added fragments that are redundant. For example, if the size of the firmware image file is 100 bytes and the fragment size is 10 bytes, with <code>RedundancyPercent</code> set to 50(%), the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.'
       minimum: 0
       maximum: 100
     FragmentSizeBytes:
       type: integer
-      description: The size of each fragment in bytes. Currently only supported in fuota tasks with multicast groups.
+      description: The size of each fragment in bytes. This parameter is supported only for FUOTA tasks with multicast groups.
       minimum: 1
     FragmentIntervalMS:
       type: integer
-      description: The interval of sending fragments in milliseconds. Currently the interval will be rounded to the nearest second. Note that this interval only controls the timing when the cloud sends the fragments down. The actual delay of receiving fragments at device side depends on the device's class and the communication delay with the cloud.
+      description: '<p>The interval for sending fragments in milliseconds, rounded to the nearest second.</p> <note> <p>This interval only determines the timing for when the Cloud sends down the fragments to yor device. There can be a delay for when your device will receive these fragments. This delay depends on the device''s class and the communication delay with the cloud.</p> </note>'
       minimum: 1
     CreateFuotaTaskRequest:
       type: object
@@ -10351,6 +10386,8 @@ components:
           $ref: '#/components/schemas/WirelessDeviceFrameInfo'
         LogLevel:
           $ref: '#/components/schemas/LogLevel'
+        MulticastFrameInfo:
+          $ref: '#/components/schemas/MulticastFrameInfo'
       description: Trace content for your wireless gateway and wireless device resources.
     WirelessDeviceList:
       type: array
@@ -10362,6 +10399,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/WirelessGatewayId'
+    NetworkAnalyzerMulticastGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MulticastGroupId'
+      minItems: 0
+      maxItems: 10
     CreateNetworkAnalyzerConfigurationRequest:
       type: object
       required:
@@ -10386,6 +10429,10 @@ components:
           $ref: '#/components/schemas/TagList'
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
+        MulticastGroups:
+          allOf:
+            - $ref: '#/components/schemas/NetworkAnalyzerMulticastGroupList'
+            - description: Multicast Group resources to add to the network analyzer configruation. Provide the <code>MulticastGroupId</code> of the resource to add in the input array.
     NetworkAnalyzerConfigurationArn:
       type: string
       maxLength: 1124
@@ -12932,6 +12979,14 @@ components:
             - description: Wireless gateway resources to remove from the network analyzer configuration. Provide the <code>WirelessGatewayId</code> of the resources to remove in the input array.
         Description:
           $ref: '#/components/schemas/Description'
+        MulticastGroupsToAdd:
+          allOf:
+            - $ref: '#/components/schemas/NetworkAnalyzerMulticastGroupList'
+            - description: Multicast group resources to add to the network analyzer configuration. Provide the <code>MulticastGroupId</code> of the resource to add in the input array.
+        MulticastGroupsToRemove:
+          allOf:
+            - $ref: '#/components/schemas/NetworkAnalyzerMulticastGroupList'
+            - description: Multicast group resources to remove from the network analyzer configuration. Provide the <code>MulticastGroupId</code> of the resource to remove in the input array.
     UpdatePartnerAccountRequest:
       type: object
       required:
@@ -13244,7 +13299,7 @@ components:
         LastUplinkReceivedAt:
           allOf:
             - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+            - description: <p>The date and time when the most recent uplink was received.</p> <note> <p>Theis value is only valid for 3 months.</p> </note>
         LoRaWAN:
           allOf:
             - $ref: '#/components/schemas/LoRaWANListDevice'
@@ -13315,7 +13370,7 @@ components:
         LastUplinkReceivedAt:
           allOf:
             - $ref: '#/components/schemas/ISODateTimeString'
-            - description: The date and time when the most recent uplink was received.
+            - description: <p>The date and time when the most recent uplink was received.</p> <note> <p>This value is only valid for 3 months.</p> </note>
       description: Information about a wireless gateway's operation.
 security:
   - hmac: []
