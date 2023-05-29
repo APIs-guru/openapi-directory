@@ -315,6 +315,14 @@ components:
             - RETRY
           type: string
       type: object
+    ResetInstanceResponse:
+      description: Response message from resetting a server.
+      properties: {}
+      type: object
+    StartInstanceResponse:
+      description: Response message from starting a server.
+      properties: {}
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -332,6 +340,10 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    StopInstanceResponse:
+      description: Response message from stopping a server.
+      properties: {}
       type: object
   securitySchemes:
     Oauth2:

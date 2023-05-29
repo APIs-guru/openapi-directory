@@ -2353,6 +2353,10 @@ components:
       description: Message requesting to reset a server.
       properties: {}
       type: object
+    ResetInstanceResponse:
+      description: Response message from resetting a server.
+      properties: {}
+      type: object
     ResizeVolumeRequest:
       description: Request for emergency resize Volume.
       properties:
@@ -2418,6 +2422,10 @@ components:
       description: Message requesting to start a server.
       properties: {}
       type: object
+    StartInstanceResponse:
+      description: Response message from starting a server.
+      properties: {}
+      type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
@@ -2438,6 +2446,10 @@ components:
       type: object
     StopInstanceRequest:
       description: Message requesting to stop a server.
+      properties: {}
+      type: object
+    StopInstanceResponse:
+      description: Response message from stopping a server.
       properties: {}
       type: object
     SubmitProvisioningConfigRequest:
