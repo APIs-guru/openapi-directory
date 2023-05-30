@@ -687,7 +687,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Query string using the [Filtering Syntax](https://developers.google.com/authorized-buyers/apis/guides/v2/list-filters) Supported fields for filtering are: * partnerClientId Use this field to filter the clients by the partnerClientId. For example, if the partnerClientId of the client is "1234", the value of this field should be `partnerClientId = "1234"`, in order to get only the client whose partnerClientId is "1234" in the response.'
+        - description: 'Query string using the [Filtering Syntax](https://developers.google.com/authorized-buyers/apis/guides/list-filters) Supported fields for filtering are: * partnerClientId Use this field to filter the clients by the partnerClientId. For example, if the partnerClientId of the client is "1234", the value of this field should be `partnerClientId = "1234"`, in order to get only the client whose partnerClientId is "1234" in the response.'
           in: query
           name: filter
           schema:
@@ -857,7 +857,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional query string using the [Cloud API list filtering syntax](https://developers.google.com/authorized-buyers/apis/guides/v2/list-filters) Supported columns for filtering are: * deal.displayName * deal.dealType * deal.createTime * deal.updateTime * deal.flightStartTime * deal.flightEndTime * dealServingStatus"
+        - description: "Optional query string using the [Cloud API list filtering syntax](https://developers.google.com/authorized-buyers/apis/guides/list-filters) Supported columns for filtering are: * deal.displayName * deal.dealType * deal.createTime * deal.updateTime * deal.flightStartTime * deal.flightEndTime * dealServingStatus"
           in: query
           name: filter
           schema:
@@ -905,7 +905,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/proposals":
     get:
-      description: Lists proposals. A filter expression (list filter syntax) may be specified to filter the results. This will not list finalized versions of proposals that are being renegotiated; to retrieve these use the finalizedProposals resource.
+      description: Lists proposals. A filter expression using [Cloud API list filtering syntax](https://developers.google.com/authorized-buyers/apis/guides/list-filters) may be specified to filter the results.
       operationId: authorizedbuyersmarketplace.buyers.proposals.list
       parameters:
         - description: "Required. Parent that owns the collection of proposals Format: `buyers/{accountId}`"
@@ -914,7 +914,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional query string using the [Cloud API list filtering syntax](https://developers.google.com/authorized-buyers/apis/guides/v2/list-filters) Supported columns for filtering are: * displayName * dealType * updateTime * state"
+        - description: "Optional query string using the [Cloud API list filtering syntax](https://developers.google.com/authorized-buyers/apis/guides/list-filters) Supported columns for filtering are: * displayName * dealType * updateTime * state"
           in: query
           name: filter
           schema:
@@ -966,7 +966,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional query string using the [Cloud API list filtering] (https://developers.google.com/authorized-buyers/apis/guides/v2/list-filters) syntax.
+        - description: Optional query string using the [Cloud API list filtering] (https://developers.google.com/authorized-buyers/apis/guides/list-filters) syntax.
           in: query
           name: filter
           schema:

@@ -266,6 +266,45 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - documents
+  /v1/documents:moderateText:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Moderates a document for harmful and sensitive categories.
+      operationId: language.documents.moderateText
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModerateTextRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ModerateTextResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-language
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-language
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - documents
 components:
   parameters:
     _.xgafv:
@@ -495,6 +534,11 @@ components:
         language:
           description: The language of the text, which will be the same as the language specified in the request or, if not specified, the automatically-detected language. See Document.language field for more details.
           type: string
+        moderationCategories:
+          description: Harmful and sensitive categories identified in the input document.
+          items:
+            $ref: "#/components/schemas/ClassificationCategory"
+          type: array
         sentences:
           description: Sentences in the input document. Populated if the user enables AnnotateTextRequest.Features.extract_syntax.
           items:
@@ -740,6 +784,25 @@ components:
         extractSyntax:
           description: Extract syntax information.
           type: boolean
+        moderateText:
+          description: Moderate the document for harmful and sensitive categories.
+          type: boolean
+      type: object
+    ModerateTextRequest:
+      description: The document moderation request message.
+      properties:
+        document:
+          $ref: "#/components/schemas/Document"
+          description: Required. Input document.
+      type: object
+    ModerateTextResponse:
+      description: The document moderation response message.
+      properties:
+        moderationCategories:
+          description: Harmful and sensitive categories representing the input document.
+          items:
+            $ref: "#/components/schemas/ClassificationCategory"
+          type: array
       type: object
     PartOfSpeech:
       description: Represents part of speech information for a token. Parts of speech are as defined in http://www.lrec-conf.org/proceedings/lrec2012/pdf/274_Paper.pdf

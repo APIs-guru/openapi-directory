@@ -1153,6 +1153,10 @@ components:
             $ref: "#/components/schemas/NetworkConfiguration"
           type: array
       type: object
+    NoActivityIntent:
+      description: Skips the starting activity
+      properties: {}
+      type: object
     ObbFile:
       description: An opaque binary blob file to install on the device before the test starts.
       properties:
@@ -1270,6 +1274,9 @@ components:
         launcherActivity:
           $ref: "#/components/schemas/LauncherActivityIntent"
           description: An intent that starts the main launcher activity.
+        noActivity:
+          $ref: "#/components/schemas/NoActivityIntent"
+          description: Skips the starting activity
         startActivity:
           $ref: "#/components/schemas/StartActivityIntent"
           description: An intent that starts an activity with specific details.

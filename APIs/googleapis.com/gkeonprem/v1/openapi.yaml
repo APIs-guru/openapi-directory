@@ -84,12 +84,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: View for VMware user cluster. When `BASIC` is specified, only the cluster resource name and admin cluster membership are returned. The default/unset value `CLUSTER_VIEW_UNSPECIFIED` is the same as `FULL', which returns the complete cluster configuration details.
+        - description: View for VMware node pool. When `BASIC` is specified, only the node pool resource name is returned. The default/unset value `NODE_POOL_VIEW_UNSPECIFIED` is the same as `FULL', which returns the complete node pool configuration details.
           in: query
           name: view
           schema:
             enum:
-              - CLUSTER_VIEW_UNSPECIFIED
+              - NODE_POOL_VIEW_UNSPECIFIED
               - BASIC
               - FULL
             type: string
@@ -315,6 +315,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If set to true, and the VMware node pool is not found, the request will succeed but no action will be taken on the server and return a completed LRO.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
         - description: The current etag of the VMware node pool. If an etag is provided and does not match the current etag of node pool, deletion will be blocked and an ABORTED error will be returned.
           in: query
           name: etag
@@ -323,11 +328,6 @@ paths:
         - description: If set, only validate the request, but do not actually unenroll the node pool.
           in: query
           name: validateOnly
-          schema:
-            type: boolean
-        - description: This is required if the cluster has any associated node pools. When set, any child node pools will also be unenrolled.
-          in: query
-          name: force
           schema:
             type: boolean
       responses:
@@ -750,6 +750,15 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: View for bare metal node pools. When `BASIC` is specified, only the node pool resource name is returned. The default/unset value `NODE_POOL_VIEW_UNSPECIFIED` is the same as `FULL', which returns the complete node pool configuration details.
+          in: query
+          name: view
+          schema:
+            enum:
+              - NODE_POOL_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
+            type: string
       responses:
         "200":
           content:
@@ -843,6 +852,48 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EnrollBareMetalNodePoolRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/bareMetalStandaloneNodePools:enroll":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enrolls an existing bare metal standalone node pool to the Anthos On-Prem API within a given project and location. Through enrollment, an existing standalone node pool will become Anthos On-Prem API managed. The corresponding GCP resources will be created.
+      operationId: gkeonprem.projects.locations.bareMetalStandaloneClusters.bareMetalStandaloneNodePools.enroll
+      parameters:
+        - description: Required. The parent resource where this node pool will be created. projects/{project}/locations/{location}/bareMetalStandaloneClusters/{cluster}
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrollBareMetalStandaloneNodePoolRequest"
       responses:
         "200":
           content:
@@ -1017,7 +1068,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a new VMware cluster in a given project and location.
+      description: Creates a new VMware user cluster in a given project and location.
       operationId: gkeonprem.projects.locations.vmwareClusters.create
       parameters:
         - description: 'Required. The parent of the project and location where this cluster is created in. Format: "projects/{project}/locations/{location}"'
@@ -1169,6 +1220,15 @@ paths:
           in: query
           name: pageToken
           schema:
+            type: string
+        - description: View for VMware node pools. When `BASIC` is specified, only the node pool resource name is returned. The default/unset value `NODE_POOL_VIEW_UNSPECIFIED` is the same as `FULL', which returns the complete node pool configuration details.
+          in: query
+          name: view
+          schema:
+            enum:
+              - NODE_POOL_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
             type: string
       responses:
         "200":
@@ -1483,7 +1543,7 @@ components:
       description: Authorization defines the On-Prem cluster authorization configuration to bootstrap onto the admin cluster.
       properties:
         adminUsers:
-          description: Required. For VMware user, bare metal user and standalone clusters, users that will be granted the cluster-admin role on the cluster, providing full access to the cluster. For bare metal Admin cluster, users will be granted the view role, which is a view only access.
+          description: Required. For VMware and bare metal user clusters, users will be granted the cluster-admin role on the cluster, which provides full administrative access to the cluster. For bare metal admin clusters, users will be granted the cluster-view role, which limits users to read-only access.
           items:
             $ref: "#/components/schemas/ClusterUser"
           type: array
@@ -2019,7 +2079,7 @@ components:
           type: array
       type: object
     BareMetalKubeletConfig:
-      description: "KubeletConfig defines the modifiable kubelet configurations for baremetal machines. Note: this list includes fields supported in GKE (see https://cloud.google.com/kubernetes-engine/docs/how-to/node-system-config#kubelet-options)."
+      description: "KubeletConfig defines the modifiable kubelet configurations for bare metal machines. Note: this list includes fields supported in GKE (see https://cloud.google.com/kubernetes-engine/docs/how-to/node-system-config#kubelet-options)."
       properties:
         registryBurst:
           description: The maximum size of bursty pulls, temporarily allows pulls to burst to this number, while still not exceeding registry_pull_qps. The value must not be a negative number. Updating this field may impact scalability by changing the amount of traffic produced by image pulls. Defaults to 10.
@@ -2254,7 +2314,7 @@ components:
       properties:
         kubeletConfig:
           $ref: "#/components/schemas/BareMetalKubeletConfig"
-          description: The modifiable kubelet configurations for the baremetal machines.
+          description: The modifiable kubelet configurations for the bare metal machines.
         labels:
           additionalProperties:
             type: string
@@ -2425,12 +2485,19 @@ components:
           description: If set, only validate the request, but do not actually enroll the node pool.
           type: boolean
       type: object
+    EnrollBareMetalStandaloneNodePoolRequest:
+      description: Message for enrolling an existing bare metal standalone node pool to the GKE on-prem API.
+      properties:
+        bareMetalStandaloneNodePoolId:
+          description: User provided OnePlatform identifier that is used as part of the resource name. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
+          type: string
+        validateOnly:
+          description: If set, only validate the request, but do not actually enroll the node pool.
+          type: boolean
+      type: object
     EnrollVmwareAdminClusterRequest:
       description: Message for enrolling an existing VMware admin cluster to the GKE on-prem API.
       properties:
-        localName:
-          description: The object name of the VMware OnPremAdminCluster custom resource on the associated admin cluster. This field is used to support conflicting resource names when enrolling existing clusters to the API. When not provided, this field will resolve to the vmware_admin_cluster_id. Otherwise, it must match the object name of the VMware OnPremAdminCluster custom resource. It is not modifiable outside / beyond the enrollment operation.
-          type: string
         membership:
           description: Required. This is the full resource name of this admin cluster's fleet membership.
           type: string
@@ -2682,6 +2749,10 @@ components:
           description: Output only. API version used to start the operation.
           readOnly: true
           type: string
+        controlPlaneDisconnected:
+          description: Output only. Denotes if the local managing cluster's control plane is currently disconnected. This is expected to occur temporarily during self-managed cluster upgrades.
+          readOnly: true
+          type: boolean
         createTime:
           description: Output only. The time the operation was created.
           format: google-datetime
@@ -3257,7 +3328,7 @@ components:
           $ref: "#/components/schemas/VmwareNetworkConfig"
           description: The VMware user cluster network configuration.
         onPremVersion:
-          description: The Anthos clusters on the VMware version for your user cluster. Defaults to the admin cluster version.
+          description: Required. The Anthos clusters on the VMware version for your user cluster.
           type: string
         reconciling:
           description: Output only. If set, there are currently changes in flight to the VMware user cluster.

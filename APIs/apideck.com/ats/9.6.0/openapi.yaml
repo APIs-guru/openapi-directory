@@ -3246,11 +3246,9 @@ components:
           example:
             - "123456"
           items:
-            properties:
-              id:
-                example: "12345"
-                readOnly: true
-                type: string
+            example: "12345"
+            readOnly: true
+            type: string
             x-apideck-weights:
               id: medium
           type: array
@@ -3368,6 +3366,7 @@ components:
         visibility:
           description: The visibility of the job
           enum:
+            - draft
             - public
             - internal
           example: internal
