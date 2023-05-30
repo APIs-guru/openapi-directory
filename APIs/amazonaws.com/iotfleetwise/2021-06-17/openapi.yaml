@@ -694,7 +694,7 @@ paths:
   /#X-Amz-Target=IoTAutobahnControlPlane.CreateVehicle:
     post:
       operationId: CreateVehicle
-      description: '<p> Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles created from the same vehicle model consist of the same signals inherited from the vehicle model.</p> <note> <p> If you have an existing Amazon Web Services IoT Thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and collect data from your thing. </p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html">Create a vehicle (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>'
+      description: '<p> Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles created from the same vehicle model consist of the same signals inherited from the vehicle model.</p> <note> <p> If you have an existing Amazon Web Services IoT thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and collect data from your thing. </p> </note> <p>For more information, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html">Create a vehicle (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2941,7 +2941,7 @@ paths:
   /#X-Amz-Target=IoTAutobahnControlPlane.RegisterAccount:
     post:
       operationId: RegisterAccount
-      description: '<p>Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html">Setting up Amazon Web Services IoT FleetWise</a>. </p> <note> <p>An Amazon Web Services account is <b>not</b> the same thing as a "user account". An <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users">Amazon Web Services user</a> is an identity that you create using Identity and Access Management (IAM) and takes the form of either an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html">IAM user</a> or an <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM role, both with credentials</a>. A single Amazon Web Services account can, and typically does, contain many users and roles.</p> </note>'
+      description: '<important> <p>This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html">CreateCampaign</a> API operation.</p> <p>You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the <a href="https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteCampaign.html">DeleteCampaign</a> API operation.</p> <p>If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html">DeleteServiceLinkedRole</a> in the <i>Identity and Access Management API Reference</i>.</p> </important> <pre><code> &lt;p&gt;Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For more information, including step-by-step procedures, see &lt;a href=&quot;https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html&quot;&gt;Setting up Amazon Web Services IoT FleetWise&lt;/a&gt;. &lt;/p&gt; &lt;note&gt; &lt;p&gt;An Amazon Web Services account is &lt;b&gt;not&lt;/b&gt; the same thing as a &quot;user.&quot; An &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users&quot;&gt;Amazon Web Services user&lt;/a&gt; is an identity that you create using Identity and Access Management (IAM) and takes the form of either an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html&quot;&gt;IAM user&lt;/a&gt; or an &lt;a href=&quot;https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html&quot;&gt;IAM role, both with credentials&lt;/a&gt;. A single Amazon Web Services account can, and typically does, contain many users and roles.&lt;/p&gt; &lt;/note&gt; </code></pre>'
       responses:
         '200':
           description: Success
@@ -3744,7 +3744,7 @@ components:
         expiryTime:
           allOf:
             - $ref: '#/components/schemas/timestamp'
-            - description: '<p> (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at midnight UTC time). Vehicle data won''t be collected after the campaign expires. </p> <p>Default: 253402214400 (December 31, 9999, 00:00:00 UTC)</p>'
+            - description: '<p> (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at midnight UTC time). Vehicle data isn''t collected after the campaign expires. </p> <p>Default: 253402214400 (December 31, 9999, 00:00:00 UTC)</p>'
         postTriggerCollectionDuration:
           allOf:
             - $ref: '#/components/schemas/uint32'
@@ -3781,6 +3781,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: Metadata that can be used to manage the campaign.
+        dataDestinationConfigs:
+          allOf:
+            - $ref: '#/components/schemas/DataDestinationConfigs'
+            - description: '<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p> <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. </p> <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query vehicle data so that you can identify trends and patterns.</p>'
     ConflictException: {}
     CreateDecoderManifestResponse:
       type: object
@@ -3983,7 +3987,7 @@ components:
         attributes:
           allOf:
             - $ref: '#/components/schemas/attributesMap'
-            - description: 'Static information about a vehicle in a key-value pair. For example: <code>"engineType"</code> : <code>"1.3 L R2"</code> '
+            - description: '<p>Static information about a vehicle in a key-value pair. For example: <code>"engineType"</code> : <code>"1.3 L R2"</code> </p> <p>A campaign must include the keys (attribute names) in <code>dataExtraDimensions</code> for them to display in Amazon Timestream.</p>'
         associationBehavior:
           allOf:
             - $ref: '#/components/schemas/VehicleAssociationBehavior'
@@ -4223,6 +4227,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/timestamp'
             - description: The last time the campaign was modified.
+        dataDestinationConfigs:
+          allOf:
+            - $ref: '#/components/schemas/DataDestinationConfigs'
+            - description: '<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p> <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. </p> <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query vehicle data so that you can identify trends and patterns.</p>'
     GetCampaignRequest:
       type: object
       required:
@@ -4386,7 +4394,6 @@ components:
       required:
         - customerAccountId
         - accountStatus
-        - timestreamRegistrationResponse
         - iamRegistrationResponse
         - creationTime
         - lastModificationTime
@@ -4958,7 +4965,6 @@ components:
       type: object
       required:
         - registerAccountStatus
-        - timestreamResources
         - iamResources
         - creationTime
         - lastModificationTime
@@ -4983,12 +4989,13 @@ components:
             - description: ' The time this registration was last updated, in seconds since epoch (January 1, 1970 at midnight UTC time). '
     RegisterAccountRequest:
       type: object
-      required:
-        - timestreamResources
       title: RegisterAccountRequest
       properties:
         timestreamResources:
-          $ref: '#/components/schemas/TimestreamResources'
+          allOf:
+            - $ref: '#/components/schemas/TimestreamResources'
+            - deprecated: true
+              description: Amazon Timestream metadata is now passed in the CreateCampaign API.
         iamResources:
           allOf:
             - $ref: '#/components/schemas/IamResources'
@@ -5067,7 +5074,7 @@ components:
         action:
           allOf:
             - $ref: '#/components/schemas/UpdateCampaignAction'
-            - description: '<p> Specifies how to update a campaign. The action can be one of the following:</p> <ul> <li> <p> <code>APPROVE</code> - To approve delivering a data collection scheme to vehicles. </p> </li> <li> <p> <code>SUSPEND</code> - To suspend collecting signal data. </p> </li> <li> <p> <code>RESUME</code> - To resume collecting signal data. </p> </li> <li> <p> <code>UPDATE</code> - To update a campaign. </p> </li> </ul>'
+            - description: '<p> Specifies how to update a campaign. The action can be one of the following:</p> <ul> <li> <p> <code>APPROVE</code> - To approve delivering a data collection scheme to vehicles. </p> </li> <li> <p> <code>SUSPEND</code> - To suspend collecting signal data. The campaign is deleted from vehicles and all vehicles in the suspended campaign will stop sending data.</p> </li> <li> <p> <code>RESUME</code> - To reactivate the <code>SUSPEND</code> campaign. The campaign is redeployed to all vehicles and the vehicles will resume sending data.</p> </li> <li> <p> <code>UPDATE</code> - To update a campaign. </p> </li> </ul>'
     UpdateDecoderManifestResponse:
       type: object
       required:
@@ -5310,6 +5317,11 @@ components:
     double:
       type: number
       format: double
+    message:
+      type: string
+      pattern: '[^\u0000-\u001F\u007F]+'
+      minLength: 1
+      maxLength: 2048
     Actuator:
       type: object
       required:
@@ -5349,6 +5361,14 @@ components:
             - $ref: '#/components/schemas/string'
             - deprecated: true
               description: A specified value for the actuator.assignedValue is no longer in use
+        deprecationMessage:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: The deprecation message for the node or the branch that was moved or deleted.
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: A comment in addition to the description.
       description: '<p>A signal that represents a vehicle device such as the engine, heater, and door locks. Data from an actuator reports the state of a certain vehicle device.</p> <note> <p> Updating actuator data can change the state of a device. For example, you can turn on or off the heater by updating its actuator data.</p> </note>'
     AmazonResourceName:
       type: string
@@ -5407,6 +5427,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: The default value of the attribute.
+        deprecationMessage:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: The deprecation message for the node or the branch that was moved or deleted.
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: A comment in addition to the description.
       description: 'A signal that represents static information about the vehicle, such as engine type or manufacturing date.'
     createVehicleRequestItems:
       type: array
@@ -5447,6 +5475,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/description'
             - description: A brief description of the branch.
+        deprecationMessage:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: The deprecation message for the node or the branch that was moved or deleted.
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: A comment in addition to the description.
       description: A group of signals that are defined in a hierarchical structure.
     CampaignStatus:
       type: string
@@ -5602,11 +5638,11 @@ components:
         startBit:
           allOf:
             - $ref: '#/components/schemas/nonNegativeInteger'
-            - description: Indicates the beginning of the CAN message.
+            - description: '<p>Indicates the beginning of the CAN signal. This should always be the least significant bit (LSB).</p> <p>This value might be different from the value in a DBC file. For little endian signals, <code>startBit</code> is the same value as in the DBC file. For big endian signals in a DBC file, the start bit is the most significant bit (MSB). You will have to calculate the LSB instead and pass it as the <code>startBit</code>.</p>'
         offset:
           allOf:
             - $ref: '#/components/schemas/double'
-            - description: Indicates where data appears in the CAN message.
+            - description: 'The offset used to calculate the signal value. Combined with factor, the calculation is <code>value = raw_value * factor + offset</code>.'
         factor:
           allOf:
             - $ref: '#/components/schemas/double'
@@ -5740,6 +5776,12 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
+    DataDestinationConfigs:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataDestinationConfig'
+      minItems: 1
+      maxItems: 1
     resourceName:
       type: string
       pattern: '[a-zA-Z\d\-_:]+'
@@ -5836,11 +5878,65 @@ components:
             - $ref: '#/components/schemas/arn'
             - description: The ARN of a created or validated Amazon Web Services IoT thing.
       description: Information about a created vehicle.
+    S3Config:
+      type: object
+      required:
+        - bucketArn
+      properties:
+        bucketArn:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketArn'
+            - description: The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+        dataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DataFormat'
+            - description: <p>Specify the format that files are saved in the Amazon S3 bucket. You can save files in an Apache Parquet or JSON format.</p> <ul> <li> <p>Parquet - Store data in a columnar storage file format. Parquet is optimal for fast data retrieval and can reduce costs. This option is selected by default.</p> </li> <li> <p>JSON - Store data in a standard text-based JSON file format.</p> </li> </ul>
+        storageCompressionFormat:
+          allOf:
+            - $ref: '#/components/schemas/StorageCompressionFormat'
+            - description: 'By default, stored data is compressed as a .gzip file. Compressed files have a reduced file size, which can optimize the cost of data storage.'
+        prefix:
+          allOf:
+            - $ref: '#/components/schemas/Prefix'
+            - description: '<p>(Optional) Enter an S3 bucket prefix. The prefix is the string of characters after the bucket name and before the object name. You can use the prefix to organize data stored in Amazon S3 buckets. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html">Organizing objects using prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>By default, Amazon Web Services IoT FleetWise sets the prefix <code>processed-data/year=YY/month=MM/date=DD/hour=HH/</code> (in UTC) to data it delivers to Amazon S3. You can enter a prefix to append it to this default prefix. For example, if you enter the prefix <code>vehicles</code>, the prefix will be <code>vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/</code>.</p>'
+      description: 'The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends data. Amazon S3 is an object storage service that stores data as objects within buckets. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html">Creating, configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.'
+    TimestreamConfig:
+      type: object
+      required:
+        - timestreamTableArn
+        - executionRoleArn
+      properties:
+        timestreamTableArn:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamTableArn'
+            - description: The Amazon Resource Name (ARN) of the Amazon Timestream table.
+        executionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IAMRoleArn'
+            - description: The Amazon Resource Name (ARN) of the task execution role that grants Amazon Web Services IoT FleetWise permission to deliver data to the Amazon Timestream table.
+      description: 'The Amazon Timestream table where the Amazon Web Services IoT FleetWise campaign sends data. Timestream stores and organizes data to optimize query processing time and to reduce storage costs. For more information, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/data-modeling.html">Data modeling</a> in the <i>Amazon Timestream Developer Guide</i>.'
+    DataDestinationConfig:
+      type: object
+      properties:
+        s3Config:
+          allOf:
+            - $ref: '#/components/schemas/S3Config'
+            - description: The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends data.
+        timestreamConfig:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamConfig'
+            - description: The Amazon Timestream table where the campaign sends data.
+      description: The destination where the Amazon Web Services IoT FleetWise campaign sends data. You can send data to be stored in Amazon S3 or Amazon Timestream.
     NodePath:
       type: string
       pattern: '[a-zA-Z0-9_.]+'
       minLength: 1
       maxLength: 150
+    DataFormat:
+      type: string
+      enum:
+        - JSON
+        - PARQUET
     ManifestStatus:
       type: string
       enum:
@@ -5923,7 +6019,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Provides the VSS in JSON format.
-      description: Vehicle Signal Specification (VSS) is a precise language used to describe and model signals in vehicle networks. The JSON file collects signal specificiations in a VSS format.
+      description: ' <a href="https://www.w3.org/auto/wg/wiki/Vehicle_Signal_Specification_(VSS)/Vehicle_Data_Spec">Vehicle Signal Specification (VSS)</a> is a precise language used to describe and model signals in vehicle networks. The JSON file collects signal specificiations in a VSS format.'
     FullyQualifiedName:
       type: string
       minLength: 1
@@ -6236,6 +6332,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/double'
             - description: The specified possible maximum value of the sensor.
+        deprecationMessage:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: The deprecation message for the node or the branch that was moved or deleted.
+        comment:
+          allOf:
+            - $ref: '#/components/schemas/message'
+            - description: A comment in addition to the description.
       description: '<p>An input component that reports the environmental condition of a vehicle.</p> <note> <p>You can collect data about fluid levels, temperatures, vibrations, or battery voltage from sensors.</p> </note>'
     Node:
       type: object
@@ -6312,7 +6416,7 @@ components:
         offset:
           allOf:
             - $ref: '#/components/schemas/double'
-            - description: Indicates where data appears in the message.
+            - description: 'The offset used to calculate the signal value. Combined with scaling, the calculation is <code>value = raw_value * scaling + offset</code>.'
         startByte:
           allOf:
             - $ref: '#/components/schemas/nonNegativeInteger'
@@ -6330,6 +6434,11 @@ components:
             - $ref: '#/components/schemas/ObdBitmaskLength'
             - description: The number of bits to mask in a message.
       description: Information about signal messages using the on-board diagnostics (OBD) II protocol in a vehicle.
+    Prefix:
+      type: string
+      pattern: '[a-zA-Z0-9-_:./!*''()]+'
+      minLength: 1
+      maxLength: 512
     TimestreamResources:
       type: object
       required:
@@ -6345,6 +6454,16 @@ components:
             - $ref: '#/components/schemas/TimestreamTableName'
             - description: The name of the registered Amazon Timestream database table.
       description: The registered Amazon Timestream resources that Amazon Web Services IoT FleetWise edge agent software can transfer your vehicle data to.
+    S3BucketArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):s3:::.+'
+      minLength: 16
+      maxLength: 100
+    StorageCompressionFormat:
+      type: string
+      enum:
+        - NONE
+        - GZIP
     SignalCatalogSummary:
       type: object
       properties:
@@ -6458,6 +6577,11 @@ components:
       type: integer
       minimum: 10000
       maximum: 60000
+    TimestreamTableArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):timestream:[a-zA-Z0-9-]+:[0-9]{12}:database/[a-zA-Z0-9_.-]+/table/[a-zA-Z0-9_.-]+'
+      minLength: 20
+      maxLength: 2048
     TimestreamDatabaseName:
       type: string
       pattern: '[a-zA-Z0-9_.-]+'

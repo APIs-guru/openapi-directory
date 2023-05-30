@@ -5630,6 +5630,22 @@ components:
       type: object
       required:
         - SecurityControls
+      example:
+        SecurityControls:
+          - Description: This AWS control checks whether ACM Certificates in your account are marked for expiration within a specified time period. Certificates provided by ACM are automatically renewed. ACM does not automatically renew certificates that you import.
+            RemediationUrl: 'https://docs.aws.amazon.com/console/securityhub/ACM.1/remediation'
+            SecurityControlArn: 'arn:aws:securityhub:us-west-2:123456789012:security-control/ACM.1'
+            SecurityControlId: ACM.1
+            SecurityControlStatus: ENABLED
+            SeverityRating: MEDIUM
+            Title: Imported and ACM-issued certificates should be renewed after a specified time period
+          - Description: This control checks whether all stages of Amazon API Gateway REST and WebSocket APIs have logging enabled. The control fails if logging is not enabled for all methods of a stage or if loggingLevel is neither ERROR nor INFO.
+            RemediationUrl: 'https://docs.aws.amazon.com/console/securityhub/APIGateway.1/remediation'
+            SecurityControlArn: 'arn:aws:securityhub:us-west-2:123456789012:security-control/APIGateway.1'
+            SecurityControlId: APIGateway.1
+            SecurityControlStatus: ENABLED
+            SeverityRating: MEDIUM
+            Title: API Gateway REST and WebSocket API execution logging should be enabled
       properties:
         SecurityControls:
           allOf:
@@ -5643,6 +5659,26 @@ components:
       type: object
       required:
         - StandardsControlAssociationDetails
+      example:
+        StandardsControlAssociationDetails:
+          - AssociationStatus: ENABLED
+            RelatedRequirements:
+              - CIS AWS Foundations 2.1
+            SecurityControlArn: 'arn:aws:securityhub:us-west-2:110479873537:security-control/CloudTrail.1'
+            SecurityControlId: CloudTrail.1
+            StandardsArn: 'arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0'
+            StandardsControlDescription: 'AWS CloudTrail is a web service that records AWS API calls for your account and delivers log files to you. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, the request parameters, and the response elements returned by the AWS service.'
+            StandardsControlTitle: Ensure CloudTrail is enabled in all regions
+            UpdatedAt: '2022-01-13T18:52:29.539000+00:00'
+          - AssociationStatus: ENABLED
+            RelatedRequirements:
+              - CIS AWS Foundations 3.12
+            SecurityControlArn: 'arn:aws:securityhub:us-west-2:110479873537:security-control/CloudWatch.12'
+            SecurityControlId: CloudWatch.12
+            StandardsArn: 'arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0'
+            StandardsControlDescription: Real-time monitoring of API calls can be achieved by directing CloudTrail Logs to CloudWatch Logs and establishing corresponding metric filters and alarms. Network gateways are required to send/receive traffic to a destination outside of a VPC. It is recommended that a metric filter and alarm be established for changes to network gateways.
+            StandardsControlTitle: Ensure a log metric filter and alarm exist for changes to network gateways
+            UpdatedAt: '2022-01-13T18:52:29.686000+00:00'
       properties:
         StandardsControlAssociationDetails:
           allOf:
@@ -5943,6 +5979,15 @@ components:
       description: Details about a related finding.
     BatchUpdateStandardsControlAssociationsResponse:
       type: object
+      example:
+        UnprocessedAssociationUpdates:
+          - ErrorCode: INVALID_INPUT
+            ErrorReason: 'Invalid Standards Arn: ''arn:aws:securityhub:::ruleset/sample-standard/v/1.1.0'''
+            StandardsControlAssociationUpdate:
+              AssociationStatus: DISABLED
+              SecurityControlId: CloudTrail.1
+              StandardsArn: 'arn:aws:securityhub:::ruleset/sample-standard/v/1.1.0'
+              UpdatedReason: Test Reason
       properties:
         UnprocessedAssociationUpdates:
           allOf:
@@ -7217,6 +7262,210 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AvailabilityZone'
+    AwsAmazonMqBrokerEncryptionOptionsDetails:
+      type: object
+      properties:
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The KMS key that’s used to encrypt your data at rest. If not provided, Amazon MQ will use a default KMS key to encrypt your data. '
+        UseAwsOwnedKey:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies that an KMS key should be used for at-rest encryption. Set to <code>true</code> by default if no value is provided (for example, for RabbitMQ brokers). '
+      description: ' Provides details about broker encryption options. '
+    AwsAmazonMqBrokerLdapServerMetadataDetails:
+      type: object
+      properties:
+        Hosts:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: ' Specifies the location of the LDAP server, such as Amazon Web Services Directory Service for Microsoft Active Directory. '
+        RoleBase:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. '
+        RoleName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The group name attribute in a role entry whose value is the name of that role. '
+        RoleSearchMatching:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The LDAP search filter used to find roles within the <code>roleBase</code>. '
+        RoleSearchSubtree:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' The directory search scope for the role. If set to <code>true</code>, the scope is to search the entire subtree. '
+        ServiceAccountUsername:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A username for the service account, which is an account in your LDAP server that has access to initiate a connection. '
+        UserBase:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Selects a particular subtree of the directory information tree (DIT) to search for user entries. '
+        UserRoleName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The name of the LDAP attribute in the user''s directory entry for the user''s group membership. '
+        UserSearchMatching:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The LDAP search filter used to find users within the <code>userBase</code>. '
+        UserSearchSubtree:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' The directory search scope for the user. If set to true, the scope is to search the entire subtree. '
+      description: ' The metadata of the Lightweight Directory Access Protocol (LDAP) server used to authenticate and authorize connections to the broker. This is an optional failover server. '
+    AwsAmazonMqBrokerLogsDetails:
+      type: object
+      properties:
+        Audit:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Activates audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Doesn''t apply to RabbitMQ brokers. '
+        General:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Activates general logging. '
+        AuditLogGroup:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The location of the CloudWatch Logs log group where audit logs are sent. '
+        GeneralLogGroup:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The location of the CloudWatch Logs log group where general logs are sent. '
+        Pending:
+          allOf:
+            - $ref: '#/components/schemas/AwsAmazonMqBrokerLogsPendingDetails'
+            - description: ' The list of information about logs that are to be turned on for the specified broker. '
+      description: ' Provides information about logs to be activated for the specified broker. '
+    AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails:
+      type: object
+      properties:
+        DayOfWeek:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The day of the week on which the maintenance window falls. '
+        TimeOfDay:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The time, in 24-hour format, on which the maintenance window falls. '
+        TimeZone:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The time zone in either the Country/City format or the UTC offset format. UTC is the default format. '
+      description: ' The scheduled time period (UTC) during which Amazon MQ begins to apply pending updates or patches to the broker. '
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    AwsAmazonMqBrokerUsersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsAmazonMqBrokerUsersDetails'
+    AwsAmazonMqBrokerDetails:
+      type: object
+      properties:
+        AuthenticationStrategy:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The authentication strategy used to secure the broker. The default is <code>SIMPLE</code>. '
+        AutoMinorVersionUpgrade:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Whether automatically upgrade new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. '
+        BrokerArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of the broker. '
+        BrokerName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The broker''s name. '
+        DeploymentMode:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The broker''s deployment mode. '
+        EncryptionOptions:
+          allOf:
+            - $ref: '#/components/schemas/AwsAmazonMqBrokerEncryptionOptionsDetails'
+            - description: ' Encryption options for the broker. Doesn’t apply to RabbitMQ brokers. '
+        EngineType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The type of broker engine. '
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The version of the broker engine. '
+        HostInstanceType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The broker''s instance type. '
+        BrokerId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The unique ID that Amazon MQ generates for the broker. '
+        LdapServerMetadata:
+          allOf:
+            - $ref: '#/components/schemas/AwsAmazonMqBrokerLdapServerMetadataDetails'
+            - description: ' The metadata of the Lightweight Directory Access Protocol (LDAP) server used to authenticate and authorize connections to the broker. This is an optional failover server. '
+        Logs:
+          allOf:
+            - $ref: '#/components/schemas/AwsAmazonMqBrokerLogsDetails'
+            - description: ' Turns on Amazon CloudWatch logging for brokers. '
+        MaintenanceWindowStartTime:
+          allOf:
+            - $ref: '#/components/schemas/AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails'
+            - description: ' The scheduled time period (UTC) during which Amazon MQ begins to apply pending updates or patches to the broker. '
+        PubliclyAccessible:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Permits connections from applications outside of the VPC that hosts the broker''s subnets. '
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: ' The list of rules (one minimum, 125 maximum) that authorize connections to brokers. '
+        StorageType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The broker''s storage type. '
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: ' The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. '
+        Users:
+          allOf:
+            - $ref: '#/components/schemas/AwsAmazonMqBrokerUsersList'
+            - description: ' The list of all broker usernames for the specified broker. Doesn''t apply to RabbitMQ brokers. '
+      description: ' Provides details about an Amazon MQ message broker. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols. '
+    AwsAmazonMqBrokerLogsPendingDetails:
+      type: object
+      properties:
+        Audit:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Activates audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Doesn''t apply to RabbitMQ brokers. '
+        General:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Activates general logging. '
+      description: ' Provides information about logs to be activated for the specified broker. '
+    AwsAmazonMqBrokerUsersDetails:
+      type: object
+      properties:
+        PendingChange:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The type of change pending for the broker user. '
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The username of the broker user. '
+      description: ' Provides details about the broker usernames for the specified broker. Doesn''t apply to RabbitMQ brokers. '
     AwsApiCallActionDomainDetails:
       type: object
       properties:
@@ -7589,6 +7838,156 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Indicates whether the stage is managed by API Gateway.
       description: Contains information about a version 2 stage for Amazon API Gateway.
+    AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails:
+      type: object
+      properties:
+        AuthorizerResultTtlInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of seconds a response should be cached for. The default is 5 minutes (300 seconds). '
+        AuthorizerUri:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of the Lambda function to be called for authorization. This can be a standard Lambda ARN, a version ARN (.../v3), or an alias ARN. '
+        IdentityValidationExpression:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A regular expression for validation of tokens before the Lambda function is called. '
+      description: ' Specifies the authorization configuration for using an Lambda function with your AppSync GraphQL API endpoint. '
+    AwsAppSyncGraphQlApiOpenIdConnectConfigDetails:
+      type: object
+      properties:
+        AuthTtL:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: ' The number of milliseconds that a token is valid after being authenticated. '
+        ClientId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The client identifier of the relying party at the OpenID identity provider. This identifier is typically obtained when the relying party is registered with the OpenID identity provider. You can specify a regular expression so that AppSync can validate against multiple client identifiers at a time. '
+        IatTtL:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: ' The number of milliseconds that a token is valid after it''s issued to a user. '
+        Issuer:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The issuer for the OIDC configuration. The issuer returned by discovery must exactly match the value of <code>iss</code> in the ID token. '
+      description: ' Specifies the authorization configuration for using an OpenID Connect compliant service with your AppSync GraphQL API endpoint. '
+    AwsAppSyncGraphQlApiUserPoolConfigDetails:
+      type: object
+      properties:
+        AppIdClientRegex:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A regular expression for validating the incoming Amazon Cognito user pools app client ID. If this value isn''t set, no filtering is applied. '
+        AwsRegion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Web Services Region in which the user pool was created. '
+        DefaultAction:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pools authentication doesn''t match the Amazon Cognito user pools configuration. '
+        UserPoolId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The user pool ID. '
+      description: ' Specifies the authorization configuration for using Amazon Cognito user pools with your AppSync GraphQL API endpoint. '
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails:
+      type: object
+      properties:
+        AuthenticationType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The type of security configuration for your GraphQL API: API key, Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda. '
+        LambdaAuthorizerConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails'
+            - description: ' The configuration for Lambda function authorization. '
+        OpenIdConnectConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiOpenIdConnectConfigDetails'
+            - description: ' The OpenID Connect configuration. '
+        UserPoolConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiUserPoolConfigDetails'
+            - description: ' The Amazon Cognito user pools configuration. '
+      description: ' A list of additional authentication providers for the GraphqlApi API. '
+    AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails'
+    AwsAppSyncGraphQlApiLogConfigDetails:
+      type: object
+      properties:
+        CloudWatchLogsRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of the service role that AppSync assumes to publish to CloudWatch Logs in your account. '
+        ExcludeVerboseContent:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Set to <code>TRUE</code> to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level. '
+        FieldLogLevel:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The field logging level. '
+      description: ' Specifies the logging configuration when writing GraphQL operations and tracing to Amazon CloudWatch for an AppSync GraphQL API. '
+    AwsAppSyncGraphQlApiDetails:
+      type: object
+      properties:
+        ApiId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The unique identifier for the API. '
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The unique identifier for the API.
+        OpenIdConnectConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiOpenIdConnectConfigDetails'
+            - description: ' Specifies the authorization configuration for using an OpenID Connect compliant service with an AppSync GraphQL API endpoint. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The API name. '
+        LambdaAuthorizerConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails'
+            - description: ' Specifies the configuration for Lambda function authorization. '
+        XrayEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Indicates whether to use X-Ray tracing for the GraphQL API. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of the API. '
+        UserPoolConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiUserPoolConfigDetails'
+            - description: ' The Amazon Cognito user pools configuration. '
+        AuthenticationType:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The type of security configuration for your GraphQL API: API key, Identity and Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or Lambda. '
+        LogConfig:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiLogConfigDetails'
+            - description: ' The Amazon CloudWatch Logs configuration. '
+        AdditionalAuthenticationProviders:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersList'
+            - description: ' A list of additional authentication providers for the GraphQL API. '
+        WafWebAclArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of the WAF web access control list (web ACL) associated with this GraphQL API, if one exists. '
+      description: ' Provides details about an AppSync Graph QL API, which lets you query multiple databases, microservices, and APIs from a single GraphQL endpoint. '
+    Long:
+      type: integer
     AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails:
       type: object
       properties:
@@ -7601,10 +8000,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails'
-    StringList:
-      type: array
-      items:
-        $ref: '#/components/schemas/NonEmptyString'
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails:
       type: object
       properties:
@@ -7957,8 +8352,6 @@ components:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: 'Unique, randomly generated, Unicode, UTF-8 encoded strings. Version IDs cannot be edited. '
       description: 'Provides details about an Backup backup plan and an array of <code>BackupRule</code> objects, each of which specifies a backup rule. '
-    Long:
-      type: integer
     AwsBackupBackupPlanLifecycleDetails:
       type: object
       properties:
@@ -13471,6 +13864,170 @@ components:
             - $ref: '#/components/schemas/AwsElbv2LoadBalancerAttributes'
             - description: Attributes of the load balancer.
       description: Information about a load balancer.
+    AwsEventSchemasRegistryDetails:
+      type: object
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A description of the registry to be created. '
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of the registry. '
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The name of the schema registry. '
+      description: ' A schema defines the structure of events that are sent to Amazon EventBridge. Schema registries are containers for schemas. They collect and organize schemas so that your schemas are in logical groups. '
+    AwsGuardDutyDetectorDataSourcesCloudTrailDetails:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Specifies whether CloudTrail is activated as a data source for the detector. '
+      description: ' An object that contains information on the status of CloudTrail as a data source for the detector. '
+    AwsGuardDutyDetectorDataSourcesDnsLogsDetails:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Describes whether DNS logs is enabled as a data source for the detector. '
+      description: ' An object that contains information on the status of DNS logs as a data source for the detector. '
+    AwsGuardDutyDetectorDataSourcesFlowLogsDetails:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Describes whether VPC Flow Logs are activated as a data source for the detector. '
+      description: ' An object that contains information on the status of VPC Flow Logs as a data source for the detector. '
+    AwsGuardDutyDetectorDataSourcesKubernetesDetails:
+      type: object
+      properties:
+        AuditLogs:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails'
+            - description: ' Describes whether Kubernetes audit logs are activated as a data source for the detector. '
+      description: ' An object that contains information on the status of Kubernetes data sources for the detector. '
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails:
+      type: object
+      properties:
+        ScanEc2InstanceWithFindings:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails'
+            - description: ' Describes the configuration of Malware Protection for EC2 instances with findings. '
+        ServiceRole:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The GuardDuty Malware Protection service role. '
+      description: ' An object that contains information on the status of Malware Protection as a data source for the detector. '
+    AwsGuardDutyDetectorDataSourcesS3LogsDetails:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A value that describes whether S3 data event logs are automatically enabled for new members of an organization. '
+      description: ' An object that contains information on the status of S3 data event logs as a data source for the detector. '
+    AwsGuardDutyDetectorDataSourcesDetails:
+      type: object
+      properties:
+        CloudTrail:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesCloudTrailDetails'
+            - description: ' An object that contains information on the status of CloudTrail as a data source for the detector. '
+        DnsLogs:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesDnsLogsDetails'
+            - description: ' An object that contains information on the status of DNS logs as a data source for the detector. '
+        FlowLogs:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesFlowLogsDetails'
+            - description: ' An object that contains information on the status of VPC Flow Logs as a data source for the detector. '
+        Kubernetes:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesKubernetesDetails'
+            - description: ' An object that contains information on the status of Kubernetes data sources for the detector. '
+        MalwareProtection:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails'
+            - description: ' An object that contains information on the status of Malware Protection as a data source for the detector. '
+        S3Logs:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesS3LogsDetails'
+            - description: ' An object that contains information on the status of S3 Data event logs as a data source for the detector. '
+      description: ' Describes which data sources are activated for the detector. '
+    AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Describes whether Kubernetes audit logs are activated as a data source for the detector. '
+      description: ' An object that contains information on the status of Kubernetes audit logs as a data source for the detector. '
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails:
+      type: object
+      properties:
+        EbsVolumes:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails'
+            - description: ' Describes the configuration of scanning EBS volumes (Malware Protection) as a data source. '
+      description: ' Describes the configuration of Malware Protection for EC2 instances with findings. '
+    AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails:
+      type: object
+      properties:
+        Reason:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Specifies the reason why scanning EBS volumes (Malware Protection) isn’t activated as a data source. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Describes whether scanning EBS volumes is activated as a data source for the detector. '
+      description: ' Describes the configuration of scanning EBS volumes (Malware Protection) as a data source. '
+    AwsGuardDutyDetectorFeaturesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsGuardDutyDetectorFeaturesDetails'
+    AwsGuardDutyDetectorDetails:
+      type: object
+      properties:
+        DataSources:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDataSourcesDetails'
+            - description: ' Describes which data sources are activated for the detector. '
+        Features:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorFeaturesList'
+            - description: ' Describes which features are activated for the detector. '
+        FindingPublishingFrequency:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The publishing frequency of the finding. '
+        ServiceRole:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The GuardDuty service role. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The activation status of the detector. '
+      description: ' Provides details about an Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector is required for GuardDuty to become operational. '
+    AwsGuardDutyDetectorFeaturesDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Indicates the name of the feature that is activated for the detector. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Indicates the status of the feature that is activated for the detector. '
+      description: ' Describes which features are activated for the detector. '
     AwsIamAccessKeyStatus:
       type: string
       enum:
@@ -17605,6 +18162,86 @@ components:
             - $ref: '#/components/schemas/AwsSsmPatch'
             - description: Information about the status of a patch.
       description: Provides information about the state of a patch on an instance based on the patch baseline that was used to patch the instance.
+    AwsStepFunctionStateMachineLoggingConfigurationDetails:
+      type: object
+      properties:
+        Destinations:
+          allOf:
+            - $ref: '#/components/schemas/AwsStepFunctionStateMachineLoggingConfigurationDestinationsList'
+            - description: ' An array of objects that describes where your execution history events will be logged. '
+        IncludeExecutionData:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Determines whether execution data is included in your log. When set to false, data is excluded. '
+        Level:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' Defines which category of execution history events are logged. '
+      description: ' The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options. '
+    AwsStepFunctionStateMachineTracingConfigurationDetails:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' When set to true, X-Ray tracing is enabled. '
+      description: ' Specifies whether X-Ray tracing is enabled. '
+    AwsStepFunctionStateMachineDetails:
+      type: object
+      properties:
+        Label:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' A user-defined or an auto-generated string that identifies a <code>Map</code> state. This parameter is present only if the <code>stateMachineArn</code> specified in input is a qualified state machine ARN. '
+        LoggingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsStepFunctionStateMachineLoggingConfigurationDetails'
+            - description: ' Used to set CloudWatch Logs options. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The name of the state machine. '
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. '
+        StateMachineArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The ARN that identifies the state machine. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The current status of the state machine. '
+        TracingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AwsStepFunctionStateMachineTracingConfigurationDetails'
+            - description: ' Specifies whether X-Ray tracing is enabled. '
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The type of the state machine (STANDARD or EXPRESS). '
+      description: ' Provides details about an Step Functions state machine, which is a workflow consisting of a series of event- driven steps. '
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails:
+      type: object
+      properties:
+        LogGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The ARN (ends with <code>:*</code>) of the CloudWatch Logs log group to which you want your logs emitted.'
+      description: ' An object describing a CloudWatch log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html"> Amazon Web Services::Logs::LogGroup</a> in the <i>CloudFormation User Guide</i>. '
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails:
+      type: object
+      properties:
+        CloudWatchLogsLogGroup:
+          allOf:
+            - $ref: '#/components/schemas/AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails'
+            - description: ' An object describing a CloudWatch Logs log group. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html"> Amazon Web Services::Logs::LogGroup</a> in the <i>CloudFormation User Guide</i>. '
+      description: ' An array of objects that describes where your execution history events will be logged. '
+    AwsStepFunctionStateMachineLoggingConfigurationDestinationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails'
     AwsWafRateBasedRuleMatchPredicateList:
       type: array
       items:
@@ -19104,7 +19741,7 @@ components:
         UpdateTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: ' An ISO 8601-formatted timestamp that indicates when the security findings provider last updated the finding record. A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. '
+            - description: '<p> An ISO 8601-formatted timestamp that indicates when Security Hub processed the updated finding record.</p> <p>A correctly formatted example is <code>2020-05-21T20:16:34.724Z</code>. The value cannot contain spaces, and date and time should be separated by <code>T</code>. For more information, see <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339 section 5.6, Internet Date/Time Format</a>. </p>'
         FindingCreated:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -20201,6 +20838,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsEc2RouteTableDetails'
             - description: ' Provides details about a route table. A route table contains a set of rules, called routes, that determine where to direct network traffic from your subnet or gateway. '
+        AwsAmazonMqBroker:
+          allOf:
+            - $ref: '#/components/schemas/AwsAmazonMqBrokerDetails'
+            - description: ' Provides details about AppSync message broker. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols. '
+        AwsAppSyncGraphQlApi:
+          allOf:
+            - $ref: '#/components/schemas/AwsAppSyncGraphQlApiDetails'
+            - description: ' Provides details about an AppSync Graph QL API, which lets you query multiple databases, microservices, and APIs from a single GraphQL endpoint. '
+        AwsEventSchemasRegistry:
+          allOf:
+            - $ref: '#/components/schemas/AwsEventSchemasRegistryDetails'
+            - description: ' A schema defines the structure of events that are sent to Amazon EventBridge. Schema registries are containers for schemas. They collect and organize schemas so that your schemas are in logical groups. '
+        AwsGuardDutyDetector:
+          allOf:
+            - $ref: '#/components/schemas/AwsGuardDutyDetectorDetails'
+            - description: ' Provides details about an Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector is required for GuardDuty to become operational. '
+        AwsStepFunctionStateMachine:
+          allOf:
+            - $ref: '#/components/schemas/AwsStepFunctionStateMachineDetails'
+            - description: ' Provides details about an Step Functions state machine, which is a workflow consisting of a series of event-driven steps. '
       description: '<p>Additional details about a resource related to a finding.</p> <p>To provide the details, use the object that corresponds to the resource type. For example, if the resource type is <code>AwsEc2Instance</code>, then you use the <code>AwsEc2Instance</code> object to provide the details.</p> <p>If the type-specific object does not contain all of the fields you want to populate, then you use the <code>Other</code> object to populate those additional fields.</p> <p>You also use the <code>Other</code> object to populate the details when the selected type does not have a corresponding object.</p>'
     Resource:
       type: object

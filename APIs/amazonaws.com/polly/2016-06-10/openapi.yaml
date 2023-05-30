@@ -331,6 +331,7 @@ paths:
               - yue-CN
               - ar-AE
               - fi-FI
+              - en-IE
         - name: IncludeAdditionalLanguageCodes
           in: query
           required: false
@@ -638,6 +639,7 @@ paths:
                     - yue-CN
                     - ar-AE
                     - fi-FI
+                    - en-IE
                 LexiconNames:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
                   type: array
@@ -774,6 +776,8 @@ paths:
                     - Stephen
                     - Kazuha
                     - Tomoko
+                    - Niamh
+                    - Sofie
   /v1/speech:
     post:
       operationId: SynthesizeSpeech
@@ -897,6 +901,7 @@ paths:
                     - yue-CN
                     - ar-AE
                     - fi-FI
+                    - en-IE
                 LexiconNames:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.'
                   type: array
@@ -1021,6 +1026,8 @@ paths:
                     - Stephen
                     - Kazuha
                     - Tomoko
+                    - Niamh
+                    - Sofie
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1284,6 +1291,7 @@ components:
         - yue-CN
         - ar-AE
         - fi-FI
+        - en-IE
     IncludeAdditionalLanguageCodes:
       type: boolean
     NextToken:
@@ -1619,6 +1627,8 @@ components:
         - Stephen
         - Kazuha
         - Tomoko
+        - Niamh
+        - Sofie
     StartSpeechSynthesisTaskInput:
       type: object
       required:
