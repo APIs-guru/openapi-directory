@@ -66,7 +66,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: PaymentService
-  x-timestamp: 2023-05-30T15:27:08Z
+  x-timestamp: 2023-05-30T22:26:22Z
 tags:
   - name: Modifications
   - name: General
@@ -3034,7 +3034,7 @@ components:
           type: string
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         reference:
           description: |-
@@ -3262,7 +3262,7 @@ components:
           type: string
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         reference:
           description: |-
@@ -3329,7 +3329,7 @@ components:
           type: string
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         reference:
           description: |-
@@ -3405,7 +3405,7 @@ components:
           type: string
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         reference:
           description: |-
@@ -3552,7 +3552,7 @@ components:
           type: string
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         reference:
           description: |-
@@ -4148,7 +4148,7 @@ components:
           type: string
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         recurring:
           $ref: "#/components/schemas/Recurring"
@@ -4963,6 +4963,10 @@ components:
     PlatformChargebackLogic:
       properties:
         behavior:
+          description: |-
+            The method of handling the chargeback.
+
+            Possible values: **deductFromLiableAccount**, **deductFromOneBalanceAccount**, **deductAccordingToSplitRatio**.
           enum:
             - deductAccordingToSplitRatio
             - deductFromLiableAccount
@@ -4970,9 +4974,14 @@ components:
           type: string
           x-addedInVersion: "68"
         costAllocationAccount:
+          description: The unique identifier of the balance account to which the chargeback fees are booked. By default, the chargeback fees are booked to your liable balance account.
           type: string
           x-addedInVersion: "68"
         targetAccount:
+          description: |-
+            The unique identifier of the balance account against which the disputed amount is booked.
+
+            Required if `behavior` is **deductFromOneBalanceAccount**.
           type: string
           x-addedInVersion: "68"
       type: object
@@ -5062,7 +5071,7 @@ components:
           type: string
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         reference:
           description: |-
@@ -5827,7 +5836,7 @@ components:
           x-addedInVersion: "30"
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         reference:
           description: |-
@@ -6417,7 +6426,7 @@ components:
           type: string
         platformChargebackLogic:
           $ref: "#/components/schemas/PlatformChargebackLogic"
-          description: Defines the behavior to be applied in case of a chargeback.
+          description: Defines how to book chargebacks when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#chargebacks-and-disputes).
           x-addedInVersion: "68"
         reference:
           description: |-

@@ -241,6 +241,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:validateAttributeExpression":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Validates a given CEL expression conforms to IAP restrictions.
+      operationId: iap.validateAttributeExpression
+      parameters:
+        - description: Required. The resource name of the IAP protected resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. User input string expression. Should be of the form 'attributes.saml_attributes.filter(attribute, attribute.name in ['{attribute_name}', '{attribute_name}'])'
+          in: query
+          name: expression
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateIapAttributeExpressionResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - v1
   "/v1/{parent}/brands":
     get:
       description: Lists the existing brands for the project.
@@ -1043,6 +1085,10 @@ components:
         name:
           description: Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the project and contain only lower case letters (a-z) and dashes (-).
           type: string
+      type: object
+    ValidateIapAttributeExpressionResponse:
+      description: API requires a return message, but currently all response strings will fit in the status and public message. In the future, this response can hold AST validation info.
+      properties: {}
       type: object
   securitySchemes:
     Oauth2:

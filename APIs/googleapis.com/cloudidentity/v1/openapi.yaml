@@ -1427,6 +1427,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/SearchDirectGroupsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:

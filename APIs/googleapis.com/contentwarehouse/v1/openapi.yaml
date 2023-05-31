@@ -2527,6 +2527,7 @@ components:
             - PMW_TI_AFFINITY
             - DRIVE_SEARCH_FILTER_PERSON_ONLY
             - ACCESSIBILITY_TRACKER_AFFINITY
+            - PLX_DATASOURCE_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -3488,7 +3489,6 @@ components:
               - NEWS_360
               - DUO
               - MEET
-              - MESSAGES
             type: string
           type: array
         clientData:
@@ -3537,7 +3537,6 @@ components:
             - NEWS_360
             - DUO
             - MEET
-            - MESSAGES
           type: string
         byteValue:
           format: byte
@@ -3583,7 +3582,6 @@ components:
             - NEWS_360
             - DUO
             - MEET
-            - MESSAGES
           type: string
         metadata:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
@@ -5780,6 +5778,9 @@ components:
             - DEFAULT_DISABLED
             - ENABLED_WITH_SMART_DICTATION
           type: string
+        sendMessageSuppressed:
+          description: If true, disable send message AppControl/SD flow. This is needed to suppress the feature for specific device. If we decide to turn down this feature for all devices, then this field will become obsolete and should be removed. See context in b/275727627.
+          type: boolean
       type: object
     AssistantApiAppIntegrationsSettings:
       description: Contains the app privacy bits used for App Integrations implicit request. (go/app-privacy-settings-for-implicit-requests)
@@ -7274,13 +7275,17 @@ components:
           type: string
       type: object
     AssistantApiCoreTypesMessageNotificationNotificationEntry:
-      description: "Structure of each notification in the MessageNotification Bundle. Attribute sender_name could be different in case of group messages. Next Id: 6"
+      description: "Structure of each notification in the MessageNotification Bundle. Attribute sender_name could be different in case of group messages. Next Id: 8"
       properties:
+        charCount:
+          description: Count of characters in the message body in the notification.
+          format: int32
+          type: integer
         dataUri:
           description: Uri for the attachment (image, audio, video etc.).
           type: string
         messageBody:
-          description: Content of the message body in the notification.
+          description: Note that this is not present in production traffic. Content of the message body in the notification.
           type: string
         mimeType:
           description: Mime type of the data_uri. e.g. 'audio/wav', 'video/mp4', 'image/png'.
@@ -7292,6 +7297,10 @@ components:
         sender:
           $ref: "#/components/schemas/AssistantApiCoreTypesMessageNotificationPerson"
           description: Sender of the message notification.
+        wordCount:
+          description: Count of words in the message body in the notification.
+          format: int32
+          type: integer
       type: object
     AssistantApiCoreTypesMessageNotificationPerson:
       description: "Mirrors part of https://developer.android.com/reference/android/app/Person Next Id: 4"
@@ -8014,10 +8023,10 @@ components:
           type: boolean
       type: object
     AssistantApiLoggingOnlyData:
-      description: "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 15"
+      description: "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 16"
       properties:
         accountIndex:
-          description: The index of the account on the device. Useful when there are multiple accounts on a device such as distinguishing primary user data from secondary users. There is no guarantee that this is a stable number but is relatively stable in practice.
+          description: The index of the account on the device. Useful when there are multiple accounts on a device. There is no guarantee that this is a stable number but is relatively stable in practice.
           format: int32
           type: integer
         acpVersion:
@@ -8065,6 +8074,9 @@ components:
         initialAppVersion:
           description: A string recording the app version that is initially used to created this settings entry.
           type: string
+        isPrimaryUser:
+          description: "Boolean field to indicate whether a certain user is the primary user of a device or not. This is useful for distinguishing the user0 from other users given user0 might have certain privileges (Eg: Hubmode on Tangor)"
+          type: boolean
         mdnsDisplayName:
           description: default display name of device over mdns. This is specified at the factory, not specified by the user.
           type: string
@@ -8835,6 +8847,9 @@ components:
         optInStatus:
           $ref: "#/components/schemas/AssistantApiSettingsDeviceLogsOptIn"
           description: Specifies if device logs and crashes can be captured during SendFeedback
+        paymentsEnabled:
+          description: "DEPRECATED: Use DeviceCapabilities.OutputRestrictions.personal_data instead. Whether the user has enabled payments for this device."
+          type: boolean
         personalizationMetadata:
           $ref: "#/components/schemas/AssistantApiSettingsPersonalizationMetadata"
           description: Metadata about how personalization settings were configured.
@@ -8973,7 +8988,7 @@ components:
           description: Boolean indicating if user has explicitly marked this device to be linked or not. This bit is used in case where unexpected errors occur and we have to check for account/device status and mark the device linked after verification.
           type: boolean
         state:
-          description: The call state of the device (i.e. whether an Duo call account has been setup on the device).
+          description: The call state of the device (i.e. whether a Duo call account has been setup on the device).
           enum:
             - UNKNOWN_LINK_STATE
             - NOT_LINKED
@@ -9837,7 +9852,7 @@ components:
           type: integer
       type: object
     AssistantApiSupportedFeatures:
-      description: "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 64"
+      description: "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 66"
       properties:
         aaeNotificationSourceSupported:
           description: Whether the client supports the alternative message notification sources on AAE, in which case notification-related operations can access it.
@@ -9940,6 +9955,13 @@ components:
         liveCardsSupported:
           description: Whether the surface supports LiveCards. In cases where the user intent flow cannot be completed within the Assistant, LiveCards are used to take the user to an external app or website. These cards will be pushed to the Google Home app via the PushMessage ClientOp.
           type: boolean
+        lottieAnimationSupport:
+          description: Whether the client supports the Lottie animation library for the broadcast feature.
+          enum:
+            - LOTTIE_ANIMATION_UNKNOWN
+            - LOTTIE_ANIMATION_NOT_SUPPORTED
+            - LOTTIE_ANIMATION_SUPPORTED
+          type: string
         mapsDialogsSupported:
           description: Whether the client supports Assistant dialogs within Maps. This field will be set only when the Maps on the surface supports Assistant dialogs embedded within Maps. go/gsa-gmm.
           type: boolean
@@ -9975,6 +9997,9 @@ components:
           type: boolean
         privacyAwareLockscreenSupported:
           description: Whether the client supports the privacy-aware lockscreen protocol (go/assistant-lockscreen-spec).
+          type: boolean
+        readMessagesTtsTaperingSupported:
+          description: Whether the client supports tts tapering for the read messages flow. If set to true the tapered tts variant would be used during the read messages flow.
           type: boolean
         remoteCloudCastingEnabled:
           description: "Whether the client has remote casting enabled. For ex: we want to disable this for clients like Auto."
@@ -10416,6 +10441,9 @@ components:
           type: integer
         restrictAlarmsToNextDay:
           description: Whether the client restricts alarms to ring within the next 24 hours.
+          type: boolean
+        supportsGenericMutations:
+          description: Whether the client supports mutation of any alarm attribute such as time_pattern, recurrence_pattern, etc through the MUTATE action. If this is false, MUTATE may only be used for changing the alarm's status (to e.g. disable or dismiss the alarm).
           type: boolean
         supportsStopAction:
           description: Whether the client supports the STOP alarm action. If this is false, stop actions will be represented by the MUTATE action, and the device may need to check alarm state to determine if there's a firing alarm that needs to be dismissed.
@@ -11080,7 +11108,7 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerAssistantInteractionFeatures"
       type: object
     AssistantGroundingRankerMediaGroundingProviderFeatures:
-      description: "Features to be passed from Media GP to HGR. Next ID: 14"
+      description: "Features to be passed from Media GP to HGR. Next ID: 15"
       properties:
         albumReleaseType:
           description: Release type for an album container.
@@ -11112,6 +11140,9 @@ components:
           type: boolean
         isSeedRadioRequest:
           description: True if the user requests seed radio.
+          type: boolean
+        isYoutubeMusicSeeking:
+          description: Indicates whether this is youtube content seeking music.
           type: boolean
         mediaContentType:
           description: MediaAquaAction::media_content_type from interpretation. It can be used for cross-content type ranking, for example, if a candidate's content type does not match this content type from interpretation, this candidate will be slightly demoted. Also, we might avoid fetching some signals when the content type is generic music, since some content types do not need ranking.
@@ -11224,11 +11255,6 @@ components:
         isInAppProvider:
           description: Indicates that fulfillment on this provider will happen within the provider app.
           type: boolean
-        providerClusterIdDeprecated:
-          description: This field is deprecated in favor of the integer field below.
-          items:
-            type: string
-          type: array
         providerClusterIds:
           description: Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.
           items:
@@ -11623,6 +11649,8 @@ components:
             - PHONE_TARGETING_PROMOTER
             - TRAITS_PROMOTER
             - DEVICE_TYPE_PROMOTER
+            - FEATURE_EXTRACTOR
+            - LABELER
           type: string
         isRemote:
           type: boolean
@@ -12016,6 +12044,8 @@ components:
             - PHONE_TARGETING_PROMOTER
             - TRAITS_PROMOTER
             - DEVICE_TYPE_PROMOTER
+            - FEATURE_EXTRACTOR
+            - LABELER
           type: string
       type: object
     AssistantLogsMediaCapabilities:
@@ -12309,7 +12339,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 52"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 53"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -12382,6 +12412,9 @@ components:
           type: boolean
         isPodcastIntent:
           description: Whether the intent is a podcast intent.
+          type: boolean
+        isTvmIntent:
+          description: Whether the intent is a media object tvm intent.
           type: boolean
         isVideoIntent:
           description: Whether the intent is a media object video intent.
@@ -12481,6 +12514,9 @@ components:
             - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED
             - RANKER_NAME_EXPERIMENTAL_PFR_SAGE_NEW_DOMAINS
             - RANKER_NAME_BUCKETED_PARSING_SCORE_FOR_SMARTHOME
+            - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED_V2
+            - RANKER_NAME_GROUNDING_RANKER_COMMS_EXP_CALIBRATED_V2
+            - RANKER_NAME_CONSOLIDATED_PFR_HGR_PODCAST
           type: string
         searchDispatch:
           description: The determination made by the SearchDispatchingConfig as to whether and how this interpretation should be dispatched to Search.
@@ -12498,6 +12534,9 @@ components:
           enum:
             - SUB_INTENT_TYPE_UNKNOWN
             - SUB_INTENT_TYPE_TV_FALLBACK_SEARCH_INTENT
+            - SUB_INTENT_TYPE_PODCAST
+            - SUB_INTENT_TYPE_MUSIC_INITIATION_INTENT
+            - SUB_INTENT_TYPE_PLAY_RADIO_INTENT
           type: string
         topHypothesisConfidence:
           description: "Average of per-word confidence for top speech recognition hypothesis. The value is from RecognizerHypothesisLog: http://google3/logs/proto/speech/service/recognizer_log.proto?l=848&rcl=281400256"
@@ -18570,6 +18609,7 @@ components:
             - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
             - PROVIDER_GOOGLE_GT_LANE_AUTOMATION
             - PROVIDER_GOOGLE_GEO_NG_LOCAL
+            - PROVIDER_GOOGLE_MAPFACTS_CLEANUP
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -19999,7 +20039,7 @@ components:
             - TRANSIT_LINE_VARIANT_LINE_CONCEPT
             - TRANSIT_LINE_VARIANT_STOP
             - TRANSIT_LINE_VEHICLE_TYPE
-            - TRANSIT_STATION_AGENCY
+            - TRANSIT_STATION_AGENCY_ASSOCIATION
             - VERTICAL_ORDERING_LEVEL
             - WATER_REMOVED_POLYGON
             - DEPRECATED_DO_NOT_USE_EMAIL_ADDRESS
@@ -20046,6 +20086,7 @@ components:
             - DEPRECATED_DO_NOT_USE_WORKAREA
             - DEPRECATED_DO_NOT_USE_INFERRED_GEOMETRY_INCLUDES_GEOMETRY_OF
             - DEPRECATED_DO_NOT_USE_INFERRED_GEOMETRY_EXCLUDES_GEOMETRY_OF
+            - DEPRECATED_DO_NOT_USE_TRANSIT_STATION_AGENCY
           type: string
         kgPropertyId:
           description: Required when field_type == KNOWLEDGE_GRAPH_PROPERTY.
@@ -21243,6 +21284,7 @@ components:
             - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
             - PROVIDER_GOOGLE_GT_LANE_AUTOMATION
             - PROVIDER_GOOGLE_GEO_NG_LOCAL
+            - PROVIDER_GOOGLE_MAPFACTS_CLEANUP
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -22414,6 +22456,7 @@ components:
             - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
             - PROVIDER_GOOGLE_GT_LANE_AUTOMATION
             - PROVIDER_GOOGLE_GEO_NG_LOCAL
+            - PROVIDER_GOOGLE_MAPFACTS_CLEANUP
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -23061,7 +23104,7 @@ components:
           $ref: "#/components/schemas/GeostoreOpeningHoursProto"
           description: Hours in which the parking facility is open; that is, permits both arrivals and departures of the facility. Should only be set on compounds (i.e. parking lots or garages); roads are considered to always be “open,” though parking at certain times may be prohibited via restrictions. If unset on a compound, this suggests we don’t know the opening hours, or they are the same as the hours of the entity for which this feature offers parking facilities.
         parkingAvailable:
-          description: Indicates whether long-term parking is available at the feature; if true, long-term parking is available at the feature and parking allowances may be present on this feature, or parking_provider_feature may indicate defered parking feature(s). If false, this is an explicit statement that there is no long-term parking associated with this feature. If unset, we don't know whether there is long-term parking associated with this feature. If false or unset, only additional restrictions or short-term allowances will be populated.
+          description: Indicates whether long-term parking is available at the feature; if true, long-term parking is available at the feature and parking allowances may be present on this feature, or parking_provider_feature may indicate deferred parking feature(s). If false, this is an explicit statement that there is no long-term parking associated with this feature. If unset, we don't know whether there is long-term parking associated with this feature. If false or unset, only additional restrictions or short-term allowances will be populated.
           type: boolean
         parkingProviderFeature:
           description: If empty, indicates that the feature containing this ParkingProto provides parking facilities, which are described by this proto. If nonempty, indicates that the feature with this ParkingProto does not contain parking facilities itself, but visitors of this feature may use the parking available to the referent feature(s). The referent feature(s) may themselves contain parking facilities or defer to other features. A ParkingProto may defer parking details to another feature, but still include its own data. This suggests that a visitor of the referrer feature is eligible for different rates or discounts. The data in these fields applies transitively, and any fields in a referrer may be applied to the referent (for a visitor of the referrer).
@@ -23768,6 +23811,7 @@ components:
             - PROVIDER_GOOGLE_LOCAL_SERVICES_ADS
             - PROVIDER_GOOGLE_GT_LANE_AUTOMATION
             - PROVIDER_GOOGLE_GEO_NG_LOCAL
+            - PROVIDER_GOOGLE_MAPFACTS_CLEANUP
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -24850,7 +24894,7 @@ components:
           enum:
             - BICYCLE_FACILITY_SEPARATE_TRAIL
             - BICYCLE_FACILITY_PEDESTRIAN_PATH
-            - BICYCLE_FACILITY_WIDE_PEDESTRIAN_PATH
+            - BICYCLE_FACILITY_BIKE_FRIENDLY_PEDESTRIAN_PATH
             - BICYCLE_FACILITY_SHARED_ROAD
             - BICYCLE_FACILITY_BIKE_LANE
             - BICYCLE_FACILITY_BIKE_LANE_WITH_PEDESTRIAN_PATH
@@ -25631,7 +25675,7 @@ components:
       description: A collection of information that applies to a toll cluster.
       properties:
         intersection:
-          description: The list of TYPE_INTERSECTION features that are toll points and form this toll cluster. A toll cluser can consist of either a single or a group of intersection points called toll points at the end of various road segments in MapFacts that represent one or more lanes passing through a toll fixture that all go to the same routing destination. This relationship is reciprocal, as a toll point intersection also stores a reference to the toll cluster it belongs to. A toll cluster must have reference to one or more toll points i.e. toll_cluster.intersection should always be populated.
+          description: The list of TYPE_INTERSECTION features that are toll points and form this toll cluster. A toll cluster can consist of either a single or a group of intersection points called toll points at the end of various road segments in MapFacts that represent one or more lanes passing through a toll fixture that all go to the same routing destination. This relationship is reciprocal, as a toll point intersection also stores a reference to the toll cluster it belongs to. A toll cluster must have reference to one or more toll points i.e. toll_cluster.intersection should always be populated.
           items:
             $ref: "#/components/schemas/GeostoreFeatureIdProto"
           type: array
@@ -25710,11 +25754,21 @@ components:
     GeostoreTransitStationProto:
       description: Encapsulates information related to an individual transit station.
       properties:
-        agencies:
-          description: Transit agencies which service this transit station. A station can be serviced by one or more transit agencies. See go/transit-agency-relation-migration for more information.
+        agencyAssociations:
+          description: All the transit agencies which service this station. A station can be serviced by multiple stations. There may only be one agency association per transit agency. See go/transit-agency-relation-migration for more details.
           items:
-            $ref: "#/components/schemas/GeostoreFeatureIdProto"
+            $ref: "#/components/schemas/GeostoreTransitStationProtoTransitAgencyAssociationProto"
           type: array
+      type: object
+    GeostoreTransitStationProtoTransitAgencyAssociationProto:
+      description: The association between this station and the agency which services this station.
+      properties:
+        agency:
+          $ref: "#/components/schemas/GeostoreFeatureIdProto"
+          description: The transit agency which services this station.
+        stationCode:
+          description: A station code uniquely identifies a transit station within the transit agency's network.
+          type: string
       type: object
     GeostoreTrustSignalsProto:
       properties:
@@ -27703,6 +27757,11 @@ components:
           items:
             type: string
           type: array
+        documentNameFilter:
+          description: "Search the documents in the list. Format: projects/{project_number}/locations/{location}/documents/{document_id}."
+          items:
+            type: string
+          type: array
         documentSchemaNames:
           description: This filter specifies the exact document schema Document.document_schema_name of the documents to search against. If a value isn't specified, documents within the search results are associated with any schema. If multiple values are specified, documents within the search results may be associated with any of the specified schemas. At most 20 document schema names are allowed.
           items:
@@ -28536,6 +28595,9 @@ components:
           description: Additional information for the API invocation, such as the request tracking id.
         nextPageToken:
           description: The token that specifies the starting position of the next page of results. This field is empty if there are no more results.
+          type: string
+        questionAnswer:
+          description: Experimental. Question answer from the query against the document.
           type: string
         totalSize:
           description: 'The total number of matched documents which is available only if the client set SearchDocumentsRequest.require_total_size to `true` or set SearchDocumentsRequest.total_result_size to `ESTIMATED_SIZE` or `ACTUAL_SIZE`. Otherwise, the value will be `-1`. Typically a UI would handle this condition by displaying "of many", for example: "Displaying 10 of many".'
@@ -29716,7 +29778,7 @@ components:
       description: Represents the information about user's working hours during one day. Note that a period on Monday from 18:00 - 00:00 is represented as a triplet (1, 1080, 1440).
       properties:
         dayOfWeek:
-          description: Day of week, 1 for Monday, ..., 7 for Sunday.
+          description: Day of week, 0 for Sunday, 1 for Monday, ...
           format: int32
           type: integer
         periodEndMinutes:
@@ -30101,7 +30163,7 @@ components:
           type: string
       type: object
     GoogleTypeColor:
-      description: "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to/from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't carry information about the absolute color space that should be used to interpret the RGB value (e.g. sRGB, Adobe RGB, DCI-P3, BT.2020, etc.). By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most 1e-5. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ..."
+      description: "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to and from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page does not have information about the absolute color space that should be used to interpret the RGB value—for example, sRGB, Adobe RGB, DCI-P3, and BT.2020. By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most `1e-5`. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ..."
       properties:
         alpha:
           description: "The fraction of this color that should be applied to the pixel. That is, the final pixel color is defined by the equation: `pixel color = alpha * (this color) + (1.0 - alpha) * (background color)` This means that a value of 1.0 corresponds to a solid color, whereas a value of 0.0 corresponds to a completely transparent color. This uses a wrapper message rather than a simple float scalar so that it is possible to distinguish between a default value and the value being unset. If omitted, this color object is rendered as a solid color (as if the alpha value had been explicitly given a value of 1.0)."
@@ -34931,7 +34993,13 @@ components:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         creator:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        discoverSource:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
           description: LINT.ThenChange(//depot/google3/indexing/ames/spanner/schema/web-version.proto)
+        discussion:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        documentIntent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         instantNavboost:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         localyp:
@@ -36875,6 +36943,14 @@ components:
             - GIBBERISH_DECLINED
             - GIBBERISH_DETECTION_FAILED
           type: string
+        numGibberishSegments:
+          description: The number of the above segments that were classified as gibberish.
+          format: int32
+          type: integer
+        numSegmentsClassified:
+          description: The number of ASR segments that were sent for classification.
+          format: int32
+          type: integer
       type: object
     KaltixPerDocData:
       properties:
@@ -53821,6 +53897,7 @@ components:
               - INFORMATION_SOURCE_GOVERNMENT
               - INFORMATION_SOURCE_UGC
               - INFORMATION_SOURCE_RESEARCH_INSTITUTE
+              - QNA
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -53841,7 +53918,7 @@ components:
               - RESERVED_FOR_NEW_ENUM_152
               - RESERVED_FOR_NEW_ENUM_153
               - RESERVED_FOR_NEW_ENUM_154
-              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98
+              - RESERVED_FOR_NEW_ENUM_155
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101
@@ -53992,6 +54069,7 @@ components:
               - INFORMATION_SOURCE_GOVERNMENT
               - INFORMATION_SOURCE_UGC
               - INFORMATION_SOURCE_RESEARCH_INSTITUTE
+              - QNA
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -54012,7 +54090,7 @@ components:
               - RESERVED_FOR_NEW_ENUM_152
               - RESERVED_FOR_NEW_ENUM_153
               - RESERVED_FOR_NEW_ENUM_154
-              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98
+              - RESERVED_FOR_NEW_ENUM_155
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101
@@ -54166,6 +54244,7 @@ components:
               - INFORMATION_SOURCE_GOVERNMENT
               - INFORMATION_SOURCE_UGC
               - INFORMATION_SOURCE_RESEARCH_INSTITUTE
+              - QNA
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -54186,7 +54265,7 @@ components:
               - RESERVED_FOR_NEW_ENUM_152
               - RESERVED_FOR_NEW_ENUM_153
               - RESERVED_FOR_NEW_ENUM_154
-              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_98
+              - RESERVED_FOR_NEW_ENUM_155
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101
@@ -55880,6 +55959,9 @@ components:
           description: Normalized riskiness score for Organic destinations. It's in range [1,1000] with 1 being the worst score and 1000 being the best.
           format: int32
           type: integer
+        nonDisplayableStaleAvailability:
+          $ref: "#/components/schemas/ShoppingWebentityShoppingAnnotationOfferAvailabilityInfo"
+          description: This is experimental, not filled in yet and not intended to be used. Please contact buyable-corpus@ before considering using this field.
         offerDocid:
           format: uint64
           type: string
@@ -56299,6 +56381,7 @@ components:
             - LSU_HIGH_PRECISION_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION
             - LSU_HIGH_PRECISION_ANNOTATION_WITH_PATTERN_BYLINE_TAG
             - LSU_HIGH_PRECISION_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION
+            - LSU_HIGH_PRECISION_CREATION_DATE_OF_UGC_PAGE
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT
@@ -56342,6 +56425,7 @@ components:
             - LSU_HIGH_PRECISION_PUBLICATION_MARKUP_SUPPORTED_BY_ANNOTATION
             - LSU_HIGH_PRECISION_ANNOTATION_WITH_PATTERN_BYLINE_TAG
             - LSU_HIGH_PRECISION_RELIABLE_CONTENT_AGE_SUPPORTED_BY_ANNOTATION
+            - LSU_HIGH_PRECISION_CREATION_DATE_OF_UGC_PAGE
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_LOW_SUPPORT
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_MEDIUM_SUPPORT
             - LSU_MEDIUM_PRECISION_FRESH_SALIENT_ANNOTATION_HIGH_SUPPORT
@@ -61426,6 +61510,9 @@ components:
           description: Neighbor data point. This field is set based on the data_id_str field in the GFV of the data point in the database (or SSTable key if data_id_str is not present), and thus can be arbitrary data, e.g. docid, URL, query string.
           format: byte
           type: string
+        gfv:
+          $ref: "#/components/schemas/ResearchScamGenericFeatureVector"
+          description: The field isn't tpopulated by default, but when enabled (eg, in the ground-truth pipeline), this field provides the original database GFV corresponding to this result.
         metadata:
           description: Metadata about the neighbor. This is returned under some configurations as a serialized proto. The specific proto depends on which metadata is configured to be returned.
           format: byte
@@ -64263,6 +64350,19 @@ components:
             - INFERRED_IMAGE_TYPE_ANCHOR_IMAGE
           type: string
       type: object
+    ShoppingWebentityShoppingAnnotationOfferAvailabilityInfo:
+      properties:
+        availability:
+          enum:
+            - AVAILABILITY_UNKNOWN
+            - AVAILABILITY_IN_STOCK
+            - AVAILABILITY_LIMITED
+            - AVAILABILITY_OUT_OF_STOCK
+            - AVAILABILITY_BACKORDER
+            - AVAILABILITY_PREORDER
+            - AVAILABILITY_ON_DISPLAY_TO_ORDER
+          type: string
+      type: object
     ShoppingWebentityShoppingAnnotationProductRating:
       description: "Information about a rating provided for a product. This can represent an aggregated rating if count is set. Next Id: 7"
       properties:
@@ -65157,6 +65257,7 @@ components:
           description: Time of day that notification is sent to user. This is local to the user's device.
       type: object
     SocialGraphApiProtoPartialNameOptions:
+      description: For general information about Limited Profiles, see go/limited-profiles-api. LINT.IfChange
       properties:
         language:
           description: IETF BCP-47 language code that should be used for localizing the name computation (go/bcp-47). If not provided, we'll use the name origin detector to infer it. If unable to detect, "en" will be assumed.
@@ -66389,6 +66490,7 @@ components:
             - ISOLATION_S3_CREATOR_PRESENCE
             - ISOLATION_S12Y_RECIPE_INGREDIENT_INSIGHTS
             - ISOLATION_SCOUTS_SOCIETAL_CONTEXT_ENTITIES
+            - ISOLATION_ASTROLOGY_HOROSCOPE
             - UMP_TESTING_ONLY
             - INTENTJOINS_NB_SIGNALS
             - ADS_INTEGRITY_ANNOTATION
@@ -67007,9 +67109,7 @@ components:
             type: string
           type: array
         greenFaresInfo:
-          items:
-            $ref: "#/components/schemas/TravelFlightsAirlineConfigGreenFaresInfo"
-          type: array
+          $ref: "#/components/schemas/TravelFlightsAirlineConfigGreenFaresInfo"
         iataCode:
           description: "Note that some iata_codes are reused (`dup_flag` field). For details, including how to resolve collisions for airlines shown in Google Flights, see: go/controlled-duplicate go/flights-data/airlines#resolving-iata-code-collisions cs/go/controlled-duplicate U2 - some have no IATA code"
           type: string
@@ -68701,12 +68801,19 @@ components:
               - DSA_P13N_OPTED_IN_AT_EVENT_LEVEL
               - DSA_P13N_OPTED_OUT_AT_EVENT_LEVEL
               - USER_P13N_SETTING_UNSPECIFIED_AT_EVENT_LEVEL
+              - BOOKS_USER_P13N_SETTING_UNSPECIFIED_AT_EVENT_LEVEL
               - USER_P13N_SETTING_ON_AT_EVENT_LEVEL
+              - BOOKS_USER_P13N_SETTING_ON_AT_EVENT_LEVEL
               - USER_P13N_SETTING_OFF_AT_EVENT_LEVEL
+              - BOOKS_USER_P13N_SETTING_OFF_AT_EVENT_LEVEL
               - BATTLESTAR_GAME_IN_MDP_EVENT_LEVEL
               - REVIEW_HIGHLIGHTS_TRIGGERING_EVENT_LEVEL
               - TRUSTED_VERTICAL_VPN_INTENT_EVENT_LEVEL
               - TRUSTED_VERTICAL_LOAN_INTENT_EVENT_LEVEL
+              - SERP_YOUTUBE_VIDEO_CLUSTER_POPULATED_EVENT_LEVEL
+              - LOWQ_APPS_DEMOTION_EVENT_LEVEL
+              - QUERY_TYPE_MDP_EVENT_LEVEL
+              - QUERY_TYPE_NON_MDP_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -69279,8 +69386,11 @@ components:
               - LANGUAGE_SWITCHER_SERVED_SESSION_LEVEL
               - HAS_INSUFFICIENT_STORED_VALUE_BALANCE_BEFORE_RENEWAL_SESSION_LEVEL
               - USER_P13N_SETTING_UNSPECIFIED_AT_SESSION_LEVEL
+              - BOOKS_USER_P13N_SETTING_UNSPECIFIED_AT_SESSION_LEVEL
               - USER_P13N_SETTING_ON_AT_SESSION_LEVEL
+              - BOOKS_USER_P13N_SETTING_ON_AT_SESSION_LEVEL
               - USER_P13N_SETTING_OFF_AT_SESSION_LEVEL
+              - BOOKS_USER_P13N_SETTING_OFF_AT_SESSION_LEVEL
               - BATTLESTAR_GAME_IN_MDP_SESSION_LEVEL
               - REVIEW_HIGHLIGHTS_SESSION_LEVEL
               - BOOKS_NOTIFICATION_RECEIVED_SESSION_LEVEL
@@ -69289,6 +69399,13 @@ components:
               - SUBS_OFFER_ON_BUYFLOW_ELIGIBLE_AT_SESSION_LEVEL
               - TRUSTED_VERTICAL_VPN_INTENT_SESSION_LEVEL
               - TRUSTED_VERTICAL_LOAN_INTENT_SESSION_LEVEL
+              - FOP_PARTNER_PROMOTION_SESSION_LEVEL
+              - SERP_YOUTUBE_VIDEO_CLUSTER_POPULATED_SESSION_LEVEL
+              - LOWQ_APPS_DEMOTION_SESSION_LEVEL
+              - PLANOGRAM_MERCH_TW_DYNASTY_EXTRA_FEATURING
+              - AMPLIFY_FORM_OF_PAYMENT_ELIGIBLE_SESSION_LEVEL
+              - QUERY_TYPE_MDP_SESSION_LEVEL
+              - QUERY_TYPE_NON_MDP_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -69401,6 +69518,7 @@ components:
               - PLAY_PASS_PARENT_FOCUSED_SPLASH_PAGE_USER_LEVEL
               - PLAY_PASS_SPLASH_PAGE_FOR_UNICORN_USER_LEVEL
               - IN_CART_EXCHANGE_OPTIONS_ELIGIBLE_USER_LEVEL
+              - GE_STAMP_CARD_INDIVIDUALIZATION_COUNTERFACTUAL
               - GE_USER_BUYER_STATE_UNKNOWN
               - GE_USER_BUYER_STATE_NEVER
               - GE_USER_BUYER_STATE_NEW
@@ -69538,6 +69656,7 @@ components:
               - PURCHASE_READINESS_ADD_FOP_USER_LEVEL
               - PURCHASE_READINESS_ADD_AUTH_USER_LEVEL
               - PURCHASE_READINESS_ADD_FOP_AUTH_USER_LEVEL
+              - SUBS_PAYMENT_DECLINE_USER_LEVEL
               - MERCH_CONTENT_EXP_ACTIVE_PUBG_USER_LEVEL
               - MERCH_CONTENT_EXP_ACTIVE_GENSHIN_USER_LEVEL
               - MERCH_CONTENT_EXP_ACTIVE_ROBLOX_USER_LEVEL
@@ -69549,13 +69668,18 @@ components:
               - DSA_P13N_OPTED_OUT_AT_USER_LEVEL
               - LIVEOPS_INSTALL_NOTIFICATION_USER_LEVEL
               - USER_P13N_SETTING_UNSPECIFIED_AT_USER_LEVEL
+              - BOOKS_USER_P13N_SETTING_UNSPECIFIED_AT_USER_LEVEL
               - USER_P13N_SETTING_ON_AT_USER_LEVEL
+              - BOOKS_USER_P13N_SETTING_ON_AT_USER_LEVEL
               - USER_P13N_SETTING_OFF_AT_USER_LEVEL
+              - BOOKS_USER_P13N_SETTING_OFF_AT_USER_LEVEL
               - LIVEOPS_CLUSTER_SERP_TRIGGERING_USER_LEVEL
               - BOOKS_NOTIFICATION_RECEIVED_USER_LEVEL
               - LIVEOPS_INSTALL_NOTIFICATION_CHURNED_USER_LEVEL
               - SUBS_OFFER_ON_BUYFLOW_AT_USER_LEVEL
               - SUBS_OFFER_ON_BUYFLOW_ELIGIBLE_AT_USER_LEVEL
+              - FOP_PARTNER_PROMOTION_USER_LEVEL
+              - BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -78400,7 +78524,7 @@ components:
           type: string
       type: object
     WWWResultInfoSubImageDocInfo:
-      description: "The following message contains info of sub image docs, it is populated in query_state and consumed in web image boost twiddler: (go/WebImageBoostTwiddler). NextID: 25"
+      description: "The following message contains info of sub image docs, it is populated in query_state and consumed in web image boost twiddler: (go/WebImageBoostTwiddler). NextID: 26"
       properties:
         additionalSafesearchSignals:
           items:
@@ -78478,6 +78602,10 @@ components:
           type: number
         estRelevance:
           description: Estimated Image Relevance ranging between 0.0 (Off-Topic) to 1.0 (Very Useful).
+          format: float
+          type: number
+        estSigmaU:
+          description: Estimated Sigma U calculated from U*.
           format: float
           type: number
         flowOutput:

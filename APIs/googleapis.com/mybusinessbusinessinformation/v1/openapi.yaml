@@ -355,80 +355,6 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{name}:associate":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Associates a location to a place ID. Any previous association is overwritten. This operation is only valid if the location is unverified. The association must be valid, that is, it appears in the list of `SearchGoogleLocations`.
-      operationId: mybusinessbusinessinformation.locations.associate
-      parameters:
-        - description: Required. The resource name of the location to associate.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AssociateLocationRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      tags:
-        - locations
-  "/v1/{name}:clearLocationAssociation":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Clears an association between a location and its place ID. This operation is only valid if the location is unverified.
-      operationId: mybusinessbusinessinformation.locations.clearLocationAssociation
-      parameters:
-        - description: Required. The resource name of the location to disassociate.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ClearLocationAssociationRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Empty"
-          description: Successful response
-      tags:
-        - locations
   "/v1/{name}:getGoogleUpdated":
     get:
       description: Gets the Google-updated version of the specified location.
@@ -640,13 +566,6 @@ components:
           description: Required. An alternate phone number to display on AdWords location extensions instead of the location's primary phone number.
           type: string
       type: object
-    AssociateLocationRequest:
-      description: Request message for Locations.AssociateLocationRequest.
-      properties:
-        placeId:
-          description: The association to establish. If not set, it indicates no match.
-          type: string
-      type: object
     Attribute:
       description: A location attribute. Attributes provide additional information about a location. The attributes that can be set on a location may vary based on the properties of that location (for example, category). Available attributes are determined by Google and may be added and removed without API changes.
       properties:
@@ -820,10 +739,6 @@ components:
         uri:
           description: The uri for this chain.
           type: string
-      type: object
-    ClearLocationAssociationRequest:
-      description: Request message for Locations.ClearLocationAssociationRequest.
-      properties: {}
       type: object
     Date:
       description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"

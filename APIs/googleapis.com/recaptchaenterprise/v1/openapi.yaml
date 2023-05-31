@@ -763,7 +763,7 @@ components:
           description: Required. The Apple developer key ID (10-character string).
           type: string
         privateKey:
-          description: Required. Input only. A private key (downloaded as a text file with a .p8 file extension) generated for your Apple Developer account.
+          description: Required. Input only. A private key (downloaded as a text file with a .p8 file extension) generated for your Apple Developer account. Ensure that Apple DeviceCheck is enabled for the private key.
           type: string
         teamId:
           description: Required. The Apple team ID (10-character string) owning the provisioning profile used to build your application.
@@ -1022,7 +1022,7 @@ components:
           type: array
         appleDeveloperId:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1AppleDeveloperId"
-          description: Apple Developer account details for the app that is protected by the reCAPTCHA Key. reCAPTCHA Enterprise leverages platform specific checks like Apple AppAttest and Apple DeviceCheck to protect your app from abuse. Providing these fields allows reCAPTCHA Enterprise to get a better assessment of the integrity of your app.
+          description: Apple Developer account details for the app that is protected by the reCAPTCHA Key. reCAPTCHA Enterprise leverages platform-specific checks like Apple App Attest and Apple DeviceCheck to protect your app from abuse. Providing these fields allows reCAPTCHA Enterprise to get a better assessment of the integrity of your app.
       type: object
     GoogleCloudRecaptchaenterpriseV1Key:
       description: A key used to identify and configure applications (web and/or mobile) that use reCAPTCHA Enterprise.

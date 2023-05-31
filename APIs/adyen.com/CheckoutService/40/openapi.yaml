@@ -58,7 +58,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-05-30T15:26:54Z
+  x-timestamp: 2023-05-30T19:28:47Z
 tags:
   - name: Modifications
   - name: Orders
@@ -947,8 +947,8 @@ paths:
             examples:
               basic:
                 $ref: "#/components/examples/post-paymentMethods-balance-basic"
-              plastix:
-                $ref: "#/components/examples/post-paymentMethods-balance-plastix"
+              not-enough:
+                $ref: "#/components/examples/post-paymentMethods-balance-not-enough"
             schema:
               $ref: "#/components/schemas/CheckoutBalanceCheckRequest"
       responses:
@@ -956,8 +956,10 @@ paths:
           content:
             application/json:
               examples:
-                plastix:
-                  $ref: "#/components/examples/post-paymentMethods-balance-plastix-200"
+                basic:
+                  $ref: "#/components/examples/post-paymentMethods-balance-basic-200"
+                not-enough:
+                  $ref: "#/components/examples/post-paymentMethods-balance-not-enough-200"
               schema:
                 $ref: "#/components/schemas/CheckoutBalanceCheckResponse"
           description: OK - the request has succeeded.
@@ -2190,33 +2192,43 @@ components:
         status: active
         url: https://test.adyen.link/PLE83C39B0A0DE0C1E
     post-paymentMethods-balance-basic:
-      summary: Retrieve gift card balance
+      summary: Get gift card balance specifying amount of 10 EUR
       value:
+        amount:
+          currency: EUR
+          value: 1000
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
           cvc: "737"
           number: "4126491073027401"
           type: givex
-    post-paymentMethods-balance-plastix:
-      summary: Retrieve gift card balance
+    post-paymentMethods-balance-basic-200:
+      summary: Gift card balance greater than amount specified in request
       value:
-        merchantAccount: YOUR_MERCHANT_ACCOUNT
-        paymentMethod:
-          cvc: "73737"
-          holderName: BALANCE EUR 888
-          number: "4010100000000000000"
-          type: plastix
-    post-paymentMethods-balance-plastix-200:
-      summary: Example response for request 'plastix'
-      value:
-        additionalData:
-          nonScheme.transactionLimit: "5000"
-          nonScheme.transactionLimitCcy: EUR
         balance:
           currency: EUR
-          value: 888
-        pspReference: 851617891188737F
+          value: 5000
+        pspReference: KHQC5N7G84BLNK43
         resultCode: Success
+    post-paymentMethods-balance-not-enough:
+      summary: Get gift card balance specifying amount of 100 EUR
+      value:
+        amount:
+          currency: EUR
+          value: 10000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          cvc: "737"
+          number: "4126491073027401"
+          type: givex
+    post-paymentMethods-balance-not-enough-200:
+      summary: Gift card balance lower than amount specified in request
+      value:
+        balance:
+          currency: EUR
+          value: 5000
+        pspReference: FKSPNCQ8HXSKGK82
+        resultCode: NotEnoughBalance
     post-paymentMethods-basic:
       summary: Get available payment methods
       value:
@@ -7287,6 +7299,7 @@ components:
           x-addedInVersion: "37"
       required:
         - merchantAccount
+        - amount
         - paymentMethod
       type: object
     CheckoutBalanceCheckResponse:
@@ -8416,7 +8429,7 @@ components:
 
             The maximum expiry date is 70 days after the payment link is created.
 
-            If not provided, the payment link expires 24 hours after it was created.
+            If not provided, the payment link expires 24 hours after it was created.This value is represented in Zulu format which is utilized for API v70 and lower.
           type: string
         installmentOptions:
           additionalProperties:
@@ -10015,7 +10028,7 @@ components:
 
             The maximum expiry date is 70 days after the payment link is created.
 
-            If not provided, the payment link expires 24 hours after it was created.
+            If not provided, the payment link expires 24 hours after it was created.This value is represented in Zulu format which is utilized for API v70 and lower.
           type: string
         installmentOptions:
           additionalProperties:

@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 9.6.0
+  version: 9.7.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -4503,9 +4503,9 @@ components:
           nullable: true
           type: string
         string:
+          description: The address string. Some APIs don't provide structured address data.
           example: 25 Spring Street, Blackburn, VIC 3130
           nullable: true
-          title: The address string. Some APIs don't provide structured address data.
           type: string
         type:
           enum:
