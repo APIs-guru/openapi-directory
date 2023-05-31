@@ -799,7 +799,7 @@ paths:
   /#X-Amz-Target=HealthLake.TagResource:
     post:
       operationId: TagResource
-      description: ' Adds a user specifed key and value tag to a Data Store. '
+      description: ' Adds a user specified key and value tag to a Data Store. '
       responses:
         '200':
           description: Success
@@ -953,7 +953,7 @@ components:
         DatastoreArn:
           allOf:
             - $ref: '#/components/schemas/DatastoreArn'
-            - description: The datastore ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
+            - description: The Data Store ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
         DatastoreStatus:
           allOf:
             - $ref: '#/components/schemas/DatastoreStatus'
@@ -961,7 +961,7 @@ components:
         DatastoreEndpoint:
           allOf:
             - $ref: '#/components/schemas/BoundedLengthString'
-            - description: 'The AWS endpoint for the created Data Store. For preview, only US-east-1 endpoints are supported.'
+            - description: 'The AWS endpoint for the created Data Store. '
     CreateFHIRDatastoreRequest:
       type: object
       required:
@@ -992,6 +992,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: ' Resource tags that are applied to a Data Store when it is created. '
+        IdentityProviderConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderConfiguration'
+            - description: The configuration of the identity provider that you want to use for your Data Store.
     ValidationException: {}
     ThrottlingException: {}
     AccessDeniedException: {}
@@ -1022,6 +1026,8 @@ components:
             - description: The AWS endpoint for the Data Store the user has requested to be deleted.
     DeleteFHIRDatastoreRequest:
       type: object
+      required:
+        - DatastoreId
       title: DeleteFHIRDatastoreRequest
       properties:
         DatastoreId:
@@ -1041,12 +1047,14 @@ components:
             - description: 'All properties associated with a Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.'
     DescribeFHIRDatastoreRequest:
       type: object
+      required:
+        - DatastoreId
       title: DescribeFHIRDatastoreRequest
       properties:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store id. This is part of the ‘CreateFHIRDatastore’ output.
+            - description: The AWS-generated Data Store ID.
     DescribeFHIRExportJobResponse:
       type: object
       required:
@@ -1373,6 +1381,13 @@ components:
       pattern: '^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}'
       minLength: 1
       maxLength: 1011
+    AuthorizationStrategy:
+      type: string
+      enum:
+        - SMART_ON_FHIR_V1
+        - AWS_AUTH
+    Boolean:
+      type: boolean
     BoundedLengthString:
       type: string
       pattern: '[\P{M}\p{M}]{1,5000}'
@@ -1388,6 +1403,8 @@ components:
       enum:
         - CUSTOMER_MANAGED_KMS_KEY
         - AWS_OWNED_KMS_KEY
+    ConfigurationMetadata:
+      type: string
     DatastoreName:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
@@ -1423,6 +1440,28 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 200
+    IdentityProviderConfiguration:
+      type: object
+      required:
+        - AuthorizationStrategy
+      properties:
+        AuthorizationStrategy:
+          allOf:
+            - $ref: '#/components/schemas/AuthorizationStrategy'
+            - description: The authorization strategy that you selected when you created the Data Store.
+        FineGrainedAuthorizationEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: If you enabled fine-grained authorization when you created the Data Store.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationMetadata'
+            - description: '<p>The JSON metadata elements that you want to use in your identity provider configuration. Required elements are listed based on the launch specification of the SMART application. For more information on all possible elements, see <a href="https://build.fhir.org/ig/HL7/smart-app-launch/conformance.html#metadata">Metadata</a> in SMART''s App Launch specification.</p> <p> <code>authorization_endpoint</code>: The URL to the OAuth2 authorization endpoint.</p> <p> <code>grant_types_supported</code>: An array of grant types that are supported at the token endpoint. You must provide at least one grant type option. Valid options are <code>authorization_code</code> and <code>client_credentials</code>.</p> <p> <code>token_endpoint</code>: The URL to the OAuth2 token endpoint.</p> <p> <code>capabilities</code>: An array of strings of the SMART capabilities that the authorization server supports.</p> <p> <code>code_challenge_methods_supported</code>: An array of strings of supported PKCE code challenge methods. You must include the <code>S256</code> method in the array of PKCE code challenge methods.</p>'
+        IdpLambdaArn:
+          allOf:
+            - $ref: '#/components/schemas/LambdaArn'
+            - description: The Amazon Resource Name (ARN) of the Lambda function that you want to use to decode the access token created by the authorization server.
+      description: The identity provider configuration that you gave when the Data Store was created.
     DatastoreId:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
@@ -1510,7 +1549,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/PreloadDataConfig'
             - description: The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
-      description: 'Displays the properties of the Data Store, including the ID, Arn, name, and the status of the Data Store.'
+        IdentityProviderConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/IdentityProviderConfiguration'
+            - description: The identity provider that you selected when you created the Data Store.
+      description: 'Displays the properties of the Data Store, including the ID, ARN, name, and the status of the Data Store.'
     DatastorePropertiesList:
       type: array
       items:
@@ -1586,7 +1629,7 @@ components:
         JobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: 'The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.'
+            - description: 'The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED_WITH_ERRORS, COMPLETED, FAILED.'
         SubmitTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -1632,6 +1675,10 @@ components:
         - COMPLETED_WITH_ERRORS
         - COMPLETED
         - FAILED
+        - CANCEL_SUBMITTED
+        - CANCEL_IN_PROGRESS
+        - CANCEL_COMPLETED
+        - CANCEL_FAILED
     OutputDataConfig:
       type: object
       properties:
@@ -1654,6 +1701,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ExportJobProperties'
+    LambdaArn:
+      type: string
+      pattern: 'arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9\-_\.]+(:(\$LATEST|[a-zA-Z0-9\-_]+))?'
+      minLength: 49
+      maxLength: 256
     InputDataConfig:
       type: object
       properties:
@@ -1734,7 +1786,7 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/TagValue'
-            - description: ' The value portion of tag. Tag values are case sensitive. '
+            - description: ' The value portion of a tag. Tag values are case sensitive. '
       description: ' A tag is a label consisting of a user-defined key and value. The form for tags is {"Key", "Value"} '
     TagKeyList:
       type: array

@@ -189,6 +189,80 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/portals/{portalArn}/ipAccessSettings#ipAccessSettingsArn':
+    put:
+      operationId: AssociateIpAccessSettings
+      description: Associates an IP access settings resource with a web portal.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateIpAccessSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: ipAccessSettingsArn
+          in: query
+          required: true
+          description: The ARN of the IP access settings.
+          schema:
+            type: string
+            pattern: '^arn:[\w+=\/,.@-]+:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\/[a-fA-F0-9\-]{36})+$'
+            minLength: 20
+            maxLength: 2048
+        - name: portalArn
+          in: path
+          required: true
+          description: The ARN of the web portal.
+          schema:
+            type: string
+            pattern: '^arn:[\w+=\/,.@-]+:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\/[a-fA-F0-9\-]{36})+$'
+            minLength: 20
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/portals/{portalArn}/networkSettings#networkSettingsArn':
     put:
       operationId: AssociateNetworkSettings
@@ -738,6 +812,166 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ipAccessSettings:
+    post:
+      operationId: CreateIpAccessSettings
+      description: Creates an IP access settings resource that can be associated with a web portal.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIpAccessSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ipRules
+              properties:
+                additionalEncryptionContext:
+                  description: Additional encryption context of the IP access settings.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/StringType'
+                clientToken:
+                  description: '<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>'
+                  type: string
+                  minLength: 1
+                  maxLength: 512
+                customerManagedKey:
+                  description: The custom managed key of the IP access settings.
+                  type: string
+                  pattern: '^arn:[\w+=\/,.@-]+:kms:[a-zA-Z0-9\-]*:[a-zA-Z0-9]{1,12}:key\/[a-zA-Z0-9-]+$'
+                  minLength: 20
+                  maxLength: 2048
+                description:
+                  description: The description of the IP access settings.
+                  type: string
+                  pattern: ^.+$
+                  minLength: 1
+                  maxLength: 256
+                  format: password
+                displayName:
+                  description: The display name of the IP access settings.
+                  type: string
+                  pattern: ^.+$
+                  minLength: 1
+                  maxLength: 64
+                  format: password
+                ipRules:
+                  description: The IP rules of the IP access settings.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/IpRule'
+                  minItems: 1
+                  maxItems: 100
+                tags:
+                  description: The tags to add to the browser settings resource. A tag is a key-value pair.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                  minItems: 0
+                  maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListIpAccessSettings
+      description: Retrieves a list of IP access settings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIpAccessSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be included in the next page.
+          schema:
+            type: integer
+            minimum: 1
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token used to retrieve the next page of results for this operation.
+          schema:
+            type: string
+            pattern: ^\S+$
+            minLength: 1
+            maxLength: 2048
   /networkSettings:
     post:
       operationId: CreateNetworkSettings
@@ -1854,6 +2088,198 @@ paths:
                     - LoginWithAmazon
                     - SignInWithApple
                     - OIDC
+  '/ipAccessSettings/{ipAccessSettingsArn}':
+    delete:
+      operationId: DeleteIpAccessSettings
+      description: Deletes IP access settings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteIpAccessSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: ipAccessSettingsArn
+          in: path
+          required: true
+          description: The ARN of the IP access settings.
+          schema:
+            type: string
+            pattern: '^arn:[\w+=\/,.@-]+:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\/[a-fA-F0-9\-]{36})+$'
+            minLength: 20
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetIpAccessSettings
+      description: Gets the IP access settings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIpAccessSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ipAccessSettingsArn
+          in: path
+          required: true
+          description: The ARN of the IP access settings.
+          schema:
+            type: string
+            pattern: '^arn:[\w+=\/,.@-]+:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\/[a-fA-F0-9\-]{36})+$'
+            minLength: 20
+            maxLength: 2048
+    patch:
+      operationId: UpdateIpAccessSettings
+      description: Updates IP access settings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateIpAccessSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ipAccessSettingsArn
+          in: path
+          required: true
+          description: The ARN of the IP access settings.
+          schema:
+            type: string
+            pattern: '^arn:[\w+=\/,.@-]+:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\/[a-fA-F0-9\-]{36})+$'
+            minLength: 20
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientToken:
+                  description: '<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>'
+                  type: string
+                  minLength: 1
+                  maxLength: 512
+                description:
+                  description: The description of the IP access settings.
+                  type: string
+                  pattern: ^.+$
+                  minLength: 1
+                  maxLength: 256
+                  format: password
+                displayName:
+                  description: The display name of the IP access settings.
+                  type: string
+                  pattern: ^.+$
+                  minLength: 1
+                  maxLength: 64
+                  format: password
+                ipRules:
+                  description: The updated IP rules of the IP access settings.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/IpRule'
+                  minItems: 1
+                  maxItems: 100
   '/networkSettings/{networkSettingsArn}':
     delete:
       operationId: DeleteNetworkSettings
@@ -2194,6 +2620,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       parameters:
         - name: portalArn
           in: path
@@ -2810,6 +3242,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DisassociateBrowserSettingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: portalArn
+          in: path
+          required: true
+          description: The ARN of the web portal.
+          schema:
+            type: string
+            pattern: '^arn:[\w+=\/,.@-]+:[a-zA-Z0-9\-]+:[a-zA-Z0-9\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\/[a-fA-F0-9\-]{36})+$'
+            minLength: 20
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/portals/{portalArn}/ipAccessSettings':
+    delete:
+      operationId: DisassociateIpAccessSettings
+      description: Disassociates IP access settings from a web portal.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateIpAccessSettingsResponse'
         '480':
           description: InternalServerException
           content:
@@ -3642,6 +4133,20 @@ components:
     ThrottlingException: {}
     ValidationException: {}
     ConflictException: {}
+    AssociateIpAccessSettingsResponse:
+      type: object
+      required:
+        - ipAccessSettingsArn
+        - portalArn
+      properties:
+        ipAccessSettingsArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the IP access settings resource.
+        portalArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the web portal.
     AssociateNetworkSettingsResponse:
       type: object
       required:
@@ -3737,6 +4242,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: The ARN of the identity provider.
+    CreateIpAccessSettingsResponse:
+      type: object
+      required:
+        - ipAccessSettingsArn
+      properties:
+        ipAccessSettingsArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the IP access settings resource.
+    IpRule:
+      type: object
+      required:
+        - ipRange
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the IP rule.
+        ipRange:
+          allOf:
+            - $ref: '#/components/schemas/IpRange'
+            - description: The IP range of the IP rule.
+      description: The IP rules of the IP access settings.
     CreateNetworkSettingsResponse:
       type: object
       required:
@@ -3805,6 +4333,9 @@ components:
     DeleteIdentityProviderResponse:
       type: object
       properties: {}
+    DeleteIpAccessSettingsResponse:
+      type: object
+      properties: {}
     DeleteNetworkSettingsResponse:
       type: object
       properties: {}
@@ -3821,6 +4352,9 @@ components:
       type: object
       properties: {}
     DisassociateBrowserSettingsResponse:
+      type: object
+      properties: {}
+    DisassociateIpAccessSettingsResponse:
       type: object
       properties: {}
     DisassociateNetworkSettingsResponse:
@@ -3849,6 +4383,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdentityProvider'
             - description: The identity provider.
+    GetIpAccessSettingsResponse:
+      type: object
+      properties:
+        ipAccessSettings:
+          allOf:
+            - $ref: '#/components/schemas/IpAccessSettings'
+            - description: The IP access settings.
     GetNetworkSettingsResponse:
       type: object
       properties:
@@ -3926,6 +4467,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderList'
             - description: The identity providers.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    ListIpAccessSettingsResponse:
+      type: object
+      properties:
+        ipAccessSettings:
+          allOf:
+            - $ref: '#/components/schemas/IpAccessSettingsList'
+            - description: The IP access settings.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -4038,6 +4590,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdentityProvider'
             - description: The identity provider.
+    UpdateIpAccessSettingsResponse:
+      type: object
+      required:
+        - ipAccessSettings
+      properties:
+        ipAccessSettings:
+          allOf:
+            - $ref: '#/components/schemas/IpAccessSettings'
+            - description: The IP access settings.
     UpdateNetworkSettingsResponse:
       type: object
       required:
@@ -4098,6 +4659,10 @@ components:
     AssociateBrowserSettingsRequest:
       type: object
       title: AssociateBrowserSettingsRequest
+      properties: {}
+    AssociateIpAccessSettingsRequest:
+      type: object
+      title: AssociateIpAccessSettingsRequest
       properties: {}
     AssociateNetworkSettingsRequest:
       type: object
@@ -4325,6 +4890,58 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: The ARN of the web portal.
+    Description:
+      type: string
+      pattern: ^.+$
+      minLength: 1
+      maxLength: 256
+      format: password
+    DisplayName:
+      type: string
+      pattern: ^.+$
+      minLength: 1
+      maxLength: 64
+      format: password
+    IpRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IpRule'
+      minItems: 1
+      maxItems: 100
+    CreateIpAccessSettingsRequest:
+      type: object
+      required:
+        - ipRules
+      title: CreateIpAccessSettingsRequest
+      properties:
+        additionalEncryptionContext:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionContextMap'
+            - description: Additional encryption context of the IP access settings.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>'
+        customerManagedKey:
+          allOf:
+            - $ref: '#/components/schemas/keyArn'
+            - description: The custom managed key of the IP access settings.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the IP access settings.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the IP access settings.
+        ipRules:
+          allOf:
+            - $ref: '#/components/schemas/IpRuleList'
+            - description: The IP rules of the IP access settings.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to add to the browser settings resource. A tag is a key-value pair.
     SecurityGroupIdList:
       type: array
       items:
@@ -4370,12 +4987,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcId'
             - description: The VPC that streaming instances will connect to.
-    DisplayName:
-      type: string
-      pattern: ^.+$
-      minLength: 1
-      maxLength: 64
-      format: password
     CreatePortalRequest:
       type: object
       title: CreatePortalRequest
@@ -4518,6 +5129,10 @@ components:
       type: object
       title: DeleteIdentityProviderRequest
       properties: {}
+    DeleteIpAccessSettingsRequest:
+      type: object
+      title: DeleteIpAccessSettingsRequest
+      properties: {}
     DeleteNetworkSettingsRequest:
       type: object
       title: DeleteNetworkSettingsRequest
@@ -4541,6 +5156,10 @@ components:
     DisassociateBrowserSettingsRequest:
       type: object
       title: DisassociateBrowserSettingsRequest
+      properties: {}
+    DisassociateIpAccessSettingsRequest:
+      type: object
+      title: DisassociateIpAccessSettingsRequest
       properties: {}
     DisassociateNetworkSettingsRequest:
       type: object
@@ -4588,6 +5207,40 @@ components:
             - $ref: '#/components/schemas/IdentityProviderType'
             - description: The identity provider type.
       description: The identity provider.
+    GetIpAccessSettingsRequest:
+      type: object
+      title: GetIpAccessSettingsRequest
+      properties: {}
+    IpAccessSettings:
+      type: object
+      required:
+        - ipAccessSettingsArn
+      properties:
+        associatedPortalArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: A list of web portal ARNs that this IP access settings resource is associated with.
+        creationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date timestamp of the IP access settings.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the IP access settings.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: ' The display name of the IP access settings.'
+        ipAccessSettingsArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the IP access settings resource.
+        ipRules:
+          allOf:
+            - $ref: '#/components/schemas/IpRuleList'
+            - description: The IP rules of the IP access settings.
+      description: 'The IP access settings resource that can be associated with a web portal. '
     GetNetworkSettingsRequest:
       type: object
       title: GetNetworkSettingsRequest
@@ -4645,6 +5298,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DisplayName'
             - description: The name of the web portal.
+        ipAccessSettingsArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the IP access settings.
         networkSettingsArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -4799,6 +5456,35 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/IdentityProviderSummary'
+    IpAccessSettingsSummary:
+      type: object
+      properties:
+        creationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date timestamp of the IP access settings.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the IP access settings.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the IP access settings.
+        ipAccessSettingsArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of IP access settings.
+      description: The summary of IP access settings.
+    IpAccessSettingsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IpAccessSettingsSummary'
+    IpRange:
+      type: string
+      pattern: '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?:/([0-9]|[12][0-9]|3[0-2])|)$'
+      description: A single IP address or an IP address range in CIDR notation
+      format: password
     MaxResults:
       type: integer
       minimum: 1
@@ -4814,6 +5500,10 @@ components:
     ListIdentityProvidersRequest:
       type: object
       title: ListIdentityProvidersRequest
+      properties: {}
+    ListIpAccessSettingsRequest:
+      type: object
+      title: ListIpAccessSettingsRequest
       properties: {}
     ListNetworkSettingsRequest:
       type: object
@@ -4913,6 +5603,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DisplayName'
             - description: The name of the web portal.
+        ipAccessSettingsArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the IP access settings.
         networkSettingsArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -5016,6 +5710,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderType'
             - description: The type of the identity provider.
+    UpdateIpAccessSettingsRequest:
+      type: object
+      title: UpdateIpAccessSettingsRequest
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>'
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the IP access settings.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the IP access settings.
+        ipRules:
+          allOf:
+            - $ref: '#/components/schemas/IpRuleList'
+            - description: The updated IP rules of the IP access settings.
     UpdateNetworkSettingsRequest:
       type: object
       title: UpdateNetworkSettingsRequest

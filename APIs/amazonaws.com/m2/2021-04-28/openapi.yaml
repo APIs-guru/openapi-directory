@@ -277,6 +277,10 @@ paths:
                   description: The unique identifier of the application.
                   type: string
                   pattern: '^[A-Za-z0-9][A-Za-z0-9_\-]{1,59}$'
+                roleArn:
+                  description: The Amazon Resource Name (ARN) of the role associated with the application.
+                  type: string
+                  pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]|):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
                 tags:
                   description: A list of tags to apply to the application.
                   type: object
@@ -2113,7 +2117,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the resource.
           schema:
             type: string
-            pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+            pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]|):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2175,7 +2179,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the resource.
           schema:
             type: string
-            pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+            pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]|):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
       requestBody:
         required: true
         content:
@@ -2467,7 +2471,7 @@ paths:
           description: The Amazon Resource Name (ARN) of the resource.
           schema:
             type: string
-            pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+            pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]|):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
         - name: tagKeys
           in: query
           required: true
@@ -2708,6 +2712,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityName'
             - description: The unique identifier of the application.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the role associated with the application.
         status:
           allOf:
             - $ref: '#/components/schemas/ApplicationLifecycle'
@@ -2774,7 +2782,9 @@ components:
             - $ref: '#/components/schemas/Identifier'
             - description: The identifier of the application.
         batchJobIdentifier:
-          $ref: '#/components/schemas/BatchJobIdentifier'
+          allOf:
+            - $ref: '#/components/schemas/BatchJobIdentifier'
+            - description: The unique identifier of this batch job.
         endTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -2802,7 +2812,7 @@ components:
         returnCode:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: 'The batch job return code from either the Blu Age or Micro Focus runtime engines. For more information, see <a href="https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes">Batch return codes</a> in the <i>IBM WebSphere Application Server</i> documentation.'
         startTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3270,7 +3280,7 @@ components:
         - Deleting From Environment
     Arn:
       type: string
-      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+      pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]|):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
     Version:
       type: integer
       minimum: 1
@@ -3343,6 +3353,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityName'
             - description: The name of the application.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the role associated with the application.
         status:
           allOf:
             - $ref: '#/components/schemas/ApplicationLifecycle'
@@ -3475,7 +3489,9 @@ components:
             - $ref: '#/components/schemas/Identifier'
             - description: The unique identifier of the application that hosts this batch job.
         batchJobIdentifier:
-          $ref: '#/components/schemas/BatchJobIdentifier'
+          allOf:
+            - $ref: '#/components/schemas/BatchJobIdentifier'
+            - description: The unique identifier of this batch job.
         endTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3499,7 +3515,7 @@ components:
         returnCode:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: 'The batch job return code from either the Blu Age or Micro Focus runtime engines. For more information, see <a href="https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes">Batch return codes</a> in the <i>IBM WebSphere Application Server</i> documentation.'
         startTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3523,7 +3539,7 @@ components:
     BatchParamKey:
       type: string
       pattern: '^[A-Za-z][A-Za-z0-9]{1,7}$'
-      description: 'Parameter key: the first character must be alphabetic. Can be of up to 8 alphanumeric characters.'
+      description: '<p>See https://www.ibm.com/docs/en/workload-automation/9.3.0?topic=zos-coding-variables-in-jcl to get details about limits for both keys and values: 8 for keys (variable names), 44 for values (variable values) In addition, keys will be only alphabetic characters and digits, without any space or special characters (dash, underscore, etc ...)</p> <p>Parameter key: the first character must be alphabetic. Can be of up to 8 alphanumeric characters.</p>'
       minLength: 1
       maxLength: 8
     CancelBatchJobExecutionRequest:
@@ -3580,6 +3596,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityName'
             - description: The unique identifier of the application.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the role associated with the application.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3724,6 +3744,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/GdgAttributes'
             - description: The generation data group of the data set.
+        po:
+          allOf:
+            - $ref: '#/components/schemas/PoAttributes'
+            - description: The details of a PO type data set.
+        ps:
+          allOf:
+            - $ref: '#/components/schemas/PsAttributes'
+            - description: The details of a PS type data set.
         vsam:
           allOf:
             - $ref: '#/components/schemas/VsamAttributes'
@@ -3904,6 +3932,36 @@ components:
             - $ref: '#/components/schemas/String50'
             - description: The disposition of the data set in the catalog.
       description: 'The required attributes for a generation data group data set. A generation data set is one of a collection of successive, historically related, catalogued data sets that together are known as a generation data group (GDG). Use this structure when you want to import a GDG. For more information on GDG, see <a href="https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets">Generation data sets</a>.'
+    PoDetailAttributes:
+      type: object
+      required:
+        - encoding
+        - format
+      properties:
+        encoding:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The character set encoding of the data set.
+        format:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The format of the data set records.
+      description: The supported properties for a PO type data set.
+    PsDetailAttributes:
+      type: object
+      required:
+        - encoding
+        - format
+      properties:
+        encoding:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The character set encoding of the data set.
+        format:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The format of the data set records.
+      description: The supported properties for a PS type data set.
     VsamDetailAttributes:
       type: object
       properties:
@@ -3939,6 +3997,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/GdgDetailAttributes'
             - description: The generation data group of the data set.
+        po:
+          allOf:
+            - $ref: '#/components/schemas/PoDetailAttributes'
+            - description: The details of a PO type data set.
+        ps:
+          allOf:
+            - $ref: '#/components/schemas/PsDetailAttributes'
+            - description: The details of a PS type data set.
         vsam:
           allOf:
             - $ref: '#/components/schemas/VsamDetailAttributes'
@@ -3956,6 +4022,39 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The disposition of the data set in the catalog.
       description: 'The required attributes for a generation data group data set. A generation data set is one of a collection of successive, historically related, catalogued data sets that together are known as a generation data group (GDG). Use this structure when you want to import a GDG. For more information on GDG, see <a href="https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-generation-data-sets">Generation data sets</a>.'
+    PoAttributes:
+      type: object
+      required:
+        - format
+        - memberFileExtensions
+      properties:
+        encoding:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The character set encoding of the data set.
+        format:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The format of the data set records.
+        memberFileExtensions:
+          allOf:
+            - $ref: '#/components/schemas/String20List'
+            - description: 'An array containing one or more filename extensions, allowing you to specify which files to be included as PDS member.'
+      description: The supported properties for a PO type data set.
+    PsAttributes:
+      type: object
+      required:
+        - format
+      properties:
+        encoding:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The character set encoding of the data set.
+        format:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The format of the data set records.
+      description: The supported properties for a PS type data set.
     VsamAttributes:
       type: object
       required:
@@ -4315,6 +4414,12 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time the scheduled maintenance is to start.
       description: The information about the maintenance schedule.
+    String20List:
+      type: array
+      items:
+        $ref: '#/components/schemas/String20'
+      minItems: 1
+      maxItems: 10
     PrimaryKey:
       type: object
       required:

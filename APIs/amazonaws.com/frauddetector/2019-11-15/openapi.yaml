@@ -3,7 +3,7 @@ info:
   version: '2019-11-15'
   x-release: v4
   title: Amazon Fraud Detector
-  description: '<p>This is the Amazon Fraud Detector API Reference. This guide is for developers who need detailed information about Amazon Fraud Detector API actions, data types, and errors. For more information about Amazon Fraud Detector features, see the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/">Amazon Fraud Detector User Guide</a>.</p> <p>We provide the Query API as well as AWS software development kits (SDK) for Amazon Fraud Detector in Java and Python programming languages.</p> <p>The Amazon Fraud Detector Query API provides HTTPS requests that use the HTTP verb GET or POST and a Query parameter <code>Action</code>. AWS SDK provides libraries, sample code, tutorials, and other resources for software developers who prefer to build applications using language-specific APIs instead of submitting a request over HTTP or HTTPS. These libraries provide basic functions that automatically take care of tasks such as cryptographically signing your requests, retrying requests, and handling error responses, so that it is easier for you to get started. For more information about the AWS SDKs, see <a href="https://docs.aws.amazon.com/https:/aws.amazon.com/tools/">Tools to build on AWS</a>. </p>'
+  description: '<p>This is the Amazon Fraud Detector API Reference. This guide is for developers who need detailed information about Amazon Fraud Detector API actions, data types, and errors. For more information about Amazon Fraud Detector features, see the <a href="https://docs.aws.amazon.com/frauddetector/latest/ug/">Amazon Fraud Detector User Guide</a>.</p> <p>We provide the Query API as well as AWS software development kits (SDK) for Amazon Fraud Detector in Java and Python programming languages.</p> <p>The Amazon Fraud Detector Query API provides HTTPS requests that use the HTTP verb GET or POST and a Query parameter <code>Action</code>. AWS SDK provides libraries, sample code, tutorials, and other resources for software developers who prefer to build applications using language-specific APIs instead of submitting a request over HTTP or HTTPS. These libraries provide basic functions that automatically take care of tasks such as cryptographically signing your requests, retrying requests, and handling error responses, so that it is easier for you to get started. For more information about the AWS SDKs, go to <a href="https://aws.amazon.com/developer/tools/">Tools to build on AWS</a> page, scroll down to the <b>SDK</b> section, and choose plus (+) sign to expand the section. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -6523,11 +6523,15 @@ components:
         eventIngestion:
           allOf:
             - $ref: '#/components/schemas/EventIngestion'
-            - description: Specifies if ingenstion is enabled or disabled.
+            - description: Specifies if ingestion is enabled or disabled.
         tags:
           allOf:
             - $ref: '#/components/schemas/tagList'
             - description: A collection of key and value pairs.
+        eventOrchestration:
+          allOf:
+            - $ref: '#/components/schemas/EventOrchestration'
+            - description: 'Enables or disables event orchestration. If enabled, you can send event predictions to select AWS services for downstream processing of the events.'
     PutExternalModelResult:
       type: object
       properties: {}
@@ -6603,7 +6607,7 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/tagList'
-            - description: <p/>
+            - description: A collection of key and value pairs.
     PutOutcomeResult:
       type: object
       properties: {}
@@ -7827,6 +7831,16 @@ components:
       enum:
         - ENABLED
         - DISABLED
+    EventOrchestration:
+      type: object
+      required:
+        - eventBridgeEnabled
+      properties:
+        eventBridgeEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies if event orchestration is enabled through Amazon EventBridge.
+      description: ' The event orchestration status. '
     EventPredictionSummary:
       type: object
       properties:
@@ -7926,6 +7940,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/fraudDetectorArn'
             - description: The entity type ARN.
+        eventOrchestration:
+          allOf:
+            - $ref: '#/components/schemas/EventOrchestration'
+            - description: 'The event orchestration status. '
       description: The event type details.
     variableValue:
       type: string
@@ -8327,7 +8345,7 @@ components:
         unlabeledEventsTreatment:
           allOf:
             - $ref: '#/components/schemas/UnlabeledEventsTreatment'
-            - description: '<p>The action to take for unlabeled events.</p> <ul> <li> <p>Use <code>IGNORE</code> if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.</p> </li> <li> <p>Use <code>FRAUD</code> if you want to categorize all unlabeled events as “Fraud”. This is recommended when most of the events in your dataset are fraudulent.</p> </li> <li> <p>Use <code>LEGIT</code> f you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.</p> </li> <li> <p>Use <code>AUTO</code> if you want Amazon Fraud Detector to decide how to use the unlabeled data. This is recommended when there is significant unlabeled events in the dataset.</p> </li> </ul> <p>By default, Amazon Fraud Detector ignores the unlabeled data.</p>'
+            - description: '<p>The action to take for unlabeled events.</p> <ul> <li> <p>Use <code>IGNORE</code> if you want the unlabeled events to be ignored. This is recommended when the majority of the events in the dataset are labeled.</p> </li> <li> <p>Use <code>FRAUD</code> if you want to categorize all unlabeled events as “Fraud”. This is recommended when most of the events in your dataset are fraudulent.</p> </li> <li> <p>Use <code>LEGIT</code> if you want to categorize all unlabeled events as “Legit”. This is recommended when most of the events in your dataset are legitimate.</p> </li> <li> <p>Use <code>AUTO</code> if you want Amazon Fraud Detector to decide how to use the unlabeled data. This is recommended when there is significant unlabeled events in the dataset.</p> </li> </ul> <p>By default, Amazon Fraud Detector ignores the unlabeled data.</p>'
       description: The label schema.
     PredictionTimeRange:
       type: object
@@ -8671,7 +8689,7 @@ components:
         upperBoundValue:
           allOf:
             - $ref: '#/components/schemas/float'
-            - description: ' The lower bound value of the area under curve (auc). '
+            - description: ' The upper bound value of the area under curve (auc). '
       description: ' Range of area under curve (auc) expected from the model. A range greater than 0.1 indicates higher model uncertainity. A range is the difference between upper and lower bound of auc. '
     OFIModelPerformance:
       type: object
