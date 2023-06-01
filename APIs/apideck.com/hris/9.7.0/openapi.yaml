@@ -3961,6 +3961,10 @@ components:
                 title: Rate
                 type: number
             type: object
+            x-apideck-strict-required:
+              - rate
+              - currency
+              - payment_unit
             x-apideck-weights:
               currency: high
               effective_date: low

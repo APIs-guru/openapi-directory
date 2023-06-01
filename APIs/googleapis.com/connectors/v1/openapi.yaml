@@ -433,11 +433,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: Filter string.
-          in: query
-          name: filter
-          schema:
-            type: string
         - description: Page size.
           in: query
           name: pageSize
@@ -1209,9 +1204,6 @@ components:
         key:
           description: Key of the config variable.
           type: string
-        keyValue:
-          $ref: "#/components/schemas/EncryptionKey"
-          description: Value is a Encryption Key.
         secretValue:
           $ref: "#/components/schemas/Secret"
           description: Value is a secret.
@@ -1268,7 +1260,6 @@ components:
             - SECRET
             - ENUM
             - AUTHORIZATION_CODE
-            - ENCRYPTION_KEY
           type: string
       type: object
     Connection:
@@ -1282,11 +1273,6 @@ components:
           items:
             $ref: "#/components/schemas/ConfigVariable"
           type: array
-        connectionRevision:
-          description: Output only. Connection revision. This field is only updated when the connection is created or updated by User.
-          format: int64
-          readOnly: true
-          type: string
         connectorVersion:
           description: "Required. Connector version on which the connection is created. The format is: projects/*/locations/*/providers/*/connectors/*/versions/* Only global location is supported for ConnectorVersion resource."
           type: string
@@ -1650,20 +1636,6 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
-      type: object
-    EncryptionKey:
-      description: Encryption Key value.
-      properties:
-        kmsKeyName:
-          description: "The [KMS key name] with which the content of the Operation is encrypted. The expected format: `projects/*/locations/*/keyRings/*/cryptoKeys/*`. Will be empty string if google managed."
-          type: string
-        type:
-          description: Type.
-          enum:
-            - TYPE_UNSPECIFIED
-            - GOOGLE_MANAGED
-            - CUSTOMER_MANAGED
-          type: string
       type: object
     EndpointAttachment:
       description: represents the Connector's Endpoint Attachment resource

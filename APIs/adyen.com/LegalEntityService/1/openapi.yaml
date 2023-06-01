@@ -46,7 +46,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-05-30T15:24:25Z
+  x-timestamp: 2023-06-01T20:23:28Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2282,6 +2282,8 @@ components:
         ipAddress:
           description: The IP address of the user accepting the Terms of Service.
           type: string
+      required:
+        - acceptedBy
       type: object
     AcceptTermsOfServiceResponse:
       properties:

@@ -999,6 +999,12 @@ components:
     GoogleDevtoolsRemotebuildbotResourceUsage:
       description: ResourceUsage is the system resource usage of the host machine.
       properties:
+        botState:
+          enum:
+            - UNSPECIFIED
+            - IDLE
+            - BUSY
+          type: string
         cpuUsedPercent:
           format: double
           type: number
