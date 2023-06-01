@@ -26202,7 +26202,7 @@ components:
         ContentType:
           allOf:
             - $ref: '#/components/schemas/ContentType'
-            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, <code>image/*</code> </p> </li> <li> <p>TextClassification: <code>text/csv;header=present</code> </p> </li> </ul>'
+            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or <code>image/*</code>. The default value is <code>image/*</code>.</p> </li> <li> <p>TextClassification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> </ul>'
         CompressionType:
           allOf:
             - $ref: '#/components/schemas/CompressionType'
@@ -31077,12 +31077,12 @@ components:
         RecommendationStatus:
           allOf:
             - $ref: '#/components/schemas/RecommendationStatus'
-            - description: Status of the deployment recommendation. <code>NOT_APPLICABLE</code> means that SageMaker is unable to provide a default recommendation for the model using the information provided.
+            - description: 'Status of the deployment recommendation. The status <code>NOT_APPLICABLE</code> means that SageMaker is unable to provide a default recommendation for the model using the information provided. If the deployment status is <code>IN_PROGRESS</code>, retry your API call after a few seconds to get a <code>COMPLETED</code> deployment recommendation.'
         RealTimeInferenceRecommendations:
           allOf:
             - $ref: '#/components/schemas/RealTimeInferenceRecommendations'
             - description: 'A list of <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html">RealTimeInferenceRecommendation</a> items.'
-      description: A set of recommended deployment configurations for the model.
+      description: 'A set of recommended deployment configurations for the model. To get more advanced recommendations, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html">CreateInferenceRecommendationsJob</a> to create an inference recommendation job.'
     DeviceSelectionConfig:
       type: object
       required:
@@ -39050,7 +39050,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RStudioServerProUserGroup'
             - description: The level of permissions that the user has within the <code>RStudioServerPro</code> app. This value defaults to `User`. The `Admin` value allows the user access to the RStudio Administrative Dashboard.
-      description: A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app. <code>RStudioServerProAppSettings</code> cannot be updated. The <code>RStudioServerPro</code> app must be deleted and a new one created to make any changes.
+      description: A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app.
     RealTimeInferenceRecommendation:
       type: object
       required:

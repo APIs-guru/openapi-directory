@@ -3,7 +3,7 @@ info:
   version: '2017-11-09'
   x-release: v4
   title: Alexa For Business
-  description: 'Alexa for Business helps you use Alexa in your organization. Alexa for Business provides you with the tools to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations. You can also make these available as private skills for your organization. Alexa for Business makes it efficient to voice-enable your products and services, thus providing context-aware voice experiences for your customers. Device makers building with the Alexa Voice Service (AVS) can create fully integrated solutions, register their products with Alexa for Business, and manage them as shared devices in their organization. '
+  description: Alexa for Business has been retired and is no longer supported.
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -116,6 +116,7 @@ x-hasEquivalentPaths: true
 paths:
   /#X-Amz-Target=AlexaForBusiness.ApproveSkill:
     post:
+      deprecated: true
       operationId: ApproveSkill
       description: 'Associates a skill with the organization under the customer''s AWS account. If a skill is private, the user implicitly accepts access to this skill during enablement.'
       responses:
@@ -167,6 +168,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.AssociateContactWithAddressBook:
     post:
+      deprecated: true
       operationId: AssociateContactWithAddressBook
       description: Associates a contact with a given address book.
       responses:
@@ -206,6 +208,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.AssociateDeviceWithNetworkProfile:
     post:
+      deprecated: true
       operationId: AssociateDeviceWithNetworkProfile
       description: Associates a device with the specified network profile.
       responses:
@@ -257,6 +260,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.AssociateDeviceWithRoom:
     post:
+      deprecated: true
       operationId: AssociateDeviceWithRoom
       description: 'Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. '
       responses:
@@ -308,6 +312,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.AssociateSkillGroupWithRoom:
     post:
+      deprecated: true
       operationId: AssociateSkillGroupWithRoom
       description: Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
       responses:
@@ -347,6 +352,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.AssociateSkillWithSkillGroup:
     post:
+      deprecated: true
       operationId: AssociateSkillWithSkillGroup
       description: Associates a skill with a skill group.
       responses:
@@ -398,6 +404,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.AssociateSkillWithUsers:
     post:
+      deprecated: true
       operationId: AssociateSkillWithUsers
       description: Makes a private skill available for enrolled users to enable on their devices.
       responses:
@@ -443,6 +450,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateAddressBook:
     post:
+      deprecated: true
       operationId: CreateAddressBook
       description: Creates an address book with the specified details.
       responses:
@@ -488,6 +496,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateBusinessReportSchedule:
     post:
+      deprecated: true
       operationId: CreateBusinessReportSchedule
       description: Creates a recurring schedule for usage reports to deliver to the specified S3 location with a specified daily or weekly interval.
       responses:
@@ -527,6 +536,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateConferenceProvider:
     post:
+      deprecated: true
       operationId: CreateConferenceProvider
       description: Adds a new conference provider under the user's AWS account.
       responses:
@@ -566,6 +576,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateContact:
     post:
+      deprecated: true
       operationId: CreateContact
       description: Creates a contact with the specified details.
       responses:
@@ -611,6 +622,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateGatewayGroup:
     post:
+      deprecated: true
       operationId: CreateGatewayGroup
       description: Creates a gateway group with the specified details.
       responses:
@@ -656,6 +668,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateNetworkProfile:
     post:
+      deprecated: true
       operationId: CreateNetworkProfile
       description: Creates a network profile with the specified details.
       responses:
@@ -719,6 +732,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateProfile:
     post:
+      deprecated: true
       operationId: CreateProfile
       description: Creates a new room profile with the specified details.
       responses:
@@ -770,6 +784,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateRoom:
     post:
+      deprecated: true
       operationId: CreateRoom
       description: Creates a room with the specified details.
       responses:
@@ -815,6 +830,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateSkillGroup:
     post:
+      deprecated: true
       operationId: CreateSkillGroup
       description: Creates a skill group with a specified name and description.
       responses:
@@ -866,6 +882,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.CreateUser:
     post:
+      deprecated: true
       operationId: CreateUser
       description: Creates a user.
       responses:
@@ -917,6 +934,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteAddressBook:
     post:
+      deprecated: true
       operationId: DeleteAddressBook
       description: Deletes an address book by the address book ARN.
       responses:
@@ -962,6 +980,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteBusinessReportSchedule:
     post:
+      deprecated: true
       operationId: DeleteBusinessReportSchedule
       description: Deletes the recurring report delivery schedule with the specified schedule ARN.
       responses:
@@ -1007,6 +1026,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteConferenceProvider:
     post:
+      deprecated: true
       operationId: DeleteConferenceProvider
       description: Deletes a conference provider.
       responses:
@@ -1046,6 +1066,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteContact:
     post:
+      deprecated: true
       operationId: DeleteContact
       description: Deletes a contact by the contact ARN.
       responses:
@@ -1091,6 +1112,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteDevice:
     post:
+      deprecated: true
       operationId: DeleteDevice
       description: Removes a device from Alexa For Business.
       responses:
@@ -1142,6 +1164,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteDeviceUsageData:
     post:
+      deprecated: true
       operationId: DeleteDeviceUsageData
       description: 'When this action is called for a specified shared device, it allows authorized users to delete the device''s entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.'
       responses:
@@ -1193,6 +1216,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteGatewayGroup:
     post:
+      deprecated: true
       operationId: DeleteGatewayGroup
       description: Deletes a gateway group.
       responses:
@@ -1232,6 +1256,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteNetworkProfile:
     post:
+      deprecated: true
       operationId: DeleteNetworkProfile
       description: Deletes a network profile by the network profile ARN.
       responses:
@@ -1283,6 +1308,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteProfile:
     post:
+      deprecated: true
       operationId: DeleteProfile
       description: Deletes a room profile by the profile ARN.
       responses:
@@ -1328,6 +1354,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteRoom:
     post:
+      deprecated: true
       operationId: DeleteRoom
       description: Deletes a room by the room ARN.
       responses:
@@ -1373,6 +1400,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteRoomSkillParameter:
     post:
+      deprecated: true
       operationId: DeleteRoomSkillParameter
       description: 'Deletes room skill parameter details by room, skill, and parameter key ID.'
       responses:
@@ -1412,6 +1440,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteSkillAuthorization:
     post:
+      deprecated: true
       operationId: DeleteSkillAuthorization
       description: Unlinks a third-party account from a skill.
       responses:
@@ -1457,6 +1486,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteSkillGroup:
     post:
+      deprecated: true
       operationId: DeleteSkillGroup
       description: Deletes a skill group by skill group ARN.
       responses:
@@ -1502,6 +1532,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DeleteUser:
     post:
+      deprecated: true
       operationId: DeleteUser
       description: Deletes a specified user by user ARN and enrollment ARN.
       responses:
@@ -1547,6 +1578,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DisassociateContactFromAddressBook:
     post:
+      deprecated: true
       operationId: DisassociateContactFromAddressBook
       description: Disassociates a contact from a given address book.
       responses:
@@ -1580,6 +1612,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DisassociateDeviceFromRoom:
     post:
+      deprecated: true
       operationId: DisassociateDeviceFromRoom
       description: Disassociates a device from its current room. The device continues to be connected to the Wi-Fi network and is still registered to the account. The device settings and skills are removed from the room.
       responses:
@@ -1625,6 +1658,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DisassociateSkillFromSkillGroup:
     post:
+      deprecated: true
       operationId: DisassociateSkillFromSkillGroup
       description: Disassociates a skill from a skill group.
       responses:
@@ -1670,6 +1704,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DisassociateSkillFromUsers:
     post:
+      deprecated: true
       operationId: DisassociateSkillFromUsers
       description: Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.
       responses:
@@ -1715,6 +1750,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.DisassociateSkillGroupFromRoom:
     post:
+      deprecated: true
       operationId: DisassociateSkillGroupFromRoom
       description: Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.
       responses:
@@ -1754,6 +1790,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ForgetSmartHomeAppliances:
     post:
+      deprecated: true
       operationId: ForgetSmartHomeAppliances
       description: Forgets smart home appliances associated to a room.
       responses:
@@ -1793,6 +1830,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetAddressBook:
     post:
+      deprecated: true
       operationId: GetAddressBook
       description: Gets address the book details by the address book ARN.
       responses:
@@ -1832,6 +1870,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetConferencePreference:
     post:
+      deprecated: true
       operationId: GetConferencePreference
       description: Retrieves the existing conference preferences.
       responses:
@@ -1871,6 +1910,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetConferenceProvider:
     post:
+      deprecated: true
       operationId: GetConferenceProvider
       description: Gets details about a specific conference provider.
       responses:
@@ -1910,6 +1950,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetContact:
     post:
+      deprecated: true
       operationId: GetContact
       description: Gets the contact details by the contact ARN.
       responses:
@@ -1949,6 +1990,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetDevice:
     post:
+      deprecated: true
       operationId: GetDevice
       description: Gets the details of a device by device ARN.
       responses:
@@ -1988,6 +2030,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetGateway:
     post:
+      deprecated: true
       operationId: GetGateway
       description: Retrieves the details of a gateway.
       responses:
@@ -2027,6 +2070,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetGatewayGroup:
     post:
+      deprecated: true
       operationId: GetGatewayGroup
       description: Retrieves the details of a gateway group.
       responses:
@@ -2066,6 +2110,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetInvitationConfiguration:
     post:
+      deprecated: true
       operationId: GetInvitationConfiguration
       description: Retrieves the configured values for the user enrollment invitation email template.
       responses:
@@ -2105,6 +2150,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetNetworkProfile:
     post:
+      deprecated: true
       operationId: GetNetworkProfile
       description: Gets the network profile details by the network profile ARN.
       responses:
@@ -2150,6 +2196,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetProfile:
     post:
+      deprecated: true
       operationId: GetProfile
       description: Gets the details of a room profile by profile ARN.
       responses:
@@ -2189,6 +2236,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetRoom:
     post:
+      deprecated: true
       operationId: GetRoom
       description: Gets room details by room ARN.
       responses:
@@ -2228,6 +2276,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetRoomSkillParameter:
     post:
+      deprecated: true
       operationId: GetRoomSkillParameter
       description: 'Gets room skill parameter details by room, skill, and parameter key ARN.'
       responses:
@@ -2267,6 +2316,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.GetSkillGroup:
     post:
+      deprecated: true
       operationId: GetSkillGroup
       description: Gets skill group details by skill group ARN.
       responses:
@@ -2306,6 +2356,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListBusinessReportSchedules:
     post:
+      deprecated: true
       operationId: ListBusinessReportSchedules
       description: 'Lists the details of the schedules that a user configured. A download URL of the report associated with each schedule is returned every time this action is called. A new download URL is returned each time, and is valid for 24 hours.'
       responses:
@@ -2351,6 +2402,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListConferenceProviders:
     post:
+      deprecated: true
       operationId: ListConferenceProviders
       description: Lists conference providers under a specific AWS account.
       responses:
@@ -2396,6 +2448,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListDeviceEvents:
     post:
+      deprecated: true
       operationId: ListDeviceEvents
       description: 'Lists the device event history, including device connection status, for up to 30 days.'
       responses:
@@ -2447,6 +2500,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListGatewayGroups:
     post:
+      deprecated: true
       operationId: ListGatewayGroups
       description: Retrieves a list of gateway group summaries. Use GetGatewayGroup to retrieve details of a specific gateway group.
       responses:
@@ -2492,6 +2546,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListGateways:
     post:
+      deprecated: true
       operationId: ListGateways
       description: Retrieves a list of gateway summaries. Use GetGateway to retrieve details of a specific gateway. An optional gateway group ARN can be provided to only retrieve gateway summaries of gateways that are associated with that gateway group ARN.
       responses:
@@ -2537,6 +2592,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListSkills:
     post:
+      deprecated: true
       operationId: ListSkills
       description: Lists all enabled skills in a specific skill group.
       responses:
@@ -2582,6 +2638,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListSkillsStoreCategories:
     post:
+      deprecated: true
       operationId: ListSkillsStoreCategories
       description: Lists all categories in the Alexa skill store.
       responses:
@@ -2627,6 +2684,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListSkillsStoreSkillsByCategory:
     post:
+      deprecated: true
       operationId: ListSkillsStoreSkillsByCategory
       description: Lists all skills in the Alexa skill store by category.
       responses:
@@ -2672,6 +2730,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListSmartHomeAppliances:
     post:
+      deprecated: true
       operationId: ListSmartHomeAppliances
       description: Lists all of the smart home appliances associated with a room.
       responses:
@@ -2723,6 +2782,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ListTags:
     post:
+      deprecated: true
       operationId: ListTags
       description: Lists all tags for the specified resource.
       responses:
@@ -2774,6 +2834,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.PutConferencePreference:
     post:
+      deprecated: true
       operationId: PutConferencePreference
       description: Sets the conference preferences on a specific conference provider at the account level.
       responses:
@@ -2813,6 +2874,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.PutInvitationConfiguration:
     post:
+      deprecated: true
       operationId: PutInvitationConfiguration
       description: Configures the email template for the user enrollment invitation with the specified attributes.
       responses:
@@ -2858,6 +2920,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.PutRoomSkillParameter:
     post:
+      deprecated: true
       operationId: PutRoomSkillParameter
       description: 'Updates room skill parameter details by room, skill, and parameter key ID. Not all skills have a room skill parameter.'
       responses:
@@ -2897,6 +2960,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.PutSkillAuthorization:
     post:
+      deprecated: true
       operationId: PutSkillAuthorization
       description: 'Links a user''s account to a third-party skill provider. If this API operation is called by an assumed IAM role, the skill being linked must be a private skill. Also, the skill must be owned by the AWS account that assumed the IAM role.'
       responses:
@@ -2942,6 +3006,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.RegisterAVSDevice:
     post:
+      deprecated: true
       operationId: RegisterAVSDevice
       description: Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM) using Alexa Voice Service (AVS).
       responses:
@@ -2999,6 +3064,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.RejectSkill:
     post:
+      deprecated: true
       operationId: RejectSkill
       description: 'Disassociates a skill from the organization under a user''s AWS account. If the skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill that is rejected can be added later by calling the ApproveSkill API. '
       responses:
@@ -3044,6 +3110,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.ResolveRoom:
     post:
+      deprecated: true
       operationId: ResolveRoom
       description: '<p>Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.</p> <p>To query ResolveRoom from an Alexa skill, the skill ID needs to be authorized. When the skill is using an AWS Lambda function, the skill is automatically authorized when you publish your skill as a private skill to your AWS account. Skills that are hosted using a custom web service must be manually authorized. To get your skill authorized, contact AWS Support with your AWS account ID that queries the ResolveRoom API and skill ID. </p>'
       responses:
@@ -3083,6 +3150,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.RevokeInvitation:
     post:
+      deprecated: true
       operationId: RevokeInvitation
       description: Revokes an invitation and invalidates the enrollment URL.
       responses:
@@ -3128,6 +3196,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SearchAddressBooks:
     post:
+      deprecated: true
       operationId: SearchAddressBooks
       description: Searches address books and lists the ones that meet a set of filter and sort criteria.
       responses:
@@ -3173,6 +3242,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SearchContacts:
     post:
+      deprecated: true
       operationId: SearchContacts
       description: Searches contacts and lists the ones that meet a set of filter and sort criteria.
       responses:
@@ -3218,6 +3288,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SearchDevices:
     post:
+      deprecated: true
       operationId: SearchDevices
       description: Searches devices and lists the ones that meet a set of filter criteria.
       responses:
@@ -3263,6 +3334,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SearchNetworkProfiles:
     post:
+      deprecated: true
       operationId: SearchNetworkProfiles
       description: Searches network profiles and lists the ones that meet a set of filter and sort criteria.
       responses:
@@ -3308,6 +3380,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SearchProfiles:
     post:
+      deprecated: true
       operationId: SearchProfiles
       description: Searches room profiles and lists the ones that meet a set of filter criteria.
       responses:
@@ -3353,6 +3426,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SearchRooms:
     post:
+      deprecated: true
       operationId: SearchRooms
       description: Searches rooms and lists the ones that meet a set of filter and sort criteria.
       responses:
@@ -3398,6 +3472,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SearchSkillGroups:
     post:
+      deprecated: true
       operationId: SearchSkillGroups
       description: Searches skill groups and lists the ones that meet a set of filter and sort criteria.
       responses:
@@ -3443,6 +3518,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SearchUsers:
     post:
+      deprecated: true
       operationId: SearchUsers
       description: Searches users and lists the ones that meet a set of filter and sort criteria.
       responses:
@@ -3533,6 +3609,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.SendInvitation:
     post:
+      deprecated: true
       operationId: SendInvitation
       description: 'Sends an enrollment invitation email with a URL to a user. The URL is valid for 30 days or until you call this operation again, whichever comes first. '
       responses:
@@ -3584,6 +3661,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.StartDeviceSync:
     post:
+      deprecated: true
       operationId: StartDeviceSync
       description: '<p>Resets a device and its account to the known default settings. This clears all information and settings set by previous users in the following ways:</p> <ul> <li> <p>Bluetooth - This unpairs all bluetooth devices paired with your echo device.</p> </li> <li> <p>Volume - This resets the echo device''s volume to the default value.</p> </li> <li> <p>Notifications - This clears all notifications from your echo device.</p> </li> <li> <p>Lists - This clears all to-do items from your echo device.</p> </li> <li> <p>Settings - This internally syncs the room''s profile (if the device is assigned to a room), contacts, address books, delegation access for account linking, and communications (if enabled on the room profile).</p> </li> </ul>'
       responses:
@@ -3623,6 +3701,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.StartSmartHomeApplianceDiscovery:
     post:
+      deprecated: true
       operationId: StartSmartHomeApplianceDiscovery
       description: Initiates the discovery of any smart home appliances associated with the room.
       responses:
@@ -3662,6 +3741,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.TagResource:
     post:
+      deprecated: true
       operationId: TagResource
       description: Adds metadata tags to a specified resource.
       responses:
@@ -3701,6 +3781,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UntagResource:
     post:
+      deprecated: true
       operationId: UntagResource
       description: Removes metadata tags from a specified resource.
       responses:
@@ -3740,6 +3821,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateAddressBook:
     post:
+      deprecated: true
       operationId: UpdateAddressBook
       description: Updates address book details by the address book ARN.
       responses:
@@ -3791,6 +3873,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateBusinessReportSchedule:
     post:
+      deprecated: true
       operationId: UpdateBusinessReportSchedule
       description: Updates the configuration of the report delivery schedule with the specified schedule ARN.
       responses:
@@ -3836,6 +3919,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateConferenceProvider:
     post:
+      deprecated: true
       operationId: UpdateConferenceProvider
       description: Updates an existing conference provider's settings.
       responses:
@@ -3875,6 +3959,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateContact:
     post:
+      deprecated: true
       operationId: UpdateContact
       description: Updates the contact details by the contact ARN.
       responses:
@@ -3920,6 +4005,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateDevice:
     post:
+      deprecated: true
       operationId: UpdateDevice
       description: Updates the device name by device ARN.
       responses:
@@ -3971,6 +4057,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateGateway:
     post:
+      deprecated: true
       operationId: UpdateGateway
       description: 'Updates the details of a gateway. If any optional field is not provided, the existing corresponding value is left unmodified.'
       responses:
@@ -4016,6 +4103,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateGatewayGroup:
     post:
+      deprecated: true
       operationId: UpdateGatewayGroup
       description: 'Updates the details of a gateway group. If any optional field is not provided, the existing corresponding value is left unmodified.'
       responses:
@@ -4061,6 +4149,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateNetworkProfile:
     post:
+      deprecated: true
       operationId: UpdateNetworkProfile
       description: Updates a network profile by the network profile ARN.
       responses:
@@ -4124,6 +4213,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateProfile:
     post:
+      deprecated: true
       operationId: UpdateProfile
       description: Updates an existing room profile by room profile ARN.
       responses:
@@ -4175,6 +4265,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateRoom:
     post:
+      deprecated: true
       operationId: UpdateRoom
       description: Updates room details by room ARN.
       responses:
@@ -4220,6 +4311,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AlexaForBusiness.UpdateSkillGroup:
     post:
+      deprecated: true
       operationId: UpdateSkillGroup
       description: Updates skill group details by skill group ARN.
       responses:
@@ -7151,6 +7243,13 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether require check in is enabled or not.
       description: 'Creates settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released.'
+    CreateProactiveJoin:
+      type: object
+      required:
+        - EnabledByMotion
+      properties:
+        EnabledByMotion:
+          $ref: '#/components/schemas/Boolean'
     CreateMeetingRoomConfiguration:
       type: object
       properties:
@@ -7168,6 +7267,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreateRequireCheckIn'
             - description: 'Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it''s not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.”'
+        ProactiveJoin:
+          $ref: '#/components/schemas/CreateProactiveJoin'
       description: Creates meeting room settings of a room profile.
     NetworkProfileName:
       type: string
@@ -7287,7 +7388,7 @@ components:
       maxLength: 30
     Email:
       type: string
-      pattern: '([0-9a-zA-Z]([+-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z]([-\w]*[0-9a-zA-Z]+)*\.)+[a-zA-Z]{2,9})'
+      pattern: '\w[+-.\w]*@\w[\w\.\-]+\.[0-9a-zA-Z]{2,24}'
       minLength: 1
       maxLength: 128
     DeviceUsageType:
@@ -7995,6 +8096,11 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether require check in is enabled or not.
       description: 'Settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released. '
+    ProactiveJoin:
+      type: object
+      properties:
+        EnabledByMotion:
+          $ref: '#/components/schemas/Boolean'
     MeetingRoomConfiguration:
       type: object
       properties:
@@ -8014,6 +8120,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/RequireCheckIn'
             - description: 'Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it''s not checked into. This makes the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” '
+        ProactiveJoin:
+          $ref: '#/components/schemas/ProactiveJoin'
       description: Meeting room settings of a room profile.
     RequirePin:
       type: string
@@ -8542,6 +8650,13 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether require check in is enabled or not.
       description: 'Updates settings for the require check in feature that are applied to a room profile. Require check in allows a meeting room’s Alexa or AVS device to prompt the user to check in; otherwise, the room will be released. '
+    UpdateProactiveJoin:
+      type: object
+      required:
+        - EnabledByMotion
+      properties:
+        EnabledByMotion:
+          $ref: '#/components/schemas/Boolean'
     UpdateMeetingRoomConfiguration:
       type: object
       properties:
@@ -8561,6 +8676,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateRequireCheckIn'
             - description: 'Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it''s not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” '
+        ProactiveJoin:
+          $ref: '#/components/schemas/UpdateProactiveJoin'
       description: Updates meeting room settings of a room profile.
     UserData:
       type: object

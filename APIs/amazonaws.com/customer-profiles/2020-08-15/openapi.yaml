@@ -200,6 +200,353 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}':
+    post:
+      operationId: CreateCalculatedAttributeDefinition
+      description: 'Creates a new calculated attribute definition. After creation, new object data ingested into Customer Profiles will be included in the calculated attribute, which can be retrieved for a profile using the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetCalculatedAttributeForProfile.html">GetCalculatedAttributeForProfile</a> API. Defining a calculated attribute makes it available for all profiles within a domain. Each calculated attribute can only reference one <code>ObjectType</code> and at most, two fields from that <code>ObjectType</code>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCalculatedAttributeDefinitionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: CalculatedAttributeName
+          in: path
+          required: true
+          description: The unique name of the calculated attribute.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AttributeDetails
+                - Statistic
+              properties:
+                DisplayName:
+                  description: The display name of the calculated attribute.
+                  type: string
+                  pattern: '^[a-zA-Z_][a-zA-Z_0-9-\s]*$'
+                  minLength: 1
+                  maxLength: 255
+                Description:
+                  description: The description of the calculated attribute.
+                  type: string
+                  minLength: 1
+                  maxLength: 1000
+                AttributeDetails:
+                  description: Mathematical expression and a list of attribute items specified in that expression.
+                  type: object
+                  properties:
+                    Attributes:
+                      allOf:
+                        - $ref: '#/components/schemas/AttributeList'
+                        - description: A list of attribute items specified in the mathematical expression.
+                    Expression:
+                      allOf:
+                        - $ref: '#/components/schemas/string1To255'
+                        - description: 'Mathematical expression that is performed on attribute items provided in the attribute list. Each element in the expression should follow the structure of \"{ObjectTypeName.AttributeName}\".'
+                Conditions:
+                  description: 'The conditions including range, object count, and threshold for the calculated attribute.'
+                  type: object
+                  properties:
+                    Range:
+                      allOf:
+                        - $ref: '#/components/schemas/Range'
+                        - description: The relative time period over which data is included in the aggregation.
+                    ObjectCount:
+                      allOf:
+                        - $ref: '#/components/schemas/ObjectCount'
+                        - description: The number of profile objects used for the calculated attribute.
+                    Threshold:
+                      allOf:
+                        - $ref: '#/components/schemas/Threshold'
+                        - description: The threshold for the calculated attribute.
+                Statistic:
+                  description: The aggregation operation to perform for the calculated attribute.
+                  type: string
+                  enum:
+                    - FIRST_OCCURRENCE
+                    - LAST_OCCURRENCE
+                    - COUNT
+                    - SUM
+                    - MINIMUM
+                    - MAXIMUM
+                    - AVERAGE
+                    - MAX_OCCURRENCE
+                Tags:
+                  description: 'The tags used to organize, track, or control access for this resource.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteCalculatedAttributeDefinition
+      description: 'Deletes an existing calculated attribute definition. Note that deleting a default calculated attribute is possible, however once deleted, you will be unable to undo that action and will need to recreate it on your own using the CreateCalculatedAttributeDefinition API if you want it back.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCalculatedAttributeDefinitionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: CalculatedAttributeName
+          in: path
+          required: true
+          description: The unique name of the calculated attribute.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
+            minLength: 1
+            maxLength: 255
+    get:
+      operationId: GetCalculatedAttributeDefinition
+      description: Provides more information on a calculated attribute definition for Customer Profiles.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCalculatedAttributeDefinitionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: CalculatedAttributeName
+          in: path
+          required: true
+          description: The unique name of the calculated attribute.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateCalculatedAttributeDefinition
+      description: 'Updates an existing calculated attribute definition. When updating the Conditions, note that increasing the date range of a calculated attribute will not trigger inclusion of historical data greater than the current date range.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCalculatedAttributeDefinitionResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: CalculatedAttributeName
+          in: path
+          required: true
+          description: The unique name of the calculated attribute.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                DisplayName:
+                  description: The display name of the calculated attribute.
+                  type: string
+                  pattern: '^[a-zA-Z_][a-zA-Z_0-9-\s]*$'
+                  minLength: 1
+                  maxLength: 255
+                Description:
+                  description: The description of the calculated attribute.
+                  type: string
+                  minLength: 1
+                  maxLength: 1000
+                Conditions:
+                  description: 'The conditions including range, object count, and threshold for the calculated attribute.'
+                  type: object
+                  properties:
+                    Range:
+                      allOf:
+                        - $ref: '#/components/schemas/Range'
+                        - description: The relative time period over which data is included in the aggregation.
+                    ObjectCount:
+                      allOf:
+                        - $ref: '#/components/schemas/ObjectCount'
+                        - description: The number of profile objects used for the calculated attribute.
+                    Threshold:
+                      allOf:
+                        - $ref: '#/components/schemas/Threshold'
+                        - description: The threshold for the calculated attribute.
   '/domains/{DomainName}':
     post:
       operationId: CreateDomain
@@ -2069,6 +2416,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{DomainName}/profile/{ProfileId}/calculated-attributes/{CalculatedAttributeName}':
+    get:
+      operationId: GetCalculatedAttributeForProfile
+      description: Retrieve a calculated attribute for a customer profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCalculatedAttributeForProfileResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: ProfileId
+          in: path
+          required: true
+          description: The unique identifier of a customer profile.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{32}'
+        - name: CalculatedAttributeName
+          in: path
+          required: true
+          description: The unique name of the calculated attribute.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_][a-zA-Z_0-9-]*$'
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/domains/{DomainName}/identity-resolution-jobs/{JobId}':
     get:
       operationId: GetIdentityResolutionJob
@@ -2690,6 +3112,163 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{DomainName}/calculated-attributes':
+    get:
+      operationId: ListCalculatedAttributeDefinitions
+      description: Lists calculated attribute definitions for Customer Profiles
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCalculatedAttributeDefinitionsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: next-token
+          in: query
+          required: false
+          description: The pagination token from the previous call to ListCalculatedAttributeDefinitions.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of calculated attribute definitions returned per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{DomainName}/profile/{ProfileId}/calculated-attributes':
+    get:
+      operationId: ListCalculatedAttributesForProfile
+      description: Retrieve a list of calculated attributes for a customer profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCalculatedAttributesForProfileResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The pagination token from the previous call to ListCalculatedAttributesForProfile.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of calculated attributes returned per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: ProfileId
+          in: path
+          required: true
+          description: The unique identifier of a customer profile.
+          schema:
+            type: string
+            pattern: '[a-f0-9]{32}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /domains:
     get:
       operationId: ListDomains
@@ -3060,13 +3639,13 @@ paths:
                   type: string
                   pattern: '[a-f0-9]{32}'
                 ObjectFilter:
-                  description: 'The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.'
+                  description: The filter applied to <code>ListProfileObjects</code> response to include profile objects with the specified index values.
                   type: object
                   properties:
                     KeyName:
                       allOf:
                         - $ref: '#/components/schemas/name'
-                        - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId. The predefined keys you can use to search for _order include: _orderId.'
+                        - description: 'A searchable identifier of a profile object. The predefined keys you can use to search for <code>_asset</code> include: <code>_assetId</code>, <code>_assetName</code>, and <code>_serialNumber</code>. The predefined keys you can use to search for <code>_case</code> include: <code>_caseId</code>. The predefined keys you can use to search for <code>_order</code> include: <code>_orderId</code>.'
                     Values:
                       allOf:
                         - $ref: '#/components/schemas/requestValueList'
@@ -3754,6 +4333,88 @@ components:
     ResourceNotFoundException: {}
     ThrottlingException: {}
     InternalServerException: {}
+    CreateCalculatedAttributeDefinitionResponse:
+      type: object
+      properties:
+        CalculatedAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/typeName'
+            - description: The unique name of the calculated attribute.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/displayName'
+            - description: The display name of the calculated attribute.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/text'
+            - description: The description of the calculated attribute.
+        AttributeDetails:
+          allOf:
+            - $ref: '#/components/schemas/AttributeDetails'
+            - description: Mathematical expression and a list of attribute items specified in that expression.
+        Conditions:
+          allOf:
+            - $ref: '#/components/schemas/Conditions'
+            - description: 'The conditions including range, object count, and threshold for the calculated attribute.'
+        Statistic:
+          allOf:
+            - $ref: '#/components/schemas/Statistic'
+            - description: The aggregation operation to perform for the calculated attribute.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the calculated attribute definition was created.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the calculated attribute definition was most recently edited.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+    AttributeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeItem'
+      minItems: 1
+      maxItems: 2
+    Range:
+      type: object
+      required:
+        - Value
+        - Unit
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/Value'
+            - description: The amount of time of the specified unit.
+        Unit:
+          allOf:
+            - $ref: '#/components/schemas/Unit'
+            - description: The unit of time.
+      description: The relative time period over which data is included in the aggregation.
+    ObjectCount:
+      type: integer
+      minimum: 1
+      maximum: 100
+    Threshold:
+      type: object
+      required:
+        - Value
+        - Operator
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The value of the threshold.
+        Operator:
+          allOf:
+            - $ref: '#/components/schemas/Operator'
+            - description: The operator of the threshold.
+      description: The threshold for the calculated attribute.
+    TagValue:
+      type: string
+      maxLength: 256
     CreateDomainResponse:
       type: object
       required:
@@ -3841,9 +4502,6 @@ components:
             - $ref: '#/components/schemas/S3ExportingConfig'
             - description: The S3 location where Identity Resolution Jobs write result files.
       description: '<p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p> <note> <p>You need to give Customer Profiles service principal write permission to your S3 bucket. Otherwise, you''ll get an exception in the API response. For an example policy, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service">Amazon Connect Customer Profiles cross-service confused deputy prevention</a>. </p> </note>'
-    TagValue:
-      type: string
-      maxLength: 256
     CreateIntegrationWorkflowResponse:
       type: object
       required:
@@ -3879,6 +4537,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/uuid'
             - description: The unique identifier of a customer profile.
+    DeleteCalculatedAttributeDefinitionResponse:
+      type: object
+      properties: {}
     DeleteDomainResponse:
       type: object
       required:
@@ -3962,6 +4623,64 @@ components:
       enum:
         - RECENCY
         - SOURCE
+    GetCalculatedAttributeDefinitionResponse:
+      type: object
+      properties:
+        CalculatedAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/typeName'
+            - description: The unique name of the calculated attribute.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/displayName'
+            - description: The display name of the calculated attribute.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/text'
+            - description: The description of the calculated attribute.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the calculated attribute definition was created.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the calculated attribute definition was most recently edited.
+        Statistic:
+          allOf:
+            - $ref: '#/components/schemas/Statistic'
+            - description: The aggregation operation to perform for the calculated attribute.
+        Conditions:
+          allOf:
+            - $ref: '#/components/schemas/Conditions'
+            - description: 'The conditions including range, object count, and threshold for the calculated attribute.'
+        AttributeDetails:
+          allOf:
+            - $ref: '#/components/schemas/AttributeDetails'
+            - description: Mathematical expression and a list of attribute items specified in that expression.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+    GetCalculatedAttributeForProfileResponse:
+      type: object
+      properties:
+        CalculatedAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/typeName'
+            - description: The unique name of the calculated attribute.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/displayName'
+            - description: The display name of the calculated attribute.
+        IsDataPartial:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: 'Indicates whether the calculated attribute’s value is based on partial data. If data is partial, it is set to true.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The value of the calculated attribute.
     GetDomainResponse:
       type: object
       required:
@@ -4265,6 +4984,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/token'
             - description: The pagination token from the previous ListAccountIntegrations API call.
+    ListCalculatedAttributeDefinitionsResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/CalculatedAttributeDefinitionsList'
+            - description: The list of calculated attribute definitions.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: The pagination token from the previous call to ListCalculatedAttributeDefinitions.
+    ListCalculatedAttributesForProfileResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/CalculatedAttributesForProfileList'
+            - description: The list of calculated attributes.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: The pagination token from the previous call to ListCalculatedAttributesForProfile.
     ListDomainsResponse:
       type: object
       properties:
@@ -4593,6 +5334,45 @@ components:
       pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
       minLength: 1
       maxLength: 128
+    UpdateCalculatedAttributeDefinitionResponse:
+      type: object
+      properties:
+        CalculatedAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/typeName'
+            - description: The unique name of the calculated attribute.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/displayName'
+            - description: The display name of the calculated attribute.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/text'
+            - description: The description of the calculated attribute.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the calculated attribute definition was created.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the calculated attribute definition was most recently edited.
+        Statistic:
+          allOf:
+            - $ref: '#/components/schemas/Statistic'
+            - description: The aggregation operation to perform for the calculated attribute.
+        Conditions:
+          allOf:
+            - $ref: '#/components/schemas/Conditions'
+            - description: 'The conditions including range, object count, and threshold for the calculated attribute.'
+        AttributeDetails:
+          allOf:
+            - $ref: '#/components/schemas/AttributeDetails'
+            - description: The mathematical expression and a list of attribute items specified in that expression.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
     UpdateDomainResponse:
       type: object
       required:
@@ -4858,6 +5638,36 @@ components:
             - $ref: '#/components/schemas/timestamp'
             - description: Last updated timestamp for workflow step for <code>APPFLOW_INTEGRATION</code> workflow.
       description: Workflow step details for <code>APPFLOW_INTEGRATION</code> workflow.
+    AttributeDetails:
+      type: object
+      required:
+        - Attributes
+        - Expression
+      properties:
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/AttributeList'
+            - description: A list of attribute items specified in the mathematical expression.
+        Expression:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: 'Mathematical expression that is performed on attribute items provided in the attribute list. Each element in the expression should follow the structure of \"{ObjectTypeName.AttributeName}\".'
+      description: Mathematical expression and a list of attribute items specified in that expression.
+    attributeName:
+      type: string
+      pattern: '^[a-zA-Z0-9_.-]+$'
+      minLength: 1
+      maxLength: 64
+    AttributeItem:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/attributeName'
+            - description: The name of an attribute defined in a profile object type.
+      description: The details of a single attribute item specified in the mathematical expression.
     Attributes:
       type: object
       additionalProperties:
@@ -4915,6 +5725,78 @@ components:
       type: string
       pattern: .*
       maxLength: 512
+    ListCalculatedAttributeDefinitionItem:
+      type: object
+      properties:
+        CalculatedAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/typeName'
+            - description: The unique name of the calculated attribute.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/displayName'
+            - description: The display name of the calculated attribute.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/text'
+            - description: The threshold for the calculated attribute.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The threshold for the calculated attribute.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the calculated attribute definition was most recently edited.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+      description: The details of a single calculated attribute definition.
+    CalculatedAttributeDefinitionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListCalculatedAttributeDefinitionItem'
+    ListCalculatedAttributeForProfileItem:
+      type: object
+      properties:
+        CalculatedAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/typeName'
+            - description: The unique name of the calculated attribute.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/displayName'
+            - description: The display name of the calculated attribute.
+        IsDataPartial:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: 'Indicates whether the calculated attribute’s value is based on partial data. If data is partial, it is set to true.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The value of the calculated attribute.
+      description: The details of a single calculated attribute for a profile.
+    CalculatedAttributesForProfileList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListCalculatedAttributeForProfileItem'
+    Conditions:
+      type: object
+      properties:
+        Range:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - description: The relative time period over which data is included in the aggregation.
+        ObjectCount:
+          allOf:
+            - $ref: '#/components/schemas/ObjectCount'
+            - description: The number of profile objects used for the calculated attribute.
+        Threshold:
+          allOf:
+            - $ref: '#/components/schemas/Threshold'
+            - description: The threshold for the calculated attribute.
+      description: 'The conditions including range, object count, and threshold for the calculated attribute.'
     MarketoConnectorOperator:
       type: string
       enum:
@@ -5046,6 +5928,63 @@ components:
             - $ref: '#/components/schemas/ZendeskConnectorOperator'
             - description: The operation to be performed on the provided Zendesk source fields.
       description: The operation to be performed on the provided source fields.
+    displayName:
+      type: string
+      pattern: '^[a-zA-Z_][a-zA-Z_0-9-\s]*$'
+      minLength: 1
+      maxLength: 255
+    text:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    Statistic:
+      type: string
+      enum:
+        - FIRST_OCCURRENCE
+        - LAST_OCCURRENCE
+        - COUNT
+        - SUM
+        - MINIMUM
+        - MAXIMUM
+        - AVERAGE
+        - MAX_OCCURRENCE
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateCalculatedAttributeDefinitionRequest:
+      type: object
+      required:
+        - AttributeDetails
+        - Statistic
+      title: CreateCalculatedAttributeDefinitionRequest
+      properties:
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/displayName'
+            - description: The display name of the calculated attribute.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/text'
+            - description: The description of the calculated attribute.
+        AttributeDetails:
+          allOf:
+            - $ref: '#/components/schemas/AttributeDetails'
+            - description: Mathematical expression and a list of attribute items specified in that expression.
+        Conditions:
+          allOf:
+            - $ref: '#/components/schemas/Conditions'
+            - description: 'The conditions including range, object count, and threshold for the calculated attribute.'
+        Statistic:
+          allOf:
+            - $ref: '#/components/schemas/Statistic'
+            - description: The aggregation operation to perform for the calculated attribute.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
     expirationDaysInteger:
       type: integer
       minimum: 1
@@ -5080,12 +6019,6 @@ components:
             - $ref: '#/components/schemas/ExportingConfig'
             - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
       description: The flag that enables the matching process of duplicate profiles.
-    TagMap:
-      type: object
-      minProperties: 1
-      maxProperties: 50
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
     CreateDomainRequest:
       type: object
       required:
@@ -5303,6 +6236,10 @@ components:
       type: string
       pattern: .*
       maxLength: 256
+    DeleteCalculatedAttributeDefinitionRequest:
+      type: object
+      title: DeleteCalculatedAttributeDefinitionRequest
+      properties: {}
     DeleteDomainRequest:
       type: object
       title: DeleteDomainRequest
@@ -5601,6 +6538,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Double0To1'
             - description: Minimum confidence score required for profiles within a matching group to be merged during the auto-merge process.
+    GetCalculatedAttributeDefinitionRequest:
+      type: object
+      title: GetCalculatedAttributeDefinitionRequest
+      properties: {}
+    GetCalculatedAttributeForProfileRequest:
+      type: object
+      title: GetCalculatedAttributeForProfileRequest
+      properties: {}
     GetDomainRequest:
       type: object
       title: GetDomainRequest
@@ -5676,10 +6621,6 @@ components:
       type: object
       title: GetProfileObjectTypeRequest
       properties: {}
-    text:
-      type: string
-      minLength: 1
-      maxLength: 1000
     boolean:
       type: boolean
     KeyMap:
@@ -5840,6 +6781,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/string1To255'
             - description: The URI of the S3 bucket or any other type of data source.
+    ListCalculatedAttributeDefinitionsRequest:
+      type: object
+      title: ListCalculatedAttributeDefinitionsRequest
+      properties: {}
+    ListCalculatedAttributesForProfileRequest:
+      type: object
+      title: ListCalculatedAttributesForProfileRequest
+      properties: {}
     ListDomainsRequest:
       type: object
       title: ListDomainsRequest
@@ -5940,12 +6889,12 @@ components:
         KeyName:
           allOf:
             - $ref: '#/components/schemas/name'
-            - description: 'A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId. The predefined keys you can use to search for _order include: _orderId.'
+            - description: 'A searchable identifier of a profile object. The predefined keys you can use to search for <code>_asset</code> include: <code>_assetId</code>, <code>_assetName</code>, and <code>_serialNumber</code>. The predefined keys you can use to search for <code>_case</code> include: <code>_caseId</code>. The predefined keys you can use to search for <code>_order</code> include: <code>_orderId</code>.'
         Values:
           allOf:
             - $ref: '#/components/schemas/requestValueList'
             - description: A list of key values.
-      description: 'The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.'
+      description: The filter applied to <code>ListProfileObjects</code> response to include profile objects with the specified index values.
     ListProfileObjectsRequest:
       type: object
       required:
@@ -5964,7 +6913,7 @@ components:
         ObjectFilter:
           allOf:
             - $ref: '#/components/schemas/ObjectFilter'
-            - description: 'Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset, _case and _order.'
+            - description: Applies a filter to the response to include profile objects with the specified index values.
     ProfileObjectList:
       type: array
       items:
@@ -6117,6 +7066,13 @@ components:
             - $ref: '#/components/schemas/FieldNameList'
             - description: The reference for the key name of the fields map.
       description: An object that defines the Key element of a ProfileObject. A Key is a special element that can be used to search for a customer profile.
+    Operator:
+      type: string
+      enum:
+        - EQUAL_TO
+        - GREATER_THAN
+        - LESS_THAN
+        - NOT_EQUAL_TO
     OperatorPropertiesKeys:
       type: string
       enum:
@@ -6333,6 +7289,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource.'
+    Value:
+      type: integer
+      minimum: 1
+      maximum: 366
+    Unit:
+      type: string
+      enum:
+        - DAYS
     s3BucketName:
       type: string
       pattern: '^[a-z0-9.-]+$'
@@ -6642,6 +7606,22 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/string0To255'
+    UpdateCalculatedAttributeDefinitionRequest:
+      type: object
+      title: UpdateCalculatedAttributeDefinitionRequest
+      properties:
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/displayName'
+            - description: The display name of the calculated attribute.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/text'
+            - description: The description of the calculated attribute.
+        Conditions:
+          allOf:
+            - $ref: '#/components/schemas/Conditions'
+            - description: 'The conditions including range, object count, and threshold for the calculated attribute.'
     UpdateDomainRequest:
       type: object
       title: UpdateDomainRequest

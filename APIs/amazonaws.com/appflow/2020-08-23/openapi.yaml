@@ -3292,6 +3292,14 @@ components:
       type: string
       pattern: \S+
       maxLength: 512
+    SupportedDataTransferTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedDataTransferType'
+    SupportedDataTransferApis:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataTransferApi'
     ConnectorConfiguration:
       type: object
       properties:
@@ -3399,6 +3407,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/RegisteredBy'
             - description: Information about who registered the connector.
+        supportedDataTransferTypes:
+          allOf:
+            - $ref: '#/components/schemas/SupportedDataTransferTypeList'
+            - description: <p>The data transfer types that the connector supports.</p> <dl> <dt>RECORD</dt> <dd> <p>Structured records.</p> </dd> <dt>FILE</dt> <dd> <p>Files or binary data.</p> </dd> </dl>
+        supportedDataTransferApis:
+          allOf:
+            - $ref: '#/components/schemas/SupportedDataTransferApis'
+            - description: The APIs of the connector application that Amazon AppFlow can use to transfer your data.
       description: ' The configuration settings related to a given connector. '
     ConnectorConfigurationsMap:
       type: object
@@ -3451,6 +3467,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectorModeList'
             - description: The connection mode that the connector supports.
+        supportedDataTransferTypes:
+          allOf:
+            - $ref: '#/components/schemas/SupportedDataTransferTypeList'
+            - description: <p>The data transfer types that the connector supports.</p> <dl> <dt>RECORD</dt> <dd> <p>Structured records.</p> </dd> <dt>FILE</dt> <dd> <p>Files or binary data.</p> </dd> </dl>
       description: Information about the registered connector.
     Name:
       type: string
@@ -5168,6 +5188,18 @@ components:
             - $ref: '#/components/schemas/TokenUrlCustomProperties'
             - description: Associates your token URL with a map of properties that you define. Use this parameter to provide any additional details that the connector requires to authenticate your request.
       description: The OAuth 2.0 properties required for OAuth 2.0 authentication.
+    DataTransferApi:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DataTransferApiTypeName'
+            - description: The name of the connector application API.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/DataTransferApiType'
+            - description: '<p>You can specify one of the following types:</p> <dl> <dt>AUTOMATIC</dt> <dd> <p>The default. Optimizes a flow for datasets that fluctuate in size from small to large. For each flow run, Amazon AppFlow chooses to use the SYNC or ASYNC API type based on the amount of data that the run transfers.</p> </dd> <dt>SYNC</dt> <dd> <p>A synchronous API. This type of API optimizes a flow for small to medium-sized datasets.</p> </dd> <dt>ASYNC</dt> <dd> <p>An asynchronous API. This type of API optimizes a flow for large datasets.</p> </dd> </dl>'
+      description: The API of the connector application that Amazon AppFlow uses to transfer your data.
     CustomConnectorSourceProperties:
       type: object
       required:
@@ -5181,6 +5213,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CustomProperties'
             - description: Custom properties that are required to use the custom connector as a source.
+        dataTransferApi:
+          allOf:
+            - $ref: '#/components/schemas/DataTransferApi'
+            - description: The API of the connector application that Amazon AppFlow uses to transfer your data.
       description: The properties that are applied when the custom connector is being used as a source.
     CustomPropertyValue:
       type: string
@@ -5222,6 +5258,16 @@ components:
       enum:
         - Incremental
         - Complete
+    DataTransferApiTypeName:
+      type: string
+      pattern: '[\w/-]+'
+      maxLength: 64
+    DataTransferApiType:
+      type: string
+      enum:
+        - SYNC
+        - ASYNC
+        - AUTOMATIC
     DatabaseName:
       type: string
       pattern: \S+
@@ -6626,6 +6672,11 @@ components:
       type: string
       pattern: \S+
       maxLength: 256
+    SupportedDataTransferType:
+      type: string
+      enum:
+        - RECORD
+        - FILE
     Value:
       type: string
       pattern: \S+
