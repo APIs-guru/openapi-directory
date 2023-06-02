@@ -1942,7 +1942,7 @@ components:
           type: object
         validity:
           $ref: "#/components/schemas/Status"
-          description: Read-only description of how the alert policy is invalid. OK if the alert policy is valid. If not OK, the alert policy will not generate incidents.
+          description: Read-only description of how the alert policy is invalid. This field is only set when the alert policy is invalid. An invalid alert policy will not generate incidents.
       type: object
     AlertStrategy:
       description: Control over how the notification channels in notification_channels are notified when this alert fires.

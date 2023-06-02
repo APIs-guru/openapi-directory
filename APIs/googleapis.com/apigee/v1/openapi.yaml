@@ -6258,13 +6258,18 @@ components:
     GoogleCloudApigeeV1DimensionMetric:
       description: Encapsulates a metric grouped by dimension.
       properties:
+        individualNames:
+          description: Individual dimension names. E.g. ["dim1_name", "dim2_name"].
+          items:
+            type: string
+          type: array
         metrics:
           description: List of metrics.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1Metric"
           type: array
         name:
-          description: Name of the dimension.
+          description: Comma joined dimension names. E.g. "dim1_name,dim2_name". Deprecated. If name already has comma before join, we may get wrong splits. Please use individual_names.
           type: string
       type: object
     GoogleCloudApigeeV1EndpointAttachment:
@@ -7533,7 +7538,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudApigeeV1AddonsConfig"
           description: Addon configurations of the Apigee organization.
         analyticsRegion:
-          description: "Required. DEPRECATED: This field will be deprecated once Apigee supports DRZ. Primary Google Cloud region for analytics data storage. For valid values, see [Create an Apigee organization](https://cloud.google.com/apigee/docs/api-platform/get-started/create-org)."
+          description: "Required. DEPRECATED: This field will eventually be deprecated and replaced with a differently-named field. Primary Google Cloud region for analytics data storage. For valid values, see [Create an Apigee organization](https://cloud.google.com/apigee/docs/api-platform/get-started/create-org)."
           type: string
         apiConsumerDataEncryptionKeyName:
           description: "Cloud KMS key name used for encrypting API consumer data. Required for US/EU regions when [BillingType](#BillingType) is `SUBSCRIPTION`. When [BillingType](#BillingType) is `EVALUATION` or the region is not US/EU, a Google-Managed encryption key will be used. Format: `projects/*/locations/*/keyRings/*/cryptoKeys/*`"
@@ -7712,6 +7717,61 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1Result"
           type: array
+      type: object
+    GoogleCloudApigeeV1ProfileConfig:
+      description: ProfileConfig defines a set of categories and policies which will be used to compute security score.
+      properties:
+        categories:
+          description: List of categories of profile config.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigCategory"
+          type: array
+      type: object
+    GoogleCloudApigeeV1ProfileConfigAbuse:
+      description: Checks for abuse, which includes any requests sent to the API for purposes other than what it is intended for, such as high volumes of requests, data scraping, and abuse related to authorization.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigAuthorization:
+      description: "By default, following policies will be included: - JWS - JWT - OAuth - BasicAuth - APIKey"
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigCORS:
+      description: Checks to see if you have CORS policy in place.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigCategory:
+      description: Advanced API Security provides security profile that scores the following categories.
+      properties:
+        abuse:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigAbuse"
+          description: Checks for abuse, which includes any requests sent to the API for purposes other than what it is intended for, such as high volumes of requests, data scraping, and abuse related to authorization.
+        authorization:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigAuthorization"
+          description: Checks to see if you have an authorization policy in place.
+        cors:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigCORS"
+          description: Checks to see if you have CORS policy in place.
+        mediation:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigMediation"
+          description: Checks to see if you have a mediation policy in place.
+        mtls:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigMTLS"
+          description: Checks to see if you have configured mTLS for the target server.
+        threat:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigThreat"
+          description: Checks to see if you have a threat protection policy in place.
+      type: object
+    GoogleCloudApigeeV1ProfileConfigMTLS:
+      description: Checks to see if you have configured mTLS for the target server.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigMediation:
+      description: "By default, following policies will be included: - OASValidation - SOAPMessageValidation"
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigThreat:
+      description: "By default, following policies will be included: - XMLThreatProtection - JSONThreatProtection"
+      properties: {}
       type: object
     GoogleCloudApigeeV1Properties:
       description: Message for compatibility with legacy Edge specification for Java Properties object in JSON.
@@ -8527,6 +8587,9 @@ components:
     GoogleCloudApigeeV1SecurityProfile:
       description: Represents a SecurityProfile resource.
       properties:
+        description:
+          description: Description of the security profile.
+          type: string
         displayName:
           description: Display name of the security profile.
           type: string
@@ -8548,6 +8611,9 @@ components:
         name:
           description: "Immutable. Name of the security profile resource. Format: organizations/{org}/securityProfiles/{profile}"
           type: string
+        profileConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfig"
+          description: Customized profile configuration that computes the security score.
         revisionCreateTime:
           description: Output only. The time when revision was created.
           format: google-datetime

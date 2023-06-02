@@ -4209,6 +4209,7 @@ components:
           type: string
           x-apideck-enum-id: employees.leaving_reason
         manager:
+          additionalProperties: false
           properties:
             email:
               description: The email address of the manager.

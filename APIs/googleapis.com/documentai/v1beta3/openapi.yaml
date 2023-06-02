@@ -107,11 +107,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: The standard list filter.
+        - description: If set, only returns the visible fields of the schema.
           in: query
-          name: filter
+          name: visibleFieldsOnly
           schema:
-            type: string
+            type: boolean
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -148,6 +148,40 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a DatasetSchema.
+      operationId: documentai.projects.locations.processors.dataset.updateDatasetSchema
+      parameters:
+        - description: "Dataset schema resource name. Format: `projects/{project}/locations/{location}/processors/{processor}/dataset/datasetSchema`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The update mask applies to the resource.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetSchema"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetSchema"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta3/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
@@ -3815,6 +3849,70 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta3Dataset:
+      description: A singleton resource under a `Processor` which configs a collection of documents.
+      properties:
+        documentWarehouseConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetDocumentWarehouseConfig"
+          description: Optional. Document Warehouse-based dataset config.
+        gcsManagedConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetGCSManagedConfig"
+          description: Optional. User managed GCS dataset config. Use this config if the dataset documents are stored under a user managed GCS location.
+        name:
+          description: "Dataset resource name. Format: `projects/{project}/locations/{location}/processors/{processor}/dataset`"
+          type: string
+        spannerIndexingConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetSpannerIndexingConfig"
+          description: Optional. A lightweight indexing source with low latency and high reliablity, but lack advanced features like CMEK and content based search.
+        state:
+          description: Required. State of the dataset. Will be ignored when updating dataset.
+          enum:
+            - STATE_UNSPECIFIED
+            - UNINITIALIZED
+            - INITIALIZING
+            - INITIALIZED
+          type: string
+        unmanagedDatasetConfig:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetUnmanagedDatasetConfig"
+          description: Optional. Unmanaged dataset config. Use this config if the dataset documents are managed by the document service internally (not user managed).
+      type: object
+    GoogleCloudDocumentaiV1beta3DatasetDocumentWarehouseConfig:
+      description: Config specific to the Document Warehouse-based implementation.
+      properties:
+        collection:
+          description: Output only. The collection in Document Warehouse associated with the dataset.
+          readOnly: true
+          type: string
+        schema:
+          description: Output only. The schema in Document Warehouse associated with the dataset.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3DatasetGCSManagedConfig:
+      description: Config specific to the GCS-based implementation.
+      properties:
+        gcsPrefix:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3GcsPrefix"
+          description: Required. The Cloud Storage uri (a directory) where the documents belonging to the dataset must be stored.
+      type: object
+    GoogleCloudDocumentaiV1beta3DatasetSchema:
+      description: Dataset Schema.
+      properties:
+        documentSchema:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentSchema"
+          description: Optional. Schema of the dataset.
+        name:
+          description: "Dataset schema resource name. Format: `projects/{project}/locations/{location}/processors/{processor}/dataset/datasetSchema`"
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3DatasetSpannerIndexingConfig:
+      description: Config specific to spanner based indexing.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3DatasetUnmanagedDatasetConfig:
+      description: Config specific to unmanaged config
+      properties: {}
+      type: object
     GoogleCloudDocumentaiV1beta3DeleteProcessorMetadata:
       description: The long-running operation metadata for the DeleteProcessor method.
       properties:
@@ -4626,6 +4724,9 @@ components:
         displayName:
           description: User defined name for the type.
           type: string
+        entityTypeMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3EntityTypeMetadata"
+          description: Metadata for the entity type.
         enumValues:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentSchemaEntityTypeEnumValues"
           description: If specified, lists all the possible values for this entity. This should not be more than a handful of values. If the number of values is >10 or could change frequently use the `EntityType.value_ontology` field and specify a list of all possible values in a value ontology file.
@@ -4662,6 +4763,9 @@ components:
             - REQUIRED_ONCE
             - REQUIRED_MULTIPLE
           type: string
+        propertyMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3PropertyMetadata"
+          description: Any additional metadata about the property can be added here.
         valueType:
           description: A reference to the value type of the property. This type is subject to the same conventions as the `Entity.base_types` field.
           type: string
@@ -4790,6 +4894,13 @@ components:
     GoogleCloudDocumentaiV1beta3EnableProcessorResponse:
       description: Response message for the EnableProcessor method. Intentionally empty proto for adding fields in future.
       properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3EntityTypeMetadata:
+      description: Metadata about an entity type.
+      properties:
+        inactive:
+          description: Whether the entity type should be considered as "inactive".
+          type: boolean
       type: object
     GoogleCloudDocumentaiV1beta3EvaluateProcessorVersionMetadata:
       description: Metadata of the EvaluateProcessorVersion method.
@@ -5323,6 +5434,13 @@ components:
         replacementProcessorVersion:
           description: If set, the processor version that will be used as a replacement.
           type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3PropertyMetadata:
+      description: Metadata about a property.
+      properties:
+        inactive:
+          description: Whether the property should be considered as "inactive".
+          type: boolean
       type: object
     GoogleCloudDocumentaiV1beta3RawDocument:
       description: Payload message of raw document content (bytes).
