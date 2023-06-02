@@ -18686,6 +18686,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParallelismConfiguration'
             - description: The parallelism configuration applied to the pipeline.
+        SelectiveExecutionConfig:
+          allOf:
+            - $ref: '#/components/schemas/SelectiveExecutionConfig'
+            - description: The selective execution configuration applied to the pipeline run.
     DescribePipelineExecutionRequest:
       type: object
       required:
@@ -23470,6 +23474,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParallelismConfiguration'
             - description: 'This configuration, if specified, overrides the parallelism configuration of the parent pipeline for this specific run.'
+        SelectiveExecutionConfig:
+          allOf:
+            - $ref: '#/components/schemas/SelectiveExecutionConfig'
+            - description: The selective execution configuration applied to the pipeline run.
     StopAutoMLJobRequest:
       type: object
       required:
@@ -26202,7 +26210,7 @@ components:
         ContentType:
           allOf:
             - $ref: '#/components/schemas/ContentType'
-            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or <code>image/*</code>. The default value is <code>image/*</code>.</p> </li> <li> <p>TextClassification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> </ul>'
+            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, <code>image/*</code> </p> </li> <li> <p>TextClassification: <code>text/csv;header=present</code> </p> </li> </ul>'
         CompressionType:
           allOf:
             - $ref: '#/components/schemas/CompressionType'
@@ -31943,6 +31951,21 @@ components:
       type: string
       pattern: .*
       maxLength: 1300
+    SelectiveExecutionConfig:
+      type: object
+      required:
+        - SourcePipelineExecutionArn
+        - SelectedSteps
+      properties:
+        SourcePipelineExecutionArn:
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionArn'
+            - description: The ARN from a reference execution of the current pipeline. Used to copy input collaterals needed for the selected steps to run. The execution status of the pipeline can be either <code>Failed</code> or <code>Success</code>.
+        SelectedSteps:
+          allOf:
+            - $ref: '#/components/schemas/SelectedStepList'
+            - description: A list of pipeline steps to run. All step(s) in all path(s) between two selected steps should be included.
+      description: The selective execution configuration applied to the pipeline run.
     PipelineNameOrArn:
       type: string
       pattern: '(arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:pipeline/.*)?([a-zA-Z0-9](-*[a-zA-Z0-9]){0,255})'
@@ -37996,6 +38019,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParameterList'
             - description: 'Contains a list of pipeline parameters. This list can be empty. '
+        SelectiveExecutionConfig:
+          allOf:
+            - $ref: '#/components/schemas/SelectiveExecutionConfig'
+            - description: The selective execution configuration applied to the pipeline run.
       description: An execution of a pipeline.
     StepName:
       type: string
@@ -38080,6 +38107,14 @@ components:
             - $ref: '#/components/schemas/AutoMLJobStepMetadata'
             - description: The Amazon Resource Name (ARN) of the AutoML job that was run by this step.
       description: Metadata for a step execution.
+    SelectiveExecutionResult:
+      type: object
+      properties:
+        SourcePipelineExecutionArn:
+          allOf:
+            - $ref: '#/components/schemas/PipelineExecutionArn'
+            - description: The ARN from an execution of the current pipeline.
+      description: The ARN from an execution of the current pipeline.
     PipelineExecutionStep:
       type: object
       properties:
@@ -38123,6 +38158,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionStepMetadata'
             - description: Metadata to run the pipeline step.
+        SelectiveExecutionResult:
+          allOf:
+            - $ref: '#/components/schemas/SelectiveExecutionResult'
+            - description: The ARN from an execution of the current pipeline from which results are reused for this step.
       description: An execution of a step in a pipeline.
     TrainingJobStepMetadata:
       type: object
@@ -39703,6 +39742,22 @@ components:
       description: '<p>An array element of <code>SecondaryStatusTransitions</code> for <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html">DescribeTrainingJob</a>. It provides additional details about a status that the training job has transitioned through. A training job can be in one of several states, for example, starting, downloading, training, or uploading. Within each state, there are a number of intermediate states. For example, within the starting state, SageMaker could be starting the training job or launching the ML instances. These transitional states are referred to as the job''s secondary status. </p> <p/>'
     Seed:
       type: integer
+    SelectedStep:
+      type: object
+      required:
+        - StepName
+      properties:
+        StepName:
+          allOf:
+            - $ref: '#/components/schemas/String256'
+            - description: The name of the pipeline step.
+      description: A step selected to run in selective execution mode.
+    SelectedStepList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SelectedStep'
+      minItems: 1
+      maxItems: 50
     ServiceCatalogEntityId:
       type: string
       pattern: '^[a-zA-Z0-9_\-]*'

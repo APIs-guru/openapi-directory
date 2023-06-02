@@ -252,7 +252,7 @@ paths:
   /#X-Amz-Target=AmazonAthena.CancelCapacityReservation:
     post:
       operationId: CancelCapacityReservation
-      description: Cancels the capacity reservation with the specified name.
+      description: 'Cancels the capacity reservation with the specified name. Cancelled reservations remain in your account and will be deleted 45 days after cancellation. During the 45 days, you cannot re-purpose or reuse a reservation that has been cancelled, but you can refer to its tags and view it for historical reference. '
       responses:
         '200':
           description: Success
@@ -613,6 +613,51 @@ paths:
             type: string
             enum:
               - AmazonAthena.CreateWorkGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonAthena.DeleteCapacityReservation:
+    post:
+      operationId: DeleteCapacityReservation
+      description: 'Deletes a cancelled capacity reservation. A reservation must be cancelled before it can be deleted. A deleted reservation is immediately removed from your account and can no longer be referenced, including by its ARN. A deleted reservation cannot be called by <code>GetCapacityReservation</code>, and deleted reservations do not appear in the output of <code>ListCapacityReservations</code>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCapacityReservationOutput'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteCapacityReservationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonAthena.DeleteCapacityReservation
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3868,6 +3913,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of comma separated tags to add to the workgroup that is created.
+    DeleteCapacityReservationOutput:
+      type: object
+      properties: {}
+    DeleteCapacityReservationInput:
+      type: object
+      required:
+        - Name
+      title: DeleteCapacityReservationInput
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/CapacityReservationName'
+            - description: The name of the capacity reservation to delete.
     DeleteDataCatalogOutput:
       type: object
       properties: {}
@@ -6206,7 +6264,7 @@ components:
         ExecutionParameters:
           allOf:
             - $ref: '#/components/schemas/ExecutionParameters'
-            - description: A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur.
+            - description: A list of values for the parameters in a query. The values are applied sequentially to the parameters in the query in the order in which the parameters occur. The list of parameters is not returned in the response.
         SubstatementType:
           allOf:
             - $ref: '#/components/schemas/String'
