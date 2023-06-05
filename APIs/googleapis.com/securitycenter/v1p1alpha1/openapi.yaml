@@ -253,6 +253,9 @@ components:
         serviceName:
           description: This is the API service that the service account made a call to, e.g. "iam.googleapis.com"
           type: string
+        userAgent:
+          description: The caller's user agent string associated with the finding.
+          type: string
         userAgentFamily:
           description: Type of user agent associated with the finding. For example, an operating system shell or an embedded or standalone application.
           type: string

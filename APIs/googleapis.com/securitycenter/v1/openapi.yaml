@@ -1331,6 +1331,9 @@ components:
         serviceName:
           description: This is the API service that the service account made a call to, e.g. "iam.googleapis.com"
           type: string
+        userAgent:
+          description: The caller's user agent string associated with the finding.
+          type: string
         userAgentFamily:
           description: Type of user agent associated with the finding. For example, an operating system shell or an embedded or standalone application.
           type: string
@@ -3013,7 +3016,7 @@ components:
           $ref: "#/components/schemas/AssetDiscoveryConfig"
           description: The configuration used for Asset Discovery runs.
         enableAssetDiscovery:
-          description: A flag that indicates if Asset Discovery should be enabled. If the flag is set to `true`, then discovery of assets will occur. If it is set to `false, all historical assets will remain, but discovery of future assets will not occur.
+          description: A flag that indicates if Asset Discovery should be enabled. If the flag is set to `true`, then discovery of assets will occur. If it is set to `false`, all historical assets will remain, but discovery of future assets will not occur.
           type: boolean
         name:
           description: 'The relative resource name of the settings. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/organizationSettings".'

@@ -1055,6 +1055,11 @@ components:
     GoogleCloudPaymentsResellerSubscriptionV1YoutubePayload:
       description: Payload specific to Youtube products.
       properties:
+        accessEndTime:
+          description: Output only. The access expiration time for this line item.
+          format: google-datetime
+          readOnly: true
+          type: string
         partnerEligibilityIds:
           description: The list of eligibility_ids which are applicable for the line item.
           items:

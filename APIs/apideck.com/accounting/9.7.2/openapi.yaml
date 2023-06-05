@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Accounting API
-  version: 9.7.0
+  version: 9.7.2
   x-apideck-api: accounting
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3981,6 +3981,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
@@ -5393,7 +5394,7 @@ components:
         minimum: 1
         type: integer
     passThrough:
-      description: Optional unmapped key/values that will be passed through to downstream as query parameters
+      description: "Optional unmapped key/values that will be passed through to downstream as query parameters. Ie: ?pass_through[search]=leads becomes ?search=leads"
       explode: true
       in: query
       name: pass_through
@@ -5903,7 +5904,37 @@ components:
       x-apideck-enum-id: accounting.events
     AccountingWebhookEvent:
       allOf:
-        - $ref: "#/components/schemas/WebhookEvent/allOf/0"
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+          x-apideck-schema-id: WebhookEvent
         - properties:
             event_type:
               $ref: "#/components/schemas/AccountingEventType"
@@ -8650,6 +8681,7 @@ components:
         email: elon@musk.com
         first_name: Elon
         last_name: Musk
+        status: active
       properties:
         company_name:
           description: Company Name of customer to search for
@@ -8676,6 +8708,18 @@ components:
           example: Musk
           title: Last Name
           type: string
+        status:
+          description: Status of customer to filter on
+          enum:
+            - active
+            - inactive
+            - archived
+            - all
+          example: active
+          nullable: true
+          title: Status
+          type: string
+          x-apideck-enum-id: customers.status
       type: object
       x-apideck-schema-id: CustomersFilter
     DeleteBillResponse:
@@ -11251,10 +11295,8 @@ components:
       x-apideck-schema-id: NotImplemented
     PassThroughQuery:
       additionalProperties: true
-      properties:
-        example_downstream_property:
-          description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
-          type: string
+      example:
+        search: San Francisco
       type: object
     Payment:
       additionalProperties: false
@@ -12931,44 +12973,6 @@ components:
       readOnly: true
       title: Updated by
       type: string
-    WebhookEvent:
-      allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-          x-apideck-schema-id: WebhookEvent
-        - properties:
-            event_type:
-              $ref: "#/components/schemas/AccountingEventType"
-          type: object
-      x-sdk-exclude: true
     Website:
       additionalProperties: false
       properties:
@@ -13027,7 +13031,6 @@ x-webhooks:
       operationId: customerCreated
       parameters:
         - description: The type of event that was triggered
-          example: accounting.customer.created
           in: header
           name: x-apideck-event-type
           required: true
@@ -13579,6 +13582,12 @@ x-webhooks:
       description: Event broadcast when a purchase order has been created.
       operationId: purchaseOrderCreated
       parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
         - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
           in: header
           name: x-apideck-idempotency-key
@@ -13602,10 +13611,13 @@ x-webhooks:
                 service_id: xero
                 unified_api: accounting
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
       security: []
       summary: Purchase order Created
       tags:
@@ -13616,6 +13628,12 @@ x-webhooks:
       description: Event broadcast when a purchase order has been deleted.
       operationId: purchaseOrderDeleted
       parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
         - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
           in: header
           name: x-apideck-idempotency-key
@@ -13639,10 +13657,13 @@ x-webhooks:
                 service_id: xero
                 unified_api: accounting
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
       security: []
       summary: Purchase order Deleted
       tags:
@@ -13653,6 +13674,12 @@ x-webhooks:
       description: Event broadcast when a purchase order has been updated.
       operationId: purchaseOrderUpdated
       parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountingEventType"
         - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
           in: header
           name: x-apideck-idempotency-key
@@ -13676,10 +13703,13 @@ x-webhooks:
                 service_id: xero
                 unified_api: accounting
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AccountingWebhookEvent"
+              type: object
       responses:
         "200":
-          description: Return a 200 status to indicate that the data was received successfully
+          description: Return a 200 status to indicate that the data was received successfully.
       security: []
       summary: Purchase order Updated
       tags:

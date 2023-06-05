@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 9.7.0
+  version: 9.7.2
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -346,6 +346,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -733,6 +734,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1012,6 +1014,7 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/employeesFilter"
         - $ref: "#/components/parameters/employeesSort"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1663,6 +1666,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1775,6 +1779,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/payrollsFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1826,6 +1831,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/payrollsFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1986,6 +1992,7 @@ paths:
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2040,6 +2047,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/timeOffRequestsFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2418,6 +2426,14 @@ components:
         maximum: 200
         minimum: 1
         type: integer
+    passThrough:
+      description: "Optional unmapped key/values that will be passed through to downstream as query parameters. Ie: ?pass_through[search]=leads becomes ?search=leads"
+      explode: true
+      in: query
+      name: pass_through
+      schema:
+        $ref: "#/components/schemas/PassThroughQuery"
+      style: deepObject
     payrollId:
       description: ID of the payroll you are acting upon.
       in: path
@@ -5316,6 +5332,44 @@ components:
           type: array
       type: object
       x-apideck-schema-id: HrisJobs
+    HrisWebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+          x-apideck-schema-id: WebhookEvent
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/HrisEventType"
+          type: object
+      x-sdk-exclude: true
     Id:
       description: A unique identifier for an object.
       example: "12345"
@@ -5450,6 +5504,11 @@ components:
           type: string
       type: object
       x-apideck-schema-id: NotImplemented
+    PassThroughQuery:
+      additionalProperties: true
+      example:
+        search: San Francisco
+      type: object
     PaymentRequiredResponse:
       properties:
         detail:
@@ -6301,44 +6360,6 @@ components:
       readOnly: true
       title: Updated by
       type: string
-    WebhookEvent:
-      allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-          x-apideck-schema-id: WebhookEvent
-        - properties:
-            event_type:
-              $ref: "#/components/schemas/HrisEventType"
-          type: object
-      x-sdk-exclude: true
     Website:
       additionalProperties: false
       properties:
@@ -6427,7 +6448,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/HrisWebhookEvent"
               type: object
       responses:
         "200":
@@ -6473,7 +6494,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/HrisWebhookEvent"
               type: object
       responses:
         "200":
@@ -6519,7 +6540,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/HrisWebhookEvent"
               type: object
       responses:
         "200":
@@ -6565,7 +6586,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/HrisWebhookEvent"
               type: object
       responses:
         "200":
@@ -6611,7 +6632,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/HrisWebhookEvent"
               type: object
       responses:
         "200":
@@ -6655,7 +6676,10 @@ x-webhooks:
                 service_id: bamboo
                 unified_api: hris
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/HrisWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
@@ -6700,7 +6724,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/HrisWebhookEvent"
               type: object
       responses:
         "200":

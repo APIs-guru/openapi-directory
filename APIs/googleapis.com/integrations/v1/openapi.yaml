@@ -400,48 +400,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:executeEvent":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Executes an integration on receiving events from Integration Connector triggers, Eventarc or CPS Trigger. The details about integration are derived from CloudEvent request body.
-      operationId: integrations.projects.locations.integrations.executeEvent
-      parameters:
-        - description: "Required. The integration resource name. Format: projects/{gcp_project_id}/locations/{location}/integrations/{integration_id}"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaExecuteEventRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaExecuteEventResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{name}:lift":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1866,6 +1824,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Optional. Indicates if sample workflow should be created.
+          in: query
+          name: createSampleIntegrations
+          schema:
+            type: boolean
         - description: Set this flag to true, if draft version is to be created for a brand new integration. False, if the request is for an existing integration. For backward compatibility reasons, even if this flag is set to `false` and no existing integration is found, a new draft integration will still be created.
           in: query
           name: newIntegration
@@ -4823,6 +4786,9 @@ components:
         boolValue:
           description: Value is a bool.
           type: boolean
+        encryptionKeyValue:
+          $ref: "#/components/schemas/GoogleCloudConnectorsV1EncryptionKey"
+          description: Value is a Encryption Key.
         intValue:
           description: Value is an integer
           format: int64
@@ -4830,9 +4796,6 @@ components:
         key:
           description: Key of the config variable.
           type: string
-        keyValue:
-          $ref: "#/components/schemas/GoogleCloudConnectorsV1EncryptionKey"
-          description: Value is a Encryption Key.
         secretValue:
           $ref: "#/components/schemas/GoogleCloudConnectorsV1Secret"
           description: Value is a secret.
@@ -5558,20 +5521,6 @@ components:
         value:
           $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaValueType"
           description: Values for the defined keys. Each value can either be string, int, double or any proto message.
-      type: object
-    GoogleCloudIntegrationsV1alphaExecuteEventRequest:
-      description: Request for triggering an integration using event triggers.
-      properties:
-        cloudEvent:
-          $ref: "#/components/schemas/IoCloudeventsV1CloudEvent"
-          description: Required. Details about the trigger which is to be executed and values for input variable to the integration.
-      type: object
-    GoogleCloudIntegrationsV1alphaExecuteEventResponse:
-      description: The response for executing an integration.
-      properties:
-        executionId:
-          description: The id of the execution corresponding to this run of integration.
-          type: string
       type: object
     GoogleCloudIntegrationsV1alphaExecuteIntegrationsRequest:
       description: The request for executing an integration.
@@ -7080,54 +7029,6 @@ components:
     GoogleProtobufEmpty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
-      type: object
-    IoCloudeventsV1CloudEvent:
-      description: -- CloudEvent Context Attributes
-      properties:
-        attributes:
-          additionalProperties:
-            $ref: "#/components/schemas/IoCloudeventsV1CloudEventCloudEventAttributeValue"
-          description: Optional & Extension Attributes
-          type: object
-        binaryData:
-          format: byte
-          type: string
-        id:
-          description: Required Attributes
-          type: string
-        protoData:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          type: object
-        source:
-          description: URI-reference
-          type: string
-        specVersion:
-          type: string
-        textData:
-          type: string
-        type:
-          type: string
-      type: object
-    IoCloudeventsV1CloudEventCloudEventAttributeValue:
-      properties:
-        ceBoolean:
-          type: boolean
-        ceBytes:
-          format: byte
-          type: string
-        ceInteger:
-          format: int32
-          type: integer
-        ceString:
-          type: string
-        ceTimestamp:
-          format: google-datetime
-          type: string
-        ceUri:
-          type: string
-        ceUriRef:
-          type: string
       type: object
   securitySchemes:
     Oauth2:

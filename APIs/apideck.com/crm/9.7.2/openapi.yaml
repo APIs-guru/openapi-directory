@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 9.7.0
+  version: 9.7.2
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -348,6 +348,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/activitiesFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -798,6 +799,7 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/companiesFilter"
         - $ref: "#/components/parameters/companiesSort"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1290,6 +1292,7 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/contactsFilter"
         - $ref: "#/components/parameters/contactsSort"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1752,6 +1755,7 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/leadsFilter"
         - $ref: "#/components/parameters/leadsSort"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2194,6 +2198,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2486,6 +2491,7 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/opportunitiesFilter"
         - $ref: "#/components/parameters/opportunitiesSort"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2832,6 +2838,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -3137,6 +3144,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -3637,6 +3645,14 @@ components:
       name: sort
       schema:
         $ref: "#/components/schemas/OpportunitiesSort"
+      style: deepObject
+    passThrough:
+      description: "Optional unmapped key/values that will be passed through to downstream as query parameters. Ie: ?pass_through[search]=leads becomes ?search=leads"
+      explode: true
+      in: query
+      name: pass_through
+      schema:
+        $ref: "#/components/schemas/PassThroughQuery"
       style: deepObject
     raw:
       description: Include raw response. Mostly used for debugging purposes
@@ -7675,6 +7691,11 @@ components:
         win_probability: high
         won_reason: edge-case
         won_reason_id: edge-case
+    PassThroughQuery:
+      additionalProperties: true
+      example:
+        search: San Francisco
+      type: object
     PaymentRequiredResponse:
       properties:
         detail:

@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: ATS API
-  version: 9.7.0
+  version: 9.7.2
   x-apideck-api: ats
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -331,7 +331,8 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/jobsFilter"
+        - $ref: "#/components/parameters/applicantsFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -794,6 +795,7 @@ paths:
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/limit"
       responses:
         "200":
@@ -1078,6 +1080,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1217,14 +1220,6 @@ components:
       required: true
       schema:
         type: string
-    jobsFilter:
-      description: Apply filters
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/JobsFilter"
-      style: deepObject
     limit:
       description: Number of results to return. Minimum 1, Maximum 200, Default 20
       in: query
@@ -1234,6 +1229,14 @@ components:
         maximum: 200
         minimum: 1
         type: integer
+    passThrough:
+      description: "Optional unmapped key/values that will be passed through to downstream as query parameters. Ie: ?pass_through[search]=leads becomes ?search=leads"
+      explode: true
+      in: query
+      name: pass_through
+      schema:
+        $ref: "#/components/schemas/PassThroughQuery"
+      style: deepObject
     raw:
       description: Include raw response. Mostly used for debugging purposes
       in: query
@@ -1949,7 +1952,37 @@ components:
       type: string
     AtsWebhookEvent:
       allOf:
-        - $ref: "#/components/schemas/WebhookEvent/allOf/0"
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+          x-apideck-schema-id: WebhookEvent
         - properties:
             event_type:
               $ref: "#/components/schemas/AtsEventType"
@@ -3433,17 +3466,6 @@ components:
       example: completed
       type: string
       x-apideck-enum-id: jobs.status
-    JobsFilter:
-      additionalProperties: false
-      example:
-        job_id: "1234"
-      properties:
-        job_id:
-          description: Id of the job to filter on
-          example: "1234"
-          type: string
-      type: object
-      x-apideck-schema-id: JobsFilter
     Language:
       description: language code according to ISO 639-1. For the United States - EN
       example: EN
@@ -3595,6 +3617,11 @@ components:
       example: "54321"
       title: Owner ID
       type: string
+    PassThroughQuery:
+      additionalProperties: true
+      example:
+        search: San Francisco
+      type: object
     PaymentRequiredResponse:
       properties:
         detail:
@@ -3959,44 +3986,6 @@ components:
       format: uri
       pattern: ^(https?)://
       type: string
-    WebhookEvent:
-      allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-          x-apideck-schema-id: WebhookEvent
-        - properties:
-            event_type:
-              $ref: "#/components/schemas/AtsEventType"
-          type: object
-      x-sdk-exclude: true
   securitySchemes:
     apiKey:
       description: |
@@ -4189,7 +4178,10 @@ x-webhooks:
                 service_id: lever
                 unified_api: ats
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AtsWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -4226,7 +4218,10 @@ x-webhooks:
                 service_id: lever
                 unified_api: ats
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AtsWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully
@@ -4263,7 +4258,10 @@ x-webhooks:
                 service_id: lever
                 unified_api: ats
             schema:
-              $ref: "#/components/schemas/WebhookEvent"
+              properties:
+                payload:
+                  $ref: "#/components/schemas/AtsWebhookEvent"
+              type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully

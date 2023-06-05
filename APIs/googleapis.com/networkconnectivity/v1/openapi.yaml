@@ -530,45 +530,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a new ServiceClass in a given project and location.
-      operationId: networkconnectivity.projects.locations.serviceClasses.create
-      parameters:
-        - description: Required. The parent resource's name of the ServiceClass.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-        - description: Optional. Resource ID (i.e. 'foo' in '[...]/projects/p/locations/l/serviceClasses/foo') See https://google.aip.dev/122#resource-id-segments Unique per location. If one is not provided, one will be generated.
-          in: query
-          name: serviceClassId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ServiceClass"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{parent}/serviceConnectionMaps":
     get:
       description: Lists ServiceConnectionMaps in a given project and location.
@@ -1210,6 +1171,14 @@ components:
           type: string
         project:
           description: The consumer project where PSC connections are allowed to be created in.
+          type: string
+        state:
+          description: Output only. Overall state of PSC Connections management for this consumer psc config.
+          enum:
+            - STATE_UNSPECIFIED
+            - VALID
+            - CONNECTION_POLICY_MISSING
+          readOnly: true
           type: string
       type: object
     ConsumerPscConnection:

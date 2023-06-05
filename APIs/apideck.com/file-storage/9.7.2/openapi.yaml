@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 9.7.0
+  version: 9.7.2
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -335,6 +335,7 @@ paths:
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/driveGroupsFilter"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -1578,6 +1579,7 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
@@ -2268,7 +2270,7 @@ components:
         minimum: 0
         type: number
     passThrough:
-      description: Optional unmapped key/values that will be passed through to downstream as query parameters
+      description: "Optional unmapped key/values that will be passed through to downstream as query parameters. Ie: ?pass_through[search]=leads becomes ?search=leads"
       explode: true
       in: query
       name: pass_through
@@ -3159,6 +3161,44 @@ components:
       example: file-storage.file.created
       type: string
       x-apideck-enum-id: file-storage.event_type
+    FileStorageWebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+          x-apideck-schema-id: WebhookEvent
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/FileStorageEventType"
+          type: object
+      x-sdk-exclude: true
     FileType:
       description: The type of resource. Could be file, folder or url
       enum:
@@ -3829,10 +3869,8 @@ components:
       x-apideck-schema-id: ParentFolderId
     PassThroughQuery:
       additionalProperties: true
-      properties:
-        example_downstream_property:
-          description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
-          type: string
+      example:
+        search: San Francisco
       type: object
     PaymentRequiredResponse:
       properties:
@@ -4426,44 +4464,6 @@ components:
         part_size: critical
         success: critical
         uploaded_byte_range: low
-    WebhookEvent:
-      allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-          x-apideck-schema-id: WebhookEvent
-        - properties:
-            event_type:
-              $ref: "#/components/schemas/FileStorageEventType"
-          type: object
-      x-sdk-exclude: true
   securitySchemes:
     apiKey:
       description: |
@@ -4523,7 +4523,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/FileStorageWebhookEvent"
               type: object
       responses:
         "200":
@@ -4569,7 +4569,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/FileStorageWebhookEvent"
               type: object
       responses:
         "200":
@@ -4615,7 +4615,7 @@ x-webhooks:
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/WebhookEvent"
+                  $ref: "#/components/schemas/FileStorageWebhookEvent"
               type: object
       responses:
         "200":
