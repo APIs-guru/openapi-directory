@@ -808,7 +808,7 @@ paths:
   /#X-Amz-Target=KeyspacesService.TagResource:
     post:
       operationId: TagResource
-      description: '<p>Associates a set of tags with a Amazon Keyspaces resource. You can then activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking. For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>For IAM policy examples that show how to control access to Amazon Keyspaces resources based on tags, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples-tags">Amazon Keyspaces resource access based on tags</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>'
+      description: '<p>Associates a set of tags with a Amazon Keyspaces resource. You can then activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking. For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p> <p>For IAM policy examples that show how to control access to Amazon Keyspaces resources based on tags, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-tags">Amazon Keyspaces resource access based on tags</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1081,6 +1081,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: '<p>A list of key-value pair tags to be attached to the keyspace.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>'
+        replicationSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationSpecification'
+            - description: '<p> The replication specification of the keyspace includes:</p> <ul> <li> <p> <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.</p> </li> <li> <p> <code>regionList</code> - if the <code>replicationStrategy</code> is <code>MULTI_REGION</code>, the <code>regionList</code> requires the current Region and at least one additional Amazon Web Services Region where the keyspace is going to be replicated in. The maximum number of supported replication Regions including the current Region is six.</p> </li> </ul>'
     ValidationException: {}
     ServiceQuotaExceededException: {}
     InternalServerException: {}
@@ -1184,6 +1188,7 @@ components:
       required:
         - keyspaceName
         - resourceArn
+        - replicationStrategy
       properties:
         keyspaceName:
           allOf:
@@ -1192,7 +1197,15 @@ components:
         resourceArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: The ARN of the keyspace.
+            - description: Returns the ARN of the keyspace.
+        replicationStrategy:
+          allOf:
+            - $ref: '#/components/schemas/rs'
+            - description: ' Returns the replication strategy of the keyspace. The options are <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>. '
+        replicationRegions:
+          allOf:
+            - $ref: '#/components/schemas/RegionList'
+            - description: ' If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. '
     GetKeyspaceRequest:
       type: object
       required:
@@ -1632,7 +1645,7 @@ components:
       description: An optional comment that describes the table.
     KeyspaceName:
       type: string
-      pattern: '[a-zA-Z0-9][a-zA-Z0-9_]{1,47}'
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9_]{0,47}'
       minLength: 1
       maxLength: 48
     TagList:
@@ -1641,9 +1654,23 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 1
       maxItems: 60
+    ReplicationSpecification:
+      type: object
+      required:
+        - replicationStrategy
+      properties:
+        replicationStrategy:
+          allOf:
+            - $ref: '#/components/schemas/rs'
+            - description: ' The <code>replicationStrategy</code> of a keyspace, the required value is <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>. '
+        regionList:
+          allOf:
+            - $ref: '#/components/schemas/RegionList'
+            - description: ' The <code>regionList</code> can contain up to six Amazon Web Services Regions where the keyspace is replicated in. '
+      description: '<p> The replication specification of the keyspace includes:</p> <ul> <li> <p> <code>regionList</code> - up to six Amazon Web Services Regions where the keyspace is replicated in.</p> </li> <li> <p> <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.</p> </li> </ul>'
     TableName:
       type: string
-      pattern: '[a-zA-Z0-9][a-zA-Z0-9_]{1,47}'
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9_]{0,47}'
       minLength: 1
       maxLength: 48
     SchemaDefinition:
@@ -1716,6 +1743,19 @@ components:
       type: string
       minLength: 1
       maxLength: 5096
+    rs:
+      type: string
+      enum:
+        - SINGLE_REGION
+        - MULTI_REGION
+      minLength: 1
+      maxLength: 20
+    RegionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/region'
+      minItems: 2
+      maxItems: 6
     TableStatus:
       type: string
       enum:
@@ -1745,6 +1785,7 @@ components:
       required:
         - keyspaceName
         - resourceArn
+        - replicationStrategy
       properties:
         keyspaceName:
           allOf:
@@ -1754,6 +1795,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: The unique identifier of the keyspace in the format of an Amazon Resource Name (ARN).
+        replicationStrategy:
+          allOf:
+            - $ref: '#/components/schemas/rs'
+            - description: ' This property specifies if a keyspace is a single Region keyspace or a multi-Region keyspace. The available values are <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>. '
+        replicationRegions:
+          allOf:
+            - $ref: '#/components/schemas/RegionList'
+            - description: ' If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. '
       description: Represents the properties of a keyspace.
     KeyspaceSummaryList:
       type: array
@@ -1791,6 +1840,10 @@ components:
       enum:
         - ENABLED
         - DISABLED
+    region:
+      type: string
+      minLength: 2
+      maxLength: 25
     StaticColumnList:
       type: array
       items:

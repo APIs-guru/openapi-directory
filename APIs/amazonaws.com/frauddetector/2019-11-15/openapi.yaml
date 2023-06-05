@@ -1146,7 +1146,7 @@ paths:
   /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteEvent:
     post:
       operationId: DeleteEvent
-      description: '<p>Deletes the specified event.</p> <p>When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector.</p>'
+      description: '<p>Deletes the specified event.</p> <p>When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector. If <code>deleteAuditHistory</code> is <code>True</code>, event data is available through search for up to 30 seconds after the delete operation is completed.</p>'
       responses:
         '200':
           description: Success
@@ -5343,7 +5343,7 @@ components:
         dataType:
           allOf:
             - $ref: '#/components/schemas/DataType'
-            - description: The data type.
+            - description: The data type of the variable.
         dataSource:
           allOf:
             - $ref: '#/components/schemas/DataSource'
@@ -5456,7 +5456,7 @@ components:
         deleteAuditHistory:
           allOf:
             - $ref: '#/components/schemas/DeleteAuditHistory'
-            - description: Specifies whether or not to delete any predictions associated with the event.
+            - description: 'Specifies whether or not to delete any predictions associated with the event. If set to <code>True</code>, '
     DeleteEventTypeResult:
       type: object
       properties: {}
@@ -7535,6 +7535,7 @@ components:
         - INTEGER
         - FLOAT
         - BOOLEAN
+        - DATETIME
     DataSource:
       type: string
       enum:
