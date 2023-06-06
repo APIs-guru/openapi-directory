@@ -325,7 +325,7 @@ paths:
         - projects
   "/v1/{name}:getInstanceHealth":
     get:
-      description: Checks whether a notebook instance is healthy.
+      description: Check if a notebook instance is healthy.
       operationId: notebooks.projects.locations.instances.getInstanceHealth
       parameters:
         - description: "Required. Format: `projects/{project_id}/locations/{location}/instances/{instance_id}`"
@@ -458,7 +458,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Reports and processes a runtime event.
+      description: Report and process a runtime event.
       operationId: notebooks.projects.locations.runtimes.reportEvent
       parameters:
         - description: "Required. Format: `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`"
@@ -1076,7 +1076,7 @@ paths:
         - projects
   "/v1/{notebookInstance}:isUpgradeable":
     get:
-      description: Checks whether a notebook instance is upgradable.
+      description: Check if a notebook instance is upgradable.
       operationId: notebooks.projects.locations.instances.isUpgradeable
       parameters:
         - description: "Required. Format: `projects/{project_id}/locations/{location}/instances/{instance_id}`"
@@ -1797,7 +1797,7 @@ components:
         type: string
   schemas:
     AcceleratorConfig:
-      description: Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. See [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a valid combination. TPUs are not supported.
+      description: Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. Check [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a valid combination. TPUs are not supported.
       properties:
         coreCount:
           description: Count of cores of this accelerator.
@@ -2261,7 +2261,7 @@ components:
           description: If true, the notebook instance will not register with the proxy.
           type: boolean
         noPublicIp:
-          description: If true, no external IP will be assigned to this instance.
+          description: If true, no public IP will be assigned to this instance.
           type: boolean
         noRemoveDataDisk:
           description: Input only. If true, the data disk will not be auto deleted when deleting the instance.
@@ -2850,7 +2850,7 @@ components:
           type: object
       type: object
     RuntimeShieldedInstanceConfig:
-      description: A set of Shielded Instance options. See [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm). Not all combinations are valid.
+      description: A set of Shielded Instance options. Check [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm). Not all combinations are valid.
       properties:
         enableIntegrityMonitoring:
           description: Defines whether the instance has integrity monitoring enabled. Enables monitoring and attestation of the boot integrity of the instance. The attestation is performed against the integrity policy baseline. This baseline is initially derived from the implicitly trusted boot image when the instance is created. Enabled by default.
@@ -2965,7 +2965,7 @@ components:
           type: string
       type: object
     SchedulerAcceleratorConfig:
-      description: Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. See [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus) to find a valid combination. TPUs are not supported.
+      description: Definition of a hardware accelerator. Note that not all combinations of `type` and `core_count` are valid. Check [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus) to find a valid combination. TPUs are not supported.
       properties:
         coreCount:
           description: Count of cores of this accelerator.
@@ -2996,7 +2996,7 @@ components:
       description: Request for setting instance accelerator.
       properties:
         coreCount:
-          description: Required. Count of cores of this accelerator. Note that not all combinations of `type` and `core_count` are valid. See [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a valid combination. TPUs are not supported.
+          description: Required. Count of cores of this accelerator. Note that not all combinations of `type` and `core_count` are valid. Check [GPUs on Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a valid combination. TPUs are not supported.
           format: int64
           type: string
         type:
@@ -3033,7 +3033,7 @@ components:
           type: string
       type: object
     ShieldedInstanceConfig:
-      description: A set of Shielded Instance options. See [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm). Not all combinations are valid.
+      description: A set of Shielded Instance options. Check [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm). Not all combinations are valid.
       properties:
         enableIntegrityMonitoring:
           description: Defines whether the instance has integrity monitoring enabled. Enables monitoring and attestation of the boot integrity of the instance. The attestation is performed against the integrity policy baseline. This baseline is initially derived from the implicitly trusted boot image when the instance is created. Enabled by default.

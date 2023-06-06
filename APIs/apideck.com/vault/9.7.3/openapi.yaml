@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 9.7.2
+  version: 9.7.3
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3579,6 +3579,7 @@ components:
         - vault.connection.disabled
         - vault.connection.deleted
         - vault.connection.callable
+        - vault.connection.revoked
         - vault.connection.token_refresh.failed
       example: vault.connection.created
       type: string
@@ -3879,6 +3880,65 @@ x-webhooks:
       tags:
         - Webhook Events
       x-apideck-event-type: vault.connection.disabled
+  ConnectionRevoked:
+    post:
+      description: Event broadcast when a connection has been revoked.
+      operationId: connectionRevoked
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/VaultEventType"
+        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
+          in: header
+          name: x-apideck-idempotency-key
+          required: true
+          schema:
+            example: d290f1ee-6c54-4b01-90e6-d701748f0851
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              payload:
+                entity:
+                  auth_type: oauth2
+                  consumer_id: test_user_id
+                  created_at: 2020-09-19T12:18:37.071Z
+                  enabled: true
+                  icon: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
+                  id: 1111+test_user_id
+                  logo: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
+                  name: Salesforce
+                  service_id: salesforce
+                  state: added
+                  tag_line: CRM software solutions and enterprise cloud computing from Salesforce, the leader in customer relationship management (CRM) and PaaS. Free 30 day trial.
+                  unified_api: crm
+                  updated_at: 2020-09-19T12:18:37.071Z
+                  website: https://www.salesforce.com
+                entity_id: 1111+test_user_id
+                entity_type: Connection
+                event_id: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+                event_type: vault.connection.revoked
+                execution_attempt: 2
+                occurred_at: 2021-10-01T03:14:55.419Z
+                service_id: apideck-vault
+            schema:
+              properties:
+                payload:
+                  $ref: "#/components/schemas/ConnectionEvent"
+              type: object
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully.
+      security: []
+      summary: Connection Revoked
+      tags:
+        - Webhook Events
+      x-apideck-event-type: vault.connection.revoked
   ConnectionUpdated:
     post:
       description: Event broadcast when a connection has been updated.

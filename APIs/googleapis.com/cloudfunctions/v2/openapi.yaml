@@ -1555,6 +1555,9 @@ components:
     Source:
       description: The location of the function source code.
       properties:
+        gitUri:
+          description: "If provided, get the source from GitHub repository. This option is valid only for GCF 1st Gen function. Example: https://github.com///blob//"
+          type: string
         repoSource:
           $ref: "#/components/schemas/RepoSource"
           description: If provided, get the source from this location in a Cloud Source Repository.
@@ -1565,6 +1568,9 @@ components:
     SourceProvenance:
       description: Provenance of the source. Ways to find the original source, or verify that some source was used for this build.
       properties:
+        gitUri:
+          description: A copy of the build's `source.git_uri`, if exists, with any commits resolved.
+          type: string
         resolvedRepoSource:
           $ref: "#/components/schemas/RepoSource"
           description: A copy of the build's `source.repo_source`, if exists, with any revisions resolved.

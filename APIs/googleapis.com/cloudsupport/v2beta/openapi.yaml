@@ -773,7 +773,7 @@ components:
       description: A classification object with a product type and value.
       properties:
         displayName:
-          description: The display name of the classification.
+          description: A display name for the classification. The display name is not static and can change. To uniquely and consistently identify classifications, use the `CaseClassification.id` field.
           type: string
         id:
           description: The unique ID for a classification. Must be specified for case creation. To retrieve valid classification IDs for case creation, use `caseClassifications.search`.

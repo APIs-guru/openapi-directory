@@ -1431,11 +1431,6 @@ components:
         secondaryButton:
           $ref: "#/components/schemas/GoogleAppsCardV1Button"
           description: The secondary button of the fixed footer. The button must be a text button with text and color set. If `secondaryButton` is set, you must also set `primaryButton`.
-        widgets:
-          description: A list of widgets included in the card footer. Primary button and secondary button are rendered below these widgets.
-          items:
-            $ref: "#/components/schemas/GoogleAppsCardV1FooterWidget"
-          type: array
       type: object
     GoogleAppsCardV1CardHeader:
       description: Represents a card header.
@@ -1565,25 +1560,6 @@ components:
     GoogleAppsCardV1Divider:
       description: 'Displays a divider between widgets as a horizontal line. For example, the following JSON creates a divider: ``` "divider": {} ```'
       properties: {}
-      type: object
-    GoogleAppsCardV1FooterWidget:
-      description: The CardFixedFooter can contain a list of these widgets.
-      properties:
-        buttonList:
-          $ref: "#/components/schemas/GoogleAppsCardV1ButtonList"
-          description: ButtonList widget.
-        dateTimePicker:
-          $ref: "#/components/schemas/GoogleAppsCardV1DateTimePicker"
-          description: DateTimePicker widget.
-        decoratedText:
-          $ref: "#/components/schemas/GoogleAppsCardV1DecoratedText"
-          description: DecoratedText widget.
-        textInput:
-          $ref: "#/components/schemas/GoogleAppsCardV1TextInput"
-          description: TextInput widget.
-        textParagraph:
-          $ref: "#/components/schemas/GoogleAppsCardV1TextParagraph"
-          description: TextParagraph widget.
       type: object
     GoogleAppsCardV1Grid:
       description: 'Displays a grid with a collection of items. Items can only include text or images. A grid supports any number of columns and items. The number of rows is determined by items divided by columns. A grid with 10 items and 2 columns has 5 rows. A grid with 11 items and 2 columns has 6 rows. For responsive columns, or to include more than text or images, use `Columns`. For example, the following JSON creates a 2 column grid with a single item: ``` "grid": { "title": "A fine collection of items", "columnCount": 2, "borderStyle": { "type": "STROKE", "cornerRadius": 4 }, "items": [ { "image": { "imageUri": "https://www.example.com/image.png", "cropStyle": { "type": "SQUARE" }, "borderStyle": { "type": "STROKE" } }, "title": "An item", "textAlignment": "CENTER" } ], "onClick": { "openLink": { "url": "https://www.example.com" } } } ```'
@@ -2196,9 +2172,8 @@ components:
           description: A custom name for a Chat message assigned at creation. Must start with `client-` and contain only lowercase letters, numbers, and hyphens up to 63 characters in length. Specify this field to get, update, or delete the message with the specified value. Assigning a custom name lets a Chat app recall the message without saving the message `name` from the [response body](/chat/api/reference/rest/v1/spaces.messages/get#response-body) returned when creating the message. Assigning a custom name doesn't replace the generated `name` field, the message's resource name. Instead, it sets the custom name as the `clientAssignedMessageId` field, which you can reference while processing later operations, like updating or deleting the message. For example usage, see [Name a created message](https://developers.google.com/chat/api/guides/crudl/messages#name_a_created_message).
           type: string
         createTime:
-          description: Output only. The time at which the message was created in Google Chat.
+          description: For spaces created in Chat, the time at which the message was created. For imported spaces, set this field to the historical timestamp at which the message was created in the source in order to preserve the original creation time.
           format: google-datetime
-          readOnly: true
           type: string
         deleteTime:
           description: Output only. The time at which the message was deleted in Google Chat. If the message is never deleted, this field is empty.

@@ -5740,6 +5740,50 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/{merchantId}/promotions":
+    get:
+      description: List all promotions from your Merchant Center account.
+      operationId: content.promotions.list
+      parameters:
+        - description: Required. The ID of the account that contains the collection.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: '[CLDR country code](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) (for example, "US"), used as a filter on promotions target country.'
+          in: query
+          name: countryCode
+          schema:
+            type: string
+        - description: The two-letter ISO 639-1 language code associated with the promotions, used as a filter.
+          in: query
+          name: languageCode
+          schema:
+            type: string
+        - description: The maximum number of promotions to return. The service may return fewer than this value. If unspecified, at most 50 labels will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListPromotion` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListPromotion` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPromotionResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - promotions
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -10164,6 +10208,18 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    ListPromotionResponse:
+      description: Response message for Promotions.List method.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        promotions:
+          description: List of all available promotions for the merchant.
+          items:
+            $ref: "#/components/schemas/Promotion"
+          type: array
+      type: object
     ListRegionsResponse:
       description: Response message for the `ListRegions` method.
       properties:
@@ -12631,7 +12687,7 @@ components:
           description: Description of the item.
           type: string
         disclosureDate:
-          description: The date time when an offer becomes visible in search results across Google’s YouTube surfaces, in [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format. See [Disclosure date]( https://support.google.com/merchants/answer/13034208) for more information.
+          description: The date time when an offer becomes visible in search results across Google’s YouTube surfaces, in [ISO 8601](http://en.wikipedia.org/wiki/ISO_8601) format. See [Disclosure date](https://support.google.com/merchants/answer/13034208) for more information.
           type: string
         displayAdsId:
           description: An identifier for an item for dynamic remarketing campaigns.
@@ -14070,6 +14126,7 @@ components:
           description: Required. Type of the interaction that is reported, for example INTERACTION_CLICK.
           enum:
             - INTERACTION_TYPE_UNSPECIFIED
+            - INTERACTION_DISMISS
             - INTERACTION_CLICK
           type: string
         responseToken:
