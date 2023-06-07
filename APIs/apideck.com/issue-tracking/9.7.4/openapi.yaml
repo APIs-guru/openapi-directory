@@ -6,9 +6,9 @@ info:
     email: hello@apideck.com
     url: https://developers.apideck.com
   description: |+
-    Welcome to the ATS API.
+    Welcome to the Issue Tracking API.
 
-    You can use this API to access all ATS API endpoints.
+    You can use this API to access all Issue Tracking API endpoints.
 
     ## Base URL
 
@@ -233,7 +233,7 @@ info:
 
     ### Meta
 
-    Meta data can be represented as a top level member named “meta”. Any information may be provided in the meta data. It’s most common use is to return the total number of records when requesting a collection of resources.
+    Meta data can be represented as a top level member named “meta”. Any information may be provided in the meta data. It's most common use is to return the total number of records when requesting a collection of resources.
 
     ### Idempotence (upcoming)
 
@@ -257,7 +257,7 @@ info:
 
     #### Prices and Currencies
 
-    All prices returned by the API are represented as integer amounts in a currency’s smallest unit. For example, $5 USD would be returned as 500 (i.e, 500 cents).
+    All prices returned by the API are represented as integer amounts in a currency's smallest unit. For example, $5 USD would be returned as 500 (i.e, 500 cents).
 
     For zero-decimal currencies, amounts will still be provided as an integer but without the need to divide by 100. For example, an amount of ¥5 (JPY) would be returned as 5.
 
@@ -270,9 +270,9 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  title: ATS API
-  version: 9.7.3
-  x-apideck-api: ats
+  title: Issue Tracking API
+  version: 9.7.4
+  x-apideck-api: issue-tracking
   x-apideck-sdk-support: true
   x-apisguru-categories:
     - developer_tools
@@ -280,10 +280,10 @@ info:
     url: https://developers.apideck.com/icon.png
   x-origin:
     - format: openapi
-      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/ats.yml
+      url: https://raw.githubusercontent.com/apideck-libraries/openapi-specs/master/issue-tracking.yml
       version: "3.0"
   x-providerName: apideck.com
-  x-serviceName: ats
+  x-serviceName: issue-tracking
   x-tags:
     - partner
 externalDocs:
@@ -293,37 +293,35 @@ security:
   - apiKey: []
 tags:
   - description: ""
-    name: Offers
+    name: Tickets
     x-apideck-model:
-      $ref: "#/components/schemas/Offer"
-    x-apideck-resource-id: offers
-    x-apideck-upcoming: true
+      $ref: "#/components/schemas/Ticket"
+    x-apideck-resource-id: collection-tickets
   - description: ""
-    name: Activities
+    name: Collections
     x-apideck-model:
-      $ref: "#/components/schemas/AtsActivity"
-    x-apideck-resource-id: activities
-    x-apideck-upcoming: true
+      $ref: "#/components/schemas/Collection"
+    x-apideck-resource-id: collections
   - description: ""
-    name: Jobs
+    name: Users
     x-apideck-model:
-      $ref: "#/components/schemas/Job"
-    x-apideck-resource-id: jobs
+      $ref: "#/components/schemas/CollectionUser"
+    x-apideck-resource-id: collection-users
   - description: ""
-    name: Applicants
+    name: Comments
     x-apideck-model:
-      $ref: "#/components/schemas/Applicant"
-    x-apideck-resource-id: applicants
+      $ref: "#/components/schemas/CollectionTicketComment"
+    x-apideck-resource-id: collection-ticket-comments
   - description: ""
-    name: Applications
+    name: Tags
     x-apideck-model:
-      $ref: "#/components/schemas/Application"
-    x-apideck-resource-id: applications
+      $ref: "#/components/schemas/CollectionTag"
+    x-apideck-resource-id: collection-tags
 paths:
-  /ats/applicants:
+  /issue-tracking/collections:
     get:
-      description: List Applicants
-      operationId: applicantsAll
+      description: List Collections
+      operationId: collectionsAll
       parameters:
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
@@ -331,12 +329,12 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
         - $ref: "#/components/parameters/limit"
-        - $ref: "#/components/parameters/applicantsFilter"
+        - $ref: "#/components/parameters/collectionsSort"
         - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
-          $ref: "#/components/responses/GetApplicantsResponse"
+          $ref: "#/components/responses/GetCollectionsResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -351,10 +349,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Applicants
+      summary: List Collections
       tags:
-        - Applicants
-      x-apideck-api: ats
+        - Collections
+      x-apideck-api: issueTracking
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -368,28 +366,25 @@ paths:
             })
 
             try {
-              const { data } = await apideck.ats.applicantsAll({})
+              const { data } = await apideck.issueTracking.collectionsAll({})
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-    post:
-      description: Create Applicant
-      operationId: applicantsAdd
+  "/issue-tracking/collections/{collection_id}":
+    get:
+      description: Get Collection
+      operationId: collectionsOne
       parameters:
-        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/collectionId"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Applicant"
-        required: true
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/fields"
       responses:
-        "201":
-          $ref: "#/components/responses/CreateApplicantResponse"
+        "200":
+          $ref: "#/components/responses/GetCollectionResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -404,10 +399,178 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create Applicant
+      summary: Get Collection
       tags:
-        - Applicants
-      x-apideck-api: ats
+        - Collections
+      x-apideck-api: issueTracking
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.issueTracking.collectionsOne({
+                collectionId: 'collection_id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/issue-tracking/collections/{collection_id}/tags":
+    get:
+      description: List Tags
+      operationId: collectionTagsAll
+      parameters:
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/passThrough"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCollectionTagsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Tags
+      tags:
+        - Tags
+      x-apideck-api: issueTracking
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.issueTracking.collectionTagsAll({
+                collectionId: 'collection_id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/issue-tracking/collections/{collection_id}/tickets":
+    get:
+      description: List Tickets
+      operationId: collectionTicketsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/ticketsSort"
+        - $ref: "#/components/parameters/issuesFilter"
+        - $ref: "#/components/parameters/passThrough"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetTicketsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Tickets
+      tags:
+        - Tickets
+      x-apideck-api: issueTracking
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.issueTracking.collectionTicketsAll({
+                collectionId: 'collection_id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    post:
+      description: Create Ticket
+      operationId: collectionTicketsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/collectionId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateTicketResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Ticket
+      tags:
+        - Tickets
+      x-apideck-api: issueTracking
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -421,125 +584,48 @@ paths:
             })
 
             const params = {
-              applicant: {
-                position_id: '123',
-                name: 'Elon Musk',
-                first_name: 'Elon',
-                last_name: 'Musk',
-                middle_name: 'D.',
-                initials: 'EM',
-                birthday: '2000-08-12',
-                cover_letter:
-                  'I submit this application to express my sincere interest in the API developer position. In the previous role, I was responsible for leadership and ...',
-                photo_url: 'https://unavatar.io/elon-musk',
-                headline: 'PepsiCo, Inc, Central Perk',
-                title: 'CEO',
-                emails: [
+              collectionId: 'collection_id_example',
+              collectionTicket: {
+                parent_id: '12345',
+                type: 'Technical',
+                subject: 'Technical Support Request',
+                description: 'I am facing issues with my internet connection',
+                status: 'open',
+                priority: 'high',
+                assignees: [
                   {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
+                    id: '12345'
                   }
                 ],
-                custom_fields: [
+                due_date: '2020-09-30T07:43:32.000Z',
+                tags: [
                   {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
+                    id: '12345'
                   }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    notes: 'Address notes or delivery instructions.',
-                    row_version: '1-12345'
-                  }
-                ],
-                websites: [
-                  {
-                    id: '12345',
-                    url: 'http://example.com',
-                    type: 'primary'
-                  }
-                ],
-                social_links: [
-                  {
-                    id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
-                    type: 'twitter'
-                  }
-                ],
-                stage_id: '12345',
-                recruiter_id: '12345',
-                coordinator_id: '12345',
-                application_ids: [
-                  'a0d636c6-43b3-4bde-8c70-85b707d992f4',
-                  'a98lfd96-43b3-4bde-8c70-85b707d992e6'
-                ],
-                applications: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
-                followers: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
-                sources: ['Job site'],
-                confidential: false,
-                anonymized: true,
-                tags: ['New'],
-                archived: false,
-                owner_id: '54321',
-                record_url: 'https://app.intercom.io/contacts/12345',
-                deleted: true
+                ]
               }
             }
 
             try {
-              const { data } = await apideck.ats.applicantsAdd(params)
+              const { data } = await apideck.issueTracking.collectionTicketsAdd(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/ats/applicants/{id}":
+  "/issue-tracking/collections/{collection_id}/tickets/{ticket_id}":
     delete:
-      description: Delete Applicant
-      operationId: applicantsDelete
+      description: Delete Ticket
+      operationId: collectionTicketsDelete
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/ticketId"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/collectionId"
       responses:
         "200":
-          $ref: "#/components/responses/DeleteApplicantResponse"
+          $ref: "#/components/responses/DeleteTicketResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -554,10 +640,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete Applicant
+      summary: Delete Ticket
       tags:
-        - Applicants
-      x-apideck-api: ats
+        - Tickets
+      x-apideck-api: issueTracking
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -570,27 +656,31 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              ticketId: 'ticket_id_example',
+              collectionId: 'collection_id_example'
+            }
+
             try {
-              const { data } = await apideck.ats.applicantsDelete({
-                id: 'id_example'
-              })
+              const { data } = await apideck.issueTracking.collectionTicketsDelete(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
     get:
-      description: Get Applicant
-      operationId: applicantsOne
+      description: Get Ticket
+      operationId: collectionTicketsOne
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/ticketId"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/collectionId"
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
-          $ref: "#/components/responses/GetApplicantResponse"
+          $ref: "#/components/responses/GetTicketResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -605,10 +695,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Applicant
+      summary: Get Ticket
       tags:
-        - Applicants
-      x-apideck-api: ats
+        - Tickets
+      x-apideck-api: issueTracking
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -621,32 +711,36 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              ticketId: 'ticket_id_example',
+              collectionId: 'collection_id_example'
+            }
+
             try {
-              const { data } = await apideck.ats.applicantsOne({
-                id: 'id_example'
-              })
+              const { data } = await apideck.issueTracking.collectionTicketsOne(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
     patch:
-      description: Update Applicant
-      operationId: applicantsUpdate
+      description: Update Ticket
+      operationId: collectionTicketsUpdate
       parameters:
-        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/ticketId"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/collectionId"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Applicant"
+              $ref: "#/components/schemas/Ticket"
         required: true
       responses:
         "200":
-          $ref: "#/components/responses/UpdateApplicantResponse"
+          $ref: "#/components/responses/UpdateTicketResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -661,10 +755,208 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update Applicant
+      summary: Update Ticket
       tags:
-        - Applicants
-      x-apideck-api: ats
+        - Tickets
+      x-apideck-api: issueTracking
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              ticketId: 'ticket_id_example',
+              collectionId: 'collection_id_example',
+              collectionTicket: {
+                parent_id: '12345',
+                type: 'Technical',
+                subject: 'Technical Support Request',
+                description: 'I am facing issues with my internet connection',
+                status: 'open',
+                priority: 'high',
+                assignees: [
+                  {
+                    id: '12345'
+                  }
+                ],
+                due_date: '2020-09-30T07:43:32.000Z',
+                tags: [
+                  {
+                    id: '12345'
+                  }
+                ]
+              }
+            }
+
+            try {
+              const { data } = await apideck.issueTracking.collectionTicketsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/issue-tracking/collections/{collection_id}/tickets/{ticket_id}/comments":
+    get:
+      description: List Comments
+      operationId: collectionTicketCommentsAll
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/ticketId"
+        - $ref: "#/components/parameters/commentsSort"
+        - $ref: "#/components/parameters/passThrough"
+        - $ref: "#/components/parameters/fields"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetCommentsResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: List Comments
+      tags:
+        - Comments
+      x-apideck-api: issueTracking
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              collectionId: 'collection_id_example',
+              ticketId: 'ticket_id_example'
+            }
+
+            try {
+              const { data } = await apideck.issueTracking.collectionTicketCommentsAll(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+    post:
+      description: Create Comment
+      operationId: collectionTicketCommentsAdd
+      parameters:
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/ticketId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollectionTicketComment"
+        required: true
+      responses:
+        "201":
+          $ref: "#/components/responses/CreateCommentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Create Comment
+      tags:
+        - Comments
+      x-apideck-api: issueTracking
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              collectionId: 'collection_id_example',
+              ticketId: 'ticket_id_example',
+              collectionTicketComment: {
+                body: 'What internet provider do you use?'
+              }
+            }
+
+            try {
+              const { data } = await apideck.issueTracking.collectionTicketCommentsAdd(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/issue-tracking/collections/{collection_id}/tickets/{ticket_id}/comments/{id}":
+    delete:
+      description: Delete Comment
+      operationId: collectionTicketCommentsDelete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/ticketId"
+      responses:
+        "200":
+          $ref: "#/components/responses/DeleteCommentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Delete Comment
+      tags:
+        - Comments
+      x-apideck-api: issueTracking
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -679,127 +971,33 @@ paths:
 
             const params = {
               id: 'id_example',
-              applicant: {
-                position_id: '123',
-                name: 'Elon Musk',
-                first_name: 'Elon',
-                last_name: 'Musk',
-                middle_name: 'D.',
-                initials: 'EM',
-                birthday: '2000-08-12',
-                cover_letter:
-                  'I submit this application to express my sincere interest in the API developer position. In the previous role, I was responsible for leadership and ...',
-                photo_url: 'https://unavatar.io/elon-musk',
-                headline: 'PepsiCo, Inc, Central Perk',
-                title: 'CEO',
-                emails: [
-                  {
-                    id: '123',
-                    email: 'elon@musk.com',
-                    type: 'primary'
-                  }
-                ],
-                custom_fields: [
-                  {
-                    id: '2389328923893298',
-                    name: 'employee_level',
-                    description: 'Employee Level',
-                    value: 'Uses Salesforce and Marketo'
-                  }
-                ],
-                phone_numbers: [
-                  {
-                    id: '12345',
-                    country_code: '1',
-                    area_code: '323',
-                    number: '111-111-1111',
-                    extension: '105',
-                    type: 'primary'
-                  }
-                ],
-                addresses: [
-                  {
-                    id: '123',
-                    type: 'primary',
-                    string: '25 Spring Street, Blackburn, VIC 3130',
-                    name: 'HQ US',
-                    line1: 'Main street',
-                    line2: 'apt #',
-                    line3: 'Suite #',
-                    line4: 'delivery instructions',
-                    street_number: '25',
-                    city: 'San Francisco',
-                    state: 'CA',
-                    postal_code: '94104',
-                    country: 'US',
-                    latitude: '40.759211',
-                    longitude: '-73.984638',
-                    county: 'Santa Clara',
-                    contact_name: 'Elon Musk',
-                    salutation: 'Mr',
-                    phone_number: '111-111-1111',
-                    fax: '122-111-1111',
-                    email: 'elon@musk.com',
-                    website: 'https://elonmusk.com',
-                    notes: 'Address notes or delivery instructions.',
-                    row_version: '1-12345'
-                  }
-                ],
-                websites: [
-                  {
-                    id: '12345',
-                    url: 'http://example.com',
-                    type: 'primary'
-                  }
-                ],
-                social_links: [
-                  {
-                    id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
-                    type: 'twitter'
-                  }
-                ],
-                stage_id: '12345',
-                recruiter_id: '12345',
-                coordinator_id: '12345',
-                application_ids: [
-                  'a0d636c6-43b3-4bde-8c70-85b707d992f4',
-                  'a98lfd96-43b3-4bde-8c70-85b707d992e6'
-                ],
-                applications: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
-                followers: ['a0d636c6-43b3-4bde-8c70-85b707d992f4', 'a98lfd96-43b3-4bde-8c70-85b707d992e6'],
-                sources: ['Job site'],
-                confidential: false,
-                anonymized: true,
-                tags: ['New'],
-                archived: false,
-                owner_id: '54321',
-                record_url: 'https://app.intercom.io/contacts/12345',
-                deleted: true
-              }
+              collectionId: 'collection_id_example',
+              ticketId: 'ticket_id_example'
             }
 
             try {
-              const { data } = await apideck.ats.applicantsUpdate(params)
+              const { data } = await apideck.issueTracking.collectionTicketCommentsDelete(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /ats/applications:
     get:
-      description: List Applications
-      operationId: applicationsAll
+      description: Get Comment
+      operationId: collectionTicketCommentsOne
       parameters:
+        - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/cursor"
-        - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/ticketId"
+        - $ref: "#/components/parameters/fields"
       responses:
         "200":
-          $ref: "#/components/responses/GetApplicationsResponse"
+          $ref: "#/components/responses/GetCommentResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -814,230 +1012,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Applications
+      summary: Get Comment
       tags:
-        - Applications
-      x-apideck-api: ats
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.ats.applicationsAll({})
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    post:
-      description: Create Application
-      operationId: applicationsAdd
-      parameters:
-        - $ref: "#/components/parameters/raw"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Application"
-        required: true
-      responses:
-        "201":
-          $ref: "#/components/responses/CreateApplicationResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Create Application
-      tags:
-        - Applications
-      x-apideck-api: ats
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            const params = {
-              application: {
-                applicant_id: '12345',
-                job_id: '12345',
-                status: 'open',
-                stage: {
-                  id: '12345',
-                  name: '12345'
-                }
-              }
-            }
-
-            try {
-              const { data } = await apideck.ats.applicationsAdd(params)
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-  "/ats/applications/{id}":
-    delete:
-      description: Delete Application
-      operationId: applicationsDelete
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/DeleteApplicationResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Delete Application
-      tags:
-        - Applications
-      x-apideck-api: ats
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.ats.applicationsDelete({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    get:
-      description: Get Application
-      operationId: applicationsOne
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      responses:
-        "200":
-          $ref: "#/components/responses/GetApplicationResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Get Application
-      tags:
-        - Applications
-      x-apideck-api: ats
-      x-codeSamples:
-        - label: Node
-          lang: TypeScript
-          source: |
-            import { Apideck } from '@apideck/node'
-
-            const apideck = new Apideck({
-              apiKey: 'REPLACE_WITH_API_KEY',
-              appId: 'REPLACE_WITH_APP_ID',
-              consumerId: 'REPLACE_WITH_CONSUMER_ID'
-            })
-
-            try {
-              const { data } = await apideck.ats.applicationsOne({
-                id: 'id_example'
-              })
-              console.log('API called successfully', data)
-            } catch (error) {
-              console.error(error)
-            }
-    patch:
-      description: Update Application
-      operationId: applicationsUpdate
-      parameters:
-        - $ref: "#/components/parameters/id"
-        - $ref: "#/components/parameters/consumerId"
-        - $ref: "#/components/parameters/applicationId"
-        - $ref: "#/components/parameters/serviceId"
-        - $ref: "#/components/parameters/raw"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Application"
-        required: true
-      responses:
-        "200":
-          $ref: "#/components/responses/UpdateApplicationResponse"
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "401":
-          $ref: "#/components/responses/UnauthorizedResponse"
-        "402":
-          $ref: "#/components/responses/PaymentRequiredResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "422":
-          $ref: "#/components/responses/UnprocessableResponse"
-        default:
-          $ref: "#/components/responses/UnexpectedErrorResponse"
-      security:
-        - apiKey: []
-      summary: Update Application
-      tags:
-        - Applications
-      x-apideck-api: ats
+        - Comments
+      x-apideck-api: issueTracking
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1052,28 +1030,87 @@ paths:
 
             const params = {
               id: 'id_example',
-              application: {
-                applicant_id: '12345',
-                job_id: '12345',
-                status: 'open',
-                stage: {
-                  id: '12345',
-                  name: '12345'
-                }
-              }
+              collectionId: 'collection_id_example',
+              ticketId: 'ticket_id_example'
             }
 
             try {
-              const { data } = await apideck.ats.applicationsUpdate(params)
+              const { data } = await apideck.issueTracking.collectionTicketCommentsOne(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  /ats/jobs:
-    get:
-      description: List Jobs
-      operationId: jobsAll
+    patch:
+      description: Update Comment
+      operationId: collectionTicketCommentsUpdate
       parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/raw"
+        - $ref: "#/components/parameters/collectionId"
+        - $ref: "#/components/parameters/ticketId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollectionTicketComment"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/UpdateCommentResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Update Comment
+      tags:
+        - Comments
+      x-apideck-api: issueTracking
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            const params = {
+              id: 'id_example',
+              collectionId: 'collection_id_example',
+              ticketId: 'ticket_id_example',
+              collectionTicketComment: {
+                body: 'What internet provider do you use?'
+              }
+            }
+
+            try {
+              const { data } = await apideck.issueTracking.collectionTicketCommentsUpdate(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/issue-tracking/collections/{collection_id}/users":
+    get:
+      description: List Users
+      operationId: collectionUsersAll
+      parameters:
+        - $ref: "#/components/parameters/collectionId"
         - $ref: "#/components/parameters/raw"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
@@ -1084,7 +1121,7 @@ paths:
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
-          $ref: "#/components/responses/GetJobsResponse"
+          $ref: "#/components/responses/GetCollectionUsersResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -1099,10 +1136,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List Jobs
+      summary: List Users
       tags:
-        - Jobs
-      x-apideck-api: ats
+        - Users
+      x-apideck-api: issueTracking
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1116,16 +1153,19 @@ paths:
             })
 
             try {
-              const { data } = await apideck.ats.jobsAll({})
+              const { data } = await apideck.issueTracking.collectionUsersAll({
+                collectionId: 'collection_id_example'
+              })
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
-  "/ats/jobs/{id}":
+  "/issue-tracking/collections/{collection_id}/users/{id}":
     get:
-      description: Get Job
-      operationId: jobsOne
+      description: Get user
+      operationId: collectionUsersOne
       parameters:
+        - $ref: "#/components/parameters/collectionId"
         - $ref: "#/components/parameters/id"
         - $ref: "#/components/parameters/consumerId"
         - $ref: "#/components/parameters/applicationId"
@@ -1134,7 +1174,7 @@ paths:
         - $ref: "#/components/parameters/fields"
       responses:
         "200":
-          $ref: "#/components/responses/GetJobResponse"
+          $ref: "#/components/responses/GetCollectionUserResponse"
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "401":
@@ -1149,10 +1189,10 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get Job
+      summary: Get user
       tags:
-        - Jobs
-      x-apideck-api: ats
+        - Users
+      x-apideck-api: issueTracking
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1165,24 +1205,19 @@ paths:
               consumerId: 'REPLACE_WITH_CONSUMER_ID'
             })
 
+            const params = {
+              collectionId: 'collection_id_example',
+              id: 'id_example'
+            }
+
             try {
-              const { data } = await apideck.ats.jobsOne({
-                id: 'id_example'
-              })
+              const { data } = await apideck.issueTracking.collectionUsersOne(params)
               console.log('API called successfully', data)
             } catch (error) {
               console.error(error)
             }
 components:
   parameters:
-    applicantsFilter:
-      description: Apply filters
-      explode: true
-      in: query
-      name: filter
-      schema:
-        $ref: "#/components/schemas/ApplicantsFilter"
-      style: deepObject
     applicationId:
       description: The ID of your Unify application
       example: dSBdXd2H6Mqwfg0atXHXYcysLJE9qyn1VwBtXHX
@@ -1191,6 +1226,30 @@ components:
       required: true
       schema:
         type: string
+    collectionId:
+      description: The collection ID
+      in: path
+      name: collection_id
+      required: true
+      schema:
+        example: apideck-io
+        type: string
+    collectionsSort:
+      description: Apply sorting
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/CollectionsSort"
+      style: deepObject
+    commentsSort:
+      description: Apply sorting
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/CommentsSort"
+      style: deepObject
     consumerId:
       description: ID of the consumer which you want to get or push data from
       in: header
@@ -1220,6 +1279,14 @@ components:
       required: true
       schema:
         type: string
+    issuesFilter:
+      description: Apply filters
+      explode: true
+      in: query
+      name: filter
+      schema:
+        $ref: "#/components/schemas/IssuesFilter"
+      style: deepObject
     limit:
       description: Number of results to return. Minimum 1, Maximum 200, Default 20
       in: query
@@ -1250,103 +1317,106 @@ components:
       name: x-apideck-service-id
       schema:
         type: string
+    ticketId:
+      description: ID of the ticket you are acting upon.
+      in: path
+      name: ticket_id
+      required: true
+      schema:
+        type: string
+    ticketsSort:
+      description: Apply sorting
+      explode: true
+      in: query
+      name: sort
+      schema:
+        $ref: "#/components/schemas/TicketsSort"
+      style: deepObject
   responses:
-    Applicant:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Applicant"
-      description: Applicants
-    AtsActivity:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/AtsActivity"
-      description: Activities
     BadRequestResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/BadRequestResponse"
       description: Bad Request
-    CreateApplicantResponse:
+    CreateCommentResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateApplicantResponse"
-      description: Applicants
-    CreateApplicationResponse:
+            $ref: "#/components/schemas/CreateCommentResponse"
+      description: Create a Comment
+    CreateTicketResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateApplicationResponse"
-      description: Applications
-    CreateJobResponse:
+            $ref: "#/components/schemas/CreateTicketResponse"
+      description: Create a Ticket
+    DeleteCommentResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateJobResponse"
-      description: Jobs
-    DeleteApplicantResponse:
+            $ref: "#/components/schemas/DeleteCommentResponse"
+      description: Delete a Comment
+    DeleteTicketResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteApplicantResponse"
-      description: Applicants
-    DeleteApplicationResponse:
+            $ref: "#/components/schemas/DeleteTicketResponse"
+      description: Delete a Ticket
+    GetCollectionResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteApplicationResponse"
-      description: Applications
-    DeleteJobResponse:
+            $ref: "#/components/schemas/GetCollectionResponse"
+      description: Get a Collection
+    GetCollectionTagsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/DeleteJobResponse"
-      description: Jobs
-    GetApplicantResponse:
+            $ref: "#/components/schemas/GetCollectionTagsResponse"
+      description: List Tags
+    GetCollectionUserResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApplicantResponse"
-      description: Applicants
-    GetApplicantsResponse:
+            $ref: "#/components/schemas/GetCollectionUserResponse"
+      description: User
+    GetCollectionUsersResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApplicantsResponse"
-      description: Applicants
-    GetApplicationResponse:
+            $ref: "#/components/schemas/GetCollectionUsersResponse"
+      description: Users
+    GetCollectionsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApplicationResponse"
-      description: Applications
-    GetApplicationsResponse:
+            $ref: "#/components/schemas/GetCollectionsResponse"
+      description: List Collections
+    GetCommentResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetApplicationsResponse"
-      description: Applications
-    GetJobResponse:
+            $ref: "#/components/schemas/GetCommentResponse"
+      description: Get a Comment
+    GetCommentsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetJobResponse"
-      description: Jobs
-    GetJobsResponse:
+            $ref: "#/components/schemas/GetCommentsResponse"
+      description: List Comments
+    GetTicketResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/GetJobsResponse"
-      description: Jobs
-    Job:
+            $ref: "#/components/schemas/GetTicketResponse"
+      description: Get a Ticket
+    GetTicketsResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Job"
-      description: Jobs
+            $ref: "#/components/schemas/GetTicketsResponse"
+      description: List Tickets
     NotFoundResponse:
       content:
         application/json:
@@ -1359,24 +1429,12 @@ components:
           schema:
             $ref: "#/components/schemas/NotImplementedResponse"
       description: Not Implemented
-    Offer:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Offer"
-      description: Offers
     PaymentRequiredResponse:
       content:
         application/json:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
-    TooManyRequestsResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/TooManyRequestsResponse"
-      description: Too Many Requests
     UnauthorizedResponse:
       content:
         application/json:
@@ -1395,24 +1453,18 @@ components:
           schema:
             $ref: "#/components/schemas/UnprocessableResponse"
       description: Unprocessable
-    UpdateApplicantResponse:
+    UpdateCommentResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateApplicantResponse"
-      description: Applicants
-    UpdateApplicationResponse:
+            $ref: "#/components/schemas/UpdateCommentResponse"
+      description: Update a Comment
+    UpdateTicketResponse:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/UpdateApplicationResponse"
-      description: Applications
-    UpdateJobResponse:
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/UpdateJobResponse"
-      description: Jobs
+            $ref: "#/components/schemas/UpdateTicketResponse"
+      description: Update a Ticket
   schemas:
     Address:
       additionalProperties: false
@@ -1557,437 +1609,26 @@ components:
         string: low
         type: critical
         website: edge-case
-    Anonymized:
-      example: true
-      title: Anonymized
-      type: boolean
-    Applicant:
+    Assignee:
       additionalProperties: false
       properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        anonymized:
-          $ref: "#/components/schemas/Anonymized"
-        application_ids:
-          example:
-            - a0d636c6-43b3-4bde-8c70-85b707d992f4
-            - a98lfd96-43b3-4bde-8c70-85b707d992e6
-          items:
-            type: string
-          nullable: true
-          type: array
-        applications:
-          example:
-            - a0d636c6-43b3-4bde-8c70-85b707d992f4
-            - a98lfd96-43b3-4bde-8c70-85b707d992e6
-          items:
-            type: string
-          nullable: true
-          type: array
-        archived:
-          $ref: "#/components/schemas/Archived"
-        birthday:
-          description: The date of birth of the person.
-          example: 2000-08-12
-          format: date
-          nullable: true
-          title: Birth Date
-          type: string
-        confidential:
-          example: false
-          title: Confidential
-          type: boolean
-        coordinator_id:
-          example: "12345"
-          title: Coordinator ID
-          type: string
-        cover_letter:
-          example: I submit this application to express my sincere interest in the API developer position. In the previous role, I was responsible for leadership and ...
-          title: Cover letter
-          type: string
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        cv_url:
-          example: https://recruitee-main.s3.eu-central-1.amazonaws.com/candidates/36615291/pdf_cv_38swhu4w42k1.pdf?response-content-disposition=inline&response-content-type=application%2Fpdf&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYHB7CA5RLR4Y3ON%2F20220514%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20220514T235654Z&X-Amz-Expires=36000&X-Amz-SignedHeaders=host&X-Amz-Signature=72c0621f5976db75b54de487eb821a8e73480d7f2a6a4a9713ab997944b0561f
-          readOnly: true
-          title: CV URL
-          type: string
-        deleted:
-          $ref: "#/components/schemas/Deleted"
-        deleted_at:
-          $ref: "#/components/schemas/DeletedAt"
-        deleted_by:
-          $ref: "#/components/schemas/DeletedBy"
-        emails:
-          items:
-            $ref: "#/components/schemas/Email"
-          type: array
-        first_name:
-          description: The first name of the person.
-          example: Elon
-          nullable: true
-          title: First name
-          type: string
-        followers:
-          example:
-            - a0d636c6-43b3-4bde-8c70-85b707d992f4
-            - a98lfd96-43b3-4bde-8c70-85b707d992e6
-          items:
-            type: string
-          nullable: true
-          type: array
-        headline:
-          description: Typically a list of previous companies where the contact has worked or schools that the contact has attended
-          example: PepsiCo, Inc, Central Perk
-          title: Headline
-          type: string
         id:
-          $ref: "#/components/schemas/Id"
-        initials:
-          $ref: "#/components/schemas/Initials"
-        job_url:
-          example: https://democompany.recruitee.com/o/example-talent-pool
-          nullable: true
+          description: A unique identifier for an object.
+          example: "12345"
+          title: ID
+          type: string
+        username:
+          example: Cocoa
           readOnly: true
-          title: Job URL
+          title: Name
           type: string
-        last_interaction_at:
-          $ref: "#/components/schemas/LastInteractionAt"
-        last_name:
-          description: The last name of the person.
-          example: Musk
-          nullable: true
-          title: Last name
-          type: string
-        middle_name:
-          description: Middle name of the person.
-          example: D.
-          nullable: true
-          title: Middle name
-          type: string
-        name:
-          description: The name of an applicant.
-          example: Elon Musk
-          type: string
-        owner_id:
-          $ref: "#/components/schemas/OwnerId"
-        phone_numbers:
-          items:
-            $ref: "#/components/schemas/PhoneNumber"
-          type: array
-        photo_url:
-          description: The URL of the photo of a person.
-          example: https://unavatar.io/elon-musk
-          nullable: true
-          title: Photo URL
-          type: string
-        position_id:
-          description: The PositionId the applicant applied for.
-          example: "123"
-          type: string
-        record_url:
-          $ref: "#/components/schemas/RecordUrl"
-        recruiter_id:
-          example: "12345"
-          title: Recruiter ID
-          type: string
-        rejected_at:
-          example: 2020-09-30T07:43:32.000Z
-          format: date-time
-          nullable: true
-          readOnly: true
-          title: Rejected at (timestamp)
-          type: string
-        social_links:
-          items:
-            additionalProperties: false
-            properties:
-              id:
-                example: "12345"
-                nullable: true
-                type: string
-              type:
-                example: twitter
-                nullable: true
-                type: string
-              url:
-                example: https://www.twitter.com/apideck-io
-                minLength: 1
-                type: string
-            required:
-              - url
-            type: object
-            x-apideck-schema-id: SocialLink
-            x-apideck-weights:
-              id: edge-case
-              type: critical
-              url: critical
-          type: array
-        source_id:
-          example: "12345"
-          readOnly: true
-          title: Source ID
-          type: string
-        sourced_by:
-          example: "12345"
-          nullable: true
-          readOnly: true
-          title: Sourced by
-          type: string
-        sources:
-          example:
-            - Job site
-          items:
-            type: string
-          nullable: true
-          type: array
-        stage_id:
-          example: "12345"
-          title: Stage
-          type: string
-        tags:
-          $ref: "#/components/schemas/Tags"
-        title:
-          $ref: "#/components/schemas/Title"
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-        websites:
-          items:
-            additionalProperties: false
-            properties:
-              id:
-                example: "12345"
-                nullable: true
-                type: string
-              type:
-                enum:
-                  - primary
-                  - secondary
-                  - work
-                  - personal
-                  - other
-                example: primary
-                type: string
-                x-apideck-enum-id: websites.type
-              url:
-                example: http://example.com
-                minLength: 1
-                type: string
-            required:
-              - url
-            type: object
-            x-apideck-schema-id: Website
-            x-apideck-weights:
-              id: edge-case
-              type: critical
-              url: critical
-          type: array
-      type: object
-      x-apideck-schema-id: Applicant
-      x-apideck-weights:
-        addresses: high
-        anonymized: low
-        applications: medium
-        archived: medium
-        birthday: high
-        confidential: medium
-        coordinator_id: medium
-        cover_letter: low
-        created_at: medium
-        created_by: edge-case
-        custom_fields: edge-case
-        cv_url: high
-        deleted: medium
-        deleted_at: medium
-        deleted_by: medium
-        emails: high
-        first_name: high
-        followers: low
-        headline: medium
-        id: critical
-        initials: low
-        job_url: medium
-        last_interaction_at: medium
-        last_name: high
-        middle_name: low
-        name: critical
-        owner_id: high
-        phone_numbers: high
-        photo_url: medium
-        position_id: medium
-        record_url: low
-        recruiter_id: medium
-        rejected_at: high
-        social_links: medium
-        source_id: low
-        sourced_by: high
-        sources: low
-        stage_id: low
-        tags: low
-        title: high
-        updated_at: medium
-        updated_by: edge-case
-        websites: medium
-    ApplicantsFilter:
-      additionalProperties: false
-      example:
-        job_id: "1234"
-      properties:
-        job_id:
-          description: Id of the job to filter on
-          example: "1234"
-          type: string
-      type: object
-      x-apideck-schema-id: ApplicantsFilter
-    Application:
-      additionalProperties: false
-      properties:
-        applicant_id:
-          example: "12345"
-          nullable: true
-          title: Applicant ID
-          type: string
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        id:
-          $ref: "#/components/schemas/Id"
-        job_id:
-          example: "12345"
-          nullable: true
-          title: Job ID
-          type: string
-        stage:
-          properties:
-            id:
-              description: Stage the candidate should be in. If omitted, the default stage for this job will be used.
-              example: "12345"
-              nullable: true
-              title: Stage ID
-              type: string
-            name:
-              example: "12345"
-              nullable: true
-              title: Stage name
-              type: string
-          type: object
-        status:
-          enum:
-            - open
-            - rejected
-            - hired
-            - converted
-            - other
-          example: open
-          nullable: true
-          title: Status
-          type: string
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
       required:
-        - applicant_id
-        - job_id
+        - id
       type: object
+      x-apideck-schema-id: Assignee
       x-apideck-weights:
-        applicant_id: critical
-        created_at: medium
-        created_by: edge-case
-        id: high
-        job_id: critical
-        stage: high
-        status: high
-        updated_at: medium
-        updated_by: edge-case
-    Archived:
-      example: false
-      title: Archived
-      type: boolean
-    AtsActivity:
-      additionalProperties: false
-      properties:
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        id:
-          $ref: "#/components/schemas/Id"
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-      type: object
-      x-apideck-schema-id: AtsActivity
-      x-apideck-weights:
-        created_at: medium
-        created_by: edge-case
-        id: high
-        updated_at: medium
-        updated_by: edge-case
-    AtsEventType:
-      enum:
-        - "*"
-        - ats.job.created
-        - ats.job.updated
-        - ats.job.deleted
-        - ats.applicant.created
-        - ats.applicant.updated
-        - ats.applicant.deleted
-        - ats.application.created
-        - ats.application.updated
-        - ats.application.deleted
-      example: ats.job.created
-      type: string
-    AtsWebhookEvent:
-      allOf:
-        - properties:
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-          type: object
-          x-apideck-schema-id: WebhookEvent
-        - properties:
-            event_type:
-              $ref: "#/components/schemas/AtsEventType"
-          type: object
-      x-sdk-exclude: true
+        id: critical
+        username: medium
     BadRequestResponse:
       properties:
         detail:
@@ -2021,11 +1662,174 @@ components:
           type: string
       type: object
       x-apideck-schema-id: BadRequest
-    Code:
-      description: The code of the job.
-      example: 123-OC
+    Collection:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        description:
+          description: Description of the collection
+          example: IT Issues
+          title: Description
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        name:
+          description: Name of the collection
+          example: Main IT Issues
+          title: name
+          type: string
+        parent_id:
+          description: The collections's parent ID
+          example: "12345"
+          type: string
+        type:
+          description: The collections's type
+          example: Technical
+          title: Type
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: Collection
+      x-apideck-weights:
+        created_at: high
+        id: critical
+        name: high
+        updated_at: high
+    CollectionTag:
+      additionalProperties: false
+      properties:
+        id:
+          description: A unique identifier for an object.
+          example: "12345"
+          title: ID
+          type: string
+        name:
+          example: User Experience
+          readOnly: true
+          title: Name
+          type: string
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: Tag
+      x-apideck-weights:
+        id: critical
+        name: medium
+    CollectionTicketComment:
+      additionalProperties: false
+      properties:
+        body:
+          description: Body of the comment
+          example: What internet provider do you use?
+          title: Body
+          type: string
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        id:
+          $ref: "#/components/schemas/Id"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      type: object
+      x-apideck-schema-id: Comment
+      x-apideck-weights:
+        body: critical
+        created_at: critical
+        created_by: critical
+        id: critical
+        updated_at: medium
+    CollectionUser:
+      additionalProperties: false
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        email:
+          example: elon@musk.com
+          nullable: true
+          type: string
+        first_name:
+          example: Elon
+          nullable: true
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        last_name:
+          example: Musk
+          nullable: true
+          type: string
+        name:
+          example: Elon Musk
+          title: Name
+          type: string
+        photo_url:
+          $ref: "#/components/schemas/PhotoUrl"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      type: object
+      x-apideck-schema-id: CollectionUser
+      x-apideck-weights:
+        created_at: medium
+        email: medium
+        first_name: high
+        id: high
+        last_name: high
+        name: critical
+        updated_at: medium
+    CollectionsSort:
+      additionalProperties: false
+      example:
+        by: name
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Collections
+          enum:
+            - name
+            - created_at
+            - updated_at
+          example: name
+          type: string
+          x-apideck-enum-id: Collections.sort_by
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      type: object
+      x-apideck-schema-id: CollectionsSort
+    CommentsSort:
+      additionalProperties: false
+      example:
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Comments
+          enum:
+            - created_at
+            - updated_at
+          example: created_at
+          type: string
+          x-apideck-enum-id: Comments.sort_by
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      type: object
+      x-apideck-schema-id: CommentsSort
+    CompanyId:
+      description: The unique identifier of the company.
+      example: "23456"
+      nullable: true
+      title: Company ID
       type: string
-    CreateApplicantResponse:
+    CompanyName:
+      description: The name of the company.
+      example: SpaceX
+      nullable: true
+      title: Company name
+      type: string
+    CreateCommentResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2035,11 +1839,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Applicants
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: lever
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -2057,7 +1861,8 @@ components:
         - operation
         - data
       type: object
-    CreateApplicationResponse:
+      x-apideck-schema-id: CreateCommentResponse
+    CreateTicketResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -2067,11 +1872,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Applications
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: sap-successfactors
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -2089,39 +1894,7 @@ components:
         - operation
         - data
       type: object
-    CreateJobResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: add
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Jobs
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-apideck-schema-id: CreateJobResponse
+      x-apideck-schema-id: CreateTicketResponse
     CreatedAt:
       description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
@@ -2737,21 +2510,21 @@ components:
         id: critical
         name: medium
         value: critical
-    DeleteApplicantResponse:
+    DeleteCommentResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: delete
+          example: add
           type: string
         resource:
           description: Unified API resource name
-          example: Applicants
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: lever
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -2769,21 +2542,22 @@ components:
         - operation
         - data
       type: object
-    DeleteApplicationResponse:
+      x-apideck-schema-id: DeleteCommentResponse
+    DeleteTicketResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
         operation:
           description: Operation performed
-          example: delete
+          example: add
           type: string
         resource:
           description: Unified API resource name
-          example: Applications
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: sap-successfactors
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -2801,59 +2575,7 @@ components:
         - operation
         - data
       type: object
-    DeleteJobResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: delete
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Jobs
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-apideck-schema-id: DeleteJobResponse
-    Deleted:
-      example: true
-      nullable: true
-      title: Deleted
-      type: boolean
-    DeletedAt:
-      description: The time at which the object was deleted.
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      nullable: true
-      readOnly: true
-      title: Deleted at (timestamp)
-      type: string
-    DeletedBy:
-      description: The user who deleted the object.
-      example: "12345"
-      nullable: true
-      readOnly: true
-      title: Deleted by
-      type: string
+      x-apideck-schema-id: DeleteTicketResponse
     Department:
       additionalProperties: false
       properties:
@@ -2905,6 +2627,12 @@ components:
       nullable: true
       title: Description
       type: string
+    Division:
+      description: The division the person is currently in. Usually a collection of departments or teams or regions.
+      example: Europe
+      nullable: true
+      title: Division
+      type: string
     Email:
       additionalProperties: false
       properties:
@@ -2935,21 +2663,40 @@ components:
         email: critical
         id: edge-case
         type: critical
-    GetApplicantResponse:
+    FirstName:
+      description: The first name of the person.
+      example: Elon
+      nullable: true
+      title: First name
+      type: string
+    Gender:
+      description: The gender represents the gender identity of a person.
+      enum:
+        - male
+        - female
+        - unisex
+        - other
+        - not_specified
+      example: male
+      nullable: true
+      title: Gender
+      type: string
+      x-apideck-enum-id: genders
+    GetCollectionResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Applicant"
+          $ref: "#/components/schemas/Collection"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Applicants
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: lever
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -2967,12 +2714,12 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: GetApplicantResponse
-    GetApplicantsResponse:
+      x-apideck-schema-id: GetCollectionResponse
+    GetCollectionTagsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Applicant"
+            $ref: "#/components/schemas/CollectionTag"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -2984,11 +2731,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Applicants
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: lever
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -3006,22 +2753,22 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: GetApplicantsResponse
-    GetApplicationResponse:
+      x-apideck-schema-id: GetTagsResponse
+    GetCollectionUserResponse:
       properties:
         data:
-          $ref: "#/components/schemas/Application"
+          $ref: "#/components/schemas/CollectionUser"
         operation:
           description: Operation performed
           example: one
           type: string
         resource:
           description: Unified API resource name
-          example: Applications
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: sap-successfactors
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -3039,11 +2786,12 @@ components:
         - operation
         - data
       type: object
-    GetApplicationsResponse:
+      x-apideck-schema-id: GetCollectionUserResponse
+    GetCollectionUsersResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Application"
+            $ref: "#/components/schemas/CollectionUser"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -3055,11 +2803,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Applications
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: sap-successfactors
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -3077,44 +2825,12 @@ components:
         - operation
         - data
       type: object
-    GetJobResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/Job"
-        operation:
-          description: Operation performed
-          example: one
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Jobs
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: lever
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-apideck-schema-id: GetJobResponse
-    GetJobsResponse:
+      x-apideck-schema-id: GetCollectionUsersResponse
+    GetCollectionsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Job"
+            $ref: "#/components/schemas/Collection"
           type: array
         links:
           $ref: "#/components/schemas/Links"
@@ -3126,11 +2842,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Jobs
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: lever
+          example: jira
           type: string
         status:
           description: HTTP Response Status
@@ -3148,334 +2864,242 @@ components:
         - operation
         - data
       type: object
-      x-apideck-schema-id: GetJobsResponse
+      x-apideck-schema-id: GetCollectionsResponse
+    GetCommentResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/CollectionTicketComment"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tickets
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: sage-hr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetCommentResponse
+    GetCommentsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/CollectionTicketComment"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tickets
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: jira
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetCommentsResponse
+    GetTicketResponse:
+      properties:
+        data:
+          $ref: "#/components/schemas/Ticket"
+        operation:
+          description: Operation performed
+          example: one
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tickets
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: sage-hr
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetTicketResponse
+    GetTicketsResponse:
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/Ticket"
+          type: array
+        links:
+          $ref: "#/components/schemas/Links"
+        meta:
+          $ref: "#/components/schemas/Meta"
+        operation:
+          description: Operation performed
+          example: all
+          type: string
+        resource:
+          description: Unified API resource name
+          example: Tickets
+          type: string
+        service:
+          description: Apideck ID of service provider
+          example: jira
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+      required:
+        - status_code
+        - status
+        - service
+        - resource
+        - operation
+        - data
+      type: object
+      x-apideck-schema-id: GetTicketsResponse
     Id:
       description: A unique identifier for an object.
       example: "12345"
       readOnly: true
       title: ID
       type: string
-    Initials:
-      description: The initials of the person, usually derived from their first, middle, and last names.
-      example: EM
-      nullable: true
-      title: Initials
+    IssueTrackingEventType:
+      enum:
+        - "*"
+        - issue-tracking.ticket.created
+        - issue-tracking.ticket.updated
+        - issue-tracking.ticket.deleted
       type: string
-    Job:
+      x-apideck-enum-id: issue-tracking.events
+    IssueTrackingWebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+          x-apideck-schema-id: WebhookEvent
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/IssueTrackingEventType"
+          type: object
+      x-sdk-exclude: true
+    IssuesFilter:
       additionalProperties: false
+      example:
+        status:
+          - open
       properties:
-        addresses:
-          items:
-            $ref: "#/components/schemas/Address"
-          type: array
-        available_to_employees:
-          description: Specifies whether an employee of the organization can apply for the job.
-          example: false
-          title: Available to employees
-          type: boolean
-        blocks:
-          example:
-            - content: string
-              title: string
-          items:
-            properties:
-              content:
-                type: string
-              title:
-                type: string
-            x-apideck-weights:
-              content: medium
-              title: medium
-          type: array
-        branch:
-          description: Details of the branch for which the job is created.
-          example:
-            id: "123"
-            name: HQ NY
-          properties:
-            id:
-              $ref: "#/components/schemas/Id"
-            name:
-              description: Name of the branch.
-              example: HQ NY
-              type: string
-          title: Branch
-          type: object
-          x-apideck-weights:
-            id: medium
-            name: medium
-        closing:
-          example: The closing section of the job description
-          nullable: true
-          title: Closing
+        assignee_id:
+          description: Only return tickets assigned to a specific user
+          example: 2332bd9c2eaaa5dcfa14721c
+          title: Assignee ID
           type: string
-        closing_date:
-          example: 2020-10-30
-          format: date
-          nullable: true
-          type: string
-        closing_html:
-          description: The closing section of the job description in HTML format
-          nullable: true
-          title: Closing
-          type: string
-        code:
-          $ref: "#/components/schemas/Code"
-        confidential:
-          example: false
-          title: Confidential
-          type: boolean
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        custom_fields:
-          items:
-            $ref: "#/components/schemas/CustomField"
-          type: array
-        deleted:
-          $ref: "#/components/schemas/Deleted"
-        department:
-          $ref: "#/components/schemas/Department"
-        description:
-          $ref: "#/components/schemas/Description"
-        description_html:
-          description: The job description in HTML format
-          nullable: true
-          title: Description (HTML)
-          type: string
-        employment_terms:
-          enum:
-            - full-time
-            - part-time
-            - internship
-            - contractor
-            - employee
-            - freelance
-            - temp
-            - seasonal
-            - volunteer
-            - other
-          example: full-time
-          nullable: true
-          type: string
-          x-apideck-enum-id: jobs.employment_terms
-        experience:
-          description: Level of experience required for the job role.
-          example: Director/ Vice President
-          title: Experience
-          type: string
-        followers:
-          example:
-            - a0d636c6-43b3-4bde-8c70-85b707d992f4
-            - a98lfd96-43b3-4bde-8c70-85b707d992e6
-          items:
-            example: "12345"
-            readOnly: true
-            type: string
-          nullable: true
-          type: array
-        hiring_managers:
-          example:
-            - "123456"
-          items:
-            example: "12345"
-            readOnly: true
-            type: string
-            x-apideck-weights:
-              id: medium
-          type: array
-        id:
-          $ref: "#/components/schemas/Id"
-        job_portal_url:
-          deprecated: true
-          description: URL of the job portal
-          nullable: true
-          title: URL
-          type: string
-        language:
-          $ref: "#/components/schemas/Language"
-        links:
-          items:
-            properties:
-              type:
-                enum:
-                  - job_portal
-                  - job_description
-                example: job_portal
-                type: string
-              url:
-                example: https://app.intercom.io/contacts/12345
-                type: string
-            type: object
-            x-apideck-weights:
-              type: critical
-              url: critical
-          minLength: 1
-          type: array
-        location:
-          description: Specifies the location for the job posting.
-          example: San Francisco
-          nullable: true
-          title: Location
-          type: string
-        owner_id:
-          $ref: "#/components/schemas/OwnerId"
-        published_at:
-          $ref: "#/components/schemas/PublishedAt"
-        record_url:
-          deprecated: true
-          example: https://app.intercom.io/contacts/12345
-          nullable: true
-          title: Record URL
-          type: string
-        recruiters:
-          description: The recruiter is generally someone who is tasked to help the hiring manager find and screen qualified applicant
-          example:
-            - a0d636c6-43b3-4bde-8c70-85b707d992f4
-          items:
-            example: "12345"
-            readOnly: true
-            type: string
-          nullable: true
-          type: array
-        remote:
-          description: Specifies whether the posting is for a remote job.
-          example: true
-          nullable: true
-          title: Remote
-          type: boolean
-        requisition_id:
-          description: A job's Requisition ID (Req ID) allows your organization to identify and track a job based on alphanumeric naming conventions unique to your company's internal processes.
-          example: abc123
-          title: Requisition ID
-          type: string
-        salary:
-          properties:
-            currency:
-              $ref: "#/components/schemas/Currency"
-            interval:
-              example: year
-              nullable: true
-              type: string
-            max:
-              description: Maximum salary payable for the job role.
-              example: 10000
-              type: integer
-            min:
-              description: Minimum salary payable for the job role.
-              example: 8000
-              type: integer
-          type: object
-          x-apideck-weights:
-            currency: medium
-            interval: edge-case
-            max: medium
-            min: medium
-        sequence:
-          description: Sequence in relation to other jobs.
-          example: 3
-          type: integer
-        slug:
-          example: ceo
-          nullable: true
+        since:
+          description: Only return tickets since a specific date
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          title: Since date (timestamp)
           type: string
         status:
-          $ref: "#/components/schemas/JobStatus"
-        tags:
-          $ref: "#/components/schemas/Tags"
-        title:
-          $ref: "#/components/schemas/Title"
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-        url:
-          deprecated: true
-          description: URL of the job description
-          nullable: true
-          title: URL
-          type: string
-        visibility:
-          description: The visibility of the job
-          enum:
-            - draft
-            - public
-            - internal
-          example: internal
-          type: string
-          x-apideck-enum-id: jobs.visibility
+          default: []
+          description: Filter by ticket status, can be `open`, `closed` or `all`. Will passthrough if none of the above match
+          example:
+            - closed
+          items:
+            type: string
+          title: ticket status
+          type: array
+          uniqueItems: true
       type: object
-      x-apideck-schema-id: Job
-      x-apideck-strict-any-of:
-        - required:
-            - description_html
-        - required:
-            - description
-      x-apideck-weights:
-        addresses: low
-        available_to_employees: medium
-        blocks: edge-case
-        branch: low
-        closing: medium
-        closing_date: high
-        closing_html: edge-case
-        code: low
-        confidential: medium
-        created_at: critical
-        created_by: edge-case
-        custom_fields: critical
-        deleted: medium
-        department: medium
-        description: high
-        description_html: high
-        employment_terms: low
-        experience: low
-        followers: low
-        hiring_managers: low
-        id: high
-        job_portal_url: medium
-        language: medium
-        links: critical
-        location: critical
-        owner_id: high
-        published_at: high
-        record_url: low
-        recruiters: low
-        remote: low
-        requisition_id: medium
-        salary: critical
-        sequence: low
-        slug: low
-        status: critical
-        tags: low
-        title: critical
-        updated_at: medium
-        updated_by: edge-case
-        url: high
-        visibility: low
-    JobStatus:
-      description: The status of the job.
-      enum:
-        - draft
-        - internal
-        - published
-        - completed
-        - on-hold
-        - private
-      example: completed
-      type: string
-      x-apideck-enum-id: jobs.status
+      x-apideck-schema-id: IssuesFilter
     Language:
       description: language code according to ISO 639-1. For the United States - EN
       example: EN
       nullable: true
       type: string
-    LastInteractionAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      title: Last interaction at (timestamp)
+    LastName:
+      description: The last name of the person.
+      example: Musk
+      nullable: true
+      title: Last name
       type: string
     Links:
       description: Links to navigate to previous or next pages through the API
@@ -3524,6 +3148,12 @@ components:
           type: integer
       type: object
       x-apideck-schema-id: Meta
+    MiddleName:
+      description: Middle name of the person.
+      example: D.
+      nullable: true
+      title: Middle name
+      type: string
     NotFoundResponse:
       properties:
         detail:
@@ -3588,39 +3218,14 @@ components:
           type: string
       type: object
       x-apideck-schema-id: NotImplemented
-    Offer:
-      additionalProperties: false
-      properties:
-        application_id:
-          example: abc123
-          title: Application ID
-          type: string
-        created_at:
-          $ref: "#/components/schemas/CreatedAt"
-        created_by:
-          $ref: "#/components/schemas/CreatedBy"
-        id:
-          $ref: "#/components/schemas/Id"
-        updated_at:
-          $ref: "#/components/schemas/UpdatedAt"
-        updated_by:
-          $ref: "#/components/schemas/UpdatedBy"
-      type: object
-      x-apideck-schema-id: Offer
-      x-apideck-weights:
-        created_at: medium
-        created_by: edge-case
-        id: high
-        updated_at: medium
-        updated_by: edge-case
-    OwnerId:
-      example: "54321"
-      title: Owner ID
-      type: string
     PassThroughQuery:
       additionalProperties: true
       example:
         search: San Francisco
+      properties:
+        example_downstream_property:
+          description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
+          type: string
       type: object
     PaymentRequiredResponse:
       properties:
@@ -3650,6 +3255,18 @@ components:
           type: string
       type: object
       x-apideck-schema-id: PaymentRequired
+    PaymentUnit:
+      description: Unit of measurement for employee compensation.
+      enum:
+        - hour
+        - week
+        - month
+        - year
+        - paycheck
+      example: year
+      title: Payment Unit
+      type: string
+      x-apideck-enum-id: payment_unit
     PhoneNumber:
       additionalProperties: false
       properties:
@@ -3704,16 +3321,11 @@ components:
         id: edge-case
         number: critical
         type: critical
-    PublishedAt:
-      example: 2020-09-30T07:43:32.000Z
-      format: date-time
-      readOnly: true
-      title: Published at (timestamp)
-      type: string
-    RecordUrl:
-      example: https://app.intercom.io/contacts/12345
+    PhotoUrl:
+      description: The URL of the photo of a person.
+      example: https://unavatar.io/elon-musk
       nullable: true
-      title: Record URL
+      title: Photo URL
       type: string
     RowVersion:
       description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
@@ -3721,13 +3333,124 @@ components:
       nullable: true
       title: Row version
       type: string
-    Tags:
+    SortDirection:
+      default: asc
+      description: The direction in which to sort the results
+      enum:
+        - asc
+        - desc
+      type: string
+      x-apideck-enum-id: sort_direction
+      x-apideck-schema-id: SortDirection
+    Ticket:
+      additionalProperties: false
+      properties:
+        assignees:
+          items:
+            $ref: "#/components/schemas/Assignee"
+          type: array
+        collection_id:
+          description: The ticket's collection ID
+          example: "12345"
+          readOnly: true
+          type: string
+        completed_at:
+          description: When the ticket was completed
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          readOnly: true
+          title: Completed at (timestamp)
+          type: string
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        created_by:
+          $ref: "#/components/schemas/CreatedBy"
+        description:
+          description: The ticket's description. HTML version of description is mapped if supported by the third-party platform
+          example: I am facing issues with my internet connection
+          title: Description
+          type: string
+        due_date:
+          description: Due date of the ticket
+          example: 2020-09-30T07:43:32.000Z
+          format: date-time
+          nullable: true
+          title: Due date (timestamp)
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        parent_id:
+          description: The ticket's parent ID
+          example: "12345"
+          type: string
+        priority:
+          description: Priority of the ticket
+          enum:
+            - low
+            - normal
+            - high
+            - urgent
+          example: high
+          title: Priority
+          type: string
+          x-apideck-enum-id: tickets.priority
+        status:
+          description: "The current status of the ticket. Possible values include: open, in_progress, closed, or - in cases where there is no clear mapping - the original value passed through."
+          example: open
+          nullable: true
+          type: string
+        subject:
+          description: Subject of the ticket
+          example: Technical Support Request
+          title: Subject
+          type: string
+        tags:
+          items:
+            $ref: "#/components/schemas/CollectionTag"
+          type: array
+        type:
+          description: The ticket's type
+          example: Technical
+          title: Type
+          type: string
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      required:
+        - id
+      type: object
+      x-apideck-schema-id: Ticket
+      x-apideck-weights:
+        assignees: high
+        collection_id: high
+        completed_at: medium
+        created_at: critical
+        description: high
+        due_date: medium
+        id: critical
+        status: critical
+        subject: high
+        tags: high
+        type: medium
+        updated_at: critical
+    TicketsSort:
+      additionalProperties: false
       example:
-        - New
-      items:
-        type: string
-      type: array
-      x-apideck-schema-id: Tags
+        by: created_at
+        direction: desc
+      properties:
+        by:
+          description: The field on which to sort the Tickets
+          enum:
+            - created_at
+            - updated_at
+          example: created_at
+          type: string
+          x-apideck-enum-id: Tickets.sort_by
+        direction:
+          $ref: "#/components/schemas/SortDirection"
+      type: object
+      x-apideck-schema-id: TicketsSort
     Title:
       description: The job title of the person.
       example: CEO
@@ -3868,7 +3591,7 @@ components:
           type: string
       type: object
       x-apideck-schema-id: Unprocessable
-    UpdateApplicantResponse:
+    UpdateCommentResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3878,11 +3601,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Applicants
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: lever
+          example: github
           type: string
         status:
           description: HTTP Response Status
@@ -3900,7 +3623,8 @@ components:
         - operation
         - data
       type: object
-    UpdateApplicationResponse:
+      x-apideck-schema-id: UpdateCommentResponse
+    UpdateTicketResponse:
       properties:
         data:
           $ref: "#/components/schemas/UnifiedId"
@@ -3910,11 +3634,11 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: Applications
+          example: Tickets
           type: string
         service:
           description: Apideck ID of service provider
-          example: sap-successfactors
+          example: github
           type: string
         status:
           description: HTTP Response Status
@@ -3932,39 +3656,7 @@ components:
         - operation
         - data
       type: object
-    UpdateJobResponse:
-      properties:
-        data:
-          $ref: "#/components/schemas/UnifiedId"
-        operation:
-          description: Operation performed
-          example: update
-          type: string
-        resource:
-          description: Unified API resource name
-          example: Jobs
-          type: string
-        service:
-          description: Apideck ID of service provider
-          example: sage-hr
-          type: string
-        status:
-          description: HTTP Response Status
-          example: OK
-          type: string
-        status_code:
-          description: HTTP Response Status Code
-          example: 200
-          type: integer
-      required:
-        - status_code
-        - status
-        - service
-        - resource
-        - operation
-        - data
-      type: object
-      x-apideck-schema-id: UpdateJobResponse
+      x-apideck-schema-id: UpdateTicketResponse
     UpdatedAt:
       description: The date and time when the object was last updated.
       example: 2020-09-30T07:43:32.000Z
@@ -3980,12 +3672,35 @@ components:
       readOnly: true
       title: Updated by
       type: string
-    Url:
-      description: The url pointing to the job.
-      example: https://downstreamconnector.com/job?id=123
-      format: uri
-      pattern: ^(https?)://
-      type: string
+    Website:
+      additionalProperties: false
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          enum:
+            - primary
+            - secondary
+            - work
+            - personal
+            - other
+          example: primary
+          type: string
+          x-apideck-enum-id: websites.type
+        url:
+          example: http://example.com
+          minLength: 1
+          type: string
+      required:
+        - url
+      type: object
+      x-apideck-schema-id: Website
+      x-apideck-weights:
+        id: edge-case
+        type: critical
+        url: critical
   securitySchemes:
     apiKey:
       description: |
@@ -4009,17 +3724,18 @@ components:
       name: Authorization
       type: apiKey
 x-webhooks:
-  ApplicantCreated:
+  TicketCreated:
     post:
-      description: Event broadcast when an applicant has been created.
-      operationId: applicantCreated
+      description: Event broadcast when a ticket has been created.
+      operationId: ticketCreated
       parameters:
         - description: The type of event that was triggered
+          example: issue-tracking.ticket.created
           in: header
           name: x-apideck-event-type
           required: true
           schema:
-            $ref: "#/components/schemas/AtsEventType"
+            $ref: "#/components/schemas/IssueTrackingEventType"
         - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
           in: header
           name: x-apideck-idempotency-key
@@ -4035,38 +3751,37 @@ x-webhooks:
               payload:
                 consumer_id: test_user_id
                 entity_id: 123456ASDF
-                entity_type: applicant
-                entity_url: https://unify.apideck.com/ats/applicants/123456ASDF
+                entity_type: ticket
+                entity_url: https://unify.apideck.com/issue-tracking/tickets/123456ASDF
                 event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.applicant.created
+                event_type: issue-tracking.ticket.created
                 occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
+                unified_api: issue-tracking
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
+                  $ref: "#/components/schemas/IssueTrackingWebhookEvent"
               type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
       security: []
-      summary: Applicant Created
+      summary: Ticket Created
       tags:
         - Webhook Events
-      x-apideck-event-type: ats.applicant.created
-      x-apideck-upcoming: true
-  ApplicantDeleted:
+      x-apideck-event-type: issue-tracking.ticket.created
+  TicketDeleted:
     post:
-      description: Event broadcast when an applicant has been deleted.
-      operationId: applicantDeleted
+      description: Event broadcast when a ticket has been deleted.
+      operationId: ticketDeleted
       parameters:
         - description: The type of event that was triggered
+          example: issue-tracking.ticket.deleted
           in: header
           name: x-apideck-event-type
           required: true
           schema:
-            $ref: "#/components/schemas/AtsEventType"
+            $ref: "#/components/schemas/IssueTrackingEventType"
         - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
           in: header
           name: x-apideck-idempotency-key
@@ -4082,38 +3797,37 @@ x-webhooks:
               payload:
                 consumer_id: test_user_id
                 entity_id: 123456ASDF
-                entity_type: applicant
-                entity_url: https://unify.apideck.com/ats/applicants/123456ASDF
+                entity_type: ticket
+                entity_url: https://unify.apideck.com/issue-tracking/tickets/123456ASDF
                 event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.applicant.deleted
+                event_type: issue-tracking.ticket.deleted
                 occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
+                unified_api: issue-tracking
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
+                  $ref: "#/components/schemas/IssueTrackingWebhookEvent"
               type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
       security: []
-      summary: Applicant Deleted
+      summary: Ticket Deleted
       tags:
         - Webhook Events
-      x-apideck-event-type: ats.applicant.deleted
-      x-apideck-upcoming: true
-  ApplicantUpdated:
+      x-apideck-event-type: issue-tracking.ticket.deleted
+  TicketUpdated:
     post:
-      description: Event broadcast when an applicant has been updated.
-      operationId: applicantUpdated
+      description: Event broadcast when a ticket has been updated.
+      operationId: ticketUpdated
       parameters:
         - description: The type of event that was triggered
+          example: issue-tracking.ticket.updated
           in: header
           name: x-apideck-event-type
           required: true
           schema:
-            $ref: "#/components/schemas/AtsEventType"
+            $ref: "#/components/schemas/IssueTrackingEventType"
         - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
           in: header
           name: x-apideck-idempotency-key
@@ -4129,283 +3843,25 @@ x-webhooks:
               payload:
                 consumer_id: test_user_id
                 entity_id: 123456ASDF
-                entity_type: applicant
-                entity_url: https://unify.apideck.com/ats/applicants/123456ASDF
+                entity_type: ticket
+                entity_url: https://unify.apideck.com/issue-tracking/tickets/123456ASDF
                 event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.applicant.updated
+                event_type: issue-tracking.ticket.updated
                 occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
+                unified_api: issue-tracking
             schema:
               properties:
                 payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
+                  $ref: "#/components/schemas/IssueTrackingWebhookEvent"
               type: object
       responses:
         "200":
           description: Return a 200 status to indicate that the data was received successfully.
       security: []
-      summary: Applicant Updated
+      summary: Ticket Updated
       tags:
         - Webhook Events
-      x-apideck-event-type: ats.applicant.updated
-      x-apideck-upcoming: true
-  ApplicationCreated:
-    post:
-      description: Event broadcast when an application has been created.
-      operationId: applicationCreated
-      parameters:
-        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
-          in: header
-          name: x-apideck-idempotency-key
-          required: true
-          schema:
-            example: d290f1ee-6c54-4b01-90e6-d701748f0851
-            format: uuid
-            type: string
-      requestBody:
-        content:
-          application/json:
-            example:
-              payload:
-                consumer_id: test_user_id
-                entity_id: 123456ASDF
-                entity_type: application
-                entity_url: https://unify.apideck.com/ats/applications/123456ASDF
-                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.application.created
-                occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
-            schema:
-              properties:
-                payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      security: []
-      summary: Application Created
-      tags:
-        - Webhook Events
-      x-apideck-event-type: ats.application.created
-  ApplicationDeleted:
-    post:
-      description: Event broadcast when an application has been deleted.
-      operationId: applicationDeleted
-      parameters:
-        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
-          in: header
-          name: x-apideck-idempotency-key
-          required: true
-          schema:
-            example: d290f1ee-6c54-4b01-90e6-d701748f0851
-            format: uuid
-            type: string
-      requestBody:
-        content:
-          application/json:
-            example:
-              payload:
-                consumer_id: test_user_id
-                entity_id: 123456ASDF
-                entity_type: application
-                entity_url: https://unify.apideck.com/ats/applications/123456ASDF
-                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.application.deleted
-                occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
-            schema:
-              properties:
-                payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      security: []
-      summary: Application Deleted
-      tags:
-        - Webhook Events
-      x-apideck-event-type: ats.application.deleted
-  ApplicationUpdated:
-    post:
-      description: Event broadcast when an application has been updated.
-      operationId: applicationUpdated
-      parameters:
-        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
-          in: header
-          name: x-apideck-idempotency-key
-          required: true
-          schema:
-            example: d290f1ee-6c54-4b01-90e6-d701748f0851
-            format: uuid
-            type: string
-      requestBody:
-        content:
-          application/json:
-            example:
-              payload:
-                consumer_id: test_user_id
-                entity_id: 123456ASDF
-                entity_type: application
-                entity_url: https://unify.apideck.com/ats/applications/123456ASDF
-                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.application.updated
-                occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
-            schema:
-              properties:
-                payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully
-      security: []
-      summary: Application Updated
-      tags:
-        - Webhook Events
-      x-apideck-event-type: ats.application.updated
-  JobCreated:
-    post:
-      description: Event broadcast when a job has been created.
-      operationId: jobCreated
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            $ref: "#/components/schemas/AtsEventType"
-        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
-          in: header
-          name: x-apideck-idempotency-key
-          required: true
-          schema:
-            example: d290f1ee-6c54-4b01-90e6-d701748f0851
-            format: uuid
-            type: string
-      requestBody:
-        content:
-          application/json:
-            example:
-              payload:
-                consumer_id: test_user_id
-                entity_id: 123456ASDF
-                entity_type: job
-                entity_url: https://unify.apideck.com/ats/jobs/123456ASDF
-                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.job.created
-                occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
-            schema:
-              properties:
-                payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully.
-      security: []
-      summary: Job Created
-      tags:
-        - Webhook Events
-      x-apideck-event-type: ats.job.created
-  JobDeleted:
-    post:
-      description: Event broadcast when a job has been deleted.
-      operationId: jobDeleted
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            $ref: "#/components/schemas/AtsEventType"
-        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
-          in: header
-          name: x-apideck-idempotency-key
-          required: true
-          schema:
-            example: d290f1ee-6c54-4b01-90e6-d701748f0851
-            format: uuid
-            type: string
-      requestBody:
-        content:
-          application/json:
-            example:
-              payload:
-                consumer_id: test_user_id
-                entity_id: 123456ASDF
-                entity_type: job
-                entity_url: https://unify.apideck.com/ats/jobs/123456ASDF
-                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.job.deleted
-                occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
-            schema:
-              properties:
-                payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully.
-      security: []
-      summary: Job Deleted
-      tags:
-        - Webhook Events
-      x-apideck-event-type: ats.job.deleted
-  JobUpdated:
-    post:
-      description: Event broadcast when a job has been updated.
-      operationId: jobUpdated
-      parameters:
-        - description: The type of event that was triggered
-          in: header
-          name: x-apideck-event-type
-          required: true
-          schema:
-            $ref: "#/components/schemas/AtsEventType"
-        - description: An idempotency key is a unique value generated to recognize subsequent retries/duplicates of the same request.
-          in: header
-          name: x-apideck-idempotency-key
-          required: true
-          schema:
-            example: d290f1ee-6c54-4b01-90e6-d701748f0851
-            format: uuid
-            type: string
-      requestBody:
-        content:
-          application/json:
-            example:
-              payload:
-                consumer_id: test_user_id
-                entity_id: 123456ASDF
-                entity_type: job
-                entity_url: https://unify.apideck.com/ats/jobs/123456ASDF
-                event_id: d290f1ee-6c54-4b01-90e6-d701748f0851
-                event_type: ats.job.updated
-                occurred_at: 2020-01-01T00:00:00.000Z
-                service_id: lever
-                unified_api: ats
-            schema:
-              properties:
-                payload:
-                  $ref: "#/components/schemas/AtsWebhookEvent"
-              type: object
-      responses:
-        "200":
-          description: Return a 200 status to indicate that the data was received successfully.
-      security: []
-      summary: Job Updated
-      tags:
-        - Webhook Events
-      x-apideck-event-type: ats.job.updated
+      x-apideck-event-type: issue-tracking.ticket.updated
+  x-apideck-resources:
+    collection-ticket: ticket
   x-sdk-exclude: true

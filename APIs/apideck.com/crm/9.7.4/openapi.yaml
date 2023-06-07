@@ -272,7 +272,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 9.7.3
+  version: 9.7.4
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -7036,7 +7036,9 @@ components:
           nullable: true
           type: string
         created_at:
+          description: Date created in ISO 8601 format
           example: 2020-09-30T07:43:32.000Z
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$
           readOnly: true
           type: string
         currency:
@@ -7112,7 +7114,9 @@ components:
           nullable: true
           type: string
         updated_at:
+          description: Date updated in ISO 8601 format
           example: 2020-09-30T07:43:32.000Z
+          pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$
           readOnly: true
           type: string
         websites:
@@ -7695,6 +7699,10 @@ components:
       additionalProperties: true
       example:
         search: San Francisco
+      properties:
+        example_downstream_property:
+          description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
+          type: string
       type: object
     PaymentRequiredResponse:
       properties:

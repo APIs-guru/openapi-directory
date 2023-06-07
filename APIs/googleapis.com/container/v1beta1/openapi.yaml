@@ -3013,6 +3013,9 @@ components:
         acceleratorType:
           description: The accelerator type resource name. List of supported accelerators [here](https://cloud.google.com/compute/docs/gpus)
           type: string
+        gpuDriverInstallationConfig:
+          $ref: "#/components/schemas/GPUDriverInstallationConfig"
+          description: The configuration for auto installation of GPU driver.
         gpuPartitionSize:
           description: Size of partitions to create on the GPU. Valid values are described in the NVIDIA [mig user guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning).
           type: string
@@ -3110,6 +3113,9 @@ components:
         enabled:
           description: Enable Autopilot
           type: boolean
+        workloadPolicyConfig:
+          $ref: "#/components/schemas/WorkloadPolicyConfig"
+          description: Workload policy configuration for Autopilot.
       type: object
     AutopilotCompatibilityIssue:
       description: AutopilotCompatibilityIssue contains information about a specific compatibility issue with Autopilot mode.
@@ -3522,6 +3528,9 @@ components:
         resourceUsageExportConfig:
           $ref: "#/components/schemas/ResourceUsageExportConfig"
           description: Configuration for exporting resource usages. Resource usage export is disabled when this config unspecified.
+        securityPostureConfig:
+          $ref: "#/components/schemas/SecurityPostureConfig"
+          description: Enable/Disable Security Posture API features for the cluster.
         selfLink:
           description: "[Output only] Server-defined URL for the resource."
           type: string
@@ -3621,6 +3630,9 @@ components:
         desiredAuthenticatorGroupsConfig:
           $ref: "#/components/schemas/AuthenticatorGroupsConfig"
           description: AuthenticatorGroupsConfig specifies the config for the cluster security groups settings.
+        desiredAutopilotWorkloadPolicyConfig:
+          $ref: "#/components/schemas/WorkloadPolicyConfig"
+          description: The desired workload policy configuration for the autopilot cluster.
         desiredBinaryAuthorization:
           $ref: "#/components/schemas/BinaryAuthorization"
           description: The desired configuration options for the Binary Authorization feature.
@@ -3749,6 +3761,9 @@ components:
         desiredResourceUsageExportConfig:
           $ref: "#/components/schemas/ResourceUsageExportConfig"
           description: The desired configuration for exporting resource usage.
+        desiredSecurityPostureConfig:
+          $ref: "#/components/schemas/SecurityPostureConfig"
+          description: Enable/Disable Security Posture API features for the cluster.
         desiredServiceExternalIpsConfig:
           $ref: "#/components/schemas/ServiceExternalIPsConfig"
           description: ServiceExternalIPsConfig specifies the config for the use of Services with ExternalIPs field.
@@ -3997,6 +4012,18 @@ components:
           type: boolean
         project:
           description: The Fleet host project(project ID or project number) where this cluster will be registered to. This field cannot be changed after the cluster has been registered.
+          type: string
+      type: object
+    GPUDriverInstallationConfig:
+      description: GPUDriverInstallationConfig specifies the version of GPU driver to be auto installed.
+      properties:
+        gpuDriverVersion:
+          description: Mode for how the GPU driver is installed.
+          enum:
+            - GPU_DRIVER_VERSION_UNSPECIFIED
+            - INSTALLATION_DISABLED
+            - DEFAULT
+            - LATEST
           type: string
       type: object
     GPUSharingConfig:
@@ -5432,6 +5459,24 @@ components:
           description: This represents a version selected from the patched_versions field that the cluster receiving this notification should most likely want to upgrade to based on its current version. Note that if this notification is being received by a given cluster, it means that this version is currently available as an upgrade target in that cluster's location.
           type: string
       type: object
+    SecurityPostureConfig:
+      description: SecurityPostureConfig defines the flags needed to enable/disable features for the Security Posture API.
+      properties:
+        mode:
+          description: Sets which mode to use for Security Posture features.
+          enum:
+            - MODE_UNSPECIFIED
+            - DISABLED
+            - BASIC
+          type: string
+        vulnerabilityMode:
+          description: Sets which mode to use for vulnerability scanning.
+          enum:
+            - VULNERABILITY_MODE_UNSPECIFIED
+            - VULNERABILITY_DISABLED
+            - VULNERABILITY_BASIC
+          type: string
+      type: object
     ServerConfig:
       description: Kubernetes Engine service configuration.
       properties:
@@ -6213,6 +6258,13 @@ components:
             - EXPOSE
             - GKE_METADATA_SERVER
           type: string
+      type: object
+    WorkloadPolicyConfig:
+      description: WorkloadPolicyConfig is the configuration of workload policy for autopilot clusters.
+      properties:
+        allowNetAdmin:
+          description: If true, workloads can use NET_ADMIN capability.
+          type: boolean
       type: object
   securitySchemes:
     Oauth2:

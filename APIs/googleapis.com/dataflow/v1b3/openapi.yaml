@@ -90,7 +90,7 @@ paths:
         - projects
   "/v1b3/projects/{projectId}/jobs":
     get:
-      description: List the jobs of a project. To list the jobs of a project in a region, we recommend using `projects.locations.jobs.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To list the all jobs across all regions, use `projects.jobs.aggregated`. Using `projects.jobs.list` is not recommended, as you can only get the list of jobs that are running in `us-central1`.
+      description: List the jobs of a project. To list the jobs of a project in a region, we recommend using `projects.locations.jobs.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To list the all jobs across all regions, use `projects.jobs.aggregated`. Using `projects.jobs.list` is not recommended, because you can only get the list of jobs that are running in `us-central1`. `projects.locations.jobs.list` and `projects.jobs.list` support filtering the list of jobs by name. Filtering by name isn't supported by `projects.jobs.aggregated`.
       operationId: dataflow.projects.jobs.list
       parameters:
         - description: The project which owns the jobs.
@@ -114,7 +114,7 @@ paths:
           name: location
           schema:
             type: string
-        - description: Optional. The job name. Optional.
+        - description: Optional. The job name.
           in: query
           name: name
           schema:
@@ -824,7 +824,7 @@ paths:
         - projects
   "/v1b3/projects/{projectId}/jobs:aggregated":
     get:
-      description: List the jobs of a project across all regions.
+      description: List the jobs of a project across all regions. **Note:** This method doesn't support filtering the list of jobs by name.
       operationId: dataflow.projects.jobs.aggregated
       parameters:
         - description: The project which owns the jobs.
@@ -848,7 +848,7 @@ paths:
           name: location
           schema:
             type: string
-        - description: Optional. The job name. Optional.
+        - description: Optional. The job name.
           in: query
           name: name
           schema:
@@ -1033,7 +1033,7 @@ paths:
         - projects
   "/v1b3/projects/{projectId}/locations/{location}/jobs":
     get:
-      description: List the jobs of a project. To list the jobs of a project in a region, we recommend using `projects.locations.jobs.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To list the all jobs across all regions, use `projects.jobs.aggregated`. Using `projects.jobs.list` is not recommended, as you can only get the list of jobs that are running in `us-central1`.
+      description: List the jobs of a project. To list the jobs of a project in a region, we recommend using `projects.locations.jobs.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To list the all jobs across all regions, use `projects.jobs.aggregated`. Using `projects.jobs.list` is not recommended, because you can only get the list of jobs that are running in `us-central1`. `projects.locations.jobs.list` and `projects.jobs.list` support filtering the list of jobs by name. Filtering by name isn't supported by `projects.jobs.aggregated`.
       operationId: dataflow.projects.locations.jobs.list
       parameters:
         - description: The project which owns the jobs.
@@ -1058,7 +1058,7 @@ paths:
               - TERMINATED
               - ACTIVE
             type: string
-        - description: Optional. The job name. Optional.
+        - description: Optional. The job name.
           in: query
           name: name
           schema:

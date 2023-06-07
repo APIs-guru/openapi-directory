@@ -2888,7 +2888,7 @@ components:
           description: Private connectivity.
         ssl:
           $ref: "#/components/schemas/SslConfig"
-          description: SSL configuration for the connection to the source Oracle database. * Only `SERVER_ONLY` configuration is supported for Oracle SSL. * SSL is supported for Oracle versions 12 and above.
+          description: SSL configuration for the destination to connect to the source database. The supported configuration for Oracle SSL is of SERVER_ONLY type.
         staticServiceIpConnectivity:
           $ref: "#/components/schemas/StaticServiceIpConnectivity"
           description: Static Service IP connectivity.

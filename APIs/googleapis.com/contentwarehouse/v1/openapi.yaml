@@ -2873,6 +2873,14 @@ components:
             - COWORKERS
           type: string
       type: object
+    AppsPeopleOzExternalMergedpeopleapiContactPromptSettingsInfo:
+      description: Contact level People Prompt settings. This message is a pure wrapper of the shared ContactPromptSettings message so that it can be a top-level person field. No other fields should be added to the message.
+      properties:
+        contactPromptSettings:
+          $ref: "#/components/schemas/SocialGraphApiProtoContactPromptSettings"
+        metadata:
+          $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
+      type: object
     AppsPeopleOzExternalMergedpeopleapiContactStateInfo:
       description: Contact state and related metadata. See go/fbs-contacts-trash. This message is a pure wrapper of the shared ContactState message so that it can be a top-level person field. No other fields should be added to the message.
       properties:
@@ -4143,6 +4151,10 @@ components:
           description: Contact groups that this person is a member of.
           items:
             $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiContactGroupMembership"
+          type: array
+        contactPromptSettingsInfo:
+          items:
+            $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiContactPromptSettingsInfo"
           type: array
         contactStateInfo:
           description: Contact state and related metadata. See go/fbs-contacts-trash. If this field was requested but is not set on the Person then the contact is in the DEFAULT contact state. This field is read-only, and should not be set on a mutate (e.g. UpdatePerson) call. Clients must call the explicit APIs (e.g. UntrashPerson) to change contact state.
@@ -5668,19 +5680,6 @@ components:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiProductProfileFailure"
           description: Failure type if there is an error when fetching product profile data.
       type: object
-    AssistantApiAccessControlOutput:
-      description: Access settings for providers.
-      properties:
-        allowNonUnicornUserAccessYoutubeKids:
-          description: If true, the user consented to use YouTube Kids as a video provider for non-unicorn users(voice recognized adults or guest). Unicorn accounts shouldn’t use this setting.
-          type: boolean
-        guestAccessOnYoutube:
-          enum:
-            - UNKNOWN_GUEST_ACCESS
-            - USE_DEFAULT_ACCOUNT_FOR_GUEST
-            - DISABLED_FOR_GUEST
-          type: string
-      type: object
     AssistantApiActionV2SupportedFeatures:
       description: The features supported by the ActionV2 protocol. Note that after we move on to ConversationProto for all surfaces we can remove this message.
       properties:
@@ -7083,6 +7082,87 @@ components:
           description: The unique id for each routine. When the alrm is dismissed, it will trigger the routine of the routine alarm's creator if feasible.
           type: string
       type: object
+    AssistantApiCoreTypesGovernedSurfaceIdentity:
+      description: "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 5 LINT.IfChange"
+      properties:
+        deviceId:
+          $ref: "#/components/schemas/AssistantApiCoreTypesDeviceId"
+          description: The identifier of the device.
+        surfaceType:
+          description: The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl.
+          enum:
+            - UNKNOWN_TYPE
+            - ACCL
+            - AGSA
+            - ANDROID
+            - ANDROID_AUTO
+            - ANDROID_LITE
+            - ANDROID_PHONE
+            - ANDROID_SCREENLESS
+            - ANDROID_SMART_DISPLAY
+            - ANDROID_TABLET
+            - ANDROID_THINGS
+            - ANDROID_THINGS_CUBE
+            - ANDROID_THINGS_JASPER
+            - ANDROID_TV
+            - ANDROID_WEAR
+            - ASSISTANT_KIT
+            - ASSISTANT_SDK
+            - AUTO
+            - CAST_OS
+            - CHROME_OS
+            - CHROMECAST_MANHATTAN
+            - CLOUD_DEVICE
+            - CROS
+            - FITBIT_OS_WATCH
+            - FITBIT_OS_WATCH_ANDROID
+            - FITBIT_OS_WATCH_IOS
+            - GOOGLE_HOME
+            - HEADPHONE
+            - HEADPHONE_ANDROID
+            - HEADPHONE_IOS
+            - IOPA
+            - IOS
+            - IOS_SCREENLESS
+            - IPAD
+            - IPHONE
+            - KAI_OS
+            - KAI_OS_AMA
+            - LIBASSISTANT
+            - PHONE
+            - PIXEL
+            - PIXEL5
+            - PIXEL6
+            - PIXEL7
+            - PIXEL_BUDS
+            - PIXEL_TABLET
+            - PIXEL_TABLET_HUB_MODE
+            - PIXEL_TABLET_PERSONAL_MODE
+            - PIXEL_WATCH
+            - SCREENLESS
+            - SMART_DISPLAY
+            - SPEAKER
+            - TABLET
+            - TELEPHONE
+            - THING
+            - WATCH
+            - WEAR_OS
+            - WEAR_OS_WATCH
+          type: string
+        surfaceVersion:
+          $ref: "#/components/schemas/AssistantApiCoreTypesGovernedSurfaceVersion"
+          description: The version of the surface/client. This is different from the Conversation protocol version.
+      type: object
+    AssistantApiCoreTypesGovernedSurfaceVersion:
+      description: The version of the surface/client. New surfaces are encouraged to only use the “major” field to keep track of version number. The “minor” field may be used for surfaces that rely on both the “major” and “minor” fields to define their version.
+      properties:
+        major:
+          format: int32
+          type: integer
+        minor:
+          format: int32
+          type: integer
+      type: object
     AssistantApiCoreTypesHomeAppInfo:
       description: "The Home app information of the provider. Next ID: 3"
       properties:
@@ -7207,7 +7287,7 @@ components:
           type: number
       type: object
     AssistantApiCoreTypesMessageNotification:
-      description: "This proto captures the contents of a messaging app notification that is typically part of a conversation thread. Next Id: 20"
+      description: "LINT.IfChange(ungoverned_message_notification) This proto captures the contents of a messaging app notification that is typically part of a conversation thread. Next Id: 20"
       properties:
         appName:
           description: App name of the message notification, e.g. Hangouts.
@@ -7713,7 +7793,7 @@ components:
           type: string
         systemNotificationRestrictions:
           $ref: "#/components/schemas/AssistantApiSystemNotificationRestrictions"
-          description: Restrictions related to system-level notifications. This field is superficially similar to ProactiveNotificationOutput, but unlike that field which tracks a per-user preference on the OPA side, this field captures system level notifications restrictions. This field is not stored and is merged to capablities from conversation params. It exists mostly for logging purposes of android channel state and global app-level notification opt out.
+          description: Restrictions related to system-level notifications. This field is superficially similar to ProactiveNotificationOutput, but unlike that field which tracks a per-user preference on the OPA side, this field captures system level notifications restrictions. This field is not stored and is merged to capabilities from conversation params. It exists mostly for logging purposes of android channel state and global app-level notification opt out.
         thirdPartyCapabilities:
           $ref: "#/components/schemas/AssistantApiThirdPartyCapabilities"
           description: Capabilities related to third party integration.
@@ -7841,7 +7921,7 @@ components:
           type: boolean
       type: object
     AssistantApiGuestAccessOutput:
-      description: "DEPRECATED: Use AccessControlOutput instead. Access settings for guests."
+      description: Access settings for guests.
       properties:
         guestAccessOnYoutube:
           enum:
@@ -8008,7 +8088,7 @@ components:
           $ref: "#/components/schemas/AssistantApiCoreTypesProvider"
           description: Contains detailed provider information such as android app package name.
         providerKey:
-          description: An provider enum string for OTT providers. The available key can be found in go/ump-provider-enum For Tuner provider, the provider key would be an ID the tuner app uploaded from TIF. See https://source.android.com/devices/tv
+          description: A provider enum string for OTT providers. The available key can be found in go/ump-provider-enum For Tuner provider, the provider key would be an ID the tuner app uploaded from TIF. See https://source.android.com/devices/tv
           type: string
         providerType:
           enum:
@@ -8287,9 +8367,6 @@ components:
     AssistantApiOutputRestrictions:
       description: "These are user configurable permissions representing what the device is allowed to output. Next ID: 11"
       properties:
-        accessControlOutput:
-          $ref: "#/components/schemas/AssistantApiAccessControlOutput"
-          description: Access settings for all providers.
         googlePhotoContent:
           description: The type of Google Photo content which the device can output.
           enum:
@@ -8298,7 +8375,7 @@ components:
           type: string
         guestAccessOutput:
           $ref: "#/components/schemas/AssistantApiGuestAccessOutput"
-          description: "DEPRECATED: Use access_control_output instead. Access settings for guests."
+          description: Access settings for guests.
         personalData:
           description: The level of personal data which the device can output. See go/personal-readout for detail.
           enum:
@@ -8504,7 +8581,7 @@ components:
             type: string
           type: array
         visionHelpEnabled:
-          description: Whether the device enabled vision help features in accessiblity settings. The settings is config in Assistant App and on-device settings, and stored in footprints. When enabled, font, color and TTS will be adjusted.
+          description: Whether the device enabled vision help features in accessibility settings. The settings is config in Assistant App and on-device settings, and stored in footprints. When enabled, font, color and TTS will be adjusted.
           type: boolean
       type: object
     AssistantApiScreenCapabilitiesMask:
@@ -8579,7 +8656,7 @@ components:
           type: boolean
       type: object
     AssistantApiSettingsAppCapabilities:
-      description: These capabilties are associated with Assistant Settings on devices.
+      description: These capabilities are associated with Assistant Settings on devices.
       properties:
         carSettingsCapabilities:
           $ref: "#/components/schemas/AssistantApiCarSettingsCapabilities"
@@ -8888,9 +8965,6 @@ components:
         truncatedLocalNetworkId:
           description: Local network ID of the device (truncated to obfuscate devices and households globally). This is a temporary signal to determine proximity of Assistant devices in a house (HGS place).
           type: string
-        trustedVoiceEnabled:
-          description: "DEPRECATED: Use speech_settings instead. Indicates whether the user has enabled trusted voice for this device. See go/hotword-settings-on-cloud for more info on this project."
-          type: boolean
         type:
           description: "The type of the device. Note: this should only be used for grouping devices for UI presentation purpose. Use |capabilities| to decide what the device can do."
           enum:
@@ -9724,7 +9798,7 @@ components:
           $ref: "#/components/schemas/AssistantApiSurfaceProperties"
       type: object
     AssistantApiSpeechCapabilities:
-      description: DEPRECATED These capabilties are associated with speech detection on devices.
+      description: DEPRECATED These capabilities are associated with speech detection on devices.
       properties:
         dspAvailable:
           description: A bool indicating whether device supports dsp based hotword detection.
@@ -11001,6 +11075,9 @@ components:
         deviceTargetingLabels:
           $ref: "#/components/schemas/AssistantGroundingRankerDeviceTargetingLabels"
           description: Labels tagged by Device Targeting library (Lumos).
+        surfaceIdentity:
+          $ref: "#/components/schemas/AssistantApiCoreTypesGovernedSurfaceIdentity"
+          description: The set of information that helps identify the surface.
       type: object
     AssistantGroundingRankerDeviceTargetingFeatures:
       description: Features generated by Device Targeting library (Lumos). See go/hgr-lumos-integration and go/lumos-feature-extraction for more details.
@@ -11235,11 +11312,19 @@ components:
           type: number
       type: object
     AssistantGroundingRankerPodcastGroundingProviderFeatures:
-      description: "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 4"
+      description: "Features to be extracted from Podcast GP for ranking in HGR. Next ID: 6"
       properties:
         isExclusive:
           description: Whether the podcast is exclusive to a provider a not.
           type: boolean
+        podcastListenersCount:
+          description: The count of the unique users that listened to the podcast in the last 28 days.
+          format: int32
+          type: integer
+        popularityScore:
+          description: Provider popularity score. More details are here go/ps-to-kg.
+          format: double
+          type: number
         scubedNg3ModelScore:
           description: The relevance score from Scubed.
           format: float
@@ -12339,16 +12424,30 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 53"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 55"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
           format: float
           type: number
+        bindingSetInvalidReason:
+          description: "BindingSet level invalid reason. This is only useful when the bindingset is invalid after running the horizontal check in HGR. More details: go/gb-infeasible."
+          enum:
+            - BINDING_SET_INVALID_REASON_UNKNOWN
+            - BINDING_SET_INVALID_REASON_PROVIDER_INFEASIBLE_FOR_INTENT
+          type: string
         bindingSetPauis:
           description: Pauis score for the binding set
           format: float
           type: number
+        bindingSetValidity:
+          description: "BindingSet level validity. When one of the GPs returns invalid resolution, or the combined bindingset is invalid, this enum will indidate the validity. More details: go/gb-infeasible."
+          enum:
+            - BINDING_SET_VALIDITY_UNKNOWN
+            - BINDING_SET_VALIDITY_VALID
+            - BINDING_SET_VALIDITY_INVALID_RESOLUTIONS
+            - BINDING_SET_VALIDITY_INFEASIBLE_JOINT_GROUNDING
+          type: string
         calibratedParsingScore:
           description: A parsing score that is independently calibrated by each parser/IG.
           format: double
@@ -18255,6 +18354,120 @@ components:
             type: string
           type: array
       type: object
+    GeostoreCityJsonProto:
+      description: CityJsonProto is a custom proto representation of the portion of the CityJSON spec (https://www.cityjson.org/) relevant to internal projects. See go/cityjsonproto-design for more information about the modeling and design decisions implemented here.
+      properties:
+        cityObjects:
+          description: City objects associated with this CityJsonProto.
+          items:
+            $ref: "#/components/schemas/GeostoreCityJsonProtoCityObject"
+          type: array
+        transform:
+          $ref: "#/components/schemas/GeostoreCityJsonProtoTransform"
+          description: Spec for converting vertices from a local coordinate system in arbitrary units to ECEF coordinates in meters (https://en.wikipedia.org/wiki/Earth-centered,_Earth-fixed_coordinate_system).
+        vertexXyz:
+          description: "Vertices as local coordinates represented as a flattened list: [x1,y1,z1,x2,y2,z2,x3,y3,z3]. Vertices are relative to a local coordinate system and rounded to their nearest integer value. See `transform` for how vertices can be transformed from a local coordinate system into an Earth-centered, Earth-fixed coordinate system. Vertices are flattened for space efficiency, memory locality, and processing performance. To access the x,y,z coordinates of vertex N, read the values at indices 3N, 3N+1, and 3N+2."
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
+    GeostoreCityJsonProtoCityObject:
+      description: Representation of an object with geometry.
+      properties:
+        geometries:
+          description: Geometries associated with this object.
+          items:
+            $ref: "#/components/schemas/GeostoreCityJsonProtoCityObjectGeometry"
+          type: array
+        id:
+          description: The ID of this CityObject, which must be unique within this CityJsonProto. The ID does not have a meaning outside this CityJsonProto.
+          type: string
+        type:
+          description: Type of object represented, e.g. building.
+          enum:
+            - TYPE_UNSPECIFIED
+            - BUILDING
+            - OTHER_CONSTRUCTION
+          type: string
+      type: object
+    GeostoreCityJsonProtoCityObjectGeometry:
+      description: Representation of geometry. Geometries vary both in type and in level-of-detail, enabling representation of any shape at any level of granularity.
+      properties:
+        lod:
+          description: Level-of-detail (LoD) indicates how intricate the geometric representation is. May be a single digit per CityGML standards or X.Y per TU Delft (visual depiction at https://3d.bk.tudelft.nl/lod/). `CityObject`s may have multiple geometries with the same LoD.
+          type: string
+        multipoint:
+          $ref: "#/components/schemas/GeostoreCityJsonProtoCityObjectGeometryMultiPoint"
+          description: For geometries consisting of a single point, line, or loop.
+        multisurface:
+          $ref: "#/components/schemas/GeostoreCityJsonProtoCityObjectGeometryMultiSurface"
+          description: For geometries consisting of a collection of surfaces.
+        solid:
+          $ref: "#/components/schemas/GeostoreCityJsonProtoCityObjectGeometrySolid"
+          description: For geometries consisting of a watertight 3D shape.
+      type: object
+    GeostoreCityJsonProtoCityObjectGeometryMultiPoint:
+      description: A single line, loop, or set of points.
+      properties:
+        xIndices:
+          description: A collection of references to vertices in `CityJsonProto.vertex_xyz`. `CityJsonProto.vertex_xyz` is a flattened list of vertex coordinates. A value in `x_indices` should be the index of the x-coordinate of the desired vertex V; the full coordinates of vertex V can then be found at indices [V,V+1,V+2]. For example, an `x_indices` containing 3, 0, and 12 references three vertices, whose complete x,y,z coordinates can respectively be found at `CityJsonProto.vertex_xyz` indices [3,4,5], [0,1,2], and [12,13,14].
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
+    GeostoreCityJsonProtoCityObjectGeometryMultiSurface:
+      description: A collection of arbitrary surfaces that have no prescribed topological relationship.
+      properties:
+        surfaces:
+          description: All surfaces are standalone entities with no relationship to each other.
+          items:
+            $ref: "#/components/schemas/GeostoreCityJsonProtoCityObjectGeometrySurface"
+          type: array
+      type: object
+    GeostoreCityJsonProtoCityObjectGeometrySolid:
+      description: A 3D shape, composed of a watertight exterior shell with optional interior watertight shells.
+      properties:
+        shells:
+          description: The first shell is exterior; any additional are interior.
+          items:
+            $ref: "#/components/schemas/GeostoreCityJsonProtoCityObjectGeometryMultiSurface"
+          type: array
+      type: object
+    GeostoreCityJsonProtoCityObjectGeometrySurface:
+      description: A polygonal surface, composed of a closed exterior loop with optional closed interior loops.
+      properties:
+        loops:
+          description: The first loop is exterior; any additional are interior.
+          items:
+            $ref: "#/components/schemas/GeostoreCityJsonProtoCityObjectGeometryMultiPoint"
+          type: array
+      type: object
+    GeostoreCityJsonProtoTransform:
+      description: 'Information for transforming a point from an "old" to "new" coordinate frame. Applied as follows: vertex_new = scale * vertex_old + translate'
+      properties:
+        scale:
+          description: Relative scale of the vertices in the new coordinate system relative to the old coordinate system. Applies to all three x,y,z coordinates.
+          format: double
+          type: number
+        translate:
+          $ref: "#/components/schemas/GeostoreCityJsonProtoTransformXyzVector"
+          description: Offset of each vertex in the new coordinate system relative to the old coordinate system.
+      type: object
+    GeostoreCityJsonProtoTransformXyzVector:
+      description: Vector of length three whose values respectively correspond to the x, y, and z axes.
+      properties:
+        x:
+          format: double
+          type: number
+        y:
+          format: double
+          type: number
+        z:
+          format: double
+          type: number
+      type: object
     GeostoreComposableItemProto:
       description: Generic item proto. This is intended to have only certain aspects filled (e.g. photo only, name + price). Valid combinations of properties are enforced by linters.
       properties:
@@ -18341,6 +18554,14 @@ components:
             - TRIANGLE_CROSSING_LINE_POINTING_RIGHT
             - STRUCTURED_CROSSING_LINE
           type: string
+      type: object
+    GeostoreCurvatureProto:
+      properties:
+        pointCurvature:
+          description: Curvature values at points along the flowline. A linear interpolation between two successive points will yield the curvature value at intermediate points.
+          items:
+            $ref: "#/components/schemas/GeostorePointCurvatureProto"
+          type: array
       type: object
     GeostoreCurveConnectionProto:
       description: Protocol buffer describing a curve that connects two externally specified endpoints.
@@ -19927,6 +20148,7 @@ components:
             - FUTURE_GEOMETRY
             - FUTURE_GEOMETRY_FOR
             - GCONCEPT
+            - GEOMETRY_3D
             - GEOMETRY_PRECISION_METERS
             - GEOPOLITICAL_GEOMETRY_REST_OF_WORLD_POLYGON
             - GEOPOLITICAL_GEOMETRY_SELF_POLYGON
@@ -20041,6 +20263,7 @@ components:
             - TRANSIT_LINE_VEHICLE_TYPE
             - TRANSIT_STATION_AGENCY_ASSOCIATION
             - VERTICAL_ORDERING_LEVEL
+            - VISUALIZATION_AREA
             - WATER_REMOVED_POLYGON
             - DEPRECATED_DO_NOT_USE_EMAIL_ADDRESS
             - DEPRECATED_DO_NOT_USE_RANK_GEOMETRY
@@ -20174,6 +20397,9 @@ components:
         futureGeometryFor:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
           description: Specifies the feature that this feature's geometry will replace. If this field is populated, the referenced feature must have a future_geometry reference back to this feature. This field is only allowed (and required) for TYPE_FUTURE_GEOMETRY features.
+        geometry3d:
+          $ref: "#/components/schemas/GeostoreGeometryStoreReferenceProto"
+          description: Geometry Store ID and materialized geometry representing the feature's physical shape in the world.
         geometryPrecisionMeters:
           description: "If set, the feature's actual location can be assumed to be somewhere within a circle of this radius, centered on the feature's location. More information on this field at go/gpm-definition-update. NOTE: Only applicable to features with 'point' geometry. Please contact geo-schema-team@ if you have non-point use cases for which this field would be useful."
           format: double
@@ -20745,6 +20971,9 @@ components:
         verticalOrdering:
           $ref: "#/components/schemas/GeostoreVerticalOrderingProto"
           description: Represents vertical ordering for this feature relative to other geometrically-overlaping features. See go/aboutgrades for more information about distinction among different levels.
+        visualizationArea:
+          $ref: "#/components/schemas/GeostoreGeometryStoreReferenceProto"
+          description: Geometry Store ID and materialized geometry representing a tight bounding box of the feature's geometry (or the building/grounds a POI occupies), e.g. for generating flyover experiences.
         waterRemovedPolygon:
           $ref: "#/components/schemas/GeostorePolygonProto"
           description: A version of the geometry which has water removed but is not simplified (thus having equal or more vertices than polygon_for_display).
@@ -20797,6 +21026,9 @@ components:
     GeostoreFlowLineProto:
       description: Wrapper to hold data related to a lane’s track, extendable for future data.
       properties:
+        curvature:
+          $ref: "#/components/schemas/GeostoreCurvatureProto"
+          description: RESERVED
         track:
           $ref: "#/components/schemas/GeostoreTrackProto"
       type: object
@@ -20973,6 +21205,20 @@ components:
           items:
             $ref: "#/components/schemas/GeostoreFeatureIdProto"
           type: array
+      type: object
+    GeostoreGeometryStoreReferenceProto:
+      description: A Geometry Store ID and, in some contexts, geometry materialized from the record associated with that ID.
+      properties:
+        footprint:
+          description: Geometry (in STGeography format) materialized from the footprint field of the Geometry Store record associated with the geometry_id referenced above.
+          format: byte
+          type: string
+        geometry:
+          $ref: "#/components/schemas/GeostoreCityJsonProto"
+          description: Geometry materialized from the full_fidelity_proto field of the Geometry Store record associated with the geometry_id referenced above.
+        geometryId:
+          description: The ID of a record in the Geometry Store.
+          type: string
       type: object
     GeostoreGeopoliticalGeometryProto:
       description: Geopolitical (unsimplified) polygons for a feature for different geopolitical use cases. See go/unsimplified-poly.
@@ -23234,6 +23480,22 @@ components:
           description: A token that can be used to identify the version of the data about this marker line.
           type: string
       type: object
+    GeostorePointCurvatureProto:
+      properties:
+        curvatureStatus:
+          enum:
+            - CURVATURE_UNSPECIFIED
+            - CURVATURE_UNKNOWN
+          type: string
+        radiansPerMeter:
+          description: Curvature in radians per meter. Negative is a curve to the left and positive is a curve to the right.
+          format: float
+          type: number
+        startPointFraction:
+          description: How far along the line this curvature value starts to apply, in the format of decimal between 0 and 1.
+          format: float
+          type: number
+      type: object
     GeostorePointProto:
       properties:
         latE7:
@@ -24639,7 +24901,7 @@ components:
           $ref: "#/components/schemas/GeostoreTimeScheduleProto"
           description: "When specified, restriction applies only at particular times (operating hours or times of the year: reversing lanes, seasonal roads, no left turns from 3-5pm Mon-Fri except holidays). Otherwise, restriction is in effect at all times."
         scope:
-          description: "The scope that the restriction applies to. - SCOPE_DIRECTION means the segment/sibling pair is restricted in the direction of the segment that contains this RestrictionProto. For segment/sibling pairs with pedestrian facilities (and thus side-of-road routing) the RestrictionProto restricts both facilities in the direction of the segment (assuming that the restriction applies to travel mode TRAVEL_PEDESTRIAN). - SCOPE_SIDE means the RestrictionProto applies only to the side of road that the containing segment represents. That sibling's pedestrian facility is restricted in both directions. Schema constraints: - SCOPE_SIDE must be set if and only if travel_mode == [TRAVEL_PEDESTRIAN] and the segment containing the restriction has PEDESTRIAN_FACILITY_PRESENT. Such restrictions must have no subpath. - All other restrictions must have this field set to SCOPE_DIRECTION (whether explicitly or implicitly). This distinction is necessary for cases such as pedestrian facility on one-way segment/sibling roads."
+          description: "The scope that the restriction applies to. - SCOPE_DIRECTION means the segment/sibling pair is restricted in the direction of the segment that contains this RestrictionProto. For segment/sibling pairs with pedestrian facilities (and thus side-of-road routing) the RestrictionProto restricts both facilities in the direction of the segment (assuming that the restriction applies to travel mode TRAVEL_PEDESTRIAN). - SCOPE_SIDE means the RestrictionProto applies only to the side of road that the containing segment represents. That sibling's pedestrian facility is restricted in both directions. Schema constraints: - SCOPE_SIDE must be set if and only if travel_mode == [TRAVEL_PEDESTRIAN] and the segment containing the restriction has the pedestrian_facility field set and is not set to PEDESTRIAN_FACILITY_UNKNOWN. Such restrictions must have no subpath. - All other restrictions must have this field set to SCOPE_DIRECTION (whether explicitly or implicitly). This distinction is necessary for cases such as pedestrian facility on one-way segment/sibling roads."
           enum:
             - SCOPE_DIRECTION
             - SCOPE_SIDE
@@ -28906,7 +29168,7 @@ components:
           $ref: "#/components/schemas/GoogleRpcStatus"
           description: Any error that occurred while processing this document.
         mimeType:
-          description: An IANA published MIME type (also referred to as media type). For more information, see https://www.iana.org/assignments/media-types/media-types.xhtml.
+          description: An IANA published [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml).
           type: string
         pages:
           description: Visual page layout for the Document.
@@ -29052,7 +29314,7 @@ components:
           description: Rendered image for this page. This image is preprocessed to remove any skew, rotation, and distortions such that the annotation bounding boxes can be upright and axis-aligned.
         imageQualityScores:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageImageQualityScores"
-          description: Image Quality Scores.
+          description: Image quality scores.
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageLayout"
           description: Layout for the page.
@@ -29171,7 +29433,7 @@ components:
           format: float
           type: number
         languageCode:
-          description: The BCP-47 language code, such as `en-US` or `sr-Latn`. For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          description: The [BCP-47 language code](https://www.unicode.org/reports/tr35/#Unicode_locale_identifier), such as `en-US` or `sr-Latn`.
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentPageDimension:
@@ -29233,7 +29495,7 @@ components:
           format: int32
           type: integer
         mimeType:
-          description: Encoding mime type for the image.
+          description: Encoding [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml) for the image.
           type: string
         width:
           description: Width of the image in pixels.
@@ -29241,7 +29503,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiV1DocumentPageImageQualityScores:
-      description: Image Quality Scores for the page image
+      description: Image quality scores for the page image.
       properties:
         detectedDefects:
           description: A list of detected defects.
@@ -29249,7 +29511,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageImageQualityScoresDetectedDefect"
           type: array
         qualityScore:
-          description: The overall quality score. Range `[0, 1]` where 1 is perfect quality.
+          description: The overall quality score. Range `[0, 1]` where `1` is perfect quality.
           format: float
           type: number
       type: object
@@ -29257,7 +29519,7 @@ components:
       description: Image Quality Defects
       properties:
         confidence:
-          description: Confidence of detected defect. Range `[0, 1]` where 1 indicates strong confidence of that the defect exists.
+          description: Confidence of detected defect. Range `[0, 1]` where `1` indicates strong confidence that the defect exists.
           format: float
           type: number
         type:
@@ -29622,16 +29884,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentStyleFontSize"
           description: Font size.
         fontWeight:
-          description: Font weight. Possible values are normal, bold, bolder, and lighter. https://www.w3schools.com/cssref/pr_font_weight.asp
+          description: "[Font weight](https://www.w3schools.com/cssref/pr_font_weight.asp). Possible values are `normal`, `bold`, `bolder`, and `lighter`."
           type: string
         textAnchor:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentTextAnchor"
           description: Text anchor indexing into the Document.text.
         textDecoration:
-          description: Text decoration. Follows CSS standard. https://www.w3schools.com/cssref/pr_text_text-decoration.asp
+          description: "[Text decoration](https://www.w3schools.com/cssref/pr_text_text-decoration.asp). Follows CSS standard. "
           type: string
         textStyle:
-          description: Text style. Possible values are normal, italic, and oblique. https://www.w3schools.com/cssref/pr_font_font-style.asp
+          description: "[Text style](https://www.w3schools.com/cssref/pr_font_font-style.asp). Possible values are `normal`, `italic`, and `oblique`."
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentStyleFontSize:
@@ -29642,7 +29904,7 @@ components:
           format: float
           type: number
         unit:
-          description: Unit for the font size. Follows CSS naming (in, px, pt, etc.).
+          description: Unit for the font size. Follows CSS naming (such as `in`, `px`, and `pt`).
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentTextAnchor:
@@ -33105,6 +33367,7 @@ components:
             - GENUS_SEARCH_SPORTS
             - GENUS_BUSINESSMESSAGING
             - GENUS_AERIAL_VIEW
+            - GENUS_DOCS_VIDEO
           type: string
         state:
           description: Indicates the state in Venom for this transcode type.
@@ -33671,6 +33934,7 @@ components:
             - GENUS_SEARCH_SPORTS
             - GENUS_BUSINESSMESSAGING
             - GENUS_AERIAL_VIEW
+            - GENUS_DOCS_VIDEO
           type: string
         insertionResponseTimestampUsec:
           description: Time that VideoNotification result was received from Venom.
@@ -51970,6 +52234,9 @@ components:
             - HEADPHONE_PERSONAL_RESULTS_OPTIN
             - DISCOVERY_SPARKS
             - SPOKEN_NOTIFICATIONS_OOBE_OPTIN
+            - PROACTIVE_TRAIN_STATUS
+            - PROACTIVE_TRAIN_DELAY
+            - PROACTIVE_TRAIN_PLATFORM
             - UNIT_TESTING
           type: string
         attachment:
@@ -55296,7 +55563,7 @@ components:
           format: byte
           type: string
         versionAndImprovInfo:
-          description: First 7 bits encode the version, then each chunck of 5 bits encode the index of a potential improv query (lsb to msb) -------|-----|-----|-----|-----|----- version| id1 | id2 | id3 | id4 | id5 where id1 is the index of the first improv query in the improv debug table. As of cl/270008220, this field only contains the version info. For backward compatibility, version still only uses the first 7 bits, and is still prepended by 5 1 bits.
+          description: First 7 bits encode the version, then each chunk of 5 bits encode the index of a potential improv query (lsb to msb) -------|-----|-----|-----|-----|----- version| id1 | id2 | id3 | id4 | id5 where id1 is the index of the first improv query in the improv debug table. As of cl/270008220, this field only contains the version info. For backward compatibility, version still only uses the first 7 bits, and is still prepended by 5 1 bits.
           format: uint32
           type: integer
       type: object
@@ -57662,7 +57929,7 @@ components:
           type: string
       type: object
     RepositoryWebrefDetailedEntityScores:
-      description: "Detailed scores about the topicality of an entity. Next available tag: 16"
+      description: "Detailed scores about the topicality of an entity. Next available tag: 17"
       properties:
         connectedness:
           description: "Represents how much the entity is connected/related to the other entities in the document. This signal partially influences the topicality score, but it is not totally aligned with it: an entity can be very related to the rest of the document, but not central for understanding it. Likewise, an entity can be central to understand a document, but not very related to the rest of the document. The value is in [0, 1]."
@@ -57693,6 +57960,9 @@ components:
           description: Representation of the topicality score that is normalized in [0, 1] and which sum over all entities in the document is 1. It represents the "proportion" of the document that talks about the entity. This score is less human interpretable as the bucketized topicality score (EntityAnnotations.topicality_score), but is more suited for some usages like aggregations.
           format: float
           type: number
+        profileUrl:
+          description: Contains the link to the author's profile url on the platform.
+          type: string
         referencePageScores:
           $ref: "#/components/schemas/RepositoryWebrefReferencePageScores"
           description: Signals used for mining new reference pages, set by the reference-page-scorer processor (that is turned off by default). This field is not populated, except for special reference page extraction runs.
@@ -62688,7 +62958,7 @@ components:
           type: number
       type: object
     SafesearchVideoClassifierOutput:
-      description: "Flexible multi-vertical classification output. The output for each vertical should be defined as a proto extension to this proto. When defining an extension for a new vertical please follow the format: message NewVertical { extend safesearch.VideoClassifierOutput { optional NewVertical classifier_output_extension = ; } optional safesearch.VideoVerticalOutput vertical_output = 1; } SafeSearch verticals only: Please also update this message with a new extension declaration. For more details on extension declaration please refer to http://go/proto-proposals/extension-declarations. Please refer to http://go/proto2-extensions for details on message extensions. LINT.IfChange next extension id: 5"
+      description: "Flexible multi-vertical classification output. The output for each vertical should be defined as a proto extension to this proto. When defining an extension for a new vertical please follow the format: message NewVertical { extend safesearch.VideoClassifierOutput { optional NewVertical classifier_output_extension = ; } optional safesearch.VideoVerticalOutput vertical_output = 1; } SafeSearch verticals only: Please also update this message with a new extension declaration. For more details on extension declaration please refer to http://go/proto-proposals/extension-declarations. Please refer to http://go/proto2-extensions for details on message extensions. LINT.IfChange next extension id: 6"
       properties: {}
       type: object
     SafesearchVideoContentSignals:
@@ -62746,6 +63016,9 @@ components:
             - PDF_TEXT_BLOCK
           type: string
         AbstractText:
+          type: string
+        AbstractTypeFromSource:
+          description: The original (unnormalized) type of an abstract. AbstractDisplay holds a normalized type deduced from things like tagnames, tag-attributes, keywords in documents or the placement of the abstract in the document. This field is meant for the type of the abstract identified explicitly by the source document. E.g., the value of the 'abstract-type' attribute from a tag in XML ('primary abstract', 'summary', 'highlights' etc.).
           type: string
         AlternateVersionID:
           description: Fingerprint of the URL after applying crawl and aggregate rewrites. Different citations with the same AlternateVersionID must have the same VersionID, but not necessarily vice versa. Omitted when identical to the VersionID.
@@ -63136,6 +63409,9 @@ components:
         AbstractLanguage:
           type: string
         AbstractText:
+          type: string
+        AbstractTypeFromSource:
+          description: The original (unnormalized) type of an abstract. AbstractDisplay holds a normalized type deduced from things like tagnames, tag-attributes, keywords in documents or the placement of the abstract in the document. This field is meant for the type of the abstract identified explicitly by the source document. E.g., the value of the 'abstract-type' attribute from a tag in XML ('primary abstract', 'summary', 'highlights' etc.).
           type: string
       type: object
     ScienceCitationAlternateTitle:
@@ -68814,6 +69090,7 @@ components:
               - LOWQ_APPS_DEMOTION_EVENT_LEVEL
               - QUERY_TYPE_MDP_EVENT_LEVEL
               - QUERY_TYPE_NON_MDP_EVENT_LEVEL
+              - NAV_CARD_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -69406,6 +69683,12 @@ components:
               - AMPLIFY_FORM_OF_PAYMENT_ELIGIBLE_SESSION_LEVEL
               - QUERY_TYPE_MDP_SESSION_LEVEL
               - QUERY_TYPE_NON_MDP_SESSION_LEVEL
+              - NAV_CARD_SESSION_LEVEL
+              - CART_WITH_BROKEN_FOP_SESSION_LEVEL
+              - IS_ELIGIBLE_FOR_DYNAMIC_AUTH_SESSION_LEVEL
+              - CLICKED_INSTALL_IN_DEEP_LINK_DETAILS
+              - ONE_TIME_PRODUCT_VARIANT_OFFER_DARK_LAUNCH_SESSION_LEVEL
+              - ONE_TIME_PRODUCT_VARIANT_OFFER_LAUNCH_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -69680,6 +69963,7 @@ components:
               - SUBS_OFFER_ON_BUYFLOW_ELIGIBLE_AT_USER_LEVEL
               - FOP_PARTNER_PROMOTION_USER_LEVEL
               - BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_USER_LEVEL
+              - IS_ELIGIBLE_FOR_DYNAMIC_AUTH_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -69945,6 +70229,7 @@ components:
             - NS_SEARCH_SPORTS
             - NS_BUSINESSMESSAGING
             - NS_AERIAL_VIEW
+            - NS_DOCS_VIDEO
           type: string
       type: object
     VideoAudioStream:

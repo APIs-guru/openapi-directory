@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 9.7.3
+  version: 9.7.4
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -5508,6 +5508,10 @@ components:
       additionalProperties: true
       example:
         search: San Francisco
+      properties:
+        example_downstream_property:
+          description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
+          type: string
       type: object
     PaymentRequiredResponse:
       properties:
