@@ -189,7 +189,7 @@ paths:
           description: The name of the shadow.
           schema:
             type: string
-            pattern: '[a-zA-Z0-9:_-]+'
+            pattern: '[$a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 64
     parameters:
@@ -274,7 +274,7 @@ paths:
           description: The name of the shadow.
           schema:
             type: string
-            pattern: '[a-zA-Z0-9:_-]+'
+            pattern: '[$a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 64
     post:
@@ -357,7 +357,7 @@ paths:
           description: The name of the shadow.
           schema:
             type: string
-            pattern: '[a-zA-Z0-9:_-]+'
+            pattern: '[$a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 64
       requestBody:
@@ -859,7 +859,7 @@ components:
       maxLength: 128
     ShadowName:
       type: string
-      pattern: '[a-zA-Z0-9:_-]+'
+      pattern: '[$a-zA-Z0-9:_-]+'
       minLength: 1
       maxLength: 64
     DeleteThingShadowRequest:

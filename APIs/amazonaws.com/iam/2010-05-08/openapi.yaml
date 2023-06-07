@@ -1107,23 +1107,29 @@ paths:
     get:
       x-aws-operation-name: CreateAccountAlias
       operationId: GET_CreateAccountAlias
-      description: 'Creates an alias for your Amazon Web Services account. For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an alias for your Amazon Web Services account ID</a> in the <i>IAM User Guide</i>.'
+      description: 'Creates an alias for your Amazon Web Services account. For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html">Creating, deleting, and listing an Amazon Web Services account alias</a> in the <i>Amazon Web Services Sign-In User Guide</i>.'
       responses:
         '200':
           description: Success
         '480':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
           description: EntityAlreadyExistsException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/EntityAlreadyExistsException'
-        '481':
+        '482':
           description: LimitExceededException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
-        '482':
+        '483':
           description: ServiceFailureException
           content:
             text/xml:
@@ -1136,7 +1142,7 @@ paths:
           description: '<p>The account alias to create.</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.</p>'
           schema:
             type: string
-            pattern: '^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$'
+            pattern: '^[a-z0-9]([a-z0-9]|-(?!-)){1,61}[a-z0-9]$'
             minLength: 3
             maxLength: 63
         - name: Action
@@ -1164,23 +1170,29 @@ paths:
     post:
       x-aws-operation-name: CreateAccountAlias
       operationId: POST_CreateAccountAlias
-      description: 'Creates an alias for your Amazon Web Services account. For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an alias for your Amazon Web Services account ID</a> in the <i>IAM User Guide</i>.'
+      description: 'Creates an alias for your Amazon Web Services account. For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html">Creating, deleting, and listing an Amazon Web Services account alias</a> in the <i>Amazon Web Services Sign-In User Guide</i>.'
       responses:
         '200':
           description: Success
         '480':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
           description: EntityAlreadyExistsException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/EntityAlreadyExistsException'
-        '481':
+        '482':
           description: LimitExceededException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
-        '482':
+        '483':
           description: ServiceFailureException
           content:
             text/xml:
@@ -1249,7 +1261,7 @@ paths:
           description: '<p> The path to the group. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM identifiers</a> in the <i>IAM User Guide</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: GroupName
@@ -1396,7 +1408,7 @@ paths:
           description: '<p> The path to the instance profile. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: Tags
@@ -2189,7 +2201,7 @@ paths:
           description: '<p> The path to the role. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM Identifiers</a> in the <i>IAM User Guide</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: RoleName
@@ -2216,7 +2228,7 @@ paths:
           description: A description of the role.
           schema:
             type: string
-            pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
+            pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]*'
             maxLength: 1000
         - name: MaxSessionDuration
           in: query
@@ -2537,7 +2549,7 @@ paths:
           description: The description of the role.
           schema:
             type: string
-            pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
+            pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]*'
             maxLength: 1000
         - name: CustomSuffix
           in: query
@@ -2797,7 +2809,7 @@ paths:
           description: '<p> The path for the user name. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM identifiers</a> in the <i>IAM User Guide</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: UserName
@@ -2965,7 +2977,7 @@ paths:
           description: '<p> The path for the virtual MFA device. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM identifiers</a> in the <i>IAM User Guide</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/).</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: VirtualMFADeviceName
@@ -3100,6 +3112,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       parameters:
         - name: UserName
           in: query
@@ -3172,6 +3190,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         content:
           text/xml:
@@ -3308,23 +3332,29 @@ paths:
     get:
       x-aws-operation-name: DeleteAccountAlias
       operationId: GET_DeleteAccountAlias
-      description: ' Deletes the specified Amazon Web Services account alias. For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an alias for your Amazon Web Services account ID</a> in the <i>IAM User Guide</i>.'
+      description: ' Deletes the specified Amazon Web Services account alias. For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html">Creating, deleting, and listing an Amazon Web Services account alias</a> in the <i>Amazon Web Services Sign-In User Guide</i>.'
       responses:
         '200':
           description: Success
         '480':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
           description: NoSuchEntityException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchEntityException'
-        '481':
+        '482':
           description: LimitExceededException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
-        '482':
+        '483':
           description: ServiceFailureException
           content:
             text/xml:
@@ -3337,7 +3367,7 @@ paths:
           description: '<p>The name of the account alias to delete.</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.</p>'
           schema:
             type: string
-            pattern: '^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$'
+            pattern: '^[a-z0-9]([a-z0-9]|-(?!-)){1,61}[a-z0-9]$'
             minLength: 3
             maxLength: 63
         - name: Action
@@ -3365,23 +3395,29 @@ paths:
     post:
       x-aws-operation-name: DeleteAccountAlias
       operationId: POST_DeleteAccountAlias
-      description: ' Deletes the specified Amazon Web Services account alias. For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an alias for your Amazon Web Services account ID</a> in the <i>IAM User Guide</i>.'
+      description: ' Deletes the specified Amazon Web Services account alias. For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html">Creating, deleting, and listing an Amazon Web Services account alias</a> in the <i>Amazon Web Services Sign-In User Guide</i>.'
       responses:
         '200':
           description: Success
         '480':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
           description: NoSuchEntityException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchEntityException'
-        '481':
+        '482':
           description: LimitExceededException
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
-        '482':
+        '483':
           description: ServiceFailureException
           content:
             text/xml:
@@ -5221,6 +5257,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
         '482':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
           description: ServiceFailureException
           content:
             text/xml:
@@ -5287,6 +5329,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/LimitExceededException'
         '482':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
           description: ServiceFailureException
           content:
             text/xml:
@@ -5674,6 +5722,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       parameters:
         - name: SerialNumber
           in: query
@@ -5737,6 +5791,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         content:
           text/xml:
@@ -6185,6 +6245,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+        '486':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       parameters:
         - name: UserName
           in: query
@@ -6287,6 +6353,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+        '486':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         content:
           text/xml:
@@ -9366,7 +9438,7 @@ paths:
     get:
       x-aws-operation-name: ListAccountAliases
       operationId: GET_ListAccountAliases
-      description: 'Lists the account alias associated with the Amazon Web Services account (Note: you can have only one). For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an alias for your Amazon Web Services account ID</a> in the <i>IAM User Guide</i>.'
+      description: 'Lists the account alias associated with the Amazon Web Services account (Note: you can have only one). For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html">Creating, deleting, and listing an Amazon Web Services account alias</a> in the <i>Amazon Web Services Sign-In User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -9423,7 +9495,7 @@ paths:
     post:
       x-aws-operation-name: ListAccountAliases
       operationId: POST_ListAccountAliases
-      description: 'Lists the account alias associated with the Amazon Web Services account (Note: you can have only one). For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html">Using an alias for your Amazon Web Services account ID</a> in the <i>IAM User Guide</i>.'
+      description: 'Lists the account alias associated with the Amazon Web Services account (Note: you can have only one). For information about using an Amazon Web Services account alias, see <a href="https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html">Creating, deleting, and listing an Amazon Web Services account alias</a> in the <i>Amazon Web Services Sign-In User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -9974,7 +10046,7 @@ paths:
           description: '<p>The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all entities.</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: PolicyUsageFilter
@@ -14579,6 +14651,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       parameters:
         - name: UserName
           in: query
@@ -14669,6 +14747,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ServiceFailureException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
       requestBody:
         content:
           text/xml:
@@ -17822,7 +17906,7 @@ paths:
           description: '<p>New path for the IAM group. Only include this if changing the group''s path.</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: NewGroupName
@@ -18208,7 +18292,7 @@ paths:
           description: The new description that you want to apply to the specified role.
           schema:
             type: string
-            pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
+            pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]*'
             maxLength: 1000
         - name: MaxSessionDuration
           in: query
@@ -18335,7 +18419,7 @@ paths:
           description: The new description that you want to apply to the specified role.
           schema:
             type: string
-            pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
+            pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]*'
             maxLength: 1000
         - name: Action
           in: query
@@ -18684,7 +18768,7 @@ paths:
           description: '<p>The new path for the server certificate. Include this only if you are updating the server certificate''s path.</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: NewServerCertificateName
@@ -19047,7 +19131,7 @@ paths:
           description: '<p>New path for the IAM user. Include this parameter only if you''re changing the user''s path.</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: NewUserName
@@ -19349,7 +19433,7 @@ paths:
           description: '<p>The path for the server certificate. For more information about paths, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html">IAM identifiers</a> in the <i>IAM User Guide</i>.</p> <p>This parameter is optional. If it is not included, it defaults to a slash (/). This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of either a forward slash (/) by itself or a string that must begin and end with forward slashes. In addition, it can contain any ASCII character from the ! (<code>\u0021</code>) through the DEL character (<code>\u007F</code>), including most punctuation characters, digits, and upper and lowercased letters.</p> <note> <p> If you are uploading a server certificate specifically for use with Amazon CloudFront distributions, you must specify a path using the <code>path</code> parameter. The path must begin with <code>/cloudfront</code> and must include a trailing slash (for example, <code>/cloudfront/test/</code>).</p> </note>'
           schema:
             type: string
-            pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+            pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
             minLength: 1
             maxLength: 512
         - name: ServerCertificateName
@@ -19542,6 +19626,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NoSuchEntityException'
         '486':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '487':
           description: ServiceFailureException
           content:
             text/xml:
@@ -19636,6 +19726,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/NoSuchEntityException'
         '486':
+          description: ConcurrentModificationException
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '487':
           description: ServiceFailureException
           content:
             text/xml:
@@ -19740,6 +19836,7 @@ components:
             - $ref: '#/components/schemas/AccessKey'
             - description: A structure with details about the access key.
       description: 'Contains the response to a successful <a>CreateAccessKey</a> request. '
+    ConcurrentModificationException: {}
     CreateGroupResponse:
       type: object
       required:
@@ -19790,7 +19887,6 @@ components:
             - $ref: '#/components/schemas/tagValueType'
             - description: '<p>The value associated with this tag. For example, tags with a key name of <code>Department</code> could have values such as <code>Human Resources</code>, <code>Accounting</code>, and <code>Support</code>. Tags with a key name of <code>Cost Center</code> might have values that consist of the number associated with the different cost centers in your company. Typically, many resources have tags with the same key name but with different values.</p> <note> <p>Amazon Web Services always interprets the tag <code>Value</code> as a single string. If you need to store an array, you can store comma-separated values in the string. However, you must interpret the value in your code.</p> </note>'
       description: 'A structure that represents user-provided metadata that can be associated with an IAM resource. For more information about tagging, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html">Tagging IAM resources</a> in the <i>IAM User Guide</i>.'
-    ConcurrentModificationException: {}
     CreateLoginProfileResponse:
       type: object
       required:
@@ -21679,7 +21775,7 @@ components:
             - description: '<p>The name of the IAM user that the new key will belong to.</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-</p>'
     accountAliasType:
       type: string
-      pattern: '^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$'
+      pattern: '^[a-z0-9]([a-z0-9]|-(?!-)){1,61}[a-z0-9]$'
       minLength: 3
       maxLength: 63
     CreateAccountAliasRequest:
@@ -21694,7 +21790,7 @@ components:
             - description: '<p>The account alias to create.</p> <p>This parameter allows (through its <a href="http://wikipedia.org/wiki/regex">regex pattern</a>) a string of characters consisting of lowercase letters, digits, and dashes. You cannot start or finish with a dash, nor can you have two dashes in a row.</p>'
     pathType:
       type: string
-      pattern: '(\u002F)|(\u002F[\u0021-\u007F]+\u002F)'
+      pattern: '(\u002F)|(\u002F[\u0021-\u007E]+\u002F)'
       minLength: 1
       maxLength: 512
     CreateGroupRequest:
@@ -22006,7 +22102,7 @@ components:
       description: '<p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, <a>ListPolicyVersions</a>, and <a>GetAccountAuthorizationDetails</a> operations. </p> <p>For more information about managed policies, refer to <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html">Managed policies and inline policies</a> in the <i>IAM User Guide</i>. </p>'
     roleDescriptionType:
       type: string
-      pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
+      pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]*'
       maxLength: 1000
     roleMaxSessionDurationType:
       type: integer
@@ -22307,7 +22403,7 @@ components:
         Base32StringSeed:
           allOf:
             - $ref: '#/components/schemas/BootstrapDatum'
-            - description: ' The base32 seed defined as specified in <a href="https://tools.ietf.org/html/rfc3548.txt">RFC3548</a>. The <code>Base32StringSeed</code> is base64-encoded. '
+            - description: ' The base32 seed defined as specified in <a href="https://tools.ietf.org/html/rfc3548.txt">RFC3548</a>. The <code>Base32StringSeed</code> is base32-encoded. '
         QRCodePNG:
           allOf:
             - $ref: '#/components/schemas/BootstrapDatum'

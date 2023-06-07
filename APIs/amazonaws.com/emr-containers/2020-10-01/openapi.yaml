@@ -301,7 +301,7 @@ paths:
                 kmsKeyArn:
                   description: The KMS key ARN used to encrypt the job template.
                   type: string
-                  pattern: '^(arn:(aws[a-zA-Z0-9-]*):kms:([a-zA-Z0-9]+-?)+:(\d{12})?:key\/[(0-9a-zA-Z)-?]+|\$\{[a-zA-Z]\w*\})$'
+                  pattern: '^(arn:(aws[a-zA-Z0-9-]*):kms:.+:(\d{12})?:key\/[(0-9a-zA-Z)-?]+|\$\{[a-zA-Z]\w*\})$'
                   minLength: 3
                   maxLength: 2048
     parameters:
@@ -1616,6 +1616,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3MonitoringConfiguration'
             - description: Amazon S3 configuration for monitoring log publishing.
+        containerLogRotationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ContainerLogRotationConfiguration'
+            - description: Enable or disable container log rotation.
       description: Configuration setting for monitoring.
     CreateVirtualClusterResponse:
       type: object
@@ -1961,6 +1965,30 @@ components:
             - $ref: '#/components/schemas/KubernetesNamespace'
             - description: The namespaces of the Amazon EKS cluster.
       description: The information about the Amazon EKS cluster.
+    RotationSize:
+      type: string
+      pattern: '^\d+(\.\d+)?[KMG][Bb]?$'
+      minLength: 3
+      maxLength: 12
+    MaxFilesToKeep:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ContainerLogRotationConfiguration:
+      type: object
+      required:
+        - rotationSize
+        - maxFilesToKeep
+      properties:
+        rotationSize:
+          allOf:
+            - $ref: '#/components/schemas/RotationSize'
+            - description: 'The file size at which to rotate logs. Minimum of 2KB, Maximum of 2GB.'
+        maxFilesToKeep:
+          allOf:
+            - $ref: '#/components/schemas/MaxFilesToKeep'
+            - description: The number of files to keep in container after rotation.
+      description: The settings for container log rotation.
     ContainerProvider:
       type: object
       required:
@@ -2017,7 +2045,7 @@ components:
       description: The values of StartJobRun API requests used in job runs started using the job template.
     KmsKeyArn:
       type: string
-      pattern: '^(arn:(aws[a-zA-Z0-9-]*):kms:([a-zA-Z0-9]+-?)+:(\d{12})?:key\/[(0-9a-zA-Z)-?]+|\$\{[a-zA-Z]\w*\})$'
+      pattern: '^(arn:(aws[a-zA-Z0-9-]*):kms:.+:(\d{12})?:key\/[(0-9a-zA-Z)-?]+|\$\{[a-zA-Z]\w*\})$'
       minLength: 3
       maxLength: 2048
     CreateJobTemplateRequest:

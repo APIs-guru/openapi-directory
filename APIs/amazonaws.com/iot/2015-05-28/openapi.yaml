@@ -2264,7 +2264,7 @@ paths:
   /certificates:
     post:
       operationId: CreateCertificateFromCsr
-      description: '<p>Creates an X.509 certificate using the specified certificate signing request. </p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateCertificateFromCsr</a> action. </p> <note> <p>The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-25 or NIST P-384 curves. For supported certificates, consult <a href="https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms"> Certificate signing algorithms supported by IoT</a>. </p> </note> <note> <p>Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> </note> <p>You can create multiple certificates in a batch by creating a directory, copying multiple <code>.csr</code> files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is: </p> <p> <code>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</code> </p> <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the <code>aws iot create-certificate-from-csr</code> Amazon Web Services CLI command to create a certificate for the corresponding CSR. </p> <p>You can also run the <code>aws iot create-certificate-from-csr</code> part of the command in parallel to speed up the certificate creation process:</p> <p> <code>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} </code> </p> <p>On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:</p> <p> <code>&gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} </code> </p> <p>On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:</p> <p> <code>&gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path" </code> </p>'
+      description: '<p>Creates an X.509 certificate using the specified certificate signing request. </p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreateCertificateFromCsr</a> action. </p> <note> <p>The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. For supported certificates, consult <a href="https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms"> Certificate signing algorithms supported by IoT</a>. </p> </note> <note> <p>Reusing the same certificate signing request (CSR) results in a distinct certificate.</p> </note> <p>You can create multiple certificates in a batch by creating a directory, copying multiple <code>.csr</code> files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. In the following commands, we assume that a set of CSRs are located inside of the directory my-csr-directory:</p> <p>On Linux and OS X, the command is: </p> <p> <code>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{}</code> </p> <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the <code>aws iot create-certificate-from-csr</code> Amazon Web Services CLI command to create a certificate for the corresponding CSR. </p> <p>You can also run the <code>aws iot create-certificate-from-csr</code> part of the command in parallel to speed up the certificate creation process:</p> <p> <code>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} </code> </p> <p>On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is:</p> <p> <code>&gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} </code> </p> <p>On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is:</p> <p> <code>&gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path" </code> </p>'
       responses:
         '200':
           description: Success
@@ -3988,7 +3988,7 @@ paths:
                     $ref: '#/components/schemas/TargetArn'
                   minItems: 1
                 documentSource:
-                  description: '<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don''t specify a value for <code>document</code>.</p> <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a bucket</a>.</p>'
+                  description: '<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don''t specify a value for <code>document</code>.</p> <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code> </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a bucket</a>.</p>'
                   type: string
                   minLength: 1
                   maxLength: 1350
@@ -4095,6 +4095,11 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/MaintenanceWindows'
                         - description: An optional configuration within the <code>SchedulingConfig</code> to setup a recurring maintenance window with a predetermined start time and duration for the rollout of a job document to all devices in a target group for a job.
+                destinationPackageVersions:
+                  description: '<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p> <p> <b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PackageVersionArn'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4460,6 +4465,11 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/MaintenanceWindow'
+                destinationPackageVersions:
+                  description: '<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p> <p> <b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PackageVersionArn'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5176,6 +5186,561 @@ paths:
             pattern: '[a-zA-Z0-9_-]+'
             minLength: 1
             maxLength: 128
+  '/packages/{packageName}':
+    put:
+      operationId: CreatePackage
+      description: '<p>Creates an IoT software package that can be deployed to your fleet.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreatePackage</a> and <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetIndexingConfiguration</a> actions.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePackageResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the new package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+        - name: clientToken
+          in: query
+          required: false
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          schema:
+            type: string
+            pattern: '\S{36,64}'
+            minLength: 36
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: A summary of the package being created. This can be used to outline the package's contents or purpose.
+                  type: string
+                  pattern: '[^\p{C}]+'
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                tags:
+                  description: Metadata that can be used to manage the package.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeletePackage
+      description: '<p>Deletes a specific version from a software package.</p> <p> <b>Note:</b> All package versions must be deleted before deleting the software package.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">DeletePackageVersion</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePackageResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the target package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+        - name: clientToken
+          in: query
+          required: false
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          schema:
+            type: string
+            pattern: '\S{36,64}'
+            minLength: 36
+            maxLength: 64
+    get:
+      operationId: GetPackage
+      description: '<p>Gets information about the specified software package.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetPackage</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPackageResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the target package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+    patch:
+      operationId: UpdatePackage
+      description: '<p>Updates the supported fields for a specific package.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdatePackage</a> and <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetIndexingConfiguration</a> actions.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePackageResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the target package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+        - name: clientToken
+          in: query
+          required: false
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          schema:
+            type: string
+            pattern: '\S{36,64}'
+            minLength: 36
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: The package description.
+                  type: string
+                  pattern: '[^\p{C}]+'
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                defaultVersionName:
+                  description: '<p>The name of the default package version.</p> <p> <b>Note:</b> You cannot name a <code>defaultVersion</code> and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>'
+                  type: string
+                  pattern: '[a-zA-Z0-9-_.]+'
+                  minLength: 1
+                  maxLength: 64
+                unsetDefaultVersion:
+                  description: '<p>Indicates whether you want to remove the named default package version from the software package. Set as <code>true</code> to remove the default package version. </p> <p> <b>Note:</b> You cannot name a <code>defaultVersion</code> and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>'
+                  type: boolean
+  '/packages/{packageName}/versions/{versionName}':
+    put:
+      operationId: CreatePackageVersion
+      description: '<p>Creates a new version for an existing IoT software package.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">CreatePackageVersion</a> and <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetIndexingConfiguration</a> actions.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePackageVersionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the associated package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+        - name: versionName
+          in: path
+          required: true
+          description: The name of the new package version.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 64
+        - name: clientToken
+          in: query
+          required: false
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          schema:
+            type: string
+            pattern: '\S{36,64}'
+            minLength: 36
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: A summary of the package version being created. This can be used to outline the package's contents or purpose.
+                  type: string
+                  pattern: '[^\p{C}]+'
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                attributes:
+                  description: '<p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet.</p> <p>The combined size of all the attributes on a package version is limited to 3KB.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/ResourceAttributeValue'
+                tags:
+                  description: Metadata that can be used to manage the package version.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeletePackageVersion
+      description: '<p>Deletes a specific version from a software package.</p> <p> <b>Note:</b> If a package version is designated as default, you must remove the designation from the package using the <a>UpdatePackage</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePackageVersionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the associated package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+        - name: versionName
+          in: path
+          required: true
+          description: The name of the target package version.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 64
+        - name: clientToken
+          in: query
+          required: false
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          schema:
+            type: string
+            pattern: '\S{36,64}'
+            minLength: 36
+            maxLength: 64
+    get:
+      operationId: GetPackageVersion
+      description: '<p>Gets information about the specified package version. </p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetPackageVersion</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPackageVersionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the associated package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+        - name: versionName
+          in: path
+          required: true
+          description: The name of the target package version.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 64
+    patch:
+      operationId: UpdatePackageVersion
+      description: '<p>Updates the supported fields for a specific package version.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdatePackageVersion</a> and <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetIndexingConfiguration</a> actions.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePackageVersionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the associated software package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+        - name: versionName
+          in: path
+          required: true
+          description: The name of the target package version.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 64
+        - name: clientToken
+          in: query
+          required: false
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          schema:
+            type: string
+            pattern: '\S{36,64}'
+            minLength: 36
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: The package version description.
+                  type: string
+                  pattern: '[^\p{C}]+'
+                  minLength: 0
+                  maxLength: 1024
+                  format: password
+                attributes:
+                  description: '<p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet. </p> <p> <b>Note:</b> Attributes can be updated only when the package version is in a draft state.</p> <p>The combined size of all the attributes on a package version is limited to 3KB.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/ResourceAttributeValue'
+                action:
+                  description: 'The status that the package version should be assigned. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.'
+                  type: string
+                  enum:
+                    - PUBLISH
+                    - DEPRECATE
   '/policies/{policyName}':
     post:
       operationId: CreatePolicy
@@ -11454,6 +12019,95 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/LogLevel'
                         - description: The log level.
+  /package-configuration:
+    get:
+      operationId: GetPackageConfiguration
+      description: '<p>Gets information about the specified software package''s configuration.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">GetPackageConfiguration</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPackageConfigurationResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdatePackageConfiguration
+      description: '<p>Updates the package configuration.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">UpdatePackageConfiguration</a> and <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html">iam:PassRole</a> actions.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePackageConfigurationResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: clientToken
+          in: query
+          required: false
+          description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
+          schema:
+            type: string
+            pattern: '\S{36,64}'
+            minLength: 36
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                versionUpdateByJobsConfig:
+                  description: '<p>Configuration to manage IoT Job''s package version reporting. If configured, Jobs updates the thing''s reserved named shadow with the package version information up on successful job completion.</p> <p> <b>Note:</b> For each job, the destinationPackageVersions attribute has to be set with the correct data for Jobs to report to the thing shadow. </p>'
+                  type: object
+                  properties:
+                    enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/EnabledBoolean'
+                        - description: Indicates whether the Job is enabled or not.
+                    roleArn:
+                      allOf:
+                        - $ref: '#/components/schemas/RoleArn'
+                        - description: The Amazon Resource Name (ARN) of the role that grants permission to the IoT jobs service to update the reserved named shadow when the job successfully completes.
   /indices/percentiles:
     post:
       operationId: GetPercentiles
@@ -13932,6 +14586,129 @@ paths:
           description: 'Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.'
           schema:
             type: boolean
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/packages/{packageName}/versions':
+    get:
+      operationId: ListPackageVersions
+      description: '<p>Lists the software package versions associated to the account.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListPackageVersions</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPackageVersionsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: packageName
+          in: path
+          required: true
+          description: The name of the target package.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9-_.]+'
+            minLength: 1
+            maxLength: 128
+        - name: status
+          in: query
+          required: false
+          description: 'The status of the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.'
+          schema:
+            type: string
+            enum:
+              - DRAFT
+              - PUBLISHED
+              - DEPRECATED
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /packages:
+    get:
+      operationId: ListPackages
+      description: '<p>Lists the software packages associated to the account.</p> <p>Requires permission to access the <a href="https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions">ListPackages</a> action.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPackagesResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results returned at one time.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results.
+          schema:
+            type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -18070,6 +18847,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MaintenanceWindow'
+    PackageVersionArn:
+      type: string
+      pattern: '^arn:[!-~]+$'
+      minLength: 1
+      maxLength: 1600
     CreateJobTemplateResponse:
       type: object
       properties:
@@ -18293,6 +19075,63 @@ components:
       pattern: '[\s\S]*'
       minLength: 0
       maxLength: 4096
+    CreatePackageResponse:
+      type: object
+      properties:
+        packageName:
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: The name of the package.
+        packageArn:
+          allOf:
+            - $ref: '#/components/schemas/PackageArn'
+            - description: The Amazon Resource Name (ARN) for the package.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The package description.
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    InternalServerException: {}
+    ValidationException: {}
+    ServiceQuotaExceededException: {}
+    CreatePackageVersionResponse:
+      type: object
+      properties:
+        packageVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionArn'
+            - description: The Amazon Resource Name (ARN) for the package.
+        packageName:
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: The name of the associated package.
+        versionName:
+          allOf:
+            - $ref: '#/components/schemas/VersionName'
+            - description: The name of the new package version.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The package version description.
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ResourceAttributes'
+            - description: Metadata that were added to the package version that can be used to define a package version’s configuration.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: 'The status of the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.'
+        errorReason:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionErrorReason'
+            - description: Error reason for a package version failure during creation or update.
+    ResourceAttributeValue:
+      type: string
+      pattern: '[^\p{C}]+'
+      minLength: 1
     CreatePolicyResponse:
       type: object
       properties:
@@ -18762,6 +19601,12 @@ components:
     DeleteOTAUpdateResponse:
       type: object
       properties: {}
+    DeletePackageResponse:
+      type: object
+      properties: {}
+    DeletePackageVersionResponse:
+      type: object
+      properties: {}
     DeleteProvisioningTemplateResponse:
       type: object
       properties: {}
@@ -19218,6 +20063,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindows'
             - description: Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
+        destinationPackageVersions:
+          allOf:
+            - $ref: '#/components/schemas/DestinationPackageVersions'
+            - description: '<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p> <p> <b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>'
     DescribeManagedJobTemplateResponse:
       type: object
       properties:
@@ -19249,7 +20098,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobDocument'
             - description: The document schema for a managed job template.
-    InternalServerException: {}
     DescribeMitigationActionResponse:
       type: object
       properties:
@@ -19678,6 +20526,79 @@ components:
           allOf:
             - $ref: '#/components/schemas/OTAUpdateInfo'
             - description: The OTA update info.
+    GetPackageResponse:
+      type: object
+      properties:
+        packageName:
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: The name of the package.
+        packageArn:
+          allOf:
+            - $ref: '#/components/schemas/PackageArn'
+            - description: The ARN for the package.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The package description.
+        defaultVersionName:
+          allOf:
+            - $ref: '#/components/schemas/VersionName'
+            - description: The name of the default package version.
+        creationDate:
+          allOf:
+            - $ref: '#/components/schemas/CreationDate'
+            - description: The date the package was created.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedDate'
+            - description: The date when the package was last updated.
+    GetPackageConfigurationResponse:
+      type: object
+      properties:
+        versionUpdateByJobsConfig:
+          allOf:
+            - $ref: '#/components/schemas/VersionUpdateByJobsConfig'
+            - description: The version that is associated to a specific job.
+    GetPackageVersionResponse:
+      type: object
+      properties:
+        packageVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionArn'
+            - description: The ARN for the package version.
+        packageName:
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: The name of the package.
+        versionName:
+          allOf:
+            - $ref: '#/components/schemas/VersionName'
+            - description: The name of the package version.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The package version description.
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ResourceAttributes'
+            - description: Metadata that were added to the package version that can be used to define a package version’s configuration.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: 'The status associated to the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.'
+        errorReason:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionErrorReason'
+            - description: Error reason for a package version failure during creation or update.
+        creationDate:
+          allOf:
+            - $ref: '#/components/schemas/CreationDate'
+            - description: The date when the package version was created.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedDate'
+            - description: The date when the package version was last updated.
     GetPercentilesResponse:
       type: object
       properties:
@@ -20120,6 +21041,28 @@ components:
             - $ref: '#/components/schemas/Marker'
             - description: The marker for the next set of results.
       description: The output from the ListOutgoingCertificates operation.
+    ListPackageVersionsResponse:
+      type: object
+      properties:
+        packageVersionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionSummaryList'
+            - description: Lists the package versions associated to the package.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results.
+    ListPackagesResponse:
+      type: object
+      properties:
+        packageSummaries:
+          allOf:
+            - $ref: '#/components/schemas/PackageSummaryList'
+            - description: The software package summary.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of results.
     ListPoliciesResponse:
       type: object
       properties:
@@ -20919,6 +21862,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/MitigationActionId'
             - description: A unique identifier for the mitigation action.
+    UpdatePackageResponse:
+      type: object
+      properties: {}
+    UpdatePackageConfigurationResponse:
+      type: object
+      properties: {}
+    EnabledBoolean:
+      type: boolean
+    UpdatePackageVersionResponse:
+      type: object
+      properties: {}
     UpdateProvisioningTemplateResponse:
       type: object
       properties: {}
@@ -23302,6 +24256,11 @@ components:
       pattern: '^[a-zA-Z0-9-_]+$'
       minLength: 1
       maxLength: 64
+    ClientToken:
+      type: string
+      pattern: '\S{36,64}'
+      minLength: 36
+      maxLength: 64
     StateReason:
       type: string
     StateValue:
@@ -23875,6 +24834,10 @@ components:
             - $ref: '#/components/schemas/MaintenanceWindows'
             - description: An optional configuration within the <code>SchedulingConfig</code> to setup a recurring maintenance window with a predetermined start time and duration for the rollout of a job document to all devices in a target group for a job.
       description: 'Specifies the date and time that a job will begin the rollout of the job document to all devices in the target group. Additionally, you can specify the end behavior for each job execution when it reaches the scheduled end time.'
+    DestinationPackageVersions:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageVersionArn'
     CreateJobRequest:
       type: object
       required:
@@ -23888,7 +24851,7 @@ components:
         documentSource:
           allOf:
             - $ref: '#/components/schemas/JobDocumentSource'
-            - description: '<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don''t specify a value for <code>document</code>.</p> <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a bucket</a>.</p>'
+            - description: '<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don''t specify a value for <code>document</code>.</p> <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code> </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html">Methods for accessing a bucket</a>.</p>'
         document:
           allOf:
             - $ref: '#/components/schemas/JobDocument'
@@ -23941,6 +24904,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SchedulingConfig'
             - description: The configuration that allows you to schedule a job for a future date and time in addition to specifying the end behavior for each job execution.
+        destinationPackageVersions:
+          allOf:
+            - $ref: '#/components/schemas/DestinationPackageVersions'
+            - description: '<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p> <p> <b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>'
     JobTemplateId:
       type: string
       pattern: '[a-zA-Z0-9_-]+'
@@ -23988,6 +24955,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindows'
             - description: Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.
+        destinationPackageVersions:
+          allOf:
+            - $ref: '#/components/schemas/DestinationPackageVersions'
+            - description: '<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p> <p> <b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>'
     CreateKeysAndCertificateRequest:
       type: object
       title: CreateKeysAndCertificateRequest
@@ -24146,6 +25117,70 @@ components:
         - CREATE_FAILED
         - DELETE_IN_PROGRESS
         - DELETE_FAILED
+    PackageName:
+      type: string
+      pattern: '[a-zA-Z0-9-_.]+'
+      minLength: 1
+      maxLength: 128
+    ResourceDescription:
+      type: string
+      pattern: '[^\p{C}]+'
+      minLength: 0
+      maxLength: 1024
+      format: password
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreatePackageRequest:
+      type: object
+      title: CreatePackageRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: A summary of the package being created. This can be used to outline the package's contents or purpose.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata that can be used to manage the package.
+    PackageArn:
+      type: string
+    VersionName:
+      type: string
+      pattern: '[a-zA-Z0-9-_.]+'
+      minLength: 1
+      maxLength: 64
+    ResourceAttributes:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ResourceAttributeValue'
+    CreatePackageVersionRequest:
+      type: object
+      title: CreatePackageVersionRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: A summary of the package version being created. This can be used to outline the package's contents or purpose.
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ResourceAttributes'
+            - description: '<p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet.</p> <p>The combined size of all the attributes on a package version is limited to 3KB.</p>'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata that can be used to manage the package version.
+    PackageVersionStatus:
+      type: string
+      enum:
+        - DRAFT
+        - PUBLISHED
+        - DEPRECATED
+    PackageVersionErrorReason:
+      type: string
     PolicyDocument:
       type: string
       pattern: '[\s\S]*'
@@ -24697,6 +25732,14 @@ components:
       type: object
       title: DeleteOTAUpdateRequest
       properties: {}
+    DeletePackageRequest:
+      type: object
+      title: DeletePackageRequest
+      properties: {}
+    DeletePackageVersionRequest:
+      type: object
+      title: DeletePackageVersionRequest
+      properties: {}
     DeletePolicyRequest:
       type: object
       title: DeletePolicyRequest
@@ -25171,6 +26214,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScheduledJobRolloutList'
             - description: Displays the next seven maintenance window occurrences and their start times.
+        destinationPackageVersions:
+          allOf:
+            - $ref: '#/components/schemas/DestinationPackageVersions'
+            - description: '<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p> <p> <b>Note:</b>The following Length Constraints relates to a single string. Up to five strings are allowed.</p>'
       description: The <code>Job</code> object contains details about a job.
     DescribeJobTemplateRequest:
       type: object
@@ -25631,7 +26678,7 @@ components:
         $ref: '#/components/schemas/DomainConfigurationSummary'
     DurationInMinutes:
       type: integer
-      minimum: 30
+      minimum: 1
       maximum: 1430
     TableName:
       type: string
@@ -26061,6 +27108,30 @@ components:
             - $ref: '#/components/schemas/AdditionalParameterMap'
             - description: A collection of name/value pairs
       description: Information about an OTA update.
+    GetPackageConfigurationRequest:
+      type: object
+      title: GetPackageConfigurationRequest
+      properties: {}
+    VersionUpdateByJobsConfig:
+      type: object
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/EnabledBoolean'
+            - description: Indicates whether the Job is enabled or not.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the role that grants permission to the IoT jobs service to update the reserved named shadow when the job successfully completes.
+      description: '<p>Configuration to manage IoT Job''s package version reporting. If configured, Jobs updates the thing''s reserved named shadow with the package version information up on successful job completion.</p> <p> <b>Note:</b> For each job, the destinationPackageVersions attribute has to be set with the correct data for Jobs to report to the thing shadow. </p>'
+    GetPackageRequest:
+      type: object
+      title: GetPackageRequest
+      properties: {}
+    GetPackageVersionRequest:
+      type: object
+      title: GetPackageVersionRequest
+      properties: {}
     PercentList:
       type: array
       items:
@@ -26816,6 +27887,26 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/OutgoingCertificate'
+    PackageCatalogMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListPackageVersionsRequest:
+      type: object
+      title: ListPackageVersionsRequest
+      properties: {}
+    PackageVersionSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageVersionSummary'
+    ListPackagesRequest:
+      type: object
+      title: ListPackagesRequest
+      properties: {}
+    PackageSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageSummary'
     ListPoliciesRequest:
       type: object
       title: ListPoliciesRequest
@@ -27353,6 +28444,55 @@ components:
             - $ref: '#/components/schemas/DateType'
             - description: The certificate creation date.
       description: A certificate that has been transferred but not yet accepted.
+    PackageSummary:
+      type: object
+      properties:
+        packageName:
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: The name for the target package.
+        defaultVersionName:
+          allOf:
+            - $ref: '#/components/schemas/VersionName'
+            - description: The name of the default package version.
+        creationDate:
+          allOf:
+            - $ref: '#/components/schemas/CreationDate'
+            - description: The date that the package was created.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedDate'
+            - description: The date that the package was last updated.
+      description: A summary of information about a software package.
+    PackageVersionAction:
+      type: string
+      enum:
+        - PUBLISH
+        - DEPRECATE
+    PackageVersionSummary:
+      type: object
+      properties:
+        packageName:
+          allOf:
+            - $ref: '#/components/schemas/PackageName'
+            - description: The name of the associated software package.
+        versionName:
+          allOf:
+            - $ref: '#/components/schemas/VersionName'
+            - description: The name of the target package version.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionStatus'
+            - description: 'The status of the package version. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.'
+        creationDate:
+          allOf:
+            - $ref: '#/components/schemas/CreationDate'
+            - description: The date that the package version was created.
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedDate'
+            - description: The date that the package version was last updated.
+      description: A summary of information about a package version.
     Parameter:
       type: string
       pattern: '[\s\S]*'
@@ -27701,6 +28841,10 @@ components:
       type: string
       pattern: '[\s\S]*'
       maxLength: 2048
+    ResourceAttributeKey:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      minLength: 1
     ResourceLogicalId:
       type: string
     RetryableFailureType:
@@ -28094,10 +29238,6 @@ components:
         $ref: '#/components/schemas/SubnetId'
     SucceededFindingsCount:
       type: integer
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
     TagKeyList:
       type: array
       items:
@@ -28480,6 +29620,8 @@ components:
             - $ref: '#/components/schemas/Message'
             - description: The transfer message.
       description: The input for the TransferCertificate operation.
+    UnsetDefaultVersion:
+      type: boolean
     UntagResourceRequest:
       type: object
       required:
@@ -28758,6 +29900,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/MitigationActionParams'
             - description: Defines the type of action and the parameters for that action.
+    UpdatePackageConfigurationRequest:
+      type: object
+      title: UpdatePackageConfigurationRequest
+      properties:
+        versionUpdateByJobsConfig:
+          allOf:
+            - $ref: '#/components/schemas/VersionUpdateByJobsConfig'
+            - description: Configuration to manage job's package version reporting. This updates the thing's reserved named shadow that the job targets.
+    UpdatePackageRequest:
+      type: object
+      title: UpdatePackageRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The package description.
+        defaultVersionName:
+          allOf:
+            - $ref: '#/components/schemas/VersionName'
+            - description: '<p>The name of the default package version.</p> <p> <b>Note:</b> You cannot name a <code>defaultVersion</code> and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>'
+        unsetDefaultVersion:
+          allOf:
+            - $ref: '#/components/schemas/UnsetDefaultVersion'
+            - description: '<p>Indicates whether you want to remove the named default package version from the software package. Set as <code>true</code> to remove the default package version. </p> <p> <b>Note:</b> You cannot name a <code>defaultVersion</code> and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>'
+    UpdatePackageVersionRequest:
+      type: object
+      title: UpdatePackageVersionRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The package version description.
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/ResourceAttributes'
+            - description: '<p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet. </p> <p> <b>Note:</b> Attributes can be updated only when the package version is in a draft state.</p> <p>The combined size of all the attributes on a package version is limited to 3KB.</p>'
+        action:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionAction'
+            - description: 'The status that the package version should be assigned. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle">Package version lifecycle</a>.'
     UpdateProvisioningTemplateRequest:
       type: object
       title: UpdateProvisioningTemplateRequest

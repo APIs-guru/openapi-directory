@@ -171,7 +171,7 @@ paths:
                     rootGroup:
                       allOf:
                         - $ref: '#/components/schemas/RootGroup'
-                        - description: Gets the test suite root group. This is a required parameter.
+                        - description: '<p>Gets the test suite root group. This is a required parameter. For updating or creating the latest qualification suite, if <code>intendedForQualification</code> is set to true, <code>rootGroup</code> can be an empty string. If <code>intendedForQualification</code> is false, <code>rootGroup</code> cannot be an empty string. If <code>rootGroup</code> is empty, and <code>intendedForQualification</code> is set to true, all the qualification tests are included, and the configuration is default.</p> <p> For a qualification suite, the minimum length is 0, and the maximum is 2048. For a non-qualification suite, the minimum length is 1, and the maximum is 2048. </p>'
                     devicePermissionRoleArn:
                       allOf:
                         - $ref: '#/components/schemas/AmazonResourceName'
@@ -381,7 +381,7 @@ paths:
                     rootGroup:
                       allOf:
                         - $ref: '#/components/schemas/RootGroup'
-                        - description: Gets the test suite root group. This is a required parameter.
+                        - description: '<p>Gets the test suite root group. This is a required parameter. For updating or creating the latest qualification suite, if <code>intendedForQualification</code> is set to true, <code>rootGroup</code> can be an empty string. If <code>intendedForQualification</code> is false, <code>rootGroup</code> cannot be an empty string. If <code>rootGroup</code> is empty, and <code>intendedForQualification</code> is set to true, all the qualification tests are included, and the configuration is default.</p> <p> For a qualification suite, the minimum length is 0, and the maximum is 2048. For a non-qualification suite, the minimum length is 1, and the maximum is 2048. </p>'
                     devicePermissionRoleArn:
                       allOf:
                         - $ref: '#/components/schemas/AmazonResourceName'
@@ -1011,7 +1011,7 @@ components:
       type: boolean
     RootGroup:
       type: string
-      minLength: 1
+      minLength: 0
       maxLength: 2048
     AmazonResourceName:
       type: string
@@ -1274,7 +1274,7 @@ components:
         rootGroup:
           allOf:
             - $ref: '#/components/schemas/RootGroup'
-            - description: Gets the test suite root group. This is a required parameter.
+            - description: '<p>Gets the test suite root group. This is a required parameter. For updating or creating the latest qualification suite, if <code>intendedForQualification</code> is set to true, <code>rootGroup</code> can be an empty string. If <code>intendedForQualification</code> is false, <code>rootGroup</code> cannot be an empty string. If <code>rootGroup</code> is empty, and <code>intendedForQualification</code> is set to true, all the qualification tests are included, and the configuration is default.</p> <p> For a qualification suite, the minimum length is 0, and the maximum is 2048. For a non-qualification suite, the minimum length is 1, and the maximum is 2048. </p>'
         devicePermissionRoleArn:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
@@ -1665,7 +1665,7 @@ components:
         systemMessage:
           allOf:
             - $ref: '#/components/schemas/SystemMessage'
-            - description: ' '
+            - description: Provides test case scenario system messages if any.
       description: Provides test case scenario.
     UntagResourceRequest:
       type: object

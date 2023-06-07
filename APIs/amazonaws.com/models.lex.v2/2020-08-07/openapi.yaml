@@ -589,7 +589,7 @@ paths:
         - name: botVersion
           in: path
           required: true
-          description: The identifier of the version of the bot associated with the locale.
+          description: The version of the bot associated with the locale.
           schema:
             type: string
             pattern: '^(DRAFT|[0-9]+)$'
@@ -767,7 +767,7 @@ paths:
                 botName:
                   description: The name of the bot. The bot name must be unique in the account that creates the bot.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -788,7 +788,7 @@ paths:
                     childDirected:
                       allOf:
                         - $ref: '#/components/schemas/ChildDirected'
-                        - description: 'For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ</a>.'
+                        - description: 'For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="http://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ</a>.'
                 idleSessionTTLInSeconds:
                   description: '<p>The time, in seconds, that Amazon Lex should keep information about a user''s conversation with the bot. </p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Lex deletes any data provided before the timeout.</p> <p>You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.</p>'
                   type: integer
@@ -979,7 +979,7 @@ paths:
                 botAliasName:
                   description: The alias to create. The name must be unique for the bot.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -1556,12 +1556,17 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/CustomVocabularyExportSpecification'
                         - description: The parameters required to export a custom vocabulary.
+                    testSetExportSpecification:
+                      allOf:
+                        - $ref: '#/components/schemas/TestSetExportSpecification'
+                        - description: Specifications for the test set that is exported as a resource.
                 fileFormat:
                   description: The file format of the bot or bot locale definition files.
                   type: string
                   enum:
                     - LexJson
                     - TSV
+                    - CSV
                 filePassword:
                   description: 'An password to use to encrypt the exported archive. Using a password is optional, but you should encrypt the archive to protect the data in transit between Amazon Lex and your local computer.'
                   type: string
@@ -1726,7 +1731,7 @@ paths:
         - name: botVersion
           in: path
           required: true
-          description: The identifier of the version of the bot associated with this intent.
+          description: The version of the bot associated with this intent.
           schema:
             type: string
             pattern: ^DRAFT$
@@ -1750,7 +1755,7 @@ paths:
                 intentName:
                   description: The name of the intent. Intent names must be unique in the locale that contains the intent and cannot match the name of any built-in intent.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -1879,17 +1884,17 @@ paths:
                   minItems: 0
                   maxItems: 10
                 kendraConfiguration:
-                  description: 'Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user''s utterance.'
+                  description: 'Provides configuration information for the <code>AMAZON.KendraSearchIntent</code> intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user''s utterance.'
                   type: object
                   properties:
                     kendraIndex:
                       allOf:
                         - $ref: '#/components/schemas/KendraIndexArn'
-                        - description: The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot.
+                        - description: The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the <code>AMAZON.KendraSearchIntent</code> intent to search. The index must be in the same account and Region as the Amazon Lex bot.
                     queryFilterStringEnabled:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.
+                        - description: Determines whether the <code>AMAZON.KendraSearchIntent</code> intent uses a custom query string to query the Amazon Kendra index.
                     queryFilterString:
                       allOf:
                         - $ref: '#/components/schemas/QueryFilterString'
@@ -2350,7 +2355,7 @@ paths:
                 statementId:
                   description: 'The name of the statement. The ID is the same as the <code>Sid</code> IAM property. The statement name must be unique within the policy. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html">IAM JSON policy elements: Sid</a>. '
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 effect:
@@ -2360,7 +2365,7 @@ paths:
                     - Allow
                     - Deny
                 principal:
-                  description: 'An IAM principal, such as an IAM users, IAM roles, or AWS services that is allowed or denied access to a resource. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">AWS JSON policy elements: Principal</a>.'
+                  description: 'An IAM principal, such as an IAM user, IAM role, or Amazon Web Services services that is allowed or denied access to a resource. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">Amazon Web Services JSON policy elements: Principal</a>.'
                   type: array
                   items:
                     $ref: '#/components/schemas/Principal'
@@ -2478,7 +2483,7 @@ paths:
                 slotName:
                   description: The name of the slot. Slot names must be unique within the bot that contains the slot.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -2493,7 +2498,7 @@ paths:
                   minLength: 1
                   maxLength: 25
                 valueElicitationSetting:
-                  description: Specifies the elicitation setting details for constituent sub slots of a composite slot.
+                  description: Specifies the elicitation setting details eliciting a slot.
                   type: object
                   properties:
                     defaultValueSpecification:
@@ -2750,9 +2755,9 @@ paths:
                 - slotTypeName
               properties:
                 slotTypeName:
-                  description: The name for the slot. A slot type name must be unique within the account.
+                  description: The name for the slot. A slot type name must be unique within the intent.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -2774,7 +2779,7 @@ paths:
                     resolutionStrategy:
                       allOf:
                         - $ref: '#/components/schemas/SlotValueResolutionStrategy'
-                        - description: '<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p>OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p>TopResolution - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the valueSelectionStrategy, the default is OriginalValue. </p>'
+                        - description: '<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
                     regexFilter:
                       allOf:
                         - $ref: '#/components/schemas/SlotValueRegexFilter'
@@ -2782,7 +2787,7 @@ paths:
                     advancedRecognitionSetting:
                       allOf:
                         - $ref: '#/components/schemas/AdvancedRecognitionSetting'
-                        - description: Provides settings that enable advanced recognition settings for slot values.
+                        - description: Provides settings that enable advanced recognition settings for slot values. You can use this to enable using slot values as a custom vocabulary for recognizing user utterances.
                 parentSlotTypeSignature:
                   description: '<p>The built-in slot type used as a parent of this slot type. When you define a parent slot type, the new slot type has the configuration of the parent slot type.</p> <p>Only <code>AMAZON.AlphaNumeric</code> is supported.</p>'
                   type: string
@@ -2915,6 +2920,88 @@ paths:
                 nextToken:
                   description: 'If the response from the <code>ListSlotTypes</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
                   type: string
+  '/testsets/{testSetId}/testsetdiscrepancy':
+    post:
+      operationId: CreateTestSetDiscrepancyReport
+      description: Create a report that describes the differences between the bot and the test set.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTestSetDiscrepancyReportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: testSetId
+          in: path
+          required: true
+          description: The test set Id for the test set discrepancy report.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - target
+              properties:
+                target:
+                  description: Contains information about the resource used for the test set discrepancy report.
+                  type: object
+                  properties:
+                    botAliasTarget:
+                      allOf:
+                        - $ref: '#/components/schemas/TestSetDiscrepancyReportBotAliasTarget'
+                        - description: Contains information about the bot alias used as the resource for the test set discrepancy report.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /createuploadurl/:
     post:
       operationId: CreateUploadUrl
@@ -3157,7 +3244,7 @@ paths:
                 botName:
                   description: The new name of the bot. The name must be unique in the account that creates the bot.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -3178,7 +3265,7 @@ paths:
                     childDirected:
                       allOf:
                         - $ref: '#/components/schemas/ChildDirected'
-                        - description: 'For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ</a>.'
+                        - description: 'For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="http://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ</a>.'
                 idleSessionTTLInSeconds:
                   description: '<p>The time, in seconds, that Amazon Lex should keep information about a user''s conversation with the bot.</p> <p>A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Lex deletes any data provided before the timeout.</p> <p>You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.</p>'
                   type: integer
@@ -3413,7 +3500,7 @@ paths:
                 botAliasName:
                   description: The new name to assign to the bot alias.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -4198,7 +4285,7 @@ paths:
                 intentName:
                   description: The new name for the intent.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -4332,17 +4419,17 @@ paths:
                   minItems: 0
                   maxItems: 10
                 kendraConfiguration:
-                  description: 'Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user''s utterance.'
+                  description: 'Provides configuration information for the <code>AMAZON.KendraSearchIntent</code> intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user''s utterance.'
                   type: object
                   properties:
                     kendraIndex:
                       allOf:
                         - $ref: '#/components/schemas/KendraIndexArn'
-                        - description: The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot.
+                        - description: The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the <code>AMAZON.KendraSearchIntent</code> intent to search. The index must be in the same account and Region as the Amazon Lex bot.
                     queryFilterStringEnabled:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
-                        - description: Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.
+                        - description: Determines whether the <code>AMAZON.KendraSearchIntent</code> intent uses a custom query string to query the Amazon Kendra index.
                     queryFilterString:
                       allOf:
                         - $ref: '#/components/schemas/QueryFilterString'
@@ -4411,7 +4498,7 @@ paths:
           description: The name of the statement (SID) to delete from the policy.
           schema:
             type: string
-            pattern: '^([0-9a-zA-Z][_-]?)+$'
+            pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
             minLength: 1
             maxLength: 100
         - name: expectedRevisionId
@@ -4710,7 +4797,7 @@ paths:
                 slotName:
                   description: The new name for the slot.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -4725,7 +4812,7 @@ paths:
                   minLength: 1
                   maxLength: 25
                 valueElicitationSetting:
-                  description: Specifies the elicitation setting details for constituent sub slots of a composite slot.
+                  description: Specifies the elicitation setting details eliciting a slot.
                   type: object
                   properties:
                     defaultValueSpecification:
@@ -5035,7 +5122,7 @@ paths:
                 slotTypeName:
                   description: The new name of the slot type.
                   type: string
-                  pattern: '^([0-9a-zA-Z][_-]?)+$'
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
                   minLength: 1
                   maxLength: 100
                 description:
@@ -5057,7 +5144,7 @@ paths:
                     resolutionStrategy:
                       allOf:
                         - $ref: '#/components/schemas/SlotValueResolutionStrategy'
-                        - description: '<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p>OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p>TopResolution - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the valueSelectionStrategy, the default is OriginalValue. </p>'
+                        - description: '<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
                     regexFilter:
                       allOf:
                         - $ref: '#/components/schemas/SlotValueRegexFilter'
@@ -5065,7 +5152,7 @@ paths:
                     advancedRecognitionSetting:
                       allOf:
                         - $ref: '#/components/schemas/AdvancedRecognitionSetting'
-                        - description: Provides settings that enable advanced recognition settings for slot values.
+                        - description: Provides settings that enable advanced recognition settings for slot values. You can use this to enable using slot values as a custom vocabulary for recognizing user utterances.
                 parentSlotTypeSignature:
                   description: The new built-in slot type that should be used as the parent of this slot type.
                   type: string
@@ -5085,6 +5172,193 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SubSlotTypeList'
                         - description: Subslots in the composite slot.
+  '/testsets/{testSetId}':
+    delete:
+      operationId: DeleteTestSet
+      description: The action to delete the selected test set.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testSetId
+          in: path
+          required: true
+          description: The test set Id of the test set to be deleted.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeTestSet
+      description: Gets metadata information about the test set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTestSetResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testSetId
+          in: path
+          required: true
+          description: The test set Id for the test set request.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+    put:
+      operationId: UpdateTestSet
+      description: The action to update the test set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTestSetResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testSetId
+          in: path
+          required: true
+          description: The test set Id for which update test operation to be performed.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - testSetName
+              properties:
+                testSetName:
+                  description: The new test set name.
+                  type: string
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The new test set description.
+                  type: string
+                  minLength: 0
+                  maxLength: 200
   '/bots/{botId}/utterances/':
     delete:
       operationId: DeleteUtterances
@@ -5407,6 +5681,242 @@ paths:
           description: The locale to return the custom vocabulary information for. The locale must be <code>en_GB</code>.
           schema:
             type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/testexecutions/{testExecutionId}':
+    get:
+      operationId: DescribeTestExecution
+      description: Gets metadata information about the test execution.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTestExecutionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testExecutionId
+          in: path
+          required: true
+          description: The execution Id of the test set execution.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/testsetdiscrepancy/{testSetDiscrepancyReportId}':
+    get:
+      operationId: DescribeTestSetDiscrepancyReport
+      description: Gets metadata information about the test set discrepancy report.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTestSetDiscrepancyReportResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testSetDiscrepancyReportId
+          in: path
+          required: true
+          description: The unique identifier of the test set discrepancy report.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/testsetgenerations/{testSetGenerationId}':
+    get:
+      operationId: DescribeTestSetGeneration
+      description: Gets metadata information about the test set generation.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTestSetGenerationResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testSetGenerationId
+          in: path
+          required: true
+          description: The unique identifier of the test set generation.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/testexecutions/{testExecutionId}/artifacturl':
+    get:
+      operationId: GetTestExecutionArtifactsUrl
+      description: The pre-signed Amazon S3 URL to download the test execution result artifacts.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTestExecutionArtifactsUrlResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testExecutionId
+          in: path
+          required: true
+          description: The unique identifier of the completed test execution.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6207,6 +6717,10 @@ paths:
                         - description: Parameters for importing a bot locale.
                     customVocabularyImportSpecification:
                       $ref: '#/components/schemas/CustomVocabularyImportSpecification'
+                    testSetImportResourceSpecification:
+                      allOf:
+                        - $ref: '#/components/schemas/TestSetImportResourceSpecification'
+                        - description: Specifications for the test set that is imported.
                 mergeStrategy:
                   description: The strategy to use when there is a name conflict between the imported resource and an existing resource. When the merge strategy is <code>FailOnConflict</code> existing resources are not overwritten and the import fails.
                   type: string
@@ -6441,6 +6955,358 @@ paths:
                   maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  '/testexecutions/{testExecutionId}/results':
+    post:
+      operationId: ListTestExecutionResultItems
+      description: Gets a list of test execution result items.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTestExecutionResultItemsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testExecutionId
+          in: path
+          required: true
+          description: The unique identifier of the test execution to list the result items.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resultFilterBy
+              properties:
+                resultFilterBy:
+                  description: Contains information about the method by which to filter the results of the test execution.
+                  type: object
+                  properties:
+                    resultTypeFilter:
+                      allOf:
+                        - $ref: '#/components/schemas/TestResultTypeFilter'
+                        - description: 'Specifies which results to filter. See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html">Test result details"&gt;Test results details</a> for details about different types of results.'
+                    conversationLevelTestResultsFilterBy:
+                      allOf:
+                        - $ref: '#/components/schemas/ConversationLevelTestResultsFilterBy'
+                        - description: Contains information about the method for filtering Conversation level test results.
+                maxResults:
+                  description: 'The maximum number of test execution result items to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: 'If the response from the <code>ListTestExecutionResultItems</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /testexecutions:
+    post:
+      operationId: ListTestExecutions
+      description: The list of test set executions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTestExecutionsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sortBy:
+                  description: Contains information about the method by which to sort the instances of test executions you have carried out.
+                  type: object
+                  properties:
+                    attribute:
+                      allOf:
+                        - $ref: '#/components/schemas/TestExecutionSortAttribute'
+                        - description: Specifies whether to sort the test set executions by the date and time at which the test sets were created.
+                    order:
+                      allOf:
+                        - $ref: '#/components/schemas/SortOrder'
+                        - description: Specifies whether to sort in ascending or descending order.
+                maxResults:
+                  description: 'The maximum number of test executions to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: 'If the response from the ListTestExecutions operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/testsets/{testSetId}/records':
+    post:
+      operationId: ListTestSetRecords
+      description: The list of test set records.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTestSetRecordsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testSetId
+          in: path
+          required: true
+          description: The identifier of the test set to list its test set records.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxResults:
+                  description: 'The maximum number of test set records to return in each page. If there are fewer records than the max page size, only the actual number of records are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: 'If the response from the ListTestSetRecords operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /testsets:
+    post:
+      operationId: ListTestSets
+      description: The list of the test sets
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTestSetsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sortBy:
+                  description: Contains information about the methods by which to sort the test set.
+                  type: object
+                  properties:
+                    attribute:
+                      allOf:
+                        - $ref: '#/components/schemas/TestSetSortAttribute'
+                        - description: Specifies whether to sort the test sets by name or by the time they were last updated.
+                    order:
+                      allOf:
+                        - $ref: '#/components/schemas/SortOrder'
+                        - description: Specifies whether to sort in ascending or descending order.
+                maxResults:
+                  description: 'The maximum number of test sets to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: 'If the response from the ListTestSets operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/associatedtranscripts':
     post:
       operationId: SearchAssociatedTranscripts
@@ -6548,6 +7414,217 @@ paths:
                   type: integer
                   minimum: 0
                   maximum: 10000000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/testsets/{testSetId}/testexecutions':
+    post:
+      operationId: StartTestExecution
+      description: The action to start test set execution.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartTestExecutionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: testSetId
+          in: path
+          required: true
+          description: The test set Id for the test set execution.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - target
+                - apiMode
+              properties:
+                target:
+                  description: Contains information about the bot used for the test execution.
+                  type: object
+                  properties:
+                    botAliasTarget:
+                      allOf:
+                        - $ref: '#/components/schemas/BotAliasTestExecutionTarget'
+                        - description: Contains information about the bot alias used for the test execution.
+                apiMode:
+                  description: 'Indicates whether we use streaming or non-streaming APIs for the test set execution. For streaming, StartConversation Runtime API is used. Whereas, for non-streaming, RecognizeUtterance and RecognizeText Amazon Lex Runtime API are used.'
+                  type: string
+                  enum:
+                    - Streaming
+                    - NonStreaming
+                testExecutionModality:
+                  description: Indicates whether audio or text is used.
+                  type: string
+                  enum:
+                    - Text
+                    - Audio
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /testsetgenerations:
+    put:
+      operationId: StartTestSetGeneration
+      description: The action to start the generation of test set.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartTestSetGenerationResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - testSetName
+                - storageLocation
+                - generationDataSource
+                - roleArn
+              properties:
+                testSetName:
+                  description: The test set name for the test set generation request.
+                  type: string
+                  pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
+                  minLength: 1
+                  maxLength: 100
+                description:
+                  description: The test set description for the test set generation request.
+                  type: string
+                  minLength: 0
+                  maxLength: 200
+                storageLocation:
+                  description: Contains information about the location in which the test set is stored.
+                  type: object
+                  properties:
+                    s3BucketName:
+                      allOf:
+                        - $ref: '#/components/schemas/S3BucketName'
+                        - description: The name of the Amazon S3 bucket in which the test set is stored.
+                    s3Path:
+                      allOf:
+                        - $ref: '#/components/schemas/S3ObjectPath'
+                        - description: The path inside the Amazon S3 bucket where the test set is stored.
+                    kmsKeyArn:
+                      allOf:
+                        - $ref: '#/components/schemas/KmsKeyArn'
+                        - description: The Amazon Resource Name (ARN) of an Amazon Web Services Key Management Service (KMS) key for encrypting the test set.
+                generationDataSource:
+                  description: Contains information about the data source from which the test set is generated.
+                  type: object
+                  properties:
+                    conversationLogsDataSource:
+                      allOf:
+                        - $ref: '#/components/schemas/ConversationLogsDataSource'
+                        - description: Contains information about the bot from which the conversation logs are sourced.
+                roleArn:
+                  description: The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+                  type: string
+                  pattern: '^arn:aws:iam::[0-9]{12}:role/.*$'
+                  minLength: 32
+                  maxLength: 2048
+                testSetTags:
+                  description: 'A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can''t use the <code>UpdateTestSet</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7242,6 +8319,16 @@ components:
             - $ref: '#/components/schemas/LocaleId'
             - description: The locale of the bot that contains the custom vocabulary to export.
       description: Provides the parameters required for exporting a custom vocabulary.
+    TestSetExportSpecification:
+      type: object
+      required:
+        - testSetId
+      properties:
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test set.
+      description: Contains information about the test set that is exported.
     CreateIntentResponse:
       type: object
       properties:
@@ -7300,7 +8387,7 @@ components:
         botVersion:
           allOf:
             - $ref: '#/components/schemas/DraftBotVersion'
-            - description: The identifier of the version of the bot associated with the intent.
+            - description: The version of the bot associated with the intent.
         localeId:
           allOf:
             - $ref: '#/components/schemas/LocaleId'
@@ -7477,7 +8564,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PostDialogCodeHookInvocationSpecification'
             - description: Contains the responses and actions that Amazon Lex takes after the Lambda function is complete.
-      description: ' Settings that specify the dialog code hook that is called by Amazon Lex at a step of the conversation. '
+      description: 'Settings that specify the dialog code hook that is called by Amazon Lex at a step of the conversation. '
     ElicitationCodeHookInvocationSetting:
       type: object
       required:
@@ -7501,7 +8588,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Name'
             - description: The name of the context.
-      description: The name of a context that must be active for an intent to be selected by Amazon Lex.
+      description: A context that must be active for an intent to be selected by Amazon Lex.
     OutputContext:
       type: object
       required:
@@ -7559,7 +8646,7 @@ components:
         service:
           allOf:
             - $ref: '#/components/schemas/ServicePrincipal'
-            - description: The name of the AWS service that should allowed or denied access to an Amazon Lex action.
+            - description: The name of the Amazon Web Services service that should allowed or denied access to an Amazon Lex action.
         arn:
           allOf:
             - $ref: '#/components/schemas/PrincipalArn'
@@ -7798,7 +8885,7 @@ components:
         pattern:
           allOf:
             - $ref: '#/components/schemas/RegexPattern'
-            - description: '<p>A regular expression used to validate the value of a slot.</p> <p> Use a standard regular expression. Amazon Lex supports the following characters in the regular expression: </p> <ul> <li> <p>A-Z, a-z</p> </li> <li> <p>0-9</p> </li> <li> <p>Unicode characters ("\ u&lt;Unicode&gt;")</p> </li> </ul> <p> Represent Unicode characters with four digits, for example "\u0041" or "\u005A". </p> <p> The following regular expression operators are not supported: </p> <ul> <li> <p>Infinite repeaters: *, +, or {x,} with no upper bound.</p> </li> <li> <p>Wild card (.)</p> </li> </ul>'
+            - description: '<p>A regular expression used to validate the value of a slot.</p> <p> Use a standard regular expression. Amazon Lex supports the following characters in the regular expression: </p> <ul> <li> <p>A-Z, a-z</p> </li> <li> <p>0-9</p> </li> <li> <p>Unicode characters ("\⁠u&lt;Unicode&gt;")</p> </li> </ul> <p> Represent Unicode characters with four digits, for example "\⁠u0041" or "\⁠u005A". </p> <p> The following regular expression operators are not supported: </p> <ul> <li> <p>Infinite repeaters: *, +, or {x,} with no upper bound.</p> </li> <li> <p>Wild card (.)</p> </li> </ul>'
       description: Provides a regular expression used to validate the value of a slot.
     AdvancedRecognitionSetting:
       type: object
@@ -7822,6 +8909,45 @@ components:
         $ref: '#/components/schemas/SubSlotTypeComposition'
       minItems: 0
       maxItems: 6
+    CreateTestSetDiscrepancyReportResponse:
+      type: object
+      properties:
+        testSetDiscrepancyReportId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test set discrepancy report to describe.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date and time for the test set discrepancy report.
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The test set Id for the test set discrepancy report.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/TestSetDiscrepancyReportResourceTarget'
+            - description: The target bot for the test set discrepancy report.
+    TestSetDiscrepancyReportBotAliasTarget:
+      type: object
+      required:
+        - botId
+        - botAliasId
+        - localeId
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier for the bot alias.
+        botAliasId:
+          allOf:
+            - $ref: '#/components/schemas/BotAliasId'
+            - description: The unique identifier for the bot associated with the bot alias.
+        localeId:
+          allOf:
+            - $ref: '#/components/schemas/LocaleId'
+            - description: The unique identifier of the locale associated with the bot alias.
+      description: Contains information about the bot alias used for the test set discrepancy report.
     CreateUploadUrlResponse:
       type: object
       properties:
@@ -8073,7 +9199,7 @@ components:
         botVersion:
           allOf:
             - $ref: '#/components/schemas/BotVersion'
-            - description: The identifier of the version of the bot associated with the locale.
+            - description: The version of the bot associated with the locale.
         localeId:
           allOf:
             - $ref: '#/components/schemas/LocaleId'
@@ -8411,7 +9537,7 @@ components:
         initialResponseSetting:
           allOf:
             - $ref: '#/components/schemas/InitialResponseSetting'
-            - description: <p/>
+            - description: Configuration setting for a response sent to the user before Amazon Lex starts eliciting slots.
     DescribeResourcePolicyResponse:
       type: object
       properties:
@@ -8539,6 +9665,189 @@ components:
           allOf:
             - $ref: '#/components/schemas/CompositeSlotTypeSetting'
             - description: Specifications for a composite slot type.
+    DescribeTestExecutionResponse:
+      type: object
+      properties:
+        testExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The execution Id for the test set execution.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The execution creation date and time for the test set execution.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time of the last update for the execution.
+        testExecutionStatus:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionStatus'
+            - description: The test execution status for the test execution.
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The test set Id for the test set execution.
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The test set name of the test set execution.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionTarget'
+            - description: The target bot for the test set execution details.
+        apiMode:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionApiMode'
+            - description: 'Indicates whether we use streaming or non-streaming APIs are used for the test set execution. For streaming, <code>StartConversation</code> Amazon Lex Runtime API is used. Whereas for non-streaming, <code>RecognizeUtterance</code> and <code>RecognizeText</code> Amazon Lex Runtime API is used.'
+        testExecutionModality:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionModality'
+            - description: Indicates whether test set is audio or text.
+        failureReasons:
+          allOf:
+            - $ref: '#/components/schemas/FailureReasons'
+            - description: Reasons for the failure of the test set execution.
+    DescribeTestSetResponse:
+      type: object
+      properties:
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The test set Id for the test set response.
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The test set name of the test set.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the test set.
+        modality:
+          allOf:
+            - $ref: '#/components/schemas/TestSetModality'
+            - description: Indicates whether the test set is audio or text data.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStatus'
+            - description: The status of the test set.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+        numTurns:
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: The total number of agent and user turn in the test set.
+        storageLocation:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStorageLocation'
+            - description: The Amazon S3 storage location for the test set data.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date and time for the test set data.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time for the last update of the test set data.
+    DescribeTestSetDiscrepancyReportResponse:
+      type: object
+      properties:
+        testSetDiscrepancyReportId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test set discrepancy report to describe.
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The test set Id for the test set discrepancy report.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time and date of creation for the test set discrepancy report.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/TestSetDiscrepancyReportResourceTarget'
+            - description: The target bot location for the test set discrepancy report.
+        testSetDiscrepancyReportStatus:
+          allOf:
+            - $ref: '#/components/schemas/TestSetDiscrepancyReportStatus'
+            - description: The status for the test set discrepancy report.
+        lastUpdatedDataTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time of the last update for the test set discrepancy report.
+        testSetDiscrepancyTopErrors:
+          allOf:
+            - $ref: '#/components/schemas/TestSetDiscrepancyErrors'
+            - description: The top 200 error results from the test set discrepancy report.
+        testSetDiscrepancyRawOutputUrl:
+          allOf:
+            - $ref: '#/components/schemas/PresignedS3Url'
+            - description: Pre-signed Amazon S3 URL to download the test set discrepancy report.
+        failureReasons:
+          allOf:
+            - $ref: '#/components/schemas/FailureReasons'
+            - description: The failure report for the test set discrepancy report generation action.
+    DescribeTestSetGenerationResponse:
+      type: object
+      properties:
+        testSetGenerationId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test set generation.
+        testSetGenerationStatus:
+          allOf:
+            - $ref: '#/components/schemas/TestSetGenerationStatus'
+            - description: The status for the test set generation.
+        failureReasons:
+          allOf:
+            - $ref: '#/components/schemas/FailureReasons'
+            - description: The reasons the test set generation failed.
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier for the test set created for the generated test set.
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The test set name for the generated test set.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The test set description for the test set generation.
+        storageLocation:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStorageLocation'
+            - description: The Amazon S3 storage location for the test set generation.
+        generationDataSource:
+          allOf:
+            - $ref: '#/components/schemas/TestSetGenerationDataSource'
+            - description: The data source of the test set used for the test set generation.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: ' The roleARN of the test set used for the test set generation.'
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date and time for the test set generation.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time of the last update for the test set generation.
+    GetTestExecutionArtifactsUrlResponse:
+      type: object
+      properties:
+        testExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the completed test execution.
+        downloadArtifactsUrl:
+          allOf:
+            - $ref: '#/components/schemas/PresignedS3Url'
+            - description: The pre-signed Amazon S3 URL to download completed test execution.
     ListAggregatedUtterancesResponse:
       type: object
       properties:
@@ -9099,6 +10408,76 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags associated with a resource.
+    ListTestExecutionResultItemsResponse:
+      type: object
+      properties:
+        testExecutionResults:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionResultItems'
+            - description: The list of results from the test execution.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that indicates whether there are more results to return in a response to the <code>ListTestExecutionResultItems</code> operation. If the <code>nextToken</code> field is present, you send the contents as the <code>nextToken</code> parameter of a <code>ListTestExecutionResultItems</code> operation request to get the next page of results.'
+    TestResultTypeFilter:
+      type: string
+      enum:
+        - OverallTestResults
+        - ConversationLevelTestResults
+        - IntentClassificationTestResults
+        - SlotResolutionTestResults
+        - UtteranceLevelResults
+    ConversationLevelTestResultsFilterBy:
+      type: object
+      properties:
+        endToEndResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: The selection of matched or mismatched end-to-end status to filter test set results data at the conversation level.
+      description: The selection to filter the test set results data at the conversation level.
+    ListTestExecutionsResponse:
+      type: object
+      properties:
+        testExecutions:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionSummaryList'
+            - description: The list of test executions.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that indicates whether there are more results to return in a response to the ListTestExecutions operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListTestExecutions operation request to get the next page of results.'
+    TestExecutionSortAttribute:
+      type: string
+      enum:
+        - TestSetName
+        - CreationDateTime
+    ListTestSetRecordsResponse:
+      type: object
+      properties:
+        testSetRecords:
+          allOf:
+            - $ref: '#/components/schemas/TestSetTurnRecordList'
+            - description: The list of records from the test set.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that indicates whether there are more records to return in a response to the ListTestSetRecords operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListTestSetRecords operation request to get the next page of records.'
+    ListTestSetsResponse:
+      type: object
+      properties:
+        testSets:
+          allOf:
+            - $ref: '#/components/schemas/TestSetSummaryList'
+            - description: The selected test sets in a list of test sets.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that indicates whether there are more results to return in a response to the ListTestSets operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListTestSets operation request to get the next page of results.'
+    TestSetSortAttribute:
+      type: string
+      enum:
+        - TestSetName
+        - LastUpdatedDateTime
     SearchAssociatedTranscriptsResponse:
       type: object
       properties:
@@ -9316,6 +10695,165 @@ components:
             - $ref: '#/components/schemas/LocaleId'
             - description: The identifier of the local to import the custom vocabulary to. The value must be <code>en_GB</code>.
       description: Provides the parameters required for importing a custom vocabulary.
+    TestSetImportResourceSpecification:
+      type: object
+      required:
+        - testSetName
+        - roleArn
+        - storageLocation
+        - importInputLocation
+        - modality
+      properties:
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the test set.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the test set.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that has permission to access the test set.
+        storageLocation:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStorageLocation'
+            - description: Contains information about the location that Amazon Lex uses to store the test-set.
+        importInputLocation:
+          allOf:
+            - $ref: '#/components/schemas/TestSetImportInputLocation'
+            - description: Contains information about the input location from where test-set should be imported.
+        modality:
+          allOf:
+            - $ref: '#/components/schemas/TestSetModality'
+            - description: Specifies whether the test-set being imported contains written or spoken data.
+        testSetTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can''t use the <code>UpdateTestSet</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.'
+      description: Contains information about the test set that is imported.
+    StartTestExecutionResponse:
+      type: object
+      properties:
+        testExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test set execution.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date and time for the test set execution.
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The test set Id for the test set execution.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionTarget'
+            - description: The target bot for the test set execution.
+        apiMode:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionApiMode'
+            - description: 'Indicates whether we use streaming or non-streaming APIs for the test set execution. For streaming, StartConversation Amazon Lex Runtime API is used. Whereas for non-streaming, RecognizeUtterance and RecognizeText Amazon Lex Runtime API are used.'
+        testExecutionModality:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionModality'
+            - description: Indicates whether audio or text is used.
+    BotAliasTestExecutionTarget:
+      type: object
+      required:
+        - botId
+        - botAliasId
+        - localeId
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The bot Id of the bot alias used in the test set execution.
+        botAliasId:
+          allOf:
+            - $ref: '#/components/schemas/BotAliasId'
+            - description: The bot alias Id of the bot alias used in the test set execution.
+        localeId:
+          allOf:
+            - $ref: '#/components/schemas/LocaleId'
+            - description: The locale Id of the bot alias used in the test set execution.
+      description: The target Amazon S3 location for the test set execution using a bot alias.
+    StartTestSetGenerationResponse:
+      type: object
+      properties:
+        testSetGenerationId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test set generation to describe.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The creation date and time for the test set generation.'
+        testSetGenerationStatus:
+          allOf:
+            - $ref: '#/components/schemas/TestSetGenerationStatus'
+            - description: ' The status for the test set generation.'
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The test set name used for the test set generation.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description used for the test set generation.
+        storageLocation:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStorageLocation'
+            - description: The Amazon S3 storage location for the test set generation.
+        generationDataSource:
+          allOf:
+            - $ref: '#/components/schemas/TestSetGenerationDataSource'
+            - description: ' The data source for the test set generation.'
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+        testSetTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A list of tags that was used for the test set that is being generated.
+    S3BucketName:
+      type: string
+      pattern: '^[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]$'
+      minLength: 3
+      maxLength: 63
+    S3ObjectPath:
+      type: string
+      pattern: '[\.\-\!\*\_\''\(\)a-zA-Z0-9][\.\-\!\*\_\''\(\)\/a-zA-Z0-9]*$'
+      minLength: 1
+      maxLength: 1024
+    ConversationLogsDataSource:
+      type: object
+      required:
+        - botId
+        - botAliasId
+        - localeId
+        - filter
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The bot Id from the conversation logs.
+        botAliasId:
+          allOf:
+            - $ref: '#/components/schemas/BotAliasId'
+            - description: The bot alias Id from the conversation logs.
+        localeId:
+          allOf:
+            - $ref: '#/components/schemas/LocaleId'
+            - description: The locale Id of the conversation log.
+        filter:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLogsDataSourceFilterBy'
+            - description: The filter for the data source of the conversation log.
+      description: The data source that uses conversation logs.
     StopBotRecommendationResponse:
       type: object
       properties:
@@ -9636,7 +11174,7 @@ components:
         initialResponseSetting:
           allOf:
             - $ref: '#/components/schemas/InitialResponseSetting'
-            - description: <p/>
+            - description: Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.
     SlotPriority:
       type: object
       required:
@@ -9646,7 +11184,7 @@ components:
         priority:
           allOf:
             - $ref: '#/components/schemas/PriorityValue'
-            - description: The priority that a slot should be elicited.
+            - description: The priority that Amazon Lex should apply to the slot.
         slotId:
           allOf:
             - $ref: '#/components/schemas/Id'
@@ -9697,7 +11235,7 @@ components:
         botVersion:
           allOf:
             - $ref: '#/components/schemas/DraftBotVersion'
-            - description: The identifier of the slot version that contains the slot. Will always be <code>DRAFT</code>.
+            - description: The version of the bot that contains the slot. Will always be <code>DRAFT</code>.
         localeId:
           allOf:
             - $ref: '#/components/schemas/LocaleId'
@@ -9775,10 +11313,137 @@ components:
           allOf:
             - $ref: '#/components/schemas/CompositeSlotTypeSetting'
             - description: Specifications for a composite slot type.
+    UpdateTestSetResponse:
+      type: object
+      properties:
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The test set Id for which update test operation to be performed.
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The test set name for the updated test set.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The test set description for the updated test set.
+        modality:
+          allOf:
+            - $ref: '#/components/schemas/TestSetModality'
+            - description: Indicates whether audio or text is used for the updated test set.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStatus'
+            - description: The status for the updated test set.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+        numTurns:
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: The number of conversation turns from the updated test set.
+        storageLocation:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStorageLocation'
+            - description: The Amazon S3 storage location for the updated test set.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation date and time for the updated test set.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date and time of the last update for the updated test set.'
+    ActiveContextName:
+      type: string
+      pattern: '^([A-Za-z]_?)+$'
+      minLength: 1
+      maxLength: 100
+    ActiveContext:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextName'
+            - description: The name of active context.
+      description: The active context used in the test execution.
+    ActiveContextList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActiveContext'
+      minItems: 0
+      maxItems: 20
     AudioRecognitionStrategy:
       type: string
       enum:
         - UseSlotValuesAsCustomVocabulary
+    TestSetAgentPrompt:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ExecutionErrorDetails:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The error code for the error.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The message describing the error.
+      description: Details about an error in an execution of a test set.
+    TestResultSlotName:
+      type: string
+      pattern: '^([0-9a-zA-Z][_.-]?)+$'
+      minLength: 1
+      maxLength: 100
+    Name:
+      type: string
+      pattern: '^([0-9a-zA-Z][_-]?){1,100}$'
+      minLength: 1
+      maxLength: 100
+    AgentTurnResult:
+      type: object
+      required:
+        - expectedAgentPrompt
+      properties:
+        expectedAgentPrompt:
+          allOf:
+            - $ref: '#/components/schemas/TestSetAgentPrompt'
+            - description: The expected agent prompt for the agent turn in a test set execution.
+        actualAgentPrompt:
+          allOf:
+            - $ref: '#/components/schemas/TestSetAgentPrompt'
+            - description: The actual agent prompt for the agent turn in a test set execution.
+        errorDetails:
+          $ref: '#/components/schemas/ExecutionErrorDetails'
+        actualElicitedSlot:
+          allOf:
+            - $ref: '#/components/schemas/TestResultSlotName'
+            - description: The actual elicited slot for the agent turn in a test set execution.
+        actualIntent:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The actual intent for the agent turn in a test set execution.
+      description: The information about the agent turn in a test set execution.
+    AgentTurnSpecification:
+      type: object
+      required:
+        - agentPrompt
+      properties:
+        agentPrompt:
+          allOf:
+            - $ref: '#/components/schemas/TestSetAgentPrompt'
+            - description: The agent prompt for the agent turn in a test set.
+      description: The specification of an agent turn.
     AggregatedUtterancesFilterName:
       type: string
       enum:
@@ -9972,6 +11637,11 @@ components:
             - $ref: '#/components/schemas/DTMFSpecification'
             - description: Specifies the settings on DTMF input.
       description: Specifies the audio and DTMF input specification.
+    AudioFileS3Location:
+      type: string
+      pattern: '^s3://([a-z0-9\\.-]+)/(.+)$'
+      minLength: 1
+      maxLength: 1024
     S3BucketLogDestination:
       type: object
       required:
@@ -9981,7 +11651,7 @@ components:
         kmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/KmsKeyArn'
-            - description: The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.
+            - description: The Amazon Resource Name (ARN) of an Amazon Web Services Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.
         s3BucketArn:
           allOf:
             - $ref: '#/components/schemas/S3BucketArn'
@@ -10132,11 +11802,6 @@ components:
         - Available
         - Deleting
         - Failed
-    Name:
-      type: string
-      pattern: '^([0-9a-zA-Z][_-]?)+$'
-      minLength: 1
-      maxLength: 100
     Description:
       type: string
       minLength: 0
@@ -10207,7 +11872,7 @@ components:
         childDirected:
           allOf:
             - $ref: '#/components/schemas/ChildDirected'
-            - description: 'For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="https://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ</a>.'
+            - description: 'For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children''s Online Privacy Protection Act (COPPA) by specifying <code>true</code> or <code>false</code> in the <code>childDirected</code> field. By specifying <code>true</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying <code>false</code> in the <code>childDirected</code> field, you confirm that your use of Amazon Lex <b>is not</b> related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the <code>childDirected</code> field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the <a href="http://aws.amazon.com/lex/faqs#data-security">Amazon Lex FAQ</a>.'
       description: 'By default, data stored by Amazon Lex is encrypted. The <code>DataPrivacy</code> structure provides settings that determine how Amazon Lex handles special cases of securing the data for your bot. '
     SessionTTL:
       type: integer
@@ -10788,6 +12453,117 @@ components:
       type: integer
       minimum: 1
       maximum: 20
+    TestResultMatchStatus:
+      type: string
+      enum:
+        - Matched
+        - Mismatched
+        - ExecutionError
+    ConversationLevelIntentClassificationResultItem:
+      type: object
+      required:
+        - intentName
+        - matchResult
+      properties:
+        intentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The intent name used in the evaluation of intent level success or failure.
+        matchResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: The number of times the specific intent is used in the evaluation of intent level success or failure.
+      description: The item listing the evaluation of intent level success or failure.
+    ConversationLevelIntentClassificationResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConversationLevelIntentClassificationResultItem'
+    ConversationLevelResultDetail:
+      type: object
+      required:
+        - endToEndResult
+      properties:
+        endToEndResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: The success or failure of the streaming of the conversation.
+        speechTranscriptionResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: The speech transcription success or failure details of the conversation.
+      description: The conversation level details of the conversation used in the test set.
+    ConversationLevelSlotResolutionResultItem:
+      type: object
+      required:
+        - intentName
+        - slotName
+        - matchResult
+      properties:
+        intentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The intents used in the slots list for the slot resolution details.
+        slotName:
+          allOf:
+            - $ref: '#/components/schemas/TestResultSlotName'
+            - description: The slot name in the slots list for the slot resolution details.
+        matchResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: The number of matching slots used in the slots listings for the slot resolution evaluation.
+      description: The slots used for the slot resolution in the conversation.
+    ConversationLevelSlotResolutionResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConversationLevelSlotResolutionResultItem'
+    TestSetConversationId:
+      type: string
+      pattern: '^([0-9a-zA-Z][_-]?)+$'
+      minLength: 1
+      maxLength: 50
+    ConversationLevelTestResultItem:
+      type: object
+      required:
+        - conversationId
+        - endToEndResult
+        - intentClassificationResults
+        - slotResolutionResults
+      properties:
+        conversationId:
+          allOf:
+            - $ref: '#/components/schemas/TestSetConversationId'
+            - description: The conversation Id of the test result evaluation item.
+        endToEndResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: The end-to-end success or failure of the test result evaluation item.
+        speechTranscriptionResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: The speech transcription success or failure of the test result evaluation item.
+        intentClassificationResults:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLevelIntentClassificationResults'
+            - description: The intent classification of the test result evaluation item.
+        slotResolutionResults:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLevelSlotResolutionResults'
+            - description: The slot success or failure of the test result evaluation item.
+      description: The test result evaluation item at the conversation level.
+    ConversationLevelTestResultItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConversationLevelTestResultItem'
+    ConversationLevelTestResults:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLevelTestResultItemList'
+            - description: The item list in the test set results data at the conversation level.
+      description: The test set results data at the conversation level.
     ConversationLogSettings:
       type: object
       properties:
@@ -10800,6 +12576,31 @@ components:
             - $ref: '#/components/schemas/AudioLogSettingsList'
             - description: The Amazon S3 settings for logging audio to an S3 bucket.
       description: 'Configures conversation logging that saves audio, text, and metadata for the conversations with your users.'
+    ConversationLogsDataSourceFilterBy:
+      type: object
+      required:
+        - startTime
+        - endTime
+        - inputMode
+      properties:
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The start time for the conversation log.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The end time for the conversation log.
+        inputMode:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLogsInputModeFilter'
+            - description: 'The selection to filter by input mode for the conversation logs. '
+      description: The selected data source to filter the conversation log.
+    ConversationLogsInputModeFilter:
+      type: string
+      enum:
+        - Speech
+        - Text
     Count:
       type: integer
     SentimentAnalysisSettings:
@@ -10941,12 +12742,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/CustomVocabularyExportSpecification'
             - description: The parameters required to export a custom vocabulary.
+        testSetExportSpecification:
+          allOf:
+            - $ref: '#/components/schemas/TestSetExportSpecification'
+            - description: Specifications for the test set that is exported as a resource.
       description: 'Provides information about the bot or bot locale that you want to export. You can specify the <code>botExportSpecification</code> or the <code>botLocaleExportSpecification</code>, but not both.'
     ImportExportFileFormat:
       type: string
       enum:
         - LexJson
         - TSV
+        - CSV
     ImportExportFilePassword:
       type: string
       minLength: 1
@@ -11102,16 +12908,16 @@ components:
         kendraIndex:
           allOf:
             - $ref: '#/components/schemas/KendraIndexArn'
-            - description: The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search. The index must be in the same account and Region as the Amazon Lex bot.
+            - description: The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the <code>AMAZON.KendraSearchIntent</code> intent to search. The index must be in the same account and Region as the Amazon Lex bot.
         queryFilterStringEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.
+            - description: Determines whether the <code>AMAZON.KendraSearchIntent</code> intent uses a custom query string to query the Amazon Kendra index.
         queryFilterString:
           allOf:
             - $ref: '#/components/schemas/QueryFilterString'
             - description: 'A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query. The filter is in the format defined by Amazon Kendra. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/filtering.html">Filtering queries</a>.'
-      description: 'Provides configuration information for the AMAZON.KendraSearchIntent intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user''s utterance.'
+      description: 'Provides configuration information for the <code>AMAZON.KendraSearchIntent</code> intent. When you use this intent, Amazon Lex searches the specified Amazon Kendra index and returns documents from the index that match the user''s utterance.'
     InitialResponseSetting:
       type: object
       properties:
@@ -11231,7 +13037,7 @@ components:
         principal:
           allOf:
             - $ref: '#/components/schemas/PrincipalList'
-            - description: 'An IAM principal, such as an IAM users, IAM roles, or AWS services that is allowed or denied access to a resource. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">AWS JSON policy elements: Principal</a>.'
+            - description: 'An IAM principal, such as an IAM user, IAM role, or Amazon Web Services services that is allowed or denied access to a resource. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html">Amazon Web Services JSON policy elements: Principal</a>.'
         action:
           allOf:
             - $ref: '#/components/schemas/OperationList'
@@ -11267,7 +13073,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SlotCaptureSetting'
             - description: Specifies the settings that Amazon Lex uses when a slot value is successfully entered by a user.
-      description: Specifies the elicitation setting details for constituent sub slots of a composite slot.
+      description: Specifies the elicitation setting details eliciting a slot.
     ObfuscationSetting:
       type: object
       required:
@@ -11328,7 +13134,7 @@ components:
         multipleValuesSetting:
           allOf:
             - $ref: '#/components/schemas/MultipleValuesSetting'
-            - description: '<p>Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the en-US locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>. </p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>'
+            - description: '<p>Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the <code>en-US</code> locale. If you set this value to <code>true</code> in any other locale, Amazon Lex throws a <code>ValidationException</code>. </p> <p>If the <code>multipleValuesSetting</code> is not set, the default value is <code>false</code>.</p>'
         subSlotSetting:
           allOf:
             - $ref: '#/components/schemas/SubSlotSetting'
@@ -11347,7 +13153,7 @@ components:
         resolutionStrategy:
           allOf:
             - $ref: '#/components/schemas/SlotValueResolutionStrategy'
-            - description: '<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p>OriginalValue - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p>TopResolution - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the valueSelectionStrategy, the default is OriginalValue. </p>'
+            - description: '<p>Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionStrategy</code>, the default is <code>ORIGINAL_VALUE</code>.</p>'
         regexFilter:
           allOf:
             - $ref: '#/components/schemas/SlotValueRegexFilter'
@@ -11355,7 +13161,7 @@ components:
         advancedRecognitionSetting:
           allOf:
             - $ref: '#/components/schemas/AdvancedRecognitionSetting'
-            - description: Provides settings that enable advanced recognition settings for slot values.
+            - description: Provides settings that enable advanced recognition settings for slot values. You can use this to enable using slot values as a custom vocabulary for recognizing user utterances.
       description: Contains settings used by Amazon Lex to select a slot value.
     ExternalSourceSetting:
       type: object
@@ -11374,7 +13180,7 @@ components:
         slotTypeName:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The name for the slot. A slot type name must be unique within the account.
+            - description: The name for the slot. A slot type name must be unique within the intent.
         description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -11386,7 +13192,7 @@ components:
         valueSelectionSetting:
           allOf:
             - $ref: '#/components/schemas/SlotValueSelectionSetting'
-            - description: '<p>Determines the strategy that Amazon Lex uses to select a value from the list of possible values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>OriginalValue</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TopResolution</code> - If there is a resolution list for the slot, return the first value in the resolution list. If there is no resolution list, return null.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionSetting</code> parameter, the default is <code>OriginalValue</code>.</p>'
+            - description: '<p>Determines the strategy that Amazon Lex uses to select a value from the list of possible values. The field can be set to one of the following values:</p> <ul> <li> <p> <code>ORIGINAL_VALUE</code> - Returns the value entered by the user, if the user value is similar to the slot value.</p> </li> <li> <p> <code>TOP_RESOLUTION</code> - If there is a resolution list for the slot, return the first value in the resolution list. If there is no resolution list, return null.</p> </li> </ul> <p>If you don''t specify the <code>valueSelectionSetting</code> parameter, the default is <code>ORIGINAL_VALUE</code>.</p>'
         parentSlotTypeSignature:
           allOf:
             - $ref: '#/components/schemas/SlotTypeSignature'
@@ -11399,6 +13205,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/CompositeSlotTypeSetting'
             - description: Specifications for a composite slot type.
+    TestSetDiscrepancyReportResourceTarget:
+      type: object
+      properties:
+        botAliasTarget:
+          allOf:
+            - $ref: '#/components/schemas/TestSetDiscrepancyReportBotAliasTarget'
+            - description: Contains information about the bot alias used as the resource for the test set discrepancy report.
+      description: Contains information about the resource used for the test set discrepancy report.
+    CreateTestSetDiscrepancyReportRequest:
+      type: object
+      required:
+        - target
+      title: CreateTestSetDiscrepancyReportRequest
+      properties:
+        target:
+          allOf:
+            - $ref: '#/components/schemas/TestSetDiscrepancyReportResourceTarget'
+            - description: The target bot for the test set discrepancy report.
     CreateUploadUrlRequest:
       type: object
       title: CreateUploadUrlRequest
@@ -11516,6 +13340,10 @@ components:
       type: object
       title: DeleteSlotTypeRequest
       properties: {}
+    DeleteTestSetRequest:
+      type: object
+      title: DeleteTestSetRequest
+      properties: {}
     SessionId:
       type: string
       pattern: '[0-9a-zA-Z._:-]+'
@@ -11610,6 +13438,10 @@ components:
             - description: Parameters for importing a bot locale.
         customVocabularyImportSpecification:
           $ref: '#/components/schemas/CustomVocabularyImportSpecification'
+        testSetImportResourceSpecification:
+          allOf:
+            - $ref: '#/components/schemas/TestSetImportResourceSpecification'
+            - description: Specifications for the test set that is imported.
       description: 'Provides information about the bot or bot locale that you want to import. You can specify the <code>botImportSpecification</code> or the <code>botLocaleImportSpecification</code>, but not both.'
     ImportedResourceId:
       type: string
@@ -11642,6 +13474,118 @@ components:
       type: object
       title: DescribeSlotTypeRequest
       properties: {}
+    DescribeTestExecutionRequest:
+      type: object
+      title: DescribeTestExecutionRequest
+      properties: {}
+    TestExecutionStatus:
+      type: string
+      enum:
+        - Pending
+        - Waiting
+        - InProgress
+        - Completed
+        - Failed
+        - Stopping
+        - Stopped
+    TestExecutionTarget:
+      type: object
+      properties:
+        botAliasTarget:
+          allOf:
+            - $ref: '#/components/schemas/BotAliasTestExecutionTarget'
+            - description: Contains information about the bot alias used for the test execution.
+      description: Contains information about the bot used for the test execution.
+    TestExecutionApiMode:
+      type: string
+      enum:
+        - Streaming
+        - NonStreaming
+    TestExecutionModality:
+      type: string
+      enum:
+        - Text
+        - Audio
+    DescribeTestSetDiscrepancyReportRequest:
+      type: object
+      title: DescribeTestSetDiscrepancyReportRequest
+      properties: {}
+    TestSetDiscrepancyReportStatus:
+      type: string
+      enum:
+        - InProgress
+        - Completed
+        - Failed
+    TestSetDiscrepancyErrors:
+      type: object
+      required:
+        - intentDiscrepancies
+        - slotDiscrepancies
+      properties:
+        intentDiscrepancies:
+          allOf:
+            - $ref: '#/components/schemas/TestSetIntentDiscrepancyList'
+            - description: Contains information about discrepancies found for intents between the test set and the bot.
+        slotDiscrepancies:
+          allOf:
+            - $ref: '#/components/schemas/TestSetSlotDiscrepancyList'
+            - description: Contains information about discrepancies found for slots between the test set and the bot.
+      description: Contains details about the errors in the test set discrepancy report
+    DescribeTestSetGenerationRequest:
+      type: object
+      title: DescribeTestSetGenerationRequest
+      properties: {}
+    TestSetGenerationStatus:
+      type: string
+      enum:
+        - Generating
+        - Ready
+        - Failed
+        - Pending
+    TestSetStorageLocation:
+      type: object
+      required:
+        - s3BucketName
+        - s3Path
+      properties:
+        s3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the Amazon S3 bucket in which the test set is stored.
+        s3Path:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectPath'
+            - description: The path inside the Amazon S3 bucket where the test set is stored.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Amazon Resource Name (ARN) of an Amazon Web Services Key Management Service (KMS) key for encrypting the test set.
+      description: Contains information about the location in which the test set is stored.
+    TestSetGenerationDataSource:
+      type: object
+      properties:
+        conversationLogsDataSource:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLogsDataSource'
+            - description: Contains information about the bot from which the conversation logs are sourced.
+      description: Contains information about the data source from which the test set is generated.
+    DescribeTestSetRequest:
+      type: object
+      title: DescribeTestSetRequest
+      properties: {}
+    TestSetModality:
+      type: string
+      enum:
+        - Text
+        - Audio
+    TestSetStatus:
+      type: string
+      enum:
+        - Importing
+        - PendingAnnotation
+        - Deleting
+        - ValidationError
+        - Ready
     DialogActionType:
       type: string
       enum:
@@ -11671,7 +13615,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: When true the next message for the intent is not used.
-      description: ' Defines the action that the bot executes at runtime when the conversation reaches this step.'
+      description: Defines the action that the bot executes at runtime when the conversation reaches this step.
     PostDialogCodeHookInvocationSpecification:
       type: object
       properties:
@@ -11716,7 +13660,7 @@ components:
         slots:
           allOf:
             - $ref: '#/components/schemas/SlotValueOverrideMap'
-            - description: 'A map of all of the slot value overrides for the intent. The name of the slot maps to the value of the slot. Slots that are not included in the map aren''t overridden.,'
+            - description: A map of all of the slot value overrides for the intent. The name of the slot maps to the value of the slot. Slots that are not included in the map aren't overridden.
       description: Override settings to configure the intent state.
     StringMap:
       type: object
@@ -11731,6 +13675,9 @@ components:
         - INTERNAL_SERVER_FAILURE
     ErrorMessage:
       type: string
+    NonEmptyString:
+      type: string
+      minLength: 1
     ExportFilterName:
       type: string
       enum:
@@ -11839,7 +13786,7 @@ components:
         messageGroups:
           allOf:
             - $ref: '#/components/schemas/MessageGroupsList'
-            - description: One to 5 message groups that contain start messages. Amazon Lex chooses one of the messages to play to the user.
+            - description: 1 - 5 message groups that contain start messages. Amazon Lex chooses one of the messages to play to the user.
         allowInterrupt:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
@@ -11866,12 +13813,16 @@ components:
         messageGroups:
           allOf:
             - $ref: '#/components/schemas/MessageGroupsList'
-            - description: One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.
+            - description: 1 - 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.
         allowInterrupt:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
             - description: Determines whether the user can interrupt an update message while it is playing.
       description: Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.
+    GetTestExecutionArtifactsUrlRequest:
+      type: object
+      title: GetTestExecutionArtifactsUrlRequest
+      properties: {}
     GrammarSlotTypeSource:
       type: object
       required:
@@ -11881,26 +13832,16 @@ components:
         s3BucketName:
           allOf:
             - $ref: '#/components/schemas/S3BucketName'
-            - description: The name of the S3 bucket that contains the grammar source.
+            - description: The name of the Amazon S3 bucket that contains the grammar source.
         s3ObjectKey:
           allOf:
             - $ref: '#/components/schemas/S3ObjectPath'
-            - description: The path to the grammar in the S3 bucket.
+            - description: The path to the grammar in the Amazon S3 bucket.
         kmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/KmsKeyArn'
-            - description: 'The Amazon KMS key required to decrypt the contents of the grammar, if any.'
+            - description: 'The KMS key required to decrypt the contents of the grammar, if any.'
       description: Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.
-    S3BucketName:
-      type: string
-      pattern: '^[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]$'
-      minLength: 3
-      maxLength: 63
-    S3ObjectPath:
-      type: string
-      pattern: '[\.\-\!\*\_\''\(\)a-zA-Z0-9][\.\-\!\*\_\''\(\)\/a-zA-Z0-9]*$'
-      minLength: 1
-      maxLength: 1024
     ImageResponseCard:
       type: object
       required:
@@ -11944,6 +13885,7 @@ components:
         - Bot
         - BotLocale
         - CustomVocabulary
+        - TestSet
     ImportSortBy:
       type: object
       required:
@@ -11999,6 +13941,87 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ImportSummary'
+    RuntimeHints:
+      type: object
+      properties:
+        slotHints:
+          allOf:
+            - $ref: '#/components/schemas/SlotHintsIntentMap'
+            - description: '<p>A list of the slots in the intent that should have runtime hints added, and the phrases that should be added for each slot.</p> <p>The first level of the <code>slotHints</code> map is the name of the intent. The second level is the name of the slot within the intent. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html">Using hints to improve accuracy</a>.</p> <p>The intent name and slot name must exist.</p>'
+      description: '<p>You can provide Amazon Lex with hints to the phrases that a customer is likely to use for a slot. When a slot with hints is resolved, the phrases in the runtime hints are preferred in the resolution. You can provide hints for a maximum of 100 intents. You can provide a maximum of 100 slots.</p> <p>Before you can use runtime hints with an existing bot, you must first rebuild the bot.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html">Using runtime hints to improve recognition of slot values</a>.</p>'
+    InputSessionStateSpecification:
+      type: object
+      properties:
+        sessionAttributes:
+          allOf:
+            - $ref: '#/components/schemas/StringMap'
+            - description: Session attributes for the session state.
+        activeContexts:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextList'
+            - description: Active contexts for the session state.
+        runtimeHints:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeHints'
+            - description: Runtime hints for the session state.
+      description: Specifications for the current state of the dialog between the user and the bot in the test set.
+    IntentClassificationTestResultItemCounts:
+      type: object
+      required:
+        - totalResultCount
+        - intentMatchResultCounts
+      properties:
+        totalResultCount:
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: The total number of results in the intent classification test.
+        speechTranscriptionResultCounts:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatusCountMap'
+            - description: 'The number of matched, mismatched, and execution error results for speech transcription for the intent.'
+        intentMatchResultCounts:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatusCountMap'
+            - description: The number of matched and mismatched results for intent recognition for the intent.
+      description: The number of items in the intent classification test.
+    IntentClassificationTestResultItem:
+      type: object
+      required:
+        - intentName
+        - multiTurnConversation
+        - resultCounts
+      properties:
+        intentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the intent.
+        multiTurnConversation:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the conversation involves multiple turns or not.
+        resultCounts:
+          allOf:
+            - $ref: '#/components/schemas/IntentClassificationTestResultItemCounts'
+            - description: The result of the intent classification test.
+      description: Information for an intent that is classified by the test workbench.
+    TestResultMatchStatusCountMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Count'
+    IntentClassificationTestResultItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IntentClassificationTestResultItem'
+    IntentClassificationTestResults:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/IntentClassificationTestResultItemList'
+            - description: A list of the results for the intent classification test.
+      description: 'Information for the results of the intent classification test. '
     IntentFilterName:
       type: string
       enum:
@@ -12014,6 +14037,44 @@ components:
         $ref: '#/components/schemas/IntentFilter'
       minItems: 1
       maxItems: 1
+    SlotResolutionTestResultItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/SlotResolutionTestResultItem'
+    IntentLevelSlotResolutionTestResultItem:
+      type: object
+      required:
+        - intentName
+        - multiTurnConversation
+        - slotResolutionResults
+      properties:
+        intentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the intent that was recognized.
+        multiTurnConversation:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the conversation involves multiple turns or not.
+        slotResolutionResults:
+          allOf:
+            - $ref: '#/components/schemas/SlotResolutionTestResultItems'
+            - description: The results for the slot resolution in the test execution result.
+      description: Information about intent-level slot resolution in a test result.
+    IntentLevelSlotResolutionTestResultItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IntentLevelSlotResolutionTestResultItem'
+    IntentLevelSlotResolutionTestResults:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/IntentLevelSlotResolutionTestResultItemList'
+            - description: Indicates the items for the slot level resolution for the intents.
+      description: Indicates the success or failure of slots at the intent level.
     SlotValueOverrideMap:
       type: object
       additionalProperties:
@@ -12455,6 +14516,148 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    TestExecutionResultFilterBy:
+      type: object
+      required:
+        - resultTypeFilter
+      properties:
+        resultTypeFilter:
+          allOf:
+            - $ref: '#/components/schemas/TestResultTypeFilter'
+            - description: 'Specifies which results to filter. See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html">Test result details"&gt;Test results details</a> for details about different types of results.'
+        conversationLevelTestResultsFilterBy:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLevelTestResultsFilterBy'
+            - description: Contains information about the method for filtering Conversation level test results.
+      description: Contains information about the method by which to filter the results of the test execution.
+    ListTestExecutionResultItemsRequest:
+      type: object
+      required:
+        - resultFilterBy
+      title: ListTestExecutionResultItemsRequest
+      properties:
+        resultFilterBy:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionResultFilterBy'
+            - description: The filter for the list of results from the test set execution.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of test execution result items to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response from the <code>ListTestExecutionResultItems</code> operation contains more results than specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.'
+    TestExecutionResultItems:
+      type: object
+      properties:
+        overallTestResults:
+          allOf:
+            - $ref: '#/components/schemas/OverallTestResults'
+            - description: 'Overall results for the test execution, including the breakdown of conversations and single-input utterances.'
+        conversationLevelTestResults:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLevelTestResults'
+            - description: 'Results related to conversations in the test set, including metrics about success and failure of conversations and intent and slot failures.'
+        intentClassificationTestResults:
+          allOf:
+            - $ref: '#/components/schemas/IntentClassificationTestResults'
+            - description: 'Intent recognition results aggregated by intent name. The aggregated results contain success and failure rates of intent recognition, speech transcriptions, and end-to-end conversations.'
+        intentLevelSlotResolutionTestResults:
+          allOf:
+            - $ref: '#/components/schemas/IntentLevelSlotResolutionTestResults'
+            - description: 'Slot resolution results aggregated by intent and slot name. The aggregated results contain success and failure rates of slot resolution, speech transcriptions, and end-to-end conversations'
+        utteranceLevelTestResults:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceLevelTestResults'
+            - description: Results related to utterances in the test set.
+      description: 'Contains the results of the test execution, grouped by type of results. See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html">Test result details"&gt;Test results details</a> for details about different types of results.'
+    TestExecutionSortBy:
+      type: object
+      required:
+        - attribute
+        - order
+      properties:
+        attribute:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionSortAttribute'
+            - description: Specifies whether to sort the test set executions by the date and time at which the test sets were created.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: Specifies whether to sort in ascending or descending order.
+      description: Contains information about the method by which to sort the instances of test executions you have carried out.
+    ListTestExecutionsRequest:
+      type: object
+      title: ListTestExecutionsRequest
+      properties:
+        sortBy:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionSortBy'
+            - description: The sort order of the test set executions.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of test executions to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response from the ListTestExecutions operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.'
+    TestExecutionSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TestExecutionSummary'
+    ListTestSetRecordsRequest:
+      type: object
+      title: ListTestSetRecordsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of test set records to return in each page. If there are fewer records than the max page size, only the actual number of records are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response from the ListTestSetRecords operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.'
+    TestSetTurnRecordList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TestSetTurnRecord'
+    TestSetSortBy:
+      type: object
+      required:
+        - attribute
+        - order
+      properties:
+        attribute:
+          allOf:
+            - $ref: '#/components/schemas/TestSetSortAttribute'
+            - description: Specifies whether to sort the test sets by name or by the time they were last updated.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: Specifies whether to sort in ascending or descending order.
+      description: Contains information about the methods by which to sort the test set.
+    ListTestSetsRequest:
+      type: object
+      title: ListTestSetsRequest
+      properties:
+        sortBy:
+          allOf:
+            - $ref: '#/components/schemas/TestSetSortBy'
+            - description: The sort order for the list of test sets.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of test sets to return in each page. If there are fewer results than the max page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response from the ListTestSets operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.'
+    TestSetSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TestSetSummary'
     PlainTextMessage:
       type: object
       required:
@@ -12494,7 +14697,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageResponseCard'
             - description: A message that defines a response card that the client application can show to the user.
-      description: The object that provides message text and it's type.
+      description: The object that provides message text and its type.
     MessageVariationsList:
       type: array
       items:
@@ -12524,9 +14727,6 @@ components:
       type: integer
       minimum: 0
       maximum: 10000000
-    NonEmptyString:
-      type: string
-      minLength: 1
     ObjectPrefix:
       type: string
       pattern: '^[\/]\?\+[a-zA-Z0-9!_.*''\(\)-]\+\(\/[a-zA-Z0-9!_.*''\(\)-]\+\)*$'
@@ -12537,6 +14737,44 @@ components:
         $ref: '#/components/schemas/ObjectPrefix'
       minItems: 1
       maxItems: 2
+    OverallTestResultItem:
+      type: object
+      required:
+        - multiTurnConversation
+        - totalResultCount
+        - endToEndResultCounts
+      properties:
+        multiTurnConversation:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the conversation contains multiple turns or not.
+        totalResultCount:
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: The total number of overall results in the result of the test execution.
+        speechTranscriptionResultCounts:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatusCountMap'
+            - description: The number of speech transcription results in the overall test.
+        endToEndResultCounts:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatusCountMap'
+            - description: The number of results that succeeded.
+      description: Information about the overall results for a test execution result.
+    OverallTestResultItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OverallTestResultItem'
+    OverallTestResults:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/OverallTestResultItemList'
+            - description: A list of the overall test results.
+      description: Information about the overall test results.
     ParentBotNetwork:
       type: object
       required:
@@ -12648,6 +14886,10 @@ components:
             - $ref: '#/components/schemas/SampleUtterancesCount'
             - description: The count of sample utterances of a recommended intent that is associated with a bot recommendation.
       description: An object that contains a summary of a recommended intent.
+    RecordNumber:
+      type: integer
+      minimum: 1
+      maximum: 200000
     RegexPattern:
       type: string
       minLength: 1
@@ -12662,6 +14904,46 @@ components:
       type: integer
       minimum: 1
       maximum: 24
+    RuntimeHintValuesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RuntimeHintValue'
+      minItems: 1
+      maxItems: 100
+    SlotHintsSlotMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/RuntimeHintDetails'
+    RuntimeHintDetails:
+      type: object
+      properties:
+        runtimeHintValues:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeHintValuesList'
+            - description: One or more strings that Amazon Lex should look for in the input to the bot. Each phrase is given preference when deciding on slot values.
+        subSlotHints:
+          allOf:
+            - $ref: '#/components/schemas/SlotHintsSlotMap'
+            - description: 'A map of constituent sub slot names inside a composite slot in the intent and the phrases that should be added for each sub slot. Inside each composite slot hints, this structure provides a mechanism to add granular sub slot phrases. Only sub slot hints are supported for composite slots. The intent name, composite slot name and the constituent sub slot names must exist.'
+      description: Provides an array of phrases that should be given preference when resolving values for a slot.
+    RuntimeHintPhrase:
+      type: string
+      minLength: 1
+      maxLength: 140
+    RuntimeHintValue:
+      type: object
+      required:
+        - phrase
+      properties:
+        phrase:
+          allOf:
+            - $ref: '#/components/schemas/RuntimeHintPhrase'
+            - description: The phrase that Amazon Lex should look for in the user's input to the bot.
+      description: Provides the phrase that Amazon Lex should look for in the user's input to the bot.
+    SlotHintsIntentMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/SlotHintsSlotMap'
     S3BucketArn:
       type: string
       pattern: '^arn:[\w\-]+:s3:::[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9]$'
@@ -12753,6 +15035,40 @@ components:
       enum:
         - CO
         - EQ
+    SlotResolutionTestResultItemCounts:
+      type: object
+      required:
+        - totalResultCount
+        - slotMatchResultCounts
+      properties:
+        totalResultCount:
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: The total number of results.
+        speechTranscriptionResultCounts:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatusCountMap'
+            - description: 'The number of matched, mismatched and execution error results for speech transcription for the slot.'
+        slotMatchResultCounts:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatusCountMap'
+            - description: The number of matched and mismatched results for slot resolution for the slot.
+      description: Information about the counts for a slot resolution in the results of a test execution.
+    SlotResolutionTestResultItem:
+      type: object
+      required:
+        - slotName
+        - resultCounts
+      properties:
+        slotName:
+          allOf:
+            - $ref: '#/components/schemas/TestResultSlotName'
+            - description: The name of the slot.
+        resultCounts:
+          allOf:
+            - $ref: '#/components/schemas/SlotResolutionTestResultItemCounts'
+            - description: A result for slot resolution in the results of a test execution.
+      description: Information about the success and failure rate of slot resolution in the results of a test execution.
     SlotShape:
       type: string
       enum:
@@ -12833,7 +15149,7 @@ components:
         slotTypeCategory:
           allOf:
             - $ref: '#/components/schemas/SlotTypeCategory'
-            - description: '<p>Indicates the type of the slot type.</p> <ul> <li> <p> <code>Custom</code> - A slot type that you created using custom values. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html">Creating custom slot types</a>.</p> </li> <li> <p> <code>Extended</code> - A slot type created by extending the AMAZON.AlphaNumeric built-in slot type. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html">AMAZON.AlphaNumeric</a>.</p> </li> <li> <p> <code>ExternalGrammar</code> - A slot type using a custom GRXML grammar to define values. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html">Using a custom grammar slot type</a>.</p> </li> </ul>'
+            - description: '<p>Indicates the type of the slot type.</p> <ul> <li> <p> <code>Custom</code> - A slot type that you created using custom values. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html">Creating custom slot types</a>.</p> </li> <li> <p> <code>Extended</code> - A slot type created by extending the <code>AMAZON.AlphaNumeric</code> built-in slot type. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html"> <code>AMAZON.AlphaNumeric</code> </a>.</p> </li> <li> <p> <code>ExternalGrammar</code> - A slot type using a custom GRXML grammar to define values. For more information, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html">Using a custom grammar slot type</a>.</p> </li> </ul>'
       description: Provides summary information about a slot type.
     SynonymList:
       type: array
@@ -12934,6 +15250,58 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImportExportFilePassword'
             - description: The password used to encrypt the zip archive that contains the resource definition. You should always encrypt the zip archive to protect it during transit between your site and Amazon Lex.
+    StartTestExecutionRequest:
+      type: object
+      required:
+        - target
+        - apiMode
+      title: StartTestExecutionRequest
+      properties:
+        target:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionTarget'
+            - description: The target bot for the test set execution.
+        apiMode:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionApiMode'
+            - description: 'Indicates whether we use streaming or non-streaming APIs for the test set execution. For streaming, StartConversation Runtime API is used. Whereas, for non-streaming, RecognizeUtterance and RecognizeText Amazon Lex Runtime API are used.'
+        testExecutionModality:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionModality'
+            - description: Indicates whether audio or text is used.
+    StartTestSetGenerationRequest:
+      type: object
+      required:
+        - testSetName
+        - storageLocation
+        - generationDataSource
+        - roleArn
+      title: StartTestSetGenerationRequest
+      properties:
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The test set name for the test set generation request.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The test set description for the test set generation request.
+        storageLocation:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStorageLocation'
+            - description: The Amazon S3 storage location for the test set generation.
+        generationDataSource:
+          allOf:
+            - $ref: '#/components/schemas/TestSetGenerationDataSource'
+            - description: The data source for the test set generation.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The roleARN used for any operation in the test set to access resources in the Amazon Web Services account.
+        testSetTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'A list of tags to add to the test set. You can only add tags when you import/generate a new test set. You can''t use the <code>UpdateTestSet</code> operation to update tags. To update tags, use the <code>TagResource</code> operation.'
     StillWaitingResponseFrequency:
       type: integer
       minimum: 1
@@ -13003,6 +15371,254 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'A list of tag keys to add to the resource. If a tag key already exists, the existing value is replaced with the new value.'
+    UtteranceLevelTestResults:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceLevelTestResultItemList'
+            - description: Contains information about an utterance in the results of the test set execution.
+      description: Contains information about the utterances in the results of the test set execution.
+    TestExecutionSummary:
+      type: object
+      properties:
+        testExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test execution.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time at which the test execution was created.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time at which the test execution was last updated.
+        testExecutionStatus:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionStatus'
+            - description: The current status of the test execution.
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test set used in the test execution.
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the test set used in the test execution.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionTarget'
+            - description: Contains information about the bot used for the test execution..
+        apiMode:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionApiMode'
+            - description: Specifies whether the API mode for the test execution is streaming or non-streaming.
+        testExecutionModality:
+          allOf:
+            - $ref: '#/components/schemas/TestExecutionModality'
+            - description: Specifies whether the data used for the test execution is written or spoken.
+      description: Summarizes metadata about the test execution.
+    TestSetIntentDiscrepancyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TestSetIntentDiscrepancyItem'
+    TestSetSlotDiscrepancyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TestSetSlotDiscrepancyItem'
+    TestSetImportInputLocation:
+      type: object
+      required:
+        - s3BucketName
+        - s3Path
+      properties:
+        s3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketName'
+            - description: The name of the Amazon S3 bucket.
+        s3Path:
+          allOf:
+            - $ref: '#/components/schemas/S3ObjectPath'
+            - description: The path inside the Amazon S3 bucket pointing to the test-set CSV file.
+      description: Contains information about the Amazon S3 location from which the test set is imported.
+    TestSetIntentDiscrepancyItem:
+      type: object
+      required:
+        - intentName
+        - errorMessage
+      properties:
+        intentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the intent in the discrepancy report.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message for a discrepancy for an intent between the test set and the bot.
+      description: Contains information about discrepancy in an intent information between the test set and the bot.
+    TestSetSlotDiscrepancyItem:
+      type: object
+      required:
+        - intentName
+        - slotName
+        - errorMessage
+      properties:
+        intentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the intent associated with the slot in the discrepancy report.
+        slotName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the slot in the discrepancy report.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message for a discrepancy for an intent between the test set and the bot.
+      description: Contains information about discrepancy in a slot information between the test set and the bot.
+    TestSetSummary:
+      type: object
+      properties:
+        testSetId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the test set.
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the test set.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the test set.
+        modality:
+          allOf:
+            - $ref: '#/components/schemas/TestSetModality'
+            - description: Specifies whether the test set contains written or spoken data.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStatus'
+            - description: The status of the test set.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that has permission to access the test set.
+        numTurns:
+          allOf:
+            - $ref: '#/components/schemas/Count'
+            - description: The number of turns in the test set.
+        storageLocation:
+          allOf:
+            - $ref: '#/components/schemas/TestSetStorageLocation'
+            - description: Contains information about the location at which the test set is stored.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time at which the test set was created.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time at which the test set was last updated.
+      description: Contains summary information about the test set.
+    TurnNumber:
+      type: integer
+      minimum: 0
+      maximum: 30
+    TurnSpecification:
+      type: object
+      properties:
+        agentTurn:
+          allOf:
+            - $ref: '#/components/schemas/AgentTurnSpecification'
+            - description: Contains information about the agent messages in the turn.
+        userTurn:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnSpecification'
+            - description: Contains information about the user messages in the turn.
+      description: Contains information about the messages in the turn.
+    TestSetTurnRecord:
+      type: object
+      required:
+        - recordNumber
+        - turnSpecification
+      properties:
+        recordNumber:
+          allOf:
+            - $ref: '#/components/schemas/RecordNumber'
+            - description: The record number associated with the turn.
+        conversationId:
+          allOf:
+            - $ref: '#/components/schemas/TestSetConversationId'
+            - description: The unique identifier for the conversation associated with the turn.
+        turnNumber:
+          allOf:
+            - $ref: '#/components/schemas/TurnNumber'
+            - description: The number of turns that has elapsed up to that turn.
+        turnSpecification:
+          allOf:
+            - $ref: '#/components/schemas/TurnSpecification'
+            - description: Contains information about the agent or user turn depending upon type of turn.
+      description: Contains information about a turn in a test set.
+    UserTurnResult:
+      type: object
+      required:
+        - input
+        - expectedOutput
+      properties:
+        input:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnInputSpecification'
+            - description: Contains information about the user messages in the turn in the input.
+        expectedOutput:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnOutputSpecification'
+            - description: Contains information about the expected output for the user turn.
+        actualOutput:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnOutputSpecification'
+            - description: Contains information about the actual output for the user turn.
+        errorDetails:
+          $ref: '#/components/schemas/ExecutionErrorDetails'
+        endToEndResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: 'Specifies whether the expected and actual outputs match or not, or if there is an error in execution.'
+        intentMatchResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: Specifies whether the expected and actual intents match or not.
+        slotMatchResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: Specifies whether the expected and actual slots match or not.
+        speechTranscriptionResult:
+          allOf:
+            - $ref: '#/components/schemas/TestResultMatchStatus'
+            - description: 'Specifies whether the expected and actual speech transcriptions match or not, or if there is an error in execution.'
+        conversationLevelResult:
+          allOf:
+            - $ref: '#/components/schemas/ConversationLevelResultDetail'
+            - description: Contains information about the results related to the conversation associated with the user turn.
+      description: Contains the results for the user turn by the test execution.
+    TestSetTurnResult:
+      type: object
+      properties:
+        agent:
+          allOf:
+            - $ref: '#/components/schemas/AgentTurnResult'
+            - description: Contains information about the agent messages in the turn.
+        user:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnResult'
+            - description: Contains information about the user messages in the turn.
+      description: Contains information about the results of the analysis of a turn in the test set.
+    TestSetUtteranceText:
+      type: string
+      minLength: 1
+      maxLength: 1024
     TextLogDestination:
       type: object
       required:
@@ -13026,6 +15642,21 @@ components:
         destination:
           $ref: '#/components/schemas/TextLogDestination'
       description: Defines settings to enable text conversation logs.
+    UserTurnSpecification:
+      type: object
+      required:
+        - input
+        - expected
+      properties:
+        input:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnInputSpecification'
+            - description: Contains information about the user messages in the turn in the input.
+        expected:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnOutputSpecification'
+            - description: Contains results about the expected output for the user turn.
+      description: Contains information about the expected and input values for the user turn.
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest
@@ -13188,7 +15819,7 @@ components:
         initialResponseSetting:
           allOf:
             - $ref: '#/components/schemas/InitialResponseSetting'
-            - description: <p/>
+            - description: Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.
     UpdateResourcePolicyRequest:
       type: object
       required:
@@ -13266,5 +15897,138 @@ components:
           allOf:
             - $ref: '#/components/schemas/CompositeSlotTypeSetting'
             - description: Specifications for a composite slot type.
+    UpdateTestSetRequest:
+      type: object
+      required:
+        - testSetName
+      title: UpdateTestSetRequest
+      properties:
+        testSetName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The new test set name.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The new test set description.
+    UtteranceInputSpecification:
+      type: object
+      properties:
+        textInput:
+          allOf:
+            - $ref: '#/components/schemas/TestSetUtteranceText'
+            - description: A text input transcription of the utterance. It is only applicable for test-sets containing text data.
+        audioInput:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceAudioInputSpecification'
+            - description: Contains information about the audio input for an utterance.
+      description: Contains information about input of an utterance.
+    UserTurnInputSpecification:
+      type: object
+      required:
+        - utteranceInput
+      properties:
+        utteranceInput:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceInputSpecification'
+            - description: The utterance input in the user turn.
+        requestAttributes:
+          allOf:
+            - $ref: '#/components/schemas/StringMap'
+            - description: Request attributes of the user turn.
+        sessionState:
+          allOf:
+            - $ref: '#/components/schemas/InputSessionStateSpecification'
+            - description: Contains information about the session state in the input.
+      description: Contains information about the user messages in the turn in the input.
+    UserTurnSlotOutputMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/UserTurnSlotOutput'
+    UserTurnIntentOutput:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the intent.
+        slots:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnSlotOutputMap'
+            - description: The slots associated with the intent.
+      description: Contains information about the intent that is output for the turn by the test execution.
+    UserTurnOutputSpecification:
+      type: object
+      required:
+        - intent
+      properties:
+        intent:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnIntentOutput'
+            - description: Contains information about the intent.
+        activeContexts:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextList'
+            - description: The contexts that are active in the turn.
+        transcript:
+          allOf:
+            - $ref: '#/components/schemas/TestSetUtteranceText'
+            - description: The transcript that is output for the user turn by the test execution.
+      description: Contains results that are output for the user turn by the test execution.
+    UserTurnSlotOutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserTurnSlotOutput'
+    UserTurnSlotOutput:
+      type: object
+      properties:
+        value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The value output by the slot recognition.
+        values:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnSlotOutputList'
+            - description: Values that are output by the slot recognition.
+        subSlots:
+          allOf:
+            - $ref: '#/components/schemas/UserTurnSlotOutputMap'
+            - description: A list of items mapping the name of the subslots to information about those subslots.
+      description: Contains information about a slot output by the test set execution.
+    UtteranceAudioInputSpecification:
+      type: object
+      required:
+        - audioFileS3Location
+      properties:
+        audioFileS3Location:
+          allOf:
+            - $ref: '#/components/schemas/AudioFileS3Location'
+            - description: Amazon S3 file pointing to the audio.
+      description: Contains information about the audio for an utterance.
+    UtteranceLevelTestResultItem:
+      type: object
+      required:
+        - recordNumber
+        - turnResult
+      properties:
+        recordNumber:
+          allOf:
+            - $ref: '#/components/schemas/RecordNumber'
+            - description: The record number of the result.
+        conversationId:
+          allOf:
+            - $ref: '#/components/schemas/TestSetConversationId'
+            - description: The unique identifier for the conversation associated with the result.
+        turnResult:
+          allOf:
+            - $ref: '#/components/schemas/TestSetTurnResult'
+            - description: Contains information about the turn associated with the result.
+      description: Contains information about multiple utterances in the results of a test set execution.
+    UtteranceLevelTestResultItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UtteranceLevelTestResultItem'
 security:
   - hmac: []

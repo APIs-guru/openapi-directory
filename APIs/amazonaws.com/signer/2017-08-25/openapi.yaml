@@ -3,7 +3,7 @@ info:
   version: '2017-08-25'
   x-release: v4
   title: AWS Signer
-  description: '<p>AWS Signer is a fully managed code signing service to help you ensure the trust and integrity of your code. </p> <p>AWS Signer supports the following applications:</p> <p>With <i>code signing for AWS Lambda</i>, you can sign AWS Lambda deployment packages. Integrated support is provided for Amazon S3, Amazon CloudWatch, and AWS CloudTrail. In order to sign code, you create a signing profile and then use Signer to sign Lambda zip files in S3. </p> <p>With <i>code signing for IoT</i>, you can sign code for any IoT device that is supported by AWS. IoT code signing is available for <a href="http://docs.aws.amazon.com/freertos/latest/userguide/">Amazon FreeRTOS</a> and <a href="http://docs.aws.amazon.com/iot/latest/developerguide/">AWS IoT Device Management</a>, and is integrated with <a href="http://docs.aws.amazon.com/acm/latest/userguide/">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code signing certificate using ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device Management. </p> <p>For more information about AWS Signer, see the <a href="http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">AWS Signer Developer Guide</a>.</p> <p/>'
+  description: '<p>AWS Signer is a fully managed code signing service to help you ensure the trust and integrity of your code. </p> <p>AWS Signer supports the following applications:</p> <p>With code signing for AWS Lambda, you can sign <a href="http://docs.aws.amazon.com/lambda/latest/dg/">AWS Lambda</a> deployment packages. Integrated support is provided for <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/">Amazon S3</a>, <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/">Amazon CloudWatch</a>, and <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/">AWS CloudTrail</a>. In order to sign code, you create a signing profile and then use Signer to sign Lambda zip files in S3. </p> <p>With code signing for IoT, you can sign code for any IoT device that is supported by AWS. IoT code signing is available for <a href="http://docs.aws.amazon.com/freertos/latest/userguide/">Amazon FreeRTOS</a> and <a href="http://docs.aws.amazon.com/iot/latest/developerguide/">AWS IoT Device Management</a>, and is integrated with <a href="http://docs.aws.amazon.com/acm/latest/userguide/">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code signing certificate using ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device Management. </p> <p>With code signing for containers …(TBD)</p> <p>For more information about AWS Signer, see the <a href="https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">AWS Signer Developer Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -375,7 +375,7 @@ paths:
             maxLength: 12
     put:
       operationId: PutSigningProfile
-      description: 'Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see <a href="http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a> '
+      description: 'Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. '
       responses:
         '200':
           description: Success
@@ -521,6 +521,87 @@ paths:
           description: The ID of the signing job on input.
           schema:
             type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /revocations#signatureTimestamp&platformId&profileVersionArn&jobArn&certificateHashes:
+    get:
+      operationId: GetRevocationStatus
+      description: 'Retrieves the revocation status of one or more of the signing profile, signing job, and signing certificate.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRevocationStatusResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: signatureTimestamp
+          in: query
+          required: true
+          description: The timestamp of the signature that validates the profile or job.
+          schema:
+            type: string
+            format: date-time
+        - name: platformId
+          in: query
+          required: true
+          description: 'The ID of a signing platform. '
+          schema:
+            type: string
+        - name: profileVersionArn
+          in: query
+          required: true
+          description: The version of a signing profile.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+        - name: jobArn
+          in: query
+          required: true
+          description: The ARN of a signing job.
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+        - name: certificateHashes
+          in: query
+          required: true
+          description: <p>A list of composite signed hashes that identify certificates.</p> <p>A certificate identifier consists of a subject certificate TBS hash (signed by the parent CA) combined with a parent CA TBS hash (signed by the parent CA’s CA). Root certificates are defined as their own CA.</p>
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -690,7 +771,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: StartSigningJob
-      description: '<p>Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the <code>ListSigningJobs</code> operation for two years after they are performed. Note the following requirements: </p> <ul> <li> <p> You must create an Amazon S3 source bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">Create a Bucket</a> in the <i>Amazon S3 Getting Started Guide</i>. </p> </li> <li> <p>Your S3 source bucket must be version enabled.</p> </li> <li> <p>You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.</p> </li> <li> <p>You specify the name of the source and destination buckets when calling the <code>StartSigningJob</code> operation.</p> </li> <li> <p>You must also specify a request token that identifies your request to code signing.</p> </li> </ul> <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call <code>StartSigningJob</code>.</p> <p>For a Java example that shows how to use this action, see <a href="http://docs.aws.amazon.com/acm/latest/userguide/">http://docs.aws.amazon.com/acm/latest/userguide/</a> </p>'
+      description: '<p>Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the <code>ListSigningJobs</code> operation for two years after they are performed. Note the following requirements: </p> <ul> <li> <p> You must create an Amazon S3 source bucket. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html">Creating a Bucket</a> in the <i>Amazon S3 Getting Started Guide</i>. </p> </li> <li> <p>Your S3 source bucket must be version enabled.</p> </li> <li> <p>You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.</p> </li> <li> <p>You specify the name of the source and destination buckets when calling the <code>StartSigningJob</code> operation.</p> </li> <li> <p>You must also specify a request token that identifies your request to code signing.</p> </li> </ul> <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call <code>StartSigningJob</code>.</p> <p>For a Java example that shows how to use this action, see <a href="https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html">StartSigningJob</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1263,6 +1344,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /signing-jobs/with-payload:
+    post:
+      operationId: SignPayload
+      description: Signs a binary payload and returns a signature envelope.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignPayloadResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - profileName
+                - payload
+                - payloadFormat
+              properties:
+                profileName:
+                  description: The name of the signing profile.
+                  type: string
+                  pattern: '^[a-zA-Z0-9_]{2,}'
+                  minLength: 2
+                  maxLength: 64
+                profileOwner:
+                  description: The AWS account ID of the profile owner.
+                  type: string
+                  pattern: '^[0-9]{12}$'
+                  minLength: 12
+                  maxLength: 12
+                payload:
+                  description: Specifies the object digest (hash) to sign.
+                  type: string
+                  minLength: 1
+                  maxLength: 4096
+                payloadFormat:
+                  description: Payload content type
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
@@ -1468,6 +1630,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountId'
             - description: The IAM entity that initiated the signing job.
+    GetRevocationStatusResponse:
+      type: object
+      properties:
+        revokedEntities:
+          allOf:
+            - $ref: '#/components/schemas/RevokedEntities'
+            - description: 'A list of revoked entities (including one or more of the signing profile ARN, signing job ID, and certificate hash) supplied as input to the API.'
+    String:
+      type: string
     GetSigningPlatformResponse:
       type: object
       properties:
@@ -1684,6 +1855,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: An identifier for the current revision of the profile permissions.
+    SignPayloadResponse:
+      type: object
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: Unique identifier of the signing job.
+        jobOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the job owner.
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/Metadata'
+            - description: 'Information including the signing profile ARN and the signing job ID. Clients use metadata to signature records, for example, as annotations added to the signature manifest inside an OCI registry.'
+        signature:
+          allOf:
+            - $ref: '#/components/schemas/Blob'
+            - description: A cryptographic signature.
     StartSigningJobResponse:
       type: object
       properties:
@@ -1754,8 +1944,6 @@ components:
       pattern: '^[a-zA-Z0-9]{10}$'
       minLength: 10
       maxLength: 10
-    String:
-      type: string
     AddProfilePermissionRequest:
       type: object
       required:
@@ -1788,6 +1976,8 @@ components:
       type: string
       minLength: 20
       maxLength: 2048
+    Blob:
+      type: string
     BucketName:
       type: string
     CancelSigningProfileRequest:
@@ -1798,6 +1988,10 @@ components:
       type: string
       enum:
         - AWSIoT
+    CertificateHashes:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     ClientRequestToken:
       type: string
     JobId:
@@ -1913,6 +2107,14 @@ components:
             - $ref: '#/components/schemas/EncryptionAlgorithm'
             - description: The default encryption algorithm that is used by a code signing job.
       description: The encryption algorithm options that are available to a code signing job.
+    GetRevocationStatusRequest:
+      type: object
+      title: GetRevocationStatusRequest
+      properties: {}
+    RevokedEntities:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     GetSigningPlatformRequest:
       type: object
       title: GetSigningPlatformRequest
@@ -2069,6 +2271,14 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    Metadata:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
+    Payload:
+      type: string
+      minLength: 1
+      maxLength: 4096
     Permission:
       type: object
       properties:
@@ -2177,6 +2387,30 @@ components:
       description: The S3 bucket name and key where code signing saved your signed code image.
     Version:
       type: string
+    SignPayloadRequest:
+      type: object
+      required:
+        - profileName
+        - payload
+        - payloadFormat
+      title: SignPayloadRequest
+      properties:
+        profileName:
+          allOf:
+            - $ref: '#/components/schemas/ProfileName'
+            - description: The name of the signing profile.
+        profileOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the profile owner.
+        payload:
+          allOf:
+            - $ref: '#/components/schemas/Payload'
+            - description: Specifies the object digest (hash) to sign.
+        payloadFormat:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Payload content type
     SigningJob:
       type: object
       properties:
@@ -2245,7 +2479,7 @@ components:
         platformId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The ID of a code signing; platform.
+            - description: The ID of a code signing platform.
         displayName:
           allOf:
             - $ref: '#/components/schemas/String'

@@ -856,6 +856,213 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  '/domains/{DomainName}/event-streams/{EventStreamName}':
+    post:
+      operationId: CreateEventStream
+      description: '<p>Creates an event stream, which is a subscription to real-time events, such as when profiles are created and updated through Amazon Connect Customer Profiles.</p> <p>Each event stream can be associated with only one Kinesis Data Stream destination in the same region and Amazon Web Services account as the customer profiles domain</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEventStreamResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: EventStreamName
+          in: path
+          required: true
+          description: The name of the event stream.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Uri
+              properties:
+                Uri:
+                  description: 'The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name'
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                Tags:
+                  description: 'The tags used to organize, track, or control access for this resource.'
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteEventStream
+      description: Disables and deletes the specified event stream.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEventStreamResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: EventStreamName
+          in: path
+          required: true
+          description: The name of the event stream
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+    get:
+      operationId: GetEventStream
+      description: Returns information about the specified event stream in a specific domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEventStreamResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: EventStreamName
+          in: path
+          required: true
+          description: The name of the event stream provided during create operations.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
   '/domains/{DomainName}/workflows/integrations':
     post:
       operationId: CreateIntegrationWorkflow
@@ -3335,6 +3542,93 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/domains/{DomainName}/event-streams':
+    get:
+      operationId: ListEventStreams
+      description: Returns a list of all the event streams in a specific domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEventStreamsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+        - name: next-token
+          in: query
+          required: false
+          description: Identifies the next page of results to return.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of objects returned per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/domains/{DomainName}/identity-resolution-jobs':
     get:
       operationId: ListIdentityResolutionJobs
@@ -4502,6 +4796,19 @@ components:
             - $ref: '#/components/schemas/S3ExportingConfig'
             - description: The S3 location where Identity Resolution Jobs write result files.
       description: '<p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p> <note> <p>You need to give Customer Profiles service principal write permission to your S3 bucket. Otherwise, you''ll get an exception in the API response. For an example policy, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service">Amazon Connect Customer Profiles cross-service confused deputy prevention</a>. </p> </note>'
+    CreateEventStreamResponse:
+      type: object
+      required:
+        - EventStreamArn
+      properties:
+        EventStreamArn:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: A unique identifier for the event stream.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
     CreateIntegrationWorkflowResponse:
       type: object
       required:
@@ -4549,6 +4856,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/message'
             - description: A message that indicates the delete request is done.
+    DeleteEventStreamResponse:
+      type: object
+      properties: {}
     DeleteIntegrationResponse:
       type: object
       required:
@@ -4720,6 +5030,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/timestamp'
             - description: The timestamp of when the domain was most recently edited.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+    GetEventStreamResponse:
+      type: object
+      required:
+        - DomainName
+        - EventStreamArn
+        - CreatedAt
+        - State
+        - DestinationDetails
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: The unique name of the domain.
+        EventStreamArn:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: A unique identifier for the event stream.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp of when the export was created.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EventStreamState'
+            - description: The operational state of destination stream for export.
+        StoppedSince:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp when the <code>State</code> changed to <code>STOPPED</code>.
+        DestinationDetails:
+          allOf:
+            - $ref: '#/components/schemas/EventStreamDestinationDetails'
+            - description: Details regarding the Kinesis stream.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -5017,6 +5364,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/token'
             - description: The pagination token from the previous ListDomains API call.
+    ListEventStreamsResponse:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/EventStreamSummaryList'
+            - description: Contains summary information about an EventStream.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: Identifies the next page of results to return.
     ListIdentityResolutionJobsResponse:
       type: object
       properties:
@@ -6065,6 +6423,20 @@ components:
             - $ref: '#/components/schemas/ExportingConfig'
             - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
       description: The flag that enables the matching process of duplicate profiles.
+    CreateEventStreamRequest:
+      type: object
+      required:
+        - Uri
+      title: CreateEventStreamRequest
+      properties:
+        Uri:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: 'The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
     WorkflowType:
       type: string
       enum:
@@ -6246,6 +6618,10 @@ components:
       properties: {}
     message:
       type: string
+    DeleteEventStreamRequest:
+      type: object
+      title: DeleteEventStreamRequest
+      properties: {}
     DeleteIntegrationRequest:
       type: object
       required:
@@ -6318,6 +6694,30 @@ components:
       type: string
       pattern: .*
       maxLength: 256
+    EventStreamDestinationStatus:
+      type: string
+      enum:
+        - HEALTHY
+        - UNHEALTHY
+    DestinationSummary:
+      type: object
+      required:
+        - Uri
+        - Status
+      properties:
+        Uri:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: 'The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name.'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/EventStreamDestinationStatus'
+            - description: The status of enabling the Kinesis stream as a destination for export.
+        UnhealthySince:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp when the status last changed to <code>UNHEALHY</code>.
+      description: Summary information about the Kinesis data stream
     ListDomainItem:
       type: object
       required:
@@ -6369,6 +6769,75 @@ components:
     Double:
       type: number
       format: double
+    EventStreamDestinationDetails:
+      type: object
+      required:
+        - Uri
+        - Status
+      properties:
+        Uri:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: 'The StreamARN of the destination to deliver profile events to. For example, arn:aws:kinesis:region:account-id:stream/stream-name.'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/EventStreamDestinationStatus'
+            - description: The status of enabling the Kinesis stream as a destination for export.
+        UnhealthySince:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp when the status last changed to <code>UNHEALHY</code>.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/string1To1000'
+            - description: The human-readable string that corresponds to the error or success while enabling the streaming destination.
+      description: Details of the destination being used for the EventStream.
+    EventStreamState:
+      type: string
+      enum:
+        - RUNNING
+        - STOPPED
+    EventStreamSummary:
+      type: object
+      required:
+        - DomainName
+        - EventStreamName
+        - EventStreamArn
+        - State
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: The unique name of the domain.
+        EventStreamName:
+          allOf:
+            - $ref: '#/components/schemas/name'
+            - description: The name of the event stream.
+        EventStreamArn:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: A unique identifier for the event stream.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/EventStreamState'
+            - description: The operational state of destination stream for export.
+        StoppedSince:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The timestamp when the <code>State</code> changed to <code>STOPPED</code>.
+        DestinationSummary:
+          allOf:
+            - $ref: '#/components/schemas/DestinationSummary'
+            - description: Summary information about the Kinesis data stream.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+      description: An instance of EventStream in a list of EventStreams.
+    EventStreamSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventStreamSummary'
     S3ExportingConfig:
       type: object
       required:
@@ -6549,6 +7018,10 @@ components:
     GetDomainRequest:
       type: object
       title: GetDomainRequest
+      properties: {}
+    GetEventStreamRequest:
+      type: object
+      title: GetEventStreamRequest
       properties: {}
     GetIdentityResolutionJobRequest:
       type: object
@@ -6792,6 +7265,10 @@ components:
     ListDomainsRequest:
       type: object
       title: ListDomainsRequest
+      properties: {}
+    ListEventStreamsRequest:
+      type: object
+      title: ListEventStreamsRequest
       properties: {}
     ListIdentityResolutionJobsRequest:
       type: object

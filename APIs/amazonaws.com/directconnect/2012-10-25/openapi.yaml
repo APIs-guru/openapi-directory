@@ -3025,7 +3025,7 @@ paths:
   /#X-Amz-Target=OvertureService.UpdateVirtualInterfaceAttributes:
     post:
       operationId: UpdateVirtualInterfaceAttributes
-      description: '<p>Updates the specified attributes of the specified virtual private interface.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn''t updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual q interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>'
+      description: '<p>Updates the specified attributes of the specified virtual private interface.</p> <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to the underlying physical connection if it wasn''t updated to support jumbo frames. Updating the connection disrupts network connectivity for all virtual interfaces associated with the connection for up to 30 seconds. To check whether your connection supports jumbo frames, call <a>DescribeConnections</a>. To check whether your virtual interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>'
       responses:
         '200':
           description: Success
@@ -3204,7 +3204,7 @@ components:
         jumboFrameCapable:
           allOf:
             - $ref: '#/components/schemas/JumboFrameCapable'
-            - description: Indicates whether jumbo frames (9001 MTU) are supported.
+            - description: Indicates whether jumbo frames are supported.
         awsDeviceV2:
           allOf:
             - $ref: '#/components/schemas/AwsDeviceV2'
@@ -3378,7 +3378,7 @@ components:
         jumboFrameCapable:
           allOf:
             - $ref: '#/components/schemas/JumboFrameCapable'
-            - description: Indicates whether jumbo frames (9001 MTU) are supported.
+            - description: Indicates whether jumbo frames are supported.
         virtualGatewayId:
           allOf:
             - $ref: '#/components/schemas/VirtualGatewayId'
@@ -3837,7 +3837,7 @@ components:
         jumboFrameCapable:
           allOf:
             - $ref: '#/components/schemas/JumboFrameCapable'
-            - description: Indicates whether jumbo frames (9001 MTU) are supported.
+            - description: Indicates whether jumbo frames are supported.
         awsDeviceV2:
           allOf:
             - $ref: '#/components/schemas/AwsDeviceV2'
@@ -3953,7 +3953,7 @@ components:
         jumboFrameCapable:
           allOf:
             - $ref: '#/components/schemas/JumboFrameCapable'
-            - description: Indicates whether jumbo frames (9001 MTU) are supported.
+            - description: Indicates whether jumbo frames are supported.
         hasLogicalRedundancy:
           allOf:
             - $ref: '#/components/schemas/HasLogicalRedundancy'
