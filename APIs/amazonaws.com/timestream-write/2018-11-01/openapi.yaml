@@ -118,7 +118,7 @@ paths:
   /#X-Amz-Target=Timestream_20181101.CreateBatchLoadTask:
     post:
       operationId: CreateBatchLoadTask
-      description: 'Creates a new Timestream batch load task. A batch load task processes data from a CSV source in an S3 location and writes to a Timestream table. A mapping from source to target is defined in a batch load task. Errors and events are written to a report at an S3 location. For the report, if the KMS key is not specified, the batch load task will be encrypted with a Timestream managed KMS key located in your account. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed keys</a>. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. For details, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html">code sample</a>.'
+      description: 'Creates a new Timestream batch load task. A batch load task processes data from a CSV source in an S3 location and writes to a Timestream table. A mapping from source to target is defined in a batch load task. Errors and events are written to a report at an S3 location. For the report, if the KMS key is not specified, the report will be encrypted with an S3 managed key when <code>SSE_S3</code> is the option. Otherwise an error is thrown. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk">Amazon Web Services managed keys</a>. <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html">Service quotas apply</a>. For details, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html">code sample</a>.'
       responses:
         '200':
           description: Success
@@ -1609,6 +1609,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MagneticStoreWriteProperties'
             - description: Contains properties to set on the table when enabling magnetic store writes.
+        Schema:
+          allOf:
+            - $ref: '#/components/schemas/Schema'
+            - description: ' The schema of the table. '
     DeleteDatabaseRequest:
       type: object
       required:
@@ -1898,6 +1902,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MagneticStoreWriteProperties'
             - description: Contains properties to set on the table when enabling magnetic store writes.
+        Schema:
+          allOf:
+            - $ref: '#/components/schemas/Schema'
+            - description: ' The schema of the table. '
     WriteRecordsResponse:
       type: object
       properties:
@@ -2195,6 +2203,14 @@ components:
             - $ref: '#/components/schemas/MagneticStoreRejectedDataLocation'
             - description: The location to write error reports for records rejected asynchronously during magnetic store writes.
       description: The set of properties on a table for configuring magnetic store writes.
+    Schema:
+      type: object
+      properties:
+        CompositePartitionKey:
+          allOf:
+            - $ref: '#/components/schemas/PartitionKeyList'
+            - description: 'A non-empty list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed. '
+      description: ' A Schema specifies the expected data model of the table. '
     Table:
       type: object
       properties:
@@ -2230,6 +2246,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MagneticStoreWriteProperties'
             - description: Contains properties to set on the table when enabling magnetic store writes.
+        Schema:
+          allOf:
+            - $ref: '#/components/schemas/Schema'
+            - description: ' The schema of the table. '
       description: 'Represents a database table in Timestream. Tables contain one or more related time series. You can modify the retention duration of the memory store and the magnetic store for a table. '
     StringValue1:
       type: string
@@ -2499,7 +2519,7 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/StringValue2048'
-            - description: ' The value for the MeasureValue. '
+            - description: ' The value for the MeasureValue. For information, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types">Data types</a>.'
         Type:
           allOf:
             - $ref: '#/components/schemas/MeasureValueType'
@@ -2570,6 +2590,39 @@ components:
             - $ref: '#/components/schemas/ScalarMeasureValueType'
             - description: <p/>
       description: <p/>
+    PartitionKeyType:
+      type: string
+      enum:
+        - DIMENSION
+        - MEASURE
+    PartitionKeyEnforcementLevel:
+      type: string
+      enum:
+        - REQUIRED
+        - OPTIONAL
+    PartitionKey:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/PartitionKeyType'
+            - description: ' The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key). '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SchemaName'
+            - description: ' The name of the attribute used for a dimension key. '
+        EnforcementInRecord:
+          allOf:
+            - $ref: '#/components/schemas/PartitionKeyEnforcementLevel'
+            - description: ' The level of enforcement for the specification of a dimension key in ingested records. Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not have to be specified). '
+      description: ' An attribute used in partitioning data in a table. A dimension key partitions data using the values of the dimension specified by the dimension-name as partition key, while a measure key partitions data using measure names (values of the ''measure_name'' column). '
+    PartitionKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartitionKey'
+      minItems: 1
     Record:
       type: object
       properties:
@@ -2588,7 +2641,7 @@ components:
         MeasureValueType:
           allOf:
             - $ref: '#/components/schemas/MeasureValueType'
-            - description: ' Contains the data type of the measure value for the time-series data point. Default type is <code>DOUBLE</code>. '
+            - description: ' Contains the data type of the measure value for the time-series data point. Default type is <code>DOUBLE</code>. For more information, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types">Data types</a>.'
         Time:
           allOf:
             - $ref: '#/components/schemas/StringValue256'

@@ -5880,7 +5880,7 @@ components:
         CustomerContentEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/CustomerContentEncryptionConfiguration'
-            - description: Specifies the KMS key that is used to encrypt the user's data stores in Athena.
+            - description: Specifies the KMS key that is used to encrypt the user's data stores in Athena. This setting does not apply to Athena SQL workgroups.
         EnableMinimumEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
@@ -5904,7 +5904,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/KmsKey'
             - description: The KMS key that is used to encrypt the user's data stores in Athena.
-      description: Specifies the KMS key that is used to encrypt the user's data stores in Athena.
+      description: Specifies the KMS key that is used to encrypt the user's data stores in Athena. This setting does not apply to Athena SQL workgroups.
     DataCatalog:
       type: object
       required:
@@ -6025,6 +6025,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParametersMap'
             - description: 'Contains additional notebook engine <code>MAP&lt;string, string&gt;</code> parameter mappings in the form of key-value pairs. To specify an Athena notebook that the Jupyter server will download and serve, specify a value for the <a>StartSessionRequest$NotebookVersion</a> field, and then add a key named <code>NotebookId</code> to <code>AdditionalConfigs</code> that has the value of the Athena notebook ID.'
+        SparkProperties:
+          allOf:
+            - $ref: '#/components/schemas/ParametersMap'
+            - description: 'Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.'
       description: Contains data processing unit (DPU) configuration settings and parameter mappings for a notebook engine.
     EngineVersion:
       type: object
@@ -7020,7 +7024,7 @@ components:
         RemoveCustomerContentEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/BoxedBoolean'
-            - description: Removes content encryption configuration for a workgroup.
+            - description: Removes content encryption configuration from an Apache Spark-enabled Athena workgroup.
         AdditionalConfiguration:
           allOf:
             - $ref: '#/components/schemas/NameString'
