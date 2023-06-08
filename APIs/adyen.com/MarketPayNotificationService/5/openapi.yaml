@@ -1,9 +1,8 @@
 openapi: 3.1.0
 info:
   contact:
-    email: developer-experience@adyen.com
     name: Adyen Developer Experience team
-    url: https://www.adyen.help/hc/en-us/community/topics
+    url: https://github.com/Adyen/adyen-openapi
     x-twitter: Adyen
   description: |-
     This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.
@@ -30,7 +29,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: MarketPayNotificationService
-  x-timestamp: 2023-04-03T19:29:07Z
+  x-timestamp: 2023-06-02T11:23:48Z
 tags: []
 components:
   examples:
@@ -1305,6 +1304,8 @@ components:
         webAddress:
           description: The URL of the website of the account holder.
           type: string
+      required:
+        - address
       type: object
     AccountHolderPayoutNotification:
       properties:
@@ -2444,6 +2445,7 @@ components:
             - ownerStreet
             - passport
             - passportNumber
+            - payoutMethod
             - payoutMethodCode
             - payoutSchedule
             - pciSelfAssessment
@@ -3171,6 +3173,12 @@ components:
             - Default
             - MarketPlace
             - PaymentFee
+            - PaymentFeeAcquiring
+            - PaymentFeeAdyen
+            - PaymentFeeAdyenCommission
+            - PaymentFeeAdyenMarkup
+            - PaymentFeeInterchange
+            - PaymentFeeSchemeFee
             - Remainder
             - Surcharge
             - Tip
@@ -3600,6 +3608,8 @@ components:
         street:
           description: The name of the street. Required if the `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
           type: string
+      required:
+        - country
       type: object
     ViasName:
       properties:
@@ -3670,10 +3680,6 @@ components:
           type: string
       type: object
   securitySchemes:
-    ApiKeyAuth:
-      in: header
-      name: X-API-Key
-      type: apiKey
     BasicAuth:
       scheme: basic
       type: http
@@ -3702,7 +3708,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Account closed
       tags:
         - Accounts
@@ -3733,7 +3738,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Account created
       tags:
         - Accounts
@@ -3764,7 +3768,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Liable account's funds are below configured threshold
       tags:
         - Fund management
@@ -3803,7 +3806,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Account holder created
       tags:
         - Account holders
@@ -3838,7 +3840,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Paid out to account holder
       tags:
         - Fund management
@@ -3869,7 +3870,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Account holder status changed
       tags:
         - Account holders
@@ -3900,7 +3900,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Store status changed
       tags:
         - Account holders
@@ -3931,7 +3930,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Upcoming deadline
       tags:
         - Account holders
@@ -3962,7 +3960,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Account holder updated
       tags:
         - Account holders
@@ -3993,7 +3990,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Verification results received
       tags:
         - Account holders
@@ -4024,7 +4020,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Account updated
       tags:
         - Accounts
@@ -4055,7 +4050,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Beneficiary defined
       tags:
         - Fund management
@@ -4086,7 +4080,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Negative account balances compensated
       tags:
         - Fund management
@@ -4117,7 +4110,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Automated direct debit initiated
       tags:
         - Fund management
@@ -4148,7 +4140,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Booking for a capture or refund failed
       tags:
         - Other
@@ -4179,7 +4170,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Funds transfer between accounts refunded
       tags:
         - Fund management
@@ -4210,7 +4200,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Report available
       tags:
         - Other
@@ -4241,7 +4230,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: "'Refund Transfers Not Paid Out' call processed and refunds scheduled"
       tags:
         - Fund management
@@ -4272,7 +4260,6 @@ webhooks:
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
-        - ApiKeyAuth: []
       summary: Funds transferred between accounts
       tags:
         - Fund management

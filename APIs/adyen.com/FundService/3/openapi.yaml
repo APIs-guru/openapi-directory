@@ -3,9 +3,8 @@ servers:
   - url: https://cal-test.adyen.com/cal/services/Fund/v3
 info:
   contact:
-    email: developer-experience@adyen.com
     name: Adyen Developer Experience team
-    url: https://www.adyen.help/hc/en-us/community/topics
+    url: https://github.com/Adyen/adyen-openapi
     x-twitter: Adyen
   description: |-
     This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.
@@ -55,7 +54,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: FundService
-  x-timestamp: 2023-04-11T21:25:34Z
+  x-timestamp: 2023-05-30T15:27:19Z
 tags:
   - name: General
 paths:
@@ -1284,6 +1283,12 @@ components:
             - Default
             - MarketPlace
             - PaymentFee
+            - PaymentFeeAcquiring
+            - PaymentFeeAdyen
+            - PaymentFeeAdyenCommission
+            - PaymentFeeAdyenMarkup
+            - PaymentFeeInterchange
+            - PaymentFeeSchemeFee
             - Remainder
             - Surcharge
             - Tip

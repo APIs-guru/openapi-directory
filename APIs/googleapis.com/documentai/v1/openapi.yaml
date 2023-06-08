@@ -1565,7 +1565,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1BatchDocumentsInputConfig"
           description: The input documents for the BatchProcessDocuments method.
         skipHumanReview:
-          description: Whether Human Review feature should be skipped for this request. Default to false.
+          description: Whether Human Review feature should be skipped for this request. Default to `false`.
           type: boolean
       type: object
     GoogleCloudDocumentaiV1BatchProcessResponse:
@@ -1679,7 +1679,7 @@ components:
           $ref: "#/components/schemas/GoogleRpcStatus"
           description: Any error that occurred while processing this document.
         mimeType:
-          description: An IANA published MIME type (also referred to as media type). For more information, see https://www.iana.org/assignments/media-types/media-types.xhtml.
+          description: An IANA published [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml).
           type: string
         pages:
           description: Visual page layout for the Document.
@@ -1977,7 +1977,7 @@ components:
           format: float
           type: number
         languageCode:
-          description: The BCP-47 language code, such as `en-US` or `sr-Latn`. For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          description: The [BCP-47 language code](https://www.unicode.org/reports/tr35/#Unicode_locale_identifier), such as `en-US` or `sr-Latn`.
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentPageDimension:
@@ -2039,7 +2039,7 @@ components:
           format: int32
           type: integer
         mimeType:
-          description: Encoding mime type for the image.
+          description: Encoding [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml) for the image.
           type: string
         width:
           description: Width of the image in pixels.
@@ -2047,7 +2047,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiV1DocumentPageImageQualityScores:
-      description: Image Quality Scores for the page image
+      description: Image Quality Scores for the page image.
       properties:
         detectedDefects:
           description: A list of detected defects.
@@ -2055,7 +2055,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageImageQualityScoresDetectedDefect"
           type: array
         qualityScore:
-          description: The overall quality score. Range `[0, 1]` where 1 is perfect quality.
+          description: The overall quality score. Range `[0, 1]` where `1` is perfect quality.
           format: float
           type: number
       type: object
@@ -2063,7 +2063,7 @@ components:
       description: Image Quality Defects
       properties:
         confidence:
-          description: Confidence of detected defect. Range `[0, 1]` where 1 indicates strong confidence of that the defect exists.
+          description: Confidence of detected defect. Range `[0, 1]` where `1` indicates strong confidence of that the defect exists.
           format: float
           type: number
         type:
@@ -2429,7 +2429,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentSchemaEntityTypeEnumValues"
           description: If specified, lists all the possible values for this entity. This should not be more than a handful of values. If the number of values is >10 or could change frequently use the `EntityType.value_ontology` field and specify a list of all possible values in a value ontology file.
         name:
-          description: "Name of the type. It must be unique within the schema file and cannot be a 'Common Type'. Besides that we use the following naming conventions: - *use `snake_casing`* - name matching is case-sensitive - Maximum 64 characters. - Must start with a letter. - Allowed characters: ASCII letters `[a-z0-9_-]`. (For backward compatibility internal infrastructure and tooling can handle any ascii character) - The `/` is sometimes used to denote a property of a type. For example `line_item/amount`. This convention is deprecated, but will still be honored for backward compatibility."
+          description: 'Name of the type. It must be unique within the schema file and cannot be a "Common Type". The following naming conventions are used: - Use `snake_casing` - Name matching is case-sensitive - Maximum 64 characters. - Must start with a letter. - Allowed characters: ASCII letters `[a-z0-9_-]`. (For backward compatibility internal infrastructure and tooling can handle any ascii character) - The `/` is sometimes used to denote a property of a type. For example `line_item/amount`. This convention is deprecated, but will still be honored for backward compatibility.'
           type: string
         properties:
           description: Description the nested structure, or composition of an entity.
@@ -2472,7 +2472,7 @@ components:
           description: If true, on a given page, there can be multiple `document` annotations covering it.
           type: boolean
         documentSplitter:
-          description: If true, a `document` entity type can be applied to subdocument ( splitting). Otherwise, it can only be applied to the entire document (classification).
+          description: If true, a `document` entity type can be applied to subdocument (splitting). Otherwise, it can only be applied to the entire document (classification).
           type: boolean
         prefixedNamingOnProperties:
           description: If set, all the nested entities must be prefixed with the parents.
@@ -2513,16 +2513,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentStyleFontSize"
           description: Font size.
         fontWeight:
-          description: Font weight. Possible values are normal, bold, bolder, and lighter. https://www.w3schools.com/cssref/pr_font_weight.asp
+          description: "[Font weight](https://www.w3schools.com/cssref/pr_font_weight.asp). Possible values are `normal`, `bold`, `bolder`, and `lighter`."
           type: string
         textAnchor:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentTextAnchor"
           description: Text anchor indexing into the Document.text.
         textDecoration:
-          description: Text decoration. Follows CSS standard. https://www.w3schools.com/cssref/pr_text_text-decoration.asp
+          description: "[Text decoration](https://www.w3schools.com/cssref/pr_text_text-decoration.asp). Follows CSS standard. "
           type: string
         textStyle:
-          description: Text style. Possible values are normal, italic, and oblique. https://www.w3schools.com/cssref/pr_font_font-style.asp
+          description: "[Text style](https://www.w3schools.com/cssref/pr_font_font-style.asp). Possible values are `normal`, `italic`, and `oblique`."
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentStyleFontSize:
@@ -2533,7 +2533,7 @@ components:
           format: float
           type: number
         unit:
-          description: Unit for the font size. Follows CSS naming (in, px, pt, etc.).
+          description: Unit for the font size. Follows CSS naming (`in`, `px`, `pt`, etc.).
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentTextAnchor:
@@ -2925,7 +2925,7 @@ components:
           description: The display name of the processor.
           type: string
         kmsKeyName:
-          description: The KMS key used for encryption/decryption in CMEK scenarios. See https://cloud.google.com/security-key-management.
+          description: The [KMS key](https://cloud.google.com/security-key-management) used for encryption/decryption in CMEK scenarios.
           type: string
         name:
           description: "Output only. Immutable. The resource name of the processor. Format: `projects/{project}/locations/{location}/processors/{processor}`"
@@ -2994,11 +2994,11 @@ components:
       description: The location information about where the processor is available.
       properties:
         locationId:
-          description: The location id, currently must be one of [us, eu].
+          description: The location id, refer to [regional and multi-regional support](/document-ai/docs/regions) for supported locations.
           type: string
       type: object
     GoogleCloudDocumentaiV1ProcessorVersion:
-      description: A processor version is an implementation of a processor. Each processor can have multiple versions, pre-trained by Google internally or up-trained by the customer. At a time, a processor can only have one default version version. So the processor's behavior (when processing documents) is defined by a default version
+      description: A processor version is an implementation of a processor. Each processor can have multiple versions, pre-trained by Google internally or uptrained by the customer. At a time, a processor can only have one default version version. So the processor's behavior (when processing documents) is defined by a default version
       properties:
         createTime:
           description: The time the processor version was created.
@@ -3014,7 +3014,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentSchema"
           description: The schema of the processor version. Describes the output.
         googleManaged:
-          description: Denotes that this ProcessorVersion is managed by google.
+          description: Denotes that this `ProcessorVersion` is managed by Google.
           type: boolean
         kmsKeyName:
           description: The KMS key name used for encryption.
@@ -3280,7 +3280,7 @@ components:
           $ref: "#/components/schemas/GoogleRpcStatus"
           description: Any error that occurred while processing this document.
         mimeType:
-          description: An IANA published MIME type (also referred to as media type). For more information, see https://www.iana.org/assignments/media-types/media-types.xhtml.
+          description: An IANA published [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml).
           type: string
         pages:
           description: Visual page layout for the Document.
@@ -3545,7 +3545,7 @@ components:
           format: float
           type: number
         languageCode:
-          description: The BCP-47 language code, such as `en-US` or `sr-Latn`. For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          description: The [BCP-47 language code](https://www.unicode.org/reports/tr35/#Unicode_locale_identifier), such as `en-US` or `sr-Latn`.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageDimension:
@@ -3607,7 +3607,7 @@ components:
           format: int32
           type: integer
         mimeType:
-          description: Encoding mime type for the image.
+          description: Encoding [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml) for the image.
           type: string
         width:
           description: Width of the image in pixels.
@@ -3615,7 +3615,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageImageQualityScores:
-      description: Image Quality Scores for the page image
+      description: Image Quality Scores for the page image.
       properties:
         detectedDefects:
           description: A list of detected defects.
@@ -3623,7 +3623,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageImageQualityScoresDetectedDefect"
           type: array
         qualityScore:
-          description: The overall quality score. Range `[0, 1]` where 1 is perfect quality.
+          description: The overall quality score. Range `[0, 1]` where `1` is perfect quality.
           format: float
           type: number
       type: object
@@ -3631,7 +3631,7 @@ components:
       description: Image Quality Defects
       properties:
         confidence:
-          description: Confidence of detected defect. Range `[0, 1]` where 1 indicates strong confidence of that the defect exists.
+          description: Confidence of detected defect. Range `[0, 1]` where `1` indicates strong confidence of that the defect exists.
           format: float
           type: number
         type:
@@ -3996,16 +3996,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentStyleFontSize"
           description: Font size.
         fontWeight:
-          description: Font weight. Possible values are normal, bold, bolder, and lighter. https://www.w3schools.com/cssref/pr_font_weight.asp
+          description: "[Font weight](https://www.w3schools.com/cssref/pr_font_weight.asp). Possible values are `normal`, `bold`, `bolder`, and `lighter`."
           type: string
         textAnchor:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentTextAnchor"
           description: Text anchor indexing into the Document.text.
         textDecoration:
-          description: Text decoration. Follows CSS standard. https://www.w3schools.com/cssref/pr_text_text-decoration.asp
+          description: "[Text decoration](https://www.w3schools.com/cssref/pr_text_text-decoration.asp). Follows CSS standard. "
           type: string
         textStyle:
-          description: Text style. Possible values are normal, italic, and oblique. https://www.w3schools.com/cssref/pr_font_font-style.asp
+          description: "[Text style](https://www.w3schools.com/cssref/pr_font_font-style.asp). Possible values are `normal`, `italic`, and `oblique`."
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentStyleFontSize:
@@ -4016,7 +4016,7 @@ components:
           format: float
           type: number
         unit:
-          description: Unit for the font size. Follows CSS naming (in, px, pt, etc.).
+          description: Unit for the font size. Follows CSS naming (`in`, `px`, `pt`, etc.).
           type: string
       type: object
     GoogleCloudDocumentaiV1beta1DocumentTextAnchor:
@@ -4213,7 +4213,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentLabel"
           type: array
         mimeType:
-          description: An IANA published MIME type (also referred to as media type). For more information, see https://www.iana.org/assignments/media-types/media-types.xhtml.
+          description: An IANA published [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml).
           type: string
         pages:
           description: Visual page layout for the Document.
@@ -4492,7 +4492,7 @@ components:
           format: float
           type: number
         languageCode:
-          description: The BCP-47 language code, such as `en-US` or `sr-Latn`. For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          description: The [BCP-47 language code](https://www.unicode.org/reports/tr35/#Unicode_locale_identifier), such as `en-US` or `sr-Latn`.
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageDimension:
@@ -4554,7 +4554,7 @@ components:
           format: int32
           type: integer
         mimeType:
-          description: Encoding mime type for the image.
+          description: Encoding [media type (MIME type)](https://www.iana.org/assignments/media-types/media-types.xhtml) for the image.
           type: string
         width:
           description: Width of the image in pixels.
@@ -4562,7 +4562,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScores:
-      description: Image Quality Scores for the page image
+      description: Image Quality Scores for the page image.
       properties:
         detectedDefects:
           description: A list of detected defects.
@@ -4570,7 +4570,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageImageQualityScoresDetectedDefect"
           type: array
         qualityScore:
-          description: The overall quality score. Range `[0, 1]` where 1 is perfect quality.
+          description: The overall quality score. Range `[0, 1]` where `1` is perfect quality.
           format: float
           type: number
       type: object
@@ -4578,7 +4578,7 @@ components:
       description: Image Quality Defects
       properties:
         confidence:
-          description: Confidence of detected defect. Range `[0, 1]` where 1 indicates strong confidence of that the defect exists.
+          description: Confidence of detected defect. Range `[0, 1]` where `1` indicates strong confidence of that the defect exists.
           format: float
           type: number
         type:
@@ -4943,16 +4943,16 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentStyleFontSize"
           description: Font size.
         fontWeight:
-          description: Font weight. Possible values are normal, bold, bolder, and lighter. https://www.w3schools.com/cssref/pr_font_weight.asp
+          description: "[Font weight](https://www.w3schools.com/cssref/pr_font_weight.asp). Possible values are `normal`, `bold`, `bolder`, and `lighter`."
           type: string
         textAnchor:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentTextAnchor"
           description: Text anchor indexing into the Document.text.
         textDecoration:
-          description: Text decoration. Follows CSS standard. https://www.w3schools.com/cssref/pr_text_text-decoration.asp
+          description: "[Text decoration](https://www.w3schools.com/cssref/pr_text_text-decoration.asp). Follows CSS standard. "
           type: string
         textStyle:
-          description: Text style. Possible values are normal, italic, and oblique. https://www.w3schools.com/cssref/pr_font_font-style.asp
+          description: "[Text style](https://www.w3schools.com/cssref/pr_font_font-style.asp). Possible values are `normal`, `italic`, and `oblique`."
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentStyleFontSize:
@@ -4963,7 +4963,7 @@ components:
           format: float
           type: number
         unit:
-          description: Unit for the font size. Follows CSS naming (in, px, pt, etc.).
+          description: Unit for the font size. Follows CSS naming (`in`, `px`, `pt`, etc.).
           type: string
       type: object
     GoogleCloudDocumentaiV1beta2DocumentTextAnchor:

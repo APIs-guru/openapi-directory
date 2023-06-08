@@ -1826,6 +1826,13 @@ components:
           $ref: "#/components/schemas/PushConfig"
           description: Required. The push configuration for future deliveries. An empty `pushConfig` indicates that the Pub/Sub system should stop pushing messages from the given subscription and allow messages to be pulled and acknowledged - effectively pausing the subscription if `Pull` or `StreamingPull` is not called.
       type: object
+    NoWrapper:
+      description: Sets the `data` field as the HTTP body for delivery.
+      properties:
+        writeMetadata:
+          description: When true, writes the Pub/Sub message metadata to `x-goog-pubsub-:` headers of the HTTP request. Writes the Pub/Sub message attributes to `:` headers of the HTTP request.
+          type: boolean
+      type: object
     OidcToken:
       description: Contains information needed for generating an [OpenID Connect token](https://developers.google.com/identity/protocols/OpenIDConnect).
       properties:
@@ -1894,6 +1901,10 @@ components:
           format: google-datetime
           type: string
       type: object
+    PubsubWrapper:
+      description: The payload to the push endpoint is in the form of the JSON representation of a PubsubMessage (https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#pubsubmessage).
+      properties: {}
+      type: object
     PullRequest:
       description: Request for the `Pull` method.
       properties:
@@ -1922,9 +1933,15 @@ components:
             type: string
           description: 'Endpoint configuration attributes that can be used to control different aspects of the message delivery. The only currently supported attribute is `x-goog-version`, which you can use to change the format of the pushed message. This attribute indicates the version of the data expected by the endpoint. This controls the shape of the pushed message (i.e., its fields and metadata). If not present during the `CreateSubscription` call, it will default to the version of the Pub/Sub API used to make such call. If not present in a `ModifyPushConfig` call, its value will not be changed. `GetSubscription` calls will always return a valid version, even if the subscription was created without this attribute. The only supported values for the `x-goog-version` attribute are: * `v1beta1`: uses the push format defined in the v1beta1 Pub/Sub API. * `v1` or `v1beta2`: uses the push format defined in the v1 Pub/Sub API. For example: `attributes { "x-goog-version": "v1" }`'
           type: object
+        noWrapper:
+          $ref: "#/components/schemas/NoWrapper"
+          description: When set, the payload to the push endpoint is not wrapped.
         oidcToken:
           $ref: "#/components/schemas/OidcToken"
           description: If specified, Pub/Sub will generate and attach an OIDC JWT token as an `Authorization` header in the HTTP request for every pushed message.
+        pubsubWrapper:
+          $ref: "#/components/schemas/PubsubWrapper"
+          description: When set, the payload to the push endpoint is in the form of the JSON representation of a PubsubMessage (https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#pubsubmessage).
         pushEndpoint:
           description: A URL locating the endpoint to which messages should be pushed. For example, a Webhook endpoint might use `https://example.com/push`.
           type: string

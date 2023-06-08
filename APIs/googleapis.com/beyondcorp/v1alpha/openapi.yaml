@@ -3160,12 +3160,9 @@ components:
         displayName:
           description: Optional. An arbitrary caller-provided name for the PartnerTenant. Cannot exceed 64 characters.
           type: string
-        googleGroupEmail:
-          description: Optional. Google group email to which the PartnerTenant is enabled.
-          type: string
-        googleGroupId:
-          description: Optional. Google group ID to which the PartnerTenant is enabled.
-          type: string
+        group:
+          $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaGroup"
+          description: Optional. Group information for the users enabled to use the partnerTenant. If the group information is not provided then the partnerTenant will be enabled for all users.
         name:
           description: Output only. Unique resource name of the PartnerTenant. The name is ignored when creating PartnerTenant.
           readOnly: true

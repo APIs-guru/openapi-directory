@@ -18922,6 +18922,122 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionDisks
+  "/projects/{project}/regions/{region}/disks/bulkInsert":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Bulk create a set of disks.
+      operationId: compute.regionDisks.bulkInsert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkInsertDiskResource"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionDisks
+  "/projects/{project}/regions/{region}/disks/stopGroupAsyncReplication":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Stops asynchronous replication for a consistency group of disks. Can be invoked either in the primary or secondary scope.
+      operationId: compute.regionDisks.stopGroupAsyncReplication
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request. This must be the region of the primary or secondary disks in the consistency group.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisksStopGroupAsyncReplicationResource"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionDisks
   "/projects/{project}/regions/{region}/disks/{disk}":
     delete:
       description: Deletes the specified regional persistent disk. Deleting a regional disk removes all the replicas of its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
@@ -19326,6 +19442,129 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RegionDisksResizeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionDisks
+  "/projects/{project}/regions/{region}/disks/{disk}/startAsyncReplication":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Starts asynchronous replication. Must be invoked on the primary disk.
+      operationId: compute.regionDisks.startAsyncReplication
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the persistent disk.
+          in: path
+          name: disk
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegionDisksStartAsyncReplicationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - regionDisks
+  "/projects/{project}/regions/{region}/disks/{disk}/stopAsyncReplication":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Stops asynchronous replication. Can be invoked either on the primary or on the secondary disk.
+      operationId: compute.regionDisks.stopAsyncReplication
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: The name of the persistent disk.
+          in: path
+          name: disk
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -33071,6 +33310,122 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - disks
+  "/projects/{project}/zones/{zone}/disks/bulkInsert":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Bulk create a set of disks.
+      operationId: compute.disks.bulkInsert
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkInsertDiskResource"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - disks
+  "/projects/{project}/zones/{zone}/disks/stopGroupAsyncReplication":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Stops asynchronous replication for a consistency group of disks. Can be invoked either in the primary or secondary scope.
+      operationId: compute.disks.stopGroupAsyncReplication
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request. This must be the zone of the primary or secondary disks in the consistency group.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisksStopGroupAsyncReplicationResource"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - disks
   "/projects/{project}/zones/{zone}/disks/{disk}":
     delete:
       description: Deletes the specified persistent disk. Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
@@ -33480,6 +33835,129 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/DisksResizeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - disks
+  "/projects/{project}/zones/{zone}/disks/{disk}/startAsyncReplication":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Starts asynchronous replication. Must be invoked on the primary disk.
+      operationId: compute.disks.startAsyncReplication
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the persistent disk.
+          in: path
+          name: disk
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DisksStartAsyncReplicationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - disks
+  "/projects/{project}/zones/{zone}/disks/{disk}/stopAsyncReplication":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Stops asynchronous replication. Can be invoked either on the primary or on the secondary disk.
+      operationId: compute.disks.stopAsyncReplication
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The name of the persistent disk.
+          in: path
+          name: disk
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -41152,6 +41630,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41224,6 +41703,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41282,6 +41762,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41502,6 +41983,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41574,6 +42056,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41632,6 +42115,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42075,6 +42559,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42147,6 +42632,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42235,6 +42721,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42620,6 +43107,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42877,6 +43365,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43096,6 +43585,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43216,6 +43706,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43422,6 +43913,13 @@ components:
           type: array
         role:
           description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
+      type: object
+    BulkInsertDiskResource:
+      description: A transient resource used in compute.disks.bulkInsert and compute.regionDisks.bulkInsert. It is only used to process requests and is not persisted.
+      properties:
+        sourceConsistencyGroupPolicy:
+          description: "The URL of the DiskConsistencyGroupPolicy for the group of disks to clone. This may be a full or partial URL, such as: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy "
           type: string
       type: object
     BulkInsertInstanceResource:
@@ -43668,6 +44166,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43740,6 +44239,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43798,6 +44298,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44221,6 +44722,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44337,6 +44839,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44495,6 +44998,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44567,6 +45071,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44625,6 +45130,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44706,6 +45212,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44740,6 +45247,19 @@ components:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
           type: object
+      type: object
+    DisksStartAsyncReplicationRequest:
+      properties:
+        asyncSecondaryDisk:
+          description: "The secondary disk to start asynchronous replication to. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk "
+          type: string
+      type: object
+    DisksStopGroupAsyncReplicationResource:
+      description: A transient resource used in compute.disks.stopGroupAsyncReplication and compute.regionDisks.stopGroupAsyncReplication. It is only used to process requests and is not persisted.
+      properties:
+        resourcePolicy:
+          description: "The URL of the DiskConsistencyGroupPolicy for the group of disks to stop. This may be a full or partial URL, such as: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy "
+          type: string
       type: object
     DisplayDevice:
       description: A set of Display Device options
@@ -44855,6 +45375,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45002,6 +45523,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45190,6 +45712,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45360,6 +45883,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45749,6 +46273,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45821,6 +46346,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45897,6 +46423,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46284,6 +46811,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46427,6 +46955,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46504,6 +47033,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46562,6 +47092,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46879,6 +47410,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47153,6 +47685,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47373,6 +47906,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47640,6 +48174,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47795,6 +48330,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47867,6 +48403,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48089,6 +48626,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48171,6 +48709,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48410,6 +48949,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48485,6 +49025,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48591,6 +49132,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48666,6 +49208,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48750,6 +49293,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48822,6 +49366,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49091,6 +49636,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49163,6 +49709,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49221,6 +49768,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49358,6 +49906,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49794,6 +50343,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49890,6 +50440,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49969,6 +50520,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50152,6 +50704,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50294,6 +50847,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50540,6 +51094,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50732,6 +51287,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50998,6 +51554,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51152,6 +51709,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51224,6 +51782,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51282,6 +51841,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51671,6 +52231,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51769,6 +52330,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51827,6 +52389,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51944,6 +52507,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52002,6 +52566,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52175,6 +52740,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52282,6 +52848,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52396,6 +52963,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52454,6 +53022,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52609,6 +53178,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52877,6 +53447,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52968,6 +53539,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53123,6 +53695,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53181,6 +53754,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53339,6 +53913,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53411,6 +53986,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53478,6 +54054,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53601,6 +54178,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53673,6 +54251,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53731,6 +54310,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53853,6 +54433,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54013,6 +54594,7 @@ components:
                   - INJECTED_KERNELS_DEPRECATED
                   - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                   - LARGE_DEPLOYMENT_WARNING
+                  - LIST_OVERHEAD_QUOTA_EXCEED
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54094,6 +54676,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54166,6 +54749,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54224,6 +54808,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54434,6 +55019,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54535,6 +55121,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54638,6 +55225,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -55012,6 +55600,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -55162,6 +55751,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -55233,6 +55823,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -55319,6 +55910,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -55650,6 +56242,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -55721,6 +56314,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -55779,6 +56373,12 @@ components:
           format: int64
           type: string
       type: object
+    RegionDisksStartAsyncReplicationRequest:
+      properties:
+        asyncSecondaryDisk:
+          description: "The secondary disk to start asynchronous replication to. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk "
+          type: string
+      type: object
     RegionInstanceGroupList:
       description: Contains a list of InstanceGroup resources.
       properties:
@@ -55816,6 +56416,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -55897,6 +56498,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56043,6 +56645,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56151,6 +56754,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56248,6 +56852,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56489,6 +57094,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56560,6 +57166,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56625,6 +57232,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56709,6 +57317,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56752,6 +57361,9 @@ components:
           type: string
         description:
           type: string
+        diskConsistencyGroupPolicy:
+          $ref: "#/components/schemas/ResourcePolicyDiskConsistencyGroupPolicy"
+          description: Resource policy for disk consistency groups.
         groupPlacementPolicy:
           $ref: "#/components/schemas/ResourcePolicyGroupPlacementPolicy"
           description: Resource policy for instances for placement configuration.
@@ -56836,6 +57448,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -56884,6 +57497,10 @@ components:
         startTime:
           description: Start time of the window. This must be in UTC format that resolves to one of 00:00, 04:00, 08:00, 12:00, 16:00, or 20:00. For example, both 13:00-5 and 08:00 are valid.
           type: string
+      type: object
+    ResourcePolicyDiskConsistencyGroupPolicy:
+      description: Resource policy for disk consistency groups.
+      properties: {}
       type: object
     ResourcePolicyGroupPlacementPolicy:
       description: A GroupPlacementPolicy specifies resource placement configuration. It specifies the failure bucket separation as well as network locality
@@ -56981,6 +57598,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -57225,6 +57843,7 @@ components:
                   - INJECTED_KERNELS_DEPRECATED
                   - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                   - LARGE_DEPLOYMENT_WARNING
+                  - LIST_OVERHEAD_QUOTA_EXCEED
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
@@ -57315,6 +57934,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -57460,6 +58080,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -57687,6 +58308,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -58076,6 +58698,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -58414,6 +59037,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -58477,6 +59101,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -58663,6 +59288,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -59099,6 +59725,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -59204,6 +59831,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -59262,6 +59890,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -59537,6 +60166,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -59747,6 +60377,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -59819,6 +60450,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -59919,6 +60551,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -59998,6 +60631,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60069,6 +60703,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60134,6 +60769,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60242,6 +60878,7 @@ components:
                   - INJECTED_KERNELS_DEPRECATED
                   - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                   - LARGE_DEPLOYMENT_WARNING
+                  - LIST_OVERHEAD_QUOTA_EXCEED
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60453,6 +61090,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60525,6 +61163,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60635,6 +61274,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60801,6 +61441,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60859,6 +61500,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -60996,6 +61638,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61054,6 +61697,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61217,6 +61861,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61289,6 +61934,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61405,6 +62051,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61477,6 +62124,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61535,6 +62183,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61669,6 +62318,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61752,6 +62402,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61842,6 +62493,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -61993,6 +62645,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62051,6 +62704,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62183,6 +62837,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62255,6 +62910,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62390,6 +63046,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62462,6 +63119,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62520,6 +63178,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62710,6 +63369,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62848,6 +63508,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -62906,6 +63567,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63071,6 +63733,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63223,6 +63886,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63351,6 +64015,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63423,6 +64088,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63556,6 +64222,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63736,6 +64403,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63808,6 +64476,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63866,6 +64535,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -63977,6 +64647,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -64106,6 +64777,7 @@ components:
                 - INJECTED_KERNELS_DEPRECATED
                 - INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB
                 - LARGE_DEPLOYMENT_WARNING
+                - LIST_OVERHEAD_QUOTA_EXCEED
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD

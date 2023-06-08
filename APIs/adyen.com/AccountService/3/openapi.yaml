@@ -3,9 +3,8 @@ servers:
   - url: https://cal-test.adyen.com/cal/services/Account/v3
 info:
   contact:
-    email: developer-experience@adyen.com
     name: Adyen Developer Experience team
-    url: https://www.adyen.help/hc/en-us/community/topics
+    url: https://github.com/Adyen/adyen-openapi
     x-twitter: Adyen
   description: |-
     This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.
@@ -55,7 +54,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: AccountService
-  x-timestamp: 2023-04-11T21:25:35Z
+  x-timestamp: 2023-05-30T15:27:20Z
 tags:
   - name: Account holders
   - name: Verification
@@ -1779,6 +1778,8 @@ components:
         webAddress:
           description: The URL of the website of the account holder.
           type: string
+      required:
+        - address
       type: object
     AccountHolderStatus:
       properties:
@@ -2498,6 +2499,7 @@ components:
             - ownerStreet
             - passport
             - passportNumber
+            - payoutMethod
             - payoutMethodCode
             - payoutSchedule
             - pciSelfAssessment
@@ -3418,6 +3420,8 @@ components:
         street:
           description: The name of the street. Required if the `houseNumberOrName`, `city`, `postalCode`, or `stateOrProvince` are provided.
           type: string
+      required:
+        - country
       type: object
     ViasName:
       properties:

@@ -3,9 +3,8 @@ servers:
   - url: https://cal-test.adyen.com/cal/services/Hop/v6
 info:
   contact:
-    email: developer-experience@adyen.com
     name: Adyen Developer Experience team
-    url: https://www.adyen.help/hc/en-us/community/topics
+    url: https://github.com/Adyen/adyen-openapi
     x-twitter: Adyen
   description: |-
     This API is used for the classic integration. If you are just starting your implementation, refer to our [new integration guide](https://docs.adyen.com/marketplaces-and-platforms) instead.
@@ -54,7 +53,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: HopService
-  x-timestamp: 2023-03-22T11:13:03Z
+  x-timestamp: 2023-05-30T15:27:20Z
 tags:
   - name: Hosted Onboarding Page
   - name: PCI Compliance Questionnaire Page
@@ -357,6 +356,7 @@ components:
             - ownerStreet
             - passport
             - passportNumber
+            - payoutMethod
             - payoutMethodCode
             - payoutSchedule
             - pciSelfAssessment

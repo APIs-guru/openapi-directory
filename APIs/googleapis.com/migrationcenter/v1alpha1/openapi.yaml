@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: ""
+  description: A unified platform that helps you accelerate your end-to-end cloud journey from your current on-premises or cloud environments to Google Cloud.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -1746,7 +1746,7 @@ components:
       description: Performance data for an asset.
       properties:
         dailyResourceUsageAggregations:
-          description: Daily resource usage aggregations. Contains all of the data available for an asset, up to the last 420 days.
+          description: Daily resource usage aggregations. Contains all of the data available for an asset, up to the last 420 days. Aggregations are sorted from oldest to most recent.
           items:
             $ref: "#/components/schemas/DailyResourceUsageAggregation"
           type: array

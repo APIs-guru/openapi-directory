@@ -9,27 +9,33 @@ info:
   description: |+
     The Legal Entity Management API enables you to manage legal entities that contain information required for verification. 
     ## Authentication
-    To connect to the Legal Entity Management API, you must use the basic authentication credentials of your web service user. If you don't have one, contact the [Adyen Support Team](https://www.adyen.help/hc/en-us/requests/new). Use the web service user credentials to authenticate your request, for example:
+    Your Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value. For example:
 
     ```
     curl
-    -U "ws_123456@Scope.BalancePlatform_YourBalancePlatform":"YourWsPassword" \
+    -H "X-API-Key: YOUR_API_KEY" \
     -H "Content-Type: application/json" \
     ...
     ```
-    Note that when going live, you need to generate new web service user credentials to access the [live endpoints](https://docs.adyen.com/development-resources/live-endpoints).
+    Alternatively, you can use the username and password of your API credential to connect to the API using basic authentication. For example:
 
+    ```
+    curl
+    -U "ws_123456@Scope.Company_YOUR_COMPANY_ACCOUNT":"YourWsPassword" \
+    -H "Content-Type: application/json" \
+    ...
+    ```
     ## Versioning
-    The Legal Entity Management API supports versioning of its endpoints through a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
-
-    >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+    The Legal Entity Management API supports [versioning](https://docs.adyen.com/development-resources/versioning) using a version suffix in the endpoint URL. This suffix has the following format: "vXX", where XX is the version number.
 
     For example:
     ```
     https://kyc-test.adyen.com/lem/v3/legalEntities
     ```
+    >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
+
     ## Going live
-    When going live, your Adyen contact will provide your API credential for the live environment. You can then use the username and password to send requests to `https://kyc-live.adyen.com/lem/v3`.
+    When going live, your Adyen contact will provide your API credential for the live environment. You can then use the API key or the username and password to send requests to `https://kyc-live.adyen.com/lem/v3`.
 
   termsOfService: https://www.adyen.com/legal/terms-and-conditions
   title: Legal Entity Management API
@@ -46,7 +52,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-06-01T20:23:30Z
+  x-timestamp: 2023-06-07T22:22:39Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -2811,6 +2817,7 @@ components:
             - $ref: "#/components/schemas/NumberAndBicAccountIdentification"
             - $ref: "#/components/schemas/PLLocalAccountIdentification"
             - $ref: "#/components/schemas/SELocalAccountIdentification"
+            - $ref: "#/components/schemas/SGLocalAccountIdentification"
             - $ref: "#/components/schemas/UKLocalAccountIdentification"
             - $ref: "#/components/schemas/USLocalAccountIdentification"
           x-addedInVersion: "3"
@@ -3645,6 +3652,13 @@ components:
             - trust
             - unincorporatedPartnership
           type: string
+        verificationDeadlines:
+          description: List of verification deadlines and the capabilities that will be disallowed if verification errors are not resolved.
+          items:
+            $ref: "#/components/schemas/VerificationDeadline"
+          readOnly: true
+          type: array
+          x-addedInVersion: "3"
       required:
         - id
       type: object
@@ -4178,6 +4192,29 @@ components:
         - accountNumber
         - clearingNumber
       type: object
+    SGLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 4- to 19-digit bank account number, without separators or whitespace.
+          maxLength: 19
+          minLength: 4
+          type: string
+        bic:
+          description: The bank's 8- or 11-character BIC or SWIFT code.
+          maxLength: 11
+          minLength: 8
+          type: string
+        type:
+          default: sgLocal
+          description: "**sgLocal**"
+          enum:
+            - sgLocal
+          type: string
+      required:
+        - accountNumber
+        - bic
+      type: object
     ServiceError:
       properties:
         errorCode:
@@ -4531,6 +4568,74 @@ components:
         - type
         - accountNumber
         - routingNumber
+      type: object
+    VerificationDeadline:
+      properties:
+        capabilities:
+          description: The names of the capabilities to be disallowed.
+          items:
+            enum:
+              - acceptExternalFunding
+              - acceptPspFunding
+              - acceptTransactionInRestrictedCountries
+              - acceptTransactionInRestrictedCountriesCommercial
+              - acceptTransactionInRestrictedCountriesConsumer
+              - acceptTransactionInRestrictedIndustries
+              - acceptTransactionInRestrictedIndustriesCommercial
+              - acceptTransactionInRestrictedIndustriesConsumer
+              - acquiring
+              - atmWithdrawal
+              - atmWithdrawalCommercial
+              - atmWithdrawalConsumer
+              - atmWithdrawalInRestrictedCountries
+              - atmWithdrawalInRestrictedCountriesCommercial
+              - atmWithdrawalInRestrictedCountriesConsumer
+              - authorisedPaymentInstrumentUser
+              - getGrantOffers
+              - issueBankAccount
+              - issueCard
+              - issueCardCommercial
+              - issueCardConsumer
+              - localAcceptance
+              - payout
+              - payoutToTransferInstrument
+              - processing
+              - receiveFromBalanceAccount
+              - receiveFromPlatformPayments
+              - receiveFromThirdParty
+              - receiveFromTransferInstrument
+              - receiveGrants
+              - receivePayments
+              - sendToBalanceAccount
+              - sendToThirdParty
+              - sendToTransferInstrument
+              - thirdPartyFunding
+              - useCard
+              - useCardCommercial
+              - useCardConsumer
+              - useCardInRestrictedCountries
+              - useCardInRestrictedCountriesCommercial
+              - useCardInRestrictedCountriesConsumer
+              - useCardInRestrictedIndustries
+              - useCardInRestrictedIndustriesCommercial
+              - useCardInRestrictedIndustriesConsumer
+              - withdrawFromAtm
+              - withdrawFromAtmCommercial
+              - withdrawFromAtmConsumer
+              - withdrawFromAtmInRestrictedCountries
+              - withdrawFromAtmInRestrictedCountriesCommercial
+              - withdrawFromAtmInRestrictedCountriesConsumer
+            type: string
+          readOnly: true
+          type: array
+        expiresAt:
+          description: The date that verification is due by before capabilities are disallowed.
+          format: date-time
+          readOnly: true
+          type: string
+      required:
+        - expiresAt
+        - capabilities
       type: object
     VerificationError:
       properties:
