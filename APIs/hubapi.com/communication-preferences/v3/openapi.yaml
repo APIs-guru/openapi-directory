@@ -63,7 +63,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - communication_preferences.read_write
@@ -113,7 +112,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - communication_preferences.read_write
@@ -154,7 +152,6 @@ paths:
       security:
         - oauth2_legacy:
             - communication_preferences.write
-        - hapikey: []
         - oauth2_legacy:
             - communication_preferences.read_write
         - private_apps_legacy: []
@@ -193,7 +190,6 @@ paths:
       security:
         - oauth2_legacy:
             - communication_preferences.write
-        - hapikey: []
         - oauth2_legacy:
             - communication_preferences.read_write
         - private_apps_legacy: []
@@ -440,10 +436,6 @@ components:
         - subscriptionDefinitions
       type: object
   securitySchemes:
-    hapikey:
-      in: query
-      name: hapikey
-      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:

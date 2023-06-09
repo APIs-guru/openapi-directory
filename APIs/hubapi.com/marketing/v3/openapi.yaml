@@ -529,7 +529,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - developer_hapikey: []
       tags:
         - Settings_External
@@ -560,7 +559,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - developer_hapikey: []
       tags:
         - Settings_External
@@ -1411,10 +1409,6 @@ components:
       type: object
   securitySchemes:
     developer_hapikey:
-      in: query
-      name: hapikey
-      type: apiKey
-    hapikey:
       in: query
       name: hapikey
       type: apiKey

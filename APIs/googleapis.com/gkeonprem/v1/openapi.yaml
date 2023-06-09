@@ -866,48 +866,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/bareMetalStandaloneNodePools:enroll":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Enrolls an existing bare metal standalone node pool to the Anthos On-Prem API within a given project and location. Through enrollment, an existing standalone node pool will become Anthos On-Prem API managed. The corresponding GCP resources will be created.
-      operationId: gkeonprem.projects.locations.bareMetalStandaloneClusters.bareMetalStandaloneNodePools.enroll
-      parameters:
-        - description: Required. The parent resource where this node pool will be created. projects/{project}/locations/{location}/bareMetalStandaloneClusters/{cluster}
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/EnrollBareMetalStandaloneNodePoolRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1/{parent}/vmwareAdminClusters":
     get:
       description: Lists VMware admin clusters in a given project and location.
@@ -2308,6 +2266,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        upgradePolicy:
+          $ref: "#/components/schemas/BareMetalNodePoolUpgradePolicy"
+          description: The worker node pool upgrade policy.
       type: object
     BareMetalNodePoolConfig:
       description: BareMetalNodePoolConfig describes the configuration of all nodes within a given bare metal node pool.
@@ -2337,12 +2298,31 @@ components:
             $ref: "#/components/schemas/NodeTaint"
           type: array
       type: object
+    BareMetalNodePoolUpgradePolicy:
+      description: BareMetalNodePoolUpgradePolicy defines the node pool upgrade policy.
+      properties:
+        parallelUpgradeConfig:
+          $ref: "#/components/schemas/BareMetalParallelUpgradeConfig"
+          description: The parallel upgrade settings for worker node pools.
+      type: object
     BareMetalOsEnvironmentConfig:
       description: Specifies operating system settings for cluster provisioning.
       properties:
         packageRepoExcluded:
           description: Whether the package repo should not be included when initializing bare metal machines.
           type: boolean
+      type: object
+    BareMetalParallelUpgradeConfig:
+      description: BareMetalParallelUpgradeConfig defines the parallel upgrade settings for worker node pools.
+      properties:
+        concurrentNodes:
+          description: Required. The maximum number of nodes that can be upgraded at once. Defaults to 1.
+          format: int32
+          type: integer
+        minimumAvailableNodes:
+          description: The minimum number of nodes that should be healthy and available during an upgrade. If set to the default value of 0, it is possible that none of the nodes will be available during an upgrade.
+          format: int32
+          type: integer
       type: object
     BareMetalPortConfig:
       description: Specifies load balancer ports for the bare metal user cluster.
@@ -2391,6 +2371,11 @@ components:
     BareMetalVersionInfo:
       description: Contains information about a specific Anthos on bare metal version.
       properties:
+        dependencies:
+          description: The list of upgrade dependencies for this version.
+          items:
+            $ref: "#/components/schemas/UpgradeDependency"
+          type: array
         hasDependencies:
           description: If set, the cluster dependencies (e.g. the admin cluster, other user clusters managed by the same admin cluster, version skew policy, etc) must be upgraded before this version can be installed or upgraded to.
           type: boolean
@@ -2479,16 +2464,6 @@ components:
       description: Message for enrolling an existing bare metal node pool to the GKE on-prem API.
       properties:
         bareMetalNodePoolId:
-          description: User provided OnePlatform identifier that is used as part of the resource name. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
-          type: string
-        validateOnly:
-          description: If set, only validate the request, but do not actually enroll the node pool.
-          type: boolean
-      type: object
-    EnrollBareMetalStandaloneNodePoolRequest:
-      description: Message for enrolling an existing bare metal standalone node pool to the GKE on-prem API.
-      properties:
-        bareMetalStandaloneNodePoolId:
           description: User provided OnePlatform identifier that is used as part of the resource name. This value must be up to 40 characters and follow RFC-1123 (https://tools.ietf.org/html/rfc1123) format.
           type: string
         validateOnly:
@@ -2913,6 +2888,22 @@ components:
           items:
             type: string
           type: array
+      type: object
+    UpgradeDependency:
+      description: UpgradeDependency represents a dependency when upgrading a resource.
+      properties:
+        currentVersion:
+          description: Current version of the dependency e.g. 1.15.0.
+          type: string
+        localName:
+          description: Local name of the dependency.
+          type: string
+        resourceName:
+          description: Resource name of the dependency.
+          type: string
+        targetVersion:
+          description: Target version of the dependency e.g. 1.16.1. This is the version the dependency needs to be upgraded to before a resource can be upgraded.
+          type: string
       type: object
     ValidationCheck:
       description: ValidationCheck represents the result of preflight check.

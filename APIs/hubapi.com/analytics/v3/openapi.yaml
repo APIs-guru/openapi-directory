@@ -33,7 +33,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - analytics.behavioral_events.send
@@ -156,10 +155,6 @@ components:
         - message
       type: object
   securitySchemes:
-    hapikey:
-      in: query
-      name: hapikey
-      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:

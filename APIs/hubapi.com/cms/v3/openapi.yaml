@@ -166,7 +166,6 @@ paths:
         - oauth2:
             - cms.domains.read
         - private_apps: []
-        - hapikey: []
         - private_apps: []
         - oauth2:
             - cms.domains.write
@@ -226,7 +225,6 @@ paths:
         - oauth2:
             - cms.domains.read
         - private_apps: []
-        - hapikey: []
         - private_apps: []
         - oauth2:
             - cms.domains.write
@@ -418,10 +416,6 @@ components:
         - after
       type: object
   securitySchemes:
-    hapikey:
-      in: query
-      name: hapikey
-      type: apiKey
     oauth2:
       flows:
         authorizationCode:

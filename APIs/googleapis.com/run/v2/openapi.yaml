@@ -1725,6 +1725,11 @@ components:
           description: Output only. Email address of the authenticated creator.
           readOnly: true
           type: string
+        customAudiences:
+          description: Custom audiences that can be used in the audience field of ID token for authenticated requests.
+          items:
+            type: string
+          type: array
         deleteTime:
           description: Output only. The deletion time.
           format: google-datetime

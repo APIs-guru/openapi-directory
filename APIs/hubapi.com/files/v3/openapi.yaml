@@ -58,7 +58,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -85,7 +84,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -118,7 +116,6 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -345,7 +342,6 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -373,7 +369,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -415,7 +410,6 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -452,7 +446,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -497,7 +490,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -525,7 +517,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -589,7 +580,6 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -617,7 +607,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -769,7 +758,6 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -797,7 +785,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -827,7 +814,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -855,7 +841,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -898,7 +883,6 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -926,7 +910,6 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -969,7 +952,6 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
-        - hapikey: []
         - private_apps_legacy: []
         - oauth2_legacy:
             - files
@@ -1611,10 +1593,6 @@ components:
         - status
       type: object
   securitySchemes:
-    hapikey:
-      in: query
-      name: hapikey
-      type: apiKey
     oauth2_legacy:
       flows:
         authorizationCode:
