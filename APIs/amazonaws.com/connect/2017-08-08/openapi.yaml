@@ -12387,6 +12387,222 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /search-hours-of-operations:
+    post:
+      operationId: SearchHoursOfOperations
+      description: 'Searches the hours of operation in an Amazon Connect instance, with optional filtering.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchHoursOfOperationsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InstanceId
+              properties:
+                InstanceId:
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                NextToken:
+                  description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+                  type: string
+                  minLength: 1
+                  maxLength: 2500
+                MaxResults:
+                  description: The maximum number of results to return per page.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                SearchFilter:
+                  description: Filters to be applied to search results.
+                  type: object
+                  properties:
+                    TagFilter:
+                      $ref: '#/components/schemas/ControlPlaneTagFilter'
+                SearchCriteria:
+                  description: The search criteria to be used to return hours of operations.
+                  type: object
+                  properties:
+                    OrConditions:
+                      allOf:
+                        - $ref: '#/components/schemas/HoursOfOperationSearchConditionList'
+                        - description: A list of conditions which would be applied together with an OR condition.
+                    AndConditions:
+                      allOf:
+                        - $ref: '#/components/schemas/HoursOfOperationSearchConditionList'
+                        - description: A list of conditions which would be applied together with an AND condition.
+                    StringCondition:
+                      allOf:
+                        - $ref: '#/components/schemas/StringCondition'
+                        - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, <code>timezone</code>, and <code>resourceID</code>.</p> </note>'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /search-prompts:
+    post:
+      operationId: SearchPrompts
+      description: 'Searches prompts in an Amazon Connect instance, with optional filtering.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchPromptsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InstanceId
+              properties:
+                InstanceId:
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                NextToken:
+                  description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+                  type: string
+                  minLength: 1
+                  maxLength: 2500
+                MaxResults:
+                  description: The maximum number of results to return per page.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                SearchFilter:
+                  description: Filters to be applied to search results.
+                  type: object
+                  properties:
+                    TagFilter:
+                      $ref: '#/components/schemas/ControlPlaneTagFilter'
+                SearchCriteria:
+                  description: The search criteria to be used to return prompts.
+                  type: object
+                  properties:
+                    OrConditions:
+                      allOf:
+                        - $ref: '#/components/schemas/PromptSearchConditionList'
+                        - description: A list of conditions which would be applied together with an OR condition.
+                    AndConditions:
+                      allOf:
+                        - $ref: '#/components/schemas/PromptSearchConditionList'
+                        - description: A list of conditions which would be applied together with an AND condition.
+                    StringCondition:
+                      allOf:
+                        - $ref: '#/components/schemas/StringCondition'
+                        - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /search-queues:
     post:
       operationId: SearchQueues
@@ -12484,11 +12700,121 @@ paths:
                         - $ref: '#/components/schemas/QueueSearchConditionList'
                         - description: A list of conditions which would be applied together with an AND condition.
                     StringCondition:
-                      $ref: '#/components/schemas/StringCondition'
+                      allOf:
+                        - $ref: '#/components/schemas/StringCondition'
+                        - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
                     QueueTypeCondition:
                       allOf:
                         - $ref: '#/components/schemas/SearchableQueueType'
                         - description: The type of queue.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /search-quick-connects:
+    post:
+      operationId: SearchQuickConnects
+      description: 'Searches quick connects in an Amazon Connect instance, with optional filtering.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchQuickConnectsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InstanceId
+              properties:
+                InstanceId:
+                  description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                NextToken:
+                  description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+                  type: string
+                  minLength: 1
+                  maxLength: 2500
+                MaxResults:
+                  description: The maximum number of results to return per page.
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                SearchFilter:
+                  description: Filters to be applied to search results.
+                  type: object
+                  properties:
+                    TagFilter:
+                      $ref: '#/components/schemas/ControlPlaneTagFilter'
+                SearchCriteria:
+                  description: The search criteria to be used to return quick connects.
+                  type: object
+                  properties:
+                    OrConditions:
+                      allOf:
+                        - $ref: '#/components/schemas/QuickConnectSearchConditionList'
+                        - description: A list of conditions which would be applied together with an OR condition.
+                    AndConditions:
+                      allOf:
+                        - $ref: '#/components/schemas/QuickConnectSearchConditionList'
+                        - description: A list of conditions which would be applied together with an AND condition.
+                    StringCondition:
+                      allOf:
+                        - $ref: '#/components/schemas/StringCondition'
+                        - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -12594,7 +12920,9 @@ paths:
                         - $ref: '#/components/schemas/RoutingProfileSearchConditionList'
                         - description: A list of conditions which would be applied together with an AND condition.
                     StringCondition:
-                      $ref: '#/components/schemas/StringCondition'
+                      allOf:
+                        - $ref: '#/components/schemas/StringCondition'
+                        - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -12806,7 +13134,7 @@ paths:
                     StringCondition:
                       allOf:
                         - $ref: '#/components/schemas/StringCondition'
-                        - description: A leaf node condition which can be used to specify a string condition.
+                        - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
                     HierarchyGroupCondition:
                       allOf:
                         - $ref: '#/components/schemas/HierarchyGroupCondition'
@@ -17951,13 +18279,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/AvailableNumbersList'
             - description: A list of available phone numbers that you can claim to your Amazon Connect instance or traffic distribution group.
-    SearchQueuesResponse:
+    SearchHoursOfOperationsResponse:
       type: object
       properties:
-        Queues:
+        HoursOfOperations:
           allOf:
-            - $ref: '#/components/schemas/QueueSearchSummaryList'
-            - description: Information about the queues.
+            - $ref: '#/components/schemas/HoursOfOperationList'
+            - description: Information about the hours of operations.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken2500'
@@ -17965,7 +18293,7 @@ components:
         ApproximateTotalCount:
           allOf:
             - $ref: '#/components/schemas/ApproximateTotalCount'
-            - description: The total number of queues which matched your search query.
+            - description: The total number of hours of operations which matched your search query.
     ControlPlaneTagFilter:
       type: object
       properties:
@@ -17982,10 +18310,10 @@ components:
             - $ref: '#/components/schemas/TagCondition'
             - description: 'A leaf node condition which can be used to specify a tag condition. '
       description: '<p>An object that can be used to specify Tag conditions inside the <code>SearchFilter</code>. This accepts an <code>OR</code> of <code>AND</code> (List of List) input where: </p> <ul> <li> <p>Top level list specifies conditions that need to be applied with <code>OR</code> operator</p> </li> <li> <p>Inner list specifies conditions that need to be applied with <code>AND</code> operator.</p> </li> </ul>'
-    QueueSearchConditionList:
+    HoursOfOperationSearchConditionList:
       type: array
       items:
-        $ref: '#/components/schemas/QueueSearchCriteria'
+        $ref: '#/components/schemas/HoursOfOperationSearchCriteria'
     StringCondition:
       type: object
       properties:
@@ -18001,11 +18329,68 @@ components:
           allOf:
             - $ref: '#/components/schemas/StringComparisonType'
             - description: The type of comparison to be made when evaluating the string condition.
-      description: '<p>A leaf node condition which can be used to specify a string condition. </p> <note> <p>The currently supported value for <code>FieldName</code>: <code>name</code> </p> </note>'
+      description: 'A leaf node condition which can be used to specify a string condition. '
+    SearchPromptsResponse:
+      type: object
+      properties:
+        Prompts:
+          allOf:
+            - $ref: '#/components/schemas/PromptList'
+            - description: Information about the prompts.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken2500'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+        ApproximateTotalCount:
+          allOf:
+            - $ref: '#/components/schemas/ApproximateTotalCount'
+            - description: The total number of quick connects which matched your search query.
+    PromptSearchConditionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PromptSearchCriteria'
+    SearchQueuesResponse:
+      type: object
+      properties:
+        Queues:
+          allOf:
+            - $ref: '#/components/schemas/QueueSearchSummaryList'
+            - description: Information about the queues.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken2500'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+        ApproximateTotalCount:
+          allOf:
+            - $ref: '#/components/schemas/ApproximateTotalCount'
+            - description: The total number of queues which matched your search query.
+    QueueSearchConditionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QueueSearchCriteria'
     SearchableQueueType:
       type: string
       enum:
         - STANDARD
+    SearchQuickConnectsResponse:
+      type: object
+      properties:
+        QuickConnects:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectSearchSummaryList'
+            - description: Information about the quick connects.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken2500'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+        ApproximateTotalCount:
+          allOf:
+            - $ref: '#/components/schemas/ApproximateTotalCount'
+            - description: The total number of quick connects which matched your search query.
+    QuickConnectSearchConditionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuickConnectSearchCriteria'
     SearchRoutingProfilesResponse:
       type: object
       properties:
@@ -21004,7 +21389,7 @@ components:
         Description:
           allOf:
             - $ref: '#/components/schemas/PromptDescription'
-            - description: A description for the prompt.
+            - description: The description of the prompt.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -22659,8 +23044,34 @@ components:
             - $ref: '#/components/schemas/MinutesLimit60'
             - description: The minutes.
       description: The start time or end time for an hours of operation.
+    HoursOfOperationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/HoursOfOperation'
     HoursOfOperationName:
       type: string
+    HoursOfOperationSearchCriteria:
+      type: object
+      properties:
+        OrConditions:
+          allOf:
+            - $ref: '#/components/schemas/HoursOfOperationSearchConditionList'
+            - description: A list of conditions which would be applied together with an OR condition.
+        AndConditions:
+          allOf:
+            - $ref: '#/components/schemas/HoursOfOperationSearchConditionList'
+            - description: A list of conditions which would be applied together with an AND condition.
+        StringCondition:
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+            - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, <code>timezone</code>, and <code>resourceID</code>.</p> </note>'
+      description: The search criteria to be used to return hours of operations.
+    HoursOfOperationSearchFilter:
+      type: object
+      properties:
+        TagFilter:
+          $ref: '#/components/schemas/ControlPlaneTagFilter'
+      description: Filters to be applied to search results.
     HoursOfOperationSummary:
       type: object
       properties:
@@ -23421,10 +23832,36 @@ components:
       type: integer
       minimum: 1
       maximum: 99
+    PromptList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Prompt'
     PromptName:
       type: string
       minLength: 1
       maxLength: 256
+    PromptSearchCriteria:
+      type: object
+      properties:
+        OrConditions:
+          allOf:
+            - $ref: '#/components/schemas/PromptSearchConditionList'
+            - description: A list of conditions which would be applied together with an OR condition.
+        AndConditions:
+          allOf:
+            - $ref: '#/components/schemas/PromptSearchConditionList'
+            - description: A list of conditions which would be applied together with an AND condition.
+        StringCondition:
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+            - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
+      description: The search criteria to be used to return prompts.
+    PromptSearchFilter:
+      type: object
+      properties:
+        TagFilter:
+          $ref: '#/components/schemas/ControlPlaneTagFilter'
+      description: Filters to be applied to search results.
     PromptSummary:
       type: object
       properties:
@@ -23472,7 +23909,9 @@ components:
             - $ref: '#/components/schemas/QueueSearchConditionList'
             - description: A list of conditions which would be applied together with an AND condition.
         StringCondition:
-          $ref: '#/components/schemas/StringCondition'
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+            - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
         QueueTypeCondition:
           allOf:
             - $ref: '#/components/schemas/SearchableQueueType'
@@ -23508,6 +23947,32 @@ components:
             - $ref: '#/components/schemas/QueueType'
             - description: The type of queue.
       description: Contains summary information about a queue.
+    QuickConnectSearchCriteria:
+      type: object
+      properties:
+        OrConditions:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectSearchConditionList'
+            - description: A list of conditions which would be applied together with an OR condition.
+        AndConditions:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectSearchConditionList'
+            - description: A list of conditions which would be applied together with an AND condition.
+        StringCondition:
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+            - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
+      description: The search criteria to be used to return quick connects.
+    QuickConnectSearchFilter:
+      type: object
+      properties:
+        TagFilter:
+          $ref: '#/components/schemas/ControlPlaneTagFilter'
+      description: Filters to be applied to search results.
+    QuickConnectSearchSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuickConnect'
     QuickConnectSummary:
       type: object
       properties:
@@ -23690,7 +24155,9 @@ components:
             - $ref: '#/components/schemas/RoutingProfileSearchConditionList'
             - description: A list of conditions which would be applied together with an AND condition.
         StringCondition:
-          $ref: '#/components/schemas/StringCondition'
+          allOf:
+            - $ref: '#/components/schemas/StringCondition'
+            - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
       description: <p>The search criteria to be used to return routing profiles.</p> <note> <p>The <code>name</code> and <code>description</code> fields support "contains" queries with a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths outside of this range will throw invalid results. </p> </note>
     RoutingProfileSearchFilter:
       type: object
@@ -23843,6 +24310,58 @@ components:
           allOf:
             - $ref: '#/components/schemas/LargeNextToken'
             - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+    SearchHoursOfOperationsRequest:
+      type: object
+      required:
+        - InstanceId
+      title: SearchHoursOfOperationsRequest
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken2500'
+            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResult100'
+            - description: The maximum number of results to return per page.
+        SearchFilter:
+          allOf:
+            - $ref: '#/components/schemas/HoursOfOperationSearchFilter'
+            - description: Filters to be applied to search results.
+        SearchCriteria:
+          allOf:
+            - $ref: '#/components/schemas/HoursOfOperationSearchCriteria'
+            - description: The search criteria to be used to return hours of operations.
+    SearchPromptsRequest:
+      type: object
+      required:
+        - InstanceId
+      title: SearchPromptsRequest
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken2500'
+            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResult100'
+            - description: The maximum number of results to return per page.
+        SearchFilter:
+          allOf:
+            - $ref: '#/components/schemas/PromptSearchFilter'
+            - description: Filters to be applied to search results.
+        SearchCriteria:
+          allOf:
+            - $ref: '#/components/schemas/PromptSearchCriteria'
+            - description: The search criteria to be used to return prompts.
     SearchQueuesRequest:
       type: object
       required:
@@ -23869,6 +24388,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/QueueSearchCriteria'
             - description: <p>The search criteria to be used to return queues.</p> <note> <p>The <code>name</code> and <code>description</code> fields support "contains" queries with a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths outside of this range will throw invalid results. </p> </note>
+    SearchQuickConnectsRequest:
+      type: object
+      required:
+        - InstanceId
+      title: SearchQuickConnectsRequest
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken2500'
+            - description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResult100'
+            - description: The maximum number of results to return per page.
+        SearchFilter:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectSearchFilter'
+            - description: Filters to be applied to search results.
+        SearchCriteria:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectSearchCriteria'
+            - description: The search criteria to be used to return quick connects.
     SearchRoutingProfilesRequest:
       type: object
       required:
@@ -23965,7 +24510,7 @@ components:
         StringCondition:
           allOf:
             - $ref: '#/components/schemas/StringCondition'
-            - description: A leaf node condition which can be used to specify a string condition.
+            - description: '<p>A leaf node condition which can be used to specify a string condition.</p> <note> <p>The currently supported values for <code>FieldName</code> are <code>name</code>, <code>description</code>, and <code>resourceID</code>.</p> </note>'
         HierarchyGroupCondition:
           allOf:
             - $ref: '#/components/schemas/HierarchyGroupCondition'
