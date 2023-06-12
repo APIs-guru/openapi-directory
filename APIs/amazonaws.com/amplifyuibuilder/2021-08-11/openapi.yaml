@@ -287,7 +287,7 @@ paths:
   '/app/{appId}/environment/{environmentName}/forms':
     post:
       operationId: CreateForm
-      description: Creates a new form for an Amplify app.
+      description: Creates a new form for an Amplify.
       responses:
         '200':
           description: Success
@@ -1390,6 +1390,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/app/{appId}/environment/{environmentName}/codegen-jobs/{id}':
+    get:
+      operationId: GetCodegenJob
+      description: Returns an existing code generation job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCodegenJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique ID of the Amplify app associated with the code generation job.
+          schema:
+            type: string
+            pattern: 'd[a-z0-9]+'
+            minLength: 1
+            maxLength: 20
+        - name: environmentName
+          in: path
+          required: true
+          description: The name of the backend environment that is a part of the Amplify app associated with the code generation job.
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          description: The unique ID of the code generation job.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/app/{appId}/environment/{environmentName}/metadata':
     get:
       operationId: GetMetadata
@@ -1434,6 +1499,156 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/app/{appId}/environment/{environmentName}/codegen-jobs':
+    get:
+      operationId: ListCodegenJobs
+      description: Retrieves a list of code generation jobs for a specified Amplify app and backend environment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCodegenJobsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique ID for the Amplify app.
+          schema:
+            type: string
+            pattern: 'd[a-z0-9]+'
+            minLength: 1
+            maxLength: 20
+        - name: environmentName
+          in: path
+          required: true
+          description: The name of the backend environment that is a part of the Amplify app.
+          schema:
+            type: string
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to request the next page of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of jobs to retrieve.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartCodegenJob
+      description: Starts a code generation job for for a specified Amplify app and backend environment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartCodegenJobResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: appId
+          in: path
+          required: true
+          description: The unique ID for the Amplify app.
+          schema:
+            type: string
+            pattern: 'd[a-z0-9]+'
+            minLength: 1
+            maxLength: 20
+        - name: environmentName
+          in: path
+          required: true
+          description: The name of the backend environment that is a part of the Amplify app.
+          schema:
+            type: string
+        - name: clientToken
+          in: query
+          required: false
+          description: The idempotency token used to ensure that the code generation job request completes only once.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - codegenJobToCreate
+              properties:
+                codegenJobToCreate:
+                  description: The code generation job resource configuration.
+                  type: object
+                  properties:
+                    renderConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/CodegenJobRenderConfig'
+                        - description: The code generation configuration for the codegen job.
+                    genericDataSchema:
+                      allOf:
+                        - $ref: '#/components/schemas/CodegenJobGenericDataSchema'
+                        - description: The data schema to use for a code generation job.
+                    autoGenerateForms:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies whether to autogenerate forms in the code generation job.
+                    features:
+                      allOf:
+                        - $ref: '#/components/schemas/CodegenFeatureFlags'
+                        - description: The feature flags for a code generation job.
+                    tags:
+                      allOf:
+                        - $ref: '#/components/schemas/Tags'
+                        - description: One or more key-value pairs to use when tagging the code generation job data.
   '/app/{appId}/environment/{environmentName}/metadata/features/{featureName}':
     put:
       operationId: PutMetadataFlag
@@ -1811,6 +2026,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The pagination token that's included if more results are available.
+    GetCodegenJobResponse:
+      type: object
+      properties:
+        job:
+          allOf:
+            - $ref: '#/components/schemas/CodegenJob'
+            - description: The configuration settings for the code generation job.
+    ThrottlingException: {}
     GetComponentResponse:
       type: object
       properties:
@@ -1842,6 +2065,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/Theme'
             - description: Represents the configuration settings for the theme.
+    ListCodegenJobsResponse:
+      type: object
+      required:
+        - entities
+      properties:
+        entities:
+          allOf:
+            - $ref: '#/components/schemas/CodegenJobSummaryList'
+            - description: The list of code generation jobs for the Amplify app.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token that's included if more results are available.
     ListComponentsResponse:
       type: object
       required:
@@ -1895,6 +2131,60 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: The date and time when the new access token expires.
+    StartCodegenJobResponse:
+      type: object
+      properties:
+        entity:
+          allOf:
+            - $ref: '#/components/schemas/CodegenJob'
+            - description: The code generation job for a UI component that is associated with an Amplify app.
+    CodegenJobRenderConfig:
+      type: object
+      properties:
+        react:
+          allOf:
+            - $ref: '#/components/schemas/ReactStartCodegenJobData'
+            - description: The name of the <code>ReactStartCodegenJobData</code> object.
+      description: Describes the configuration information for rendering the UI component associated the code generation job.
+    CodegenJobGenericDataSchema:
+      type: object
+      required:
+        - dataSourceType
+        - models
+        - enums
+        - nonModels
+      properties:
+        dataSourceType:
+          allOf:
+            - $ref: '#/components/schemas/CodegenJobGenericDataSourceType'
+            - description: 'The type of the data source for the schema. Currently, the only valid value is an Amplify <code>DataStore</code>.'
+        models:
+          allOf:
+            - $ref: '#/components/schemas/CodegenGenericDataModels'
+            - description: The name of a <code>CodegenGenericDataModel</code>.
+        enums:
+          allOf:
+            - $ref: '#/components/schemas/CodegenGenericDataEnums'
+            - description: The name of a <code>CodegenGenericDataEnum</code>.
+        nonModels:
+          allOf:
+            - $ref: '#/components/schemas/CodegenGenericDataNonModels'
+            - description: The name of a <code>CodegenGenericDataNonModel</code>.
+      description: Describes the data schema for a code generation job.
+    Boolean:
+      type: boolean
+    CodegenFeatureFlags:
+      type: object
+      properties:
+        isRelationshipSupported:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifes whether a code generation job supports data relationships.
+        isNonModelSupported:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether a code generation job supports non models.
+      description: Describes the feature flags that you can specify for a code generation job.
     UpdateComponentResponse:
       type: object
       properties:
@@ -2046,11 +2336,320 @@ components:
             - $ref: '#/components/schemas/MutationActionSetStateParameter'
             - description: A key-value pair that specifies the state property name and its initial value.
       description: Represents the event action configuration for an element of a <code>Component</code> or <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components. <code>ActionParameters</code> defines the action that is performed when an event occurs on the component.
-    Boolean:
-      type: boolean
+    AppId:
+      type: string
+      pattern: 'd[a-z0-9]+'
+      minLength: 1
+      maxLength: 20
+    AssociatedFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    CodegenGenericDataEnumValuesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    CodegenGenericDataEnum:
+      type: object
+      required:
+        - values
+      properties:
+        values:
+          allOf:
+            - $ref: '#/components/schemas/CodegenGenericDataEnumValuesList'
+            - description: The list of enum values in the generic data schema.
+      description: Describes the enums in a generic data schema.
+    CodegenGenericDataEnums:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/CodegenGenericDataEnum'
+    CodegenGenericDataFieldDataType:
+      type: string
+      enum:
+        - ID
+        - String
+        - Int
+        - Float
+        - AWSDate
+        - AWSTime
+        - AWSDateTime
+        - AWSTimestamp
+        - AWSEmail
+        - AWSURL
+        - AWSIPAddress
+        - Boolean
+        - AWSJSON
+        - AWSPhone
+        - Enum
+        - Model
+        - NonModel
+    CodegenGenericDataRelationshipType:
+      type: object
+      required:
+        - type
+        - relatedModelName
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/GenericDataRelationshipType'
+            - description: The data relationship type.
+        relatedModelName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the related model in the data relationship.
+        relatedModelFields:
+          allOf:
+            - $ref: '#/components/schemas/RelatedModelFieldsList'
+            - description: The related model fields in the data relationship.
+        canUnlinkAssociatedModel:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the relationship can unlink the associated model.
+        relatedJoinFieldName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the related join field in the data relationship.
+        relatedJoinTableName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the related join table in the data relationship.
+        belongsToFieldOnRelatedModel:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The value of the <code>belongsTo</code> field on the related data model. '
+        associatedFields:
+          allOf:
+            - $ref: '#/components/schemas/AssociatedFieldsList'
+            - description: The associated fields of the data relationship.
+        isHasManyIndex:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the <code>@index</code> directive is supported for a <code>hasMany</code> data relationship.
+      description: Describes the relationship between generic data models.
+    CodegenGenericDataField:
+      type: object
+      required:
+        - dataType
+        - dataTypeValue
+        - required
+        - readOnly
+        - isArray
+      properties:
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/CodegenGenericDataFieldDataType'
+            - description: The data type for the generic data field.
+        dataTypeValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value of the data type for the generic data field.
+        required:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the generic data field is required.
+        readOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the generic data field is read-only.
+        isArray:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the generic data field is an array.
+        relationship:
+          allOf:
+            - $ref: '#/components/schemas/CodegenGenericDataRelationshipType'
+            - description: The relationship of the generic data schema.
+      description: Describes a field in a generic data schema.
+    CodegenGenericDataFields:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/CodegenGenericDataField'
+    CodegenPrimaryKeysList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    CodegenGenericDataModel:
+      type: object
+      required:
+        - fields
+        - primaryKeys
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/CodegenGenericDataFields'
+            - description: The fields in the generic data model.
+        isJoinTable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the generic data model is a join table.
+        primaryKeys:
+          allOf:
+            - $ref: '#/components/schemas/CodegenPrimaryKeysList'
+            - description: The primary keys of the generic data model.
+      description: Describes a model in a generic data schema.
+    CodegenGenericDataModels:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/CodegenGenericDataModel'
+    CodegenGenericDataNonModelFields:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/CodegenGenericDataField'
+    CodegenGenericDataNonModel:
+      type: object
+      required:
+        - fields
+      properties:
+        fields:
+          allOf:
+            - $ref: '#/components/schemas/CodegenGenericDataNonModelFields'
+            - description: The fields in a generic data schema non model.
+      description: Describes a non-model in a generic data schema.
+    CodegenGenericDataNonModels:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/CodegenGenericDataNonModel'
+    GenericDataRelationshipType:
+      type: string
+      enum:
+        - HAS_MANY
+        - HAS_ONE
+        - BELONGS_TO
+    RelatedModelFieldsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    CodegenJobStatus:
+      type: string
+      enum:
+        - in_progress
+        - failed
+        - succeeded
+    CodegenJobAsset:
+      type: object
+      properties:
+        downloadUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL to use to access the asset.
+      description: Describes an asset for a code generation job.
     SyntheticTimestamp_date_time:
       type: string
       format: date-time
+    CodegenJob:
+      type: object
+      required:
+        - id
+        - appId
+        - environmentName
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique ID for the code generation job.
+        appId:
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The ID of the Amplify app associated with the code generation job.
+        environmentName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the backend environment associated with the code generation job.
+        renderConfig:
+          $ref: '#/components/schemas/CodegenJobRenderConfig'
+        genericDataSchema:
+          $ref: '#/components/schemas/CodegenJobGenericDataSchema'
+        autoGenerateForms:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether to autogenerate forms in the code generation job.
+        features:
+          $ref: '#/components/schemas/CodegenFeatureFlags'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/CodegenJobStatus'
+            - description: The status of the code generation job.
+        statusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The customized status message for the code generation job.
+        asset:
+          allOf:
+            - $ref: '#/components/schemas/CodegenJobAsset'
+            - description: The <code>CodegenJobAsset</code> to use for the code generation job.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: One or more key-value pairs to use when tagging the code generation job.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time that the code generation job was created.
+        modifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time that the code generation job was modified.
+      description: Describes the configuration for a code generation job that is associated with an Amplify app.
+    CodegenJobGenericDataSourceType:
+      type: string
+      enum:
+        - DataStore
+    ReactStartCodegenJobData:
+      type: object
+      properties:
+        module:
+          allOf:
+            - $ref: '#/components/schemas/JSModule'
+            - description: The JavaScript module type.
+        target:
+          allOf:
+            - $ref: '#/components/schemas/JSTarget'
+            - description: The ECMAScript specification to use.
+        script:
+          allOf:
+            - $ref: '#/components/schemas/JSScript'
+            - description: The file type to use for a JavaScript project.
+        renderTypeDeclarations:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the code generation job should render type declaration files.
+        inlineSourceMap:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the code generation job should render inline source maps.
+      description: Describes the code generation job configuration for a React project.
+    CodegenJobSummary:
+      type: object
+      required:
+        - appId
+        - environmentName
+        - id
+      properties:
+        appId:
+          allOf:
+            - $ref: '#/components/schemas/AppId'
+            - description: The unique ID of the Amplify app associated with the code generation job.
+        environmentName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the backend environment associated with the code generation job.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The unique ID for the code generation job summary.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time that the code generation job summary was created.
+        modifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The time that the code generation job summary was modified.
+      description: A summary of the basic information about the code generation job.
+    CodegenJobSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodegenJobSummary'
     Component:
       type: object
       required:
@@ -3104,6 +3703,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FormSummary'
+    GetCodegenJobRequest:
+      type: object
+      title: GetCodegenJobRequest
+      properties: {}
     GetComponentRequest:
       type: object
       title: GetComponentRequest
@@ -3119,6 +3722,30 @@ components:
     GetThemeRequest:
       type: object
       title: GetThemeRequest
+      properties: {}
+    JSModule:
+      type: string
+      enum:
+        - es2020
+        - esnext
+    JSScript:
+      type: string
+      enum:
+        - jsx
+        - tsx
+        - js
+    JSTarget:
+      type: string
+      enum:
+        - es2015
+        - es2020
+    ListCodegenJobsLimit:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListCodegenJobsRequest:
+      type: object
+      title: ListCodegenJobsRequest
       properties: {}
     ListComponentsLimit:
       type: integer
@@ -3245,6 +3872,42 @@ components:
             - $ref: '#/components/schemas/SortDirection'
             - description: 'The direction of the sort, either ascending or descending.'
       description: Describes how to sort the data that you bind to a component.
+    StartCodegenJobData:
+      type: object
+      required:
+        - renderConfig
+      properties:
+        renderConfig:
+          allOf:
+            - $ref: '#/components/schemas/CodegenJobRenderConfig'
+            - description: The code generation configuration for the codegen job.
+        genericDataSchema:
+          allOf:
+            - $ref: '#/components/schemas/CodegenJobGenericDataSchema'
+            - description: The data schema to use for a code generation job.
+        autoGenerateForms:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether to autogenerate forms in the code generation job.
+        features:
+          allOf:
+            - $ref: '#/components/schemas/CodegenFeatureFlags'
+            - description: The feature flags for a code generation job.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: One or more key-value pairs to use when tagging the code generation job data.
+      description: The code generation job resource configuration.
+    StartCodegenJobRequest:
+      type: object
+      required:
+        - codegenJobToCreate
+      title: StartCodegenJobRequest
+      properties:
+        codegenJobToCreate:
+          allOf:
+            - $ref: '#/components/schemas/StartCodegenJobData'
+            - description: The code generation job resource configuration.
     TagKey:
       type: string
       pattern: '(?!aws:)[a-zA-Z+-=._:/]+'

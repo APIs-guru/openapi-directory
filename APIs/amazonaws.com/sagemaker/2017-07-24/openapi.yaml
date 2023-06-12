@@ -18619,7 +18619,7 @@ components:
         PipelineName:
           allOf:
             - $ref: '#/components/schemas/PipelineNameOrArn'
-            - description: The name of the pipeline to describe.
+            - description: The name or Amazon Resource Name (ARN) of the pipeline to describe.
     DescribePipelineDefinitionForExecutionResponse:
       type: object
       properties:
@@ -19861,7 +19861,7 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: 'The maximum number of AppImageConfigs to return in the response. The default value is 10. '
+            - description: 'The total number of items to return in the response. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the response. To resume pagination, provide the <code>NextToken</code> value in the as part of a subsequent call. The default value is 10.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -19916,7 +19916,7 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: Returns a list up to a specified limit.
+            - description: 'The total number of items to return in the response. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the response. To resume pagination, provide the <code>NextToken</code> value in the as part of a subsequent call. The default value is 10.'
         SortOrder:
           allOf:
             - $ref: '#/components/schemas/SortOrder'
@@ -20465,7 +20465,7 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: Returns a list up to a specified limit.
+            - description: 'The total number of items to return in the response. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the response. To resume pagination, provide the <code>NextToken</code> value in the as part of a subsequent call. The default value is 10.'
     ListEdgeDeploymentPlansResponse:
       type: object
       required:
@@ -22375,7 +22375,7 @@ components:
         PipelineName:
           allOf:
             - $ref: '#/components/schemas/PipelineNameOrArn'
-            - description: The name of the pipeline.
+            - description: The name or Amazon Resource Name (ARN) of the pipeline.
         CreatedAfter:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -22596,7 +22596,7 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: Returns a list up to a specified limit.
+            - description: 'The total number of items to return in the response. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the response. To resume pagination, provide the <code>NextToken</code> value in the as part of a subsequent call. The default value is 10.'
         SortOrder:
           allOf:
             - $ref: '#/components/schemas/SortOrder'
@@ -22659,7 +22659,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'A token for getting the next set of actions, if there are any.'
+            - description: 'If the previous response was truncated, you will receive this token. Use it in your next request to receive the next set of results.'
         StudioLifecycleConfigs:
           allOf:
             - $ref: '#/components/schemas/StudioLifecycleConfigsList'
@@ -22671,7 +22671,7 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: The maximum number of Studio Lifecycle Configurations to return in the response. The default value is 10.
+            - description: 'The total number of items to return in the response. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the response. To resume pagination, provide the <code>NextToken</code> value in the as part of a subsequent call. The default value is 10.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -23047,7 +23047,7 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: Returns a list up to a specified limit.
+            - description: 'The total number of items to return in the response. If the total number of items available is more than the value specified, a <code>NextToken</code> is provided in the response. To resume pagination, provide the <code>NextToken</code> value in the as part of a subsequent call. The default value is 10.'
         SortOrder:
           allOf:
             - $ref: '#/components/schemas/SortOrder'
@@ -23453,7 +23453,7 @@ components:
         PipelineName:
           allOf:
             - $ref: '#/components/schemas/PipelineNameOrArn'
-            - description: The name of the pipeline.
+            - description: The name or Amazon Resource Name (ARN) of the pipeline.
         PipelineExecutionDisplayName:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionName'
@@ -26210,7 +26210,7 @@ components:
         ContentType:
           allOf:
             - $ref: '#/components/schemas/ContentType'
-            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, <code>image/*</code> </p> </li> <li> <p>TextClassification: <code>text/csv;header=present</code> </p> </li> </ul>'
+            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or <code>image/*</code>. The default value is <code>image/*</code>.</p> </li> <li> <p>TextClassification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> </ul>'
         CompressionType:
           allOf:
             - $ref: '#/components/schemas/CompressionType'
@@ -27939,6 +27939,8 @@ components:
         - ml_p3
         - ml_g4dn
         - ml_inf1
+        - ml_inf2
+        - ml_trn1
         - ml_eia2
         - jetson_tx1
         - jetson_tx2
@@ -34363,7 +34365,7 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/TrainingInstanceType'
-            - description: 'The instance type used to run hyperparameter optimization tuning jobs. See <a href="https://docs.aws.amazon.com/notebooks-available-instance-types.html"> descriptions of instance types</a> for more information.'
+            - description: 'The instance type used to run hyperparameter optimization tuning jobs. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html"> descriptions of instance types</a> for more information.'
         InstanceCount:
           allOf:
             - $ref: '#/components/schemas/TrainingInstanceCount'
@@ -34478,7 +34480,7 @@ components:
         InstanceCount:
           allOf:
             - $ref: '#/components/schemas/TrainingInstanceCount'
-            - description: 'The number of instances of the type specified by <code>InstanceType</code>. Choose an instance count larger than 1 for distributed training algorithms. See <a href="https://docs.aws.amazon.com/data-parallel-use-api.html">SageMaker distributed training jobs</a> for more information.'
+            - description: 'The number of instances of the type specified by <code>InstanceType</code>. Choose an instance count larger than 1 for distributed training algorithms. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html">Step 2: Launch a SageMaker Distributed Training Job Using the SageMaker Python SDK</a> for more information.'
         VolumeSizeInGB:
           allOf:
             - $ref: '#/components/schemas/VolumeSizeInGB'

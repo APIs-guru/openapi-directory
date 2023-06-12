@@ -830,6 +830,18 @@ paths:
                   enum:
                     - DIRECT
                     - VPC_ENDPOINT
+                ConnectionProperties:
+                  description: The connection properties of an outbound connection.
+                  type: object
+                  properties:
+                    Endpoint:
+                      allOf:
+                        - $ref: '#/components/schemas/Endpoint'
+                        - description: <important> <p>The Endpoint attribute cannot be modified. </p> </important> <p>The endpoint of the remote domain. Applicable for VPC_ENDPOINT connection mode.</p>
+                    CrossClusterSearch:
+                      allOf:
+                        - $ref: '#/components/schemas/CrossClusterSearchConnectionProperties'
+                        - description: The connection properties for cross cluster search.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4841,6 +4853,17 @@ components:
             - $ref: '#/components/schemas/Region'
             - description: The Amazon Web Services Region in which the domain is located.
       description: Information about an Amazon OpenSearch Service domain.
+    Endpoint:
+      type: string
+      pattern: '^[A-Za-z0-9\-\.]+$'
+    CrossClusterSearchConnectionProperties:
+      type: object
+      properties:
+        SkipUnavailable:
+          allOf:
+            - $ref: '#/components/schemas/SkipUnavailableStatus'
+            - description: Status of SkipUnavailable param for outbound connection.
+      description: Cross cluster search specific connection properties.
     CreatePackageResponse:
       type: object
       properties:
@@ -6342,16 +6365,17 @@ components:
         - DIRECT
         - VPC_ENDPOINT
       description: <p>The connection mode for the cross-cluster connection.</p> <ul> <li> <p> <b>DIRECT</b> - Used for cross-cluster search or cross-cluster replication.</p> </li> <li> <p> <b>VPC_ENDPOINT</b> - Used for remote reindex between Amazon OpenSearch Service VPC domains.</p> </li> </ul>
-    Endpoint:
-      type: string
-      pattern: '^[A-Za-z0-9\-\.]+$'
     ConnectionProperties:
       type: object
       properties:
         Endpoint:
           allOf:
             - $ref: '#/components/schemas/Endpoint'
-            - description: The endpoint of the remote domain.
+            - description: <important> <p>The Endpoint attribute cannot be modified. </p> </important> <p>The endpoint of the remote domain. Applicable for VPC_ENDPOINT connection mode.</p>
+        CrossClusterSearch:
+          allOf:
+            - $ref: '#/components/schemas/CrossClusterSearchConnectionProperties'
+            - description: The connection properties for cross cluster search.
       description: The connection properties of an outbound connection.
     ConnectionStatusMessage:
       type: string
@@ -6694,6 +6718,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConnectionMode'
             - description: The connection mode.
+        ConnectionProperties:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionProperties'
+            - description: The <code>ConnectionProperties</code> for the outbound connection.
       description: Container for the parameters to the <code>CreateOutboundConnection</code> operation.
     OutboundConnectionStatus:
       type: object
@@ -6851,6 +6879,12 @@ components:
     CreatedAt:
       type: string
       format: date-time
+    SkipUnavailableStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+      description: <p>Status of SkipUnavailable param for outbound connection.</p> <ul> <li> <p> <b>ENABLED</b> - The SkipUnavailable param is enabled for the connection.</p> </li> <li> <p> <b>DISABLED</b> - The SkipUnavailable param is disabled for the connection.</p> </li> </ul>
     DeleteDomainRequest:
       type: object
       title: DeleteDomainRequest
@@ -7221,7 +7255,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DescribePackagesFilterValue'
-      minItems: 1
     DescribePackagesFilterList:
       type: array
       description: A list of <code>DescribePackagesFilter</code> to filter the packages included in a <code>DescribePackages</code> response.
