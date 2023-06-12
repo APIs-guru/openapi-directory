@@ -3989,14 +3989,14 @@ components:
       description: Data specific to web streams.
       properties:
         defaultUri:
-          description: 'Immutable. Domain name of the web app being measured, or empty. Example: "http://www.google.com", "https://www.google.com"'
+          description: 'Domain name of the web app being measured, or empty. Example: "http://www.google.com", "https://www.google.com"'
           type: string
         firebaseAppId:
           description: Output only. ID of the corresponding web app in Firebase, if any. This ID can change if the web app is deleted and recreated.
           readOnly: true
           type: string
         measurementId:
-          description: 'Output only. Analytics "Measurement ID", without the "G-" prefix. Example: "G-1A2BCD345E" would just be "1A2BCD345E"'
+          description: 'Output only. Analytics Measurement ID. Example: "G-1A2BCD345E"'
           readOnly: true
           type: string
       type: object
@@ -4080,7 +4080,7 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaEnhancedMeasurementSettings:
-      description: Singleton resource under a WebDataStream, configuring measurement of additional site interactions and content.
+      description: Singleton resource under a web DataStream, configuring measurement of additional site interactions and content.
       properties:
         fileDownloadsEnabled:
           description: If enabled, capture a file download event each time a link is clicked with a common document, compressed file, application, video, or audio extension.

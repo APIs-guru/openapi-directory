@@ -24,7 +24,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: ManagementNotificationService-v1
-  x-timestamp: 2023-05-30T15:24:27Z
+  x-timestamp: 2023-06-09T18:22:41Z
 tags: []
 components:
   examples:
@@ -474,10 +474,6 @@ components:
           type: string
       type: object
   securitySchemes:
-    ApiKeyAuth:
-      in: header
-      name: X-API-Key
-      type: apiKey
     BasicAuth:
       scheme: basic
       type: http
@@ -505,7 +501,7 @@ webhooks:
                 $ref: "#/components/schemas/AccountNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Merchant account created
       tags:
         - Merchant account
@@ -540,7 +536,7 @@ webhooks:
                 $ref: "#/components/schemas/AccountNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Merchant account capability updated
       tags:
         - Merchant account
@@ -571,7 +567,7 @@ webhooks:
                 $ref: "#/components/schemas/PaymentMethodNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Payment method created
       tags:
         - Payment method

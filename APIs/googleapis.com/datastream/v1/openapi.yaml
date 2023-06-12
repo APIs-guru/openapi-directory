@@ -1085,7 +1085,7 @@ components:
           readOnly: true
           type: string
         state:
-          description: Backfill job state.
+          description: Output only. Backfill job state.
           enum:
             - STATE_UNSPECIFIED
             - NOT_STARTED
@@ -1095,6 +1095,7 @@ components:
             - FAILED
             - COMPLETED
             - UNSUPPORTED
+          readOnly: true
           type: string
         trigger:
           description: Backfill job's triggering reason.
@@ -2209,12 +2210,13 @@ components:
             $ref: "#/components/schemas/ValidationMessage"
           type: array
         state:
-          description: Validation execution status.
+          description: Output only. Validation execution status.
           enum:
             - STATE_UNSPECIFIED
             - NOT_EXECUTED
             - FAILED
             - PASSED
+          readOnly: true
           type: string
       type: object
     ValidationMessage:

@@ -1385,6 +1385,58 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
+  "/sql/v1beta4/projects/{project}/instances/{instance}/reencrypt":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Reencrypt CMEK instance with latest key version.
+      operationId: sql.instances.reencrypt
+      parameters:
+        - description: ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InstancesReencryptRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sqlservice.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/sqlservice.admin
+      tags:
+        - instances
   "/sql/v1beta4/projects/{project}/instances/{instance}/rescheduleMaintenance":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2757,6 +2809,21 @@ components:
           description: This is always `sql#backupContext`.
           type: string
       type: object
+    BackupReencryptionConfig:
+      description: Backup Reencryption Config
+      properties:
+        backupLimit:
+          description: Backup re-encryption limit
+          format: int32
+          type: integer
+        backupType:
+          description: Type of backups users want to re-encrypt.
+          enum:
+            - BACKUP_TYPE_UNSPECIFIED
+            - AUTOMATED
+            - ON_DEMAND
+          type: string
+      type: object
     BackupRetentionSettings:
       description: We currently only support backup retention by specifying the number of backups we will retain.
       properties:
@@ -2955,6 +3022,13 @@ components:
             - SQLSERVER_2019_ENTERPRISE
             - SQLSERVER_2019_EXPRESS
             - SQLSERVER_2019_WEB
+            - SQLSERVER_2022_STANDARD
+            - SQLSERVER_2022_ENTERPRISE
+            - SQLSERVER_2022_EXPRESS
+            - SQLSERVER_2022_WEB
+          type: string
+        dnsName:
+          description: The dns name of the instance.
           type: string
         ipAddresses:
           description: The assigned IP addresses for the instance.
@@ -3080,6 +3154,10 @@ components:
             - SQLSERVER_2019_ENTERPRISE
             - SQLSERVER_2019_EXPRESS
             - SQLSERVER_2019_WEB
+            - SQLSERVER_2022_STANDARD
+            - SQLSERVER_2022_ENTERPRISE
+            - SQLSERVER_2022_EXPRESS
+            - SQLSERVER_2022_WEB
           type: string
         diskEncryptionConfiguration:
           $ref: "#/components/schemas/DiskEncryptionConfiguration"
@@ -3317,10 +3395,10 @@ components:
                 - DIFF
               type: string
             copyOnly:
-              description: Whether or not the export will be exeucted with COPY_ONLY, SQL Server only deprecated as the behavior should default to copy_only = true use differential_base instead
+              description: "Deprecated: copy_only is deprecated. Use differential_base instead"
               type: boolean
             differentialBase:
-              description: Whether or not the backup can be use as differential base only non copy only backup can be served as differential base
+              description: Whether or not the backup can be used as a differential base copy_only backup can not be served as differential base
               type: boolean
             stripeCount:
               description: Option for specifying how many stripes to use for the export. If blank, and the value of the striped field is true, the number of stripes is automatically chosen.
@@ -3454,6 +3532,10 @@ components:
               - SQLSERVER_2019_ENTERPRISE
               - SQLSERVER_2019_EXPRESS
               - SQLSERVER_2019_WEB
+              - SQLSERVER_2022_STANDARD
+              - SQLSERVER_2022_ENTERPRISE
+              - SQLSERVER_2022_EXPRESS
+              - SQLSERVER_2022_WEB
             type: string
           type: array
         inBeta:
@@ -3709,6 +3791,13 @@ components:
           description: This is always `sql#instancesListServerCas`.
           type: string
       type: object
+    InstancesReencryptRequest:
+      description: Database Instance reencrypt request.
+      properties:
+        backupReencryptionConfig:
+          $ref: "#/components/schemas/BackupReencryptionConfig"
+          description: Configuration specific to backup re-encryption
+      type: object
     InstancesRestoreBackupRequest:
       description: Database instance restore backup request.
       properties:
@@ -3961,6 +4050,7 @@ components:
             - LOG_CLEANUP
             - AUTO_RESTART
             - REENCRYPT
+            - SWITCHOVER
           type: string
         selfLink:
           description: The URI of this resource.

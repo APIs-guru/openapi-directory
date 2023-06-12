@@ -639,35 +639,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Create an Instance.
-      operationId: baremetalsolution.projects.locations.instances.create
-      parameters:
-        - description: Required. The parent project and location.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Instance"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v2/{parent}/luns":
     get:
       description: List storage volume luns for given storage volume.
@@ -1596,6 +1567,11 @@ components:
         privateNetwork:
           $ref: "#/components/schemas/NetworkAddress"
           description: Private network address, if any. Filled if InstanceConfig.multivlan_config is false.
+        sshKeyNames:
+          description: List of names of ssh keys used to provision the instance.
+          items:
+            type: string
+          type: array
         userNote:
           description: User note field, it can be used by customers to add additional information for the BMS Ops team .
           type: string

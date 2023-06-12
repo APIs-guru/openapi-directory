@@ -4432,7 +4432,7 @@ components:
           description: UI configuration for this task Also associated with the METADATA mask.
       type: object
     EnterpriseCrmFrontendsEventbusProtoTriggerConfig:
-      description: "Configuration detail of a trigger. Next available id: 19"
+      description: "Configuration detail of a trigger. Next available id: 20"
       properties:
         alertConfig:
           description: An alert threshold configuration for the [trigger + client + workflow] tuple. If these values are not specified in the trigger config, default values will be populated by the system. Note that there must be exactly one alert threshold configured per [client + trigger + workflow] when published.
@@ -4483,6 +4483,9 @@ components:
           description: Optional. When set, Eventbus will run the task specified in the trigger_criteria and validate the result using the trigger_criteria.condition, and only execute the workflow when result is true.
         triggerId:
           description: The backend trigger ID.
+          type: string
+        triggerName:
+          description: Optional. Name of the trigger This is added to identify the type of trigger. This is avoid the logic on triggerId to identify the trigger_type and push the same to monitoring.
           type: string
         triggerNumber:
           description: Required. A number to uniquely identify each trigger config within the workflow on UI.
@@ -6898,6 +6901,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudIntegrationsV1alphaNextTask"
           type: array
+        trigger:
+          description: 'Optional. Name of the trigger. Example: "API Trigger", "Cloud Pub Sub Trigger" When set will be sent out to monitoring dashabord for tracking purpose.'
+          type: string
         triggerId:
           description: Optional. The backend trigger ID.
           type: string
