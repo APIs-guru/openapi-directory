@@ -167,6 +167,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
       requestBody:
         required: true
         content:
@@ -181,6 +183,83 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/LensAlias'
+                  minItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workloads/{WorkloadId}/associateProfiles':
+    patch:
+      operationId: AssociateProfiles
+      description: Associate a profile with a workload.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: WorkloadId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '[0-9a-f]{32}'
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ProfileArns
+              properties:
+                ProfileArns:
+                  description: The list of profile ARNs to associate with the workload.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProfileArn'
                   minItems: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -264,13 +343,15 @@ paths:
                 - ClientRequestToken
               properties:
                 SharedWith:
-                  description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.'
+                  description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload, lens, or profile is shared.'
                   type: string
                   minLength: 12
                   maxLength: 2048
                 ClientRequestToken:
                   description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
+                  minLength: 1
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -366,7 +447,7 @@ paths:
               - ASSOCIATING
               - ASSOCIATED
               - FAILED
-            description: The status of a workload share.
+            description: The status of the share request.
   '/lenses/{LensAlias}/versions':
     post:
       operationId: CreateLensVersion
@@ -451,6 +532,8 @@ paths:
                 ClientRequestToken:
                   description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
+                  minLength: 1
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -521,6 +604,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
       requestBody:
         required: true
         content:
@@ -539,6 +624,8 @@ paths:
                 ClientRequestToken:
                   description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
+                  minLength: 1
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -547,6 +634,280 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /profiles:
+    post:
+      operationId: CreateProfile
+      description: Create a profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProfileOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ProfileName
+                - ProfileDescription
+                - ProfileQuestions
+                - ClientRequestToken
+              properties:
+                ProfileName:
+                  description: Name of the profile.
+                  type: string
+                  pattern: '^[A-Za-z0-9-_.,:/()@!&?#+''’\s]+$'
+                  minLength: 3
+                  maxLength: 100
+                ProfileDescription:
+                  description: The profile description.
+                  type: string
+                  pattern: '^[A-Za-z0-9-_.,:/()@!&?#+''’\s]+$'
+                  minLength: 3
+                  maxLength: 100
+                ProfileQuestions:
+                  description: The profile questions.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProfileQuestionUpdate'
+                ClientRequestToken:
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+                Tags:
+                  description: The tags assigned to the profile.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profiles/{ProfileArn}/shares':
+    post:
+      operationId: CreateProfileShare
+      description: Create a profile share.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProfileShareOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: ProfileArn
+          in: path
+          required: true
+          description: The profile ARN.
+          schema:
+            type: string
+            pattern: 'arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:profile/[a-z0-9]+'
+            maxLength: 2084
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SharedWith
+                - ClientRequestToken
+              properties:
+                SharedWith:
+                  description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload, lens, or profile is shared.'
+                  type: string
+                  minLength: 12
+                  maxLength: 2048
+                ClientRequestToken:
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProfileShares
+      description: List profile shares.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProfileSharesOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: ProfileArn
+          in: path
+          required: true
+          description: The profile ARN.
+          schema:
+            type: string
+            pattern: 'arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:profile/[a-z0-9]+'
+            maxLength: 2084
+        - name: SharedWithPrefix
+          in: query
+          required: false
+          description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the profile is shared.'
+          schema:
+            type: string
+            maxLength: 100
+        - name: NextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            description: The token to use to retrieve the next set of results.
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of results to return for this request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: Status
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            enum:
+              - ACCEPTED
+              - REJECTED
+              - PENDING
+              - REVOKED
+              - EXPIRED
+              - ASSOCIATING
+              - ASSOCIATED
+              - FAILED
+            description: The status of the share request.
   /workloads:
     post:
       operationId: CreateWorkload
@@ -683,6 +1044,8 @@ paths:
                 ClientRequestToken:
                   description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
+                  minLength: 1
+                  maxLength: 2048
                 Tags:
                   description: The tags to be associated with the workload.
                   type: object
@@ -707,6 +1070,12 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/ApplicationArn'
+                  maxItems: 1
+                ProfileArns:
+                  description: The list of profile ARNs associated with the workload.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProfileArn'
                   maxItems: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -778,6 +1147,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
       requestBody:
         required: true
         content:
@@ -790,12 +1161,12 @@ paths:
                 - ClientRequestToken
               properties:
                 SharedWith:
-                  description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.'
+                  description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload, lens, or profile is shared.'
                   type: string
                   minLength: 12
                   maxLength: 2048
                 PermissionType:
-                  description: Permission granted on a workload share.
+                  description: Permission granted on a share request.
                   type: string
                   enum:
                     - READONLY
@@ -803,6 +1174,8 @@ paths:
                 ClientRequestToken:
                   description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
+                  minLength: 1
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -860,6 +1233,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: SharedWithPrefix
           in: query
           required: false
@@ -897,7 +1272,7 @@ paths:
               - ASSOCIATING
               - ASSOCIATED
               - FAILED
-            description: The status of a workload share.
+            description: The status of the share request.
   '/lenses/{LensAlias}#ClientRequestToken&LensStatus':
     delete:
       operationId: DeleteLens
@@ -958,6 +1333,8 @@ paths:
           schema:
             type: string
             description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            minLength: 1
+            maxLength: 2048
         - name: LensStatus
           in: query
           required: true
@@ -1027,7 +1404,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID associated with the workload share.
+            description: The ID associated with the share.
         - name: LensAlias
           in: path
           required: true
@@ -1044,6 +1421,154 @@ paths:
           schema:
             type: string
             description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profiles/{ProfileArn}#ClientRequestToken':
+    delete:
+      operationId: DeleteProfile
+      description: '<p>Delete a profile.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your profile with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your profile available to those other accounts. Those other accounts may continue to access and use your shared profile even if you delete the profile from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: ProfileArn
+          in: path
+          required: true
+          description: The profile ARN.
+          schema:
+            type: string
+            pattern: 'arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:profile/[a-z0-9]+'
+            maxLength: 2084
+        - name: ClientRequestToken
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            minLength: 1
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profiles/{ProfileArn}/shares/{ShareId}#ClientRequestToken':
+    delete:
+      operationId: DeleteProfileShare
+      description: Delete a profile share.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: ShareId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '[0-9a-f]{32}'
+            description: The ID associated with the share.
+        - name: ProfileArn
+          in: path
+          required: true
+          description: The profile ARN.
+          schema:
+            type: string
+            pattern: 'arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:profile/[a-z0-9]+'
+            maxLength: 2084
+        - name: ClientRequestToken
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            minLength: 1
+            maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1104,6 +1629,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: ClientRequestToken
           in: query
           required: true
@@ -1111,6 +1638,8 @@ paths:
           schema:
             type: string
             description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            minLength: 1
+            maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1170,7 +1699,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID associated with the workload share.
+            description: The ID associated with the share.
         - name: WorkloadId
           in: path
           required: true
@@ -1179,6 +1708,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: ClientRequestToken
           in: query
           required: true
@@ -1186,6 +1717,8 @@ paths:
           schema:
             type: string
             description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+            minLength: 1
+            maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1246,6 +1779,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
       requestBody:
         required: true
         content:
@@ -1260,6 +1795,83 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/LensAlias'
+                  minItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workloads/{WorkloadId}/disassociateProfiles':
+    patch:
+      operationId: DisassociateProfiles
+      description: Disassociate a profile from a workload.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: WorkloadId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '[0-9a-f]{32}'
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ProfileArns
+              properties:
+                ProfileArns:
+                  description: The list of profile ARNs to disassociate from the workload.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProfileArn'
                   minItems: 1
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -1386,6 +1998,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: LensAlias
           in: path
           required: true
@@ -1476,6 +2090,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: LensAlias
           in: path
           required: true
@@ -1724,6 +2340,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: LensAlias
           in: path
           required: true
@@ -1805,6 +2423,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: LensAlias
           in: path
           required: true
@@ -1880,6 +2500,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: LensAlias
           in: path
           required: true
@@ -2031,6 +2653,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: MilestoneNumber
           in: path
           required: true
@@ -2040,6 +2664,196 @@ paths:
             description: <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
             minimum: 1
             maximum: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profiles/{ProfileArn}':
+    get:
+      operationId: GetProfile
+      description: Get profile information.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProfileOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: ProfileArn
+          in: path
+          required: true
+          description: The profile ARN.
+          schema:
+            type: string
+            pattern: 'arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:profile/[a-z0-9]+'
+            maxLength: 2084
+        - name: ProfileVersion
+          in: query
+          required: false
+          description: The profile version.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-]+$'
+            minLength: 1
+            maxLength: 32
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateProfile
+      description: Update a profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProfileOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: ProfileArn
+          in: path
+          required: true
+          description: The profile ARN.
+          schema:
+            type: string
+            pattern: 'arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:profile/[a-z0-9]+'
+            maxLength: 2084
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ProfileDescription:
+                  description: The profile description.
+                  type: string
+                  pattern: '^[A-Za-z0-9-_.,:/()@!&?#+''’\s]+$'
+                  minLength: 3
+                  maxLength: 100
+                ProfileQuestions:
+                  description: Profile questions.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ProfileQuestionUpdate'
+  /profileTemplate:
+    get:
+      operationId: GetProfileTemplate
+      description: Get profile template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProfileTemplateOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2098,6 +2912,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2161,6 +2977,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
       requestBody:
         required: true
         content:
@@ -2336,6 +3154,8 @@ paths:
                 ClientRequestToken:
                   description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
+                  minLength: 1
+                  maxLength: 2048
                 Tags:
                   description: Tags to associate to a lens.
                   type: object
@@ -2401,6 +3221,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: LensAlias
           in: path
           required: true
@@ -2443,6 +3265,15 @@ paths:
             type: integer
             minimum: 1
             maximum: 50
+        - name: QuestionPriority
+          in: query
+          required: false
+          description: The priority of the question.
+          schema:
+            type: string
+            enum:
+              - PRIORITIZED
+              - NONE
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2501,6 +3332,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: MaxResults
           in: query
           schema:
@@ -2609,6 +3442,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: MaxResults
           in: query
           schema:
@@ -2717,6 +3552,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: LensAlias
           in: path
           required: true
@@ -2759,6 +3596,15 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: QuestionPriority
+          in: query
+          required: false
+          description: The priority of the question.
+          schema:
+            type: string
+            enum:
+              - PRIORITIZED
+              - NONE
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2817,6 +3663,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: MilestoneNumber
           in: query
           required: false
@@ -2989,6 +3837,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: MaxResults
           in: query
           schema:
@@ -3083,6 +3933,8 @@ paths:
                   description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
                   type: string
                   pattern: '[0-9a-f]{32}'
+                  minLength: 32
+                  maxLength: 32
                 NextToken:
                   description: The token to use to retrieve the next set of results.
                   type: string
@@ -3091,6 +3943,153 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /profileNotifications/:
+    get:
+      operationId: ListProfileNotifications
+      description: List profile notifications.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProfileNotificationsOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: WorkloadId
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            pattern: '[0-9a-f]{32}'
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
+        - name: NextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            description: The token to use to retrieve the next set of results.
+        - name: MaxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: The maximum number of results to return for this request.
+            minimum: 1
+            maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /profileSummaries:
+    get:
+      operationId: ListProfiles
+      description: List profiles.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProfilesOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: ProfileNamePrefix
+          in: query
+          required: false
+          description: Prefix for profile name.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.,:/()@!&?#+''’\s]+$'
+            maxLength: 100
+        - name: ProfileOwnerType
+          in: query
+          required: false
+          description: Profile owner type.
+          schema:
+            type: string
+            enum:
+              - SELF
+              - SHARED
+        - name: NextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            description: The token to use to retrieve the next set of results.
+        - name: MaxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: The maximum number of results to return for this request.
+            minimum: 1
+            maximum: 50
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3159,6 +4158,7 @@ paths:
             enum:
               - WORKLOAD
               - LENS
+              - PROFILE
         - name: NextToken
           in: query
           required: false
@@ -3174,6 +4174,14 @@ paths:
             type: integer
             minimum: 1
             maximum: 50
+        - name: ProfileNamePrefix
+          in: query
+          required: false
+          description: Profile name prefix.
+          schema:
+            type: string
+            pattern: '^[A-Za-z0-9-_.,:/()@!&?#+''’\s]+$'
+            maxLength: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3185,7 +4193,7 @@ paths:
   '/tags/{WorkloadArn}':
     get:
       operationId: ListTagsForResource
-      description: <p>List the tags for a resource.</p> <note> <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p> </note>
+      description: '<p>List the tags for a resource.</p> <note> <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3223,7 +4231,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: <p>Adds one or more tags to the specified resource.</p> <note> <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p> </note>
+      description: '<p>Adds one or more tags to the specified resource.</p> <note> <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3345,7 +4353,7 @@ paths:
   '/tags/{WorkloadArn}#tagKeys':
     delete:
       operationId: UntagResource
-      description: '<p>Deletes specified tags from a resource.</p> <note> <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p> </note> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>'
+      description: '<p>Deletes specified tags from a resource.</p> <note> <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.</p> </note> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>'
       responses:
         '200':
           description: Success
@@ -3589,7 +4597,7 @@ paths:
           schema:
             type: string
             pattern: '[0-9a-f]{32}'
-            description: The ID associated with the workload share.
+            description: The ID associated with the share.
         - name: WorkloadId
           in: path
           required: true
@@ -3598,6 +4606,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
       requestBody:
         required: true
         content:
@@ -3608,7 +4618,7 @@ paths:
                 - PermissionType
               properties:
                 PermissionType:
-                  description: Permission granted on a workload share.
+                  description: Permission granted on a share request.
                   type: string
                   enum:
                     - READONLY
@@ -3673,6 +4683,8 @@ paths:
             type: string
             pattern: '[0-9a-f]{32}'
             description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
         - name: LensAlias
           in: path
           required: true
@@ -3699,6 +4711,95 @@ paths:
                 ClientRequestToken:
                   description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
                   type: string
+                  minLength: 1
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/workloads/{WorkloadId}/profiles/{ProfileArn}/upgrade':
+    put:
+      operationId: UpgradeProfileVersion
+      description: Upgrade a profile.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: WorkloadId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+            pattern: '[0-9a-f]{32}'
+            description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+            minLength: 32
+            maxLength: 32
+        - name: ProfileArn
+          in: path
+          required: true
+          description: The profile ARN.
+          schema:
+            type: string
+            pattern: 'arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:profile/[a-z0-9]+'
+            maxLength: 2084
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                MilestoneName:
+                  description: <p>The name of the milestone in a workload.</p> <p>Milestone names must be unique within a workload.</p>
+                  type: string
+                  minLength: 3
+                  maxLength: 100
+                ClientRequestToken:
+                  description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3770,6 +4871,10 @@ components:
     InternalServerException: {}
     AccessDeniedException: {}
     ThrottlingException: {}
+    ProfileArn:
+      type: string
+      pattern: 'arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\d:\d{12}:profile/[a-z0-9]+'
+      maxLength: 2084
     CreateLensShareOutput:
       type: object
       properties:
@@ -3795,6 +4900,40 @@ components:
         MilestoneNumber:
           $ref: '#/components/schemas/MilestoneNumber'
       description: Output of a create milestone call.
+    CreateProfileOutput:
+      type: object
+      properties:
+        ProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The profile ARN.
+        ProfileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: Version of the profile.
+    ProfileQuestionUpdate:
+      type: object
+      properties:
+        QuestionId:
+          $ref: '#/components/schemas/QuestionId'
+        SelectedChoiceIds:
+          allOf:
+            - $ref: '#/components/schemas/SelectedProfileChoiceIds'
+            - description: The selected choices.
+      description: An update to a profile question.
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    CreateProfileShareOutput:
+      type: object
+      properties:
+        ShareId:
+          $ref: '#/components/schemas/ShareId'
+        ProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The profile ARN.
     CreateWorkloadOutput:
       type: object
       properties:
@@ -3807,6 +4946,8 @@ components:
       type: string
       pattern: '[0-9]{12}'
       description: An Amazon Web Services account ID.
+      minLength: 12
+      maxLength: 12
     AwsRegion:
       type: string
       description: 'An Amazon Web Services Region, for example, <code>us-west-2</code> or <code>ap-northeast-1</code>.'
@@ -3820,10 +4961,6 @@ components:
       description: '<p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>'
       minLength: 1
       maxLength: 64
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
     TrustedAdvisorIntegrationStatus:
       type: string
       enum:
@@ -3937,6 +5074,20 @@ components:
         Milestone:
           $ref: '#/components/schemas/Milestone'
       description: Output of a get milestone call.
+    GetProfileOutput:
+      type: object
+      properties:
+        Profile:
+          allOf:
+            - $ref: '#/components/schemas/Profile'
+            - description: The profile.
+    GetProfileTemplateOutput:
+      type: object
+      properties:
+        ProfileTemplate:
+          allOf:
+            - $ref: '#/components/schemas/ProfileTemplate'
+            - description: The profile template.
     GetWorkloadOutput:
       type: object
       properties:
@@ -4056,6 +5207,33 @@ components:
             - description: List of lens notification summaries in a workload.
         NextToken:
           $ref: '#/components/schemas/NextToken'
+    ListProfileNotificationsOutput:
+      type: object
+      properties:
+        NotificationSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ProfileNotificationSummaries'
+            - description: Notification summaries.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListProfileSharesOutput:
+      type: object
+      properties:
+        ProfileShareSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ProfileShareSummaries'
+            - description: Profile share summaries.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
+    ListProfilesOutput:
+      type: object
+      properties:
+        ProfileSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ProfileSummaries'
+            - description: Profile summaries.
+        NextToken:
+          $ref: '#/components/schemas/NextToken'
     ListShareInvitationsOutput:
       type: object
       properties:
@@ -4150,6 +5328,13 @@ components:
       type: string
       description: The notes associated with the workload.
       maxLength: 2084
+    UpdateProfileOutput:
+      type: object
+      properties:
+        Profile:
+          allOf:
+            - $ref: '#/components/schemas/Profile'
+            - description: The profile.
     UpdateShareInvitationOutput:
       type: object
       properties:
@@ -4331,6 +5516,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnswerReason'
             - description: The reason why a choice is non-applicable to a question in your workload.
+        QuestionType:
+          allOf:
+            - $ref: '#/components/schemas/QuestionType'
+            - description: The type of the question.
       description: An answer summary of a lens review in a workload.
     AnswerSummaries:
       type: array
@@ -4341,10 +5530,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ChoiceAnswerSummary'
+    QuestionType:
+      type: string
+      enum:
+        - PRIORITIZED
+        - NON_PRIORITIZED
     WorkloadId:
       type: string
       pattern: '[0-9a-f]{32}'
       description: The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.
+      minLength: 32
+      maxLength: 32
     LensAliases:
       type: array
       description: <p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
@@ -4360,6 +5556,21 @@ components:
         LensAliases:
           $ref: '#/components/schemas/LensAliases'
       description: Input to associate lens reviews.
+    ProfileArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileArn'
+      minItems: 1
+    AssociateProfilesInput:
+      type: object
+      required:
+        - ProfileArns
+      title: AssociateProfilesInput
+      properties:
+        ProfileArns:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArns'
+            - description: The list of profile ARNs to associate with the workload.
     Base64String:
       type: string
       description: <p>The Base64-encoded string representation of a lens review report.</p> <p>This data can be used to create a PDF file.</p> <p>Only returned by <a>GetConsolidatedReport</a> when <code>PDF</code> format is requested.</p>
@@ -4628,6 +5839,8 @@ components:
     ClientRequestToken:
       type: string
       description: '<p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>'
+      minLength: 1
+      maxLength: 2048
     MetricType:
       type: string
       enum:
@@ -4688,7 +5901,7 @@ components:
       minimum: 0
     SharedWith:
       type: string
-      description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.'
+      description: 'The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload, lens, or profile is shared.'
       minLength: 12
       maxLength: 2048
     CreateLensShareInput:
@@ -4705,7 +5918,7 @@ components:
     ShareId:
       type: string
       pattern: '[0-9a-f]{32}'
-      description: The ID associated with the workload share.
+      description: The ID associated with the share.
     LensVersion:
       type: string
       minLength: 1
@@ -4751,6 +5964,69 @@ components:
       description: <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
       minimum: 1
       maximum: 100
+    ProfileName:
+      type: string
+      pattern: '^[A-Za-z0-9-_.,:/()@!&?#+''’\s]+$'
+      minLength: 3
+      maxLength: 100
+    ProfileDescription:
+      type: string
+      pattern: '^[A-Za-z0-9-_.,:/()@!&?#+''’\s]+$'
+      minLength: 3
+      maxLength: 100
+    ProfileQuestionUpdates:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileQuestionUpdate'
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateProfileInput:
+      type: object
+      required:
+        - ProfileName
+        - ProfileDescription
+        - ProfileQuestions
+        - ClientRequestToken
+      title: CreateProfileInput
+      properties:
+        ProfileName:
+          allOf:
+            - $ref: '#/components/schemas/ProfileName'
+            - description: Name of the profile.
+        ProfileDescription:
+          allOf:
+            - $ref: '#/components/schemas/ProfileDescription'
+            - description: The profile description.
+        ProfileQuestions:
+          allOf:
+            - $ref: '#/components/schemas/ProfileQuestionUpdates'
+            - description: The profile questions.
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the profile.
+    ProfileVersion:
+      type: string
+      pattern: '^[A-Za-z0-9-]+$'
+      minLength: 1
+      maxLength: 32
+    CreateProfileShareInput:
+      type: object
+      required:
+        - SharedWith
+        - ClientRequestToken
+      title: CreateProfileShareInput
+      properties:
+        SharedWith:
+          $ref: '#/components/schemas/SharedWith'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
     WorkloadDescription:
       type: string
       description: The description for the workload.
@@ -4808,12 +6084,6 @@ components:
       description: The list of lenses associated with the workload. Each lens is identified by its <a>LensSummary$LensAlias</a>.
       items:
         $ref: '#/components/schemas/LensAlias'
-    TagMap:
-      type: object
-      minProperties: 1
-      maxProperties: 50
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
     WorkloadDiscoveryConfig:
       type: object
       properties:
@@ -4830,6 +6100,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ApplicationArn'
+      maxItems: 1
+    WorkloadProfileArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileArn'
       maxItems: 1
     CreateWorkloadInput:
       type: object
@@ -4881,13 +6156,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkloadApplications'
             - description: List of AppRegistry application ARNs associated to the workload.
+        ProfileArns:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadProfileArns'
+            - description: The list of profile ARNs associated with the workload.
       description: Input for workload creation.
     PermissionType:
       type: string
       enum:
         - READONLY
         - CONTRIBUTOR
-      description: Permission granted on a workload share.
+      description: Permission granted on a share request.
     CreateWorkloadShareInput:
       type: object
       required:
@@ -4922,6 +6201,14 @@ components:
       type: object
       title: DeleteLensShareInput
       properties: {}
+    DeleteProfileInput:
+      type: object
+      title: DeleteProfileInput
+      properties: {}
+    DeleteProfileShareInput:
+      type: object
+      title: DeleteProfileShareInput
+      properties: {}
     DeleteWorkloadInput:
       type: object
       title: DeleteWorkloadInput
@@ -4947,6 +6234,16 @@ components:
         LensAliases:
           $ref: '#/components/schemas/LensAliases'
       description: Input to disassociate lens reviews.
+    DisassociateProfilesInput:
+      type: object
+      required:
+        - ProfileArns
+      title: DisassociateProfilesInput
+      properties:
+        ProfileArns:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArns'
+            - description: The list of profile ARNs to disassociate from the workload.
     DiscoveryIntegrationStatus:
       type: string
       enum:
@@ -5049,6 +6346,12 @@ components:
           $ref: '#/components/schemas/RiskCounts'
         NextToken:
           $ref: '#/components/schemas/NextToken'
+        Profiles:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadProfiles'
+            - description: The profiles associated with the workload.
+        PrioritizedRiskCounts:
+          $ref: '#/components/schemas/RiskCounts'
       description: A lens review of a question.
     GetLensReviewReportInput:
       type: object
@@ -5096,6 +6399,68 @@ components:
         Workload:
           $ref: '#/components/schemas/Workload'
       description: A milestone return object.
+    GetProfileInput:
+      type: object
+      title: GetProfileInput
+      properties: {}
+    Profile:
+      type: object
+      properties:
+        ProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The profile ARN.
+        ProfileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The profile version.
+        ProfileName:
+          allOf:
+            - $ref: '#/components/schemas/ProfileName'
+            - description: The profile name.
+        ProfileDescription:
+          allOf:
+            - $ref: '#/components/schemas/ProfileDescription'
+            - description: The profile description.
+        ProfileQuestions:
+          allOf:
+            - $ref: '#/components/schemas/ProfileQuestions'
+            - description: Profile questions.
+        Owner:
+          $ref: '#/components/schemas/AwsAccountId'
+        CreatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        UpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        ShareInvitationId:
+          allOf:
+            - $ref: '#/components/schemas/ShareInvitationId'
+            - description: The ID assigned to the share invitation.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags assigned to the profile.
+      description: A profile.
+    GetProfileTemplateInput:
+      type: object
+      title: GetProfileTemplateInput
+      properties: {}
+    ProfileTemplate:
+      type: object
+      properties:
+        TemplateName:
+          allOf:
+            - $ref: '#/components/schemas/ProfileName'
+            - description: The name of the profile template.
+        TemplateQuestions:
+          allOf:
+            - $ref: '#/components/schemas/TemplateQuestions'
+            - description: Profile template questions.
+        CreatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        UpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+      description: The profile template.
     GetWorkloadInput:
       type: object
       title: GetWorkloadInput
@@ -5164,6 +6529,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkloadApplications'
             - description: List of AppRegistry application ARNs associated to the workload.
+        Profiles:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadProfiles'
+            - description: Profile associated with a workload.
+        PrioritizedRiskCounts:
+          $ref: '#/components/schemas/RiskCounts'
       description: A workload return object.
     ImportLensInput:
       type: object
@@ -5264,6 +6635,11 @@ components:
       description: List of pillar review summaries of lens review in a workload.
       items:
         $ref: '#/components/schemas/PillarReviewSummary'
+    WorkloadProfiles:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkloadProfile'
+      maxItems: 1
     LensReviewSummary:
       type: object
       properties:
@@ -5286,6 +6662,12 @@ components:
         UpdatedAt:
           $ref: '#/components/schemas/Timestamp'
         RiskCounts:
+          $ref: '#/components/schemas/RiskCounts'
+        Profiles:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadProfiles'
+            - description: The profiles associated with the workload.
+        PrioritizedRiskCounts:
           $ref: '#/components/schemas/RiskCounts'
       description: A lens review summary of a workload.
     LensReviewSummaries:
@@ -5322,7 +6704,7 @@ components:
         - ASSOCIATING
         - ASSOCIATED
         - FAILED
-      description: The status of a workload share.
+      description: The status of the share request.
     StatusMessage:
       type: string
       minLength: 1
@@ -5396,6 +6778,11 @@ components:
       type: integer
       minimum: 1
       maximum: 50
+    QuestionPriority:
+      type: string
+      enum:
+        - PRIORITIZED
+        - NONE
     ListAnswersInput:
       type: object
       title: ListAnswersInput
@@ -5516,6 +6903,43 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/NotificationSummary'
+    ListProfileNotificationsInput:
+      type: object
+      title: ListProfileNotificationsInput
+      properties: {}
+    ProfileNotificationSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileNotificationSummary'
+    ListProfileSharesMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListProfileSharesInput:
+      type: object
+      title: ListProfileSharesInput
+      properties: {}
+    ProfileShareSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileShareSummary'
+    ProfileNamePrefix:
+      type: string
+      pattern: '^[A-Za-z0-9-_.,:/()@!&?#+''’\s]+$'
+      maxLength: 100
+    ProfileOwnerType:
+      type: string
+      enum:
+        - SELF
+        - SHARED
+    ListProfilesInput:
+      type: object
+      title: ListProfilesInput
+      properties: {}
+    ProfileSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileSummary'
     WorkloadNamePrefix:
       type: string
       description: An optional string added to the beginning of each workload name returned in the results.
@@ -5525,6 +6949,7 @@ components:
       enum:
         - WORKLOAD
         - LENS
+        - PROFILE
     ListShareInvitationsMaxResults:
       type: integer
       minimum: 1
@@ -5574,6 +6999,9 @@ components:
       description: A list of workload summaries.
       items:
         $ref: '#/components/schemas/WorkloadSummary'
+    MaxSelectedProfileChoices:
+      type: integer
+      minimum: 0
     MilestoneSummary:
       type: object
       properties:
@@ -5605,7 +7033,16 @@ components:
           $ref: '#/components/schemas/RiskCounts'
         ImprovementStatus:
           $ref: '#/components/schemas/WorkloadImprovementStatus'
+        Profiles:
+          allOf:
+            - $ref: '#/components/schemas/WorkloadProfiles'
+            - description: Profile associated with a workload.
+        PrioritizedRiskCounts:
+          $ref: '#/components/schemas/RiskCounts'
       description: A workload summary return object.
+    MinSelectedProfileChoices:
+      type: integer
+      minimum: 0
     NotificationSummary:
       type: object
       properties:
@@ -5689,7 +7126,174 @@ components:
           $ref: '#/components/schemas/Notes'
         RiskCounts:
           $ref: '#/components/schemas/RiskCounts'
+        PrioritizedRiskCounts:
+          $ref: '#/components/schemas/RiskCounts'
       description: A pillar review summary of a lens review.
+    ProfileQuestions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileQuestion'
+    ProfileChoice:
+      type: object
+      properties:
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+        ChoiceTitle:
+          $ref: '#/components/schemas/ChoiceTitle'
+        ChoiceDescription:
+          $ref: '#/components/schemas/ChoiceDescription'
+      description: The profile choice.
+    ProfileNotificationSummary:
+      type: object
+      properties:
+        CurrentProfileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The current profile version.
+        LatestProfileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The latest profile version.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ProfileNotificationType'
+            - description: Type of notification.
+        ProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The profile ARN.
+        ProfileName:
+          allOf:
+            - $ref: '#/components/schemas/ProfileName'
+            - description: The profile name.
+        WorkloadId:
+          $ref: '#/components/schemas/WorkloadId'
+        WorkloadName:
+          $ref: '#/components/schemas/WorkloadName'
+      description: The profile notification summary.
+    ProfileNotificationType:
+      type: string
+      enum:
+        - PROFILE_ANSWERS_UPDATED
+        - PROFILE_DELETED
+    ProfileQuestionChoices:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileChoice'
+    SelectedChoiceIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChoiceId'
+    ProfileQuestion:
+      type: object
+      properties:
+        QuestionId:
+          $ref: '#/components/schemas/QuestionId'
+        QuestionTitle:
+          $ref: '#/components/schemas/QuestionTitle'
+        QuestionDescription:
+          $ref: '#/components/schemas/QuestionDescription'
+        QuestionChoices:
+          allOf:
+            - $ref: '#/components/schemas/ProfileQuestionChoices'
+            - description: The question choices.
+        SelectedChoiceIds:
+          allOf:
+            - $ref: '#/components/schemas/SelectedChoiceIds'
+            - description: The selected choices.
+        MinSelectedChoices:
+          allOf:
+            - $ref: '#/components/schemas/MinSelectedProfileChoices'
+            - description: The minimum number of selected choices.
+        MaxSelectedChoices:
+          allOf:
+            - $ref: '#/components/schemas/MaxSelectedProfileChoices'
+            - description: The maximum number of selected choices.
+      description: A profile question.
+    SelectedProfileChoiceIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/ChoiceId'
+    ProfileShareSummary:
+      type: object
+      properties:
+        ShareId:
+          $ref: '#/components/schemas/ShareId'
+        SharedWith:
+          $ref: '#/components/schemas/SharedWith'
+        Status:
+          $ref: '#/components/schemas/ShareStatus'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: Profile share invitation status message.
+      description: Summary of a profile share.
+    ProfileSummary:
+      type: object
+      properties:
+        ProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The profile ARN.
+        ProfileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The profile version.
+        ProfileName:
+          allOf:
+            - $ref: '#/components/schemas/ProfileName'
+            - description: The profile name.
+        ProfileDescription:
+          allOf:
+            - $ref: '#/components/schemas/ProfileDescription'
+            - description: The profile description.
+        Owner:
+          $ref: '#/components/schemas/AwsAccountId'
+        CreatedAt:
+          $ref: '#/components/schemas/Timestamp'
+        UpdatedAt:
+          $ref: '#/components/schemas/Timestamp'
+      description: Summary of a profile.
+    TemplateQuestions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileTemplateQuestion'
+    ProfileTemplateChoice:
+      type: object
+      properties:
+        ChoiceId:
+          $ref: '#/components/schemas/ChoiceId'
+        ChoiceTitle:
+          $ref: '#/components/schemas/ChoiceTitle'
+        ChoiceDescription:
+          $ref: '#/components/schemas/ChoiceDescription'
+      description: A profile template choice.
+    ProfileTemplateQuestionChoices:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfileTemplateChoice'
+    ProfileTemplateQuestion:
+      type: object
+      properties:
+        QuestionId:
+          $ref: '#/components/schemas/QuestionId'
+        QuestionTitle:
+          $ref: '#/components/schemas/QuestionTitle'
+        QuestionDescription:
+          $ref: '#/components/schemas/QuestionDescription'
+        QuestionChoices:
+          allOf:
+            - $ref: '#/components/schemas/ProfileTemplateQuestionChoices'
+            - description: The question choices.
+        MinSelectedChoices:
+          allOf:
+            - $ref: '#/components/schemas/MinSelectedProfileChoices'
+            - description: The minimum number of choices selected.
+        MaxSelectedChoices:
+          allOf:
+            - $ref: '#/components/schemas/MaxSelectedProfileChoices'
+            - description: The maximum number of choices selected.
+      description: A profile template question.
     QuestionDifference:
       type: object
       properties:
@@ -5733,6 +7337,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LensArn'
             - description: The ARN for the lens.
+        ProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The profile ARN.
       description: The share invitation.
     ShareInvitationAction:
       type: string
@@ -5767,6 +7375,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/LensArn'
             - description: The ARN for the lens.
+        ProfileName:
+          allOf:
+            - $ref: '#/components/schemas/ProfileName'
+            - description: The profile name.
+        ProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The profile ARN.
       description: A share invitation summary return object.
     TagKeyList:
       type: array
@@ -5828,6 +7444,18 @@ components:
         PillarNotes:
           $ref: '#/components/schemas/PillarNotes'
       description: Input for update lens review.
+    UpdateProfileInput:
+      type: object
+      title: UpdateProfileInput
+      properties:
+        ProfileDescription:
+          allOf:
+            - $ref: '#/components/schemas/ProfileDescription'
+            - description: The profile description.
+        ProfileQuestions:
+          allOf:
+            - $ref: '#/components/schemas/ProfileQuestionUpdates'
+            - description: Profile questions.
     UpdateShareInvitationInput:
       type: object
       required:
@@ -5926,6 +7554,26 @@ components:
           $ref: '#/components/schemas/MilestoneName'
         ClientRequestToken:
           $ref: '#/components/schemas/ClientRequestToken'
+    UpgradeProfileVersionInput:
+      type: object
+      title: UpgradeProfileVersionInput
+      properties:
+        MilestoneName:
+          $ref: '#/components/schemas/MilestoneName'
+        ClientRequestToken:
+          $ref: '#/components/schemas/ClientRequestToken'
+    WorkloadProfile:
+      type: object
+      properties:
+        ProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/ProfileArn'
+            - description: The profile ARN.
+        ProfileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The profile version.
+      description: The profile associated with a workload.
     WorkloadShareSummary:
       type: object
       properties:

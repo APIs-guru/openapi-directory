@@ -115,6 +115,91 @@ servers:
     description: The drs endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /AssociateSourceNetworkStack:
+    post:
+      operationId: AssociateSourceNetworkStack
+      description: Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network. Can be used for reverting to previously deployed CloudFormation stacks.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateSourceNetworkStackResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '486':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - cfnStackName
+                - sourceNetworkID
+              properties:
+                cfnStackName:
+                  description: CloudFormation template to associate with a Source Network.
+                  type: string
+                  pattern: '^[a-zA-Z][-a-zA-Z0-9]*$'
+                  minLength: 1
+                  maxLength: 128
+                  format: password
+                sourceNetworkID:
+                  description: The Source Network ID to associate with CloudFormation template.
+                  type: string
+                  pattern: '^sn-[0-9a-zA-Z]{17}$'
+                  minLength: 20
+                  maxLength: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /CreateExtendedSourceServer:
     post:
       operationId: CreateExtendedSourceServer
@@ -258,6 +343,12 @@ paths:
                 copyTags:
                   description: Copy tags.
                   type: boolean
+                exportBucketArn:
+                  description: S3 bucket ARN to export Source Network templates.
+                  type: string
+                  pattern: '^arn:.{16,2044}$'
+                  minLength: 20
+                  maxLength: 2048
                 launchDisposition:
                   description: Launch disposition.
                   type: string
@@ -392,6 +483,7 @@ paths:
                   enum:
                     - DEFAULT
                     - CUSTOM
+                    - NONE
                 ebsEncryptionKeyArn:
                   description: The ARN of the EBS encryption key to be used during replication.
                   type: string
@@ -436,6 +528,102 @@ paths:
                 useDedicatedReplicationServer:
                   description: Whether to use a dedicated Replication Server in the replication staging area.
                   type: boolean
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateSourceNetwork:
+    post:
+      operationId: CreateSourceNetwork
+      description: Create a new Source Network resource for a provided VPC ID.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSourceNetworkResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '486':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - originAccountID
+                - originRegion
+                - vpcID
+              properties:
+                originAccountID:
+                  description: Account containing the VPC to protect.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
+                originRegion:
+                  description: Region containing the VPC to protect.
+                  type: string
+                  pattern: '^(us(-gov)?|ap|ca|cn|eu|sa|af|me)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$'
+                  minLength: 0
+                  maxLength: 255
+                tags:
+                  description: A set of tags to be associated with the Source Network resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                vpcID:
+                  description: Which VPC ID to protect.
+                  type: string
+                  pattern: '^vpc-[0-9a-fA-F]{8,}$'
+                  minLength: 12
+                  maxLength: 21
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -692,6 +880,71 @@ paths:
                   pattern: '^rct-[0-9a-zA-Z]{17}$'
                   minLength: 21
                   maxLength: 21
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteSourceNetwork:
+    post:
+      operationId: DeleteSourceNetwork
+      description: Delete Source Network resource.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSourceNetworkResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceNetworkID
+              properties:
+                sourceNetworkID:
+                  description: ID of the Source Network to delete.
+                  type: string
+                  pattern: '^sn-[0-9a-zA-Z]{17}$'
+                  minLength: 20
+                  maxLength: 20
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1292,6 +1545,94 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DescribeSourceNetworks:
+    post:
+      operationId: DescribeSourceNetworks
+      description: Lists all Source Networks or multiple Source Networks filtered by ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSourceNetworksResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filters:
+                  description: A set of filters by which to return Source Networks.
+                  type: object
+                  properties:
+                    originAccountID:
+                      allOf:
+                        - $ref: '#/components/schemas/AccountID'
+                        - description: Filter Source Networks by account ID containing the protected VPCs.
+                    originRegion:
+                      allOf:
+                        - $ref: '#/components/schemas/AwsRegion'
+                        - description: Filter Source Networks by the region containing the protected VPCs.
+                    sourceNetworkIDs:
+                      allOf:
+                        - $ref: '#/components/schemas/DescribeSourceNetworksRequestFiltersIDs'
+                        - description: An array of Source Network IDs that should be returned. An empty array means all Source Networks.
+                maxResults:
+                  description: Maximum number of Source Networks to retrieve.
+                  type: integer
+                  minimum: 1
+                nextToken:
+                  description: The token of the next Source Networks to retrieve.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /DescribeSourceServers:
     post:
       operationId: DescribeSourceServers
@@ -1504,6 +1845,77 @@ paths:
                   pattern: '^s-[0-9a-zA-Z]{17}$'
                   minLength: 19
                   maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ExportSourceNetworkCfnTemplate:
+    post:
+      operationId: ExportSourceNetworkCfnTemplate
+      description: Export the Source Network CloudFormation template to an S3 bucket.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportSourceNetworkCfnTemplateResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceNetworkID
+              properties:
+                sourceNetworkID:
+                  description: The Source Network ID to export its CloudFormation template to an S3 bucket.
+                  type: string
+                  pattern: '^sn-[0-9a-zA-Z]{17}$'
+                  minLength: 20
+                  maxLength: 20
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2370,6 +2782,151 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /StartSourceNetworkRecovery:
+    post:
+      operationId: StartSourceNetworkRecovery
+      description: Deploy VPC for the specified Source Network and modify launch templates to use this network. The VPC will be deployed using a dedicated CloudFormation stack.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSourceNetworkRecoveryResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceNetworks
+              properties:
+                deployAsNew:
+                  description: 'Don''t update existing CloudFormation Stack, recover the network using a new stack.'
+                  type: boolean
+                sourceNetworks:
+                  description: The Source Networks that we want to start a Recovery Job for.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/StartSourceNetworkRecoveryRequestNetworkEntry'
+                  minItems: 1
+                  maxItems: 100
+                tags:
+                  description: The tags to be associated with the Source Network recovery Job.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /StartSourceNetworkReplication:
+    post:
+      operationId: StartSourceNetworkReplication
+      description: Starts replication for a Source Network. This action would make the Source Network protected.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSourceNetworkReplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceNetworkID
+              properties:
+                sourceNetworkID:
+                  description: ID of the Source Network to replicate.
+                  type: string
+                  pattern: '^sn-[0-9a-zA-Z]{17}$'
+                  minLength: 20
+                  maxLength: 20
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /StopFailback:
     post:
       operationId: StopFailback
@@ -2482,6 +3039,77 @@ paths:
                   pattern: '^s-[0-9a-zA-Z]{17}$'
                   minLength: 19
                   maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /StopSourceNetworkReplication:
+    post:
+      operationId: StopSourceNetworkReplication
+      description: Stops replication for a Source Network. This action would make the Source Network unprotected.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopSourceNetworkReplicationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceNetworkID
+              properties:
+                sourceNetworkID:
+                  description: ID of the Source Network to stop replication.
+                  type: string
+                  pattern: '^sn-[0-9a-zA-Z]{17}$'
+                  minLength: 20
+                  maxLength: 20
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2857,6 +3485,12 @@ paths:
                 copyTags:
                   description: Copy tags.
                   type: boolean
+                exportBucketArn:
+                  description: S3 bucket ARN to export Source Network templates.
+                  type: string
+                  pattern: '^arn:.{16,2044}$'
+                  minLength: 20
+                  maxLength: 2048
                 launchConfigurationTemplateID:
                   description: Launch Configuration Template ID.
                   type: string
@@ -2987,6 +3621,7 @@ paths:
                   enum:
                     - DEFAULT
                     - CUSTOM
+                    - NONE
                 ebsEncryptionKeyArn:
                   description: The ARN of the EBS encryption key to be used during replication.
                   type: string
@@ -3148,6 +3783,7 @@ paths:
                   enum:
                     - DEFAULT
                     - CUSTOM
+                    - NONE
                 ebsEncryptionKeyArn:
                   description: The ARN of the EBS encryption key to be used during replication.
                   type: string
@@ -3253,6 +3889,20 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateSourceNetworkStackResponse:
+      type: object
+      properties:
+        job:
+          allOf:
+            - $ref: '#/components/schemas/Job'
+            - description: The Source Network association Job.
+    ResourceNotFoundException: {}
+    InternalServerException: {}
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    UninitializedAccountException: {}
     CreateExtendedSourceServerResponse:
       type: object
       properties:
@@ -3264,13 +3914,7 @@ components:
       type: string
       minLength: 0
       maxLength: 256
-    ResourceNotFoundException: {}
-    InternalServerException: {}
-    ServiceQuotaExceededException: {}
-    ThrottlingException: {}
     AccessDeniedException: {}
-    ValidationException: {}
-    UninitializedAccountException: {}
     CreateLaunchConfigurationTemplateResponse:
       type: object
       properties:
@@ -3386,14 +4030,23 @@ components:
       pattern: '^sg-[0-9a-fA-F]{8,}$'
       minLength: 0
       maxLength: 255
+    CreateSourceNetworkResponse:
+      type: object
+      properties:
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: ID of the created Source Network.
     DeleteJobResponse:
       type: object
       properties: {}
-    ConflictException: {}
     DeleteLaunchConfigurationTemplateResponse:
       type: object
       properties: {}
     DeleteReplicationConfigurationTemplateResponse:
+      type: object
+      properties: {}
+    DeleteSourceNetworkResponse:
       type: object
       properties: {}
     DeleteSourceServerResponse:
@@ -3496,6 +4149,33 @@ components:
       pattern: '^rct-[0-9a-zA-Z]{17}$'
       minLength: 21
       maxLength: 21
+    DescribeSourceNetworksResponse:
+      type: object
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworksList'
+            - description: An array of Source Networks.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token of the next Source Networks to retrieve.
+    AccountID:
+      type: string
+      pattern: '[0-9]{12,}'
+      minLength: 12
+      maxLength: 12
+    AwsRegion:
+      type: string
+      pattern: '^(us(-gov)?|ap|ca|cn|eu|sa|af|me)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$'
+      minLength: 0
+      maxLength: 255
+    DescribeSourceNetworksRequestFiltersIDs:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceNetworkID'
+      minItems: 0
+      maxItems: 100
     DescribeSourceServersResponse:
       type: object
       properties:
@@ -3558,6 +4238,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceCloudProperties'
             - description: Source cloud properties of the Source Server.
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: ID of the Source Network which is protecting this Source Server's network.
         sourceProperties:
           allOf:
             - $ref: '#/components/schemas/SourceProperties'
@@ -3574,6 +4258,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: The tags associated with the Source Server.
+    ExportSourceNetworkCfnTemplateResponse:
+      type: object
+      properties:
+        s3DestinationUrl:
+          allOf:
+            - $ref: '#/components/schemas/LargeBoundedString'
+            - description: S3 bucket URL where the Source Network CloudFormation template was exported to.
     GetFailbackReplicationConfigurationResponse:
       type: object
       required:
@@ -3780,6 +4471,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceServer'
             - description: The Source Server that this action was targeted on.
+    StartSourceNetworkRecoveryResponse:
+      type: object
+      properties:
+        job:
+          allOf:
+            - $ref: '#/components/schemas/Job'
+            - description: The Source Network recovery Job.
+    StartSourceNetworkRecoveryRequestNetworkEntry:
+      type: object
+      required:
+        - sourceNetworkID
+      properties:
+        cfnStackName:
+          allOf:
+            - $ref: '#/components/schemas/CfnStackName'
+            - description: CloudFormation stack name to be used for recovering the network.
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: The ID of the Source Network you want to recover.
+      description: An object representing the Source Network to recover.
+    StartSourceNetworkReplicationResponse:
+      type: object
+      properties:
+        sourceNetwork:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetwork'
+            - description: Source Network which was requested for replication.
     StopReplicationResponse:
       type: object
       properties:
@@ -3787,6 +4506,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceServer'
             - description: The Source Server that this action was targeted on.
+    StopSourceNetworkReplicationResponse:
+      type: object
+      properties:
+        sourceNetwork:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetwork'
+            - description: Source Network which was requested to stop replication.
     TerminateRecoveryInstancesResponse:
       type: object
       properties:
@@ -3838,11 +4564,6 @@ components:
       pattern: '^arn:.{16,2044}$'
       minLength: 20
       maxLength: 2048
-    AccountID:
-      type: string
-      pattern: '[0-9]{12,}'
-      minLength: 12
-      maxLength: 12
     Account:
       type: object
       properties:
@@ -3857,14 +4578,81 @@ components:
         $ref: '#/components/schemas/Account'
       minItems: 0
       maxItems: 50
+    CfnStackName:
+      type: string
+      pattern: '^[a-zA-Z][-a-zA-Z0-9]*$'
+      minLength: 1
+      maxLength: 128
+      format: password
+    SourceNetworkID:
+      type: string
+      pattern: '^sn-[0-9a-zA-Z]{17}$'
+      minLength: 20
+      maxLength: 20
+    AssociateSourceNetworkStackRequest:
+      type: object
+      required:
+        - cfnStackName
+        - sourceNetworkID
+      title: AssociateSourceNetworkStackRequest
+      properties:
+        cfnStackName:
+          allOf:
+            - $ref: '#/components/schemas/CfnStackName'
+            - description: CloudFormation template to associate with a Source Network.
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: The Source Network ID to associate with CloudFormation template.
+    Job:
+      type: object
+      required:
+        - jobID
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of a Job.
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: The date and time of when the Job was created.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DatetimeString'
+            - description: The date and time of when the Job ended.
+        initiatedBy:
+          allOf:
+            - $ref: '#/components/schemas/InitiatedBy'
+            - description: A string representing who initiated the Job.
+        jobID:
+          allOf:
+            - $ref: '#/components/schemas/JobID'
+            - description: The ID of the Job.
+        participatingResources:
+          allOf:
+            - $ref: '#/components/schemas/ParticipatingResources'
+            - description: A list of resources that the Job is acting upon.
+        participatingServers:
+          allOf:
+            - $ref: '#/components/schemas/ParticipatingServers'
+            - description: A list of servers that the Job is acting upon.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The status of the Job.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: A list of tags associated with the Job.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: The type of the Job.
+      description: A job is an asynchronous workflow.
     AwsAvailabilityZone:
       type: string
       pattern: '^(us(-gov)?|ap|ca|cn|eu|sa|af|me)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$'
-      minLength: 0
-      maxLength: 255
-    AwsRegion:
-      type: string
-      pattern: '^(us(-gov)?|ap|ca|cn|eu|sa|af|me)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$'
       minLength: 0
       maxLength: 255
     PositiveInteger:
@@ -3984,6 +4772,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Copy tags.
+        exportBucketArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: S3 bucket ARN to export Source Network templates.
         launchDisposition:
           allOf:
             - $ref: '#/components/schemas/LaunchDisposition'
@@ -4015,6 +4807,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Copy tags.
+        exportBucketArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: S3 bucket ARN to export Source Network templates.
         launchConfigurationTemplateID:
           allOf:
             - $ref: '#/components/schemas/LaunchConfigurationTemplateID'
@@ -4053,6 +4849,7 @@ components:
       enum:
         - DEFAULT
         - CUSTOM
+        - NONE
     PITPolicy:
       type: array
       items:
@@ -4151,6 +4948,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Whether to use a dedicated Replication Server in the replication staging area.
+    VpcID:
+      type: string
+      pattern: '^vpc-[0-9a-fA-F]{8,}$'
+      minLength: 12
+      maxLength: 21
+    CreateSourceNetworkRequest:
+      type: object
+      required:
+        - originAccountID
+        - originRegion
+        - vpcID
+      title: CreateSourceNetworkRequest
+      properties:
+        originAccountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account containing the VPC to protect.
+        originRegion:
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: Region containing the VPC to protect.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: A set of tags to be associated with the Source Network resource.
+        vpcID:
+          allOf:
+            - $ref: '#/components/schemas/VpcID'
+            - description: Which VPC ID to protect.
     DataReplicationErrorString:
       type: string
       enum:
@@ -4358,6 +5184,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReplicationConfigurationTemplateID'
             - description: The ID of the Replication Configuration Template to be deleted.
+    DeleteSourceNetworkRequest:
+      type: object
+      required:
+        - sourceNetworkID
+      title: DeleteSourceNetworkRequest
+      properties:
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: ID of the Source Network to delete.
     SourceServerID:
       type: string
       pattern: '^s-[0-9a-zA-Z]{17}$'
@@ -4635,6 +5471,42 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ReplicationConfigurationTemplate'
+    DescribeSourceNetworksRequestFilters:
+      type: object
+      properties:
+        originAccountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Filter Source Networks by account ID containing the protected VPCs.
+        originRegion:
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: Filter Source Networks by the region containing the protected VPCs.
+        sourceNetworkIDs:
+          allOf:
+            - $ref: '#/components/schemas/DescribeSourceNetworksRequestFiltersIDs'
+            - description: An array of Source Network IDs that should be returned. An empty array means all Source Networks.
+      description: A set of filters by which to return Source Networks.
+    DescribeSourceNetworksRequest:
+      type: object
+      title: DescribeSourceNetworksRequest
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/DescribeSourceNetworksRequestFilters'
+            - description: A set of filters by which to return Source Networks.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/StrictlyPositiveInteger'
+            - description: Maximum number of Source Networks to retrieve.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token of the next Source Networks to retrieve.
+    SourceNetworksList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceNetwork'
     DescribeSourceServersRequestFilters:
       type: object
       properties:
@@ -4733,6 +5605,44 @@ components:
       pattern: '^vol-([0-9a-fA-F]{8}|[0-9a-fA-F]{17})$'
       minLength: 10
       maxLength: 19
+    SourceNetworkData:
+      type: object
+      properties:
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: Source Network ID.
+        sourceVpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcID'
+            - description: VPC ID protected by the Source Network.
+        stackName:
+          allOf:
+            - $ref: '#/components/schemas/LargeBoundedString'
+            - description: CloudFormation stack name that was deployed for recovering the Source Network.
+        targetVpc:
+          allOf:
+            - $ref: '#/components/schemas/VpcID'
+            - description: ID of the recovered VPC following Source Network recovery.
+      description: Properties of Source Network related to a job event.
+    EventResourceData:
+      type: object
+      properties:
+        sourceNetworkData:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkData'
+            - description: Source Network properties.
+      description: Properties of resource related to a job event.
+    ExportSourceNetworkCfnTemplateRequest:
+      type: object
+      required:
+        - sourceNetworkID
+      title: ExportSourceNetworkCfnTemplateRequest
+      properties:
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: The Source Network ID to export its CloudFormation template to an S3 bucket.
     ExtensionStatus:
       type: string
       enum:
@@ -4845,6 +5755,13 @@ components:
         - DIAGNOSTIC
         - TERMINATE_RECOVERY_INSTANCES
         - TARGET_ACCOUNT
+        - CREATE_NETWORK_RECOVERY
+        - UPDATE_NETWORK_RECOVERY
+        - ASSOCIATE_NETWORK_RECOVERY
+    ParticipatingResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParticipatingResource'
     ParticipatingServers:
       type: array
       items:
@@ -4861,48 +5778,6 @@ components:
         - LAUNCH
         - TERMINATE
         - CREATE_CONVERTED_SNAPSHOT
-    Job:
-      type: object
-      required:
-        - jobID
-      properties:
-        arn:
-          allOf:
-            - $ref: '#/components/schemas/ARN'
-            - description: The ARN of a Job.
-        creationDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: The date and time of when the Job was created.
-        endDateTime:
-          allOf:
-            - $ref: '#/components/schemas/ISO8601DatetimeString'
-            - description: The date and time of when the Job ended.
-        initiatedBy:
-          allOf:
-            - $ref: '#/components/schemas/InitiatedBy'
-            - description: A string representing who initiated the Job.
-        jobID:
-          allOf:
-            - $ref: '#/components/schemas/JobID'
-            - description: The ID of the Job.
-        participatingServers:
-          allOf:
-            - $ref: '#/components/schemas/ParticipatingServers'
-            - description: A list of servers that the Job is acting upon.
-        status:
-          allOf:
-            - $ref: '#/components/schemas/JobStatus'
-            - description: The status of the Job.
-        tags:
-          allOf:
-            - $ref: '#/components/schemas/TagsMap'
-            - description: A list of tags associated with the Job.
-        type:
-          allOf:
-            - $ref: '#/components/schemas/JobType'
-            - description: The type of the Job.
-      description: A job is an asynchronous workflow.
     JobLogEvent:
       type: string
       enum:
@@ -4923,6 +5798,16 @@ components:
         - LAUNCH_FAILED
         - JOB_CANCEL
         - JOB_END
+        - DEPLOY_NETWORK_CONFIGURATION_START
+        - DEPLOY_NETWORK_CONFIGURATION_END
+        - DEPLOY_NETWORK_CONFIGURATION_FAILED
+        - UPDATE_NETWORK_CONFIGURATION_START
+        - UPDATE_NETWORK_CONFIGURATION_END
+        - UPDATE_NETWORK_CONFIGURATION_FAILED
+        - UPDATE_LAUNCH_TEMPLATE_START
+        - UPDATE_LAUNCH_TEMPLATE_END
+        - UPDATE_LAUNCH_TEMPLATE_FAILED
+        - NETWORK_RECOVERY_FAIL
     JobLogEventData:
       type: object
       properties:
@@ -4934,6 +5819,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EC2InstanceID'
             - description: The ID of a conversion server.
+        eventResourceData:
+          allOf:
+            - $ref: '#/components/schemas/EventResourceData'
+            - description: Properties of resource related to a job event.
         rawError:
           allOf:
             - $ref: '#/components/schemas/LargeBoundedString'
@@ -5118,6 +6007,26 @@ components:
         - MINUTE
         - HOUR
         - DAY
+    ParticipatingResourceID:
+      type: object
+      properties:
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: Source Network ID.
+      description: ID of a resource participating in an asynchronous Job.
+    ParticipatingResource:
+      type: object
+      properties:
+        launchStatus:
+          allOf:
+            - $ref: '#/components/schemas/LaunchStatus'
+            - description: The launch status of a participating resource.
+        participatingResourceID:
+          allOf:
+            - $ref: '#/components/schemas/ParticipatingResourceID'
+            - description: The ID of a participating resource.
+      description: Represents a resource participating in an asynchronous Job.
     ParticipatingServer:
       type: object
       properties:
@@ -5384,6 +6293,35 @@ components:
         $ref: '#/components/schemas/RecoveryInstanceID'
       minItems: 1
       maxItems: 200
+    SyntheticTimestamp_date_time:
+      type: string
+      format: date-time
+    RecoveryResult:
+      type: string
+      enum:
+        - NOT_STARTED
+        - IN_PROGRESS
+        - SUCCESS
+        - FAIL
+        - PARTIAL_SUCCESS
+        - ASSOCIATE_SUCCESS
+        - ASSOCIATE_FAIL
+    RecoveryLifeCycle:
+      type: object
+      properties:
+        apiCallDateTime:
+          allOf:
+            - $ref: '#/components/schemas/SyntheticTimestamp_date_time'
+            - description: The date and time the last Source Network recovery was initiated.
+        jobID:
+          allOf:
+            - $ref: '#/components/schemas/JobID'
+            - description: The ID of the Job that was used to last recover the Source Network.
+        lastRecoveryResult:
+          allOf:
+            - $ref: '#/components/schemas/RecoveryResult'
+            - description: The status of the last recovery status of this Source Network.
+      description: An object representing the Source Network recovery Lifecycle.
     RecoverySnapshotID:
       type: string
       pattern: '^pit-[0-9a-zA-Z]{17}$'
@@ -5439,6 +6377,13 @@ components:
         - FAILOVER
         - FAILBACK
       description: 'Replication direction designates if this is a failover replication, or a failback replication. When a DRS agent is installed on an instance, the replication direction is failover. In cases where a recovery launch was made in the recovery location and a new recovery instance was created, and then a failback replication was initiated from that recovery instance back to the origin location, then the replication direction will be failback.'
+    ReplicationStatus:
+      type: string
+      enum:
+        - STOPPED
+        - IN_PROGRESS
+        - PROTECTED
+        - ERROR
     RetryDataReplicationRequest:
       type: object
       required:
@@ -5461,6 +6406,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecoveryInstanceID'
             - description: The ID of the Recovery Instance that we want to reverse the replication for.
+    SensitiveBoundedString:
+      type: string
+      minLength: 0
+      maxLength: 256
+      format: password
     SourceCloudProperties:
       type: object
       properties:
@@ -5477,6 +6427,54 @@ components:
             - $ref: '#/components/schemas/AwsRegion'
             - description: AWS Region for an EC2-originated Source Server.
       description: Properties of the cloud environment where this Source Server originated from.
+    SourceNetwork:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The ARN of the Source Network.
+        cfnStackName:
+          allOf:
+            - $ref: '#/components/schemas/CfnStackName'
+            - description: CloudFormation stack name that was deployed for recovering the Source Network.
+        lastRecovery:
+          allOf:
+            - $ref: '#/components/schemas/RecoveryLifeCycle'
+            - description: An object containing information regarding the last recovery of the Source Network.
+        launchedVpcID:
+          allOf:
+            - $ref: '#/components/schemas/VpcID'
+            - description: ID of the recovered VPC following Source Network recovery.
+        replicationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationStatus'
+            - description: 'Status of Source Network Replication. Possible values: (a) STOPPED - Source Network is not replicating. (b) IN_PROGRESS - Source Network is being replicated. (c) PROTECTED - Source Network was replicated successfully and is being synchronized for changes. (d) ERROR - Source Network replication has failed'
+        replicationStatusDetails:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveBoundedString'
+            - description: Error details in case Source Network replication status is ERROR.
+        sourceAccountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID containing the VPC protected by the Source Network.
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: Source Network ID.
+        sourceRegion:
+          allOf:
+            - $ref: '#/components/schemas/AwsRegion'
+            - description: Region containing the VPC protected by the Source Network.
+        sourceVpcID:
+          allOf:
+            - $ref: '#/components/schemas/VpcID'
+            - description: VPC ID protected by the Source Network.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: A list of tags associated with the Source Network.
+      description: The ARN of the Source Network.
     SourceProperties:
       type: object
       properties:
@@ -5607,6 +6605,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
             - description: The ID of the Source Server to start replication for.
+    StartSourceNetworkRecoveryRequestNetworkEntries:
+      type: array
+      items:
+        $ref: '#/components/schemas/StartSourceNetworkRecoveryRequestNetworkEntry'
+      minItems: 1
+      maxItems: 100
+    StartSourceNetworkRecoveryRequest:
+      type: object
+      required:
+        - sourceNetworks
+      title: StartSourceNetworkRecoveryRequest
+      properties:
+        deployAsNew:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Don''t update existing CloudFormation Stack, recover the network using a new stack.'
+        sourceNetworks:
+          allOf:
+            - $ref: '#/components/schemas/StartSourceNetworkRecoveryRequestNetworkEntries'
+            - description: The Source Networks that we want to start a Recovery Job for.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags to be associated with the Source Network recovery Job.
+    StartSourceNetworkReplicationRequest:
+      type: object
+      required:
+        - sourceNetworkID
+      title: StartSourceNetworkReplicationRequest
+      properties:
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: ID of the Source Network to replicate.
     StopFailbackRequest:
       type: object
       required:
@@ -5627,6 +6659,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
             - description: The ID of the Source Server to stop replication for.
+    StopSourceNetworkReplicationRequest:
+      type: object
+      required:
+        - sourceNetworkID
+      title: StopSourceNetworkReplicationRequest
+      properties:
+        sourceNetworkID:
+          allOf:
+            - $ref: '#/components/schemas/SourceNetworkID'
+            - description: ID of the Source Network to stop replication.
     TagKeys:
       type: array
       items:
@@ -5725,6 +6767,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Copy tags.
+        exportBucketArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: S3 bucket ARN to export Source Network templates.
         launchConfigurationTemplateID:
           allOf:
             - $ref: '#/components/schemas/LaunchConfigurationTemplateID'

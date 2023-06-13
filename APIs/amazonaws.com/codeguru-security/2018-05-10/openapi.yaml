@@ -1,0 +1,1875 @@
+openapi: 3.0.0
+info:
+  version: '2018-05-10'
+  x-release: v4
+  title: Amazon CodeGuru Security
+  description: '<p>This section provides documentation for the <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codeguru/latest/security-ug/what-is-codeguru-security.html">Amazon CodeGuru Security</a> API operations. CodeGuru Security is a service that uses program analysis and machine learning to detect security policy violations and vulnerabilities, and recommends ways to address these security risks.</p> <p>By proactively detecting and providing recommendations for addressing security risks, CodeGuru Security improves the overall security of your application code. For more information about CodeGuru Security, see the <a href="https://docs.aws.amazon.com/codeguru/latest/security-ug/what-is-codeguru-security.html">Amazon CodeGuru Security User Guide</a>. </p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: codeguru-security
+  x-aws-signingName: codeguru-security
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/codeguru-security-2018-05-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/codeguru-security/'
+servers:
+  - url: 'http://codeguru-security.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon CodeGuru Security multi-region endpoint
+  - url: 'https://codeguru-security.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon CodeGuru Security multi-region endpoint
+  - url: 'http://codeguru-security.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon CodeGuru Security endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://codeguru-security.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon CodeGuru Security endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /batchGetFindings:
+    post:
+      operationId: BatchGetFindings
+      description: Returns a list of all requested findings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetFindingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - findingIdentifiers
+              properties:
+                findingIdentifiers:
+                  description: A list of finding identifiers. Each identifier consists of a <code>scanName</code> and a <code>findingId</code>. You retrieve the <code>findingId</code> when you call <code>GetFindings</code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FindingIdentifier'
+                  minItems: 1
+                  maxItems: 25
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /scans:
+    post:
+      operationId: CreateScan
+      description: Use to create a scan using code uploaded to an S3 bucket.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateScanResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceId
+                - scanName
+              properties:
+                analysisType:
+                  description: 'The type of analysis you want CodeGuru Security to perform in the scan, either <code>Security</code> or <code>All</code>. The <code>Secuirty</code> type only generates findings related to security. The <code>All</code> type generates both security findings and quality findings. Defaults to <code>Security</code> type if missing.'
+                  type: string
+                  enum:
+                    - Security
+                    - All
+                clientToken:
+                  description: The idempotency token for the request. Amazon CodeGuru Security uses this value to prevent the accidental creation of duplicate scans if there are failures and retries.
+                  type: string
+                  pattern: '^[\S]+$'
+                  minLength: 1
+                  maxLength: 64
+                resourceId:
+                  description: The identifier for a resource object that contains resources where a finding was detected.
+                  type: object
+                  properties:
+                    codeArtifactId:
+                      allOf:
+                        - $ref: '#/components/schemas/Uuid'
+                        - description: The identifier for the code file uploaded to the resource where a finding was detected.
+                scanName:
+                  description: 'The unique name that CodeGuru Security uses to track revisions across multiple scans of the same resource. Only allowed for a <code>STANDARD</code> scan type. If not specified, it will be auto generated. '
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_$:.]*$'
+                  minLength: 1
+                  maxLength: 140
+                scanType:
+                  description: '<p>The type of scan, either <code>Standard</code> or <code>Express</code>. Defaults to <code>Standard</code> type if missing.</p> <p> <code>Express</code> scans run on limited resources and use a limited set of detectors to analyze your code in near-real time. <code>Standard</code> scans have standard resource limits and use the full set of detectors to analyze your code.</p>'
+                  type: string
+                  enum:
+                    - Standard
+                    - Express
+                tags:
+                  description: '<p>An array of key-value pairs used to tag a scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListScans
+      description: Returns a list of all the scans in an account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListScansResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.'
+          schema:
+            type: string
+            pattern: '^[\S]+$'
+            minLength: 1
+            maxLength: 2048
+  /uploadUrl:
+    post:
+      operationId: CreateUploadUrl
+      description: <p>Generates a pre-signed URL and request headers used to upload a code resource.</p> <p>You can upload your code resource to the URL and add the request headers using any HTTP client.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUploadUrlResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - scanName
+              properties:
+                scanName:
+                  description: The name of the scan that will use the uploaded resource. CodeGuru Security uses the unique scan name to track revisions across multiple scans of the same resource. Use this <code>scanName</code> when you call <code>CreateScan</code> on the code resource you upload to this URL.
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_$:.]*$'
+                  minLength: 1
+                  maxLength: 140
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /accountConfiguration/get:
+    get:
+      operationId: GetAccountConfiguration
+      description: Use to get account level configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccountConfigurationResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/findings/{scanName}':
+    get:
+      operationId: GetFindings
+      description: Returns a list of all findings generated by a particular scan.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFindingsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.'
+          schema:
+            type: string
+            pattern: '^[\S]+$'
+            minLength: 1
+            maxLength: 2048
+        - name: scanName
+          in: path
+          required: true
+          description: The name of the scan you want to retrieve findings from.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9-_$:.]*$'
+            minLength: 1
+            maxLength: 140
+        - name: status
+          in: query
+          required: false
+          description: 'The status of the findings you want to get. Pass either <code>Open</code>, <code>Closed</code>, or <code>All</code>.'
+          schema:
+            type: string
+            enum:
+              - Closed
+              - Open
+              - All
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /metrics/summary#date:
+    get:
+      operationId: GetMetricsSummary
+      description: 'Returns top level metrics about an account from a specified date, including number of open findings, the categories with most findings, the scans with most open findings, and scans with most open critical findings. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMetricsSummaryResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: date
+          in: query
+          required: true
+          description: 'The date you want to retrieve summary metrics from, rounded to the nearest day. The date must be within the past two years since metrics data is only stored for two years. If a date outside of this range is passed, the response will be empty.'
+          schema:
+            type: string
+            format: date-time
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/scans/{scanName}':
+    get:
+      operationId: GetScan
+      description: 'Returns details about a scan, including whether or not a scan has completed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScanResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: runId
+          in: query
+          required: false
+          description: UUID that identifies the individual scan run you want to view details about. You retrieve this when you call the <code>CreateScan</code> operation. Defaults to the latest scan run if missing.
+          schema:
+            type: string
+            pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+        - name: scanName
+          in: path
+          required: true
+          description: The name of the scan you want to view details about.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9-_$:.]*$'
+            minLength: 1
+            maxLength: 140
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /metrics/findings#endDate&startDate:
+    get:
+      operationId: ListFindingsMetrics
+      description: Returns metrics about all findings in an account within a specified time range.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFindingsMetricsResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: endDate
+          in: query
+          required: true
+          description: The end date of the interval which you want to retrieve metrics from.
+          schema:
+            type: string
+            format: date-time
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in the response. Use this parameter when paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code> element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve additional results.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token to use for paginating results that are returned in the response. Set the value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value returned from the previous request to continue listing results after the first page.'
+          schema:
+            type: string
+            pattern: '^[\S]+$'
+            minLength: 1
+            maxLength: 2048
+        - name: startDate
+          in: query
+          required: true
+          description: The start date of the interval which you want to retrieve metrics from.
+          schema:
+            type: string
+            format: date-time
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Returns a list of all tags associated with a scan.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>ListScans</code> or <code>GetScan</code>.
+          schema:
+            type: string
+            pattern: '^arn:aws:codeguru-security:[\S]+:[\d]{12}:scans\/[a-zA-Z0-9-_$:.]*$'
+            minLength: 1
+            maxLength: 300
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Use to add one or more tags to an existing scan.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>ListScans</code> or <code>GetScan</code>.
+          schema:
+            type: string
+            pattern: '^arn:aws:codeguru-security:[\S]+:[\d]{12}:scans\/[a-zA-Z0-9-_$:.]*$'
+            minLength: 1
+            maxLength: 300
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: '<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Use to remove one or more tags from an existing scan.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling <code>ListScans</code> or <code>GetScan</code>.
+          schema:
+            type: string
+            pattern: '^arn:aws:codeguru-security:[\S]+:[\d]{12}:scans\/[a-zA-Z0-9-_$:.]*$'
+            minLength: 1
+            maxLength: 300
+        - name: tagKeys
+          in: query
+          required: true
+          description: A list of keys for each tag you want to remove from a scan.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /updateAccountConfiguration:
+    put:
+      operationId: UpdateAccountConfiguration
+      description: Use to update account-level configuration with an encryption key.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAccountConfigurationResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - encryptionConfig
+              properties:
+                encryptionConfig:
+                  description: Information about account-level configuration.
+                  type: object
+                  properties:
+                    kmsKeyArn:
+                      allOf:
+                        - $ref: '#/components/schemas/KmsKeyArn'
+                        - description: The KMS key ARN to use for encryption. This must be provided as a header when uploading your code resource.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchGetFindingsResponse:
+      type: object
+      required:
+        - failedFindings
+        - findings
+      properties:
+        failedFindings:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetFindingsErrors'
+            - description: 'A list of errors for individual findings which were not fetched. Each BatchGetFindingsError contains the <code>scanName</code>, <code>findingId</code>, <code>errorCode</code> and error <code>message</code>.'
+        findings:
+          allOf:
+            - $ref: '#/components/schemas/Findings'
+            - description: ' A list of all requested findings.'
+    FindingIdentifier:
+      type: object
+      required:
+        - findingId
+        - scanName
+      properties:
+        findingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for a finding.
+        scanName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the scan that generated the finding. '
+      description: 'An object that contains information about a finding and the scan that generated it. '
+    InternalServerException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    AccessDeniedException: {}
+    CreateScanResponse:
+      type: object
+      required:
+        - resourceId
+        - runId
+        - scanName
+        - scanState
+      properties:
+        resourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The identifier for the resource object that contains resources that were scanned.
+        runId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: UUID that identifies the individual scan run.
+        scanName:
+          allOf:
+            - $ref: '#/components/schemas/ScanName'
+            - description: The name of the scan.
+        scanNameArn:
+          allOf:
+            - $ref: '#/components/schemas/ScanNameArn'
+            - description: The ARN for the scan name.
+        scanState:
+          allOf:
+            - $ref: '#/components/schemas/ScanState'
+            - description: 'The current state of the scan. Returns either <code>InProgress</code>, <code>Successful</code>, or <code>Failed</code>.'
+    Uuid:
+      type: string
+      pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ConflictException: {}
+    ResourceNotFoundException: {}
+    CreateUploadUrlResponse:
+      type: object
+      required:
+        - codeArtifactId
+        - requestHeaders
+        - s3Url
+      properties:
+        codeArtifactId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The identifier for the uploaded code resource. '
+        requestHeaders:
+          allOf:
+            - $ref: '#/components/schemas/RequestHeaderMap'
+            - description: A set of key-value pairs that contain the required headers when uploading your resource.
+        s3Url:
+          allOf:
+            - $ref: '#/components/schemas/S3Url'
+            - description: A pre-signed S3 URL. You can upload the code file you want to scan and add the required <code>requestHeaders</code> using any HTTP client.
+    GetAccountConfigurationResponse:
+      type: object
+      required:
+        - encryptionConfig
+      properties:
+        encryptionConfig:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfig'
+            - description: 'An <code>EncryptionConfig</code> object that contains the KMS key ARN to use for encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify your own key, call <code>UpdateAccountConfiguration</code>.'
+    GetFindingsResponse:
+      type: object
+      properties:
+        findings:
+          allOf:
+            - $ref: '#/components/schemas/Findings'
+            - description: A list of findings generated by the specified scan.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A pagination token. You can use this in future calls to <code>GetFindings</code> to continue listing results after the current page. '
+    GetMetricsSummaryResponse:
+      type: object
+      properties:
+        metricsSummary:
+          allOf:
+            - $ref: '#/components/schemas/MetricsSummary'
+            - description: The summary metrics from the specified date.
+    GetScanResponse:
+      type: object
+      required:
+        - analysisType
+        - createdAt
+        - runId
+        - scanName
+        - scanState
+      properties:
+        analysisType:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisType'
+            - description: 'The type of analysis CodeGuru Security performed in the scan, either <code>Security</code> or <code>All</code>. The <code>Security</code> type only generates findings related to security. The <code>All</code> type generates both security findings and quality findings.'
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the scan was created.
+        numberOfRevisions:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of times a scan has been re-run on a revised resource.
+        runId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: UUID that identifies the individual scan run.
+        scanName:
+          allOf:
+            - $ref: '#/components/schemas/ScanName'
+            - description: The name of the scan.
+        scanNameArn:
+          allOf:
+            - $ref: '#/components/schemas/ScanNameArn'
+            - description: The ARN for the scan name.
+        scanState:
+          allOf:
+            - $ref: '#/components/schemas/ScanState'
+            - description: 'The current state of the scan. Pass either <code>InProgress</code>, <code>Successful</code>, or <code>Failed</code>.'
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the scan was last updated. Only available for <code>STANDARD</code> scan types.
+    ListFindingsMetricsResponse:
+      type: object
+      properties:
+        findingsMetrics:
+          allOf:
+            - $ref: '#/components/schemas/FindingsMetricList'
+            - description: A list of <code>AccountFindingsMetric</code> objects retrieved from the specified time interval.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A pagination token. You can use this in future calls to <code>ListFindingMetrics</code> to continue listing results after the current page. '
+    ListScansResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A pagination token. You can use this in future calls to <code>ListScans</code> to continue listing results after the current page.
+        summaries:
+          allOf:
+            - $ref: '#/components/schemas/ScanSummaries'
+            - description: A list of <code>ScanSummary</code> objects with information about all scans in an account.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: '<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>'
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    UpdateAccountConfigurationResponse:
+      type: object
+      required:
+        - encryptionConfig
+      properties:
+        encryptionConfig:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfig'
+            - description: An <code>EncryptionConfig</code> object that contains the KMS key ARN to use for encryption.
+    KmsKeyArn:
+      type: string
+      pattern: '^arn:aws:kms:[\S]+:[\d]{12}:key\/(([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})|(mrk-[0-9a-zA-Z]{32}))$'
+      minLength: 1
+      maxLength: 2048
+    FindingMetricsValuePerSeverity:
+      type: object
+      properties:
+        critical:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The severity of the finding is critical and should be addressed immediately.
+        high:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The severity of the finding is high and should be addressed as a near-term priority.
+        info:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The finding is related to quality or readability improvements and not considered actionable.
+        low:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The severity of the finding is low and does require action on its own.
+        medium:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The severity of the finding is medium and should be addressed as a mid-term priority.
+      description: The severity of the issue in the code that generated a finding.
+    Timestamp:
+      type: string
+      format: date-time
+    AccountFindingsMetric:
+      type: object
+      properties:
+        closedFindings:
+          allOf:
+            - $ref: '#/components/schemas/FindingMetricsValuePerSeverity'
+            - description: The number of closed findings of each severity in an account on the specified date.
+        date:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date from which the finding metrics were retrieved.
+        meanTimeToClose:
+          allOf:
+            - $ref: '#/components/schemas/FindingMetricsValuePerSeverity'
+            - description: The average time it takes to close findings of each severity in days.
+        newFindings:
+          allOf:
+            - $ref: '#/components/schemas/FindingMetricsValuePerSeverity'
+            - description: The number of new findings of each severity in account on the specified date.
+        openFindings:
+          allOf:
+            - $ref: '#/components/schemas/FindingMetricsValuePerSeverity'
+            - description: The number of open findings of each severity in an account as of the specified date.
+      description: A summary of findings metrics in an account.
+    AnalysisType:
+      type: string
+      enum:
+        - Security
+        - All
+    ErrorCode:
+      type: string
+      enum:
+        - DUPLICATE_IDENTIFIER
+        - ITEM_DOES_NOT_EXIST
+        - INTERNAL_ERROR
+        - INVALID_FINDING_ID
+        - INVALID_SCAN_NAME
+    String:
+      type: string
+    ScanName:
+      type: string
+      pattern: '^[a-zA-Z0-9-_$:.]*$'
+      minLength: 1
+      maxLength: 140
+    BatchGetFindingsError:
+      type: object
+      required:
+        - errorCode
+        - findingId
+        - message
+        - scanName
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: A code associated with the type of error.
+        findingId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The finding ID of the finding that was not fetched.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Describes the error.
+        scanName:
+          allOf:
+            - $ref: '#/components/schemas/ScanName'
+            - description: The name of the scan that generated the finding.
+      description: Contains information about the error that caused a finding to fail to be retrieved.
+    BatchGetFindingsErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetFindingsError'
+    FindingIdentifiers:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingIdentifier'
+      minItems: 1
+      maxItems: 25
+    BatchGetFindingsRequest:
+      type: object
+      required:
+        - findingIdentifiers
+      title: BatchGetFindingsRequest
+      properties:
+        findingIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/FindingIdentifiers'
+            - description: A list of finding identifiers. Each identifier consists of a <code>scanName</code> and a <code>findingId</code>. You retrieve the <code>findingId</code> when you call <code>GetFindings</code>.
+    Findings:
+      type: array
+      items:
+        $ref: '#/components/schemas/Finding'
+    CategoryWithFindingNum:
+      type: object
+      properties:
+        categoryName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the finding category. A finding category is determined by the detector that detected the finding.
+        findingNumber:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of open findings in the category.
+      description: Information about a finding category with open findings.
+    CategoriesWithMostFindings:
+      type: array
+      items:
+        $ref: '#/components/schemas/CategoryWithFindingNum'
+      minItems: 0
+      maxItems: 5
+    Integer:
+      type: integer
+    ClientToken:
+      type: string
+      pattern: '^[\S]+$'
+      minLength: 1
+      maxLength: 64
+    CodeLine:
+      type: object
+      properties:
+        content:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The code that contains a vulnerability.
+        number:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The code line number.
+      description: The line of code where a finding was detected.
+    CodeSnippet:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodeLine'
+    ResourceId:
+      type: object
+      properties:
+        codeArtifactId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: The identifier for the code file uploaded to the resource where a finding was detected.
+      description: The identifier for a resource object that contains resources where a finding was detected.
+    ScanType:
+      type: string
+      enum:
+        - Standard
+        - Express
+    TagMap:
+      type: object
+      minProperties: 0
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateScanRequest:
+      type: object
+      required:
+        - resourceId
+        - scanName
+      title: CreateScanRequest
+      properties:
+        analysisType:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisType'
+            - description: 'The type of analysis you want CodeGuru Security to perform in the scan, either <code>Security</code> or <code>All</code>. The <code>Secuirty</code> type only generates findings related to security. The <code>All</code> type generates both security findings and quality findings. Defaults to <code>Security</code> type if missing.'
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The idempotency token for the request. Amazon CodeGuru Security uses this value to prevent the accidental creation of duplicate scans if there are failures and retries.
+        resourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The identifier for an input resource used to create a scan.
+        scanName:
+          allOf:
+            - $ref: '#/components/schemas/ScanName'
+            - description: 'The unique name that CodeGuru Security uses to track revisions across multiple scans of the same resource. Only allowed for a <code>STANDARD</code> scan type. If not specified, it will be auto generated. '
+        scanType:
+          allOf:
+            - $ref: '#/components/schemas/ScanType'
+            - description: '<p>The type of scan, either <code>Standard</code> or <code>Express</code>. Defaults to <code>Standard</code> type if missing.</p> <p> <code>Express</code> scans run on limited resources and use a limited set of detectors to analyze your code in near-real time. <code>Standard</code> scans have standard resource limits and use the full set of detectors to analyze your code.</p>'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: '<p>An array of key-value pairs used to tag a scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>'
+    ScanNameArn:
+      type: string
+      pattern: '^arn:aws:codeguru-security:[\S]+:[\d]{12}:scans\/[a-zA-Z0-9-_$:.]*$'
+      minLength: 1
+      maxLength: 300
+    ScanState:
+      type: string
+      enum:
+        - InProgress
+        - Successful
+        - Failed
+    CreateUploadUrlRequest:
+      type: object
+      required:
+        - scanName
+      title: CreateUploadUrlRequest
+      properties:
+        scanName:
+          allOf:
+            - $ref: '#/components/schemas/ScanName'
+            - description: The name of the scan that will use the uploaded resource. CodeGuru Security uses the unique scan name to track revisions across multiple scans of the same resource. Use this <code>scanName</code> when you call <code>CreateScan</code> on the code resource you upload to this URL.
+    RequestHeaderMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/HeaderValue'
+    S3Url:
+      type: string
+      minLength: 1
+      format: password
+    DetectorTags:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    Double:
+      type: number
+      format: double
+    EncryptionConfig:
+      type: object
+      properties:
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The KMS key ARN to use for encryption. This must be provided as a header when uploading your code resource.
+      description: Information about account-level configuration.
+    FilePath:
+      type: object
+      properties:
+        codeSnippet:
+          allOf:
+            - $ref: '#/components/schemas/CodeSnippet'
+            - description: A list of <code>CodeLine</code> objects that describe where the security vulnerability appears in your code.
+        endLine:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The last line number of the code snippet where the security vulnerability appears in your code.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the file.
+        path:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The path to the resource with the security vulnerability.
+        startLine:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The first line number of the code snippet where the security vulnerability appears in your code.
+      description: Information about the location of security vulnerabilities that Amazon CodeGuru Security detected in your code.
+    Remediation:
+      type: object
+      properties:
+        recommendation:
+          allOf:
+            - $ref: '#/components/schemas/Recommendation'
+            - description: An object that contains information about the recommended course of action to remediate a finding.
+        suggestedFixes:
+          allOf:
+            - $ref: '#/components/schemas/SuggestedFixes'
+            - description: A list of <code>SuggestedFix</code> objects. Each object contains information about a suggested code fix to remediate the finding.
+      description: Information about how to remediate a finding.
+    Resource:
+      type: object
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the resource.
+        subResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier for a section of the resource, such as an AWS Lambda layer.'
+      description: 'Information about a resource, such as an Amazon S3 bucket or AWS Lambda function, that contains a finding.'
+    Severity:
+      type: string
+      enum:
+        - Critical
+        - High
+        - Medium
+        - Low
+        - Info
+    Status:
+      type: string
+      enum:
+        - Closed
+        - Open
+        - All
+    Vulnerability:
+      type: object
+      properties:
+        filePath:
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: ' An object that describes the location of the detected security vulnerability in your code.'
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the vulnerability.
+        itemCount:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' The number of times the vulnerability appears in your code.'
+        referenceUrls:
+          allOf:
+            - $ref: '#/components/schemas/ReferenceUrls'
+            - description: One or more URL addresses that contain details about a vulnerability.
+        relatedVulnerabilities:
+          allOf:
+            - $ref: '#/components/schemas/RelatedVulnerabilities'
+            - description: One or more vulnerabilities that are related to the vulnerability being described.
+      description: Information about a security vulnerability that Amazon CodeGuru Security detected.
+    Finding:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the finding was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of the finding.
+        detectorId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier for the detector that detected the finding in your code. A detector is a defined rule based on industry standards and AWS best practices. '
+        detectorName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the detector that identified the security vulnerability in your code. '
+        detectorTags:
+          allOf:
+            - $ref: '#/components/schemas/DetectorTags'
+            - description: 'One or more tags or categorizations that are associated with a detector. These tags are defined by type, programming language, or other classification such as maintainability or consistency.'
+        generatorId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the component that generated a finding such as AWSCodeGuruSecurity or AWSInspector.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for a finding.
+        remediation:
+          allOf:
+            - $ref: '#/components/schemas/Remediation'
+            - description: An object that contains the details about how to remediate a finding.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/Resource'
+            - description: The resource where Amazon CodeGuru Security detected a finding.
+        ruleId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the rule that generated the finding.
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/Severity'
+            - description: The severity of the finding.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: 'The status of the finding. A finding status can be open or closed. '
+        title:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The title of the finding.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of finding. '
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time when the finding was last updated. Findings are updated when you remediate them or when the finding code location changes. '
+        vulnerability:
+          allOf:
+            - $ref: '#/components/schemas/Vulnerability'
+            - description: An object that describes the detected security vulnerability.
+      description: Information about a finding that was detected in your code.
+    FindingsMetricList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountFindingsMetric'
+    GetAccountConfigurationRequest:
+      type: object
+      title: GetAccountConfigurationRequest
+      properties: {}
+    GetFindingsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    NextToken:
+      type: string
+      pattern: '^[\S]+$'
+      minLength: 1
+      maxLength: 2048
+    GetFindingsRequest:
+      type: object
+      title: GetFindingsRequest
+      properties: {}
+    GetMetricsSummaryRequest:
+      type: object
+      title: GetMetricsSummaryRequest
+      properties: {}
+    MetricsSummary:
+      type: object
+      properties:
+        categoriesWithMostFindings:
+          allOf:
+            - $ref: '#/components/schemas/CategoriesWithMostFindings'
+            - description: A list of <code>CategoryWithFindingNum</code> objects for the top 5 finding categories with the most open findings in an account.
+        date:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date from which the metrics summary information was retrieved.
+        openFindings:
+          allOf:
+            - $ref: '#/components/schemas/FindingMetricsValuePerSeverity'
+            - description: The number of open findings of each severity in an account.
+        scansWithMostOpenCriticalFindings:
+          allOf:
+            - $ref: '#/components/schemas/ScansWithMostOpenCriticalFindings'
+            - description: A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open findings in an account.
+        scansWithMostOpenFindings:
+          allOf:
+            - $ref: '#/components/schemas/ScansWithMostOpenFindings'
+            - description: A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most number of open critical findings in an account.
+      description: Information about summary metrics in an account.
+    GetScanRequest:
+      type: object
+      title: GetScanRequest
+      properties: {}
+    Long:
+      type: integer
+    HeaderKey:
+      type: string
+      minLength: 1
+    HeaderValue:
+      type: string
+      minLength: 1
+    ListFindingsMetricsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 1000
+    ListFindingsMetricsRequest:
+      type: object
+      title: ListFindingsMetricsRequest
+      properties: {}
+    ListScansRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListScansRequest:
+      type: object
+      title: ListScansRequest
+      properties: {}
+    ScanSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScanSummary'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    ScansWithMostOpenCriticalFindings:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScanNameWithFindingNum'
+      minItems: 0
+      maxItems: 3
+    ScansWithMostOpenFindings:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScanNameWithFindingNum'
+      minItems: 0
+      maxItems: 3
+    Recommendation:
+      type: object
+      properties:
+        text:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The recommended course of action to remediate the finding.
+        url:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The URL address to the recommendation for remediating the finding. '
+      description: Information about the recommended course of action to remediate a finding.
+    ReferenceUrls:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    RelatedVulnerabilities:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    SuggestedFixes:
+      type: array
+      items:
+        $ref: '#/components/schemas/SuggestedFix'
+    ScanNameWithFindingNum:
+      type: object
+      properties:
+        findingNumber:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of open findings generated by a scan.
+        scanName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the scan.
+      description: Information about a scan with open findings.
+    ScanSummary:
+      type: object
+      required:
+        - createdAt
+        - runId
+        - scanName
+        - scanState
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when the scan was created. '
+        runId:
+          allOf:
+            - $ref: '#/components/schemas/Uuid'
+            - description: 'The identifier for the scan run. '
+        scanName:
+          allOf:
+            - $ref: '#/components/schemas/ScanName'
+            - description: 'The name of the scan. '
+        scanNameArn:
+          allOf:
+            - $ref: '#/components/schemas/ScanNameArn'
+            - description: The ARN for the scan name.
+        scanState:
+          allOf:
+            - $ref: '#/components/schemas/ScanState'
+            - description: 'The state of the scan. A scan can be <code>In Progress</code>, <code>Complete</code>, or <code>Failed</code>. '
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time the scan was last updated. A scan is updated when it is re-run.
+      description: 'Information about a scan. '
+    SuggestedFix:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The suggested code to add to your file. '
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A description of the suggested code fix and why it is being suggested. '
+      description: Information about the suggested code fix to remediate a finding.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: '<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute label with two parts:</p> <ul> <li> <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or <code>Secret</code>. Tag keys are case sensitive.</p> </li> <li> <p>An optional tag value field. For example, <code>111122223333</code>, <code>Production</code>, or a team name. Omitting the tag value is the same as using an empty string. Tag values are case sensitive.</p> </li> </ul>'
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateAccountConfigurationRequest:
+      type: object
+      required:
+        - encryptionConfig
+      title: UpdateAccountConfigurationRequest
+      properties:
+        encryptionConfig:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfig'
+            - description: The KMS key ARN you want to use for encryption. Defaults to service-side encryption if missing.
+security:
+  - hmac: []

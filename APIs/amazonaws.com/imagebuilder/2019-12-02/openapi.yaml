@@ -8139,7 +8139,7 @@ components:
         dateNextRun:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: 'This is no longer supported, and does not return a value.'
+            - description: The next date when the pipeline is scheduled to run.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'

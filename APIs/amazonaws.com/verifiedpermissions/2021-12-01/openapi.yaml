@@ -1,0 +1,3484 @@
+openapi: 3.0.0
+info:
+  version: '2021-12-01'
+  x-release: v4
+  title: Amazon Verified Permissions
+  description: '<p>Amazon Verified Permissions is a permissions management service from Amazon Web Services. You can use Verified Permissions to manage permissions for your application, and authorize user access based on those permissions. Using Verified Permissions, application developers can grant access based on information about the users, resources, and requested actions. You can also evaluate additional information like group membership, attributes of the resources, and session context, such as time of request and IP addresses. Verified Permissions manages these permissions by letting you create and store authorization policies for your applications, such as consumer-facing web sites and enterprise business systems.</p> <p>Verified Permissions uses Cedar as the policy language to express your permission requirements. Cedar supports both role-based access control (RBAC) and attribute-based access control (ABAC) authorization models.</p> <p>For more information about configuring, administering, and using Amazon Verified Permissions in your applications, see the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/">Amazon Verified Permissions User Guide</a>.</p> <p>For more information about the Cedar policy language, see the <a href="docs.cedarpolicy.com">Cedar Policy Language Guide</a>.</p> <important> <p>When you write Cedar policies that reference principals, resources and actions, you can define the unique identifiers used for each of those elements. We strongly recommend that you follow these best practices:</p> <ul> <li> <p> <b>Use values like universally unique identifiers (UUIDs) for all principal and resource identifiers.</b> </p> <p>For example, if user <code>jane</code> leaves the company, and you later let someone else use the name <code>jane</code>, then that new user automatically gets access to everything granted by policies that still reference <code>User::"jane"</code>. Cedar can’t distinguish between the new user and the old. This applies to both principal and resource identifiers. Always use identifiers that are guaranteed unique and never reused to ensure that you don’t unintentionally grant access because of the presence of an old identifier in a policy.</p> <p>Where you use a UUID for an entity, we recommend that you follow it with the // comment specifier and the ‘friendly’ name of your entity. This helps to make your policies easier to understand. For example: principal == User::"a1b2c3d4-e5f6-a1b2-c3d4-EXAMPLE11111", // alice</p> </li> <li> <p> <b>Do not include personally identifying, confidential, or sensitive information as part of the unique identifier for your principals or resources.</b> These identifiers are included in log entries shared in CloudTrail trails.</p> </li> </ul> </important> <p>Several operations return structures that appear similar, but have different purposes. As new functionality is added to the product, the structure used in a parameter of one operation might need to change in a way that wouldn''t make sense for the same parameter in a different operation. To help you understand the purpose of each, the following naming convention is used for the structures:</p> <ul> <li> <p>Parameters that end in <code>Detail</code> are used in <code>Get</code> operations.</p> </li> <li> <p>Parameters that end in <code>Item</code> are used in <code>List</code> operations.</p> </li> <li> <p>Parameters that use neither suffix are used in the mutating (create and update) operations.</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: verifiedpermissions
+  x-aws-signingName: verifiedpermissions
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/verifiedpermissions-2021-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/verifiedpermissions/'
+servers:
+  - url: 'http://verifiedpermissions.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Verified Permissions multi-region endpoint
+  - url: 'https://verifiedpermissions.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Verified Permissions multi-region endpoint
+  - url: 'http://verifiedpermissions.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Verified Permissions endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://verifiedpermissions.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Verified Permissions endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=VerifiedPermissions.CreateIdentitySource:
+    post:
+      operationId: CreateIdentitySource
+      description: '<p>Creates a reference to an Amazon Cognito user pool as an external identity provider (IdP). </p> <p>After you create an identity source, you can use the identities provided by the IdP as proxies for the principal in authorization queries that use the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operation. These identities take the form of tokens that contain claims about the user, such as IDs, attributes and group memberships. Amazon Cognito provides both identity tokens and access tokens, and Verified Permissions can use either or both. Any combination of identity and access tokens results in the same Cedar principal. Verified Permissions automatically translates the information about the identities into the standard Cedar attributes that can be evaluated by your policies. Because the Amazon Cognito identity and access tokens can contain different information, the tokens you choose to use determine which principal attributes are available to access when evaluating Cedar policies.</p> <important> <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p> </important> <note> <p>To reference a user from this identity source in your Cedar policies, use the following syntax.</p> <p> <i>IdentityType::"&lt;CognitoUserPoolIdentifier&gt;|&lt;CognitoClientId&gt;</i> </p> <p>Where <code>IdentityType</code> is the string that you provide to the <code>PrincipalEntityType</code> parameter for this operation. The <code>CognitoUserPoolId</code> and <code>CognitoClientId</code> are defined by the Amazon Cognito user pool.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIdentitySourceOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIdentitySourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.CreateIdentitySource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.CreatePolicy:
+    post:
+      operationId: CreatePolicy
+      description: '<p>Creates a Cedar policy and saves it in the specified policy store. You can create either a static policy or a policy linked to a policy template.</p> <ul> <li> <p>To create a static policy, provide the Cedar policy text in the <code>StaticPolicy</code> section of the <code>PolicyDefinition</code>.</p> </li> <li> <p>To create a policy that is dynamically linked to a policy template, specify the policy template ID and the principal and resource to associate with this policy in the <code>templateLinked</code> section of the <code>PolicyDefinition</code>. If the policy template is ever updated, any policies linked to the policy template automatically use the updated template.</p> </li> </ul> <note> <p>Creating a policy causes it to be validated against the schema in the policy store. If the policy doesn''t pass validation, the operation fails and the policy isn''t stored.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePolicyOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.CreatePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.CreatePolicyStore:
+    post:
+      operationId: CreatePolicyStore
+      description: Creates a policy store. A policy store is a container for policy resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePolicyStoreOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePolicyStoreInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.CreatePolicyStore
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.CreatePolicyTemplate:
+    post:
+      operationId: CreatePolicyTemplate
+      description: 'Creates a policy template. A template can use placeholders for the principal and resource. A template must be instantiated into a policy by associating it with specific principals and resources to use for the placeholders. That instantiated policy can then be considered in authorization decisions. The instantiated policy works identically to any other policy, except that it is dynamically linked to the template. If the template changes, then any policies that are linked to that template are immediately updated as well.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePolicyTemplateOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePolicyTemplateInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.CreatePolicyTemplate
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.DeleteIdentitySource:
+    post:
+      operationId: DeleteIdentitySource
+      description: 'Deletes an identity source that references an identity provider (IdP) such as Amazon Cognito. After you delete the identity source, you can no longer use tokens for identities from that identity source to represent principals in authorization queries made using <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a>. operations.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteIdentitySourceOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteIdentitySourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.DeleteIdentitySource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.DeletePolicy:
+    post:
+      operationId: DeletePolicy
+      description: '<p>Deletes the specified policy from the policy store.</p> <p>This operation is idempotent; if you specify a policy that doesn''t exist, the request response returns a successful <code>HTTP 200</code> status code.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePolicyOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.DeletePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.DeletePolicyStore:
+    post:
+      operationId: DeletePolicyStore
+      description: '<p>Deletes the specified policy store.</p> <p>This operation is idempotent. If you specify a policy store that does not exist, the request response will still return a successful HTTP 200 status code.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePolicyStoreOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePolicyStoreInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.DeletePolicyStore
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.DeletePolicyTemplate:
+    post:
+      operationId: DeletePolicyTemplate
+      description: '<p>Deletes the specified policy template from the policy store.</p> <important> <p>This operation also deletes any policies that were created from the specified policy template. Those policies are immediately removed from all future API responses, and are asynchronously deleted from the policy store.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePolicyTemplateOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePolicyTemplateInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.DeletePolicyTemplate
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.GetIdentitySource:
+    post:
+      operationId: GetIdentitySource
+      description: Retrieves the details about the specified identity source.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetIdentitySourceOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetIdentitySourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.GetIdentitySource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.GetPolicy:
+    post:
+      operationId: GetPolicy
+      description: Retrieves information about the specified policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPolicyOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.GetPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.GetPolicyStore:
+    post:
+      operationId: GetPolicyStore
+      description: Retrieves details about a policy store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPolicyStoreOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPolicyStoreInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.GetPolicyStore
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.GetPolicyTemplate:
+    post:
+      operationId: GetPolicyTemplate
+      description: Retrieve the details for the specified policy template in the specified policy store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPolicyTemplateOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetPolicyTemplateInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.GetPolicyTemplate
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.GetSchema:
+    post:
+      operationId: GetSchema
+      description: Retrieve the details for the specified schema in the specified policy store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSchemaInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.GetSchema
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.IsAuthorized:
+    post:
+      operationId: IsAuthorized
+      description: 'Makes an authorization decision about a service request described in the parameters. The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either <code>Allow</code> or <code>Deny</code>, along with a list of the policies that resulted in the decision.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IsAuthorizedOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IsAuthorizedInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.IsAuthorized
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.IsAuthorizedWithToken:
+    post:
+      operationId: IsAuthorizedWithToken
+      description: '<p>Makes an authorization decision about a service request described in the parameters. The principal in this request comes from an external identity source. The information in the parameters can also define additional context that Verified Permissions can include in the evaluation. The request is evaluated against all matching policies in the specified policy store. The result of the decision is either <code>Allow</code> or <code>Deny</code>, along with a list of the policies that resulted in the decision.</p> <important> <p>If you delete a Amazon Cognito user pool or user, tokens from that deleted pool or that deleted user continue to be usable until they expire.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IsAuthorizedWithTokenOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IsAuthorizedWithTokenInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.IsAuthorizedWithToken
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.ListIdentitySources:
+    post:
+      operationId: ListIdentitySources
+      description: Returns a paginated list of all of the identity sources defined in the specified policy store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIdentitySourcesOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListIdentitySourcesInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.ListIdentitySources
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.ListPolicies:
+    post:
+      operationId: ListPolicies
+      description: Returns a paginated list of all policies stored in the specified policy store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPoliciesOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPoliciesInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.ListPolicies
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.ListPolicyStores:
+    post:
+      operationId: ListPolicyStores
+      description: Returns a paginated list of all policy stores in the calling Amazon Web Services account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPolicyStoresOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPolicyStoresInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.ListPolicyStores
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.ListPolicyTemplates:
+    post:
+      operationId: ListPolicyTemplates
+      description: Returns a paginated list of all policy templates in the specified policy store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPolicyTemplatesOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPolicyTemplatesInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.ListPolicyTemplates
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.PutSchema:
+    post:
+      operationId: PutSchema
+      description: 'Creates or updates the policy schema in the specified policy store. The schema is used to validate any Cedar policies and policy templates submitted to the policy store. Any changes to the schema validate only policies and templates submitted after the schema change. Existing policies and templates are not re-evaluated against the changed schema. If you later update a policy, then it is evaluated against the new schema at that time.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutSchemaOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutSchemaInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.PutSchema
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.UpdateIdentitySource:
+    post:
+      operationId: UpdateIdentitySource
+      description: 'Updates the specified identity source to use a new identity provider (IdP) source, or to change the mapping of identities from the IdP to a different principal entity type.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateIdentitySourceOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateIdentitySourceInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.UpdateIdentitySource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.UpdatePolicy:
+    post:
+      operationId: UpdatePolicy
+      description: '<p>Modifies a Cedar static policy in the specified policy store. You can change only certain elements of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition">UpdatePolicyDefinition</a> parameter. You can directly update only static policies. To change a template-linked policy, you must update the template instead, using <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html">UpdatePolicyTemplate</a>.</p> <note> <p>If policy validation is enabled in the policy store, then updating a static policy causes Verified Permissions to validate the policy against the schema in the policy store. If the updated static policy doesn''t pass validation, the operation fails and the update isn''t stored.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePolicyOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.UpdatePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.UpdatePolicyStore:
+    post:
+      operationId: UpdatePolicyStore
+      description: Modifies the validation setting for a policy store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePolicyStoreOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyStoreInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.UpdatePolicyStore
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=VerifiedPermissions.UpdatePolicyTemplate:
+    post:
+      operationId: UpdatePolicyTemplate
+      description: '<p>Updates the specified policy template. You can update only the description and the some elements of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html#amazonverifiedpermissions-UpdatePolicyTemplate-request-policyBody">policyBody</a>. </p> <important> <p>Changes you make to the policy template content are immediately reflected in authorization decisions that involve all template-linked policies instantiated from this template.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePolicyTemplateOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePolicyTemplateInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - VerifiedPermissions.UpdatePolicyTemplate
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateIdentitySourceOutput:
+      type: object
+      required:
+        - createdDate
+        - identitySourceId
+        - lastUpdatedDate
+        - policyStoreId
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the identity source was originally created.
+        identitySourceId:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceId'
+            - description: The unique ID of the new identity source.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the identity source was most recently updated.
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the identity source.
+    CreateIdentitySourceInput:
+      type: object
+      required:
+        - policyStoreId
+        - configuration
+      title: CreateIdentitySourceInput
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: '<p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_Id">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>'
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store in which you want to store this identity source. Only policies and requests made using this policy store can reference identities from the identity provider configured in the new identity source.
+        configuration:
+          allOf:
+            - $ref: '#/components/schemas/Configuration'
+            - description: '<p>Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.</p> <note> <p>At this time, the only valid member of this structure is a Amazon Cognito user pool configuration.</p> <p>You must specify a <code>UserPoolArn</code>, and optionally, a <code>ClientId</code>.</p> </note>'
+        principalEntityType:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalEntityType'
+            - description: Specifies the namespace and data type of the principals generated for identities authenticated by the new identity source.
+    ValidationException: {}
+    ServiceQuotaExceededException: {}
+    AccessDeniedException: {}
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    InternalServerException: {}
+    CreatePolicyOutput:
+      type: object
+      required:
+        - policyStoreId
+        - policyId
+        - policyType
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the new policy.
+        policyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: The unique ID of the new policy.
+        policyType:
+          allOf:
+            - $ref: '#/components/schemas/PolicyType'
+            - description: The policy type of the new policy.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The principal specified in the new policy's scope. This response element isn't present when <code>principal</code> isn't specified in the policy content.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The resource specified in the new policy's scope. This response element isn't present when the <code>resource</code> isn't specified in the policy content.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy was last updated.
+    CreatePolicyInput:
+      type: object
+      required:
+        - policyStoreId
+        - definition
+      title: CreatePolicyInput
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: '<p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_Id">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>'
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the <code>PolicyStoreId</code> of the policy store you want to store the policy in.
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDefinition'
+            - description: A structure that specifies the policy type and content to use for the new policy. You must include either a static or a templateLinked element. The policy content must be written in the Cedar policy language.
+    CreatePolicyStoreOutput:
+      type: object
+      required:
+        - policyStoreId
+        - arn
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The unique ID of the new policy store.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the new policy store.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy store was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy store was last updated.
+    CreatePolicyStoreInput:
+      type: object
+      required:
+        - validationSettings
+      title: CreatePolicyStoreInput
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: '<p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_Id">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>'
+        validationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ValidationSettings'
+            - description: '<p>Specifies the validation setting for this policy store.</p> <p>Currently, the only valid and required value is <code>Mode</code>.</p> <important> <p>We recommend that you turn on <code>STRICT</code> mode only after you define a schema. If a schema doesn''t exist, then <code>STRICT</code> mode causes any policy to fail validation, and Verified Permissions rejects the policy. You can turn off validation by using the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore">UpdatePolicyStore</a>. Then, when you have a schema defined, use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore">UpdatePolicyStore</a> again to turn validation back on.</p> </important>'
+    CreatePolicyTemplateOutput:
+      type: object
+      required:
+        - policyStoreId
+        - policyTemplateId
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the policy template.
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: The unique ID of the new policy template.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy template was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy template was most recently updated.
+    CreatePolicyTemplateInput:
+      type: object
+      required:
+        - policyStoreId
+        - statement
+      title: CreatePolicyTemplateInput
+      properties:
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: '<p>Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_Id">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>'
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store in which to create the policy template.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateDescription'
+            - description: Specifies a description for the policy template.
+        statement:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStatement'
+            - description: 'Specifies the content that you want to use for the new policy template, written in the Cedar policy language.'
+    DeleteIdentitySourceOutput:
+      type: object
+      properties: {}
+    DeleteIdentitySourceInput:
+      type: object
+      required:
+        - policyStoreId
+        - identitySourceId
+      title: DeleteIdentitySourceInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the identity source that you want to delete.
+        identitySourceId:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceId'
+            - description: Specifies the ID of the identity source that you want to delete.
+    ConflictException: {}
+    DeletePolicyOutput:
+      type: object
+      properties: {}
+    DeletePolicyInput:
+      type: object
+      required:
+        - policyStoreId
+        - policyId
+      title: DeletePolicyInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the policy that you want to delete.
+        policyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: Specifies the ID of the policy that you want to delete.
+    DeletePolicyStoreOutput:
+      type: object
+      properties: {}
+    DeletePolicyStoreInput:
+      type: object
+      required:
+        - policyStoreId
+      title: DeletePolicyStoreInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that you want to delete.
+    DeletePolicyTemplateOutput:
+      type: object
+      properties: {}
+    DeletePolicyTemplateInput:
+      type: object
+      required:
+        - policyStoreId
+        - policyTemplateId
+      title: DeletePolicyTemplateInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the policy template that you want to delete.
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: Specifies the ID of the policy template that you want to delete.
+    GetIdentitySourceOutput:
+      type: object
+      required:
+        - createdDate
+        - details
+        - identitySourceId
+        - lastUpdatedDate
+        - policyStoreId
+        - principalEntityType
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the identity source was originally created.
+        details:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceDetails'
+            - description: A structure that describes the configuration of the identity source.
+        identitySourceId:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceId'
+            - description: The ID of the identity source.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the identity source was most recently updated.
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the identity source.
+        principalEntityType:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalEntityType'
+            - description: The data type of principals generated for identities authenticated by this identity source.
+    GetIdentitySourceInput:
+      type: object
+      required:
+        - policyStoreId
+        - identitySourceId
+      title: GetIdentitySourceInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the identity source you want information about.
+        identitySourceId:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceId'
+            - description: Specifies the ID of the identity source you want information about.
+    GetPolicyOutput:
+      type: object
+      required:
+        - policyStoreId
+        - policyId
+        - policyType
+        - definition
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the policy that you want information about.
+        policyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: The unique ID of the policy that you want information about.
+        policyType:
+          allOf:
+            - $ref: '#/components/schemas/PolicyType'
+            - description: The type of the policy.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The principal specified in the policy's scope. This element isn't included in the response when <code>Principal</code> isn't present in the policy content.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The resource specified in the policy's scope. This element isn't included in the response when <code>Resource</code> isn't present in the policy content.
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDefinitionDetail'
+            - description: The definition of the requested policy.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy was last updated.
+    GetPolicyInput:
+      type: object
+      required:
+        - policyStoreId
+        - policyId
+      title: GetPolicyInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the policy that you want information about.
+        policyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: Specifies the ID of the policy you want information about.
+    GetPolicyStoreOutput:
+      type: object
+      required:
+        - policyStoreId
+        - arn
+        - validationSettings
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store;
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the policy store.
+        validationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ValidationSettings'
+            - description: The current validation settings for the policy store.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy store was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy store was last updated.
+    GetPolicyStoreInput:
+      type: object
+      required:
+        - policyStoreId
+      title: GetPolicyStoreInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that you want information about.
+    GetPolicyTemplateOutput:
+      type: object
+      required:
+        - policyStoreId
+        - policyTemplateId
+        - statement
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the policy template.
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: The ID of the policy template.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateDescription'
+            - description: The description of the policy template.
+        statement:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStatement'
+            - description: The content of the body of the policy template written in the Cedar policy language.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy template was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy template was most recently updated.
+    GetPolicyTemplateInput:
+      type: object
+      required:
+        - policyStoreId
+        - policyTemplateId
+      title: GetPolicyTemplateInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the policy template that you want information about.
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: Specifies the ID of the policy template that you want information about.
+    GetSchemaOutput:
+      type: object
+      required:
+        - policyStoreId
+        - schema
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the schema.
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/SchemaJson'
+            - description: 'The body of the schema, written in Cedar schema JSON.'
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the schema was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the schema was most recently updated.
+    GetSchemaInput:
+      type: object
+      required:
+        - policyStoreId
+      title: GetSchemaInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the schema.
+    IsAuthorizedOutput:
+      type: object
+      required:
+        - decision
+        - determiningPolicies
+        - errors
+      properties:
+        decision:
+          allOf:
+            - $ref: '#/components/schemas/Decision'
+            - description: An authorization decision that indicates if the authorization request should be allowed or denied.
+        determiningPolicies:
+          allOf:
+            - $ref: '#/components/schemas/DeterminingPolicyList'
+            - description: 'The list of determining policies used to make the authorization decision. For example, if there are two matching policies, where one is a forbid and the other is a permit, then the forbid policy will be the determining policy. In the case of multiple matching permit policies then there would be multiple determining policies. In the case that no policies match, and hence the response is DENY, there would be no determining policies.'
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationErrorList'
+            - description: 'Errors that occurred while making an authorization decision, for example, a policy references an Entity or entity Attribute that does not exist in the slice.'
+    IsAuthorizedInput:
+      type: object
+      required:
+        - policyStoreId
+      title: IsAuthorizedInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: Specifies the principal for which the authorization decision is to be made.
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ActionIdentifier'
+            - description: 'Specifies the requested action to be authorized. For example, is the principal authorized to perform this action on the resource?'
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: Specifies the resource for which the authorization decision is to be made.
+        context:
+          allOf:
+            - $ref: '#/components/schemas/ContextDefinition'
+            - description: Specifies additional context that can be used to make more granular authorization decisions.
+        entities:
+          allOf:
+            - $ref: '#/components/schemas/EntitiesDefinition'
+            - description: Specifies the list of entities and their associated attributes that Verified Permissions can examine when evaluating the policies.
+    IsAuthorizedWithTokenOutput:
+      type: object
+      required:
+        - decision
+        - determiningPolicies
+        - errors
+      properties:
+        decision:
+          allOf:
+            - $ref: '#/components/schemas/Decision'
+            - description: An authorization decision that indicates if the authorization request should be allowed or denied.
+        determiningPolicies:
+          allOf:
+            - $ref: '#/components/schemas/DeterminingPolicyList'
+            - description: 'The list of determining policies used to make the authorization decision. For example, if there are multiple matching policies, where at least one is a forbid policy, then because forbid always overrides permit the forbid policies are the determining policies. If all matching policies are permit policies, then those policies are the determining policies. When no policies match and the response is the default DENY, there are no determining policies.'
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/EvaluationErrorList'
+            - description: 'Errors that occurred while making an authorization decision. For example, a policy references an entity or entity attribute that does not exist in the slice.'
+    IsAuthorizedWithTokenInput:
+      type: object
+      required:
+        - policyStoreId
+      title: IsAuthorizedWithTokenInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store. Policies in this policy store will be used to make an authorization decision for the input.
+        identityToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'Specifies an identity token for the principal to be authorized. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an <code>AccessToken</code> or an <code>IdentityToken</code>, but not both.'
+        accessToken:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: 'Specifies an access token for the principal to be authorized. This token is provided to you by the identity provider (IdP) associated with the specified identity source. You must specify either an <code>AccessToken</code> or an <code>IdentityToken</code>, but not both.'
+        action:
+          allOf:
+            - $ref: '#/components/schemas/ActionIdentifier'
+            - description: Specifies the requested action to be authorized. Is the specified principal authorized to perform this action on the specified resource.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: 'Specifies the resource for which the authorization decision is made. For example, is the principal allowed to perform the action on the resource?'
+        context:
+          allOf:
+            - $ref: '#/components/schemas/ContextDefinition'
+            - description: Specifies additional context that can be used to make more granular authorization decisions.
+        entities:
+          allOf:
+            - $ref: '#/components/schemas/EntitiesDefinition'
+            - description: Specifies the list of entities and their associated attributes that Verified Permissions can examine when evaluating the policies.
+    ListIdentitySourcesOutput:
+      type: object
+      required:
+        - identitySources
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
+        identitySources:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySources'
+            - description: The list of identity sources stored in the specified policy store.
+    ListIdentitySourcesInput:
+      type: object
+      required:
+        - policyStoreId
+      title: ListIdentitySourcesInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the identity sources that you want to list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListIdentitySourcesMaxResults'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceFilters'
+            - description: Specifies characteristics of an identity source that you can use to limit the output to matching identity sources.
+    ListPoliciesOutput:
+      type: object
+      required:
+        - policies
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
+        policies:
+          allOf:
+            - $ref: '#/components/schemas/PolicyList'
+            - description: Lists all policies that are available in the specified policy store.
+    ListPoliciesInput:
+      type: object
+      required:
+        - policyStoreId
+      title: ListPoliciesInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store you want to list policies from.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+        filter:
+          allOf:
+            - $ref: '#/components/schemas/PolicyFilter'
+            - description: 'Specifies a filter that limits the response to only policies that match the specified criteria. For example, you list only the policies that reference a specified principal.'
+    ListPolicyStoresOutput:
+      type: object
+      required:
+        - policyStores
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
+        policyStores:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreList'
+            - description: The list of policy stores in the account.
+    ListPolicyStoresInput:
+      type: object
+      title: ListPolicyStoresInput
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+    ListPolicyTemplatesOutput:
+      type: object
+      required:
+        - policyTemplates
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If present, this value indicates that more output is available than is included in the current response. Use this value in the <code>NextToken</code> request parameter in a subsequent call to the operation to get the next part of the output. You should repeat this until the <code>NextToken</code> response element comes back as <code>null</code>. This indicates that this is the last page of results.'
+        policyTemplates:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplatesList'
+            - description: The list of the policy templates in the specified policy store.
+    ListPolicyTemplatesInput:
+      type: object
+      required:
+        - policyStoreId
+      title: ListPolicyTemplatesInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the policy templates you want to list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call''s <code>NextToken</code> response to request the next page of results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'Specifies the total number of results that you want included on each page of the response. If you do not include this parameter, it defaults to a value that is specific to the operation. If additional items exist beyond the number you specify, the <code>NextToken</code> response element is returned with a value (not null). Include the specified value as the <code>NextToken</code> request parameter in the next call to the operation to get the next part of the results. Note that the service might return fewer results than the maximum even when there are more results available. You should check <code>NextToken</code> after every operation to ensure that you receive all of the results.'
+    PutSchemaOutput:
+      type: object
+      required:
+        - policyStoreId
+        - namespaces
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The unique ID of the policy store that contains the schema.
+        namespaces:
+          allOf:
+            - $ref: '#/components/schemas/NamespaceList'
+            - description: Identifies the namespaces of the entities referenced by this schema.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the schema was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the schema was last updated.
+    PutSchemaInput:
+      type: object
+      required:
+        - policyStoreId
+        - definition
+      title: PutSchemaInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store in which to place the schema.
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDefinition'
+            - description: Specifies the definition of the schema to be stored. The schema definition must be written in Cedar schema JSON.
+    UpdateIdentitySourceOutput:
+      type: object
+      required:
+        - createdDate
+        - identitySourceId
+        - lastUpdatedDate
+        - policyStoreId
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the updated identity source was originally created.
+        identitySourceId:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceId'
+            - description: The ID of the updated identity source.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the identity source was most recently updated.
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the updated identity source.
+    UpdateIdentitySourceInput:
+      type: object
+      required:
+        - policyStoreId
+        - identitySourceId
+        - updateConfiguration
+      title: UpdateIdentitySourceInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the identity source that you want to update.
+        identitySourceId:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceId'
+            - description: Specifies the ID of the identity source that you want to update.
+        updateConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/UpdateConfiguration'
+            - description: '<p>Specifies the details required to communicate with the identity provider (IdP) associated with this identity source.</p> <note> <p>At this time, the only valid member of this structure is a Amazon Cognito user pool configuration.</p> <p>You must specify a <code>userPoolArn</code>, and optionally, a <code>ClientId</code>.</p> </note>'
+        principalEntityType:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalEntityType'
+            - description: Specifies the data type of principals generated for identities authenticated by the identity source.
+    UpdatePolicyOutput:
+      type: object
+      required:
+        - policyStoreId
+        - policyId
+        - policyType
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the policy that was updated.
+        policyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: The ID of the policy that was updated.
+        policyType:
+          allOf:
+            - $ref: '#/components/schemas/PolicyType'
+            - description: The type of the policy that was updated.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The principal specified in the policy's scope. This element isn't included in the response when <code>Principal</code> isn't present in the policy content.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The resource specified in the policy's scope. This element isn't included in the response when <code>Resource</code> isn't present in the policy content.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy was most recently updated.
+    UpdatePolicyInput:
+      type: object
+      required:
+        - policyStoreId
+        - policyId
+        - definition
+      title: UpdatePolicyInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the policy that you want to update.
+        policyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: 'Specifies the ID of the policy that you want to update. To find this value, you can use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a>.'
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/UpdatePolicyDefinition'
+            - description: '<p>Specifies the updated policy content that you want to replace on the specified policy. The content must be valid Cedar policy language text.</p> <p>You can change only the following elements from the policy definition:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can''t</b> change the following elements:</p> <ul> <li> <p>Changing from <code>static</code> to <code>templateLinked</code>.</p> </li> <li> <p>Changing the effect of the policy from <code>permit</code> or <code>forbid</code>.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul>'
+    UpdatePolicyStoreOutput:
+      type: object
+      required:
+        - policyStoreId
+        - arn
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the updated policy store.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the updated policy store.'
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy store was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy store was most recently updated.
+    UpdatePolicyStoreInput:
+      type: object
+      required:
+        - policyStoreId
+        - validationSettings
+      title: UpdatePolicyStoreInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that you want to update
+        validationSettings:
+          allOf:
+            - $ref: '#/components/schemas/ValidationSettings'
+            - description: A structure that defines the validation settings that want to enable for the policy store.
+    UpdatePolicyTemplateOutput:
+      type: object
+      required:
+        - policyStoreId
+        - policyTemplateId
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The ID of the policy store that contains the updated policy template.
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: The ID of the updated policy template.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy template was originally created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy template was most recently updated.
+    UpdatePolicyTemplateInput:
+      type: object
+      required:
+        - policyStoreId
+        - policyTemplateId
+        - statement
+      title: UpdatePolicyTemplateInput
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: Specifies the ID of the policy store that contains the policy template that you want to update.
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: Specifies the ID of the policy template that you want to update.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateDescription'
+            - description: Specifies a new description to apply to the policy template.
+        statement:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStatement'
+            - description: '<p>Specifies new statement content written in Cedar policy language to replace the current body of the policy template.</p> <p>You can change only the following elements of the policy body:</p> <ul> <li> <p>The <code>action</code> referenced by the policy template.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can''t</b> change the following elements:</p> <ul> <li> <p>The effect (<code>permit</code> or <code>forbid</code>) of the policy template.</p> </li> <li> <p>The <code>principal</code> referenced by the policy template.</p> </li> <li> <p>The <code>resource</code> referenced by the policy template.</p> </li> </ul>'
+    ActionId:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 200
+    ActionType:
+      type: string
+      pattern: 'Action$|^.+::Action'
+      minLength: 1
+      maxLength: 200
+    ActionIdentifier:
+      type: object
+      required:
+        - actionType
+        - actionId
+      properties:
+        actionType:
+          allOf:
+            - $ref: '#/components/schemas/ActionType'
+            - description: The type of an action.
+        actionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: The ID of an action.
+      description: '<p>Contains information about an action for a request for which an authorization decision is made.</p> <p>This data type is used as an request parameter to the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p> <p>Example: <code>{ "actionId": "&lt;action name&gt;", "actionType": "Action" }</code> </p>'
+    BooleanAttribute:
+      type: boolean
+    EntityIdentifier:
+      type: object
+      required:
+        - entityType
+        - entityId
+      properties:
+        entityType:
+          allOf:
+            - $ref: '#/components/schemas/EntityType'
+            - description: '<p>The type of an entity.</p> <p>Example: <code>"entityType":"<i>typeName</i>"</code> </p>'
+        entityId:
+          allOf:
+            - $ref: '#/components/schemas/EntityId'
+            - description: '<p>The identifier of an entity.</p> <p> <code>"entityId":"<i>identifier</i>"</code> </p>'
+      description: '<p>Contains the identifier of an entity, including its ID and type.</p> <p>This data type is used as a request parameter for <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> operation, and as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a>, <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicy.html">GetPolicy</a>, and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicy.html">UpdatePolicy</a> operations.</p> <p>Example: <code>{"entityId":"<i>string</i>","entityType":"<i>string</i>"}</code> </p>'
+    LongAttribute:
+      type: integer
+    StringAttribute:
+      type: string
+    SetAttribute:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeValue'
+    RecordAttribute:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/AttributeValue'
+    AttributeValue:
+      type: object
+      properties:
+        boolean:
+          allOf:
+            - $ref: '#/components/schemas/BooleanAttribute'
+            - description: '<p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-boolean">Boolean</a> type.</p> <p>Example: <code>{"boolean": true}</code> </p>'
+        entityIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: '<p>An attribute value of type <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html">EntityIdentifier</a>.</p> <p>Example: <code>"entityIdentifier": { "entityId": "&lt;id&gt;", "entityType": "&lt;entity type&gt;"}</code> </p>'
+        long:
+          allOf:
+            - $ref: '#/components/schemas/LongAttribute'
+            - description: '<p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-long">Long</a> type.</p> <p>Example: <code>{"long": 0}</code> </p>'
+        string:
+          allOf:
+            - $ref: '#/components/schemas/StringAttribute'
+            - description: '<p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-string">String</a> type.</p> <p>Example: <code>{"string": "abc"}</code> </p>'
+        set:
+          allOf:
+            - $ref: '#/components/schemas/SetAttribute'
+            - description: '<p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-set">Set</a> type.</p> <p>Example: <code>{"set": [ {} ] }</code> </p>'
+        record:
+          allOf:
+            - $ref: '#/components/schemas/RecordAttribute'
+            - description: '<p>An attribute value of <a href="docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-record">Record</a> type.</p> <p>Example: <code>{"record": { "keyName": {} } }</code> </p>'
+      description: '<p>The value of an attribute.</p> <p>Contains information about the runtime context for a request for which an authorization decision is made. </p> <p>This data type is used as a member of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html">ContextDefinition</a> structure which is uses as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>'
+    Boolean:
+      type: boolean
+    ClientId:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 255
+    ClientIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClientId'
+      minItems: 0
+      maxItems: 1000
+    UserPoolArn:
+      type: string
+      pattern: 'arn:[a-zA-Z0-9-]+:cognito-idp:(([a-zA-Z0-9-]+:\d{12}:userpool/[\w-]+_[0-9a-zA-Z]+))'
+      minLength: 1
+      maxLength: 255
+    CognitoUserPoolConfiguration:
+      type: object
+      required:
+        - userPoolArn
+      properties:
+        userPoolArn:
+          allOf:
+            - $ref: '#/components/schemas/UserPoolArn'
+            - description: '<p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool that contains the identities to be authorized.</p> <p>Example: <code>"UserPoolArn": "cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"</code> </p>'
+        clientIds:
+          allOf:
+            - $ref: '#/components/schemas/ClientIds'
+            - description: '<p>The unique application client IDs that are associated with the specified Amazon Cognito user pool.</p> <p>Example: <code>"ClientIds": ["&amp;ExampleCogClientId;"]</code> </p>'
+      description: '<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used as an identity provider for Verified Permissions.</p> <p>This data type is used as a field that is part of an <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html">Configuration</a> structure that is used as a parameter to the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html">Configuration</a>.</p> <p>Example:<code>"CognitoUserPoolConfiguration":{"UserPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}</code> </p>'
+    Configuration:
+      type: object
+      properties:
+        cognitoUserPoolConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CognitoUserPoolConfiguration'
+            - description: '<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of authenticated identities as entities. It specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool and one or more application client IDs.</p> <p>Example: <code>"configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds": ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}}</code> </p>'
+      description: '<p>Contains configuration information used when creating a new identity source.</p> <note> <p>At this time, the only valid member of this structure is a Amazon Cognito user pool configuration.</p> <p>You must specify a <code>userPoolArn</code>, and optionally, a <code>ClientId</code>.</p> </note> <p>This data type is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a> operation.</p>'
+    ContextMap:
+      type: object
+      minProperties: 0
+      additionalProperties:
+        $ref: '#/components/schemas/AttributeValue'
+    ContextDefinition:
+      type: object
+      properties:
+        contextMap:
+          allOf:
+            - $ref: '#/components/schemas/ContextMap'
+            - description: '<p>An list of attributes that are needed to successfully evaluate an authorization request. Each attribute in this array must include a map of a data type and its value.</p> <p>Example: <code>"Context":{"&lt;KeyName1&gt;":{"boolean":true},"&lt;KeyName2&gt;":{"long":1234}}</code> </p>'
+      description: '<p>Contains additional details about the context of the request. Verified Permissions evaluates this information in an authorization request as part of the <code>when</code> and <code>unless</code> clauses in a policy.</p> <p>This data type is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p> <p>Example: <code>"context":{"Context":{"&lt;KeyName1&gt;":{"boolean":true},"&lt;KeyName2&gt;":{"long":1234}}}</code> </p>'
+    IdempotencyToken:
+      type: string
+      pattern: '[a-zA-Z0-9-]*'
+      minLength: 1
+      maxLength: 64
+    PolicyStoreId:
+      type: string
+      pattern: '[a-zA-Z0-9-]*'
+      minLength: 1
+      maxLength: 200
+    PrincipalEntityType:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 200
+    TimestampFormat:
+      type: string
+      format: date-time
+    IdentitySourceId:
+      type: string
+      pattern: '[a-zA-Z0-9-]*'
+      minLength: 1
+      maxLength: 200
+    PolicyDefinition:
+      type: object
+      properties:
+        static:
+          allOf:
+            - $ref: '#/components/schemas/StaticPolicyDefinition'
+            - description: A structure that describes a static policy. An static policy doesn't use a template or allow placeholders for entities.
+        templateLinked:
+          allOf:
+            - $ref: '#/components/schemas/TemplateLinkedPolicyDefinition'
+            - description: 'A structure that describes a policy that was instantiated from a template. The template can specify placeholders for <code>principal</code> and <code>resource</code>. When you use <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a> to create a policy from a template, you specify the exact principal and resource to use for the instantiated policy.'
+      description: '<p>A structure that contains the details for a Cedar policy definition. It includes the policy type, a description, and a policy body. This is a top level data type used to create a policy.</p> <p>This data type is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a> operation. This structure must always have either an <code>static</code> or a <code>templateLinked</code> element.</p>'
+    PolicyId:
+      type: string
+      pattern: '[a-zA-Z0-9-]*'
+      minLength: 1
+      maxLength: 200
+    PolicyType:
+      type: string
+      enum:
+        - STATIC
+        - TEMPLATE_LINKED
+    ValidationSettings:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/ValidationMode'
+            - description: '<p>The validation mode currently configured for this policy store. The valid values are:</p> <ul> <li> <p> <b>OFF</b> – Neither Verified Permissions nor Cedar perform any validation on policies. No validation errors are reported by either service.</p> </li> <li> <p> <b>STRICT</b> – Requires a schema to be present in the policy store. Cedar performs validation on all submitted new or updated static policies and policy templates. Any that fail validation are rejected and Cedar doesn''t store them in the policy store.</p> </li> </ul> <important> <p>If <code>Mode=STRICT</code> and the policy store doesn''t contain a schema, Verified Permissions rejects all static policies and policy templates because there is no schema to validate against. </p> <p>To submit a static policy or policy template without a schema, you must turn off validation.</p> </important>'
+      description: '<p>A structure that contains Cedar policy validation settings for the policy store. The validation mode determines which validation failures that Cedar considers serious enough to block acceptance of a new or edited static policy or policy template. </p> <p>This data type is used as a request parameter in the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicyStore.html">CreatePolicyStore</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore.html">UpdatePolicyStore</a> operations.</p>'
+    ResourceArn:
+      type: string
+      pattern: 'arn:[^:]*:[^:]*:[^:]*:[^:]*:.*'
+      minLength: 1
+      maxLength: 2500
+    PolicyTemplateDescription:
+      type: string
+      minLength: 0
+      maxLength: 150
+    PolicyStatement:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    PolicyTemplateId:
+      type: string
+      pattern: '[a-zA-Z0-9-]*'
+      minLength: 1
+      maxLength: 200
+    Decision:
+      type: string
+      enum:
+        - ALLOW
+        - DENY
+    DeterminingPolicyItem:
+      type: object
+      required:
+        - policyId
+      properties:
+        policyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: '<p>The Id of a policy that determined to an authorization decision.</p> <p>Example: <code>"policyId":"SPEXAMPLEabcdefg111111"</code> </p>'
+      description: '<p>Contains information about one of the policies that determined an authorization decision.</p> <p>This data type is used as an element in a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p> <p>Example: <code>"determiningPolicies":[{"policyId":"SPEXAMPLEabcdefg111111"}]</code> </p>'
+    DeterminingPolicyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeterminingPolicyItem'
+    DiscoveryUrl:
+      type: string
+      pattern: 'https://.*'
+      minLength: 1
+      maxLength: 2048
+    EntityList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityItem'
+      minItems: 0
+    EntitiesDefinition:
+      type: object
+      properties:
+        entityList:
+          allOf:
+            - $ref: '#/components/schemas/EntityList'
+            - description: 'An array of entities that are needed to successfully evaluate an authorization request. Each entity in this array must include an identifier for the entity, the attributes of the entity, and a list of any parent entities.'
+      description: '<p>Contains the list of entities to be considered during an authorization request. This includes all principals, resources, and actions required to successfully evaluate the request.</p> <p>This data type is used as a field in the response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>'
+    EntityAttributes:
+      type: object
+      minProperties: 0
+      additionalProperties:
+        $ref: '#/components/schemas/AttributeValue'
+    EntityId:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 200
+    EntityType:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 200
+    ParentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntityIdentifier'
+      minItems: 0
+      maxItems: 100
+    EntityItem:
+      type: object
+      required:
+        - identifier
+      properties:
+        identifier:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The identifier of the entity.
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/EntityAttributes'
+            - description: A list of attributes for the entity.
+        parents:
+          allOf:
+            - $ref: '#/components/schemas/ParentList'
+            - description: The parents in the hierarchy that contains the entity.
+      description: '<p>Contains information about an entity that can be referenced in a Cedar policy.</p> <p>This data type is used as one of the fields in the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntitiesDefinition.html">EntitiesDefinition</a> structure.</p> <p> <code>{ "id": { "entityType": "Photo", "entityId": "VacationPhoto94.jpg" }, "Attributes": {}, "Parents": [ { "entityType": "Album", "entityId": "alice_folder" } ] }</code> </p>'
+    EntityReference:
+      type: object
+      properties:
+        unspecified:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Used to indicate that a principal or resource is not specified. This can be used to search for policies that are not associated with a specific principal or resource.
+        identifier:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: 'The identifier of the entity. It can consist of either an EntityType and EntityId, a principal, or a resource.'
+      description: '<p>Contains information about a principal or resource that can be referenced in a Cedar policy.</p> <p>This data type is used as part of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyFilter.html">PolicyFilter</a> structure that is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a> operation..</p>'
+    String:
+      type: string
+    EvaluationErrorItem:
+      type: object
+      required:
+        - errorDescription
+      properties:
+        errorDescription:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error description.
+      description: '<p>Contains a description of an evaluation error.</p> <p>This data type is used as a request parameter in the <a href="https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorized.html">IsAuthorized</a> and <a href="https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorizedWithToken.html">IsAuthorizedWithToken</a> operations.</p>'
+    EvaluationErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EvaluationErrorItem'
+    IdentitySourceDetails:
+      type: object
+      properties:
+        clientIds:
+          allOf:
+            - $ref: '#/components/schemas/ClientIds'
+            - description: The application client IDs associated with the specified Amazon Cognito user pool that are enabled for this identity source.
+        userPoolArn:
+          allOf:
+            - $ref: '#/components/schemas/UserPoolArn'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool whose identities are accessible to this Verified Permissions policy store.'
+        discoveryUrl:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryUrl'
+            - description: '<p>The well-known URL that points to this user pool''s OIDC discovery endpoint. This is a URL string in the following format. This URL replaces the placeholders for both the Amazon Web Services Region and the user pool identifier with those appropriate for this user pool.</p> <p> <code>https://cognito-idp.<i>&lt;region&gt;</i>.amazonaws.com/<i>&lt;user-pool-id&gt;</i>/.well-known/openid-configuration</code> </p>'
+        openIdIssuer:
+          allOf:
+            - $ref: '#/components/schemas/OpenIdIssuer'
+            - description: '<p>A string that identifies the type of OIDC service represented by this identity source. </p> <p>At this time, the only valid value is <code>cognito</code>.</p>'
+      description: '<p>A structure that contains configuration of the identity source.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a> operation.</p>'
+    PolicyDefinitionDetail:
+      type: object
+      properties:
+        static:
+          allOf:
+            - $ref: '#/components/schemas/StaticPolicyDefinitionDetail'
+            - description: Information about a static policy that wasn't created with a policy template.
+        templateLinked:
+          allOf:
+            - $ref: '#/components/schemas/TemplateLinkedPolicyDefinitionDetail'
+            - description: Information about a template-linked policy that was created by instantiating a policy template.
+      description: '<p>A structure that describes a policy definition. It must always have either an <code>static</code> or a <code>templateLinked</code> element.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicy.html">GetPolicy</a> operation.</p>'
+    SchemaJson:
+      type: string
+      minLength: 1
+      maxLength: 10000
+    OpenIdIssuer:
+      type: string
+      enum:
+        - COGNITO
+    IdentitySourceFilter:
+      type: object
+      properties:
+        principalEntityType:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalEntityType'
+            - description: The Cedar entity type of the principals returned by the identity provider (IdP) associated with this identity source.
+      description: '<p>A structure that defines characteristics of an identity source that you can use to filter.</p> <p>This data type is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html">ListIdentityStores</a> operation.</p>'
+    IdentitySourceFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/IdentitySourceFilter'
+      minItems: 0
+      maxItems: 10
+    IdentitySourceItemDetails:
+      type: object
+      properties:
+        clientIds:
+          allOf:
+            - $ref: '#/components/schemas/ClientIds'
+            - description: The application client IDs associated with the specified Amazon Cognito user pool that are enabled for this identity source.
+        userPoolArn:
+          allOf:
+            - $ref: '#/components/schemas/UserPoolArn'
+            - description: The Amazon Cognito user pool whose identities are accessible to this Verified Permissions policy store.
+        discoveryUrl:
+          allOf:
+            - $ref: '#/components/schemas/DiscoveryUrl'
+            - description: '<p>The well-known URL that points to this user pool''s OIDC discovery endpoint. This is a URL string in the following format. This URL replaces the placeholders for both the Amazon Web Services Region and the user pool identifier with those appropriate for this user pool.</p> <p> <code>https://cognito-idp.<i>&lt;region&gt;</i>.amazonaws.com/<i>&lt;user-pool-id&gt;</i>/.well-known/openid-configuration</code> </p>'
+        openIdIssuer:
+          allOf:
+            - $ref: '#/components/schemas/OpenIdIssuer'
+            - description: '<p>A string that identifies the type of OIDC service represented by this identity source. </p> <p>At this time, the only valid value is <code>cognito</code>.</p>'
+      description: '<p>A structure that contains configuration of the identity source.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html">CreateIdentitySource</a> operation.</p>'
+    IdentitySourceItem:
+      type: object
+      required:
+        - createdDate
+        - details
+        - identitySourceId
+        - lastUpdatedDate
+        - policyStoreId
+        - principalEntityType
+      properties:
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the identity source was originally created.
+        details:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceItemDetails'
+            - description: A structure that contains the details of the associated identity provider (IdP).
+        identitySourceId:
+          allOf:
+            - $ref: '#/components/schemas/IdentitySourceId'
+            - description: The unique identifier of the identity source.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the identity source was most recently updated.
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The identifier of the policy store that contains the identity source.
+        principalEntityType:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalEntityType'
+            - description: The Cedar entity type of the principals returned from the IdP associated with this identity source.
+      description: '<p>A structure that defines an identity source.</p> <p>This data type is used as a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html">ListIdentityStores</a> operation.</p>'
+    IdentitySources:
+      type: array
+      items:
+        $ref: '#/components/schemas/IdentitySourceItem'
+    Token:
+      type: string
+      pattern: '[A-Za-z0-9-_=]+.[A-Za-z0-9-_=]+.[A-Za-z0-9-_=]+'
+      minLength: 1
+      maxLength: 131072
+    NextToken:
+      type: string
+      pattern: '[A-Za-z0-9-_=+/\.]*'
+      minLength: 1
+      maxLength: 8000
+    ListIdentitySourcesMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 200
+    MaxResults:
+      type: integer
+      minimum: 1
+      maximum: 20
+    PolicyFilter:
+      type: object
+      properties:
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityReference'
+            - description: Filters the output to only policies that reference the specified principal.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityReference'
+            - description: Filters the output to only policies that reference the specified resource.
+        policyType:
+          allOf:
+            - $ref: '#/components/schemas/PolicyType'
+            - description: Filters the output to only policies of the specified type.
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: Filters the output to only template-linked policies that were instantiated from the specified policy template.
+      description: '<p>Contains information about a filter to refine policies returned in a query.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a> operation.</p>'
+    PolicyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyItem'
+    PolicyStoreList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyStoreItem'
+    PolicyTemplatesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PolicyTemplateItem'
+    Namespace:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 100
+    NamespaceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Namespace'
+    StaticPolicyDefinition:
+      type: object
+      required:
+        - statement
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/StaticPolicyDescription'
+            - description: The description of the static policy.
+        statement:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStatement'
+            - description: 'The policy content of the static policy, written in the Cedar policy language.'
+      description: '<p>Contains information about a static policy.</p> <p>This data type is used as a field that is part of the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinitionDetail.html">PolicyDefinitionDetail</a> type.</p>'
+    TemplateLinkedPolicyDefinition:
+      type: object
+      required:
+        - policyTemplateId
+      properties:
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: The unique identifier of the policy template used to create this policy.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The principal associated with this template-linked policy. Verified Permissions substitutes this principal for the <code>?principal</code> placeholder in the policy template when it evaluates an authorization request.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The resource associated with this template-linked policy. Verified Permissions substitutes this resource for the <code>?resource</code> placeholder in the policy template when it evaluates an authorization request.
+      description: Contains information about a policy created by instantiating a policy template.
+    StaticPolicyDefinitionDetail:
+      type: object
+      required:
+        - statement
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/StaticPolicyDescription'
+            - description: A description of the static policy.
+        statement:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStatement'
+            - description: The content of the static policy written in the Cedar policy language.
+      description: '<p>A structure that contains details about a static policy. It includes the description and policy body.</p> <p>This data type is used within a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html">PolicyDefinition</a> structure as part of a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a> operation.</p>'
+    TemplateLinkedPolicyDefinitionDetail:
+      type: object
+      required:
+        - policyTemplateId
+      properties:
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: The unique identifier of the policy template used to create this policy.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The principal associated with this template-linked policy. Verified Permissions substitutes this principal for the <code>?principal</code> placeholder in the policy template when it evaluates an authorization request.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The resource associated with this template-linked policy. Verified Permissions substitutes this resource for the <code>?resource</code> placeholder in the policy template when it evaluates an authorization request.
+      description: <p>Contains information about a policy that was </p> <p/> <p>created by instantiating a policy template. </p> <p>This </p>
+    StaticPolicyDefinitionItem:
+      type: object
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/StaticPolicyDescription'
+            - description: A description of the static policy.
+      description: '<p>A structure that contains details about a static policy. It includes the description and policy statement.</p> <p>This data type is used within a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html">PolicyDefinition</a> structure as part of a request parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a> operation.</p>'
+    TemplateLinkedPolicyDefinitionItem:
+      type: object
+      required:
+        - policyTemplateId
+      properties:
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: The unique identifier of the policy template used to create this policy.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The principal associated with this template-linked policy. Verified Permissions substitutes this principal for the <code>?principal</code> placeholder in the policy template when it evaluates an authorization request.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The resource associated with this template-linked policy. Verified Permissions substitutes this resource for the <code>?resource</code> placeholder in the policy template when it evaluates an authorization request.
+      description: <p>Contains information about a policy created by instantiating a policy template. </p> <p>This </p>
+    PolicyDefinitionItem:
+      type: object
+      properties:
+        static:
+          allOf:
+            - $ref: '#/components/schemas/StaticPolicyDefinitionItem'
+            - description: Information about a static policy that wasn't created with a policy template.
+        templateLinked:
+          allOf:
+            - $ref: '#/components/schemas/TemplateLinkedPolicyDefinitionItem'
+            - description: Information about a template-linked policy that was created by instantiating a policy template.
+      description: '<p>A structure that describes a <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinintion.html">PolicyDefinintion</a>. It will always have either an <code>StaticPolicy</code> or a <code>TemplateLinkedPolicy</code> element.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html">CreatePolicy</a> and <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a> operations. </p>'
+    PolicyItem:
+      type: object
+      required:
+        - policyStoreId
+        - policyId
+        - policyType
+        - definition
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The identifier of the PolicyStore where the policy you want information about is stored.
+        policyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: The identifier of the policy you want information about.
+        policyType:
+          allOf:
+            - $ref: '#/components/schemas/PolicyType'
+            - description: '<p>The type of the policy. This is one of the following values:</p> <ul> <li> <p> <code>static</code> </p> </li> <li> <p> <code>templateLinked</code> </p> </li> </ul>'
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The principal associated with the policy.
+        resource:
+          allOf:
+            - $ref: '#/components/schemas/EntityIdentifier'
+            - description: The resource associated with the policy.
+        definition:
+          allOf:
+            - $ref: '#/components/schemas/PolicyDefinitionItem'
+            - description: The policy definition of an item in the list of policies returned.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy was created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy was most recently updated.
+      description: '<p>Contains information about a policy.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html">ListPolicies</a> operation.</p>'
+    PolicyStoreItem:
+      type: object
+      required:
+        - policyStoreId
+        - arn
+        - createdDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The unique identifier of the policy store.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the policy store.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time the policy was created.
+      description: '<p>Contains information about a policy store.</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStores.html">ListPolicyStores</a> operation.</p>'
+    PolicyTemplateItem:
+      type: object
+      required:
+        - policyStoreId
+        - policyTemplateId
+        - createdDate
+        - lastUpdatedDate
+      properties:
+        policyStoreId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStoreId'
+            - description: The unique identifier of the policy store that contains the template.
+        policyTemplateId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateId'
+            - description: The unique identifier of the policy template.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/PolicyTemplateDescription'
+            - description: The description attached to the policy template.
+        createdDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy template was created.
+        lastUpdatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimestampFormat'
+            - description: The date and time that the policy template was most recently updated.
+      description: '<p>Contains details about a policy template</p> <p>This data type is used as a response parameter for the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyTemplates.html">ListPolicyTemplates</a> operation.</p>'
+    SchemaDefinition:
+      type: object
+      properties:
+        cedarJson:
+          allOf:
+            - $ref: '#/components/schemas/SchemaJson'
+            - description: 'A JSON string representation of the schema supported by applications that use this policy store. For more information, see <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/schema.html">Policy store schema</a> in the <i>Amazon Verified Permissions User Guide</i>.'
+      description: 'Contains a list of principal types, resource types, and actions that can be specified in policies stored in the same policy store. If the validation mode for the policy store is set to <code>STRICT</code>, then policies that can''t be validated by this schema are rejected by Verified Permissions and can''t be stored in the policy store.'
+    StaticPolicyDescription:
+      type: string
+      minLength: 0
+      maxLength: 150
+    UpdateCognitoUserPoolConfiguration:
+      type: object
+      required:
+        - userPoolArn
+      properties:
+        userPoolArn:
+          allOf:
+            - $ref: '#/components/schemas/UserPoolArn'
+            - description: 'The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool associated with this identity source.'
+        clientIds:
+          allOf:
+            - $ref: '#/components/schemas/ClientIds'
+            - description: The client ID of an app client that is configured for the specified Amazon Cognito user pool.
+      description: Contains configuration details of a Amazon Cognito user pool for use with an identity source.
+    UpdateConfiguration:
+      type: object
+      properties:
+        cognitoUserPoolConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/UpdateCognitoUserPoolConfiguration'
+            - description: Contains configuration details of a Amazon Cognito user pool.
+      description: '<p>Contains an updated configuration to replace the configuration in an existing identity source.</p> <note> <p>At this time, the only valid member of this structure is a Amazon Cognito user pool configuration.</p> <p>You must specify a <code>userPoolArn</code>, and optionally, a <code>ClientId</code>.</p> </note>'
+    UpdateStaticPolicyDefinition:
+      type: object
+      required:
+        - statement
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/StaticPolicyDescription'
+            - description: Specifies the description to be added to or replaced on the static policy.
+        statement:
+          allOf:
+            - $ref: '#/components/schemas/PolicyStatement'
+            - description: '<p>Specifies the Cedar policy language text to be added to or replaced on the static policy.</p> <important> <p>You can change only the following elements from the original content:</p> <ul> <li> <p>The <code>action</code> referenced by the policy.</p> </li> <li> <p>Any conditional clauses, such as <code>when</code> or <code>unless</code> clauses.</p> </li> </ul> <p>You <b>can''t</b> change the following elements:</p> <ul> <li> <p>Changing from <code>StaticPolicy</code> to <code>TemplateLinkedPolicy</code>.</p> </li> <li> <p>The effect (<code>permit</code> or <code>forbid</code>) of the policy.</p> </li> <li> <p>The <code>principal</code> referenced by the policy.</p> </li> <li> <p>The <code>resource</code> referenced by the policy.</p> </li> </ul> </important>'
+      description: Contains information about an update to a static policy.
+    UpdatePolicyDefinition:
+      type: object
+      properties:
+        static:
+          allOf:
+            - $ref: '#/components/schemas/UpdateStaticPolicyDefinition'
+            - description: Contains details about the updates to be applied to a static policy.
+      description: '<p>Contains information about updates to be applied to a policy.</p> <p>This data type is used as a request parameter in the <a href="https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicy.html">UpdatePolicy</a> operation.</p>'
+    ValidationMode:
+      type: string
+      enum:
+        - 'OFF'
+        - STRICT
+security:
+  - hmac: []

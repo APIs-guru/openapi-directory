@@ -633,7 +633,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) of the resource. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.'
           schema:
             type: string
-            pattern: '^arn:(?:aws|aws-cn):simspaceweaver:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:([a-z]+)\/(.+)$'
+            pattern: '^arn:(?:aws|aws-cn|aws-us-gov):simspaceweaver:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:([a-z]+)\/(.+)$'
             minLength: 0
             maxLength: 1600
     parameters:
@@ -679,7 +679,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) of the resource that you want to add tags to. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.'
           schema:
             type: string
-            pattern: '^arn:(?:aws|aws-cn):simspaceweaver:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:([a-z]+)\/(.+)$'
+            pattern: '^arn:(?:aws|aws-cn|aws-us-gov):simspaceweaver:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:([a-z]+)\/(.+)$'
             minLength: 0
             maxLength: 1600
       requestBody:
@@ -941,7 +941,7 @@ paths:
                 RoleArn:
                   description: 'The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that the simulation assumes to perform actions. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>. For more information about IAM roles, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html">IAM roles</a> in the <i>Identity and Access Management User Guide</i>.'
                   type: string
-                  pattern: '^arn:(?:aws|aws-cn):iam::(\d{12})?:role\/(.+)$'
+                  pattern: '^arn:(?:aws|aws-cn|aws-us-gov):iam::(\d{12})?:role\/(.+)$'
                   minLength: 0
                   maxLength: 1600
                 SchemaS3Location:
@@ -1222,7 +1222,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) of the resource that you want to remove tags from. For more information about ARNs, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.'
           schema:
             type: string
-            pattern: '^arn:(?:aws|aws-cn):simspaceweaver:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:([a-z]+)\/(.+)$'
+            pattern: '^arn:(?:aws|aws-cn|aws-us-gov):simspaceweaver:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:([a-z]+)\/(.+)$'
             minLength: 0
             maxLength: 1600
         - name: tagKeys
@@ -1545,7 +1545,7 @@ components:
         - STOPPED
     LogGroupArn:
       type: string
-      pattern: '^arn:(?:aws|aws-cn):log-group:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:role\/(.+)$'
+      pattern: '^arn:(?:aws|aws-cn|aws-us-gov):log-group:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:role\/(.+)$'
       minLength: 0
       maxLength: 1600
     CloudWatchLogsLogGroup:
@@ -1583,7 +1583,7 @@ components:
         Destination:
           allOf:
             - $ref: '#/components/schemas/S3Destination'
-            - description: The Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates the snapshot file.
+            - description: <p>The Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates the snapshot file.</p> <p>The Amazon S3 bucket must be in the same Amazon Web Services Region as the simulation.</p>
         Simulation:
           allOf:
             - $ref: '#/components/schemas/SimSpaceWeaverResourceName'
@@ -1650,7 +1650,7 @@ components:
       properties: {}
     SimSpaceWeaverArn:
       type: string
-      pattern: '^arn:(?:aws|aws-cn):simspaceweaver:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:([a-z]+)\/(.+)$'
+      pattern: '^arn:(?:aws|aws-cn|aws-us-gov):simspaceweaver:([a-z]{2}-[a-z]+-\d{1}):(\d{12})?:([a-z]+)\/(.+)$'
       minLength: 0
       maxLength: 1600
     Timestamp:
@@ -1687,7 +1687,7 @@ components:
       maxLength: 6
     RoleArn:
       type: string
-      pattern: '^arn:(?:aws|aws-cn):iam::(\d{12})?:role\/(.+)$'
+      pattern: '^arn:(?:aws|aws-cn|aws-us-gov):iam::(\d{12})?:role\/(.+)$'
       minLength: 0
       maxLength: 1600
     OptionalString:
@@ -1933,7 +1933,7 @@ components:
         SnapshotS3Location:
           allOf:
             - $ref: '#/components/schemas/S3Location'
-            - description: '<p>The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.</p> <p>Provide a <code>SnapshotS3Location</code> to start your simulation from a snapshot.</p> <p>If you provide a <code>SnapshotS3Location</code> then you can''t provide a <code>SchemaS3Location</code>.</p>'
+            - description: '<p>The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon S3). For more information about Amazon S3, see the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html"> <i>Amazon Simple Storage Service User Guide</i> </a>.</p> <p>Provide a <code>SnapshotS3Location</code> to start your simulation from a snapshot.</p> <p>The Amazon S3 bucket must be in the same Amazon Web Services Region as the simulation.</p> <p>If you provide a <code>SnapshotS3Location</code> then you can''t provide a <code>SchemaS3Location</code>.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
