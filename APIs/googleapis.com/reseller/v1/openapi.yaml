@@ -196,9 +196,23 @@ paths:
           required: true
           schema:
             type: string
+        - description: The intented insert action. The usage of this field is governed by certain policies which are being developed & tested currently. Hence, these might not work as intended. Once this is fully tested & available to consume, we will share more information about its usage, limitations and policy documentation.
+          in: query
+          name: action
+          schema:
+            enum:
+              - actionUnspecified
+              - buy
+              - switch
+            type: string
         - description: The `customerAuthToken` query string is required when creating a resold account that transfers a direct customer's subscription or transfers another reseller customer's subscription to your reseller management. This is a hexadecimal authentication token needed to complete the subscription transfer. For more information, see the administrator help center.
           in: query
           name: customerAuthToken
+          schema:
+            type: string
+        - description: The sku_id of the existing subscription to be upgraded or downgraded. This is required when action is SWITCH. The usage of this field is governed by certain policies which are being developed & tested currently. Hence, these might not work as intended. Once this is fully tested & available to consume, we will share more information about its usage, limitations and policy documentation.
+          in: query
+          name: sourceSkuId
           schema:
             type: string
       requestBody:

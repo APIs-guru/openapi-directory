@@ -2528,6 +2528,7 @@ components:
             - DRIVE_SEARCH_FILTER_PERSON_ONLY
             - ACCESSIBILITY_TRACKER_AFFINITY
             - PLX_DATASOURCE_AFFINITY
+            - DUCKIEWEB_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -5904,7 +5905,6 @@ components:
             type: string
           type: array
         supportsDuoEmailEndpoint:
-          description: Whether the surface supports Duo calling email endpoints.
           type: boolean
       type: object
     AssistantApiCameraCapabilities:
@@ -6057,6 +6057,7 @@ components:
               - AUTO_ROTATE
               - AUTO_ROTATE_FACE_DETECTION
               - BACKUP
+              - BATTERY_HEALTH
               - BATTERY_LEVEL
               - BATTERY_LOW
               - BATTERY_PERCENTAGE
@@ -6283,6 +6284,14 @@ components:
               - TIPS_AND_SUPPORT
               - SCREEN_ATTENTION
               - BLUETOOTH_TETHERING
+              - ALL_APPS
+              - EXTEND_UNLOCK
+              - CLEAR_CALLING
+              - GOOGLE_SETTINGS
+              - APP_LANGUAGES
+              - SIM_STATUS
+              - MICROPHONE_PERMISSIONS
+              - GOOGLE_PLAY_UPDATE
               - ABOUT_PHONE
               - ACCOUNTS
               - APPLICATION
@@ -8105,10 +8114,6 @@ components:
     AssistantApiLoggingOnlyData:
       description: "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 16"
       properties:
-        accountIndex:
-          description: The index of the account on the device. Useful when there are multiple accounts on a device. There is no guarantee that this is a stable number but is relatively stable in practice.
-          format: int32
-          type: integer
         acpVersion:
           description: A user-readable string describing the ACP version (go/acp-version) of the client app used by the user to originate the conversation.
           type: string
@@ -8450,9 +8455,6 @@ components:
             - NO_PHOTOS_PROACTIVE_OUTPUT
             - ALL_PHOTOS_PROACTIVE_OUTPUT
           type: string
-        supportsProactiveOutput:
-          description: Whether a device supports proactive output. Note that this is assumed to be true for all Smart Display devices, but surfaces that newly start supporting proactive_output should set this bit.
-          type: boolean
         userMatchProactive:
           description: Settings for displaying personal data on proactive surfaces with face match capability.
           enum:
@@ -10448,6 +10450,46 @@ components:
           $ref: "#/components/schemas/AssistantContextProviderVariant"
           description: Provider variant corresponding to the current provider. It's used together with mid to uniquely identify provider.
       type: object
+    AssistantContextProviderSelectionPolicy:
+      description: Identifies a business policy used for selecting a given content provider in the form of a name and a resulting scoring action.
+      properties:
+        policyAction:
+          description: Result of applying the policy.
+          enum:
+            - UNSET_ACTION
+            - BOOST_TO_WIN_ACTION
+            - SUPPRESS_TO_INVALIDATE_ACTION
+          type: string
+        policyName:
+          description: Name of the policy.
+          enum:
+            - UNSET_POLICY
+            - QUERY_RESTRICTED_SPOTIFY_POLICY
+            - QUERY_RESTRICTED_PANDORA_POLICY
+            - QUERY_RESTRICTED_NETFLIX_POLICY
+          type: string
+      type: object
+    AssistantContextProviderSelectionResult:
+      description: Message that gets returned from the Provider Selection Library (PSL). It encodes the scores, applied policies, and pruning decisions for a given provider candidate.
+      properties:
+        bucketedFinalScore:
+          description: Alternative bucketed score for use by downstream ranking providers. A raw numeric score is subject to semantic-drift, while a bucket is not.
+          enum:
+            - DEFAULT_BUCKET
+          type: string
+        finalScore:
+          description: Final score in the range [0,1] that can be used for ranking providers. Incorporates both policy rules and quality considerations.
+          format: float
+          type: number
+        policyApplied:
+          description: List of business policies applied to the candidate.
+          items:
+            $ref: "#/components/schemas/AssistantContextProviderSelectionPolicy"
+          type: array
+        shouldPrune:
+          description: Indicates whether the candidate should be pruned.
+          type: boolean
+      type: object
     AssistantContextProviderVariant:
       description: "Note: As of May 2021, multiple providers use the same mids (e.g. YouTube Main, YouTube Go, and YouTube Music all have the same mids). However, quite often we end up using surface specific identifiers (e.g. Android package names, iOS bundle identifiers, etc.) to differentiate amongst them. This field allows us to move away from surface specific identifiers towards a surface-agnostic enum representing the same information."
       properties:
@@ -10504,6 +10546,7 @@ components:
             - NO_DEVICE_HAS_REQUIRED_APP
             - HYBRID_DEVICE_NOT_QUALIFIED
             - NO_NEARBY_DEVICES
+            - NO_MATCHING_LAST_USED_DEVICE
           type: string
       type: object
     AssistantDevicesPlatformProtoAlarmCapability:
@@ -10926,6 +10969,38 @@ components:
             - DEEP_NLU
           type: string
       type: object
+    AssistantGroundingProviderProviderSignalResult:
+      description: "Message containing the processed provider signals. This message is consumed by systems outside of the Provider GP, such as the HGR. For use of provider signals within the Provider GP, please refer to the CTF-governed PackedProviderSignals defined in: cs/google3/assistant/context/proto/packed_provider_signals.proto;rcl=486224300;l=68"
+      properties:
+        isDefaultProvider:
+          description: Whether the provider is the default provider for the BII and entity type. Also known as the 'preferred_provider'.
+          type: boolean
+        isForegroundProvider:
+          description: Whether the provider is currently open in the foreground on the device.
+          type: boolean
+        isInAppProvider:
+          description: Indicates that fulfillment on this provider will happen within the provider app
+          type: boolean
+        isInstalled:
+          description: Whether the provider is installed, or otherwise reachable, from the device.
+          type: boolean
+        isLastUsedProvider:
+          description: Whether the provider was the last-used provider for this intent on the device. Also known as the 'sticky_provider'.
+          type: boolean
+        isQueryRestrictedProvider:
+          description: Whether the provider was specified by the query.
+          type: boolean
+        providerSelectionResult:
+          $ref: "#/components/schemas/AssistantContextProviderSelectionResult"
+          description: The result of running provider-selection on the provider candidate. This is populated by the Signal Extractor after the PSL has been run.
+        providerTypeSignal:
+          description: Contains the "fulfillment type" of provider eg whether it's 0p or System API provider.
+          enum:
+            - UNKNOWN_TYPE
+            - ZEROTH_PARTY_TYPE
+            - ANDROID_SYSTEM_API_TYPE
+          type: string
+      type: object
     AssistantGroundingRankerAssistantInteractionFeatures:
       properties:
         timeDecayed14dHalfLife:
@@ -11335,11 +11410,8 @@ components:
           type: number
       type: object
     AssistantGroundingRankerProviderGroundingProviderFeatures:
-      description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 6"
+      description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 7"
       properties:
-        isInAppProvider:
-          description: Indicates that fulfillment on this provider will happen within the provider app.
-          type: boolean
         providerClusterIds:
           description: Cluster IDs for the provider. This field is repeated because some providers can be associated with multiple clusters. PRR specific feature.
           items:
@@ -11349,6 +11421,9 @@ components:
         providerId:
           $ref: "#/components/schemas/AssistantContextProviderId"
           description: ProviderId for the provider in the binding set. PRR specific feature.
+        providerSignalResult:
+          $ref: "#/components/schemas/AssistantGroundingProviderProviderSignalResult"
+          description: Provider signals extracted from Provider GP.
         pslScore:
           description: Provider quality score in the range [0,1] that can be used for ranking providers. Incorporates both policy rules and quality considerations.
           format: float
@@ -11724,6 +11799,7 @@ components:
             - HYBRID_DEVICE_PROPERTIES_FILTER
             - NEARBY_DEVICE_FILTER
             - DEVICE_ATTRIBUTES_FILTER
+            - LAST_USED_DEVICE_FILTER
             - DEFAULT_MEDIA_OUTPUT_PROMOTER
             - DEVICE_GROUP_PROMOTER
             - LOCAL_DEVICE_PROMOTER
@@ -12008,6 +12084,7 @@ components:
             - NO_DEVICE_HAS_REQUIRED_APP
             - HYBRID_DEVICE_NOT_QUALIFIED
             - NO_NEARBY_DEVICES
+            - NO_MATCHING_LAST_USED_DEVICE
           type: string
         finalLumosStage:
           description: The class name for the final filter/promoter used by Lumos for device targeting. This filter or promoter runs for all users, and contains no data specific to the individual user.
@@ -12119,6 +12196,7 @@ components:
             - HYBRID_DEVICE_PROPERTIES_FILTER
             - NEARBY_DEVICE_FILTER
             - DEVICE_ATTRIBUTES_FILTER
+            - LAST_USED_DEVICE_FILTER
             - DEFAULT_MEDIA_OUTPUT_PROMOTER
             - DEVICE_GROUP_PROMOTER
             - LOCAL_DEVICE_PROMOTER
@@ -12424,7 +12502,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 55"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 57"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -12512,8 +12590,14 @@ components:
         isPodcastIntent:
           description: Whether the intent is a podcast intent.
           type: boolean
+        isSageIntent:
+          description: Whether this intent was generated by Sage.
+          type: boolean
         isTvmIntent:
           description: Whether the intent is a media object tvm intent.
+          type: boolean
+        isValidSmarthomeIntent:
+          description: Whether the intent is a Smarthome-domain intent with valid device arguments.
           type: boolean
         isVideoIntent:
           description: Whether the intent is a media object video intent.
@@ -13540,6 +13624,7 @@ components:
             - AD_LEAD_VERIFICATION
             - GET_HUMAN
             - CHECK_INSURANCE_ACCEPTANCE
+            - FREE_TEXT
           type: string
       type: object
     BookCitationPerDocData:
@@ -24897,6 +24982,9 @@ components:
         restrictionGroup:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
           description: Restriction group this restriction belongs to.
+        restrictionToken:
+          description: A token that can be used to identify the version of the data about this restriction.
+          type: string
         schedule:
           $ref: "#/components/schemas/GeostoreTimeScheduleProto"
           description: "When specified, restriction applies only at particular times (operating hours or times of the year: reversing lanes, seasonal roads, no left turns from 3-5pm Mon-Fri except holidays). Otherwise, restriction is in effect at all times."
@@ -27489,6 +27577,7 @@ components:
           enum:
             - STATE_FETCH_ERROR_UNSPECIFIED
             - STATE_FETCH_ERROR_TIMEOUT
+            - STATE_FETCH_ERROR_UNSUPPORTED
           type: string
       type: object
     GoogleAssistantEmbeddedV1DeviceModelCapabilitiesOverride:
@@ -27675,6 +27764,7 @@ components:
           enum:
             - STATE_FETCH_ERROR_UNSPECIFIED
             - STATE_FETCH_ERROR_TIMEOUT
+            - STATE_FETCH_ERROR_UNSUPPORTED
           type: string
         timers:
           description: Information about all on-device timers.
@@ -28271,6 +28361,9 @@ components:
             - DOCUMENT_EDITOR
             - DOCUMENT_VIEWER
           type: string
+        enableCalUserEmailLogging:
+          description: Optional. Whether to enable CAL user email logging.
+          type: boolean
         kmsKey:
           description: Optional. The KMS key used for CMEK encryption. It is required that the kms key is in the same region as the endpoint. The same key will be used for all provisioned resources, if encryption is available. If the kms_key is left empty, no encryption will be enforced.
           type: string
@@ -28659,6 +28752,8 @@ components:
             - UNKNOWN
             - ON_CREATE
             - ON_UPDATE
+            - ON_CREATE_LINK
+            - ON_DELETE_LINK
           type: string
       type: object
     GoogleCloudContentwarehouseV1RuleActionsPair:
@@ -30425,7 +30520,7 @@ components:
           type: string
       type: object
     GoogleTypeColor:
-      description: "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to and from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page does not have information about the absolute color space that should be used to interpret the RGB value—for example, sRGB, Adobe RGB, DCI-P3, and BT.2020. By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most `1e-5`. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ..."
+      description: "Represents a color in the RGBA color space. This representation is designed for simplicity of conversion to and from color representations in various languages over compactness. For example, the fields of this representation can be trivially provided to the constructor of `java.awt.Color` in Java; it can also be trivially provided to UIColor's `+colorWithRed:green:blue:alpha` method in iOS; and, with just a little work, it can be easily formatted into a CSS `rgba()` string in JavaScript. This reference page doesn't have information about the absolute color space that should be used to interpret the RGB value—for example, sRGB, Adobe RGB, DCI-P3, and BT.2020. By default, applications should assume the sRGB color space. When color equality needs to be decided, implementations, unless documented otherwise, treat two colors as equal if all their red, green, blue, and alpha values each differ by at most `1e-5`. Example (Java): import com.google.type.Color; // ... public static java.awt.Color fromProto(Color protocolor) { float alpha = protocolor.hasAlpha() ? protocolor.getAlpha().getValue() : 1.0; return new java.awt.Color( protocolor.getRed(), protocolor.getGreen(), protocolor.getBlue(), alpha); } public static Color toProto(java.awt.Color color) { float red = (float) color.getRed(); float green = (float) color.getGreen(); float blue = (float) color.getBlue(); float denominator = 255.0; Color.Builder resultBuilder = Color .newBuilder() .setRed(red / denominator) .setGreen(green / denominator) .setBlue(blue / denominator); int alpha = color.getAlpha(); if (alpha != 255) { result.setAlpha( FloatValue .newBuilder() .setValue(((float) alpha) / denominator) .build()); } return resultBuilder.build(); } // ... Example (iOS / Obj-C): // ... static UIColor* fromProto(Color* protocolor) { float red = [protocolor red]; float green = [protocolor green]; float blue = [protocolor blue]; FloatValue* alpha_wrapper = [protocolor alpha]; float alpha = 1.0; if (alpha_wrapper != nil) { alpha = [alpha_wrapper value]; } return [UIColor colorWithRed:red green:green blue:blue alpha:alpha]; } static Color* toProto(UIColor* color) { CGFloat red, green, blue, alpha; if (![color getRed:&red green:&green blue:&blue alpha:&alpha]) { return nil; } Color* result = [[Color alloc] init]; [result setRed:red]; [result setGreen:green]; [result setBlue:blue]; if (alpha <= 0.9999) { [result setAlpha:floatWrapperWithValue(alpha)]; } [result autorelease]; return result; } // ... Example (JavaScript): // ... var protoToCssColor = function(rgb_color) { var redFrac = rgb_color.red || 0.0; var greenFrac = rgb_color.green || 0.0; var blueFrac = rgb_color.blue || 0.0; var red = Math.floor(redFrac * 255); var green = Math.floor(greenFrac * 255); var blue = Math.floor(blueFrac * 255); if (!('alpha' in rgb_color)) { return rgbToCssColor(red, green, blue); } var alphaFrac = rgb_color.alpha.value || 0.0; var rgbParams = [red, green, blue].join(','); return ['rgba(', rgbParams, ',', alphaFrac, ')'].join(''); }; var rgbToCssColor = function(red, green, blue) { var rgbNumber = new Number((red << 16) | (green << 8) | blue); var hexString = rgbNumber.toString(16); var missingZeros = 6 - hexString.length; var resultBuilder = ['#']; for (var i = 0; i < missingZeros; i++) { resultBuilder.push('0'); } resultBuilder.push(hexString); return resultBuilder.join(''); }; // ..."
       properties:
         alpha:
           description: "The fraction of this color that should be applied to the pixel. That is, the final pixel color is defined by the equation: `pixel color = alpha * (this color) + (1.0 - alpha) * (background color)` This means that a value of 1.0 corresponds to a solid color, whereas a value of 0.0 corresponds to a completely transparent color. This uses a wrapper message rather than a simple float scalar so that it is possible to distinguish between a default value and the value being unset. If omitted, this color object is rendered as a solid color (as if the alpha value had been explicitly given a value of 1.0)."
@@ -35253,16 +35348,21 @@ components:
       properties:
         acceleratedShoppingSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        authenticSiteRankData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         chromeCounts:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         creator:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         discoverSource:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
-          description: LINT.ThenChange(//depot/google3/indexing/ames/spanner/schema/web-version.proto)
         discussion:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         documentIntent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        extractedBookInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        instantChromeViews:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         instantNavboost:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
@@ -35272,8 +35372,11 @@ components:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         navboost:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
-          description: LINT.IfChange
+        predictedAuthenticity:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         rankembed:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        rosettaLanguage:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         universalFacts:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
@@ -48894,6 +48997,7 @@ components:
             - GSOX_MOCHI
             - PMW_TI
             - ACCESSIBILITY_TRACKER
+            - DUCKIEWEB
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -52234,9 +52338,10 @@ components:
             - HEADPHONE_PERSONAL_RESULTS_OPTIN
             - DISCOVERY_SPARKS
             - SPOKEN_NOTIFICATIONS_OOBE_OPTIN
-            - PROACTIVE_TRAIN_STATUS
-            - PROACTIVE_TRAIN_DELAY
-            - PROACTIVE_TRAIN_PLATFORM
+            - SPOKEN_NOTIFICATIONS_BNS_MIGRATION_OOBE
+            - TRAIN_STATUS
+            - TRAIN_DELAY
+            - TRAIN_PLATFORM
             - UNIT_TESTING
           type: string
         attachment:
@@ -54155,7 +54260,7 @@ components:
               - GOOGLE_SCREENSHOT
               - MUGSHOT
               - CRIME
-              - SHOPPING_TOPN
+              - PRODUCT_TOPN
               - AUTHENTICITY
               - INFORMATION_SOURCE_OTHER
               - INFORMATION_SOURCE_NEWS_PUBLISHER
@@ -54165,6 +54270,7 @@ components:
               - INFORMATION_SOURCE_UGC
               - INFORMATION_SOURCE_RESEARCH_INSTITUTE
               - QNA
+              - UGC_DISCUSSION
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -54186,7 +54292,6 @@ components:
               - RESERVED_FOR_NEW_ENUM_153
               - RESERVED_FOR_NEW_ENUM_154
               - RESERVED_FOR_NEW_ENUM_155
-              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102
@@ -54327,7 +54432,7 @@ components:
               - GOOGLE_SCREENSHOT
               - MUGSHOT
               - CRIME
-              - SHOPPING_TOPN
+              - PRODUCT_TOPN
               - AUTHENTICITY
               - INFORMATION_SOURCE_OTHER
               - INFORMATION_SOURCE_NEWS_PUBLISHER
@@ -54337,6 +54442,7 @@ components:
               - INFORMATION_SOURCE_UGC
               - INFORMATION_SOURCE_RESEARCH_INSTITUTE
               - QNA
+              - UGC_DISCUSSION
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -54358,7 +54464,6 @@ components:
               - RESERVED_FOR_NEW_ENUM_153
               - RESERVED_FOR_NEW_ENUM_154
               - RESERVED_FOR_NEW_ENUM_155
-              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102
@@ -54502,7 +54607,7 @@ components:
               - GOOGLE_SCREENSHOT
               - MUGSHOT
               - CRIME
-              - SHOPPING_TOPN
+              - PRODUCT_TOPN
               - AUTHENTICITY
               - INFORMATION_SOURCE_OTHER
               - INFORMATION_SOURCE_NEWS_PUBLISHER
@@ -54512,6 +54617,7 @@ components:
               - INFORMATION_SOURCE_UGC
               - INFORMATION_SOURCE_RESEARCH_INSTITUTE
               - QNA
+              - UGC_DISCUSSION
               - RESERVED_FOR_NEW_ENUM_135
               - RESERVED_FOR_NEW_ENUM_136
               - RESERVED_FOR_NEW_ENUM_137
@@ -54533,7 +54639,6 @@ components:
               - RESERVED_FOR_NEW_ENUM_153
               - RESERVED_FOR_NEW_ENUM_154
               - RESERVED_FOR_NEW_ENUM_155
-              - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_99
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_100
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_101
               - RESERVED_FOR_NEW_ENUM_LARGE_PLEASE_ASK_ORBIT_102
@@ -59139,6 +59244,7 @@ components:
             - UNKNOWN
             - DEFINITE
             - INDEFINITE
+            - FEMININE_DETERMINER
             - ABLATIVE
             - ADESSIVE
             - ALLATIVE
@@ -61782,7 +61888,7 @@ components:
           type: string
         gfv:
           $ref: "#/components/schemas/ResearchScamGenericFeatureVector"
-          description: The field isn't tpopulated by default, but when enabled (eg, in the ground-truth pipeline), this field provides the original database GFV corresponding to this result.
+          description: The field isn't populated by default, but when enabled (eg, in the ground-truth pipeline), this field provides the original database GFV corresponding to this result.
         metadata:
           description: Metadata about the neighbor. This is returned under some configurations as a serialized proto. The specific proto depends on which metadata is configured to be returned.
           format: byte
@@ -63059,6 +63165,10 @@ components:
           description: "citation src: dblp/crossref/paper etc"
           format: int32
           type: integer
+        CitationSourceCrawlTimestamp:
+          description: Seconds since the epoch, should be consistent with CitationSourceUrl.
+          format: int64
+          type: string
         CitationSourceUrl:
           description: url where record came from
           type: string
@@ -69083,6 +69193,7 @@ components:
               - USER_P13N_SETTING_OFF_AT_EVENT_LEVEL
               - BOOKS_USER_P13N_SETTING_OFF_AT_EVENT_LEVEL
               - BATTLESTAR_GAME_IN_MDP_EVENT_LEVEL
+              - BATTLESTAR_PSEUDO_CREDIT_OFFER_IN_DP_EVENT_LEVEL
               - REVIEW_HIGHLIGHTS_TRIGGERING_EVENT_LEVEL
               - TRUSTED_VERTICAL_VPN_INTENT_EVENT_LEVEL
               - TRUSTED_VERTICAL_LOAN_INTENT_EVENT_LEVEL
@@ -69091,6 +69202,9 @@ components:
               - QUERY_TYPE_MDP_EVENT_LEVEL
               - QUERY_TYPE_NON_MDP_EVENT_LEVEL
               - NAV_CARD_EVENT_LEVEL
+              - MDP_WITH_LIVE_OPS_EVER_INSTALLED_USERS_EVENT_LEVEL
+              - MDP_WITH_LIVE_OPS_NEVER_INSTALLED_USERS_EVENT_LEVEL
+              - BROAD_RELATED_QUERIES_CLUSTER_EVENT
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -69256,6 +69370,9 @@ components:
               - IN_APP_OFFER_APP_4_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_GAMELOFT_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_EVONY_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_ASPHALT_9_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_MAGIC_RAMPAGE_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_SUMMONERS_WAR_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_1_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_2_AT_SESSION_LEVEL
@@ -69263,6 +69380,9 @@ components:
               - IN_APP_OFFER_ELIGIBLE_APP_4_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GAMELOFT_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_EVONY_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ASPHALT_9_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAGIC_RAMPAGE_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_SUMMONERS_WAR_AT_SESSION_LEVEL
               - IN_APP_OFFER_SAVED_AT_SESSION_LEVEL
               - IN_APP_OFFER_SAVED_APP_1_AT_SESSION_LEVEL
               - IN_APP_OFFER_SAVED_APP_2_AT_SESSION_LEVEL
@@ -69551,6 +69671,48 @@ components:
               - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_NEW_RELEASE_GH
               - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_PRE_REGISTRATION_GH
               - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_LIVE_OPS_GH
+              - SHOULD_NOT_SEE_NOW_CONTENT_NH
+              - SHOULD_SEE_NOW_CONTENT_NH_K1
+              - SHOULD_SEE_NOW_CONTENT_NH_K2
+              - SHOULD_SEE_NOW_CONTENT_NH_K3_4
+              - SHOULD_SEE_NOW_CONTENT_NH_GTE_K5
+              - SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_NH_K1
+              - SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_NH_K2
+              - SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_NH_K3_4
+              - SHOULD_SEE_NOW_CONTENT_NEW_RELEASE_NH_GTE_K5
+              - SHOULD_SEE_NOW_CONTENT_EDITORIAL_NH_K1
+              - SHOULD_SEE_NOW_CONTENT_EDITORIAL_NH_K2
+              - SHOULD_SEE_NOW_CONTENT_EDITORIAL_NH_K3_4
+              - SHOULD_SEE_NOW_CONTENT_EDITORIAL_NH_GTE_K5
+              - SHOULD_SEE_NOW_CONTENT_LIVE_OPS_NH_K1
+              - SHOULD_SEE_NOW_CONTENT_LIVE_OPS_NH_K2
+              - SHOULD_SEE_NOW_CONTENT_LIVE_OPS_NH_K3_4
+              - SHOULD_SEE_NOW_CONTENT_LIVE_OPS_NH_GTE_K5
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_NH_K1
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_NH_K2
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_NH_K3_4
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_NH_GTE_K5
+              - SHOULD_NOT_SEE_NOW_CLUSTER_CONTENT_NH
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_NH_K1
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_NH_K2
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_NH_K3_4
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_NH_GTE_K5
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_NEW_RELEASE_NH_K1
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_NEW_RELEASE_NH_K2
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_NEW_RELEASE_NH_K3_4
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_NEW_RELEASE_NH_GTE_K5
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_EDITORIAL_NH_K1
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_EDITORIAL_NH_K2
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_EDITORIAL_NH_K3_4
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_EDITORIAL_NH_GTE_K5
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_LIVE_OPS_NH_K1
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_LIVE_OPS_NH_K2
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_LIVE_OPS_NH_K3_4
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_LIVE_OPS_NH_GTE_K5
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K1
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K2
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K3_4
+              - SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_GTE_K5
               - WALLET_WELLBEING_ALERT_SESSION_LEVEL
               - BROAD_INTENT_REWEIGHTING_SESSION_LEVEL
               - DYNASTY_DEVICE_HANDOFF_SESSION_LEVEL
@@ -69669,6 +69831,7 @@ components:
               - USER_P13N_SETTING_OFF_AT_SESSION_LEVEL
               - BOOKS_USER_P13N_SETTING_OFF_AT_SESSION_LEVEL
               - BATTLESTAR_GAME_IN_MDP_SESSION_LEVEL
+              - BATTLESTAR_PSEUDO_CREDIT_OFFER_IN_DP_SESSION_LEVEL
               - REVIEW_HIGHLIGHTS_SESSION_LEVEL
               - BOOKS_NOTIFICATION_RECEIVED_SESSION_LEVEL
               - LANGUAGE_SWITCHER_ELIGIBLE_SESSION_LEVEL
@@ -69753,6 +69916,9 @@ components:
               - IN_APP_OFFER_APP_4_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_GAMELOFT_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_EVONY_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_ASPHALT_9_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_MAGIC_RAMPAGE_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_SUMMONERS_WAR_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_1_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_2_AT_USER_LEVEL
@@ -69760,6 +69926,9 @@ components:
               - IN_APP_OFFER_ELIGIBLE_APP_4_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_GAMELOFT_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_EVONY_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ASPHALT_9_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAGIC_RAMPAGE_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_SUMMONERS_WAR_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_APP_1_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_APP_2_AT_USER_LEVEL
@@ -69845,6 +70014,7 @@ components:
               - GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL
               - LOYALTY_PURCHASE_QUEST_GAMES_HOME_SERVER_USER_LEVEL
               - LOYALTY_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL
+              - LOYALTY_CORPUS_WIDE_STAMP_CARD_DETAILS_PAGE_SERVER_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL
@@ -71098,6 +71268,7 @@ components:
             - ADSBURST_DISCOVERY_UNCOMFORTABLE_V1
             - ADSBURST_DISCOVERY_NERV_SUBS_V1
             - ADSBURST_BASIC_TEXT_TOWER_V0
+            - ADSBURST_V2
             - SHOPPING_IMAGE_TRANSFORMATION_UNCROP
             - SHOPPING_IMAGE_TRANSFORMATION_V2
             - SCREENAI_V1

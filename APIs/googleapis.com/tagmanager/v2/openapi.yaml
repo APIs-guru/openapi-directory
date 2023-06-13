@@ -928,6 +928,81 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
+  "/tagmanager/v2/{parent}/transformations":
+    get:
+      description: Lists all GTM Transformations of a GTM container workspace.
+      operationId: tagmanager.accounts.containers.workspaces.transformations.list
+      parameters:
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Continuation token for fetching the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTransformationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
+          Oauth2c:
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
+        - Oauth2:
+            - https://www.googleapis.com/auth/tagmanager.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/tagmanager.readonly
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a GTM Transformation.
+      operationId: tagmanager.accounts.containers.workspaces.transformations.create
+      parameters:
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Transformation"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transformation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
+          Oauth2c:
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
+      tags:
+        - accounts
   "/tagmanager/v2/{parent}/triggers":
     get:
       description: Lists all GTM Triggers of a Container.
@@ -2925,6 +3000,9 @@ components:
         supportTemplates:
           description: Whether this Container supports templates.
           type: boolean
+        supportTransformations:
+          description: Whether this Container supports transformations.
+          type: boolean
         supportTriggers:
           description: Whether this Container supports triggers.
           type: boolean
@@ -3007,6 +3085,11 @@ components:
         tagManagerUrl:
           description: Auto generated link to the tag manager UI
           type: string
+        transformation:
+          description: The transformations in the container that this version was taken from.
+          items:
+            $ref: "#/components/schemas/Transformation"
+          type: array
         trigger:
           description: The triggers in the container that this version was taken from.
           items:
@@ -3192,6 +3275,9 @@ components:
         tag:
           $ref: "#/components/schemas/Tag"
           description: The tag being represented by the entity.
+        transformation:
+          $ref: "#/components/schemas/Transformation"
+          description: The transformation being represented by the entity.
         trigger:
           $ref: "#/components/schemas/Trigger"
           description: The trigger being represented by the entity.
@@ -3510,6 +3596,17 @@ components:
             $ref: "#/components/schemas/CustomTemplate"
           type: array
       type: object
+    ListTransformationsResponse:
+      properties:
+        nextPageToken:
+          description: Continuation token for fetching the next page of results.
+          type: string
+        transformation:
+          description: All GTM Transformations of a GTM Container.
+          items:
+            $ref: "#/components/schemas/Transformation"
+          type: array
+      type: object
     ListTriggersResponse:
       description: List triggers response.
       properties:
@@ -3668,6 +3765,13 @@ components:
         template:
           $ref: "#/components/schemas/CustomTemplate"
           description: Template as it appears in the latest container version since the last workspace synchronization operation. If no template is present, that means the template was deleted in the latest container version.
+      type: object
+    RevertTransformationResponse:
+      description: The result of reverting a transformation in a workspace.
+      properties:
+        transformation:
+          $ref: "#/components/schemas/Transformation"
+          description: Transformation as it appears in the latest container version since the last workspace synchronization operation. If no transformation is present, that means the transformation was deleted in the latest container version.
       type: object
     RevertTriggerResponse:
       description: The result of reverting a trigger in a workspace.
@@ -3849,6 +3953,48 @@ components:
           type: boolean
         tagName:
           description: The name of the teardown tag.
+          type: string
+      type: object
+    Transformation:
+      description: Represents a Google Tag Manager Transformation.
+      properties:
+        accountId:
+          description: GTM Account ID.
+          type: string
+        containerId:
+          description: GTM Container ID.
+          type: string
+        fingerprint:
+          description: The fingerprint of the GTM Transformation as computed at storage time. This value is recomputed whenever the transformation is modified.
+          type: string
+        name:
+          description: Transformation display name.
+          type: string
+        notes:
+          description: User notes on how to apply this transformation in the container.
+          type: string
+        parameter:
+          description: The transformation's parameters.
+          items:
+            $ref: "#/components/schemas/Parameter"
+          type: array
+        parentFolderId:
+          description: Parent folder id.
+          type: string
+        path:
+          description: GTM transformation's API relative path.
+          type: string
+        tagManagerUrl:
+          description: Auto generated link to the tag manager UI
+          type: string
+        transformationId:
+          description: The Transformation ID uniquely identifies the GTM transformation.
+          type: string
+        type:
+          description: Transformation type.
+          type: string
+        workspaceId:
+          description: GTM Workspace ID.
           type: string
       type: object
     Trigger:

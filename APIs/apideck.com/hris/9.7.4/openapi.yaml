@@ -4306,9 +4306,11 @@ components:
             birthday: low
             deceased_on: low
             first_name: critical
+            gender: medium
             id: low
             initials: medium
             last_name: critical
+            middle_name: low
         phone_numbers:
           items:
             $ref: "#/components/schemas/PhoneNumber"
@@ -4471,11 +4473,14 @@ components:
         deceased_on: low
         deleted: medium
         department: medium
+        department_id: low
+        department_name: low
         description: edge-case
         dietary_preference: edge-case
         direct_reports: edge-case
         display_name: edge-case
         division: medium
+        division_id: low
         emails: high
         employee_number: high
         employment_end_date: high
@@ -4502,6 +4507,7 @@ components:
         preferred_name: medium
         probation_period: low
         pronouns: medium
+        record_url: low
         row_version: edge-case
         salutation: medium
         social_links: edge-case
