@@ -750,7 +750,7 @@ components:
           description: User managed repository created in Artifact Registry optionally with a customer managed encryption key. If specified, deployments will use Artifact Registry. If unspecified and the deployment is eligible to use Artifact Registry, GCF will create and use a repository named 'gcf-artifacts' for every deployed region. This is the repository to which the function docker image will be pushed after it is built by Cloud Build. It must match the pattern `projects/{project}/locations/{location}/repositories/{repository}`. Cross-project repositories are not supported. Cross-location repositories are not supported. Repository format must be 'DOCKER'.
           type: string
         entryPoint:
-          description: The name of the function (as defined in source code) that will be executed. Defaults to the resource name suffix, if not specified. For backward compatibility, if function with given name is not found, then the system will try to use function named "function". For Node.js this is name of a function exported by the module specified in `source_location`.
+          description: The name of the function (as defined in source code) that will be executed. Defaults to the resource name suffix (ID of the function), if not specified.
           type: string
         environmentVariables:
           additionalProperties:
@@ -945,7 +945,7 @@ components:
           description: API version used to start the operation.
           type: string
         cancelRequested:
-          description: Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          description: Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have google.longrunning.Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
           type: boolean
         createTime:
           description: The time the operation was created.
@@ -1050,7 +1050,7 @@ components:
           description: API version used to start the operation.
           type: string
         cancelRequested:
-          description: Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          description: Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have google.longrunning.Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
           type: boolean
         createTime:
           description: The time the operation was created.
@@ -1155,7 +1155,7 @@ components:
           description: API version used to start the operation.
           type: string
         cancelRequested:
-          description: Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          description: Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have google.longrunning.Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
           type: boolean
         createTime:
           description: The time the operation was created.

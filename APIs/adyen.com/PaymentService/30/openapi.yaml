@@ -66,7 +66,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: PaymentService
-  x-timestamp: 2023-05-30T15:27:09Z
+  x-timestamp: 2023-06-08T23:24:47Z
 tags:
   - name: Modifications
   - name: General
@@ -3136,7 +3136,11 @@ components:
           type: string
           x-addedInVersion: "4"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           maxLength: 16
           minLength: 1
           type: string
@@ -3367,7 +3371,11 @@ components:
           type: string
           x-addedInVersion: "4"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           maxLength: 16
           minLength: 1
           type: string

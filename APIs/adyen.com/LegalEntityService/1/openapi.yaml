@@ -52,7 +52,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-06-07T22:22:37Z
+  x-timestamp: 2023-06-08T11:24:15Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -3648,6 +3648,7 @@ components:
           description: The type of error.
           enum:
             - dataMissing
+            - declined
             - invalidInput
             - pendingStatus
           type: string
@@ -3725,6 +3726,7 @@ components:
           description: The type of error.
           enum:
             - dataMissing
+            - declined
             - invalidInput
             - pendingStatus
           type: string

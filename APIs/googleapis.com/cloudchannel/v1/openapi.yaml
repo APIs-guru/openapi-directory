@@ -224,7 +224,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Optional. Resource name of the new target Billing Account. Provide this Billing Account when setting up billing for a trial subscription. Format: accounts/{account_id}/billing_accounts/{billing_account_id}. This field is only relevant for multi-currency accounts. It should be left empty for single currency accounts."
+        - description: "Optional. Resource name of the new target Billing Account. Provide this Billing Account when setting up billing for a trial subscription. Format: accounts/{account_id}/billingAccounts/{billing_account_id}. This field is only relevant for multi-currency accounts. It should be left empty for single currency accounts."
           in: query
           name: changeOfferPurchase.billingAccount
           schema:
@@ -239,7 +239,7 @@ paths:
           name: changeOfferPurchase.newSku
           schema:
             type: string
-        - description: "Optional. Billing account that the result should be restricted to. Format: accounts/{account_id}/billing_accounts/{billing_account_id}."
+        - description: "Optional. Billing account that the result should be restricted to. Format: accounts/{account_id}/billingAccounts/{billing_account_id}."
           in: query
           name: createEntitlementPurchase.billingAccount
           schema:
@@ -2938,7 +2938,7 @@ components:
       description: Request message for CloudChannelService.ListTransferableOffers
       properties:
         billingAccount:
-          description: "Optional. The Billing Account to look up Offers for. Format: accounts/{account_id}/billing_accounts/{billing_account_id}. This field is only relevant for multi-currency accounts. It should be left empty for single currency accounts."
+          description: "Optional. The Billing Account to look up Offers for. Format: accounts/{account_id}/billingAccounts/{billing_account_id}. This field is only relevant for multi-currency accounts. It should be left empty for single currency accounts."
           type: string
         cloudIdentityId:
           description: Customer's Cloud Identity ID

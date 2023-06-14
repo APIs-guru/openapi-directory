@@ -10912,6 +10912,13 @@ components:
           $ref: "#/components/schemas/MessageSet"
           description: The RPC's request extensions (i.e. RPC::request_extensions(), a.k.a. the Stubby side channel) will be merged with the specified [request_extensions]. When Triggers are batched, the RPC's request extensions will be merged with all of the [request_extensions] of the Triggers in the batch. Note that merging of request extensions follows standard protocol buffer semantics; values of singular fields override previous values, and values of repeated fields are appended (In the case of Triggers, Triggers with later fire times will be merged after Triggers with earlier fire times in the same batch). It is not advised to specify extensions with repeated fields on batchable Triggers.
       type: object
+    SafeHtmlProto:
+      description: "IMPORTANT: It is unsafe to accept this message from an untrusted source, since it's trivial for an attacker to forge serialized messages that don't fulfill the type's safety contract -- for example, it could contain attacker controlled script. A system which receives a SafeHtmlProto implicitly trusts the producer of the SafeHtmlProto. So, it's generally safe to return this message in RPC responses, but generally unsafe to accept it in RPC requests."
+      properties:
+        privateDoNotAccessOrElseSafeHtmlWrappedValue:
+          description: "IMPORTANT: Never set or read this field, even from tests, it is private. See documentation at the top of .proto file for programming language packages with which to create or read this message."
+          type: string
+      type: object
     SafeUrlProto:
       description: Message containing a string that is safe to use in URL contexts in DOM APIs and HTML documents, where the URL context does not refer to a resource that loads code.
       properties:
@@ -11638,6 +11645,9 @@ components:
         suggestedQuery:
           description: The suggested spelling of the query.
           type: string
+        suggestedQueryHtml:
+          $ref: "#/components/schemas/SafeHtmlProto"
+          description: The sanitized HTML representing the spell corrected query that can be used in the UI. This usually has language-specific tags to mark up parts of the query that are spell checked.
         suggestionType:
           description: Suggestion triggered for the current query.
           enum:
@@ -12201,6 +12211,7 @@ components:
             - ACTION_RELEVANCY_SCORE_BACKFILL
             - ACTION_PDH_PUSH_NOTIFICATION_BACKFILL
             - ACTION_AUTO_SAVE_DRAFT_EXPUNGE
+            - ACTION_RELEVANCY_SCORE_CATCHUP
           type: string
         data:
           description: Clients should use extensions on the Trigger message instead.

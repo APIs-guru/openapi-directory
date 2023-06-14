@@ -1194,6 +1194,11 @@ components:
                 type: string
             type: object
           type: array
+        partner_signup_url:
+          description: Link to the connector's partner program signup page.
+          example: https://www.salesforce.com/partners
+          format: uri
+          type: string
         service_id:
           description: Service provider identifier
           example: close

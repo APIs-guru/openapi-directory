@@ -531,6 +531,46 @@ components:
             type: integer
           type: array
       type: object
+    AgentContainer:
+      description: Container runnable representation on the agent side.
+      properties:
+        commands:
+          description: Overrides the `CMD` specified in the container. If there is an ENTRYPOINT (either in the container image or with the entrypoint field below) then commands are appended as arguments to the ENTRYPOINT.
+          items:
+            type: string
+          type: array
+        entrypoint:
+          description: Overrides the `ENTRYPOINT` specified in the container.
+          type: string
+        imageUri:
+          description: The URI to pull the container image from.
+          type: string
+        options:
+          description: Arbitrary additional options to include in the "docker run" command when running this container, e.g. "--network host".
+          type: string
+        volumes:
+          description: Volumes to mount (bind mount) from the host machine files or directories into the container, formatted to match docker run's --volume option, e.g. /foo:/bar, or /foo:/bar:ro
+          items:
+            type: string
+          type: array
+      type: object
+    AgentEnvironment:
+      description: AgentEnvironment is the Environment representation between Agent and CLH communication. The environment is used in both task level and agent level.
+      properties:
+        encryptedVariables:
+          $ref: "#/components/schemas/AgentKMSEnvMap"
+          description: An encrypted JSON dictionary where the key/value pairs correspond to environment variable names and their values.
+        secretVariables:
+          additionalProperties:
+            type: string
+          description: A map of environment variable names to Secret Manager secret names. The VM will access the named secrets to set the value of each environment variable.
+          type: object
+        variables:
+          additionalProperties:
+            type: string
+          description: A map of environment variable names to values.
+          type: object
+      type: object
     AgentInfo:
       description: VM Agent Info.
       properties:
@@ -557,6 +597,16 @@ components:
           items:
             $ref: "#/components/schemas/AgentTaskInfo"
           type: array
+      type: object
+    AgentKMSEnvMap:
+      description: AgentKMSEnvMap contains the encrypted key/value pair to be used in the environment on the Agent side.
+      properties:
+        cipherText:
+          description: The value of the cipherText response from the `encrypt` method.
+          type: string
+        keyName:
+          description: The name of the KMS key that will be used to decrypt the cipher text.
+          type: string
       type: object
     AgentMetadata:
       description: VM Agent Metadata.
@@ -593,9 +643,22 @@ components:
           description: Agent zone.
           type: string
       type: object
+    AgentScript:
+      description: Script runnable representation on the agent side.
+      properties:
+        path:
+          description: Script file path on the host VM. To specify an interpreter, please add a `#!`(also known as [shebang line](https://en.wikipedia.org/wiki/Shebang_(Unix))) as the first line of the file.(For example, to execute the script using bash, `#!/bin/bash` should be the first line of the file. To execute the script using`Python3`, `#!/usr/bin/env python3` should be the first line of the file.) Otherwise, the file will by default be excuted by `/bin/sh`.
+          type: string
+        text:
+          description: Shell script text. To specify an interpreter, please add a `#!\n` at the beginning of the text.(For example, to execute the script using bash, `#!/bin/bash\n` should be added. To execute the script using`Python3`, `#!/usr/bin/env python3\n` should be added.) Otherwise, the script will by default be excuted by `/bin/sh`.
+          type: string
+      type: object
     AgentTask:
       description: TODO(b/182501497) The message needs to be redefined when the Agent API server updates data in storage per the backend design.
       properties:
+        agentTaskSpec:
+          $ref: "#/components/schemas/AgentTaskSpec"
+          description: AgentTaskSpec is the taskSpec representation between Agent and CLH communication. This field will replace the TaskSpec field above in future to have a better separation between user-facaing API and internal API.
         intendedState:
           description: The intended state of the task.
           enum:
@@ -610,7 +673,7 @@ components:
           type: string
         spec:
           $ref: "#/components/schemas/TaskSpec"
-          description: Task Spec.
+          description: Task Spec. This field will be replaced by agent_task_spec below in future.
         status:
           $ref: "#/components/schemas/TaskStatus"
           description: Task status.
@@ -638,6 +701,48 @@ components:
         taskStatus:
           $ref: "#/components/schemas/TaskStatus"
           description: The status of the Task. If we need agent specific fields we should fork the public TaskStatus into an agent specific one. Or add them below.
+      type: object
+    AgentTaskRunnable:
+      description: AgentTaskRunnable is the Runnable representation between Agent and CLH communication.
+      properties:
+        alwaysRun:
+          description: By default, after a Runnable fails, no further Runnable are executed. This flag indicates that this Runnable must be run even if the Task has already failed. This is useful for Runnables that copy output files off of the VM or for debugging. The always_run flag does not override the Task's overall max_run_duration. If the max_run_duration has expired then no further Runnables will execute, not even always_run Runnables.
+          type: boolean
+        background:
+          description: This flag allows a Runnable to continue running in the background while the Task executes subsequent Runnables. This is useful to provide services to other Runnables (or to provide debugging support tools like SSH servers).
+          type: boolean
+        container:
+          $ref: "#/components/schemas/AgentContainer"
+          description: Container runnable.
+        environment:
+          $ref: "#/components/schemas/AgentEnvironment"
+          description: Environment variables for this Runnable (overrides variables set for the whole Task or TaskGroup).
+        ignoreExitStatus:
+          description: Normally, a non-zero exit status causes the Task to fail. This flag allows execution of other Runnables to continue instead.
+          type: boolean
+        script:
+          $ref: "#/components/schemas/AgentScript"
+          description: Script runnable.
+        timeout:
+          description: Timeout for this Runnable.
+          format: google-duration
+          type: string
+      type: object
+    AgentTaskSpec:
+      description: AgentTaskSpec is the user's TaskSpec representation between Agent and CLH communication.
+      properties:
+        environment:
+          $ref: "#/components/schemas/AgentEnvironment"
+          description: Environment variables to set before running the Task.
+        maxRunDuration:
+          description: Maximum duration the task should run. The task will be killed and marked as FAILED if over this limit.
+          format: google-duration
+          type: string
+        runnables:
+          description: AgentTaskRunnable is runanbles that will be executed on the agent.
+          items:
+            $ref: "#/components/schemas/AgentTaskRunnable"
+          type: array
       type: object
     AgentTimingInfo:
       description: VM timing information
@@ -759,7 +864,7 @@ components:
           description: Local SSDs are available through both "SCSI" and "NVMe" interfaces. If not indicated, "NVMe" will be the default one for local ssds. We only support "SCSI" for persistent disks now.
           type: string
         image:
-          description: 'Name of a public or custom image used as the data source. For example, the following are all valid URLs: * Specify the image by its family name: projects/{project}/global/images/family/{image_family} * Specify the image version: projects/{project}/global/images/{image_version} You can also use Batch customized image in short names. The following image values are supported for a boot disk: * "batch-debian": use Batch Debian images. * "batch-centos": use Batch CentOS images. * "batch-cos": use Batch Container-Optimized images.'
+          description: 'Name of a public or custom image used as the data source. For example, the following are all valid URLs: * Specify the image by its family name: projects/{project}/global/images/family/{image_family} * Specify the image version: projects/{project}/global/images/{image_version} You can also use Batch customized image in short names. The following image values are supported for a boot disk: * "batch-debian": use Batch Debian images. * "batch-centos": use Batch CentOS images. * "batch-cos": use Batch Container-Optimized images. * "batch-hpc-centos": use Batch HPC CentOS images.'
           type: string
         sizeGb:
           description: Disk size in GB. For persistent disk, this field is ignored if `data_source` is `image` or `snapshot`. For local SSD, size_gb should be a multiple of 375GB, otherwise, the final size will be the next greater multiple of 375 GB. For boot disk, Batch will calculate the boot disk size based on source image and task requirements if you do not speicify the size. If both this field and the boot_disk_mib field in task spec's compute_resource are defined, Batch will only honor this field.
