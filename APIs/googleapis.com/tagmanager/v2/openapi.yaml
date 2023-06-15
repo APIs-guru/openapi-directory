@@ -3968,13 +3968,13 @@ components:
           description: The fingerprint of the GTM Transformation as computed at storage time. This value is recomputed whenever the transformation is modified.
           type: string
         name:
-          description: Transformation display name.
+          description: Transformation display name. @mutable tagmanager.accounts.containers.workspaces.transformations.create @mutable tagmanager.accounts.containers.workspaces.transformations.update
           type: string
         notes:
-          description: User notes on how to apply this transformation in the container.
+          description: User notes on how to apply this transformation in the container. @mutable tagmanager.accounts.containers.workspaces.transformations.create @mutable tagmanager.accounts.containers.workspaces.transformations.update
           type: string
         parameter:
-          description: The transformation's parameters.
+          description: The transformation's parameters. @mutable tagmanager.accounts.containers.workspaces.transformations.create @mutable tagmanager.accounts.containers.workspaces.transformations.update
           items:
             $ref: "#/components/schemas/Parameter"
           type: array
@@ -3991,7 +3991,7 @@ components:
           description: The Transformation ID uniquely identifies the GTM transformation.
           type: string
         type:
-          description: Transformation type.
+          description: Transformation type. @mutable tagmanager.accounts.containers.workspaces.transformations.create @mutable tagmanager.accounts.containers.workspaces.transformations.update
           type: string
         workspaceId:
           description: GTM Workspace ID.

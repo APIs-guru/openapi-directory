@@ -535,17 +535,6 @@ components:
           format: int32
           type: integer
       type: object
-    DashConfig:
-      description: "`DASH` manifest configuration."
-      properties:
-        segmentReferenceScheme:
-          description: The segment reference scheme for a `DASH` manifest. The default is `SEGMENT_LIST`
-          enum:
-            - SEGMENT_REFERENCE_SCHEME_UNSPECIFIED
-            - SEGMENT_LIST
-            - SEGMENT_TEMPLATE_NUMBER
-          type: string
-      type: object
     Deblock:
       description: Deblock preprocessing configuration. **Note:** This configuration is not supported.
       properties:
@@ -958,9 +947,6 @@ components:
     Manifest:
       description: Manifest configuration.
       properties:
-        dash:
-          $ref: "#/components/schemas/DashConfig"
-          description: "`DASH` manifest configuration."
         fileName:
           description: The name of the generated file. The default is `manifest` with the extension suffix corresponding to the `Manifest.type`.
           type: string

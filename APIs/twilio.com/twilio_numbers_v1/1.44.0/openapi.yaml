@@ -1,0 +1,163 @@
+openapi: 3.0.1
+servers:
+  - url: https://numbers.twilio.com
+info:
+  contact:
+    email: support@twilio.com
+    name: Twilio Support
+    url: https://support.twilio.com
+  description: This is the public Twilio REST API.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.twilio.com/legal/tos
+  title: Twilio - Numbers
+  version: 1.44.0
+  x-apisguru-categories:
+    - telecom
+    - messaging
+  x-logo:
+    url: https://static1.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg
+  x-origin:
+    - format: openapi
+      url: https://raw.githubusercontent.com/twilio/twilio-oai/main/spec/json/twilio_numbers_v1.json
+      version: "3.0"
+  x-providerName: twilio.com
+  x-serviceName: twilio_numbers_v1
+paths:
+  /v1/HostedNumber/Eligibility:
+    description: "TODO: Resource-level docs"
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties: []
+      mountName: eligibilities
+      pathType: list
+  /v1/HostedNumber/Eligibility/Bulk:
+    description: "TODO: Resource-level docs"
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties: []
+      mountName: bulk_eligibilities
+      pathType: list
+  "/v1/HostedNumber/Eligibility/Bulk/{RequestId}":
+    description: "TODO: Resource-level docs"
+    get:
+      description: Fetch an eligibility bulk check that you requested to host in Twilio.
+      operationId: FetchBulkEligibility
+      parameters:
+        - description: The SID of the bulk eligibility check that you want to know about.
+          in: path
+          name: RequestId
+          required: true
+          schema:
+            maxLength: 34
+            minLength: 34
+            pattern: ^EC[0-9a-fA-F]{32}$
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/numbers.v1.bulk_eligibility"
+          description: OK
+      security:
+        - accountSid_authToken: []
+      x-maturity:
+        - Beta
+    servers:
+      - url: https://numbers.twilio.com
+    x-twilio:
+      defaultOutputProperties: []
+      mountName: bulk_eligibilities
+      pathType: instance
+components:
+  schemas:
+    bulk_eligibility_enum_eligibility_status:
+      enum:
+        - ineligible
+        - eligible
+      type: string
+    bulk_eligibility_enum_eligibility_sub_status:
+      enum:
+        - country-ineligible
+        - number-format-ineligible
+        - number-type-ineligible
+        - carrier-ineligible
+        - already-in-twilio
+        - internal-processing-error
+        - invalid-phone-number
+        - invalid-hosting-account-sid
+        - eligible
+        - eligible-by-manual-process
+      type: string
+    eligibility_enum_eligibility_status:
+      enum:
+        - ineligible
+        - eligible
+      type: string
+    eligibility_enum_eligibility_sub_status:
+      enum:
+        - country-ineligible
+        - number-format-ineligible
+        - number-type-ineligible
+        - carrier-ineligible
+        - already-in-twilio
+        - internal-processing-error
+        - invalid-phone-number
+        - invalid-hosting-account-sid
+        - eligible
+      type: string
+    numbers.v1.bulk_eligibility:
+      properties:
+        date_completed:
+          format: date-time
+          nullable: true
+          type: string
+        date_created:
+          format: date-time
+          nullable: true
+          type: string
+        friendly_name:
+          description: This is the string that you assigned as a friendly name for describing the eligibility check request.
+          nullable: true
+          type: string
+        request_id:
+          description: The SID of the bulk eligibility check that you want to know about.
+          maxLength: 34
+          minLength: 34
+          nullable: true
+          pattern: ^EC[0-9a-fA-F]{32}$
+          type: string
+        results:
+          description: "The result set that contains the eligibility check response for each requested number, each result has at least the following attributes:  phone_number: The requested phone number ,hosting_account_sid: The account sid where the phone number will be hosted, country: Phone number’s country, eligibility_status: Indicates the eligibility status of the PN (Eligible/Ineligible), eligibility_sub_status: Indicates the sub status of the eligibility , ineligibility_reason: Reason for number's ineligibility (if applicable), next_step: Suggested next step in the hosting process based on the eligibility status."
+          items: {}
+          nullable: true
+          type: array
+        status:
+          description: "This is the status of the bulk eligibility check request. (Example: COMPLETE, IN_PROGRESS)"
+          nullable: true
+          type: string
+        url:
+          description: This is the url of the request that you're trying to reach out to locate the resource.
+          format: uri
+          nullable: true
+          type: string
+      type: object
+    numbers.v1.eligibility:
+      properties:
+        results:
+          description: "The result set that contains the eligibility check response for the requested number, each result has at least the following attributes:  phone_number: The requested phone number ,hosting_account_sid: The account sid where the phone number will be hosted, date_last_checked: Datetime (ISO 8601) when the PN was last checked for eligibility, country: Phone number’s country, eligibility_status: Indicates the eligibility status of the PN (Eligible/Ineligible), eligibility_sub_status: Indicates the sub status of the eligibility , ineligibility_reason: Reason for number's ineligibility (if applicable), next_step: Suggested next step in the hosting process based on the eligibility status."
+          items: {}
+          nullable: true
+          type: array
+      type: object
+  securitySchemes:
+    accountSid_authToken:
+      scheme: basic
+      type: http
+x-maturity:
+  - description: PLEASE NOTE that this is a Beta product that is subject to change. Use it with caution.
+    name: Beta

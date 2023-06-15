@@ -1371,6 +1371,9 @@ paths:
       tags:
         - Contacts
       x-apideck-api: crm
+      x-apideck-gotchas:
+        - connector: hubspot
+          description: When creating a contact, it is advised to always include an unique email address since Hubspot uses it to prevent duplicate contacts in HubSpot. More info on the [Hubspot developer docs](https://developers.hubspot.com/docs/api/crm/contacts).
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1834,6 +1837,11 @@ paths:
       tags:
         - Leads
       x-apideck-api: crm
+      x-apideck-gotchas:
+        - connector: hubspot
+          description: When creating a lead, it is advised to always include an unique email address since Hubspot uses it to prevent duplicate contacts in HubSpot. More info on the [Hubspot developer docs](https://developers.hubspot.com/docs/api/crm/contacts).
+        - connector: pipedrive
+          description: When creating a lead, it is required to include an existing `company_id`. More info on the [Pipedrive developer docs](https://pipedrive.readme.io/docs/adding-a-lead).
       x-codeSamples:
         - label: Node
           lang: TypeScript
