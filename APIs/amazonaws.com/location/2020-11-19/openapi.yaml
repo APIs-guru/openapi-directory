@@ -578,7 +578,7 @@ paths:
   '/tracking/v0/trackers/{TrackerName}/positions':
     post:
       operationId: BatchUpdateDevicePosition
-      description: '<p>Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.</p> <note> <p>Position updates are handled based on the <code>PositionFiltering</code> property of the tracker. When <code>PositionFiltering</code> is set to <code>TimeBased</code>, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID.</p> <p>When <code>PositionFiltering</code> is set to <code>DistanceBased</code> filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft).</p> <p>When <code>PositionFiltering</code> is set to <code>AccuracyBased</code> filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If <code>PositionFiltering</code> is set to <code>AccuracyBased</code> filtering, Amazon Location uses the default value <code>{ "Horizontal": 0}</code> when accuracy is not provided on a <code>DevicePositionUpdate</code>.</p> </note>'
+      description: '<p>Uploads position update data for one or more devices to a tracker resource (up to 10 devices per batch). Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.</p> <note> <p>Position updates are handled based on the <code>PositionFiltering</code> property of the tracker. When <code>PositionFiltering</code> is set to <code>TimeBased</code>, updates are evaluated against linked geofence collections, and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than every 30 seconds, only one update per 30 seconds is stored for each unique device ID.</p> <p>When <code>PositionFiltering</code> is set to <code>DistanceBased</code> filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than 30 m (98.4 ft).</p> <p>When <code>PositionFiltering</code> is set to <code>AccuracyBased</code> filtering, location data is stored and evaluated against linked geofence collections only if the device has moved more than the measured accuracy. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is neither stored or evaluated if the device has moved less than 15 m. If <code>PositionFiltering</code> is set to <code>AccuracyBased</code> filtering, Amazon Location uses the default value <code>{ "Horizontal": 0}</code> when accuracy is not provided on a <code>DevicePositionUpdate</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -636,7 +636,7 @@ paths:
                 - Updates
               properties:
                 Updates:
-                  description: Contains the position update details for each device.
+                  description: 'Contains the position update details for each device, up to 10 devices.'
                   type: array
                   items:
                     $ref: '#/components/schemas/DevicePositionUpdate'
@@ -3042,6 +3042,13 @@ paths:
               required:
                 - Geometry
               properties:
+                GeofenceProperties:
+                  description: Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 3
+                  additionalProperties:
+                    $ref: '#/components/schemas/PropertyMapValueString'
                 Geometry:
                   description: '<p>Contains the geofence geometry details.</p> <p>A geofence geometry is made up of either a polygon or a circle. Can be either a polygon or a circle. Including both will return a validation error.</p> <note> <p>Amazon Location doesn''t currently support polygons with holes, multipolygons, polygons that are wound clockwise, or that cross the antimeridian. </p> </note>'
                   type: object
@@ -4428,6 +4435,13 @@ paths:
                     $ref: '#/components/schemas/Double'
                   minItems: 4
                   maxItems: 4
+                FilterCategories:
+                  description: '<p>A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match <i>any</i> of the categories listed.</p> <p>For more information about using categories, including a list of Amazon Location categories, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html">Categories and filtering</a>, in the <i>Amazon Location Service Developer Guide</i>.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PlaceCategory'
+                  minItems: 1
+                  maxItems: 5
                 FilterCountries:
                   description: '<p>An optional parameter that limits the search results by returning only suggestions within the provided list of countries.</p> <ul> <li> <p>Use the <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> 3-digit country code. For example, Australia uses three upper-case characters: <code>AUS</code>.</p> </li> </ul>'
                   type: array
@@ -4533,6 +4547,13 @@ paths:
                     $ref: '#/components/schemas/Double'
                   minItems: 4
                   maxItems: 4
+                FilterCategories:
+                  description: '<p>A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match <i>any</i> of the categories listed.</p> <p>For more information about using categories, including a list of Amazon Location categories, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html">Categories and filtering</a>, in the <i>Amazon Location Service Developer Guide</i>.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/PlaceCategory'
+                  minItems: 1
+                  maxItems: 5
                 FilterCountries:
                   description: '<p>An optional parameter that limits the search results by returning only places that are in a specified list of countries.</p> <ul> <li> <p>Valid values include <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> 3-digit country codes. For example, Australia uses three upper-case characters: <code>AUS</code>.</p> </li> </ul>'
                   type: array
@@ -4793,6 +4814,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Id'
             - description: The identifier for the geofence to be stored in a given geofence collection.
+        GeofenceProperties:
+          allOf:
+            - $ref: '#/components/schemas/PropertyMap'
+            - description: Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
         Geometry:
           allOf:
             - $ref: '#/components/schemas/GeofenceGeometry'
@@ -4941,7 +4966,7 @@ components:
       items:
         $ref: '#/components/schemas/ApiKeyAction'
       minItems: 1
-      maxItems: 5
+      maxItems: 7
     ApiKeyRestrictionsAllowReferersList:
       type: array
       items:
@@ -5409,6 +5434,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Id'
             - description: The geofence identifier.
+        GeofenceProperties:
+          allOf:
+            - $ref: '#/components/schemas/PropertyMap'
+            - description: Contains additional user-defined properties stored with the geofence. An array of key-value pairs.
         Geometry:
           allOf:
             - $ref: '#/components/schemas/GeofenceGeometry'
@@ -5606,6 +5635,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The timestamp for when the geofence was last updated in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code> '
+    PropertyMapValueString:
+      type: string
+      minLength: 1
+      maxLength: 40
     Circle:
       type: object
       required:
@@ -5654,6 +5687,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SearchPlaceIndexForSuggestionsSummary'
             - description: 'Contains a summary of the request. Echoes the input values for <code>BiasPosition</code>, <code>FilterBBox</code>, <code>FilterCountries</code>, <code>Language</code>, <code>MaxResults</code>, and <code>Text</code>. Also includes the <code>DataSource</code> of the place index. '
+    PlaceCategory:
+      type: string
+      minLength: 0
+      maxLength: 35
     CountryCode:
       type: string
       pattern: '^[A-Z]{3}$'
@@ -6079,6 +6116,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/BatchPutGeofenceRequestEntriesList'
             - description: The batch of geofences to be stored in a geofence collection.
+    PropertyMap:
+      type: object
+      minProperties: 0
+      maxProperties: 3
+      additionalProperties:
+        $ref: '#/components/schemas/PropertyMapValueString'
     GeofenceGeometry:
       type: object
       properties:
@@ -6154,7 +6197,7 @@ components:
         Updates:
           allOf:
             - $ref: '#/components/schemas/BatchUpdateDevicePositionRequestUpdatesList'
-            - description: Contains the position update details for each device.
+            - description: 'Contains the position update details for each device, up to 10 devices.'
     Blob:
       type: string
     BoundingBox:
@@ -6702,12 +6745,6 @@ components:
             - $ref: '#/components/schemas/PositionalAccuracyHorizontalDouble'
             - description: 'Estimated maximum distance, in meters, between the measured position and the true position of a device, along the Earth''s surface.'
       description: Defines the level of certainty of the position.
-    PropertyMap:
-      type: object
-      minProperties: 0
-      maxProperties: 3
-      additionalProperties:
-        $ref: '#/components/schemas/PropertyMapValueString'
     DevicePosition:
       type: object
       required:
@@ -6749,6 +6786,12 @@ components:
       type: object
       title: DisassociateTrackerConsumerRequest
       properties: {}
+    FilterPlaceCategoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlaceCategory'
+      minItems: 1
+      maxItems: 5
     GetDevicePositionHistoryRequestMaxResultsInteger:
       type: integer
       minimum: 1
@@ -6835,6 +6878,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The numerical portion of an address, such as a building number. '
+        Categories:
+          allOf:
+            - $ref: '#/components/schemas/PlaceCategoryList'
+            - description: '<p>The Amazon Location categories that describe this Place.</p> <p>For more information about using categories, including a list of Amazon Location categories, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html">Categories and filtering</a>, in the <i>Amazon Location Service Developer Guide</i>.</p>'
         Country:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6873,18 +6920,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'A county, or an area that''s part of a larger region. For example, <code>Metro Vancouver</code>.'
+        SupplementalCategories:
+          allOf:
+            - $ref: '#/components/schemas/PlaceSupplementalCategoryList'
+            - description: Categories from the data provider that describe the Place that are not mapped to any Amazon Location categories.
         TimeZone:
           allOf:
             - $ref: '#/components/schemas/TimeZone'
-            - description: The time zone in which the <code>Place</code> is located. Returned only when using HERE as the selected partner.
+            - description: The time zone in which the <code>Place</code> is located. Returned only when using HERE or Grab as the selected partner.
         UnitNumber:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>For addresses with multiple units, the unit identifier. Can include numbers and letters, for example <code>3B</code> or <code>Unit 123</code>.</p> <note> <p>Returned only for a place index that uses Esri as a data provider. Is not returned for <code>SearchPlaceIndexForPosition</code>.</p> </note>'
+            - description: '<p>For addresses with multiple units, the unit identifier. Can include numbers and letters, for example <code>3B</code> or <code>Unit 123</code>.</p> <note> <p>Returned only for a place index that uses Esri or Grab as a data provider. Is not returned for <code>SearchPlaceIndexForPosition</code>.</p> </note>'
         UnitType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'For addresses with a <code>UnitNumber</code>, the type of unit. For example, <code>Apartment</code>.'
+            - description: '<p>For addresses with a <code>UnitNumber</code>, the type of unit. For example, <code>Apartment</code>.</p> <note> <p>Returned only for a place index that uses Esri as a data provider.</p> </note>'
       description: <p>Contains details about addresses or points of interest that match the search criteria.</p> <p>Not all details are included with all responses. Some details may only be returned by specific data partners.</p>
     Integer:
       type: integer
@@ -7072,6 +7123,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Id'
             - description: The geofence identifier.
+        GeofenceProperties:
+          allOf:
+            - $ref: '#/components/schemas/PropertyMap'
+            - description: Contains additional user-defined properties stored with the geofence. An array of key-value pairs.
         Geometry:
           allOf:
             - $ref: '#/components/schemas/GeofenceGeometry'
@@ -7409,6 +7464,12 @@ components:
             - $ref: '#/components/schemas/CountryCode3OrEmpty'
             - description: '<p>Specifies the political view for the style. Set to an empty string to not use a political view, or, for styles that support specific political views, you can choose a view, such as <code>IND</code> for the Indian view.</p> <note> <p>Not all map resources or styles support political view styles. See <a href="https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views">Political views</a> for more information.</p> </note>'
       description: Specifies the political view for the style.
+    PlaceCategoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlaceCategory'
+      minItems: 1
+      maxItems: 10
     PlaceGeometry:
       type: object
       properties:
@@ -7417,6 +7478,12 @@ components:
             - $ref: '#/components/schemas/Position'
             - description: '<p>A single point geometry specifies a location for a Place using <a href="https://gisgeography.com/wgs84-world-geodetic-system/">WGS 84</a> coordinates:</p> <ul> <li> <p> <i>x</i> — Specifies the x coordinate or longitude. </p> </li> <li> <p> <i>y</i> — Specifies the y coordinate or latitude. </p> </li> </ul>'
       description: Places uses a point geometry to specify a location or a Place.
+    PlaceSupplementalCategoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PlaceSupplementalCategory'
+      minItems: 1
+      maxItems: 10
     TimeZone:
       type: object
       required:
@@ -7435,15 +7502,15 @@ components:
       type: integer
       minimum: 1
       maximum: 50
+    PlaceSupplementalCategory:
+      type: string
+      minLength: 0
+      maxLength: 35
     PositionalAccuracyHorizontalDouble:
       type: number
       format: double
       minimum: 0
       maximum: 10000
-    PropertyMapValueString:
-      type: string
-      minLength: 1
-      maxLength: 40
     PropertyMapKeyString:
       type: string
       minLength: 1
@@ -7454,6 +7521,10 @@ components:
         - Geometry
       title: PutGeofenceRequest
       properties:
+        GeofenceProperties:
+          allOf:
+            - $ref: '#/components/schemas/PropertyMap'
+            - description: Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
         Geometry:
           allOf:
             - $ref: '#/components/schemas/GeofenceGeometry'
@@ -7541,10 +7612,18 @@ components:
       required:
         - Text
       properties:
+        Categories:
+          allOf:
+            - $ref: '#/components/schemas/PlaceCategoryList'
+            - description: '<p>The Amazon Location categories that describe the Place.</p> <p>For more information about using categories, including a list of Amazon Location categories, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html">Categories and filtering</a>, in the <i>Amazon Location Service Developer Guide</i>.</p>'
         PlaceId:
           allOf:
             - $ref: '#/components/schemas/PlaceId'
-            - description: '<p>The unique identifier of the place. You can use this with the <code>GetPlace</code> operation to find the place again later.</p> <note> <p>For <code>SearchPlaceIndexForSuggestions</code> operations, the <code>PlaceId</code> is returned by place indexes that use Esri, Grab, or HERE as data providers.</p> </note>'
+            - description: '<p>The unique identifier of the Place. You can use this with the <code>GetPlace</code> operation to find the place again later, or to get full information for the Place.</p> <p>The <code>GetPlace</code> request must use the same <code>PlaceIndex</code> resource as the <code>SearchPlaceIndexForSuggestions</code> that generated the Place ID.</p> <note> <p>For <code>SearchPlaceIndexForSuggestions</code> operations, the <code>PlaceId</code> is returned by place indexes that use Esri, Grab, or HERE as data providers.</p> </note>'
+        SupplementalCategories:
+          allOf:
+            - $ref: '#/components/schemas/PlaceSupplementalCategoryList'
+            - description: Categories from the data provider that describe the Place that are not mapped to any Amazon Location categories.
         Text:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -7653,6 +7732,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoundingBox'
             - description: '<p>An optional parameter that limits the search results by returning only suggestions within a specified bounding box.</p> <p> If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box.</p> <p>For example, <code>[-12.7935, -37.4835, -12.0684, -36.9542]</code> represents a bounding box where the southwest corner has longitude <code>-12.7935</code> and latitude <code>-37.4835</code>, and the northeast corner has longitude <code>-12.0684</code> and latitude <code>-36.9542</code>.</p> <note> <p> <code>FilterBBox</code> and <code>BiasPosition</code> are mutually exclusive. Specifying both options results in an error. </p> </note>'
+        FilterCategories:
+          allOf:
+            - $ref: '#/components/schemas/FilterPlaceCategoryList'
+            - description: '<p>A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match <i>any</i> of the categories listed.</p> <p>For more information about using categories, including a list of Amazon Location categories, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html">Categories and filtering</a>, in the <i>Amazon Location Service Developer Guide</i>.</p>'
         FilterCountries:
           allOf:
             - $ref: '#/components/schemas/CountryCodeList'
@@ -7687,6 +7770,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoundingBox'
             - description: Contains the coordinates for the optional bounding box specified in the request.
+        FilterCategories:
+          allOf:
+            - $ref: '#/components/schemas/FilterPlaceCategoryList'
+            - description: The optional category filter specified in the request.
         FilterCountries:
           allOf:
             - $ref: '#/components/schemas/CountryCodeList'
@@ -7726,6 +7813,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoundingBox'
             - description: '<p>An optional parameter that limits the search results by returning only places that are within the provided bounding box.</p> <p> If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box.</p> <p>For example, <code>[-12.7935, -37.4835, -12.0684, -36.9542]</code> represents a bounding box where the southwest corner has longitude <code>-12.7935</code> and latitude <code>-37.4835</code>, and the northeast corner has longitude <code>-12.0684</code> and latitude <code>-36.9542</code>.</p> <note> <p> <code>FilterBBox</code> and <code>BiasPosition</code> are mutually exclusive. Specifying both options results in an error. </p> </note>'
+        FilterCategories:
+          allOf:
+            - $ref: '#/components/schemas/FilterPlaceCategoryList'
+            - description: '<p>A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match <i>any</i> of the categories listed.</p> <p>For more information about using categories, including a list of Amazon Location categories, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html">Categories and filtering</a>, in the <i>Amazon Location Service Developer Guide</i>.</p>'
         FilterCountries:
           allOf:
             - $ref: '#/components/schemas/CountryCodeList'
@@ -7760,6 +7851,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoundingBox'
             - description: Contains the coordinates for the optional bounding box specified in the request.
+        FilterCategories:
+          allOf:
+            - $ref: '#/components/schemas/FilterPlaceCategoryList'
+            - description: The optional category filter specified in the request.
         FilterCountries:
           allOf:
             - $ref: '#/components/schemas/CountryCodeList'
