@@ -5506,6 +5506,10 @@ components:
     CrmWebhookEvent:
       allOf:
         - properties:
+            consumer_id:
+              description: Unique consumer identifier. You can freely choose a consumer ID yourself. Most of the time, this is an ID of your internal data model that represents a user or account in your system (for example account:12345). If the consumer doesn't exist yet, Vault will upsert a consumer based on your ID.
+              example: test_consumer_id
+              type: string
             entity_id:
               description: The service provider's ID of the entity that triggered this event
               example: 123456ASDF
@@ -5534,6 +5538,39 @@ components:
               description: Service provider identifier
               example: close
               type: string
+            unified_api:
+              description: Name of Apideck Unified API
+              enum:
+                - accounting
+                - ats
+                - calendar
+                - crm
+                - csp
+                - customer-support
+                - ecommerce
+                - email
+                - email-marketing
+                - expense-management
+                - file-storage
+                - form
+                - hris
+                - lead
+                - payroll
+                - pos
+                - procurement
+                - project-management
+                - script
+                - sms
+                - spreadsheet
+                - team-messaging
+                - issue-tracking
+                - time-registration
+                - transactional-email
+                - vault
+                - data-warehouse
+              example: crm
+              type: string
+              x-apideck-enum-id: unified_api
           type: object
           x-apideck-schema-id: WebhookEvent
         - properties:

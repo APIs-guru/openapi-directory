@@ -7202,7 +7202,7 @@ components:
       description: The request message for Conversations.BatchCreateMessagesRequest.
       properties:
         requests:
-          description: Required. A maximum of 1000 Messages can be created in a batch. CreateMessageRequest.message.send_time is required. All created messages will have identical Message.create_time.
+          description: Required. A maximum of 300 messages can be created in a batch. CreateMessageRequest.message.send_time is required. All created messages will have identical Message.create_time.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1CreateMessageRequest"
           type: array
@@ -8247,7 +8247,7 @@ components:
           description: Required. Document template used for importing all the documents.
         gcsSource:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1GcsSources"
-          description: The Google Cloud Storage location for the documents. The path can include a wildcard. These URIs may have the forms `gs:///`. `gs:////*.`.
+          description: Optional. The Google Cloud Storage location for the documents. The path can include a wildcard. These URIs may have the forms `gs:///`. `gs:////*.`.
         importGcsCustomMetadata:
           description: Whether to import custom metadata from Google Cloud Storage. Only valid when the document source is Google Cloud Storage URI.
           type: boolean
@@ -10164,6 +10164,9 @@ components:
         suggestDialogflowAssistsResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestDialogflowAssistsResponse"
           description: SuggestDialogflowAssistsResponse if request is for DIALOGFLOW_ASSIST.
+        suggestEntityExtractionResponse:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestDialogflowAssistsResponse"
+          description: SuggestDialogflowAssistsResponse if request is for ENTITY_EXTRACTION.
         suggestFaqAnswersResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SuggestFaqAnswersResponse"
           description: SuggestFaqAnswersResponse if request is for FAQ_ANSWER.

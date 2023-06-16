@@ -1208,6 +1208,22 @@ components:
         retentionPolicy:
           $ref: "#/components/schemas/RetentionPolicy"
           description: RetentionPolicy governs lifecycle of Backups created under this plan.
+        state:
+          description: Output only. State of the BackupPlan. This State field reflects the various stages a BackupPlan can be in during the Create operation. It will be set to "DEACTIVATED" if the BackupPlan is deactivated on an Update
+          enum:
+            - STATE_UNSPECIFIED
+            - CLUSTER_PENDING
+            - PROVISIONING
+            - READY
+            - FAILED
+            - DEACTIVATED
+            - DELETING
+          readOnly: true
+          type: string
+        stateReason:
+          description: Output only. Human-readable description of why BackupPlan is in the current `state`
+          readOnly: true
+          type: string
         uid:
           description: Output only. Server generated global unique identifier of [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) format.
           readOnly: true
@@ -1257,6 +1273,17 @@ components:
     ClusterResourceRestoreScope:
       description: Defines the scope of cluster-scoped resources to restore. Some group kinds are not reasonable choices for a restore, and will cause an error if selected here. Any scope selection that would restore "all valid" resources automatically excludes these group kinds. - gkebackup.gke.io/BackupJob - gkebackup.gke.io/RestoreJob - metrics.k8s.io/NodeMetrics - migration.k8s.io/StorageState - migration.k8s.io/StorageVersionMigration - Node - snapshot.storage.k8s.io/VolumeSnapshotContent - storage.k8s.io/CSINode Some group kinds are driven by restore configuration elsewhere, and will cause an error if selected here. - Namespace - PersistentVolume
       properties:
+        allGroupKinds:
+          description: If True, all valid cluster-scoped resources will be restored. Mutually exclusive to any other field in the message.
+          type: boolean
+        excludedGroupKinds:
+          description: A list of cluster-scoped resource group kinds to NOT restore from the backup. If specified, all valid cluster-scoped resources will be restored except for those specified in the list. Mutually exclusive to any other field in the message.
+          items:
+            $ref: "#/components/schemas/GroupKind"
+          type: array
+        noGroupKinds:
+          description: If True, no cluster-scoped resources will be restored. This has the same restore scope as if the message is not defined. Mutually exclusive to any other field in the message.
+          type: boolean
         selectedGroupKinds:
           description: A list of cluster-scoped resource group kinds to restore from the backup. If specified, only the selected resources will be restored. Mutually exclusive to any other field in the message.
           items:
@@ -1563,6 +1590,23 @@ components:
           format: int32
           type: integer
       type: object
+    ResourceFilter:
+      description: ResourceFilter specifies matching criteria to limit the scope of a change to a specific set of kubernetes resources that are selected for restoration from a backup.
+      properties:
+        groupKinds:
+          description: (Filtering parameter) Any resource subject to transformation must belong to one of the listed "types". If this field is not provided, no type filtering will be performed (all resources of all types matching previous filtering parameters will be candidates for transformation).
+          items:
+            $ref: "#/components/schemas/GroupKind"
+          type: array
+        jsonPath:
+          description: This is a [JSONPath] (https://github.com/json-path/JsonPath/blob/master/README.md) expression that matches specific fields of candidate resources and it operates as a filtering parameter (resources that are not matched with this expression will not be candidates for transformation).
+          type: string
+        namespaces:
+          description: (Filtering parameter) Any resource subject to transformation must be contained within one of the listed Kubernetes Namespace in the Backup. If this field is not provided, no namespace filtering will be performed (all resources in all Namespaces, including all cluster-scoped resources, will be candidates for transformation). To mix cluster-scoped and namespaced resources in the same rule, use an empty string ("") as one of the target namespaces.
+          items:
+            type: string
+          type: array
+      type: object
     Restore:
       description: "Represents both a request to Restore some portion of a Backup into a target GKE cluster and a record of the restore operation itself. Next id: 18"
       properties:
@@ -1664,6 +1708,9 @@ components:
         clusterResourceRestoreScope:
           $ref: "#/components/schemas/ClusterResourceRestoreScope"
           description: Identifies the cluster-scoped resources to restore from the Backup. Not specifying it means NO cluster resource will be restored.
+        excludedNamespaces:
+          $ref: "#/components/schemas/Namespaces"
+          description: A list of selected namespaces excluded from restoration. All namespaces except those in this list will be restored.
         namespacedResourceRestoreMode:
           description: Defines the behavior for handling the situation where sets of namespaced resources being restored already exist in the target cluster. This MUST be set to a value other than NAMESPACED_RESOURCE_RESTORE_MODE_UNSPECIFIED.
           enum:
@@ -1671,6 +1718,9 @@ components:
             - DELETE_AND_RESTORE
             - FAIL_ON_CONFLICT
           type: string
+        noNamespaces:
+          description: Do not restore any namespaced resources if set to "True". Specifying this field to "False" is not allowed.
+          type: boolean
         selectedApplications:
           $ref: "#/components/schemas/NamespacedNames"
           description: A list of selected ProtectedApplications to restore. The listed ProtectedApplications and all the resources to which they refer will be restored.
@@ -1681,6 +1731,11 @@ components:
           description: A list of transformation rules to be applied against Kubernetes resources as they are selected for restoration from a Backup. Rules are executed in order defined - this order matters, as changes made by a rule may impact the filtering logic of subsequent rules. An empty list means no substitution will occur.
           items:
             $ref: "#/components/schemas/SubstitutionRule"
+          type: array
+        transformationRules:
+          description: A list of transformation rules to be applied against Kubernetes resources as they are selected for restoration from a Backup. Rules are executed in order defined - this order matters, as changes made by a rule may impact the filtering logic of subsequent rules. An empty list means no transformation will occur.
+          items:
+            $ref: "#/components/schemas/TransformationRule"
           type: array
         volumeDataRestorePolicy:
           description: "Specifies the mechanism to be used to restore volume data. Default: VOLUME_DATA_RESTORE_POLICY_UNSPECIFIED (will be treated as NO_VOLUME_DATA_RESTORATION)."
@@ -1724,6 +1779,20 @@ components:
         restoreConfig:
           $ref: "#/components/schemas/RestoreConfig"
           description: Required. Configuration of Restores created via this RestorePlan.
+        state:
+          description: Output only. State of the RestorePlan. This State field reflects the various stages a RestorePlan can be in during the Create operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - CLUSTER_PENDING
+            - READY
+            - FAILED
+            - DELETING
+          readOnly: true
+          type: string
+        stateReason:
+          description: Output only. Human-readable description of why RestorePlan is in the current `state`
+          readOnly: true
+          type: string
         uid:
           description: Output only. Server generated global unique identifier of [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier) format.
           readOnly: true
@@ -1750,10 +1819,10 @@ components:
           type: boolean
       type: object
     Schedule:
-      description: Schedule defines scheduling parameters for automatically creating Backups via this BackupPlan.
+      description: Defines scheduling parameters for automatically creating Backups via this BackupPlan.
       properties:
         cronSchedule:
-          description: "A standard [cron](https://wikipedia.com/wiki/cron) string that defines a repeating schedule for creating Backups via this BackupPlan. If this is defined, then backup_retain_days must also be defined. Default (empty): no automatic backup creation will occur."
+          description: "A standard [cron](https://wikipedia.com/wiki/cron) string that defines a repeating schedule for creating Backups via this BackupPlan. This is mutually exclusive with the rpo_config field since at most one schedule can be defined for a BackupPlan. If this is defined, then backup_retain_days must also be defined. Default (empty): no automatic backup creation will occur."
           type: string
         paused:
           description: "This flag denotes whether automatic Backup creation is paused for this BackupPlan. Default: False"
@@ -1810,6 +1879,45 @@ components:
           items:
             type: string
           type: array
+      type: object
+    TransformationRule:
+      description: A transformation rule to be applied against Kubernetes resources as they are selected for restoration from a Backup. A rule contains both filtering logic (which resources are subject to transform) and transformation logic.
+      properties:
+        description:
+          description: The description is a user specified string description of the transformation rule.
+          type: string
+        fieldActions:
+          description: Required. A list of transformation rule actions to take against candidate resources. Actions are executed in order defined - this order matters, as they could potentially interfere with each other and the first operation could affect the outcome of the second operation.
+          items:
+            $ref: "#/components/schemas/TransformationRuleAction"
+          type: array
+        resourceFilter:
+          $ref: "#/components/schemas/ResourceFilter"
+          description: This field is used to specify a set of fields that should be used to determine which resources in backup should be acted upon by the supplied transformation rule actions, and this will ensure that only specific resources are affected by transformation rule actions.
+      type: object
+    TransformationRuleAction:
+      description: TransformationRuleAction defines a TransformationRule action based on the JSON Patch RFC (https://www.rfc-editor.org/rfc/rfc6902)
+      properties:
+        fromPath:
+          description: A string containing a JSON Pointer value that references the location in the target document to move the value from.
+          type: string
+        op:
+          description: Required. op specifies the operation to perform.
+          enum:
+            - OP_UNSPECIFIED
+            - REMOVE
+            - MOVE
+            - COPY
+            - ADD
+            - TEST
+            - REPLACE
+          type: string
+        path:
+          description: A string containing a JSON-Pointer value that references a location within the target document where the operation is performed.
+          type: string
+        value:
+          description: A string that specifies the desired value in string format to use for transformation.
+          type: string
       type: object
     VolumeBackup:
       description: "Represents the backup of a specific persistent volume as a component of a Backup - both the record of the operation and a pointer to the underlying storage-specific artifacts. Next id: 14"

@@ -32,9 +32,93 @@ externalDocs:
 tags:
   - name: billingAccounts
   - name: folders
+  - name: insightTypes
   - name: organizations
   - name: projects
+  - name: recommenders
 paths:
+  /v1beta1/insightTypes:
+    get:
+      description: Lists available InsightTypes. No IAM permissions are required.
+      operationId: recommender.insightTypes.list
+      parameters:
+        - description: Optional. The number of InsightTypes to return per page. The service may return fewer than this value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListRecommenders` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1ListInsightTypesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - insightTypes
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1beta1/recommenders:
+    get:
+      description: Lists all available Recommenders. No IAM permissions are required.
+      operationId: recommender.recommenders.list
+      parameters:
+        - description: Optional. The number of RecommenderTypes to return per page. The service may return fewer than this value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token, received from a previous `ListRecommenders` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1ListRecommendersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - recommenders
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{name}":
     get:
       description: Gets the requested recommendation. Requires the recommender.*.get IAM permission for the specified recommender.
@@ -625,6 +709,13 @@ components:
           description: A map of metadata for the state, provided by user or automations systems.
           type: object
       type: object
+    GoogleCloudRecommenderV1beta1InsightType:
+      description: The type of insight. See google3/googledata/devsite/site-cloud/en/recommender/docs/insights/insight-types.md for more info.
+      properties:
+        name:
+          description: "The insight_type’s name in format insightTypes/{insight_type} eg: insightTypes/google.iam.policy.Insight"
+          type: string
+      type: object
     GoogleCloudRecommenderV1beta1InsightTypeConfig:
       description: Configuration for an InsightType.
       properties:
@@ -663,6 +754,18 @@ components:
           description: Parameters for this InsightTypeGenerationConfig. These configs can be used by or are applied to all subtypes.
           type: object
       type: object
+    GoogleCloudRecommenderV1beta1ListInsightTypesResponse:
+      description: "Response for the `ListInsightTypes` method. Next ID: 3"
+      properties:
+        insightTypes:
+          description: The set of recommenders available
+          items:
+            $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1InsightType"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     GoogleCloudRecommenderV1beta1ListInsightsResponse:
       description: Response to the `ListInsights` method.
       properties:
@@ -685,6 +788,18 @@ components:
           description: The set of recommendations for the `parent` resource.
           items:
             $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1Recommendation"
+          type: array
+      type: object
+    GoogleCloudRecommenderV1beta1ListRecommendersResponse:
+      description: "Response for the `ListRecommender` method. Next ID: 3"
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        recommenders:
+          description: The set of recommenders available
+          items:
+            $ref: "#/components/schemas/GoogleCloudRecommenderV1beta1RecommenderType"
           type: array
       type: object
     GoogleCloudRecommenderV1beta1MarkInsightAcceptedRequest:
@@ -915,6 +1030,13 @@ components:
             description: Properties of the object.
           description: Parameters for this RecommenderGenerationConfig. These configs can be used by or are applied to all subtypes.
           type: object
+      type: object
+    GoogleCloudRecommenderV1beta1RecommenderType:
+      description: The type of a recommender. See google3/googledata/devsite/site-cloud/en/recommender/docs/recommenders.md for more info.
+      properties:
+        name:
+          description: "The recommender's name in format RecommenderTypes/{recommender_type} eg: recommenderTypes/google.iam.policy.Recommender"
+          type: string
       type: object
     GoogleCloudRecommenderV1beta1ReliabilityProjection:
       description: Contains information on the impact of a reliability recommendation.
