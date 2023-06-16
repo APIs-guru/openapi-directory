@@ -611,6 +611,7 @@ paths:
                     - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
                     - ATTACHMENTS
                     - CONTACT_EVALUATIONS
+                    - SCREEN_RECORDINGS
                 StorageConfig:
                   description: The storage configuration for the instance.
                   type: object
@@ -7186,6 +7187,7 @@ paths:
               - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
               - ATTACHMENTS
               - CONTACT_EVALUATIONS
+              - SCREEN_RECORDINGS
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7263,6 +7265,7 @@ paths:
               - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
               - ATTACHMENTS
               - CONTACT_EVALUATIONS
+              - SCREEN_RECORDINGS
     post:
       operationId: UpdateInstanceStorageConfig
       description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates an existing configuration for a resource type. This API is idempotent.</p>
@@ -7332,6 +7335,7 @@ paths:
               - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
               - ATTACHMENTS
               - CONTACT_EVALUATIONS
+              - SCREEN_RECORDINGS
       requestBody:
         required: true
         content:
@@ -10178,6 +10182,7 @@ paths:
               - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
               - ATTACHMENTS
               - CONTACT_EVALUATIONS
+              - SCREEN_RECORDINGS
         - name: nextToken
           in: query
           required: false
@@ -11995,7 +12000,7 @@ paths:
   /contact/resume-recording:
     post:
       operationId: ResumeContactRecording
-      description: '<p>When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording the call.</p> <p>Only voice recordings are supported at this time.</p>'
+      description: '<p>When a contact is being recorded, and the recording has been suspended using SuspendContactRecording, this API resumes recording the call or screen.</p> <p>Voice and screen recordings are supported.</p>'
       responses:
         '200':
           description: Success
@@ -14185,7 +14190,7 @@ paths:
   /contact/suspend-recording:
     post:
       operationId: SuspendContactRecording
-      description: '<p>When a contact is being recorded, this API suspends recording the call. For example, you might suspend the call recording while collecting sensitive information, such as a credit card number. Then use ResumeContactRecording to restart recording. </p> <p>The period of time that the recording is suspended is filled with silence in the final recording. </p> <p>Only voice recordings are supported at this time.</p>'
+      description: '<p>When a contact is being recorded, this API suspends recording the call or screen. For example, you might suspend the call or screen recording while collecting sensitive information, such as a credit card number. Then use ResumeContactRecording to restart recording.</p> <p>The period of time that the recording is suspended is filled with silence in the final recording.</p> <p>Voice and screen recordings are supported.</p>'
       responses:
         '200':
           description: Success
@@ -19181,6 +19186,7 @@ components:
         - REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
         - ATTACHMENTS
         - CONTACT_EVALUATIONS
+        - SCREEN_RECORDINGS
     InstanceStorageConfig:
       type: object
       required:
@@ -21358,6 +21364,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutboundCallsEnabled'
             - description: Whether outbound calls are enabled.
+        InstanceAccessUrl:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: This URL allows contact center users to access Amazon Connect admin website.
       description: The Amazon Connect instance.
     DescribeInstanceStorageConfigRequest:
       type: object
@@ -23158,6 +23168,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutboundCallsEnabled'
             - description: Whether outbound calls are enabled.
+        InstanceAccessUrl:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: This URL allows contact center users to access Amazon Connect admin website.
       description: Information about the instance.
     InstanceSummaryList:
       type: array
