@@ -29,6 +29,43 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1/{location}:getStatus":
+    get:
+      description: Get the project status.
+      operationId: contentwarehouse.projects.locations.getStatus
+      parameters:
+        - description: "Required. The location to be queried Format: projects/{project_number}/locations/{location}."
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProjectStatus"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{location}:initialize":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2529,6 +2566,7 @@ components:
             - ACCESSIBILITY_TRACKER_AFFINITY
             - PLX_DATASOURCE_AFFINITY
             - DUCKIEWEB_AFFINITY
+            - MEET_CALLING_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -6292,6 +6330,7 @@ components:
               - SIM_STATUS
               - MICROPHONE_PERMISSIONS
               - GOOGLE_PLAY_UPDATE
+              - ADD_GOOGLE_ACCOUNT
               - ABOUT_PHONE
               - ACCOUNTS
               - APPLICATION
@@ -10560,7 +10599,7 @@ components:
           description: Whether the client restricts alarms to ring within the next 24 hours.
           type: boolean
         supportsGenericMutations:
-          description: Whether the client supports mutation of any alarm attribute such as time_pattern, recurrence_pattern, etc through the MUTATE action. If this is false, MUTATE may only be used for changing the alarm's status (to e.g. disable or dismiss the alarm).
+          description: Whether the client supports mutation of any alarm attribute such as time_pattern, recurrence_pattern, etc through the MUTATE action. If this is false, MUTATE may only be used to disable or dismiss an alarm. This field is true by default for backwards-compatibility; clients which don't support mutation outside of Disable/DismissAlarm should explicitly set this to false.
           type: boolean
         supportsStopAction:
           description: Whether the client supports the STOP alarm action. If this is false, stop actions will be represented by the MUTATE action, and the device may need to check alarm state to determine if there's a firing alarm that needs to be dismissed.
@@ -10700,6 +10739,9 @@ components:
             - DEFAULT
             - CLOUD
           type: string
+      type: object
+    AssistantDevicesPlatformProtoExecutionWaitCapability:
+      properties: {}
       type: object
     AssistantDevicesPlatformProtoInlinedActionCapability:
       properties:
@@ -10885,7 +10927,7 @@ components:
       properties: {}
       type: object
     AssistantDevicesPlatformProtoSupportedDeviceOps:
-      description: "This message will specify supports for fields in |assistant.embedded.v1.DeviceOp|, for a device model package. See go/easi-client-op2 for more info. Next ID: 16"
+      description: "This message will specify supports for fields in |assistant.embedded.v1.DeviceOp|, for a device model package. See go/easi-client-op2 for more info. Next ID: 17"
       properties:
         callCall:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoCallCallCapability"
@@ -10902,6 +10944,9 @@ components:
         deviceTakePhoto:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoDeviceTakePhotoCapability"
           description: "[device_take_photo] specifies the support for the device.TAKE_PHOTO clientop, and the corresponding device_take_photo field in assistant.embedded.v1.DeviceOp."
+        executionWait:
+          $ref: "#/components/schemas/AssistantDevicesPlatformProtoExecutionWaitCapability"
+          description: "|execution_wait| specifies the support for execution.WAIT client_op, and the corresponding execution_wait field in assistant.embedded.v1.DeviceOp."
         mediaNext:
           $ref: "#/components/schemas/AssistantDevicesPlatformProtoMediaNextCapability"
         mediaPause:
@@ -11064,6 +11109,7 @@ components:
             - FAMILY_MEMBER
             - SHARED_DEVICE_USER
             - ON_DEVICE_CONTACT_LOOKUP
+            - APP_SEARCH_CONTACT
           type: string
         isRelationshipFromAnnotation:
           description: Whether the query is a relationship query based on the annotation source.
@@ -11680,6 +11726,7 @@ components:
             - FAMILY_MEMBER
             - SHARED_DEVICE_USER
             - ON_DEVICE_CONTACT_LOOKUP
+            - APP_SEARCH_CONTACT
           type: string
         systemContactGroupId:
           description: Integer value corresponding to SystemContactGroup enum. http://google3/social/graph/wire/proto/merged_person.proto?l=3151&rcl=320308954
@@ -11750,7 +11797,7 @@ components:
           type: string
       type: object
     AssistantLogsDeviceInfoLog:
-      description: The information related to the device.
+      description: "The information related to the device. Next ID: 18"
       properties:
         arbitrationDeviceId:
           description: Device identifier string for the current device used in the arbitration service.
@@ -11812,6 +11859,9 @@ components:
             - DEVICE_TYPE_PROMOTER
             - FEATURE_EXTRACTOR
             - LABELER
+          type: string
+        homeStructureId:
+          description: The home structure id of the device.
           type: string
         isRemote:
           type: boolean
@@ -12720,6 +12770,7 @@ components:
             - SUB_INTENT_TYPE_PODCAST
             - SUB_INTENT_TYPE_MUSIC_INITIATION_INTENT
             - SUB_INTENT_TYPE_PLAY_RADIO_INTENT
+            - SUB_INTENT_TYPE_PLAY_TVM_INTENT
           type: string
         topHypothesisConfidence:
           description: "Average of per-word confidence for top speech recognition hypothesis. The value is from RecognizerHypothesisLog: http://google3/logs/proto/speech/service/recognizer_log.proto?l=848&rcl=281400256"
@@ -13043,7 +13094,7 @@ components:
           type: array
       type: object
     AssistantVerticalsHomeautomationProtoHomeAutomation_MetaData:
-      description: "Next ID: 43"
+      description: "Next ID: 44"
       properties:
         actionProjectConfigs:
           description: Custom actions that this item supports.
@@ -13087,6 +13138,9 @@ components:
         lanscanOptedIn:
           description: Whether local home platform should discover new devices via LAN for the structure.
           type: boolean
+        matterUniqueId:
+          $ref: "#/components/schemas/AssistantVerticalsHomeautomationProtoMatterUniqueId"
+          description: Matter Unique ID. Contains VID/PID information
         modelName:
           description: Model name from HomeGraph, populated from model_manifest.model_name. See b/200087451.
           type: string
@@ -13229,6 +13283,18 @@ components:
           items:
             type: string
           type: array
+      type: object
+    AssistantVerticalsHomeautomationProtoMatterUniqueId:
+      description: Matter unique Id. These values are provided by the device.
+      properties:
+        productId:
+          format: int32
+          type: integer
+        uniqueId:
+          type: string
+        vendorId:
+          format: int32
+          type: integer
       type: object
     AssistantVerticalsHomeautomationProtoPhysicalLocation:
       properties:
@@ -20066,7 +20132,7 @@ components:
           description: "(Initial) opening and (permanent) closing dates of the establishment, such that start_date is the first day open and end_date is the first day closed. The only allowed precisions are PRECISION_DAY, PRECISION_MONTH, PRECISION_YEAR. DateTimeProto.seconds should have the lowest legal value for the desired date/time and precision. E.g. for PRECISION_MONTH, 2019-02-15 21:10:30 is not valid, it should be 2019-02-01 00:00:00 instead. NOTE: The start_date and end_date are stored in UTC but should be interpreted as being in the local timezone. So clients should convert the DateTimeProto to local (civil) time using UTC+0, and then treat the result as local to the feature."
       type: object
     GeostoreFeatureFieldMetadataProto:
-      description: Provenance information for sub-fields of this feature.
+      description: Provenance information for sub-fields of this feature - go/subfield-provenance.
       properties:
         fieldProvenance:
           items:
@@ -28535,6 +28601,46 @@ components:
           description: "The Document schema resource name. All documents processed by this processor will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
           type: string
       type: object
+    GoogleCloudContentwarehouseV1ProjectStatus:
+      description: Status of a project, including the project state, dbType, aclMode and etc.
+      properties:
+        accessControlMode:
+          description: Access control mode.
+          enum:
+            - ACL_MODE_UNKNOWN
+            - ACL_MODE_UNIVERSAL_ACCESS
+            - ACL_MODE_DOCUMENT_LEVEL_ACCESS_CONTROL_BYOID
+            - ACL_MODE_DOCUMENT_LEVEL_ACCESS_CONTROL_GCI
+          type: string
+        databaseType:
+          description: Database type.
+          enum:
+            - DB_UNKNOWN
+            - DB_INFRA_SPANNER
+            - DB_CLOUD_SQL_POSTGRES
+          type: string
+        documentCreatorDefaultRole:
+          description: The default role for the person who create a document.
+          type: string
+        location:
+          description: The location of the queried project.
+          type: string
+        qaEnabled:
+          description: If the qa is enabled on this project.
+          type: boolean
+        state:
+          description: State of the project.
+          enum:
+            - PROJECT_STATE_UNSPECIFIED
+            - PROJECT_STATE_PENDING
+            - PROJECT_STATE_COMPLETED
+            - PROJECT_STATE_FAILED
+            - PROJECT_STATE_DELETING
+            - PROJECT_STATE_DELETING_FAILED
+            - PROJECT_STATE_DELETED
+            - PROJECT_STATE_NOT_FOUND
+          type: string
+      type: object
     GoogleCloudContentwarehouseV1Property:
       description: Property of a document.
       properties:
@@ -35344,15 +35450,67 @@ components:
           $ref: "#/components/schemas/Proto2BridgeMessageSet"
       type: object
     IndexingDocjoinerDataVersion:
-      description: DataVersion tracks the version of data in CompositeDoc. The notion of "data" here is loose and people can define the name of their own. For example, a signal generated by Index Signals or an annotation generated by Goldmine (and other components) can all be considered as data here. Each field in this proto represents the human readable version string and the timestamp of one particular data. We choose to explicitly list out all of the data here for better understanding about which data are tracked. NOTE that human_readable_version is not intended for comparison, use timestamp_micros. In addition, we have an annotation about the field paths of each data. With proto reflection (using google3/net/proto2/util/public/field_path.h), downstream systems can take advantage of this annotation to automatically handle newly introduced data without modifying their code. Please also see the comment of FieldProjector above. There are also some fields in DataInfo that annotate who generates the data, the Index Signals or Goldmine annotator name.
+      description: 'DataVersion tracks the version of data in CompositeDoc. The notion of "data" here is loose and people can define the name of their own. For example, a signal generated by Index Signals or an annotation generated by Goldmine (and other components) can all be considered as data here. Each field in this proto represents the human readable version string and the timestamp of one particular data. We choose to explicitly list out all of the data here for better understanding about which data are tracked. NOTE that human_readable_version is not intended for comparison, use timestamp_micros. In addition, we have an annotation about the field paths of each data. With proto reflection (using google3/net/proto2/util/public/field_path.h), downstream systems can take advantage of this annotation to automatically handle newly introduced data without modifying their code. Please also see the comment of FieldProjector above. There are also some fields in DataInfo that annotate who generates the data, the Index Signals or Goldmine annotator name. Next ID: 536'
       properties:
         acceleratedShoppingSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        adsAdsaiMagicApfelApfelRegionFinderAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        adsAdsaiMagicMagicPageTypeAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        adsShoppingWebpxRawShoppingAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        amphtmlSignedExchangeErrorDetails:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        amphtmlSignedExchangeValidationPayload:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        analyticsSiteidAnalyticsPropertyAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        analyticsSiteidAnalyticsRenderedOutput:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         authenticSiteRankData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        babelEncoderBabelEncodings:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        badurlsBadurlsForceSelectionSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        boilerplateAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        boilerplateVisibleBytesEstimates:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         chromeCounts:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        commerceDataqualityOrganicCrawledSellerData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        commerceDataqualityOrganicShoppingAnnotationSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        commerceDataqualityOrganicShoppingSiteQuality:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        commonsenseQueriosityGoldmineQnaAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        commonsenseScoredCompoundReferenceAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        commonsenseStoneSoupProtoRaffiaInstructionsSeq:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        contraContentReviewAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        contraCuratedContent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        countryCountryAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        crawzallSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         creator:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        datacommonsDatacommonsTriplesSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        dateAnnotationTags:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        dateAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        dateRangeAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        dateTimeAnnotations:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         discoverSource:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
@@ -35360,29 +35518,1001 @@ components:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         documentIntent:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        dotsGaramondSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        dotsNewsstandSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        emailAddressAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         extractedBookInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        fatcatCompactDocClassification:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        fatcatSiteVerticalsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        firstseen:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        fontsAnalysisAnnotatorFontsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        forumRankingForumPostsSafeSearchAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        foundationSplinterSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        freshboxFreshboxArticleAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        geoPointAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        geoPointResolution:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        geostoreAddressProto:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        i2eV2ImageEntitiesInfos:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageContentAnnotationLabels:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageContentColorSearchColorDetectionResults:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageDataList:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageExtraImageExtraTerms:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageMonetizationFeaturedDocumentProperties:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageMustangFaviconInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageMustangWebsearchImageSnippetResponse:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualityLabelmakerDocMediaLabels:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualityLandingPageProtoLandingPageSalientTextSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualityLayoutDocument:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualityRichdataProtoImageAnchor:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualityRichdataProtoRichdata:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualitySalientTermsImageQuerySmearingList:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualitySalientTermsImageSalientTermSetMap:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualitySensitiveFaceSkinToneSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageQualitySensitiveMediaOrPeopleEntities:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageRepositoryGeolocation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageRepositoryPicasaGeoData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageSearchRejectedImageInfoList:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageStockStockImageAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsAnnotationMeta:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsAppMarketAppMarketAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsAppsCacheColonAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsAppsDocRestrictionsDocPreviewRestrictionsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsAutomobileVinAnnotatorAutomobileVinAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsCanonicalUrl:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsCleanTextProto:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsCollectionsDocCollections:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsCommentBlockGroups:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsDatasetModelAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsDatesDateTimes:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsDocImportance:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsDocRestrictionsInDocRestrictionsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsEntityPage:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsFeedbackSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsIBertEmbeddingAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsImageRepositoryImageLicenseInfoAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsPcuAmpError:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsPcuSignedExchangeInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsPersonPersonAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsSduPageTypeAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsSocialLinksSocialLinksAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsSubscribewithgoogleSwgAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsTwitterEmbeddedTweetsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsTypedNumberTypedNumberAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsWaPassagesQueryToPassageAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAnnotationsWaPassagesTrimmedQueryToPassageAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAppsAffiliatedInstantAppInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingAppsMergedAppInfoAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingBadpagesBadPageParseResult:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingBadpagesCollapserInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingBadpagesIndexSelectionRemoval:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingBadpagesLoginPageResult:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingBadpagesUnifiedModelFeatures:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingBeringPublisherOnPageAdsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingCenterpieceCenterPieceAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingCenterpieceCenterpieceChecksums:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingCenterpieceComponentLearningSource:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingCenterpieceSectionTitleAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingConverterContentGenerationInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingConverterContentParserResults:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingConverterFileMetaInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingConverterLinkRelOutlinks:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingConverterMetaDetectorsResultsProto:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingConverterPdfFileMetaInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingConverterPdfPageAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingCustomCorpusCdmAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingDeepwebStoreListAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingDocjoinerServingTimeClusterIds:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingDocjoinerWikiInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingDocskeletonRepeatedPatternRepeatedPatternAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingDupsLocalizedLocalizedCluster:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingFreshSchedulerFreshSchedulerDoubleInstantExtension:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingFreshSchedulerOutlinkDiscoveryHistoricalHubsSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingImagesRelatedImageSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingInstantActiveClusterScorerSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingInstantBaseReindexWhitelistData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingInstantClusterScorerArticle:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingInstantClusterScorerSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingInstantHistoricalContentSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingInstantNewsHighlyCitedDocumentSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingInstantNewsImagesInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingInstantSignalSourceTagsExtension:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingLatticeLatticeAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMetricsUrlIndexingProps:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMlDomNodeSegments:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMlEntityInfoboxes:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMlPageStructure:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMlSemanticArticle:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMlShoppingUniverseAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMlVerticalVerticalClassificationResult:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMlVerticalVerticalClassificationV2:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMobileClientDependentInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMobileInterstitialsProtoDesktopInterstitials:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMobileObelixInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMobileSmartphoneContentAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMobileSmartphonePatternClassification:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingMobileSpeedPageSpeedFieldData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingPlusonePlusOneSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingPlusoneSocialScoreSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingRaffiaDataRecoveryInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingRaffiaIndexingIntermediate:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingRaffiaMediaProcessingMetadata:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingRaffiaOverlayCDocAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionAcquisitionMetadataAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionDoubleIndexingExtension:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionFastServingPush:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionFreshdocsPassthroughExtension:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionImageImageSelectionAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionLanguageExtension:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionPriorScorerParameterSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionProcessingPriorityExtension:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionProtoBasePromotionInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSelectionTensorFlowExtension:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSignalAggregatorUrlPatternSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSignalsAccumulatedOnlineSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSignalsImpressionsPerDayContainer:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSocialCountsSocialWidgetsIndicator:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSpeechGoldminePodcastAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingSpeechSpeechPagePropertiesProto:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingThirdpartyThirdPartyInputs:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingUgcPageParamInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingUnionKeyData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingUrlPatternUrlTreeUrlPatternAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingVideosVideoAnchorSourceInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingVideosVideoPlaylistAnchorSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        indexingWebChannelsWebChannelAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        infoextractionPinpointPinpointAnnotationSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        infoextractionPinpointPinpointSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         instantChromeViews:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         instantNavboost:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeGraphAcquisitionFeedsQuotesQuotesAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsDocumentSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsFactEvaluationSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsHtmlTableSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsKatsSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsLocalizedFact:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsObjectAnnotationsSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsProductCompositionSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsServingData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsShoppingSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsStructuredSnippetsSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsUdrExtraFactData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsUdrExtraFactMentionData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsUniversalFactMetadata:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsUniversalFactScores:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsUniversalTableSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningFactsWebKvSiteGroupSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningShoppingBrowseonomyData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMiningShoppingTwdModelVersions:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMumStoryTeaserAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMumStorytimeStampEngagementAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeMumStorytimeStampQualityAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeTablesTableInternalData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeTablesUniversalTableAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeTasksUniversalTaskAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        knowledgeTpfHowtodoHowtoVideoAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        langIdLangReasonerDocumentLanguages:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        lensVsaiDatasets:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        localsearchAuthoritySiteAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         localyp:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        mapsSyntheticsGeoDocFetchKey:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        measurementAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        metawebExtractionDocumentEvidence:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         modernFormatContent:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        navBoostDocument:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         navboost:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+          description: BEGIN DATA FIELDS
+        newsAnnotationsContentAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsCorpusHubPageAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsCorpusLeafPageAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsCorpusNewsAggregateSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsCorpusNewsCorpusAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsCorpusNewsCorpusRootAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+          description: END DATA FIELDS
+        newsCorpusNewsCorpusStatusAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsCorpusNewsinessAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsCorpusPositionRankAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsCrawlFilterNewsLinkCrawlSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsExtractionNewsPbeAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNarIndexingMetadata:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNarRow:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNarRowContainer:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNearDupsInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNewromanIndexingNewRomanSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNewsArticleChecksum:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNewsClassifications:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNewsContentSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsNewsForEducationReadingStatistics:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsVideosNewsAnchorSourceInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        newsVideosNewsVideoAnnotationSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        nlpAtcClaraAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        nlpSaftDocument:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        nlpSaftNlxDocAnnotatorMigration:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        nlpSaftRodinClassification:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        nlpSentimentSentimentAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        nlxDocAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        noindexedImageDataList:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        numberAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanLibrarianBookMetadata:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanLibrarianPopulatorData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanLibrarianPopulatorPageData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataAllItemSpecificBibdatas:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataAvailabilityInfoComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataAvailabilitySnapshot:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataAvailabilitySnapshotHolder:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataBibkeyComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataClusterHorizontalReference:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataClusterRecord:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataClusterVolumes:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataClusteringSeriesSeriesInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataClusteringTomeHorizontalLinkDescriptor:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataContributorLinks:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataItemSpecificBibdataComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataKgTopicLinks:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataLanguageInfoComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataMaterialInfoComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataParsedAccessTerms:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataParsedSuDoc:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataPatentPublicationDetails:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataPhysicalMeasurementsComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataPublicDomainInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataPublicationDetailsComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataRightsComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataSeriesInfoComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataTomeDetailsComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataTomeMembersComponent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanMetadataTomePriceInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanReviewsForWork:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        oceanRightsOptOutRequest:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        officialPagesQuerySet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        perDocLangidData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        personalizationGameWebeventsConsolidatedEvents:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        personalizationGameWebeventsEvent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        personalizationGameWebeventsEvents:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        photosGeoAnnotation:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         predictedAuthenticity:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        priceAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityAnchorsOutdegreeOutdegreeInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityAnimaLivewebLivewebAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityAnimaRoutinesRoutinesPropertiesProto:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityAuthorityTopicEmbeddings:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityAuthorshipAuthorAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityBreadcrumbsBreadcrumbAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityCalypsoAppsLink:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityChardDocument:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityChardPredictedQueryFringeScore:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityChardPredictedXlq:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityContraSelectedAttributions:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityCopiaFireflySiteInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityDiscoverUgcScatScatEmbeddingAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityDniNewsstandPcu:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityDniPcuAuxiliaryData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityDniPcuMetaAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityDniPcuParsedData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityDniPcuRawData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityExploreQueryableFeedEcsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityExploreQueryableFeedHashtagAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityExploreQueryableFeedHashtagListAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityExploreQueryableFeedTopicFeedScoringSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityFreshnessAbacusInstantNegativeClicksInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityFringeFringeQueryPrior:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityGeoBrainlocGoldmineBrainlocAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityGeoLoglocGoldmineDocumentLocationAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityHistoricalContentAge:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityHorizonProtoHorizonEmbeddings:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityHorizonRecordInfoAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityImprovDocToQueries:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityImprovImprovAnchors:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityLisztomaniaDocument:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNavboostCrapsCrapsData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNavboostCrapsCrapsPatternSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNegativeClicksNegativeClicksInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNlqStructuredSearchAnnotationAnalysisAutomaticExtractionAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNlqStructuredSearchListingPagesListingPageAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNsrDokiAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNsrNsrData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNsrNsrSitechunksAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNsrPairwiseqPairwiseQData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNsrPqData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNsrSiteAuthority:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityNsrUvSitechunksAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityOrbitAsteroidBeltIntermediateDocumentIntentScores:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPagemasterPagemasterAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPanopticIndexingDiscoverCorpusAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPanopticIndexingDiscoverDocumentSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPanopticIndexingPanopticAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPanopticStorytimeAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPanopticStorytimeScoringSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPanopticVoiceUgcAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPeoplesearchNamedetectorNameOccurrenceAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPopfeedsChromeBackgroundAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPopfeedsHubDataAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPopfeedsUrlPredictionAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPopfeedsUrlSourceAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPricedetectorKefirPriceAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityPricedetectorProductBlockAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityProseJsonLdAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityProseThumbnailSelection:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityQ2QualityBoost:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityQ2SiteQualityFeatures:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityRealtimeBoostRealtimeBoostEvent:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityRealtimeBoostRealtimeBoostResponse:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityRealtimeBoostSeismographEventAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityRealtimeRealtimeResultInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityRealtimeRtFactAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityResultFilteringIndexingClusterAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityRichsnippetsAppsProtosApplicationInformationAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityRodinRodinSiteSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySalientCountriesSalientCountrySet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySalientStructuresSalientStructureSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySalientStuffSalientStuffSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySalientTermsQuerySmearingModel:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySalientTermsSalientTermSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySearchoversiteAnnotatorStructuredResultsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySherlockKnexAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityShoppingProductReview:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityShoppingProductReviewPage:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityShoppingShoppingProductReviewAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySimilarpagesRelatedInfoSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySitemapDocument:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySitemapThirdPartyCarouselsItemLists:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySixfaceSixfaceUrlData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySnippetsHiddenTextHiddenSpanAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySnippetsListSnippetsAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySnippetsMetadescriptionDuplicateMetaSiteSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySnippetsSnippetSpansInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySosGoldmineSosAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualitySummarySummary:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityTangramInformationTypes:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityTimebasedTimeSensitivityTimeSensitivityAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityTitlesAlternativeTitlesInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityTitlesSitelinksTargetTitleInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityTwiddlerDomainClassification:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityViewsAnswersAnswerAnnotationInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityVisualwebVisualWebAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityVisualwebVisualWebModelsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityWebanswersAltTitleSaftDoc:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityWebanswersTranscriptAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityWebfeederDocEmbedding:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        qualityWebshineDocResources:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        rankBoostDocAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         rankembed:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        relativeDateAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsAddressAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsAmenitiesAmenitiesAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsCrawzallAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsDiscussionThreadDiscussionViewProto:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsLicensedResources:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsListFilterAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsListSummaryAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsMicrodataMicrodataAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsMicroformatsHproduct:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsMicroformatsMicroformatAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsPhoneTypePhoneTypeAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsRdfaRdfaAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsRodinArticleAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsSectionHeadingAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsSnippetSegmentSnippetSegmentAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsSporeAuthoritySignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsSporeDeeplinkAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsSporeExtractorTopicAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsSporeExtractorTripleAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsSporeSporeEtlAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsSporeSporeEtlInputAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsStorehoursStoreHoursAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsVerseAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryAnnotationsWebanswersContextItemAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryProtiumEncyclojoinsEncycloJoin:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryProtiumGoldmineTriplificationResult:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryProtiumGoldmineTypeAssertionOutput:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryProtiumWebkvWebKv:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryProtiumWikiaWikiaInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryUpdaterIndexSelectionAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefEntityJoin:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefExperimentalWebrefEntitiesAttachment:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefGraphMention:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefJuggernautIndices:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefPageClassificationAnchorSignalsSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefPageClassificationSignalsSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefPiannoDocumentIntents:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefPiannoTvSeasonEpisode:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefPreprocessingReferencePageCandidateList:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefReconcileResponse:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefRefconJugglerReferencePageMappings:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefReferencePagesClassifierScoredPage:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefSalientEntitySet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefUndermergedEntities:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefUniversalEmbeddingRetrievalDebug:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefWebitIntermediaryMids:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefWebitScopeFprint:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefWebitScopeSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefWebitTripleSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefWebrefEntities:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebrefWebrefStatus:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebtablesDataTableAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebtablesDataTableMidAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWebtablesTranslationMessage:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWikipediaAliasList:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWikipediaAnnotatorWikipediaPageComponentAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWikipediaSentenceCompressionAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWikipediaWikiJoin:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWikipediaWikiMapperTripleSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWikipediaWikibaseEntity:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWikipediaWikidataOrgTripleSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        repositoryWikipediaWikitrustWikiTrustInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        researchCoauthorOpinionAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        researchStructuredDataInadvertentAnchorScoreAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        researchStructuredDataKnowledgeExplorationAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        researchStructuredDataNewsEmbeddingAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        richsnippetsDataObject:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        richsnippetsFeedPageMap:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        richsnippetsPageMap:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        richsnippetsPageMapAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        richsnippetsSchemaThing:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         rosettaLanguage:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        safesearchPageClassifierOutput:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        safesearchSafeSearchInternalPageSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        scienceIndexSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        searchEngagementHighlightSharedHighlightSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        searcharSearchArPipelineSignal:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        shoppingQualityShoppingSiteClassifier:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        shoppingQualityShoppingSiteClassifierShopfab:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        shoppingWebentityShoppingAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        sitemapsSitemapsSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        smearingSmearedTerms:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        socialPersonalizationKnexAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamBrainSpamBrainData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamBrainSpamBrainPageClassifierAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamContentAnchorDist:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamContentAuthenticAuthenticTextAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamContentImageMapPb:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamContentSiteAgeStats:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamCookbookCookbookAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamCookbookCookbookSitechunkAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamFatpingIndexFeed:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamGodclusterAffIdAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamGodclusterServerHeaderAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamGooglebombsGooglebombsAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamHackedSitesDocSpamInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamHackedSitesGpgbGpgbNgramStats:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamHackedSitesWordFrequencies:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamJsJsInfo:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamScamScamness:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamScamUnauthoritativeSite:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        spamTokensSpamTokensAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        tableTalkStrideOfferPagePriceAnnotation:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        tasksTabaTabaDocSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        telephoneNumberAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        timeAnnotationTags:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        timeAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        timeRangeAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        travelAssistantTravelDocClassification:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        udrConverterDocumentShoppingData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        udrConverterOffer:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        udrConverterProductBlockData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        udrProtoDetailedEntityScores:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        udrProtoOverlay:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        udrProtoWebrefMention:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         universalFacts:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        unwantedImageDataList:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        uriAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        utilStatusProto:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        verticalsDiscussionDiscussionAnnotationTag:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoCrawlAutomatedAudioExtractionSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoCrawlAutomatedExtractionSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoCrawlDomainVideoClickData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoCrawlVideoClickData:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoCrawlVideoSalientTermSet:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoCrawlVideoScoringSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoCrawlWatchPagePatternClassification:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoCrawlYoutubeEmbedSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         videoScoringSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoWebGallery:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        videoYoutubeLiveCardioCardioStats:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         volt:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        watchpageLanguageWatchPageLanguageResult:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        websitetoolsFeedsAnnotationsFeedContentAnnotations:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        websitetoolsFeedsLinkedFeedLinkedFeed:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        websitetoolsFeedsPodcastPodcastSignals:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        websitetoolsFeedsSporeFeedsSporeTriples:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        whatshappStrideExtractions:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        youtubeAlexandriaYoutubeBody:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        youtubeAlexandriaYoutubeSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
       type: object
     IndexingDocjoinerDataVersionVersionInfo:
@@ -47183,7 +48313,6 @@ components:
             - NO_EQUIVALENT
             - EQUIVALENT
             - MUNIN_SYNONYM
-            - SYNONYM
           type: string
         mdvcRelation:
           description: The mdvc relation with the related mid.
@@ -49242,7 +50371,7 @@ components:
           type: string
       type: object
     PerDocData:
-      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 222"
+      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 223"
       properties:
         BlogData:
           $ref: "#/components/schemas/BlogPerDocData"
@@ -51383,9 +52512,6 @@ components:
     PornFlagData:
       description: "A protocol buffer to store the url, referer and porn flag for a url. and an optional image score. Next available tag id: 51."
       properties:
-        coclickBrainScores:
-          $ref: "#/components/schemas/ImageSafesearchContentBrainPornAnnotation"
-          description: "Aggregated brain_porn_scores for navboost co-clicked images. Historical: this signal is deprecated and no longer populated as of 2020-12-01. Refer to b/172897542 for more information."
         csaiScore:
           description: Score predicting how likely an image is offensive or suggestive about CSAI (child sexual abuse imagery).
           format: float
@@ -51713,7 +52839,7 @@ components:
           type: integer
       type: object
     PtokenPToken:
-      description: "PToken expresses policy-relevant properties of the data objects being processed and stored in Google's production systems. See go/ptoken to learn more. PTokens are intentionally opaque: go/ptokens-are-opaque. The following should be considered implementation details. Next ID: 8 INTERNAL: If both the Scalar and the Compound extensions are populated, we use the Compound and discard the Scalar. In principle, this should never happen."
+      description: "PToken expresses policy-relevant properties of the data objects being processed and stored in Google's production systems. See go/ptoken to learn more. PTokens are intentionally opaque: go/ptokens-are-opaque. The following should be considered implementation details. Next ID: 9 INTERNAL: If both the Scalar and the Compound extensions are populated, we use the Compound and discard the Scalar. In principle, this should never happen."
       properties: {}
       type: object
     QualityActionsAppInfo:
@@ -54724,9 +55850,9 @@ components:
             - SEQUENCE
             - SEQUENCE_V2
             - FULL
-            - FULL_V2
             - META
             - LEADING_TEXT
+            - FULL_V2
             - SAFT_SENTENCE
             - RADISH_SENTENCE
             - RADISH_LIST
@@ -55613,7 +56739,7 @@ components:
           format: int64
           type: string
         source:
-          description: LINT.ThenChange(//depot/google3/assistant/verticals/communication/\ fulfillment/proto/contact_logging_enums.proto, //depot/google3/assistant/api/dialog_state/values/person.proto) Data source of the contact data.
+          description: LINT.ThenChange(//depot/google3/assistant/verticals/communication/\ fulfillment/proto/contact_logging_enums.proto, //depot/google3/assistant/api/dialog_state/values/person.proto, //depot/google3/assistant/context/proto/person.proto) Data source of the contact data.
           enum:
             - FOCUS_CONTACT
             - DEVICE_CONTACT
@@ -55626,6 +56752,7 @@ components:
             - FAMILY_MEMBER
             - SHARED_DEVICE_USER
             - ON_DEVICE_CONTACT_LOOKUP
+            - APP_SEARCH_CONTACT
           type: string
       type: object
     QualityQrewritePrimaryCalendarAlias:
@@ -57724,6 +58851,7 @@ components:
             - VIDEO_OCR
             - IMAGE_OCR
             - LENS
+            - VIDEO_DESCRIPTION
             - ONLY_LOOKUP_METADATA
             - EMBEDDED_CONTENT
           type: string
@@ -58920,6 +60048,7 @@ components:
             - VIDEO_OCR
             - IMAGE_OCR
             - LENS
+            - VIDEO_DESCRIPTION
             - ONLY_LOOKUP_METADATA
             - EMBEDDED_CONTENT
           type: string
@@ -60459,6 +61588,7 @@ components:
               - VIDEO_OCR
               - IMAGE_OCR
               - LENS
+              - VIDEO_DESCRIPTION
             type: string
           type: array
         shortToken:
@@ -60595,6 +61725,7 @@ components:
             - VIDEO_OCR
             - IMAGE_OCR
             - LENS
+            - VIDEO_DESCRIPTION
           type: string
       type: object
     RepositoryWebrefSegmentMentions:
@@ -60624,6 +61755,7 @@ components:
             - VIDEO_OCR
             - IMAGE_OCR
             - LENS
+            - VIDEO_DESCRIPTION
           type: string
       type: object
     RepositoryWebrefSemanticDateRange:
@@ -60723,7 +61855,7 @@ components:
           type: array
       type: object
     RepositoryWebrefSimplifiedCompositeDoc:
-      description: "Represents an information which is very close to composite doc, but compresses how the anchors are represented to save space. Next available tag: 15."
+      description: "Represents an information which is very close to composite doc, but compresses how the anchors are represented to save space. Next available tag: 16."
       properties:
         anchors:
           $ref: "#/components/schemas/RepositoryWebrefSimplifiedAnchors"
@@ -60761,7 +61893,9 @@ components:
         url:
           description: The URL, populated independently of whether we have a CompositeDoc proto. If the cdoc exists, the url is the same as CompositeDoc.doc.url.
           type: string
-        webrefOutlinks:
+        webrefOutlinkInfos:
+          $ref: "#/components/schemas/RepositoryWebrefWebrefOutlinkInfos"
+        webrefOutlinksLegacy:
           $ref: "#/components/schemas/Proto2BridgeMessageSet"
       type: object
     RepositoryWebrefSubSegmentIndex:
@@ -65044,9 +66178,9 @@ components:
             - SEQUENCE
             - SEQUENCE_V2
             - FULL
-            - FULL_V2
             - META
             - LEADING_TEXT
+            - FULL_V2
             - SAFT_SENTENCE
             - RADISH_SENTENCE
             - RADISH_LIST
@@ -69852,6 +70986,9 @@ components:
               - CLICKED_INSTALL_IN_DEEP_LINK_DETAILS
               - ONE_TIME_PRODUCT_VARIANT_OFFER_DARK_LAUNCH_SESSION_LEVEL
               - ONE_TIME_PRODUCT_VARIANT_OFFER_LAUNCH_SESSION_LEVEL
+              - AMPLIFY_FORM_OF_PAYMENT_ABANDONMENT_ELIGIBLE_SESSION_LEVEL
+              - SUBSCRIPTION_FREE_TRIAL_OFFER_HIGHLIGHT_SESSION_LEVEL
+              - SUBSCRIPTION_INTRO_PRICE_OFFER_HIGHLIGHT_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -70134,6 +71271,7 @@ components:
               - FOP_PARTNER_PROMOTION_USER_LEVEL
               - BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_USER_LEVEL
               - IS_ELIGIBLE_FOR_DYNAMIC_AUTH_USER_LEVEL
+              - GE_LIVEOPS_PSPEND_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -71269,6 +72407,9 @@ components:
             - ADSBURST_DISCOVERY_NERV_SUBS_V1
             - ADSBURST_BASIC_TEXT_TOWER_V0
             - ADSBURST_V2
+            - ADSBURST_V2_128D
+            - ADSBURST_V2_64D
+            - ADSBURST_V2_32D
             - SHOPPING_IMAGE_TRANSFORMATION_UNCROP
             - SHOPPING_IMAGE_TRANSFORMATION_V2
             - SCREENAI_V1

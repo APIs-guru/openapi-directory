@@ -529,6 +529,10 @@ components:
         GCPCloudEventsMode:
           description: "Required. LINT: LEGACY_NAMES The query parameter value for __GCP_CloudEventsMode, set by the Eventarc service when configuring triggers."
           type: string
+        deliveryAttempt:
+          description: The number of attempts that have been made to deliver this message. This is set by Pub/Sub for subscriptions that have the "dead letter" feature enabled, and hence provided here for compatibility, but is ignored by Workflows.
+          format: int32
+          type: integer
         message:
           $ref: "#/components/schemas/PubsubMessage"
           description: Required. The message of the Pub/Sub push notification.

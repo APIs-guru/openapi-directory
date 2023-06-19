@@ -1615,6 +1615,20 @@ components:
           description: Output only. The name of the Cloud Run Service that is associated with a `DeployJobRun`.
           readOnly: true
       type: object
+    DeployParameters:
+      description: DeployParameters contains deploy parameters information.
+      properties:
+        matchTargetLabels:
+          additionalProperties:
+            type: string
+          description: Optional. Deploy parameters are applied to targets with match labels. If unspecified, deploy parameters are applied to all targets (including child targets of a multi-target).
+          type: object
+        values:
+          additionalProperties:
+            type: string
+          description: Required. Values are deploy parameters in key-value pairs.
+          type: object
+      type: object
     DeploymentJobs:
       description: Deployment job composition.
       properties:
@@ -2231,6 +2245,11 @@ components:
           $ref: "#/components/schemas/DeliveryPipeline"
           description: Output only. Snapshot of the parent pipeline taken at release creation time.
           readOnly: true
+        deployParameters:
+          additionalProperties:
+            type: string
+          description: Optional. The deploy parameters to use for all targets in this release.
+          type: object
         description:
           description: Description of the `Release`. Max length is 255 characters.
           type: string
@@ -2595,6 +2614,11 @@ components:
     Stage:
       description: Stage specifies a location to which to deploy.
       properties:
+        deployParameters:
+          description: Optional. The deploy parameters to use for the target in this stage.
+          items:
+            $ref: "#/components/schemas/DeployParameters"
+          type: array
         profiles:
           description: Skaffold profiles to use when rendering the manifest for this stage's `Target`.
           items:
@@ -2658,6 +2682,11 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        deployParameters:
+          additionalProperties:
+            type: string
+          description: Optional. The deploy parameters to use for this target.
+          type: object
         description:
           description: Optional. Description of the `Target`. Max length is 255 characters.
           type: string

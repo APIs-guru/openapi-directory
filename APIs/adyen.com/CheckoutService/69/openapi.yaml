@@ -58,7 +58,6 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: CheckoutService
-  x-timestamp: 2023-05-30T22:26:06Z
 tags:
   - name: Modifications
   - name: Orders
@@ -122,6 +121,9 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              cancel-with-own-reference:
+                $ref: "#/components/examples/post-cancels-cancel-with-own-reference"
             schema:
               $ref: "#/components/schemas/CreateStandalonePaymentCancelRequest"
       responses:
@@ -137,6 +139,9 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                cancel-with-own-reference:
+                  $ref: "#/components/examples/post-cancels-cancel-with-own-reference-201"
               schema:
                 $ref: "#/components/schemas/StandalonePaymentCancelResource"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
@@ -1272,16 +1277,19 @@ paths:
         content:
           application/json:
             examples:
+              00.redirect:
+                $ref: "#/components/examples/post-payments-details-00.redirect"
               3d-secure-2-native:
                 $ref: "#/components/examples/post-payments-details-3d-secure-2-native"
-              redirect:
-                $ref: "#/components/examples/post-payments-details-redirect"
             schema:
               $ref: "#/components/schemas/DetailsRequest"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                00.redirect:
+                  $ref: "#/components/examples/post-payments-details-00.redirect-200"
               schema:
                 $ref: "#/components/schemas/PaymentDetailsResponse"
           description: OK - the request has succeeded.
@@ -1367,6 +1375,9 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                basic:
+                  $ref: "#/components/examples/post-payments-result-basic-200"
               schema:
                 $ref: "#/components/schemas/PaymentVerificationResponse"
           description: OK - the request has succeeded.
@@ -1453,6 +1464,9 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              amount-update:
+                $ref: "#/components/examples/post-payments-paymentPspReference-amountUpdates-amount-update"
             schema:
               $ref: "#/components/schemas/CreatePaymentAmountUpdateRequest"
       responses:
@@ -1468,6 +1482,9 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                amount-update:
+                  $ref: "#/components/examples/post-payments-paymentPspReference-amountUpdates-amount-update-201"
               schema:
                 $ref: "#/components/schemas/PaymentAmountUpdateResource"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
@@ -1553,6 +1570,9 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              cancel-with-psp-reference:
+                $ref: "#/components/examples/post-payments-paymentPspReference-cancels-cancel-with-psp-reference"
             schema:
               $ref: "#/components/schemas/CreatePaymentCancelRequest"
       responses:
@@ -1568,6 +1588,9 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                cancel-with-psp-reference:
+                  $ref: "#/components/examples/post-payments-paymentPspReference-cancels-cancel-with-psp-reference-201"
               schema:
                 $ref: "#/components/schemas/PaymentCancelResource"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
@@ -1653,6 +1676,9 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              capture:
+                $ref: "#/components/examples/post-payments-paymentPspReference-captures-capture"
             schema:
               $ref: "#/components/schemas/CreatePaymentCaptureRequest"
       responses:
@@ -1668,6 +1694,9 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                capture:
+                  $ref: "#/components/examples/post-payments-paymentPspReference-captures-capture-201"
               schema:
                 $ref: "#/components/schemas/PaymentCaptureResource"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
@@ -1755,6 +1784,9 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              refund:
+                $ref: "#/components/examples/post-payments-paymentPspReference-refunds-refund"
             schema:
               $ref: "#/components/schemas/CreatePaymentRefundRequest"
       responses:
@@ -1770,6 +1802,9 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                refund:
+                  $ref: "#/components/examples/post-payments-paymentPspReference-refunds-refund-201"
               schema:
                 $ref: "#/components/schemas/PaymentRefundResource"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
@@ -1854,6 +1889,9 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              reversal:
+                $ref: "#/components/examples/post-payments-paymentPspReference-reversals-reversal"
             schema:
               $ref: "#/components/schemas/CreatePaymentReversalRequest"
       responses:
@@ -1869,6 +1907,9 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                reversal:
+                  $ref: "#/components/examples/post-payments-paymentPspReference-reversals-reversal-201"
               schema:
                 $ref: "#/components/schemas/PaymentReversalResource"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
@@ -1961,6 +2002,15 @@ paths:
         "201":
           content:
             application/json:
+              examples:
+                00.success:
+                  $ref: "#/components/examples/post-sessions-00.success-201"
+                01.klarna:
+                  $ref: "#/components/examples/post-sessions-01.klarna-201"
+                enableOneClick:
+                  $ref: "#/components/examples/post-sessions-enableOneClick-201"
+                split:
+                  $ref: "#/components/examples/post-sessions-split-201"
               schema:
                 $ref: "#/components/schemas/CreateCheckoutSessionResponse"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
@@ -2061,6 +2111,22 @@ components:
       summary: Payment session data for Apple Pay
       value:
         data: eyJ2Z...
+    post-cancels-cancel-with-own-reference:
+      description: Example cancel request with your own reference
+      summary: Cancel a payment using your own reference
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentReference: YOUR_UNIQUE_REFERENCE_FOR_THE_PAYMENT
+        reference: YOUR_UNIQUE_REFERENCE_FOR_THE_CANCELLATION
+    post-cancels-cancel-with-own-reference-201:
+      description: Example response when a payment cancellation was requested
+      summary: Payment cancellation requested
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentReference: YOUR_UNIQUE_REFERENCE_FOR_THE_PAYMENT
+        pspReference: 993617894906488A
+        reference: YOUR_UNIQUE_REFERENCE_FOR_THE_CANCELLATION
+        status: received
     post-cardDetails-basic:
       description: Example request for getting a list of brands on a card using the first 6 digits of the card number.
       summary: Get a list of brands on a card
@@ -4630,16 +4696,23 @@ components:
         merchantReference: string
         pspReference: 993617895215577D
         resultCode: Authorised
+    post-payments-details-00.redirect:
+      description: Example request when submitting a redirect result
+      summary: Submit the redirect result
+      value:
+        details:
+          redirectResult: X6XtfGC3!Y...
+    post-payments-details-00.redirect-200:
+      description: Example response when submitting the redirect result
+      summary: Payment authorised
+      value:
+        pspReference: V4HZ4RBFJGXXGN82
+        resultCode: Authorised
     post-payments-details-3d-secure-2-native:
       summary: Submit 3D Secure 2 authentication result
       value:
         details:
           threeDSResult: eyJ0cmFuc1N0YXR1cyI6IlkifQ==
-    post-payments-details-redirect:
-      summary: Submit the redirect result
-      value:
-        details:
-          redirectResult: X6XtfGC3!Y...
     post-payments-enableOneClick-SF:
       summary: Tokenize card details for one-off payments (using encrypted card details)
       value:
@@ -4863,6 +4936,101 @@ components:
         returnUrl: https://your-company.com/...
         shopperInteraction: ContAuth
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_6738oneoff
+    post-payments-paymentPspReference-amountUpdates-amount-update:
+      description: Example request to update the amount of a payment
+      summary: Update the amount of an authorised payment
+      value:
+        amount:
+          currency: EUR
+          value: 2500
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reason: delayedCharge
+        reference: YOUR_UNIQUE_REFERENCE
+    post-payments-paymentPspReference-amountUpdates-amount-update-201:
+      description: Example response when an amount update was requested
+      summary: Amount update requested
+      value:
+        amount:
+          currency: EUR
+          value: 2500
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentPspReference: 993617894903480A
+        pspReference: 993617894906488A
+        reason: delayedCharge
+        reference: YOUR_UNIQUE_REFERENCE
+        status: received
+    post-payments-paymentPspReference-cancels-cancel-with-psp-reference:
+      description: Example cancel request with a PSP reference
+      summary: Cancel payment using a PSP reference
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_UNIQUE_REFERENCE
+    post-payments-paymentPspReference-cancels-cancel-with-psp-reference-201:
+      description: Example response when a refund was requested
+      summary: Refund requested
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentPspReference: 993617894903480A
+        pspReference: 993617894906488A
+        reference: YOUR_UNIQUE_REFERENCE
+        status: received
+    post-payments-paymentPspReference-captures-capture:
+      description: Example capture request
+      summary: Capture an authorised payment
+      value:
+        amount:
+          currency: EUR
+          value: 2000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_UNIQUE_REFERENCE
+    post-payments-paymentPspReference-captures-capture-201:
+      description: Example response when a refund was requested
+      summary: Refund requested
+      value:
+        amount:
+          currency: EUR
+          value: 2000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentPspReference: 993617894903480A
+        pspReference: 993617894906488A
+        reference: YOUR_UNIQUE_REFERENCE
+        status: received
+    post-payments-paymentPspReference-refunds-refund:
+      description: Example refund request
+      summary: Refund a payment
+      value:
+        amount:
+          currency: EUR
+          value: 2500
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_UNIQUE_REFERENCE
+    post-payments-paymentPspReference-refunds-refund-201:
+      description: Example response when a refund was requested
+      summary: Refund requested
+      value:
+        amount:
+          currency: EUR
+          value: 2500
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentPspReference: 993617894903480A
+        pspReference: 993617894906488A
+        reference: YOUR_UNIQUE_REFERENCE
+        status: received
+    post-payments-paymentPspReference-reversals-reversal:
+      description: Example request to reverse a payment
+      summary: Reverse (cancel or refund) a payment
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        reference: YOUR_UNIQUE_REFERENCE
+    post-payments-paymentPspReference-reversals-reversal-201:
+      description: Example response when a payment reversal was requested
+      summary: Payment reversal requested
+      value:
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentPspReference: 993617894903480A
+        pspReference: 993617894906488A
+        reference: YOUR_UNIQUE_REFERENCE
+        status: received
     post-payments-recurring:
       summary: Make a card payment with a token
       value:
@@ -4882,6 +5050,11 @@ components:
       summary: Verify payment results
       value:
         payload: VALUE_YOU_GET_FROM_CHECKOUT_SDK
+    post-payments-result-basic-200:
+      summary: Payment authorised
+      value:
+        pspReference: V4HZ4RBFJGXXGN82
+        resultCode: Authorised
     post-payments-sofort:
       summary: Make a Sofort payment
       value:
@@ -4934,7 +5107,7 @@ components:
               value: 39600
             description: Your description for the sale amount
             reference: Your reference for the sale amount
-            type: BalanceAcocount
+            type: BalanceAccount
           - amount:
               value: 400
             description: Your description for the commission
@@ -5017,7 +5190,7 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         reference: YOUR_PAYMENT_REFERENCE
         returnUrl: https://your-company.com/checkout?shopperOrder=12xy..
-    post-sessions-00.success-200:
+    post-sessions-00.success-201:
       description: Example response for creating a payment session
       summary: "Response code: 201. Success."
       value:
@@ -5083,7 +5256,7 @@ components:
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         socialSecurityNumber: "0108"
         telephoneNumber: +46 840 839 298
-    post-sessions-01.klarna-200:
+    post-sessions-01.klarna-201:
       description: "Example "
       summary: "Response code: 201. Success."
       value:
@@ -5153,7 +5326,7 @@ components:
         shopperInteraction: Ecommerce
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         storePaymentMethod: true
-    post-sessions-enableOneClick-200:
+    post-sessions-enableOneClick-201:
       description: "Example "
       summary: "Response code: 201. Success."
       value:
@@ -5206,7 +5379,7 @@ components:
             description: Your description for the fees
             reference: Your reference for the fees
             type: PaymentFee
-    post-sessions-split-200:
+    post-sessions-split-201:
       summary: Example response for request 'split'
       value:
         additionalData:
@@ -8059,7 +8232,11 @@ components:
           type: array
           x-addedInVersion: "37"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           maxLength: 16
           minLength: 1
           type: string
@@ -8650,7 +8827,11 @@ components:
           type: array
           x-addedInVersion: "37"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           maxLength: 16
           minLength: 1
           type: string
@@ -9116,7 +9297,11 @@ components:
           type: array
           x-addedInVersion: "37"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           maxLength: 16
           minLength: 1
           type: string
@@ -9332,6 +9517,10 @@ components:
         merchantReference:
           description: The merchant reference.
           type: string
+        passCreationToken:
+          description: A base64 encoded signature of all properties
+          type: string
+          x-addedInVersion: "68"
         paymentData:
           description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
           type: string
@@ -9700,7 +9889,11 @@ components:
             $ref: "#/components/schemas/Split-2"
           type: array
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           type: string
         storePaymentMethod:
           description: When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
@@ -9985,7 +10178,11 @@ components:
             $ref: "#/components/schemas/Split-2"
           type: array
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           type: string
         storePaymentMethod:
           description: When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
@@ -11092,7 +11289,7 @@ components:
           description: Link to the picture of the purchased item.
           type: string
         itemCategory:
-          description: Item category, used by the RatePay payment method.
+          description: Item category, used by the payment methods PayPal and Ratepay.
           type: string
         productUrl:
           description: Link to the purchased item.
@@ -11808,6 +12005,8 @@ components:
           description: (3D) Payment Authentication Response data by the card issuer.
           maxLength: 20000
           type: string
+        authorization_token:
+          type: string
         billingToken:
           description: PayPal-generated token for recurring payments.
           type: string
@@ -12493,7 +12692,11 @@ components:
           type: boolean
           x-addedInVersion: "53"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           maxLength: 16
           minLength: 1
           type: string
@@ -13031,7 +13234,11 @@ components:
           type: array
           x-addedInVersion: "37"
         store:
-          description: The ecommerce or point-of-sale store that is processing the payment. Used in [partner model integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for Adyen for Platforms.
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
           maxLength: 16
           minLength: 1
           type: string
@@ -14503,7 +14710,6 @@ components:
           type: string
           x-addedInVersion: "49"
         messageVersion:
-          default: 2.1.0
           description: The `messageVersion` value indicating the 3D Secure 2 protocol version.
           type: string
         mobilePhone:
@@ -14752,7 +14958,6 @@ components:
           type: string
           x-addedInVersion: "49"
         messageVersion:
-          default: 2.1.0
           description: The `messageVersion` value indicating the 3D Secure 2 protocol version.
           type: string
         mobilePhone:

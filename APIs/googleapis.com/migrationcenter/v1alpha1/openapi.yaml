@@ -1718,7 +1718,7 @@ components:
           description: Labels as key value pairs.
           type: object
         performanceSamples:
-          description: Asset performance data samples.
+          description: Asset performance data samples. Samples that are older than 40 days are ignored.
           items:
             $ref: "#/components/schemas/PerformanceSample"
           type: array
@@ -3062,7 +3062,7 @@ components:
           $ref: "#/components/schemas/NetworkUsageSample"
           description: Network usage sample.
         sampleTime:
-          description: Time the sample was collected.
+          description: Required. Time the sample was collected.
           format: google-datetime
           type: string
       type: object
@@ -3366,9 +3366,15 @@ components:
         pricingTrack:
           description: Text describing the pricing track specified for this Preference Set
           type: string
+        soleTenantFinding:
+          $ref: "#/components/schemas/ReportSummarySoleTenantFinding"
+          description: A set of findings that applies to Stole-Tenant machines in the input.
         topPriority:
           description: Text describing the business priority specified for this Preference Set
           type: string
+        vmwareEngineFinding:
+          $ref: "#/components/schemas/ReportSummaryVMWareEngineFinding"
+          description: A set of findings that applies to VMWare machines in the input.
       type: object
     ReportSummaryHistogramChartData:
       description: A Histogram Chart shows a distribution of values into buckets, showing a count of values which fall into a bucket.
@@ -3434,6 +3440,39 @@ components:
           $ref: "#/components/schemas/MachineSeries"
           description: The Machine Series (e.g. "E2", "N2")
       type: object
+    ReportSummarySoleTenantFinding:
+      description: A set of findings that applies to assets destined for Sole-Tenant nodes.
+      properties:
+        allocatedAssetCount:
+          description: Count of assets which are allocated
+          format: int64
+          type: string
+        allocatedRegions:
+          description: Set of regions in which the assets are allocated
+          items:
+            type: string
+          type: array
+        nodeAllocations:
+          description: Set of per-nodetype allocation records
+          items:
+            $ref: "#/components/schemas/ReportSummarySoleTenantNodeAllocation"
+          type: array
+      type: object
+    ReportSummarySoleTenantNodeAllocation:
+      description: Represents the assets allocated to a specific Sole-Tenant node type.
+      properties:
+        allocatedAssetCount:
+          description: Count of assets allocated to these nodes
+          format: int64
+          type: string
+        node:
+          $ref: "#/components/schemas/SoleTenantNodeType"
+          description: Sole Tenant node type, e.g. "m3-node-128-3904"
+        nodeCount:
+          description: Count of this node type to be provisioned
+          format: int64
+          type: string
+      type: object
     ReportSummaryUtilizationChartData:
       description: Utilization Chart is a specific type of visualization which displays a metric classified into "Used" and "Free" buckets.
       properties:
@@ -3445,6 +3484,46 @@ components:
           description: Aggregate value which falls into the "Used" bucket.
           format: int64
           type: string
+      type: object
+    ReportSummaryVMWareEngineFinding:
+      description: A set of findings that applies to assets destined for VMWare Engine.
+      properties:
+        allocatedAssetCount:
+          description: Count of assets which are allocated
+          format: int64
+          type: string
+        allocatedRegions:
+          description: Set of regions in which the assets were allocated
+          items:
+            type: string
+          type: array
+        nodeAllocations:
+          description: Set of per-nodetype allocation records
+          items:
+            $ref: "#/components/schemas/ReportSummaryVMWareNodeAllocation"
+          type: array
+      type: object
+    ReportSummaryVMWareNode:
+      description: A VMWare Engine Node
+      properties:
+        code:
+          description: Code to identify VMware Engine node series, e.g. "ve1-standard-72". Based on the displayName of cloud.google.com/vmware-engine/docs/reference/rest/v1/projects.locations.nodeTypes
+          type: string
+      type: object
+    ReportSummaryVMWareNodeAllocation:
+      description: Represents assets allocated to a specific VMWare Node type.
+      properties:
+        allocatedAssetCount:
+          description: Count of assets allocated to these nodes
+          format: int64
+          type: string
+        nodeCount:
+          description: Count of this node type to be provisioned
+          format: int64
+          type: string
+        vmwareNode:
+          $ref: "#/components/schemas/ReportSummaryVMWareNode"
+          description: VMWare node type, e.g. "ve1-standard-72"
       type: object
     RunImportJobRequest:
       description: A request to run an import job.
@@ -3551,6 +3630,42 @@ components:
           type: string
         preferenceSet:
           description: The preference set used by default for a project.
+          type: string
+      type: object
+    SoleTenancyPreferences:
+      description: Preferences concerning Sole Tenancy nodes and VMs.
+      properties:
+        commitmentPlan:
+          description: Commitment plan to consider when calculating costs for virtual machine insights and recommendations. If you are unsure which value to set, a 3 year commitment plan is often a good value to start with.
+          enum:
+            - COMMITMENT_PLAN_UNSPECIFIED
+            - ON_DEMAND
+            - COMMITMENT_1_YEAR
+            - COMMITMENT_3_YEAR
+          type: string
+        cpuOvercommitRatio:
+          description: CPU overcommit ratio. Acceptable values are between 1.0 and 2.0 inclusive.
+          format: double
+          type: number
+        hostMaintenancePolicy:
+          description: Sole Tenancy nodes maintenance policy.
+          enum:
+            - HOST_MAINTENANCE_POLICY_UNSPECIFIED
+            - HOST_MAINTENANCE_POLICY_DEFAULT
+            - HOST_MAINTENANCE_POLICY_RESTART_IN_PLACE
+            - HOST_MAINTENANCE_POLICY_MIGRATE_WITHIN_NODE_GROUP
+          type: string
+        nodeTypes:
+          description: A list of sole tenant node types. An empty list means that all possible node types will be considered.
+          items:
+            $ref: "#/components/schemas/SoleTenantNodeType"
+          type: array
+      type: object
+    SoleTenantNodeType:
+      description: A Sole Tenant node type.
+      properties:
+        nodeName:
+          description: Name of the Sole Tenant node. Consult https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes
           type: string
       type: object
     Source:
@@ -3856,6 +3971,20 @@ components:
             - SIZING_OPTIMIZATION_STRATEGY_MODERATE
             - SIZING_OPTIMIZATION_STRATEGY_AGGRESSIVE
           type: string
+        soleTenancyPreferences:
+          $ref: "#/components/schemas/SoleTenancyPreferences"
+          description: Preferences concerning Sole Tenant nodes and virtual machines.
+        targetProduct:
+          description: Target product for assets using this preference set. Specify either target product or business goal, but not both.
+          enum:
+            - COMPUTE_MIGRATION_TARGET_PRODUCT_UNSPECIFIED
+            - COMPUTE_MIGRATION_TARGET_PRODUCT_COMPUTE_ENGINE
+            - COMPUTE_MIGRATION_TARGET_PRODUCT_VMWARE_ENGINE
+            - COMPUTE_MIGRATION_TARGET_PRODUCT_SOLE_TENANCY
+          type: string
+        vmwareEnginePreferences:
+          $ref: "#/components/schemas/VmwareEnginePreferences"
+          description: Preferences concerning insights and recommendations for Google Cloud VMware Engine.
       type: object
     VmwareDiskConfig:
       description: VMware disk config details.
@@ -3886,6 +4015,32 @@ components:
     VmwareEngineMigrationTarget:
       description: VMWare engine migration target.
       properties: {}
+      type: object
+    VmwareEnginePreferences:
+      description: The user preferences relating to Google Cloud VMware Engine target platform.
+      properties:
+        commitmentPlan:
+          description: Commitment plan to consider when calculating costs for virtual machine insights and recommendations. If you are unsure which value to set, a 3 year commitment plan is often a good value to start with.
+          enum:
+            - COMMITMENT_PLAN_UNSPECIFIED
+            - ON_DEMAND
+            - COMMITMENT_1_YEAR_MONTHLY_PAYMENTS
+            - COMMITMENT_3_YEAR_MONTHLY_PAYMENTS
+            - COMMITMENT_1_YEAR_UPFRONT_PAYMENT
+            - COMMITMENT_3_YEAR_UPFRONT_PAYMENT
+          type: string
+        cpuOvercommitRatio:
+          description: CPU overcommit ratio. Acceptable values are between 1.0 and 8.0, with 0.1 increment.
+          format: double
+          type: number
+        memoryOvercommitRatio:
+          description: Memory overcommit ratio. Acceptable values are 1.0, 1.25, 1.5, 1.75 and 2.0.
+          format: double
+          type: number
+        storageDeduplicationCompressionRatio:
+          description: The Deduplication and Compression ratio is based on the logical (Used Before) space required to store data before applying deduplication and compression, in relation to the physical (Used After) space required after applying deduplication and compression. Specifically, the ratio is the Used Before space divided by the Used After space. For example, if the Used Before space is 3 GB, but the physical Used After space is 1 GB, the deduplication and compression ratio is 3x. Acceptable values are between 1.0 and 4.0.
+          format: double
+          type: number
       type: object
     VmwarePlatformDetails:
       description: VMware specific details.

@@ -1488,26 +1488,6 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Optional. Filter partnerTenants to be returned. See [List Sub-Collections] (https://cloud.google.com/apis/design/design_patterns#list_sub-collections) for more details. All fields can be used in the filter. Usage: field_filter="fieldName1=fieldVal1 AND fieldName2=fieldVal2". NOTE: Only `AND` conditions are allowed.'
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: Optional. Specifies the ordering of results. Currently, only ordering by the "name" and "create_time" fields are supported. See [Sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) for more information.
-          in: query
-          name: orderBy
-          schema:
-            type: string
-        - description: Optional. The maximum number of items to return. The service may return fewer than this value. If unspecified, at most 50 items will be returned. The maximum value is 1000; values above 1000 are coerced to 1000. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response's next_page_token to determine if there are more instances left to be queried.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Optional. A token identifying a page of results the server should return.
-          in: query
-          name: pageToken
-          schema:
-            type: string
       responses:
         "200":
           content:
@@ -1569,6 +1549,30 @@ paths:
       tags:
         - organizations
   "/v1alpha/{parent}/proxyConfigs":
+    get:
+      description: Lists ProxyConfigs for PartnerTenant in a given organization.
+      operationId: beyondcorp.organizations.locations.global.partnerTenants.proxyConfigs.list
+      parameters:
+        - description: "Required. The parent organization to which the ProxyConfigs belong. Format: `organizations/{organization_id}/locations/global/partnerTenants/{partner_tenant_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaListProxyConfigsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3094,18 +3098,19 @@ components:
     GoogleCloudBeyondcorpPartnerservicesV1alphaListPartnerTenantsResponse:
       description: Message for response to listing PartnerTenants.
       properties:
-        nextPageToken:
-          description: A token which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
-          type: string
         partnerTenants:
           description: The list of PartnerTenant objects.
           items:
             $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerTenant"
           type: array
-        unreachable:
-          description: Locations that could not be reached.
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaListProxyConfigsResponse:
+      description: Message for response to listing ProxyConfigs.
+      properties:
+        proxyConfigs:
+          description: The list of ProxyConfig objects.
           items:
-            type: string
+            $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaProxyConfig"
           type: array
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaPartnerMetadata:
