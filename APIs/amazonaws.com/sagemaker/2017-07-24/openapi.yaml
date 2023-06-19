@@ -469,7 +469,7 @@ paths:
   /#X-Amz-Target=SageMaker.CreateAutoMLJob:
     post:
       operationId: CreateAutoMLJob
-      description: '<p>Creates an Autopilot job.</p> <p>Find the best-performing model after you run an Autopilot job by calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html">DescribeAutoMLJob</a>.</p> <p>For information about how to use Autopilot, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html">Automate Model Development with Amazon SageMaker Autopilot</a>.</p>'
+      description: '<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.</p> <p>Find the best-performing model after you run an AutoML job by calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html">DescribeAutoMLJobV2</a> (recommended) or <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html">DescribeAutoMLJob</a>.</p> <note> <p> <code>CreateAutoMLJob</code> only accepts tabular input data. We recommend using <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html">CreateAutoMLJobV2</a> for all problem types. <code>CreateAutoMLJobV2</code> can process the same tabular data as its previous version <code>CreateAutoMLJob</code>, as well as non-tabular data for problem types such as image or text classification.</p> <p>Find guidelines about how to migrate <code>CreateAutoMLJob</code> to <code>CreateAutoMLJobV2</code> in <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -514,7 +514,7 @@ paths:
   /#X-Amz-Target=SageMaker.CreateAutoMLJobV2:
     post:
       operationId: CreateAutoMLJobV2
-      description: '<p>Creates an Amazon SageMaker AutoML job that uses non-tabular data such as images or text for Computer Vision or Natural Language Processing problems.</p> <p>Find the resulting model after you run an AutoML job V2 by calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html">DescribeAutoMLJobV2</a>.</p> <p>To create an <code>AutoMLJob</code> using tabular data, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html">CreateAutoMLJob</a>.</p> <note> <p>This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error.</p> </note>'
+      description: '<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.</p> <p>We recommend using <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html">CreateAutoMLJobV2</a> for all problem types. <code>CreateAutoMLJobV2</code> can process the same tabular data as its previous version <code>CreateAutoMLJob</code>, as well as non-tabular data for problem types such as image or text classification.</p> <p>Find guidelines about how to migrate <code>CreateAutoMLJob</code> to <code>CreateAutoMLJobV2</code> in <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p> <p>For the list of available problem types supported by <code>CreateAutoMLJobV2</code>, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html">AutoMLProblemTypeConfig</a>.</p> <p>Find the best-performing model after you run an AutoML job V2 by calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html">DescribeAutoMLJobV2</a>. Calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html">DescribeAutoMLJob</a> on a AutoML job V2 results in an error.</p>'
       responses:
         '200':
           description: Success
@@ -4435,7 +4435,7 @@ paths:
   /#X-Amz-Target=SageMaker.DescribeAutoMLJob:
     post:
       operationId: DescribeAutoMLJob
-      description: Returns information about an Amazon SageMaker AutoML job.
+      description: 'Returns information about an AutoML job created by calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html">CreateAutoMLJob</a>.'
       responses:
         '200':
           description: Success
@@ -4474,7 +4474,7 @@ paths:
   /#X-Amz-Target=SageMaker.DescribeAutoMLJobV2:
     post:
       operationId: DescribeAutoMLJobV2
-      description: <p>Returns information about an Amazon SageMaker AutoML V2 job.</p> <note> <p>This API action is callable through SageMaker Canvas only. Calling it directly from the CLI or an SDK results in an error.</p> </note>
+      description: 'Returns information about an AutoML job V2 created by calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html">CreateAutoMLJobV2</a>.'
       responses:
         '200':
           description: Success
@@ -12807,7 +12807,7 @@ components:
         AutoMLJobObjective:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobObjective'
-            - description: 'Defines the objective metric used to measure the predictive quality of an AutoML job. You provide an <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html">AutoMLJobObjective$MetricName</a> and Autopilot infers whether to minimize or maximize it. For <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html">CreateAutoMLJobV2</a>, only <code>Accuracy</code> is supported.'
+            - description: 'Specifies a metric to minimize or maximize as the objective of a job. If not specified, the default objective metric depends on the problem type. See <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html">AutoMLJobObjective</a> for the default values.'
         AutoMLJobConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobConfig'
@@ -12854,7 +12854,7 @@ components:
         AutoMLJobInputDataConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobInputDataConfig'
-            - description: '<p>An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig">InputDataConfig</a> supported by <code>CreateAutoMLJob</code>. The supported formats depend on the problem type:</p> <ul> <li> <p>ImageClassification: S3Prefix, <code>ManifestFile</code>, <code>AugmentedManifestFile</code> </p> </li> <li> <p>TextClassification: S3Prefix</p> </li> </ul>'
+            - description: '<p>An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig">InputDataConfig</a> supported by <code>CreateAutoMLJob</code>. The supported formats depend on the problem type:</p> <ul> <li> <p>For Tabular problem types: <code>S3Prefix</code>, <code>ManifestFile</code>.</p> </li> <li> <p>For ImageClassification: <code>S3Prefix</code>, <code>ManifestFile</code>, <code>AugmentedManifestFile</code>.</p> </li> <li> <p>For TextClassification: <code>S3Prefix</code>.</p> </li> </ul>'
         OutputDataConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLOutputDataConfig'
@@ -12862,7 +12862,7 @@ components:
         AutoMLProblemTypeConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLProblemTypeConfig'
-            - description: Defines the configuration settings of one of the supported problem types.
+            - description: '<p>Defines the configuration settings of one of the supported problem types.</p> <note> <p>For tabular problem types, you must either specify the type of supervised learning problem in <code>AutoMLProblemTypeConfig</code> (<code>TabularJobConfig.ProblemType</code>) and provide the <code>AutoMLJobObjective</code>, or none at all.</p> </note>'
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -12878,7 +12878,7 @@ components:
         AutoMLJobObjective:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobObjective'
-            - description: 'Specifies a metric to minimize or maximize as the objective of a job. For <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html">CreateAutoMLJobV2</a>, only <code>Accuracy</code> is supported.'
+            - description: '<p>Specifies a metric to minimize or maximize as the objective of a job. If not specified, the default objective metric depends on the problem type. For the list of default values per problem type, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html">AutoMLJobObjective</a>.</p> <note> <p>For tabular problem types, you must either provide the <code>AutoMLJobObjective</code> and indicate the type of supervised learning problem in <code>AutoMLProblemTypeConfig</code> (<code>TabularJobConfig.ProblemType</code>), or none.</p> </note>'
         ModelDeployConfig:
           allOf:
             - $ref: '#/components/schemas/ModelDeployConfig'
@@ -12886,7 +12886,7 @@ components:
         DataSplitConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLDataSplitConfig'
-            - description: '<p>This structure specifies how to split the data into train and validation datasets.</p> <p>If you are using the V1 API (for example <code>CreateAutoMLJob</code>) or the V2 API for Natural Language Processing problems (for example <code>CreateAutoMLJobV2</code> with a <code>TextClassificationJobConfig</code> problem type), the validation and training datasets must contain the same headers. Also, for V1 API jobs, the validation dataset must be less than 2 GB in size.</p>'
+            - description: '<p>This structure specifies how to split the data into train and validation datasets.</p> <p>The validation and training datasets must contain the same headers. For jobs created by calling <code>CreateAutoMLJob</code>, the validation dataset must be less than 2 GB in size.</p>'
     CreateCodeRepositoryOutput:
       type: object
       required:
@@ -16005,7 +16005,7 @@ components:
         ResolvedAttributes:
           allOf:
             - $ref: '#/components/schemas/ResolvedAttributes'
-            - description: 'Contains <code>ProblemType</code>, <code>AutoMLJobObjective</code>, and <code>CompletionCriteria</code>. If you do not provide these values, they are auto-inferred. If you do provide them, the values used are the ones you provide.'
+            - description: 'Contains <code>ProblemType</code>, <code>AutoMLJobObjective</code>, and <code>CompletionCriteria</code>. If you do not provide these values, they are inferred.'
         ModelDeployConfig:
           allOf:
             - $ref: '#/components/schemas/ModelDeployConfig'
@@ -16040,11 +16040,11 @@ components:
         AutoMLJobName:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobName'
-            - description: Returns the name of the AutoML V2 job.
+            - description: Returns the name of the AutoML job V2.
         AutoMLJobArn:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobArn'
-            - description: Returns the Amazon Resource Name (ARN) of the AutoML V2 job.
+            - description: Returns the Amazon Resource Name (ARN) of the AutoML job V2.
         AutoMLJobInputDataConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobInputDataConfig'
@@ -16064,15 +16064,15 @@ components:
         AutoMLProblemTypeConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLProblemTypeConfig'
-            - description: Returns the configuration settings of the problem type set for the AutoML V2 job.
+            - description: Returns the configuration settings of the problem type set for the AutoML job V2.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Returns the creation time of the AutoML V2 job.
+            - description: Returns the creation time of the AutoML job V2.
         EndTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Returns the end time of the AutoML V2 job.
+            - description: Returns the end time of the AutoML job V2.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -16080,11 +16080,11 @@ components:
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/AutoMLFailureReason'
-            - description: 'Returns the reason for the failure of the AutoML V2 job, when applicable.'
+            - description: 'Returns the reason for the failure of the AutoML job V2, when applicable.'
         PartialFailureReasons:
           allOf:
             - $ref: '#/components/schemas/AutoMLPartialFailureReasons'
-            - description: Returns a list of reasons for partial failures within an AutoML V2 job.
+            - description: Returns a list of reasons for partial failures within an AutoML job V2.
         BestCandidate:
           allOf:
             - $ref: '#/components/schemas/AutoMLCandidate'
@@ -16092,11 +16092,11 @@ components:
         AutoMLJobStatus:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobStatus'
-            - description: Returns the status of the AutoML V2 job.
+            - description: Returns the status of the AutoML job V2.
         AutoMLJobSecondaryStatus:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobSecondaryStatus'
-            - description: Returns the secondary status of the AutoML V2 job.
+            - description: Returns the secondary status of the AutoML job V2.
         ModelDeployConfig:
           allOf:
             - $ref: '#/components/schemas/ModelDeployConfig'
@@ -16113,6 +16113,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoMLSecurityConfig'
             - description: Returns the security configuration for traffic encryption or Amazon VPC settings.
+        AutoMLJobArtifacts:
+          $ref: '#/components/schemas/AutoMLJobArtifacts'
+        ResolvedAttributes:
+          allOf:
+            - $ref: '#/components/schemas/AutoMLResolvedAttributes'
+            - description: Returns the resolved attributes used by the AutoML job V2.
+        AutoMLProblemTypeConfigName:
+          allOf:
+            - $ref: '#/components/schemas/AutoMLProblemTypeConfigName'
+            - description: Returns the name of the problem type configuration set for the AutoML job V2.
     DescribeAutoMLJobV2Request:
       type: object
       required:
@@ -16122,7 +16132,7 @@ components:
         AutoMLJobName:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobName'
-            - description: Requests information about an AutoML V2 job using its unique name.
+            - description: Requests information about an AutoML job V2 using its unique name.
     DescribeCodeRepositoryOutput:
       type: object
       required:
@@ -25995,7 +26005,7 @@ components:
         InferenceContainerDefinitions:
           allOf:
             - $ref: '#/components/schemas/AutoMLInferenceContainerDefinitions'
-            - description: 'The mapping of all supported processing unit (CPU, GPU, etc...) to inference container definitions for the candidate. This field is populated for the V2 API only (for example, for jobs created by calling <code>CreateAutoMLJobV2</code>).'
+            - description: 'The mapping of all supported processing unit (CPU, GPU, etc...) to inference container definitions for the candidate. This field is populated for the AutoML jobs V2 (for example, for jobs created by calling <code>CreateAutoMLJobV2</code>) related to image or text classification problem types only.'
       description: 'Information about a candidate produced by an AutoML training job, including its status, steps, and other properties.'
     AutoMLCandidateGenerationConfig:
       type: object
@@ -26170,7 +26180,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ValidationFraction'
             - description: 'The validation fraction (optional) is a float that specifies the portion of the training dataset to be used for validation. The default value is 0.2, and values must be greater than 0 and less than 1. We recommend setting this value to be less than 0.5.'
-      description: '<p>This structure specifies how to split the data into train and validation datasets.</p> <p>If you are using the V1 API (for example <code>CreateAutoMLJob</code>) or the V2 API for Natural Language Processing problems (for example <code>CreateAutoMLJobV2</code> with a <code>TextClassificationJobConfig</code> problem type), the validation and training datasets must contain the same headers. Also, for V1 API jobs, the validation dataset must be less than 2 GB in size.</p>'
+      description: '<p>This structure specifies how to split the data into train and validation datasets.</p> <p>The validation and training datasets must contain the same headers. For jobs created by calling <code>CreateAutoMLJob</code>, the validation dataset must be less than 2 GB in size.</p>'
     AutoMLInputDataConfig:
       type: array
       items:
@@ -26210,16 +26220,16 @@ components:
         ContentType:
           allOf:
             - $ref: '#/components/schemas/ContentType'
-            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or <code>image/*</code>. The default value is <code>image/*</code>.</p> </li> <li> <p>TextClassification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> </ul>'
+            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>For Tabular problem types: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> <li> <p>For ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or <code>image/*</code>. The default value is <code>image/*</code>.</p> </li> <li> <p>For TextClassification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> </ul>'
         CompressionType:
           allOf:
             - $ref: '#/components/schemas/CompressionType'
-            - description: 'The allowed compression types depend on the input format. We allow the compression type <code>Gzip</code> for <code>S3Prefix</code> inputs only. For all other inputs, the compression type should be <code>None</code>. If no compression type is provided, we default to <code>None</code>.'
+            - description: 'The allowed compression types depend on the input format and problem type. We allow the compression type <code>Gzip</code> for <code>S3Prefix</code> inputs on tabular data only. For all other inputs, the compression type should be <code>None</code>. If no compression type is provided, we default to <code>None</code>.'
         DataSource:
           allOf:
             - $ref: '#/components/schemas/AutoMLDataSource'
-            - description: The data source for an AutoML channel.
-      description: 'A channel is a named input source that training algorithms can consume. This channel is used for the non tabular training data of an AutoML job using the V2 API. For tabular training data, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html"> AutoMLChannel</a>. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html"> Channel</a>.'
+            - description: The data source for an AutoML channel (Required).
+      description: 'A channel is a named input source that training algorithms can consume. This channel is used for AutoML jobs V2 (jobs created by calling <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html">CreateAutoMLJobV2</a>).'
     MaxCandidates:
       type: integer
       minimum: 1
@@ -26236,11 +26246,11 @@ components:
         MaxCandidates:
           allOf:
             - $ref: '#/components/schemas/MaxCandidates'
-            - description: '<p>The maximum number of times a training job is allowed to run.</p> <p>For V2 jobs (jobs created by calling <code>CreateAutoMLJobV2</code>), the supported value is 1.</p>'
+            - description: '<p>The maximum number of times a training job is allowed to run.</p> <p>For job V2s (jobs created by calling <code>CreateAutoMLJobV2</code>), the supported value is 1.</p>'
         MaxRuntimePerTrainingJobInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaxRuntimePerTrainingJobInSeconds'
-            - description: '<p>The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html">StoppingCondition</a> used by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html">CreateHyperParameterTuningJob</a> action.</p> <p>For V2 jobs (jobs created by calling <code>CreateAutoMLJobV2</code>), this field controls the runtime of the job candidate.</p>'
+            - description: '<p>The maximum time, in seconds, that each training job executed inside hyperparameter tuning is allowed to run as part of a hyperparameter tuning job. For more information, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html">StoppingCondition</a> used by the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html">CreateHyperParameterTuningJob</a> action.</p> <p>For job V2s (jobs created by calling <code>CreateAutoMLJobV2</code>), this field controls the runtime of the job candidate.</p>'
         MaxAutoMLJobRuntimeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaxAutoMLJobRuntimeInSeconds'
@@ -26290,7 +26300,7 @@ components:
         Mode:
           allOf:
             - $ref: '#/components/schemas/AutoMLMode'
-            - description: '<p>The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting <code>AUTO</code>. In <code>AUTO</code> mode, Autopilot chooses <code>ENSEMBLING</code> for datasets smaller than 100 MB, and <code>HYPERPARAMETER_TUNING</code> for larger ones.</p> <p>The <code>ENSEMBLING</code> mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt">Autopilot algorithm support</a> for a list of algorithms supported by <code>ENSEMBLING</code> mode.</p> <p>The <code>HYPERPARAMETER_TUNING</code> (HPO) mode uses the best hyperparameters to train the best version of a model. HPO automatically selects an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt">Autopilot algorithm support</a> for a list of algorithms supported by <code>HYPERPARAMETER_TUNING</code> mode.</p>'
+            - description: '<p>The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting <code>AUTO</code>. In <code>AUTO</code> mode, Autopilot chooses <code>ENSEMBLING</code> for datasets smaller than 100 MB, and <code>HYPERPARAMETER_TUNING</code> for larger ones.</p> <p>The <code>ENSEMBLING</code> mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Autopilot algorithm support</a> for a list of algorithms supported by <code>ENSEMBLING</code> mode.</p> <p>The <code>HYPERPARAMETER_TUNING</code> (HPO) mode uses the best hyperparameters to train the best version of a model. HPO automatically selects an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Autopilot algorithm support</a> for a list of algorithms supported by <code>HYPERPARAMETER_TUNING</code> mode.</p>'
       description: A collection of settings used for an AutoML job.
     AutoMLJobInputDataConfig:
       type: array
@@ -26327,8 +26337,8 @@ components:
         MetricName:
           allOf:
             - $ref: '#/components/schemas/AutoMLMetricEnum'
-            - description: '<p>The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model''s parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset.</p> <p>For the list of all available metrics supported by Autopilot, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics">Autopilot metrics</a>.</p> <p>If you do not specify a metric explicitly, the default behavior is to automatically use:</p> <ul> <li> <p> <code>MSE</code>: for regression.</p> </li> <li> <p> <code>F1</code>: for binary classification</p> </li> <li> <p> <code>Accuracy</code>: for multiclass classification.</p> </li> </ul>'
-      description: 'Specifies a metric to minimize or maximize as the objective of a job. V2 API jobs (for example jobs created by calling <code>CreateAutoMLJobV2</code>), support <code>Accuracy</code> only.'
+            - description: '<p>The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model''s parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset.</p> <p>For the list of all available metrics supported by Autopilot, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics">Autopilot metrics</a>.</p> <p>If you do not specify a metric explicitly, the default behavior is to automatically use:</p> <ul> <li> <p>For tabular problem types:</p> <ul> <li> <p>Regression: <code>MSE</code>.</p> </li> <li> <p>Binary classification: <code>F1</code>.</p> </li> <li> <p>Multiclass classification: <code>Accuracy</code>.</p> </li> </ul> </li> <li> <p>For image or text classification problem types: <code>Accuracy</code> </p> </li> </ul>'
+      description: Specifies a metric to minimize or maximize as the objective of a job.
     AutoMLJobObjectiveType:
       type: string
       enum:
@@ -26483,7 +26493,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobCompletionCriteria'
             - description: 'How long a job is allowed to run, or how many candidates a job is allowed to generate.'
-      description: Stores the configuration information for the image classification problem of an AutoML job using the V2 API.
+      description: Stores the configuration information for the image classification problem of an AutoML job V2.
     TextClassificationJobConfig:
       type: object
       properties:
@@ -26494,29 +26504,103 @@ components:
         ContentColumn:
           allOf:
             - $ref: '#/components/schemas/ContentColumn'
-            - description: The name of the column used to provide the sentences to be classified. It should not be the same as the target column.
+            - description: The name of the column used to provide the sentences to be classified. It should not be the same as the target column (Required).
         TargetLabelColumn:
           allOf:
             - $ref: '#/components/schemas/TargetLabelColumn'
-            - description: The name of the column used to provide the class labels. It should not be same as the content column.
-      description: Stores the configuration information for the text classification problem of an AutoML job using the V2 API.
+            - description: The name of the column used to provide the class labels. It should not be same as the content column (Required).
+      description: Stores the configuration information for the text classification problem of an AutoML job V2.
+    TabularJobConfig:
+      type: object
+      required:
+        - TargetAttributeName
+      properties:
+        CandidateGenerationConfig:
+          allOf:
+            - $ref: '#/components/schemas/CandidateGenerationConfig'
+            - description: The configuration information of how model candidates are generated.
+        CompletionCriteria:
+          $ref: '#/components/schemas/AutoMLJobCompletionCriteria'
+        FeatureSpecificationS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: '<p>A URL to the Amazon S3 data source containing selected features from the input data source to run an Autopilot job V2. You can input <code>FeatureAttributeNames</code> (optional) in JSON format as shown below: </p> <p> <code>{ "FeatureAttributeNames":["col1", "col2", ...] }</code>.</p> <p>You can also specify the data type of the feature (optional) in the format shown below:</p> <p> <code>{ "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } }</code> </p> <note> <p>These column keys may not include the target column.</p> </note> <p>In ensembling mode, Autopilot only supports the following data types: <code>numeric</code>, <code>categorical</code>, <code>text</code>, and <code>datetime</code>. In HPO mode, Autopilot can support <code>numeric</code>, <code>categorical</code>, <code>text</code>, <code>datetime</code>, and <code>sequence</code>.</p> <p>If only <code>FeatureDataTypes</code> is provided, the column keys (<code>col1</code>, <code>col2</code>,..) should be a subset of the column names in the input data. </p> <p>If both <code>FeatureDataTypes</code> and <code>FeatureAttributeNames</code> are provided, then the column keys should be a subset of the column names provided in <code>FeatureAttributeNames</code>. </p> <p>The key name <code>FeatureAttributeNames</code> is fixed. The values listed in <code>["col1", "col2", ...]</code> are case sensitive and should be a list of strings containing unique values that are a subset of the column names in the input data. The list of columns provided must not include the target column.</p>'
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/AutoMLMode'
+            - description: '<p>The method that Autopilot uses to train the data. You can either specify the mode manually or let Autopilot choose for you based on the dataset size by selecting <code>AUTO</code>. In <code>AUTO</code> mode, Autopilot chooses <code>ENSEMBLING</code> for datasets smaller than 100 MB, and <code>HYPERPARAMETER_TUNING</code> for larger ones.</p> <p>The <code>ENSEMBLING</code> mode uses a multi-stack ensemble model to predict classification and regression tasks directly from your dataset. This machine learning mode combines several base models to produce an optimal predictive model. It then uses a stacking ensemble method to combine predictions from contributing members. A multi-stack ensemble model can provide better performance over a single model by combining the predictive capabilities of multiple models. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Autopilot algorithm support</a> for a list of algorithms supported by <code>ENSEMBLING</code> mode.</p> <p>The <code>HYPERPARAMETER_TUNING</code> (HPO) mode uses the best hyperparameters to train the best version of a model. HPO automatically selects an algorithm for the type of problem you want to solve. Then HPO finds the best hyperparameters according to your objective metric. See <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Autopilot algorithm support</a> for a list of algorithms supported by <code>HYPERPARAMETER_TUNING</code> mode.</p>'
+        GenerateCandidateDefinitionsOnly:
+          allOf:
+            - $ref: '#/components/schemas/GenerateCandidateDefinitionsOnly'
+            - description: 'Generates possible candidates without training the models. A model candidate is a combination of data preprocessors, algorithms, and algorithm parameter settings.'
+        ProblemType:
+          allOf:
+            - $ref: '#/components/schemas/ProblemType'
+            - description: 'The type of supervised learning problem available for the model candidates of the AutoML job V2. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types"> Amazon SageMaker Autopilot problem types</a>.'
+        TargetAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/TargetAttributeName'
+            - description: 'The name of the target variable in supervised learning, usually represented by ''y''.'
+        SampleWeightAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/SampleWeightAttributeName'
+            - description: '<p>If specified, this column name indicates which column of the dataset should be treated as sample weights for use by the objective metric during the training, evaluation, and the selection of the best model. This column is not considered as a predictive feature. For more information on Autopilot metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html">Metrics and validation</a>.</p> <p>Sample weights should be numeric, non-negative, with larger values indicating which rows are more important than others. Data points that have invalid or no weight value are excluded.</p> <p>Support for sample weights is available in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html">Ensembling</a> mode only.</p>'
+      description: The collection of settings used by an AutoML job V2 for the <code>TABULAR</code> problem type.
     AutoMLProblemTypeConfig:
       type: object
       properties:
         ImageClassificationJobConfig:
           allOf:
             - $ref: '#/components/schemas/ImageClassificationJobConfig'
-            - description: Settings used to configure an AutoML job using the V2 API for the image classification problem type.
+            - description: Settings used to configure an AutoML job V2 for the image classification problem type.
         TextClassificationJobConfig:
           allOf:
             - $ref: '#/components/schemas/TextClassificationJobConfig'
-            - description: Settings used to configure an AutoML job using the V2 API for the text classification problem type.
-      description: A collection of settings specific to the problem type used to configure an AutoML job using the V2 API. There must be one and only one config of the following type.
+            - description: Settings used to configure an AutoML job V2 for the text classification problem type.
+        TabularJobConfig:
+          allOf:
+            - $ref: '#/components/schemas/TabularJobConfig'
+            - description: 'Settings used to configure an AutoML job V2 for a tabular problem type (regression, classification).'
+      description: A collection of settings specific to the problem type used to configure an AutoML job V2. There must be one and only one config of the following type.
+    AutoMLProblemTypeConfigName:
+      type: string
+      enum:
+        - ImageClassification
+        - TextClassification
+        - Tabular
+    TabularResolvedAttributes:
+      type: object
+      properties:
+        ProblemType:
+          allOf:
+            - $ref: '#/components/schemas/ProblemType'
+            - description: 'The type of supervised learning problem available for the model candidates of the AutoML job V2 (Binary Classification, Multiclass Classification, Regression). For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types"> Amazon SageMaker Autopilot problem types</a>.'
+      description: The resolved attributes specific to the <code>TABULAR</code> problem type.
+    AutoMLProblemTypeResolvedAttributes:
+      type: object
+      properties:
+        TabularResolvedAttributes:
+          allOf:
+            - $ref: '#/components/schemas/TabularResolvedAttributes'
+            - description: Defines the resolved attributes for the <code>TABULAR</code> problem type.
+      description: The resolved attributes specific to the problem type of an AutoML job V2.
     AutoMLProcessingUnit:
       type: string
       enum:
         - CPU
         - GPU
+    AutoMLResolvedAttributes:
+      type: object
+      properties:
+        AutoMLJobObjective:
+          $ref: '#/components/schemas/AutoMLJobObjective'
+        CompletionCriteria:
+          $ref: '#/components/schemas/AutoMLJobCompletionCriteria'
+        AutoMLProblemTypeResolvedAttributes:
+          allOf:
+            - $ref: '#/components/schemas/AutoMLProblemTypeResolvedAttributes'
+            - description: Defines the resolved attributes specific to a problem type.
+      description: The resolved attributes used to configure an AutoML job V2.
     AutoMLS3DataType:
       type: string
       enum:
@@ -27012,6 +27096,14 @@ components:
             - $ref: '#/components/schemas/ModelInsightsLocation'
             - description: The Amazon S3 prefix to the model insight artifacts generated for the AutoML candidate.
       description: The location of artifacts for an AutoML candidate job.
+    CandidateGenerationConfig:
+      type: object
+      properties:
+        AlgorithmsConfig:
+          allOf:
+            - $ref: '#/components/schemas/AutoMLAlgorithmsConfig'
+            - description: '<p>Stores the configuration information for the selection of algorithms used to train model candidates on tabular data.</p> <p>The list of available algorithms to choose from depends on the training mode set in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html"> <code>TabularJobConfig.Mode</code> </a>.</p> <ul> <li> <p> <code>AlgorithmsConfig</code> should not be set in <code>AUTO</code> training mode.</p> </li> <li> <p>When <code>AlgorithmsConfig</code> is provided, one <code>AutoMLAlgorithms</code> attribute must be set and one only.</p> <p>If the list of algorithms provided as values for <code>AutoMLAlgorithms</code> is empty, <code>CandidateGenerationConfig</code> uses the full set of algorithms for the given training mode.</p> </li> <li> <p>When <code>AlgorithmsConfig</code> is not provided, <code>CandidateGenerationConfig</code> uses the full set of algorithms for the given training mode.</p> </li> </ul> <p>For the list of all algorithms per problem type and training mode, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html"> AutoMLAlgorithmConfig</a>.</p> <p>For more information on each algorithm, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support">Algorithm support</a> section in Autopilot developer guide.</p>'
+      description: Stores the configuration information for how model candidates are generated using an AutoML job V2.
     MetricDataList:
       type: array
       items:
@@ -28383,7 +28475,7 @@ components:
         TargetDevice:
           allOf:
             - $ref: '#/components/schemas/TargetDevice'
-            - description: 'Identifies the target device or the machine learning instance that you want to run your model on after the compilation has completed. Alternatively, you can specify OS, architecture, and accelerator using <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TargetPlatform.html">TargetPlatform</a> fields. It can be used instead of <code>TargetPlatform</code>.'
+            - description: '<p>Identifies the target device or the machine learning instance that you want to run your model on after the compilation has completed. Alternatively, you can specify OS, architecture, and accelerator using <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TargetPlatform.html">TargetPlatform</a> fields. It can be used instead of <code>TargetPlatform</code>.</p> <note> <p>Currently <code>ml_trn1</code> is available only in US East (N. Virginia) Region, and <code>ml_inf2</code> is available only in US East (Ohio) Region.</p> </note>'
         TargetPlatform:
           allOf:
             - $ref: '#/components/schemas/TargetPlatform'
