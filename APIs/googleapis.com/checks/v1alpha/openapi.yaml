@@ -1,0 +1,468 @@
+openapi: 3.0.0
+servers:
+  - url: https://checks.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: The Checks API contains powerful and easy-to-use privacy and compliance APIs that interact with the Checks product and its underlying technology.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Checks API
+  version: v1alpha
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://checks.googleapis.com/$discovery/rest?version=v1alpha
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: checks
+externalDocs:
+  url: https://developers.google.com/checks
+tags:
+  - name: accounts
+  - name: privacypolicy
+paths:
+  /v1alpha/privacypolicy:analyze:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Analyzes the privacy policy of the given policy URL or content.
+      operationId: checks.privacypolicy.analyze
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalyzePrivacyPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyzePrivacyPolicyResponse"
+          description: Successful response
+      tags:
+        - privacypolicy
+  "/v1alpha/{name}":
+    get:
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: checks.accounts.apps.operations.get
+      parameters:
+        - description: The name of the operation resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/xapi.zoo
+          Oauth2c:
+            - https://www.googleapis.com/auth/xapi.zoo
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    AnalyzePrivacyPolicyRequest:
+      description: The request proto for AnalyzePrivacyPolicy method.
+      properties:
+        privacyPolicyPageContent:
+          description: Web page raw HTML content for the privacy policy page to be analyzed. Useful when the client wants to analyze a privacy policy already fetched.
+          type: string
+        privacyPolicyUri:
+          description: URL for the privacy policy page to be analyzed. https://linter.aip.dev/140/uri (Use `uri` instead of `url` in field name)
+          type: string
+      type: object
+    AnalyzePrivacyPolicyResponse:
+      description: The response proto for AnalyzePrivacyPolicy method.
+      properties:
+        dataPurposeAnnotations:
+          description: List of all data types in the privacy policy.
+          items:
+            $ref: "#/components/schemas/PolicyPurposeOfUseAnnotation"
+          type: array
+        dataTypeAnnotations:
+          description: List of all data types in the privacy policy.
+          items:
+            $ref: "#/components/schemas/PolicyDataTypeAnnotation"
+          type: array
+        htmlContent:
+          description: HTML content for the privacy policy page.
+          type: string
+        lastUpdatedDateInfo:
+          $ref: "#/components/schemas/LastUpdatedDate"
+          description: Information about the date when the privacy policy was last updated.
+        sectionAnnotations:
+          description: List of all sections in the privacy policy.
+          items:
+            $ref: "#/components/schemas/PolicySectionAnnotation"
+          type: array
+      type: object
+    Date:
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
+      properties:
+        day:
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          format: int32
+          type: integer
+        year:
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          format: int32
+          type: integer
+      type: object
+    LastUpdatedDate:
+      description: Information about the date when the privacy policy was last updated.
+      properties:
+        endOffset:
+          description: Byte offsets for the end of the date text inside the full text.
+          format: int64
+          type: string
+        lastUpdatedDate:
+          $ref: "#/components/schemas/Date"
+          description: Date when the privacy policy was last updated.
+        startOffset:
+          description: Byte offsets for the start of the date text inside the full text.
+          format: int64
+          type: string
+        textContent:
+          description: "The bytes of actual text content in the section. NOTE: - This will correspond to the whole sentence that includes the date. - This field might contain HTML and it is not sanitized."
+          type: string
+      type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
+      type: object
+    PolicyDataTypeAnnotation:
+      properties:
+        dataType:
+          description: Type of the data mentioned in the policy.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - CONTACT_INFO_NAME
+            - CONTACT_INFO_EMAIL_ADDRESS
+            - CONTACT_INFO_PHONE_NUMBER
+            - CONTACT_INFO_MAILING_ADDRESS
+            - CONTACT_INFO_OTHER
+            - IDENTITY_INFO_OTHER
+            - USER_CONTENT_EMAIL_MESSAGES
+            - USER_CONTENT_TEXT_MESSAGES
+            - USER_CONTENT_OTHER_IN_APP_MESSAGES
+            - USER_CONTENT_PHOTOS
+            - USER_CONTENT_VIDEOS
+            - USER_CONTENT_MUSIC_FILES
+            - USER_CONTENT_VOICE_OR_SOUND_RECORDINGS
+            - USER_CONTENT_OTHER_AUDIO_FILES
+            - USER_CONTENT_FILES_AND_DOCS
+            - USER_CONTENT_GAMEPLAY_DATA
+            - USER_CONTENT_CUSTOMER_SUPPORT
+            - COOKIES_AND_TRACKING_ELEMENTS
+            - BROWSING_HISTORY
+            - SEARCH_HISTORY
+            - PURCHASE_HISTORY
+            - PRODUCT_INTERACTION
+            - USER_GENERATED_CONTENT_OTHER
+            - IN_APP_ACTIONS_OTHER
+            - ADVERTISING
+            - APP_CRASH_LOGS
+            - APP_DIAGNOSTICS
+            - APP_PERFORMANCE_OTHER
+            - USER_IDENTIFIERS
+            - DEVICE_IDENTIFIERS
+            - IP_ADDRESS
+            - CONTACTS
+            - AUTHENTICATION_DATA
+            - CALENDAR_EVENTS_OR_NOTES
+            - HEALTH
+            - FITNESS
+            - LOCATION_PRECISE
+            - LOCATION_COARSE
+            - LOCATION_GENERAL
+            - APPS_ON_DEVICE
+            - FINANCIAL_PAYMENT_INFO
+            - FINANCIAL_CREDIT_INFO
+            - FINANCIAL_OTHER
+            - PERSONAL_INFO_RACE_AND_ETHNICITY
+            - PERSONAL_INFO_POLITICAL_OR_RELIGIOUS_BELIEFS
+            - PERSONAL_INFO_SEXUAL_ORIENTATION
+            - PERSONAL_INFO_OTHER
+            - GENERIC_PERSONAL_INFORMATION
+            - UNSPECIFIED_INFORMATION
+            - OTHER_DATA
+          type: string
+        endOffset:
+          description: Byte offsets for the end of the data type sentence inside the full text.
+          format: int64
+          type: string
+        score:
+          description: Score given by the model representing how confident it was regarding this `text_content` being of `data_type`.
+          format: float
+          type: number
+        startOffset:
+          description: Byte offsets for the start of the data type sentence inside the full text.
+          format: int64
+          type: string
+        textContent:
+          description: "Actual text content in the section. This makes it much easier to consume the information. NOTE: This field might contain HTML and does not guarantee a SafeHtml security contract go/safehtmltypecontracts#safehtml."
+          type: string
+      type: object
+    PolicyPurposeOfUseAnnotation:
+      properties:
+        endOffset:
+          description: Byte offsets for the end of the purpose of use sentence inside the full text.
+          format: int64
+          type: string
+        purposeOfUse:
+          description: Purpose of use mentioned in the policy.
+          enum:
+            - PURPOSE_OF_USE_UNSPECIFIED
+            - APP_FUNCTIONALITY
+            - APP_DIAGNOSTICS_AND_PERFORMANCE
+            - FRAUD_PREVENTION_AND_SECURITY
+            - PRODUCT_PERSONALIZATION
+            - ANALYTICS
+            - DEVELOPERS_COMMUNICATION_AND_MARKETING
+            - THIRD_PARTY_ADVERTISING
+            - GENERAL_ADVERTISING
+            - LEGAL_COMPLIANCE
+            - MERGERS_AND_ACQUISITIONS
+            - OTHER_SPECIFIED_PURPOSE
+            - NO_PURPOSE_MENTIONED
+          type: string
+        score:
+          description: Score given by the model representing how confident it was regarding this `text_content` being of `purpose_of_use`.
+          format: float
+          type: number
+        startOffset:
+          description: Byte offsets for the start of the purpose of use sentence inside the full text.
+          format: int64
+          type: string
+        textContent:
+          description: "The bytes of actual text content in the sentence that mentions the purpose of use. This makes it much easier to consume the information. NOTE: This field might contain HTML and does not guarantee a SafeHtml security contract go/safehtmltypecontracts#safehtml."
+          type: string
+      type: object
+    PolicySectionAnnotation:
+      properties:
+        endOffset:
+          description: Byte offsets for the end of the section inside the full text.
+          format: int64
+          type: string
+        score:
+          description: Score given by the model representing how confident it was regarding this `text_content` being of `section_type`.
+          format: float
+          type: number
+        sectionType:
+          description: Type of the high-level category in the policy.
+          enum:
+            - SECTION_TYPE_UNSPECIFIED
+            - FIRST_PARTY_COLLECTION
+            - FIRST_PARTY_USE
+            - THIRD_PARTY_SHARING
+            - CHILDREN_RELATED
+            - DATA_RETENTION
+            - PRIVACY_CONTACT
+            - RIGHT_TO_DELETE
+            - RIGHT_TO_RESTRICT_PROCESSING
+            - RIGHT_TO_ACCESS
+            - RIGHT_TO_RECTIFICATION
+            - RIGHT_TO_KNOW_ABOUT_SELLING
+            - RIGHT_TO_KNOW_ABOUT_SHARING
+            - RIGHT_TO_OPT_OUT_FROM_SELLING
+            - RIGHT_TO_OPT_OUT_FROM_SHARING
+            - METHOD_TO_OPT_OUT_FROM_SELLING_OR_SHARING
+            - AUTHORIZED_AGENT
+            - CCPA_CPRA_REFERENCE
+            - DATA_PROTECTION_OFFICER
+            - DATA_CONTROLLER
+            - DO_NOT_SELL
+            - GDPR_REFERENCE
+            - LAWFUL_LEGAL_BASIS
+            - PRIVACY_SHIELD
+            - RIGHT_TO_LODGE_A_COMPLAINT
+            - TRANSFER_MECHANISMS
+            - NO_CHILDREN_DATA_COLLECTION
+            - NO_CHILDREN_DATA_SHARING
+            - CHILDREN_INFORMATION_PUBLICITY
+            - PARENTS_METHOD_OF_INFORMATION_DELETION
+            - PARENTS_METHOD_TO_INFORMATION_REVIEW
+            - PARENTS_METHOD_TO_STOP_FURTHER_INFORMATION_COLLECTION_USE
+            - PARENTS_RIGHT_TO_INFORMATION_DELETION
+            - PARENTS_RIGHT_TO_INFORMATION_REVIEW
+            - PARENTS_RIGHT_TO_STOP_FURTHER_INFORMATION_COLLECTION_USE
+          type: string
+        startOffset:
+          description: Byte offsets for the start of the section inside the full text.
+          format: int64
+          type: string
+        textContent:
+          description: "Actual text content in the section. This makes it much easier to consume the information. NOTE: This field might contain HTML and does not guarantee a SafeHtml security contract go/safehtmltypecontracts#safehtml."
+          type: string
+      type: object
+    Status:
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
+          type: string
+      type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/xapi.zoo: Test scope for access to the Zoo service
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/xapi.zoo: Test scope for access to the Zoo service
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

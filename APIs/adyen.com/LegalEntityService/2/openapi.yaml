@@ -52,7 +52,6 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: LegalEntityService
-  x-timestamp: 2023-06-08T11:24:16Z
 tags:
   - name: Legal entities
   - name: Hosted Onboarding
@@ -3277,7 +3276,7 @@ components:
           description: |-
             Defines the relationship of the legal entity to the current legal entity.
 
-            Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **signatory**, or **ultimateParentCompany**.
+            Possible values for organizations: **uboThroughOwnership**, **uboThroughControl**, **director**, **signatory**, or **ultimateParentCompany**.
 
             Possible values for sole proprietorships: **soleProprietorship**.
           enum:
@@ -4054,6 +4053,7 @@ components:
           description: The type of error.
           enum:
             - dataMissing
+            - dataReview
             - declined
             - invalidInput
             - pendingStatus
@@ -4132,6 +4132,7 @@ components:
           description: The type of error.
           enum:
             - dataMissing
+            - dataReview
             - declined
             - invalidInput
             - pendingStatus

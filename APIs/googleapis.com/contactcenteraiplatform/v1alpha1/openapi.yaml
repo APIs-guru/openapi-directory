@@ -96,21 +96,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the parameters of a single ContactCenter.
-      operationId: contactcenteraiplatform.projects.locations.contactCenters.patch
+      description: ""
+      operationId: contactcenteraiplatform.projects.locations.contactCenters.updateAuthentication-config
       parameters:
-        - description: name of resource
+        - description: "Name of authentication config. Format: projects/{project}/locations/{location}/contactCenters/{contact_center}/authentication-config"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-        - description: Required. Field mask is used to specify the fields to be overwritten in the ContactCenter resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.
+        - description: Required. Indicates which fields in the provided authentication config to update. Must be specified and non-empty.
           in: query
           name: updateMask
           schema:
@@ -119,13 +114,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ContactCenter"
+              $ref: "#/components/schemas/AuthenticationConfig"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/AuthenticationConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -499,6 +494,21 @@ components:
           description: Optional. First/given name of the first admin user.
           type: string
       type: object
+    AuthenticationConfig:
+      properties:
+        basicAuthSetting:
+          $ref: "#/components/schemas/BasicAuthConfig"
+        name:
+          description: "Name of authentication config. Format: projects/{project}/locations/{location}/contactCenters/{contact_center}/authentication-config"
+          type: string
+        samlSetting:
+          $ref: "#/components/schemas/SamlConfig"
+      type: object
+    BasicAuthConfig:
+      properties:
+        enabled:
+          type: boolean
+      type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
@@ -583,6 +593,40 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
+    GoogleCloudCommonOperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        cancelRequested:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have been cancelled successfully have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        statusDetail:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
     InstanceConfig:
       description: Message storing the instance configuration.
       properties:
@@ -596,6 +640,7 @@ components:
             - STANDARD_XLARGE
             - STANDARD_2XLARGE
             - STANDARD_3XLARGE
+            - DEV_XSMALL
           type: string
       type: object
     ListContactCentersResponse:
@@ -743,6 +788,7 @@ components:
             - STANDARD_XLARGE
             - STANDARD_2XLARGE
             - STANDARD_3XLARGE
+            - DEV_XSMALL
           type: string
       type: object
     SAMLParams:
@@ -759,6 +805,21 @@ components:
           type: string
         userEmail:
           description: Email address of the first admin users.
+          type: string
+      type: object
+    SamlConfig:
+      properties:
+        cert:
+          description: X.509 public certificate for IdP
+          type: string
+        emailMapping:
+          description: IdP field that maps to the user’s email address
+          type: string
+        entityId:
+          description: "The entity ID for the identity provider. Example: https://[IDP Domain]/saml/metadata"
+          type: string
+        loginUri:
+          description: "The sso login url. Example: https://[IDP Domain]/saml/sso/login"
           type: string
       type: object
     Status:

@@ -1410,7 +1410,7 @@ components:
       description: A digest of all the documents that match a given target.
       properties:
         count:
-          description: The total count of documents that match target_id. If different from the count of documents in the client that match, the client must manually determine which documents no longer match the target. The client can use the `unchanged_names` bloom filter to assist with this determination.
+          description: The total count of documents that match target_id. If different from the count of documents in the client that match, the client must manually determine which documents no longer match the target.
           format: int32
           type: integer
         targetId:

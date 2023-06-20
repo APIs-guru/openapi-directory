@@ -3,12 +3,11 @@ servers:
   - url: https://balanceplatform-api-test.adyen.com/btl/v2
 info:
   contact:
-    email: developer-experience@adyen.com
     name: Adyen Developer Experience team
-    url: https://www.adyen.help/hc/en-us/community/topics
+    url: https://github.com/Adyen/adyen-openapi
     x-twitter: Adyen
   description: |+
-    The Transfers API provides endpoints that you can use to get information about all your transactions, move funds within your balance platform or send funds from your balance platform to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments).
+    This API provides endpoints that you can use to transfer funds, whether when [paying out to a transfer instrument](https://docs.adyen.com/marketplaces-and-platforms/payout-to-users/on-demand-payouts), [sending funds to third parties](https://docs.adyen.com/marketplaces-and-platforms/business-accounts/send-receive-funds) for users with business bank accounts, or to [request a payout for a grant offer](https://docs.adyen.com/marketplaces-and-platforms/capital). The API also supports use cases for [getting transactions for business bank accounts](https://docs.adyen.com/marketplaces-and-platforms/business-accounts/transactions-api) and getting [grants and its outstanding balances](https://docs.adyen.com/marketplaces-and-platforms/capital#get-balances). .
 
     ## Authentication
     Your Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:
@@ -55,7 +54,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-05-10T13:27:06Z
+  x-timestamp: 2023-06-12T13:25:58Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -154,6 +153,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all transactions
       tags:
@@ -208,6 +208,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a transaction
       tags:
@@ -280,6 +281,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Transfer funds
       tags:
@@ -781,9 +783,11 @@ components:
 
           enum:
             - bank
+            - card
             - grants
             - internal
             - issuedCard
+            - migration
             - platformPayment
           type: string
           x-addedInVersion: "1"
@@ -1004,7 +1008,9 @@ components:
             - captureReversalPending
             - captureReversed
             - captured
+            - capturedExternally
             - chargeback
+            - chargebackExternally
             - chargebackPending
             - chargebackReversalPending
             - chargebackReversed
@@ -1041,6 +1047,7 @@ components:
             - refundReversalPending
             - refundReversed
             - refunded
+            - refundedExternally
             - refused
             - reserveAdjustment
             - reserveAdjustmentPending
@@ -1051,9 +1058,9 @@ components:
           type: string
           x-addedInVersion: "2"
       required:
-        - amount
         - counterparty
         - status
+        - amount
       type: object
     TransferInfo:
       properties:
@@ -1114,3 +1121,4 @@ components:
 x-groups:
   - Transfers
   - Transactions
+  - Capital

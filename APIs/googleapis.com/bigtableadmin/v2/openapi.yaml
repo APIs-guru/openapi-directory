@@ -2513,7 +2513,7 @@ components:
           type: array
       type: object
     Location:
-      description: A resource that represents a Google Cloud location.
+      description: A resource that represents Google Cloud location.
       properties:
         displayName:
           description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
@@ -2554,9 +2554,6 @@ components:
     ModifyColumnFamiliesRequest:
       description: Request message for google.bigtable.admin.v2.BigtableTableAdmin.ModifyColumnFamilies
       properties:
-        ignoreWarnings:
-          description: If true, ignore safety checks when modifying the column families.
-          type: boolean
         modifications:
           description: Required. Modifications to be atomically applied to the specified table's families. Entries are applied in order, meaning that earlier modifications can be masked by later ones (in the case of repeated updates to the same family, for example).
           items:

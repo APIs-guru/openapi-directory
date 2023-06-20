@@ -1,11 +1,8 @@
 openapi: 3.1.0
-servers:
-  - url: https://balanceplatform-api-test.adyen.com/btl/v1
 info:
   contact:
-    email: developer-experience@adyen.com
     name: Adyen Developer Experience team
-    url: https://www.adyen.help/hc/en-us/community/topics
+    url: https://github.com/Adyen/adyen-openapi
     x-twitter: Adyen
   description: |-
     The payment webhooks are deprecated. Use the [accounting webhooks](https://docs.adyen.com/api-explorer/transfer-webhooks/latest/overview) instead.
@@ -27,7 +24,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformPaymentNotification-v1
-  x-timestamp: 2023-05-10T13:27:05Z
+  x-timestamp: 2023-06-09T18:25:00Z
 tags: []
 components:
   examples:
@@ -1402,10 +1399,6 @@ components:
           type: string
       type: object
   securitySchemes:
-    ApiKeyAuth:
-      in: header
-      name: X-API-Key
-      type: apiKey
     BasicAuth:
       scheme: basic
       type: http
@@ -1439,7 +1432,7 @@ webhooks:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Incoming transfer created
       tags:
         - Fund movements
@@ -1480,7 +1473,7 @@ webhooks:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Incoming transfer updated
       tags:
         - Fund movements
@@ -1521,7 +1514,7 @@ webhooks:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Outgoing transfer created
       tags:
         - Fund movements
@@ -1558,7 +1551,7 @@ webhooks:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Outgoing transfer updated
       tags:
         - Fund movements
@@ -1613,7 +1606,7 @@ webhooks:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Payment authorisation, refund, or funds transfer initiated
       tags:
         - Payment authorisation, refund, or funds transfer initiated
@@ -1655,7 +1648,7 @@ webhooks:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Payment authorisation expired or cancelled
       tags:
         - Payment authorisation, refund, or funds transfer initiated

@@ -3,9 +3,8 @@ servers:
   - url: https://balanceplatform-api-test.adyen.com/btl/v3
 info:
   contact:
-    email: developer-experience@adyen.com
     name: Adyen Developer Experience team
-    url: https://www.adyen.help/hc/en-us/community/topics
+    url: https://github.com/Adyen/adyen-openapi
     x-twitter: Adyen
   description: |+
     Adyen Capital allows you to build an embedded financing offering for your users to serve their operational needs. Learn more about [Adyen Capital](https://docs.adyen.com/marketplaces-and-platforms/capital).
@@ -54,7 +53,7 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: GrantService-v3
-  x-timestamp: 2023-05-08T16:23:07Z
+  x-timestamp: 2023-06-05T19:25:44Z
 tags:
   - name: Capital
 paths:
@@ -113,6 +112,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a capital account
       tags:
@@ -179,6 +179,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Request a grant payout
       tags:
@@ -242,6 +243,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get grant reference details
       tags:

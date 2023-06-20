@@ -3,12 +3,11 @@ servers:
   - url: https://balanceplatform-api-test.adyen.com/btl/v3
 info:
   contact:
-    email: developer-experience@adyen.com
     name: Adyen Developer Experience team
-    url: https://www.adyen.help/hc/en-us/community/topics
+    url: https://github.com/Adyen/adyen-openapi
     x-twitter: Adyen
   description: |+
-    The Transfers API provides endpoints that you can use to get information about all your transactions, move funds within your balance platform or send funds from your balance platform to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments).
+    This API provides endpoints that you can use to transfer funds, whether when [paying out to a transfer instrument](https://docs.adyen.com/marketplaces-and-platforms/payout-to-users/on-demand-payouts), [sending funds to third parties](https://docs.adyen.com/marketplaces-and-platforms/business-accounts/send-receive-funds) for users with business bank accounts, or to [request a payout for a grant offer](https://docs.adyen.com/marketplaces-and-platforms/capital). The API also supports use cases for [getting transactions for business bank accounts](https://docs.adyen.com/marketplaces-and-platforms/business-accounts/transactions-api) and getting [grants and its outstanding balances](https://docs.adyen.com/marketplaces-and-platforms/capital#get-balances). .
 
     ## Authentication
     Your Adyen contact will provide your API credential and an API key. To connect to the API, add an `X-API-Key` header with the API key as the value, for example:
@@ -55,11 +54,206 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-05-10T13:27:06Z
 tags:
   - name: Transactions
   - name: Transfers
+  - name: Capital
 paths:
+  /grants:
+    get:
+      description: Returns a list of grants with status and outstanding balances.
+      operationId: get-grants
+      parameters:
+        - description: The counterparty account holder id.
+          in: query
+          name: counterpartyAccountHolderId
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapitalGrants"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Not Found - the payment was not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get a capital account
+      tags:
+        - Capital
+      x-addedInVersion: "3"
+      x-groupName: Capital
+      x-methodName: getCapitalAccount
+      x-sortIndex: 2
+    post:
+      description: Requests the payout of the selected grant offer.
+      operationId: post-grants
+      requestBody:
+        content:
+          application/json:
+            examples:
+              requestGrant:
+                $ref: "#/components/examples/post-grants-requestGrant"
+            schema:
+              $ref: "#/components/schemas/CapitalGrantInfo"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                requestGrant:
+                  $ref: "#/components/examples/post-grants-requestGrant-200"
+              schema:
+                $ref: "#/components/schemas/CapitalGrant"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Not Found - the payment was not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Request a grant payout
+      tags:
+        - Capital
+      x-addedInVersion: "3"
+      x-groupName: Capital
+      x-methodName: requestGrantPayout
+      x-sortIndex: 1
+  "/grants/{id}":
+    get:
+      description: Returns the details of a capital account specified in the path.
+      operationId: get-grants-id
+      parameters:
+        - description: The unique identifier of the grant.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CapitalGrant"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Not Found - the payment was not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get grant reference details
+      tags:
+        - Capital
+      x-addedInVersion: "3"
+      x-groupName: Capital
+      x-methodName: getGrantReferenceDetails
+      x-sortIndex: 3
   /transactions:
     get:
       description: |-
@@ -154,6 +348,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get all transactions
       tags:
@@ -208,6 +403,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get a transaction
       tags:
@@ -288,6 +484,7 @@ paths:
                 $ref: "#/components/schemas/RestServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Transfer funds
       tags:
@@ -390,6 +587,40 @@ components:
             reference: REFERENCE_46e8c40e
             status: booked
             valueDate: 2022-03-14T21:00:48+01:00
+    post-grants-requestGrant:
+      description: Example request for grant payout
+      summary: Request grant payout to a balance account
+      value:
+        counterparty:
+          accountHolderId: AH00000000000000000000001
+          balanceAccountId: BA00000000000000000000001
+        grantAccountId: CG00000000000000000000001
+        grantOfferId: "0000000000000001"
+    post-grants-requestGrant-200:
+      description: Example response for requesting grant payout
+      summary: Grant payout requested
+      value:
+        amount:
+          currency: EUR
+          value: 1000000
+        balances:
+          currency: EUR
+          fee: 120000
+          principal: 1000000
+          total: 1120000
+        counterparty:
+          accountHolderId: AH00000000000000000000001
+          balanceAccountId: BA00000000000000000000001
+        fee:
+          amount:
+            currency: EUR
+            value: 120000
+        grantAccountId: CG00000000000000000000001
+        grantOfferId: "0000000000000001"
+        id: GR00000000000000000000001
+        repayment:
+          basisPoints: 1400
+        status: Pending
     post-transfers-payout-cross-border:
       description: Example request to make a cross-border transfer
       summary: Make a cross-border transfer
@@ -888,6 +1119,106 @@ components:
         - accountNumber
         - bankCode
       type: object
+    CapitalBalance:
+      properties:
+        currency:
+          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
+          type: string
+        fee:
+          description: Fee amount.
+          format: int64
+          type: integer
+        principal:
+          description: Principal amount.
+          format: int64
+          type: integer
+        total:
+          description: Total amount. A sum of principal amount and fee amount.
+          format: int64
+          type: integer
+      required:
+        - principal
+        - fee
+        - total
+        - currency
+      type: object
+    CapitalGrant:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: An object containing the amount of the grant, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+        balances:
+          $ref: "#/components/schemas/CapitalBalance"
+          description: An object containing the details of the existing grant.
+        counterparty:
+          $ref: "#/components/schemas/Counterparty-2"
+          description: An object containing the details of the receiving party of the grant. Setting either an `accountHolderId`, `balanceAccountId`, or both is required.
+        fee:
+          $ref: "#/components/schemas/Fee"
+          description: An object containing the fee currency and value, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
+        grantAccountId:
+          description: The identifier of the grant account used for the grant.
+          type: string
+        grantOfferId:
+          description: The identifier of the grant offer that has been selected and from which the grant details will be used.
+          type: string
+        id:
+          description: The identifier of the grant reference.
+          type: string
+        repayment:
+          $ref: "#/components/schemas/Repayment"
+          description: An object containing the details of the 30-day repayment threshold.
+        status:
+          description: "The current status of the grant. Possible values: **Pending**, **Active**, **Repaid**."
+          enum:
+            - Pending
+            - Active
+            - Repaid
+          type: string
+      required:
+        - grantAccountId
+        - grantOfferId
+        - id
+        - status
+        - balances
+      type: object
+    CapitalGrantInfo:
+      properties:
+        counterparty:
+          $ref: "#/components/schemas/Counterparty-2"
+          description: An object containing the details of the receiving party of the grant. Setting either an `accountHolderId`, `balanceAccountId`, or both is required.
+        grantAccountId:
+          description: The identifier of the grant account used for the grant.
+          type: string
+        grantOfferId:
+          description: The identifier of the grant offer that has been selected and from which the grant details will be used.
+          type: string
+      required:
+        - grantAccountId
+        - grantOfferId
+      type: object
+    CapitalGrants:
+      properties:
+        grants:
+          description: The unique identifier of the grant.
+          items:
+            $ref: "#/components/schemas/CapitalGrant"
+          type: array
+      required:
+        - grants
+      type: object
+    Counterparty-2:
+      properties:
+        accountHolderId:
+          description: The identifier of the receiving account holder. The payout will default to the primary balance account of this account holder if no `balanceAccountId` is provided.
+          type: string
+        balanceAccountId:
+          description: The identifier of the balance account that belongs to the receiving account holder.
+          type: string
+        transferInstrumentId:
+          description: The identifier of the transfer instrument that belongs to the legal entity of the account holder.
+          type: string
+      type: object
     CounterpartyInfoV3:
       properties:
         balanceAccountId:
@@ -938,6 +1269,14 @@ components:
         - type
         - accountNumber
         - bankCode
+      type: object
+    Fee:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: An object containing the fee amount.
+      required:
+        - amount
       type: object
     HULocalAccountIdentification:
       additionalProperties: false
@@ -1124,7 +1463,7 @@ components:
           description: Address of the bank account owner.
         dateOfBirth:
           description: |-
-            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.
+            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before 1st January 1900.
 
             Allowed only when `type` is **individual**.
           format: date
@@ -1176,6 +1515,34 @@ components:
           description: The type of wallet the network token is associated with.
           type: string
           x-addedInVersion: "3"
+      type: object
+    Repayment:
+      properties:
+        basisPoints:
+          description: The repayment that is deducted daily from incoming net volume, in [basis points](https://www.investopedia.com/terms/b/basispoint.asp).
+          format: int32
+          type: integer
+        term:
+          $ref: "#/components/schemas/RepaymentTerm"
+          description: An object containing the details of the configuration for repayment term.
+        threshold:
+          $ref: "#/components/schemas/ThresholdRepayment"
+          description: An object containing the details of the 30-day repayment threshold.
+      required:
+        - basisPoints
+      type: object
+    RepaymentTerm:
+      properties:
+        estimatedDays:
+          description: The estimated term for repaying the grant, in days.
+          format: int32
+          type: integer
+        maximumDays:
+          description: The maximum term for repaying the grant, in days. Only applies when `contractType` is **loan**.
+          format: int32
+          type: integer
+      required:
+        - estimatedDays
       type: object
     ResourceReference:
       properties:
@@ -1275,6 +1642,14 @@ components:
         - accountNumber
         - bic
       type: object
+    ThresholdRepayment:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount to be repaid on a 30-day basis.
+      required:
+        - amount
+      type: object
     Transaction:
       properties:
         accountHolderId:
@@ -1314,9 +1689,11 @@ components:
 
           enum:
             - bank
+            - card
             - grants
             - internal
             - issuedCard
+            - migration
             - platformPayment
           type: string
           x-addedInVersion: "1"
@@ -1485,6 +1862,11 @@ components:
           $ref: "#/components/schemas/CounterpartyV3"
           description: The other party in the transfer.
           x-addedInVersion: "3"
+        creationDate:
+          description: The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+          format: date-time
+          type: string
+          x-addedInVersion: "3"
         description:
           description: |-
             Your description for the transfer. It is used by most banks as the transfer description. We recommend sending a maximum of 140 characters, otherwise the description may be truncated.
@@ -1603,7 +1985,9 @@ components:
             - captureReversalPending
             - captureReversed
             - captured
+            - capturedExternally
             - chargeback
+            - chargebackExternally
             - chargebackPending
             - chargebackReversalPending
             - chargebackReversed
@@ -1640,6 +2024,7 @@ components:
             - refundReversalPending
             - refundReversed
             - refunded
+            - refundedExternally
             - refused
             - reserveAdjustment
             - reserveAdjustmentPending
@@ -1650,10 +2035,10 @@ components:
           type: string
           x-addedInVersion: "2"
       required:
-        - category
-        - amount
         - counterparty
         - status
+        - category
+        - amount
       type: object
     TransferInfo:
       properties:
@@ -1682,6 +2067,7 @@ components:
             - internal
             - issuedCard
             - platformPayment
+            - card
           type: string
           x-addedInVersion: "3"
         counterparty:
@@ -1821,7 +2207,7 @@ components:
           description: Address of the bank account owner.
         dateOfBirth:
           description: |-
-            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**.
+            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before 1st January 1900.
 
             Allowed only when `type` is **individual**.
           format: date
@@ -1869,3 +2255,4 @@ components:
 x-groups:
   - Transfers
   - Transactions
+  - Capital

@@ -3046,6 +3046,14 @@ components:
             - ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS
             - ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS
           type: string
+        adsWebConversionDataExportScope:
+          description: Required. The Conversion Export Scope for data exported to linked Ads Accounts.
+          enum:
+            - ADS_WEB_CONVERSION_DATA_EXPORT_SCOPE_UNSPECIFIED
+            - NOT_SELECTED_YET
+            - CROSS_CHANNEL
+            - ADS_PREFERRED
+          type: string
         name:
           description: 'Output only. Resource name of this attribution settings resource. Format: properties/{property_id}/attributionSettings Example: "properties/1000/attributionSettings"'
           readOnly: true
