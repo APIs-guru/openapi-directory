@@ -4082,6 +4082,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkflowDetails'
             - description: '<p>Specifies the workflow ID for the workflow to assign and the execution role that''s used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p>'
+        StructuredLogDestinations:
+          allOf:
+            - $ref: '#/components/schemas/StructuredLogDestinations'
+            - description: '<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>'
     AccessDeniedException: {}
     CreateUserResponse:
       type: object
@@ -5483,6 +5487,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkflowDetails'
             - description: '<p>Specifies the workflow ID for the workflow to assign and the execution role that''s used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p> <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p> <p> <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details ''{"OnUpload":[]}''</code> </p>'
+        StructuredLogDestinations:
+          allOf:
+            - $ref: '#/components/schemas/StructuredLogDestinations'
+            - description: '<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>'
     ConflictException: {}
     UpdateUserResponse:
       type: object
@@ -5949,6 +5957,12 @@ components:
             - $ref: '#/components/schemas/OnPartialUploadWorkflowDetails'
             - description: <p>A trigger that starts a workflow if a file is only partially uploaded. You can attach a workflow to a server that executes whenever there is a partial upload.</p> <p>A <i>partial upload</i> occurs when a file is open when the session disconnects.</p>
       description: Container for the <code>WorkflowDetail</code> data type. It is used by actions that trigger a workflow to begin execution.
+    StructuredLogDestinations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      minItems: 0
+      maxItems: 1
     SshPublicKeyBody:
       type: string
       maxLength: 2048
@@ -6446,6 +6460,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkflowDetails'
             - description: '<p>Specifies the workflow ID for the workflow to assign and the execution role that''s used for executing the workflow.</p> <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects while the file is still being uploaded.</p>'
+        StructuredLogDestinations:
+          allOf:
+            - $ref: '#/components/schemas/StructuredLogDestinations'
+            - description: '<p>Specifies the log groups to which your server logs are sent.</p> <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p> <p> <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code> </p> <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code> </p> <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty value for this parameter in an <code>update-server</code> call. For example:</p> <p> <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code> </p>'
       description: Describes the properties of a file transfer protocol-enabled server that was specified.
     DescribedUser:
       type: object

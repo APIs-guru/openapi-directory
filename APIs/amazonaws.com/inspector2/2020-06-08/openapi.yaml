@@ -238,6 +238,66 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /codesnippet/batchget:
+    post:
+      operationId: BatchGetCodeSnippet
+      description: Retrieves code snippets from findings that Amazon Inspector detected code vulnerabilities in.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetCodeSnippetResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - findingArns
+              properties:
+                findingArns:
+                  description: An array of finding ARNs for the findings you want to retrieve code snippets from.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FindingArn'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /freetrialinfo/batchget:
     post:
       operationId: BatchGetFreeTrialInfo
@@ -479,6 +539,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /sbomexport/cancel:
+    post:
+      operationId: CancelSbomExport
+      description: Cancels a software bill of materials (SBOM) report.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelSbomExportResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reportId
+              properties:
+                reportId:
+                  description: The report ID of the SBOM export to cancel.
+                  type: string
+                  pattern: '\b[a-f0-9]{8}\b-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-\b[a-f0-9]{12}\b'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /filters/create:
     post:
       operationId: CreateFilter
@@ -557,6 +680,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: Details of the Amazon Web Services account IDs used to filter findings.
+                    codeVulnerabilityDetectorName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of the detector used to identify a code vulnerability in a Lambda function used to filter findings.
+                    codeVulnerabilityDetectorTags:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: 'The detector type tag associated with the vulnerability used to filter findings. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see <a href="https://docs.aws.amazon.com/codeguru/detector-library/java/tags/">Java tags</a>, or <a href="https://docs.aws.amazon.com/codeguru/detector-library/python/tags/">Python tags</a>. '
+                    codeVulnerabilityFilePath:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The file path to the file in a Lambda function that contains a code vulnerability used to filter findings.
                     componentId:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -601,6 +736,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: The tags attached to the Amazon ECR container image.
+                    epssScore:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: The EPSS score used to filter findings.
                     exploitAvailable:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -788,6 +927,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: Details of the Amazon Web Services account IDs used to filter findings.
+                    codeVulnerabilityDetectorName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of the detector used to identify a code vulnerability in a Lambda function used to filter findings.
+                    codeVulnerabilityDetectorTags:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: 'The detector type tag associated with the vulnerability used to filter findings. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see <a href="https://docs.aws.amazon.com/codeguru/detector-library/java/tags/">Java tags</a>, or <a href="https://docs.aws.amazon.com/codeguru/detector-library/python/tags/">Python tags</a>. '
+                    codeVulnerabilityFilePath:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The file path to the file in a Lambda function that contains a code vulnerability used to filter findings.
                     componentId:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -832,6 +983,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: The tags attached to the Amazon ECR container image.
+                    epssScore:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: The EPSS score used to filter findings.
                     exploitAvailable:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -942,6 +1097,124 @@ paths:
                   enum:
                     - CSV
                     - JSON
+                s3Destination:
+                  description: Contains details of the Amazon S3 bucket and KMS key used to export findings.
+                  type: object
+                  properties:
+                    bucketName:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The name of the Amazon S3 bucket to export findings to.
+                    keyPrefix:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The prefix of the Amazon S3 bucket used to export findings.
+                    kmsKeyArn:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The ARN of the KMS key used to encrypt data when exporting findings.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /sbomexport/create:
+    post:
+      operationId: CreateSbomExport
+      description: Creates a software bill of materials (SBOM) report.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSbomExportResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reportFormat
+                - s3Destination
+              properties:
+                reportFormat:
+                  description: The output format for the software bill of materials (SBOM) report.
+                  type: string
+                  enum:
+                    - CYCLONEDX_1_4
+                    - SPDX_2_3
+                resourceFilterCriteria:
+                  description: The resource filter criteria for a Software bill of materials (SBOM) report.
+                  type: object
+                  properties:
+                    accountId:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceStringFilterList'
+                        - description: The account IDs used as resource filter criteria.
+                    ec2InstanceTags:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceMapFilterList'
+                        - description: The EC2 instance tags used as resource filter criteria.
+                    ecrImageTags:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceStringFilterList'
+                        - description: The ECR image tags used as resource filter criteria.
+                    ecrRepositoryName:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceStringFilterList'
+                        - description: The ECR repository names used as resource filter criteria.
+                    lambdaFunctionName:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceStringFilterList'
+                        - description: The AWS Lambda function name used as resource filter criteria.
+                    lambdaFunctionTags:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceMapFilterList'
+                        - description: The AWS Lambda function tags used as resource filter criteria.
+                    resourceId:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceStringFilterList'
+                        - description: The resource IDs used as resource filter criteria.
+                    resourceType:
+                      allOf:
+                        - $ref: '#/components/schemas/ResourceStringFilterList'
+                        - description: The resource types used as resource filter criteria.
                 s3Destination:
                   description: Contains details of the Amazon S3 bucket and KMS key used to export findings.
                   type: object
@@ -1561,6 +1834,77 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /encryptionkey/get#resourceType&scanType:
+    get:
+      operationId: GetEncryptionKey
+      description: Gets an encryption key.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEncryptionKeyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: resourceType
+          in: query
+          required: true
+          description: The resource type the key encrypts.
+          schema:
+            type: string
+            enum:
+              - AWS_EC2_INSTANCE
+              - AWS_ECR_CONTAINER_IMAGE
+              - AWS_ECR_REPOSITORY
+              - AWS_LAMBDA_FUNCTION
+        - name: scanType
+          in: query
+          required: true
+          description: The scan type the key encrypts.
+          schema:
+            type: string
+            enum:
+              - NETWORK
+              - PACKAGE
+              - CODE
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /reporting/status/get:
     post:
       operationId: GetFindingsReportStatus
@@ -1679,6 +2023,69 @@ paths:
                   pattern: '^\d{12}$'
                   minLength: 12
                   maxLength: 12
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /sbomexport/get:
+    post:
+      operationId: GetSbomExport
+      description: Gets details of a software bill of materials (SBOM) report.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSbomExportResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reportId
+              properties:
+                reportId:
+                  description: The report ID of the SBOM export to get details for.
+                  type: string
+                  pattern: '\b[a-f0-9]{8}\b-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-\b[a-f0-9]{12}\b'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2364,6 +2771,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: Details of the Amazon Web Services account IDs used to filter findings.
+                    codeVulnerabilityDetectorName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of the detector used to identify a code vulnerability in a Lambda function used to filter findings.
+                    codeVulnerabilityDetectorTags:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: 'The detector type tag associated with the vulnerability used to filter findings. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see <a href="https://docs.aws.amazon.com/codeguru/detector-library/java/tags/">Java tags</a>, or <a href="https://docs.aws.amazon.com/codeguru/detector-library/python/tags/">Python tags</a>. '
+                    codeVulnerabilityFilePath:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The file path to the file in a Lambda function that contains a code vulnerability used to filter findings.
                     componentId:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -2408,6 +2827,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: The tags attached to the Amazon ECR container image.
+                    epssScore:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: The EPSS score used to filter findings.
                     exploitAvailable:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -2812,6 +3235,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /encryptionkey/reset:
+    put:
+      operationId: ResetEncryptionKey
+      description: Resets an encryption key. After the key is reset your resources will be encrypted by an Amazon Web Services owned key.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetEncryptionKeyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - resourceType
+                - scanType
+              properties:
+                resourceType:
+                  description: The resource type the key encrypts.
+                  type: string
+                  enum:
+                    - AWS_EC2_INSTANCE
+                    - AWS_ECR_CONTAINER_IMAGE
+                    - AWS_ECR_REPOSITORY
+                    - AWS_LAMBDA_FUNCTION
+                scanType:
+                  description: The scan type the key encrypts.
+                  type: string
+                  enum:
+                    - NETWORK
+                    - PACKAGE
+                    - CODE
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /vulnerabilities/search:
     post:
       operationId: SearchVulnerabilities
@@ -3068,6 +3566,86 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /encryptionkey/update:
+    put:
+      operationId: UpdateEncryptionKey
+      description: Updates an encryption key. A <code>ResourceNotFoundException</code> means that an AWS owned key is being used for encryption.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateEncryptionKeyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - kmsKeyId
+                - resourceType
+                - scanType
+              properties:
+                kmsKeyId:
+                  description: A KMS key ID for the encryption key.
+                  type: string
+                  pattern: '^arn:aws(-(us-gov|cn))?:kms:([a-z0-9][-.a-z0-9]{0,62})?:[0-9]{12}?:key/(([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(mrk-[0-9a-zA-Z]{32}))$'
+                resourceType:
+                  description: The resource type for the encryption key.
+                  type: string
+                  enum:
+                    - AWS_EC2_INSTANCE
+                    - AWS_ECR_CONTAINER_IMAGE
+                    - AWS_ECR_REPOSITORY
+                    - AWS_LAMBDA_FUNCTION
+                scanType:
+                  description: The scan type for the encryption key.
+                  type: string
+                  enum:
+                    - NETWORK
+                    - PACKAGE
+                    - CODE
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /filters/update:
     post:
       operationId: UpdateFilter
@@ -3143,6 +3721,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: Details of the Amazon Web Services account IDs used to filter findings.
+                    codeVulnerabilityDetectorName:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The name of the detector used to identify a code vulnerability in a Lambda function used to filter findings.
+                    codeVulnerabilityDetectorTags:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: 'The detector type tag associated with the vulnerability used to filter findings. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see <a href="https://docs.aws.amazon.com/codeguru/detector-library/java/tags/">Java tags</a>, or <a href="https://docs.aws.amazon.com/codeguru/detector-library/python/tags/">Python tags</a>. '
+                    codeVulnerabilityFilePath:
+                      allOf:
+                        - $ref: '#/components/schemas/StringFilterList'
+                        - description: The file path to the file in a Lambda function that contains a code vulnerability used to filter findings.
                     componentId:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3187,6 +3777,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
                         - description: The tags attached to the Amazon ECR container image.
+                    epssScore:
+                      allOf:
+                        - $ref: '#/components/schemas/NumberFilterList'
+                        - description: The EPSS score used to filter findings.
                     exploitAvailable:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
@@ -3430,6 +4024,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/Boolean'
                         - description: 'Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization. '
+                    lambdaCode:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Represents whether AWS Lambda code scans are automatically enabled for new members of your Amazon Inspector organization. <pre><code> &lt;/p&gt; </code></pre>
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3522,6 +4120,22 @@ components:
       minLength: 12
       maxLength: 12
     ResourceNotFoundException: {}
+    BatchGetCodeSnippetResponse:
+      type: object
+      properties:
+        codeSnippetResults:
+          allOf:
+            - $ref: '#/components/schemas/CodeSnippetResultList'
+            - description: The retrieved code snippets associated with the provided finding ARNs.
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/CodeSnippetErrorList'
+            - description: Any errors Amazon Inspector encountered while trying to retrieve the requested code snippets.
+    FindingArn:
+      type: string
+      pattern: '^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:finding/[a-f0-9]{32}$'
+      minLength: 1
+      maxLength: 100
     BatchGetFreeTrialInfoResponse:
       type: object
       required:
@@ -3585,6 +4199,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReportId'
             - description: The ID of the canceled report.
+    CancelSbomExportResponse:
+      type: object
+      properties:
+        reportId:
+          allOf:
+            - $ref: '#/components/schemas/ReportId'
+            - description: The report ID of the canceled SBOM export.
     CreateFilterResponse:
       type: object
       required:
@@ -3645,6 +4266,25 @@ components:
             - description: The ID of the report.
     String:
       type: string
+    CreateSbomExportResponse:
+      type: object
+      properties:
+        reportId:
+          allOf:
+            - $ref: '#/components/schemas/ReportId'
+            - description: The report ID for the software bill of materials (SBOM) report.
+    ResourceStringFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceStringFilter'
+      minItems: 1
+      maxItems: 10
+    ResourceMapFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceMapFilter'
+      minItems: 1
+      maxItems: 10
     DeleteFilterResponse:
       type: object
       required:
@@ -3684,6 +4324,7 @@ components:
         - EC2
         - ECR
         - LAMBDA
+        - LAMBDA_CODE
     DisableDelegatedAdminAccountResponse:
       type: object
       required:
@@ -3758,6 +4399,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/Ec2DeepInspectionStatus'
             - description: The activation status of Amazon Inspector deep inspection in your account.
+    GetEncryptionKeyResponse:
+      type: object
+      required:
+        - kmsKeyId
+      properties:
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: A kms key ID.
     GetFindingsReportStatusResponse:
       type: object
       properties:
@@ -3792,6 +4442,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/Member'
             - description: Details of the retrieved member account.
+    GetSbomExportResponse:
+      type: object
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/ReportingErrorCode'
+            - description: An error code.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: An error message.
+        filterCriteria:
+          allOf:
+            - $ref: '#/components/schemas/ResourceFilterCriteria'
+            - description: Contains details about the resource filter criteria used for the software bill of materials (SBOM) report.
+        format:
+          allOf:
+            - $ref: '#/components/schemas/SbomReportFormat'
+            - description: The format of the software bill of materials (SBOM) report.
+        reportId:
+          allOf:
+            - $ref: '#/components/schemas/ReportId'
+            - description: The report ID of the software bill of materials (SBOM) report.
+        s3Destination:
+          $ref: '#/components/schemas/Destination'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/ExternalReportStatus'
+            - description: The status of the software bill of materials (SBOM) report.
     ListAccountPermissionsResponse:
       type: object
       required:
@@ -4138,6 +4817,10 @@ components:
     TitleAggregation:
       type: object
       properties:
+        findingType:
+          allOf:
+            - $ref: '#/components/schemas/AggregationFindingType'
+            - description: The type of finding to aggregate on.
         resourceType:
           allOf:
             - $ref: '#/components/schemas/AggregationResourceType'
@@ -4189,6 +4872,7 @@ components:
         - VULNERABILITY_SOURCE
         - INSPECTOR_SCORE
         - VENDOR_SEVERITY
+        - EPSS_SCORE
     SortOrder:
       type: string
       enum:
@@ -4226,6 +4910,9 @@ components:
     UsageAccountId:
       type: string
       pattern: '[0-9]{12}'
+    ResetEncryptionKeyResponse:
+      type: object
+      properties: {}
     SearchVulnerabilitiesResponse:
       type: object
       required:
@@ -4289,6 +4976,9 @@ components:
       pattern: '^(?:/(?:\.[-\w]+|[-\w]+(?:\.[-\w]+)?))+/?$'
       minLength: 1
       maxLength: 512
+    UpdateEncryptionKeyResponse:
+      type: object
+      properties: {}
     UpdateFilterResponse:
       type: object
       required:
@@ -4330,6 +5020,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Status'
             - description: The status of Amazon Inspector scanning for AWS Lambda function.
+        lambdaCode:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: 'The status of Amazon Inspector scanning for custom application code for Amazon Web Services Lambda functions. '
       description: Details the status of Amazon Inspector for each resource type Amazon Inspector scans.
     Status:
       type: string
@@ -4365,6 +5059,7 @@ components:
       enum:
         - NETWORK_REACHABILITY
         - PACKAGE_VULNERABILITY
+        - CODE_VULNERABILITY
     AggregationResourceType:
       type: string
       enum:
@@ -4434,6 +5129,8 @@ components:
             - $ref: '#/components/schemas/State'
             - description: An object detailing the state of Amazon Inspector scanning for Amazon ECR resources.
         lambda:
+          $ref: '#/components/schemas/State'
+        lambdaCode:
           $ref: '#/components/schemas/State'
       description: Details the state of Amazon Inspector for each resource type Amazon Inspector scans.
     State:
@@ -4941,6 +5638,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization. '
+        lambdaCode:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Represents whether AWS Lambda code scans are automatically enabled for new members of your Amazon Inspector organization. <pre><code> &lt;/p&gt; </code></pre>
       description: Represents which scan types are automatically enabled for new members of your Amazon Inspector organization.
     NonEmptyString:
       type: string
@@ -5099,6 +5800,8 @@ components:
         - UNSUPPORTED
         - NODEJS_18_X
         - GO_1_X
+        - JAVA_17
+        - PYTHON_3_10
     Version:
       type: string
       pattern: '^\$LATEST|[0-9]+$'
@@ -5182,6 +5885,30 @@ components:
         $ref: '#/components/schemas/FailedAccount'
       minItems: 0
       maxItems: 100
+    BatchGetCodeSnippetRequestFindingArnsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingArn'
+      minItems: 1
+      maxItems: 10
+    BatchGetCodeSnippetRequest:
+      type: object
+      required:
+        - findingArns
+      title: BatchGetCodeSnippetRequest
+      properties:
+        findingArns:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetCodeSnippetRequestFindingArnsList'
+            - description: An array of finding ARNs for the findings you want to retrieve code snippets from.
+    CodeSnippetResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodeSnippetResult'
+    CodeSnippetErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodeSnippetError'
     BatchGetFreeTrialInfoRequestAccountIdsList:
       type: array
       items:
@@ -5255,6 +5982,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReportId'
             - description: The ID of the report to be canceled.
+    CancelSbomExportRequest:
+      type: object
+      required:
+        - reportId
+      title: CancelSbomExportRequest
+      properties:
+        reportId:
+          allOf:
+            - $ref: '#/components/schemas/ReportId'
+            - description: The report ID of the SBOM export to cancel.
     CisaAction:
       type: string
       minLength: 0
@@ -5284,6 +6021,177 @@ components:
       type: string
       minLength: 1
       maxLength: 64
+    Integer:
+      type: integer
+    CodeFilePath:
+      type: object
+      required:
+        - endLine
+        - fileName
+        - filePath
+        - startLine
+      properties:
+        endLine:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The line number of the last line of code that a vulnerability was found in.
+        fileName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the file the code vulnerability was found in.
+        filePath:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The file path to the code that a vulnerability was found in.
+        startLine:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The line number of the first line of code that a vulnerability was found in.
+      description: Contains information on where a code vulnerability is located in your Lambda function.
+    CodeLineContentString:
+      type: string
+      minLength: 0
+      maxLength: 240
+    CodeLine:
+      type: object
+      required:
+        - content
+        - lineNumber
+      properties:
+        content:
+          allOf:
+            - $ref: '#/components/schemas/CodeLineContentString'
+            - description: The content of a line of code
+        lineNumber:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The line number that a section of code is located at.
+      description: Contains information on the lines of code associated with a code snippet.
+    CodeLineList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodeLine'
+      minItems: 1
+      maxItems: 20
+    CodeSnippetErrorCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - ACCESS_DENIED
+        - CODE_SNIPPET_NOT_FOUND
+        - INVALID_INPUT
+    CodeSnippetError:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+        - findingArn
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/CodeSnippetErrorCode'
+            - description: The error code for the error that prevented a code snippet from being retrieved.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The error message received when Amazon Inspector failed to retrieve a code snippet.
+        findingArn:
+          allOf:
+            - $ref: '#/components/schemas/FindingArn'
+            - description: The ARN of the finding that a code snippet couldn't be retrieved for.
+      description: Contains information about any errors encountered while trying to retrieve a code snippet.
+    SuggestedFixes:
+      type: array
+      items:
+        $ref: '#/components/schemas/SuggestedFix'
+      minItems: 1
+      maxItems: 5
+    CodeSnippetResult:
+      type: object
+      properties:
+        codeSnippet:
+          allOf:
+            - $ref: '#/components/schemas/CodeLineList'
+            - description: Contains information on the retrieved code snippet.
+        endLine:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The line number of the last line of a code snippet.
+        findingArn:
+          allOf:
+            - $ref: '#/components/schemas/FindingArn'
+            - description: The ARN of a finding that the code snippet is associated with.
+        startLine:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The line number of the first line of a code snippet.
+        suggestedFixes:
+          allOf:
+            - $ref: '#/components/schemas/SuggestedFixes'
+            - description: Details of a suggested code fix.
+      description: Contains information on a code snippet retrieved by Amazon Inspector from a code vulnerability finding.
+    CweList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 1
+      maxItems: 10
+    DetectorTagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 1
+      maxItems: 10
+    ReferenceUrls:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+      minItems: 1
+      maxItems: 10
+    LambdaLayerArn:
+      type: string
+      pattern: '^arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+$'
+    CodeVulnerabilityDetails:
+      type: object
+      required:
+        - cwes
+        - detectorId
+        - detectorName
+        - filePath
+      properties:
+        cwes:
+          allOf:
+            - $ref: '#/components/schemas/CweList'
+            - description: The Common Weakness Enumeration (CWE) item associated with the detected vulnerability.
+        detectorId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The ID for the Amazon CodeGuru detector associated with the finding. For more information on detectors see <a href="https://docs.aws.amazon.com/codeguru/detector-library">Amazon CodeGuru Detector Library</a>.'
+        detectorName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The name of the detector used to identify the code vulnerability. For more information on detectors see <a href="https://docs.aws.amazon.com/codeguru/detector-library">CodeGuru Detector Library</a>.'
+        detectorTags:
+          allOf:
+            - $ref: '#/components/schemas/DetectorTagList'
+            - description: 'The detector tag associated with the vulnerability. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see <a href="https://docs.aws.amazon.com/codeguru/detector-library/java/tags/">Java tags</a>, or <a href="https://docs.aws.amazon.com/codeguru/detector-library/python/tags/">Python tags</a>. '
+        filePath:
+          allOf:
+            - $ref: '#/components/schemas/CodeFilePath'
+            - description: Contains information on where the code vulnerability is located in your code.
+        referenceUrls:
+          allOf:
+            - $ref: '#/components/schemas/ReferenceUrls'
+            - description: A URL containing supporting documentation about the code vulnerability detected.
+        ruleId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The identifier for a rule that was used to detect the code vulnerability.
+        sourceLambdaLayerArn:
+          allOf:
+            - $ref: '#/components/schemas/LambdaLayerArn'
+            - description: The Amazon Resource Name (ARN) of the Lambda layer that the code vulnerability was detected in.
+      description: Contains information on the code vulnerability identified in your Lambda function.
     Component:
       type: string
     ComponentType:
@@ -5481,6 +6389,7 @@ components:
       enum:
         - NETWORK
         - PACKAGE
+        - CODE
     CoveredResource:
       type: object
       required:
@@ -5538,6 +6447,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
             - description: Details of the Amazon Web Services account IDs used to filter findings.
+        codeVulnerabilityDetectorName:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The name of the detector used to identify a code vulnerability in a Lambda function used to filter findings.
+        codeVulnerabilityDetectorTags:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: 'The detector type tag associated with the vulnerability used to filter findings. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see <a href="https://docs.aws.amazon.com/codeguru/detector-library/java/tags/">Java tags</a>, or <a href="https://docs.aws.amazon.com/codeguru/detector-library/python/tags/">Python tags</a>. '
+        codeVulnerabilityFilePath:
+          allOf:
+            - $ref: '#/components/schemas/StringFilterList'
+            - description: The file path to the file in a Lambda function that contains a code vulnerability used to filter findings.
         componentId:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -5582,6 +6503,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
             - description: The tags attached to the Amazon ECR container image.
+        epssScore:
+          allOf:
+            - $ref: '#/components/schemas/NumberFilterList'
+            - description: The EPSS score used to filter findings.
         exploitAvailable:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
@@ -5774,6 +6699,64 @@ components:
           allOf:
             - $ref: '#/components/schemas/Destination'
             - description: The Amazon S3 export destination for the report.
+    SbomReportFormat:
+      type: string
+      enum:
+        - CYCLONEDX_1_4
+        - SPDX_2_3
+    ResourceFilterCriteria:
+      type: object
+      properties:
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStringFilterList'
+            - description: The account IDs used as resource filter criteria.
+        ec2InstanceTags:
+          allOf:
+            - $ref: '#/components/schemas/ResourceMapFilterList'
+            - description: The EC2 instance tags used as resource filter criteria.
+        ecrImageTags:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStringFilterList'
+            - description: The ECR image tags used as resource filter criteria.
+        ecrRepositoryName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStringFilterList'
+            - description: The ECR repository names used as resource filter criteria.
+        lambdaFunctionName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStringFilterList'
+            - description: The AWS Lambda function name used as resource filter criteria.
+        lambdaFunctionTags:
+          allOf:
+            - $ref: '#/components/schemas/ResourceMapFilterList'
+            - description: The AWS Lambda function tags used as resource filter criteria.
+        resourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStringFilterList'
+            - description: The resource IDs used as resource filter criteria.
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStringFilterList'
+            - description: The resource types used as resource filter criteria.
+      description: The resource filter criteria for a Software bill of materials (SBOM) report.
+    CreateSbomExportRequest:
+      type: object
+      required:
+        - reportFormat
+        - s3Destination
+      title: CreateSbomExportRequest
+      properties:
+        reportFormat:
+          allOf:
+            - $ref: '#/components/schemas/SbomReportFormat'
+            - description: The output format for the software bill of materials (SBOM) report.
+        resourceFilterCriteria:
+          allOf:
+            - $ref: '#/components/schemas/ResourceFilterCriteria'
+            - description: The resource filter criteria for the software bill of materials (SBOM) report.
+        s3Destination:
+          $ref: '#/components/schemas/Destination'
     Currency:
       type: string
       enum:
@@ -6181,6 +7164,19 @@ components:
             - $ref: '#/components/schemas/EpssScore'
             - description: The Exploit Prediction Scoring System (EPSS) score.
       description: Details about the Exploit Prediction Scoring System (EPSS) score.
+    EpssScoreValue:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 1
+    EpssDetails:
+      type: object
+      properties:
+        score:
+          allOf:
+            - $ref: '#/components/schemas/EpssScoreValue'
+            - description: The EPSS score.
+      description: Details about the Exploit Prediction Scoring System (EPSS) score for a finding.
     ErrorCode:
       type: string
       enum:
@@ -6351,11 +7347,6 @@ components:
       type: string
       minLength: 1
       maxLength: 1024
-    FindingArn:
-      type: string
-      pattern: '^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:finding/[a-f0-9]{32}$'
-      minLength: 1
-      maxLength: 100
     FixAvailable:
       type: string
       enum:
@@ -6475,6 +7466,7 @@ components:
       enum:
         - NETWORK_REACHABILITY
         - PACKAGE_VULNERABILITY
+        - CODE_VULNERABILITY
     Finding:
       type: object
       required:
@@ -6493,10 +7485,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountId'
             - description: The Amazon Web Services account ID associated with the finding.
+        codeVulnerabilityDetails:
+          allOf:
+            - $ref: '#/components/schemas/CodeVulnerabilityDetails'
+            - description: Details about the code vulnerability identified in a Lambda function used to filter findings.
         description:
           allOf:
             - $ref: '#/components/schemas/FindingDescription'
             - description: The description of the finding.
+        epss:
+          allOf:
+            - $ref: '#/components/schemas/EpssDetails'
+            - description: The finding's EPSS score.
         exploitAvailable:
           allOf:
             - $ref: '#/components/schemas/ExploitAvailable'
@@ -6608,6 +7608,7 @@ components:
         - EC2
         - ECR
         - LAMBDA
+        - LAMBDA_CODE
     FreeTrialInfo:
       type: object
       required:
@@ -6676,6 +7677,20 @@ components:
         $ref: '#/components/schemas/Path'
       minItems: 0
       maxItems: 5
+    ResourceType:
+      type: string
+      enum:
+        - AWS_EC2_INSTANCE
+        - AWS_ECR_CONTAINER_IMAGE
+        - AWS_ECR_REPOSITORY
+        - AWS_LAMBDA_FUNCTION
+    GetEncryptionKeyRequest:
+      type: object
+      title: GetEncryptionKeyRequest
+      properties: {}
+    KmsKeyArn:
+      type: string
+      pattern: '^arn:aws(-(us-gov|cn))?:kms:([a-z0-9][-.a-z0-9]{0,62})?:[0-9]{12}?:key/(([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(mrk-[0-9a-zA-Z]{32}))$'
     GetFindingsReportStatusRequest:
       type: object
       title: GetFindingsReportStatusRequest
@@ -6723,6 +7738,16 @@ components:
             - $ref: '#/components/schemas/DateTimeTimestamp'
             - description: A timestamp showing when the status of this member was last updated.
       description: Details on a member account in your organization.
+    GetSbomExportRequest:
+      type: object
+      required:
+        - reportId
+      title: GetSbomExportRequest
+      properties:
+        reportId:
+          allOf:
+            - $ref: '#/components/schemas/ReportId'
+            - description: The report ID of the SBOM export to get details for.
     ImageLayerSortBy:
       type: string
       enum:
@@ -6776,9 +7801,6 @@ components:
         - CRITICAL
         - HIGH
         - ALL
-    LambdaLayerArn:
-      type: string
-      pattern: '^arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+$'
     SecurityGroupIdList:
       type: array
       items:
@@ -7289,6 +8311,21 @@ components:
         - HIGH
         - ALL
         - AFFECTED_IMAGES
+    ResetEncryptionKeyRequest:
+      type: object
+      required:
+        - resourceType
+        - scanType
+      title: ResetEncryptionKeyRequest
+      properties:
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The resource type the key encrypts.
+        scanType:
+          allOf:
+            - $ref: '#/components/schemas/ScanType'
+            - description: The scan type the key encrypts.
     ResourceDetails:
       type: object
       properties:
@@ -7305,13 +8342,6 @@ components:
             - $ref: '#/components/schemas/AwsLambdaFunctionDetails'
             - description: A summary of the information about an AWS Lambda function affected by a finding.
       description: Contains details about the resource involved in the finding.
-    ResourceType:
-      type: string
-      enum:
-        - AWS_EC2_INSTANCE
-        - AWS_ECR_CONTAINER_IMAGE
-        - AWS_ECR_REPOSITORY
-        - AWS_LAMBDA_FUNCTION
     Resource:
       type: object
       required:
@@ -7343,6 +8373,53 @@ components:
             - $ref: '#/components/schemas/ResourceType'
             - description: The type of resource.
       description: Details about the resource involved in a finding.
+    ResourceMapComparison:
+      type: string
+      enum:
+        - EQUALS
+    ResourceMapFilter:
+      type: object
+      required:
+        - comparison
+        - key
+      properties:
+        comparison:
+          allOf:
+            - $ref: '#/components/schemas/ResourceMapComparison'
+            - description: The filter's comparison.
+        key:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The filter's key.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The filter's value.
+      description: A resource map filter for a software bill of material report.
+    ResourceStringComparison:
+      type: string
+      enum:
+        - EQUALS
+        - NOT_EQUALS
+    ResourceStringInput:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ResourceStringFilter:
+      type: object
+      required:
+        - comparison
+        - value
+      properties:
+        comparison:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStringComparison'
+            - description: The filter's comparison.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStringInput'
+            - description: The filter's value.
+      description: A resource string filter for a software bill of materials report.
     ScanStatusReason:
       type: string
       enum:
@@ -7441,6 +8518,26 @@ components:
     SubnetId:
       type: string
       pattern: '^subnet-([a-z0-9]{8}|[a-z0-9]{17}|\*)$'
+    SuggestedFixCodeString:
+      type: string
+      minLength: 1
+      maxLength: 2500
+    SuggestedFixDescriptionString:
+      type: string
+      minLength: 1
+      maxLength: 1000
+    SuggestedFix:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/SuggestedFixCodeString'
+            - description: The fix's code.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/SuggestedFixDescriptionString'
+            - description: The fix's description.
+      description: A suggested fix for a vulnerability in your Lambda function code.
     TagKeyList:
       type: array
       items:
@@ -7497,6 +8594,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/PathList'
             - description: The Amazon Inspector deep inspection custom paths you are adding for your account.
+    UpdateEncryptionKeyRequest:
+      type: object
+      required:
+        - kmsKeyId
+        - resourceType
+        - scanType
+      title: UpdateEncryptionKeyRequest
+      properties:
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: A KMS key ID for the encryption key.
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: The resource type for the encryption key.
+        scanType:
+          allOf:
+            - $ref: '#/components/schemas/ScanType'
+            - description: The scan type for the encryption key.
     UpdateFilterRequest:
       type: object
       required:
@@ -7558,6 +8675,7 @@ components:
         - ECR_INITIAL_SCAN
         - ECR_RESCAN
         - LAMBDA_FUNCTION_HOURS
+        - LAMBDA_FUNCTION_CODE_HOURS
     Usage:
       type: object
       properties:
@@ -7643,7 +8761,7 @@ components:
         epss:
           allOf:
             - $ref: '#/components/schemas/Epss'
-            - description: An object that contains the Exploit Prediction Scoring System (EPSS) score.
+            - description: An object that contains the Exploit Prediction Scoring System (EPSS) score for a vulnerability.
         exploitObserved:
           allOf:
             - $ref: '#/components/schemas/ExploitObserved'

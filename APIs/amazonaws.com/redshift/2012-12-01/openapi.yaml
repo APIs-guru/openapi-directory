@@ -999,7 +999,7 @@ paths:
         - name: SnapshotClusterIdentifier
           in: query
           required: false
-          description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+          description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
           schema:
             type: string
             maxLength: 2147483647
@@ -1481,7 +1481,7 @@ paths:
         - name: SourceSnapshotClusterIdentifier
           in: query
           required: false
-          description: '<p>The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier for a valid cluster.</p> </li> </ul>'
+          description: '<p>The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier for a valid cluster.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
@@ -1874,14 +1874,14 @@ paths:
         - name: MasterUsername
           in: query
           required: true
-          description: '<p>The user name associated with the admin user for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon (:) or a slash (/).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
+          description: '<p>The user name associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon (:) or a slash (/).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
         - name: MasterUserPassword
           in: query
           required: true
-          description: '<p>The password associated with the admin user for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
+          description: '<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
@@ -2933,6 +2933,133 @@ paths:
             type: string
             enum:
               - CreateClusterSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=CreateCustomDomainAssociation:
+    get:
+      x-aws-operation-name: CreateCustomDomainAssociation
+      operationId: GET_CreateCustomDomainAssociation
+      description: 'Used to create a custom domain name for a cluster. Properties include the custom domain name, the cluster the custom domain is associated with, and the certificate Amazon Resource Name (ARN).'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateCustomDomainAssociationResult'
+        '480':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: CustomCnameAssociationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomCnameAssociationFault'
+      parameters:
+        - name: CustomDomainName
+          in: query
+          required: true
+          description: The custom domain name for a custom domain association.
+          schema:
+            type: string
+            pattern: '^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$'
+            minLength: 1
+            maxLength: 253
+        - name: CustomDomainCertificateArn
+          in: query
+          required: true
+          description: The certificate Amazon Resource Name (ARN) for the custom domain name association.
+          schema:
+            type: string
+            pattern: 'arn:[\w+=/,.@-]+:acm:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*'
+            minLength: 20
+            maxLength: 2048
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The cluster identifier that the custom domain is associated with.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateCustomDomainAssociation
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateCustomDomainAssociation
+      operationId: POST_CreateCustomDomainAssociation
+      description: 'Used to create a custom domain name for a cluster. Properties include the custom domain name, the cluster the custom domain is associated with, and the certificate Amazon Resource Name (ARN).'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateCustomDomainAssociationResult'
+        '480':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: CustomCnameAssociationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomCnameAssociationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateCustomDomainAssociationMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateCustomDomainAssociation
         - name: Version
           in: query
           required: true
@@ -5176,7 +5303,7 @@ paths:
         - name: SnapshotClusterIdentifier
           in: query
           required: false
-          description: '<p>The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints: Must be the name of valid cluster.</p>'
+          description: '<p>The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints: Must be the name of valid cluster.</p>'
           schema:
             type: string
             maxLength: 2147483647
@@ -5339,6 +5466,107 @@ paths:
             type: string
             enum:
               - DeleteClusterSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DeleteCustomDomainAssociation:
+    get:
+      x-aws-operation-name: DeleteCustomDomainAssociation
+      operationId: GET_DeleteCustomDomainAssociation
+      description: Contains information about deleting a custom domain association for a cluster.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: CustomCnameAssociationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomCnameAssociationFault'
+      parameters:
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The identifier of the cluster to delete a custom domain association for.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteCustomDomainAssociation
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteCustomDomainAssociation
+      operationId: POST_DeleteCustomDomainAssociation
+      description: Contains information about deleting a custom domain association for a cluster.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: CustomCnameAssociationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomCnameAssociationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteCustomDomainAssociationMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteCustomDomainAssociation
         - name: Version
           in: query
           required: true
@@ -7121,7 +7349,7 @@ paths:
         - name: MaxRecords
           in: query
           required: false
-          description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 500.</p>'
+          description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>'
           schema:
             type: integer
         - name: Marker
@@ -7774,6 +8002,139 @@ paths:
             type: string
             enum:
               - DescribeClusters
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=DescribeCustomDomainAssociations:
+    get:
+      x-aws-operation-name: DescribeCustomDomainAssociations
+      operationId: GET_DescribeCustomDomainAssociations
+      description: Contains information for custom domain associations for a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomDomainAssociationsMessage'
+        '480':
+          description: CustomDomainAssociationNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomDomainAssociationNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      parameters:
+        - name: CustomDomainName
+          in: query
+          required: false
+          description: The custom domain name for the custom domain association.
+          schema:
+            type: string
+            pattern: '^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$'
+            minLength: 1
+            maxLength: 253
+        - name: CustomDomainCertificateArn
+          in: query
+          required: false
+          description: The certificate Amazon Resource Name (ARN) for the custom domain association.
+          schema:
+            type: string
+            pattern: 'arn:[\w+=/,.@-]+:acm:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*'
+            minLength: 20
+            maxLength: 2048
+        - name: MaxRecords
+          in: query
+          required: false
+          description: The maximum records setting for the associated custom domain.
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: The marker for the custom domain association.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeCustomDomainAssociations
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeCustomDomainAssociations
+      operationId: POST_DescribeCustomDomainAssociations
+      description: Contains information for custom domain associations for a cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomDomainAssociationsMessage'
+        '480':
+          description: CustomDomainAssociationNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomDomainAssociationNotFoundFault'
+        '481':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeCustomDomainAssociationsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeCustomDomainAssociations
         - name: Version
           in: query
           required: true
@@ -11881,7 +12242,7 @@ paths:
             maxLength: 2147483647
         - name: ClusterIdentifier
           in: query
-          required: true
+          required: false
           description: The unique identifier of the cluster that contains the database for which you are requesting credentials. This parameter is case sensitive.
           schema:
             type: string
@@ -11909,6 +12270,13 @@ paths:
                 - $ref: '#/components/schemas/String'
                 - xml:
                     name: DbGroup
+        - name: CustomDomainName
+          in: query
+          required: false
+          description: The custom domain name for the cluster credentials.
+          schema:
+            type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -12008,7 +12376,7 @@ paths:
             maxLength: 2147483647
         - name: ClusterIdentifier
           in: query
-          required: true
+          required: false
           description: 'The unique identifier of the cluster that contains the database for which you are requesting credentials. '
           schema:
             type: string
@@ -12019,6 +12387,13 @@ paths:
           description: '<p>The number of seconds until the returned temporary password expires.</p> <p>Range: 900-3600. Default: 900.</p>'
           schema:
             type: integer
+        - name: CustomDomainName
+          in: query
+          required: false
+          description: The custom domain name for the IAM message cluster credentials.
+          schema:
+            type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -12826,6 +13201,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidRetentionPeriodFault'
+        '499':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '500':
+          description: CustomCnameAssociationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomCnameAssociationFault'
       parameters:
         - name: ClusterIdentifier
           in: query
@@ -12879,7 +13266,7 @@ paths:
         - name: MasterUserPassword
           in: query
           required: false
-          description: '<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
+          description: '<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
           schema:
             type: string
             maxLength: 2147483647
@@ -13148,6 +13535,18 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidRetentionPeriodFault'
+        '499':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '500':
+          description: CustomCnameAssociationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomCnameAssociationFault'
       requestBody:
         content:
           text/xml:
@@ -14039,6 +14438,133 @@ paths:
             type: string
             enum:
               - ModifyClusterSubnetGroup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+  /#Action=ModifyCustomDomainAssociation:
+    get:
+      x-aws-operation-name: ModifyCustomDomainAssociation
+      operationId: GET_ModifyCustomDomainAssociation
+      description: Contains information for changing a custom domain association.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyCustomDomainAssociationResult'
+        '480':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: CustomCnameAssociationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomCnameAssociationFault'
+      parameters:
+        - name: CustomDomainName
+          in: query
+          required: false
+          description: The custom domain name for a changed custom domain association.
+          schema:
+            type: string
+            pattern: '^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$'
+            minLength: 1
+            maxLength: 253
+        - name: CustomDomainCertificateArn
+          in: query
+          required: false
+          description: The certificate Amazon Resource Name (ARN) for the changed custom domain association.
+          schema:
+            type: string
+            pattern: 'arn:[\w+=/,.@-]+:acm:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*'
+            minLength: 20
+            maxLength: 2048
+        - name: ClusterIdentifier
+          in: query
+          required: true
+          description: The identifier of the cluster to change a custom domain association for.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyCustomDomainAssociation
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2012-12-01'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyCustomDomainAssociation
+      operationId: POST_ModifyCustomDomainAssociation
+      description: Contains information for changing a custom domain association.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyCustomDomainAssociationResult'
+        '480':
+          description: UnsupportedOperationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationFault'
+        '481':
+          description: ClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ClusterNotFoundFault'
+        '482':
+          description: CustomCnameAssociationFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomCnameAssociationFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyCustomDomainAssociationMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyCustomDomainAssociation
         - name: Version
           in: query
           required: true
@@ -16058,7 +16584,7 @@ paths:
         - name: SnapshotClusterIdentifier
           in: query
           required: false
-          description: The name of the cluster the source snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+          description: The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
           schema:
             type: string
             maxLength: 2147483647
@@ -17202,7 +17728,7 @@ paths:
         - name: SnapshotClusterIdentifier
           in: query
           required: false
-          description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+          description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
           schema:
             type: string
             maxLength: 2147483647
@@ -17747,7 +18273,7 @@ components:
         SnapshotClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints: Must be the name of valid cluster.</p>'
+            - description: '<p>The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints: Must be the name of valid cluster.</p>'
       description: <p/>
     BatchDeleteRequestSizeExceededFault: {}
     BatchModifyClusterSnapshotsOutputMessage:
@@ -17915,6 +18441,26 @@ components:
     ClusterSubnetGroupAlreadyExistsFault: {}
     ClusterSubnetGroupQuotaExceededFault: {}
     ClusterSubnetQuotaExceededFault: {}
+    CreateCustomDomainAssociationResult:
+      type: object
+      properties:
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainNameString'
+            - description: The custom domain name for the association result.
+        CustomDomainCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainCertificateArnString'
+            - description: The Amazon Resource Name (ARN) for the certificate associated with the custom domain name.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the cluster that the custom domain is associated with.
+        CustomDomainCertExpiryTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The expiration time for the certificate for the custom domain.
+    CustomCnameAssociationFault: {}
     EndpointAccess:
       type: object
       properties:
@@ -18337,6 +18883,18 @@ components:
             - $ref: '#/components/schemas/ClusterList'
             - description: 'A list of <code>Cluster</code> objects, where each object describes one cluster. '
       description: 'Contains the output from the <a>DescribeClusters</a> action. '
+    CustomDomainAssociationsMessage:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The marker for the custom domain association.
+        Associations:
+          allOf:
+            - $ref: '#/components/schemas/AssociationList'
+            - description: The associations for the custom domain.
+    CustomDomainAssociationNotFoundFault: {}
     DescribeDataSharesResult:
       type: object
       properties:
@@ -18850,6 +19408,25 @@ components:
         ClusterSubnetGroup:
           $ref: '#/components/schemas/ClusterSubnetGroup'
     SubnetAlreadyInUse: {}
+    ModifyCustomDomainAssociationResult:
+      type: object
+      properties:
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainNameString'
+            - description: The custom domain name associated with the result for the changed custom domain association.
+        CustomDomainCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainCertificateArnString'
+            - description: The certificate Amazon Resource Name (ARN) associated with the result for the changed custom domain association.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the cluster associated with the result for the changed custom domain association.
+        CustomDomainCertExpiryTime:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The certificate expiration time associated with the result for the changed custom domain association.
     ModifyEventSubscriptionResult:
       type: object
       properties:
@@ -19107,6 +19684,39 @@ components:
           - $ref: '#/components/schemas/ClusterAssociatedToSchedule'
           - xml:
               name: ClusterAssociatedToSchedule
+    TStamp:
+      type: string
+      format: date-time
+    CertificateAssociationList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/CertificateAssociation'
+          - xml:
+              name: CertificateAssociation
+    Association:
+      type: object
+      properties:
+        CustomDomainCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the certificate associated with the custom domain.
+        CustomDomainCertificateExpiryDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The expiration date for the certificate.
+        CertificateAssociations:
+          allOf:
+            - $ref: '#/components/schemas/CertificateAssociationList'
+            - description: A list of all associated clusters and domain names tied to a specific certificate.
+      description: Contains information about the custom domain name association.
+    AssociationList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/Association'
+          - xml:
+              name: Association
     AttributeNameList:
       type: array
       items:
@@ -19251,7 +19861,7 @@ components:
         SnapshotClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+            - description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
         AccountWithRestoreAccess:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -19513,6 +20123,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The unique identifier for the cluster that you want to cancel a resize operation for.
+    CertificateAssociation:
+      type: object
+      properties:
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The custom domain name for the certificate association.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster identifier for the certificate association.
+      description: A cluster ID and custom domain name tied to a specific certificate. These are typically returned in a list.
     Endpoint:
       type: object
       properties:
@@ -19529,9 +20151,6 @@ components:
             - $ref: '#/components/schemas/VpcEndpointsList'
             - description: Describes a connection endpoint.
       description: Describes a connection endpoint.
-    TStamp:
-      type: string
-      format: date-time
     Integer:
       type: integer
     ClusterSecurityGroupMembershipList:
@@ -20007,6 +20626,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReservedNodeExchangeStatus'
             - description: The status of the reserved-node exchange request. Statuses include in-progress and requested.
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The custom domain name associated with the cluster.
+        CustomDomainCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The certificate Amazon Resource Name (ARN) for the custom domain name.
+        CustomDomainCertificateExpiryDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The expiration date for the certificate associated with the custom domain name.
       description: Describes a cluster.
     SensitiveString:
       type: string
@@ -20271,7 +20902,7 @@ components:
         SourceSnapshotClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier for a valid cluster.</p> </li> </ul>'
+            - description: '<p>The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier for a valid cluster.</p> </li> </ul>'
         TargetSnapshotIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -20338,11 +20969,11 @@ components:
         MasterUsername:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The user name associated with the admin user for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon (:) or a slash (/).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
+            - description: '<p>The user name associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Must not contain a colon (:) or a slash (/).</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
         MasterUserPassword:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The password associated with the admin user for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
+            - description: '<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
         ClusterSecurityGroups:
           allOf:
             - $ref: '#/components/schemas/ClusterSecurityGroupNameList'
@@ -20557,6 +21188,36 @@ components:
             - $ref: '#/components/schemas/TagList'
             - description: A list of tag instances.
       description: <p/>
+    CustomDomainNameString:
+      type: string
+      pattern: '^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+[A-Za-z]{2,6}$'
+      minLength: 1
+      maxLength: 253
+    CustomDomainCertificateArnString:
+      type: string
+      pattern: 'arn:[\w+=/,.@-]+:acm:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=,.@-]+)*'
+      minLength: 20
+      maxLength: 2048
+    CreateCustomDomainAssociationMessage:
+      type: object
+      required:
+        - CustomDomainName
+        - CustomDomainCertificateArn
+        - ClusterIdentifier
+      title: CreateCustomDomainAssociationMessage
+      properties:
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainNameString'
+            - description: The custom domain name for a custom domain association.
+        CustomDomainCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainCertificateArnString'
+            - description: The certificate Amazon Resource Name (ARN) for the custom domain name association.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The cluster identifier that the custom domain is associated with.
     CreateEndpointAccessMessage:
       type: object
       required:
@@ -21164,6 +21825,16 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The name of the cluster subnet group name to be deleted.
       description: <p/>
+    DeleteCustomDomainAssociationMessage:
+      type: object
+      required:
+        - ClusterIdentifier
+      title: DeleteCustomDomainAssociationMessage
+      properties:
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the cluster to delete a custom domain association for.
     DeleteEndpointAccessMessage:
       type: object
       required:
@@ -21421,7 +22092,7 @@ components:
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 500.</p>'
+            - description: '<p>The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified <code>MaxRecords</code> value, a value is returned in a <code>marker</code> field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. </p> <p>Default: <code>100</code> </p> <p>Constraints: minimum 20, maximum 100.</p>'
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -21534,6 +22205,26 @@ components:
             - $ref: '#/components/schemas/TagValueList'
             - description: 'A tag value or values for which you want to return all matching clusters that are associated with the specified tag value or values. For example, suppose that you have clusters that are tagged with values called <code>admin</code> and <code>test</code>. If you specify both of these tag values in the request, Amazon Redshift returns a response with the clusters that have either or both of these tag values associated with them.'
       description: <p/>
+    DescribeCustomDomainAssociationsMessage:
+      type: object
+      title: DescribeCustomDomainAssociationsMessage
+      properties:
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainNameString'
+            - description: The custom domain name for the custom domain association.
+        CustomDomainCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainCertificateArnString'
+            - description: The certificate Amazon Resource Name (ARN) for the custom domain association.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The maximum records setting for the associated custom domain.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The marker for the custom domain association.
     DescribeDataSharesForConsumerMessage:
       type: object
       title: DescribeDataSharesForConsumerMessage
@@ -22453,7 +23144,6 @@ components:
       type: object
       required:
         - DbUser
-        - ClusterIdentifier
       title: GetClusterCredentialsMessage
       properties:
         DbUser:
@@ -22480,11 +23170,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/DbGroupList'
             - description: '<p>A list of the names of existing database groups that the user named in <code>DbUser</code> will join for the current session, in addition to any group memberships for an existing user. If not specified, a new user is added only to PUBLIC.</p> <p>Database group name constraints</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The custom domain name for the cluster credentials.
       description: The request parameters to get cluster credentials.
     GetClusterCredentialsWithIAMMessage:
       type: object
-      required:
-        - ClusterIdentifier
       title: GetClusterCredentialsWithIAMMessage
       properties:
         DbName:
@@ -22499,6 +23191,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
             - description: '<p>The number of seconds until the returned temporary password expires.</p> <p>Range: 900-3600. Default: 900.</p>'
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The custom domain name for the IAM message cluster credentials.
     ReservedNodeExchangeActionType:
       type: string
       enum:
@@ -22756,7 +23452,7 @@ components:
         MasterUserPassword:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
+            - description: '<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33-126) except <code>''</code> (single quote), <code>"</code> (double quote), <code>\</code>, <code>/</code>, or <code>@</code>.</p> </li> </ul>'
         ClusterParameterGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22902,6 +23598,24 @@ components:
             - $ref: '#/components/schemas/SubnetIdentifierList'
             - description: An array of VPC subnet IDs. A maximum of 20 subnets can be modified in a single request.
       description: <p/>
+    ModifyCustomDomainAssociationMessage:
+      type: object
+      required:
+        - ClusterIdentifier
+      title: ModifyCustomDomainAssociationMessage
+      properties:
+        CustomDomainName:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainNameString'
+            - description: The custom domain name for a changed custom domain association.
+        CustomDomainCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/CustomDomainCertificateArnString'
+            - description: The certificate Amazon Resource Name (ARN) for the changed custom domain association.
+        ClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the cluster to change a custom domain association for.
     ModifyEndpointAccessMessage:
       type: object
       required:
@@ -23391,7 +24105,7 @@ components:
         SnapshotClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The name of the cluster the source snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+            - description: The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
         Port:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -23692,7 +24406,7 @@ components:
         SnapshotClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user or role has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
+            - description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
         AccountWithRestoreAccess:
           allOf:
             - $ref: '#/components/schemas/String'

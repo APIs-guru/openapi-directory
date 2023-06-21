@@ -118,7 +118,7 @@ paths:
   /v1/brokers:
     post:
       operationId: CreateBroker
-      description: '<p>Creates a broker. Note: This API is asynchronous.</p> <p>To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy.</p> <ul><li><p>ec2:CreateNetworkInterface</p> <p>This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account.</p></li> <li><p>ec2:CreateNetworkInterfacePermission</p> <p>This permission is required to attach the ENI to the broker instance.</p></li> <li><p>ec2:DeleteNetworkInterface</p></li> <li><p>ec2:DeleteNetworkInterfacePermission</p></li> <li><p>ec2:DetachNetworkInterface</p></li> <li><p>ec2:DescribeInternetGateways</p></li> <li><p>ec2:DescribeNetworkInterfaces</p></li> <li><p>ec2:DescribeNetworkInterfacePermissions</p></li> <li><p>ec2:DescribeRouteTables</p></li> <li><p>ec2:DescribeSecurityGroups</p></li> <li><p>ec2:DescribeSubnets</p></li> <li><p>ec2:DescribeVpcs</p></li></ul> <p>For more information, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user">Create an IAM User and Get Your AWS Credentials</a> and <a href="https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface">Never Modify or Delete the Amazon MQ Elastic Network Interface</a> in the <i>Amazon MQ Developer Guide</i>.</p>'
+      description: '<p>Creates a broker. Note: This API is asynchronous.</p> <p>To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy.</p> <ul><li><p>ec2:CreateNetworkInterface</p> <p>This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account.</p></li> <li><p>ec2:CreateNetworkInterfacePermission</p> <p>This permission is required to attach the ENI to the broker instance.</p></li> <li><p>ec2:DeleteNetworkInterface</p></li> <li><p>ec2:DeleteNetworkInterfacePermission</p></li> <li><p>ec2:DetachNetworkInterface</p></li> <li><p>ec2:DescribeInternetGateways</p></li> <li><p>ec2:DescribeNetworkInterfaces</p></li> <li><p>ec2:DescribeNetworkInterfacePermissions</p></li> <li><p>ec2:DescribeRouteTables</p></li> <li><p>ec2:DescribeSecurityGroups</p></li> <li><p>ec2:DescribeSubnets</p></li> <li><p>ec2:DescribeVpcs</p></li></ul> <p>For more information, see <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user">Create an IAM User and Get Your Amazon Web Services Credentials</a> and <a href="https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface">Never Modify or Delete the Amazon MQ Elastic Network Interface</a> in the <i>Amazon MQ Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -183,10 +183,10 @@ paths:
                   description: 'Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. Set to true by default, if no value is specified.'
                   type: boolean
                 brokerName:
-                  description: 'Required. The broker''s name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
+                  description: '<p>Required. The broker''s name. This value must be unique in your Amazon Web Services account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.</p> <important><p>Do not add personally identifiable information (PII) or other confidential or sensitive information in broker names. Broker names are accessible to other Amazon Web Services services, including CloudWatch Logs. Broker names are not intended to be used for private or sensitive data.</p></important>'
                   type: string
                 configuration:
-                  description: <p>A list of information about the configuration.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
+                  description: A list of information about the configuration.
                   type: object
                   properties:
                     Id:
@@ -202,7 +202,7 @@ paths:
                             name: revision
                           description: The revision number of the configuration.
                 creatorRequestId:
-                  description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
+                  description: <p>The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action.</p> <note><p>We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.</p></note>
                   type: string
                 deploymentMode:
                   description: The broker's deployment mode.
@@ -212,7 +212,7 @@ paths:
                     - ACTIVE_STANDBY_MULTI_AZ
                     - CLUSTER_MULTI_AZ
                 encryptionOptions:
-                  description: <important><p>Does not apply to RabbitMQ brokers.</p></important> <p>Encryption options for the broker.</p>
+                  description: Encryption options for the broker.
                   type: object
                   properties:
                     KmsKeyId:
@@ -220,13 +220,13 @@ paths:
                         - $ref: '#/components/schemas/__string'
                         - xml:
                             name: kmsKeyId
-                          description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+                          description: 'The customer master key (CMK) to use for the A KMS (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
                     UseAwsOwnedKey:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - xml:
                             name: useAwsOwnedKey
-                          description: 'Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.'
+                          description: 'Enables the use of an Amazon Web Services owned CMK using KMS (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.'
                 engineType:
                   description: The type of broker engine. Amazon MQ supports ActiveMQ and RabbitMQ.
                   type: string
@@ -248,7 +248,7 @@ paths:
                         - $ref: '#/components/schemas/__listOf__string'
                         - xml:
                             name: hosts
-                          description: Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+                          description: Specifies the location of the LDAP server such as Directory Service for Microsoft Active Directory. Optional failover server.
                     RoleBase:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -372,7 +372,7 @@ paths:
                     - EBS
                     - EFS
                 subnetIds:
-                  description: '<p>The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet.</p> <important><p>If you specify subnets in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html">shared VPC</a> for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your AWS account.</p></important>'
+                  description: '<p>The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet.</p> <important><p>If you specify subnets in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html">shared VPC</a> for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your Amazon Web Services account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your Amazon Web Services account.</p></important>'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
@@ -382,10 +382,19 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
                 users:
-                  description: '<p>Required. The list of broker users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p> <important><title>Amazon MQ for RabbitMQ</title> <p>When you create an Amazon MQ for RabbitMQ broker, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p></important>'
+                  description: 'The list of broker users (persons or applications) who can access queues and topics. For Amazon MQ for RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.'
                   type: array
                   items:
                     $ref: '#/components/schemas/User'
+                dataReplicationMode:
+                  description: Specifies whether a broker is a part of a data replication pair.
+                  type: string
+                  enum:
+                    - NONE
+                    - CRDR
+                dataReplicationPrimaryBrokerArn:
+                  description: 'The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when dataReplicationMode is set to CRDR.'
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -672,7 +681,7 @@ paths:
   '/v1/brokers/{broker-id}/users/{username}':
     post:
       operationId: CreateUser
-      description: Creates an ActiveMQ user.
+      description: '<p>Creates an ActiveMQ user.</p> <important><p>Do not add personally identifiable information (PII) or other confidential or sensitive information in broker usernames. Broker usernames are accessible to other Amazon Web Services services, including CloudWatch Logs. Broker usernames are not intended to be used for private or sensitive data.</p></important>'
       responses:
         '200':
           description: Success
@@ -743,6 +752,9 @@ paths:
                 password:
                   description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
                   type: string
+                replicationUser:
+                  description: Defines if this user is intended for CRDR replication purposes.
+                  type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -916,6 +928,9 @@ paths:
                 password:
                   description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
                   type: string
+                replicationUser:
+                  description: Defines whether the user is intended for data replication.
+                  type: boolean
   '/v1/brokers/{broker-id}':
     delete:
       operationId: DeleteBroker
@@ -1071,7 +1086,7 @@ paths:
                   description: 'Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.'
                   type: boolean
                 configuration:
-                  description: <p>A list of information about the configuration.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
+                  description: A list of information about the configuration.
                   type: object
                   properties:
                     Id:
@@ -1101,7 +1116,7 @@ paths:
                         - $ref: '#/components/schemas/__listOf__string'
                         - xml:
                             name: hosts
-                          description: Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+                          description: Specifies the location of the LDAP server such as Directory Service for Microsoft Active Directory. Optional failover server.
                     RoleBase:
                       allOf:
                         - $ref: '#/components/schemas/__string'
@@ -1215,6 +1230,12 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
+                dataReplicationMode:
+                  description: Specifies whether a broker is a part of a data replication pair.
+                  type: string
+                  enum:
+                    - NONE
+                    - CRDR
   '/v1/tags/{resource-arn}#tagKeys':
     delete:
       operationId: DeleteTags
@@ -1504,7 +1525,7 @@ paths:
                 - data
               properties:
                 data:
-                  description: Required. The base64-encoded XML configuration.
+                  description: 'Amazon MQ for Active MQ: The base64-encoded XML configuration. Amazon MQ for RabbitMQ: the base64-encoded Cuttlefish configuration.'
                   type: string
                 description:
                   description: The description of the configuration.
@@ -1693,6 +1714,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/v1/brokers/{broker-id}/promote':
+    post:
+      operationId: Promote
+      description: Promotes a data replication replica broker to the primary broker role.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromoteResponse'
+        '480':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '481':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+      parameters:
+        - name: broker-id
+          in: path
+          required: true
+          description: The unique ID that Amazon MQ generates for the broker.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - mode
+              properties:
+                mode:
+                  description: The Promote mode requested.
+                  type: string
+                  enum:
+                    - SWITCHOVER
+                    - FAILOVER
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/brokers/{broker-id}/reboot':
     post:
       operationId: RebootBroker
@@ -1859,8 +1945,14 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: username
-              description: '<p>important><title>Amazon MQ for ActiveMQ</title> <para>For ActiveMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p>/important> <important><title>Amazon MQ for RabbitMQ</title> <p>For RabbitMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores (- . _). This value must not contain a tilde (~) character. Amazon MQ prohibts using guest as a valid usename. This value must be 2-100 characters long.</p></important></para>'
-      description: 'A user associated with the broker. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.'
+              description: '<p>The username of the broker user. The following restrictions apply to broker usernames:</p> <ul><li><p>For Amazon MQ for ActiveMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p></li> <li><p>para>For Amazon MQ for RabbitMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores (- . _). This value must not contain a tilde (~) character. Amazon MQ prohibts using guest as a valid usename. This value must be 2-100 characters long.</p></para></li></ul> <important><p>Do not add personally identifiable information (PII) or other confidential or sensitive information in broker usernames. Broker usernames are accessible to other Amazon Web Services services, including CloudWatch Logs. Broker usernames are not intended to be used for private or sensitive data.</p></important>'
+        ReplicationUser:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: replicationUser
+              description: Defines if this user is intended for CRDR replication purposes.
+      description: 'A user associated with the broker. For Amazon MQ for RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.'
     BadRequestException: {}
     UnauthorizedException: {}
     InternalServerErrorException: {}
@@ -1929,7 +2021,7 @@ components:
             - $ref: '#/components/schemas/__listOfActionRequired'
             - xml:
                 name: actionsRequired
-              description: A list of actions required for a broker.
+              description: Actions required for a broker.
         AuthenticationStrategy:
           allOf:
             - $ref: '#/components/schemas/AuthenticationStrategy'
@@ -1965,7 +2057,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerName
-              description: 'The broker''s name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
+              description: 'The broker''s name. This value must be unique in your Amazon Web Services account account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
         BrokerState:
           allOf:
             - $ref: '#/components/schemas/BrokerState'
@@ -1995,7 +2087,7 @@ components:
             - $ref: '#/components/schemas/EncryptionOptions'
             - xml:
                 name: encryptionOptions
-              description: Encryption options for the broker. Does not apply to RabbitMQ brokers.
+              description: Encryption options for the broker.
         EngineType:
           allOf:
             - $ref: '#/components/schemas/EngineType'
@@ -2098,6 +2190,30 @@ components:
             - xml:
                 name: users
               description: The list of all broker usernames for the specified broker.
+        DataReplicationMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMetadataOutput'
+            - xml:
+                name: dataReplicationMetadata
+              description: The replication details of the data replication-enabled broker. Only returned if dataReplicationMode is set to CRDR.
+        DataReplicationMode:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMode'
+            - xml:
+                name: dataReplicationMode
+              description: Describes whether this broker is a part of a data replication pair.
+        PendingDataReplicationMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMetadataOutput'
+            - xml:
+                name: pendingDataReplicationMetadata
+              description: The pending replication details of the data replication-enabled broker. Only returned if pendingDataReplicationMode is set to CRDR.
+        PendingDataReplicationMode:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMode'
+            - xml:
+                name: pendingDataReplicationMode
+              description: Describes whether this broker will be a part of a data replication pair after reboot.
     DescribeBrokerEngineTypesResponse:
       type: object
       properties:
@@ -2223,7 +2339,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: data
-              description: Required. The base64-encoded XML configuration.
+              description: 'Amazon MQ for ActiveMQ: the base64-encoded XML configuration. Amazon MQ for RabbitMQ: base64-encoded Cuttlefish.'
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2263,6 +2379,12 @@ components:
             - xml:
                 name: username
               description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+        ReplicationUser:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: replicationUser
+              description: Describes whether the user is intended for data replication
     ListBrokersResponse:
       type: object
       properties:
@@ -2362,6 +2484,15 @@ components:
             - xml:
                 name: users
               description: Required. The list of all ActiveMQ usernames for the specified broker. Does not apply to RabbitMQ brokers.
+    PromoteResponse:
+      type: object
+      properties:
+        BrokerId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: The unique ID that Amazon MQ generates for the broker.
     RebootBrokerResponse:
       type: object
       properties: {}
@@ -2428,6 +2559,30 @@ components:
             - xml:
                 name: securityGroups
               description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+        DataReplicationMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMetadataOutput'
+            - xml:
+                name: dataReplicationMetadata
+              description: The replication details of the data replication-enabled broker. Only returned if dataReplicationMode is set to CRDR.
+        DataReplicationMode:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMode'
+            - xml:
+                name: dataReplicationMode
+              description: Describes whether this broker is a part of a data replication pair.
+        PendingDataReplicationMetadata:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMetadataOutput'
+            - xml:
+                name: pendingDataReplicationMetadata
+              description: The pending replication details of the data replication-enabled broker. Only returned if pendingDataReplicationMode is set to CRDR.
+        PendingDataReplicationMode:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMode'
+            - xml:
+                name: pendingDataReplicationMode
+              description: Describes whether this broker will be a part of a data replication pair after reboot.
     UpdateConfigurationResponse:
       type: object
       properties:
@@ -2436,7 +2591,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: arn
-              description: Required. The Amazon Resource Name (ARN) of the configuration.
+              description: The Amazon Resource Name (ARN) of the configuration.
         Created:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -2448,7 +2603,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: id
-              description: Required. The unique ID that Amazon MQ generates for the configuration.
+              description: The unique ID that Amazon MQ generates for the configuration.
         LatestRevision:
           allOf:
             - $ref: '#/components/schemas/ConfigurationRevision'
@@ -2460,13 +2615,13 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: name
-              description: 'Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
+              description: 'The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.'
         Warnings:
           allOf:
             - $ref: '#/components/schemas/__listOfSanitizationWarning'
             - xml:
                 name: warnings
-              description: The list of the first 20 warnings about the configuration XML elements or attributes that were sanitized.
+              description: The list of the first 20 warnings about the configuration elements or attributes that were sanitized.
     UpdateUserResponse:
       type: object
       properties: {}
@@ -2478,14 +2633,14 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: actionRequiredCode
-              description: 'The code you can use to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state. You can find instructions by choosing the link for your code from the list of action required codes in <a href="https://docs.aws.amazon.com//latest/developer-guide/troubleshooting-action-required-codes.html">Amazon MQ action required codes</a>. Each code references a topic with detailed information, instructions, and recommendations for how to resolve the issue and prevent future occurrences.'
+              description: The code you can use to find instructions on the action required to resolve your broker issue.
         ActionRequiredInfo:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: actionRequiredInfo
-              description: Information about the action required to resolve your broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state.
-      description: The action required to resolve a broker issue when the broker is in a CRITICAL_ACTION_REQUIRED state.
+              description: Information about the action required to resolve your broker issue.
+      description: Action required for a broker.
     AuthenticationStrategy:
       type: string
       enum:
@@ -2613,6 +2768,7 @@ components:
         - RUNNING
         - REBOOT_IN_PROGRESS
         - CRITICAL_ACTION_REQUIRED
+        - REPLICA
       description: The broker's status.
     __timestampIso8601:
       type: string
@@ -2647,7 +2803,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerName
-              description: 'The broker''s name. This value is unique in your AWS account, 1-50 characters long, and containing only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
+              description: 'The broker''s name. This value is unique in your Amazon Web Services account, 1-50 characters long, and containing only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
         BrokerState:
           allOf:
             - $ref: '#/components/schemas/BrokerState'
@@ -2806,7 +2962,7 @@ components:
             - xml:
                 name: revision
               description: The revision number of the configuration.
-      description: <p>A list of information about the configuration.</p> <important><p>Does not apply to RabbitMQ brokers.</p></important>
+      description: A list of information about the configuration.
     __listOfConfigurationId:
       type: array
       items:
@@ -2843,14 +2999,14 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: kmsKeyId
-              description: 'The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
+              description: 'The customer master key (CMK) to use for the A KMS (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.'
         UseAwsOwnedKey:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: useAwsOwnedKey
-              description: 'Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.'
-      description: <important><p>Does not apply to RabbitMQ brokers.</p></important> <p>Encryption options for the broker.</p>
+              description: 'Enables the use of an Amazon Web Services owned CMK using KMS (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.'
+      description: Encryption options for the broker.
     LdapServerMetadataInput:
       type: object
       required:
@@ -2867,7 +3023,7 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: hosts
-              description: Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+              description: Specifies the location of the LDAP server such as Directory Service for Microsoft Active Directory. Optional failover server.
         RoleBase:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2984,6 +3140,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/User'
+    DataReplicationMode:
+      type: string
+      enum:
+        - NONE
+        - CRDR
+      description: Specifies whether a broker is a part of a data replication pair.
     CreateBrokerRequest:
       type: object
       required:
@@ -3014,7 +3176,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: brokerName
-              description: 'Required. The broker''s name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.'
+              description: '<p>Required. The broker''s name. This value must be unique in your Amazon Web Services account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.</p> <important><p>Do not add personally identifiable information (PII) or other confidential or sensitive information in broker names. Broker names are accessible to other Amazon Web Services services, including CloudWatch Logs. Broker names are not intended to be used for private or sensitive data.</p></important>'
         Configuration:
           allOf:
             - $ref: '#/components/schemas/ConfigurationId'
@@ -3026,7 +3188,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: creatorRequestId
-              description: 'The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn''t require idempotency.'
+              description: <p>The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action.</p> <note><p>We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.</p></note>
         DeploymentMode:
           allOf:
             - $ref: '#/components/schemas/DeploymentMode'
@@ -3038,7 +3200,7 @@ components:
             - $ref: '#/components/schemas/EncryptionOptions'
             - xml:
                 name: encryptionOptions
-              description: Encryption options for the broker. Does not apply to RabbitMQ brokers.
+              description: Encryption options for the broker.
         EngineType:
           allOf:
             - $ref: '#/components/schemas/EngineType'
@@ -3098,7 +3260,7 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: subnetIds
-              description: '<p>The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet.</p> <important><p>If you specify subnets in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html">shared VPC</a> for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your AWS account.</p></important>'
+              description: '<p>The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet.</p> <important><p>If you specify subnets in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html">shared VPC</a> for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your Amazon Web Services account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your Amazon Web Services account.</p></important>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -3110,7 +3272,19 @@ components:
             - $ref: '#/components/schemas/__listOfUser'
             - xml:
                 name: users
-              description: '<p>Required. The list of broker users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.</p> <important><title>Amazon MQ for RabbitMQ</title> <p>When you create an Amazon MQ for RabbitMQ broker, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.</p></important>'
+              description: 'The list of broker users (persons or applications) who can access queues and topics. For Amazon MQ for RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.'
+        DataReplicationMode:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMode'
+            - xml:
+                name: dataReplicationMode
+              description: Defines whether this broker is a part of a data replication pair.
+        DataReplicationPrimaryBrokerArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: dataReplicationPrimaryBrokerArn
+              description: 'The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when dataReplicationMode is set to CRDR.'
       description: Creates a broker using the specified properties.
     CreateConfigurationRequest:
       type: object
@@ -3186,7 +3360,50 @@ components:
             - xml:
                 name: password
               description: 'Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
+        ReplicationUser:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: replicationUser
+              description: Defines if this user is intended for CRDR replication purposes.
       description: Creates a new ActiveMQ user.
+    DataReplicationCounterpart:
+      type: object
+      required:
+        - BrokerId
+        - Region
+      properties:
+        BrokerId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: brokerId
+              description: Required. The unique broker id generated by Amazon MQ.
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: region
+              description: Required. The region of the broker.
+      description: Specifies a broker in a data replication pair.
+    DataReplicationMetadataOutput:
+      type: object
+      required:
+        - DataReplicationRole
+      properties:
+        DataReplicationCounterpart:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationCounterpart'
+            - xml:
+                name: dataReplicationCounterpart
+              description: Describes the replica/primary broker. Only returned if this broker is currently set as a primary or replica in the broker's dataReplicationRole property.
+        DataReplicationRole:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: dataReplicationRole
+              description: 'Defines the role of this broker in a data replication pair. When a replica broker is promoted to primary, this role is interchanged.'
+      description: The replication details of the data replication-enabled broker. Only returned if dataReplicationMode or pendingDataReplicationMode is set to CRDR.
     DeleteBrokerRequest:
       type: object
       title: DeleteBrokerRequest
@@ -3250,7 +3467,7 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: hosts
-              description: Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
+              description: Specifies the location of the LDAP server such as Directory Service for Microsoft Active Directory. Optional failover server.
         RoleBase:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3449,6 +3666,25 @@ components:
                 name: general
               description: Enables general logging.
       description: The list of information about logs to be enabled for the specified broker.
+    PromoteMode:
+      type: string
+      enum:
+        - SWITCHOVER
+        - FAILOVER
+      description: The Promote mode requested.
+    PromoteRequest:
+      type: object
+      required:
+        - Mode
+      title: PromoteRequest
+      properties:
+        Mode:
+          allOf:
+            - $ref: '#/components/schemas/PromoteMode'
+            - xml:
+                name: mode
+              description: 'The Promote mode requested. Note: Valid values for the parameter are SWITCHOVER, FAILOVER.'
+      description: Promotes a data replication replica broker to the primary broker role.
     RebootBrokerRequest:
       type: object
       title: RebootBrokerRequest
@@ -3459,7 +3695,7 @@ components:
         - DISALLOWED_ELEMENT_REMOVED
         - DISALLOWED_ATTRIBUTE_REMOVED
         - INVALID_ATTRIBUTE_VALUE_REMOVED
-      description: The reason for which the XML elements or attributes were sanitized.
+      description: The reason for which the configuration elements or attributes were sanitized.
     SanitizationWarning:
       type: object
       required:
@@ -3470,20 +3706,20 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: attributeName
-              description: The name of the XML attribute that has been sanitized.
+              description: The name of the configuration attribute that has been sanitized.
         ElementName:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: elementName
-              description: The name of the XML element that has been sanitized.
+              description: The name of the configuration element that has been sanitized.
         Reason:
           allOf:
             - $ref: '#/components/schemas/SanitizationWarningReason'
             - xml:
                 name: reason
-              description: Required. The reason for which the XML elements or attributes were sanitized.
-      description: Returns information about the XML element or attribute that was sanitized in the configuration.
+              description: The reason for which the configuration elements or attributes were sanitized.
+      description: Returns information about the configuration element or attribute that was sanitized in the configuration.
     UpdateBrokerRequest:
       type: object
       title: UpdateBrokerRequest
@@ -3542,6 +3778,12 @@ components:
             - xml:
                 name: securityGroups
               description: 'The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.'
+        DataReplicationMode:
+          allOf:
+            - $ref: '#/components/schemas/DataReplicationMode'
+            - xml:
+                name: dataReplicationMode
+              description: Defines whether this broker is a part of a data replication pair.
       description: Updates the broker using the specified properties.
     UpdateConfigurationRequest:
       type: object
@@ -3554,7 +3796,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: data
-              description: Required. The base64-encoded XML configuration.
+              description: 'Amazon MQ for Active MQ: The base64-encoded XML configuration. Amazon MQ for RabbitMQ: the base64-encoded Cuttlefish configuration.'
         Description:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3588,6 +3830,12 @@ components:
             - xml:
                 name: password
               description: 'The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).'
+        ReplicationUser:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - xml:
+                name: replicationUser
+              description: Defines whether the user is intended for data replication.
       description: Updates the information for an ActiveMQ user.
     UserSummary:
       type: object

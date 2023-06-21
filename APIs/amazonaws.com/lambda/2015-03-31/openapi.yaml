@@ -3977,6 +3977,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotReadyException'
+        '509':
+          description: RecursiveInvocationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecursiveInvocationException'
       parameters:
         - name: FunctionName
           in: path
@@ -4297,6 +4303,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotReadyException'
+        '509':
+          description: RecursiveInvocationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecursiveInvocationException'
       parameters:
         - name: FunctionName
           in: path
@@ -6479,6 +6491,7 @@ components:
     KMSNotFoundException: {}
     InvalidRuntimeException: {}
     ResourceNotReadyException: {}
+    RecursiveInvocationException: {}
     InvokeAsyncResponse:
       type: object
       deprecated: true

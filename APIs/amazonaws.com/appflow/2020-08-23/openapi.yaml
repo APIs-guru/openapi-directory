@@ -1496,6 +1496,105 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /reset-connector-metadata-cache:
+    post:
+      operationId: ResetConnectorMetadataCache
+      description: '<p>Resets metadata about your connector entities that Amazon AppFlow stored in its cache. Use this action when you want Amazon AppFlow to return the latest information about the data that you have in a source application.</p> <p>Amazon AppFlow returns metadata about your entities when you use the ListConnectorEntities or DescribeConnectorEntities actions. Following these actions, Amazon AppFlow caches the metadata to reduce the number of API requests that it must send to the source application. Amazon AppFlow automatically resets the cache once every hour, but you can use this action when you want to get the latest metadata right away.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResetConnectorMetadataCacheResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                connectorProfileName:
+                  description: '<p>The name of the connector profile that you want to reset cached metadata for.</p> <p>You can omit this parameter if you''re resetting the cache for any of the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you''re resetting the cache for any other connector, you must include this parameter in your request.</p>'
+                  type: string
+                  pattern: '[\w/!@#+=.-]+'
+                  maxLength: 256
+                connectorType:
+                  description: '<p>The type of connector to reset cached metadata for.</p> <p>You must include this parameter in your request if you''re resetting the cache for any of the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you''re resetting the cache for any other connector, you can omit this parameter from your request. </p>'
+                  type: string
+                  enum:
+                    - Salesforce
+                    - Singular
+                    - Slack
+                    - Redshift
+                    - S3
+                    - Marketo
+                    - Googleanalytics
+                    - Zendesk
+                    - Servicenow
+                    - Datadog
+                    - Trendmicro
+                    - Snowflake
+                    - Dynatrace
+                    - Infornexus
+                    - Amplitude
+                    - Veeva
+                    - EventBridge
+                    - LookoutMetrics
+                    - Upsolver
+                    - Honeycode
+                    - CustomerProfiles
+                    - SAPOData
+                    - CustomConnector
+                    - Pardot
+                connectorEntityName:
+                  description: '<p>Use this parameter if you want to reset cached metadata about the details for an individual entity.</p> <p>If you don''t include this parameter in your request, Amazon AppFlow only resets cached metadata about entity names, not entity details.</p>'
+                  type: string
+                  pattern: \S+
+                  maxLength: 1024
+                entitiesPath:
+                  description: '<p>Use this parameter only if you’re resetting the cached metadata about a nested entity. Only some connectors support nested entities. A nested entity is one that has another entity as a parent. To use this parameter, specify the name of the parent entity.</p> <p>To look up the parent-child relationship of entities, you can send a ListConnectorEntities request that omits the entitiesPath parameter. Amazon AppFlow will return a list of top-level entities. For each one, it indicates whether the entity has nested entities. Then, in a subsequent ListConnectorEntities request, you can specify a parent entity name for the entitiesPath parameter. Amazon AppFlow will return a list of the child entities for that parent.</p>'
+                  type: string
+                  pattern: '[\s\w/!@#+=,.-]*'
+                  maxLength: 256
+                apiVersion:
+                  description: '<p>The API version that you specified in the connector profile that you’re resetting cached metadata for. You must use this parameter only if the connector supports multiple API versions or if the connector type is CustomConnector.</p> <p>To look up how many versions a connector supports, use the DescribeConnectors action. In the response, find the value that Amazon AppFlow returns for the connectorVersion parameter.</p> <p>To look up the connector type, use the DescribeConnectorProfiles action. In the response, find the value that Amazon AppFlow returns for the connectorType parameter.</p> <p>To look up the API version that you specified in a connector profile, use the DescribeConnectorProfiles action.</p>'
+                  type: string
+                  pattern: \S+
+                  maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /start-flow:
     post:
       operationId: StartFlow
@@ -2711,6 +2810,9 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: Lambda ARN of the connector being registered.
       description: Contains information about the configuration of the lambda which is being registered as the connector.
+    ResetConnectorMetadataCacheResponse:
+      type: object
+      properties: {}
     StartFlowResponse:
       type: object
       properties:
@@ -6398,6 +6500,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: '<p>The <code>clientToken</code> parameter is an idempotency token. It ensures that your <code>RegisterConnector</code> request completes only once. You choose the value to pass. For example, if you don''t receive a response from your request, you can safely retry the request with the same <code>clientToken</code> parameter value.</p> <p>If you omit a <code>clientToken</code> value, the Amazon Web Services SDK that you are using inserts a value for you. This way, the SDK can safely retry requests multiple times after a network error. You must provide your own value for other use cases.</p> <p>If you specify input parameters that differ from your first request, an error occurs. If you use a different value for <code>clientToken</code>, Amazon AppFlow considers it a new call to <code>RegisterConnector</code>. The token is active for 8 hours.</p>'
+    ResetConnectorMetadataCacheRequest:
+      type: object
+      title: ResetConnectorMetadataCacheRequest
+      properties:
+        connectorProfileName:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorProfileName'
+            - description: '<p>The name of the connector profile that you want to reset cached metadata for.</p> <p>You can omit this parameter if you''re resetting the cache for any of the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you''re resetting the cache for any other connector, you must include this parameter in your request.</p>'
+        connectorType:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorType'
+            - description: '<p>The type of connector to reset cached metadata for.</p> <p>You must include this parameter in your request if you''re resetting the cache for any of the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you''re resetting the cache for any other connector, you can omit this parameter from your request. </p>'
+        connectorEntityName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: '<p>Use this parameter if you want to reset cached metadata about the details for an individual entity.</p> <p>If you don''t include this parameter in your request, Amazon AppFlow only resets cached metadata about entity names, not entity details.</p>'
+        entitiesPath:
+          allOf:
+            - $ref: '#/components/schemas/EntitiesPath'
+            - description: '<p>Use this parameter only if you’re resetting the cached metadata about a nested entity. Only some connectors support nested entities. A nested entity is one that has another entity as a parent. To use this parameter, specify the name of the parent entity.</p> <p>To look up the parent-child relationship of entities, you can send a ListConnectorEntities request that omits the entitiesPath parameter. Amazon AppFlow will return a list of top-level entities. For each one, it indicates whether the entity has nested entities. Then, in a subsequent ListConnectorEntities request, you can specify a parent entity name for the entitiesPath parameter. Amazon AppFlow will return a list of the child entities for that parent.</p>'
+        apiVersion:
+          allOf:
+            - $ref: '#/components/schemas/ApiVersion'
+            - description: '<p>The API version that you specified in the connector profile that you’re resetting cached metadata for. You must use this parameter only if the connector supports multiple API versions or if the connector type is CustomConnector.</p> <p>To look up how many versions a connector supports, use the DescribeConnectors action. In the response, find the value that Amazon AppFlow returns for the connectorVersion parameter.</p> <p>To look up the connector type, use the DescribeConnectorProfiles action. In the response, find the value that Amazon AppFlow returns for the connectorType parameter.</p> <p>To look up the API version that you specified in a connector profile, use the DescribeConnectorProfiles action.</p>'
     S3OutputFormatConfig:
       type: object
       properties:

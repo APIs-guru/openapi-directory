@@ -1669,6 +1669,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.ListSupportedInstanceTypes:
+    post:
+      operationId: ListSupportedInstanceTypes
+      description: 'A list of the instance types that Amazon EMR supports. You can filter the list by Amazon Web Services Region and Amazon EMR release. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSupportedInstanceTypesOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSupportedInstanceTypesInput'
+      parameters:
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.ListSupportedInstanceTypes
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ElasticMapReduce.ModifyCluster:
     post:
       operationId: ModifyCluster
@@ -3361,6 +3412,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/Marker'
             - description: The pagination token that indicates the set of results to retrieve.
+    ListSupportedInstanceTypesOutput:
+      type: object
+      properties:
+        SupportedInstanceTypes:
+          allOf:
+            - $ref: '#/components/schemas/SupportedInstanceTypesList'
+            - description: 'The list of instance types that the release specified in <code>ListSupportedInstanceTypesInput$ReleaseLabel</code> supports, filtered by Amazon Web Services Region.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token that marks the next set of results to retrieve.
+    ListSupportedInstanceTypesInput:
+      type: object
+      required:
+        - ReleaseLabel
+      title: ListSupportedInstanceTypesInput
+      properties:
+        ReleaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon EMR release label determines the <a href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-app-versions-6.x.html">versions of open-source application packages</a> that Amazon EMR has installed on the cluster. Release labels are in the format <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release number such as <code>emr-6.10.0</code>. For more information about Amazon EMR releases and their included application versions and features, see the <i> <a href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html">Amazon EMR Release Guide</a> </i>.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token that marks the next set of results to retrieve.
     ModifyClusterOutput:
       type: object
       properties:
@@ -5110,6 +5186,9 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The path to the log file where the step failure root cause was originally recorded.
       description: The details of the step failure. The service attempts to detect the root cause for many common failures.
+    Float:
+      type: number
+      format: float
     ManagedScalingPolicy:
       type: object
       properties:
@@ -5430,7 +5509,7 @@ components:
         AllocationStrategy:
           allOf:
             - $ref: '#/components/schemas/SpotProvisioningAllocationStrategy'
-            - description: '<p>Specifies one of the following strategies to launch Spot Instance fleets: <code>price-capacity-optimized</code>, <code>capacity-optimized</code>, <code>lowest-price</code>, or <code>diversified</code>. For more information on the provisioning strategies, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html">Allocation strategies for Spot Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p> <note> <p>When you launch a Spot Instance fleet with the old console, it automatically launches with the <code>capacity-optimized</code> strategy. You can''t change the allocation strategy from the old console.</p> </note>'
+            - description: ' Specifies the strategy to use in launching Spot Instance fleets. Currently, the only option is capacity-optimized (the default), which launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. '
       description: '<p>The launch specification for Spot Instances in the instance fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR releases 4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation strategy is available in Amazon EMR releases 5.12.1 and later.</p> </note> <note> <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer available to new customers from July 1, 2021. For customers who have previously used the feature, we will continue to support Spot Instances with a defined duration until December 31, 2022. </p> </note>'
     OnDemandProvisioningSpecification:
       type: object
@@ -6318,6 +6397,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/StudioSummary'
+    SupportedInstanceTypesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SupportedInstanceType'
     MetricDimension:
       type: object
       properties:
@@ -6834,6 +6917,54 @@ components:
             - $ref: '#/components/schemas/Date'
             - description: The time when the Amazon EMR Studio was created.
       description: 'Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The details do not include subnets, IAM roles, security groups, or tags associated with the Studio.'
+    SupportedInstanceType:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The <a href="http://aws.amazon.com/ec2/instance-types/">Amazon EC2 instance type</a>, for example <code>m5.xlarge</code>, of the <code>SupportedInstanceType</code>.'
+        MemoryGB:
+          allOf:
+            - $ref: '#/components/schemas/Float'
+            - description: 'The amount of memory that is available to Amazon EMR from the <code>SupportedInstanceType</code>. The kernel and hypervisor software consume some memory, so this value might be lower than the overall memory for the instance type.'
+        StorageGB:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: ' <code>StorageGB</code> represents the storage capacity of the <code>SupportedInstanceType</code>. This value is <code>0</code> for Amazon EBS-only instance types.'
+        VCPU:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of vCPUs available for the <code>SupportedInstanceType</code>.
+        Is64BitsOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the <code>SupportedInstanceType</code> only supports 64-bit architecture.
+        InstanceFamilyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon EC2 family and generation for the <code>SupportedInstanceType</code>.
+        EbsOptimizedAvailable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the <code>SupportedInstanceType</code> supports Amazon EBS optimization.
+        EbsOptimizedByDefault:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the <code>SupportedInstanceType</code> uses Amazon EBS optimization by default.
+        NumberOfDisks:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: Number of disks for the <code>SupportedInstanceType</code>. This value is <code>0</code> for Amazon EBS-only instance types.
+        EbsStorageOnly:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether the <code>SupportedInstanceType</code> only supports Amazon EBS.
+        Architecture:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The CPU architecture, for example <code>X86_64</code> or <code>AARCH64</code>.'
+      description: An instance type that the specified Amazon EMR release supports.
     Tag:
       type: object
       properties:
