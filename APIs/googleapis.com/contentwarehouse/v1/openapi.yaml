@@ -6331,6 +6331,7 @@ components:
               - MICROPHONE_PERMISSIONS
               - GOOGLE_PLAY_UPDATE
               - ADD_GOOGLE_ACCOUNT
+              - ASSISTANT_SPOKEN_NOTIFICATIONS
               - ABOUT_PHONE
               - ACCOUNTS
               - APPLICATION
@@ -33568,7 +33569,7 @@ components:
             - GENUS_SEARCH_SPORTS
             - GENUS_BUSINESSMESSAGING
             - GENUS_AERIAL_VIEW
-            - GENUS_DOCS_VIDEO
+            - GENUS_DOCS_FLIX_RENDER
           type: string
         state:
           description: Indicates the state in Venom for this transcode type.
@@ -34135,7 +34136,7 @@ components:
             - GENUS_SEARCH_SPORTS
             - GENUS_BUSINESSMESSAGING
             - GENUS_AERIAL_VIEW
-            - GENUS_DOCS_VIDEO
+            - GENUS_DOCS_FLIX_RENDER
           type: string
         insertionResponseTimestampUsec:
           description: Time that VideoNotification result was received from Venom.
@@ -70989,6 +70990,9 @@ components:
               - AMPLIFY_FORM_OF_PAYMENT_ABANDONMENT_ELIGIBLE_SESSION_LEVEL
               - SUBSCRIPTION_FREE_TRIAL_OFFER_HIGHLIGHT_SESSION_LEVEL
               - SUBSCRIPTION_INTRO_PRICE_OFFER_HIGHLIGHT_SESSION_LEVEL
+              - SUBSCRIPTION_CANCELLATION_ELIGIBLE_FOR_RENEWAL_REMINDER
+              - SUBSCRIPTION_CANCELLATION_NOT_ELIGIBLE_FOR_RENEWAL_REMINDER
+              - USER_HAS_SET_RENEWAL_REMINDER
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -71272,6 +71276,7 @@ components:
               - BOOKS_LOYALTY_PROMO_BANNER_WEEKLY_PRIZE_USER_LEVEL
               - IS_ELIGIBLE_FOR_DYNAMIC_AUTH_USER_LEVEL
               - GE_LIVEOPS_PSPEND_USER_LEVEL
+              - IS_ELIGIBLE_FOR_RENEWAL_REMINDER_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -71537,7 +71542,7 @@ components:
             - NS_SEARCH_SPORTS
             - NS_BUSINESSMESSAGING
             - NS_AERIAL_VIEW
-            - NS_DOCS_VIDEO
+            - NS_DOCS_FLIX_RENDER
           type: string
       type: object
     VideoAudioStream:

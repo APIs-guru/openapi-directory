@@ -2132,7 +2132,7 @@ components:
           description: "VPC Access connector name. Format: projects/{project}/locations/{location}/connectors/{connector}, where {project} can be project id or number."
           type: string
         egress:
-          description: Traffic VPC egress settings.
+          description: Traffic VPC egress settings. If not provided, it defaults to PRIVATE_RANGES_ONLY.
           enum:
             - VPC_EGRESS_UNSPECIFIED
             - ALL_TRAFFIC

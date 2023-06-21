@@ -1,6 +1,7 @@
 openapi: 3.1.0
 servers:
   - url: https://management-test.adyen.com/v1
+x-hasEquivalentPaths: true
 info:
   contact:
     name: Adyen Developer Experience team
@@ -41,7 +42,6 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: ManagementService
-  x-timestamp: 2023-06-07T20:22:16Z
 tags:
   - name: API key - merchant level
   - name: Account - merchant level
@@ -6197,6 +6197,80 @@ paths:
       x-groupName: Split configuration - merchant level
       x-methodName: updateSplitLogic
       x-sortIndex: 7
+  "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{splitConfigurationRuleId}":
+    delete:
+      description: |-
+        Deletes the split configuration rule specified in the path.
+
+        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API - SplitConfiguration read and write
+      operationId: delete-merchants-merchantId-splitConfigurations-splitConfigurationId-rules-splitConfigurationRuleId
+      parameters:
+        - description: The unique identifier of the merchant account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The unique identifier of the split configuration.
+          in: path
+          name: splitConfigurationId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: splitConfigurationRuleId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SplitConfiguration"
+          description: OK - the request has succeeded.
+        "204":
+          description: No Content - the request has been successfully processed, but there is no additional content.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Delete a split configuration rule
+      tags:
+        - Split configuration - merchant level
+      x-groupName: Split configuration - merchant level
+      x-methodName: deleteSplitConfigurationRule
+      x-sortIndex: 9
   "/merchants/{merchantId}/stores":
     get:
       description: |-

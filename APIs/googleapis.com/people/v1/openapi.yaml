@@ -1556,10 +1556,12 @@ components:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the birthday.
         text:
+          deprecated: true
           description: Prefer to use the `date` field if set. A free-form string representing the user's birthday. This value is not validated.
           type: string
       type: object
     BraggingRights:
+      deprecated: true
       description: "**DEPRECATED**: No data will be returned A person's bragging rights."
       properties:
         metadata:
@@ -1648,6 +1650,7 @@ components:
       description: A Google contact group membership.
       properties:
         contactGroupId:
+          deprecated: true
           description: Output only. The contact group ID for the contact group membership.
           readOnly: true
           type: string
@@ -1936,6 +1939,7 @@ components:
           format: int32
           type: integer
         totalPeople:
+          deprecated: true
           description: "**DEPRECATED** (Please use totalItems) The total number of people in the list without pagination."
           format: int32
           type: integer
@@ -2171,6 +2175,14 @@ components:
             - ALTERNATE_NAME
             - SHORT_NAME
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - true
+            - true
+            - true
+            - false
+            - true
         value:
           description: The nickname.
           type: string
@@ -2248,6 +2260,7 @@ components:
             $ref: "#/components/schemas/Address"
           type: array
         ageRange:
+          deprecated: true
           description: Output only. **DEPRECATED** (Please use `person.ageRanges` instead) The person's age range.
           enum:
             - AGE_RANGE_UNSPECIFIED
@@ -2273,6 +2286,7 @@ components:
             $ref: "#/components/schemas/Birthday"
           type: array
         braggingRights:
+          deprecated: true
           description: "**DEPRECATED**: No data will be returned The person's bragging rights."
           items:
             $ref: "#/components/schemas/BraggingRights"
@@ -2392,18 +2406,21 @@ components:
             $ref: "#/components/schemas/Relation"
           type: array
         relationshipInterests:
+          deprecated: true
           description: "Output only. **DEPRECATED**: No data will be returned The person's relationship interests."
           items:
             $ref: "#/components/schemas/RelationshipInterest"
           readOnly: true
           type: array
         relationshipStatuses:
+          deprecated: true
           description: "Output only. **DEPRECATED**: No data will be returned The person's relationship statuses."
           items:
             $ref: "#/components/schemas/RelationshipStatus"
           readOnly: true
           type: array
         residences:
+          deprecated: true
           description: "**DEPRECATED**: (Please use `person.locations` instead) The person's residences."
           items:
             $ref: "#/components/schemas/Residence"
@@ -2422,6 +2439,7 @@ components:
             $ref: "#/components/schemas/Skill"
           type: array
         taglines:
+          deprecated: true
           description: "Output only. **DEPRECATED**: No data will be returned The person's taglines."
           items:
             $ref: "#/components/schemas/Tagline"
@@ -2452,6 +2470,7 @@ components:
           readOnly: true
           type: array
         objectType:
+          deprecated: true
           description: Output only. **DEPRECATED** (Please use `person.metadata.sources.profileMetadata.objectType` instead) The type of the person object.
           enum:
             - OBJECT_TYPE_UNSPECIFIED
@@ -2475,6 +2494,7 @@ components:
       description: The response for a single person
       properties:
         httpStatusCode:
+          deprecated: true
           description: "**DEPRECATED** (Please use status instead) [HTTP 1.1 status code] (http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html)."
           format: int32
           type: integer
@@ -2560,6 +2580,7 @@ components:
           type: string
       type: object
     RelationshipInterest:
+      deprecated: true
       description: "**DEPRECATED**: No data will be returned A person's relationship interest ."
       properties:
         formattedValue:
@@ -2574,6 +2595,7 @@ components:
           type: string
       type: object
     RelationshipStatus:
+      deprecated: true
       description: "**DEPRECATED**: No data will be returned A person's relationship status."
       properties:
         formattedValue:
@@ -2588,6 +2610,7 @@ components:
           type: string
       type: object
     Residence:
+      deprecated: true
       description: "**DEPRECATED**: Please use `person.locations` instead. A person's past or current residence."
       properties:
         current:
@@ -2708,6 +2731,7 @@ components:
           type: string
       type: object
     Tagline:
+      deprecated: true
       description: "**DEPRECATED**: No data will be returned A brief one-line description of the person."
       properties:
         metadata:

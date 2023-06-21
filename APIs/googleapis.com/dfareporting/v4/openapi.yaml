@@ -72,7 +72,6 @@ tags:
   - name: mobileCarriers
   - name: operatingSystems
   - name: operatingSystemVersions
-  - name: orderDocuments
   - name: orders
   - name: placementGroups
   - name: placements
@@ -453,8 +452,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -519,7 +516,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing account user profile. This method supports patch semantics.
+      description: Updates an existing user role. This method supports patch semantics.
       operationId: dfareporting.accountUserProfiles.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -528,7 +525,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: AccountUserProfile ID.
+        - description: Required. AccountUserProfile ID.
           in: query
           name: id
           required: true
@@ -683,8 +680,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -748,7 +743,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Account ID.
+        - description: Required. Account ID.
           in: query
           name: id
           required: true
@@ -946,8 +941,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Select only ads with this event tag override ID.
           in: query
@@ -1059,7 +1052,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing ad. This method supports patch semantics.
+      description: Updates an existing event tag. This method supports patch semantics.
       operationId: dfareporting.ads.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -1068,7 +1061,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Ad ID.
+        - description: Required. RemarketingList ID.
           in: query
           name: id
           required: true
@@ -1218,8 +1211,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -1283,7 +1274,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: AdvertiserGroup ID.
+        - description: Required. Advertiser Group ID.
           in: query
           name: id
           required: true
@@ -1482,8 +1473,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -1543,7 +1532,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing advertiser landing page. This method supports patch semantics.
+      description: Updates an existing advertiser. This method supports patch semantics.
       operationId: dfareporting.advertiserLandingPages.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -1552,7 +1541,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: LandingPage ID.
+        - description: Required. Landing Page ID.
           in: query
           name: id
           required: true
@@ -1725,8 +1714,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Select only advertisers which use another advertiser's floodlight configuration.
           in: query
@@ -1808,7 +1795,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Advertiser ID.
+        - description: Required. Advertiser ID.
           in: query
           name: id
           required: true
@@ -1917,8 +1904,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -2023,8 +2008,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Allows searching for billing profiles by name. Wildcards (*) are allowed. For example, "profile*2020" will return objects with names like "profile June 2020", "profile April 2020", or simply "profile 2020". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "profile" will match objects with name "my profile", "profile 2021", or simply "profile".
           in: query
@@ -2396,8 +2379,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Select only campaigns that have overridden this event tag ID.
           in: query
@@ -2462,7 +2443,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing campaign. This method supports patch semantics.
+      description: Updates an existing creative. This method supports patch semantics.
       operationId: dfareporting.campaigns.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -2471,7 +2452,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Campaign ID.
+        - description: Required. Campaign ID.
           in: query
           name: id
           required: true
@@ -2575,8 +2556,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -2747,8 +2726,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Select only change logs whose change time is after the specified minChangeTime.The time should be formatted as an RFC3339 date/time string. For example, for 10:54 PM on July 18th, 2015, in the America/New York time zone, the format is "2015-07-18T22:54:00-04:00". In other words, the year, month, day, the letter T, the hour (24-hour clock system), minute, second, and then the time zone offset.
           in: query
@@ -3072,8 +3049,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -3137,7 +3112,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: ContentCategory ID.
+        - description: Required. ContentCategory ID.
           in: query
           name: id
           required: true
@@ -3534,8 +3509,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -3712,8 +3685,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -4052,8 +4023,6 @@ paths:
           in: query
           name: groupNumber
           schema:
-            maximum: 2
-            minimum: 1
             type: integer
         - description: Select only creative groups with these IDs.
           explode: true
@@ -4068,8 +4037,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -4133,7 +4100,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: CreativeGroup ID.
+        - description: Required. Creative Group ID.
           in: query
           name: id
           required: true
@@ -4321,8 +4288,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -4444,7 +4409,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Creative ID.
+        - description: Required. Creative ID.
           in: query
           name: id
           required: true
@@ -4597,8 +4562,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 100
-            minimum: 0
             type: integer
         - description: The value of the nextToken from the previous result page.
           in: query
@@ -4673,8 +4636,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -4912,13 +4873,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
+        - description: Required. Name of this dynamic targeting key. This is a required field. Must be less than 256 characters long and cannot contain commas. All characters are converted to lowercase.
           in: query
           name: name
           required: true
           schema:
             type: string
-        - description: Type of the object of this dynamic targeting key. This is a required field.
+        - description: Required. Type of the object of this dynamic targeting key. This is a required field.
           in: query
           name: objectType
           required: true
@@ -5066,7 +5027,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: EventTag ID.
+        - description: Required. EventTag ID.
           in: query
           name: id
           required: true
@@ -5233,8 +5194,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 10
-            minimum: 0
             type: integer
         - description: The value of the nextToken from the previous result page.
           in: query
@@ -5353,8 +5312,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -5414,7 +5371,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing floodlight activity. This method supports patch semantics.
+      description: Updates an existing event tag. This method supports patch semantics.
       operationId: dfareporting.floodlightActivities.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -5423,7 +5380,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: FloodlightActivity ID.
+        - description: Required. EventTag ID.
           in: query
           name: id
           required: true
@@ -5651,8 +5608,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -5715,7 +5670,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing floodlight activity group. This method supports patch semantics.
+      description: Updates an existing event tag. This method supports patch semantics.
       operationId: dfareporting.floodlightActivityGroups.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -5724,7 +5679,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: FloodlightActivityGroup ID.
+        - description: Required. EventTag ID.
           in: query
           name: id
           required: true
@@ -5897,7 +5852,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing floodlight configuration. This method supports patch semantics.
+      description: Updates an existing event tag. This method supports patch semantics.
       operationId: dfareporting.floodlightConfigurations.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -5906,7 +5861,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: FloodlightConfiguration ID.
+        - description: Required. EventTag ID.
           in: query
           name: id
           required: true
@@ -6122,8 +6077,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -6524,8 +6477,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 800
-            minimum: 0
             type: integer
         - description: Select only placements or placement groups whose start date is on or before the specified maxStartDate. The date should be formatted as "yyyy-MM-dd".
           in: query
@@ -6646,7 +6597,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: PlacementGroup ID.
+        - description: Required. Placement ID.
           in: query
           name: id
           required: true
@@ -6796,8 +6747,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -6861,7 +6810,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: PlacementStrategy ID.
+        - description: Required. PlacementStrategy ID.
           in: query
           name: id
           required: true
@@ -7118,8 +7067,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Select only placements or placement groups whose start date is on or before the specified maxStartDate. The date should be formatted as "yyyy-MM-dd".
           in: query
@@ -7249,7 +7196,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Placement ID.
+        - description: Required. Placement ID.
           in: query
           name: id
           required: true
@@ -7649,8 +7596,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -7782,8 +7727,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Select only inventory items that belong to specified orders.
           explode: true
@@ -7907,163 +7850,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/userprofiles/{profileId}/projects/{projectId}/orderDocuments":
-    get:
-      description: Retrieves a list of order documents, possibly filtered. This method supports paging.
-      operationId: dfareporting.orderDocuments.list
-      parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          schema:
-            type: string
-        - description: Project ID for order documents.
-          in: path
-          name: projectId
-          required: true
-          schema:
-            type: string
-        - description: Select only order documents that have been approved by at least one user.
-          in: query
-          name: approved
-          schema:
-            type: boolean
-        - description: Select only order documents with these IDs.
-          explode: true
-          in: query
-          name: ids
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Maximum number of results to return.
-          in: query
-          name: maxResults
-          schema:
-            maximum: 1000
-            minimum: 0
-            type: integer
-        - description: Select only order documents for specified orders.
-          explode: true
-          in: query
-          name: orderId
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Value of the nextPageToken from the previous result page.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Allows searching for order documents by name or ID. Wildcards (*) are allowed. For example, "orderdocument*2015" will return order documents with names like "orderdocument June 2015", "orderdocument April 2015", or simply "orderdocument 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "orderdocument" will match order documents with name "my orderdocument", "orderdocument 2015", or simply "orderdocument".
-          in: query
-          name: searchString
-          schema:
-            type: string
-        - description: Select only order documents that are associated with these sites.
-          explode: true
-          in: query
-          name: siteId
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Field by which to sort the list.
-          in: query
-          name: sortField
-          schema:
-            enum:
-              - ID
-              - NAME
-            type: string
-        - description: Order of sorted results.
-          in: query
-          name: sortOrder
-          schema:
-            enum:
-              - ASCENDING
-              - DESCENDING
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OrderDocumentsListResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/dfatrafficking
-          Oauth2c:
-            - https://www.googleapis.com/auth/dfatrafficking
-      tags:
-        - orderDocuments
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}":
-    get:
-      description: Gets one order document by ID.
-      operationId: dfareporting.orderDocuments.get
-      parameters:
-        - description: User profile ID associated with this request.
-          in: path
-          name: profileId
-          required: true
-          schema:
-            type: string
-        - description: Project ID for order documents.
-          in: path
-          name: projectId
-          required: true
-          schema:
-            type: string
-        - description: Order document ID.
-          in: path
-          name: id
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OrderDocument"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/dfatrafficking
-          Oauth2c:
-            - https://www.googleapis.com/auth/dfatrafficking
-      tags:
-        - orderDocuments
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   "/userprofiles/{profileId}/projects/{projectId}/orders":
     get:
       description: Retrieves a list of orders, possibly filtered. This method supports paging.
@@ -8094,8 +7880,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -8258,7 +8042,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing remarketing list share. This method supports patch semantics.
+      description: Updates an existing RemarketingListShare. This method supports patch semantics.
       operationId: dfareporting.remarketingListShares.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -8267,7 +8051,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: RemarketingList ID.
+        - description: Required. RemarketingList ID.
           in: query
           name: id
           required: true
@@ -8375,7 +8159,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Select only remarketing lists owned by this advertiser.
+        - description: Required. Select only remarketing lists owned by this advertiser.
           in: query
           name: advertiserId
           required: true
@@ -8395,8 +8179,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "remarketing list*2015" will return objects with names like "remarketing list June 2015", "remarketing list April 2015", or simply "remarketing list 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "remarketing list" will match objects with name "my remarketing list", "remarketing list 2015", or simply "remarketing list".
           in: query
@@ -8451,7 +8233,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates an existing remarketing list. This method supports patch semantics.
+      description: Updates an existing RemarketingList. This method supports patch semantics.
       operationId: dfareporting.remarketingLists.patch
       parameters:
         - description: User profile ID associated with this request.
@@ -8460,7 +8242,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: RemarketingList ID.
+        - description: Required. RemarketingList ID.
           in: query
           name: id
           required: true
@@ -8601,8 +8383,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 10
-            minimum: 0
             type: integer
         - description: The value of the nextToken from the previous result page.
           in: query
@@ -8891,8 +8671,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 10
-            minimum: 0
             type: integer
         - description: The value of the nextToken from the previous result page.
           in: query
@@ -9105,8 +8883,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -9180,7 +8956,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Site ID.
+        - description: Required. Site ID.
           in: query
           name: id
           required: true
@@ -9321,8 +9097,6 @@ paths:
           in: query
           name: height
           schema:
-            maximum: 32767
-            minimum: 0
             type: integer
         - description: Select only IAB standard sizes.
           in: query
@@ -9342,8 +9116,6 @@ paths:
           in: query
           name: width
           schema:
-            maximum: 32767
-            minimum: 0
             type: integer
       responses:
         "200":
@@ -9467,8 +9239,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -9532,7 +9302,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Subaccount ID.
+        - description: Required. Subaccount ID.
           in: query
           name: id
           required: true
@@ -9669,7 +9439,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Select only targetable remarketing lists targetable by these advertisers.
+        - description: Required. Select only targetable remarketing lists targetable by these advertisers.
           in: query
           name: advertiserId
           required: true
@@ -9684,8 +9454,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, "remarketing list*2015" will return objects with names like "remarketing list June 2015", "remarketing list April 2015", or simply "remarketing list 2015". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of "remarketing list" will match objects with name "my remarketing list", "remarketing list 2015", or simply "remarketing list".
           in: query
@@ -9811,8 +9579,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -9876,7 +9642,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: TargetingTemplate ID.
+        - description: Required. RemarketingList ID.
           in: query
           name: id
           required: true
@@ -10200,8 +9966,6 @@ paths:
           in: query
           name: maxResults
           schema:
-            maximum: 1000
-            minimum: 0
             type: integer
         - description: Value of the nextPageToken from the previous result page.
           in: query
@@ -10270,7 +10034,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: UserRole ID.
+        - description: Required. UserRole ID.
           in: query
           name: id
           required: true
@@ -10749,7 +10513,7 @@ components:
             $ref: "#/components/schemas/AccountPermissionGroup"
           type: array
         kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#accountPermissionGroupsListResponse".'
+          description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#accountPermissionGroupGroupsListResponse".'
           type: string
       type: object
     AccountPermissionsListResponse:
@@ -11943,7 +11707,6 @@ components:
           type: string
       type: object
     ContentCategory:
-      description: Organizes placements according to the contents of their associated webpages.
       properties:
         accountId:
           description: Account ID of this content category. This is a read-only field that can be left blank.
@@ -12015,7 +11778,7 @@ components:
           description: The ordinal of the conversion. Use this field to control how conversions of the same user and day are de-duplicated. This is a required field.
           type: string
         quantity:
-          description: The quantity of the conversion.
+          description: The quantity of the conversion. This is a required field.
           format: int64
           type: string
         timestampMicros:
@@ -12031,7 +11794,7 @@ components:
             $ref: "#/components/schemas/UserIdentifier"
           type: array
         value:
-          description: The value of the conversion.
+          description: The value of the conversion. This is a required field.
           format: double
           type: number
       type: object
@@ -12184,7 +11947,7 @@ components:
             $ref: "#/components/schemas/Size"
           type: array
         advertiserId:
-          description: Advertiser ID of this creative. This is a required field. Applicable to all creative types.
+          description: Required. Advertiser ID of this creative. This is a required field. Applicable to all creative types.
           format: int64
           type: string
         allowScriptAccess:
@@ -12397,7 +12160,7 @@ components:
           format: float
           type: number
         name:
-          description: Name of the creative. This is a required field and must be less than 256 characters long. Applicable to all creative types.
+          description: Required. Name of the creative. This must be less than 256 characters long. Applicable to all creative types.
           type: string
         obaIcon:
           $ref: "#/components/schemas/ObaIcon"
@@ -12477,7 +12240,7 @@ components:
           format: int64
           type: string
         type:
-          description: Type of this creative. This is a required field. Applicable to all creative types. *Note:* FLASH_INPAGE, HTML5_BANNER, and IMAGE are only used for existing creatives. New creatives should use DISPLAY as a replacement for these types.
+          description: Required. Type of this creative. Applicable to all creative types. *Note:* FLASH_INPAGE, HTML5_BANNER, and IMAGE are only used for existing creatives. New creatives should use DISPLAY as a replacement for these types.
           enum:
             - IMAGE
             - DISPLAY_REDIRECT
@@ -13545,13 +13308,13 @@ components:
           description: 'Days of the week when the ad will serve. Acceptable values are: - "SUNDAY" - "MONDAY" - "TUESDAY" - "WEDNESDAY" - "THURSDAY" - "FRIDAY" - "SATURDAY" '
           items:
             enum:
+              - SUNDAY
               - MONDAY
               - TUESDAY
               - WEDNESDAY
               - THURSDAY
               - FRIDAY
               - SATURDAY
-              - SUNDAY
             type: string
           type: array
         hoursOfDay:
@@ -14473,10 +14236,9 @@ components:
           description: Whether the exposure-to-conversion report is enabled. This report shows detailed pathway information on up to 10 of the most recent ad exposures seen by a user before converting.
           type: boolean
         firstDayOfWeek:
-          description: Day that will be counted as the first day of the week in reports. This is a required field.
           enum:
-            - MONDAY
             - SUNDAY
+            - MONDAY
           type: string
         id:
           description: ID of this floodlight configuration. This is a read-only, auto-generated field.
@@ -14962,7 +14724,7 @@ components:
     MeasurementPartnerAdvertiserLink:
       properties:
         linkStatus:
-          description: .
+          description: Status of the partner link.
           enum:
             - MEASUREMENT_PARTNER_UNLINKED
             - MEASUREMENT_PARTNER_LINKED
@@ -14981,7 +14743,7 @@ components:
             - DOUBLE_VERIFY
           type: string
         partnerAdvertiserId:
-          description: .
+          description: partner Advertiser Id.
           type: string
       type: object
     MeasurementPartnerCampaignLink:
@@ -15060,7 +14822,7 @@ components:
           description: The kind of resource this is, in this case dfareporting#metric.
           type: string
         name:
-          description: The metric name, e.g. dfa:impressions
+          description: The metric name, e.g. impressions
           type: string
       type: object
     Metro:
@@ -15462,91 +15224,6 @@ components:
           description: ID of the user profile containing the signature that will be embedded into order documents.
           format: int64
           type: string
-      type: object
-    OrderDocument:
-      description: Contains properties of a Planning order document.
-      properties:
-        accountId:
-          description: Account ID of this order document.
-          format: int64
-          type: string
-        advertiserId:
-          description: Advertiser ID of this order document.
-          format: int64
-          type: string
-        amendedOrderDocumentId:
-          description: The amended order document ID of this order document. An order document can be created by optionally amending another order document so that the change history can be preserved.
-          format: int64
-          type: string
-        approvedByUserProfileIds:
-          description: IDs of users who have approved this order document.
-          items:
-            format: int64
-            type: string
-          type: array
-        cancelled:
-          description: Whether this order document is cancelled.
-          type: boolean
-        createdInfo:
-          $ref: "#/components/schemas/LastModifiedInfo"
-          description: Information about the creation of this order document.
-        effectiveDate:
-          format: date
-          type: string
-        id:
-          description: ID of this order document.
-          format: int64
-          type: string
-        kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#orderDocument".'
-          type: string
-        lastSentRecipients:
-          description: List of email addresses that received the last sent document.
-          items:
-            type: string
-          type: array
-        lastSentTime:
-          format: date-time
-          type: string
-        orderId:
-          description: ID of the order from which this order document is created.
-          format: int64
-          type: string
-        projectId:
-          description: Project ID of this order document.
-          format: int64
-          type: string
-        signed:
-          description: Whether this order document has been signed.
-          type: boolean
-        subaccountId:
-          description: Subaccount ID of this order document.
-          format: int64
-          type: string
-        title:
-          description: Title of this order document.
-          type: string
-        type:
-          description: Type of this order document
-          enum:
-            - PLANNING_ORDER_TYPE_INSERTION_ORDER
-            - PLANNING_ORDER_TYPE_CHANGE_ORDER
-          type: string
-      type: object
-    OrderDocumentsListResponse:
-      description: Order document List Response
-      properties:
-        kind:
-          description: 'Identifies what kind of resource this is. Value: the fixed string "dfareporting#orderDocumentsListResponse".'
-          type: string
-        nextPageToken:
-          description: Pagination token to be used for the next list operation.
-          type: string
-        orderDocuments:
-          description: Order document collection
-          items:
-            $ref: "#/components/schemas/OrderDocument"
-          type: array
       type: object
     OrdersListResponse:
       description: Order List Response
@@ -16163,7 +15840,6 @@ components:
           type: array
       type: object
     Pricing:
-      description: Pricing Information
       properties:
         capCostType:
           description: Cap cost type of this inventory item.
@@ -16254,7 +15930,7 @@ components:
           description: Comments for this pricing period.
           type: string
         rateOrCostNanos:
-          description: Rate or cost of this pricing period in nanos (i.e., multipled by 1000000000). Acceptable values are 0 to 1000000000000000000, inclusive.
+          description: Rate or cost of this pricing period in nanos (i.e., multiplied by 1000000000). Acceptable values are 0 to 1000000000000000000, inclusive.
           format: int64
           type: string
         startDate:
@@ -17442,7 +17118,7 @@ components:
           type: string
       type: object
     TargetableRemarketingList:
-      description: Contains properties of a targetable remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource is a read-only view of a remarketing list to be used to faciliate targeting ads to specific lists. Remarketing lists that are owned by your advertisers and those that are shared to your advertisers or account are accessible via this resource. To manage remarketing lists that are owned by your advertisers, use the RemarketingLists resource.
+      description: Contains properties of a targetable remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource is a read-only view of a remarketing list to be used to facilitate targeting ads to specific lists. Remarketing lists that are owned by your advertisers and those that are shared to your advertisers or account are accessible via this resource. To manage remarketing lists that are owned by your advertisers, use the RemarketingLists resource.
       properties:
         accountId:
           description: Account ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.
