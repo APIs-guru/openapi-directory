@@ -374,6 +374,8 @@ paths:
       x-apideck-gotchas:
         - connector: hubspot
           description: Hubspot will only return activities from the last 30 days when using the `filter[updated_since]` parameter, with a maximum of 10.000 records. More info [here](https://legacydocs.hubspot.com/docs/methods/engagements/get-recent-engagements).
+        - connector: salesforce
+          description: If you set the limit below 200, Salesforce will only return a maximum of 2.000 activities. To retrieve more than 2.000 activities, it is recommended to fetch 200 items per page.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -825,6 +827,8 @@ paths:
       x-apideck-gotchas:
         - connector: hubspot
           description: When using a filter or sorting for companies, Hubspot will only return a maximum of 10.000 companies.
+        - connector: salesforce
+          description: If you set the limit below 200, Salesforce will only return a maximum of 2.000 companies. To retrieve more than 2.000 companies, it is recommended to fetch 200 items per page.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1318,6 +1322,8 @@ paths:
       x-apideck-gotchas:
         - connector: hubspot
           description: When using a filter or sorting for contacts, Hubspot will only return a maximum of 10.000 contacts.
+        - connector: salesforce
+          description: If you set the limit below 200, Salesforce will only return a maximum of 2.000 contacts. To retrieve more than 2.000 contacts, it is recommended to fetch 200 items per page.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1784,6 +1790,8 @@ paths:
       x-apideck-gotchas:
         - connector: hubspot
           description: When using a filter or sorting for leads, Hubspot will only return a maximum of 10.000 leads.
+        - connector: salesforce
+          description: If you set the limit below 200, Salesforce will only return a maximum of 2.000 leads. To retrieve more than 2.000 leads, it is recommended to fetch 200 items per page.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2229,6 +2237,9 @@ paths:
       tags:
         - Notes
       x-apideck-api: crm
+      x-apideck-gotchas:
+        - connector: salesforce
+          description: If you set the limit below 200, Salesforce will only return a maximum of 2.000 notes. To retrieve more than 2.000 notes, it is recommended to fetch 200 items per page.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2524,7 +2535,9 @@ paths:
       x-apideck-api: crm
       x-apideck-gotchas:
         - connector: hubspot
-          description: When using a filter or sorting for opportunities, Hubspot will only return a maximum of 10.000 opportunities.
+          description: When using a filter or sorting for opportunities, Hubspot will only return a maximum of 10.000 opportunities and omit the company_id, primary_contact_id, company_id, contact_ids, lead_id and contact_id.
+        - connector: salesforce
+          description: If you set the limit below 200, Salesforce will only return a maximum of 2.000 opportunities. To retrieve more than 2.000 opportunities, it is recommended to fetch 200 items per page.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -3178,6 +3191,8 @@ paths:
       x-apideck-gotchas:
         - connector: hubspot
           description: HubSpot owners are mapped to CRM users in Apideck. HubSpot owners and HubSpot users (people who can log into HubSpot) aren't necessarily the same, as you may have owners created through an integration.
+        - connector: salesforce
+          description: If you set the limit below 200, Salesforce will only return a maximum of 2.000 users. To retrieve more than 2.000 users, it is recommended to fetch 200 items per page.
       x-codeSamples:
         - label: Node
           lang: TypeScript

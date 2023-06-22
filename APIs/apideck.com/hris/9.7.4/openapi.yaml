@@ -1154,6 +1154,7 @@ paths:
                   sub_type: 'full_time'
                 },
                 manager: {
+                  id: '12345',
                   name: 'Elon Musk',
                   first_name: 'Elon',
                   last_name: 'Musk',
@@ -1501,6 +1502,7 @@ paths:
                   sub_type: 'full_time'
                 },
                 manager: {
+                  id: '12345',
                   name: 'Elon Musk',
                   first_name: 'Elon',
                   last_name: 'Musk',
@@ -3976,6 +3978,7 @@ components:
                 readOnly: false
                 title: Rate
                 type: number
+            title: compensation
             type: object
             x-apideck-strict-required:
               - rate
@@ -4192,6 +4195,7 @@ components:
                 type: string
               title:
                 $ref: "#/components/schemas/Title"
+            title: job
             type: object
             x-apideck-weights:
               compensation_rate: medium
@@ -4239,7 +4243,11 @@ components:
             first_name:
               $ref: "#/components/schemas/FirstName"
             id:
-              $ref: "#/components/schemas/Id"
+              description: A unique identifier for an object.
+              example: "12345"
+              readOnly: false
+              title: ID
+              type: string
             last_name:
               $ref: "#/components/schemas/LastName"
             name:
@@ -5592,6 +5600,7 @@ components:
         - month
         - year
         - paycheck
+        - other
       example: year
       title: Payment Unit
       type: string

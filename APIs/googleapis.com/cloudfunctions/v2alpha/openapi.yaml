@@ -827,6 +827,10 @@ components:
         name:
           description: A user-defined name of the function. Function names must be unique globally and match pattern `projects/*/locations/*/functions/*`
           type: string
+        satisfiesPzs:
+          description: Output only. Reserved for future use.
+          readOnly: true
+          type: boolean
         serviceConfig:
           $ref: "#/components/schemas/ServiceConfig"
           description: Describes the Service being deployed. Currently deploys services to Cloud Run (fully managed).

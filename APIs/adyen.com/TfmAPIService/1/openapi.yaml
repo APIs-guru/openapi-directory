@@ -45,7 +45,6 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TfmAPIService
-  x-timestamp: 2023-05-30T15:24:32Z
 tags:
   - name: General
 paths:
@@ -122,6 +121,7 @@ paths:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Assign terminals
       tags:
@@ -194,6 +194,7 @@ paths:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get the account or store of a terminal
       tags:
@@ -270,6 +271,7 @@ paths:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get the stores of an account
       tags:
@@ -342,6 +344,7 @@ paths:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get the details of a terminal
       tags:
@@ -422,6 +425,7 @@ paths:
                 $ref: "#/components/schemas/ServiceError"
           description: Internal Server Error - the server could not process the request.
       security:
+        - BasicAuth: []
         - ApiKeyAuth: []
       summary: Get the list of terminals
       tags:
