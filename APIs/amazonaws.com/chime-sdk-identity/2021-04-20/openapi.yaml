@@ -1316,6 +1316,14 @@ paths:
                   minLength: 0
                   maxLength: 1024
                   format: password
+                Configuration:
+                  description: A structure that contains configuration data.
+                  type: object
+                  properties:
+                    Lex:
+                      allOf:
+                        - $ref: '#/components/schemas/LexConfiguration'
+                        - description: The configuration for an Amazon Lex V2 bot.
   '/app-instance-users/{appInstanceUserArn}':
     delete:
       operationId: DeleteAppInstanceUser
@@ -1590,7 +1598,6 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
-            format: password
         - name: endpointId
           in: path
           required: true
@@ -1600,7 +1607,6 @@ paths:
             pattern: .*
             minLength: 0
             maxLength: 64
-            format: password
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1665,7 +1671,6 @@ paths:
             pattern: .*
             minLength: 0
             maxLength: 1600
-            format: password
         - name: endpointId
           in: path
           required: true
@@ -1675,7 +1680,6 @@ paths:
             pattern: .*
             minLength: 0
             maxLength: 64
-            format: password
     put:
       operationId: UpdateAppInstanceUserEndpoint
       description: Updates the details of an <code>AppInstanceUserEndpoint</code>. You can update the name and <code>AllowMessage</code> values.
@@ -1738,7 +1742,6 @@ paths:
             pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
             minLength: 5
             maxLength: 1600
-            format: password
         - name: endpointId
           in: path
           required: true
@@ -1748,7 +1751,6 @@ paths:
             pattern: .*
             minLength: 0
             maxLength: 64
-            format: password
       requestBody:
         required: true
         content:
@@ -2752,14 +2754,17 @@ components:
     LexConfiguration:
       type: object
       required:
-        - RespondsTo
         - LexBotAliasArn
         - LocaleId
       properties:
         RespondsTo:
           allOf:
             - $ref: '#/components/schemas/RespondsTo'
-            - description: Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.
+            - description: <important> <p> <b>Deprecated</b>. Use <code>InvokedBy</code> instead.</p> </important> <p>Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.</p>
+        InvokedBy:
+          allOf:
+            - $ref: '#/components/schemas/InvokedBy'
+            - description: Specifies the type of message that triggers a bot.
         LexBotAliasArn:
           allOf:
             - $ref: '#/components/schemas/LexBotAliasArn'
@@ -2944,11 +2949,11 @@ components:
       properties:
         AppInstanceUserArn:
           allOf:
-            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the <code>AppInstanceUser</code>.
         EndpointId:
           allOf:
-            - $ref: '#/components/schemas/SensitiveString64'
+            - $ref: '#/components/schemas/String64'
             - description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
     NonEmptySensitiveString1600:
       type: string
@@ -2987,11 +2992,11 @@ components:
       properties:
         AppInstanceUserArn:
           allOf:
-            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the <code>AppInstanceUser</code>.
         EndpointId:
           allOf:
-            - $ref: '#/components/schemas/SensitiveString64'
+            - $ref: '#/components/schemas/String64'
             - description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
     AllowMessages:
       type: string
@@ -3223,18 +3228,11 @@ components:
             - $ref: '#/components/schemas/ExpirationSettings'
             - description: The interval after which an <code>AppInstanceUser</code> is automatically deleted.
       description: The details of an <code>AppInstanceUser</code>.
-    SensitiveChimeArn:
-      type: string
-      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
-      minLength: 5
-      maxLength: 1600
-      format: password
-    SensitiveString64:
+    String64:
       type: string
       pattern: .*
       minLength: 0
       maxLength: 64
-      format: password
     SensitiveString1600:
       type: string
       pattern: .*
@@ -3280,11 +3278,11 @@ components:
       properties:
         AppInstanceUserArn:
           allOf:
-            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the <code>AppInstanceUser</code>.
         EndpointId:
           allOf:
-            - $ref: '#/components/schemas/SensitiveString64'
+            - $ref: '#/components/schemas/String64'
             - description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
         Name:
           allOf:
@@ -3324,11 +3322,11 @@ components:
       properties:
         AppInstanceUserArn:
           allOf:
-            - $ref: '#/components/schemas/SensitiveChimeArn'
+            - $ref: '#/components/schemas/ChimeArn'
             - description: The ARN of the <code>AppInstanceUser</code>.
         EndpointId:
           allOf:
-            - $ref: '#/components/schemas/SensitiveString64'
+            - $ref: '#/components/schemas/String64'
             - description: The unique identifier of the <code>AppInstanceUserEndpoint</code>.
         Name:
           allOf:
@@ -3526,6 +3524,11 @@ components:
       type: object
       title: DescribeAppInstanceRequest
       properties: {}
+    String1600:
+      type: string
+      pattern: .*
+      minLength: 0
+      maxLength: 1600
     DescribeAppInstanceUserEndpointRequest:
       type: object
       title: DescribeAppInstanceUserEndpointRequest
@@ -3548,6 +3551,33 @@ components:
       type: object
       title: GetAppInstanceRetentionSettingsRequest
       properties: {}
+    StandardMessages:
+      type: string
+      enum:
+        - AUTO
+        - ALL
+        - MENTIONS
+        - NONE
+    TargetedMessages:
+      type: string
+      enum:
+        - ALL
+        - NONE
+    InvokedBy:
+      type: object
+      required:
+        - StandardMessages
+        - TargetedMessages
+      properties:
+        StandardMessages:
+          allOf:
+            - $ref: '#/components/schemas/StandardMessages'
+            - description: '<p>Sets standard messages as the bot trigger. For standard messages:</p> <ul> <li> <p> <code>ALL</code>: The bot processes all standard messages.</p> </li> <li> <p> <code>AUTO</code>: The bot responds to ALL messages when the channel has one other non-hidden member, and responds to MENTIONS when the channel has more than one other non-hidden member.</p> </li> <li> <p> <code>MENTIONS</code>: The bot processes all standard messages that have a message attribute with <code>CHIME.mentions</code> and a value of the bot ARN.</p> </li> <li> <p> <code>NONE</code>: The bot processes no standard messages.</p> </li> </ul>'
+        TargetedMessages:
+          allOf:
+            - $ref: '#/components/schemas/TargetedMessages'
+            - description: '<p>Sets targeted messages as the bot trigger. For targeted messages:</p> <ul> <li> <p> <code>ALL</code>: The bot processes all <code>TargetedMessages</code> sent to it. The bot then responds with a targeted message back to the sender. </p> </li> <li> <p> <code>NONE</code>: The bot processes no targeted messages.</p> </li> </ul>'
+      description: Specifies the type of message that triggers a bot.
     LexBotAliasArn:
       type: string
       pattern: 'arn:aws:lex:[a-z]{2}-[a-z]+-\d{1}:\d{12}:bot-alias/[A-Z0-9]{10}/[A-Z0-9]{10}'
@@ -3582,6 +3612,12 @@ components:
       type: object
       title: ListAppInstanceBotsRequest
       properties: {}
+    SensitiveChimeArn:
+      type: string
+      pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
+      minLength: 5
+      maxLength: 1600
+      format: password
     ListAppInstanceUserEndpointsRequest:
       type: object
       title: ListAppInstanceUserEndpointsRequest
@@ -3705,6 +3741,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Metadata'
             - description: The metadata of the <code>AppInstanceBot</code>.
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/Configuration'
+            - description: The configuration for the bot update.
     UpdateAppInstanceRequest:
       type: object
       required:
