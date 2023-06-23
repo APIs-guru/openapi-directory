@@ -2015,7 +2015,7 @@ components:
       description: A single target dataset to which all data will be streamed.
       properties:
         datasetId:
-          description: The dataset ID of the target dataset.
+          description: "The dataset ID of the target dataset. DatasetIds allowed characters: https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets#datasetreference."
           type: string
       type: object
     SourceConfig:

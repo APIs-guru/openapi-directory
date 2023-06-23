@@ -402,6 +402,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/goModules:create":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Directly uploads a Go module. The returned Operation will complete once the Go module is uploaded. Package, Version, and File resources are created based on the uploaded Go module.
+      operationId: artifactregistry.projects.locations.repositories.goModules.upload
+      parameters:
+        - description: The resource name of the repository where the Go module will be uploaded.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/UploadGoModuleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadGoModuleMediaResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/googetArtifacts:create":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1395,6 +1437,26 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
+    GoModule:
+      description: GoModule represents a Go module.
+      properties:
+        createTime:
+          description: Output only. The time when the Go module is created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: The resource name of a Go module.
+          type: string
+        updateTime:
+          description: Output only. The time when the Go module is updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        version:
+          description: The version of the Go module. Must be a valid canonical version as defined in https://go.dev/ref/mod#glos-canonical-version.
+          type: string
+      type: object
     GoogetArtifact:
       description: A detailed representation of a GooGet artifact.
       properties:
@@ -2124,6 +2186,21 @@ components:
           items:
             $ref: "#/components/schemas/AptArtifact"
           type: array
+      type: object
+    UploadGoModuleMediaResponse:
+      description: The response to upload a Go module.
+      properties:
+        operation:
+          $ref: "#/components/schemas/Operation"
+          description: Operation to be returned to the user.
+      type: object
+    UploadGoModuleMetadata:
+      description: The operation metadata for uploading go modules.
+      properties: {}
+      type: object
+    UploadGoModuleRequest:
+      description: The request to upload a Go module.
+      properties: {}
       type: object
     UploadGoogetArtifactMediaResponse:
       description: The response to upload an artifact.

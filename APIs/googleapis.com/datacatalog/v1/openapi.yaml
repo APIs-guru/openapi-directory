@@ -1934,7 +1934,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1SqlDatabaseSystemSpec"
           description: Specification that applies to a relational database system. Only settable when `user_specified_system` is equal to `SQL_DATABASE`
         type:
-          description: The type of the entry. For details, see [`EntryType`](#entrytype).
+          description: The type of the entry. Only used for entries with types listed in the `EntryType` enum. Currently, only `FILESET` enum value is allowed. All other entries created in Data Catalog must use the `user_specified_type`.
           enum:
             - ENTRY_TYPE_UNSPECIFIED
             - TABLE
@@ -2445,10 +2445,10 @@ components:
       description: Request message for SearchCatalog.
       properties:
         orderBy:
-          description: "Specifies the order of results. Currently supported case-sensitive values are: * `relevance` that can only be descending * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default * `default` that can only be descending Search queries don't guarantee full recall. Results that match your query might not be returned, even in subsequent result pages. Additionally, returned (and not returned) results can vary if you repeat search queries. If you are experiencing recall issues and you don't have to fetch the results in any specific order, consider setting this parameter to `default`. If this parameter is omitted, it defaults to the descending `relevance`."
+          description: "Specifies the order of results. Currently supported case-sensitive values are: * `relevance` that can only be descending * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default * `default` that can only be descending If this parameter is omitted, it defaults to the descending `relevance`."
           type: string
         pageSize:
-          description: Upper bound on the number of results you can get in a single response. Can't be negative or 0, defaults to 10 in this case. The maximum number is 1000. If exceeded, throws an "invalid argument" exception.
+          description: Number of results to return in a single search page. Can't be negative or 0, defaults to 10 in this case. The maximum number is 1000. If exceeded, throws an "invalid argument" exception.
           format: int32
           type: integer
         pageToken:

@@ -157,6 +157,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.spaces
           Oauth2c:
             - https://www.googleapis.com/auth/chat.spaces
@@ -274,6 +278,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages
@@ -365,6 +373,10 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/chat.bot
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages
@@ -408,6 +420,10 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/chat.bot
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages
@@ -449,6 +465,10 @@ paths:
                 $ref: "#/components/schemas/UploadAttachmentResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
         - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
@@ -602,6 +622,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
             - https://www.googleapis.com/auth/chat.messages
@@ -674,6 +698,10 @@ paths:
             - https://www.googleapis.com/auth/chat.bot
           Oauth2c:
             - https://www.googleapis.com/auth/chat.bot
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
         - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
@@ -771,6 +799,10 @@ paths:
                 $ref: "#/components/schemas/Reaction"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
         - Oauth2:
             - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
@@ -943,6 +975,14 @@ components:
         userMention:
           $ref: "#/components/schemas/UserMentionMetadata"
           description: The metadata of user mention.
+      type: object
+    AttachedGif:
+      description: A GIF image that's specified by a URL.
+      properties:
+        uri:
+          description: Output only. The URL that hosts the GIF image.
+          readOnly: true
+          type: string
       type: object
     Attachment:
       description: An attachment in Google Chat.
@@ -2153,6 +2193,12 @@ components:
           description: Output only. Plain-text body of the message with all Chat app mentions stripped out.
           readOnly: true
           type: string
+        attachedGifs:
+          description: Output only. GIF images that are attached to the message.
+          items:
+            $ref: "#/components/schemas/AttachedGif"
+          readOnly: true
+          type: array
         attachment:
           description: User-uploaded attachment.
           items:
@@ -2536,6 +2582,7 @@ components:
           scopes:
             https://www.googleapis.com/auth/chat.bot: "Private Service: https://www.googleapis.com/auth/chat.bot"
             https://www.googleapis.com/auth/chat.delete: Delete conversations and spaces & remove access to associated files in Google Chat
+            https://www.googleapis.com/auth/chat.import: Import spaces, messages, and memberships into Google Chat.
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
             https://www.googleapis.com/auth/chat.memberships.app: Add and remove itself from conversations in Google Chat
             https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
@@ -2557,6 +2604,7 @@ components:
           scopes:
             https://www.googleapis.com/auth/chat.bot: "Private Service: https://www.googleapis.com/auth/chat.bot"
             https://www.googleapis.com/auth/chat.delete: Delete conversations and spaces & remove access to associated files in Google Chat
+            https://www.googleapis.com/auth/chat.import: Import spaces, messages, and memberships into Google Chat.
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
             https://www.googleapis.com/auth/chat.memberships.app: Add and remove itself from conversations in Google Chat
             https://www.googleapis.com/auth/chat.memberships.readonly: View members in Google Chat conversations.
