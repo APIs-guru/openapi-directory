@@ -15245,6 +15245,11 @@ paths:
           name: requestId
           schema:
             type: string
+        - description: Indicates fields to be cleared as part of this request.
+          in: query
+          name: updateMask
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -26862,70 +26867,6 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/regions/{region}/instantSnapshots/{instantSnapshot}/export":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Export the changed blocks between two instant snapshots to a customer's bucket in the user specified format.
-      operationId: compute.regionInstantSnapshots.export
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: region
-          required: true
-          schema:
-            type: string
-        - description: Name of the instant snapshot to export.
-          in: path
-          name: instantSnapshot
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/RegionInstantSnapshotsExportRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - regionInstantSnapshots
   "/projects/{project}/regions/{region}/instantSnapshots/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -31307,6 +31248,11 @@ paths:
           name: requestId
           schema:
             type: string
+        - description: Indicates fields to be cleared as part of this request.
+          in: query
+          name: updateMask
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -31498,6 +31444,11 @@ paths:
           name: priority
           schema:
             type: integer
+        - description: Indicates fields to be cleared as part of this request.
+          in: query
+          name: updateMask
+          schema:
+            type: string
         - description: If true, the request will not be committed.
           in: query
           name: validateOnly
@@ -44423,70 +44374,6 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{project}/zones/{zone}/instantSnapshots/{instantSnapshot}/export":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-      - $ref: "#/components/parameters/userIp"
-    post:
-      description: Export the changed blocks between two instant snapshots to a customer's bucket in the user specified format.
-      operationId: compute.instantSnapshots.export
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          schema:
-            type: string
-        - description: Name of the instant snapshot to export.
-          in: path
-          name: instantSnapshot
-          required: true
-          schema:
-            type: string
-        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InstantSnapshotsExportRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/compute
-          Oauth2c:
-            - https://www.googleapis.com/auth/compute
-      tags:
-        - instantSnapshots
   "/projects/{project}/zones/{zone}/instantSnapshots/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -47860,7 +47747,7 @@ components:
           format: uint64
           type: string
         ipVersion:
-          description: The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
+          description: The IP version that will be used by this address. Valid options are IPV4 or IPV6.
           enum:
             - IPV4
             - IPV6
@@ -48423,6 +48310,9 @@ components:
         sourceImageEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
           description: The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key. InstanceTemplate and InstancePropertiesPatch do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
+        sourceInstantSnapshot:
+          description: "The source instant-snapshot to create this disk. When creating a new instance, one of initializeParams.sourceSnapshot or initializeParams.sourceInstantSnapshot initializeParams.sourceImage or disks.source is required except for local SSD. To create a disk with a snapshot that you created, specify the snapshot name in the following format: us-central1-a/instantSnapshots/my-backup If the source instant-snapshot is deleted later, this field will not be set."
+          type: string
         sourceSnapshot:
           description: "The source snapshot to create this disk. When creating a new instance, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required except for local SSD. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global/snapshots/my-backup If the source snapshot is deleted later, this field will not be set."
           type: string
@@ -54894,6 +54784,12 @@ components:
       type: object
     InstanceGroupManagerInstanceLifecyclePolicy:
       properties:
+        defaultActionOnFailure:
+          description: "The action that a MIG performs on a failed or an unhealthy VM. A VM is marked as unhealthy when the application running on that VM fails a health check. Valid values are - REPAIR (default): MIG automatically repairs a failed or an unhealthy VM by recreating it. For more information, see About repairing VMs in a MIG. - DO_NOTHING: MIG does not repair a failed or an unhealthy VM. "
+          enum:
+            - DO_NOTHING
+            - REPAIR
+          type: string
         forceUpdateOnRepair:
           description: "A bit indicating whether to forcefully apply the group's latest configuration when repairing a VM. Valid options are: - NO (default): If configuration updates are available, they are not forcefully applied during repair. Instead, configuration updates are applied according to the group's update policy. - YES: If configuration updates are available, they are applied during repair. "
           enum:
@@ -55052,7 +54948,7 @@ components:
             - RESTART
           type: string
         mostDisruptiveAllowedAction:
-          description: Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to allow actions that do not need instance restart, RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
+          description: Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to avoid restarting the VM and to limit disruption as much as possible. RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
           enum:
             - NONE
             - REFRESH
@@ -55104,7 +55000,7 @@ components:
             type: string
           type: array
         minimalAction:
-          description: "The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update."
+          description: "The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update."
           enum:
             - NONE
             - REFRESH
@@ -55112,7 +55008,7 @@ components:
             - RESTART
           type: string
         mostDisruptiveAllowedAction:
-          description: "The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail."
+          description: "The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail."
           enum:
             - NONE
             - REFRESH
@@ -56485,28 +56381,6 @@ components:
               type: string
           type: object
       type: object
-    InstantSnapshotExportParams:
-      properties:
-        baseInstantSnapshot:
-          description: An optional base instant snapshot that this resource is compared against. If not specified, all blocks of this resource are exported. The base instant snapshot and this resource must be created from the same disk. The base instant snapshot must be created earlier in time than this resource.
-          type: string
-        bucketName:
-          description: The name of an existing bucket in Cloud Storage where the changed blocks will be stored. The Google Service Account must have read and write access to this bucket. The bucket has to be in the same region as this resource.
-          type: string
-        encryptionKey:
-          $ref: "#/components/schemas/CustomerEncryptionKey"
-          description: Encryption key used to encrypt the instant snapshot.
-        objectName:
-          description: Name of the output Bigstore object storing the changed blocks. Object name must be less than 1024 bytes in length.
-          type: string
-        outputType:
-          description: The format of the output file.
-          enum:
-            - INVALID
-            - METADATA_AND_DATA
-            - METADATA_ONLY
-          type: string
-      type: object
     InstantSnapshotList:
       description: Contains a list of InstantSnapshot resources.
       properties:
@@ -56586,12 +56460,6 @@ components:
           description: "[Output Only] The storage size of this instant snapshot."
           format: int64
           type: string
-      type: object
-    InstantSnapshotsExportRequest:
-      properties:
-        exportParams:
-          $ref: "#/components/schemas/InstantSnapshotExportParams"
-          description: Parameters to export the changed blocks.
       type: object
     InstantSnapshotsScopedList:
       properties:
@@ -62288,7 +62156,7 @@ components:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
         dnsVerificationIp:
-          description: The IPv4 address to be used for reverse DNS verification.
+          description: The address to be used for reverse DNS verification.
           type: string
         fingerprint:
           description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a new PublicAdvertisedPrefix. An up-to-date fingerprint must be provided in order to update the PublicAdvertisedPrefix, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a PublicAdvertisedPrefix.
@@ -62299,7 +62167,7 @@ components:
           format: uint64
           type: string
         ipCidrRange:
-          description: The IPv4 address range, in CIDR format, represented by this public advertised prefix.
+          description: The address range, in CIDR format, represented by this public advertised prefix.
           type: string
         kind:
           default: compute#publicAdvertisedPrefix
@@ -63349,7 +63217,7 @@ components:
             type: string
           type: array
         minimalAction:
-          description: "The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update."
+          description: "The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update."
           enum:
             - NONE
             - REFRESH
@@ -63357,7 +63225,7 @@ components:
             - RESTART
           type: string
         mostDisruptiveAllowedAction:
-          description: "The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail."
+          description: "The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail."
           enum:
             - NONE
             - REFRESH
@@ -63608,12 +63476,6 @@ components:
           items:
             $ref: "#/components/schemas/NamedPort"
           type: array
-      type: object
-    RegionInstantSnapshotsExportRequest:
-      properties:
-        exportParams:
-          $ref: "#/components/schemas/InstantSnapshotExportParams"
-          description: Parameters to export the changed blocks.
       type: object
     RegionList:
       description: Contains a list of region resources.
@@ -67191,6 +67053,11 @@ components:
         guestFlush:
           description: "[Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process."
           type: boolean
+        guestOsFeatures:
+          description: "[Output Only] A list of features to enable on the guest operating system. Applicable only for bootable images. Read Enabling guest operating system features to see a list of available options."
+          items:
+            $ref: "#/components/schemas/GuestOsFeature"
+          type: array
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
           format: uint64

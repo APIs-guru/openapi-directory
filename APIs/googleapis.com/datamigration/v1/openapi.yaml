@@ -238,6 +238,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{migrationJob}:generateTcpProxyScript":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generate a TCP Proxy configuration script to configure a cloud-hosted VM running a TCP Proxy.
+      operationId: datamigration.projects.locations.migrationJobs.generateTcpProxyScript
+      parameters:
+        - description: Name of the migration job resource to generate the TCP Proxy script.
+          in: path
+          name: migrationJob
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateTcpProxyScriptRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TcpProxyScript"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{name}":
     delete:
       description: Deletes a single Database Migration Service private connection.
@@ -1868,6 +1910,13 @@ components:
             - POSTGRES_14
             - POSTGRES_15
           type: string
+        edition:
+          description: Optional. The edition of the given Cloud SQL instance.
+          enum:
+            - EDITION_UNSPECIFIED
+            - ENTERPRISE
+            - ENTERPRISE_PLUS
+          type: string
         ipConfig:
           $ref: "#/components/schemas/SqlIpConfig"
           description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled.
@@ -2440,6 +2489,22 @@ components:
         vmSelectionConfig:
           $ref: "#/components/schemas/VmSelectionConfig"
           description: The VM selection configuration
+      type: object
+    GenerateTcpProxyScriptRequest:
+      description: Request message for 'GenerateTcpProxyScript' request.
+      properties:
+        vmMachineType:
+          description: Required. The type of the Compute instance that will host the proxy.
+          type: string
+        vmName:
+          description: Required. The name of the Compute instance that will host the proxy.
+          type: string
+        vmSubnet:
+          description: "Required. The name of the subnet the Compute instance will use for private connectivity. Must be supplied in the form of projects/{project}/regions/{region}/subnetworks/{subnetwork}. Note: the region for the subnet must match the Compute instance region."
+          type: string
+        vmZone:
+          description: Optional. The Google Cloud Platform zone to create the VM in. The fully qualified name of the zone must be specified, including the region name, for example "us-central1-b". If not specified, uses the "-b" zone of the destination Connection Profile's region.
+          type: string
       type: object
     GoogleCloudClouddmsV1OperationMetadata:
       description: Represents the metadata of the long-running operation.
@@ -3357,6 +3422,13 @@ components:
           items:
             $ref: "#/components/schemas/TriggerEntity"
           type: array
+      type: object
+    TcpProxyScript:
+      description: Response message for 'GenerateTcpProxyScript' request.
+      properties:
+        script:
+          description: The TCP Proxy configuration script.
+          type: string
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.

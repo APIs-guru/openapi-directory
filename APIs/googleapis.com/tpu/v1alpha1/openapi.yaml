@@ -808,6 +808,7 @@ components:
           readOnly: true
           type: string
         ipAddress:
+          deprecated: true
           description: Output only. DEPRECATED! Use network_endpoints instead. The network address for the TPU Node as visible to Compute Engine instances.
           type: string
         labels:
@@ -829,6 +830,7 @@ components:
           readOnly: true
           type: array
         port:
+          deprecated: true
           description: Output only. DEPRECATED! Use network_endpoints instead. The network port for the TPU Node as visible to Compute Engine instances.
           type: string
         schedulingConfig:

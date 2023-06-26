@@ -514,7 +514,7 @@ components:
       properties: {}
       type: object
     ContactCenter:
-      description: "Message describing ContactCenter object Next ID: 14"
+      description: "Message describing ContactCenter object Next ID: 15"
       properties:
         adminUser:
           $ref: "#/components/schemas/AdminUser"
@@ -536,6 +536,9 @@ components:
         instanceConfig:
           $ref: "#/components/schemas/InstanceConfig"
           description: The configuration of this instance, it is currently immutable once created.
+        kmsKey:
+          description: Immutable. The KMS key name to encrypt the user input (`ContactCenter`).
+          type: string
         labels:
           additionalProperties:
             type: string
@@ -576,10 +579,12 @@ components:
       description: Represents a quota for contact centers.
       properties:
         contactCenterCountLimit:
+          deprecated: true
           description: "Deprecated: Use the Quota fields instead. Reflects the count limit of contact centers on a billing account."
           format: int32
           type: integer
         contactCenterCountSum:
+          deprecated: true
           description: "Deprecated: Use the Quota fields instead. Reflects the count sum of contact centers on a billing account."
           format: int32
           type: integer
@@ -804,6 +809,7 @@ components:
           description: Single sign-on URL
           type: string
         userEmail:
+          deprecated: true
           description: Email address of the first admin users.
           type: string
       type: object

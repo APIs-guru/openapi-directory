@@ -1877,6 +1877,27 @@ components:
         series:
           description: Compute Engine machine series.
           type: string
+        storage:
+          description: Compute Engine storage. Never empty.
+          items:
+            $ref: "#/components/schemas/ComputeStorageDescriptor"
+          type: array
+      type: object
+    ComputeStorageDescriptor:
+      description: Compute Engine storage option descriptor.
+      properties:
+        sizeGb:
+          description: Disk size in GiB.
+          format: int32
+          type: integer
+        type:
+          description: Disk type backing the storage.
+          enum:
+            - PERSISTENT_DISK_TYPE_UNSPECIFIED
+            - PERSISTENT_DISK_TYPE_STANDARD
+            - PERSISTENT_DISK_TYPE_BALANCED
+            - PERSISTENT_DISK_TYPE_SSD
+          type: string
       type: object
     CpuUsageSample:
       description: CPU usage sample.

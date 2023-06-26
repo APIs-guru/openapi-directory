@@ -83,6 +83,79 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1alpha1/customers:checkHasProvisionedDeployment:
+    get:
+      description: Checks whether a SAS deployment for the authentication context exists.
+      operationId: prod_tt_sasportal.customers.checkHasProvisionedDeployment
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalCheckHasProvisionedDeploymentResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sasportal
+          Oauth2c:
+            - https://www.googleapis.com/auth/sasportal
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1alpha1/customers:migrateOrganization:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Migrates a SAS organization to the cloud. This will create GCP projects for each deployment and associate them. The SAS Organization is linked to the gcp project that called the command. go/sas-legacy-customer-migration
+      operationId: prod_tt_sasportal.customers.migrateOrganization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SasPortalMigrateOrganizationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sasportal
+          Oauth2c:
+            - https://www.googleapis.com/auth/sasportal
+      tags:
+        - customers
   /v1alpha1/customers:provisionDeployment:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -974,6 +1047,13 @@ components:
           format: double
           type: number
       type: object
+    SasPortalCheckHasProvisionedDeploymentResponse:
+      description: Response for [CheckHasProvisionedDeployment]. [spectrum.sas.portal.v1alpha1.Provisioning.CheckHasProvisionedDeployment].
+      properties:
+        hasProvisionedDeployment:
+          description: Whether a SAS deployment for the authentication context exists.
+          type: boolean
+      type: object
     SasPortalCreateSignedDeviceRequest:
       description: Request for CreateSignedDevice.
       properties:
@@ -1021,6 +1101,16 @@ components:
           items:
             type: string
           type: array
+      type: object
+    SasPortalDeploymentAssociation:
+      description: Association between a gcp project and a SAS user id.
+      properties:
+        gcpProjectId:
+          description: GCP project id of the associated project.
+          type: string
+        userId:
+          description: User id of the deployment.
+          type: string
       type: object
     SasPortalDevice:
       properties:
@@ -1386,6 +1476,37 @@ components:
           description: The nodes that match the request.
           items:
             $ref: "#/components/schemas/SasPortalNode"
+          type: array
+      type: object
+    SasPortalMigrateOrganizationMetadata:
+      description: Long-running operation metadata message returned by the MigrateOrganization.
+      properties:
+        operationState:
+          description: Output only. Current operation state
+          enum:
+            - OPERATION_STATE_UNSPECIFIED
+            - OPERATION_STATE_PENDING
+            - OPERATION_STATE_RUNNING
+            - OPERATION_STATE_SUCCEEDED
+            - OPERATION_STATE_FAILED
+          readOnly: true
+          type: string
+      type: object
+    SasPortalMigrateOrganizationRequest:
+      description: Request for [MigrateOrganization]. [spectrum.sas.portal.v1alpha1.Provisioning.MigrateOrganization]. GCP Project, Organization Info, and caller's GAIA ID should be retrieved from the RPC handler, and used to check authorization on SAS Portal organization and to create GCP Projects.
+      properties:
+        organizationId:
+          description: Required. Id of the SAS organization to be migrated.
+          format: int64
+          type: string
+      type: object
+    SasPortalMigrateOrganizationResponse:
+      description: Response for [MigrateOrganization]. [spectrum.sas.portal.v1alpha1.Provisioning.MigrateOrganization].
+      properties:
+        deploymentAssociation:
+          description: Optional. A list of deployment association that were created for the migration, or current associations if they already exist.
+          items:
+            $ref: "#/components/schemas/SasPortalDeploymentAssociation"
           type: array
       type: object
     SasPortalMoveDeploymentRequest:

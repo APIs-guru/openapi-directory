@@ -509,7 +509,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Gets the IAM Policy for a resource
-      operationId: servicedirectory.projects.locations.registrationPolicies.getIamPolicy
+      operationId: servicedirectory.projects.locations.namespaces.workloads.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -551,7 +551,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the IAM Policy for a resource
-      operationId: servicedirectory.projects.locations.registrationPolicies.setIamPolicy
+      operationId: servicedirectory.projects.locations.namespaces.workloads.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -593,7 +593,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Tests IAM permissions for a resource (namespace, service or service workload only).
-      operationId: servicedirectory.projects.locations.registrationPolicies.testIamPermissions
+      operationId: servicedirectory.projects.locations.namespaces.workloads.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path

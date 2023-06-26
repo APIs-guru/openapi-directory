@@ -786,6 +786,8 @@ paths:
           Procountor only accepts the following values for the payment_method field: BANK_TRANSFER, DIRECT_PAYMENT, CLEARING, CREDIT_CARD_CHARGE, FOREIGN_PAYMENT, OTHER, CASH, DOMESTIC_PAYMENT_PLUSGIRO, DOMESTIC_PAYMENT_BANKGIRO, DOMESTIC_PAYMENT_CREDITOR, DKLMPKRE, NETS.
           connector: procountor-fi
           description: ""
+        - connector: Quickbooks
+          description: Quickbooks requires the supplier.id to be sent in order to make update operations.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -6770,7 +6772,7 @@ components:
         row_version: edge-case
         tax_amount: high
         tax_rate: medium
-        total_amount: critical
+        total_amount: high
         type: medium
         unit_of_measure: edge-case
         unit_price: high
@@ -10546,7 +10548,7 @@ components:
         row_version: edge-case
         tax_amount: high
         tax_rate: medium
-        total_amount: critical
+        total_amount: high
         type: medium
         unit_of_measure: edge-case
         unit_price: high

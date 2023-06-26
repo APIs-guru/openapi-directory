@@ -1106,19 +1106,17 @@ components:
       description: Configuration for Config Sync
       properties:
         allowVerticalScale:
+          deprecated: true
           description: Set to true to allow the vertical scaling. Defaults to false which disallows vertical scaling. This field is deprecated.
           type: boolean
         enabled:
-          description: "Enables the installation of ConfigSync. If set to true, ConfigSync resources will be created and the other ConfigSync fields will be applied if exist. If set to false and Managed Config Sync is disabled, all other ConfigSync fields will be ignored, ConfigSync resources will be deleted. Setting this field to false while enabling Managed Config Sync is invalid. If omitted, ConfigSync resources will be managed if: * the git or oci field is present; or * Managed Config Sync is enabled (i.e., managed.enabled is true)."
+          description: Enables the installation of ConfigSync. If set to true, ConfigSync resources will be created and the other ConfigSync fields will be applied if exist. If set to false, all other ConfigSync fields will be ignored, ConfigSync resources will be deleted. If omitted, ConfigSync resources will be managed depends on the presence of the git or oci field.
           type: boolean
         git:
           $ref: "#/components/schemas/ConfigManagementGitConfig"
           description: Git repo configuration for the cluster.
-        managed:
-          $ref: "#/components/schemas/ConfigManagementManaged"
-          description: Configuration for Managed Config Sync.
         metricsGcpServiceAccountEmail:
-          description: The Email of the GCP Service Account (GSA) used for exporting Config Sync metrics to Cloud Monitoring and Cloud Monarch when Workload Identity is enabled. The GSA should have the Monitoring Metric Writer (roles/monitoring.metricWriter) IAM role. The Kubernetes ServiceAccount `default` in the namespace `config-management-monitoring` should be binded to the GSA. This field is required when Managed Config Sync is enabled.
+          description: The Email of the Google Cloud Service Account (GSA) used for exporting Config Sync metrics to Cloud Monitoring and Cloud Monarch when Workload Identity is enabled. The GSA should have the Monitoring Metric Writer (roles/monitoring.metricWriter) IAM role. The Kubernetes ServiceAccount `default` in the namespace `config-management-monitoring` should be binded to the GSA. This field is required when automatic Feature management is enabled.
           type: string
         oci:
           $ref: "#/components/schemas/ConfigManagementOciConfig"
@@ -1129,6 +1127,9 @@ components:
         sourceFormat:
           description: Specifies whether the Config Sync Repo is in "hierarchical" or "unstructured" mode.
           type: string
+        stopSyncing:
+          description: Set to true to stop syncing configs for a single cluster when automatic Feature management is enabled. Default to false. The field will be ignored when automatic Feature management is disabled.
+          type: boolean
       type: object
     ConfigManagementConfigSyncDeploymentState:
       description: The state of ConfigSync's deployment on a cluster
@@ -1288,7 +1289,7 @@ components:
       description: Git repo configuration for a single cluster.
       properties:
         gcpServiceAccountEmail:
-          description: The GCP Service Account Email used for auth when secret_type is gcpServiceAccount.
+          description: The Google Cloud Service Account Email used for auth when secret_type is gcpServiceAccount.
           type: string
         httpsProxy:
           description: URL for the HTTPS proxy to be used when communicating with the Git repo.
@@ -1386,16 +1387,6 @@ components:
           description: A string representing the user facing error message
           type: string
       type: object
-    ConfigManagementManaged:
-      description: Configuration for Managed Config Sync.
-      properties:
-        enabled:
-          description: Set to true to enable Managed Config Sync. Defaults to false which disables Managed Config Sync. Setting this field to true when configSync.enabled is false is invalid.
-          type: boolean
-        stopSyncing:
-          description: Set to true to stop syncing configs for a single cluster. Default to false. If set to true, Managed Config Sync will not upgrade Config Sync.
-          type: boolean
-      type: object
     ConfigManagementMembershipSpec:
       description: "**Anthos Config Management**: Configuration for a single cluster. Intended to parallel the ConfigManagement CR."
       properties:
@@ -1408,6 +1399,13 @@ components:
         hierarchyController:
           $ref: "#/components/schemas/ConfigManagementHierarchyControllerConfig"
           description: Hierarchy Controller configuration for the cluster.
+        management:
+          description: Enables automatic Feature management.
+          enum:
+            - MANAGEMENT_UNSPECIFIED
+            - MANAGEMENT_AUTOMATIC
+            - MANAGEMENT_MANUAL
+          type: string
         policyController:
           $ref: "#/components/schemas/ConfigManagementPolicyController"
           description: Policy Controller configuration for the cluster.
@@ -1441,7 +1439,7 @@ components:
       description: OCI repo configuration for a single cluster
       properties:
         gcpServiceAccountEmail:
-          description: The GCP Service Account Email used for auth when secret_type is gcpServiceAccount.
+          description: The Google Cloud Service Account Email used for auth when secret_type is gcpServiceAccount.
           type: string
         policyDir:
           description: "The absolute path of the directory that contains the local resources. Default: the root directory of the image."
@@ -1600,6 +1598,7 @@ components:
           description: Token indicating the state of the importer.
           type: string
         lastSync:
+          deprecated: true
           description: "Deprecated: use last_sync_time instead. Timestamp of when ACM last successfully synced the repo The time format is specified in https://golang.org/pkg/time/#Time.String"
           type: string
         lastSyncTime:
@@ -2282,9 +2281,6 @@ components:
         configmanagement:
           $ref: "#/components/schemas/ConfigManagementMembershipSpec"
           description: Config Management-specific spec.
-        fleetInherited:
-          description: True if value of `feature_spec` was inherited from a fleet-level default.
-          type: boolean
         fleetobservability:
           $ref: "#/components/schemas/FleetObservabilityMembershipSpec"
           description: Fleet observability membership spec
@@ -2294,6 +2290,9 @@ components:
         mesh:
           $ref: "#/components/schemas/ServiceMeshMembershipSpec"
           description: Anthos Service Mesh-specific spec
+        origin:
+          $ref: "#/components/schemas/Origin"
+          description: Whether this per-Membership spec was inherited from a fleet-level default. This field can be updated by users by either overriding a Membership config (updated to USER implicitly) or setting to FLEET explicitly.
       type: object
     MembershipFeatureState:
       description: MembershipFeatureState contains Feature status information for a single Membership.
@@ -2449,6 +2448,17 @@ components:
           readOnly: true
           type: string
       type: object
+    Origin:
+      description: Origin defines where this MembershipFeatureSpec originated from.
+      properties:
+        type:
+          description: Type specifies which type of origin is set.
+          enum:
+            - TYPE_UNSPECIFIED
+            - FLEET
+            - USER
+          type: string
+      type: object
     Policy:
       description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
@@ -2599,6 +2609,7 @@ components:
       description: "**Service Mesh**: Spec for a single Membership for the servicemesh feature"
       properties:
         controlPlane:
+          deprecated: true
           description: "Deprecated: use `management` instead Enables automatic control plane management."
           enum:
             - CONTROL_PLANE_MANAGEMENT_UNSPECIFIED

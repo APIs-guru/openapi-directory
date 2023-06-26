@@ -996,7 +996,7 @@ components:
           description: Environment variables passed to the container's entrypoint.
           type: object
         image:
-          description: A Docker container image that defines a custom environment. Cloud Workstations provides a number of [preconfigured images](https://cloud.google.com/workstations/docs/preconfigured-base-images), but you can create your own [custom container images](https://cloud.google.com/workstations/docs/custom-container-images). If using a private image, the `host.gceInstance.serviceAccount` field must be specified in the workstation configuration and must have permission to pull the specified image. Otherwise, the image must be publicly accessible.s
+          description: A Docker container image that defines a custom environment. Cloud Workstations provides a number of [preconfigured images](https://cloud.google.com/workstations/docs/preconfigured-base-images), but you can create your own [custom container images](https://cloud.google.com/workstations/docs/custom-container-images). If using a private image, the `host.gceInstance.serviceAccount` field must be specified in the workstation configuration and must have permission to pull the specified image. Otherwise, the image must be publicly accessible.
           type: string
         runAsUser:
           description: If set, overrides the USER specified in the image with the given uid.
@@ -1056,6 +1056,9 @@ components:
           description: A set of Compute Engine Confidential VM instance options.
         disablePublicIpAddresses:
           description: When set to true, disables public IP addresses for VMs. If you disable public IP addresses, you must set up Private Google Access or Cloud NAT on your network. If you use Private Google Access and you use `private.googleapis.com` or `restricted.googleapis.com` for Container Registry and Artifact Registry, make sure that you set up DNS records for domains `*.gcr.io` and `*.pkg.dev`. Defaults to false (VMs have public IP addresses).
+          type: boolean
+        enableNestedVirtualization:
+          description: Whether to enable nested virtualization on instances.
           type: boolean
         machineType:
           description: The type of machine to use for VM instances—for example, `e2-standard-4`. For more information about machine types that Cloud Workstations supports, see the list of [available machine types](https://cloud.google.com/workstations/docs/available-machine-types).
@@ -1593,7 +1596,7 @@ components:
           readOnly: true
           type: string
         degraded:
-          description: Output only. Whether this resource is in degraded mode, in which case it may require user action to restore full functionality. Details can be found in the `conditions` field.
+          description: Output only. Whether this resource is degraded, in which case it may require user action to restore full functionality. See also the `conditions` field.
           readOnly: true
           type: boolean
         deleteTime:

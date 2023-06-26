@@ -1027,6 +1027,7 @@ components:
       description: Upcoming maintenance schedule. If no maintenance is scheduled, fields are not populated.
       properties:
         canReschedule:
+          deprecated: true
           description: If the scheduled maintenance can be rescheduled, default is true.
           type: boolean
         endTime:
@@ -1120,6 +1121,7 @@ components:
       description: Operation metadata returned by the CLH during resource state reconciliation.
       properties:
         deleteResource:
+          deprecated: true
           description: DEPRECATED. Use exclusive_action instead.
           type: boolean
         exclusiveAction:
@@ -1129,6 +1131,10 @@ components:
             - DELETE
             - RETRY
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
       type: object
     RescheduleMaintenanceRequest:
       description: Request for RescheduleMaintenance.

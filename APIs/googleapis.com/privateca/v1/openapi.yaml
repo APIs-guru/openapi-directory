@@ -2199,6 +2199,7 @@ components:
       description: Operation metadata returned by the CLH during resource state reconciliation.
       properties:
         deleteResource:
+          deprecated: true
           description: DEPRECATED. Use exclusive_action instead.
           type: boolean
         exclusiveAction:
@@ -2208,6 +2209,10 @@ components:
             - DELETE
             - RETRY
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
       type: object
     RevocationDetails:
       description: Describes fields that are relavent to the revocation of a Certificate.

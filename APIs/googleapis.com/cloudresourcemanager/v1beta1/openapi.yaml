@@ -1061,6 +1061,7 @@ components:
           description: Output only. The resource name of the organization. This is the organization's relative path in the API. Its format is "organizations/[organization_id]". For example, "organizations/1234".
           type: string
         organizationId:
+          deprecated: true
           description: An immutable id for the Organization that is assigned on creation. This should be omitted when creating a new Organization. This field is read-only.
           type: string
         owner:
