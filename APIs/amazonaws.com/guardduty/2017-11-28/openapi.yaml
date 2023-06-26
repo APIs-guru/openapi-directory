@@ -3551,7 +3551,7 @@ paths:
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
-      description: 'Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and threat intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource.'
+      description: 'Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, threat intel sets, publishing destination, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource.'
       responses:
         '200':
           description: Success
@@ -8486,6 +8486,12 @@ components:
             - xml:
                 name: groups
               description: The groups that include the user who called the Kubernetes API.
+        SessionName:
+          allOf:
+            - $ref: '#/components/schemas/SessionNameList'
+            - xml:
+                name: sessionName
+              description: Entity that assumes the IAM role when Kubernetes RBAC permissions are assigned to that role.
       description: Details about the Kubernetes user involved in a Kubernetes finding.
     KubernetesWorkloadDetails:
       type: object
@@ -8549,6 +8555,10 @@ components:
                 name: kubernetesWorkloadDetails
               description: Details about the Kubernetes workload involved in a Kubernetes finding.
       description: Details about Kubernetes resources such as a Kubernetes user or workload resource involved in a Kubernetes finding.
+    SessionNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     VpcConfig:
       type: object
       properties:

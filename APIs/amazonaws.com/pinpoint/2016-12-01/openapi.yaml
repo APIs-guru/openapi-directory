@@ -1642,6 +1642,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ClosedDays'
                         - description: The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
+                    TimezoneEstimationMethods:
+                      allOf:
+                        - $ref: '#/components/schemas/ListOf__TimezoneEstimationMethodsElement'
+                        - description: '<p>An array of time zone estimation methods, if any, to use for determining an <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6024,6 +6028,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ClosedDays'
                         - description: The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
+                    TimezoneEstimationMethods:
+                      allOf:
+                        - $ref: '#/components/schemas/ListOf__TimezoneEstimationMethodsElement'
+                        - description: '<p>An array of time zone estimation methods, if any, to use for determining an <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>'
   '/v1/recommenders/{recommender-id}':
     delete:
       operationId: DeleteRecommenderConfiguration
@@ -10478,6 +10486,10 @@ components:
             - $ref: '#/components/schemas/ListOfClosedDaysRules'
             - description: Rules for the Custom channel.
       description: The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+    ListOf__TimezoneEstimationMethodsElement:
+      type: array
+      items:
+        $ref: '#/components/schemas/__TimezoneEstimationMethodsElement'
     CreatePushTemplateResponse:
       type: object
       required:
@@ -13689,6 +13701,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClosedDays'
             - description: The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.
+        TimezoneEstimationMethods:
+          allOf:
+            - $ref: '#/components/schemas/ListOf__TimezoneEstimationMethodsElement'
+            - description: '<p>An array of time zone estimation methods, if any, to use for determining an <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>'
       description: Specifies the configuration and other settings for a journey.
     CreateJourneyRequest:
       type: object
@@ -13789,6 +13805,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClosedDays'
             - description: The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.
+        TimezoneEstimationMethods:
+          allOf:
+            - $ref: '#/components/schemas/ListOf__TimezoneEstimationMethodsElement'
+            - description: '<p>An array of time zone estimation methods, if any, to use for determining an <a href="https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>'
       description: 'Provides information about the status, configuration, and other settings for a journey.'
     PushNotificationTemplateRequest:
       type: object
@@ -17754,6 +17774,11 @@ components:
         - BAIDU
         - CUSTOM
         - IN_APP
+    __TimezoneEstimationMethodsElement:
+      type: string
+      enum:
+        - PHONE_NUMBER
+        - POSTAL_CODE
     DayOfWeek:
       type: string
       enum:
