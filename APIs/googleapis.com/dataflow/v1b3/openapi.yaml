@@ -329,7 +329,7 @@ paths:
           name: location
           schema:
             type: string
-        - description: The list of fields to update relative to Job. If empty, only RequestedJobState will be considered for update. If the FieldMask is not empty and RequestedJobState is none/empty, The fields specified in the update mask will be the only ones considered for update. If both RequestedJobState and update_mask are specified, an error will be returned as we cannot update both state and mask.
+        - description: The list of fields to update relative to Job. If empty, only RequestedJobState will be considered for update. If the FieldMask is not empty and RequestedJobState is none/empty, The fields specified in the update mask will be the only ones considered for update. If both RequestedJobState and update_mask are specified, we will first handle RequestedJobState and then the update_mask fields.
           in: query
           name: updateMask
           schema:
@@ -1276,7 +1276,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The list of fields to update relative to Job. If empty, only RequestedJobState will be considered for update. If the FieldMask is not empty and RequestedJobState is none/empty, The fields specified in the update mask will be the only ones considered for update. If both RequestedJobState and update_mask are specified, an error will be returned as we cannot update both state and mask.
+        - description: The list of fields to update relative to Job. If empty, only RequestedJobState will be considered for update. If the FieldMask is not empty and RequestedJobState is none/empty, The fields specified in the update mask will be the only ones considered for update. If both RequestedJobState and update_mask are specified, we will first handle RequestedJobState and then the update_mask fields.
           in: query
           name: updateMask
           schema:
@@ -4481,11 +4481,6 @@ components:
             type: string
           description: Optional. Additional metadata for describing this parameter.
           type: object
-        enumOptions:
-          description: Optional. The options shown when ENUM ParameterType is specified.
-          items:
-            $ref: "#/components/schemas/ParameterMetadataEnumOption"
-          type: array
         groupName:
           description: Optional. Specifies a group name for this parameter to be rendered under. Group header text will be rendered exactly as specified in this field. Only considered when parent_name is NOT provided.
           type: string
@@ -4521,8 +4516,6 @@ components:
             - KMS_KEY_NAME
             - WORKER_REGION
             - WORKER_ZONE
-            - BOOLEAN
-            - ENUM
           type: string
         parentName:
           description: Optional. Specifies the name of the parent parameter. Used in conjunction with 'parent_trigger_values' to make this parameter conditional (will only be rendered conditionally). Should be mappable to a ParameterMetadata.name field.
@@ -4537,19 +4530,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    ParameterMetadataEnumOption:
-      description: ParameterMetadataEnumOption specifies the option shown in the enum form.
-      properties:
-        description:
-          description: Optional. The description to display for the enum option.
-          type: string
-        label:
-          description: Optional. The label to display for the enum option.
-          type: string
-        value:
-          description: Required. The value of the enum option.
-          type: string
       type: object
     PartialGroupByKeyInstruction:
       description: An instruction that does a partial group-by-key. One input and one output.

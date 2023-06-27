@@ -1010,7 +1010,7 @@ paths:
         - projects
   "/v1/{parent}/fields":
     get:
-      description: Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false` .
+      description: Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false or `ttlConfig:*`.
       operationId: firestore.projects.databases.collectionGroups.fields.list
       parameters:
         - description: Required. A parent name of the form `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}`
@@ -2478,6 +2478,36 @@ components:
           format: int64
           type: string
       type: object
+    GoogleFirestoreAdminV1RestoreDatabaseMetadata:
+      description: Metadata for the long-running operation from the RestoreDatabase request.
+      properties:
+        backup:
+          description: The name of the backup restoring from.
+          type: string
+        database:
+          description: The name of the database being restored to.
+          type: string
+        endTime:
+          description: The time the restore finished, unset for ongoing restores.
+          format: google-datetime
+          type: string
+        operationState:
+          description: The operation state of the restore.
+          enum:
+            - OPERATION_STATE_UNSPECIFIED
+            - INITIALIZING
+            - PROCESSING
+            - CANCELLING
+            - FINALIZING
+            - SUCCESSFUL
+            - FAILED
+            - CANCELLED
+          type: string
+        startTime:
+          description: The time the restore was started.
+          format: google-datetime
+          type: string
+      type: object
     GoogleFirestoreAdminV1RestoreDatabaseRequest:
       description: The request message for FirestoreAdmin.RestoreDatabase.
       properties:
@@ -2807,7 +2837,7 @@ components:
           type: string
       type: object
     ReadWrite:
-      description: Options for a transaction that can be used to read and write documents.
+      description: Options for a transaction that can be used to read and write documents. Firestore does not allow 3rd party auth requests to create read-write. transactions.
       properties:
         retryTransaction:
           description: An optional transaction to retry.

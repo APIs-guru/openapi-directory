@@ -1824,6 +1824,7 @@ components:
           readOnly: true
         computeEngineVmDetails:
           $ref: "#/components/schemas/TargetVMDetails"
+          deprecated: true
           description: "Output only. Details of the VM in Compute Engine. Deprecated: Use compute_engine_target_details instead."
           readOnly: true
         createTime:
@@ -1870,6 +1871,7 @@ components:
           type: array
         targetDetails:
           $ref: "#/components/schemas/TargetVMDetails"
+          deprecated: true
           description: "Output only. Details of the VM to create as the target of this clone job. Deprecated: Use compute_engine_target_details instead."
           readOnly: true
       type: object
@@ -2062,6 +2064,7 @@ components:
       description: Scheduling information for VM on maintenance/restart behaviour and node allocation in sole tenant nodes.
       properties:
         automaticRestart:
+          deprecated: true
           type: boolean
         minNodeCpus:
           description: The minimum number of virtual CPUs this instance will consume when running on a sole-tenant node. Ignored if no node_affinites are configured.
@@ -2105,6 +2108,7 @@ components:
           readOnly: true
         computeEngineVmDetails:
           $ref: "#/components/schemas/TargetVMDetails"
+          deprecated: true
           description: "Output only. Details of the VM in Compute Engine. Deprecated: Use compute_engine_target_details instead."
           readOnly: true
         createTime:
@@ -2126,6 +2130,7 @@ components:
           readOnly: true
           type: string
         progress:
+          deprecated: true
           description: Output only. The current progress in percentage of the cutover job.
           format: int32
           readOnly: true
@@ -2165,6 +2170,7 @@ components:
           type: array
         targetDetails:
           $ref: "#/components/schemas/TargetVMDetails"
+          deprecated: true
           description: "Output only. Details of the VM to create as the target of this cutover job. Deprecated: Use compute_engine_target_details instead."
           readOnly: true
       type: object
@@ -2600,6 +2606,7 @@ components:
           description: Details of the target VM in Compute Engine.
         computeEngineVmDefaults:
           $ref: "#/components/schemas/TargetVMDetails"
+          deprecated: true
           description: "Details of the VM in Compute Engine. Deprecated: Use compute_engine_target_defaults instead."
         createTime:
           description: Output only. The time the migrating VM was created (this refers to this resource and not to the time it was installed in the source).
@@ -2687,6 +2694,7 @@ components:
           type: string
         targetDefaults:
           $ref: "#/components/schemas/TargetVMDetails"
+          deprecated: true
           description: "The default configuration of the target VM that will be created in Google Cloud as a result of the migration. Deprecated: Use compute_engine_target_defaults instead."
         updateTime:
           description: Output only. The last time the migrating VM resource was updated.
@@ -2887,10 +2895,12 @@ components:
           description: The identifier of the ReplicationCycle.
           type: string
         progress:
+          deprecated: true
           description: The current progress in percentage of this cycle.
           format: int32
           type: integer
         progressPercent:
+          deprecated: true
           description: The current progress in percentage of this cycle. Was replaced by 'steps' field, which breaks down the cycle progression more accurately.
           format: int32
           type: integer
@@ -2985,6 +2995,7 @@ components:
           type: string
         error:
           $ref: "#/components/schemas/Status"
+          deprecated: true
           description: Output only. Provides details on the state of the Source in case of an error.
           readOnly: true
         labels:
@@ -3062,6 +3073,7 @@ components:
           type: string
       type: object
     TargetVMDetails:
+      deprecated: true
       description: TargetVMDetails is a collection of details for creating a VM in a target Compute Engine project.
       properties:
         appliedLicense:
@@ -3133,6 +3145,7 @@ components:
             type: string
           type: array
         project:
+          deprecated: true
           description: Output only. The project in which to create the VM.
           readOnly: true
           type: string
@@ -3241,6 +3254,7 @@ components:
             $ref: "#/components/schemas/VmUtilizationInfo"
           type: array
         vmsCount:
+          deprecated: true
           description: Output only. Total number of VMs included in the report.
           format: int32
           readOnly: true
@@ -3263,6 +3277,7 @@ components:
       description: Utilization metrics values for a single VM.
       properties:
         cpuAverage:
+          deprecated: true
           description: Average CPU usage, percent.
           format: int32
           type: integer
@@ -3271,6 +3286,7 @@ components:
           format: int32
           type: integer
         cpuMax:
+          deprecated: true
           description: Max CPU usage, percent.
           format: int32
           type: integer
@@ -3279,6 +3295,7 @@ components:
           format: int32
           type: integer
         diskIoRateAverage:
+          deprecated: true
           description: Average disk IO rate, in kilobytes per second.
           format: int64
           type: string
@@ -3287,6 +3304,7 @@ components:
           format: int64
           type: string
         diskIoRateMax:
+          deprecated: true
           description: Max disk IO rate, in kilobytes per second.
           format: int64
           type: string
@@ -3295,6 +3313,7 @@ components:
           format: int64
           type: string
         memoryAverage:
+          deprecated: true
           description: Average memory usage, percent.
           format: int32
           type: integer
@@ -3303,6 +3322,7 @@ components:
           format: int32
           type: integer
         memoryMax:
+          deprecated: true
           description: Max memory usage, percent.
           format: int32
           type: integer
@@ -3311,6 +3331,7 @@ components:
           format: int32
           type: integer
         networkThroughputAverage:
+          deprecated: true
           description: Average network throughput (combined transmit-rates and receive-rates), in kilobytes per second.
           format: int64
           type: string
@@ -3319,6 +3340,7 @@ components:
           format: int64
           type: string
         networkThroughputMax:
+          deprecated: true
           description: Max network throughput (combined transmit-rates and receive-rates), in kilobytes per second.
           format: int64
           type: string
@@ -3358,6 +3380,7 @@ components:
           readOnly: true
           type: string
         committedStorage:
+          deprecated: true
           description: The total size of the storage allocated to the VM in MB.
           format: int64
           type: string

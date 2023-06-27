@@ -2567,6 +2567,7 @@ components:
             - PLX_DATASOURCE_AFFINITY
             - DUCKIEWEB_AFFINITY
             - MEET_CALLING_AFFINITY
+            - MATTERSPACE_AFFINITY
           type: string
         containerId:
           description: The ID of the container
@@ -2630,6 +2631,12 @@ components:
       properties:
         appUniqueId:
           description: Store the app unique id endpoint. This will be passed over to app to fulfill the action. For example, app_unique_id for Whatsapp will be "11234567890@s.whatsapp.net"
+          type: string
+        contactInfoSource:
+          description: "Where this contact info was retrieved from. Note: only added for Assistant usage, and will not be populated by PAPI. This is due to the coupling between Assistant Proto, and PAPI proto. (//depot/google3/quality/qrewrite/servlets/proto/focus_name.proto)"
+          enum:
+            - SOURCE_UNKNOWN
+            - APP_SEARCH
           type: string
         displayAppUniqueId:
           description: Store third party endpoint that is displayed to users. For example, display_app_unique_id for Whatsapp will be "Message +11234567890".
@@ -2863,9 +2870,6 @@ components:
     AppsPeopleOzExternalMergedpeopleapiConnectionReminder:
       description: Contact-level people-prompts settings and contact-level connection reminders. Part of go/people-prompts.
       properties:
-        contactPromptSettings:
-          $ref: "#/components/schemas/SocialGraphApiProtoContactPromptSettings"
-          description: Contains the Contact level settings that will affect all reminders.
         metadata:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
         prompt:
@@ -7132,11 +7136,74 @@ components:
           type: string
       type: object
     AssistantApiCoreTypesGovernedSurfaceIdentity:
-      description: "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 5 LINT.IfChange"
+      description: "The set of information that helps the server identify the surface. This replaces the User-Agent string within the Assistant Server. Note: The SurfaceIdentity proto should only be used to derive the capabilities of a surface. It should not be accessed outside of the CapabilityBuilder or CapabilityChecker. NEXT ID: 6 LINT.IfChange"
       properties:
         deviceId:
           $ref: "#/components/schemas/AssistantApiCoreTypesDeviceId"
           description: The identifier of the device.
+        legacySurfaceType:
+          description: "DEPRECATED: The legacy device's surface type enum. NOTE: Prefer using the ontological `surface_type` field above. If you need to access the legacy surface type, please file a bug and add it in your code to migrate to ontological surface type."
+          enum:
+            - UNKNOWN
+            - ANDROID_ALLO
+            - ANDROID_AUTO
+            - ANDROID_THINGS_CUBE
+            - ANDROID_THINGS_JASPER
+            - ANDROID_TV
+            - ANDROID_TV_KIDS
+            - ANDROID_WEAR
+            - AR_GLASSES
+            - ASSISTANT_SDK
+            - AUDIOWEAR
+            - BUBBLE_CHARACTERS_IOS
+            - CAPABILITY_BASED_SURFACE
+            - CHROMECAST_ASSISTANT
+            - CHROMECAST_MANHATTAN
+            - CHROMECAST_SEARCH
+            - CLOUD_DEVICE
+            - COMPANION_SCREEN
+            - DYNAMITE_WEB
+            - ENSEMBLE
+            - EYESFREE_AGSA
+            - EYESFREE_GMM
+            - GBOARD
+            - GLASS
+            - GOOGLE_HOME
+            - HANGOUTS_CHATBOT
+            - IOS_ALLO
+            - IOS_GSA
+            - IOS_WEAR
+            - LIBASSISTANT
+            - LINE_CHATBOT
+            - MULTIMODAL_AGSA
+            - NON_ASSISTANT_SURFACE
+            - OPA_AGSA
+            - OPA_AGSA_CHROME_OS
+            - OPA_ANDROID_AUTO
+            - OPA_ANDROID_LITE
+            - OPA_ANDROID_SCREENLESS
+            - OPA_ANDROID_SMART_DISPLAY
+            - OPA_ANDROID_TABLET
+            - OPA_CROS
+            - OPA_GACS
+            - OPA_IOS
+            - OPA_IOS_SCREENLESS
+            - OPA_KAIOS
+            - OPA_MOBILE_WEB
+            - RTOS_PHONE
+            - SMS_CHATBOT
+            - TELEGRAM_CHATBOT
+            - TELEPHONE_ASSISTANT
+            - VERILY_ONDUO
+            - YOUTUBE_APP
+            - AGSA_BISTO_FOR_EVAL
+            - COGSWORTH_FOR_EVAL
+            - LOCKHART_MIC_FOR_EVAL
+            - OPA_ANDROID_AUTO_EMBEDDED_FAKE
+            - SPARK
+            - WALLE
+            - UNIT_TESTING
+          type: string
         surfaceType:
           description: The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl.
           enum:
@@ -12552,8 +12619,45 @@ components:
             - HIGH_CONFIDENCE
           type: string
       type: object
+    AssistantPfrDeviceRdMetadata:
+      properties:
+        deviceName:
+          type: string
+        deviceTypes:
+          items:
+            type: string
+          type: array
+        effectiveArgSpanLength:
+          format: float
+          type: number
+        hasAmbiguousResolutions:
+          description: True if there are more than one possible resolutions to the RD.
+          type: boolean
+        hasResolvedDeviceId:
+          description: "True if there's at least one device id that gets resolved. Note this is different from is_grounded = true: it is possible that is_grounded = false (num_grounded_args =0) but there is resolved device ids. E.g.: \"turn on the blue light\" Power_on(device_object = [d1, d2]:RD(category=DeviceObject(name='blue light')) where there are \"blue light 1\" and \"blue light 2\" hence two resolved device ids. But since the quantifier is single, GB can't resolve the ambiguity and would set num_grounded_args = 0 to indicate such unresolved ambiguity."
+          type: boolean
+        roomName:
+          type: string
+      type: object
+    AssistantPfrSmartHomeIntentMetadata:
+      description: Used by the Smarthome Business Rules twiddler to determine whether to replace the top-scoring Smarthome intent with another.
+      properties:
+        deviceRdMetadata:
+          description: Each DeviceRdMetadata represents one device RD (device slot) in the intent. Note that each device RD could have multiple device groundings inside of it.
+          items:
+            $ref: "#/components/schemas/AssistantPfrDeviceRdMetadata"
+          type: array
+        intentName:
+          type: string
+        isExactMatch:
+          description: When num_constraints == num_constraints_satisfied, indicating all slot matchings are exact match.
+          type: boolean
+        isGrounded:
+          description: When num_grounded_args > 0, indicating there is at least one top-level argument is grounded.
+          type: boolean
+      type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 57"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 60"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -12632,11 +12736,17 @@ components:
         isFullyGrounded:
           description: Whether the intent is fully grounded.
           type: boolean
+        isHighConfidencePodcastIntent:
+          description: Used for PFR manual rule to prefer high confidence podcast intent (e.g. topical, genre) over generic podcast intents.
+          type: boolean
         isMediaControlIntent:
           description: Whether the intent is a media control intent.
           type: boolean
         isPlayGenericMusic:
           description: Whether the intent is a PlayGenericMusic-type intent.
+          type: boolean
+        isPodcastGenericIntent:
+          description: Used for PFR manual rule to prefer high confidence podcast intent (e.g. topical, genre) over generic podcast intents.
           type: boolean
         isPodcastIntent:
           description: Whether the intent is a podcast intent.
@@ -12763,6 +12873,9 @@ components:
             - COUNTERFACTUAL_LOG_ONLY
             - CAPACITY_ACCOUNTING
           type: string
+        smarthomeIntentMetadata:
+          $ref: "#/components/schemas/AssistantPfrSmartHomeIntentMetadata"
+          description: SmartHome intent metadata used for the SmartHome business-rules twiddler.
         subIntentType:
           description: 'sub_intent_type differentiates between intents that share the top level intent name. For eg: for TV_FALLBACK_SEARCH_INTENT, the top level intent name must be "Find_media" and the media_object argument within it must be of type "Media_unspecified".'
           enum:
@@ -16364,7 +16477,7 @@ components:
           type: array
       type: object
     DrishtiVesperEncodedThumbnail:
-      description: "The attributes of encoded thumbnail images. Next id: 7."
+      description: "The attributes of encoded thumbnail images. Next id: 8."
       properties:
         encodingQuality:
           description: JPEG/WEBP quality factor in range [0,100].
@@ -16381,6 +16494,9 @@ components:
         height:
           format: int32
           type: integer
+        imageBlobId:
+          description: The Blob ID of the thumbnail image in the Blobstore. We recommend absolute IDs with universe prefix if this field is passed across systems. The owner of this blob is also responsible for data Wipeout compliance.
+          type: string
         imageBytes:
           description: Encoded thumbnail bytes. Prefer this over `image_string` as we are not supposed to store image bytes in a proto string field.
           format: byte
@@ -28233,6 +28349,12 @@ components:
         documentIsFolder:
           description: The document type of the document being referenced.
           type: boolean
+        documentIsLegalHoldFolder:
+          description: Document is a folder with legal hold.
+          type: boolean
+        documentIsRetentionFolder:
+          description: Document is a folder with retention policy.
+          type: boolean
         documentName:
           description: Required. Name of the referenced document.
           type: string
@@ -29150,6 +29272,7 @@ components:
             - TIME_FIELD_UNSPECIFIED
             - CREATE_TIME
             - UPDATE_TIME
+            - DISPOSITION_TIME
           type: string
         timeRange:
           $ref: "#/components/schemas/GoogleTypeInterval"
@@ -50128,6 +50251,7 @@ components:
             - PMW_TI
             - ACCESSIBILITY_TRACKER
             - DUCKIEWEB
+            - MATTERSPACE
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -57535,6 +57659,10 @@ components:
         globalProductClusterId:
           format: uint64
           type: string
+        images:
+          items:
+            $ref: "#/components/schemas/ShoppingWebentityShoppingAnnotationProductImage"
+          type: array
         locale:
           $ref: "#/components/schemas/QualityShoppingShoppingAttachmentLocale"
         mokaFacet:
@@ -63494,7 +63622,7 @@ components:
           type: string
       type: object
     ResearchScienceSearchReconciledMetadata:
-      description: "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 71"
+      description: "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 72"
       properties:
         alternateName:
           description: Alternate names and acronyms for the dataset.
@@ -63747,6 +63875,10 @@ components:
             format: float
             type: number
           type: array
+        versionsSimhash:
+          description: A simhash value of the fields used for identifying versions of a dataset. This will be used by the VersionClusterInfoWriter.
+          format: uint64
+          type: string
       type: object
     ResearchScienceSearchReplica:
       description: "Stores the information about a dataset replica. Next ID: 5"
@@ -65884,6 +66016,19 @@ components:
             - AVAILABILITY_ON_DISPLAY_TO_ORDER
           type: string
       type: object
+    ShoppingWebentityShoppingAnnotationProductImage:
+      description: Images from the product-level representation (i.e. GPC). These images are currently only annotated 1) when no offers are available 2) on the product level
+      properties:
+        imageDocid:
+          format: uint64
+          type: string
+        productImageType:
+          enum:
+            - PRODUCT_IMAGE_TYPE_UNKNOWN
+            - PRODUCT_IMAGE_GPC
+            - PRODUCT_IMAGE_TYPE_MULTIBANG_ENTITY_INFERRED
+          type: string
+      type: object
     ShoppingWebentityShoppingAnnotationProductRating:
       description: "Information about a rating provided for a product. This can represent an aggregated rating if count is set. Next Id: 7"
       properties:
@@ -68012,6 +68157,7 @@ components:
             - ISOLATION_S12Y_RECIPE_INGREDIENT_INSIGHTS
             - ISOLATION_SCOUTS_SOCIETAL_CONTEXT_ENTITIES
             - ISOLATION_ASTROLOGY_HOROSCOPE
+            - ISOLATION_LLM_GENERATED_TVM_SYNOPSIS
             - UMP_TESTING_ONLY
             - INTENTJOINS_NB_SIGNALS
             - ADS_INTEGRITY_ANNOTATION
@@ -70340,6 +70486,7 @@ components:
               - MDP_WITH_LIVE_OPS_EVER_INSTALLED_USERS_EVENT_LEVEL
               - MDP_WITH_LIVE_OPS_NEVER_INSTALLED_USERS_EVENT_LEVEL
               - BROAD_RELATED_QUERIES_CLUSTER_EVENT
+              - SUPPLEMENTAL_TG_RETRIEVAL_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -70848,6 +70995,8 @@ components:
               - SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K2
               - SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_K3_4
               - SHOULD_SEE_NOW_CLUSTER_CONTENT_PRE_REGISTRATION_NH_GTE_K5
+              - FEATURED_PRODUCTS_LIVE_OPS_AT_SESSION_LEVEL
+              - SUPPLEMENTAL_TG_RETRIEVAL_SESSION_LEVEL
               - WALLET_WELLBEING_ALERT_SESSION_LEVEL
               - BROAD_INTENT_REWEIGHTING_SESSION_LEVEL
               - DYNASTY_DEVICE_HANDOFF_SESSION_LEVEL
@@ -71154,6 +71303,7 @@ components:
               - LOYALTY_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_CLIENT_USER_LEVEL
               - GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL
               - LOYALTY_PURCHASE_QUEST_GAMES_HOME_SERVER_USER_LEVEL
+              - LOYALTY_PURCHASE_QUEST_SERP_SERVER_USER_LEVEL
               - LOYALTY_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL
               - LOYALTY_CORPUS_WIDE_STAMP_CARD_DETAILS_PAGE_SERVER_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL
@@ -71277,6 +71427,7 @@ components:
               - IS_ELIGIBLE_FOR_DYNAMIC_AUTH_USER_LEVEL
               - GE_LIVEOPS_PSPEND_USER_LEVEL
               - IS_ELIGIBLE_FOR_RENEWAL_REMINDER_USER_LEVEL
+              - FEATURED_PRODUCTS_LIVE_OPS_AT_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -80707,23 +80858,26 @@ components:
           type: string
       type: object
     YoutubeBackstageSuperVodCommentInfo:
-      description: "Contains information about comment that is posted through a Super VOD purchase. Next ID: 6"
+      description: "Contains information about comment that is posted through a Super Thanks purchase. Next ID: 7"
       properties:
         currencyCode:
-          description: Currency code the user uses to purchase this Super VOD item.
+          description: Currency code the user uses to purchase this Super Thanks item.
           type: string
         entitlementId:
-          description: The ID of the Super VOD entitlement. It uniquely identifies a Super VOD purchase.
+          description: The ID of the Super Thanks entitlement. It uniquely identifies a Super Thanks purchase. This field is deprecated in favor of transaction_id, see go/st-deprecate-ent-id.
           type: string
         priceInMicros:
-          description: Price of Super VOD item the user purchases in micros.
+          description: Price of Super Thanks item the user purchases in micros.
           format: uint64
           type: string
         superVodItemId:
-          description: The Super VOD item the user purchases, it represents price tier.
+          description: The Super Thanks item the user purchases, it represents price tier.
+          type: string
+        transactionId:
+          description: The ID of the Super Thanks transaction. It uniquely identifies a Super Thanks purchase.
           type: string
         version:
-          description: Which version of experiment this Super VOD comment is posted in.
+          description: Which version of experiment this Super Thanks comment is posted in.
           enum:
             - UNSPECIFIED_VERSION
             - V1_DEFAULT_MESSAGE

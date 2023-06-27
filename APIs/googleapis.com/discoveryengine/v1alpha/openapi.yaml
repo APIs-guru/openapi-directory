@@ -182,7 +182,7 @@ paths:
       description: Gets a list of Documents.
       operationId: discoveryengine.projects.locations.dataStores.branches.documents.list
       parameters:
-        - description: Required. The parent branch resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`. Use `default_branch` as the branch ID, to list documents under the default branch. If the caller does not have permission to list Documentss under this branch, regardless of whether or not this branch exists, a `PERMISSION_DENIED` error is returned.
+        - description: Required. The parent branch resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`. Use `default_branch` as the branch ID, to list documents under the default branch. If the caller does not have permission to list Documents under this branch, regardless of whether or not this branch exists, a `PERMISSION_DENIED` error is returned.
           in: path
           name: parent
           required: true
@@ -344,7 +344,7 @@ paths:
         - projects
   "/v1alpha/{parent}/userEvents:collect":
     get:
-      description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Discovery Engine API JavaScript pixel and Google Tag Manager. Users should not call this method directly.
+      description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a third-party domain. This method is used only by the Discovery Engine API JavaScript pixel and Google Tag Manager. Users should not call this method directly.
       operationId: discoveryengine.projects.locations.dataStores.userEvents.collect
       parameters:
         - description: Required. The parent DataStore resource name, such as `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`.
@@ -358,7 +358,7 @@ paths:
           name: ets
           schema:
             type: string
-        - description: The URL including cgi-parameters but excluding the hash fragment with a length limit of 5,000 characters. This is often more useful than the referer URL, because many browsers only send the domain for 3rd party requests.
+        - description: The URL including cgi-parameters but excluding the hash fragment with a length limit of 5,000 characters. This is often more useful than the referer URL, because many browsers only send the domain for third-party requests.
           in: query
           name: uri
           schema:
@@ -737,7 +737,7 @@ components:
           type: string
       type: object
     GoogleCloudDiscoveryengineV1ImportDocumentsMetadata:
-      description: Metadata related to the progress of the ImportDocuments operation. This will be returned by the google.longrunning.Operation.metadata field.
+      description: Metadata related to the progress of the ImportDocuments operation. This is returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.
@@ -772,11 +772,11 @@ components:
       description: Configuration of destination for Import related errors.
       properties:
         gcsPrefix:
-          description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors will be written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
+          description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors are written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1ImportUserEventsMetadata:
-      description: Metadata related to the progress of the Import operation. This will be returned by the google.longrunning.Operation.metadata field.
+      description: Metadata related to the progress of the Import operation. This is returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.
@@ -876,7 +876,7 @@ components:
       description: BigQuery source import data from.
       properties:
         dataSchema:
-          description: "The schema to use when parsing the data from the source. Supported values for user event imports: * `user_event` (default): One UserEvent per row. Supported values for document imports: * `document` (default): One Document format per row. Each document must have a valid Document.id and one of Document.json_data or Document.struct_data. * `custom`: One custom data per row in arbitrary format that conforms the defined Schema of the data store. This can only be used by the GENERIC Data Store vertical."
+          description: "The schema to use when parsing the data from the source. Supported values for user event imports: * `user_event` (default): One UserEvent per row. Supported values for document imports: * `document` (default): One Document format per row. Each document must have a valid Document.id and one of Document.json_data or Document.struct_data. * `custom`: One custom data per row in arbitrary format that conforms to the defined Schema of the data store. This can only be used by the GENERIC Data Store vertical."
           type: string
         datasetId:
           description: Required. The BigQuery data set to copy the data from with a length limit of 1,024 characters.
@@ -898,11 +898,11 @@ components:
       description: Detailed completion information including completion attribution token and clicked completion info.
       properties:
         selectedPosition:
-          description: End user selected CompleteQueryResponse.CompletionResult.suggestion position, starting from 0.
+          description: End user selected CompleteQueryResponse.QuerySuggestion.suggestion position, starting from 0.
           format: int32
           type: integer
         selectedSuggestion:
-          description: End user selected CompleteQueryResponse.CompletionResult.suggestion.
+          description: End user selected CompleteQueryResponse.QuerySuggestion.suggestion.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaCustomAttribute:
@@ -927,7 +927,7 @@ components:
           description: Immutable. The identifier of the document. Id should conform to [RFC-1034](https://tools.ietf.org/html/rfc1034) standard with a length limit of 63 characters.
           type: string
         jsonData:
-          description: The JSON string representation of the document. It should conform to the registered Schema.schema or an `INVALID_ARGUMENT` error is thrown.
+          description: The JSON string representation of the document. It should conform to the registered Schema or an `INVALID_ARGUMENT` error is thrown.
           type: string
         name:
           description: "Immutable. The full resource name of the document. Format: `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}/documents/{document_id}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters."
@@ -941,7 +941,7 @@ components:
         structData:
           additionalProperties:
             description: Properties of the object.
-          description: The structured JSON data for the document. It should conform to the registered Schema.schema or an `INVALID_ARGUMENT` error is thrown.
+          description: The structured JSON data for the document. It should conform to the registered Schema or an `INVALID_ARGUMENT` error is thrown.
           type: object
       type: object
     GoogleCloudDiscoveryengineV1alphaDocumentInfo:
@@ -963,14 +963,14 @@ components:
           format: int32
           type: integer
         uri:
-          description: The Document url - only allowed for DataStores with content_config PUBLIC_WEBSITE.
+          description: The Document URI - only allowed for website data stores.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaGcsSource:
       description: Cloud Storage location for input content.
       properties:
         dataSchema:
-          description: "The schema to use when parsing the data from the source. Supported values for document imports: * `document` (default): One JSON Document per line. Each document must have a valid Document.id. * `content`: Unstructured data (e.g. PDF, HTML). Each file matched by `input_uris` will become a document, with the ID set to the first 128 bits of SHA256(URI) encoded as a hex string. * `custom`: One custom data JSON per row in arbitrary format that conforms the defined Schema of the data store. This can only be used by the GENERIC Data Store vertical. * `csv`: A CSV file with header conforming the defined Schema of the data store. Each entry after the header will be imported as a Document. This can only be used by the GENERIC Data Store vertical. Supported values for user even imports: * `user_event` (default): One JSON UserEvent per line."
+          description: "The schema to use when parsing the data from the source. Supported values for document imports: * `document` (default): One JSON Document per line. Each document must have a valid Document.id. * `content`: Unstructured data (e.g. PDF, HTML). Each file matched by `input_uris` becomes a document, with the ID set to the first 128 bits of SHA256(URI) encoded as a hex string. * `custom`: One custom data JSON per row in arbitrary format that conforms to the defined Schema of the data store. This can only be used by Gen App Builder. * `csv`: A CSV file with header conforming to the defined Schema of the data store. Each entry after the header is imported as a Document. This can only be used by Gen App Builder. Supported values for user even imports: * `user_event` (default): One JSON UserEvent per line."
           type: string
         inputUris:
           description: Required. Cloud Storage URIs to input files. URI can be up to 2000 characters long. URIs can match the full object path (for example, `gs://bucket/directory/object.json`) or a pattern matching one or more files, such as `gs://bucket/directory/*.json`. A request can contain at most 100 files (or 100,000 files if `data_schema` is `content`). Each file can be up to 2 GB (or 100 MB if `data_schema` is `content`).
@@ -979,7 +979,7 @@ components:
           type: array
       type: object
     GoogleCloudDiscoveryengineV1alphaImportDocumentsMetadata:
-      description: Metadata related to the progress of the ImportDocuments operation. This will be returned by the google.longrunning.Operation.metadata field.
+      description: Metadata related to the progress of the ImportDocuments operation. This is returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.
@@ -1002,7 +1002,7 @@ components:
       description: Request message for Import methods.
       properties:
         autoGenerateIds:
-          description: Whether to automatically generate IDs for the documents if absent. If set to `true`, Document.ids are automatically generated based on the hash of the payload, where IDs may not be consistent during multiple imports. In which case ReconciliationMode.FULL is highly recommended to avoid duplicate contents. If unset or set to `false`, Document.ids have to be specified using id_field, otherwises, documents without IDs will fail to be imported. Only set this field when using GcsSource or BigQuerySource, and when GcsSource.data_schema or BigQuerySource.data_schema is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
+          description: Whether to automatically generate IDs for the documents if absent. If set to `true`, Document.ids are automatically generated based on the hash of the payload, where IDs may not be consistent during multiple imports. In which case ReconciliationMode.FULL is highly recommended to avoid duplicate contents. If unset or set to `false`, Document.ids have to be specified using id_field, otherwise, documents without IDs fail to be imported. Only set this field when using GcsSource or BigQuerySource, and when GcsSource.data_schema or BigQuerySource.data_schema is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
           type: boolean
         bigquerySource:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaBigQuerySource"
@@ -1014,7 +1014,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaGcsSource"
           description: Cloud Storage location for the input content.
         idField:
-          description: 'The field in the Cloud Storage and BigQuery sources that indicates the unique IDs of the documents. For GcsSource it is the key of the JSON field. For instance, `my_id` for JSON `{"my_id": "some_uuid"}`. For BigQuerySource it is the column name of the BigQuery table where the unique ids are stored. The values of the JSON field or the BigQuery column will be used as the Document.ids. The JSON field or the BigQuery column must be of string type, and the values must be set as valid strings conform to [RFC-1034](https://tools.ietf.org/html/rfc1034) with 1-63 characters. Otherwise, documents without valid IDs will fail to be imported. Only set this field when using GcsSource or BigQuerySource, and when GcsSource.data_schema or BigQuerySource.data_schema is `custom`. And only set this field when auto_generate_ids is unset or set as `false`. Otherwise, an INVALID_ARGUMENT error is thrown. If it is unset, a default value `_id` is used when importing from the allowed data sources.'
+          description: 'The field in the Cloud Storage and BigQuery sources that indicates the unique IDs of the documents. For GcsSource it is the key of the JSON field. For instance, `my_id` for JSON `{"my_id": "some_uuid"}`. For BigQuerySource it is the column name of the BigQuery table where the unique ids are stored. The values of the JSON field or the BigQuery column are used as the Document.ids. The JSON field or the BigQuery column must be of string type, and the values must be set as valid strings conform to [RFC-1034](https://tools.ietf.org/html/rfc1034) with 1-63 characters. Otherwise, documents without valid IDs fail to be imported. Only set this field when using GcsSource or BigQuerySource, and when GcsSource.data_schema or BigQuerySource.data_schema is `custom`. And only set this field when auto_generate_ids is unset or set as `false`. Otherwise, an INVALID_ARGUMENT error is thrown. If it is unset, a default value `_id` is used when importing from the allowed data sources.'
           type: string
         inlineSource:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaImportDocumentsRequestInlineSource"
@@ -1052,11 +1052,11 @@ components:
       description: Configuration of destination for Import related errors.
       properties:
         gcsPrefix:
-          description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors will be written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
+          description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors are written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaImportUserEventsMetadata:
-      description: Metadata related to the progress of the Import operation. This will be returned by the google.longrunning.Operation.metadata field.
+      description: Metadata related to the progress of the Import operation. This is returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.
@@ -1148,10 +1148,10 @@ components:
       description: Detailed page information.
       properties:
         pageCategory:
-          description: "The most specific category associated with a category page. To represent full path of category, use '>' sign to separate different hierarchies. If '>' is part of the category name, please replace it with other character(s). Category pages include special pages such as sales or promotions. For instance, a special sale page may have the category hierarchy: \"pageCategory\" : \"Sales > 2017 Black Friday Deals\". Required for `view-category-page` events. Other event types should not set this field. Otherwise, an INVALID_ARGUMENT error is returned."
+          description: "The most specific category associated with a category page. To represent full path of category, use '>' sign to separate different hierarchies. If '>' is part of the category name, please replace it with other character(s). Category pages include special pages such as sales or promotions. For instance, a special sale page may have the category hierarchy: `\"pageCategory\" : \"Sales > 2017 Black Friday Deals\"`. Required for `view-category-page` events. Other event types should not set this field. Otherwise, an `INVALID_ARGUMENT` error is returned."
           type: string
         pageviewId:
-          description: A unique ID of a web page view. This should be kept the same for all user events triggered from the same pageview. For example, an item detail page view could trigger multiple events as the user is browsing the page. The `pageViewId` property should be kept the same for all these events so that they can be grouped together properly. When using the client side event reporting with JavaScript pixel and Google Tag Manager, this value is filled in automatically.
+          description: A unique ID of a web page view. This should be kept the same for all user events triggered from the same pageview. For example, an item detail page view could trigger multiple events as the user is browsing the page. The `pageview_id` property should be kept the same for all these events so that they can be grouped together properly. When using the client side event reporting with JavaScript pixel and Google Tag Manager, this value is filled in automatically.
           type: string
         referrerUri:
           description: The referrer URL of the current page. When using the client side event reporting with JavaScript pixel and Google Tag Manager, this value is filled in automatically. However, some browser privacy restrictions may cause this field to be empty.
@@ -1338,21 +1338,21 @@ components:
       description: Detailed search information.
       properties:
         offset:
-          description: An integer that specifies the current offset for pagination (the 0-indexed starting location, amongst the products deemed by the API as relevant). See SearchRequest.offset for definition. If this field is negative, an INVALID_ARGUMENT is returned. This can only be set for `search` events. Other event types should not set this field. Otherwise, an INVALID_ARGUMENT error is returned.
+          description: An integer that specifies the current offset for pagination (the 0-indexed starting location, amongst the products deemed by the API as relevant). See SearchRequest.offset for definition. If this field is negative, an `INVALID_ARGUMENT` is returned. This can only be set for `search` events. Other event types should not set this field. Otherwise, an `INVALID_ARGUMENT` error is returned.
           format: int32
           type: integer
         orderBy:
-          description: The order in which products are returned, if applicable. See SearchRequest.order_by for definition and syntax. The value must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an INVALID_ARGUMENT error is returned. This can only be set for `search` events. Other event types should not set this field. Otherwise, an INVALID_ARGUMENT error is returned.
+          description: The order in which products are returned, if applicable. See SearchRequest.order_by for definition and syntax. The value must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an `INVALID_ARGUMENT` error is returned. This can only be set for `search` events. Other event types should not set this field. Otherwise, an `INVALID_ARGUMENT` error is returned.
           type: string
         searchQuery:
-          description: The user's search query. See SearchRequest.query for definition. The value must be a UTF-8 encoded string with a length limit of 5,000 characters. Otherwise, an INVALID_ARGUMENT error is returned. At least one of search_query or PageInfo.page_category is required for `search` events. Other event types should not set this field. Otherwise, an INVALID_ARGUMENT error is returned.
+          description: The user's search query. See SearchRequest.query for definition. The value must be a UTF-8 encoded string with a length limit of 5,000 characters. Otherwise, an `INVALID_ARGUMENT` error is returned. At least one of search_query or PageInfo.page_category is required for `search` events. Other event types should not set this field. Otherwise, an `INVALID_ARGUMENT` error is returned.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaTargetSite:
       description: A target site for the SiteSearchEngine.
       properties:
         exactMatch:
-          description: Input only. If set to false, an uri_pattern will be generated to include all pages whose address contains the provided_uri_pattern. If set to true, an uri_pattern will be generated to try to be an exact match of the provided_uri_pattern or just the specific page if the provided_uri_pattern is a specific one. provided_uri_pattern will always be normalized to generate the uri pattern to be used by the search engine.
+          description: Input only. If set to false, a uri_pattern is generated to include all pages whose address contains the provided_uri_pattern. If set to true, an uri_pattern is generated to try to be an exact match of the provided_uri_pattern or just the specific page if the provided_uri_pattern is a specific one. provided_uri_pattern is always normalized to generate the URI pattern to be used by the search engine.
           type: boolean
         generatedUriPattern:
           description: Output only. This is system-generated based on the provided_uri_pattern.
@@ -1363,7 +1363,7 @@ components:
           readOnly: true
           type: string
         providedUriPattern:
-          description: Required. Input only. The user provided uri pattern from which the `generated_uri_pattern` is generated.
+          description: Required. Input only. The user provided URI pattern from which the `generated_uri_pattern` is generated.
           type: string
         type:
           description: The type of the target site, e.g. whether the site is to be included or excluded.
@@ -1410,14 +1410,14 @@ components:
         attributes:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaCustomAttribute"
-          description: "Extra user event features to include in the recommendation model. These attributes must NOT contain data that needs to be parsed or processed further, e.g. JSON or other encodings. If you provide custom attributes for ingested user events, also include them in the user events that you associate with prediction requests. Custom attribute formatting must be consistent between imported events and events provided with prediction requests. This lets the Discovery Engine API use those custom attributes when training models and serving predictions, which helps improve recommendation quality. This field needs to pass all below criteria, otherwise an `INVALID_ARGUMENT` error is returned: * The key must be a UTF-8 encoded string with a length limit of 5,000 characters. * For text attributes, at most 400 values are allowed. Empty values are not allowed. Each value must be a UTF-8 encoded string with a length limit of 256 characters. * For number attributes, at most 400 values are allowed. For product recommendations, an example of extra user information is ` traffic_channel`, which is how a user arrives at the site. Users can arrive at the site by coming to the site directly, coming through Google search, or in other ways."
+          description: "Extra user event features to include in the recommendation model. These attributes must NOT contain data that needs to be parsed or processed further, e.g. JSON or other encodings. If you provide custom attributes for ingested user events, also include them in the user events that you associate with prediction requests. Custom attribute formatting must be consistent between imported events and events provided with prediction requests. This lets the Discovery Engine API use those custom attributes when training models and serving predictions, which helps improve recommendation quality. This field needs to pass all below criteria, otherwise an `INVALID_ARGUMENT` error is returned: * The key must be a UTF-8 encoded string with a length limit of 5,000 characters. * For text attributes, at most 400 values are allowed. Empty values are not allowed. Each value must be a UTF-8 encoded string with a length limit of 256 characters. * For number attributes, at most 400 values are allowed. For product recommendations, an example of extra user information is `traffic_channel`, which is how a user arrives at the site. Users can arrive at the site by coming to the site directly, coming through Google search, or in other ways."
           type: object
         attributionToken:
-          description: "Token to attribute an API response to user action(s) to trigger the event. Highly recommended for user events that are the result of RecommendationService.Recommend. This field enables accurate attribution of recommendation model performance. The value must be one of: * PredictResponse.attribution_token for events that are the result of RecommendationService.Recommend. * SearchResponse.attribution_token for events that are the result of SearchService.Search. * CompleteQueryResponse.attribution_token for events that are the result of CompletionService.CompleteQuery. This token enables us to accurately attribute page view or conversion completion back to the event and the particular predict response containing this clicked/purchased product. If user clicks on product K in the recommendation results, pass PredictResponse.attribution_token as a URL parameter to product K's page. When recording events on product K's page, log the PredictResponse.attribution_token to this field."
+          description: "Token to attribute an API response to user action(s) to trigger the event. Highly recommended for user events that are the result of RecommendationService.Recommend. This field enables accurate attribution of recommendation model performance. The value must be one of: * RecommendResponse.attribution_token for events that are the result of RecommendationService.Recommend. * SearchResponse.attribution_token for events that are the result of SearchService.Search. This token enables us to accurately attribute page view or conversion completion back to the event and the particular predict response containing this clicked/purchased product. If user clicks on product K in the recommendation results, pass RecommendResponse.attribution_token as a URL parameter to product K's page. When recording events on product K's page, log the RecommendResponse.attribution_token to this field."
           type: string
         completionInfo:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaCompletionInfo"
-          description: CompleteQuery API details related to the event. This field should be set for `search` event when autocomplete function is enabled and the user clicks a suggestion for search.
+          description: CompletionService.CompleteQuery details related to the event. This field should be set for `search` event when autocomplete function is enabled and the user clicks a suggestion for search.
         directUserRequest:
           description: Should set to true if the request is made directly from the end user, in which case the UserEvent.user_info.user_agent can be populated from the HTTP request. This flag should be set only if the API request is made directly from the end user such as a mobile app (and not if a gateway or a server is processing and pushing the user events). This should not be set when using the JavaScript tag in UserEventService.CollectUserEvent.
           type: boolean
@@ -1434,7 +1434,7 @@ components:
           description: "Required. User event type. Allowed values are: Generic values: * `search`: Search for Documents. * `view-item`: Detailed page view of a Document. * `view-item-list`: View of a panel or ordered list of Documents. * `view-home-page`: View of the home page. * `view-category-page`: View of a category page, e.g. Home > Men > Jeans Retail-related values: * `add-to-cart`: Add an item(s) to cart, e.g. in Retail online shopping * `purchase`: Purchase an item(s) Media-related values: * `media-play`: Start/resume watching a video, playing a song, etc. * `media-complete`: Finished or stopped midway through a video, song, etc."
           type: string
         filter:
-          description: The filter syntax consists of an expression language for constructing a predicate from one or more fields of the documents being filtered. One example is for `search` events, the associated SearchRequest may contain a filter expression in SearchRequest.filter conforming to https://google.aip.dev/160#filtering. Similarly, for `view-item-list` events that are generated from a RecommendationService.RecommendRequest, this field may be populated directly from RecommendationService.RecommendRequest.filter conforming to https://google.aip.dev/160#filtering. The value must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an INVALID_ARGUMENT error is returned.
+          description: The filter syntax consists of an expression language for constructing a predicate from one or more fields of the documents being filtered. One example is for `search` events, the associated SearchRequest may contain a filter expression in SearchRequest.filter conforming to https://google.aip.dev/160#filtering. Similarly, for `view-item-list` events that are generated from a RecommendationService.RecommendRequest, this field may be populated directly from RecommendationService.RecommendRequest.filter conforming to https://google.aip.dev/160#filtering. The value must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
           type: string
         mediaInfo:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaMediaInfo"
@@ -1452,7 +1452,7 @@ components:
           type: array
         searchInfo:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchInfo"
-          description: Search API details related to the event. This field should be set for `search` event.
+          description: SearchService.Search details related to the event. This field should be set for `search` event.
         sessionId:
           description: "A unique identifier for tracking a visitor session with a length limit of 128 bytes. A session is an aggregation of an end user behavior in a time span. A general guideline to populate the session_id: 1. If user has no activity for 30 min, a new session_id should be assigned. 2. The session_id should be unique across users, suggest use uuid or add UserEvent.user_pseudo_id as prefix."
           type: string
@@ -1468,21 +1468,21 @@ components:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaUserInfo"
           description: Information about the end user.
         userPseudoId:
-          description: Required. A unique identifier for tracking visitors. For example, this could be implemented with an HTTP cookie, which should be able to uniquely identify a visitor on a single device. This unique identifier should not change if the visitor log in/out of the website. Do not set the field to the same fixed ID for different users. This mixes the event history of those users together, which results in degraded model quality. The field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an INVALID_ARGUMENT error is returned. The field should not contain PII or user-data. We recommend to use Google Analytics [Client ID](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#clientId) for this field.
+          description: Required. A unique identifier for tracking visitors. For example, this could be implemented with an HTTP cookie, which should be able to uniquely identify a visitor on a single device. This unique identifier should not change if the visitor log in/out of the website. Do not set the field to the same fixed ID for different users. This mixes the event history of those users together, which results in degraded model quality. The field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an `INVALID_ARGUMENT` error is returned. The field should not contain PII or user-data. We recommend to use Google Analytics [Client ID](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#clientId) for this field.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaUserInfo:
       description: Information of an end user.
       properties:
         userAgent:
-          description: User agent as included in the HTTP header. Required for getting SearchResponse.sponsored_results. The field must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an `INVALID_ARGUMENT` error is returned. This should not be set when using the client side event reporting with GTM or JavaScript tag in UserEventService.CollectUserEvent or if UserEvent.direct_user_request is set.
+          description: User agent as included in the HTTP header. The field must be a UTF-8 encoded string with a length limit of 1,000 characters. Otherwise, an `INVALID_ARGUMENT` error is returned. This should not be set when using the client side event reporting with GTM or JavaScript tag in UserEventService.CollectUserEvent or if UserEvent.direct_user_request is set.
           type: string
         userId:
           description: Highly recommended for logged-in users. Unique identifier for logged-in user, such as a user name. Don't set for anonymous users. Always use a hashed value for this ID. Don't set the field to the same fixed ID for different users. This mixes the event history of those users together, which results in degraded model quality. The field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaImportDocumentsMetadata:
-      description: Metadata related to the progress of the ImportDocuments operation. This will be returned by the google.longrunning.Operation.metadata field.
+      description: Metadata related to the progress of the ImportDocuments operation. This is returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.
@@ -1517,11 +1517,11 @@ components:
       description: Configuration of destination for Import related errors.
       properties:
         gcsPrefix:
-          description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors will be written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
+          description: Cloud Storage prefix for import errors. This must be an empty, existing Cloud Storage directory. Import errors are written to sharded files in this directory, one per line, as a JSON-encoded `google.rpc.Status` message.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaImportUserEventsMetadata:
-      description: Metadata related to the progress of the Import operation. This will be returned by the google.longrunning.Operation.metadata field.
+      description: Metadata related to the progress of the Import operation. This is returned by the google.longrunning.Operation.metadata field.
       properties:
         createTime:
           description: Operation create time.
