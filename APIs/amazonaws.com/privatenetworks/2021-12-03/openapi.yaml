@@ -267,6 +267,18 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 100
+                commitmentConfiguration:
+                  description: '<p>Determines the duration and renewal status of the commitment period for a radio unit.</p> <p>For pricing, see <a href="http://aws.amazon.com/private5g/pricing">Amazon Web Services Private 5G Pricing</a>.</p>'
+                  type: object
+                  properties:
+                    automaticRenewal:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: '<p>Determines whether the commitment period for a radio unit is set to automatically renew for an additional 1 year after your current commitment period expires.</p> <p>Set to <code>True</code>, if you want your commitment period to automatically renew. Set to <code>False</code> if you do not want your commitment to automatically renew.</p> <p>You can do the following:</p> <ul> <li> <p>Set a 1-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 1-year rate.</p> </li> <li> <p>Set a 3-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 3-year rate.</p> </li> <li> <p>Turn off a previously-enabled automatic renewal on a 1-year or 3-year commitment.</p> </li> </ul> <p>You cannot use the automatic-renewal option for a 60-day commitment.</p>'
+                    commitmentLength:
+                      allOf:
+                        - $ref: '#/components/schemas/CommitmentLength'
+                        - description: 'The duration of the commitment period for the radio unit. You can choose a 60-day, 1-year, or 3-year period.'
                 networkSiteArn:
                   description: The Amazon Resource Name (ARN) of the network site.
                   type: string
@@ -287,6 +299,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/AddressContent'
                         - description: The country for this address.
+                    emailAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The recipient's email address.
                     name:
                       allOf:
                         - $ref: '#/components/schemas/AddressContent'
@@ -294,7 +310,7 @@ paths:
                     phoneNumber:
                       allOf:
                         - $ref: '#/components/schemas/AddressContent'
-                        - description: The phone number for this address.
+                        - description: The recipient's phone number.
                     postalCode:
                       allOf:
                         - $ref: '#/components/schemas/AddressContent'
@@ -1489,7 +1505,7 @@ paths:
   /v1/network-resources/update:
     post:
       operationId: StartNetworkResourceUpdate
-      description: '<p>Starts an update of the specified network resource.</p> <p>After you submit a request to replace or return a network resource, the status of the network resource is <code>CREATING_SHIPPING_LABEL</code>. The shipping label is available when the status of the network resource is <code>PENDING_RETURN</code>. After the network resource is successfully returned, its status is <code>DELETED</code>. For more information, see <a href="https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit">Return a radio unit</a>.</p>'
+      description: '<p>Use this action to do the following tasks:</p> <ul> <li> <p>Update the duration and renewal status of the commitment period for a radio unit. The update goes into effect immediately.</p> </li> <li> <p>Request a replacement for a network resource.</p> </li> <li> <p>Request that you return a network resource.</p> </li> </ul> <p>After you submit a request to replace or return a network resource, the status of the network resource changes to <code>CREATING_SHIPPING_LABEL</code>. The shipping label is available when the status of the network resource is <code>PENDING_RETURN</code>. After the network resource is successfully returned, its status changes to <code>DELETED</code>. For more information, see <a href="https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit">Return a radio unit</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1526,6 +1542,18 @@ paths:
                 - networkResourceArn
                 - updateType
               properties:
+                commitmentConfiguration:
+                  description: '<p>Determines the duration and renewal status of the commitment period for a radio unit.</p> <p>For pricing, see <a href="http://aws.amazon.com/private5g/pricing">Amazon Web Services Private 5G Pricing</a>.</p>'
+                  type: object
+                  properties:
+                    automaticRenewal:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: '<p>Determines whether the commitment period for a radio unit is set to automatically renew for an additional 1 year after your current commitment period expires.</p> <p>Set to <code>True</code>, if you want your commitment period to automatically renew. Set to <code>False</code> if you do not want your commitment to automatically renew.</p> <p>You can do the following:</p> <ul> <li> <p>Set a 1-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 1-year rate.</p> </li> <li> <p>Set a 3-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 3-year rate.</p> </li> <li> <p>Turn off a previously-enabled automatic renewal on a 1-year or 3-year commitment.</p> </li> </ul> <p>You cannot use the automatic-renewal option for a 60-day commitment.</p>'
+                    commitmentLength:
+                      allOf:
+                        - $ref: '#/components/schemas/CommitmentLength'
+                        - description: 'The duration of the commitment period for the radio unit. You can choose a 60-day, 1-year, or 3-year period.'
                 networkResourceArn:
                   description: The Amazon Resource Name (ARN) of the network resource.
                   type: string
@@ -1551,6 +1579,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/AddressContent'
                         - description: The country for this address.
+                    emailAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/AddressContent'
+                        - description: The recipient's email address.
                     name:
                       allOf:
                         - $ref: '#/components/schemas/AddressContent'
@@ -1558,7 +1590,7 @@ paths:
                     phoneNumber:
                       allOf:
                         - $ref: '#/components/schemas/AddressContent'
-                        - description: The phone number for this address.
+                        - description: The recipient's phone number.
                     postalCode:
                       allOf:
                         - $ref: '#/components/schemas/AddressContent'
@@ -1580,11 +1612,12 @@ paths:
                         - $ref: '#/components/schemas/AddressContent'
                         - description: The third line of the street address.
                 updateType:
-                  description: <p>The update type.</p> <ul> <li> <p> <code>REPLACE</code> - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.</p> </li> <li> <p> <code>RETURN</code> - Submits a request to replace a radio unit that you no longer need. We provide a shipping label that you can use for the return process.</p> </li> </ul>
+                  description: '<p>The update type.</p> <ul> <li> <p> <code>REPLACE</code> - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.</p> </li> <li> <p> <code>RETURN</code> - Submits a request to return a radio unit that you no longer need. We provide a shipping label that you can use for the return process.</p> </li> <li> <p> <code>COMMITMENT</code> - Submits a request to change or renew the commitment period. If you choose this value, then you must set <a href="https://docs.aws.amazon.com/private-networks/latest/APIReference/API_StartNetworkResourceUpdate.html#privatenetworks-StartNetworkResourceUpdate-request-commitmentConfiguration"> <code>commitmentConfiguration</code> </a>.</p> </li> </ul>'
                   type: string
                   enum:
                     - REPLACE
                     - RETURN
+                    - COMMITMENT
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1874,6 +1907,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/NetworkSite'
             - description: Information about the network site.
+    Boolean:
+      type: boolean
+    CommitmentLength:
+      type: string
+      enum:
+        - SIXTY_DAYS
+        - ONE_YEAR
+        - THREE_YEARS
     AddressContent:
       type: string
       minLength: 1
@@ -2180,6 +2221,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the order.
+        orderedResources:
+          allOf:
+            - $ref: '#/components/schemas/OrderedResourceDefinitions'
+            - description: A list of the network resources placed in the order.
         shippingAddress:
           allOf:
             - $ref: '#/components/schemas/Address'
@@ -2259,6 +2304,21 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    CommitmentConfiguration:
+      type: object
+      required:
+        - automaticRenewal
+        - commitmentLength
+      properties:
+        automaticRenewal:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Determines whether the commitment period for a radio unit is set to automatically renew for an additional 1 year after your current commitment period expires.</p> <p>Set to <code>True</code>, if you want your commitment period to automatically renew. Set to <code>False</code> if you do not want your commitment to automatically renew.</p> <p>You can do the following:</p> <ul> <li> <p>Set a 1-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 1-year rate.</p> </li> <li> <p>Set a 3-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 3-year rate.</p> </li> <li> <p>Turn off a previously-enabled automatic renewal on a 1-year or 3-year commitment.</p> </li> </ul> <p>You cannot use the automatic-renewal option for a 60-day commitment.</p>'
+        commitmentLength:
+          allOf:
+            - $ref: '#/components/schemas/CommitmentLength'
+            - description: 'The duration of the commitment period for the radio unit. You can choose a 60-day, 1-year, or 3-year period.'
+      description: '<p>Determines the duration and renewal status of the commitment period for a radio unit.</p> <p>For pricing, see <a href="http://aws.amazon.com/private5g/pricing">Amazon Web Services Private 5G Pricing</a>.</p>'
     Address:
       type: object
       required:
@@ -2281,6 +2341,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AddressContent'
             - description: The country for this address.
+        emailAddress:
+          allOf:
+            - $ref: '#/components/schemas/AddressContent'
+            - description: The recipient's email address.
         name:
           allOf:
             - $ref: '#/components/schemas/AddressContent'
@@ -2288,7 +2352,7 @@ components:
         phoneNumber:
           allOf:
             - $ref: '#/components/schemas/AddressContent'
-            - description: The phone number for this address.
+            - description: The recipient's phone number.
         postalCode:
           allOf:
             - $ref: '#/components/schemas/AddressContent'
@@ -2321,6 +2385,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to ensure idempotency</a>.'
+        commitmentConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CommitmentConfiguration'
+            - description: '<p>Determines the duration and renewal status of the commitment period for all pending radio units.</p> <p>If you include <code>commitmentConfiguration</code> in the <code>ActivateNetworkSiteRequest</code> action, you must specify the following:</p> <ul> <li> <p>The commitment period for the radio unit. You can choose a 60-day, 1-year, or 3-year period.</p> </li> <li> <p>Whether you want your commitment period to automatically renew for one more year after your current commitment period expires.</p> </li> </ul> <p>For pricing, see <a href="http://aws.amazon.com/private5g/pricing">Amazon Web Services Private 5G Pricing</a>.</p> <p>If you do not include <code>commitmentConfiguration</code> in the <code>ActivateNetworkSiteRequest</code> action, the commitment period is set to 60-days.</p>'
         networkSiteArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -2382,6 +2450,27 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The status reason of the network site.
       description: Information about a network site.
+    Timestamp:
+      type: string
+      format: date-time
+    CommitmentInformation:
+      type: object
+      required:
+        - commitmentConfiguration
+      properties:
+        commitmentConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CommitmentConfiguration'
+            - description: The duration and renewal status of the commitment period for the radio unit.
+        expiresOn:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time that the commitment period ends. If you do not cancel or renew the commitment before the expiration date, you will be billed at the 60-day-commitment rate.'
+        startAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that the commitment period started.
+      description: 'Shows the duration, the date and time that the contract started and ends, and the renewal status of the commitment period for the radio unit.'
     ConfigureAccessPointRequestCpiSecretKeyString:
       type: string
       minLength: 1
@@ -2463,6 +2552,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NameValuePairs'
             - description: The attributes of the network resource.
+        commitmentInformation:
+          allOf:
+            - $ref: '#/components/schemas/CommitmentInformation'
+            - description: 'Information about the commitment period for the radio unit. Shows the duration, the date and time that the contract started and ends, and the renewal status of the commitment period.'
         createdAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -2662,9 +2755,6 @@ components:
       type: object
       title: DeleteNetworkSiteRequest
       properties: {}
-    Timestamp:
-      type: string
-      format: date-time
     DeviceIdentifierImsiString:
       type: string
       pattern: '^[0-9]{15}$'
@@ -2986,6 +3076,10 @@ components:
       type: string
       enum:
         - STATUS
+    OrderedResourceDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/OrderedResourceDefinition'
     TrackingInformationList:
       type: array
       items:
@@ -2995,6 +3089,28 @@ components:
       enum:
         - STATUS
         - NETWORK_SITE
+    OrderedResourceDefinitionCountInteger:
+      type: integer
+      minimum: 0
+    OrderedResourceDefinition:
+      type: object
+      required:
+        - count
+        - type
+      properties:
+        commitmentConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CommitmentConfiguration'
+            - description: The duration and renewal status of the commitment period for each radio unit in the order. Does not show details if the resource type is DEVICE_IDENTIFIER.
+        count:
+          allOf:
+            - $ref: '#/components/schemas/OrderedResourceDefinitionCountInteger'
+            - description: The number of network resources in the order.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/NetworkResourceDefinitionType'
+            - description: The type of network resource in the order.
+      description: Details of the network resources in the order.
     StartNetworkResourceUpdateRequestReturnReasonString:
       type: string
       minLength: 0
@@ -3004,6 +3120,7 @@ components:
       enum:
         - REPLACE
         - RETURN
+        - COMMITMENT
     StartNetworkResourceUpdateRequest:
       type: object
       required:
@@ -3011,6 +3128,10 @@ components:
         - updateType
       title: StartNetworkResourceUpdateRequest
       properties:
+        commitmentConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CommitmentConfiguration'
+            - description: '<p>Use this action to extend and automatically renew the commitment period for the radio unit. You can do the following:</p> <ul> <li> <p>Change a 60-day commitment to a 1-year or 3-year commitment. The change is immediate and the hourly rate decreases to the rate for the new commitment period.</p> </li> <li> <p>Change a 1-year commitment to a 3-year commitment. The change is immediate and the hourly rate decreases to the rate for the 3-year commitment period.</p> </li> <li> <p>Set a 1-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 1-year rate.</p> </li> <li> <p>Set a 3-year commitment to automatically renew for an additional 1 year. The hourly rate for the additional year will continue to be the same as your existing 3-year rate.</p> </li> <li> <p>Turn off a previously-enabled automatic renewal on a 1-year or 3-year commitment. You cannot use the automatic-renewal option for a 60-day commitment.</p> </li> </ul> <p>For pricing, see <a href="http://aws.amazon.com/private5g/pricing">Amazon Web Services Private 5G Pricing</a>.</p>'
         networkResourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -3026,7 +3147,7 @@ components:
         updateType:
           allOf:
             - $ref: '#/components/schemas/UpdateType'
-            - description: <p>The update type.</p> <ul> <li> <p> <code>REPLACE</code> - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.</p> </li> <li> <p> <code>RETURN</code> - Submits a request to replace a radio unit that you no longer need. We provide a shipping label that you can use for the return process.</p> </li> </ul>
+            - description: '<p>The update type.</p> <ul> <li> <p> <code>REPLACE</code> - Submits a request to replace a defective radio unit. We provide a shipping label that you can use for the return process and we ship a replacement radio unit to you.</p> </li> <li> <p> <code>RETURN</code> - Submits a request to return a radio unit that you no longer need. We provide a shipping label that you can use for the return process.</p> </li> <li> <p> <code>COMMITMENT</code> - Submits a request to change or renew the commitment period. If you choose this value, then you must set <a href="https://docs.aws.amazon.com/private-networks/latest/APIReference/API_StartNetworkResourceUpdate.html#privatenetworks-StartNetworkResourceUpdate-request-commitmentConfiguration"> <code>commitmentConfiguration</code> </a>.</p> </li> </ul>'
     TagKeyList:
       type: array
       items:

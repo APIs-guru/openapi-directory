@@ -3,7 +3,7 @@ info:
   version: '2021-07-13'
   x-release: v4
   title: EMR Serverless
-  description: '<p>Amazon EMR Serverless is a new deployment option for Amazon EMR. EMR Serverless provides a serverless runtime environment that simplifies running analytics applications using the latest open source frameworks such as Apache Spark and Apache Hive. With EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.</p> <p>The API reference to Amazon EMR Serverless is <code>emr-serverless</code>. The <code>emr-serverless</code> prefix is used in the following scenarios: </p> <ul> <li> <p>It is the prefix in the CLI commands for Amazon EMR Serverless. For example, <code>aws emr-serverless start-job-run</code>.</p> </li> <li> <p>It is the prefix before IAM policy actions for Amazon EMR Serverless. For example, <code>"Action": ["emr-serverless:StartJobRun"]</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions">Policy actions for Amazon EMR Serverless</a>.</p> </li> <li> <p>It is the prefix used in Amazon EMR Serverless service endpoints. For example, <code>emr-serverless.us-east-2.amazonaws.com</code>.</p> </li> </ul>'
+  description: '<p>Amazon EMR Serverless is a new deployment option for Amazon EMR. Amazon EMR Serverless provides a serverless runtime environment that simplifies running analytics applications using the latest open source frameworks such as Apache Spark and Apache Hive. With Amazon EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.</p> <p>The API reference to Amazon EMR Serverless is <code>emr-serverless</code>. The <code>emr-serverless</code> prefix is used in the following scenarios: </p> <ul> <li> <p>It is the prefix in the CLI commands for Amazon EMR Serverless. For example, <code>aws emr-serverless start-job-run</code>.</p> </li> <li> <p>It is the prefix before IAM policy actions for Amazon EMR Serverless. For example, <code>"Action": ["emr-serverless:StartJobRun"]</code>. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions">Policy actions for Amazon EMR Serverless</a>.</p> </li> <li> <p>It is the prefix used in Amazon EMR Serverless service endpoints. For example, <code>emr-serverless.us-east-2.amazonaws.com</code>.</p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -272,7 +272,7 @@ paths:
                   minLength: 1
                   maxLength: 64
                 releaseLabel:
-                  description: The EMR release associated with the application.
+                  description: The Amazon EMR release associated with the application.
                   type: string
                   pattern: '[A-Za-z0-9._/-]+'
                   minLength: 1
@@ -639,6 +639,12 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/WorkerTypeSpecificationInput'
+                releaseLabel:
+                  description: The Amazon EMR release label for the application. You can change the release label to use a different release of Amazon EMR.
+                  type: string
+                  pattern: '[A-Za-z0-9._/-]+'
+                  minLength: 1
+                  maxLength: 64
   '/applications/{applicationId}/jobruns/{jobRunId}/dashboard':
     get:
       operationId: GetDashboardForJobRun
@@ -1622,7 +1628,7 @@ components:
         releaseLabel:
           allOf:
             - $ref: '#/components/schemas/ReleaseLabel'
-            - description: The EMR release associated with the application.
+            - description: The Amazon EMR release associated with the application.
         type:
           allOf:
             - $ref: '#/components/schemas/EngineType'
@@ -1679,7 +1685,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkerTypeSpecificationMap'
             - description: The specification applied to each worker type.
-      description: Information about an application. EMR Serverless uses applications to run jobs.
+      description: Information about an application. Amazon EMR Serverless uses applications to run jobs.
     ApplicationSummary:
       type: object
       required:
@@ -1706,7 +1712,7 @@ components:
         releaseLabel:
           allOf:
             - $ref: '#/components/schemas/ReleaseLabel'
-            - description: The EMR release associated with the application.
+            - description: The Amazon EMR release associated with the application.
         type:
           allOf:
             - $ref: '#/components/schemas/EngineType'
@@ -1816,7 +1822,7 @@ components:
         releaseLabel:
           allOf:
             - $ref: '#/components/schemas/ReleaseLabel'
-            - description: The EMR release associated with the application.
+            - description: The Amazon EMR release associated with the application.
         type:
           allOf:
             - $ref: '#/components/schemas/EngineType'
@@ -1967,7 +1973,7 @@ components:
         releaseLabel:
           allOf:
             - $ref: '#/components/schemas/ReleaseLabel'
-            - description: The EMR release associated with the application your job is running on.
+            - description: The Amazon EMR release associated with the application your job is running on.
         configurationOverrides:
           allOf:
             - $ref: '#/components/schemas/ConfigurationOverrides'
@@ -1997,8 +2003,8 @@ components:
         billedResourceUtilization:
           allOf:
             - $ref: '#/components/schemas/ResourceUtilization'
-            - description: 'The aggregate vCPU, memory, and storage that AWS has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker. Note that billed resources do not include usage for idle pre-initialized workers.'
-      description: 'Information about a job run. A job run is a unit of work, such as a Spark JAR, Hive query, or SparkSQL query, that you submit to an EMR Serverless application.'
+            - description: 'The aggregate vCPU, memory, and storage that Amazon Web Services has billed for the job run. The billed resources include a 1-minute minimum usage for workers, plus additional storage over 20 GB per worker. Note that billed resources do not include usage for idle pre-initialized workers.'
+      description: 'Information about a job run. A job run is a unit of work, such as a Spark JAR, Hive query, or SparkSQL query, that you submit to an Amazon EMR Serverless application.'
     Query:
       type: string
       pattern: .*\S.*
@@ -2169,7 +2175,7 @@ components:
         releaseLabel:
           allOf:
             - $ref: '#/components/schemas/ReleaseLabel'
-            - description: The EMR release associated with the application your job is running on.
+            - description: The Amazon EMR release associated with the application your job is running on.
         type:
           allOf:
             - $ref: '#/components/schemas/JobRunType'
@@ -2363,6 +2369,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkerTypeSpecificationInputMap'
             - description: 'The key-value pairs that specify worker type to <code>WorkerTypeSpecificationInput</code>. This parameter must contain all valid worker types for a Spark or Hive application. Valid worker types include <code>Driver</code> and <code>Executor</code> for Spark applications and <code>HiveDriver</code> and <code>TezTask</code> for Hive applications. You can either set image details in this parameter for each worker type, or in <code>imageConfiguration</code> for all worker types.'
+        releaseLabel:
+          allOf:
+            - $ref: '#/components/schemas/ReleaseLabel'
+            - description: The Amazon EMR release label for the application. You can change the release label to use a different release of Amazon EMR.
     WorkerTypeSpecification:
       type: object
       properties:

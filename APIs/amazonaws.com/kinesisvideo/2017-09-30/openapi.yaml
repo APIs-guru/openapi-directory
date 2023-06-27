@@ -287,7 +287,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 KmsKeyId:
-                  description: '<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
+                  description: '<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>Amazon Web Services/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
                   type: string
                   pattern: .+
                   minLength: 1
@@ -303,6 +303,75 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /deleteEdgeConfiguration:
+    post:
+      operationId: DeleteEdgeConfiguration
+      description: '<p>An asynchronous API that deletes a stream’s existing edge configuration, as well as the corresponding media from the Edge Agent.</p> <p>When you invoke this API, the sync status is set to <code>DELETING</code>. A deletion process starts, in which active edge jobs are stopped and all media is deleted from the edge device. The time to delete varies, depending on the total amount of stored media. If the deletion process fails, the sync status changes to <code>DELETE_FAILED</code>. You will need to re-try the deletion.</p> <p>When the deletion process has completed successfully, the edge configuration is no longer accessible.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEdgeConfigurationOutput'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: StreamEdgeConfigurationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamEdgeConfigurationNotFoundException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StreamName:
+                  description: The name of the stream from which to delete the edge configuration. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: '[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 256
+                StreamARN:
+                  description: The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
+                  minLength: 1
+                  maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -468,7 +537,7 @@ paths:
   /describeEdgeConfiguration:
     post:
       operationId: DescribeEdgeConfiguration
-      description: Describes a stream’s edge configuration that was set using the <code>StartEdgeConfigurationUpdate</code> API. Use this API to get the status of the configuration if the configuration is in sync with the Edge Agent.
+      description: Describes a stream’s edge configuration that was set using the <code>StartEdgeConfigurationUpdate</code> API and the latest status of the edge agent's recorder and uploader jobs. Use this API to get the status of the configuration to determine if the configuration is in sync with the Edge Agent. Use this API to evaluate the health of the Edge Agent.
       responses:
         '200':
           description: Success
@@ -600,7 +669,7 @@ paths:
   /describeMappedResourceConfiguration:
     post:
       operationId: DescribeMappedResourceConfiguration
-      description: <p>Returns the most current information about the stream. Either streamName or streamARN should be provided in the input.</p> <p>Returns the most current information about the stream. The <code>streamName</code> or <code>streamARN</code> should be provided in the input.</p>
+      description: Returns the most current information about the stream. The <code>streamName</code> or <code>streamARN</code> should be provided in the input.
       responses:
         '200':
           description: Success
@@ -1081,6 +1150,82 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ChannelRole'
                         - description: 'This property is used to determine messaging permissions in this <code>SINGLE_MASTER</code> signaling channel. If <code>MASTER</code> is specified, this API returns an endpoint that a client can use to receive offers from and send answers to any of the viewers on this signaling channel. If <code>VIEWER</code> is specified, this API returns an endpoint that a client can use only to send offers to another <code>MASTER</code> client on this signaling channel. '
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /listEdgeAgentConfigurations:
+    post:
+      operationId: ListEdgeAgentConfigurations
+      description: '<p>Returns an array of edge configurations associated with the specified Edge Agent.</p> <p>In the request, you must specify the Edge Agent <code>HubDeviceArn</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEdgeAgentConfigurationsOutput'
+        '480':
+          description: NotAuthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorizedException'
+        '481':
+          description: ClientLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientLimitExceededException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - HubDeviceArn
+              properties:
+                HubDeviceArn:
+                  description: The "Internet of Things (IoT) Thing" Arn of the edge agent.
+                  type: string
+                  pattern: 'arn:[a-z\d-]+:iot:[a-z0-9-]+:[0-9]+:thing/[a-zA-Z0-9_.-]+'
+                  minLength: 1
+                  maxLength: 1024
+                MaxResults:
+                  description: The maximum number of edge configurations to return in the response. The default is 5.
+                  type: integer
+                  minimum: 1
+                  maximum: 10
+                NextToken:
+                  description: 'If you specify this parameter, when the result of a <code>ListEdgeAgentConfigurations</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of edge configurations, provide this token in your next request. '
+                  type: string
+                  pattern: '[a-zA-Z0-9+/=]*'
+                  minLength: 0
+                  maxLength: 512
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2439,10 +2584,14 @@ components:
     AccountStreamLimitExceededException: {}
     DeviceStreamLimitExceededException: {}
     InvalidDeviceException: {}
-    DeleteSignalingChannelOutput:
+    DeleteEdgeConfigurationOutput:
       type: object
       properties: {}
     ResourceNotFoundException: {}
+    StreamEdgeConfigurationNotFoundException: {}
+    DeleteSignalingChannelOutput:
+      type: object
+      properties: {}
     VersionMismatchException: {}
     DeleteStreamOutput:
       type: object
@@ -2479,7 +2628,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EdgeConfig'
             - description: A description of the stream's edge configuration that will be used to sync with the Edge Agent IoT Greengrass component. The Edge Agent component will run on an IoT Hub Device setup at your premise.
-    StreamEdgeConfigurationNotFoundException: {}
+        EdgeAgentStatus:
+          allOf:
+            - $ref: '#/components/schemas/EdgeAgentStatus'
+            - description: An object that contains the latest status details for an edge agent's recorder and uploader jobs. Use this information to determine the current health of an edge agent.
     DescribeImageGenerationConfigurationOutput:
       type: object
       properties:
@@ -2551,6 +2703,17 @@ components:
       enum:
         - MASTER
         - VIEWER
+    ListEdgeAgentConfigurationsOutput:
+      type: object
+      properties:
+        EdgeConfigs:
+          allOf:
+            - $ref: '#/components/schemas/ListEdgeAgentConfigurationsEdgeConfigList'
+            - description: A description of a single stream's edge configuration.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, the call returns this element with a given token. To get the next batch of edge configurations, use this token in your next request.'
     ListSignalingChannelsOutput:
       type: object
       properties:
@@ -2668,8 +2831,8 @@ components:
         ScheduleConfig:
           allOf:
             - $ref: '#/components/schemas/ScheduleConfig'
-            - description: 'The configuration that consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutes</code>details that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided, then the Edge Agent will always be in recording mode.'
-      description: 'The configuration that consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutesdetails</code>, that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided, then the Edge Agent will always be in upload mode. '
+            - description: 'The configuration that consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutes</code> details that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the <code>ScheduleConfig</code> is not provided in this <code>UploaderConfig</code>, then the Edge Agent will upload at regular intervals (every 1 hour).'
+      description: 'The configuration that consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutes</code> details that specify the scheduling to record from a camera, or local media file, onto the Edge Agent. If the <code>ScheduleConfig</code> is not provided in the <code>UploaderConfig</code>, then the Edge Agent will upload at regular intervals (every 1 hour). '
     DeletionConfig:
       type: object
       properties:
@@ -2684,7 +2847,7 @@ components:
         DeleteAfterUpload:
           allOf:
             - $ref: '#/components/schemas/DeleteAfterUpload'
-            - description: '<p>The <code>boolean</code> value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are set to <code>true</code>, such as when the limit for the <code>EdgeRetentionInHours</code>, or the <code>MaxLocalMediaSizeInMB</code>, has been reached. </p> <p>Since the default value is set to <code>true</code>, configure the uploader schedule such that the media files are not being deleted before they are initially uploaded to AWS cloud.</p>'
+            - description: '<p>The <code>boolean</code> value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are set to <code>true</code>, such as when the limit for the <code>EdgeRetentionInHours</code>, or the <code>MaxLocalMediaSizeInMB</code>, has been reached. </p> <p>Since the default value is set to <code>true</code>, configure the uploader schedule such that the media files are not being deleted before they are initially uploaded to the Amazon Web Services cloud.</p>'
       description: The configuration details required to delete the connection of the stream from the Edge Agent.
     NoDataRetentionException: {}
     TagResourceOutput:
@@ -2733,7 +2896,7 @@ components:
         DestinationRegion:
           allOf:
             - $ref: '#/components/schemas/DestinationRegion'
-            - description: The AWS Region of the S3 bucket where images will be delivered. This <code>DestinationRegion</code> must match the Region where the stream is located.
+            - description: The Amazon Web Services Region of the S3 bucket where images will be delivered. This <code>DestinationRegion</code> must match the Region where the stream is located.
       description: The structure that contains the information required to deliver images to a customer.
     SamplingInterval:
       type: integer
@@ -2956,7 +3119,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
-            - description: '<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
+            - description: '<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>Amazon Web Services/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
         DataRetentionInHours:
           allOf:
             - $ref: '#/components/schemas/DataRetentionInHours'
@@ -2972,6 +3135,18 @@ components:
       minimum: 1
     DeleteAfterUpload:
       type: boolean
+    DeleteEdgeConfigurationInput:
+      type: object
+      title: DeleteEdgeConfigurationInput
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream from which to delete the edge configuration. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.
     DeleteSignalingChannelInput:
       type: object
       required:
@@ -3037,6 +3212,7 @@ components:
         - SYNC_FAILED
         - DELETING
         - DELETE_FAILED
+        - DELETING_ACKNOWLEDGED
     FailedStatusDetails:
       type: string
     EdgeConfig:
@@ -3062,6 +3238,18 @@ components:
             - $ref: '#/components/schemas/DeletionConfig'
             - description: The deletion configuration is made up of the retention time (<code>EdgeRetentionInHours</code>) and local size configuration (<code>LocalSizeConfig</code>) details that are used to make the deletion.
       description: A description of the stream's edge configuration that will be used to sync with the Edge Agent IoT Greengrass component. The Edge Agent component will run on an IoT Hub Device setup at your premise.
+    EdgeAgentStatus:
+      type: object
+      properties:
+        LastRecorderStatus:
+          allOf:
+            - $ref: '#/components/schemas/LastRecorderStatus'
+            - description: The latest status of a stream’s edge recording job.
+        LastUploaderStatus:
+          allOf:
+            - $ref: '#/components/schemas/LastUploaderStatus'
+            - description: The latest status of a stream’s edge to cloud uploader job.
+      description: An object that contains the latest status details for an edge agent's recorder and uploader jobs. Use this information to determine the current health of an edge agent.
     DescribeImageGenerationConfigurationInput:
       type: object
       title: DescribeImageGenerationConfigurationInput
@@ -3282,6 +3470,46 @@ components:
       type: integer
       minimum: 60
       maximum: 3600
+    LastRecorderStatus:
+      type: object
+      properties:
+        JobStatusDetails:
+          allOf:
+            - $ref: '#/components/schemas/JobStatusDetails'
+            - description: A description of a recorder job’s latest status.
+        LastCollectedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp at which the recorder job was last executed and media stored to local disk.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp at which the recorder status was last updated.
+        RecorderStatus:
+          allOf:
+            - $ref: '#/components/schemas/RecorderStatus'
+            - description: The status of the latest recorder job.
+      description: The latest status of a stream's edge recording job.
+    LastUploaderStatus:
+      type: object
+      properties:
+        JobStatusDetails:
+          allOf:
+            - $ref: '#/components/schemas/JobStatusDetails'
+            - description: A description of an uploader job’s latest status.
+        LastCollectedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp at which the uploader job was last executed and media collected to the cloud.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp at which the uploader status was last updated.
+        UploaderStatus:
+          allOf:
+            - $ref: '#/components/schemas/UploaderStatus'
+            - description: The status of the latest uploader job.
+      description: The latest status of a stream’s edge to cloud uploader job.
     FormatConfigValue:
       type: string
       pattern: '^[a-zA-Z_0-9]+'
@@ -3339,6 +3567,76 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResourceEndpointListItem'
+    JobStatusDetails:
+      type: string
+    RecorderStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - USER_ERROR
+        - SYSTEM_ERROR
+    UploaderStatus:
+      type: string
+      enum:
+        - SUCCESS
+        - USER_ERROR
+        - SYSTEM_ERROR
+    ListEdgeAgentConfigurationsEdgeConfig:
+      type: object
+      properties:
+        StreamName:
+          allOf:
+            - $ref: '#/components/schemas/StreamName'
+            - description: The name of the stream.
+        StreamARN:
+          allOf:
+            - $ref: '#/components/schemas/ResourceARN'
+            - description: The Amazon Resource Name (ARN) of the stream.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp when the stream first created the edge config.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp when the stream last updated the edge config.
+        SyncStatus:
+          allOf:
+            - $ref: '#/components/schemas/SyncStatus'
+            - description: The current sync status of the stream's edge configuration.
+        FailedStatusDetails:
+          allOf:
+            - $ref: '#/components/schemas/FailedStatusDetails'
+            - description: A description of the generated failure status.
+        EdgeConfig:
+          $ref: '#/components/schemas/EdgeConfig'
+      description: A description of a single stream's edge configuration.
+    ListEdgeAgentConfigurationsEdgeConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListEdgeAgentConfigurationsEdgeConfig'
+    ListEdgeAgentConfigurationsInputLimit:
+      type: integer
+      minimum: 1
+      maximum: 10
+    ListEdgeAgentConfigurationsInput:
+      type: object
+      required:
+        - HubDeviceArn
+      title: ListEdgeAgentConfigurationsInput
+      properties:
+        HubDeviceArn:
+          allOf:
+            - $ref: '#/components/schemas/HubDeviceArn'
+            - description: The "Internet of Things (IoT) Thing" Arn of the edge agent.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListEdgeAgentConfigurationsInputLimit'
+            - description: The maximum number of edge configurations to return in the response. The default is 5.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If you specify this parameter, when the result of a <code>ListEdgeAgentConfigurations</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of edge configurations, provide this token in your next request. '
     ListStreamsInputLimit:
       type: integer
       minimum: 1
@@ -3464,7 +3762,7 @@ components:
         MediaUriSecretArn:
           allOf:
             - $ref: '#/components/schemas/MediaUriSecretArn'
-            - description: 'The AWS Secrets Manager ARN for the username and password of the camera, or a local media file location.'
+            - description: 'The Amazon Web Services Secrets Manager ARN for the username and password of the camera, or a local media file location.'
         MediaUriType:
           allOf:
             - $ref: '#/components/schemas/MediaUriType'
@@ -3484,7 +3782,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/DurationInSeconds'
             - description: 'The total duration to record the media. If the <code>ScheduleExpression</code> attribute is provided, then the <code>DurationInSeconds</code> attribute should also be specified.'
-      description: '<p>This API enables you to specify the duration that the camera, or local media file, should record onto the Edge Agent. The <code>ScheduleConfig</code> consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutes</code> attributes. </p> <p>If the <code>ScheduleExpression</code> is not provided, then the Edge Agent will always be set to recording mode.</p>'
+      description: '<p>This API enables you to specify the duration that the camera, or local media file, should record onto the Edge Agent. The <code>ScheduleConfig</code> consists of the <code>ScheduleExpression</code> and the <code>DurationInMinutes</code> attributes. </p> <p>If the <code>ScheduleConfig</code> is not provided in the <code>RecorderConfig</code>, then the Edge Agent will always be set to recording mode.</p> <p>If the <code>ScheduleConfig</code> is not provided in the <code>UploaderConfig</code>, then the Edge Agent will upload at regular intervals (every 1 hour).</p>'
     ResourceEndpoint:
       type: string
     ResourceEndpointListItem:
@@ -3498,7 +3796,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceEndpoint'
             - description: The endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
-      description: An object that describes the endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.
+      description: <p>An object that describes the endpoint of the signaling channel returned by the <code>GetSignalingChannelEndpoint</code> API.</p> <p>The media server endpoint will correspond to the <code>WEBRTC</code> Protocol.</p>
     ScheduleExpression:
       type: string
       pattern: '[^\n]{11,100}'

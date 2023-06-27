@@ -167,6 +167,12 @@ paths:
                     $ref: '#/components/schemas/BatchGetRecordIdentifier'
                   minItems: 1
                   maxItems: 10
+                ExpirationTimeResponse:
+                  description: 'Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>, <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return null.'
+                  type: string
+                  enum:
+                    - Enabled
+                    - Disabled
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -178,7 +184,7 @@ paths:
   '/FeatureGroup/{FeatureGroupName}#RecordIdentifierValueAsString&EventTime':
     delete:
       operationId: DeleteRecord
-      description: '<p>Deletes a <code>Record</code> from a <code>FeatureGroup</code> in the <code>OnlineStore</code>. Feature Store supports both <code>SOFT_DELETE</code> and <code>HARD_DELETE</code>. For <code>SOFT_DELETE</code> (default), feature columns are set to <code>null</code> and the record is no longer retrievable by <code>GetRecord</code> or <code>BatchGetRecord</code>. For<code> HARD_DELETE</code>, the complete <code>Record</code> is removed from the <code>OnlineStore</code>. In both cases, Feature Store appends the deleted record marker to the <code>OfflineStore</code> with feature values set to <code>null</code>, <code>is_deleted</code> value set to <code>True</code>, and <code>EventTime</code> set to the delete input <code>EventTime</code>.</p> <p>Note that the <code>EventTime</code> specified in <code>DeleteRecord</code> should be set later than the <code>EventTime</code> of the existing record in the <code>OnlineStore</code> for that <code>RecordIdentifer</code>. If it is not, the deletion does not occur:</p> <ul> <li> <p>For <code>SOFT_DELETE</code>, the existing (undeleted) record remains in the <code>OnlineStore</code>, though the delete record marker is still written to the <code>OfflineStore</code>.</p> </li> <li> <p> <code>HARD_DELETE</code> returns <code>EventTime</code>: <code>400 ValidationException</code> to indicate that the delete operation failed. No delete record marker is written to the <code>OfflineStore</code>.</p> </li> </ul>'
+      description: '<p>Deletes a <code>Record</code> from a <code>FeatureGroup</code> in the <code>OnlineStore</code>. Feature Store supports both <code>SoftDelete</code> and <code>HardDelete</code>. For <code>SoftDelete</code> (default), feature columns are set to <code>null</code> and the record is no longer retrievable by <code>GetRecord</code> or <code>BatchGetRecord</code>. For <code>HardDelete</code>, the complete <code>Record</code> is removed from the <code>OnlineStore</code>. In both cases, Feature Store appends the deleted record marker to the <code>OfflineStore</code> with feature values set to <code>null</code>, <code>is_deleted</code> value set to <code>True</code>, and <code>EventTime</code> set to the delete input <code>EventTime</code>.</p> <p>Note that the <code>EventTime</code> specified in <code>DeleteRecord</code> should be set later than the <code>EventTime</code> of the existing record in the <code>OnlineStore</code> for that <code>RecordIdentifer</code>. If it is not, the deletion does not occur:</p> <ul> <li> <p>For <code>SoftDelete</code>, the existing (undeleted) record remains in the <code>OnlineStore</code>, though the delete record marker is still written to the <code>OfflineStore</code>.</p> </li> <li> <p> <code>HardDelete</code> returns <code>EventTime</code>: <code>400 ValidationException</code> to indicate that the delete operation failed. No delete record marker is written to the <code>OfflineStore</code>.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -327,6 +333,15 @@ paths:
             items:
               $ref: '#/components/schemas/FeatureName'
             minItems: 1
+        - name: ExpirationTimeResponse
+          in: query
+          required: false
+          description: 'Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>, <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return null.'
+          schema:
+            type: string
+            enum:
+              - Enabled
+              - Disabled
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -398,6 +413,18 @@ paths:
                     $ref: '#/components/schemas/TargetStore'
                   minItems: 1
                   maxItems: 2
+                TtlDuration:
+                  description: 'Time to live duration, where the record is hard deleted after the expiration time is reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.'
+                  type: object
+                  properties:
+                    Unit:
+                      allOf:
+                        - $ref: '#/components/schemas/TtlDurationUnit'
+                        - description: ' <code>TtlDuration</code> time unit.'
+                    Value:
+                      allOf:
+                        - $ref: '#/components/schemas/TtlDurationValue'
+                        - description: ' <code>TtlDuration</code> time value.'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -512,6 +539,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Record'
             - description: The record you requested. A list of <code>FeatureValues</code>.
+        ExpiresAt:
+          allOf:
+            - $ref: '#/components/schemas/ExpiresAt'
+            - description: The <code>ExpiresAt</code> ISO string of the requested record.
     FeatureName:
       type: string
       pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
@@ -533,6 +564,17 @@ components:
             - $ref: '#/components/schemas/ValueAsString'
             - description: 'The value associated with a feature, in string format. Note that features types can be String, Integral, or Fractional. This value represents all three types as a string.'
       description: The value associated with a feature.
+    TtlDurationUnit:
+      type: string
+      enum:
+        - Seconds
+        - Minutes
+        - Hours
+        - Days
+        - Weeks
+    TtlDurationValue:
+      type: integer
+      minimum: 1
     ValueAsString:
       type: string
       pattern: .*
@@ -592,6 +634,11 @@ components:
         $ref: '#/components/schemas/BatchGetRecordIdentifier'
       minItems: 1
       maxItems: 10
+    ExpirationTimeResponse:
+      type: string
+      enum:
+        - Enabled
+        - Disabled
     BatchGetRecordRequest:
       type: object
       required:
@@ -602,6 +649,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BatchGetRecordIdentifiers'
             - description: 'A list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name that have been requested to be retrieved in batch.'
+        ExpirationTimeResponse:
+          allOf:
+            - $ref: '#/components/schemas/ExpirationTimeResponse'
+            - description: 'Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>, <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return null.'
     BatchGetRecordResultDetails:
       type: array
       items:
@@ -617,6 +668,8 @@ components:
       items:
         $ref: '#/components/schemas/FeatureValue'
       minItems: 1
+    ExpiresAt:
+      type: string
     BatchGetRecordResultDetail:
       type: object
       required:
@@ -636,6 +689,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Record'
             - description: The <code>Record</code> retrieved.
+        ExpiresAt:
+          allOf:
+            - $ref: '#/components/schemas/ExpiresAt'
+            - description: The <code>ExpiresAt</code> ISO string of the requested record.
       description: The output of Records that have been retrieved in a batch.
     TargetStores:
       type: array
@@ -656,6 +713,21 @@ components:
       type: object
       title: GetRecordRequest
       properties: {}
+    TtlDuration:
+      type: object
+      required:
+        - Unit
+        - Value
+      properties:
+        Unit:
+          allOf:
+            - $ref: '#/components/schemas/TtlDurationUnit'
+            - description: ' <code>TtlDuration</code> time unit.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TtlDurationValue'
+            - description: ' <code>TtlDuration</code> time value.'
+      description: 'Time to live duration, where the record is hard deleted after the expiration time is reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.'
     PutRecordRequest:
       type: object
       required:
@@ -670,5 +742,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetStores'
             - description: 'A list of stores to which you''re adding the record. By default, Feature Store adds the record to all of the stores that you''re using for the <code>FeatureGroup</code>.'
+        TtlDuration:
+          allOf:
+            - $ref: '#/components/schemas/TtlDuration'
+            - description: 'Time to live duration, where the record is hard deleted after the expiration time is reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For information on HardDelete, see the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.'
 security:
   - hmac: []
