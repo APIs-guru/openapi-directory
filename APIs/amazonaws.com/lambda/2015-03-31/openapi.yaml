@@ -814,14 +814,14 @@ paths:
                   minimum: 1
                   maximum: 10
                 StartingPosition:
-                  description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams and Amazon DocumentDB.'
+                  description: 'The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Stream event sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams, Amazon DocumentDB, Amazon MSK, and self-managed Apache Kafka.'
                   type: string
                   enum:
                     - TRIM_HORIZON
                     - LATEST
                     - AT_TIMESTAMP
                 StartingPositionTimestamp:
-                  description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
+                  description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading. <code>StartingPositionTimestamp</code> cannot be in the future.'
                   type: string
                   format: date-time
                 DestinationConfig:
@@ -1270,7 +1270,7 @@ paths:
                         - $ref: '#/components/schemas/EphemeralStorageSize'
                         - description: The size of the function's <code>/tmp</code> directory.
                 SnapStart:
-                  description: '<p>The function''s Lambda SnapStart setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.</p> <p>SnapStart is supported with the <code>java11</code> runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Improving startup performance with Lambda SnapStart</a>.</p>'
+                  description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Lambda SnapStart</a> setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.'
                   type: object
                   properties:
                     ApplyOn:
@@ -2005,6 +2005,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/TooManyRequestsException'
         '484':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '485':
           description: ResourceInUseException
           content:
             application/json:
@@ -2229,7 +2235,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}':
     delete:
       operationId: DeleteFunction
-      description: '<p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter. Otherwise, all versions and aliases are deleted.</p> <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For Amazon Web Services and resources that invoke your function directly, delete the trigger in the service where you originally configured it.</p>'
+      description: '<p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter. Otherwise, all versions and aliases are deleted. This doesn''t require the user to have explicit permissions for <a>DeleteAlias</a>.</p> <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For Amazon Web Services and resources that invoke your function directly, delete the trigger in the service where you originally configured it.</p>'
       responses:
         '204':
           description: Success
@@ -3582,7 +3588,7 @@ paths:
                         - $ref: '#/components/schemas/EphemeralStorageSize'
                         - description: The size of the function's <code>/tmp</code> directory.
                 SnapStart:
-                  description: '<p>The function''s Lambda SnapStart setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.</p> <p>SnapStart is supported with the <code>java11</code> runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Improving startup performance with Lambda SnapStart</a>.</p>'
+                  description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Lambda SnapStart</a> setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.'
                   type: object
                   properties:
                     ApplyOn:
@@ -5765,11 +5771,11 @@ components:
         StartingPosition:
           allOf:
             - $ref: '#/components/schemas/EventSourcePosition'
-            - description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams and Amazon DocumentDB.'
+            - description: 'The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Stream event sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams, Amazon DocumentDB, Amazon MSK, and self-managed Apache Kafka.'
         StartingPositionTimestamp:
           allOf:
             - $ref: '#/components/schemas/Date'
-            - description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
+            - description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading. <code>StartingPositionTimestamp</code> cannot be in the future.'
         BatchSize:
           allOf:
             - $ref: '#/components/schemas/BatchSize'
@@ -7373,11 +7379,11 @@ components:
         StartingPosition:
           allOf:
             - $ref: '#/components/schemas/EventSourcePosition'
-            - description: 'The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams and Amazon DocumentDB.'
+            - description: 'The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB Stream event sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis streams, Amazon DocumentDB, Amazon MSK, and self-managed Apache Kafka.'
         StartingPositionTimestamp:
           allOf:
             - $ref: '#/components/schemas/Date'
-            - description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading.'
+            - description: 'With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start reading. <code>StartingPositionTimestamp</code> cannot be in the future.'
         DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/DestinationConfig'
@@ -7562,7 +7568,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SnapStartApplyOn'
             - description: Set to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.
-      description: '<p>The function''s Lambda SnapStart setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.</p> <p>SnapStart is supported with the <code>java11</code> runtime. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Improving startup performance with Lambda SnapStart</a>.</p>'
+      description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html">Lambda SnapStart</a> setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a snapshot of the initialized execution environment when you publish a function version.'
     CreateFunctionRequest:
       type: object
       required:

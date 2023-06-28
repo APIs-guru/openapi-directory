@@ -14385,7 +14385,7 @@ components:
         PipelineDefinition:
           allOf:
             - $ref: '#/components/schemas/PipelineDefinition'
-            - description: The JSON pipeline definition of the pipeline.
+            - description: 'The <a href="https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/">JSON pipeline definition</a> of the pipeline.'
         PipelineDefinitionS3Location:
           allOf:
             - $ref: '#/components/schemas/PipelineDefinitionS3Location'
@@ -36317,6 +36317,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The risk rating of the model. Different organizations might have different criteria for model card risk ratings. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html">Risk ratings</a>.'
+        ModelPackageGroupName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The model package group that contains the model package. Only relevant for model cards created for model packages in the Amazon SageMaker Model Registry. '
       description: An Amazon SageMaker Model Card.
     ModelCardExportJobSummary:
       type: object

@@ -211,6 +211,18 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 100
+                HealthEventsConfig:
+                  description: 'A complex type for the configuration. Defines the health event threshold percentages, for performance score and availability score. Amazon CloudWatch Internet Monitor creates a health event when there''s an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you don''t set a health event threshold, the default value is 95%.'
+                  type: object
+                  properties:
+                    AvailabilityScoreThreshold:
+                      allOf:
+                        - $ref: '#/components/schemas/Percentage'
+                        - description: The health event threshold percentage set for availability scores.
+                    PerformanceScoreThreshold:
+                      allOf:
+                        - $ref: '#/components/schemas/Percentage'
+                        - description: The health event threshold percentage set for performance scores.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -473,6 +485,18 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 100
+                HealthEventsConfig:
+                  description: 'A complex type for the configuration. Defines the health event threshold percentages, for performance score and availability score. Amazon CloudWatch Internet Monitor creates a health event when there''s an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you don''t set a health event threshold, the default value is 95%.'
+                  type: object
+                  properties:
+                    AvailabilityScoreThreshold:
+                      allOf:
+                        - $ref: '#/components/schemas/Percentage'
+                        - description: The health event threshold percentage set for availability scores.
+                    PerformanceScoreThreshold:
+                      allOf:
+                        - $ref: '#/components/schemas/Percentage'
+                        - description: The health event threshold percentage set for performance scores.
   '/v20210603/Monitors/{MonitorName}/HealthEvents/{EventId}':
     get:
       operationId: GetHealthEvent
@@ -910,6 +934,11 @@ components:
             - $ref: '#/components/schemas/LogDeliveryStatus'
             - description: The status of publishing Internet Monitor internet measurements to an Amazon S3 bucket.
       description: 'The configuration for publishing Amazon CloudWatch Internet Monitor internet measurements to Amazon S3. The configuration includes the bucket name and (optionally) prefix for the S3 bucket to store the measurements, and the delivery status. The delivery status is <code>ENABLED</code> or <code>DISABLED</code>, depending on whether you choose to deliver internet measurements to S3 logs.'
+    Percentage:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 100
     InternalServerException: {}
     AccessDeniedException: {}
     ThrottlingException: {}
@@ -970,6 +999,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HealthEventImpactType'
             - description: The type of impairment of a specific health event.
+        HealthScoreThreshold:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The threshold percentage for health events when Amazon CloudWatch Internet Monitor creates a health event.
     GetMonitorOutput:
       type: object
       required:
@@ -1028,6 +1061,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TrafficPercentageToMonitor'
             - description: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+        HealthEventsConfig:
+          allOf:
+            - $ref: '#/components/schemas/HealthEventsConfig'
+            - description: 'The list of health event thresholds. A health event threshold percentage, for performance and availability, determines the level of impact at which Amazon CloudWatch Internet Monitor creates a health event when there''s an internet issue that affects your application end users.'
     ListHealthEventsOutput:
       type: object
       required:
@@ -1142,6 +1179,18 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    HealthEventsConfig:
+      type: object
+      properties:
+        AvailabilityScoreThreshold:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The health event threshold percentage set for availability scores.
+        PerformanceScoreThreshold:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The health event threshold percentage set for performance scores.
+      description: 'A complex type for the configuration. Defines the health event threshold percentages, for performance score and availability score. Amazon CloudWatch Internet Monitor creates a health event when there''s an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you don''t set a health event threshold, the default value is 95%.'
     CreateMonitorInput:
       type: object
       required:
@@ -1176,6 +1225,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TrafficPercentageToMonitor'
             - description: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+        HealthEventsConfig:
+          allOf:
+            - $ref: '#/components/schemas/HealthEventsConfig'
+            - description: 'Defines the health event threshold percentages, for performance score and availability score. Internet Monitor creates a health event when there''s an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you don''t set a health event threshold, the default calue is 95%.'
     MonitorArn:
       type: string
       pattern: 'arn:.*'
@@ -1282,6 +1335,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HealthEventImpactType'
             - description: The type of impairment for a health event.
+        HealthScoreThreshold:
+          allOf:
+            - $ref: '#/components/schemas/Percentage'
+            - description: The value of the threshold percentage for performance or availability that was configured when Amazon CloudWatch Internet Monitor created the health event.
       description: Information about a health event created in a monitor in Amazon CloudWatch Internet Monitor.
     HealthEventList:
       type: array
@@ -1550,5 +1607,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/TrafficPercentageToMonitor'
             - description: The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.
+        HealthEventsConfig:
+          allOf:
+            - $ref: '#/components/schemas/HealthEventsConfig'
+            - description: 'The list of health event thresholds. A health event threshold percentage, for performance and availability, determines when Internet Monitor creates a health event when there''s an internet issue that affects your application end users.'
 security:
   - hmac: []

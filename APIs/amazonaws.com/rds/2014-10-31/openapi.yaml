@@ -3787,6 +3787,32 @@ paths:
           description: '<p>The Active Directory directory ID to create the DB instance in. Currently, only Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html"> Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p> <p>This setting doesn''t apply to the following DB instances:</p> <ul> <li> <p>Amazon Aurora (The domain is managed by the DB cluster.)</p> </li> <li> <p>RDS Custom</p> </li> </ul>'
           schema:
             type: string
+        - name: DomainFqdn
+          in: query
+          required: false
+          description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainOu
+          in: query
+          required: false
+          description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainAuthSecretArn
+          in: query
+          required: false
+          description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+          schema:
+            type: string
+        - name: DomainDnsIps
+          in: query
+          required: false
+          description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
         - name: CopyTagsToSnapshot
           in: query
           required: false
@@ -4448,6 +4474,32 @@ paths:
           description: <p>The name of the IAM role to be used when making API calls to the Directory Service.</p> <p>This setting doesn't apply to RDS Custom.</p>
           schema:
             type: string
+        - name: DomainFqdn
+          in: query
+          required: false
+          description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainOu
+          in: query
+          required: false
+          description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainAuthSecretArn
+          in: query
+          required: false
+          description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+          schema:
+            type: string
+        - name: DomainDnsIps
+          in: query
+          required: false
+          description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
         - name: ReplicaMode
           in: query
           required: false
@@ -15012,6 +15064,32 @@ paths:
           description: '<p>The Active Directory directory ID to move the DB instance to. Specify <code>none</code> to remove the instance from its current domain. You must create the domain before this operation. Currently, you can create only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an Active Directory Domain.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html"> Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p> <p>This setting doesn''t apply to RDS Custom DB instances.</p>'
           schema:
             type: string
+        - name: DomainFqdn
+          in: query
+          required: false
+          description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainOu
+          in: query
+          required: false
+          description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainAuthSecretArn
+          in: query
+          required: false
+          description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+          schema:
+            type: string
+        - name: DomainDnsIps
+          in: query
+          required: false
+          description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
         - name: CopyTagsToSnapshot
           in: query
           required: false
@@ -15048,6 +15126,12 @@ paths:
           description: <p>The name of the IAM role to use when making API calls to the Directory Service.</p> <p>This setting doesn't apply to RDS Custom DB instances.</p>
           schema:
             type: string
+        - name: DisableDomain
+          in: query
+          required: false
+          description: 'Boolean. If present, removes the instance from the Active Directory domain.'
+          schema:
+            type: boolean
         - name: PromotionTier
           in: query
           required: false
@@ -20091,6 +20175,32 @@ paths:
           description: '<p>Specify the Active Directory directory ID to restore the DB instance in. The domain/ must be created prior to this operation. Currently, you can create only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an Active Directory Domain.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html"> Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p> <p>This setting doesn''t apply to RDS Custom.</p>'
           schema:
             type: string
+        - name: DomainFqdn
+          in: query
+          required: false
+          description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainOu
+          in: query
+          required: false
+          description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainAuthSecretArn
+          in: query
+          required: false
+          description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Constraints:</p> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+          schema:
+            type: string
+        - name: DomainDnsIps
+          in: query
+          required: false
+          description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
         - name: CopyTagsToSnapshot
           in: query
           required: false
@@ -21273,6 +21383,32 @@ paths:
           description: <p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p> <p>This setting doesn't apply to RDS Custom.</p>
           schema:
             type: string
+        - name: DomainFqdn
+          in: query
+          required: false
+          description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainOu
+          in: query
+          required: false
+          description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+          schema:
+            type: string
+        - name: DomainAuthSecretArn
+          in: query
+          required: false
+          description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+          schema:
+            type: string
+        - name: DomainDnsIps
+          in: query
+          required: false
+          description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
         - name: EnableIAMDatabaseAuthentication
           in: query
           required: false
@@ -26788,6 +26924,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>The Active Directory directory ID to create the DB instance in. Currently, only Microsoft SQL Server, MySQL, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html"> Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p> <p>This setting doesn''t apply to the following DB instances:</p> <ul> <li> <p>Amazon Aurora (The domain is managed by the DB cluster.)</p> </li> <li> <p>RDS Custom</p> </li> </ul>'
+        DomainFqdn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+        DomainOu:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+        DomainAuthSecretArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+        DomainDnsIps:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
         CopyTagsToSnapshot:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -27006,6 +27158,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: <p>The name of the IAM role to be used when making API calls to the Directory Service.</p> <p>This setting doesn't apply to RDS Custom.</p>
+        DomainFqdn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+        DomainOu:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+        DomainAuthSecretArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+        DomainDnsIps:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
         ReplicaMode:
           allOf:
             - $ref: '#/components/schemas/ReplicaMode'
@@ -30063,11 +30231,23 @@ components:
         FQDN:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The fully qualified domain name of the Active Directory Domain.
+            - description: The fully qualified domain name (FQDN) of the Active Directory Domain.
         IAMRoleName:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The name of the IAM role to be used when making API calls to the Directory Service.
+        OU:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Active Directory organizational unit for your DB instance to join.
+        AuthSecretArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.
+        DnsIps:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
       description: An Active Directory Domain membership record associated with the DB instance or cluster.
     Double:
       type: number
@@ -30767,6 +30947,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>The Active Directory directory ID to move the DB instance to. Specify <code>none</code> to remove the instance from its current domain. You must create the domain before this operation. Currently, you can create only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an Active Directory Domain.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html"> Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p> <p>This setting doesn''t apply to RDS Custom DB instances.</p>'
+        DomainFqdn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+        DomainOu:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+        DomainAuthSecretArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+        DomainDnsIps:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
         CopyTagsToSnapshot:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -30791,6 +30987,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: <p>The name of the IAM role to use when making API calls to the Directory Service.</p> <p>This setting doesn't apply to RDS Custom DB instances.</p>
+        DisableDomain:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'Boolean. If present, removes the instance from the Active Directory domain.'
         PromotionTier:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -32453,6 +32653,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>Specify the Active Directory directory ID to restore the DB instance in. The domain/ must be created prior to this operation. Currently, you can create only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances in an Active Directory Domain.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html"> Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p> <p>This setting doesn''t apply to RDS Custom.</p>'
+        DomainFqdn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+        DomainOu:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+        DomainAuthSecretArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Constraints:</p> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+        DomainDnsIps:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
         CopyTagsToSnapshot:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -32818,6 +33034,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: <p>Specify the name of the IAM role to be used when making API calls to the Directory Service.</p> <p>This setting doesn't apply to RDS Custom.</p>
+        DomainFqdn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the fully qualified domain name of an Active Directory domain.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>mymanagedADtest.mymanagedAD.mydomain</code> </p>'
+        DomainOu:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Active Directory organizational unit for your DB instance to join.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the distinguished name format.</p> </li> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain</code> </p>'
+        DomainAuthSecretArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The ARN for the Secrets Manager secret that contains the credentials for the user performing the domain join.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be greater than 64 characters.</p> </li> </ul> <p>Example: <code>arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456</code> </p>'
+        DomainDnsIps:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: '<p>The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.</p> <p>Constraints:</p> <ul> <li> <p>Two IP addresses must be provided. If there isn''t a secondary domain controller, use the IP address of the primary domain controller for both entries in the list.</p> </li> </ul> <p>Example: <code>123.124.125.126,234.235.236.237</code> </p>'
         EnableIAMDatabaseAuthentication:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
