@@ -2135,6 +2135,16 @@ components:
           format: int64
           readOnly: true
           type: string
+        languageCode:
+          description: Language of the model.
+          type: string
+        modelType:
+          description: Type of the model.
+          enum:
+            - MODEL_TYPE_UNSPECIFIED
+            - TYPE_V1
+            - TYPE_V2
+          type: string
         name:
           description: "Immutable. The resource name of the issue model. Format: projects/{project}/locations/{location}/issueModels/{issue_model}"
           type: string
@@ -3591,6 +3601,16 @@ components:
           description: Output only. Number of issues in this issue model.
           format: int64
           readOnly: true
+          type: string
+        languageCode:
+          description: Language of the model.
+          type: string
+        modelType:
+          description: Type of the model.
+          enum:
+            - MODEL_TYPE_UNSPECIFIED
+            - TYPE_V1
+            - TYPE_V2
           type: string
         name:
           description: "Immutable. The resource name of the issue model. Format: projects/{project}/locations/{location}/issueModels/{issue_model}"

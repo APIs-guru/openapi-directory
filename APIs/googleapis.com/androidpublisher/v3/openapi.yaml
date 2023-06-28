@@ -4344,6 +4344,34 @@ components:
       schema:
         type: string
   schemas:
+    Abi:
+      description: Represents an Abi.
+      properties:
+        alias:
+          description: Alias for an abi.
+          enum:
+            - UNSPECIFIED_CPU_ARCHITECTURE
+            - ARMEABI
+            - ARMEABI_V7A
+            - ARM64_V8A
+            - X86
+            - X86_64
+          type: string
+      type: object
+    AbiTargeting:
+      description: Targeting based on Abi.
+      properties:
+        alternatives:
+          description: Targeting of other sibling directories that were in the Bundle. For main splits this is targeting of other main splits.
+          items:
+            $ref: "#/components/schemas/Abi"
+          type: array
+        value:
+          description: Value of an abi.
+          items:
+            $ref: "#/components/schemas/Abi"
+          type: array
+      type: object
     AcquisitionTargetingRule:
       description: "Represents a targeting rule of the form: User never had {scope} before."
       properties:
@@ -4379,6 +4407,62 @@ components:
         sha256:
           description: A sha256 hash of the APK payload, encoded as a hex string and matching the output of the sha256sum command.
           type: string
+      type: object
+    ApkDescription:
+      description: Description of the created apks.
+      properties:
+        assetSliceMetadata:
+          $ref: "#/components/schemas/SplitApkMetadata"
+          description: Set only for asset slices.
+        instantApkMetadata:
+          $ref: "#/components/schemas/SplitApkMetadata"
+          description: Set only for Instant split APKs.
+        path:
+          description: "Path of the Apk, will be in the following format: .apk where DownloadId is the ID used to download the apk using GeneratedApks.Download API."
+          type: string
+        splitApkMetadata:
+          $ref: "#/components/schemas/SplitApkMetadata"
+          description: Set only for Split APKs.
+        standaloneApkMetadata:
+          $ref: "#/components/schemas/StandaloneApkMetadata"
+          description: Set only for standalone APKs.
+        targeting:
+          $ref: "#/components/schemas/ApkTargeting"
+          description: Apk-level targeting.
+      type: object
+    ApkSet:
+      description: A set of apks representing a module.
+      properties:
+        apkDescription:
+          description: Description of the generated apks.
+          items:
+            $ref: "#/components/schemas/ApkDescription"
+          type: array
+        moduleMetadata:
+          $ref: "#/components/schemas/ModuleMetadata"
+          description: Metadata about the module represented by this ApkSet
+      type: object
+    ApkTargeting:
+      description: Represents a set of apk-level targetings.
+      properties:
+        abiTargeting:
+          $ref: "#/components/schemas/AbiTargeting"
+          description: The abi that the apk targets
+        languageTargeting:
+          $ref: "#/components/schemas/LanguageTargeting"
+          description: The language that the apk targets
+        multiAbiTargeting:
+          $ref: "#/components/schemas/MultiAbiTargeting"
+          description: Multi-api-level targeting.
+        screenDensityTargeting:
+          $ref: "#/components/schemas/ScreenDensityTargeting"
+          description: The screen density that this apk supports.
+        sdkVersionTargeting:
+          $ref: "#/components/schemas/SdkVersionTargeting"
+          description: The sdk version that the apk targets
+        textureCompressionFormatTargeting:
+          $ref: "#/components/schemas/TextureCompressionFormatTargeting"
+          description: Texture-compression-format-level targeting
       type: object
     ApksAddExternallyHostedRequest:
       description: Request to create a new externally hosted APK.
@@ -4437,6 +4521,33 @@ components:
     ArchiveSubscriptionRequest:
       description: Request message for ArchiveSubscription.
       properties: {}
+      type: object
+    AssetModuleMetadata:
+      description: Metadata of an asset module.
+      properties:
+        deliveryType:
+          description: Indicates the delivery type for persistent install.
+          enum:
+            - UNKNOWN_DELIVERY_TYPE
+            - INSTALL_TIME
+            - ON_DEMAND
+            - FAST_FOLLOW
+          type: string
+        name:
+          description: Module name.
+          type: string
+      type: object
+    AssetSliceSet:
+      description: Set of asset slices belonging to a single asset module.
+      properties:
+        apkDescription:
+          description: Asset slices.
+          items:
+            $ref: "#/components/schemas/ApkDescription"
+          type: array
+        assetModuleMetadata:
+          $ref: "#/components/schemas/AssetModuleMetadata"
+          description: Module level metadata.
       type: object
     AutoRenewingBasePlanType:
       description: Represents a base plan that automatically renews at the end of its subscription period.
@@ -4682,6 +4793,24 @@ components:
     DeveloperInitiatedCancellation:
       description: Information specific to cancellations initiated by developers.
       properties: {}
+      type: object
+    DeviceFeature:
+      description: Represents a device feature.
+      properties:
+        featureName:
+          description: Name of the feature.
+          type: string
+        featureVersion:
+          description: The feature version specified by android:glEsVersion or android:version in in the AndroidManifest.
+          format: int32
+          type: integer
+      type: object
+    DeviceFeatureTargeting:
+      description: Targeting for a device feature.
+      properties:
+        requiredFeature:
+          $ref: "#/components/schemas/DeviceFeature"
+          description: Feature of the device.
       type: object
     DeviceGroup:
       description: A group of devices. A group is defined by a set of device selectors. A device belongs to the group if it matches any selector (logical OR).
@@ -5056,6 +5185,9 @@ components:
         generatedUniversalApk:
           $ref: "#/components/schemas/GeneratedUniversalApk"
           description: Generated universal APK, signed with a key corresponding to certificate_sha256_hash. This field is not set if no universal APK was generated for this signing key.
+        targetingInfo:
+          $ref: "#/components/schemas/TargetingInfo"
+          description: Contains targeting information about the generated apks.
       type: object
     GeneratedAssetPackSlice:
       description: Download metadata for an asset pack slice.
@@ -5299,6 +5431,20 @@ components:
           description: Introductory price period, specified in ISO 8601 format. Common values are (but not limited to) "P1W" (one week), "P1M" (one month), "P3M" (three months), "P6M" (six months), and "P1Y" (one year).
           type: string
       type: object
+    LanguageTargeting:
+      description: Targeting based on language.
+      properties:
+        alternatives:
+          description: Alternative languages.
+          items:
+            type: string
+          type: array
+        value:
+          description: "ISO-639: 2 or 3 letter language code."
+          items:
+            type: string
+          type: array
+      type: object
     ListDeviceTierConfigsResponse:
       description: Response listing existing device tier configs.
       properties:
@@ -5420,6 +5566,50 @@ components:
       description: Response message for MigrateBasePlanPrices.
       properties: {}
       type: object
+    ModuleMetadata:
+      description: Metadata of a module.
+      properties:
+        deliveryType:
+          description: Indicates the delivery type (e.g. on-demand) of the module.
+          enum:
+            - UNKNOWN_DELIVERY_TYPE
+            - INSTALL_TIME
+            - ON_DEMAND
+            - FAST_FOLLOW
+          type: string
+        dependencies:
+          description: Names of the modules that this module directly depends on. Each module implicitly depends on the base module.
+          items:
+            type: string
+          type: array
+        moduleType:
+          description: Indicates the type of this feature module.
+          enum:
+            - UNKNOWN_MODULE_TYPE
+            - FEATURE_MODULE
+          type: string
+        name:
+          description: Module name.
+          type: string
+        targeting:
+          $ref: "#/components/schemas/ModuleTargeting"
+          description: The targeting that makes a conditional module installed. Relevant only for Split APKs.
+      type: object
+    ModuleTargeting:
+      description: Targeting on the module level.
+      properties:
+        deviceFeatureTargeting:
+          description: Targeting for device features.
+          items:
+            $ref: "#/components/schemas/DeviceFeatureTargeting"
+          type: array
+        sdkVersionTargeting:
+          $ref: "#/components/schemas/SdkVersionTargeting"
+          description: The sdk version that the variant targets
+        userCountriesTargeting:
+          $ref: "#/components/schemas/UserCountriesTargeting"
+          description: Countries-level targeting
+      type: object
     Money:
       description: Represents an amount of money with its currency type.
       properties:
@@ -5434,6 +5624,29 @@ components:
           description: The whole units of the amount. For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
           format: int64
           type: string
+      type: object
+    MultiAbi:
+      description: Represents a list of apis.
+      properties:
+        abi:
+          description: A list of targeted ABIs, as represented by the Android Platform
+          items:
+            $ref: "#/components/schemas/Abi"
+          type: array
+      type: object
+    MultiAbiTargeting:
+      description: Targeting based on multiple abis.
+      properties:
+        alternatives:
+          description: Targeting of other sibling directories that were in the Bundle. For main splits this is targeting of other main splits.
+          items:
+            $ref: "#/components/schemas/MultiAbi"
+          type: array
+        value:
+          description: Value of a multi abi.
+          items:
+            $ref: "#/components/schemas/MultiAbi"
+          type: array
       type: object
     OfferDetails:
       description: Offer details information related to a purchase line item.
@@ -5803,6 +6016,98 @@ components:
         result:
           $ref: "#/components/schemas/ReviewReplyResult"
           description: The result of replying/updating a reply to review.
+      type: object
+    ScreenDensity:
+      description: Represents a screen density.
+      properties:
+        densityAlias:
+          description: Alias for a screen density.
+          enum:
+            - DENSITY_UNSPECIFIED
+            - NODPI
+            - LDPI
+            - MDPI
+            - TVDPI
+            - HDPI
+            - XHDPI
+            - XXHDPI
+            - XXXHDPI
+          type: string
+        densityDpi:
+          description: Value for density dpi.
+          format: int32
+          type: integer
+      type: object
+    ScreenDensityTargeting:
+      description: Targeting based on screen density.
+      properties:
+        alternatives:
+          description: Targeting of other sibling directories that were in the Bundle. For main splits this is targeting of other main splits.
+          items:
+            $ref: "#/components/schemas/ScreenDensity"
+          type: array
+        value:
+          description: Value of a screen density.
+          items:
+            $ref: "#/components/schemas/ScreenDensity"
+          type: array
+      type: object
+    SdkVersion:
+      description: Represents an sdk version.
+      properties:
+        min:
+          description: Inclusive minimum value of an sdk version.
+          format: int32
+          type: integer
+      type: object
+    SdkVersionTargeting:
+      description: Targeting based on sdk version.
+      properties:
+        alternatives:
+          description: Targeting of other sibling directories that were in the Bundle. For main splits this is targeting of other main splits.
+          items:
+            $ref: "#/components/schemas/SdkVersion"
+          type: array
+        value:
+          description: Value of an sdk version.
+          items:
+            $ref: "#/components/schemas/SdkVersion"
+          type: array
+      type: object
+    SplitApkMetadata:
+      description: Holds data specific to Split APKs.
+      properties:
+        isMasterSplit:
+          description: Indicates whether this APK is the main split of the module.
+          type: boolean
+        splitId:
+          description: Id of the split.
+          type: string
+      type: object
+    SplitApkVariant:
+      description: Variant is a group of APKs that covers a part of the device configuration space. APKs from multiple variants are never combined on one device.
+      properties:
+        apkSet:
+          description: Set of APKs, one set per module.
+          items:
+            $ref: "#/components/schemas/ApkSet"
+          type: array
+        targeting:
+          $ref: "#/components/schemas/VariantTargeting"
+          description: Variant-level targeting.
+        variantNumber:
+          description: Number of the variant, starting at 0 (unless overridden). A device will receive APKs from the first variant that matches the device configuration, with higher variant numbers having priority over lower variant numbers.
+          format: int32
+          type: integer
+      type: object
+    StandaloneApkMetadata:
+      description: Holds data specific to Standalone APKs.
+      properties:
+        fusedModuleName:
+          description: Names of the modules fused in this standalone APK.
+          items:
+            type: string
+          type: array
       type: object
     SubscribeWithGoogleInfo:
       description: Information associated with purchases made with 'Subscribe with Google'.
@@ -6244,6 +6549,23 @@ components:
       description: Information specific to cancellations initiated by Google system.
       properties: {}
       type: object
+    TargetingInfo:
+      description: Targeting information about the generated apks.
+      properties:
+        assetSliceSet:
+          description: List of created asset slices.
+          items:
+            $ref: "#/components/schemas/AssetSliceSet"
+          type: array
+        packageName:
+          description: The package name of this app.
+          type: string
+        variant:
+          description: List of the created variants.
+          items:
+            $ref: "#/components/schemas/SplitApkVariant"
+          type: array
+      type: object
     TargetingRuleScope:
       description: Defines the scope of subscriptions which a targeting rule can match to target offers to users based on past or current entitlement.
       properties:
@@ -6262,6 +6584,39 @@ components:
           description: All testing Google Groups, as email addresses.
           items:
             type: string
+          type: array
+      type: object
+    TextureCompressionFormat:
+      description: Represents texture compression format.
+      properties:
+        alias:
+          description: Alias for texture compression format.
+          enum:
+            - UNSPECIFIED_TEXTURE_COMPRESSION_FORMAT
+            - ETC1_RGB8
+            - PALETTED
+            - THREE_DC
+            - ATC
+            - LATC
+            - DXT1
+            - S3TC
+            - PVRTC
+            - ASTC
+            - ETC2
+          type: string
+      type: object
+    TextureCompressionFormatTargeting:
+      description: Targeting by a texture compression format.
+      properties:
+        alternatives:
+          description: List of alternative TCFs (TCFs targeted by the sibling splits).
+          items:
+            $ref: "#/components/schemas/TextureCompressionFormat"
+          type: array
+        value:
+          description: The list of targeted TCFs. Should not be empty.
+          items:
+            $ref: "#/components/schemas/TextureCompressionFormat"
           type: array
       type: object
     Timestamp:
@@ -6485,6 +6840,18 @@ components:
           format: int32
           type: integer
       type: object
+    UserCountriesTargeting:
+      description: Describes an inclusive/exclusive list of country codes that module targets.
+      properties:
+        countryCodes:
+          description: List of country codes in the two-letter CLDR territory format.
+          items:
+            type: string
+          type: array
+        exclude:
+          description: Indicates if the list above is exclusive.
+          type: boolean
+      type: object
     UserCountrySet:
       description: A set of user countries. A country set determines what variation of app content gets served to a specific location.
       properties:
@@ -6530,6 +6897,25 @@ components:
           format: uint32
           readOnly: true
           type: integer
+      type: object
+    VariantTargeting:
+      description: Targeting on the level of variants.
+      properties:
+        abiTargeting:
+          $ref: "#/components/schemas/AbiTargeting"
+          description: The abi that the variant targets
+        multiAbiTargeting:
+          $ref: "#/components/schemas/MultiAbiTargeting"
+          description: Multi-api-level targeting
+        screenDensityTargeting:
+          $ref: "#/components/schemas/ScreenDensityTargeting"
+          description: The screen densities that this variant supports
+        sdkVersionTargeting:
+          $ref: "#/components/schemas/SdkVersionTargeting"
+          description: The sdk version that the variant targets
+        textureCompressionFormatTargeting:
+          $ref: "#/components/schemas/TextureCompressionFormatTargeting"
+          description: Texture-compression-format-level targeting
       type: object
     VoidedPurchase:
       description: A VoidedPurchase resource indicates a purchase that was either canceled/refunded/charged-back.

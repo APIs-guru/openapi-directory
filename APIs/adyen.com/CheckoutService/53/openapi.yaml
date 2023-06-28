@@ -1147,6 +1147,8 @@ paths:
                 $ref: "#/components/examples/post-payments-card-3d-secure-2-web"
               card-3d-secure-direct:
                 $ref: "#/components/examples/post-payments-card-3d-secure-direct"
+              card-3d-secure-securedfields:
+                $ref: "#/components/examples/post-payments-card-3d-secure-securedfields"
               card-direct:
                 $ref: "#/components/examples/post-payments-card-direct"
               card-securedfields:
@@ -1182,12 +1184,16 @@ paths:
           content:
             application/json:
               examples:
+                card-3d-secure-2-web:
+                  $ref: "#/components/examples/post-payments-card-3d-secure-2-web-200"
+                card-3d-secure-direct:
+                  $ref: "#/components/examples/post-payments-card-3d-secure-direct-200"
+                card-3d-secure-securedfields:
+                  $ref: "#/components/examples/post-payments-card-3d-secure-securedfields-200"
                 card-direct:
                   $ref: "#/components/examples/post-payments-card-direct-200"
                 card-securedfields:
                   $ref: "#/components/examples/post-payments-card-securedfields-200"
-                enableOneClick-SF:
-                  $ref: "#/components/examples/post-payments-enableOneClick-SF-200"
                 enableOneClick-raw:
                   $ref: "#/components/examples/post-payments-enableOneClick-raw-200"
                 giropay:
@@ -4496,10 +4502,12 @@ components:
     post-payments-card-3d-secure-2-web:
       summary: Make a card payment with 3D Secure 2 native authentication
       value:
+        accountInfo:
+          accountCreationDate: 2019-01-17T13:42:40+01:00
         additionalData:
           allow3DS2: "true"
         amount:
-          currency: EUR
+          currency: USD
           value: 1000
         billingAddress:
           city: New York
@@ -4521,30 +4529,39 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         origin: https://your-company.com
         paymentMethod:
-          encryptedCardNumber: test_4035501428146300
-          encryptedExpiryMonth: test_03
-          encryptedExpiryYear: test_2030
-          encryptedSecurityCode: test_737
+          cvc: "737"
+          expiryMonth: "03"
+          expiryYear: "2030"
           holderName: John Smith
+          number: "4917610000000000"
           type: scheme
         reference: YOUR_ORDER_NUMBER
         returnUrl: https://your-company.com/checkout/
         shopperEmail: s.hopper@test.com
         shopperIP: 192.0.2.1
+    post-payments-card-3d-secure-2-web-200:
+      summary: Successful card payment with 3D Secure 2 native authentication
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: 8PQMP9TI1O2
+          authCode: "044410"
+          avsResult: 4 AVS not supported for this card type
+          avsResultRaw: "4"
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          refusalReasonRaw: AUTHORISED
+        pspReference: 993617895005515H
+        resultCode: Authorised
     post-payments-card-3d-secure-direct:
-      summary: Make card payment with 3D Secure redirect authentication
+      summary: Make a card payment with 3D Secure redirect authentication
       value:
         amount:
           currency: USD
           value: 1000
         browserInfo:
           acceptHeader: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-          colorDepth: 10
           javaEnabled: true
-          language: en
-          screenHeight: 2000
-          screenWidth: 3000
-          timeZoneOffset: 5
           userAgent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9) Gecko/2008052912 Firefox/3.0
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
@@ -4556,6 +4573,50 @@ components:
           type: scheme
         reference: Your order number
         returnUrl: https://your-company.com/...
+    post-payments-card-3d-secure-direct-200:
+      summary: Successful card payment with 3D Secure redirect authentication
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: 8PQMP9SJ7DN
+          authCode: "074516"
+          avsResult: 4 AVS not supported for this card type
+          avsResultRaw: "4"
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          refusalReasonRaw: AUTHORISED
+        pspReference: 993617894903480A
+        resultCode: Authorised
+    post-payments-card-3d-secure-securedfields:
+      summary: Make a payment with 3D Secure 2 native authentication, using encrypted card details
+      value:
+        amount:
+          currency: USD
+          value: 1000
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        paymentMethod:
+          encryptedCardNumber: test_4212345678901237
+          encryptedExpiryMonth: test_03
+          encryptedExpiryYear: test_2030
+          encryptedSecurityCode: test_737
+          holderName: John Smith
+          type: scheme
+        reference: Your order number
+        returnUrl: https://your-company.com/...
+    post-payments-card-3d-secure-securedfields-200:
+      summary: Successful payment with 3D Secure 2 native authentication, using encrypted card details
+      value:
+        additionalData:
+          acquirerCode: TestPmmAcquirer
+          acquirerReference: 8PQMP9SJH66
+          authCode: "083996"
+          avsResult: 4 AVS not supported for this card type
+          avsResultRaw: "4"
+          cvcResult: 1 Matches
+          cvcResultRaw: M
+          refusalReasonRaw: AUTHORISED
+        pspReference: 993617894905481G
+        resultCode: Authorised
     post-payments-card-direct:
       summary: Make a card payment
       value:
@@ -4573,22 +4634,21 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-direct-200:
-      summary: Example response for request 'card-direct'
+      summary: Successful card payment
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9VEP3H
-          authCode: "044925"
+          acquirerReference: 8PQMP9SJQUL
+          authCode: "036240"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
           cvcResultRaw: M
           refusalReasonRaw: AUTHORISED
-        merchantReference: string
-        pspReference: 993617895204576J
+        pspReference: 993617894906488A
         resultCode: Authorised
     post-payments-card-securedfields:
-      summary: Make a card payment (using encrypted card details)
+      summary: Make a card payment using encrypted card details
       value:
         amount:
           currency: USD
@@ -4603,19 +4663,18 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-securedfields-200:
-      summary: Example response for request 'card-securedfields'
+      summary: Successful card payment using encrypted card details
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9VIE9N
-          authCode: "065696"
+          acquirerReference: 8PQMP9SM92L
+          authCode: "064649"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
           cvcResultRaw: M
           refusalReasonRaw: AUTHORISED
-        merchantReference: string
-        pspReference: 993617895215577D
+        pspReference: 993617894914488A
         resultCode: Authorised
     post-payments-details-3d-secure:
       summary: "Submit details for the 3D Secure payment "
@@ -4643,42 +4702,21 @@ components:
           redirectResult: X6XtfGC3!Y...
         paymentData: Ab02b4c0!BQABAgCJN1wRZuGJmq8dMncmypvknj9s7l5Tj...
     post-payments-enableOneClick-SF:
-      summary: Tokenize card details for one-off payments (using encrypted card details)
+      summary: Tokenize card details for one-off payments, using encrypted card details
       value:
         amount:
           currency: USD
           value: 1000
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
-          encryptedCardNumber: test_4111111111111111
-          encryptedExpiryMonth: test_03
-          encryptedExpiryYear: test_2030
-          encryptedSecurityCode: test_737
+          encryptedCardNumber: adyenjs_0_1_18$MT6ppy0FAMVMLH...
+          encryptedExpiryMonth: adyenjs_0_1_18$MT6ppy0FAMVMLH...
+          encryptedExpiryYear: adyenjs_0_1_18$MT6ppy0FAMVMLH...
+          encryptedSecurityCode: adyenjs_0_1_18$MT6ppy0FAMVMLH...
           type: scheme
-        recurringProcessingModel: CardOnFile
         reference: Your order number
         returnUrl: https://your-company.com/...
-        shopperInteraction: Ecommerce
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
-        storePaymentMethod: true
-    post-payments-enableOneClick-SF-200:
-      summary: Example response for request 'enableOneClick-SF'
-      value:
-        additionalData:
-          acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9VC172
-          authCode: "082338"
-          avsResult: 4 AVS not supported for this card type
-          avsResultRaw: "4"
-          cvcResult: 1 Matches
-          cvcResultRaw: M
-          recurring.recurringDetailReference: "9916178934434753"
-          recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID
-          recurringProcessingModel: CardOnFile
-          refusalReasonRaw: AUTHORISED
-        merchantReference: string
-        pspReference: 993617895195570C
-        resultCode: Authorised
     post-payments-enableOneClick-raw:
       summary: Tokenize card details for one-off payments
       value:
@@ -4700,12 +4738,12 @@ components:
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         storePaymentMethod: true
     post-payments-enableOneClick-raw-200:
-      summary: Example response for request 'enableOneClick-raw'
+      summary: Card details tokenized for one-off payments
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9VCKO0
-          authCode: "003704"
+          acquirerReference: 8PQMP9T0BB6
+          authCode: "022966"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
@@ -4714,8 +4752,7 @@ components:
           recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID
           recurringProcessingModel: CardOnFile
           refusalReasonRaw: AUTHORISED
-        merchantReference: string
-        pspReference: 993617895197573E
+        pspReference: 993617894947495G
         resultCode: Authorised
     post-payments-giropay:
       summary: Make a giropay payment
@@ -4729,21 +4766,15 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-giropay-200:
-      summary: Example response for request 'giropay'
+      summary: Successful giropay payment
       value:
-        action:
-          method: GET
-          paymentData: Ab02b4c0!BQABAgAt9sA8lQOSEpwOpedJBZvOI6J4xAEGqCpPCfZkvEQPbXSQBP0O+HEElyemCjzTkp4G70QJLaMvq6IlQ5uPk8rlFoPbTb59E9vrOS4IXxlxQH2TQ6iAAGJvU/SIBHAqENNbg1MjG5HR04c6GgpmaO/9LISgGVlqyoY8FlyHvJQcPcMqkK1hYh0mGmbHLtXqyCAx6yRIOGpV3aaI3GMNkSwf3007BwxJBNd7o0o3XktxLuqU8T9OJquwqWoD2FtfUZ9ZEPk2m5/AbOvhoFYuWrKCW1xptWw04m3JyAJHB2F7gPMjwAi5rE0hlMu3d19WucrxsXakeA/noqubbvsHqqtWdRAn+2fMrpOacX5C4VDdE/xrED6iHM6VoqCztCH8mBtyPxPPU5DMnfxUmmeTrIrrf8j95S1FBman8UORs3jiFtCgCD6uS7y0cFSs6J2DWijpO0chjxNM4xR4q5gedL2idE6rRjZjm6cLhrM21XeroNvQYJtoW2q+gDxl9o/3M74jP+3sPafBZMkdHZ8vUdCueHDdw7bST5UCPHRnEfNHy5XaYf2kG0meaE3tpAAmoCNO2qPdcozHJZggVl9lqHQ394BLpLfYr3YROyWu+36HQRZoa2U2Yz/sFYhF81Iimx6FQWEtLZzT/kGJHsXawb68gqd7xf9jo4p6qokklGkzCRC3iOTKmbnmADUPLdy/qNw7AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifX48+5ZqamGvpSW2oKGEqf2KQdVyjcJrlnNiJKp613bt+5k9/OD8G/5T00dp7aNtQx9nGc+mWf17T7VZ6OmooTBV9bmL0ZcGccD+z4UvQbxjXYnMXKLfQmHKi58x6skXW0y3PhxfCLbm/BClmKuCIrACpLmqX/Mu9mJU4DpdOFMpf047WLI9T9yFQ/6ciUpi09DD89bOGQwvlVTkJhvPu31u7OZCd1r8sZ+NsyoEv5Pe3VPRh6R+OoGuY8cDOt9GhMfjGxp7whTcxtKzwnvETJrMrsRfCVIXv95DefR/YsVL8kchNmljNwwzvCGWACeNM7lY6/96+d27Cf2VBf5fS9EcSGtlZpYpNXsdOMLyJBYdiCujp6r1Sd68jsLJG8/XGw9MPODz8Bhqg5XSLuukhGlmVgSkp/TwHwl+p0bhnS0fz+VWDp90mrEY1B8vxFe4yZ1v0sWWaX5USb1/sEZVT3X/1X2qFCbpM6jr498Kk3w3dUGPmDlZ+XiFk0HUt2800jTYrTZYRMjQjnEOrL15aW5h2ynCtxAJXewfk+9NSYjqScbvHKjLGA8FUB6v5TVhsf+sNFSf/zVtNs+PczPZDZMLTiUnZih36iAu5f4HYjl1o4/K+V1JSKHjegDggW+RCUokGH6kKRnMcs2pU3KoG9kOdGDBOQYj94a+CPWfgE7j97v2bQxmbFHOWgJLzX0lPGM3RR5dDboH3k2BrDHb92K88i+2IHMO8WvrW2qhkB4lGpecupG0XEBOUTH4Lnc3TzUFgsDCvF8mnLweIbRyohzd4SAfn2W4wR7QK1S0
-          paymentMethodType: giropay
-          type: redirect
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFoT5zoMfIkpbmqRtSDhVfakcswUrxKa24UJ--Rku16tOJ1m71oy1O7ProyS8SkUFuGZSdGS0aS8lcDrOYFYW9hkkbQjXK0pFzzU*gNLbK-ZF5lxDLYlmgjt67ACn91m6fioPb3fZY1bk6X9fDiCVyThEX3QB7zD1B6y0ZLz*Ruhe8huiCV4uUYTiZBmiZRBH6G-tPatx*7CG-fFJtt1OslMx7P3oMd9dVq9pOyq9e6Z36*1LF6F689Pyb2xj*QzG3Hn2hlzXtSWostjgRuvO8leWd2tOKyhpG6G0QRI3cQ1EG6An0WvViK4DaRAFcmAUlLk*-y6bcyrOxkUBFZNAtWEG9Kfc9c0WdCMqy7-9Z9BG3fdRW14k5xEYbYaa1JlG4SQwnCSaMIpeLkzDjvDRMXkGHcexFahpzj9IyyqmR*y5Hlq4wcJNDigyjtDShDB4ta9eph1JQqcd4cwUmpSBrU6Mz7*i64-O4DnXNcRRHMco8QPnMx9e-MNDVCXDmHnN6vJGq6a5lG5efr4HH5uP7H6T1TBWlfgFnQraMA
         details:
           - key: payload
             type: text
-        paymentData: Ab02b4c0!BQABAgAt9sA8lQOSEpwOpedJBZvOI6J4xAEGqCpPCfZkvEQPbXSQBP0O+HEElyemCjzTkp4G70QJLaMvq6IlQ5uPk8rlFoPbTb59E9vrOS4IXxlxQH2TQ6iAAGJvU/SIBHAqENNbg1MjG5HR04c6GgpmaO/9LISgGVlqyoY8FlyHvJQcPcMqkK1hYh0mGmbHLtXqyCAx6yRIOGpV3aaI3GMNkSwf3007BwxJBNd7o0o3XktxLuqU8T9OJquwqWoD2FtfUZ9ZEPk2m5/AbOvhoFYuWrKCW1xptWw04m3JyAJHB2F7gPMjwAi5rE0hlMu3d19WucrxsXakeA/noqubbvsHqqtWdRAn+2fMrpOacX5C4VDdE/xrED6iHM6VoqCztCH8mBtyPxPPU5DMnfxUmmeTrIrrf8j95S1FBman8UORs3jiFtCgCD6uS7y0cFSs6J2DWijpO0chjxNM4xR4q5gedL2idE6rRjZjm6cLhrM21XeroNvQYJtoW2q+gDxl9o/3M74jP+3sPafBZMkdHZ8vUdCueHDdw7bST5UCPHRnEfNHy5XaYf2kG0meaE3tpAAmoCNO2qPdcozHJZggVl9lqHQ394BLpLfYr3YROyWu+36HQRZoa2U2Yz/sFYhF81Iimx6FQWEtLZzT/kGJHsXawb68gqd7xf9jo4p6qokklGkzCRC3iOTKmbnmADUPLdy/qNw7AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifX48+5ZqamGvpSW2oKGEqf2KQdVyjcJrlnNiJKp613bt+5k9/OD8G/5T00dp7aNtQx9nGc+mWf17T7VZ6OmooTBV9bmL0ZcGccD+z4UvQbxjXYnMXKLfQmHKi58x6skXW0y3PhxfCLbm/BClmKuCIrACpLmqX/Mu9mJU4DpdOFMpf047WLI9T9yFQ/6ciUpi09DD89bOGQwvlVTkJhvPu31u7OZCd1r8sZ+NsyoEv5Pe3VPRh6R+OoGuY8cDOt9GhMfjGxp7whTcxtKzwnvETJrMrsRfCVIXv95DefR/YsVL8kchNmljNwwzvCGWACeNM7lY6/96+d27Cf2VBf5fS9EcSGtlZpYpNXsdOMLyJBYdiCujp6r1Sd68jsLJG8/XGw9MPODz8Bhqg5XSLuukhGlmVgSkp/TwHwl+p0bhnS0fz+VWDp90mrEY1B8vxFe4yZ1v0sWWaX5USb1/sEZVT3X/1X2qFCbpM6jr498Kk3w3dUGPmDlZ+XiFk0HUt2800jTYrTZYRMjQjnEOrL15aW5h2ynCtxAJXewfk+9NSYjqScbvHKjLGA8FUB6v5TVhsf+sNFSf/zVtNs+PczPZDZMLTiUnZih36iAu5f4HYjl1o4/K+V1JSKHjegDggW+RCUokGH6kKRnMcs2pU3KoG9kOdGDBOQYj94a+CPWfgE7j97v2bQxmbFHOWgJLzX0lPGM3RR5dDboH3k2BrDHb92K88i+2IHMO8WvrW2qhkB4lGpecupG0XEBOUTH4Lnc3TzUFgsDCvF8mnLweIbRyohzd4SAfn2W4wR7QK1S0
+        paymentData: Ab02b4c0!BQABAgBdNcOUwhrokraZtM/nJSduq+zXt1Hub2wGGxDvL/j8D63+t+oTWtpsKPus73V1DRhbeEsPDRc6MTCmNRFNlYzRB9+Qmedoot2ccLZvIeIp9JFNURi4eLi70MEjNsT0Me1nkbkkP8btIWrk5UzulQbYCPHUurWCXgIG84Nc5/SQH7t3cpVLWiZeuXDKTUiwFjOP05jgS96jWzZ9w8WYla+tJyOST94mC246dlveWuQCDb70MxoPVi9BcVdppUBtaIXPIXYAa4YbxLAHyi3lw5STnhI0y8/k3tc+dBAFL+vezYDWLZ8czUdl/uqDzsPEe/ewz6TyS9vXZvZOAjcJhJ4wDRwZ5AFQBRBNwSANMswOBXCyh/jJsp9ycJSAT+ahWmSWKaU4oe1jlWBmQ8rxnQNOSWkV9/ZpLsrN36eLCPo6VgQnNKhWx5zkkR5xMS0pVx+Ff7ZdFeKtl0Trc4OyON8lBHTFNd7Pyhl74C21dlZUNGxA5gIc1xNXNFOvCNJQvyO9sR2giM1dEAKXpOm7Ez2u7eDvlpQa2zwPxulu3vQ2xSDVmqboSPx6Wp7ywyiYIIJzUwphVu3IulMjWnmHQOTYatiO9l1O50tqepaFB3/mwdesPw1cJD6UYq+v8kshrYya4w4ojMmQy++0L8UxUBHis71ftJM+nIhXZBpJ3cXtehBMZx+06hofQjgUgsuP+rKKAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMiffpA9iAv0lzUkDkBzjQG0XzMpxNd9Z7Jl1zf68QhTbJ53cSWhqs9FLu4XbuwyQ3ie/rNaLX7uypr+FmxHIZgehW2wSS0XKs7qp6b6z9OiTbZgcUEVtsyZ/Il3HrI+PZnavI3MB//BC5kjX/KE56BEIytAmQIovNHW7i+4YRVCjpNKAuBLr/DcSkLSqTb7HwV51btGbyhB9NwwSqO2rHUwjl+2WScEkbd5b+EUxc0jN7gdc4mu96Ak9ATN/2J/AHoiEdXDaZRkOBU6fSYOEQKpXw1UW9SOJdUji1+T7b8uVuC6gXAzS+wUXkA4ZsvW9UM5yyhaF6UgF3jY700Ufme7r98pjdBydAGGWSNVu9BdZmzDEiUke0eL2k7rYv2IfxtVvyacVNKnYmwmPpWRqvxQF+PJN2KqcVEWbNal5fleujujNZ6LACeSO5a5eREJ6bmdyKR82So08hMEwV9Ky+Sb1REXAMXY3o/FvwzN4HwHNaqi2pYNw37JkLEQTEIeWntLyC+pvc1cVhILipMx2bbBCx/CijEFGJSxVzma1mhv5Q+RJ8XtaqyzJoFOkoIoy63cq6IVYHEy47vgCfKjdnK8jDFfOU4ONDjaTb01vJYwF3XnWxNFspb7oq2ZMbmBtLDGkERkMmcrZV4XIhzF3uhbo8PEjrFhjMepOT/gB1/Tq5XkUAIViviWYaFgGByHjwzFPufEdu4ycZiG5KC0MFJ6Y+T6YrF++U9FRmeJpbdfF2oOM5Rc4jqg90YI3fi7FeKY125Dnl/uGKJhI07uaf5SRt9R3xwJJgUsGadj/AL
         redirect:
           method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFoT5zoMfIkpbmqRtSDhVfakcswUrxKa24UJ--Rku16tOJ1m71oy1O7ProyS8SkUFuGZSdGS0aS8lcDrOYFYW9hkkbQjXK0pFzzU*gNLbK-ZF5lxDLYlmgjt67ACn91m6fioPb3fZY1bk6X9fDiCVyThEX3QB7zD1B6y0ZLz*Ruhe8huiCV4uUYTiZBmiZRBH6G-tPatx*7CG-fFJtt1OslMx7P3oMd9dVq9pOyq9e6Z36*1LF6F689Pyb2xj*QzG3Hn2hlzXtSWostjgRuvO8leWd2tOKyhpG6G0QRI3cQ1EG6An0WvViK4DaRAFcmAUlLk*-y6bcyrOxkUBFZNAtWEG9Kfc9c0WdCMqy7-9Z9BG3fdRW14k5xEYbYaa1JlG4SQwnCSaMIpeLkzDjvDRMXkGHcexFahpzj9IyyqmR*y5Hlq4wcJNDigyjtDShDB4ta9eph1JQqcd4cwUmpSBrU6Mz7*i64-O4DnXNcRRHMco8QPnMx9e-MNDVCXDmHnN6vJGq6a5lG5efr4HH5uP7H6T1TBWlfgFnQraMA
+          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmQ*AuTBD0lKr9ylvSsHVa8vlWs2gBpsYhsU8utv4XJRVVWy1tbMandm12*KiXIrS6BVo2THRpv3SoHg4wwmRWa3oHjNhFlzLnthaA7a3F*wK5kKA5VippHCMWMHdHuXbH-8LPLXb8lDkqXbLzMHUBpvGpArncEepv5AtVGNqD4QplfihhlGVys3dKN4FayCIPSXyTXnd1PR3aPl3W6qh-bIwH0*RUXH63W2yZsz33VPskh1anmbF7L-k*mkfLT8Gxttt4AG29mfSwixFegi29HamM7y11gRz0FydqilNojEJCYI8Rr4u*yNrmXXgUJEgxoaDhqfv-6VTQWXLTrJoGwUcIPM4P4vd8m5B1PL0vJvPw0b1X0ct*WFah4DakNqUoeNlpPA5SQRwyh7tcCGHROjg-cMOo5ja9DTrJ-YoSkbM1KPeO6CBAsS526IjtwlhiB4sS9epj0pxqc90QQLTcrA1u*NmH9G1785g*dcVhGFURS5sR8453R49vPvYRkPY*LV69MrL*v6VJC0OO*D4*6Y3O2SCsaylH8BlM7anA
         resultCode: RedirectShopper
     post-payments-googlepay:
       summary: Make a Google Pay payment
@@ -4754,7 +4785,7 @@ components:
         merchantAccount: YourMerchantAccount
         paymentMethod:
           googlePayToken: ==Payload as retrieved from Google Pay response==
-          type: googlepay
+          type: paywithgoogle
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-ideal:
@@ -4770,21 +4801,15 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-ideal-200:
-      summary: Example response for request 'ideal'
+      summary: Successful iDEAL payment
       value:
-        action:
-          method: GET
-          paymentData: Ab02b4c0!BQABAgCINC3kOq5nsaj4k+VaArf6VIiTWkYALwijaS+VOvzTSf76Un3WYBgKJlEBqALZW3vlw+IDQGw5jqkVBO4axEJEFKu5fDL2RkeHbm+aHY7tlRVsjvNIcVTNbMtHJcclHakOVTrtTCQfspf11XGsmENUaL45bdeu07iDBtpnIvd39p6g8OVaLcSIGaA8Zosd93hs0h3lvIePt3QTekeOUH+zrMMfLyy/4QKBZtLjnWo3/4U0e2tsneOudynW0l5i+VyobWOZb7yZUj7v9GMVpAZ3YEqNZ1aWJlSmty9TJTpXp4PQQcNeELQAfTu4zaarMq5btRZpcmDRvSOQK0Qo/PvfWrv/si0c1NPr5EM43ebdkLiDEUSIGBDTellblheOaRsgD0JlrNLOHSpS6iCiyY5FQaWx7FpnYReP/un2f/2mMGxdehif1MqWWZzgAhjdA4kksQVb8eMIGLY2IveJ4iTmDAkFbhIATs2SuWhYBGqFnBGeH1jlJCJDDV8/XJ0IcX1/r0qC3wsUFecoElZ6gts+4tlfPUoeuSH/NFmyBEzrjZbgCqCH9YVXa/+W+dwQCOQ0G7K4SJepnlNcmpCtI29zMZgeRqmtzI0hImvQYt188MXK44ieh2wsmpVv6Y9EGIgJVR+t1IZKizm6Q2D5MCUC1uAVwu2iw7Xt5Re1XcWSaBC/nZt2iHaZF7kpgIXfrFshAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifVTgdc9kCwE5LJyeGFVSr+P70S1hwc62Ad03Oy1Ksxr823klh1hxYQDWBJETNf/YmYC9cHDGr6LxMQ8OOnwfg2xjsVU7ZUwWJbHid1vU/oJzHBXe54lHMNNre0HaQD6TSokVpazQsY3hRB84uevmeT7KVal98iqXd755VuiIxwHhhywaub1ogyQQEVxNGWx2+vL5Vh8NKmoghZQ+NLSZWRn77hJTGV+lKJdseGA9nV7DSlWodNmZ8RyRfQoqwtaK9woQ87PIN7XqSznZMS1HWMOE/aDLEXLJEfozHWrHuGVmn6Hupt/fBnm1GckSsMGeQNKS+4XmKGrJefrHDmdoZVBaZS9UjxfKjD2sCwu5vutgb6SLrECgCvu3q5/LTyFeTuPV1ZZrlpapC6umnWmSKmj/SdnhXJO00PNuFT2WY/GyH0cyA498zApE6VtLx2e9IvS01Oex6ZCRFDJ6sDCBzVN5g60vsm9tBut6trpQWyryqVM2cQ39xh9olCQ5Ml+2h4YFV5gA+1c0i+e6SeMtFJN788NW2EnQT/2pzM/rNAaSVwSf8vJcx3ZB9n8Pf8xi2buKZFEkyJpZJSg22JC/38D1E0tPRpQ7gZ1Z86meAGXnfKUtA+w2FllB2Y0dMrqi8jXnS/mqMPBmPVnIxUW96e40cB7W8E0VDf1IKx/wQphI8/vM3UOSqC81agmnyQ3nIDrAy8vqMOD+d1xcoElzRNy0OxU6v/90IKkhfAKr3Tur7Vb3FD6Pi/XrujJX95UlRd7fmaAI7Po1cIh1v7HEhsCNoh1z7WFNag==
-          paymentMethodType: ideal
-          type: redirect
-          url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUl1zmzAQ-DXwZgaB*XrQg0Nwg2s3DTVtJy8ZRbqAYlsikmCMf30FddNMpzOak2bvZm-3Ts*KCJZLBpgzIEeX9kqBoOMMFXXlcq17UCXDCAXIPYGiLRFmRanshcF70GZ3xd6TpTDQKGK4FJ4ZO8D5XZF-vq-3T5*KL0VV5v*tHEBpe*Pob5cKXmBSA1gbxUXzIWF6JW6JITjLUIySNItQliVxsH6v*cYbnNSHZsMfcydYr8SrE9yY7HRjavMAlyyIjhuK*tzszj9ew-uHrN854a3bkfEE1uBp9od833cV6Lra4taYzglXlsueo6Tk2EptLJL6qW8h2gI9yN7oVnYdKItoUAOnoO3z62-aUlB5sk4qYFwBNTYzoD9015odmFYyJ1z-M2yr7uO4nSBW8xisNpua1NlG0SQwmiTaMMpeLWzDjojRs-cMep7natDTrL*TI2fcjDjwA7Twlws-3aPYOkKZDVH26F69THtShE57woUlmpSBqw9czP*k65*9IfCuq0jiJElQGi69Szn8DPebmKXDWATt6vxEWduea7*sLy-Lt*1bcbctGhgZk78A5S7dyQ
         details:
           - key: payload
             type: text
-        paymentData: Ab02b4c0!BQABAgCINC3kOq5nsaj4k+VaArf6VIiTWkYALwijaS+VOvzTSf76Un3WYBgKJlEBqALZW3vlw+IDQGw5jqkVBO4axEJEFKu5fDL2RkeHbm+aHY7tlRVsjvNIcVTNbMtHJcclHakOVTrtTCQfspf11XGsmENUaL45bdeu07iDBtpnIvd39p6g8OVaLcSIGaA8Zosd93hs0h3lvIePt3QTekeOUH+zrMMfLyy/4QKBZtLjnWo3/4U0e2tsneOudynW0l5i+VyobWOZb7yZUj7v9GMVpAZ3YEqNZ1aWJlSmty9TJTpXp4PQQcNeELQAfTu4zaarMq5btRZpcmDRvSOQK0Qo/PvfWrv/si0c1NPr5EM43ebdkLiDEUSIGBDTellblheOaRsgD0JlrNLOHSpS6iCiyY5FQaWx7FpnYReP/un2f/2mMGxdehif1MqWWZzgAhjdA4kksQVb8eMIGLY2IveJ4iTmDAkFbhIATs2SuWhYBGqFnBGeH1jlJCJDDV8/XJ0IcX1/r0qC3wsUFecoElZ6gts+4tlfPUoeuSH/NFmyBEzrjZbgCqCH9YVXa/+W+dwQCOQ0G7K4SJepnlNcmpCtI29zMZgeRqmtzI0hImvQYt188MXK44ieh2wsmpVv6Y9EGIgJVR+t1IZKizm6Q2D5MCUC1uAVwu2iw7Xt5Re1XcWSaBC/nZt2iHaZF7kpgIXfrFshAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifVTgdc9kCwE5LJyeGFVSr+P70S1hwc62Ad03Oy1Ksxr823klh1hxYQDWBJETNf/YmYC9cHDGr6LxMQ8OOnwfg2xjsVU7ZUwWJbHid1vU/oJzHBXe54lHMNNre0HaQD6TSokVpazQsY3hRB84uevmeT7KVal98iqXd755VuiIxwHhhywaub1ogyQQEVxNGWx2+vL5Vh8NKmoghZQ+NLSZWRn77hJTGV+lKJdseGA9nV7DSlWodNmZ8RyRfQoqwtaK9woQ87PIN7XqSznZMS1HWMOE/aDLEXLJEfozHWrHuGVmn6Hupt/fBnm1GckSsMGeQNKS+4XmKGrJefrHDmdoZVBaZS9UjxfKjD2sCwu5vutgb6SLrECgCvu3q5/LTyFeTuPV1ZZrlpapC6umnWmSKmj/SdnhXJO00PNuFT2WY/GyH0cyA498zApE6VtLx2e9IvS01Oex6ZCRFDJ6sDCBzVN5g60vsm9tBut6trpQWyryqVM2cQ39xh9olCQ5Ml+2h4YFV5gA+1c0i+e6SeMtFJN788NW2EnQT/2pzM/rNAaSVwSf8vJcx3ZB9n8Pf8xi2buKZFEkyJpZJSg22JC/38D1E0tPRpQ7gZ1Z86meAGXnfKUtA+w2FllB2Y0dMrqi8jXnS/mqMPBmPVnIxUW96e40cB7W8E0VDf1IKx/wQphI8/vM3UOSqC81agmnyQ3nIDrAy8vqMOD+d1xcoElzRNy0OxU6v/90IKkhfAKr3Tur7Vb3FD6Pi/XrujJX95UlRd7fmaAI7Po1cIh1v7HEhsCNoh1z7WFNag==
+        paymentData: Ab02b4c0!BQABAgBOBkMn4vBx6T3DgxR+OR/a1zEA0xbGaYKP9mh/vWDSADlyktW39HZckwcm4Wr9kw2TvE9SYngEf9f6kZb1OimKls3+HEn3dRGOrTbWZZ8/tpmlS62YoDh1eQIE3EHZsUm7CQxhXjm8F0HQCelzIkVgj8DpLgtxwM3nFZxfpzl91HSt9CP/GIsx8S/RPVG2Fwg2S/jtdQ4MlFeG89S+icDvTecTyGoYFZlS/KL77Q4zJCR8Vgn4M9DJZEGRxv6kApLwDMkMyUMQngN95xDSCdLSW7fKkVusSub2+2hB7rzWxtj1E8R9dbtkCxgTe0F/G7tqrzUfEmseiHoKmaF6F8bN0j6BZiFhQJ/KHXJ6Pb+a7f0qYbQCAZmwYmeSSfNzqIDehyufpL0bP3w38spuso3QlhtPIqSHrIHDIQzbYmxPtt/I6A/RCMXJ7VN4nB6JigEygV383lnr8wd7mEynOQXnq9zEF+GGJy0Ool05WEy8L/mATgg++6bpsuSB2Wea5/VffvG6KcMyzs7OBG9zLAdYcrfqlsyXz/42UBJTeA2s6kVb1sBUfd6CQuQRF+37sjMwKiNIxwVaNWIYZMiWhbqPXOS4ozt0kNCtruhHqHgULPfF6aia/BnZKib6n+pBSepTdS47wZ31xC8VPqsoPia8RGNziLO/MmSMpW2fQRdgrhCrSniHb8qrh0vwgbPB4S7vAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifTMy2HjS+Bb81E9m0fQAZJXCA1BJgLgstBw3wxbdpZevF8c+pSBGUYNUm9ZbwrD93dGdCU2RvlI1gcyKke0cEEqKGjqWFXOWIYkSNzfLrgP3ERdp5t9VGZi6BDQko2CFzP4uAR3jwgR3AP0/mQ/4YWDrBrnYZCWjOpo7izGhNbHYvWbBOqVDvnfReoCrSNSLSo8OfSxuFrN6sJLXrajGu1qbPqQtxFIRyqLgbOfHLHw/DN3I+BZKGrNYynRfM2NparXTQ6ZRgC8E5xIodApr4JHMNeiPTjMlReaLBQwbcqaBzzRNLdV0v8/ZSXexS68WBeUMt7OkomYJBFrpwmpzgx/nzRzV87MZ9TGhZht/1zjcyaSi0Toc6r7UhbADuDX5RH5L0T8Q3iGJfjrYuS5h9aiYSg8oaVJ5DZhJAicDbb8eLvdAGXFTIV+EXbD+4e9Xl+c5um4FdKfufcrrUEo2s6lUuSBSJ3Gf6r+yJMxkamWwfnRUtxt+axRcXfmywYqU7O1r0zzW+RKCbV2qZeUWWeN1u5UIPdJbQbH4633ukPp//aGh8R4IWckBp7DGH4M5P1ZiYJB8OQRS5gD/y+iuwensnq1rKFBOK4gFNSpKmuDQYLeWb5VljHgE1sS4DRhl0fl8UCabehP+3tZu/2i88JTWbdUuvPLmkyv8zQdY36YeSDWmwC40vvbB+lo2e8MgVpfDwn+xyQFpFhasbEyr4VVoPwHq1sGR/QEutxmeoJi1Zux48jSHoGOj5RZ4ei+b8Lxp4rj45wwm0AiROghLnZJZfJaySp/LVxQ=
         redirect:
           method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUl1zmzAQ-DXwZgaB*XrQg0Nwg2s3DTVtJy8ZRbqAYlsikmCMf30FddNMpzOak2bvZm-3Ts*KCJZLBpgzIEeX9kqBoOMMFXXlcq17UCXDCAXIPYGiLRFmRanshcF70GZ3xd6TpTDQKGK4FJ4ZO8D5XZF-vq-3T5*KL0VV5v*tHEBpe*Pob5cKXmBSA1gbxUXzIWF6JW6JITjLUIySNItQliVxsH6v*cYbnNSHZsMfcydYr8SrE9yY7HRjavMAlyyIjhuK*tzszj9ew-uHrN854a3bkfEE1uBp9od833cV6Lra4taYzglXlsueo6Tk2EptLJL6qW8h2gI9yN7oVnYdKItoUAOnoO3z62-aUlB5sk4qYFwBNTYzoD9015odmFYyJ1z-M2yr7uO4nSBW8xisNpua1NlG0SQwmiTaMMpeLWzDjojRs-cMep7natDTrL*TI2fcjDjwA7Twlws-3aPYOkKZDVH26F69THtShE57woUlmpSBqw9czP*k65*9IfCuq0jiJElQGi69Szn8DPebmKXDWATt6vxEWduea7*sLy-Lt*1bcbctGhgZk78A5S7dyQ
+          url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUl1vozAQ-DXwFmQDAfLgh4jSC730Q1yoqr5Urr0NXIlNbUPj-PozXC6qqpOstTWz2p3Z9auigueSA2k50M5ng1IgmJ2hoq78VusBVMkJxiH2D6BYQ4VZMyYHYcgOtLk9YxeyFAb2ippWisDYHki*KfKf9-Xu5UdxV1Rl-t-MEZR2N4nRha7gDSY1QLRRrdh-IcygxBU1lKxWOMFptopXcZZEyc0l51e7J9XdcHpeDTxC4edG1pFF5WMHnw95FtHf3N5z1MWqipKjF17XXnTl99QewNk7zO4wQshXoOtqSxpjei9au0R3Oslo10htHJKhDDmINcDe5WB0I-selEM0qLFloN3z4W-ZUjB5cD4q4K0CZhwz4n-lzjm3YBrJvej626iduq-D9sJEzUNw2hw1qXONlpPA5STRBSsHtXANeyps4O4ZDILA16CnST-SruWtsSREIV6geIGyHU6cI7x0Ic6e-bOXaUuKsmlLpHCFJmXg6-dWzL*kH16DMQzOi0iTNE1xFsXBqRyfot1NwrPRFmGzPr4w3jTHGpX16S3*2H4Um22xB8u5-ANWgt0s
         resultCode: RedirectShopper
     post-payments-klarna:
       summary: Make a Klarna payment
@@ -4852,7 +4877,7 @@ components:
         returnUrl: https://your-company.com/...
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_6738oneoff
     post-payments-oneclick-securedfields:
-      summary: Make a one-off payment with a token and CVV (using encrypted card details)
+      summary: Make a one-off payment with a token and CVV, using encrypted card details
       value:
         amount:
           currency: USD
@@ -4860,12 +4885,10 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
           encryptedSecurityCode: adyenjs_0_1_18$MT6ppy0FAMVMLH...
-          storedPaymentMethodId: "8416038790273850"
+          recurringDetailReference: "8416038790273850"
           type: scheme
-        recurringProcessingModel: CardOnFile
         reference: Your order number
         returnUrl: https://your-company.com/...
-        shopperInteraction: ContAuth
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_6738oneoff
     post-payments-paymentPspReference-amountUpdates-amount-update:
       description: Example request to update the amount of a payment
@@ -4998,24 +5021,18 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-sofort-200:
-      summary: Example response for request 'sofort'
+      summary: Successful Sofort payment
       value:
-        action:
-          method: GET
-          paymentData: Ab02b4c0!BQABAgB1H7lBY8Uxf1bWoNkA9C2/BuD1Fa2+f3+u8Q3sZLCf6/nmkhPEg1CleH0L6NnNoxwgiHBzmljYF6QFoshWsEZ4Hp1fyq9S/IGHFcl6GlQHlQf/RATlCw21Il1BDhcjSib3JpxXWk/NeZbk/ZEvNrWNQOmHo0/eYxCSLl7OgE+PVyKfWogK8awCPNcqV52wgy27P7MlKQaZVfMTTlMfA2tS+xnGgXCXK+BpdLGXagCyRkhmi4QQLVv/sgSv4Zycu829yhaorOkum7hKEW3Os/DaIZbZjKglVpfFk4N2Qsa8ReydNGI1EeX9CfntJMFOMIWJeyfTimHhxZvUnIJ1cgIBLA8rdSxf3xExRXnK8xphXX+Aah4BIgRmLfOsnwsf6lnYcvPKg/3rMV/gK/g9iOC32wMGbzB7J+nPbW+ht5LJOK9ax/63H1bLT2Zm5UxcbzZsm8BccCyGqkMq8vZAE262urS4rGLzDCZXyJ22bq9yzQ/wUDVMhbTn55Cxotx+FwIhQA2SF0yZ+wgi1ty9ovl251eYbRdWNasvCwPaXxdTCVVD7wrdQbC5wQTpQO64EnQvYfiRerVQ5mCAu82VL4dCesNHvpKv2hKENa3p9ZFRJrle6wIUYX5fyscZDvEoqHvuqF+SpTXANK9PKGl6aaTCpg497/2x3wSU9Sxf8lzsrxAymOZnLENryrDr0v9IrYfDAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifexJovSnPKAg5NtTcILGEFLB/SoybKa3lEbVdUI76QewA8VFXNI8Ulnwlriy07AS4NDbZSfSfNYijSBS1uVsfo9kiabnFe0CQ29377TnsI1Bliv/CM6lBFp9SWQcLgSQQZkD1j4daab9L33mkUhQ/6Q+ERVtx2g+MAYNjl4xyJrc2IOQQ+0IUVGUZgJ4xKNTbf4TN0+EZXPvqxQ3ejsdtE3UhGjlZGS4HND7nkdljh/AfN5+JLe0fnvEgdfPZFttHCvdoOwosLL4ACSD5HH5v3Dc6wXuHAILopU+P/JUWa04gKInYMc1ABOzR9kOwzOHvWey7vrjONxyvUgietuYsuXkyozuL+hCgaJ4uZAIIvKqR/uTAZm76T82ds8+OcWoVgywHJRp+Vgn9Q2N5zf36DI/OWkQuYgRITz0NlT9QTjFwuWi15igdBlfufW/Gzp3mUXfYwj5GfJQBALOIGMzr9VEH6iukqHnA6tpdDOqAo9l5gsjzbPIMGkz66memwj5ZkxSSN69mgi+VEhOebAxSDDbGX0ONGY4gu12UQiiCOYx29LH3D7ANQTOjuyMmFBnHzMMRf+RoSzfrPLqiGvEC7b4vHwdzqCYNsz/cFAEouXFrZ72zzoWgpx62j/yKacRSW/PjmnEK/BOzjcovKfE3+thEybC0sjvDQSrMxQ34BvZM/+pWLXK5dY2QlBlHzRVPxmcw0tqO7dIcklC9GtEBrcr6Oc4U9ry0USIRLphRlP2eC4DOudUhbJ9AjujilVAocGy/BXOufpLJuhbaprux++0RRpxQ3ZdpMP//TiWuw==
-          paymentMethodType: directEbanking
-          type: redirect
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1zmzAQ-DXmzYwE5sMPenAJjmmdtqHGTfuSkcUFaGyJSIKa-PoexHU7nc4wErN7c7e7p4PmskxUCaxsNAibHrh8bmTliE5rkGKYuLTInRNoUXNpV0KoTlq2A2PvLtiVzKSFSnPbKOnaoQWWbNLkw6di93ibfkzzLPlvZQ-a4M0CeqVzeIJxPjBj9ajnD2E7LW*45Wy5pCGN4mXg0SAKF**uNV*aitGvXrK3tw-forjdn5fdWp*LIg88UtzbtviRHVN1X9lNuJ15658z-8Zp*XACtHea3FFCiKPBFPmW1da2M3*FhfgdleDHWhmLSExigpCoQTyrzppatS1oRAzovhFg8PfzW9tMCnVCHzm85YxMT3*3u9Tcga1VOfPX-0SN6v4Oe*aFegoBtSE1qsNBwSgwGCXiMahOz3Fgy*Xg4j2Brus6BsyY9J4fm7KxA-OIR*dkMSfxjoboyCN40OC7c-EybklzMW6JpdhoVAaOwRcyvYu2O7i9514WEYVRFNHYX7ivWf-g796HZdwPqVevzo*irOtzQbLi9Wnxsn1JN9u0gqEs1S-zMtxA
         details:
           - key: payload
             type: text
-        paymentData: Ab02b4c0!BQABAgB1H7lBY8Uxf1bWoNkA9C2/BuD1Fa2+f3+u8Q3sZLCf6/nmkhPEg1CleH0L6NnNoxwgiHBzmljYF6QFoshWsEZ4Hp1fyq9S/IGHFcl6GlQHlQf/RATlCw21Il1BDhcjSib3JpxXWk/NeZbk/ZEvNrWNQOmHo0/eYxCSLl7OgE+PVyKfWogK8awCPNcqV52wgy27P7MlKQaZVfMTTlMfA2tS+xnGgXCXK+BpdLGXagCyRkhmi4QQLVv/sgSv4Zycu829yhaorOkum7hKEW3Os/DaIZbZjKglVpfFk4N2Qsa8ReydNGI1EeX9CfntJMFOMIWJeyfTimHhxZvUnIJ1cgIBLA8rdSxf3xExRXnK8xphXX+Aah4BIgRmLfOsnwsf6lnYcvPKg/3rMV/gK/g9iOC32wMGbzB7J+nPbW+ht5LJOK9ax/63H1bLT2Zm5UxcbzZsm8BccCyGqkMq8vZAE262urS4rGLzDCZXyJ22bq9yzQ/wUDVMhbTn55Cxotx+FwIhQA2SF0yZ+wgi1ty9ovl251eYbRdWNasvCwPaXxdTCVVD7wrdQbC5wQTpQO64EnQvYfiRerVQ5mCAu82VL4dCesNHvpKv2hKENa3p9ZFRJrle6wIUYX5fyscZDvEoqHvuqF+SpTXANK9PKGl6aaTCpg497/2x3wSU9Sxf8lzsrxAymOZnLENryrDr0v9IrYfDAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifexJovSnPKAg5NtTcILGEFLB/SoybKa3lEbVdUI76QewA8VFXNI8Ulnwlriy07AS4NDbZSfSfNYijSBS1uVsfo9kiabnFe0CQ29377TnsI1Bliv/CM6lBFp9SWQcLgSQQZkD1j4daab9L33mkUhQ/6Q+ERVtx2g+MAYNjl4xyJrc2IOQQ+0IUVGUZgJ4xKNTbf4TN0+EZXPvqxQ3ejsdtE3UhGjlZGS4HND7nkdljh/AfN5+JLe0fnvEgdfPZFttHCvdoOwosLL4ACSD5HH5v3Dc6wXuHAILopU+P/JUWa04gKInYMc1ABOzR9kOwzOHvWey7vrjONxyvUgietuYsuXkyozuL+hCgaJ4uZAIIvKqR/uTAZm76T82ds8+OcWoVgywHJRp+Vgn9Q2N5zf36DI/OWkQuYgRITz0NlT9QTjFwuWi15igdBlfufW/Gzp3mUXfYwj5GfJQBALOIGMzr9VEH6iukqHnA6tpdDOqAo9l5gsjzbPIMGkz66memwj5ZkxSSN69mgi+VEhOebAxSDDbGX0ONGY4gu12UQiiCOYx29LH3D7ANQTOjuyMmFBnHzMMRf+RoSzfrPLqiGvEC7b4vHwdzqCYNsz/cFAEouXFrZ72zzoWgpx62j/yKacRSW/PjmnEK/BOzjcovKfE3+thEybC0sjvDQSrMxQ34BvZM/+pWLXK5dY2QlBlHzRVPxmcw0tqO7dIcklC9GtEBrcr6Oc4U9ry0USIRLphRlP2eC4DOudUhbJ9AjujilVAocGy/BXOufpLJuhbaprux++0RRpxQ3ZdpMP//TiWuw==
+        paymentData: Ab02b4c0!BQABAgCrbmh+OQiaXUY3sofxY5aXEujSd/zIwdZ/zDiV440FsfTI6tfDuXPzi9jOQgmGr5UFM7mnTNjHY5fwFD9FmKQre5ewthnSTsBVmC0RxupWRh7OeHYCcLp+G8+vxR680uJwp1stzdzq/lXmyIinV6aC22NzapolomfBvxS3cANwHE4IC65sXt5eyzItZbHIxJqMC7ADM/dX9Qw9HolgxLQXZlmjdHjfEHEmTvvPHXe5cBv4cfKPJ2gp+RH1J4hds1BJxKwobazQ+a/fauTj5N0a2uotli9I+06B5Y9fR8+SFyOIT3X2jHVDrGMMiVTjBSVDYB6/76A6q6GPXUv3cPgLBRdYOxKJewp5o7raTYs39Tp69iZTPF/9+E9TvmSIjcc5yekrt3kUUxnJTITAN5EJa2AnmfdJBro7O5c0C4OQ43MIgMhiMUKzBewWb5rDzfDiUCQKkSdWEbJUWDEZSS3TPChvP6smI8m80rbgig/0IXgt7Zc2UT1GLdai0t30AoX0gcnbZJnS+4o07WivKPI9aagD68dYJZy3VN64p7Q84vzj4IzwftzKW3lWDf2gt6Reo3x4Sgo2KzznEfCeSRB3QtK8Tuk5ibgVgjkCx2p7KaxKtj1Mqdi+DgA63sM4juy2IAf/23TA4fu42OWovbF9DmXf4v8aSvLmCw3NYX0VyxBEf4xCIC8T14KfCMGbP4N9AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifYDX5Nt00CX5QJ7OLRtmg5wXbL8+ctpyuEOjPJt2DpH30H0klwHPxbTfbVgctpO7GFGrUgl+mqy/pTDTlfKGmt2SRWGbo9cDMbUTrcKNh2MiEI7yOroy4iL/DYnvqbqQ3kQTjxtYtyM7qKI5/NbPotypE2Z6UlscFJnMYaaZCXenBnXU7e52p4tk1hQ5KkdZTbkjdZvNkEL7yGvoVgBNRPmTr7fZJib0XPyrAK76VL5yBq0A3mcwSMChj2Uu0ri7lp/g4yO1JNljWTxtEwaTCxGOY3tDF3IqnqELIHtZ3hyqG1n80muT4wVUX6kmCc5zeHybbZTJhPG2Q+fPAqvNXA0y4Zg3JOC51gGRhmN3m7L3eil3ks70Ejx6gpNzLnLZWpzZy/tff7coZGYW1Xo3973NOJcDkEA1QjhKiPycsHy3ZHZ04ShINLc2UssmV0o68FQ0R6sOVbjOevBaK27EySDaZfQnUjDSfgJdtIFDIEVzZtVyUWGo6w+cYLUYZCpeE9VQac1DinR/NH3w5nqHKyTBf9YqoqYZh3CuOA4jGbwadiG1HhAmZg6TOY7GZ+91hB1yOs4fsDfR42Rj6MEWOaqoH/yggwtjdNhdyeSIc0z3vfjsWJCLy4Uy0haQ7ww+81mqalJBILsTJuS3cwpuGuai68o4ApraA/8sXd+wJ7HBuCqaqJ1r9ZdPppgK+9QbZzGA8xvc5IzHqyOgPZ9oRCTbYOmENJO1grH15TyBHBB7N1Eu/76ojkCsdDEK/hu69T/jLin+x7X+aNuWVILJ4Je8HOdI8ddtr79R6WX88cU=
         redirect:
           method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1zmzAQ-DXmzYwE5sMPenAJjmmdtqHGTfuSkcUFaGyJSIKa-PoexHU7nc4wErN7c7e7p4PmskxUCaxsNAibHrh8bmTliE5rkGKYuLTInRNoUXNpV0KoTlq2A2PvLtiVzKSFSnPbKOnaoQWWbNLkw6di93ibfkzzLPlvZQ-a4M0CeqVzeIJxPjBj9ajnD2E7LW*45Wy5pCGN4mXg0SAKF**uNV*aitGvXrK3tw-forjdn5fdWp*LIg88UtzbtviRHVN1X9lNuJ15658z-8Zp*XACtHea3FFCiKPBFPmW1da2M3*FhfgdleDHWhmLSExigpCoQTyrzppatS1oRAzovhFg8PfzW9tMCnVCHzm85YxMT3*3u9Tcga1VOfPX-0SN6v4Oe*aFegoBtSE1qsNBwSgwGCXiMahOz3Fgy*Xg4j2Brus6BsyY9J4fm7KxA-OIR*dkMSfxjoboyCN40OC7c-EybklzMW6JpdhoVAaOwRcyvYu2O7i9514WEYVRFNHYX7ivWf-g796HZdwPqVevzo*irOtzQbLi9Wnxsn1JN9u0gqEs1S-zMtxA
+          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmS*4YGHXEpbemmvR6CK8lIZs8UoiU1sg0J*-RmaS6vTSchGM6vdmVlXArN6xWtI6lYAUWmF2b5ljUl6IYCRcebSMjePIAjFTC0J4T1TSQFSPV*xG5kxBY3AquXMUmMHyeoxXf38VRbvD*lLmmer-1YOIKS*Ew-d6Bw*YJoPiVRi0vNFqF6wO6xwEsd2YIdR7MV*HLjx061m0zZJ1W2bTf7juHfbZVFc3i77cdfsthuPxg8HStH51XupTvn5d1ca7p3Z4fEI2txx9mYjhEwBsszXCVWqM9yl4dzr78AJPlAulUYiFCENEQpkz3slKe86EBqRIIaWgNS-r59tM0b4UbvI4TNlzQz233bXmmdQlNeGe-9P0Frd96gNJxBzBFqbpiZ1epA-CfQnifoYeS8WemCH2WjpewYtyzIlyCnnN3xo61aNiYMce4G8BYoKO9CObF8ffrwzr16mHQlMph0lqW40KQNT6vcxv4qur6zBsa5rCIMwDO3I9axLNmzd4imoo2FMHbo8v5Oa0nOJsvLy4Z3Wp-RxnTYw1jX-A42b3RY
         resultCode: RedirectShopper
     post-payments-split:
-      summary: Split a payment between a sub-merchant and a platform account
+      summary: Split a payment between between accounts
       value:
         amount:
           currency: EUR
@@ -5062,12 +5079,12 @@ components:
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
         storePaymentMethod: true
     post-payments-subscription-first-transaction-200:
-      summary: Example response for request 'subscription-first-transaction'
+      summary: Card details tokenized for a subscription
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9VD896
-          authCode: "098871"
+          acquirerReference: 8PQMP9UV722
+          authCode: "004908"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
@@ -5077,7 +5094,7 @@ components:
           recurringProcessingModel: Subscription
           refusalReasonRaw: AUTHORISED
         merchantReference: string
-        pspReference: 993617895199574A
+        pspReference: 993617895153552A
         resultCode: Authorised
   headers:
     Idempotency-Key:
@@ -5094,146 +5111,6 @@ components:
         type: string
   schemas:
     AccountInfo:
-      properties:
-        accountAgeIndicator:
-          description: |-
-            Indicator for the length of time since this shopper account was created in the merchant's environment.
-            Allowed values:
-            * notApplicable
-            * thisTransaction
-            * lessThan30Days
-            * from30To60Days
-            * moreThan60Days
-          enum:
-            - notApplicable
-            - thisTransaction
-            - lessThan30Days
-            - from30To60Days
-            - moreThan60Days
-          type: string
-        accountChangeDate:
-          description: Date when the shopper's account was last changed.
-          format: date-time
-          type: string
-        accountChangeIndicator:
-          description: |-
-            Indicator for the length of time since the shopper's account was last updated.
-            Allowed values:
-            * thisTransaction
-            * lessThan30Days
-            * from30To60Days
-            * moreThan60Days
-          enum:
-            - thisTransaction
-            - lessThan30Days
-            - from30To60Days
-            - moreThan60Days
-          type: string
-        accountCreationDate:
-          description: Date when the shopper's account was created.
-          format: date-time
-          type: string
-        accountType:
-          description: |-
-            Indicates the type of account. For example, for a multi-account card product.
-            Allowed values:
-            * notApplicable
-            * credit
-            * debit
-          enum:
-            - notApplicable
-            - credit
-            - debit
-          type: string
-          x-addedInVersion: "50"
-        addCardAttemptsDay:
-          description: Number of attempts the shopper tried to add a card to their account in the last day.
-          format: int32
-          type: integer
-        deliveryAddressUsageDate:
-          description: Date the selected delivery address was first used.
-          format: date-time
-          type: string
-        deliveryAddressUsageIndicator:
-          description: |-
-            Indicator for the length of time since this delivery address was first used.
-            Allowed values:
-            * thisTransaction
-            * lessThan30Days
-            * from30To60Days
-            * moreThan60Days
-          enum:
-            - thisTransaction
-            - lessThan30Days
-            - from30To60Days
-            - moreThan60Days
-          type: string
-        homePhone:
-          description: Shopper's home phone number (including the country code).
-          type: string
-        mobilePhone:
-          description: Shopper's mobile phone number (including the country code).
-          type: string
-        passwordChangeDate:
-          description: Date when the shopper last changed their password.
-          format: date-time
-          type: string
-        passwordChangeIndicator:
-          description: |-
-            Indicator when the shopper has changed their password.
-            Allowed values:
-            * notApplicable
-            * thisTransaction
-            * lessThan30Days
-            * from30To60Days
-            * moreThan60Days
-          enum:
-            - notApplicable
-            - thisTransaction
-            - lessThan30Days
-            - from30To60Days
-            - moreThan60Days
-          type: string
-        pastTransactionsDay:
-          description: Number of all transactions (successful and abandoned) from this shopper in the past 24 hours.
-          format: int32
-          type: integer
-        pastTransactionsYear:
-          description: Number of all transactions (successful and abandoned) from this shopper in the past year.
-          format: int32
-          type: integer
-        paymentAccountAge:
-          description: Date this payment method was added to the shopper's account.
-          format: date-time
-          type: string
-        paymentAccountIndicator:
-          description: |-
-            Indicator for the length of time since this payment method was added to this shopper's account.
-            Allowed values:
-            * notApplicable
-            * thisTransaction
-            * lessThan30Days
-            * from30To60Days
-            * moreThan60Days
-          enum:
-            - notApplicable
-            - thisTransaction
-            - lessThan30Days
-            - from30To60Days
-            - moreThan60Days
-          type: string
-        purchasesLast6Months:
-          description: Number of successful purchases in the last six months.
-          format: int32
-          type: integer
-        suspiciousActivity:
-          description: Whether suspicious activity was recorded on this account.
-          type: boolean
-        workPhone:
-          description: Shopper's work phone number (including the country code).
-          type: string
-      type: object
-    AccountInfo-2:
       properties:
         accountAgeIndicator:
           description: |-
@@ -6751,36 +6628,6 @@ components:
         - postalCode
         - country
       type: object
-    Address-2:
-      properties:
-        city:
-          description: "The name of the city. Maximum length: 3000 characters."
-          maxLength: 3000
-          type: string
-        country:
-          description: |-
-            The two-character ISO-3166-1 alpha-2 country code. For example, **US**.
-            > If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
-          type: string
-        houseNumberOrName:
-          description: "The number or name of the house. Maximum length: 3000 characters."
-          maxLength: 3000
-          type: string
-        postalCode:
-          description: A maximum of five digits for an address in the US, or a maximum of ten characters for an address in all other countries.
-          type: string
-        stateOrProvince:
-          description: |-
-            The two-character ISO 3166-2 state or province code. For example, **CA** in the US or **ON** in Canada.
-            > Required for the US and Canada.
-          type: string
-        street:
-          description: |-
-            The name of the street. Maximum length: 3000 characters.
-            > The house number should not be included in this field; it should be separately provided via `houseNumberOrName`.
-          maxLength: 3000
-          type: string
-      type: object
     AfterpayDetails:
       additionalProperties: false
       properties:
@@ -6845,18 +6692,6 @@ components:
         - value
         - currency
       type: object
-    Amount-2:
-      properties:
-        currency:
-          description: The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes).
-          maxLength: 3
-          minLength: 3
-          type: string
-        value:
-          description: The amount of the transaction, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-          format: int64
-          type: integer
-      type: object
     AndroidPayDetails:
       additionalProperties: false
       properties:
@@ -6910,27 +6745,6 @@ components:
         - data
       type: object
     ApplicationInfo:
-      properties:
-        adyenLibrary:
-          $ref: "#/components/schemas/CommonField"
-          description: Adyen-developed software, such as libraries and plugins, used to interact with the Adyen API. For example, Magento plugin, Java API library, etc.
-        adyenPaymentSource:
-          $ref: "#/components/schemas/CommonField"
-          description: Adyen-developed software to get payment details. For example, Checkout SDK, Secured Fields SDK, etc.
-        externalPlatform:
-          $ref: "#/components/schemas/ExternalPlatform"
-          description: Third-party developed platform used to initiate payment requests. For example, Magento, Zuora, etc.
-        merchantApplication:
-          $ref: "#/components/schemas/CommonField"
-          description: Merchant developed software, such as cashier application, used to interact with the Adyen API.
-        merchantDevice:
-          $ref: "#/components/schemas/MerchantDevice"
-          description: Merchant device information.
-        shopperInteractionDevice:
-          $ref: "#/components/schemas/ShopperInteractionDevice"
-          description: Shopper interaction device, such as terminal, mobile device or web browser, to initiate payment requests.
-      type: object
-    ApplicationInfo-2:
       properties:
         adyenLibrary:
           $ref: "#/components/schemas/CommonField"
@@ -7131,48 +6945,6 @@ components:
         - screenWidth
         - timeZoneOffset
         - language
-      type: object
-    BrowserInfo-2:
-      properties:
-        acceptHeader:
-          description: The accept header value of the shopper's browser.
-          type: string
-        colorDepth:
-          description: "The color depth of the shopper's browser in bits per pixel. This should be obtained by using the browser's `screen.colorDepth` property. Accepted values: 1, 4, 8, 15, 16, 24, 30, 32 or 48 bit color depth."
-          format: int32
-          type: integer
-          x-addedInVersion: "40"
-        javaEnabled:
-          description: Boolean value indicating if the shopper's browser is able to execute Java.
-          type: boolean
-          x-addedInVersion: "40"
-        javaScriptEnabled:
-          default: true
-          description: Boolean value indicating if the shopper's browser is able to execute JavaScript. A default 'true' value is assumed if the field is not present.
-          type: boolean
-          x-addedInVersion: "40"
-        language:
-          description: The `navigator.language` value of the shopper's browser (as defined in IETF BCP 47).
-          type: string
-          x-addedInVersion: "40"
-        screenHeight:
-          description: The total height of the shopper's device screen in pixels.
-          format: int32
-          type: integer
-          x-addedInVersion: "40"
-        screenWidth:
-          description: The total width of the shopper's device screen in pixels.
-          format: int32
-          type: integer
-          x-addedInVersion: "40"
-        timeZoneOffset:
-          description: Time difference between UTC time and the shopper's browser local time, in minutes.
-          format: int32
-          type: integer
-          x-addedInVersion: "40"
-        userAgent:
-          description: The user agent value of the shopper's browser.
-          type: string
       type: object
     Card:
       properties:
@@ -7822,13 +7594,13 @@ components:
     CheckoutDonationPaymentRequest:
       properties:
         accountInfo:
-          $ref: "#/components/schemas/AccountInfo-2"
+          $ref: "#/components/schemas/AccountInfo"
           description: |-
             Shopper account information for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
           x-addedInVersion: "40"
         additionalAmount:
-          $ref: "#/components/schemas/Amount-2"
+          $ref: "#/components/schemas/Amount"
           description: |-
             If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
             Required to be in the same currency as the `amount`. 
@@ -7857,21 +7629,21 @@ components:
             The `additionalData` object consists of entries, each of which includes the key and value.
           type: object
         amount:
-          $ref: "#/components/schemas/Amount-2"
+          $ref: "#/components/schemas/Amount"
           description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
         applicationInfo:
-          $ref: "#/components/schemas/ApplicationInfo-2"
+          $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
           x-addedInVersion: "40"
         billingAddress:
-          $ref: "#/components/schemas/Address-2"
+          $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
             > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
             >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
             >* For cross-border payouts to and from Canada.
         browserInfo:
-          $ref: "#/components/schemas/BrowserInfo-2"
+          $ref: "#/components/schemas/BrowserInfo"
           description: |-
             The shopper's browser information.
             > For 3D Secure, the full object is required for web integrations. For mobile app integrations, include the `userAgent` and `acceptHeader` fields to indicate  that your integration can support a redirect in case a payment is routed to 3D Secure 1.
@@ -7915,10 +7687,10 @@ components:
           format: date-time
           type: string
         dccQuote:
-          $ref: "#/components/schemas/ForexQuote-2"
+          $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
         deliveryAddress:
-          $ref: "#/components/schemas/Address-2"
+          $ref: "#/components/schemas/Address"
           description: The address where the purchased goods should be delivered.
         deliveryDate:
           description: |-
@@ -7970,7 +7742,7 @@ components:
           format: int32
           type: integer
         installments:
-          $ref: "#/components/schemas/Installments-2"
+          $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
         lineItems:
           description: |-
@@ -7996,7 +7768,7 @@ components:
             > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
         merchantRiskIndicator:
-          $ref: "#/components/schemas/MerchantRiskIndicator-2"
+          $ref: "#/components/schemas/MerchantRiskIndicator"
           description: |-
             Additional risk fields for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
@@ -8155,7 +7927,7 @@ components:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
         shopperName:
-          $ref: "#/components/schemas/Name-2"
+          $ref: "#/components/schemas/Name"
           description: The shopper's full name.
         shopperReference:
           description: |-
@@ -8177,7 +7949,7 @@ components:
         splits:
           description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
-            $ref: "#/components/schemas/Split-2"
+            $ref: "#/components/schemas/Split"
           type: array
           x-addedInVersion: "37"
         store:
@@ -8269,13 +8041,13 @@ components:
     CheckoutPaymentRequest:
       properties:
         accountInfo:
-          $ref: "#/components/schemas/AccountInfo-2"
+          $ref: "#/components/schemas/AccountInfo"
           description: |-
             Shopper account information for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
           x-addedInVersion: "40"
         additionalAmount:
-          $ref: "#/components/schemas/Amount-2"
+          $ref: "#/components/schemas/Amount"
           description: |-
             If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
             Required to be in the same currency as the `amount`. 
@@ -8304,21 +8076,21 @@ components:
             The `additionalData` object consists of entries, each of which includes the key and value.
           type: object
         amount:
-          $ref: "#/components/schemas/Amount-2"
+          $ref: "#/components/schemas/Amount"
           description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
         applicationInfo:
-          $ref: "#/components/schemas/ApplicationInfo-2"
+          $ref: "#/components/schemas/ApplicationInfo"
           description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
           x-addedInVersion: "40"
         billingAddress:
-          $ref: "#/components/schemas/Address-2"
+          $ref: "#/components/schemas/Address"
           description: |-
             The address where to send the invoice.
             > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
             >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
             >* For cross-border payouts to and from Canada.
         browserInfo:
-          $ref: "#/components/schemas/BrowserInfo-2"
+          $ref: "#/components/schemas/BrowserInfo"
           description: |-
             The shopper's browser information.
             > For 3D Secure, the full object is required for web integrations. For mobile app integrations, include the `userAgent` and `acceptHeader` fields to indicate  that your integration can support a redirect in case a payment is routed to 3D Secure 1.
@@ -8362,10 +8134,10 @@ components:
           format: date-time
           type: string
         dccQuote:
-          $ref: "#/components/schemas/ForexQuote-2"
+          $ref: "#/components/schemas/ForexQuote"
           description: The forex quote as returned in the response of the forex service.
         deliveryAddress:
-          $ref: "#/components/schemas/Address-2"
+          $ref: "#/components/schemas/Address"
           description: The address where the purchased goods should be delivered.
         deliveryDate:
           description: |-
@@ -8408,7 +8180,7 @@ components:
           format: int32
           type: integer
         installments:
-          $ref: "#/components/schemas/Installments-2"
+          $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
         lineItems:
           description: |-
@@ -8434,7 +8206,7 @@ components:
             > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
           type: string
         merchantRiskIndicator:
-          $ref: "#/components/schemas/MerchantRiskIndicator-2"
+          $ref: "#/components/schemas/MerchantRiskIndicator"
           description: |-
             Additional risk fields for 3D Secure 2.
             > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
@@ -8593,7 +8365,7 @@ components:
           description: The combination of a language code and a country code to specify the language to be used in the payment.
           type: string
         shopperName:
-          $ref: "#/components/schemas/Name-2"
+          $ref: "#/components/schemas/Name"
           description: The shopper's full name.
         shopperReference:
           description: |-
@@ -8615,7 +8387,7 @@ components:
         splits:
           description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
           items:
-            $ref: "#/components/schemas/Split-2"
+            $ref: "#/components/schemas/Split"
           type: array
           x-addedInVersion: "37"
         store:
@@ -9469,47 +9241,6 @@ components:
         - validTill
         - basePoints
       type: object
-    ForexQuote-2:
-      properties:
-        account:
-          description: The account name.
-          type: string
-        accountType:
-          description: The account type.
-          type: string
-        baseAmount:
-          $ref: "#/components/schemas/Amount-2"
-          description: The base amount.
-        basePoints:
-          description: The base points.
-          format: int32
-          type: integer
-        buy:
-          $ref: "#/components/schemas/Amount-2"
-          description: The buy rate.
-        interbank:
-          $ref: "#/components/schemas/Amount-2"
-          description: The interbank amount.
-        reference:
-          description: The reference assigned to the forex quote request.
-          type: string
-        sell:
-          $ref: "#/components/schemas/Amount-2"
-          description: The sell rate.
-        signature:
-          description: The signature to validate the integrity.
-          type: string
-        source:
-          description: The source of the forex quote.
-          type: string
-        type:
-          description: The type of forex.
-          type: string
-        validTill:
-          description: The date until which the forex quote is valid.
-          format: date-time
-          type: string
-      type: object
     FraudCheckResult:
       properties:
         accountScore:
@@ -9715,16 +9446,6 @@ components:
       required:
         - value
       type: object
-    Installments-2:
-      properties:
-        value:
-          description: |-
-            Defines the number of installments. Its value needs to be greater than zero.
-
-            Usually, the maximum allowed number of installments is capped. For example, it may not be possible to split a payment in more than 24 installments. The acquirer sets this upper limit, so its value may vary.
-          format: int32
-          type: integer
-      type: object
     InstallmentsNumber:
       properties:
         maxNumberOfInstallments:
@@ -9886,76 +9607,6 @@ components:
           description: Start date of the billing plan, in YYYY-MM-DD format. By default, the transaction date.
           type: string
       type: object
-    Mandate-2:
-      properties:
-        amount:
-          description: The billing amount (in minor units) of the recurring transactions.
-          type: string
-        amountRule:
-          description: |+
-            The limitation rule of the billing amount.
-
-            Possible values:
-             * **max**: The transaction amount can not exceed the `amount`.
-
-             * **exact**: The transaction amount should be the same as the `amount`.
-
-          enum:
-            - max
-            - exact
-          type: string
-        billingAttemptsRule:
-          description: |+
-            The rule to specify the period, within which the recurring debit can happen, relative to the mandate recurring date.
-
-            Possible values:
-
-             * **on**: On a specific date.
-
-             * **before**:  Before and on a specific date.
-
-             * **after**: On and after a specific date.
-
-          enum:
-            - on
-            - before
-            - after
-          type: string
-        billingDay:
-          description: |-
-            The number of the day, on which the recurring debit can happen. Should be within the same calendar month as the mandate recurring date.
-
-            Possible values: 1-31 based on the `frequency`.
-          type: string
-        endsAt:
-          description: End date of the billing plan, in YYYY-MM-DD format.
-          type: string
-        frequency:
-          description: |-
-            The frequency with which a shopper should be charged.
-
-            Possible values: **daily**, **weekly**, **biWeekly**, **monthly**, **quarterly**, **halfYearly**, **yearly**.
-          enum:
-            - adhoc
-            - daily
-            - weekly
-            - biWeekly
-            - monthly
-            - quarterly
-            - halfYearly
-            - yearly
-          type: string
-        remarks:
-          description: The message shown by UPI to the shopper on the approval screen.
-          type: string
-        startsAt:
-          description: Start date of the billing plan, in YYYY-MM-DD format. By default, the transaction date.
-          type: string
-      required:
-        - frequency
-        - amount
-        - endsAt
-      type: object
     MasterpassDetails:
       additionalProperties: false
       properties:
@@ -10069,66 +9720,6 @@ components:
           description: Indicator for whether the shopper has already purchased the same items in the past.
           type: boolean
       type: object
-    MerchantRiskIndicator-2:
-      properties:
-        addressMatch:
-          description: Whether the chosen delivery address is identical to the billing address.
-          type: boolean
-        deliveryAddressIndicator:
-          description: |-
-            Indicator regarding the delivery address.
-            Allowed values:
-            * `shipToBillingAddress`
-            * `shipToVerifiedAddress`
-            * `shipToNewAddress`
-            * `shipToStore`
-            * `digitalGoods`
-            * `goodsNotShipped`
-            * `other`
-          enum:
-            - shipToBillingAddress
-            - shipToVerifiedAddress
-            - shipToNewAddress
-            - shipToStore
-            - digitalGoods
-            - goodsNotShipped
-            - other
-          type: string
-        deliveryEmail:
-          description: The delivery email address (for digital goods).
-          type: string
-        deliveryTimeframe:
-          description: |-
-            The estimated delivery time for the shopper to receive the goods.
-            Allowed values:
-            * `electronicDelivery`
-            * `sameDayShipping`
-            * `overnightShipping`
-            * `twoOrMoreDaysShipping`
-          enum:
-            - electronicDelivery
-            - sameDayShipping
-            - overnightShipping
-            - twoOrMoreDaysShipping
-          type: string
-        giftCardAmount:
-          $ref: "#/components/schemas/Amount"
-          description: For prepaid or gift card purchase, the purchase amount total of prepaid or gift card(s).
-        giftCardCount:
-          description: For prepaid or gift card purchase, total count of individual prepaid or gift cards/codes purchased.
-          format: int32
-          type: integer
-        preOrderDate:
-          description: For pre-order purchases, the expected date this product will be available to the shopper.
-          format: date-time
-          type: string
-        preOrderPurchase:
-          description: Indicator for whether this transaction is for pre-ordering a product.
-          type: boolean
-        reorderItems:
-          description: Indicator for whether the shopper has already purchased the same items in the past.
-          type: boolean
-      type: object
     MobilePayDetails:
       additionalProperties: false
       properties:
@@ -10168,15 +9759,6 @@ components:
       required:
         - firstName
         - lastName
-      type: object
-    Name-2:
-      properties:
-        firstName:
-          description: The first name.
-          type: string
-        lastName:
-          description: The last name.
-          type: string
       type: object
     OpenInvoiceDetails:
       additionalProperties: false
@@ -11449,7 +11031,7 @@ components:
           type: array
           x-addedInVersion: "32"
         mandate:
-          $ref: "#/components/schemas/Mandate-2"
+          $ref: "#/components/schemas/Mandate"
           description: The mandate details to initiate recurring transaction.
         mcc:
           description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
@@ -12636,60 +12218,6 @@ components:
           type: string
       required:
         - amount
-        - type
-      type: object
-    Split-2:
-      properties:
-        account:
-          description: |-
-            The unique identifier of the account to which the split amount is booked. Required if `type` is **MarketPlace** or **BalanceAccount**.
-
-            * [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic): The [`accountCode`](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccount#request-accountCode) of the account to which the split amount is booked.
-            * [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms): The [`balanceAccountId`](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/balanceAccounts/_id_#path-id) of the account to which the split amount is booked.
-          type: string
-        amount:
-          $ref: "#/components/schemas/SplitAmount"
-          description: |-
-            The amount of the split item.
-
-            * Required for all split types in the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
-            * Required if `type` is **BalanceAccount**, **Commission**, **Default**, or **VAT** in your [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms) integration.
-        description:
-          description: Your description for the split item.
-          type: string
-        reference:
-          description: |-
-            Your reference for the split item.
-
-            This is required if `type` is **MarketPlace** ([Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic)) or **BalanceAccount** ([Balance Platform](https://docs.adyen.com/marketplaces-and-platforms)). For the other types, we also recommend sending a reference so you can reconcile the split and the associated payment in the transaction overview and in the reports.
-          type: string
-        type:
-          description: |-
-            The type of the split item.
-
-            Possible values:
-
-            * [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic): **Commission**, **Default**, **Marketplace**, **PaymentFee**, **VAT**.
-            * [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms): **BalanceAccount**, **Commission**, **Default**, **PaymentFee**, **Remainder**, **Surcharge**, **Tip**, **VAT**.
-          enum:
-            - BalanceAccount
-            - Commission
-            - Default
-            - MarketPlace
-            - PaymentFee
-            - PaymentFeeAcquiring
-            - PaymentFeeAdyen
-            - PaymentFeeAdyenCommission
-            - PaymentFeeAdyenMarkup
-            - PaymentFeeInterchange
-            - PaymentFeeSchemeFee
-            - Remainder
-            - Surcharge
-            - Tip
-            - VAT
-            - Verification
-          type: string
-      required:
         - type
       type: object
     SplitAmount:

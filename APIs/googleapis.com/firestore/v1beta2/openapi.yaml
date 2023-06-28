@@ -456,6 +456,36 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
+    GoogleFirestoreAdminV1RestoreDatabaseMetadata:
+      description: Metadata for the long-running operation from the RestoreDatabase request.
+      properties:
+        backup:
+          description: The name of the backup restoring from.
+          type: string
+        database:
+          description: The name of the database being restored to.
+          type: string
+        endTime:
+          description: The time the restore finished, unset for ongoing restores.
+          format: google-datetime
+          type: string
+        operationState:
+          description: The operation state of the restore.
+          enum:
+            - OPERATION_STATE_UNSPECIFIED
+            - INITIALIZING
+            - PROCESSING
+            - CANCELLING
+            - FINALIZING
+            - SUCCESSFUL
+            - FAILED
+            - CANCELLED
+          type: string
+        startTime:
+          description: The time the restore was started.
+          format: google-datetime
+          type: string
+      type: object
     GoogleFirestoreAdminV1UpdateDatabaseMetadata:
       description: Metadata related to the update database operation.
       properties: {}

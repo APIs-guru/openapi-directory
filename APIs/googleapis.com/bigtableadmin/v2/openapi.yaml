@@ -1574,7 +1574,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Gets the access control policy for a Table resource. Returns an empty policy if the resource exists but does not have a policy set.
-      operationId: bigtableadmin.projects.instances.tables.getIamPolicy
+      operationId: bigtableadmin.projects.instances.tables.views.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -1636,7 +1636,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on a Table resource. Replaces any existing policy.
-      operationId: bigtableadmin.projects.instances.tables.setIamPolicy
+      operationId: bigtableadmin.projects.instances.tables.views.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -1698,7 +1698,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Returns permissions that the caller has on the specified table resource.
-      operationId: bigtableadmin.projects.instances.tables.testIamPermissions
+      operationId: bigtableadmin.projects.instances.tables.views.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -1977,6 +1977,14 @@ components:
           type: array
         role:
           description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
+      type: object
+    ChangeStreamConfig:
+      description: Change stream configuration.
+      properties:
+        retentionPeriod:
+          description: How long the change stream should be retained. Change stream data older than the retention period will not be returned when reading the change stream from the table. Values must be at least 1 day and at most 7 days, and will be truncated to microsecond granularity.
+          format: google-duration
           type: string
       type: object
     CheckConsistencyRequest:
@@ -2774,6 +2782,9 @@ components:
     Table:
       description: A collection of user data indexed by row, column, and timestamp. Each table is served using the resources of its parent cluster.
       properties:
+        changeStreamConfig:
+          $ref: "#/components/schemas/ChangeStreamConfig"
+          description: If specified, enable the change stream on this table. Otherwise, the change stream is disabled and the change stream is not retained.
         clusterStates:
           additionalProperties:
             $ref: "#/components/schemas/ClusterState"

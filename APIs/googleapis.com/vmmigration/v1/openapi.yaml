@@ -2858,6 +2858,7 @@ components:
           description: The identifier of the ReplicationCycle.
           type: string
         progressPercent:
+          deprecated: true
           description: The current progress in percentage of this cycle. Was replaced by 'steps' field, which breaks down the cycle progression more accurately.
           format: int32
           type: integer

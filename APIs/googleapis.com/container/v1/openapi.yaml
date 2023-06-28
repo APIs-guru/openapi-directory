@@ -3519,16 +3519,6 @@ components:
             $ref: "#/components/schemas/ResourceLimit"
           type: array
       type: object
-    ClusterNetworkPerformanceConfig:
-      description: Configuration of network bandwidth tiers
-      properties:
-        totalEgressBandwidthTier:
-          description: Specifies the total network bandwidth tier for NodePools in the cluster.
-          enum:
-            - TIER_UNSPECIFIED
-            - TIER_1
-          type: string
-      type: object
     ClusterUpdate:
       description: ClusterUpdate describes an update to the cluster. Exactly one update can be applied to a cluster with each request, so at most one field can be provided.
       properties:
@@ -3625,9 +3615,6 @@ components:
         desiredMonitoringService:
           description: 'The monitoring service the cluster should use to write metrics. Currently available options: * "monitoring.googleapis.com/kubernetes" - The Cloud Monitoring service with a Kubernetes-native resource model * `monitoring.googleapis.com` - The legacy Cloud Monitoring service (no longer available as of GKE 1.15). * `none` - No metrics will be exported from the cluster. If left as an empty string,`monitoring.googleapis.com/kubernetes` will be used for GKE 1.14+ or `monitoring.googleapis.com` for earlier versions.'
           type: string
-        desiredNetworkPerformanceConfig:
-          $ref: "#/components/schemas/ClusterNetworkPerformanceConfig"
-          description: The desired network performance config.
         desiredNodePoolAutoConfigNetworkTags:
           $ref: "#/components/schemas/NetworkTags"
           description: The desired network tags that apply to all auto-provisioned node pools in autopilot clusters and node auto-provisioning enabled clusters.
@@ -3787,7 +3774,6 @@ components:
             - PROVIDER_UNSPECIFIED
             - PLATFORM_DEFAULT
             - CLOUD_DNS
-            - KUBE_DNS
           type: string
         clusterDnsDomain:
           description: cluster_dns_domain is the suffix used for all cluster service records.
@@ -4451,9 +4437,6 @@ components:
         network:
           description: "Output only. The relative name of the Google Compute Engine network(https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the cluster is connected. Example: projects/my-project/global/networks/my-network"
           type: string
-        networkPerformanceConfig:
-          $ref: "#/components/schemas/ClusterNetworkPerformanceConfig"
-          description: Network bandwidth tier configuration.
         privateIpv6GoogleAccess:
           description: The desired state of IPv6 connectivity to Google Services. By default, no private IPv6 access to or from Google Services (all access will be via IPv4)
           enum:

@@ -8066,7 +8066,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigConversationProcessConfig"
           description: Configs for processing conversation.
         enableEventBasedSuggestion:
-          description: "Automatically iterates all participants and tries to compile suggestions. Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST."
+          description: "Automatically iterates all participants and tries to compile suggestions. Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST, ENTITY_EXTRACTION."
           type: boolean
         queryConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfig"
@@ -8090,7 +8090,7 @@ components:
           description: Determines how recent conversation context is filtered when generating suggestions. If unspecified, no messages will be dropped.
         dialogflowQuerySource:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDialogflowQuerySource"
-          description: Query from Dialogflow agent. It is used by DIALOGFLOW_ASSIST.
+          description: Query from Dialogflow agent. It is used by DIALOGFLOW_ASSIST, ENTITY_EXTRACTION.
         documentQuerySource:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDocumentQuerySource"
           description: "Query from knowledge base document. It is used by: SMART_REPLY, SMART_COMPOSE."
@@ -8116,7 +8116,7 @@ components:
           type: boolean
       type: object
     GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigDialogflowQuerySource:
-      description: "Dialogflow source setting. Supported feature: DIALOGFLOW_ASSIST."
+      description: "Dialogflow source setting. Supported feature: DIALOGFLOW_ASSIST, ENTITY_EXTRACTION."
       properties:
         agent:
           description: "Required. The name of a dialogflow virtual agent used for end user side intent detection and suggestion. Format: `projects//locations//agent`. When multiple agents are allowed in the same Dialogflow project."

@@ -1617,6 +1617,9 @@ components:
         clientId:
           description: Required. The client ID. Must match the audience claim of the JWT issued by the identity provider.
           type: string
+        clientSecret:
+          $ref: "#/components/schemas/GoogleIamAdminV1WorkforcePoolProviderOidcClientSecret"
+          description: The optional client secret. Required to enable Authorization Code flow for web sign-in.
         issuerUri:
           description: Required. The OIDC issuer URI. Must be a valid URI using the 'https' scheme.
           type: string
@@ -1624,19 +1627,44 @@ components:
           $ref: "#/components/schemas/GoogleIamAdminV1WorkforcePoolProviderOidcWebSsoConfig"
           description: Required. Configuration for web single sign-on for the OIDC provider. Here, web sign-in refers to console sign-in and gcloud sign-in through the browser.
       type: object
+    GoogleIamAdminV1WorkforcePoolProviderOidcClientSecret:
+      description: Representation of a client secret configured for the OIDC provider.
+      properties:
+        value:
+          $ref: "#/components/schemas/GoogleIamAdminV1WorkforcePoolProviderOidcClientSecretValue"
+          description: The value of the client secret.
+      type: object
+    GoogleIamAdminV1WorkforcePoolProviderOidcClientSecretValue:
+      description: Representation of the value of the client secret.
+      properties:
+        plainText:
+          description: Input only. The plain text of the client secret value. For security reasons, this field is only used for input and will never be populated in any response.
+          type: string
+        thumbprint:
+          description: Output only. A thumbprint to represent the current client secret value.
+          readOnly: true
+          type: string
+      type: object
     GoogleIamAdminV1WorkforcePoolProviderOidcWebSsoConfig:
       description: Configuration for web single sign-on for the OIDC provider.
       properties:
+        additionalScopes:
+          description: Additional scopes to request for in the OIDC authentication request on top of scopes requested by default. By default, the `openid`, `profile` and `email` scopes that are supported by the identity provider are requested. Each additional scope may be at most 256 characters. A maximum of 10 additional scopes may be configured.
+          items:
+            type: string
+          type: array
         assertionClaimsBehavior:
           description: Required. The behavior for how OIDC Claims are included in the `assertion` object used for attribute mapping and attribute condition.
           enum:
             - ASSERTION_CLAIMS_BEHAVIOR_UNSPECIFIED
+            - MERGE_USER_INFO_OVER_ID_TOKEN_CLAIMS
             - ONLY_ID_TOKEN_CLAIMS
           type: string
         responseType:
           description: Required. The Response Type to request for in the OIDC Authorization Request for web sign-in.
           enum:
             - RESPONSE_TYPE_UNSPECIFIED
+            - CODE
             - ID_TOKEN
           type: string
       type: object
@@ -2057,7 +2085,7 @@ components:
             type: string
           type: array
         name:
-          description: The name of the role. When Role is used in CreateRole, the role name must not be set. When Role is used in output and other input such as UpdateRole, the role name is the complete path, e.g., roles/logging.viewer for predefined roles and organizations/{ORGANIZATION_ID}/roles/logging.viewer for custom roles.
+          description: The name of the role. When `Role` is used in `CreateRole`, the role name must not be set. When `Role` is used in output and other input such as `UpdateRole`, the role name is the complete path. For example, `roles/logging.viewer` for predefined roles, `organizations/{ORGANIZATION_ID}/roles/my-role` for organization-level custom roles, and `projects/{PROJECT_ID}/roles/my-role` for project-level custom roles.
           type: string
         stage:
           description: The current launch stage of the role. If the `ALPHA` launch stage has been selected for a role, the `stage` field will not be included in the returned definition for the role.
@@ -2420,6 +2448,13 @@ components:
           type: boolean
         displayName:
           description: A display name for the pool. Cannot exceed 32 characters.
+          type: string
+        identityMode:
+          description: Immutable. The identity mode of the pool.
+          enum:
+            - IDENTITY_MODE_UNSPECIFIED
+            - FEDERATION_ONLY
+            - TRUST_DOMAIN
           type: string
         name:
           description: Output only. The resource name of the pool.

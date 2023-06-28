@@ -1494,6 +1494,36 @@ components:
           $ref: "#/components/schemas/UnaryFilter"
           description: A filter that takes exactly one argument.
       type: object
+    GoogleFirestoreAdminV1RestoreDatabaseMetadata:
+      description: Metadata for the long-running operation from the RestoreDatabase request.
+      properties:
+        backup:
+          description: The name of the backup restoring from.
+          type: string
+        database:
+          description: The name of the database being restored to.
+          type: string
+        endTime:
+          description: The time the restore finished, unset for ongoing restores.
+          format: google-datetime
+          type: string
+        operationState:
+          description: The operation state of the restore.
+          enum:
+            - OPERATION_STATE_UNSPECIFIED
+            - INITIALIZING
+            - PROCESSING
+            - CANCELLING
+            - FINALIZING
+            - SUCCESSFUL
+            - FAILED
+            - CANCELLED
+          type: string
+        startTime:
+          description: The time the restore was started.
+          format: google-datetime
+          type: string
+      type: object
     GoogleFirestoreAdminV1UpdateDatabaseMetadata:
       description: Metadata related to the update database operation.
       properties: {}
@@ -1903,7 +1933,7 @@ components:
           type: string
       type: object
     ReadWrite:
-      description: Options for a transaction that can be used to read and write documents.
+      description: Options for a transaction that can be used to read and write documents. Firestore does not allow 3rd party auth requests to create read-write. transactions.
       properties:
         retryTransaction:
           description: An optional transaction to retry.
