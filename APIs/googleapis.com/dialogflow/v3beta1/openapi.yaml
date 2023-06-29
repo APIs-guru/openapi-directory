@@ -1746,7 +1746,7 @@ paths:
         - projects
   "/v3beta1/{parent}/results":
     get:
-      description: Fetches a list of results for a given test case.
+      description: Fetches the list of run results for the given test case. A maximum of 100 results are kept for each test case.
       operationId: dialogflow.projects.locations.agents.testCases.results.list
       parameters:
         - description: "Required. The test case to list results for. Format: `projects//locations//agents// testCases/`. Specify a `-` as a wildcard for TestCase ID to list results across multiple test cases."

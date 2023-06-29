@@ -48858,13 +48858,6 @@ components:
           description: Optional parameter to define a target capacity for the UTILIZATION balancing mode. The valid range is [0.0, 1.0]. For usage guidelines, see Utilization balancing mode.
           format: float
           type: number
-        preference:
-          description: "This field indicates whether this backend should be fully utilized before sending traffic to backends with default preference. The possible values are: - PREFERRED: Backends with this preference level will be filled up to their capacity limits first, based on RTT. - DEFAULT: If preferred backends don't have enough capacity, backends in this layer would be used and traffic would be assigned based on the load balancing algorithm you use. This is the default "
-          enum:
-            - DEFAULT
-            - PREFERENCE_UNSPECIFIED
-            - PREFERRED
-          type: string
       type: object
     BackendBucket:
       description: Represents a Cloud Storage Bucket resource. This Cloud Storage bucket resource is referenced by a URL map of a load balancer. For more information, read Backend Buckets.
@@ -49236,9 +49229,6 @@ components:
           items:
             type: string
           type: array
-        serviceLbPolicy:
-          description: URL to networkservices.ServiceLbPolicy resource. Can only be set if load balancing scheme is EXTERNAL, EXTERNAL_MANAGED, INTERNAL_MANAGED or INTERNAL_SELF_MANAGED and the scope is global.
-          type: string
         sessionAffinity:
           description: "Type of session affinity to use. The default is NONE. Only NONE and HEADER_FIELD are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. For more details, see: [Session Affinity](https://cloud.google.com/load-balancing/docs/backend-service#session_affinity)."
           enum:
@@ -49896,33 +49886,6 @@ components:
         name:
           description: This field is only temporary. It will be removed. Do not use it.
           type: string
-      type: object
-    BulkInsertOperationStatus:
-      properties:
-        createdVmCount:
-          description: "[Output Only] Count of VMs successfully created so far."
-          format: int32
-          type: integer
-        deletedVmCount:
-          description: "[Output Only] Count of VMs that got deleted during rollback."
-          format: int32
-          type: integer
-        failedToCreateVmCount:
-          description: "[Output Only] Count of VMs that started creating but encountered an error."
-          format: int32
-          type: integer
-        status:
-          description: "[Output Only] Creation status of BulkInsert operation - information if the flow is rolling forward or rolling back."
-          enum:
-            - CREATING
-            - DONE
-            - ROLLING_BACK
-            - STATUS_UNSPECIFIED
-          type: string
-        targetVmCount:
-          description: "[Output Only] Count of VMs originally planned to be created."
-          format: int32
-          type: integer
       type: object
     BundledLocalSsds:
       properties:
@@ -52155,7 +52118,7 @@ components:
           description: "This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal and external protocol forwarding. Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive."
           type: boolean
         allowGlobalAccess:
-          description: This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If set to true, clients can access the Internal TCP/UDP Load Balancer, Internal HTTP(S) and TCP Proxy Load Balancer from all regions. If false, only allows access from the local region the load balancer is located at. Note that for INTERNAL_MANAGED forwarding rules, this field cannot be changed after the forwarding rule is created.
+          description: This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If the field is set to TRUE, clients can access ILB from all regions. Otherwise only allows access from clients in the same region as the internal load balancer.
           type: boolean
         allowPscGlobalAccess:
           description: This is used in PSC consumer ForwardingRule to control whether the PSC endpoint can be accessed from another region.
@@ -56061,14 +56024,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    InstancesBulkInsertOperationMetadata:
-      properties:
-        perLocationStatus:
-          additionalProperties:
-            $ref: "#/components/schemas/BulkInsertOperationStatus"
-          description: "Status information per location (location name is key). Example key: zones/us-central1-a"
-          type: object
       type: object
     InstancesGetEffectiveFirewallsResponse:
       properties:
@@ -61163,8 +61118,6 @@ components:
         insertTime:
           description: "[Output Only] The time that this operation was requested. This value is in RFC3339 text format."
           type: string
-        instancesBulkInsertOperationMetadata:
-          $ref: "#/components/schemas/InstancesBulkInsertOperationMetadata"
         kind:
           default: compute#operation
           description: "[Output Only] Type of the resource. Always `compute#operation` for Operation resources."
@@ -62356,7 +62309,7 @@ components:
           format: uint64
           type: string
         ipCidrRange:
-          description: The IP address range, in CIDR format, represented by this public delegated prefix.
+          description: The IPv4 address range, in CIDR format, represented by this public delegated prefix.
           type: string
         isLiveMigration:
           description: If true, the prefix will be live migrated.
@@ -62552,7 +62505,7 @@ components:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
         ipCidrRange:
-          description: The IP address range, in CIDR format, represented by this sub public delegated prefix.
+          description: The IPv4 address range, in CIDR format, represented by this sub public delegated prefix.
           type: string
         isAddress:
           description: Whether the sub prefix is delegated to create Address resources in the delegatee project.

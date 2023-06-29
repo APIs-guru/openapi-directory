@@ -1225,6 +1225,7 @@ components:
       description: A specification of the location of and metadata about a database dump from a relational database management system.
       properties:
         databaseType:
+          deprecated: true
           description: The type of the database.
           enum:
             - DATABASE_TYPE_UNSPECIFIED
@@ -1234,6 +1235,7 @@ components:
           description: A Cloud Storage object or folder URI that specifies the source from which to import metadata. It must begin with gs://.
           type: string
         sourceDatabase:
+          deprecated: true
           description: The name of the source database.
           type: string
         type:

@@ -633,6 +633,7 @@ components:
             - ISR_REGIONS
             - ISR_REGIONS_AND_SUPPORT
             - CA_PROTECTED_B
+            - IL5
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -727,10 +728,6 @@ components:
           type: string
         nonCompliantOrgPolicy:
           description: "Output only. Immutable. Name of the OrgPolicy which was modified with non-compliant change and resulted this violation. Format: projects/{project_number}/policies/{constraint_name} folders/{folder_id}/policies/{constraint_name} organizations/{organization_id}/policies/{constraint_name}"
-          readOnly: true
-          type: string
-        orgPolicyConstraint:
-          description: Output only. Immutable. The org-policy-constraint that was incorrectly changed, which resulted in this violation.
           readOnly: true
           type: string
         remediation:
@@ -855,6 +852,7 @@ components:
             - ISR_REGIONS
             - ISR_REGIONS_AND_SUPPORT
             - CA_PROTECTED_B
+            - IL5
           type: string
         complianceStatus:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceStatus"
