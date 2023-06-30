@@ -631,7 +631,7 @@ paths:
       operationId: DeleteRecordingConfiguration
       description: '<p>Deletes the recording configuration for the specified ARN.</p> <p>If you try to delete a recording configuration that is associated with a channel, you will get an error (409 ConflictException). To avoid this, for all channels that reference the recording configuration, first use <a>UpdateChannel</a> to set the <code>recordingConfigurationArn</code> field to an empty string, then use DeleteRecordingConfiguration.</p>'
       responses:
-        '200':
+        '204':
           description: Success
         '480':
           description: ResourceNotFoundException
@@ -1691,7 +1691,7 @@ paths:
       operationId: PutMetadata
       description: 'Inserts metadata into the active stream of the specified channel. At most 5 requests per second per channel are allowed, each with a maximum 1 KB payload. (If 5 TPS is not sufficient for your needs, we recommend batching your data into a single PutMetadata call.) At most 155 requests per second per account are allowed. Also see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/metadata.html">Embedding Metadata within a Video Stream</a> in the <i>Amazon IVS User Guide</i>.'
       responses:
-        '200':
+        '204':
           description: Success
         '480':
           description: ResourceNotFoundException

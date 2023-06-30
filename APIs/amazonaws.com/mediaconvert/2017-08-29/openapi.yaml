@@ -6020,13 +6020,13 @@ components:
             - $ref: '#/components/schemas/__stringMin3Max3PatternAZaZ3'
             - xml:
                 name: customLanguageCode
-              description: 'The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
+              description: 'The specific language to extract from source, using the ISO 639-2 or ISO 639-3 three-letter language code. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
             - xml:
                 name: languageCode
-              description: 'The specific language to extract from source. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
+              description: 'The specific language to extract from source. If input is SCTE-27, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub and output is Burn-in, complete this field and/or PID to select the caption language to extract. If input is DVB-Sub that is being passed through, omit this field (and PID field); there is no way to extract a specific language with pass-through captions.'
         SourceSettings:
           allOf:
             - $ref: '#/components/schemas/CaptionSourceSettings'
@@ -6068,7 +6068,7 @@ components:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: pid
-              description: 'When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.'
+              description: 'When using DVB-Sub with Burn-in, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.'
       description: DVB Sub Source Settings
     EmbeddedSourceSettings:
       type: object
@@ -7672,7 +7672,7 @@ components:
             - $ref: '#/components/schemas/MxfProfile'
             - xml:
                 name: profile
-              description: 'Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.'
+              description: 'Specify the MXF profile, also called shim, for this output. To automatically select a profile according to your output video codec and resolution, leave blank. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.'
         XavcProfileSettings:
           allOf:
             - $ref: '#/components/schemas/MxfXavcProfileSettings'
@@ -11054,7 +11054,7 @@ components:
             - $ref: '#/components/schemas/__integerMin1Max2147483647'
             - xml:
                 name: segmentsPerSubdirectory
-              description: Specify the number of segments to write to a subdirectory before starting a new one. You  must also set Directory structure to Subdirectory per stream for this setting to have an effect.
+              description: Specify the number of segments to write to a subdirectory before starting a new one. You must also set Directory structure to Subdirectory per stream for this setting to have an effect.
         StreamInfResolution:
           allOf:
             - $ref: '#/components/schemas/HlsStreamInfResolution'
@@ -12801,7 +12801,7 @@ components:
         - OP1A
         - XAVC
         - XDCAM_RDD9
-      description: 'Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.'
+      description: 'Specify the MXF profile, also called shim, for this output. To automatically select a profile according to your output video codec and resolution, leave blank. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.'
     MxfXavcProfileSettings:
       type: object
       properties:
@@ -14227,7 +14227,7 @@ components:
             - $ref: '#/components/schemas/VideoCodec'
             - xml:
                 name: codec
-              description: 'Specifies the video codec. This must be equal to one of the enum values defined by the object VideoCodec. To passthrough the video stream of your input JPEG2000, VC-3, AVC-INTRA or Apple ProRes  video without any video encoding: Choose Passthrough. If you have multiple input videos, note that they must have identical encoding attributes. When you choose Passthrough, your output container must be MXF or QuickTime MOV.'
+              description: 'Specifies the video codec. This must be equal to one of the enum values defined by the object VideoCodec. To passthrough the video stream of your input JPEG2000, VC-3, AVC-INTRA or Apple ProRes video without any video encoding: Choose Passthrough. If you have multiple input videos, note that they must have identical encoding attributes. When you choose Passthrough, your output container must be MXF or QuickTime MOV.'
         FrameCaptureSettings:
           allOf:
             - $ref: '#/components/schemas/FrameCaptureSettings'
@@ -14315,7 +14315,7 @@ components:
             - $ref: '#/components/schemas/Hdr10Plus'
             - xml:
                 name: hdr10Plus
-              description: Enable HDR10+ analyis and metadata injection. Compatible with HEVC only.
+              description: Enable HDR10+ analysis and metadata injection. Compatible with HEVC only.
         ImageInserter:
           allOf:
             - $ref: '#/components/schemas/ImageInserter'

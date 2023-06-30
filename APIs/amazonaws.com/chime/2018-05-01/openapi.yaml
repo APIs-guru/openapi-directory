@@ -3,7 +3,7 @@ info:
   version: '2018-05-01'
   x-release: v4
   title: Amazon Chime
-  description: '<p>The Amazon Chime application programming interface (API) is designed so administrators can perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls for Amazon Chime. We recommend using an AWS SDK or the AWS CLI. The page for each API action contains a <i>See Also</i> section that includes links to information about using the action with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports Signature Version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
+  description: '<important> <p> <b>Most of these APIs are no longer supported and will not be updated.</b> We recommend using the latest versions in the <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/welcome.html">Amazon Chime SDK API reference</a>, in the Amazon Chime SDK.</p> <p>Using the latest versions requires migrating to dedicated namespaces. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important> <p>The Amazon Chime application programming interface (API) is designed so administrators can perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls for Amazon Chime. We recommend using an AWS SDK or the AWS CLI. The page for each API action contains a <i>See Also</i> section that includes links to information about using the action with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p> You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>. </p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>. </p> </dd> <dt>Using REST APIs</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports Signature Version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -163,8 +163,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/voice-connectors/{voiceConnectorId}#operation=associate-phone-numbers':
     post:
+      deprecated: true
       operationId: AssociatePhoneNumbersWithVoiceConnector
-      description: Associates phone numbers with the specified Amazon Chime Voice Connector.
+      description: '<p>Associates phone numbers with the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_AssociatePhoneNumbersWithVoiceConnector.html">AssociatePhoneNumbersWithVoiceConnector</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -262,8 +263,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/voice-connector-groups/{voiceConnectorGroupId}#operation=associate-phone-numbers':
     post:
+      deprecated: true
       operationId: AssociatePhoneNumbersWithVoiceConnectorGroup
-      description: Associates phone numbers with the specified Amazon Chime Voice Connector group.
+      description: '<p>Associates phone numbers with the specified Amazon Chime Voice Connector group.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_AssociatePhoneNumbersWithVoiceConnectorGroup.html">AssociatePhoneNumbersWithVoiceConnectorGroup</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -451,8 +453,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/attendees#operation=batch-create':
     post:
+      deprecated: true
       operationId: BatchCreateAttendee
-      description: ' Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. '
+      description: '<p>Creates up to 100 new attendees for an active Amazon Chime SDK meeting.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_BatchCreateAttendee.html">BatchCreateAttendee</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important> <p>For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. </p>'
       responses:
         '201':
           description: Success
@@ -547,8 +550,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}/memberships#operation=batch-create':
     post:
+      deprecated: true
       operationId: BatchCreateChannelMembership
-      description: Adds a specified number of users to a channel.
+      description: '<p>Adds a specified number of users to a channel.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_BatchCreateChannelMembership.html">BatchCreateChannelMembership</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -833,7 +837,7 @@ paths:
   '/accounts/{accountId}/users#operation=suspend':
     post:
       operationId: BatchSuspendUser
-      description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action.</p> <p> To sign out users without suspending them, use the <a>LogoutUser</a> action. </p>'
+      description: '<p>Suspends up to 50 users from a <code>Team</code> or <code>EnterpriseLWA</code> Amazon Chime account. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p>Users suspended from a <code>Team</code> account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended <code>Team</code> account users, invite them to the <code>Team</code> account again. You can use the <a>InviteUsers</a> action to do so.</p> <p>Users suspended from an <code>EnterpriseLWA</code> account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended <code>EnterpriseLWA</code> account users, use the <a>BatchUnsuspendUser</a> action.</p> <p> To sign out users without suspending them, use the <a>LogoutUser</a> action.</p>'
       responses:
         '200':
           description: Success
@@ -924,7 +928,7 @@ paths:
   '/accounts/{accountId}/users#operation=unsuspend':
     post:
       operationId: BatchUnsuspendUser
-      description: '<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html"> Managing Your Amazon Chime Accounts </a> in the account types, in the <i>Amazon Chime Administration Guide</i>. </p> <p> Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored. </p>'
+      description: '<p>Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime <code>EnterpriseLWA</code> account. Only users on <code>EnterpriseLWA</code> accounts can be unsuspended using this action. For more information about different account types, see <a href="https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html"> Managing Your Amazon Chime Accounts </a> in the account types, in the <i>Amazon Chime Administration Guide</i>. </p> <p>Previously suspended users who are unsuspended using this action are returned to <code>Registered</code> status. Users who are not previously suspended are ignored.</p>'
       responses:
         '200':
           description: Success
@@ -1457,8 +1461,9 @@ paths:
           required: false
   /app-instances:
     post:
+      deprecated: true
       operationId: CreateAppInstance
-      description: Creates an Amazon Chime SDK messaging <code>AppInstance</code> under an AWS account. Only SDK messaging customers use this API. <code>CreateAppInstance</code> supports idempotency behavior as described in the AWS API Standard.
+      description: '<p>Creates an Amazon Chime SDK messaging <code>AppInstance</code> under an AWS account. Only SDK messaging customers use this API. <code>CreateAppInstance</code> supports idempotency behavior as described in the AWS API Standard.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstance.html">CreateAppInstance</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -1562,8 +1567,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListAppInstances
-      description: Lists all Amazon Chime <code>AppInstance</code>s created under a single AWS account.
+      description: '<p>Lists all Amazon Chime <code>AppInstance</code>s created under a single AWS account.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_ListAppInstances.html">ListAppInstances</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1640,8 +1646,9 @@ paths:
           required: false
   '/app-instances/{appInstanceArn}/admins':
     post:
+      deprecated: true
       operationId: CreateAppInstanceAdmin
-      description: <p>Promotes an <code>AppInstanceUser</code> to an <code>AppInstanceAdmin</code>. The promoted user can perform the following actions. </p> <ul> <li> <p> <code>ChannelModerator</code> actions across all channels in the <code>AppInstance</code>.</p> </li> <li> <p> <code>DeleteChannelMessage</code> actions.</p> </li> </ul> <p>Only an <code>AppInstanceUser</code> can be promoted to an <code>AppInstanceAdmin</code> role.</p>
+      description: '<p>Promotes an <code>AppInstanceUser</code> to an <code>AppInstanceAdmin</code>. The promoted user can perform the following actions. </p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstanceAdmin.html">CreateAppInstanceAdmin</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important> <ul> <li> <p> <code>ChannelModerator</code> actions across all channels in the <code>AppInstance</code>.</p> </li> <li> <p> <code>DeleteChannelMessage</code> actions.</p> </li> </ul> <p>Only an <code>AppInstanceUser</code> can be promoted to an <code>AppInstanceAdmin</code> role.</p>'
       responses:
         '201':
           description: Success
@@ -1731,8 +1738,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListAppInstanceAdmins
-      description: Returns a list of the administrators in the <code>AppInstance</code>.
+      description: '<p>Returns a list of the administrators in the <code>AppInstance</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_ListAppInstanceAdmins.html">ListAppInstanceAdmins</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -1818,8 +1826,9 @@ paths:
           required: false
   /app-instance-users:
     post:
+      deprecated: true
       operationId: CreateAppInstanceUser
-      description: Creates a user under an Amazon Chime <code>AppInstance</code>. The request consists of a unique <code>appInstanceUserId</code> and <code>Name</code> for that user.
+      description: '<p>Creates a user under an Amazon Chime <code>AppInstance</code>. The request consists of a unique <code>appInstanceUserId</code> and <code>Name</code> for that user.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstanceUser.html">CreateAppInstanceUser</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -1939,8 +1948,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/attendees':
     post:
+      deprecated: true
       operationId: CreateAttendee
-      description: ' Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. '
+      description: '<p> Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. </p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateAttendee.html">CreateAttendee</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -2035,8 +2045,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListAttendees
-      description: ' Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. '
+      description: '<p> Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. </p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_ListAttendees.html">ListAttendees</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2300,8 +2311,9 @@ paths:
           required: false
   /channels:
     post:
+      deprecated: true
       operationId: CreateChannel
-      description: '<p>Creates a channel to which you can add users and send messages.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Creates a channel to which you can add users and send messages.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannel.html">CreateChannel</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -2434,8 +2446,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}/bans':
     post:
+      deprecated: true
       operationId: CreateChannelBan
-      description: '<p>Permanently bans a member from a channel. Moderators can''t add banned members to a channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or channels.</p> <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Permanently bans a member from a channel. Moderators can''t add banned members to a channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or channels.</p> <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelBan.html">CreateChannelBan</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -2534,8 +2547,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListChannelBans
-      description: <p>Lists all the users banned from a particular channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Lists all the users banned from a particular channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelBans.html">ListChannelBans</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2630,8 +2644,9 @@ paths:
           required: false
   '/channels/{channelArn}/memberships':
     post:
+      deprecated: true
       operationId: CreateChannelMembership
-      description: '<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the request header. A channel member can:</p> <ul> <li> <p>List messages</p> </li> <li> <p>Send messages</p> </li> <li> <p>Receive messages</p> </li> <li> <p>Edit their own messages</p> </li> <li> <p>Leave the channel</p> </li> </ul> <p>Privacy settings impact this action as follows:</p> <ul> <li> <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p> </li> <li> <p>Private Channels: You must be a member to list or send messages.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelMembership.html">CreateChannelMembership</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -2737,8 +2752,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListChannelMemberships
-      description: <p>Lists all channel memberships in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Lists all channel memberships in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMemberships.html">ListChannelMemberships</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -2842,8 +2858,9 @@ paths:
           required: false
   '/channels/{channelArn}/moderators':
     post:
+      deprecated: true
       operationId: CreateChannelModerator
-      description: '<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p> <ul> <li> <p>Add and remove other members of the channel.</p> </li> <li> <p>Add and remove other moderators of the channel.</p> </li> <li> <p>Add and remove user bans for the channel.</p> </li> <li> <p>Redact messages in the channel.</p> </li> <li> <p>List messages in the channel.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p> <ul> <li> <p>Add and remove other members of the channel.</p> </li> <li> <p>Add and remove other moderators of the channel.</p> </li> <li> <p>Add and remove user bans for the channel.</p> </li> <li> <p>Redact messages in the channel.</p> </li> <li> <p>List messages in the channel.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelModerator.html">CreateChannelModerator</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -2942,8 +2959,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListChannelModerators
-      description: <p>Lists all the moderators for a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Lists all the moderators for a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelModerators.html">ListChannelModerators</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -3038,8 +3056,9 @@ paths:
           required: false
   /media-capture-pipelines:
     post:
+      deprecated: true
       operationId: CreateMediaCapturePipeline
-      description: Creates a media capture pipeline.
+      description: '<p>Creates a media capture pipeline.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_CreateMediaCapturePipeline">CreateMediaCapturePipeline</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -3154,8 +3173,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListMediaCapturePipelines
-      description: Returns a list of media capture pipelines.
+      description: '<p>Returns a list of media capture pipelines.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_ListMediaCapturePipelines.html">ListMediaCapturePipelines</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -3228,8 +3248,9 @@ paths:
           required: false
   /meetings:
     post:
+      deprecated: true
       operationId: CreateMeeting
-      description: ' Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime SDK Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . '
+      description: '<p>Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime SDK Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html">CreateMeeting</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -3339,8 +3360,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListMeetings
-      description: ' Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
+      description: '<p>Lists up to 100 active Amazon Chime SDK meetings.</p> <important> <p>ListMeetings is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API.</p> </important> <p>For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -3414,7 +3436,7 @@ paths:
   '/meetings/{meetingId}/dial-outs':
     post:
       operationId: CreateMeetingDialOut
-      description: '<p>Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer.</p> <p>To play welcome audio or implement an interactive voice response (IVR), use the <code>CreateSipMediaApplicationCall</code> action with the corresponding SIP media application ID.</p>'
+      description: '<p>Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer.</p> <p>To play welcome audio or implement an interactive voice response (IVR), use the <code>CreateSipMediaApplicationCall</code> action with the corresponding SIP media application ID.</p> <important> <p> <b>This API is is not available in a dedicated namespace.</b> </p> </important>'
       responses:
         '201':
           description: Success
@@ -3516,8 +3538,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /meetings#operation=create-attendees:
     post:
+      deprecated: true
       operationId: CreateMeetingWithAttendees
-      description: ' Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime SDK Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . '
+      description: '<p> Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html">Amazon Chime SDK Media Regions</a> in the <i>Amazon Chime SDK Developer Guide</i> . For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . </p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeetingWithAttendees.html">CreateMeetingWithAttendees</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -3805,8 +3828,9 @@ paths:
           required: false
   '/voice-connectors/{voiceConnectorId}/proxy-sessions':
     post:
+      deprecated: true
       operationId: CreateProxySession
-      description: Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.
+      description: '<p>Creates a proxy session on the specified Amazon Chime Voice Connector for the specified participant phone numbers.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateProxySession.html">CreateProxySession</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -3930,8 +3954,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListProxySessions
-      description: Lists the proxy sessions for the specified Amazon Chime Voice Connector.
+      description: '<p>Lists the proxy sessions for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListProxySessions.html">ListProxySessions</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -4417,8 +4442,9 @@ paths:
           required: false
   /sip-media-applications:
     post:
+      deprecated: true
       operationId: CreateSipMediaApplication
-      description: Creates a SIP media application.
+      description: '<p>Creates a SIP media application.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateSipMediaApplication.html">CreateSipMediaApplication</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -4516,8 +4542,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListSipMediaApplications
-      description: Lists the SIP media applications under the administrator's AWS account.
+      description: '<p>Lists the SIP media applications under the administrator''s AWS account.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListSipMediaApplications.html">ListSipMediaApplications</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -4591,8 +4618,9 @@ paths:
           required: false
   '/sip-media-applications/{sipMediaApplicationId}/calls':
     post:
+      deprecated: true
       operationId: CreateSipMediaApplicationCall
-      description: 'Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified <code>sipMediaApplicationId</code>.'
+      description: '<p>Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified <code>sipMediaApplicationId</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateSipMediaApplicationCall.html">CreateSipMediaApplicationCall</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -4693,8 +4721,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /sip-rules:
     post:
+      deprecated: true
       operationId: CreateSipRule
-      description: Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.
+      description: '<p>Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateSipRule.html">CreateSipRule</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -4803,8 +4832,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListSipRules
-      description: Lists the SIP rules under the administrator's AWS account.
+      description: '<p>Lists the SIP rules under the administrator''s AWS account.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListSipRules.html">ListSipRules</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -4988,8 +5018,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /voice-connectors:
     post:
+      deprecated: true
       operationId: CreateVoiceConnector
-      description: '<p>Creates an Amazon Chime Voice Connector under the administrator''s AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.</p> <p> Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked. </p>'
+      description: '<p>Creates an Amazon Chime Voice Connector under the administrator''s AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.</p> <p>Enabling <a>CreateVoiceConnectorRequest$RequireEncryption</a> configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked. </p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateVoiceConnector.html">CreateVoiceConnector</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -5079,8 +5110,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListVoiceConnectors
-      description: Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
+      description: '<p>Lists the Amazon Chime Voice Connectors for the administrator''s AWS account.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListVoiceConnectors.html">ListVoiceConnectors</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -5153,8 +5185,9 @@ paths:
           required: false
   /voice-connector-groups:
     post:
+      deprecated: true
       operationId: CreateVoiceConnectorGroup
-      description: <p>Creates an Amazon Chime Voice Connector group under the administrator's AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including <code>VoiceConnectorItems</code> in the request.</p> <p>You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p>
+      description: '<p>Creates an Amazon Chime Voice Connector group under the administrator''s AWS account. You can associate Amazon Chime Voice Connectors with the Amazon Chime Voice Connector group by including <code>VoiceConnectorItems</code> in the request.</p> <p>You can include Amazon Chime Voice Connectors from different AWS Regions in your group. This creates a fault tolerant mechanism for fallback in case of availability events.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateVoiceConnectorGroup.html">CreateVoiceConnectorGroup</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -5239,8 +5272,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: ListVoiceConnectorGroups
-      description: Lists the Amazon Chime Voice Connector groups for the administrator's AWS account.
+      description: '<p>Lists the Amazon Chime Voice Connector groups for the administrator''s AWS account.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListVoiceConnectorGroups.html">ListVoiceConnectorGroups</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -5529,8 +5563,9 @@ paths:
                     - ProTrial
   '/app-instances/{appInstanceArn}':
     delete:
+      deprecated: true
       operationId: DeleteAppInstance
-      description: Deletes an <code>AppInstance</code> and all associated data asynchronously.
+      description: '<p>Deletes an <code>AppInstance</code> and all associated data asynchronously.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstance.html">DeleteAppInstance</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -5589,8 +5624,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: DescribeAppInstance
-      description: Returns the full details of an <code>AppInstance</code>.
+      description: '<p>Returns the full details of an <code>AppInstance</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DescribeAppInstance.html">DescribeAppInstance</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -5645,8 +5681,9 @@ paths:
             minLength: 5
             maxLength: 1600
     put:
+      deprecated: true
       operationId: UpdateAppInstance
-      description: Updates <code>AppInstance</code> metadata.
+      description: '<p>Updates <code>AppInstance</code> metadata.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_UpdateAppInstance.html">UpdateAppInstance</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -5731,8 +5768,9 @@ paths:
                   format: password
   '/app-instances/{appInstanceArn}/admins/{appInstanceAdminArn}':
     delete:
+      deprecated: true
       operationId: DeleteAppInstanceAdmin
-      description: Demotes an <code>AppInstanceAdmin</code> to an <code>AppInstanceUser</code>. This action does not delete the user.
+      description: '<p>Demotes an <code>AppInstanceAdmin</code> to an <code>AppInstanceUser</code>. This action does not delete the user.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceAdmin.html">DeleteAppInstanceAdmin</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -5806,8 +5844,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: DescribeAppInstanceAdmin
-      description: Returns the full details of an <code>AppInstanceAdmin</code>.
+      description: '<p>Returns the full details of an <code>AppInstanceAdmin</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DescribeAppInstanceAdmin.html">DescribeAppInstanceAdmin</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -5872,8 +5911,9 @@ paths:
             maxLength: 1600
   '/app-instances/{appInstanceArn}/streaming-configurations':
     delete:
+      deprecated: true
       operationId: DeleteAppInstanceStreamingConfigurations
-      description: Deletes the streaming configurations of an <code>AppInstance</code>.
+      description: '<p>Deletes the streaming configurations of an <code>AppInstance</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceStreamingConfigurations.html">DeleteAppInstanceStreamingConfigurations</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -5938,8 +5978,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetAppInstanceStreamingConfigurations
-      description: Gets the streaming settings for an <code>AppInstance</code>.
+      description: '<p>Gets the streaming settings for an <code>AppInstance</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetMessagingStreamingConfigurations.html">GetMessagingStreamingConfigurations</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6000,8 +6041,9 @@ paths:
             minLength: 5
             maxLength: 1600
     put:
+      deprecated: true
       operationId: PutAppInstanceStreamingConfigurations
-      description: The data streaming configurations of an <code>AppInstance</code>.
+      description: '<p>The data streaming configurations of an <code>AppInstance</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_PutMessagingStreamingConfigurations.html">PutMessagingStreamingConfigurations</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6079,8 +6121,9 @@ paths:
                   maxItems: 2
   '/app-instance-users/{appInstanceUserArn}':
     delete:
+      deprecated: true
       operationId: DeleteAppInstanceUser
-      description: Deletes an <code>AppInstanceUser</code>.
+      description: '<p>Deletes an <code>AppInstanceUser</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DeleteAppInstanceUser.html">DeleteAppInstanceUser</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -6139,8 +6182,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: DescribeAppInstanceUser
-      description: Returns the full details of an <code>AppInstanceUser</code>.
+      description: '<p>Returns the full details of an <code>AppInstanceUser</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DescribeAppInstanceUser.html">DescribeAppInstanceUser</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6195,8 +6239,9 @@ paths:
             minLength: 5
             maxLength: 1600
     put:
+      deprecated: true
       operationId: UpdateAppInstanceUser
-      description: Updates the details of an <code>AppInstanceUser</code>. You can update names and metadata.
+      description: '<p>Updates the details of an <code>AppInstanceUser</code>. You can update names and metadata.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_UpdateAppInstanceUser.html">UpdateAppInstanceUser</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6281,8 +6326,9 @@ paths:
                   format: password
   '/meetings/{meetingId}/attendees/{attendeeId}':
     delete:
+      deprecated: true
       operationId: DeleteAttendee
-      description: 'Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
+      description: '<p>Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_DeleteAttendee.html">DeleteAttendee</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -6352,8 +6398,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetAttendee
-      description: ' Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . '
+      description: '<p> Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>. </p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetAttendee.html">GetAttendee</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6420,8 +6467,9 @@ paths:
             pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
   '/channels/{channelArn}':
     delete:
+      deprecated: true
       operationId: DeleteChannel
-      description: <p>Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannel.html">DeleteChannel</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -6489,8 +6537,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: DescribeChannel
-      description: <p>Returns the full details of a channel in an Amazon Chime <code>AppInstance</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Returns the full details of a channel in an Amazon Chime <code>AppInstance</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannel.html">DescribeChannel</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6554,8 +6603,9 @@ paths:
             minLength: 5
             maxLength: 1600
     put:
+      deprecated: true
       operationId: UpdateChannel
-      description: '<p>Update a channel''s attributes.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Update a channel''s attributes.</p> <p> <b>Restriction</b>: You can''t change a channel''s privacy. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_UpdateChannel.html">UpdateChannel</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6656,8 +6706,9 @@ paths:
                   format: password
   '/channels/{channelArn}/bans/{memberArn}':
     delete:
+      deprecated: true
       operationId: DeleteChannelBan
-      description: <p>Removes a user from a channel's ban list.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Removes a user from a channel''s ban list.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelBan.html">DeleteChannelBan</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -6734,8 +6785,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: DescribeChannelBan
-      description: <p>Returns the full details of a channel ban.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Returns the full details of a channel ban.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelBan.html">DescribeChannelBan</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6815,8 +6867,9 @@ paths:
             maxLength: 1600
   '/channels/{channelArn}/memberships/{memberArn}':
     delete:
+      deprecated: true
       operationId: DeleteChannelMembership
-      description: <p>Removes a member from a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Removes a member from a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelMembership.html">DeleteChannelMembership</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -6899,8 +6952,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: DescribeChannelMembership
-      description: <p>Returns the full details of a user's channel membership.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Returns the full details of a user''s channel membership.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelMembership.html">DescribeChannelMembership</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -6980,8 +7034,9 @@ paths:
             maxLength: 1600
   '/channels/{channelArn}/messages/{messageId}':
     delete:
+      deprecated: true
       operationId: DeleteChannelMessage
-      description: <p>Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by <code>UpdateChannelMessage</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by <code>UpdateChannelMessage</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelMessage.html">DeleteChannelMessage</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -7058,8 +7113,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetChannelMessage
-      description: <p>Gets the full details of a channel message.</p> <note> <p>The x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Gets the full details of a channel message.</p> <note> <p>The x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetChannelMessage.html">GetChannelMessage</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -7138,8 +7194,9 @@ paths:
             minLength: 5
             maxLength: 1600
     put:
+      deprecated: true
       operationId: UpdateChannelMessage
-      description: <p>Updates the content of a message.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Updates the content of a message.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_UpdateChannelMessage.html">UpdateChannelMessage</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -7240,8 +7297,9 @@ paths:
                   format: password
   '/channels/{channelArn}/moderators/{channelModeratorArn}':
     delete:
+      deprecated: true
       operationId: DeleteChannelModerator
-      description: <p>Deletes a channel moderator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Deletes a channel moderator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelModerator.html">DeleteChannelModerator</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -7318,8 +7376,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: DescribeChannelModerator
-      description: <p>Returns the full details of a single ChannelModerator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Returns the full details of a single ChannelModerator.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelModerator.html">DescribeChannelModerator</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -7614,8 +7673,9 @@ paths:
                   format: password
   '/media-capture-pipelines/{mediaPipelineId}':
     delete:
+      deprecated: true
       operationId: DeleteMediaCapturePipeline
-      description: Deletes the media capture pipeline.
+      description: '<p>Deletes the media capture pipeline.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_DeleteMediaCapturePipeline.html">DeleteMediaCapturePipeline</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -7678,8 +7738,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetMediaCapturePipeline
-      description: Gets an existing media capture pipeline.
+      description: '<p>Gets an existing media capture pipeline.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_GetMediaCapturePipeline.html">GetMediaCapturePipeline</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -7739,8 +7800,9 @@ paths:
             pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
   '/meetings/{meetingId}':
     delete:
+      deprecated: true
       operationId: DeleteMeeting
-      description: 'Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.'
+      description: '<p>Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_DeleteMeeting.html">DeleteMeeting</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -7803,8 +7865,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetMeeting
-      description: ' Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . '
+      description: '<important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_GetMeeting.html">GetMeeting</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important> <p> Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime SDK Developer Guide</i> . </p>'
       responses:
         '200':
           description: Success
@@ -8071,8 +8134,9 @@ paths:
                   format: password
   '/voice-connectors/{voiceConnectorId}/proxy-sessions/{proxySessionId}':
     delete:
+      deprecated: true
       operationId: DeleteProxySession
-      description: Deletes the specified proxy session from the specified Amazon Chime Voice Connector.
+      description: '<p>Deletes the specified proxy session from the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteProxySession.html">DeleteProxySession</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -8146,8 +8210,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetProxySession
-      description: Gets the specified proxy session details for the specified Amazon Chime Voice Connector.
+      description: '<p>Gets the specified proxy session details for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetProxySession.html">GetProxySession</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -8217,8 +8282,9 @@ paths:
             minLength: 1
             maxLength: 128
     post:
+      deprecated: true
       operationId: UpdateProxySession
-      description: 'Updates the specified proxy session details, such as voice or SMS capabilities.'
+      description: '<p>Updates the specified proxy session details, such as voice or SMS capabilities.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateProxySession.html">UpdateProxySession</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -8690,8 +8756,9 @@ paths:
                     - Member
   '/sip-media-applications/{sipMediaApplicationId}':
     delete:
+      deprecated: true
       operationId: DeleteSipMediaApplication
-      description: Deletes a SIP media application.
+      description: '<p>Deletes a SIP media application.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteSipMediaApplication.html">DeleteSipMediaApplication</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -8760,8 +8827,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetSipMediaApplication
-      description: 'Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.'
+      description: '<p>Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetSipMediaApplication.html">GetSipMediaApplication</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -8820,8 +8888,9 @@ paths:
             type: string
             pattern: .*\S.*
     put:
+      deprecated: true
       operationId: UpdateSipMediaApplication
-      description: Updates the details of the specified SIP media application.
+      description: '<p>Updates the details of the specified SIP media application.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateSipMediaApplication.html">UpdateSipMediaApplication</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -8906,8 +8975,9 @@ paths:
                   maxItems: 1
   '/sip-rules/{sipRuleId}':
     delete:
+      deprecated: true
       operationId: DeleteSipRule
-      description: Deletes a SIP rule. You must disable a SIP rule before you can delete it.
+      description: '<p>Deletes a SIP rule. You must disable a SIP rule before you can delete it.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteSipRule.html">DeleteSipRule</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -8976,8 +9046,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetSipRule
-      description: 'Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.'
+      description: '<p>Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetSipRule.html">GetSipRule</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -9036,8 +9107,9 @@ paths:
             type: string
             pattern: .*\S.*
     put:
+      deprecated: true
       operationId: UpdateSipRule
-      description: Updates the details of the specified SIP rule.
+      description: '<p>Updates the details of the specified SIP rule.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateSipRule.html">UpdateSipRule</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '202':
           description: Success
@@ -9133,8 +9205,9 @@ paths:
                   maxItems: 25
   '/voice-connectors/{voiceConnectorId}':
     delete:
+      deprecated: true
       operationId: DeleteVoiceConnector
-      description: Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.
+      description: '<p>Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnector.html">DeleteVoiceConnector</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -9203,8 +9276,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetVoiceConnector
-      description: 'Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.'
+      description: '<p>Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnector.html">GetVoiceConnector</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -9263,8 +9337,9 @@ paths:
             type: string
             pattern: .*\S.*
     put:
+      deprecated: true
       operationId: UpdateVoiceConnector
-      description: Updates details for the specified Amazon Chime Voice Connector.
+      description: '<p>Updates details for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateVoiceConnector.html">UpdateVoiceConnector</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -9342,8 +9417,9 @@ paths:
                   type: boolean
   '/voice-connectors/{voiceConnectorId}/emergency-calling-configuration':
     delete:
+      deprecated: true
       operationId: DeleteVoiceConnectorEmergencyCallingConfiguration
-      description: Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.
+      description: '<p>Deletes the emergency calling configuration details from the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorEmergencyCallingConfiguration.html">DeleteVoiceConnectorEmergencyCallingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -9406,8 +9482,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetVoiceConnectorEmergencyCallingConfiguration
-      description: Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.
+      description: '<p>Gets the emergency calling configuration details for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorEmergencyCallingConfiguration.html">GetVoiceConnectorEmergencyCallingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -9466,8 +9543,9 @@ paths:
             type: string
             pattern: .*\S.*
     put:
+      deprecated: true
       operationId: PutVoiceConnectorEmergencyCallingConfiguration
-      description: 'Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.'
+      description: '<p>Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorEmergencyCallingConfiguration.html">PutVoiceConnectorEmergencyCallingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -9544,8 +9622,9 @@ paths:
                         - description: The Dialed Number Identification Service (DNIS) emergency calling configuration details.
   '/voice-connector-groups/{voiceConnectorGroupId}':
     delete:
+      deprecated: true
       operationId: DeleteVoiceConnectorGroup
-      description: Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted.
+      description: '<p>Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorGroup.html">DeleteVoiceConnectorGroup</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -9614,8 +9693,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetVoiceConnectorGroup
-      description: ' Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code>.'
+      description: '<p> Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorGroup.html">GetVoiceConnectorGroup</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -9674,8 +9754,9 @@ paths:
             type: string
             pattern: .*\S.*
     put:
+      deprecated: true
       operationId: UpdateVoiceConnectorGroup
-      description: 'Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.'
+      description: '<p>Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateVoiceConnectorGroup.html">UpdateVoiceConnectorGroup</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '202':
           description: Success
@@ -9761,8 +9842,9 @@ paths:
                     $ref: '#/components/schemas/VoiceConnectorItem'
   '/voice-connectors/{voiceConnectorId}/origination':
     delete:
+      deprecated: true
       operationId: DeleteVoiceConnectorOrigination
-      description: '<p>Deletes the origination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings.</p> </note>'
+      description: '<p>Deletes the origination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the origination settings.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorOrigination.html">DeleteVoiceConnectorOrigination</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -9825,8 +9907,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetVoiceConnectorOrigination
-      description: Retrieves origination setting details for the specified Amazon Chime Voice Connector.
+      description: '<p>Retrieves origination setting details for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorOrigination.html">GetVoiceConnectorOrigination</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -9885,8 +9968,9 @@ paths:
             type: string
             pattern: .*\S.*
     put:
+      deprecated: true
       operationId: PutVoiceConnectorOrigination
-      description: '<p>Adds origination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings.</p> </note>'
+      description: '<p>Adds origination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off origination settings.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorOrigination.html">PutVoiceConnectorOrigination</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -9967,8 +10051,9 @@ paths:
                         - description: 'When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector. This parameter is not required, but you must specify this parameter or <code>Routes</code>.'
   '/voice-connectors/{voiceConnectorId}/programmable-numbers/proxy':
     delete:
+      deprecated: true
       operationId: DeleteVoiceConnectorProxy
-      description: Deletes the proxy configuration from the specified Amazon Chime Voice Connector.
+      description: '<p>Deletes the proxy configuration from the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorProxy.html">DeleteVoiceProxy</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -10033,8 +10118,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetVoiceConnectorProxy
-      description: Gets the proxy configuration details for the specified Amazon Chime Voice Connector.
+      description: '<p>Gets the proxy configuration details for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorProxy.html">GetVoiceConnectorProxy</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10095,8 +10181,9 @@ paths:
             minLength: 1
             maxLength: 128
     put:
+      deprecated: true
       operationId: PutVoiceConnectorProxy
-      description: Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.
+      description: '<p>Puts the specified proxy configuration to the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorProxy.html">PutVoiceConnectorProxy</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10192,8 +10279,9 @@ paths:
                   type: boolean
   '/voice-connectors/{voiceConnectorId}/streaming-configuration':
     delete:
+      deprecated: true
       operationId: DeleteVoiceConnectorStreamingConfiguration
-      description: Deletes the streaming configuration for the specified Amazon Chime Voice Connector.
+      description: '<p>Deletes the streaming configuration for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorStreamingConfiguration.html">DeleteVoiceConnectorStreamingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -10256,8 +10344,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetVoiceConnectorStreamingConfiguration
-      description: 'Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.'
+      description: '<p>Retrieves the streaming configuration details for the specified Amazon Chime Voice Connector. Shows whether media streaming is enabled for sending to Amazon Kinesis. It also shows the retention period, in hours, for the Amazon Kinesis data.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorStreamingConfiguration.html">GetVoiceConnectorStreamingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10316,8 +10405,9 @@ paths:
             type: string
             pattern: .*\S.*
     put:
+      deprecated: true
       operationId: PutVoiceConnectorStreamingConfiguration
-      description: 'Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.'
+      description: '<p>Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorStreamingConfiguration.html">PutVoiceConnectorStreamingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10402,8 +10492,9 @@ paths:
                         - description: The streaming notification targets.
   '/voice-connectors/{voiceConnectorId}/termination':
     delete:
+      deprecated: true
       operationId: DeleteVoiceConnectorTermination
-      description: '<p>Deletes the termination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings.</p> </note>'
+      description: '<p>Deletes the termination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to deleting the termination settings.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorTermination.html">DeleteVoiceConnectorTermination</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -10466,8 +10557,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
+      deprecated: true
       operationId: GetVoiceConnectorTermination
-      description: Retrieves termination setting details for the specified Amazon Chime Voice Connector.
+      description: '<p>Retrieves termination setting details for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorTermination.html">GetVoiceConnectorTermination</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10526,8 +10618,9 @@ paths:
             type: string
             pattern: .*\S.*
     put:
+      deprecated: true
       operationId: PutVoiceConnectorTermination
-      description: '<p>Adds termination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings.</p> </note>'
+      description: '<p>Adds termination settings for the specified Amazon Chime Voice Connector.</p> <note> <p>If emergency calling is configured for the Amazon Chime Voice Connector, it must be deleted prior to turning off termination settings.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorTermination.html">PutVoiceConnectorTermination</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10626,8 +10719,9 @@ paths:
                         - description: 'When termination settings are disabled, outbound calls can not be made.'
   '/voice-connectors/{voiceConnectorId}/termination/credentials#operation=delete':
     post:
+      deprecated: true
       operationId: DeleteVoiceConnectorTerminationCredentials
-      description: Deletes the specified SIP credentials used by your equipment to authenticate during call termination.
+      description: '<p>Deletes the specified SIP credentials used by your equipment to authenticate during call termination.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorTerminationCredentials.html">DeleteVoiceConnectorTerminationCredentials</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -10712,8 +10806,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}#scope=app-instance-user-membership&app-instance-user-arn':
     get:
+      deprecated: true
       operationId: DescribeChannelMembershipForAppInstanceUser
-      description: <p> Returns the details of a channel based on the membership of the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p> Returns the details of a channel based on the membership of the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelMembershipForAppInstanceUser.html">DescribeChannelMembershipForAppInstanceUser</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10802,8 +10897,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}#scope=app-instance-user-moderated-channel&app-instance-user-arn':
     get:
+      deprecated: true
       operationId: DescribeChannelModeratedByAppInstanceUser
-      description: <p>Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelModeratedByAppInstanceUser.html">DescribeChannelModeratedByAppInstanceUser</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -10973,8 +11069,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/voice-connectors/{voiceConnectorId}#operation=disassociate-phone-numbers':
     post:
+      deprecated: true
       operationId: DisassociatePhoneNumbersFromVoiceConnector
-      description: Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector.
+      description: '<p>Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DisassociatePhoneNumbersFromVoiceConnector.html">DisassociatePhoneNumbersFromVoiceConnector</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -11063,8 +11160,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/voice-connector-groups/{voiceConnectorGroupId}#operation=disassociate-phone-numbers':
     post:
+      deprecated: true
       operationId: DisassociatePhoneNumbersFromVoiceConnectorGroup
-      description: Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.
+      description: '<p>Disassociates the specified phone numbers from the specified Amazon Chime Voice Connector group.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DisassociatePhoneNumbersFromVoiceConnectorGroup.html">DisassociatePhoneNumbersFromVoiceConnectorGroup</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -11400,8 +11498,9 @@ paths:
                         - description: 'Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html">Join a Meeting without the Amazon Chime App</a>.'
   '/app-instances/{appInstanceArn}/retention-settings':
     get:
+      deprecated: true
       operationId: GetAppInstanceRetentionSettings
-      description: Gets the retention settings for an <code>AppInstance</code>.
+      description: '<p>Gets the retention settings for an <code>AppInstance</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_GetAppInstanceRetentionSettings.html">GetMessagingRetentionSettings</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -11470,8 +11569,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
+      deprecated: true
       operationId: PutAppInstanceRetentionSettings
-      description: Sets the amount of time in days that a given <code>AppInstance</code> retains data.
+      description: '<p>Sets the amount of time in days that a given <code>AppInstance</code> retains data.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_PutAppInstanceRetentionSettings.html">PutAppInstanceRetentionSettings</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -11830,8 +11930,9 @@ paths:
                         - description: The Amazon S3 bucket designated for call detail record storage.
   /endpoints/messaging-session:
     get:
+      deprecated: true
       operationId: GetMessagingSessionEndpoint
-      description: The details of the endpoint for the messaging session.
+      description: '<p>The details of the endpoint for the messaging session.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_GetMessagingSessionEndpoint.html">GetMessagingSessionEndpoint</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -12217,8 +12318,9 @@ paths:
                         - description: The chat conversation retention settings.
   '/sip-media-applications/{sipMediaApplicationId}/logging-configuration':
     get:
+      deprecated: true
       operationId: GetSipMediaApplicationLoggingConfiguration
-      description: Returns the logging configuration for the specified SIP media application.
+      description: '<p>Returns the logging configuration for the specified SIP media application.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetSipMediaApplicationLoggingConfiguration.html">GetSipMediaApplicationLoggingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -12285,8 +12387,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
+      deprecated: true
       operationId: PutSipMediaApplicationLoggingConfiguration
-      description: Updates the logging configuration for the specified SIP media application.
+      description: '<p>Updates the logging configuration for the specified SIP media application.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutSipMediaApplicationLoggingConfiguration.html">PutSipMediaApplicationLoggingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -12689,8 +12792,9 @@ paths:
                         - description: The telephony settings associated with the user.
   '/voice-connectors/{voiceConnectorId}/logging-configuration':
     get:
+      deprecated: true
       operationId: GetVoiceConnectorLoggingConfiguration
-      description: Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+      description: '<p>Retrieves the logging configuration details for the specified Amazon Chime Voice Connector. Shows whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorLoggingConfiguration.html">GetVoiceConnectorLoggingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -12757,8 +12861,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
+      deprecated: true
       operationId: PutVoiceConnectorLoggingConfiguration
-      description: Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.
+      description: '<p>Adds a logging configuration for the specified Amazon Chime Voice Connector. The logging configuration specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorLoggingConfiguration.html">PutVoiceConnectorLoggingConfiguration</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -12839,8 +12944,9 @@ paths:
                         - description: Boolean that enables logging of detailed media metrics for Voice Connectors to Amazon CloudWatch logs.
   '/voice-connectors/{voiceConnectorId}/termination/health':
     get:
+      deprecated: true
       operationId: GetVoiceConnectorTerminationHealth
-      description: Retrieves information about the last time a SIP <code>OPTIONS</code> ping was received from your SIP infrastructure for the specified Amazon Chime Voice Connector.
+      description: '<important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorTerminationHealth.html">GetVoiceConnectorTerminationHealth</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important> <p>Retrieves information about the last time a SIP <code>OPTIONS</code> ping was received from your SIP infrastructure for the specified Amazon Chime Voice Connector.</p>'
       responses:
         '200':
           description: Success
@@ -13005,8 +13111,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /app-instance-users#app-instance-arn:
     get:
+      deprecated: true
       operationId: ListAppInstanceUsers
-      description: 'List all <code>AppInstanceUsers</code> created under a single <code>AppInstance</code>. '
+      description: '<p>List all <code>AppInstanceUsers</code> created under a single <code>AppInstance</code>. </p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_ListAppInstanceUsers.html">ListAppInstanceUsers</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -13100,8 +13207,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/attendees/{attendeeId}/tags':
     get:
+      deprecated: true
       operationId: ListAttendeeTags
-      description: Lists the tags applied to an Amazon Chime SDK attendee resource.
+      description: <p>Lists the tags applied to an Amazon Chime SDK attendee resource.</p> <important> <p>ListAttendeeTags is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API.</p> </important>
       responses:
         '200':
           description: Success
@@ -13176,8 +13284,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /channels#scope=app-instance-user-memberships:
     get:
+      deprecated: true
       operationId: ListChannelMembershipsForAppInstanceUser
-      description: <p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own. </p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html">ListChannelMembershipsForAppInstanceUser</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -13287,8 +13396,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}/messages':
     get:
+      deprecated: true
       operationId: ListChannelMessages
-      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMessages.html">ListChannelMessages</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -13413,8 +13523,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
+      deprecated: true
       operationId: SendChannelMessage
-      description: '<p>Sends a message to a particular channel that the member is a part of.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> <p>Also, <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p> </note>'
+      description: '<p>Sends a message to a particular channel that the member is a part of.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> <p>Also, <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_SendChannelMessage.html">SendChannelMessage</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '201':
           description: Success
@@ -13529,8 +13640,9 @@ paths:
                   format: password
   /channels#app-instance-arn:
     get:
+      deprecated: true
       operationId: ListChannels
-      description: <p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class="title"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannels.html">ListChannels</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -13642,8 +13754,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /channels#scope=app-instance-user-moderated-channels:
     get:
+      deprecated: true
       operationId: ListChannelsModeratedByAppInstanceUser
-      description: <p>A list of the channels moderated by an <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>A list of the channels moderated by an <code>AppInstanceUser</code>.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelsModeratedByAppInstanceUser.html">ListChannelsModeratedByAppInstanceUser</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -13753,8 +13866,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/tags':
     get:
+      deprecated: true
       operationId: ListMeetingTags
-      description: Lists the tags applied to an Amazon Chime SDK meeting resource.
+      description: '<p>Lists the tags applied to an Amazon Chime SDK meeting resource.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_ListTagsForResource.html">ListTagsForResource</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -14025,8 +14139,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /tags#arn:
     get:
+      deprecated: true
       operationId: ListTagsForResource
-      description: Lists the tags applied to an Amazon Chime SDK meeting resource.
+      description: '<p>Lists the tags applied to an Amazon Chime SDK meeting and messaging resources.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the applicable latest version in the Amazon Chime SDK.</p> <ul> <li> <p>For meetings: <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_ListTagsForResource.html">ListTagsForResource</a>.</p> </li> <li> <p>For messaging: <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListTagsForResource.html">ListTagsForResource</a>.</p> </li> </ul> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -14091,8 +14206,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/voice-connectors/{voiceConnectorId}/termination/credentials':
     get:
+      deprecated: true
       operationId: ListVoiceConnectorTerminationCredentials
-      description: Lists the SIP credentials for the specified Amazon Chime Voice Connector.
+      description: '<p>Lists the SIP credentials for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListVoiceConnectorTerminationCredentials.html">ListVoiceConnectorTerminationCredentials</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -14243,8 +14359,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/voice-connectors/{voiceConnectorId}/termination/credentials#operation=put':
     post:
+      deprecated: true
       operationId: PutVoiceConnectorTerminationCredentials
-      description: Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
+      description: '<p>Adds termination SIP credentials for the specified Amazon Chime Voice Connector.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorTerminationCredentials.html">PutVoiceConnectorTerminationCredentials</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -14327,8 +14444,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}/messages/{messageId}#operation=redact':
     post:
+      deprecated: true
       operationId: RedactChannelMessage
-      description: '<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>'
+      description: '<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_RedactChannelMessage.html">RedactChannelMessage</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -14983,8 +15101,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/transcription#operation=start':
     post:
+      deprecated: true
       operationId: StartMeetingTranscription
-      description: '<p>Starts transcription for the specified <code>meetingId</code>. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html"> Using Amazon Chime SDK live transcription </a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> <p>If you specify an invalid configuration, a <code>TranscriptFailed</code> event will be sent with the contents of the <code>BadRequestException</code> generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html">StartStreamTranscription</a> API in the <i>Amazon Transcribe Developer Guide</i>.</p> <important> <p>Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services.</p> </important>'
+      description: '<p>Starts transcription for the specified <code>meetingId</code>. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/meeting-transcription.html"> Using Amazon Chime SDK live transcription </a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> <p>If you specify an invalid configuration, a <code>TranscriptFailed</code> event will be sent with the contents of the <code>BadRequestException</code> generated by Amazon Transcribe. For more information on each parameter and which combinations are valid, refer to the <a href="https://docs.aws.amazon.com/transcribe/latest/APIReference/API_streaming_StartStreamTranscription.html">StartStreamTranscription</a> API in the <i>Amazon Transcribe Developer Guide</i>.</p> <note> <p>Amazon Chime SDK live transcription is powered by Amazon Transcribe. Use of Amazon Transcribe is subject to the <a href="https://aws.amazon.com/service-terms/">AWS Service Terms</a>, including the terms specific to the AWS Machine Learning and Artificial Intelligence Services.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_StartMeetingTranscription.html">StartMeetingTranscription</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -15092,8 +15211,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/transcription#operation=stop':
     post:
+      deprecated: true
       operationId: StopMeetingTranscription
-      description: Stops transcription for the specified <code>meetingId</code>.
+      description: '<p>Stops transcription for the specified <code>meetingId</code>.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_StopMeetingTranscription.html">StopMeetingTranscription</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -15174,8 +15294,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/attendees/{attendeeId}/tags#operation=add':
     post:
+      deprecated: true
       operationId: TagAttendee
-      description: Applies the specified tags to the specified Amazon Chime SDK attendee.
+      description: <p>Applies the specified tags to the specified Amazon Chime attendee.</p> <important> <p>TagAttendee is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API.</p> </important>
       responses:
         '204':
           description: Success
@@ -15275,8 +15396,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/tags#operation=add':
     post:
+      deprecated: true
       operationId: TagMeeting
-      description: Applies the specified tags to the specified Amazon Chime SDK meeting.
+      description: '<p>Applies the specified tags to the specified Amazon Chime SDK meeting.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_TagResource.html">TagResource</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -15369,8 +15491,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /tags#operation=tag-resource:
     post:
+      deprecated: true
       operationId: TagResource
-      description: Applies the specified tags to the specified Amazon Chime SDK meeting resource.
+      description: '<p>Applies the specified tags to the specified Amazon Chime SDK meeting resource.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_TagResource.html">TagResource</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -15452,8 +15575,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/attendees/{attendeeId}/tags#operation=delete':
     post:
+      deprecated: true
       operationId: UntagAttendee
-      description: Untags the specified tags from the specified Amazon Chime SDK attendee.
+      description: <p>Untags the specified tags from the specified Amazon Chime SDK attendee.</p> <important> <p>UntagAttendee is not supported in the Amazon Chime SDK Meetings Namespace. Update your application to remove calls to this API.</p> </important>
       responses:
         '204':
           description: Success
@@ -15547,8 +15671,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/meetings/{meetingId}/tags#operation=delete':
     post:
+      deprecated: true
       operationId: UntagMeeting
-      description: Untags the specified tags from the specified Amazon Chime SDK meeting.
+      description: '<p>Untags the specified tags from the specified Amazon Chime SDK meeting.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_UntagResource.html">UntagResource</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -15635,8 +15760,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /tags#operation=untag-resource:
     post:
+      deprecated: true
       operationId: UntagResource
-      description: Untags the specified tags from the specified Amazon Chime SDK meeting resource.
+      description: '<p>Untags the specified tags from the specified Amazon Chime SDK meeting resource.</p> <p>Applies the specified tags to the specified Amazon Chime SDK meeting resource.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_UntagResource.html">UntagResource</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '204':
           description: Success
@@ -15718,8 +15844,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/channels/{channelArn}/readMarker':
     put:
+      deprecated: true
       operationId: UpdateChannelReadMarker
-      description: <p>The details of the time when a user last read messages in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>
+      description: '<p>The details of the time when a user last read messages in a channel.</p> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_UpdateChannelReadMarker.html">UpdateChannelReadMarker</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -15798,8 +15925,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}':
     post:
+      deprecated: true
       operationId: UpdateSipMediaApplicationCall
-      description: Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.
+      description: '<p>Invokes the AWS Lambda function associated with the SIP media application and transaction ID in an update request. The Lambda function can then return a new set of actions.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateSipMediaApplicationCall.html">UpdateSipMediaApplicationCall</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '202':
           description: Success
@@ -15896,8 +16024,9 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /emergency-calling/address:
     post:
+      deprecated: true
       operationId: ValidateE911Address
-      description: Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.
+      description: '<p>Validates an address to be used for 911 calls made with Amazon Chime Voice Connectors. You can use validated addresses in a Presence Information Data Format Location Object file that you include in SIP requests. That helps ensure that addresses are routed to the appropriate Public Safety Answering Point.</p> <important> <p> <b>This API is is no longer supported and will not be updated.</b> We recommend using the latest version, <a href="https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ValidateE911Address.html">ValidateE911Address</a>, in the Amazon Chime SDK.</p> <p>Using the latest version requires migrating to a dedicated namespace. For more information, refer to <a href="https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html">Migrating from the Amazon Chime namespace</a> in the <i>Amazon Chime SDK Developer Guide</i>.</p> </important>'
       responses:
         '202':
           description: Success
@@ -20909,15 +21038,15 @@ components:
         ScreenDataUrl:
           allOf:
             - $ref: '#/components/schemas/UriType'
-            - description: The screen data URL.
+            - description: <p>The screen data URL.</p> <important> <p> <b>This parameter is is no longer supported and no longer used by the Amazon Chime SDK.</b> </p> </important>
         ScreenSharingUrl:
           allOf:
             - $ref: '#/components/schemas/UriType'
-            - description: The screen sharing URL.
+            - description: <p>The screen sharing URL.</p> <important> <p> <b>This parameter is is no longer supported and no longer used by the Amazon Chime SDK.</b>.</p> </important>
         ScreenViewingUrl:
           allOf:
             - $ref: '#/components/schemas/UriType'
-            - description: The screen viewing URL.
+            - description: <p>The screen viewing URL.</p> <important> <p> <b>This parameter is is no longer supported and no longer used by the Amazon Chime SDK.</b> </p> </important>
         SignalingUrl:
           allOf:
             - $ref: '#/components/schemas/UriType'
@@ -20925,7 +21054,7 @@ components:
         TurnControlUrl:
           allOf:
             - $ref: '#/components/schemas/UriType'
-            - description: The turn control URL.
+            - description: <p>The turn control URL.</p> <important> <p> <b>This parameter is is no longer supported and no longer used by the Amazon Chime SDK.</b> </p> </important>
         EventIngestionUrl:
           allOf:
             - $ref: '#/components/schemas/UriType'

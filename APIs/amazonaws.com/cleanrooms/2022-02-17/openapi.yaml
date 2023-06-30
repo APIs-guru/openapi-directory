@@ -3,7 +3,7 @@ info:
   version: '2022-02-17'
   x-release: v4
   title: AWS Clean Rooms Service
-  description: '<p>Welcome to the <i>AWS Clean Rooms API Reference</i>.</p> <p>AWS Clean Rooms is an AWS service that helps multiple parties to join their data together in a secure collaboration workspace. In the collaboration, members who can query and receive results can get insights into the collective datasets without either party getting access to the other party''s raw data.</p> <p>To learn more about AWS Clean Rooms concepts, procedures, and best practices, see the <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html">AWS Clean Rooms User Guide</a>.</p>'
+  description: '<p>Welcome to the <i>Clean Rooms API Reference</i>.</p> <p>Clean Rooms is an Amazon Web Services service that helps multiple parties to join their data together in a secure collaboration workspace. In the collaboration, members who can query and receive results can get insights into the collective datasets without either party getting access to the other party''s raw data.</p> <p>To learn more about Clean Rooms concepts, procedures, and best practices, see the <a href="https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html">Clean Rooms User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -456,13 +456,13 @@ paths:
                   minLength: 0
                   maxLength: 255
                 tableReference:
-                  description: 'A pointer to the dataset that underlies this table. Currently, this can only be an AWS Glue table.'
+                  description: 'A pointer to the dataset that underlies this table. Currently, this can only be an Glue table.'
                   type: object
                   properties:
                     glue:
                       allOf:
                         - $ref: '#/components/schemas/GlueTableReference'
-                        - description: 'If present, a reference to the AWS Glue table referred to by this table reference.'
+                        - description: 'If present, a reference to the Glue table referred to by this table reference.'
                 allowedColumns:
                   description: The columns of the underlying table that can be used by collaborations or analysis rules.
                   type: array
@@ -2459,7 +2459,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: StartProtectedQuery
-      description: Creates a protected query that is started by AWS Clean Rooms.
+      description: Creates a protected query that is started by Clean Rooms .
       responses:
         '200':
           description: Success
@@ -2861,7 +2861,7 @@ components:
         accountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+            - description: The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
         memberAbilities:
           allOf:
             - $ref: '#/components/schemas/MemberAbilities'
@@ -2900,13 +2900,13 @@ components:
       properties:
         tableName:
           allOf:
-            - $ref: '#/components/schemas/GlueResourceName'
-            - description: The name of the AWS Glue table.
+            - $ref: '#/components/schemas/GlueTableName'
+            - description: The name of the Glue table.
         databaseName:
           allOf:
-            - $ref: '#/components/schemas/GlueResourceName'
-            - description: The name of the database the AWS Glue table belongs to.
-      description: A reference to a table within an AWS Glue data catalog.
+            - $ref: '#/components/schemas/GlueDatabaseName'
+            - description: The name of the database the Glue table belongs to.
+      description: A reference to a table within an Glue data catalog.
     ColumnName:
       type: string
       pattern: '[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?'
@@ -3173,7 +3173,6 @@ components:
       properties: {}
     TagKey:
       type: string
-      pattern: '(?!aws:).{1,128}'
       minLength: 1
       maxLength: 128
     UpdateCollaborationOutput:
@@ -3378,6 +3377,12 @@ components:
       type: string
       enum:
         - QUERY_RUNNER
+    JoinOperatorsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/JoinOperator'
+      minItems: 0
+      maxItems: 2
     ScalarFunctionsList:
       type: array
       items:
@@ -3402,7 +3407,11 @@ components:
         joinRequired:
           allOf:
             - $ref: '#/components/schemas/JoinRequiredOption'
-            - description: Control that requires member who runs query to do a join with their configured table and/or other configured table in query
+            - description: Control that requires member who runs query to do a join with their configured table and/or other configured table in query.
+        allowedJoinOperators:
+          allOf:
+            - $ref: '#/components/schemas/JoinOperatorsList'
+            - description: Which logical operators (if any) are to be used in an INNER JOIN match condition. Default is <code>AND</code>.
         dimensionColumns:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleColumnList'
@@ -3415,7 +3424,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AggregationConstraints'
             - description: Columns that must meet a specific threshold value (after an aggregation function is applied to it) for each output row to be returned.
-      description: Enables query structure and specified queries that product aggregate statistics.
+      description: Enables query structure and specified queries that produce aggregate statistics.
     AnalysisRuleListJoinColumnsList:
       type: array
       items:
@@ -3430,7 +3439,11 @@ components:
         joinColumns:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleListJoinColumnsList'
-            - description: Columns that can be used to join a configured table with the table of the member who can query and another members' configured tables.
+            - description: Columns that can be used to join a configured table with the table of the member who can query and other members' configured tables.
+        allowedJoinOperators:
+          allOf:
+            - $ref: '#/components/schemas/JoinOperatorsList'
+            - description: Which logical operators (if any) are to be used in an INNER JOIN match condition. Default is <code>AND</code>.
         listColumns:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleColumnList'
@@ -3606,7 +3619,7 @@ components:
         creatorAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier used to reference members of the collaboration. Currently only supports AWS account ID.
+            - description: The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
         creatorDisplayName:
           allOf:
             - $ref: '#/components/schemas/DisplayName'
@@ -3667,7 +3680,7 @@ components:
         creatorAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+            - description: The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
         creatorDisplayName:
           allOf:
             - $ref: '#/components/schemas/DisplayName'
@@ -3716,7 +3729,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ColumnTypeString'
             - description: The type of the column.
-      description: 'A column within a schema relation, derived from the underlying AWS Glue table.'
+      description: 'A column within a schema relation, derived from the underlying Glue table.'
     ColumnList:
       type: array
       items:
@@ -3737,8 +3750,8 @@ components:
         glue:
           allOf:
             - $ref: '#/components/schemas/GlueTableReference'
-            - description: 'If present, a reference to the AWS Glue table referred to by this table reference.'
-      description: 'A pointer to the dataset that underlies this table. Currently, this can only be an AWS Glue table.'
+            - description: 'If present, a reference to the Glue table referred to by this table reference.'
+      description: 'A pointer to the dataset that underlies this table. Currently, this can only be an Glue table.'
     ConfiguredTableAnalysisRuleTypeList:
       type: array
       items:
@@ -3775,7 +3788,7 @@ components:
         tableReference:
           allOf:
             - $ref: '#/components/schemas/TableReference'
-            - description: The AWS Glue table that this configured table represents.
+            - description: The Glue table that this configured table represents.
         createTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3795,7 +3808,7 @@ components:
         allowedColumns:
           allOf:
             - $ref: '#/components/schemas/AllowedColumnList'
-            - description: The columns within the underlying AWS Glue table that can be utilized within collaborations.
+            - description: The columns within the underlying Glue table that can be utilized within collaborations.
       description: A table that has been configured for use in a collaboration.
     ConfiguredTableAnalysisRulePolicy:
       type: object
@@ -4147,7 +4160,7 @@ components:
         tableReference:
           allOf:
             - $ref: '#/components/schemas/TableReference'
-            - description: A reference to the AWS Glue table being configured.
+            - description: A reference to the Glue table being configured.
         allowedColumns:
           allOf:
             - $ref: '#/components/schemas/AllowedColumnList'
@@ -4219,7 +4232,7 @@ components:
         collaborationCreatorAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier used to reference members of the collaboration. Currently only supports AWS account ID.
+            - description: The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
         collaborationCreatorDisplayName:
           allOf:
             - $ref: '#/components/schemas/DisplayName'
@@ -4358,7 +4371,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProtectedQueryError'
             - description: An error thrown by the protected query.
-      description: The parameters for an AWS Clean Rooms protected query.
+      description: The parameters for an Clean Rooms protected query.
     GetSchemaAnalysisRuleInput:
       type: object
       title: GetSchemaAnalysisRuleInput
@@ -4401,7 +4414,7 @@ components:
         creatorAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The unique account ID for the AWS account that owns the schema.
+            - description: The unique account ID for the Amazon Web Services account that owns the schema.
         name:
           allOf:
             - $ref: '#/components/schemas/TableAlias'
@@ -4431,11 +4444,21 @@ components:
             - $ref: '#/components/schemas/SchemaType'
             - description: The type of schema. The only valid value is currently `TABLE`.
       description: A schema is a relation within a collaboration.
-    GlueResourceName:
+    GlueDatabaseName:
+      type: string
+      pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_]+-)*([a-zA-Z0-9_]+))?'
+      minLength: 0
+      maxLength: 128
+    GlueTableName:
       type: string
       pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
       minLength: 0
       maxLength: 128
+    JoinOperator:
+      type: string
+      enum:
+        - OR
+        - AND
     KeyPrefix:
       type: string
       pattern: '[\w!.*/-]*'
@@ -4530,7 +4553,7 @@ components:
         accountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier used to reference members of the collaboration. Currently only supports AWS Account ID.
+            - description: The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
         status:
           allOf:
             - $ref: '#/components/schemas/MemberStatus'
@@ -4594,7 +4617,7 @@ components:
         collaborationCreatorAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The identifier of the AWS principal that created the collaboration. Currently only supports AWS account ID.
+            - description: The identifier of the Amazon Web Services principal that created the collaboration. Currently only supports Amazon Web Services account ID.
         collaborationCreatorDisplayName:
           allOf:
             - $ref: '#/components/schemas/DisplayName'
@@ -4622,8 +4645,6 @@ components:
       description: The membership object listed by the request.
     ProtectedQuerySQLParameters:
       type: object
-      required:
-        - queryString
       properties:
         queryString:
           allOf:
@@ -4793,7 +4814,7 @@ components:
         creatorAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: The unique account ID for the AWS account that owns the schema.
+            - description: The unique account ID for the Amazon Web Services account that owns the schema.
         createTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'

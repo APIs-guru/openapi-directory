@@ -12854,7 +12854,7 @@ components:
         AutoMLJobInputDataConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLJobInputDataConfig'
-            - description: '<p>An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig">InputDataConfig</a> attribute in the <code>CreateAutoMLJob</code> input parameters. The supported formats depend on the problem type:</p> <ul> <li> <p>For Tabular problem types: <code>S3Prefix</code>, <code>ManifestFile</code>.</p> </li> <li> <p>For ImageClassification: <code>S3Prefix</code>, <code>ManifestFile</code>, <code>AugmentedManifestFile</code>.</p> </li> <li> <p>For TextClassification: <code>S3Prefix</code>.</p> </li> </ul>'
+            - description: '<p>An array of channel objects describing the input data and their location. Each channel is a named input source. Similar to the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig">InputDataConfig</a> attribute in the <code>CreateAutoMLJob</code> input parameters. The supported formats depend on the problem type:</p> <ul> <li> <p>For tabular problem types: <code>S3Prefix</code>, <code>ManifestFile</code>.</p> </li> <li> <p>For image classification: <code>S3Prefix</code>, <code>ManifestFile</code>, <code>AugmentedManifestFile</code>.</p> </li> <li> <p>For text classification: <code>S3Prefix</code>.</p> </li> <li> <p>For time-series forecasting: <code>S3Prefix</code>.</p> </li> </ul>'
         OutputDataConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLOutputDataConfig'
@@ -12886,7 +12886,7 @@ components:
         DataSplitConfig:
           allOf:
             - $ref: '#/components/schemas/AutoMLDataSplitConfig'
-            - description: '<p>This structure specifies how to split the data into train and validation datasets.</p> <p>The validation and training datasets must contain the same headers. For jobs created by calling <code>CreateAutoMLJob</code>, the validation dataset must be less than 2 GB in size.</p>'
+            - description: '<p>This structure specifies how to split the data into train and validation datasets.</p> <p>The validation and training datasets must contain the same headers. For jobs created by calling <code>CreateAutoMLJob</code>, the validation dataset must be less than 2 GB in size.</p> <note> <p>This attribute must not be set for the time-series forecasting problem type, as Autopilot automatically splits the input dataset into training and validation sets.</p> </note>'
     CreateCodeRepositoryOutput:
       type: object
       required:
@@ -24947,6 +24947,20 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AgentVersion'
+    AggregationTransformationValue:
+      type: string
+      enum:
+        - sum
+        - avg
+        - first
+        - min
+        - max
+    AggregationTransformations:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/AggregationTransformationValue'
     AlarmName:
       type: string
       pattern: ^(?!\s*$).+
@@ -26220,11 +26234,11 @@ components:
         ChannelType:
           allOf:
             - $ref: '#/components/schemas/AutoMLChannelType'
-            - description: 'The type of channel. Defines whether the data are used for training or validation. The default value is <code>training</code>. Channels for <code>training</code> and <code>validation</code> must share the same <code>ContentType</code> '
+            - description: <p>The type of channel. Defines whether the data are used for training or validation. The default value is <code>training</code>. Channels for <code>training</code> and <code>validation</code> must share the same <code>ContentType</code> </p> <note> <p>The type of channel defaults to <code>training</code> for the time-series forecasting problem type.</p> </note>
         ContentType:
           allOf:
             - $ref: '#/components/schemas/ContentType'
-            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>For Tabular problem types: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> <li> <p>For ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or <code>image/*</code>. The default value is <code>image/*</code>.</p> </li> <li> <p>For TextClassification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> </ul>'
+            - description: '<p>The content type of the data from the input source. The following are the allowed content types for different problems:</p> <ul> <li> <p>For tabular problem types: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> <li> <p>For image classification: <code>image/png</code>, <code>image/jpeg</code>, or <code>image/*</code>. The default value is <code>image/*</code>.</p> </li> <li> <p>For text classification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> <li> <p>For time-series forecasting: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. The default value is <code>text/csv;header=present</code>.</p> </li> </ul>'
         CompressionType:
           allOf:
             - $ref: '#/components/schemas/CompressionType'
@@ -26250,7 +26264,7 @@ components:
         MaxCandidates:
           allOf:
             - $ref: '#/components/schemas/MaxCandidates'
-            - description: '<p>The maximum number of times a training job is allowed to run.</p> <p>For job V2s (jobs created by calling <code>CreateAutoMLJobV2</code>), the supported value is 1.</p>'
+            - description: '<p>The maximum number of times a training job is allowed to run.</p> <p>For text and image classification, as well as time-series forecasting problem types, the supported value is 1. For tabular problem types, the maximum value is 750.</p>'
         MaxRuntimePerTrainingJobInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaxRuntimePerTrainingJobInSeconds'
@@ -26333,6 +26347,10 @@ components:
         - PrecisionMacro
         - Recall
         - RecallMacro
+        - MAPE
+        - MASE
+        - WAPE
+        - AverageWeightedQuantileLoss
     AutoMLJobObjective:
       type: object
       required:
@@ -26341,7 +26359,7 @@ components:
         MetricName:
           allOf:
             - $ref: '#/components/schemas/AutoMLMetricEnum'
-            - description: '<p>The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model''s parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset.</p> <p>For the list of all available metrics supported by Autopilot, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics">Autopilot metrics</a>.</p> <p>If you do not specify a metric explicitly, the default behavior is to automatically use:</p> <ul> <li> <p>For tabular problem types:</p> <ul> <li> <p>Regression: <code>MSE</code>.</p> </li> <li> <p>Binary classification: <code>F1</code>.</p> </li> <li> <p>Multiclass classification: <code>Accuracy</code>.</p> </li> </ul> </li> <li> <p>For image or text classification problem types: <code>Accuracy</code> </p> </li> </ul>'
+            - description: '<p>The name of the objective metric used to measure the predictive quality of a machine learning system. During training, the model''s parameters are updated iteratively to optimize its performance based on the feedback provided by the objective metric when evaluating the model on the validation dataset.</p> <p>For the list of all available metrics supported by Autopilot, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics">Autopilot metrics</a>.</p> <p>If you do not specify a metric explicitly, the default behavior is to automatically use:</p> <ul> <li> <p>For tabular problem types:</p> <ul> <li> <p>Regression: <code>MSE</code>.</p> </li> <li> <p>Binary classification: <code>F1</code>.</p> </li> <li> <p>Multiclass classification: <code>Accuracy</code>.</p> </li> </ul> </li> <li> <p>For image or text classification problem types: <code>Accuracy</code> </p> </li> <li> <p>For time-series forecasting problem types: <code>AverageWeightedQuantileLoss</code> </p> </li> </ul>'
       description: Specifies a metric to minimize or maximize as the objective of a job.
     AutoMLJobObjectiveType:
       type: string
@@ -26369,6 +26387,7 @@ components:
         - GeneratingModelInsightsReport
         - ModelInsightsError
         - TrainingModels
+        - PreTraining
     AutoMLJobStatus:
       type: string
       enum:
@@ -26464,6 +26483,10 @@ components:
         - RecallMacro
         - LogLoss
         - InferenceLatency
+        - MAPE
+        - MASE
+        - WAPE
+        - AverageWeightedQuantileLoss
     AutoMLNameContains:
       type: string
       pattern: '[a-zA-Z0-9\-]+'
@@ -26550,6 +26573,40 @@ components:
             - $ref: '#/components/schemas/SampleWeightAttributeName'
             - description: '<p>If specified, this column name indicates which column of the dataset should be treated as sample weights for use by the objective metric during the training, evaluation, and the selection of the best model. This column is not considered as a predictive feature. For more information on Autopilot metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html">Metrics and validation</a>.</p> <p>Sample weights should be numeric, non-negative, with larger values indicating which rows are more important than others. Data points that have invalid or no weight value are excluded.</p> <p>Support for sample weights is available in <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html">Ensembling</a> mode only.</p>'
       description: The collection of settings used by an AutoML job V2 for the <code>TABULAR</code> problem type.
+    TimeSeriesForecastingJobConfig:
+      type: object
+      required:
+        - ForecastFrequency
+        - ForecastHorizon
+        - TimeSeriesConfig
+      properties:
+        FeatureSpecificationS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: '<p>A URL to the Amazon S3 data source containing additional selected features that complement the target, itemID, timestamp, and grouped columns set in <code>TimeSeriesConfig</code>. When not provided, the AutoML job V2 includes all the columns from the original dataset that are not already declared in <code>TimeSeriesConfig</code>. If provided, the AutoML job V2 only considers these additional columns as a complement to the ones declared in <code>TimeSeriesConfig</code>.</p> <p> You can input <code>FeatureAttributeNames</code> (optional) in JSON format as shown below: </p> <p> <code>{ "FeatureAttributeNames":["col1", "col2", ...] }</code>.</p> <p>You can also specify the data type of the feature (optional) in the format shown below:</p> <p> <code>{ "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } }</code> </p> <p>Autopilot supports the following data types: <code>numeric</code>, <code>categorical</code>, <code>text</code>, and <code>datetime</code>.</p> <note> <p>These column keys must not include any column set in <code>TimeSeriesConfig</code>.</p> </note> <p>When not provided, the AutoML job V2 includes all the columns from the original dataset that are not already declared in <code>TimeSeriesConfig</code>. If provided, the AutoML job V2 only considers these additional columns as a complement to the ones declared in <code>TimeSeriesConfig</code>.</p> <p>Autopilot supports the following data types: <code>numeric</code>, <code>categorical</code>, <code>text</code>, and <code>datetime</code>.</p>'
+        CompletionCriteria:
+          $ref: '#/components/schemas/AutoMLJobCompletionCriteria'
+        ForecastFrequency:
+          allOf:
+            - $ref: '#/components/schemas/ForecastFrequency'
+            - description: '<p>The frequency of predictions in a forecast.</p> <p>Valid intervals are an integer followed by Y (Year), M (Month), W (Week), D (Day), H (Hour), and min (Minute). For example, <code>1D</code> indicates every day and <code>15min</code> indicates every 15 minutes. The value of a frequency must not overlap with the next larger frequency. For example, you must use a frequency of <code>1H</code> instead of <code>60min</code>.</p> <p>The valid values for each frequency are the following:</p> <ul> <li> <p>Minute - 1-59</p> </li> <li> <p>Hour - 1-23</p> </li> <li> <p>Day - 1-6</p> </li> <li> <p>Week - 1-4</p> </li> <li> <p>Month - 1-11</p> </li> <li> <p>Year - 1</p> </li> </ul>'
+        ForecastHorizon:
+          allOf:
+            - $ref: '#/components/schemas/ForecastHorizon'
+            - description: The number of time-steps that the model predicts. The forecast horizon is also called the prediction length. The maximum forecast horizon is the lesser of 500 time-steps or 1/4 of the time-steps in the dataset.
+        ForecastQuantiles:
+          allOf:
+            - $ref: '#/components/schemas/ForecastQuantiles'
+            - description: 'The quantiles used to train the model for forecasts at a specified quantile. You can specify quantiles from <code>0.01</code> (p1) to <code>0.99</code> (p99), by increments of 0.01 or higher. Up to five forecast quantiles can be specified. When <code>ForecastQuantiles</code> is not provided, the AutoML job uses the quantiles p10, p50, and p90 as default.'
+        Transformations:
+          allOf:
+            - $ref: '#/components/schemas/TimeSeriesTransformations'
+            - description: 'The transformations modifying specific attributes of the time-series, such as filling strategies for missing values.'
+        TimeSeriesConfig:
+          allOf:
+            - $ref: '#/components/schemas/TimeSeriesConfig'
+            - description: The collection of components that defines the time-series.
+      description: <p>The collection of settings used by an AutoML job V2 for the time-series forecasting problem type.</p> <note> <p>The <code>TimeSeriesForecastingJobConfig</code> problem type is only available in private beta. Contact Amazon Web Services Support or your account manager to learn more about access privileges.</p> </note>
     AutoMLProblemTypeConfig:
       type: object
       properties:
@@ -26565,6 +26622,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TabularJobConfig'
             - description: 'Settings used to configure an AutoML job V2 for a tabular problem type (regression, classification).'
+        TimeSeriesForecastingJobConfig:
+          allOf:
+            - $ref: '#/components/schemas/TimeSeriesForecastingJobConfig'
+            - description: Settings used to configure an AutoML job V2 for a time-series forecasting problem type.
       description: A collection of settings specific to the problem type used to configure an AutoML job V2. There must be one and only one config of the following type.
     AutoMLProblemTypeConfigName:
       type: string
@@ -26572,6 +26633,7 @@ components:
         - ImageClassification
         - TextClassification
         - Tabular
+        - TimeSeriesForecasting
     TabularResolvedAttributes:
       type: object
       properties:
@@ -26693,6 +26755,9 @@ components:
       enum:
         - AWS/Rekognition/DetectModerationLabels/Image/V3
         - AWS/Textract/AnalyzeDocument/Forms/V1
+    BacktestResultsLocation:
+      type: string
+      minLength: 1
     BatchDataCaptureConfig:
       type: object
       required:
@@ -27007,7 +27072,7 @@ components:
     MaximumExecutionTimeoutInSeconds:
       type: integer
       minimum: 600
-      maximum: 14400
+      maximum: 28800
     BlueGreenUpdatePolicy:
       type: object
       required:
@@ -27099,6 +27164,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelInsightsLocation'
             - description: The Amazon S3 prefix to the model insight artifacts generated for the AutoML candidate.
+        BacktestResults:
+          allOf:
+            - $ref: '#/components/schemas/BacktestResultsLocation'
+            - description: The Amazon S3 prefix to the accuracy metrics and the inference results observed over the testing window. Available only for the time-series forecasting problem type.
       description: The location of artifacts for an AutoML candidate job.
     CandidateGenerationConfig:
       type: object
@@ -27178,7 +27247,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CapacitySizeValue'
             - description: 'Defines the capacity size, either as a number of instances or a capacity percentage.'
-      description: Specifies the endpoint capacity to activate for production.
+      description: '<p>Specifies the type and size of the endpoint capacity to activate for a blue/green deployment, a rolling deployment, or a rollback strategy. You can specify your batches as either instance count or the overall percentage or your fleet.</p> <p>For a rollback strategy, if you don''t specify the fields in this object, or if you set the <code>Value</code> to 100%, then SageMaker uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>'
     CsvContentTypes:
       type: array
       items:
@@ -28836,8 +28905,6 @@ components:
       maxLength: 63
     DeploymentConfig:
       type: object
-      required:
-        - BlueGreenUpdatePolicy
       properties:
         BlueGreenUpdatePolicy:
           allOf:
@@ -28847,6 +28914,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutoRollbackConfig'
             - description: Automatic rollback configuration for handling endpoint deployment failures and recovery.
+        RollingUpdatePolicy:
+          allOf:
+            - $ref: '#/components/schemas/RollingUpdatePolicy'
+            - description: Specifies a rolling deployment strategy for updating a SageMaker endpoint.
       description: 'The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.'
     EndpointArn:
       type: string
@@ -31184,6 +31255,29 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DeployedImage'
+    RollingUpdatePolicy:
+      type: object
+      required:
+        - MaximumBatchSize
+        - WaitIntervalInSeconds
+      properties:
+        MaximumBatchSize:
+          allOf:
+            - $ref: '#/components/schemas/CapacitySize'
+            - description: 'Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant''s total instance count.'
+        WaitIntervalInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/WaitIntervalInSeconds'
+            - description: 'The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet.'
+        MaximumExecutionTimeoutInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/MaximumExecutionTimeoutInSeconds'
+            - description: The time limit for the total deployment. Exceeding this limit causes a timeout.
+        RollbackMaximumBatchSize:
+          allOf:
+            - $ref: '#/components/schemas/CapacitySize'
+            - description: 'Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback.'
+      description: Specifies a rolling deployment strategy for updating a SageMaker endpoint.
     RecommendationStatus:
       type: string
       enum:
@@ -31485,6 +31579,7 @@ components:
         - InService
         - Deleting
         - Failed
+        - UpdateRollbackFailed
     PendingDeploymentSummary:
       type: object
       required:
@@ -33862,6 +33957,34 @@ components:
       enum:
         - EFS
         - FSxLustre
+    FillingTransformationValue:
+      type: string
+      pattern: '^[a-zA-Z0-9\_\-]+$'
+      minLength: 1
+      maxLength: 256
+    FillingTransformationMap:
+      type: object
+      minProperties: 1
+      maxProperties: 6
+      additionalProperties:
+        $ref: '#/components/schemas/FillingTransformationValue'
+    FillingTransformations:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/FillingTransformationMap'
+    FillingType:
+      type: string
+      enum:
+        - frontfill
+        - middlefill
+        - backfill
+        - futurefill
+        - frontfill_value
+        - middlefill_value
+        - backfill_value
+        - futurefill_value
     ResourcePropertyName:
       type: string
       pattern: .+
@@ -34026,6 +34149,25 @@ components:
       pattern: '^[\t\n\r -\uD7FF\uE000-\uFFFD]*$'
       minLength: 1
       maxLength: 128
+    ForecastFrequency:
+      type: string
+      pattern: '^1Y|Y|([1-9]|1[0-1])M|M|[1-4]W|W|[1-6]D|D|([1-9]|1[0-9]|2[0-3])H|H|([1-9]|[1-5][0-9])min$'
+      minLength: 1
+      maxLength: 5
+    ForecastHorizon:
+      type: integer
+      minimum: 1
+    ForecastQuantile:
+      type: string
+      pattern: '(^p[1-9]\d?$)'
+      minLength: 2
+      maxLength: 4
+    ForecastQuantiles:
+      type: array
+      items:
+        $ref: '#/components/schemas/ForecastQuantile'
+      minItems: 1
+      maxItems: 5
     Framework:
       type: string
       enum:
@@ -34113,6 +34255,16 @@ components:
       pattern: '[\p{L}\p{M}\p{S}\p{N}\p{P}]+'
       minLength: 1
       maxLength: 63
+    GroupingAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    GroupingAttributeNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/GroupingAttributeName'
+      minItems: 1
+      maxItems: 5
     Groups:
       type: array
       items:
@@ -35368,6 +35520,10 @@ components:
       type: integer
       minimum: 1
       maximum: 3600
+    ItemIdentifierAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 256
     JobDurationInSeconds:
       type: integer
       minimum: 1
@@ -39518,6 +39674,10 @@ components:
       enum:
         - Retain
         - Delete
+    WaitIntervalInSeconds:
+      type: integer
+      minimum: 0
+      maximum: 3600
     S3DataDistribution:
       type: string
       enum:
@@ -40133,6 +40293,46 @@ components:
       type: integer
       minimum: 0
       maximum: 9
+    TimestampAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    TimeSeriesConfig:
+      type: object
+      required:
+        - TargetAttributeName
+        - TimestampAttributeName
+        - ItemIdentifierAttributeName
+      properties:
+        TargetAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/TargetAttributeName'
+            - description: The name of the column representing the target variable that you want to predict for each item in your dataset. The data type of the target variable must be numerical.
+        TimestampAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/TimestampAttributeName'
+            - description: The name of the column indicating a point in time at which the target value of a given item is recorded.
+        ItemIdentifierAttributeName:
+          allOf:
+            - $ref: '#/components/schemas/ItemIdentifierAttributeName'
+            - description: The name of the column that represents the set of item identifiers for which you want to predict the target value.
+        GroupingAttributeNames:
+          allOf:
+            - $ref: '#/components/schemas/GroupingAttributeNames'
+            - description: A set of columns names that can be grouped with the item identifier column to create a composite key for which a target value is predicted.
+      description: The collection of components that defines the time-series.
+    TimeSeriesTransformations:
+      type: object
+      properties:
+        Filling:
+          allOf:
+            - $ref: '#/components/schemas/FillingTransformations'
+            - description: '<p>A key value pair defining the filling method for a column, where the key is the column name and the value is an object which defines the filling logic. You can specify multiple filling methods for a single column.</p> <p>The supported filling methods and their corresponding options are:</p> <ul> <li> <p> <code>frontfill</code>: <code>none</code> (Supported only for target column)</p> </li> <li> <p> <code>middlefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>backfill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> <li> <p> <code>futurefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code> </p> </li> </ul> <p>To set a filling method to a specific value, set the fill parameter to the chosen filling method value (for example <code>"backfill" : "value"</code>), and define the filling value in an additional parameter prefixed with "_value". For example, to set <code>backfill</code> to a value of <code>2</code>, you must include two parameters: <code>"backfill": "value"</code> and <code>"backfill_value":"2"</code>.</p>'
+        Aggregation:
+          allOf:
+            - $ref: '#/components/schemas/AggregationTransformations'
+            - description: '<p>A key value pair defining the aggregation method for a column, where the key is the column name and the value is the aggregation method.</p> <p>The supported aggregation methods are <code>sum</code> (default), <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code>.</p> <note> <p>Aggregation is only supported for the target column.</p> </note>'
+      description: Transformations allowed on the dataset. Supported transformations are <code>Filling</code> and <code>Aggregation</code>. <code>Filling</code> specifies how to add values to missing values in the dataset. <code>Aggregation</code> defines how to aggregate data that does not align with forecast frequency.
     TrafficType:
       type: string
       enum:
@@ -40143,10 +40343,6 @@ components:
         - ALL_AT_ONCE
         - CANARY
         - LINEAR
-    WaitIntervalInSeconds:
-      type: integer
-      minimum: 0
-      maximum: 3600
     TrainingContainerArgument:
       type: string
       pattern: .*
@@ -40335,6 +40531,10 @@ components:
             - $ref: '#/components/schemas/FailureReason'
             - description: 'If the transform job failed, the reason it failed.'
       description: 'Provides a summary of a transform job. Multiple <code>TransformJobSummary</code> objects are returned as a list after in response to a <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListTransformJobs.html">ListTransformJobs</a> call.'
+    TransformationAttributeName:
+      type: string
+      minLength: 1
+      maxLength: 256
     TrialComponentSimpleSummaries:
       type: array
       items:

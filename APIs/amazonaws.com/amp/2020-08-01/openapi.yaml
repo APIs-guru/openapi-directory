@@ -175,7 +175,7 @@ paths:
           description: The ID of the workspace in which to create the alert manager definition.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -188,15 +188,15 @@ paths:
               required:
                 - data
               properties:
+                data:
+                  description: The alert manager definition data.
+                  type: string
                 clientToken:
                   description: An identifier used to ensure the idempotency of a write request.
                   type: string
                   pattern: '[!-~]+'
                   minLength: 1
                   maxLength: 64
-                data:
-                  description: The alert manager definition data.
-                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -248,6 +248,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
       parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace in which to delete the alert manager definition.
+          schema:
+            type: string
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
+            description: A workspace ID.
+            minLength: 1
+            maxLength: 64
         - name: clientToken
           in: query
           required: false
@@ -256,16 +266,6 @@ paths:
             type: string
             pattern: '[!-~]+'
             description: An identifier used to ensure the idempotency of a write request.
-            minLength: 1
-            maxLength: 64
-        - name: workspaceId
-          in: path
-          required: true
-          description: The ID of the workspace in which to delete the alert manager definition.
-          schema:
-            type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
-            description: A workspace ID.
             minLength: 1
             maxLength: 64
     get:
@@ -315,7 +315,7 @@ paths:
           description: The ID of the workspace to describe.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -378,7 +378,7 @@ paths:
           description: The ID of the workspace in which to update the alert manager definition.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -391,15 +391,15 @@ paths:
               required:
                 - data
               properties:
+                data:
+                  description: The alert manager definition data.
+                  type: string
                 clientToken:
                   description: An identifier used to ensure the idempotency of a write request.
                   type: string
                   pattern: '[!-~]+'
                   minLength: 1
                   maxLength: 64
-                data:
-                  description: The alert manager definition data.
-                  type: string
   '/workspaces/{workspaceId}/logging':
     post:
       operationId: CreateLoggingConfiguration
@@ -442,7 +442,7 @@ paths:
           description: The ID of the workspace to vend logs to.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -455,16 +455,16 @@ paths:
               required:
                 - logGroupArn
               properties:
+                logGroupArn:
+                  description: The ARN of the CW log group to which the vended log data will be published.
+                  type: string
+                  pattern: 'arn:aws[a-z0-9-]*:logs:[a-z0-9-]+:\d{12}:log-group:[A-Za-z0-9\.\-\_\#/]{1,512}\:\*'
                 clientToken:
                   description: An identifier used to ensure the idempotency of a write request.
                   type: string
                   pattern: '[!-~]+'
                   minLength: 1
                   maxLength: 64
-                logGroupArn:
-                  description: The ARN of the CW log group to which the vended log data will be published.
-                  type: string
-                  pattern: '^arn:aws[a-z0-9-]*:logs:[a-z0-9-]+:\d{12}:log-group:[A-Za-z0-9\.\-\_\#/]{1,512}\:\*$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -510,6 +510,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
       parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to vend logs to.
+          schema:
+            type: string
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
+            description: A workspace ID.
+            minLength: 1
+            maxLength: 64
         - name: clientToken
           in: query
           required: false
@@ -518,16 +528,6 @@ paths:
             type: string
             pattern: '[!-~]+'
             description: An identifier used to ensure the idempotency of a write request.
-            minLength: 1
-            maxLength: 64
-        - name: workspaceId
-          in: path
-          required: true
-          description: The ID of the workspace to vend logs to.
-          schema:
-            type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
-            description: A workspace ID.
             minLength: 1
             maxLength: 64
     get:
@@ -571,7 +571,7 @@ paths:
           description: The ID of the workspace to vend logs to.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -622,7 +622,7 @@ paths:
           description: The ID of the workspace to vend logs to.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -635,16 +635,16 @@ paths:
               required:
                 - logGroupArn
               properties:
+                logGroupArn:
+                  description: The ARN of the CW log group to which the vended log data will be published.
+                  type: string
+                  pattern: 'arn:aws[a-z0-9-]*:logs:[a-z0-9-]+:\d{12}:log-group:[A-Za-z0-9\.\-\_\#/]{1,512}\:\*'
                 clientToken:
                   description: An identifier used to ensure the idempotency of a write request.
                   type: string
                   pattern: '[!-~]+'
                   minLength: 1
                   maxLength: 64
-                logGroupArn:
-                  description: The ARN of the CW log group to which the vended log data will be published.
-                  type: string
-                  pattern: '^arn:aws[a-z0-9-]*:logs:[a-z0-9-]+:\d{12}:log-group:[A-Za-z0-9\.\-\_\#/]{1,512}\:\*$'
   '/workspaces/{workspaceId}/rulegroupsnamespaces':
     post:
       operationId: CreateRuleGroupsNamespace
@@ -705,7 +705,7 @@ paths:
           description: The ID of the workspace in which to create the rule group namespace.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -716,22 +716,22 @@ paths:
             schema:
               type: object
               required:
-                - data
                 - name
+                - data
               properties:
-                clientToken:
-                  description: An identifier used to ensure the idempotency of a write request.
+                name:
+                  description: The namespace name that the rule group belong to.
                   type: string
-                  pattern: '[!-~]+'
+                  pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
                   minLength: 1
                   maxLength: 64
                 data:
                   description: The rule groups namespace data.
                   type: string
-                name:
-                  description: The namespace name that the rule group belong to.
+                clientToken:
+                  description: An identifier used to ensure the idempotency of a write request.
                   type: string
-                  pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+                  pattern: '[!-~]+'
                   minLength: 1
                   maxLength: 64
                 tags:
@@ -790,21 +790,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
       parameters:
-        - name: maxResults
-          in: query
-          required: false
-          description: 'Maximum results to return in response (default=100, maximum=1000).'
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace.
           schema:
-            type: integer
-            minimum: 1
-            maximum: 1000
+            type: string
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
+            description: A workspace ID.
+            minLength: 1
+            maxLength: 64
         - name: name
           in: query
           required: false
           description: Optional filter for rule groups namespace name. Only the rule groups namespace that begin with this value will be returned.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: The namespace name that the rule group belong to.
             minLength: 1
             maxLength: 64
@@ -815,16 +817,14 @@ paths:
           schema:
             type: string
             description: A token used to access the next page in a paginated result set.
-        - name: workspaceId
-          in: path
-          required: true
-          description: The ID of the workspace.
+        - name: maxResults
+          in: query
+          required: false
+          description: 'Maximum results to return in response (default=100, maximum=1000).'
           schema:
-            type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
-            description: A workspace ID.
-            minLength: 1
-            maxLength: 64
+            type: integer
+            minimum: 1
+            maximum: 1000
   /workspaces:
     post:
       operationId: CreateWorkspace
@@ -941,6 +941,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
       parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListWorkspaces request.
+          schema:
+            type: string
+            description: A token used to access the next page in a paginated result set.
         - name: alias
           in: query
           required: false
@@ -958,13 +965,6 @@ paths:
             type: integer
             minimum: 1
             maximum: 1000
-        - name: nextToken
-          in: query
-          required: false
-          description: Pagination token to request the next page in a paginated list. This token is obtained from the output of the previous ListWorkspaces request.
-          schema:
-            type: string
-            description: A token used to access the next page in a paginated result set.
   '/workspaces/{workspaceId}/rulegroupsnamespaces/{name}':
     delete:
       operationId: DeleteRuleGroupsNamespace
@@ -1009,14 +1009,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
       parameters:
-        - name: clientToken
-          in: query
-          required: false
-          description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to delete rule group definition.
           schema:
             type: string
-            pattern: '[!-~]+'
-            description: An identifier used to ensure the idempotency of a write request.
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
+            description: A workspace ID.
             minLength: 1
             maxLength: 64
         - name: name
@@ -1025,18 +1025,18 @@ paths:
           description: The rule groups namespace name.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: The namespace name that the rule group belong to.
             minLength: 1
             maxLength: 64
-        - name: workspaceId
-          in: path
-          required: true
-          description: The ID of the workspace to delete rule group definition.
+        - name: clientToken
+          in: query
+          required: false
+          description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
-            description: A workspace ID.
+            pattern: '[!-~]+'
+            description: An identifier used to ensure the idempotency of a write request.
             minLength: 1
             maxLength: 64
     parameters:
@@ -1088,24 +1088,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The rule groups namespace.
-          schema:
-            type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
-            description: The namespace name that the rule group belong to.
-            minLength: 1
-            maxLength: 64
         - name: workspaceId
           in: path
           required: true
           description: The ID of the workspace to describe.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
+            minLength: 1
+            maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The rule groups namespace.
+          schema:
+            type: string
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
+            description: The namespace name that the rule group belong to.
             minLength: 1
             maxLength: 64
     put:
@@ -1161,24 +1161,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
       parameters:
-        - name: name
-          in: path
-          required: true
-          description: The rule groups namespace name.
-          schema:
-            type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
-            description: The namespace name that the rule group belong to.
-            minLength: 1
-            maxLength: 64
         - name: workspaceId
           in: path
           required: true
           description: The ID of the workspace in which to update the rule group namespace.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
+            minLength: 1
+            maxLength: 64
+        - name: name
+          in: path
+          required: true
+          description: The rule groups namespace name.
+          schema:
+            type: string
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
+            description: The namespace name that the rule group belong to.
             minLength: 1
             maxLength: 64
       requestBody:
@@ -1190,15 +1190,15 @@ paths:
               required:
                 - data
               properties:
+                data:
+                  description: The rule groups namespace data.
+                  type: string
                 clientToken:
                   description: An identifier used to ensure the idempotency of a write request.
                   type: string
                   pattern: '[!-~]+'
                   minLength: 1
                   maxLength: 64
-                data:
-                  description: The rule groups namespace data.
-                  type: string
   '/workspaces/{workspaceId}':
     delete:
       operationId: DeleteWorkspace
@@ -1243,6 +1243,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
       parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          description: The ID of the workspace to delete.
+          schema:
+            type: string
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
+            description: A workspace ID.
+            minLength: 1
+            maxLength: 64
         - name: clientToken
           in: query
           required: false
@@ -1251,16 +1261,6 @@ paths:
             type: string
             pattern: '[!-~]+'
             description: An identifier used to ensure the idempotency of a write request.
-            minLength: 1
-            maxLength: 64
-        - name: workspaceId
-          in: path
-          required: true
-          description: The ID of the workspace to delete.
-          schema:
-            type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
-            description: A workspace ID.
             minLength: 1
             maxLength: 64
     parameters:
@@ -1318,7 +1318,7 @@ paths:
           description: The ID of the workspace to describe.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -1561,7 +1561,7 @@ paths:
           description: The ID of the workspace being updated.
           schema:
             type: string
-            pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+            pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
             description: A workspace ID.
             minLength: 1
             maxLength: 64
@@ -1673,18 +1673,18 @@ components:
     CreateRuleGroupsNamespaceResponse:
       type: object
       required:
-        - arn
         - name
+        - arn
         - status
       properties:
-        arn:
-          allOf:
-            - $ref: '#/components/schemas/RuleGroupsNamespaceArn'
-            - description: The Amazon Resource Name (ARN) of this rule groups namespace.
         name:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceName'
             - description: The rule groups namespace name.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/RuleGroupsNamespaceArn'
+            - description: The Amazon Resource Name (ARN) of this rule groups namespace.
         status:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceStatus'
@@ -1696,16 +1696,20 @@ components:
       description: Represents the output of a CreateRuleGroupsNamespace operation.
     TagValue:
       type: string
-      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      pattern: '([\p{L}\p{Z}\p{N}_.:/=+\-@]*)'
       minLength: 0
       maxLength: 256
     CreateWorkspaceResponse:
       type: object
       required:
+        - workspaceId
         - arn
         - status
-        - workspaceId
       properties:
+        workspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: The generated ID of the workspace that was just created.
         arn:
           allOf:
             - $ref: '#/components/schemas/WorkspaceArn'
@@ -1718,10 +1722,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of this workspace.
-        workspaceId:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceId'
-            - description: The generated ID of the workspace that was just created.
       description: Represents the output of a CreateWorkspace operation.
     DescribeAlertManagerDefinitionResponse:
       type: object
@@ -1768,14 +1768,14 @@ components:
       required:
         - ruleGroupsNamespaces
       properties:
-        nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Pagination token to use when requesting the next page in this list.
         ruleGroupsNamespaces:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceSummaryList'
             - description: The list of the selected rule groups namespaces.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Pagination token to use when requesting the next page in this list.
       description: Represents the output of a ListRuleGroupsNamespaces operation.
     ListTagsForResourceResponse:
       type: object
@@ -1787,14 +1787,14 @@ components:
       required:
         - workspaces
       properties:
-        nextToken:
-          allOf:
-            - $ref: '#/components/schemas/PaginationToken'
-            - description: Pagination token to use when requesting the next page in this list.
         workspaces:
           allOf:
             - $ref: '#/components/schemas/WorkspaceSummaryList'
             - description: 'The list of existing workspaces, including those undergoing creation or deletion.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: Pagination token to use when requesting the next page in this list.
       description: Represents the output of a ListWorkspaces operation.
     PutAlertManagerDefinitionResponse:
       type: object
@@ -1809,18 +1809,18 @@ components:
     PutRuleGroupsNamespaceResponse:
       type: object
       required:
-        - arn
         - name
+        - arn
         - status
       properties:
-        arn:
-          allOf:
-            - $ref: '#/components/schemas/RuleGroupsNamespaceArn'
-            - description: The Amazon Resource Name (ARN) of this rule groups namespace.
         name:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceName'
             - description: The rule groups namespace name.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/RuleGroupsNamespaceArn'
+            - description: The Amazon Resource Name (ARN) of this rule groups namespace.
         status:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceStatus'
@@ -1838,7 +1838,7 @@ components:
       properties: {}
     TagKey:
       type: string
-      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      pattern: '([\p{L}\p{Z}\p{N}_.:/=+\-@]*)'
       minLength: 1
       maxLength: 128
     UpdateLoggingConfigurationResponse:
@@ -1854,9 +1854,6 @@ components:
     AlertManagerDefinitionData:
       type: string
       description: The alert manager definition data.
-    Timestamp:
-      type: string
-      format: date-time
     AlertManagerDefinitionStatus:
       type: object
       required:
@@ -1871,30 +1868,33 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The reason for failure if any.
       description: Represents the status of a definition.
+    Timestamp:
+      type: string
+      format: date-time
     AlertManagerDefinitionDescription:
       type: object
       required:
-        - createdAt
-        - data
-        - modifiedAt
         - status
+        - data
+        - createdAt
+        - modifiedAt
       properties:
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the alert manager definition was created.
-        data:
-          allOf:
-            - $ref: '#/components/schemas/AlertManagerDefinitionData'
-            - description: The alert manager definition.
-        modifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the alert manager definition was modified.
         status:
           allOf:
             - $ref: '#/components/schemas/AlertManagerDefinitionStatus'
             - description: The status of alert manager definition.
+        data:
+          allOf:
+            - $ref: '#/components/schemas/AlertManagerDefinitionData'
+            - description: The alert manager definition.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the alert manager definition was created.
+        modifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the alert manager definition was modified.
       description: Represents the properties of an alert manager definition.
     AlertManagerDefinitionStatusCode:
       type: string
@@ -1908,16 +1908,16 @@ components:
       description: State of an alert manager definition.
     String:
       type: string
+    WorkspaceId:
+      type: string
+      pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
+      description: A workspace ID.
+      minLength: 1
+      maxLength: 64
     IdempotencyToken:
       type: string
       pattern: '[!-~]+'
       description: An identifier used to ensure the idempotency of a write request.
-      minLength: 1
-      maxLength: 64
-    WorkspaceId:
-      type: string
-      pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
-      description: A workspace ID.
       minLength: 1
       maxLength: 64
     CreateAlertManagerDefinitionRequest:
@@ -1926,32 +1926,32 @@ components:
         - data
       title: CreateAlertManagerDefinitionRequest
       properties:
-        clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
         data:
           allOf:
             - $ref: '#/components/schemas/AlertManagerDefinitionData'
             - description: The alert manager definition data.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
       description: Represents the input of a CreateAlertManagerDefinition operation.
     LogGroupArn:
       type: string
-      pattern: '^arn:aws[a-z0-9-]*:logs:[a-z0-9-]+:\d{12}:log-group:[A-Za-z0-9\.\-\_\#/]{1,512}\:\*$'
+      pattern: 'arn:aws[a-z0-9-]*:logs:[a-z0-9-]+:\d{12}:log-group:[A-Za-z0-9\.\-\_\#/]{1,512}\:\*'
     CreateLoggingConfigurationRequest:
       type: object
       required:
         - logGroupArn
       title: CreateLoggingConfigurationRequest
       properties:
-        clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
         logGroupArn:
           allOf:
             - $ref: '#/components/schemas/LogGroupArn'
             - description: The ARN of the CW log group to which the vended log data will be published.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
       description: Represents the input of a CreateLoggingConfiguration operation.
     LoggingConfigurationStatus:
       type: object
@@ -1967,15 +1967,15 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The reason for failure if any.
       description: Represents the status of a logging configuration.
-    RuleGroupsNamespaceData:
-      type: string
-      description: The rule groups namespace data.
     RuleGroupsNamespaceName:
       type: string
-      pattern: '[0-9A-Za-z][-.0-9A-Z_a-z]*'
+      pattern: '.*[0-9A-Za-z][-.0-9A-Z_a-z]*.*'
       description: The namespace name that the rule group belong to.
       minLength: 1
       maxLength: 64
+    RuleGroupsNamespaceData:
+      type: string
+      description: The rule groups namespace data.
     TagMap:
       type: object
       description: The list of tags assigned to the resource.
@@ -1986,22 +1986,22 @@ components:
     CreateRuleGroupsNamespaceRequest:
       type: object
       required:
-        - data
         - name
+        - data
       title: CreateRuleGroupsNamespaceRequest
       properties:
-        clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
-        data:
-          allOf:
-            - $ref: '#/components/schemas/RuleGroupsNamespaceData'
-            - description: The namespace data that define the rule groups.
         name:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceName'
             - description: The rule groups namespace name.
+        data:
+          allOf:
+            - $ref: '#/components/schemas/RuleGroupsNamespaceData'
+            - description: The namespace data that define the rule groups.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -2092,24 +2092,12 @@ components:
     LoggingConfigurationMetadata:
       type: object
       required:
-        - createdAt
-        - logGroupArn
-        - modifiedAt
         - status
         - workspace
+        - logGroupArn
+        - createdAt
+        - modifiedAt
       properties:
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the logging configuration was created.
-        logGroupArn:
-          allOf:
-            - $ref: '#/components/schemas/LogGroupArn'
-            - description: The ARN of the CW log group to which the vended log data will be published.
-        modifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the logging configuration was modified.
         status:
           allOf:
             - $ref: '#/components/schemas/LoggingConfigurationStatus'
@@ -2118,6 +2106,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceId'
             - description: The workspace where the logging configuration exists.
+        logGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupArn'
+            - description: The ARN of the CW log group to which the vended log data will be published.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the logging configuration was created.
+        modifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the logging configuration was modified.
       description: Represents the properties of a logging configuration metadata.
     DescribeRuleGroupsNamespaceRequest:
       type: object
@@ -2128,28 +2128,16 @@ components:
       type: object
       required:
         - arn
-        - createdAt
-        - data
-        - modifiedAt
         - name
         - status
+        - data
+        - createdAt
+        - modifiedAt
       properties:
         arn:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceArn'
             - description: The Amazon Resource Name (ARN) of this rule groups namespace.
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the rule groups namespace was created.
-        data:
-          allOf:
-            - $ref: '#/components/schemas/RuleGroupsNamespaceData'
-            - description: The rule groups namespace data.
-        modifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the rule groups namespace was modified.
         name:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceName'
@@ -2158,6 +2146,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceStatus'
             - description: The status of rule groups namespace.
+        data:
+          allOf:
+            - $ref: '#/components/schemas/RuleGroupsNamespaceData'
+            - description: The rule groups namespace data.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the rule groups namespace was created.
+        modifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the rule groups namespace was modified.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -2171,11 +2171,15 @@ components:
     WorkspaceDescription:
       type: object
       required:
-        - arn
-        - createdAt
-        - status
         - workspaceId
+        - arn
+        - status
+        - createdAt
       properties:
+        workspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: Unique string identifying this workspace.
         alias:
           allOf:
             - $ref: '#/components/schemas/WorkspaceAlias'
@@ -2184,34 +2188,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceArn'
             - description: The Amazon Resource Name (ARN) of this workspace.
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the workspace was created.
-        prometheusEndpoint:
-          allOf:
-            - $ref: '#/components/schemas/Uri'
-            - description: Prometheus endpoint URI.
         status:
           allOf:
             - $ref: '#/components/schemas/WorkspaceStatus'
             - description: The status of this workspace.
+        prometheusEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: Prometheus endpoint URI.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the workspace was created.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of this workspace.
-        workspaceId:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceId'
-            - description: Unique string identifying this workspace.
       description: Represents the properties of a workspace.
+    PaginationToken:
+      type: string
+      description: A token used to access the next page in a paginated result set.
     ListRuleGroupsNamespacesRequestMaxResultsInteger:
       type: integer
       minimum: 1
       maximum: 1000
-    PaginationToken:
-      type: string
-      description: A token used to access the next page in a paginated result set.
     ListRuleGroupsNamespacesRequest:
       type: object
       title: ListRuleGroupsNamespacesRequest
@@ -2256,14 +2256,14 @@ components:
         - data
       title: PutAlertManagerDefinitionRequest
       properties:
-        clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
         data:
           allOf:
             - $ref: '#/components/schemas/AlertManagerDefinitionData'
             - description: The alert manager definition data.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
       description: Represents the input of a PutAlertManagerDefinition operation.
     PutRuleGroupsNamespaceRequest:
       type: object
@@ -2271,14 +2271,14 @@ components:
         - data
       title: PutRuleGroupsNamespaceRequest
       properties:
-        clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
         data:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceData'
             - description: The namespace data that define the rule groups.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
       description: Represents the input of a PutRuleGroupsNamespace operation.
     RuleGroupsNamespaceStatusCode:
       type: string
@@ -2294,23 +2294,15 @@ components:
       type: object
       required:
         - arn
-        - createdAt
-        - modifiedAt
         - name
         - status
+        - createdAt
+        - modifiedAt
       properties:
         arn:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceArn'
             - description: The Amazon Resource Name (ARN) of this rule groups namespace.
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the rule groups namespace was created.
-        modifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the rule groups namespace was modified.
         name:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceName'
@@ -2319,6 +2311,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/RuleGroupsNamespaceStatus'
             - description: The status of rule groups namespace.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the rule groups namespace was created.
+        modifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the rule groups namespace was modified.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -2346,14 +2346,14 @@ components:
         - logGroupArn
       title: UpdateLoggingConfigurationRequest
       properties:
-        clientToken:
-          allOf:
-            - $ref: '#/components/schemas/IdempotencyToken'
-            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
         logGroupArn:
           allOf:
             - $ref: '#/components/schemas/LogGroupArn'
             - description: The ARN of the CW log group to which the vended log data will be published.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.'
       description: Represents the input of an UpdateLoggingConfiguration operation.
     UpdateWorkspaceAliasRequest:
       type: object
@@ -2384,11 +2384,15 @@ components:
     WorkspaceSummary:
       type: object
       required:
-        - arn
-        - createdAt
-        - status
         - workspaceId
+        - arn
+        - status
+        - createdAt
       properties:
+        workspaceId:
+          allOf:
+            - $ref: '#/components/schemas/WorkspaceId'
+            - description: Unique string identifying this workspace.
         alias:
           allOf:
             - $ref: '#/components/schemas/WorkspaceAlias'
@@ -2397,22 +2401,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkspaceArn'
             - description: The AmazonResourceName of this workspace.
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/Timestamp'
-            - description: The time when the workspace was created.
         status:
           allOf:
             - $ref: '#/components/schemas/WorkspaceStatus'
             - description: The status of this workspace.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the workspace was created.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of this workspace.
-        workspaceId:
-          allOf:
-            - $ref: '#/components/schemas/WorkspaceId'
-            - description: Unique string identifying this workspace.
       description: Represents a summary of the properties of a workspace.
 security:
   - hmac: []

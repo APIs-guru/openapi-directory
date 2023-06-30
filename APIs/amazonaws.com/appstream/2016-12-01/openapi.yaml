@@ -115,6 +115,69 @@ servers:
     description: The Amazon AppStream endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=PhotonAdminProxyService.AssociateAppBlockBuilderAppBlock:
+    post:
+      operationId: AssociateAppBlockBuilderAppBlock
+      description: Associates the specified app block builder with the specified app block.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateAppBlockBuilderAppBlockResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '484':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateAppBlockBuilderAppBlockRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.AssociateAppBlockBuilderAppBlock
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.AssociateApplicationFleet:
     post:
       operationId: AssociateApplicationFleet
@@ -518,6 +581,144 @@ paths:
             type: string
             enum:
               - PhotonAdminProxyService.CreateAppBlock
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.CreateAppBlockBuilder:
+    post:
+      operationId: CreateAppBlockBuilder
+      description: Creates an app block builder.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppBlockBuilderResult'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: RequestLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceededException'
+        '482':
+          description: InvalidAccountStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccountStatusException'
+        '483':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '485':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '486':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '487':
+          description: ResourceNotAvailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotAvailableException'
+        '488':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '489':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppBlockBuilderRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.CreateAppBlockBuilder
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.CreateAppBlockBuilderStreamingURL:
+    post:
+      operationId: CreateAppBlockBuilderStreamingURL
+      description: Creates a URL to start a create app block builder streaming session.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppBlockBuilderStreamingURLResult'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppBlockBuilderStreamingURLRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.CreateAppBlockBuilderStreamingURL
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1330,6 +1531,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DeleteAppBlockBuilder:
+    post:
+      operationId: DeleteAppBlockBuilder
+      description: <p>Deletes an app block builder.</p> <p>An app block builder can only be deleted when it has no association with an app block.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAppBlockBuilderResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAppBlockBuilderRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DeleteAppBlockBuilder
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.DeleteApplication:
     post:
       operationId: DeleteApplication
@@ -1832,6 +2090,120 @@ paths:
             type: string
             enum:
               - PhotonAdminProxyService.DeleteUser
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeAppBlockBuilderAppBlockAssociations:
+    post:
+      operationId: DescribeAppBlockBuilderAppBlockAssociations
+      description: Retrieves a list that describes one or more app block builder associations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppBlockBuilderAppBlockAssociationsResult'
+        '480':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '481':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAppBlockBuilderAppBlockAssociationsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DescribeAppBlockBuilderAppBlockAssociations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DescribeAppBlockBuilders:
+    post:
+      operationId: DescribeAppBlockBuilders
+      description: Retrieves a list that describes one or more app block builders.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppBlockBuildersResult'
+        '480':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAppBlockBuildersRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DescribeAppBlockBuilders
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2509,6 +2881,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.DisassociateAppBlockBuilderAppBlock:
+    post:
+      operationId: DisassociateAppBlockBuilderAppBlock
+      description: Disassociates a specified app block builder from a specified app block.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateAppBlockBuilderAppBlockResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '482':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateAppBlockBuilderAppBlockRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.DisassociateAppBlockBuilderAppBlock
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.DisassociateApplicationFleet:
     post:
       operationId: DisassociateApplicationFleet
@@ -2908,6 +3337,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.StartAppBlockBuilder:
+    post:
+      operationId: StartAppBlockBuilder
+      description: '<p>Starts an app block builder.</p> <p>An app block builder can only be started when it''s associated with an app block.</p> <p>Starting an app block builder starts a new instance, which is equivalent to an elastic fleet instance with application builder assistance functionality.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartAppBlockBuilderResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InvalidAccountStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccountStatusException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '484':
+          description: RequestLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceededException'
+        '485':
+          description: ResourceNotAvailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotAvailableException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartAppBlockBuilderRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.StartAppBlockBuilder
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=PhotonAdminProxyService.StartFleet:
     post:
       operationId: StartFleet
@@ -3044,6 +3548,57 @@ paths:
             type: string
             enum:
               - PhotonAdminProxyService.StartImageBuilder
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.StopAppBlockBuilder:
+    post:
+      operationId: StopAppBlockBuilder
+      description: '<p>Stops an app block builder.</p> <p>Stopping an app block builder terminates the instance, and the instance state is not persisted.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopAppBlockBuilderResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopAppBlockBuilderRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.StopAppBlockBuilder
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3230,6 +3785,99 @@ paths:
             type: string
             enum:
               - PhotonAdminProxyService.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=PhotonAdminProxyService.UpdateAppBlockBuilder:
+    post:
+      operationId: UpdateAppBlockBuilder
+      description: '<p>Updates an app block builder.</p> <p>If the app block builder is in the <code>STARTING</code> or <code>STOPPING</code> state, you can''t update it. If the app block builder is in the <code>RUNNING</code> state, you can only update the DisplayName and Description. If the app block builder is in the <code>STOPPED</code> state, you can update any attribute except the Name.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAppBlockBuilderResult'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InvalidAccountStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccountStatusException'
+        '482':
+          description: InvalidParameterCombinationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterCombinationException'
+        '483':
+          description: InvalidRoleException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRoleException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: OperationNotPermittedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotPermittedException'
+        '486':
+          description: RequestLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceededException'
+        '487':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '488':
+          description: ResourceNotAvailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotAvailableException'
+        '489':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppBlockBuilderRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - PhotonAdminProxyService.UpdateAppBlockBuilder
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3698,6 +4346,33 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AssociateAppBlockBuilderAppBlockResult:
+      type: object
+      properties:
+        AppBlockBuilderAppBlockAssociation:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderAppBlockAssociation'
+            - description: The list of app block builders associated with app blocks.
+    AssociateAppBlockBuilderAppBlockRequest:
+      type: object
+      required:
+        - AppBlockArn
+        - AppBlockBuilderName
+      title: AssociateAppBlockBuilderAppBlockRequest
+      properties:
+        AppBlockArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the app block.
+        AppBlockBuilderName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block builder.
+    ConcurrentModificationException: {}
+    LimitExceededException: {}
+    ResourceNotFoundException: {}
+    InvalidParameterCombinationException: {}
+    OperationNotPermittedException: {}
     AssociateApplicationFleetResult:
       type: object
       properties:
@@ -3720,11 +4395,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The ARN of the application.
-    ConcurrentModificationException: {}
-    LimitExceededException: {}
-    ResourceNotFoundException: {}
-    InvalidParameterCombinationException: {}
-    OperationNotPermittedException: {}
     AssociateApplicationToEntitlementResult:
       type: object
       properties: {}
@@ -3848,7 +4518,6 @@ components:
       required:
         - Name
         - SourceS3Location
-        - SetupScriptDetails
       title: CreateAppBlockRequest
       properties:
         Name:
@@ -3870,11 +4539,100 @@ components:
         SetupScriptDetails:
           allOf:
             - $ref: '#/components/schemas/ScriptDetails'
-            - description: The setup script details of the app block.
+            - description: The setup script details of the app block. This must be provided for the <code>CUSTOM</code> PackagingType.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: The tags assigned to the app block.
+        PostSetupScriptDetails:
+          allOf:
+            - $ref: '#/components/schemas/ScriptDetails'
+            - description: The post setup script details of the app block. This can only be provided for the <code>APPSTREAM2</code> PackagingType.
+        PackagingType:
+          allOf:
+            - $ref: '#/components/schemas/PackagingType'
+            - description: The packaging type of the app block.
+    CreateAppBlockBuilderResult:
+      type: object
+      properties:
+        AppBlockBuilder:
+          $ref: '#/components/schemas/AppBlockBuilder'
+    CreateAppBlockBuilderRequest:
+      type: object
+      required:
+        - Name
+        - Platform
+        - InstanceType
+        - VpcConfig
+      title: CreateAppBlockBuilderRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The unique name for the app block builder.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the app block builder.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the app block builder.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/Tags'
+            - description: '<p>The tags to associate with the app block builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \ - @</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+        Platform:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderPlatformType'
+            - description: <p>The platform of the app block builder.</p> <p> <code>WINDOWS_SERVER_2019</code> is the only valid value.</p>
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The instance type to use when launching the app block builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>'
+        VpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - description: <p>The VPC configuration for the app block builder.</p> <p>App block builders require that you specify at least two subnets in different availability zones.</p>
+        EnableDefaultInternetAccess:
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Enables or disables default internet access for the app block builder.
+        IamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To assume a role, the app block builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+        AccessEndpoints:
+          allOf:
+            - $ref: '#/components/schemas/AccessEndpointList'
+            - description: The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+    RequestLimitExceededException: {}
+    InvalidRoleException: {}
+    CreateAppBlockBuilderStreamingURLResult:
+      type: object
+      properties:
+        StreamingURL:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL to start the streaming session.
+        Expires:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The elapsed time, in seconds after the Unix epoch, when this URL expires.'
+    CreateAppBlockBuilderStreamingURLRequest:
+      type: object
+      required:
+        - AppBlockBuilderName
+      title: CreateAppBlockBuilderStreamingURLRequest
+      properties:
+        AppBlockBuilderName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block builder.
+        Validity:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The time that the streaming URL will be valid, in seconds. Specify a value between 1 and 604800 seconds. The default is 3600 seconds.'
     CreateApplicationResult:
       type: object
       properties:
@@ -3965,7 +4723,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/CertificateBasedAuthProperties'
             - description: 'The certificate-based authentication properties used to authenticate SAML 2.0 Identity Provider (IdP) user identities to Active Directory domain-joined streaming instances. Fallback is turned on by default when certificate-based authentication is <b>Enabled</b> . Fallback allows users to log in using their AD domain password if certificate-based authentication is unsuccessful, or to unlock a desktop lock screen. <b>Enabled_no_directory_login_fallback</b> enables certificate-based authentication, but does not allow users to log in using their AD domain password. Users will be disconnected to re-authenticate using certificates.'
-    InvalidRoleException: {}
     CreateEntitlementResult:
       type: object
       properties:
@@ -4023,7 +4780,7 @@ components:
             - description: A unique name for the fleet.
         ImageName:
           allOf:
-            - $ref: '#/components/schemas/String'
+            - $ref: '#/components/schemas/Name'
             - description: The name of the image used to create the fleet.
         ImageArn:
           allOf:
@@ -4101,7 +4858,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Location'
             - description: The S3 location of the session scripts configuration zip file. This only applies to Elastic fleets.
-    RequestLimitExceededException: {}
     CreateImageBuilderResult:
       type: object
       properties:
@@ -4396,6 +5152,19 @@ components:
             - $ref: '#/components/schemas/Name'
             - description: The name of the app block.
     ResourceInUseException: {}
+    DeleteAppBlockBuilderResult:
+      type: object
+      properties: {}
+    DeleteAppBlockBuilderRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteAppBlockBuilderRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block builder.
     DeleteApplicationResult:
       type: object
       properties: {}
@@ -4543,6 +5312,64 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthenticationType'
             - description: The authentication type for the user. You must specify USERPOOL.
+    DescribeAppBlockBuilderAppBlockAssociationsResult:
+      type: object
+      properties:
+        AppBlockBuilderAppBlockAssociations:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderAppBlockAssociationsList'
+            - description: This list of app block builders associated with app blocks.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    DescribeAppBlockBuilderAppBlockAssociationsRequest:
+      type: object
+      title: DescribeAppBlockBuilderAppBlockAssociationsRequest
+      properties:
+        AppBlockArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the app block.
+        AppBlockBuilderName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block builder.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum size of each page of results.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    DescribeAppBlockBuildersResult:
+      type: object
+      properties:
+        AppBlockBuilders:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderList'
+            - description: The list that describes one or more app block builders.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+    DescribeAppBlockBuildersRequest:
+      type: object
+      title: DescribeAppBlockBuildersRequest
+      properties:
+        Names:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The names of the app block builders.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token used to retrieve the next page of results for this operation.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum size of each page of results. The maximum value is 25.
     DescribeAppBlocksResult:
       type: object
       properties:
@@ -4980,6 +5807,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthenticationType'
             - description: The authentication type for the user. You must specify USERPOOL.
+    DisassociateAppBlockBuilderAppBlockResult:
+      type: object
+      properties: {}
+    DisassociateAppBlockBuilderAppBlockRequest:
+      type: object
+      required:
+        - AppBlockArn
+        - AppBlockBuilderName
+      title: DisassociateAppBlockBuilderAppBlockRequest
+      properties:
+        AppBlockArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the app block.
+        AppBlockBuilderName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block builder.
     DisassociateApplicationFleetResult:
       type: object
       properties: {}
@@ -5171,6 +6016,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the resource.
+    StartAppBlockBuilderResult:
+      type: object
+      properties:
+        AppBlockBuilder:
+          $ref: '#/components/schemas/AppBlockBuilder'
+    StartAppBlockBuilderRequest:
+      type: object
+      required:
+        - Name
+      title: StartAppBlockBuilderRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block builder.
     StartFleetResult:
       type: object
       properties: {}
@@ -5205,6 +6065,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppstreamAgentVersion'
             - description: 'The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. '
+    StopAppBlockBuilderResult:
+      type: object
+      properties:
+        AppBlockBuilder:
+          $ref: '#/components/schemas/AppBlockBuilder'
+    StopAppBlockBuilderRequest:
+      type: object
+      required:
+        - Name
+      title: StopAppBlockBuilderRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block builder.
     StopFleetResult:
       type: object
       properties: {}
@@ -5271,6 +6146,57 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tag keys for the tags to disassociate.
+    UpdateAppBlockBuilderResult:
+      type: object
+      properties:
+        AppBlockBuilder:
+          $ref: '#/components/schemas/AppBlockBuilder'
+    UpdateAppBlockBuilderRequest:
+      type: object
+      required:
+        - Name
+      title: UpdateAppBlockBuilderRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The unique name for the app block builder.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the app block builder.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The display name of the app block builder.
+        Platform:
+          allOf:
+            - $ref: '#/components/schemas/PlatformType'
+            - description: <p>The platform of the app block builder.</p> <p> <code>WINDOWS_SERVER_2019</code> is the only valid value.</p>
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The instance type to use when launching the app block builder. The following instance types are available:</p> <ul> <li> <p>stream.standard.small</p> </li> <li> <p>stream.standard.medium</p> </li> <li> <p>stream.standard.large</p> </li> <li> <p>stream.standard.xlarge</p> </li> <li> <p>stream.standard.2xlarge</p> </li> </ul>'
+        VpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - description: <p>The VPC configuration for the app block builder.</p> <p>App block builders require that you specify at least two subnets in different availability zones.</p>
+        EnableDefaultInternetAccess:
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Enables or disables default internet access for the app block builder.
+        IamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To assume a role, the app block builder calls the AWS Security Token Service (STS) <code>AssumeRole</code> API operation and passes the ARN of the role to use. The operation creates a new session with temporary credentials. AppStream 2.0 retrieves the temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>'
+        AccessEndpoints:
+          allOf:
+            - $ref: '#/components/schemas/AccessEndpointList'
+            - description: The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+        AttributesToDelete:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderAttributes'
+            - description: The attributes to delete from the app block builder.
     UpdateApplicationResult:
       type: object
       properties:
@@ -5419,7 +6345,7 @@ components:
         MaxUserDurationInSeconds:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: '<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.</p> <p>Specify a value between 600 and 360000.</p>'
+            - description: '<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.</p> <p>Specify a value between 600 and 432000.</p>'
         DisconnectTimeoutInSeconds:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -5619,7 +6545,6 @@ components:
       type: object
       required:
         - S3Bucket
-        - S3Key
       properties:
         S3Bucket:
           allOf:
@@ -5628,7 +6553,7 @@ components:
         S3Key:
           allOf:
             - $ref: '#/components/schemas/S3Key'
-            - description: The S3 key of the S3 object.
+            - description: '<p>The S3 key of the S3 object.</p> <p>This is required when used for the following:</p> <ul> <li> <p>IconS3Location (Actions: CreateApplication and UpdateApplication)</p> </li> <li> <p>SessionScriptS3Location (Actions: CreateFleet and UpdateFleet)</p> </li> <li> <p>ScriptDetails (Actions: CreateAppBlock)</p> </li> <li> <p>SourceS3Location when creating an app block with <code>CUSTOM</code> PackagingType (Actions: CreateAppBlock)</p> </li> <li> <p>SourceS3Location when creating an app block with <code>APPSTREAM2</code> PackagingType, and using an existing application package (VHD file). In this case, <code>S3Key</code> refers to the VHD file. If a new application package is required, then <code>S3Key</code> is not required. (Actions: CreateAppBlock)</p> </li> </ul>'
       description: Describes the S3 location.
     ScriptDetails:
       type: object
@@ -5657,12 +6582,25 @@ components:
     Timestamp:
       type: string
       format: date-time
+    PackagingType:
+      type: string
+      enum:
+        - CUSTOM
+        - APPSTREAM2
+    AppBlockState:
+      type: string
+      enum:
+        - INACTIVE
+        - ACTIVE
+    ErrorDetailsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ErrorDetails'
     AppBlock:
       type: object
       required:
         - Name
         - Arn
-        - SetupScriptDetails
       properties:
         Name:
           allOf:
@@ -5687,12 +6625,178 @@ components:
         SetupScriptDetails:
           allOf:
             - $ref: '#/components/schemas/ScriptDetails'
-            - description: The setup script details of the app block.
+            - description: <p>The setup script details of the app block.</p> <p>This only applies to app blocks with PackagingType <code>CUSTOM</code>.</p>
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The created time of the app block.
+        PostSetupScriptDetails:
+          allOf:
+            - $ref: '#/components/schemas/ScriptDetails'
+            - description: <p>The post setup script details of the app block.</p> <p>This only applies to app blocks with PackagingType <code>APPSTREAM2</code>.</p>
+        PackagingType:
+          allOf:
+            - $ref: '#/components/schemas/PackagingType'
+            - description: The packaging type of the app block.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockState'
+            - description: '<p>The state of the app block.</p> <p>An app block with AppStream 2.0 packaging will be in the <code>INACTIVE</code> state if no application package (VHD) is assigned to it. After an application package (VHD) is created by an app block builder for an app block, it becomes <code>ACTIVE</code>. </p> <p>Custom app blocks are always in the <code>ACTIVE</code> state and no action is required to use them.</p>'
+        AppBlockErrors:
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetailsList'
+            - description: The errors of the app block.
       description: <p>Describes an app block.</p> <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the virtual hard disk in an S3 bucket. It also stores the setup script with details about how to mount the virtual hard disk. The virtual hard disk includes the application binaries and other files necessary to launch your applications. Multiple applications can be assigned to a single app block.</p> <p>This is only supported for Elastic fleets.</p>
+    AppBlockBuilderPlatformType:
+      type: string
+      enum:
+        - WINDOWS_SERVER_2019
+    BooleanObject:
+      type: boolean
+    VpcConfig:
+      type: object
+      properties:
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: The identifiers of the subnets to which a network interface is attached from the fleet instance or image builder instance. Fleet instances use one or more subnets. Image builder instances use one subnet.
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIdList'
+            - description: The identifiers of the security groups for the fleet or image builder.
+      description: Describes VPC configuration information for fleets and image builders.
+    AppBlockBuilderState:
+      type: string
+      enum:
+        - STARTING
+        - RUNNING
+        - STOPPING
+        - STOPPED
+    ResourceErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceError'
+    AppBlockBuilderStateChangeReason:
+      type: object
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderStateChangeReasonCode'
+            - description: The state change reason code.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The state change reason message.
+      description: Describes the reason why the last app block builder state change occurred.
+    AppBlockBuilder:
+      type: object
+      required:
+        - Arn
+        - Name
+        - Platform
+        - InstanceType
+        - VpcConfig
+        - State
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the app block builder.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the app block builder.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The display name of the app block builder.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the app block builder.
+        Platform:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderPlatformType'
+            - description: <p>The platform of the app block builder.</p> <p> <code>WINDOWS_SERVER_2019</code> is the only valid value.</p>
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The instance type of the app block builder.
+        EnableDefaultInternetAccess:
+          allOf:
+            - $ref: '#/components/schemas/BooleanObject'
+            - description: Indicates whether default internet access is enabled for the app block builder.
+        IamRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the IAM role that is applied to the app block builder.
+        VpcConfig:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfig'
+            - description: The VPC configuration for the app block builder.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderState'
+            - description: The state of the app block builder.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The creation time of the app block builder.
+        AppBlockBuilderErrors:
+          allOf:
+            - $ref: '#/components/schemas/ResourceErrors'
+            - description: The app block builder errors.
+        StateChangeReason:
+          allOf:
+            - $ref: '#/components/schemas/AppBlockBuilderStateChangeReason'
+            - description: The state change reason.
+        AccessEndpoints:
+          allOf:
+            - $ref: '#/components/schemas/AccessEndpointList'
+            - description: The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.
+      description: Describes an app block builder.
+    Name:
+      type: string
+      pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$'
+    AppBlockBuilderAppBlockAssociation:
+      type: object
+      required:
+        - AppBlockArn
+        - AppBlockBuilderName
+      properties:
+        AppBlockArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the app block.
+        AppBlockBuilderName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the app block builder.
+      description: Describes an association between an app block builder and app block.
+    AppBlockBuilderAppBlockAssociationsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppBlockBuilderAppBlockAssociation'
+      minItems: 1
+      maxItems: 25
+    AppBlockBuilderAttribute:
+      type: string
+      enum:
+        - IAM_ROLE_ARN
+        - ACCESS_ENDPOINTS
+        - VPC_CONFIGURATION_SECURITY_GROUP_IDS
+    AppBlockBuilderAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppBlockBuilderAttribute'
+    AppBlockBuilderList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppBlockBuilder'
+    AppBlockBuilderStateChangeReasonCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
     AppBlocks:
       type: array
       items:
@@ -5857,9 +6961,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Arn'
-    Name:
-      type: string
-      pattern: '^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,100}$'
     AuthenticationType:
       type: string
       enum:
@@ -5886,8 +6987,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UserStackAssociationError'
-    BooleanObject:
-      type: boolean
     CertificateBasedAuthStatus:
       type: string
       enum:
@@ -5956,6 +7055,8 @@ components:
       maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
+    Long:
+      type: integer
     DirectoryName:
       type: string
     OrganizationalUnitDistinguishedNamesList:
@@ -6051,18 +7152,6 @@ components:
         - ALWAYS_ON
         - ON_DEMAND
         - ELASTIC
-    VpcConfig:
-      type: object
-      properties:
-        SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIdList'
-            - description: The identifiers of the subnets to which a network interface is attached from the fleet instance or image builder instance. Fleet instances use one or more subnets. Image builder instances use one subnet.
-        SecurityGroupIds:
-          allOf:
-            - $ref: '#/components/schemas/SecurityGroupIdList'
-            - description: The identifiers of the security groups for the fleet or image builder.
-      description: Describes VPC configuration information for fleets and image builders.
     DomainJoinInfo:
       type: object
       properties:
@@ -6273,8 +7362,6 @@ components:
             - $ref: '#/components/schemas/AccessEndpointList'
             - description: The list of virtual private cloud (VPC) interface endpoint objects. Administrators can connect to the image builder only through the specified endpoints.
       description: 'Describes a virtual machine that is used to create an image. '
-    Long:
-      type: integer
     StorageConnectorList:
       type: array
       description: The storage connectors.
@@ -6578,6 +7665,18 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'A value that is matched to a supported SAML attribute name when a user identity federates into an Amazon AppStream 2.0 SAML application. '
       description: An attribute associated with an entitlement. Application entitlements work by matching a supported SAML 2.0 attribute name to a value when a user identity federates to an Amazon AppStream 2.0 SAML application.
+    ErrorDetails:
+      type: object
+      properties:
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error code.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
+      description: The error details.
     FleetState:
       type: string
       enum:
@@ -6683,10 +7782,6 @@ components:
             - $ref: '#/components/schemas/BooleanObject'
             - description: Indicates whether the image can be used for an image builder.
       description: 'Describes the permissions for an image. '
-    ResourceErrors:
-      type: array
-      items:
-        $ref: '#/components/schemas/ResourceError'
     ImageBuilderState:
       type: string
       enum:

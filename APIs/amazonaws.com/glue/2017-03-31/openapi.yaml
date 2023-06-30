@@ -23507,6 +23507,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeltaTargetList'
             - description: Specifies Delta data store targets.
+        IcebergTargets:
+          allOf:
+            - $ref: '#/components/schemas/IcebergTargetList'
+            - description: Specifies Apache Iceberg data store targets.
       description: Specifies data stores to crawl.
     DatabaseName:
       type: string
@@ -23830,6 +23834,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DeltaTarget'
+    IcebergTargetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IcebergTarget'
     FieldName:
       type: string
       enum:
@@ -26597,6 +26605,26 @@ components:
         - lzo
         - uncompressed
         - snappy
+    IcebergTarget:
+      type: object
+      properties:
+        Paths:
+          allOf:
+            - $ref: '#/components/schemas/PathList'
+            - description: 'One or more Amazon S3 paths that contains Iceberg metadata folders as <code>s3://bucket/prefix</code>.'
+        ConnectionName:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionName'
+            - description: The name of the connection to use to connect to the Iceberg target.
+        Exclusions:
+          allOf:
+            - $ref: '#/components/schemas/PathList'
+            - description: 'A list of glob patterns used to exclude from the crawl. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html">Catalog Tables with a Crawler</a>.'
+        MaximumTraversalDepth:
+          allOf:
+            - $ref: '#/components/schemas/NullableInteger'
+            - description: The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler run time.
+      description: Specifies an Apache Iceberg data source where Iceberg tables are stored in Amazon S3.
     ReplaceBoolean:
       type: boolean
     ImportLabelsTaskRunProperties:
