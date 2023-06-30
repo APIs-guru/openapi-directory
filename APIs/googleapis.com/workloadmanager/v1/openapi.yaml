@@ -1089,6 +1089,7 @@ components:
       description: Message describing resource status
       properties:
         rulesNewerVersions:
+          deprecated: true
           description: "Historical: Used before 2023-05-22 the new version of rule id if exists"
           items:
             type: string
@@ -1281,14 +1282,23 @@ components:
             $ref: "#/components/schemas/SqlserverValidationValidationDetail"
           type: array
       type: object
-    SqlserverValidationValidationDetail:
-      description: Message describing the Sqlserver validation metrics.
+    SqlserverValidationDetails:
+      description: Message containing collected data names and values.
       properties:
         fields:
           additionalProperties:
             type: string
-          description: " pairs of metrics data: column name & column value."
+          description: Required. Collected data is in format.
           type: object
+      type: object
+    SqlserverValidationValidationDetail:
+      description: Message describing the Sqlserver validation metrics.
+      properties:
+        details:
+          description: Required. Details wraps map that represents collected data names and values.
+          items:
+            $ref: "#/components/schemas/SqlserverValidationDetails"
+          type: array
         type:
           description: The Sqlserver system that the validation data is from.
           enum:

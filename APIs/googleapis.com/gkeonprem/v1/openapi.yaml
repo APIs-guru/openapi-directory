@@ -2676,39 +2676,6 @@ components:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
       type: object
-    Metric:
-      description: Progress metric is (string, int|float|string) pair.
-      properties:
-        doubleValue:
-          description: For metrics with floating point value.
-          format: double
-          type: number
-        intValue:
-          description: For metrics with integer value.
-          format: int64
-          type: string
-        metric:
-          description: Required. The metric name.
-          enum:
-            - METRIC_ID_UNSPECIFIED
-            - NODES_TOTAL
-            - NODES_DRAINING
-            - NODES_UPGRADING
-            - NODES_PENDING_UPGRADE
-            - NODES_UPGRADED
-            - NODES_FAILED
-            - NODES_HEALTHY
-            - NODES_RECONCILING
-            - NODES_IN_MAINTENANCE
-            - PREFLIGHTS_COMPLETED
-            - PREFLIGHTS_RUNNING
-            - PREFLIGHTS_FAILED
-            - PREFLIGHTS_TOTAL
-          type: string
-        stringValue:
-          description: For metrics with custom values (ratios, visual progress, etc.).
-          type: string
-      type: object
     NodeTaint:
       description: NodeTaint applied to every Kubernetes node in a node pool. Kubernetes taints can be used together with tolerations to control how workloads are scheduled to your nodes. Node taints are permanent.
       properties:
@@ -2771,10 +2738,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        progress:
-          $ref: "#/components/schemas/OperationProgress"
-          description: Output only. Detailed progress information for the operation.
-          readOnly: true
         requestedCancellation:
           description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have [Operation.error] value with a [google.rpc.Status.code] of 1, corresponding to `Code.CANCELLED`.
           readOnly: true
@@ -2799,52 +2762,6 @@ components:
           type: string
         verb:
           description: Output only. Name of the verb executed by the operation.
-          readOnly: true
-          type: string
-      type: object
-    OperationProgress:
-      description: Information about operation progress. LINT.IfChange
-      properties:
-        stages:
-          description: The stages of the operation.
-          items:
-            $ref: "#/components/schemas/OperationStage"
-          type: array
-      type: object
-    OperationStage:
-      description: Information about a particular stage of an operation.
-      properties:
-        endTime:
-          description: Time the stage ended.
-          format: google-datetime
-          type: string
-        metrics:
-          description: Progress metric bundle.
-          items:
-            $ref: "#/components/schemas/Metric"
-          type: array
-        stage:
-          description: The high-level stage of the operation.
-          enum:
-            - STAGE_UNSPECIFIED
-            - PREFLIGHT_CHECK
-            - CONFIGURE
-            - DEPLOY
-            - HEALTH_CHECK
-            - UPDATE
-          type: string
-        startTime:
-          description: Time the stage started.
-          format: google-datetime
-          type: string
-        state:
-          description: Output only. State of the stage.
-          enum:
-            - STATE_UNSPECIFIED
-            - PENDING
-            - RUNNING
-            - SUCCEEDED
-            - FAILED
           readOnly: true
           type: string
       type: object

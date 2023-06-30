@@ -1557,6 +1557,12 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - true
       type: object
     DeployArtifact:
       description: The artifacts produced by a deploy operation.
@@ -1872,6 +1878,12 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - true
       type: object
     KubernetesConfig:
       description: KubernetesConfig contains the Kubernetes runtime configuration.
@@ -2343,6 +2355,12 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - true
       type: object
     ReleaseReadyCondition:
       description: ReleaseReadyCondition contains information around the status of the Release. If a release is not ready, you cannot create a rollout with the release.
@@ -2526,6 +2544,12 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - true
       type: object
     RuntimeConfig:
       description: RuntimeConfig contains the runtime specific configurations for a deployment strategy.
@@ -2676,7 +2700,7 @@ components:
           type: object
         anthosCluster:
           $ref: "#/components/schemas/AnthosCluster"
-          description: Information specifying an Anthos Cluster.
+          description: Optional. Information specifying an Anthos Cluster.
         createTime:
           description: Output only. Time at which the `Target` was created.
           format: google-datetime
@@ -2700,7 +2724,7 @@ components:
           type: array
         gke:
           $ref: "#/components/schemas/GkeCluster"
-          description: Information specifying a GKE Cluster.
+          description: Optional. Information specifying a GKE Cluster.
         labels:
           additionalProperties:
             type: string
@@ -2708,7 +2732,7 @@ components:
           type: object
         multiTarget:
           $ref: "#/components/schemas/MultiTarget"
-          description: Information specifying a multiTarget.
+          description: Optional. Information specifying a multiTarget.
         name:
           description: Optional. Name of the `Target`. Format is projects/{project}/locations/{location}/targets/a-z{0,62}.
           type: string
@@ -2717,7 +2741,7 @@ components:
           type: boolean
         run:
           $ref: "#/components/schemas/CloudRunLocation"
-          description: Information specifying a Cloud Run deployment target.
+          description: Optional. Information specifying a Cloud Run deployment target.
         targetId:
           description: Output only. Resource id of the `Target`.
           readOnly: true
@@ -2772,6 +2796,12 @@ components:
             - TYPE_PROCESS_ABORTED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - true
       type: object
     TargetRender:
       description: Details of rendering for a single target.
