@@ -1085,6 +1085,14 @@ components:
             - PATTERN_SITEMAP
             - OCEANFRONT
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - true
         warnings:
           description: Number of warnings for the sitemap. These are generally non-critical issues with URLs in the sitemaps.
           format: int64
@@ -1094,6 +1102,7 @@ components:
       description: Information about the various content types in the sitemap.
       properties:
         indexed:
+          deprecated: true
           description: "*Deprecated; do not use.*"
           format: int64
           type: string
@@ -1114,6 +1123,16 @@ components:
             - IOS_APP
             - DATA_FEED_ELEMENT
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
       type: object
   securitySchemes:
     Oauth2:

@@ -189,6 +189,19 @@ components:
               - LOSS_OF_VOICE_OF_MERCHANT
               - VOICE_OF_MERCHANT_UPDATED
             type: string
+            x-enumDeprecated:
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - true
+              - false
           type: array
         pubsubTopic:
           description: Optional. The Google Pub/Sub topic that will receive notifications when locations managed by this account are updated. If unset, no notifications will be posted. The account mybusiness-api-pubsub@system.gserviceaccount.com must have at least Publish permissions on the Pub/Sub topic.

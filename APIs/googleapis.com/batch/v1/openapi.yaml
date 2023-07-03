@@ -515,6 +515,7 @@ components:
           format: int64
           type: string
         installGpuDrivers:
+          deprecated: true
           description: "Deprecated: please use instances[0].install_gpu_drivers instead."
           type: boolean
         type:
@@ -612,6 +613,7 @@ components:
       description: VM Agent Metadata.
       properties:
         creationTime:
+          deprecated: true
           description: When the VM agent started. Use agent_startup_time instead.
           format: google-datetime
           type: string
@@ -1538,6 +1540,7 @@ components:
         environments:
           additionalProperties:
             type: string
+          deprecated: true
           description: "Deprecated: please use environment(non-plural) instead."
           type: object
         lifecyclePolicies:

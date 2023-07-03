@@ -1794,13 +1794,75 @@ components:
           readOnly: true
           type: string
       type: object
+    FleetObservabilityFeatureError:
+      description: All error details of the fleet observability feature.
+      properties:
+        code:
+          description: The code of the error.
+          type: string
+        description:
+          description: A human-readable description of the current status.
+          type: string
+      type: object
     FleetObservabilityFeatureSpec:
       description: "**Fleet Observability**: The Hub-wide input for the FleetObservability feature."
-      properties: {}
+      properties:
+        loggingConfig:
+          $ref: "#/components/schemas/FleetObservabilityLoggingConfig"
+          description: Specified if fleet logging feature is enabled for the entire fleet. If UNSPECIFIED, fleet logging feature is disabled for the entire fleet.
       type: object
     FleetObservabilityFeatureState:
       description: "**FleetObservability**: Hub-wide Feature for FleetObservability feature. state."
-      properties: {}
+      properties:
+        logging:
+          $ref: "#/components/schemas/FleetObservabilityFleetObservabilityLoggingState"
+          description: The feature state of default logging.
+        monitoring:
+          $ref: "#/components/schemas/FleetObservabilityFleetObservabilityMonitoringState"
+          description: The feature state of fleet monitoring.
+      type: object
+    FleetObservabilityFleetObservabilityBaseFeatureState:
+      description: Base state for fleet observability feature.
+      properties:
+        code:
+          description: The high-level, machine-readable status of this Feature.
+          enum:
+            - CODE_UNSPECIFIED
+            - OK
+            - ERROR
+          type: string
+        errors:
+          description: Errors after reconciling the monitoring and logging feature if the code is not OK.
+          items:
+            $ref: "#/components/schemas/FleetObservabilityFeatureError"
+          type: array
+      type: object
+    FleetObservabilityFleetObservabilityLoggingState:
+      description: Feature state for logging feature.
+      properties:
+        defaultLog:
+          $ref: "#/components/schemas/FleetObservabilityFleetObservabilityBaseFeatureState"
+          description: The base feature state of fleet default log.
+        scopeLog:
+          $ref: "#/components/schemas/FleetObservabilityFleetObservabilityBaseFeatureState"
+          description: The base feature state of fleet scope log.
+      type: object
+    FleetObservabilityFleetObservabilityMonitoringState:
+      description: Feature state for monitoring feature.
+      properties:
+        state:
+          $ref: "#/components/schemas/FleetObservabilityFleetObservabilityBaseFeatureState"
+          description: The base feature state of fleet monitoring feature.
+      type: object
+    FleetObservabilityLoggingConfig:
+      description: LoggingConfig defines the configuration for different types of logs.
+      properties:
+        defaultConfig:
+          $ref: "#/components/schemas/FleetObservabilityRoutingConfig"
+          description: Specified if applying the default routing config to logs not specified in other configs.
+        fleetScopeLogsConfig:
+          $ref: "#/components/schemas/FleetObservabilityRoutingConfig"
+          description: Specified if applying the routing config to all logs for all fleet scopes.
       type: object
     FleetObservabilityMembershipSpec:
       description: "**FleetObservability**: The membership-specific input for FleetObservability feature."
@@ -1809,6 +1871,17 @@ components:
     FleetObservabilityMembershipState:
       description: "**FleetObservability**: Membership-specific Feature state for fleetobservability."
       properties: {}
+      type: object
+    FleetObservabilityRoutingConfig:
+      description: RoutingConfig configures the behaviour of fleet logging feature.
+      properties:
+        mode:
+          description: mode configures the logs routing mode.
+          enum:
+            - MODE_UNSPECIFIED
+            - COPY
+            - MOVE
+          type: string
       type: object
     GenerateConnectManifestResponse:
       description: GenerateConnectManifestResponse contains manifest information for installing/upgrading a Connect agent.

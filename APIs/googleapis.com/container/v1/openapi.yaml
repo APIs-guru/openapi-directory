@@ -2989,6 +2989,12 @@ components:
     AdditionalPodRangesConfig:
       description: AdditionalPodRangesConfig is the configuration for additional pod secondary ranges supporting the ClusterUpdate message.
       properties:
+        podRangeInfo:
+          description: Output only. [Output only] Information for additional pod range.
+          items:
+            $ref: "#/components/schemas/RangeInfo"
+          readOnly: true
+          type: array
         podRangeNames:
           description: Name for pod secondary ipv4 range which has the actual range defined ahead.
           items:
@@ -3013,6 +3019,9 @@ components:
         gcpFilestoreCsiDriverConfig:
           $ref: "#/components/schemas/GcpFilestoreCsiDriverConfig"
           description: Configuration for the GCP Filestore CSI driver.
+        gcsFuseCsiDriverConfig:
+          $ref: "#/components/schemas/GcsFuseCsiDriverConfig"
+          description: Configuration for the Cloud Storage Fuse CSI driver.
         gkeBackupAgentConfig:
           $ref: "#/components/schemas/GkeBackupAgentConfig"
           description: Configuration for the Backup for GKE agent addon.
@@ -3113,6 +3122,9 @@ components:
         imageType:
           description: The image type to use for NAP created node. Please see https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for available image types.
           type: string
+        insecureKubeletReadonlyPortEnabled:
+          description: Enable or disable Kubelet read only port.
+          type: boolean
         management:
           $ref: "#/components/schemas/NodeManagement"
           description: Specifies the node management options for NAP created node-pools.
@@ -3943,6 +3955,13 @@ components:
           description: Whether the GCP Filestore CSI driver is enabled for this cluster.
           type: boolean
       type: object
+    GcsFuseCsiDriverConfig:
+      description: Configuration for the Cloud Storage Fuse CSI driver.
+      properties:
+        enabled:
+          description: Whether the Cloud Storage Fuse CSI driver is enabled for this cluster.
+          type: boolean
+      type: object
     GetJSONWebKeysResponse:
       description: GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc 7517
       properties:
@@ -4054,6 +4073,11 @@ components:
         createSubnetwork:
           description: Whether a new subnetwork will be created automatically for the cluster. This field is only applicable when `use_ip_aliases` is true.
           type: boolean
+        defaultPodIpv4RangeUtilization:
+          description: Output only. [Output only] The utilization of the cluster default IPv4 range for pod. The ratio is Usage/[Total number of IPs in the secondary range], Usage=numNodes*numZones*podIPsPerNode.
+          format: double
+          readOnly: true
+          type: number
         ipv6AccessType:
           description: The ipv6 access type (internal or external) when create_subnetwork is true
           enum:
@@ -4671,6 +4695,9 @@ components:
         cpuManagerPolicy:
           description: "Control the CPU management policy on the node. See https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/ The following values are allowed. * \"none\": the default, which represents the existing scheduling behavior. * \"static\": allows pods with certain resource characteristics to be granted increased CPU affinity and exclusivity on the node. The default value is 'none' if unspecified."
           type: string
+        insecureKubeletReadonlyPortEnabled:
+          description: Enable or disable Kubelet read only port.
+          type: boolean
         podPidsLimit:
           description: Set the Pod PID limits. See https://kubernetes.io/docs/concepts/policy/pid-limiting/#pod-pid-limits Controls the maximum number of processes allowed to run in a pod. The value must be greater than or equal to 1024 and less than 4194304.
           format: int64
@@ -4716,6 +4743,11 @@ components:
         podIpv4CidrBlock:
           description: The IP address range for pod IPs in this node pool. Only applicable if `create_pod_range` is true. Set to blank to have a range chosen with the default size. Set to /netmask (e.g. `/14`) to have a range chosen with a specific netmask. Set to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `10.96.0.0/14`) to pick a specific range to use. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: string
+        podIpv4RangeUtilization:
+          description: Output only. [Output only] The utilization of the IPv4 range for pod. The ratio is Usage/[Total number of IPs in the secondary range], Usage=numNodes*numZones*podIPsPerNode.
+          format: double
+          readOnly: true
+          type: number
         podRange:
           description: The ID of the secondary range for pod IPs. If `create_pod_range` is true, this ID is used for the new range. If `create_pod_range` is false, uses an existing secondary range with this ID. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: string
@@ -5059,6 +5091,19 @@ components:
         topic:
           description: The desired Pub/Sub topic to which notifications will be sent by GKE. Format is `projects/{project}/topics/{topic}`.
           type: string
+      type: object
+    RangeInfo:
+      description: RangeInfo contains the range name and the range utilization by this cluster.
+      properties:
+        rangeName:
+          description: Output only. [Output only] Name of a range.
+          readOnly: true
+          type: string
+        utilization:
+          description: Output only. [Output only] The utilization of the range.
+          format: double
+          readOnly: true
+          type: number
       type: object
     RecurringTimeWindow:
       description: Represents an arbitrary window of time that recurs.

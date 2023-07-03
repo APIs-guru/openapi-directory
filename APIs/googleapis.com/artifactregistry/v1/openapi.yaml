@@ -1014,6 +1014,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/versions:batchDelete":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deletes multiple versions across a repository. The returned operation will complete once the versions have been deleted.
+      operationId: artifactregistry.projects.locations.repositories.packages.versions.batchDelete
+      parameters:
+        - description: The name of the repository holding all requested versions.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchDeleteVersionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/yumArtifacts:create":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1350,6 +1392,18 @@ components:
             type: string
           type: array
       type: object
+    BatchDeleteVersionsRequest:
+      description: The request to delete multiple versions across a repository.
+      properties:
+        names:
+          description: Required. The names of the versions to delete. A maximum of 10000 versions can be deleted in a batch.
+          items:
+            type: string
+          type: array
+        validateOnly:
+          description: If true, the request is performed without deleting data, following AIP-163.
+          type: boolean
+      type: object
     Binding:
       description: Associates `members`, or principals, with a `role`.
       properties:
@@ -1364,6 +1418,78 @@ components:
         role:
           description: Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
+      type: object
+    CleanupPolicy:
+      description: Artifact policy configuration for repository cleanup policies.
+      properties:
+        action:
+          description: Policy action.
+          enum:
+            - ACTION_UNSPECIFIED
+            - DELETE
+            - KEEP
+          type: string
+        condition:
+          $ref: "#/components/schemas/CleanupPolicyCondition"
+          description: Policy condition for matching versions.
+        id:
+          description: The user-provided ID of the cleanup policy.
+          type: string
+        mostRecentVersions:
+          $ref: "#/components/schemas/CleanupPolicyMostRecentVersions"
+          description: Policy condition for retaining a minimum number of versions. May only be specified with a Keep action.
+      type: object
+    CleanupPolicyCondition:
+      description: CleanupPolicyCondition is a set of conditions attached to a CleanupPolicy. If multiple entries are set, all must be satisfied for the condition to be satisfied.
+      properties:
+        newerThan:
+          description: Match versions newer than a duration.
+          format: google-duration
+          type: string
+        olderThan:
+          description: Match versions older than a duration.
+          format: google-duration
+          type: string
+        packageNamePrefixes:
+          description: Match versions by package prefix. Applied on any prefix match.
+          items:
+            type: string
+          type: array
+        tagPrefixes:
+          description: Match versions by tag prefix. Applied on any prefix match.
+          items:
+            type: string
+          type: array
+        tagState:
+          description: Match versions by tag status.
+          enum:
+            - TAG_STATE_UNSPECIFIED
+            - TAGGED
+            - UNTAGGED
+            - ANY
+          type: string
+        versionAge:
+          description: "DEPRECATED: Use older_than."
+          format: google-duration
+          type: string
+        versionNamePrefixes:
+          description: Match versions by version name prefix. Applied on any prefix match.
+          items:
+            type: string
+          type: array
+      type: object
+    CleanupPolicyMostRecentVersions:
+      description: CleanupPolicyMostRecentVersions is an alternate condition of a CleanupPolicy for retaining a minimum number of versions.
+      properties:
+        keepCount:
+          description: Minimum number of versions to keep.
+          format: int32
+          type: integer
+        packageNamePrefixes:
+          description: List of package name prefixes that will apply this rule.
+          items:
+            type: string
+          type: array
       type: object
     DockerImage:
       description: "DockerImage represents a docker artifact. The following fields are returned as untyped metadata in the Version resource, using camelcase keys (i.e. metadata.imageSizeBytes): * imageSizeBytes * mediaType * buildTime"
@@ -2043,6 +2169,14 @@ components:
     Repository:
       description: A Repository for storing artifacts with a specific format.
       properties:
+        cleanupPolicies:
+          additionalProperties:
+            $ref: "#/components/schemas/CleanupPolicy"
+          description: Optional. Cleanup policies for this repository. Cleanup policies indicate when certain package versions can be automatically deleted. Map keys are policy IDs supplied by users during policy creation. They must unique within a repository and be under 128 characters in length.
+          type: object
+        cleanupPolicyDryRun:
+          description: Optional. If true, the cleanup pipeline is prevented from deleting versions in this repository.
+          type: boolean
         createTime:
           description: Output only. The time when the repository was created.
           format: google-datetime

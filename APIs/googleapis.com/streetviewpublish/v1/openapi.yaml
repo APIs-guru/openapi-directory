@@ -1096,10 +1096,6 @@ components:
           $ref: "#/components/schemas/LatLngBounds"
           description: Output only. A rectangular box that encapsulates every image in this photo sequence.
           readOnly: true
-        takedown:
-          description: Output only. Set if a Photo within the PhotoSequence contains a takedown.
-          readOnly: true
-          type: boolean
         uploadReference:
           $ref: "#/components/schemas/UploadRef"
           description: Input only. Required when creating photo sequence. The resource name where the bytes of the photo sequence (in the form of video) are uploaded.

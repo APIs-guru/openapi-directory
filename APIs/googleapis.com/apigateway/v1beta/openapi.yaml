@@ -918,6 +918,7 @@ components:
           type: string
       type: object
     ApigatewayBackendConfig:
+      deprecated: true
       description: Configuration for all backends.
       properties:
         googleServiceAccount:
@@ -1008,6 +1009,7 @@ components:
       properties:
         backendConfig:
           $ref: "#/components/schemas/ApigatewayBackendConfig"
+          deprecated: true
           description: Required. Backend settings that are applied to all backends of the Gateway.
       type: object
     ApigatewayListApiConfigsResponse:

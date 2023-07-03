@@ -1188,6 +1188,53 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/projects/{project}/instances/{instance}/getLatestRecoveryTime":
+    get:
+      description: Get Latest Recovery Time for a given instance.
+      operationId: sql.projects.instances.getLatestRecoveryTime
+      parameters:
+        - description: Project ID of the project that contains the instance.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Cloud SQL instance ID. This does not include the project ID.
+          in: path
+          name: instance
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SqlInstancesGetLatestRecoveryTimeResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sqlservice.admin
+          Oauth2c:
+            - https://www.googleapis.com/auth/sqlservice.admin
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/projects/{project}/instances/{instance}/import":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2971,6 +3018,9 @@ components:
           description: Timestamp, if specified, identifies the time to which the source instance is cloned.
           format: google-datetime
           type: string
+        preferredZone:
+          description: Optional. (Point-in-time recovery for PostgreSQL only) Clone to an instance in the specified zone. If no zone is specified, clone to the same zone as the source instance.
+          type: string
       type: object
     ConnectSettings:
       description: Connect settings retrieval response.
@@ -2983,6 +3033,11 @@ components:
             - SECOND_GEN
             - EXTERNAL
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
         databaseVersion:
           description: "The database engine type and version. The `databaseVersion` field cannot be changed after instance creation. MySQL instances: `MYSQL_8_0`, `MYSQL_5_7` (default), or `MYSQL_5_6`. PostgreSQL instances: `POSTGRES_9_6`, `POSTGRES_10`, `POSTGRES_11`, `POSTGRES_12` (default), `POSTGRES_13`, or `POSTGRES_14`. SQL Server instances: `SQLSERVER_2017_STANDARD` (default), `SQLSERVER_2017_ENTERPRISE`, `SQLSERVER_2017_EXPRESS`, `SQLSERVER_2017_WEB`, `SQLSERVER_2019_STANDARD`, `SQLSERVER_2019_ENTERPRISE`, `SQLSERVER_2019_EXPRESS`, or `SQLSERVER_2019_WEB`."
           enum:
@@ -3024,6 +3079,44 @@ components:
             - SQLSERVER_2022_EXPRESS
             - SQLSERVER_2022_WEB
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         dnsName:
           description: The dns name of the instance.
           type: string
@@ -3041,6 +3134,13 @@ components:
         serverCaCert:
           $ref: "#/components/schemas/SslCert"
           description: SSL configuration.
+      type: object
+    DataCacheConfig:
+      description: Data cache configurations.
+      properties:
+        dataCacheEnabled:
+          description: Whether data cache is enabled for the instance.
+          type: boolean
       type: object
     Database:
       description: Represents a SQL database on the Cloud SQL instance.
@@ -3099,6 +3199,11 @@ components:
             - SECOND_GEN
             - EXTERNAL
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
         connectionName:
           description: Connection name of the Cloud SQL instance used in connection strings.
           type: string
@@ -3108,6 +3213,7 @@ components:
           readOnly: true
           type: string
         currentDiskSize:
+          deprecated: true
           description: The current disk usage of the instance in bytes. This property has been deprecated. Use the "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud Monitoring API instead. Please see [this announcement](https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ) for details.
           format: int64
           type: string
@@ -3156,6 +3262,44 @@ components:
             - SQLSERVER_2022_EXPRESS
             - SQLSERVER_2022_WEB
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         diskEncryptionConfiguration:
           $ref: "#/components/schemas/DiskEncryptionConfiguration"
           description: Disk encryption configuration specific to an instance.
@@ -3192,6 +3336,7 @@ components:
             $ref: "#/components/schemas/IpMapping"
           type: array
         ipv6Address:
+          deprecated: true
           description: The IPv6 address assigned to the instance. (Deprecated) This property was applicable only to First Generation instances.
           type: string
         kind:
@@ -3204,6 +3349,7 @@ components:
           description: The name of the instance which will act as primary in the replication setup.
           type: string
         maxDiskSize:
+          deprecated: true
           description: The maximum disk size of the instance in bytes.
           format: int64
           type: string
@@ -3266,6 +3412,15 @@ components:
             - FAILED
             - ONLINE_MAINTENANCE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
         suspensionReason:
           description: If the instance state is SUSPENDED, the reason for the suspension.
           items:
@@ -3392,6 +3547,7 @@ components:
                 - DIFF
               type: string
             copyOnly:
+              deprecated: true
               description: "Deprecated: copy_only is deprecated. Use differential_base instead"
               type: boolean
             differentialBase:
@@ -3534,6 +3690,44 @@ components:
               - SQLSERVER_2022_EXPRESS
               - SQLSERVER_2022_WEB
             type: string
+            x-enumDeprecated:
+              - false
+              - true
+              - true
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - true
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
           type: array
         inBeta:
           description: Whether or not the flag is considered in beta.
@@ -3864,6 +4058,7 @@ components:
       description: Preferred location. This specifies where a Cloud SQL instance is located. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.
       properties:
         followGaeApplication:
+          deprecated: true
           description: "The App Engine application to follow, it must be in the same region as the Cloud SQL instance. WARNING: Changing this might restart the instance."
           type: string
         kind:
@@ -4049,6 +4244,46 @@ components:
             - REENCRYPT
             - SWITCHOVER
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         selfLink:
           description: The URI of this resource.
           type: string
@@ -4263,6 +4498,11 @@ components:
             - NEVER
             - ON_DEMAND
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
         activeDirectoryConfig:
           $ref: "#/components/schemas/SqlActiveDirectoryConfig"
           description: Active Directory configuration, relevant only for Cloud SQL for SQL Server.
@@ -4270,6 +4510,7 @@ components:
           $ref: "#/components/schemas/AdvancedMachineFeatures"
           description: Specifies advance machine configuration for the instance relevant only for SQL Server.
         authorizedGaeApplications:
+          deprecated: true
           description: The App Engine app IDs that can access this instance. (Deprecated) Applied to First Generation instances only.
           items:
             type: string
@@ -4295,8 +4536,12 @@ components:
             - REQUIRED
           type: string
         crashSafeReplicationEnabled:
+          deprecated: true
           description: Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled. This property was only applicable to First Generation instances.
           type: boolean
+        dataCacheConfig:
+          $ref: "#/components/schemas/DataCacheConfig"
+          description: Configuration for data cache.
         dataDiskSizeGb:
           description: The size of data disk, in GB. The data disk size minimum is 10GB.
           format: int64
@@ -4309,6 +4554,11 @@ components:
             - PD_HDD
             - OBSOLETE_LOCAL_SSD
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
         databaseFlags:
           description: The database flags passed to the instance at startup.
           items:
@@ -4325,6 +4575,13 @@ components:
           items:
             $ref: "#/components/schemas/DenyMaintenancePeriod"
           type: array
+        edition:
+          description: Optional. The edition of the instance.
+          enum:
+            - EDITION_UNSPECIFIED
+            - ENTERPRISE
+            - ENTERPRISE_PLUS
+          type: string
         insightsConfig:
           $ref: "#/components/schemas/InsightsConfig"
           description: Insights configuration, for now relevant only for Postgres.
@@ -4351,6 +4608,7 @@ components:
             - PER_USE
           type: string
         replicationType:
+          deprecated: true
           description: The type of replication this instance uses. This can be either `ASYNCHRONOUS` or `SYNCHRONOUS`. (Deprecated) This property was only applicable to First Generation instances.
           enum:
             - SQL_REPLICATION_TYPE_UNSPECIFIED
@@ -4439,6 +4697,7 @@ components:
             - INSUFFICIENT_GCS_PERMISSIONS
             - INVALID_FILE_INFO
             - UNSUPPORTED_DATABASE_SETTINGS
+            - MYSQL_PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE
           type: string
       type: object
     SqlInstancesGetDiskShrinkConfigResponse:
@@ -4453,6 +4712,17 @@ components:
         minimalTargetSizeGb:
           description: The minimum size to which a disk can be shrunk in GigaBytes.
           format: int64
+          type: string
+      type: object
+    SqlInstancesGetLatestRecoveryTimeResponse:
+      description: Instance get latest recovery time response.
+      properties:
+        kind:
+          description: This is always `sql#getLatestRecoveryTime`.
+          type: string
+        latestRecoveryTime:
+          description: Timestamp, identifies the latest recovery time of the source instance.
+          format: google-datetime
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:
@@ -4547,6 +4817,7 @@ components:
       description: Any scheduled maintenance for this instance.
       properties:
         canDefer:
+          deprecated: true
           type: boolean
         canReschedule:
           description: If the scheduled maintenance can be rescheduled.
@@ -4823,6 +5094,7 @@ components:
           description: This is always `sql#usersList`.
           type: string
         nextPageToken:
+          deprecated: true
           description: Unused.
           type: string
       type: object

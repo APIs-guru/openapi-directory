@@ -357,6 +357,10 @@ components:
           format: google-duration
           type: string
       type: object
+    Aes128Encryption:
+      description: Configuration for AES-128 encryption.
+      properties: {}
+      type: object
     Animation:
       description: Animation types.
       properties:
@@ -499,6 +503,10 @@ components:
           description: "The picture field parity assumed for the input interlaced video. The default is `auto`. Supported values: - `tff`: Assume the top field is first - `bff`: Assume the bottom field is first - `auto`: Enable automatic detection of field parity"
           type: string
       type: object
+    Clearkey:
+      description: Clearkey configuration.
+      properties: {}
+      type: object
     Color:
       description: Color preprocessing configuration. **Note:** This configuration is not supported.
       properties:
@@ -578,6 +586,22 @@ components:
           description: "Set the denoiser mode. The default is `standard`. Supported denoiser modes: - `standard` - `grain`"
           type: string
       type: object
+    DrmSystems:
+      description: Defines configuration for DRM systems in use.
+      properties:
+        clearkey:
+          $ref: "#/components/schemas/Clearkey"
+          description: Clearkey configuration.
+        fairplay:
+          $ref: "#/components/schemas/Fairplay"
+          description: Fairplay configuration.
+        playready:
+          $ref: "#/components/schemas/Playready"
+          description: Playready configuration.
+        widevine:
+          $ref: "#/components/schemas/Widevine"
+          description: Widevine configuration.
+      type: object
     EditAtom:
       description: Edit atom.
       properties:
@@ -616,6 +640,32 @@ components:
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    Encryption:
+      description: Encryption settings.
+      properties:
+        aes128:
+          $ref: "#/components/schemas/Aes128Encryption"
+          description: Configuration for AES-128 encryption.
+        drmSystems:
+          $ref: "#/components/schemas/DrmSystems"
+          description: Required. DRM system(s) to use; at least one must be specified. If a DRM system is omitted, it is considered disabled.
+        id:
+          description: Required. Identifier for this set of encryption options.
+          type: string
+        mpegCenc:
+          $ref: "#/components/schemas/MpegCommonEncryption"
+          description: Configuration for MPEG Common Encryption (MPEG-CENC).
+        sampleAes:
+          $ref: "#/components/schemas/SampleAesEncryption"
+          description: Configuration for SAMPLE-AES encryption.
+        secretManagerKeySource:
+          $ref: "#/components/schemas/SecretManagerSource"
+          description: Keys are stored in Google Secret Manager.
+      type: object
+    Fairplay:
+      description: Fairplay configuration.
       properties: {}
       type: object
     H264CodecSettings:
@@ -795,6 +845,10 @@ components:
     Job:
       description: Transcoding job resource.
       properties:
+        batchModePriority:
+          description: The processing priority of a batch job. This field can only be set for batch mode jobs, and the default value is 0. This value cannot be negative. Higher values correspond to higher priorities for the job.
+          format: int32
+          type: integer
         config:
           $ref: "#/components/schemas/JobConfig"
           description: The configuration for this job.
@@ -829,6 +883,13 @@ components:
           type: string
         name:
           description: "The resource name of the job. Format: `projects/{project_number}/locations/{location}/jobs/{job}`"
+          type: string
+        optimization:
+          description: Optional. The optimization strategy of the job. The default is `AUTODETECT`.
+          enum:
+            - OPTIMIZATION_STRATEGY_UNSPECIFIED
+            - AUTODETECT
+            - DISABLED
           type: string
         outputUri:
           description: Input only. Specify the `output_uri` to populate an empty `Job.config.output.uri` or `JobTemplate.config.output.uri` when using template. URI for the output file(s). For example, `gs://my-bucket/outputs/`. See [Supported input and output formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
@@ -873,6 +934,11 @@ components:
           description: List of elementary streams.
           items:
             $ref: "#/components/schemas/ElementaryStream"
+          type: array
+        encryptions:
+          description: List of encryption configurations for the content. Each configuration has an ID. Specify this ID in the MuxStream.encryption_id field to indicate the configuration to use for that `MuxStream` output.
+          items:
+            $ref: "#/components/schemas/Encryption"
           type: array
         inputs:
           description: List of input assets stored in Cloud Storage.
@@ -977,6 +1043,13 @@ components:
             - DASH
           type: string
       type: object
+    MpegCommonEncryption:
+      description: Configuration for MPEG Common Encryption (MPEG-CENC).
+      properties:
+        scheme:
+          description: "Required. Specify the encryption scheme. Supported encryption schemes: - `cenc` - `cbcs`"
+          type: string
+      type: object
     MuxStream:
       description: Multiplexing settings for output stream.
       properties:
@@ -988,6 +1061,9 @@ components:
           items:
             type: string
           type: array
+        encryptionId:
+          description: Identifier of the encryption configuration to use. If omitted, output will be unencrypted.
+          type: string
         fileName:
           description: The name of the generated file. The default is `MuxStream.key` with the extension suffix corresponding to the `MuxStream.container`. Individual segments also have an incremental 10-digit zero-padded suffix starting from 0 before the extension, such as `mux_stream0000000123.ts`.
           type: string
@@ -1049,6 +1125,10 @@ components:
           format: int32
           type: integer
       type: object
+    Playready:
+      description: Playready configuration.
+      properties: {}
+      type: object
     PreprocessingConfig:
       description: Preprocessing configurations.
       properties:
@@ -1079,6 +1159,17 @@ components:
       properties:
         topic:
           description: "The name of the Pub/Sub topic to publish job completion notification to. For example: `projects/{project}/topics/{topic}`."
+          type: string
+      type: object
+    SampleAesEncryption:
+      description: Configuration for SAMPLE-AES encryption.
+      properties: {}
+      type: object
+    SecretManagerSource:
+      description: Configuration for secrets stored in Google Secret Manager.
+      properties:
+        secretVersion:
+          description: 'Required. The name of the Secret Version containing the encryption key in the following format: `projects/{project}/secrets/{secret_id}/versions/{version_number}` Note that only numbered versions are supported. Aliases like "latest" are not supported.'
           type: string
       type: object
     SegmentSettings:
@@ -1241,6 +1332,10 @@ components:
           description: The width of the video in pixels. Must be an even integer. When not specified, the width is adjusted to match the specified height and input aspect ratio. If both are omitted, the input width is used. For portrait videos that contain horizontal ASR and rotation metadata, provide the width, in pixels, per the horizontal ASR. The API calculates the height per the horizontal ASR. The API detects any rotation metadata and swaps the requested height and width for the output.
           format: int32
           type: integer
+      type: object
+    Widevine:
+      description: Widevine configuration.
+      properties: {}
       type: object
     YadifConfig:
       description: Yet Another Deinterlacing Filter Configuration.

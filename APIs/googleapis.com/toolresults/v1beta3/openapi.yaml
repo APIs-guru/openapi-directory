@@ -3030,6 +3030,7 @@ components:
           type: string
         stackTrace:
           $ref: "#/components/schemas/StackTrace"
+          deprecated: true
           description: Deprecated in favor of stack trace fields inside specific warnings.
         type:
           description: Type of issue. Required.

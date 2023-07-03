@@ -948,6 +948,11 @@ components:
         parameters:
           $ref: "#/components/schemas/MemcacheParameters"
           description: User defined parameters to apply to the memcached process on each node.
+        reservedIpRangeId:
+          description: Optional. Contains the id of allocated IP address ranges associated with the private service access connection for example, "test-default" associated with IP range 10.0.0.0/29.
+          items:
+            type: string
+          type: array
         state:
           description: Output only. The state of this Memcached instance.
           enum:

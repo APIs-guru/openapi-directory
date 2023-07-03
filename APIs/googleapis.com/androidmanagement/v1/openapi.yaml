@@ -1164,6 +1164,13 @@ components:
             - REMOVED
             - INSTALLED
           type: string
+        userFacingType:
+          description: Whether the app is user facing.
+          enum:
+            - USER_FACING_TYPE_UNSPECIFIED
+            - NOT_USER_FACING
+            - USER_FACING
+          type: string
         versionCode:
           description: The app version code, which can be used to determine whether one version is more recent than another.
           format: int32
@@ -1631,6 +1638,22 @@ components:
     DeviceConnectivityManagement:
       description: Covers controls for device connectivity such as Wi-Fi, USB data access, keyboard/mouse connections, and more.
       properties:
+        configureWifi:
+          description: Controls Wi-Fi configuring privileges. Based on the option set, user will have either full or limited or no control in configuring Wi-Fi networks.
+          enum:
+            - CONFIGURE_WIFI_UNSPECIFIED
+            - ALLOW_CONFIGURING_WIFI
+            - DISALLOW_ADD_WIFI_CONFIG
+            - DISALLOW_CONFIGURING_WIFI
+          type: string
+        tetheringSettings:
+          description: Controls tethering settings. Based on the value set, the user is partially or fully disallowed from using different forms of tethering.
+          enum:
+            - TETHERING_SETTINGS_UNSPECIFIED
+            - ALLOW_ALL_TETHERING
+            - DISALLOW_WIFI_TETHERING
+            - DISALLOW_ALL_TETHERING
+          type: string
         usbDataAccess:
           description: Controls what files and/or data can be transferred via USB. Supported only on company-owned devices.
           enum:
@@ -1638,6 +1661,25 @@ components:
             - ALLOW_USB_DATA_TRANSFER
             - DISALLOW_USB_FILE_TRANSFER
             - DISALLOW_USB_DATA_TRANSFER
+          type: string
+        wifiDirectSettings:
+          description: Controls configuring and using Wi-Fi direct settings. Supported on company-owned devices running Android 13 and above.
+          enum:
+            - WIFI_DIRECT_SETTINGS_UNSPECIFIED
+            - ALLOW_WIFI_DIRECT
+            - DISALLOW_WIFI_DIRECT
+          type: string
+      type: object
+    DeviceRadioState:
+      description: Controls for device radio settings.
+      properties:
+        wifiState:
+          description: Controls current state of Wi-Fi and if user can change its state.
+          enum:
+            - WIFI_STATE_UNSPECIFIED
+            - WIFI_STATE_USER_CHOICE
+            - WIFI_ENABLED
+            - WIFI_DISABLED
           type: string
       type: object
     DeviceSettings:
@@ -2411,6 +2453,7 @@ components:
             - PASSWORD_POLICIES_PASSWORD_NOT_SUFFICIENT
             - ONC_WIFI_INVALID_VALUE
             - ONC_WIFI_API_LEVEL
+            - ONC_WIFI_INVALID_ENTERPRISE_CONFIG
           type: string
       type: object
     NonComplianceDetailCondition:
@@ -2814,6 +2857,9 @@ components:
         deviceOwnerLockScreenInfo:
           $ref: "#/components/schemas/UserFacingMessage"
           description: The device owner information to be shown on the lock screen.
+        deviceRadioState:
+          $ref: "#/components/schemas/DeviceRadioState"
+          description: Covers controls for radio state such as Wi-Fi, bluetooth, and more.
         encryptionPolicy:
           description: Whether encryption is enabled
           enum:
@@ -2911,7 +2957,7 @@ components:
           description: The name of the policy in the form enterprises/{enterpriseId}/policies/{policyId}.
           type: string
         networkEscapeHatchEnabled:
-          description: "Whether the network escape hatch is enabled. If a network connection can't be made at boot time, the escape hatch prompts the user to temporarily connect to a network in order to refresh the device policy. After applying policy, the temporary network will be forgotten and the device will continue booting. This prevents being unable to connect to a network if there is no suitable network in the last policy and the device boots into an app in lock task mode, or the user is otherwise unable to reach device settings.Note: Setting wifiConfigDisabled to true will override this setting under specific circumstances. Please see wifiConfigDisabled for further details."
+          description: "Whether the network escape hatch is enabled. If a network connection can't be made at boot time, the escape hatch prompts the user to temporarily connect to a network in order to refresh the device policy. After applying policy, the temporary network will be forgotten and the device will continue booting. This prevents being unable to connect to a network if there is no suitable network in the last policy and the device boots into an app in lock task mode, or the user is otherwise unable to reach device settings.Note: Setting wifiConfigDisabled to true will override this setting under specific circumstances. Please see wifiConfigDisabled for further details. Setting configureWifi to DISALLOW_CONFIGURING_WIFI will override this setting under specific circumstances. Please see DISALLOW_CONFIGURING_WIFI for further details."
           type: boolean
         networkResetDisabled:
           description: Whether resetting network settings is disabled.
@@ -3036,7 +3082,7 @@ components:
           $ref: "#/components/schemas/SystemUpdate"
           description: The system update policy, which controls how OS updates are applied. If the update type is WINDOWED, the update window will automatically apply to Play app updates as well.
         tetheringConfigDisabled:
-          description: Whether configuring tethering and portable hotspots is disabled.
+          description: Whether configuring tethering and portable hotspots is disabled. If tetheringSettings is set to anything other than TETHERING_SETTINGS_UNSPECIFIED, this setting is ignored.
           type: boolean
         uninstallAppsDisabled:
           description: Whether user uninstallation of applications is disabled. This prevents apps from being uninstalled, even those removed using applications
@@ -3061,7 +3107,7 @@ components:
           description: Whether configuring VPN is disabled.
           type: boolean
         wifiConfigDisabled:
-          description: "Whether configuring Wi-Fi networks is disabled. Supported on fully managed devices and work profiles on company-owned devices. For fully managed devices, setting this to true removes all configured networks and retains only the networks configured using openNetworkConfiguration. For work profiles on company-owned devices, existing configured networks are not affected and the user is not allowed to add, remove, or modify Wi-Fi networks. Note: If a network connection can't be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled)."
+          description: "Whether configuring Wi-Fi networks is disabled. Supported on fully managed devices and work profiles on company-owned devices. For fully managed devices, setting this to true removes all configured networks and retains only the networks configured using openNetworkConfiguration. For work profiles on company-owned devices, existing configured networks are not affected and the user is not allowed to add, remove, or modify Wi-Fi networks. If configureWifi is set to anything other than CONFIGURE_WIFI_UNSPECIFIED, this setting is ignored. Note: If a network connection can't be made at boot time and configuring Wi-Fi is disabled then network escape hatch will be shown in order to refresh the device policy (see networkEscapeHatchEnabled)."
           type: boolean
         wifiConfigsLockdownEnabled:
           description: DEPRECATED - Use wifi_config_disabled.

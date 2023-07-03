@@ -911,6 +911,7 @@ components:
           description: Immutable. The name of a Hub resource.
           type: string
         spokes:
+          deprecated: true
           description: Output only. A list of the URIs of all attached spokes. This field is deprecated and will not be included in future API versions. Call ListSpokes on each region instead.
           items:
             type: string
@@ -1152,6 +1153,7 @@ components:
           description: The IP address of the network interface to use for peering.
           type: string
         networkInterface:
+          deprecated: true
           type: string
         virtualMachine:
           description: The URI of the virtual machine resource
