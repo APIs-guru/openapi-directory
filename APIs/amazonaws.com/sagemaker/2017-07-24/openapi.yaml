@@ -26625,7 +26625,7 @@ components:
         TimeSeriesForecastingJobConfig:
           allOf:
             - $ref: '#/components/schemas/TimeSeriesForecastingJobConfig'
-            - description: Settings used to configure an AutoML job V2 for a time-series forecasting problem type.
+            - description: <p>Settings used to configure an AutoML job V2 for a time-series forecasting problem type.</p> <note> <p>The <code>TimeSeriesForecastingJobConfig</code> problem type is only available in private beta. Contact Amazon Web Services Support or your account manager to learn more about access privileges.</p> </note>
       description: A collection of settings specific to the problem type used to configure an AutoML job V2. There must be one and only one config of the following type.
     AutoMLProblemTypeConfigName:
       type: string
@@ -31262,9 +31262,7 @@ components:
         - WaitIntervalInSeconds
       properties:
         MaximumBatchSize:
-          allOf:
-            - $ref: '#/components/schemas/CapacitySize'
-            - description: 'Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant''s total instance count.'
+          $ref: '#/components/schemas/CapacitySize'
         WaitIntervalInSeconds:
           allOf:
             - $ref: '#/components/schemas/WaitIntervalInSeconds'
@@ -31274,9 +31272,7 @@ components:
             - $ref: '#/components/schemas/MaximumExecutionTimeoutInSeconds'
             - description: The time limit for the total deployment. Exceeding this limit causes a timeout.
         RollbackMaximumBatchSize:
-          allOf:
-            - $ref: '#/components/schemas/CapacitySize'
-            - description: 'Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback.'
+          $ref: '#/components/schemas/CapacitySize'
       description: Specifies a rolling deployment strategy for updating a SageMaker endpoint.
     RecommendationStatus:
       type: string
@@ -33452,10 +33448,27 @@ components:
             - $ref: '#/components/schemas/CategoricalParameters'
             - description: Specified a list of parameters for each category.
       description: Specifies the range of environment parameters
-    EndpointInputConfiguration:
+    ProductionVariantServerlessConfig:
       type: object
       required:
-        - InstanceType
+        - MemorySizeInMB
+        - MaxConcurrency
+      properties:
+        MemorySizeInMB:
+          allOf:
+            - $ref: '#/components/schemas/ServerlessMemorySizeInMB'
+            - description: 'The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.'
+        MaxConcurrency:
+          allOf:
+            - $ref: '#/components/schemas/ServerlessMaxConcurrency'
+            - description: The maximum number of concurrent invocations your serverless endpoint can process.
+        ProvisionedConcurrency:
+          allOf:
+            - $ref: '#/components/schemas/ServerlessProvisionedConcurrency'
+            - description: '<p>The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to <code>MaxConcurrency</code>.</p> <note> <p>This field is not supported for serverless endpoint recommendations for Inference Recommender jobs. For more information about creating an Inference Recommender job, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html">CreateInferenceRecommendationsJobs</a>.</p> </note>'
+      description: Specifies the serverless configuration for an endpoint variant.
+    EndpointInputConfiguration:
+      type: object
       properties:
         InstanceType:
           allOf:
@@ -33469,6 +33482,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnvironmentParameterRanges'
             - description: ' The parameter you want to benchmark against.'
+        ServerlessConfig:
+          $ref: '#/components/schemas/ProductionVariantServerlessConfig'
       description: The endpoint configuration for the load test.
     EndpointInputConfigurations:
       type: array
@@ -33480,13 +33495,14 @@ components:
       type: string
       pattern: '[a-zA-Z0-9-]+'
       maxLength: 63
+    InitialInstanceCount:
+      type: integer
+      minimum: 1
     EndpointOutputConfiguration:
       type: object
       required:
         - EndpointName
         - VariantName
-        - InstanceType
-        - InitialInstanceCount
       properties:
         EndpointName:
           allOf:
@@ -33502,8 +33518,10 @@ components:
             - description: The instance type recommended by Amazon SageMaker Inference Recommender.
         InitialInstanceCount:
           allOf:
-            - $ref: '#/components/schemas/Integer'
+            - $ref: '#/components/schemas/InitialInstanceCount'
             - description: The number of instances recommended to launch initially.
+        ServerlessConfig:
+          $ref: '#/components/schemas/ProductionVariantServerlessConfig'
       description: The endpoint configuration made by Inference Recommender during a recommendation job.
     InferenceMetrics:
       type: object
@@ -35238,6 +35256,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UtilizationMetric'
             - description: <p>The expected memory utilization at maximum invocations per minute for the instance.</p> <p> <code>NaN</code> indicates that the value is not available.</p>
+        ModelSetupTime:
+          allOf:
+            - $ref: '#/components/schemas/ModelSetupTime'
+            - description: '<p>The time it takes to launch new compute resources for a serverless endpoint. The time can vary depending on the model size, how long it takes to download the model, and the start-up time of the container.</p> <p> <code>NaN</code> indicates that the value is not available.</p>'
       description: The metrics of recommendations.
     ModelConfiguration:
       type: object
@@ -37300,6 +37322,9 @@ components:
         - BinaryClassification
         - MulticlassClassification
         - Regression
+    ModelSetupTime:
+      type: integer
+      minimum: 0
     ModelStepMetadata:
       type: object
       properties:
@@ -38148,25 +38173,6 @@ components:
         $ref: '#/components/schemas/ProductionVariantStatus'
       minItems: 0
       maxItems: 5
-    ProductionVariantServerlessConfig:
-      type: object
-      required:
-        - MemorySizeInMB
-        - MaxConcurrency
-      properties:
-        MemorySizeInMB:
-          allOf:
-            - $ref: '#/components/schemas/ServerlessMemorySizeInMB'
-            - description: 'The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.'
-        MaxConcurrency:
-          allOf:
-            - $ref: '#/components/schemas/ServerlessMaxConcurrency'
-            - description: The maximum number of concurrent invocations your serverless endpoint can process.
-        ProvisionedConcurrency:
-          allOf:
-            - $ref: '#/components/schemas/ServerlessProvisionedConcurrency'
-            - description: The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to <code>MaxConcurrency</code>.
-      description: Specifies the serverless configuration for an endpoint variant.
     PendingProductionVariantSummary:
       type: object
       required:
@@ -39471,6 +39477,11 @@ components:
       pattern: '[\S\s]+'
       minLength: 1
       maxLength: 1024
+    RecommendationJobSupportedEndpointType:
+      type: string
+      enum:
+        - RealTime
+        - Serverless
     RecommendationJobContainerConfig:
       type: object
       properties:
@@ -39506,6 +39517,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecommendationJobDataInputConfig'
             - description: 'Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form. This field is used for optimizing your model using SageMaker Neo. For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig">DataInputConfig</a>.'
+        SupportedEndpointType:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationJobSupportedEndpointType'
+            - description: 'The endpoint type to receive recommendations for. By default this is null, and the results of the inference recommendation job return a combined list of both real-time and serverless benchmarks. By specifying a value for this field, you can receive a longer list of benchmarks for the desired endpoint type.'
       description: 'Specifies mandatory fields for running an Inference Recommender job directly in the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html">CreateInferenceRecommendationsJob</a> API. The fields specified in <code>ContainerConfig</code> override the corresponding fields in the model package. Use <code>ContainerConfig</code> if you want to specify these fields for the recommendation job but don''t want to edit them in your model package.'
     TrafficPattern:
       type: object
