@@ -404,12 +404,14 @@ components:
           description: Device model name.
           type: string
         languageCode:
+          deprecated: true
           description: Device language code setting.
           type: string
         languageCodeFromWebview:
           description: Device language code setting obtained by executing JavaScript code in WebView.
           type: string
         languageCodeRaw:
+          deprecated: true
           description: Device language code raw setting. iOS does returns language code in different format than iOS WebView. For example WebView returns en_US, but iOS returns en-US. Field below will return raw value returned by iOS.
           type: string
         screenResolutionHeight:
@@ -450,6 +452,12 @@ components:
             - DESKTOP
             - OTHER
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - false
       type: object
     DynamicLinkInfo:
       description: Information about a Dynamic Link.
@@ -467,6 +475,7 @@ components:
           description: E.g. https://maps.app.goo.gl, https://maps.page.link, https://g.co/maps More examples can be found in description of getNormalizedUriPrefix in j/c/g/firebase/dynamiclinks/uri/DdlDomain.java Will fallback to dynamic_link_domain is this field is missing
           type: string
         dynamicLinkDomain:
+          deprecated: true
           description: Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl [Learn more](https://firebase.google.com/docs/dynamic-links/android/receive) on how to set up Dynamic Link domain associated with your Firebase project. Required if missing domain_uri_prefix.
           type: string
         iosInfo:
@@ -681,6 +690,7 @@ components:
       description: Parameters for Google Play Campaign Measurements. [Learn more](https://developers.google.com/analytics/devguides/collection/android/v4/campaigns#campaign-params)
       properties:
         gclid:
+          deprecated: true
           description: Deprecated; FDL SDK does not process nor log it.
           type: string
         utmCampaign:

@@ -329,12 +329,8 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Void"
-          description: OK - the request has succeeded.
+        "204":
+          description: No Content - the request has been successfully processed, but there is no additional content.
         "400":
           content:
             application/json:
@@ -3191,6 +3187,8 @@ components:
 
             - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.
 
+            - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country than the country of their legal entity.
+
           type: object
         themeId:
           description: The unique identifier of the hosted onboarding theme.
@@ -3648,9 +3646,9 @@ components:
           enum:
             - dataMissing
             - dataReview
-            - declined
             - invalidInput
             - pendingStatus
+            - rejected
           type: string
       type: object
     VerificationError-recursive:
@@ -3727,12 +3725,10 @@ components:
           enum:
             - dataMissing
             - dataReview
-            - declined
             - invalidInput
             - pendingStatus
+            - rejected
           type: string
-      type: object
-    Void:
       type: object
     WebData:
       properties:
@@ -3751,6 +3747,8 @@ components:
           enum:
             - noOnlinePresence
           type: string
+      type: object
+    void:
       type: object
   securitySchemes:
     ApiKeyAuth:

@@ -5052,8 +5052,11 @@ components:
     post-payments-result-basic-200:
       summary: Payment authorised
       value:
+        merchantReference: Your order number
+        paymentMethod: ideal
         pspReference: V4HZ4RBFJGXXGN82
         resultCode: Authorised
+        shopperLocale: nl_NL
     post-payments-sofort:
       summary: Make a Sofort payment
       value:
@@ -5350,16 +5353,6 @@ components:
           currency: USD
           value: 40000
         merchantAccount: YOUR_MERCHANT_ACCOUNT
-        paymentMethod:
-          cvc: "737"
-          expiryMonth: "03"
-          expiryYear: "2030"
-          holderName: John Smith
-          number: "4111111111111111"
-          type: scheme
-        platformChargebackLogic:
-          behavior: deductFromOneBalanceAccount
-          targetAccount: BA00000000000000000000001
         reference: YOUR_ORDER_NUMBER
         returnUrl: https://your-company.com/...
         splits:
@@ -5381,27 +5374,33 @@ components:
     post-sessions-split-201:
       summary: Example response for request 'split'
       value:
-        additionalData:
-          acquirerCode: TestPmmAcquirer
-          acquirerReference: YOUR_ACQUIRER_REFERENCE
-          authCode: "008304"
-          avsResult: 5 No AVS data provided
-          avsResultRaw: "5"
-          cardHolderName: John Smith
-          cvcResult: 1 Matches
-          cvcResultRaw: M
-          issuerCountry: NL
-          paymentMethod: visa
-          refusalReasonRaw: AUTHORISED
         amount:
           currency: USD
           value: 40000
-        merchantReference: YOUR_ORDER_NUMBER
-        paymentMethod:
-          brand: visa
-          type: scheme
-        pspReference: 993617895204576J
-        resultCode: Authorised
+        expiresAt: 2023-06-26T11:01:55+02:00
+        id: CSFCBC80570618EF2C
+        merchantAccount: YOUR_MERCHANT_ACCOUNT
+        mode: embedded
+        reference: YOUR_ORDER_NUMBER
+        returnUrl: https://your-company.com/...
+        sessionData: Ab02b4c0!BQABAgCjTErwAztqXSFTiZtxZMjRLYkoGbPkmvCvDX1
+        shopperLocale: en-US
+        splits:
+          - account: BA00000000000000000000001
+            amount:
+              value: 39600
+            description: Your description for the sale amount
+            reference: Your reference for the sale amount
+            type: BalanceAccount
+          - amount:
+              value: 400
+            description: Your description for the commission
+            reference: Your reference for the commission
+            type: Commission
+          - account: BA00000000000000000000001
+            description: Your description for the fees
+            reference: Your reference for the fees
+            type: PaymentFee
   headers:
     Idempotency-Key:
       description: The idempotency key used for processing the request. Present if the key was provided in the request.
@@ -6104,7 +6103,7 @@ components:
           description: |-
             Number of days for which the car is being rented.
             * Format: Numeric
-            * maxLength: 2
+            * maxLength: 4
             * Must not be all spaces
           type: string
         carRental.fuelCharges:
@@ -6239,7 +6238,7 @@ components:
           description: |-
             Number of days the car is rented for. This should be included in the auth message.
             * Format: Numeric
-            * maxLength: 2
+            * maxLength: 4
           type: string
         travelEntertainmentAuthData.market:
           description: |-
@@ -6295,11 +6294,6 @@ components:
             - NoShow
             - DelayedCharge
           type: string
-          x-enum:
-            - description: An incremental charge is carried out because of a no-show for a guaranteed reservation.
-              value: NoShow
-            - description: An incremental charge is carried out to process an additional payment after the original services have been rendered and the respective payment has been processed.
-              value: DelayedCharge
         manualCapture:
           description: Set to **true** to require [manual capture](https://docs.adyen.com/online-payments/capture) for the transaction.
           type: string
@@ -6371,7 +6365,7 @@ components:
       properties:
         enhancedSchemeData.customerReference:
           description: |-
-            The customer code, if supplied by a customer.
+            The customer code.
 
             Encoding: ASCII
 
@@ -6629,7 +6623,7 @@ components:
             The total number of nights the room is booked for.
             * Format: numeric
             * Must be a number between 0 and 99
-            * Max length: 2 characters
+            * Max length: 4 characters
           type: string
         lodging.room1.rate:
           description: |-
@@ -6656,7 +6650,7 @@ components:
           description: |-
             The number of nights. This should be included in the auth message.
             * Format: numeric
-            * Max length: 2 characters
+            * Max length: 4 characters
           type: string
         travelEntertainmentAuthData.market:
           description: |-
@@ -8289,6 +8283,12 @@ components:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
           type: integer
+        fundOrigin:
+          $ref: "#/components/schemas/FundOrigin"
+          description: The person or entity funding the money.
+        fundRecipient:
+          $ref: "#/components/schemas/FundRecipient"
+          description: the person or entity receiving the money
         installments:
           $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
@@ -8556,6 +8556,11 @@ components:
           type: boolean
           x-addedInVersion: "37"
       required:
+        - merchantAccount
+        - reference
+        - amount
+        - paymentMethod
+        - returnUrl
         - donationAccount
       type: object
     CheckoutNativeRedirectAction:
@@ -8752,6 +8757,12 @@ components:
           description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
           format: int32
           type: integer
+        fundOrigin:
+          $ref: "#/components/schemas/FundOrigin"
+          description: The person or entity funding the money.
+        fundRecipient:
+          $ref: "#/components/schemas/FundRecipient"
+          description: the person or entity receiving the money
         installments:
           $ref: "#/components/schemas/Installments"
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
@@ -9018,6 +9029,12 @@ components:
           description: Set to true if the payment should be routed to a trusted MID.
           type: boolean
           x-addedInVersion: "37"
+      required:
+        - merchantAccount
+        - reference
+        - amount
+        - paymentMethod
+        - returnUrl
       type: object
     CheckoutQrCodeAction:
       additionalProperties: false
@@ -10941,6 +10958,10 @@ components:
         startsAt:
           description: Start date of the billing plan, in YYYY-MM-DD format. By default, the transaction date.
           type: string
+      required:
+        - frequency
+        - amount
+        - endsAt
       type: object
     MasterpassDetails:
       additionalProperties: false
@@ -11839,26 +11860,6 @@ components:
             - paid
             - paymentPending
           type: string
-          x-enum:
-            - description: The link can be used to make payments.
-              value: active
-            - description: |-
-                The shopper is in the process of making the payment. Applies to payment methods with an asynchronous flow.
-
-                Added in v68.
-              value: paymentPending
-            - description: |-
-                The shopper completed the payment.
-
-                Removed in v66 and replaced with **completed**.
-              value: paid
-            - description: The expiry date for the payment link has passed. Shoppers can no longer use the link to make payments.
-              value: expired
-            - description: |-
-                The shopper completed the payment.
-
-                Added in v66 and replaces **paid**.
-              value: completed
         store:
           description: The physical store, for which this payment is processed.
           type: string
@@ -14082,19 +14083,6 @@ components:
             - "06"
           type: string
           x-addedInVersion: "68"
-          x-enum:
-            - description: No preference
-              value: "01"
-            - description: No challenge requested
-              value: "02"
-            - description: Challenge requested (3DS Requestor preference)
-              value: "03"
-            - description: Challenge requested (Mandate)
-              value: "04"
-            - description: No challenge (transactional risk analysis is already performed)
-              value: "05"
-            - description: Data only
-              value: "06"
         threeDSRequestorID:
           description: Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor identifier assigned by the Directory Server when you enrol for 3D Secure 2.
           type: string
@@ -14311,19 +14299,6 @@ components:
             - "06"
           type: string
           x-addedInVersion: "68"
-          x-enum:
-            - description: No preference
-              value: "01"
-            - description: No challenge requested
-              value: "02"
-            - description: Challenge requested (3DS Requestor preference)
-              value: "03"
-            - description: Challenge requested (Mandate)
-              value: "04"
-            - description: No challenge (transactional risk analysis is already performed)
-              value: "05"
-            - description: Data only
-              value: "06"
         threeDSRequestorID:
           description: Required for [authentication-only integration](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only) for Visa. Unique 3D Secure requestor identifier assigned by the Directory Server when you enrol for 3D Secure 2.
           type: string
@@ -14643,26 +14618,6 @@ components:
           enum:
             - expired
           type: string
-          x-enum:
-            - description: The link can be used to make payments.
-              value: active
-            - description: |-
-                The shopper is in the process of making the payment. Applies to payment methods with an asynchronous flow.
-
-                Added in v68.
-              value: paymentPending
-            - description: |-
-                The shopper completed the payment.
-
-                Removed in v66 and replaced with **completed**.
-              value: paid
-            - description: The expiry date for the payment link has passed. Shoppers can no longer use the link to make payments.
-              value: expired
-            - description: |-
-                The shopper completed the payment.
-
-                Added in v66 and replaces **paid**.
-              value: completed
       required:
         - status
       type: object

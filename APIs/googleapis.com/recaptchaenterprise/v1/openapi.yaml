@@ -693,6 +693,7 @@ components:
           readOnly: true
           type: string
         username:
+          deprecated: true
           description: Username of the account that is being verified. Deprecated. Customers should now provide the hashed account ID field in Event.
           type: string
       type: object
@@ -723,6 +724,12 @@ components:
             - PASSWORD_CORRECT
             - PASSWORD_INCORRECT
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - true
         hashedAccountId:
           description: Optional. Unique stable hashed user identifier to apply to the assessment. This is an alternative to setting the hashed_account_id in CreateAssessment, for example when the account identifier is not yet known in the initial request. It is recommended that the identifier is hashed using hmac-sha256 with stable secret.
           format: byte
