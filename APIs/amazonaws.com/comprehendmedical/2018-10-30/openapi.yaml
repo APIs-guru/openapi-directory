@@ -3,7 +3,7 @@ info:
   version: '2018-10-30'
   x-release: v4
   title: AWS Comprehend Medical
-  description: ' Comprehend Medical; extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. '
+  description: 'Amazon Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. Amazon Comprehend Medical only detects entities in English language texts. Amazon Comprehend Medical places limits on the sizes of files allowed for different API operations. To learn more, see <a href="https://docs.aws.amazon.com/comprehend-medical/latest/dev/comprehendmedical-quotas.html">Guidelines and quotas</a> in the <i>Amazon Comprehend Medical Developer Guide</i>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -404,7 +404,7 @@ paths:
     post:
       deprecated: true
       operationId: DetectEntities
-      description: '<p>The <code>DetectEntities</code> operation is deprecated. You should use the <a>DetectEntitiesV2</a> operation instead.</p> <p> Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .</p>'
+      description: '<p>The <code>DetectEntities</code> operation is deprecated. You should use the <a>DetectEntitiesV2</a> operation instead.</p> <p>Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information.</p>'
       responses:
         '200':
           description: Success
@@ -542,7 +542,7 @@ paths:
   /#X-Amz-Target=ComprehendMedical_20181030.DetectPHI:
     post:
       operationId: DetectPHI
-      description: ' Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.'
+      description: 'Inspects the clinical text for protected health information (PHI) entities and returns the entity category, location, and confidence score for each entity. Amazon Comprehend Medical only detects entities in English language texts.'
       responses:
         '200':
           description: Success
@@ -932,7 +932,7 @@ paths:
   /#X-Amz-Target=ComprehendMedical_20181030.ListPHIDetectionJobs:
     post:
       operationId: ListPHIDetectionJobs
-      description: Gets a list of protected health information (PHI) detection jobs that you have submitted.
+      description: Gets a list of protected health information (PHI) detection jobs you have submitted.
       responses:
         '200':
           description: Success
@@ -1714,7 +1714,7 @@ components:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Comprehend Medical; generated for the job. The <code>StartEntitiesDetectionV2Job</code> operation returns this identifier in its response.
+            - description: The identifier that Amazon Comprehend Medical generated for the job. The <code>StartEntitiesDetectionV2Job</code> operation returns this identifier in its response.
     InvalidRequestException: {}
     TooManyRequestsException: {}
     ResourceNotFoundException: {}
@@ -1752,7 +1752,7 @@ components:
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
-            - description: The identifier that Comprehend Medical; generated for the job. The <code>StartPHIDetectionJob</code> operation returns this identifier in its response.
+            - description: The identifier that Amazon Comprehend Medical generated for the job. The <code>StartPHIDetectionJob</code> operation returns this identifier in its response.
     DescribeRxNormInferenceJobResponse:
       type: object
       properties:
@@ -1794,15 +1794,15 @@ components:
         Entities:
           allOf:
             - $ref: '#/components/schemas/EntityList'
-            - description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical; has in the detection and analysis. Attributes and traits of the entity are also returned.'
+            - description: 'The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned.'
         UnmappedAttributes:
           allOf:
             - $ref: '#/components/schemas/UnmappedAttributeList'
-            - description: ' Attributes extracted from the input text that we were unable to relate to an entity.'
+            - description: Attributes extracted from the input text that we were unable to relate to an entity.
         PaginationToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' If the result of the previous request to <code>DetectEntities</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of entities.'
+            - description: 'If the result of the previous request to <code>DetectEntities</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of entities.'
         ModelVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1816,7 +1816,7 @@ components:
         Text:
           allOf:
             - $ref: '#/components/schemas/BoundedLengthString'
-            - description: ' A UTF-8 text string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
+            - description: ' A UTF-8 text string containing the clinical content being examined for entities.'
     ServiceUnavailableException: {}
     InvalidEncodingException: {}
     TextSizeLimitExceededException: {}
@@ -1851,7 +1851,7 @@ components:
         Text:
           allOf:
             - $ref: '#/components/schemas/BoundedLengthString'
-            - description: 'A UTF-8 string containing the clinical content being examined for entities. Each string must contain fewer than 20,000 bytes of characters.'
+            - description: A UTF-8 string containing the clinical content being examined for entities.
     DetectPHIResponse:
       type: object
       required:
@@ -1861,11 +1861,11 @@ components:
         Entities:
           allOf:
             - $ref: '#/components/schemas/EntityList'
-            - description: ' The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical; has in its detection. '
+            - description: 'The collection of PHI entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in its detection.'
         PaginationToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' If the result of the previous request to <code>DetectPHI</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of PHI entities. '
+            - description: 'If the result of the previous request to <code>DetectPHI</code> was truncated, include the <code>PaginationToken</code> to fetch the next page of PHI entities. '
         ModelVersion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1879,7 +1879,7 @@ components:
         Text:
           allOf:
             - $ref: '#/components/schemas/BoundedLengthString'
-            - description: ' A UTF-8 text string containing the clinical content being examined for PHI entities. Each string must contain fewer than 20,000 bytes of characters.'
+            - description: A UTF-8 text string containing the clinical content being examined for PHI entities.
     InferICD10CMResponse:
       type: object
       required:
@@ -1906,7 +1906,7 @@ components:
         Text:
           allOf:
             - $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
-            - description: The input text used for analysis. The input for InferICD10CM is a string from 1 to 10000 characters.
+            - description: The input text used for analysis.
     InferRxNormResponse:
       type: object
       required:
@@ -1933,7 +1933,7 @@ components:
         Text:
           allOf:
             - $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
-            - description: The input text used for analysis. The input for InferRxNorm is a string from 1 to 10000 characters.
+            - description: The input text used for analysis.
     InferSNOMEDCTResponse:
       type: object
       required:
@@ -1942,7 +1942,7 @@ components:
         Entities:
           allOf:
             - $ref: '#/components/schemas/SNOMEDCTEntityList'
-            - description: ' The collection of medical concept entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. '
+            - description: ' The collection of medical concept entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. '
         PaginationToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1968,7 +1968,7 @@ components:
         Text:
           allOf:
             - $ref: '#/components/schemas/OntologyLinkingBoundedLengthString'
-            - description: ' The input text to be analyzed using InferSNOMEDCT. The text should be a string with 1 to 10000 characters. '
+            - description: The input text to be analyzed using InferSNOMEDCT.
     ListEntitiesDetectionV2JobsResponse:
       type: object
       properties:
@@ -2130,7 +2130,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Comprehend Medical; read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med">Role-Based Permissions Required for Asynchronous Operations</a>.'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -2138,7 +2138,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestTokenString'
-            - description: 'A unique identifier for the request. If you don''t set the client request token, Comprehend Medical; generates one for you.'
+            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one for you.'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -2146,7 +2146,7 @@ components:
         LanguageCode:
           allOf:
             - $ref: '#/components/schemas/LanguageCode'
-            - description: The language of the input documents. All documents must be in the same language. Comprehend Medical; processes files in US English (en).
+            - description: The language of the input documents. All documents must be in the same language. Amazon Comprehend Medical processes files in US English (en).
     StartICD10CMInferenceJobResponse:
       type: object
       properties:
@@ -2174,7 +2174,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Comprehend Medical; read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -2182,7 +2182,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestTokenString'
-            - description: 'A unique identifier for the request. If you don''t set the client request token, Comprehend Medical; generates one.'
+            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -2218,7 +2218,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Comprehend Medical; read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -2226,7 +2226,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestTokenString'
-            - description: 'A unique identifier for the request. If you don''t set the client request token, Comprehend Medical; generates one.'
+            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -2262,7 +2262,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Comprehend Medical; read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
+            - description: 'The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend Medical read access to your input data. For more information, see <a href="https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med"> Role-Based Permissions Required for Asynchronous Operations</a>.'
         JobName:
           allOf:
             - $ref: '#/components/schemas/JobName'
@@ -2270,7 +2270,7 @@ components:
         ClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestTokenString'
-            - description: 'A unique identifier for the request. If you don''t set the client request token, Comprehend Medical; generates one.'
+            - description: 'A unique identifier for the request. If you don''t set the client request token, Amazon Comprehend Medical generates one.'
         KMSKey:
           allOf:
             - $ref: '#/components/schemas/KMSKey'
@@ -2511,11 +2511,11 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Comprehend Medical; has that the segment of text is correctly recognized as an attribute. '
+            - description: ' The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
         RelationshipScore:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Comprehend Medical; has that this attribute is correctly related to this entity. '
+            - description: ' The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. '
         RelationshipType:
           allOf:
             - $ref: '#/components/schemas/RelationshipType'
@@ -2571,7 +2571,7 @@ components:
         OriginalTextCharacters:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The number of characters present in the input text document as processed by Comprehend Medical. '
+            - description: ' The number of characters present in the input text document as processed by Amazon Comprehend Medical. '
       description: ' The number of characters in the input text to be analyzed. '
     ClientRequestTokenString:
       type: string
@@ -2629,7 +2629,7 @@ components:
         S3Bucket:
           allOf:
             - $ref: '#/components/schemas/S3Bucket'
-            - description: <p>The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling.</p> <p>Each file in the document collection must be less than 40 KB. You can store a maximum of 30 GB in the bucket.</p>
+            - description: The URI of the S3 bucket that contains the input data. The bucket must be in the same region as the API endpoint that you are calling.
         S3Key:
           allOf:
             - $ref: '#/components/schemas/S3Key'
@@ -2647,7 +2647,7 @@ components:
         S3Key:
           allOf:
             - $ref: '#/components/schemas/S3Key'
-            - description: The path to the output data files in the S3 bucket. Comprehend Medical; creates an output directory using the job ID so that the output from one job does not overwrite the output of another.
+            - description: The path to the output data files in the S3 bucket. Amazon Comprehend Medical creates an output directory using the job ID so that the output from one job does not overwrite the output of another.
       description: The output properties for a detection job.
     LanguageCode:
       type: string
@@ -2715,7 +2715,7 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Comprehend Medical; read access to your input data.
+            - description: The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical read access to your input data.
         ManifestFilePath:
           allOf:
             - $ref: '#/components/schemas/ManifestFilePath'
@@ -2759,7 +2759,7 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Comprehend Medical; has in the accuracy of the detection.
+            - description: The level of confidence that Amazon Comprehend Medical has in the accuracy of the detection.
         Text:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2950,7 +2950,7 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Comprehend Medical; has that the segment of text is correctly recognized as a trait.
+            - description: The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as a trait.
       description: 'Contextual information for the entity. The traits recognized by InferICD10CM are <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and <code>NEGATION</code>.'
     RxNormEntityList:
       type: array
@@ -3013,7 +3013,7 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute.
+            - description: The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute.
         RelationshipScore:
           allOf:
             - $ref: '#/components/schemas/Float'
@@ -3110,11 +3110,11 @@ components:
         Traits:
           allOf:
             - $ref: '#/components/schemas/RxNormTraitList'
-            - description: ' Contextual information for the entity.'
+            - description: Contextual information for the entity.
         RxNormConcepts:
           allOf:
             - $ref: '#/components/schemas/RxNormConceptList'
-            - description: ' The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.'
+            - description: 'The RxNorm concepts that the entity could refer to, along with a score indicating the likelihood of the match.'
       description: 'The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. '
     RxNormTraitName:
       type: string
@@ -3180,11 +3180,11 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
+            - description: ' The level of confidence that Amazon Comprehend Medical has that the segment of text is correctly recognized as an attribute. '
         RelationshipScore:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Comprehend Medical has that this attribute is correctly related to this entity. '
+            - description: ' The level of confidence that Amazon Comprehend Medical has that this attribute is correctly related to this entity. '
         RelationshipType:
           allOf:
             - $ref: '#/components/schemas/SNOMEDCTRelationshipType'
@@ -3232,7 +3232,7 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence Comprehend Medical has that the entity should be linked to the identified SNOMED-CT concept. '
+            - description: ' The level of confidence Amazon Comprehend Medical has that the entity should be linked to the identified SNOMED-CT concept. '
       description: ' The SNOMED-CT concepts that the entity could refer to, along with a score indicating the likelihood of the match. '
     SNOMEDCTEntityType:
       type: string
@@ -3263,7 +3263,7 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Comprehend Medical has in the accuracy of the detected entity. '
+            - description: ' The level of confidence that Amazon Comprehend Medical has in the accuracy of the detected entity. '
         BeginOffset:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -3284,7 +3284,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/SNOMEDCTConceptList'
             - description: ' The SNOMED concepts that the entity could refer to, along with a score indicating the likelihood of the match. '
-      description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. '
+      description: ' The collection of medical entities extracted from the input text and their associated information. For each entity, the response provides the entity text, the entity category, where the entity text begins and ends, and the level of confidence that Amazon Comprehend Medical has in the detection and analysis. Attributes and traits of the entity are also returned. '
     SNOMEDCTTraitName:
       type: string
       enum:
@@ -3307,7 +3307,7 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Comprehend Medical has in the accuracy of a detected trait. '
+            - description: ' The level of confidence that Amazon Comprehend Medical has in the accuracy of a detected trait. '
       description: ' Contextual information for an entity. '
     Trait:
       type: object
@@ -3319,7 +3319,7 @@ components:
         Score:
           allOf:
             - $ref: '#/components/schemas/Float'
-            - description: ' The level of confidence that Comprehend Medical; has in the accuracy of this trait.'
+            - description: ' The level of confidence that Amazon Comprehend Medical has in the accuracy of this trait.'
       description: ' Provides contextual information about the extracted entity. '
     UnmappedAttribute:
       type: object
@@ -3332,6 +3332,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Attribute'
             - description: ' The specific attribute that has been extracted but not mapped to an entity. '
-      description: ' An attribute that was extracted, but Comprehend Medical; was unable to relate to an entity. '
+      description: 'An attribute that was extracted, but Amazon Comprehend Medical was unable to relate to an entity. '
 security:
   - hmac: []

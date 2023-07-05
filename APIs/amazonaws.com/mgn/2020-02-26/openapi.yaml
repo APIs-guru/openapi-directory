@@ -160,6 +160,12 @@ paths:
               required:
                 - applicationID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 applicationID:
                   description: Application ID.
                   type: string
@@ -219,6 +225,12 @@ paths:
               required:
                 - waveID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 waveID:
                   description: Wave ID.
                   type: string
@@ -279,6 +291,12 @@ paths:
                 - applicationIDs
                 - waveID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 applicationIDs:
                   description: Application IDs list.
                   type: array
@@ -346,6 +364,12 @@ paths:
                 - applicationID
                 - sourceServerIDs
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 applicationID:
                   description: Application ID.
                   type: string
@@ -413,6 +437,12 @@ paths:
                 - lifeCycle
                 - sourceServerID
               properties:
+                accountID:
+                  description: The request to change the source server migration account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 lifeCycle:
                   description: The request to change the source server migration lifecycle state.
                   type: object
@@ -474,6 +504,12 @@ paths:
               required:
                 - name
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 description:
                   description: Application description.
                   type: string
@@ -489,6 +525,8 @@ paths:
                 tags:
                   description: Application tags.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -560,11 +598,11 @@ paths:
                   properties:
                     iops:
                       allOf:
-                        - $ref: '#/components/schemas/PositiveInteger'
+                        - $ref: '#/components/schemas/Iops'
                         - description: Launch template disk iops configuration.
                     throughput:
                       allOf:
-                        - $ref: '#/components/schemas/PositiveInteger'
+                        - $ref: '#/components/schemas/Throughput'
                         - description: Launch template disk throughput configuration.
                     volumeType:
                       allOf:
@@ -619,11 +657,11 @@ paths:
                   properties:
                     iops:
                       allOf:
-                        - $ref: '#/components/schemas/PositiveInteger'
+                        - $ref: '#/components/schemas/Iops'
                         - description: Launch template disk iops configuration.
                     throughput:
                       allOf:
-                        - $ref: '#/components/schemas/PositiveInteger'
+                        - $ref: '#/components/schemas/Throughput'
                         - description: Launch template disk throughput configuration.
                     volumeType:
                       allOf:
@@ -636,6 +674,8 @@ paths:
                 tags:
                   description: Request to associate tags during creation of a Launch Configuration Template.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 targetInstanceTypeRightSizingMethod:
@@ -708,6 +748,7 @@ paths:
                   description: Request to configure bandwidth throttling during Replication Settings template creation.
                   type: integer
                   minimum: 0
+                  maximum: 10000
                 createPublicIP:
                   description: Request to create Public IP during Replication Settings template creation.
                   type: boolean
@@ -756,15 +797,22 @@ paths:
                 stagingAreaTags:
                   description: Request to configure Staging Area tags during Replication Settings template creation.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 tags:
                   description: Request to configure tags during Replication Settings template creation.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 useDedicatedReplicationServer:
                   description: Request to use Dedicated Replication Servers during Replication Settings template creation.
+                  type: boolean
+                useFipsEndpoint:
+                  description: Request to use Fips Endpoint during Replication Settings template creation.
                   type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -813,6 +861,12 @@ paths:
               required:
                 - name
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 description:
                   description: Wave description.
                   type: string
@@ -828,6 +882,8 @@ paths:
                 tags:
                   description: Wave tags.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -877,6 +933,12 @@ paths:
               required:
                 - applicationID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 applicationID:
                   description: Application ID.
                   type: string
@@ -930,6 +992,12 @@ paths:
               required:
                 - jobID
               properties:
+                accountID:
+                  description: Request to delete Job from service by Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 jobID:
                   description: Request to delete Job from service by Job ID.
                   type: string
@@ -1089,6 +1157,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Request to delete Source Server from service by Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerID:
                   description: Request to delete Source Server from service by Server ID.
                   type: string
@@ -1191,6 +1265,12 @@ paths:
               required:
                 - waveID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 waveID:
                   description: Wave ID.
                   type: string
@@ -1250,6 +1330,12 @@ paths:
               required:
                 - jobID
               properties:
+                accountID:
+                  description: Request to describe Job log Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 jobID:
                   description: Request to describe Job log job ID.
                   type: string
@@ -1317,6 +1403,12 @@ paths:
             schema:
               type: object
               properties:
+                accountID:
+                  description: Request to describe job log items by Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 filters:
                   description: Request to describe Job log filters.
                   type: object
@@ -1542,6 +1634,12 @@ paths:
             schema:
               type: object
               properties:
+                accountID:
+                  description: Request to filter Source Servers list by Accoun ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 filters:
                   description: Request to filter Source Servers list.
                   type: object
@@ -1678,6 +1776,12 @@ paths:
                 - applicationIDs
                 - waveID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 applicationIDs:
                   description: Application IDs list.
                   type: array
@@ -1739,6 +1843,12 @@ paths:
                 - applicationID
                 - sourceServerIDs
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 applicationID:
                   description: Application ID.
                   type: string
@@ -1799,6 +1909,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Request to disconnect Source Server from service by Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerID:
                   description: Request to disconnect Source Server from service by Server ID.
                   type: string
@@ -1858,6 +1974,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Request to finalize Cutover by Source Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerID:
                   description: Request to finalize Cutover by Source Server ID.
                   type: string
@@ -1905,6 +2027,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Request to get Launch Configuration information by Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerID:
                   description: Request to get Launch Configuration information by Source Server ID.
                   type: string
@@ -1952,6 +2080,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Request to get Replication Configuration by Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerID:
                   description: Request to get Replication Configuration by Source Server ID.
                   type: string
@@ -2035,6 +2169,12 @@ paths:
             schema:
               type: object
               properties:
+                accountID:
+                  description: Applications list Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 filters:
                   description: Applications list filters.
                   type: object
@@ -2339,6 +2479,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListManagedAccounts:
+    post:
+      operationId: ListManagedAccounts
+      description: List Managed Accounts.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListManagedAccountsResponse'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                maxResults:
+                  description: List managed accounts request max results.
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: List managed accounts request next token.
+                  type: string
+                  minLength: 0
+                  maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /ListSourceServerActions:
     post:
       operationId: ListSourceServerActions
@@ -2384,6 +2585,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Account ID to return when listing source server post migration custom actions.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 filters:
                   description: Source server post migration custom action filters.
                   type: object
@@ -2531,6 +2738,8 @@ paths:
                 tags:
                   description: Tag resource by Tags.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
   /ListTemplateActions:
@@ -2647,6 +2856,12 @@ paths:
             schema:
               type: object
               properties:
+                accountID:
+                  description: Request account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 filters:
                   description: Waves list filters.
                   type: object
@@ -2716,8 +2931,85 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Mark as archived by Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerID:
                   description: Mark as archived by Source Server ID.
+                  type: string
+                  pattern: '^s-[0-9a-zA-Z]{17}$'
+                  minLength: 19
+                  maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /PauseReplication:
+    post:
+      operationId: PauseReplication
+      description: Pause Replication.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceServer'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceServerID
+              properties:
+                accountID:
+                  description: Pause Replication Request account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
+                sourceServerID:
+                  description: Pause Replication Request source server ID.
                   type: string
                   pattern: '^s-[0-9a-zA-Z]{17}$'
                   minLength: 19
@@ -2779,6 +3071,12 @@ paths:
                 - order
                 - sourceServerID
               properties:
+                accountID:
+                  description: Source server post migration custom account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 actionID:
                   description: Source server post migration custom action ID.
                   type: string
@@ -3039,6 +3337,12 @@ paths:
                 - actionID
                 - sourceServerID
               properties:
+                accountID:
+                  description: Source server post migration account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 actionID:
                   description: Source server post migration custom action ID to remove.
                   type: string
@@ -3119,6 +3423,77 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ResumeReplication:
+    post:
+      operationId: ResumeReplication
+      description: Resume Replication.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceServer'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceServerID
+              properties:
+                accountID:
+                  description: Resume Replication Request account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
+                sourceServerID:
+                  description: Resume Replication Request source server ID.
+                  type: string
+                  pattern: '^s-[0-9a-zA-Z]{17}$'
+                  minLength: 19
+                  maxLength: 19
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /RetryDataReplication:
     post:
       operationId: RetryDataReplication
@@ -3158,6 +3533,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Retry data replication for Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerID:
                   description: Retry data replication for Source Server ID.
                   type: string
@@ -3211,6 +3592,12 @@ paths:
               required:
                 - sourceServerIDs
               properties:
+                accountID:
+                  description: Start Cutover by Account IDs
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerIDs:
                   description: Start Cutover by Source Server IDs.
                   type: array
@@ -3221,6 +3608,8 @@ paths:
                 tags:
                   description: Start Cutover by Tags.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -3424,6 +3813,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Account ID on which to start replication.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerID:
                   description: ID of source server on which to start replication.
                   type: string
@@ -3477,6 +3872,12 @@ paths:
               required:
                 - sourceServerIDs
               properties:
+                accountID:
+                  description: Start Test for Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerIDs:
                   description: Start Test for Source Server IDs.
                   type: array
@@ -3487,8 +3888,81 @@ paths:
                 tags:
                   description: Start Test by Tags.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /StopReplication:
+    post:
+      operationId: StopReplication
+      description: Stop Replication.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceServer'
+        '480':
+          description: UninitializedAccountException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UninitializedAccountException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sourceServerID
+              properties:
+                accountID:
+                  description: Stop Replication Request account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
+                sourceServerID:
+                  description: Stop Replication Request source server ID.
+                  type: string
+                  pattern: '^s-[0-9a-zA-Z]{17}$'
+                  minLength: 19
+                  maxLength: 19
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3536,6 +4010,12 @@ paths:
               required:
                 - sourceServerIDs
               properties:
+                accountID:
+                  description: Terminate Target instance by Account ID
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 sourceServerIDs:
                   description: Terminate Target instance by Source Server IDs.
                   type: array
@@ -3546,6 +4026,8 @@ paths:
                 tags:
                   description: Terminate Target instance by Tags.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
     parameters:
@@ -3595,6 +4077,12 @@ paths:
               required:
                 - applicationID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 applicationID:
                   description: Application ID.
                   type: string
@@ -3648,6 +4136,12 @@ paths:
               required:
                 - waveID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 waveID:
                   description: Wave ID.
                   type: string
@@ -3763,6 +4257,12 @@ paths:
               required:
                 - applicationID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 applicationID:
                   description: Application ID.
                   type: string
@@ -3834,6 +4334,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Update Launch configuration Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 bootMode:
                   description: Update Launch configuration boot mode request.
                   type: string
@@ -3986,11 +4492,11 @@ paths:
                   properties:
                     iops:
                       allOf:
-                        - $ref: '#/components/schemas/PositiveInteger'
+                        - $ref: '#/components/schemas/Iops'
                         - description: Launch template disk iops configuration.
                     throughput:
                       allOf:
-                        - $ref: '#/components/schemas/PositiveInteger'
+                        - $ref: '#/components/schemas/Throughput'
                         - description: Launch template disk throughput configuration.
                     volumeType:
                       allOf:
@@ -4051,11 +4557,11 @@ paths:
                   properties:
                     iops:
                       allOf:
-                        - $ref: '#/components/schemas/PositiveInteger'
+                        - $ref: '#/components/schemas/Iops'
                         - description: Launch template disk iops configuration.
                     throughput:
                       allOf:
-                        - $ref: '#/components/schemas/PositiveInteger'
+                        - $ref: '#/components/schemas/Throughput'
                         - description: Launch template disk throughput configuration.
                     volumeType:
                       allOf:
@@ -4130,6 +4636,12 @@ paths:
               required:
                 - sourceServerID
               properties:
+                accountID:
+                  description: Update replication configuration Account ID request.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 associateDefaultSecurityGroup:
                   description: Update replication configuration associate default Application Migration Service Security group request.
                   type: boolean
@@ -4137,6 +4649,7 @@ paths:
                   description: Update replication configuration bandwidth throttling request.
                   type: integer
                   minimum: 0
+                  maximum: 10000
                 createPublicIP:
                   description: Update replication configuration create Public IP request.
                   type: boolean
@@ -4203,10 +4716,15 @@ paths:
                 stagingAreaTags:
                   description: Update replication configuration Staging Area Tags request.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 useDedicatedReplicationServer:
                   description: Update replication configuration use dedicated Replication Server request.
+                  type: boolean
+                useFipsEndpoint:
+                  description: Update replication configuration use Fips Endpoint.
                   type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4273,6 +4791,7 @@ paths:
                   description: Update replication configuration template bandwidth throttling request.
                   type: integer
                   minimum: 0
+                  maximum: 10000
                 createPublicIP:
                   description: Update replication configuration template create Public IP request.
                   type: boolean
@@ -4327,10 +4846,15 @@ paths:
                 stagingAreaTags:
                   description: Update replication configuration template Staging Area Tags request.
                   type: object
+                  minProperties: 0
+                  maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 useDedicatedReplicationServer:
                   description: Update replication configuration template use dedicated Replication Server request.
+                  type: boolean
+                useFipsEndpoint:
+                  description: Update replication configuration template use Fips Endpoint request.
                   type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4386,6 +4910,12 @@ paths:
                 - replicationType
                 - sourceServerID
               properties:
+                accountID:
+                  description: Account ID on which to update replication type.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 replicationType:
                   description: Replication type to which to update source server.
                   type: string
@@ -4445,6 +4975,12 @@ paths:
               required:
                 - waveID
               properties:
+                accountID:
+                  description: Account ID.
+                  type: string
+                  pattern: '[0-9]{12,}'
+                  minLength: 12
+                  maxLength: 12
                 description:
                   description: Wave description.
                   type: string
@@ -4762,9 +5298,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetInstanceTypeRightSizingMethod'
             - description: Target instance type right-sizing method.
-    PositiveInteger:
+    Iops:
       type: integer
-      minimum: 0
+      minimum: 100
+      maximum: 64000
+    Throughput:
+      type: integer
+      minimum: 125
+      maximum: 1000
     VolumeType:
       type: string
       enum:
@@ -4818,7 +5359,7 @@ components:
             - description: Replication Configuration template associate default Application Migration Service Security group.
         bandwidthThrottling:
           allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
+            - $ref: '#/components/schemas/BandwidthThrottling'
             - description: Replication Configuration template bandwidth throttling.
         createPublicIP:
           allOf:
@@ -4868,6 +5409,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Replication Configuration template use Dedicated Replication Server.
+        useFipsEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Replication Configuration template use Fips Endpoint.
     SecurityGroupID:
       type: string
       pattern: '^sg-[0-9a-fA-F]{8,}$'
@@ -5066,7 +5611,7 @@ components:
             - description: Replication Configuration associate default Application Migration Service Security Group.
         bandwidthThrottling:
           allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
+            - $ref: '#/components/schemas/BandwidthThrottling'
             - description: Replication Configuration set bandwidth throttling.
         createPublicIP:
           allOf:
@@ -5120,6 +5665,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Replication Configuration use Dedicated Replication Server.
+        useFipsEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Replication Configuration use Fips Endpoint.
     InitializeServiceResponse:
       type: object
       properties: {}
@@ -5206,6 +5755,20 @@ components:
         $ref: '#/components/schemas/ImportID'
       minItems: 0
       maxItems: 10
+    ListManagedAccountsResponse:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          allOf:
+            - $ref: '#/components/schemas/ManagedAccounts'
+            - description: List managed accounts response items.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List managed accounts response next token.
+      description: List managed accounts response.
     ListSourceServerActionsResponse:
       type: object
       properties:
@@ -5520,6 +6083,8 @@ components:
       maxLength: 256
     TagsMap:
       type: object
+      minProperties: 0
+      maxProperties: 50
       additionalProperties:
         $ref: '#/components/schemas/TagValue'
     WaveID:
@@ -5539,6 +6104,9 @@ components:
         - NOT_STARTED
         - IN_PROGRESS
         - COMPLETED
+    PositiveInteger:
+      type: integer
+      minimum: 0
     ApplicationIDs:
       type: array
       items:
@@ -5555,6 +6123,10 @@ components:
         - applicationID
       title: ArchiveApplicationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         applicationID:
           allOf:
             - $ref: '#/components/schemas/ApplicationID'
@@ -5565,6 +6137,10 @@ components:
         - waveID
       title: ArchiveWaveRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         waveID:
           allOf:
             - $ref: '#/components/schemas/WaveID'
@@ -5576,6 +6152,10 @@ components:
         - waveID
       title: AssociateApplicationsRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         applicationIDs:
           allOf:
             - $ref: '#/components/schemas/ApplicationIDs'
@@ -5597,6 +6177,10 @@ components:
         - sourceServerIDs
       title: AssociateSourceServersRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         applicationID:
           allOf:
             - $ref: '#/components/schemas/ApplicationID'
@@ -5605,6 +6189,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssociateSourceServersRequestSourceServerIDs'
             - description: Source server IDs list.
+    BandwidthThrottling:
+      type: integer
+      minimum: 0
+      maximum: 10000
     BootMode:
       type: string
       enum:
@@ -5639,6 +6227,10 @@ components:
         - sourceServerID
       title: ChangeServerLifeCycleStateRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: The request to change the source server migration account ID.
         lifeCycle:
           allOf:
             - $ref: '#/components/schemas/ChangeServerLifeCycleStateSourceServerLifecycle'
@@ -5663,6 +6255,10 @@ components:
         - name
       title: CreateApplicationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         description:
           allOf:
             - $ref: '#/components/schemas/ApplicationDescription'
@@ -5680,11 +6276,11 @@ components:
       properties:
         iops:
           allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
+            - $ref: '#/components/schemas/Iops'
             - description: Launch template disk iops configuration.
         throughput:
           allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
+            - $ref: '#/components/schemas/Throughput'
             - description: Launch template disk throughput configuration.
         volumeType:
           allOf:
@@ -5844,7 +6440,7 @@ components:
             - description: Request to associate the default Application Migration Service Security group with the Replication Settings template.
         bandwidthThrottling:
           allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
+            - $ref: '#/components/schemas/BandwidthThrottling'
             - description: Request to configure bandwidth throttling during Replication Settings template creation.
         createPublicIP:
           allOf:
@@ -5890,6 +6486,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Request to use Dedicated Replication Servers during Replication Settings template creation.
+        useFipsEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Request to use Fips Endpoint during Replication Settings template creation.
     WaveDescription:
       type: string
       pattern: '^[^\x00]*$'
@@ -5906,6 +6506,10 @@ components:
         - name
       title: CreateWaveRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         description:
           allOf:
             - $ref: '#/components/schemas/WaveDescription'
@@ -6094,6 +6698,10 @@ components:
         - applicationID
       title: DeleteApplicationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         applicationID:
           allOf:
             - $ref: '#/components/schemas/ApplicationID'
@@ -6109,6 +6717,10 @@ components:
         - jobID
       title: DeleteJobRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to delete Job from service by Account ID.
         jobID:
           allOf:
             - $ref: '#/components/schemas/JobID'
@@ -6139,6 +6751,10 @@ components:
         - sourceServerID
       title: DeleteSourceServerRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to delete Source Server from service by Account ID.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -6164,6 +6780,10 @@ components:
         - waveID
       title: DeleteWaveRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         waveID:
           allOf:
             - $ref: '#/components/schemas/WaveID'
@@ -6182,6 +6802,10 @@ components:
         - jobID
       title: DescribeJobLogItemsRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to describe Job log Account ID.
         jobID:
           allOf:
             - $ref: '#/components/schemas/JobID'
@@ -6218,6 +6842,10 @@ components:
       type: object
       title: DescribeJobsRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to describe job log items by Account ID.
         filters:
           allOf:
             - $ref: '#/components/schemas/DescribeJobsRequestFilters'
@@ -6316,6 +6944,10 @@ components:
       type: object
       title: DescribeSourceServersRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to filter Source Servers list by Accoun ID.
         filters:
           allOf:
             - $ref: '#/components/schemas/DescribeSourceServersRequestFilters'
@@ -6347,6 +6979,10 @@ components:
         - waveID
       title: DisassociateApplicationsRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         applicationIDs:
           allOf:
             - $ref: '#/components/schemas/ApplicationIDs'
@@ -6368,6 +7004,10 @@ components:
         - sourceServerIDs
       title: DisassociateSourceServersRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         applicationID:
           allOf:
             - $ref: '#/components/schemas/ApplicationID'
@@ -6382,6 +7022,10 @@ components:
         - sourceServerID
       title: DisconnectFromServiceRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to disconnect Source Server from service by Account ID.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -6522,6 +7166,10 @@ components:
         - sourceServerID
       title: FinalizeCutoverRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to finalize Cutover by Source Account ID.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -6539,6 +7187,10 @@ components:
         - sourceServerID
       title: GetLaunchConfigurationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to get Launch Configuration information by Account ID.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -6549,6 +7201,10 @@ components:
         - sourceServerID
       title: GetReplicationConfigurationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request to get Replication Configuration by Account ID.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -6584,6 +7240,10 @@ components:
     ImportErrorData:
       type: object
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Import error data source account ID.
         applicationID:
           allOf:
             - $ref: '#/components/schemas/ApplicationID'
@@ -7128,6 +7788,10 @@ components:
       type: object
       title: ListApplicationsRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Applications list Account ID.
         filters:
           allOf:
             - $ref: '#/components/schemas/ListApplicationsRequestFilters'
@@ -7226,6 +7890,25 @@ components:
             - $ref: '#/components/schemas/PaginationToken'
             - description: List imports request next token.
       description: List imports request.
+    ListManagedAccountsRequest:
+      type: object
+      title: ListManagedAccountsRequest
+      properties:
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsType'
+            - description: List managed accounts request max results.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: List managed accounts request next token.
+      description: List managed accounts request.
+    ManagedAccounts:
+      type: array
+      items:
+        $ref: '#/components/schemas/ManagedAccount'
+      minItems: 0
+      maxItems: 1000
     SourceServerActionsRequestFilters:
       type: object
       properties:
@@ -7240,6 +7923,10 @@ components:
         - sourceServerID
       title: ListSourceServerActionsRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID to return when listing source server post migration custom actions.
         filters:
           allOf:
             - $ref: '#/components/schemas/SourceServerActionsRequestFilters'
@@ -7318,6 +8005,10 @@ components:
       type: object
       title: ListWavesRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Request account ID.
         filters:
           allOf:
             - $ref: '#/components/schemas/ListWavesRequestFilters'
@@ -7334,12 +8025,24 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Wave'
+    ManagedAccount:
+      type: object
+      properties:
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: 'Managed account, account ID.'
+      description: Managed account.
     MarkAsArchivedRequest:
       type: object
       required:
         - sourceServerID
       title: MarkAsArchivedRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Mark as archived by Account ID.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -7415,6 +8118,20 @@ components:
             - $ref: '#/components/schemas/SourceServerID'
             - description: Participating server Source Server ID.
       description: Server participating in Job.
+    PauseReplicationRequest:
+      type: object
+      required:
+        - sourceServerID
+      title: PauseReplicationRequest
+      properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Pause Replication Request account ID.
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: Pause Replication Request source server ID.
     PostLaunchActionsLaunchStatusList:
       type: array
       items:
@@ -7444,6 +8161,10 @@ components:
         - sourceServerID
       title: PutSourceServerActionRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Source server post migration custom account ID.
         actionID:
           allOf:
             - $ref: '#/components/schemas/ActionID'
@@ -7569,6 +8290,10 @@ components:
         - sourceServerID
       title: RemoveSourceServerActionRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Source server post migration account ID.
         actionID:
           allOf:
             - $ref: '#/components/schemas/ActionID'
@@ -7614,12 +8339,30 @@ components:
       enum:
         - AGENT_BASED
         - SNAPSHOT_SHIPPING
+    ResumeReplicationRequest:
+      type: object
+      required:
+        - sourceServerID
+      title: ResumeReplicationRequest
+      properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Resume Replication Request account ID.
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: Resume Replication Request source server ID.
     RetryDataReplicationRequest:
       type: object
       required:
         - sourceServerID
       title: RetryDataReplicationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Retry data replication for Account ID.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -7706,6 +8449,10 @@ components:
         - sourceServerIDs
       title: StartCutoverRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Start Cutover by Account IDs
         sourceServerIDs:
           allOf:
             - $ref: '#/components/schemas/StartCutoverRequestSourceServerIDs'
@@ -7755,6 +8502,10 @@ components:
         - sourceServerID
       title: StartReplicationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID on which to start replication.
         sourceServerID:
           allOf:
             - $ref: '#/components/schemas/SourceServerID'
@@ -7771,6 +8522,10 @@ components:
         - sourceServerIDs
       title: StartTestRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Start Test for Account ID.
         sourceServerIDs:
           allOf:
             - $ref: '#/components/schemas/StartTestRequestSourceServerIDs'
@@ -7779,6 +8534,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: Start Test by Tags.
+    StopReplicationRequest:
+      type: object
+      required:
+        - sourceServerID
+      title: StopReplicationRequest
+      properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Stop Replication Request account ID.
+        sourceServerID:
+          allOf:
+            - $ref: '#/components/schemas/SourceServerID'
+            - description: Stop Replication Request source server ID.
     TagKeys:
       type: array
       items:
@@ -7805,6 +8574,10 @@ components:
         - sourceServerIDs
       title: TerminateTargetInstancesRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Terminate Target instance by Account ID
         sourceServerIDs:
           allOf:
             - $ref: '#/components/schemas/TerminateTargetInstancesRequestSourceServerIDs'
@@ -7819,6 +8592,10 @@ components:
         - applicationID
       title: UnarchiveApplicationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         applicationID:
           allOf:
             - $ref: '#/components/schemas/ApplicationID'
@@ -7829,6 +8606,10 @@ components:
         - waveID
       title: UnarchiveWaveRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         waveID:
           allOf:
             - $ref: '#/components/schemas/WaveID'
@@ -7843,6 +8624,10 @@ components:
         - applicationID
       title: UpdateApplicationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         applicationID:
           allOf:
             - $ref: '#/components/schemas/ApplicationID'
@@ -7861,6 +8646,10 @@ components:
         - sourceServerID
       title: UpdateLaunchConfigurationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Update Launch configuration Account ID.
         bootMode:
           allOf:
             - $ref: '#/components/schemas/BootMode'
@@ -7969,13 +8758,17 @@ components:
         - sourceServerID
       title: UpdateReplicationConfigurationRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Update replication configuration Account ID request.
         associateDefaultSecurityGroup:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Update replication configuration associate default Application Migration Service Security group request.
         bandwidthThrottling:
           allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
+            - $ref: '#/components/schemas/BandwidthThrottling'
             - description: Update replication configuration bandwidth throttling request.
         createPublicIP:
           allOf:
@@ -8029,6 +8822,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Update replication configuration use dedicated Replication Server request.
+        useFipsEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Update replication configuration use Fips Endpoint.
     UpdateReplicationConfigurationTemplateRequest:
       type: object
       required:
@@ -8045,7 +8842,7 @@ components:
             - description: Update replication configuration template associate default Application Migration Service Security group request.
         bandwidthThrottling:
           allOf:
-            - $ref: '#/components/schemas/PositiveInteger'
+            - $ref: '#/components/schemas/BandwidthThrottling'
             - description: Update replication configuration template bandwidth throttling request.
         createPublicIP:
           allOf:
@@ -8091,6 +8888,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Update replication configuration template use dedicated Replication Server request.
+        useFipsEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Update replication configuration template use Fips Endpoint request.
     UpdateSourceServerReplicationTypeRequest:
       type: object
       required:
@@ -8098,6 +8899,10 @@ components:
         - sourceServerID
       title: UpdateSourceServerReplicationTypeRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID on which to update replication type.
         replicationType:
           allOf:
             - $ref: '#/components/schemas/ReplicationType'
@@ -8112,6 +8917,10 @@ components:
         - waveID
       title: UpdateWaveRequest
       properties:
+        accountID:
+          allOf:
+            - $ref: '#/components/schemas/AccountID'
+            - description: Account ID.
         description:
           allOf:
             - $ref: '#/components/schemas/WaveDescription'

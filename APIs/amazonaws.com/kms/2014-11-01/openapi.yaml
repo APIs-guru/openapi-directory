@@ -505,6 +505,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '488':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -709,6 +715,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '490':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -1402,6 +1414,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '488':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -1483,6 +1501,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '488':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -1570,6 +1594,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnsupportedOperationException'
+        '489':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -1657,6 +1687,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnsupportedOperationException'
+        '489':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -1738,6 +1774,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '488':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -1813,6 +1855,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '487':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -2877,6 +2925,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '490':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -3041,6 +3095,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '487':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -3106,6 +3166,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '486':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -3131,7 +3197,7 @@ paths:
   /#X-Amz-Target=TrentService.ScheduleKeyDeletion:
     post:
       operationId: ScheduleKeyDeletion
-      description: '<p>Schedules the deletion of a KMS key. By default, KMS applies a waiting period of 30 days, but you can specify a waiting period of 7-30 days. When this operation is successful, the key state of the KMS key changes to <code>PendingDeletion</code> and the key can''t be used in any cryptographic operations. It remains in this state for the duration of the waiting period. Before the waiting period ends, you can use <a>CancelKeyDeletion</a> to cancel the deletion of the KMS key. After the waiting period ends, KMS deletes the KMS key, its key material, and all KMS data associated with it, including all aliases that refer to it.</p> <important> <p>Deleting a KMS key is a destructive and potentially dangerous operation. When a KMS key is deleted, all data that was encrypted under the KMS key is unrecoverable. (The only exception is a <a href="kms/latest/developerguide/multi-region-keys-delete.html">multi-Region replica key</a>, or an asymmetric or HMAC KMS key with imported key material[BUGBUG-link to importing-keys-managing.html#import-delete-key.) To prevent the use of a KMS key without deleting it, use <a>DisableKey</a>. </p> </important> <p>You can schedule the deletion of a multi-Region primary key and its replica keys at any time. However, KMS will not delete a multi-Region primary key with existing replica keys. If you schedule the deletion of a primary key with replicas, its key state changes to <code>PendingReplicaDeletion</code> and it cannot be replicated or used in cryptographic operations. This status can continue indefinitely. When the last of its replicas keys is deleted (not just scheduled), the key state of the primary key changes to <code>PendingDeletion</code> and its waiting period (<code>PendingWindowInDays</code>) begins. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-delete.html">Deleting multi-Region keys</a> in the <i>Key Management Service Developer Guide</i>.</p> <p>When KMS <a href="https://docs.aws.amazon.com/kms/latest/developerguide/delete-cmk-keystore.html">deletes a KMS key from an CloudHSM key store</a>, it makes a best effort to delete the associated key material from the associated CloudHSM cluster. However, you might need to manually <a href="https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key">delete the orphaned key material</a> from the cluster and its backups. <a href="https://docs.aws.amazon.com/kms/latest/developerguide/delete-xks-key.html">Deleting a KMS key from an external key store</a> has no effect on the associated external key. However, for both types of custom key stores, deleting a KMS key is destructive and irreversible. You cannot decrypt ciphertext encrypted under the KMS key by using only its associated external key or CloudHSM key. Also, you cannot recreate a KMS key in an external key store by creating a new KMS key with the same key material.</p> <p>For more information about scheduling a KMS key for deletion, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">Deleting KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p> <p>The KMS key that you use for this operation must be in a compatible key state. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p> <p> <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p> <p> <b>Required permissions</b>: kms:ScheduleKeyDeletion (key policy)</p> <p> <b>Related operations</b> </p> <ul> <li> <p> <a>CancelKeyDeletion</a> </p> </li> <li> <p> <a>DisableKey</a> </p> </li> </ul>'
+      description: '<p>Schedules the deletion of a KMS key. By default, KMS applies a waiting period of 30 days, but you can specify a waiting period of 7-30 days. When this operation is successful, the key state of the KMS key changes to <code>PendingDeletion</code> and the key can''t be used in any cryptographic operations. It remains in this state for the duration of the waiting period. Before the waiting period ends, you can use <a>CancelKeyDeletion</a> to cancel the deletion of the KMS key. After the waiting period ends, KMS deletes the KMS key, its key material, and all KMS data associated with it, including all aliases that refer to it.</p> <important> <p>Deleting a KMS key is a destructive and potentially dangerous operation. When a KMS key is deleted, all data that was encrypted under the KMS key is unrecoverable. (The only exception is a <a href="kms/latest/developerguide/multi-region-keys-delete.html">multi-Region replica key</a>, or an <a href="kms/latest/developerguide/importing-keys-managing.html#import-delete-key">asymmetric or HMAC KMS key with imported key material</a>.) To prevent the use of a KMS key without deleting it, use <a>DisableKey</a>. </p> </important> <p>You can schedule the deletion of a multi-Region primary key and its replica keys at any time. However, KMS will not delete a multi-Region primary key with existing replica keys. If you schedule the deletion of a primary key with replicas, its key state changes to <code>PendingReplicaDeletion</code> and it cannot be replicated or used in cryptographic operations. This status can continue indefinitely. When the last of its replicas keys is deleted (not just scheduled), the key state of the primary key changes to <code>PendingDeletion</code> and its waiting period (<code>PendingWindowInDays</code>) begins. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-delete.html">Deleting multi-Region keys</a> in the <i>Key Management Service Developer Guide</i>.</p> <p>When KMS <a href="https://docs.aws.amazon.com/kms/latest/developerguide/delete-cmk-keystore.html">deletes a KMS key from an CloudHSM key store</a>, it makes a best effort to delete the associated key material from the associated CloudHSM cluster. However, you might need to manually <a href="https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key">delete the orphaned key material</a> from the cluster and its backups. <a href="https://docs.aws.amazon.com/kms/latest/developerguide/delete-xks-key.html">Deleting a KMS key from an external key store</a> has no effect on the associated external key. However, for both types of custom key stores, deleting a KMS key is destructive and irreversible. You cannot decrypt ciphertext encrypted under the KMS key by using only its associated external key or CloudHSM key. Also, you cannot recreate a KMS key in an external key store by creating a new KMS key with the same key material.</p> <p>For more information about scheduling a KMS key for deletion, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html">Deleting KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p> <p>The KMS key that you use for this operation must be in a compatible key state. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p> <p> <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p> <p> <b>Required permissions</b>: kms:ScheduleKeyDeletion (key policy)</p> <p> <b>Related operations</b> </p> <ul> <li> <p> <a>CancelKeyDeletion</a> </p> </li> <li> <p> <a>DisableKey</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -3250,6 +3316,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '488':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -3779,6 +3851,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidSignatureException'
+        '489':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -3860,6 +3938,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/KMSInvalidStateException'
+        '488':
+          description: DryRunOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DryRunOperationException'
       requestBody:
         required: true
         content:
@@ -4112,8 +4196,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantNameType'
             - description: '<p>A friendly name for the grant. Use this value to prevent the unintended creation of duplicate grants when retrying this request.</p> <important> <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p> </important> <p>When this value is absent, all <code>CreateGrant</code> requests result in a new grant with a unique <code>GrantId</code> even if all the supplied parameters are identical. This can result in unintended duplicates when you retry the <code>CreateGrant</code> request.</p> <p>When this value is present, you can retry a <code>CreateGrant</code> request with identical parameters; if the grant already exists, the original <code>GrantId</code> is returned without creating a new grant. Note that the returned grant token is unique with every <code>CreateGrant</code> request, even when a duplicate <code>GrantId</code> is returned. All grant tokens for the same grant ID can be used interchangeably.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     DisabledException: {}
     InvalidGrantTokenException: {}
+    DryRunOperationException: {}
     CreateKeyResponse:
       type: object
       example:
@@ -4249,6 +4338,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecipientInfo'
             - description: '<p>A signed <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc">attestation document</a> from an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave''s public key. The only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p> <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this parameter, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK.</p> <p>When you use this parameter, instead of returning the plaintext data, KMS encrypts the plaintext data with the public key in the attestation document, and returns the resulting ciphertext in the <code>CiphertextForRecipient</code> field in the response. This ciphertext can be decrypted only with the private key in the enclave. The <code>Plaintext</code> field in the response is null or empty.</p> <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     InvalidCiphertextException: {}
     KeyUnavailableException: {}
     IncorrectKeyException: {}
@@ -4478,6 +4571,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EncryptionAlgorithmSpec'
             - description: '<p>Specifies the encryption algorithm that KMS will use to encrypt the plaintext message. The algorithm must be compatible with the KMS key that you specify.</p> <p>This parameter is required only for asymmetric KMS keys. The default value, <code>SYMMETRIC_DEFAULT</code>, is the algorithm used for symmetric encryption KMS keys. If you are using an asymmetric KMS key, we recommend RSAES_OAEP_SHA_256.</p> <p>The SM2PKE algorithm is only available in China Regions.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     GenerateDataKeyResponse:
       type: object
       example:
@@ -4532,6 +4629,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecipientInfo'
             - description: '<p>A signed <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc">attestation document</a> from an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave''s public key. The only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p> <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this parameter, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK.</p> <p>When you use this parameter, instead of returning the plaintext data key, KMS encrypts the plaintext data key under the public key in the attestation document, and returns the resulting ciphertext in the <code>CiphertextForRecipient</code> field in the response. This ciphertext can be decrypted only with the private key in the enclave. The <code>CiphertextBlob</code> field in the response contains a copy of the data key encrypted under the KMS key specified by the <code>KeyId</code> parameter. The <code>Plaintext</code> field in the response is null or empty.</p> <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     GenerateDataKeyPairResponse:
       type: object
       example:
@@ -4593,6 +4694,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecipientInfo'
             - description: '<p>A signed <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc">attestation document</a> from an Amazon Web Services Nitro enclave and the encryption algorithm to use with the enclave''s public key. The only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p> <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves. To include this parameter, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK.</p> <p>When you use this parameter, instead of returning a plaintext copy of the private data key, KMS encrypts the plaintext private data key under the public key in the attestation document, and returns the resulting ciphertext in the <code>CiphertextForRecipient</code> field in the response. This ciphertext can be decrypted only with the private key in the enclave. The <code>CiphertextBlob</code> field in the response contains a copy of the private data key encrypted under the KMS key specified by the <code>KeyId</code> parameter. The <code>PrivateKeyPlaintext</code> field in the response is null or empty.</p> <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html">How Amazon Web Services Nitro Enclaves uses KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     GenerateDataKeyPairWithoutPlaintextResponse:
       type: object
       example:
@@ -4640,6 +4745,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantTokenList'
             - description: '<p>A list of grant tokens.</p> <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a grant token</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     GenerateDataKeyWithoutPlaintextResponse:
       type: object
       example:
@@ -4680,6 +4789,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantTokenList'
             - description: '<p>A list of grant tokens.</p> <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a grant token</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     GenerateMacResponse:
       type: object
       example:
@@ -4723,6 +4836,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantTokenList'
             - description: '<p>A list of grant tokens.</p> <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a grant token</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     GenerateRandomResponse:
       type: object
       example:
@@ -5284,6 +5401,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantTokenList'
             - description: '<p>A list of grant tokens.</p> <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a grant token</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     ReplicateKeyResponse:
       type: object
       example:
@@ -5375,6 +5496,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantIdType'
             - description: '<p>Identifies the grant to retire. To get the grant ID, use <a>CreateGrant</a>, <a>ListGrants</a>, or <a>ListRetirableGrants</a>.</p> <ul> <li> <p>Grant ID Example - 0123456789012345678901234567890123456789012345678901234567890123</p> </li> </ul>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     RevokeGrantRequest:
       type: object
       required:
@@ -5390,6 +5515,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantIdType'
             - description: 'Identifies the grant to revoke. To get the grant ID, use <a>CreateGrant</a>, <a>ListGrants</a>, or <a>ListRetirableGrants</a>.'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     ScheduleKeyDeletionResponse:
       type: object
       example:
@@ -5425,7 +5554,7 @@ components:
         PendingWindowInDays:
           allOf:
             - $ref: '#/components/schemas/PendingWindowInDaysType'
-            - description: '<p>The waiting period, specified in number of days. After the waiting period ends, KMS deletes the KMS key.</p> <p>If the KMS key is a multi-Region primary key with replica keys, the waiting period begins when the last of its replica keys is deleted. Otherwise, the waiting period begins immediately.</p> <p>This value is optional. If you include a value, it must be between 7 and 30, inclusive. If you do not include a value, it defaults to 30. You can use the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-pending-deletion-window"> <code>kms:ScheduleKeyDeletionPendingWindowInDays</code> </a> condition key to further constrain the values that principals can specify in the <code>PendingWindowInDays</code> parameter.</p>'
+            - description: '<p>The waiting period, specified in number of days. After the waiting period ends, KMS deletes the KMS key.</p> <p>If the KMS key is a multi-Region primary key with replica keys, the waiting period begins when the last of its replica keys is deleted. Otherwise, the waiting period begins immediately.</p> <p>This value is optional. If you include a value, it must be between 7 and 30, inclusive. If you do not include a value, it defaults to 30. You can use the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-schedule-key-deletion-pending-window-in-days"> <code>kms:ScheduleKeyDeletionPendingWindowInDays</code> </a> condition key to further constrain the values that principals can specify in the <code>PendingWindowInDays</code> parameter.</p>'
     SignResponse:
       type: object
       example:
@@ -5473,6 +5602,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SigningAlgorithmSpec'
             - description: '<p>Specifies the signing algorithm to use when signing the message. </p> <p>Choose an algorithm that is compatible with the type and size of the specified asymmetric KMS key. When signing with RSA key pairs, RSASSA-PSS algorithms are preferred. We include RSASSA-PKCS1-v1_5 algorithms for compatibility with existing applications.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     TagResourceRequest:
       type: object
       required:
@@ -5647,6 +5780,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantTokenList'
             - description: '<p>A list of grant tokens.</p> <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a grant token</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     KMSInvalidSignatureException: {}
     VerifyMacResponse:
       type: object
@@ -5696,6 +5833,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GrantTokenList'
             - description: '<p>A list of grant tokens.</p> <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token">Using a grant token</a> in the <i>Key Management Service Developer Guide</i>.</p>'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/NullableBooleanType'
+            - description: '<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p> <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html">Testing your KMS API calls</a> in the <i>Key Management Service Developer Guide</i>.</p>'
     KMSInvalidMacException: {}
     AWSAccountIdType:
       type: string
@@ -5884,6 +6025,8 @@ components:
       pattern: '^[a-zA-Z0-9:/_-]+$'
       minLength: 1
       maxLength: 256
+    NullableBooleanType:
+      type: boolean
     GrantTokenType:
       type: string
       minLength: 1
@@ -5952,8 +6095,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Tag'
-    NullableBooleanType:
-      type: boolean
     XksKeyIdType:
       type: string
       pattern: '^[a-zA-Z0-9-_.]+$'
