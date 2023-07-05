@@ -854,6 +854,17 @@ components:
             - THREE_YEAR
             - NONE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - true
+            - false
+            - true
+            - false
+            - true
+            - false
+            - false
         renewalPlan:
           description: The plan this capacity commitment is converted to after commitment_end_time passes. Once the plan is changed, committed period is extended according to commitment plan. Only applicable for ANNUAL and TRIAL commitments.
           enum:
@@ -868,6 +879,17 @@ components:
             - THREE_YEAR
             - NONE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - true
+            - false
+            - true
+            - false
+            - true
+            - false
+            - false
         slotCount:
           description: Number of slots in this commitment.
           format: int64

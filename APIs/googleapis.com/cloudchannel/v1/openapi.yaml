@@ -3848,6 +3848,7 @@ components:
       description: An entitlement is a representation of a customer's ability to use a service.
       properties:
         assignedUnits:
+          deprecated: true
           description: "The current number of users that are assigned a license for the product defined in provisioned_service.skuId. Read-only. Deprecated: Use `parameters` instead."
           format: int32
           type: integer
@@ -3858,6 +3859,7 @@ components:
           description: Optional. The billing account resource name that is used to pay for this entitlement.
           type: string
         channelPartnerId:
+          deprecated: true
           description: "Cloud Identity ID of a channel partner who will be the direct reseller for the customer's order. This field is generally used in 2-tier ordering, where the order is placed by a top-level distributor on behalf of their channel partner or reseller. Required for distributors. Deprecated: `channel_partner_id` has been moved to the Customer."
           type: string
         commitmentSettings:
@@ -3869,6 +3871,7 @@ components:
           readOnly: true
           type: string
         maxUnits:
+          deprecated: true
           description: "Maximum number of units for a non commitment-based Offer, such as Flexible, Trial or Free entitlements. For commitment-based entitlements, this is a read-only field, which only the internal support team can update. Deprecated: Use `parameters` instead."
           format: int32
           type: integer
@@ -3877,6 +3880,7 @@ components:
           readOnly: true
           type: string
         numUnits:
+          deprecated: true
           description: "Number of units for a commitment-based Offer. For example, for seat-based Offers, this would be the number of seats; for license-based Offers, this would be the number of licenses. Required for creating commitment-based Offers. Deprecated: Use `parameters` instead."
           format: int32
           type: integer
@@ -3903,6 +3907,13 @@ components:
             - SUSPENDED
           readOnly: true
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - true
+            - true
+            - false
         purchaseOrderId:
           description: Optional. This purchase order (PO) information is for resellers to use for their company tracking usage. If a purchaseOrderId value is given, it appears in the API responses and shows up in the invoice. The property accepts up to 80 plain text characters. This is only supported for Google Workspace entitlements.
           type: string
@@ -4026,6 +4037,7 @@ components:
       description: Renewal settings for renewable Offers.
       properties:
         disableCommitment:
+          deprecated: true
           description: "If true, disables commitment-based offer on renewal and switches to flexible or pay as you go. Deprecated: Use `payment_plan` instead."
           type: boolean
         enableRenewal:
@@ -4035,6 +4047,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudChannelV1alpha1Period"
           description: Describes how frequently the reseller will be billed, such as once per month.
         paymentOption:
+          deprecated: true
           description: "Set if enable_renewal=true. Deprecated: Use `payment_cycle` instead."
           enum:
             - PAYMENT_OPTION_UNSPECIFIED

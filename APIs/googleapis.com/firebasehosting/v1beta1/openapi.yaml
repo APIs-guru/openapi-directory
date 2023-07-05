@@ -1031,6 +1031,12 @@ components:
             - DOMAIN_VERIFICATION_REQUIRED
             - DOMAIN_VERIFICATION_LOST
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
         updateTime:
           description: Output only. The time at which the domain was last updated.
           format: google-datetime

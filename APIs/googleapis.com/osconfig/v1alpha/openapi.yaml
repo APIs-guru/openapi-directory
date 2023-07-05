@@ -746,6 +746,7 @@ components:
           type: string
       type: object
     InstanceOSPoliciesCompliance:
+      deprecated: true
       description: This API resource represents the OS policies compliance data for a Compute Engine virtual machine (VM) instance at a given point in time. A Compute Engine VM can have multiple OS policy assignments, and each assignment can have multiple OS policies. As a result, multiple OS policies could be applied to a single VM. You can use this API resource to determine both the compliance state of your VM as well as the compliance state of an individual OS policy. For more information, see [View compliance](https://cloud.google.com/compute/docs/os-configuration-management/view-compliance).
       properties:
         detailedState:
@@ -791,6 +792,7 @@ components:
           type: string
       type: object
     InstanceOSPoliciesComplianceOSPolicyCompliance:
+      deprecated: true
       description: Compliance data for an OS policy
       properties:
         osPolicyAssignment:
@@ -1045,6 +1047,7 @@ components:
           type: string
       type: object
     ListInstanceOSPoliciesCompliancesResponse:
+      deprecated: true
       description: A response message for listing OS policies compliance data for all Compute Engine VMs in the given location.
       properties:
         instanceOsPoliciesCompliances:
@@ -1222,6 +1225,7 @@ components:
             $ref: "#/components/schemas/OSPolicyAssignmentInstanceFilterInventory"
           type: array
         osShortNames:
+          deprecated: true
           description: Deprecated. Use the `inventories` field instead. A VM is selected if it's OS short name matches with any of the values provided in this list.
           items:
             type: string
@@ -1425,6 +1429,7 @@ components:
           description: Package repository resource
       type: object
     OSPolicyResourceCompliance:
+      deprecated: true
       description: Compliance data for an OS policy resource.
       properties:
         configSteps:
@@ -1449,6 +1454,7 @@ components:
           type: string
       type: object
     OSPolicyResourceComplianceExecResourceOutput:
+      deprecated: true
       description: ExecResource specific output.
       properties:
         enforcementOutput:
@@ -1457,6 +1463,7 @@ components:
           type: string
       type: object
     OSPolicyResourceConfigStep:
+      deprecated: true
       description: Step performed by the OS Config agent for configuring an `OSPolicyResource` to its desired state.
       properties:
         errorMessage:
@@ -1589,6 +1596,7 @@ components:
           type: array
         osFilter:
           $ref: "#/components/schemas/OSPolicyOSFilter"
+          deprecated: true
           description: Deprecated. Use the `inventory_filters` field instead. Used to specify the OS filter for a resource group
         resources:
           description: Required. List of resources configured for this resource group. The resources are executed in the exact order specified here.
@@ -1839,6 +1847,7 @@ components:
       description: A vulnerability affecting the VM instance.
       properties:
         availableInventoryItemIds:
+          deprecated: true
           description: Corresponds to the `AVAILABLE_PACKAGE` inventory item on the VM. If the vulnerability report was not updated after the VM inventory update, these values might not display in VM inventory. If there is no available fix, the field is empty. The `inventory_item` value specifies the latest `SoftwarePackage` available to the VM that fixes the vulnerability.
           items:
             type: string
@@ -1851,6 +1860,7 @@ components:
           $ref: "#/components/schemas/VulnerabilityReportVulnerabilityDetails"
           description: Contains metadata as per the upstream feed of the operating system and NVD.
         installedInventoryItemIds:
+          deprecated: true
           description: Corresponds to the `INSTALLED_PACKAGE` inventory item on the VM. This field displays the inventory items affected by this vulnerability. If the vulnerability report was not updated after the VM inventory update, these values might not display in VM inventory. For some distros, this field may be empty.
           items:
             type: string

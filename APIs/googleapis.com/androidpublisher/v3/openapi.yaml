@@ -5263,6 +5263,21 @@ components:
               - CAN_VIEW_NON_FINANCIAL_DATA
               - CAN_VIEW_APP_QUALITY
             type: string
+            x-enumDeprecated:
+              - false
+              - true
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
           type: array
         name:
           description: Required. Resource name for this grant, following the pattern "developers/{developer}/users/{email}/grants/{package_name}". If this grant is for a draft app, the app ID will be used in this resource name instead of the package name.
@@ -5395,6 +5410,7 @@ components:
           type: string
         pageInfo:
           $ref: "#/components/schemas/PageInfo"
+          deprecated: true
           description: Deprecated and unset.
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"

@@ -894,6 +894,7 @@ components:
       description: A sequence of media data references representing composite data. Introduced to support Bigstore composite objects. For details, visit http://go/bigstore-composites.
       properties:
         blobRef:
+          deprecated: true
           description: Blobstore v1 reference, set if reference_type is BLOBSTORE_REF This should be the byte representation of a blobstore.BlobRef. Since Blobstore is deprecating v1, use blobstore2_info instead. For now, any v2 blob will also be represented in this field as v1 BlobRef.
           format: byte
           type: string
@@ -1035,13 +1036,16 @@ components:
       description: A reference to data stored on the filesystem, on GFS or in blobstore.
       properties:
         algorithm:
+          deprecated: true
           description: Deprecated, use one of explicit hash type fields instead. Algorithm used for calculating the hash. As of 2011/01/21, "MD5" is the only possible value for this field. New values may be added at any time.
           type: string
         bigstoreObjectRef:
+          deprecated: true
           description: Use object_id instead.
           format: byte
           type: string
         blobRef:
+          deprecated: true
           description: Blobstore v1 reference, set if reference_type is BLOBSTORE_REF This should be the byte representation of a blobstore.BlobRef. Since Blobstore is deprecating v1, use blobstore2_info instead. For now, any v2 blob will also be represented in this field as v1 BlobRef.
           format: byte
           type: string
@@ -1089,6 +1093,7 @@ components:
           description: Original file name
           type: string
         hash:
+          deprecated: true
           description: "Deprecated, use one of explicit hash type fields instead. These two hash related fields will only be populated on Scotty based media uploads and will contain the content of the hash group in the NotificationRequest: http://cs/#google3/uploader/service/proto/upload_listener.proto&q=class:Hash Hex encoded hash value of the uploaded media."
           type: string
         hashVerified:

@@ -2578,6 +2578,9 @@ components:
             - NOT_ENCRYPTED
           readOnly: true
           type: string
+        hostname:
+          description: Host name of the device.
+          type: string
         imei:
           description: Output only. IMEI number of device if GSM device; empty otherwise.
           readOnly: true

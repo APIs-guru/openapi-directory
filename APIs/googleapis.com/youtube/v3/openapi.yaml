@@ -5035,6 +5035,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -5056,7 +5057,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -5125,6 +5128,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -5137,6 +5141,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#captionListResponse".'
           type: string
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -5205,6 +5210,7 @@ components:
       description: Brief description of the live stream cdn settings.
       properties:
         format:
+          deprecated: true
           description: "The format of the video stream that you are sending to Youtube. "
           type: string
         frameRate:
@@ -5255,6 +5261,7 @@ components:
           description: The contentOwnerDetails object encapsulates channel data that is relevant for YouTube Partners linked with the channel.
         conversionPings:
           $ref: "#/components/schemas/ChannelConversionPings"
+          deprecated: true
           description: The conversionPings object encapsulates information about conversion pings that need to be respected by the channel.
         etag:
           description: Etag of this resource.
@@ -5317,6 +5324,7 @@ components:
           $ref: "#/components/schemas/ChannelSettings"
           description: Branding properties for the channel view.
         hints:
+          deprecated: true
           description: Additional experimental branding properties.
           items:
             $ref: "#/components/schemas/PropertyValue"
@@ -5326,6 +5334,7 @@ components:
           description: Branding properties for branding images.
         watch:
           $ref: "#/components/schemas/WatchSettings"
+          deprecated: true
           description: Branding properties for the watch page.
       type: object
     ChannelContentDetails:
@@ -5334,6 +5343,7 @@ components:
         relatedPlaylists:
           properties:
             favorites:
+              deprecated: true
               description: The ID of the playlist that contains the channel"s favorite videos. Use the playlistItems.insert and playlistItems.delete to add or remove items from that list.
               type: string
             likes:
@@ -5343,9 +5353,11 @@ components:
               description: The ID of the playlist that contains the channel"s uploaded videos. Use the videos.insert method to upload new videos and the videos.delete method to delete previously uploaded videos.
               type: string
             watchHistory:
+              deprecated: true
               description: The ID of the playlist that contains the channel"s watch history. Use the playlistItems.insert and playlistItems.delete to add or remove items from that list.
               type: string
             watchLater:
+              deprecated: true
               description: The ID of the playlist that contains the channel"s watch later playlist. Use the playlistItems.insert and playlistItems.delete to add or remove items from that list.
               type: string
           type: object
@@ -5390,6 +5402,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -5411,7 +5424,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -5458,6 +5473,7 @@ components:
         localizations:
           additionalProperties:
             $ref: "#/components/schemas/ChannelSectionLocalization"
+          deprecated: true
           description: Localizations for different languages
           type: object
         snippet:
@@ -5465,6 +5481,7 @@ components:
           description: The snippet object contains basic details about the channel section, such as its type, style and title.
         targeting:
           $ref: "#/components/schemas/ChannelSectionTargeting"
+          deprecated: true
           description: The targeting object contains basic targeting settings about the channel section.
       type: object
     ChannelSectionContentDetails:
@@ -5487,6 +5504,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -5499,6 +5517,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#channelSectionListResponse".'
           type: string
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -5506,6 +5525,7 @@ components:
       description: ChannelSection localization setting
       properties:
         title:
+          deprecated: true
           description: The localized strings for channel section's title.
           type: string
       type: object
@@ -5516,16 +5536,19 @@ components:
           description: The ID that YouTube uses to uniquely identify the channel that published the channel section.
           type: string
         defaultLanguage:
+          deprecated: true
           description: The language of the channel section's default title and description.
           type: string
         localized:
           $ref: "#/components/schemas/ChannelSectionLocalization"
+          deprecated: true
           description: Localized title, read-only.
         position:
           description: The position of the channel section in the channel.
           format: uint32
           type: integer
         style:
+          deprecated: true
           description: The style of the channel section.
           enum:
             - channelsectionStyleUnspecified
@@ -5556,21 +5579,42 @@ components:
             - postedPlaylists
             - subscriptions
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - true
+            - true
+            - false
       type: object
     ChannelSectionTargeting:
       description: ChannelSection targeting setting.
       properties:
         countries:
+          deprecated: true
           description: The country the channel section is targeting.
           items:
             type: string
           type: array
         languages:
+          deprecated: true
           description: The language the channel section is targeting.
           items:
             type: string
           type: array
         regions:
+          deprecated: true
           description: The region the channel section is targeting.
           items:
             type: string
@@ -5585,15 +5629,18 @@ components:
         defaultLanguage:
           type: string
         defaultTab:
+          deprecated: true
           description: Which content tab users should see when viewing the channel.
           type: string
         description:
           description: Specifies the channel description.
           type: string
         featuredChannelsTitle:
+          deprecated: true
           description: Title for the featured channels tab.
           type: string
         featuredChannelsUrls:
+          deprecated: true
           description: The list of featured channels.
           items:
             type: string
@@ -5605,12 +5652,15 @@ components:
           description: Whether user-submitted comments left on the channel page need to be approved by the channel owner to be publicly visible.
           type: boolean
         profileColor:
+          deprecated: true
           description: A prominent color that can be rendered on this channel page.
           type: string
         showBrowseView:
+          deprecated: true
           description: Whether the tab to browse the videos should be displayed.
           type: boolean
         showRelatedChannels:
+          deprecated: true
           description: Whether related channels should be proposed.
           type: boolean
         title:
@@ -5724,6 +5774,7 @@ components:
             type: string
           type: array
         topicIds:
+          deprecated: true
           description: A list of Freebase topic IDs associated with the channel. You can retrieve information about each topic using the Freebase Topic API.
           items:
             type: string
@@ -5752,6 +5803,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -5771,7 +5823,9 @@ components:
           description: General pagination information.
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -5867,6 +5921,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -5886,7 +5941,9 @@ components:
           description: General pagination information.
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -6273,6 +6330,7 @@ components:
             - fcoUnrated
           type: string
         fmocRating:
+          deprecated: true
           description: This property has been deprecated. Use the contentDetails.contentRating.cncRating instead.
           enum:
             - fmocUnspecified
@@ -6438,6 +6496,17 @@ components:
             - lsf21
             - lsfUnrated
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
+            - false
+            - true
+            - false
+            - true
         mccaaRating:
           description: The video's rating from Malta's Film Age-Classification Board.
           enum:
@@ -6920,6 +6989,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -6932,6 +7002,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#i18nRegionListResponse".'
           type: string
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -6950,68 +7021,89 @@ components:
       properties:
         backgroundImageUrl:
           $ref: "#/components/schemas/LocalizedProperty"
+          deprecated: true
           description: The URL for the background image shown on the video watch page. The image should be 1200px by 615px, with a maximum file size of 128k.
         bannerExternalUrl:
           description: This is generated when a ChannelBanner.Insert request has succeeded for the given channel.
           type: string
         bannerImageUrl:
+          deprecated: true
           description: Banner image. Desktop size (1060x175).
           type: string
         bannerMobileExtraHdImageUrl:
+          deprecated: true
           description: Banner image. Mobile size high resolution (1440x395).
           type: string
         bannerMobileHdImageUrl:
+          deprecated: true
           description: Banner image. Mobile size high resolution (1280x360).
           type: string
         bannerMobileImageUrl:
+          deprecated: true
           description: Banner image. Mobile size (640x175).
           type: string
         bannerMobileLowImageUrl:
+          deprecated: true
           description: Banner image. Mobile size low resolution (320x88).
           type: string
         bannerMobileMediumHdImageUrl:
+          deprecated: true
           description: Banner image. Mobile size medium/high resolution (960x263).
           type: string
         bannerTabletExtraHdImageUrl:
+          deprecated: true
           description: Banner image. Tablet size extra high resolution (2560x424).
           type: string
         bannerTabletHdImageUrl:
+          deprecated: true
           description: Banner image. Tablet size high resolution (2276x377).
           type: string
         bannerTabletImageUrl:
+          deprecated: true
           description: Banner image. Tablet size (1707x283).
           type: string
         bannerTabletLowImageUrl:
+          deprecated: true
           description: Banner image. Tablet size low resolution (1138x188).
           type: string
         bannerTvHighImageUrl:
+          deprecated: true
           description: Banner image. TV size high resolution (1920x1080).
           type: string
         bannerTvImageUrl:
+          deprecated: true
           description: Banner image. TV size extra high resolution (2120x1192).
           type: string
         bannerTvLowImageUrl:
+          deprecated: true
           description: Banner image. TV size low resolution (854x480).
           type: string
         bannerTvMediumImageUrl:
+          deprecated: true
           description: Banner image. TV size medium resolution (1280x720).
           type: string
         largeBrandedBannerImageImapScript:
           $ref: "#/components/schemas/LocalizedProperty"
+          deprecated: true
           description: The image map script for the large banner image.
         largeBrandedBannerImageUrl:
           $ref: "#/components/schemas/LocalizedProperty"
+          deprecated: true
           description: The URL for the 854px by 70px image that appears below the video player in the expanded video view of the video watch page.
         smallBrandedBannerImageImapScript:
           $ref: "#/components/schemas/LocalizedProperty"
+          deprecated: true
           description: The image map script for the small banner image.
         smallBrandedBannerImageUrl:
           $ref: "#/components/schemas/LocalizedProperty"
+          deprecated: true
           description: The URL for the 640px by 70px banner image that appears below the video player in the default view of the video watch page. The URL for the image that appears above the top-left corner of the video player. This is a 25-pixel-high image with a flexible width that cannot exceed 170 pixels.
         trackingImageUrl:
+          deprecated: true
           description: The URL for a 1px by 1px tracking pixel that can be used to collect statistics for views of the channel or video pages.
           type: string
         watchIconImageUrl:
+          deprecated: true
           type: string
       type: object
     IngestionInfo:
@@ -7064,6 +7156,11 @@ components:
             - bottomLeft
             - bottomRight
           type: string
+          x-enumDeprecated:
+            - true
+            - false
+            - true
+            - true
         type:
           description: Defines the position type.
           enum:
@@ -7149,6 +7246,7 @@ components:
           description: This setting indicates whether auto stop is enabled for this broadcast. The default value for this property is false. This setting can only be used by Events.
           type: boolean
         enableClosedCaptions:
+          deprecated: true
           description: This setting indicates whether HTTP POST closed captioning is enabled for this broadcast. The ingestion URL of the closed captions is returned through the liveStreams API. This is mutually exclusive with using the closed_captions_type property, and is equivalent to setting closed_captions_type to CLOSED_CAPTIONS_HTTP_POST.
           type: boolean
         enableContentEncryption:
@@ -7161,6 +7259,7 @@ components:
           description: This setting indicates whether the broadcast video can be played in an embedded player. If you choose to archive the video (using the enableArchive property), this setting will also apply to the archived video.
           type: boolean
         enableLowLatency:
+          deprecated: true
           description: Indicates whether this broadcast has low latency enabled.
           type: boolean
         latencyPreference:
@@ -7207,6 +7306,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -7229,7 +7329,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -7474,6 +7576,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -7499,7 +7602,9 @@ components:
           type: integer
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -7519,6 +7624,7 @@ components:
           type: string
         fanFundingEventDetails:
           $ref: "#/components/schemas/LiveChatFanFundingEventDetails"
+          deprecated: true
           description: Details about the funding event, this is only set if the type is 'fanFundingEvent'.
         giftMembershipReceivedDetails:
           $ref: "#/components/schemas/LiveChatGiftMembershipReceivedDetails"
@@ -7600,6 +7706,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -7622,7 +7729,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -7823,6 +7932,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -7844,7 +7954,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -7918,6 +8030,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -7936,7 +8049,9 @@ components:
           $ref: "#/components/schemas/PageInfo"
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -8020,6 +8135,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -8032,6 +8148,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#membershipsLevelListResponse".'
           type: string
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -8134,12 +8251,14 @@ components:
     PlaylistItemContentDetails:
       properties:
         endAt:
+          deprecated: true
           description: The time, measured in seconds from the start of the video, when the video should stop playing. (The playlist owner can specify the times when the video should start and stop playing when the video is played in the context of the playlist.) By default, assume that the video.endTime is the end of the video.
           type: string
         note:
           description: A user-generated note for this item.
           type: string
         startAt:
+          deprecated: true
           description: The time, measured in seconds from the start of the video, when the video should start playing. (The playlist owner can specify the times when the video should start and stop playing when the video is played in the context of the playlist.) The default value is 0.
           type: string
         videoId:
@@ -8237,6 +8356,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -8259,7 +8379,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -8302,6 +8424,7 @@ components:
           format: date-time
           type: string
         tags:
+          deprecated: true
           description: Keyword tags associated with the playlist.
           items:
             type: string
@@ -8487,6 +8610,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -8508,7 +8632,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -8577,6 +8703,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -8595,7 +8722,9 @@ components:
           $ref: "#/components/schemas/PageInfo"
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -8757,6 +8886,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -8769,6 +8899,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#thumbnailSetResponse".'
           type: string
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -8817,6 +8948,7 @@ components:
           description: The processingDetails object encapsulates information about YouTube's progress in processing the uploaded video file. The properties in the object identify the current processing status and an estimate of the time remaining until YouTube finishes processing the video. This part also indicates whether different types of data or content, such as file details or thumbnail images, are available for the video. The processingProgress object is designed to be polled so that the video uploaded can track the progress that YouTube has made in processing the uploaded video file. This data can only be retrieved by the video owner.
         projectDetails:
           $ref: "#/components/schemas/VideoProjectDetails"
+          deprecated: true
           description: "The projectDetails object contains information about the project specific video metadata. b/157517979: This part was never populated after it was added. However, it sees non-zero traffic because there is generated client code in the wild that refers to it [1]. We keep this field and do NOT remove it because otherwise V3 would return an error when this part gets requested [2]. [1] https://developers.google.com/resources/api-libraries/documentation/youtube/v3/csharp/latest/classGoogle_1_1Apis_1_1YouTube_1_1v3_1_1Data_1_1VideoProjectDetails.html [2] http://google3/video/youtube/src/python/servers/data_api/common.py?l=1565-1569&rcl=344141677"
         recordingDetails:
           $ref: "#/components/schemas/VideoRecordingDetails"
@@ -8878,6 +9010,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -8890,6 +9023,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string `"youtube#videoAbuseReportReasonListResponse"`.'
           type: string
         visitorId:
+          deprecated: true
           description: The `visitorId` identifies the visitor.
           type: string
       type: object
@@ -8954,6 +9088,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -8976,7 +9111,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -9034,6 +9171,7 @@ components:
           type: string
         regionRestriction:
           $ref: "#/components/schemas/VideoContentDetailsRegionRestriction"
+          deprecated: true
           description: The regionRestriction object contains information about the countries where a video is (or is not) viewable. The object will contain either the contentDetails.regionRestriction.allowed property or the contentDetails.regionRestriction.blocked property.
       type: object
     VideoContentDetailsRegionRestriction:
@@ -9159,6 +9297,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -9171,6 +9310,7 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#videoGetRatingResponse".'
           type: string
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -9180,6 +9320,7 @@ components:
           description: Etag of this resource.
           type: string
         eventId:
+          deprecated: true
           description: Serialized EventId of the request which produced this response.
           type: string
         items:
@@ -9201,7 +9342,9 @@ components:
           type: string
         tokenPagination:
           $ref: "#/components/schemas/TokenPagination"
+          deprecated: true
         visitorId:
+          deprecated: true
           description: The visitorId identifies the visitor.
           type: string
       type: object
@@ -9409,6 +9552,7 @@ components:
           format: uint64
           type: string
         favoriteCount:
+          deprecated: true
           description: The number of users who currently have the video marked as a favorite video.
           format: uint64
           type: string

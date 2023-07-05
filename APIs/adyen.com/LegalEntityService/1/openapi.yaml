@@ -1314,6 +1314,67 @@ paths:
       x-groupName: Terms of Service
       x-methodName: getTermsOfServiceInformationForLegalEntity
       x-sortIndex: 3
+  "/legalEntities/{id}/termsOfServiceStatus":
+    get:
+      description: Returns the required types of Terms of Service that need to be accepted by a legal entity.
+      operationId: get-legalEntities-id-termsOfServiceStatus
+      parameters:
+        - description: The unique identifier of the legal entity.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                success:
+                  $ref: "#/components/examples/get-legalEntities-id-termsOfServiceStatus-success-200"
+              schema:
+                $ref: "#/components/schemas/CalculateTermsOfServiceStatusResponse"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get Terms of Service status
+      tags:
+        - Terms of Service
+      x-addedInVersion: "1"
+      x-groupName: Terms of Service
+      x-methodName: getTermsOfServiceStatus
+      x-sortIndex: 4
   /themes:
     get:
       description: |+
@@ -1804,6 +1865,12 @@ components:
             createdAt: 2022-12-05T13:36:58.212253Z
             id: TOSA000AB00000000B2AAAB2BA0AA0
             type: adyenIssuing
+    get-legalEntities-id-termsOfServiceStatus-success-200:
+      description: Example response when getting the type of Terms of Service
+      summary: Terms of Service status for a legal entity
+      value:
+        termsOfServiceTypes:
+          - adyenIssuing
     get-themes-id-success-200:
       description: Example response when getting the details of a page theme
       summary: Details of a page theme
@@ -2547,6 +2614,22 @@ components:
           type: array
       required:
         - businessLines
+      type: object
+    CalculateTermsOfServiceStatusResponse:
+      properties:
+        termsOfServiceTypes:
+          description: The type of Terms of Service that the legal entity needs to accept. If empty, no Terms of Service needs to be accepted.
+          items:
+            enum:
+              - adyenAccount
+              - adyenCapital
+              - adyenCard
+              - adyenForPlatformsAdvanced
+              - adyenForPlatformsManage
+              - adyenFranchisee
+              - adyenIssuing
+            type: string
+          type: array
       type: object
     CapabilityProblem:
       properties:
