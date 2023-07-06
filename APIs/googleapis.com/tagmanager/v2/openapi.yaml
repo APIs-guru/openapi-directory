@@ -3134,9 +3134,11 @@ components:
           description: Number of Google tag configs in the container version.
           type: string
         numMacros:
+          deprecated: true
           description: Number of macros in the container version.
           type: string
         numRules:
+          deprecated: true
           description: Number of rules in the container version.
           type: string
         numTags:
@@ -3833,6 +3835,7 @@ components:
           description: GTM Account ID.
           type: string
         blockingRuleId:
+          deprecated: true
           description: Blocking rule IDs. If any of the listed rules evaluate to true, the tag will not fire. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           items:
             type: string
@@ -3852,6 +3855,7 @@ components:
           description: The fingerprint of the GTM Tag as computed at storage time. This value is recomputed whenever the tag is modified.
           type: string
         firingRuleId:
+          deprecated: true
           description: Firing rule IDs. A tag will fire when any of the listed rules are true and all of its blockingRuleIds (if any specified) are false. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           items:
             type: string

@@ -2156,6 +2156,7 @@ components:
           format: int32
           type: integer
         jobErrors:
+          deprecated: true
           description: List of job-level errors. Deprecated, use the job errors under execution_errors instead.
           items:
             $ref: "#/components/schemas/ImportError"
@@ -2263,6 +2264,14 @@ components:
             - IMPORT_JOB_FORMAT_EXPORTED_AZURE_CSV
             - IMPORT_JOB_FORMAT_MANUAL_CSV
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
         path:
           description: The payload path in Google Cloud Storage.
           type: string
@@ -2435,6 +2444,14 @@ components:
             - IMPORT_JOB_FORMAT_EXPORTED_AZURE_CSV
             - IMPORT_JOB_FORMAT_MANUAL_CSV
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
         name:
           description: Output only. The name of the file.
           readOnly: true
@@ -2491,6 +2508,7 @@ components:
           readOnly: true
         gcsPayload:
           $ref: "#/components/schemas/GCSPayloadInfo"
+          deprecated: true
           description: The payload is in Google Cloud Storage.
         inlinePayload:
           $ref: "#/components/schemas/InlinePayloadInfo"
@@ -2536,6 +2554,7 @@ components:
             $ref: "#/components/schemas/ImportError"
           type: array
         rowNumber:
+          deprecated: true
           description: The row number where the error was detected.
           format: int32
           type: integer
@@ -2560,6 +2579,14 @@ components:
             - IMPORT_JOB_FORMAT_EXPORTED_AZURE_CSV
             - IMPORT_JOB_FORMAT_MANUAL_CSV
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
         payload:
           description: List of payload files.
           items:
@@ -3264,6 +3291,7 @@ components:
       properties:
         assetAge:
           $ref: "#/components/schemas/ReportSummaryChartData"
+          deprecated: true
           description: Count of assets grouped by age.
         coreCountHistogram:
           $ref: "#/components/schemas/ReportSummaryHistogramChartData"
@@ -3273,6 +3301,7 @@ components:
           description: Histogram showing a distribution of memory sizes.
         memoryUtilization:
           $ref: "#/components/schemas/ReportSummaryChartData"
+          deprecated: true
           description: Total memory split into Used/Free buckets.
         memoryUtilizationChart:
           $ref: "#/components/schemas/ReportSummaryUtilizationChartData"
@@ -3285,6 +3314,7 @@ components:
           description: Histogram showing a distribution of memory sizes.
         storageUtilization:
           $ref: "#/components/schemas/ReportSummaryChartData"
+          deprecated: true
           description: Total storage split into Used/Free buckets.
         storageUtilizationChart:
           $ref: "#/components/schemas/ReportSummaryUtilizationChartData"
@@ -3382,15 +3412,18 @@ components:
           $ref: "#/components/schemas/Money"
           description: Total monthly cost for this preference set.
         preferredRegion:
+          deprecated: true
           description: Target region for this Preference Set
           type: string
         pricingTrack:
+          deprecated: true
           description: Text describing the pricing track specified for this Preference Set
           type: string
         soleTenantFinding:
           $ref: "#/components/schemas/ReportSummarySoleTenantFinding"
           description: A set of findings that applies to Stole-Tenant machines in the input.
         topPriority:
+          deprecated: true
           description: Text describing the business priority specified for this Preference Set
           type: string
         vmwareEngineFinding:

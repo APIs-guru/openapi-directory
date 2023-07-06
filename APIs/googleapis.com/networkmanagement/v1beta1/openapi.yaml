@@ -755,6 +755,7 @@ components:
           description: Location in which this revision is deployed.
           type: string
         serviceName:
+          deprecated: true
           description: ID of Cloud Run Service this revision belongs to.
           type: string
         serviceUri:
@@ -1186,6 +1187,7 @@ components:
           description: URI of a Compute Engine network.
           type: string
         serviceAccount:
+          deprecated: true
           description: Service account authorized for the instance.
           type: string
         uri:

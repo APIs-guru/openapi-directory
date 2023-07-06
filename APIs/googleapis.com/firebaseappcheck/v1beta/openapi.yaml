@@ -1359,7 +1359,6 @@ components:
       description: Encapsulates an *App Check token*, which are used to access Firebase services protected by App Check.
       properties:
         attestationToken:
-          deprecated: true
           description: An App Check token. App Check tokens are signed [JWTs](https://tools.ietf.org/html/rfc7519) containing claims that identify the attested app and Firebase project. This token is used to access Firebase services protected by App Check.
           type: string
         token:
@@ -1371,7 +1370,6 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaAttestationTokenResponse:
-      deprecated: true
       description: Encapsulates an *App Check token*, which are used to access Firebase services protected by App Check.
       properties:
         attestationToken:
@@ -1410,7 +1408,6 @@ components:
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaBatchGetRecaptchaConfigsResponse:
-      deprecated: true
       description: Response message for the BatchGetRecaptchaConfigs method.
       properties:
         configs:
@@ -1438,7 +1435,6 @@ components:
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaBatchGetSafetyNetConfigsResponse:
-      deprecated: true
       description: Response message for the BatchGetSafetyNetConfigs method.
       properties:
         configs:
@@ -1553,7 +1549,6 @@ components:
           type: string
         attestationToken:
           $ref: "#/components/schemas/GoogleFirebaseAppcheckV1betaAttestationTokenResponse"
-          deprecated: true
           description: Encapsulates an App Check token.
       type: object
     GoogleFirebaseAppcheckV1betaExchangeCustomTokenRequest:
@@ -1607,7 +1602,6 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeRecaptchaTokenRequest:
-      deprecated: true
       description: Request message for the ExchangeRecaptchaToken method.
       properties:
         recaptchaToken:
@@ -1625,7 +1619,6 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest:
-      deprecated: true
       description: Request message for the ExchangeSafetyNetToken method.
       properties:
         safetyNetToken:
@@ -1730,7 +1723,6 @@ components:
           type: array
       type: object
     GoogleFirebaseAppcheckV1betaRecaptchaConfig:
-      deprecated: true
       description: An app's reCAPTCHA v3 configuration object. This configuration is used by ExchangeRecaptchaToken to validate reCAPTCHA tokens issued to apps by reCAPTCHA v3. It also controls certain properties of the returned `AppCheckToken`, such as its ttl.
       properties:
         name:
@@ -1781,7 +1773,6 @@ components:
           type: string
       type: object
     GoogleFirebaseAppcheckV1betaSafetyNetConfig:
-      deprecated: true
       description: An app's SafetyNet configuration object. This configuration controls certain properties of the `AppCheckToken` returned by ExchangeSafetyNetToken, such as its ttl. Note that your registered SHA-256 certificate fingerprints are used to validate tokens issued by SafetyNet; please register them via the Firebase Console or programmatically via the [Firebase Management Service](https://firebase.google.com/docs/projects/api/reference/rest/v1beta1/projects.androidApps.sha/create).
       properties:
         name:

@@ -466,9 +466,11 @@ components:
           description: The Drive item is a folder. Includes information about the type of folder.
         file:
           $ref: "#/components/schemas/File"
+          deprecated: true
           description: This field is deprecated; please use the `driveFile` field instead.
         folder:
           $ref: "#/components/schemas/Folder"
+          deprecated: true
           description: This field is deprecated; please use the `driveFolder` field instead.
         mimeType:
           description: The MIME type of the Drive item. See https://developers.google.com/drive/v3/web/mime-types.
@@ -494,9 +496,11 @@ components:
           description: The Drive item is a folder. Includes information about the type of folder.
         file:
           $ref: "#/components/schemas/File"
+          deprecated: true
           description: This field is deprecated; please use the `driveFile` field instead.
         folder:
           $ref: "#/components/schemas/Folder"
+          deprecated: true
           description: This field is deprecated; please use the `driveFolder` field instead.
         name:
           description: The target Drive item. The format is `items/ITEM_ID`.
@@ -564,6 +568,7 @@ components:
           description: The value that was previously set on the field. If not present, the field was newly set. At least one of {old_value|new_value} is always set.
       type: object
     File:
+      deprecated: true
       description: This item is deprecated; please see `DriveFile` instead.
       properties: {}
       type: object
@@ -584,6 +589,7 @@ components:
           description: The Drive item containing this comment.
       type: object
     Folder:
+      deprecated: true
       description: This item is deprecated; please see `DriveFolder` instead.
       properties:
         type:
@@ -667,6 +673,7 @@ components:
           description: The drive that owns the item.
         teamDrive:
           $ref: "#/components/schemas/TeamDriveReference"
+          deprecated: true
           description: This field is deprecated; please use the `drive` field instead.
         user:
           $ref: "#/components/schemas/User"
@@ -885,6 +892,7 @@ components:
           description: The target is a comment on a Drive file.
         teamDrive:
           $ref: "#/components/schemas/TeamDrive"
+          deprecated: true
           description: This field is deprecated; please use the `drive` field instead.
       type: object
     TargetReference:
@@ -898,9 +906,11 @@ components:
           description: The target is a Drive item.
         teamDrive:
           $ref: "#/components/schemas/TeamDriveReference"
+          deprecated: true
           description: This field is deprecated; please use the `drive` field instead.
       type: object
     TeamDrive:
+      deprecated: true
       description: This item is deprecated; please see `Drive` instead.
       properties:
         name:
@@ -914,6 +924,7 @@ components:
           type: string
       type: object
     TeamDriveReference:
+      deprecated: true
       description: This item is deprecated; please see `DriveReference` instead.
       properties:
         name:

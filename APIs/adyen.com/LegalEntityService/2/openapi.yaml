@@ -2974,13 +2974,6 @@ components:
           description: |-
             Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.
 
-            When providing ID numbers:
-            * For **individual**, the `type` values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.
-
-            When uploading photo IDs:
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.
-
-            When uploading other documents:
             * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.
 
             * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.
@@ -3184,13 +3177,6 @@ components:
           description: |-
             Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.
 
-            When providing ID numbers:
-            * For **individual**, the `type` values can be **driversLicense**, **identityCard**, **nationalIdNumber**, or **passport**.
-
-            When uploading photo IDs:
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, or **passport**.
-
-            When uploading other documents:
             * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **vatDocument**, **proofOfOrganizationTaxInfo**, **proofOfOwnership**, **proofOfIndustry**, or **proofOfFundingOrWealthSource**.
 
             * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **passport**, **proofOfNationalIdNumber**, **proofOfResidency**, **proofOfIndustry**, **proofOfIndividualTaxId**, or **proofOfFundingOrWealthSource**.
@@ -3565,13 +3551,17 @@ components:
           additionalProperties:
             type: boolean
           description: |+
-            Boolean key-value pairs indicating the settings for the hosted onboarding page. The keys are the settings. By default, the values are set to **true**. Set to **false** to not allow the action.
+            Boolean key-value pairs indicating the settings for the hosted onboarding page. The keys are the settings.
 
             Possible keys:
+
+            By default, these values are set to **true**. Set to **false** to not allow the action.
 
             - **changeLegalEntityType**: The user can change their legal entity type.
 
             - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.
+
+            By default, this value is set to **false**. Set to **true** to allow the action.
 
             - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country than the country of their legal entity.
 

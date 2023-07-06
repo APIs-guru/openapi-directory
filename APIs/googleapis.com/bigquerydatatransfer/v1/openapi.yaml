@@ -867,9 +867,11 @@ components:
           description: Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `true`, user can override default schedule.
           type: boolean
         supportsMultipleTransfers:
+          deprecated: true
           description: Deprecated. This field has no effect.
           type: boolean
         transferType:
+          deprecated: true
           description: Deprecated. This field has no effect.
           enum:
             - TRANSFER_TYPE_UNSPECIFIED

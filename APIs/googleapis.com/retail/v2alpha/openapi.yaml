@@ -1496,6 +1496,43 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v2alpha/{parent}:enrolledSolutions":
+    get:
+      description: Lists all the retail API solutions the project has enrolled.
+      operationId: retail.projects.listEnrolledSolutions
+      parameters:
+        - description: "Required. Full resource name of parent. Format: `projects/{project_number_or_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2alphaListEnrolledSolutionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v2alpha/{placement}:predict":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1734,6 +1771,90 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GoogleCloudRetailV2alphaRemoveLocalInventoriesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2alpha/{project}:acceptTerms":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Accepts service terms for this project. By making requests to this API, you agree to the terms of service linked below. https://cloud.google.com/retail/data-use-terms
+      operationId: retail.projects.retailProject.acceptTerms
+      parameters:
+        - description: "Required. Full resource name of the project. Format: `projects/{project_number_or_id}/retailProject`"
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2alphaAcceptTermsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudRetailV2alphaProject"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v2alpha/{project}:enrollSolution":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enrolls retail API solution for the project. Recommendation solution is enrolled by default when your project enables Retail API. You don't need to call this API for the recommendation solution.
+      operationId: retail.projects.enrollSolution
+      parameters:
+        - description: "Required. Full resource name of parent. Format: `projects/{project_number_or_id}`"
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudRetailV2alphaEnrollSolutionRequest"
       responses:
         "200":
           content:
@@ -2315,6 +2436,10 @@ components:
           format: int64
           type: string
       type: object
+    GoogleCloudRetailV2alphaAcceptTermsRequest:
+      description: Request for AcceptTerms method.
+      properties: {}
+      type: object
     GoogleCloudRetailV2alphaAddCatalogAttributeRequest:
       description: Request for CatalogService.AddCatalogAttribute method.
       properties:
@@ -2805,6 +2930,46 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudRetailV2alphaEnrollSolutionMetadata:
+      description: Metadata related to the EnrollSolution method. This will be returned by the google.longrunning.Operation.metadata field.
+      properties: {}
+      type: object
+    GoogleCloudRetailV2alphaEnrollSolutionRequest:
+      description: Request for EnrollSolution method.
+      properties:
+        searchSolutionUseCase:
+          description: Solution use case to enroll. Currently settable for Browse to enroll. It should be only set when [solution] is set as SolutionType.SOLUTION_TYPE_SEARCH or an INVALID_ARGUMENT error is thrown.
+          enum:
+            - SEARCH_SOLUTION_USE_CASE_UNSPECIFIED
+            - SEARCH_SOLUTION_USE_CASE_SEARCH
+            - SEARCH_SOLUTION_USE_CASE_BROWSE
+          type: string
+        solution:
+          description: Required. Solution to enroll.
+          enum:
+            - SOLUTION_TYPE_UNSPECIFIED
+            - SOLUTION_TYPE_RECOMMENDATION
+            - SOLUTION_TYPE_SEARCH
+          type: string
+      type: object
+    GoogleCloudRetailV2alphaEnrollSolutionResponse:
+      description: Response for EnrollSolution method.
+      properties:
+        enrolledSolution:
+          description: Retail API solution that the project has enrolled.
+          enum:
+            - SOLUTION_TYPE_UNSPECIFIED
+            - SOLUTION_TYPE_RECOMMENDATION
+            - SOLUTION_TYPE_SEARCH
+          type: string
+        searchSolutionUseCase:
+          description: Search solution use case that the project has enrolled.
+          enum:
+            - SEARCH_SOLUTION_USE_CASE_UNSPECIFIED
+            - SEARCH_SOLUTION_USE_CASE_SEARCH
+            - SEARCH_SOLUTION_USE_CASE_BROWSE
+          type: string
+      type: object
     GoogleCloudRetailV2alphaExperimentInfo:
       description: Metadata for active A/B testing Experiment.
       properties:
@@ -3099,6 +3264,19 @@ components:
         nextPageToken:
           description: Pagination token, if not returned indicates the last page.
           type: string
+      type: object
+    GoogleCloudRetailV2alphaListEnrolledSolutionsResponse:
+      description: Response for ListEnrolledSolutions method.
+      properties:
+        enrolledSolutions:
+          description: Retail API solutions that the project has enrolled.
+          items:
+            enum:
+              - SOLUTION_TYPE_UNSPECIFIED
+              - SOLUTION_TYPE_RECOMMENDATION
+              - SOLUTION_TYPE_SEARCH
+            type: string
+          type: array
       type: object
     GoogleCloudRetailV2alphaListMerchantCenterAccountLinksResponse:
       description: Response for MerchantCenterAccountLinkService.ListMerchantCenterAccountLinks method.
@@ -3742,6 +3920,24 @@ components:
           type: string
         merchantCenterProductIdField:
           description: "Which field of [Merchant Center Product](/bigquery-transfer/docs/merchant-center-products-schema) should be imported as Product.id. Acceptable values are: * `offerId` (default): Import `offerId` as the product ID. * `itemGroupId`: Import `itemGroupId` as the product ID. Notice that Retail API will choose one item from the ones with the same `itemGroupId`, and use it to represent the item group. If this field is set to an invalid value other than these, an INVALID_ARGUMENT error is returned. If this field is `itemGroupId` and ingestion_product_type is `variant`, an INVALID_ARGUMENT error is returned. See [Product levels](https://cloud.google.com/retail/docs/catalog#product-levels) for more details."
+          type: string
+      type: object
+    GoogleCloudRetailV2alphaProject:
+      description: Metadata that describes a Cloud Retail Project.
+      properties:
+        enrolledSolutions:
+          description: Output only. Retail API solutions that the project has enrolled.
+          items:
+            enum:
+              - SOLUTION_TYPE_UNSPECIFIED
+              - SOLUTION_TYPE_RECOMMENDATION
+              - SOLUTION_TYPE_SEARCH
+            type: string
+          readOnly: true
+          type: array
+        name:
+          description: Output only. Full resource name of the retail project, such as `projects/{project_id_or_number}/retailProject`.
+          readOnly: true
           type: string
       type: object
     GoogleCloudRetailV2alphaPromotion:

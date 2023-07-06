@@ -536,10 +536,12 @@ components:
           description: The java package for the application under test. The default value is determined by examining the application's manifest.
           type: string
         maxDepth:
+          deprecated: true
           description: The max depth of the traversal stack Robo can explore. Needs to be at least 2 to make Robo explore the app beyond the first activity. Default is 50.
           format: int32
           type: integer
         maxSteps:
+          deprecated: true
           description: The max number of steps Robo can execute. Default is no limit.
           format: int32
           type: integer
@@ -1221,6 +1223,7 @@ components:
           description: A string representing the current version of AndroidX Test Orchestrator that is used in the environment. The package is available at https://maven.google.com/web/index.html#androidx.test:orchestrator.
           type: string
         orchestratorVersion:
+          deprecated: true
           description: "Deprecated: Use AndroidX Test Orchestrator going forward. A string representing the current version of Android Test Orchestrator that is used in the environment. The package is available at https://maven.google.com/web/index.html#com.android.support.test:orchestrator."
           type: string
       type: object
@@ -1359,6 +1362,7 @@ components:
     SystraceSetup:
       properties:
         durationSeconds:
+          deprecated: true
           description: Systrace duration in seconds. Should be between 1 and 30 seconds. 0 disables systrace.
           format: int32
           type: integer
@@ -1500,6 +1504,46 @@ components:
             - SERVICE_NOT_ACTIVATED
             - UNKNOWN_PERMISSION_ERROR
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         outcomeSummary:
           description: Output Only. The overall outcome of the test. Only set when the test matrix state is FINISHED.
           enum:
@@ -1580,6 +1624,7 @@ components:
           type: string
         systrace:
           $ref: "#/components/schemas/SystraceSetup"
+          deprecated: true
           description: "Systrace configuration for the run. Deprecated: Systrace used Python 2 which was sunsetted on 2020-01-01. Systrace is no longer supported in the Cloud Testing API, and no Systrace file will be provided in the results."
       type: object
     TestSpecification:

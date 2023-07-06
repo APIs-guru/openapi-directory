@@ -1420,6 +1420,7 @@ components:
           format: float
           type: number
         baseAuPrc:
+          deprecated: true
           description: Output only. The Area Under Precision-Recall Curve metric based on priors. Micro-averaged for the overall evaluation. Deprecated.
           format: float
           type: number
@@ -2856,6 +2857,7 @@ components:
       description: Model evaluation metrics for text sentiment problems.
       properties:
         annotationSpecId:
+          deprecated: true
           description: Output only. The annotation spec ids used for this evaluation. Deprecated .
           items:
             type: string
