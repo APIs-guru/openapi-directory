@@ -14692,7 +14692,7 @@ paths:
   '/accounts/{AwsAccountId}/asset-bundle-export-jobs/export':
     post:
       operationId: StartAssetBundleExportJob
-      description: '<p>Starts an Asset Bundle export job.</p> <p>An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a <code>DescribeAssetBundleExportJob</code> API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a <code>DescribeAssetBundleExportJob</code> API call. Each Amazon QuickSight account can run up to 10 export jobs concurrently.</p> <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>'
+      description: '<p>Starts an Asset Bundle export job.</p> <p>An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a <code>DescribeAssetBundleExportJob</code> API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a <code>DescribeAssetBundleExportJob</code> API call. Each Amazon QuickSight account can run up to 5 export jobs concurrently.</p> <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>'
       responses:
         '200':
           description: Success
@@ -14832,7 +14832,7 @@ paths:
   '/accounts/{AwsAccountId}/asset-bundle-import-jobs/import':
     post:
       operationId: StartAssetBundleImportJob
-      description: '<p>Starts an Asset Bundle import job.</p> <p>An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 10 import jobs concurrently.</p> <p>The API caller must have the necessary <code>"create"</code>, <code>"describe"</code>, and <code>"update"</code> permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.</p>'
+      description: '<p>Starts an Asset Bundle import job.</p> <p>An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 5 import jobs concurrently.</p> <p>The API caller must have the necessary <code>"create"</code>, <code>"describe"</code>, and <code>"update"</code> permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.</p>'
       responses:
         '200':
           description: Success
@@ -14909,7 +14909,7 @@ paths:
                   minLength: 1
                   maxLength: 512
                 AssetBundleImportSource:
-                  description: The source of the asset bundle zip file that contains the data that you want to import.
+                  description: The source of the asset bundle zip file that contains the data that you want to import. The file must be in <code>QUICKSIGHT_JSON</code> format.
                   type: object
                   properties:
                     Body:
@@ -17241,7 +17241,7 @@ components:
         ExportFormat:
           allOf:
             - $ref: '#/components/schemas/AssetBundleExportFormat'
-            - description: The format of the export.
+            - description: The format of the exported asset bundle. A <code>QUICKSIGHT_JSON</code> formatted file can be used to make a <code>StartAssetBundleImportJob</code> API call. A <code>CLOUDFORMATION_JSON</code> formatted file can be used in the CloudFormation console and with the CloudFormation APIs.
         CloudFormationOverridePropertyConfiguration:
           allOf:
             - $ref: '#/components/schemas/AssetBundleCloudFormationOverridePropertyConfiguration'
@@ -19869,7 +19869,6 @@ components:
       required:
         - Column
         - SortDirection
-        - AggregationFunction
       properties:
         Column:
           allOf:
@@ -20952,7 +20951,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
             - description: The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 20 MB.
-      description: The source of the asset bundle zip file that contains the data that you want to import.
+      description: The source of the asset bundle zip file that contains the data that you want to import. The file must be in <code>QUICKSIGHT_JSON</code> format.
     AssetBundleImportSourceDescription:
       type: object
       properties:
@@ -21376,6 +21375,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/PanelConfiguration'
             - description: Configures the display options for each small multiples panel.
+        XAxis:
+          allOf:
+            - $ref: '#/components/schemas/SmallMultiplesAxisProperties'
+            - description: The properties of a small multiples X axis.
+        YAxis:
+          allOf:
+            - $ref: '#/components/schemas/SmallMultiplesAxisProperties'
+            - description: The properties of a small multiples Y axis.
       description: Options that determine the layout and display options of a chart's small multiples.
     ChartAxisLabelOptions:
       type: object
@@ -22432,6 +22439,19 @@ components:
             - $ref: '#/components/schemas/DataColor'
             - description: Determines the color that is applied to null values.
       description: Determines the color scale that is applied to the visual.
+    CustomColorsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomColor'
+      maxItems: 50
+    ColorsConfiguration:
+      type: object
+      properties:
+        CustomColors:
+          allOf:
+            - $ref: '#/components/schemas/CustomColorsList'
+            - description: A list of up to 50 custom colors.
+      description: The color configurations for a column.
     FormatConfiguration:
       type: object
       properties:
@@ -22470,6 +22490,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ColumnRole'
             - description: The role of the column.
+        ColorsConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ColorsConfiguration'
+            - description: The color configurations of the column.
       description: The general configuration of a column.
     ColumnDataRole:
       type: string
@@ -24871,6 +24895,34 @@ components:
             - $ref: '#/components/schemas/URLTargetConfiguration'
             - description: '<p>The target of the <code>CustomActionURLOperation</code>.</p> <p>Valid values are defined as follows:</p> <ul> <li> <p> <code>NEW_TAB</code>: Opens the target URL in a new browser tab.</p> </li> <li> <p> <code>NEW_WINDOW</code>: Opens the target URL in a new browser window.</p> </li> <li> <p> <code>SAME_TAB</code>: Opens the target URL in the same browser tab.</p> </li> </ul>'
       description: The URL operation that opens a link to another webpage.
+    FieldValue:
+      type: string
+      maxLength: 2048
+      format: password
+    SpecialValue:
+      type: string
+      enum:
+        - EMPTY
+        - 'NULL'
+        - OTHER
+    CustomColor:
+      type: object
+      required:
+        - Color
+      properties:
+        FieldValue:
+          allOf:
+            - $ref: '#/components/schemas/FieldValue'
+            - description: The data value that the color is applied to.
+        Color:
+          allOf:
+            - $ref: '#/components/schemas/HexColor'
+            - description: The color that is applied to the data value.
+        SpecialValue:
+          allOf:
+            - $ref: '#/components/schemas/SpecialValue'
+            - description: The value of a special data value.
+      description: Determines the color that's applied to a particular data value in a column.
     CustomContentType:
       type: string
       enum:
@@ -25483,10 +25535,6 @@ components:
       items:
         $ref: '#/components/schemas/DataPathColor'
       maxItems: 5000
-    FieldValue:
-      type: string
-      maxLength: 2048
-      format: password
     DataPathValueList:
       type: array
       items:
@@ -33672,6 +33720,28 @@ components:
             - $ref: '#/components/schemas/ShortRichText'
             - description: 'Rich text. Examples of rich text include bold, underline, and italics.'
       description: '<p>The text format for the title.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
+    SmallMultiplesAxisPlacement:
+      type: string
+      enum:
+        - OUTSIDE
+        - INSIDE
+    SmallMultiplesAxisScale:
+      type: string
+      enum:
+        - SHARED
+        - INDEPENDENT
+    SmallMultiplesAxisProperties:
+      type: object
+      properties:
+        Scale:
+          allOf:
+            - $ref: '#/components/schemas/SmallMultiplesAxisScale'
+            - description: Determines whether scale of the axes are shared or independent. The default value is <code>SHARED</code>.
+        Placement:
+          allOf:
+            - $ref: '#/components/schemas/SmallMultiplesAxisPlacement'
+            - description: 'Defines the placement of the axis. By default, axes are rendered <code>OUTSIDE</code> of the panels. Axes with <code>INDEPENDENT</code> scale are rendered <code>INSIDE</code> the panels.'
+      description: Configures the properties of a chart's axes that are used by small multiples panels.
     VisiblePanelRows:
       type: integer
       minimum: 1
@@ -33725,7 +33795,7 @@ components:
         AssetBundleImportSource:
           allOf:
             - $ref: '#/components/schemas/AssetBundleImportSource'
-            - description: The source of the asset bundle zip file that contains the data that you want to import.
+            - description: 'The source of the asset bundle zip file that contains the data that you want to import. The file must be in <code>QUICKSIGHT_JSON</code> format. '
         OverrideParameters:
           allOf:
             - $ref: '#/components/schemas/AssetBundleImportJobOverrideParameters'

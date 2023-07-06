@@ -701,6 +701,15 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+        - name: key
+          in: query
+          required: false
+          description: 'The optional <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">API key</a> to authorize the request.'
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 1000
+            format: password
       requestBody:
         required: true
         content:
@@ -848,6 +857,15 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+        - name: key
+          in: query
+          required: false
+          description: 'The optional <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">API key</a> to authorize the request.'
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 1000
+            format: password
       requestBody:
         required: true
         content:
@@ -1035,7 +1053,7 @@ paths:
   /metadata/v0/keys:
     post:
       operationId: CreateKey
-      description: '<p>Creates an API key resource in your Amazon Web Services account, which lets you grant <code>geo:GetMap*</code> actions for Amazon Location Map resources to the API key bearer.</p> <important> <p>The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">Using API keys</a>.</p> </important>'
+      description: '<p>Creates an API key resource in your Amazon Web Services account, which lets you grant actions for Amazon Location resources to the API key bearer.</p> <note> <p>For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">Using API keys</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1115,7 +1133,7 @@ paths:
                     AllowActions:
                       allOf:
                         - $ref: '#/components/schemas/ApiKeyRestrictionsAllowActionsList'
-                        - description: '<p>A list of allowed actions that an API key resource grants permissions to perform</p> <note> <p>Currently, the only valid action is <code>geo:GetMap*</code> as an input to the list. For example, <code>["geo:GetMap*"]</code> is valid but <code>["geo:GetMapTile"]</code> is not.</p> </note>'
+                        - description: '<p>A list of allowed actions that an API key resource grants permissions to perform. You must have at least one action for each type of resource. For example, if you have a place resource, you must include at least one place action.</p> <p>The following are valid values for the actions.</p> <ul> <li> <p> <b>Map actions</b> </p> <ul> <li> <p> <code>geo:GetMap*</code> - Allows all actions needed for map rendering.</p> </li> </ul> </li> <li> <p> <b>Place actions</b> </p> <ul> <li> <p> <code>geo:SearchPlaceIndexForText</code> - Allows geocoding.</p> </li> <li> <p> <code>geo:SearchPlaceIndexForPosition</code> - Allows reverse geocoding.</p> </li> <li> <p> <code>geo:SearchPlaceIndexForSuggestions</code> - Allows generating suggestions from text.</p> </li> <li> <p> <code>GetPlace</code> - Allows finding a place by place ID.</p> </li> </ul> </li> <li> <p> <b>Route actions</b> </p> <ul> <li> <p> <code>geo:CalculateRoute</code> - Allows point to point routing.</p> </li> <li> <p> <code>geo:CalculateRouteMatrix</code> - Allows calculating a matrix of routes.</p> </li> </ul> </li> </ul> <note> <p>You must use these strings exactly. For example, to provide access to map rendering, the only valid action is <code>geo:GetMap*</code> as an input to the list. <code>["geo:GetMap*"]</code> is valid but <code>["geo:GetMapTile"]</code> is not. Similarly, you cannot use <code>["geo:SearchPlaceIndexFor*"]</code> - you must list each of the Place actions separately.</p> </note>'
                     AllowReferers:
                       allOf:
                         - $ref: '#/components/schemas/ApiKeyRestrictionsAllowReferersList'
@@ -1123,7 +1141,7 @@ paths:
                     AllowResources:
                       allOf:
                         - $ref: '#/components/schemas/ApiKeyRestrictionsAllowResourcesList'
-                        - description: '<p>A list of allowed resource ARNs that a API key bearer can perform actions on</p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p> <note> <p>In this preview, you can allow only map resources.</p> </note> <p>Requirements:</p> <ul> <li> <p>Must be prefixed with <code>arn</code>.</p> </li> <li> <p> <code>partition</code> and <code>service</code> must not be empty and should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).</p> </li> <li> <p> <code>region</code> and <code>account-id</code> can be empty or should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).</p> </li> <li> <p> <code>resource-id</code> can begin with any character except for forward slash (/) and contain any characters after, including forward slashes to form a path.</p> <p> <code>resource-id</code> can also include wildcard characters, denoted by an asterisk (*).</p> </li> <li> <p> <code>arn</code>, <code>partition</code>, <code>service</code>, <code>region</code>, <code>account-id</code> and <code>resource-id</code> must be delimited by a colon (:).</p> </li> <li> <p>No spaces allowed. For example, <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p> </li> </ul>'
+                        - description: '<p>A list of allowed resource ARNs that a API key bearer can perform actions on.</p> <ul> <li> <p>The ARN must be the correct ARN for a map, place, or route ARN. You may include wildcards in the resource-id to match multiple resources of the same type.</p> </li> <li> <p>The resources must be in the same <code>partition</code>, <code>region</code>, and <code>account-id</code> as the key that is being created.</p> </li> <li> <p>Other than wildcards, you must include the full ARN, including the <code>arn</code>, <code>partition</code>, <code>service</code>, <code>region</code>, <code>account-id</code> and <code>resource-id</code>, delimited by colons (:).</p> </li> <li> <p>No spaces allowed, even with wildcards. For example, <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p> </li> </ul> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>'
                 Tags:
                   description: '<p>Applies one or more tags to the map resource. A tag is a key-value pair that helps manage, identify, search, and filter your resources by labelling them.</p> <p>Format: <code>"key" : "value"</code> </p> <p>Restrictions:</p> <ul> <li> <p>Maximum 50 tags per resource</p> </li> <li> <p>Each resource tag must be unique with a maximum of one value.</p> </li> <li> <p>Maximum key length: 128 Unicode characters in UTF-8</p> </li> <li> <p>Maximum value length: 256 Unicode characters in UTF-8</p> </li> <li> <p>Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @. </p> </li> <li> <p>Cannot use "aws:" as a prefix for a key.</p> </li> </ul>'
                   type: object
@@ -1500,6 +1518,9 @@ paths:
                   type: string
                   minLength: 0
                   maxLength: 1000
+                EventBridgeEnabled:
+                  description: <p>Whether to enable position <code>UPDATE</code> events from this tracker to be sent to EventBridge.</p> <note> <p>You do not need enable this feature to get <code>ENTER</code> and <code>EXIT</code> events for geofences with this tracker. Those events are always sent to EventBridge.</p> </note>
+                  type: boolean
                 KmsKeyId:
                   description: 'A key identifier for an <a href="https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html">Amazon Web Services KMS customer managed key</a>. Enter a key ID, key ARN, alias name, or alias ARN.'
                   type: string
@@ -1785,7 +1806,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeKey
-      description: '<p>Retrieves the API key resource details.</p> <important> <p>The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">Using API keys</a>.</p> </important>'
+      description: Retrieves the API key resource details.
       responses:
         '200':
           description: Success
@@ -1835,7 +1856,7 @@ paths:
             maxLength: 100
     patch:
       operationId: UpdateKey
-      description: '<p>Updates the specified properties of a given API key resource.</p> <important> <p>The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">Using API keys</a>.</p> </important>'
+      description: Updates the specified properties of a given API key resource.
       responses:
         '200':
           description: Success
@@ -1912,7 +1933,7 @@ paths:
                     AllowActions:
                       allOf:
                         - $ref: '#/components/schemas/ApiKeyRestrictionsAllowActionsList'
-                        - description: '<p>A list of allowed actions that an API key resource grants permissions to perform</p> <note> <p>Currently, the only valid action is <code>geo:GetMap*</code> as an input to the list. For example, <code>["geo:GetMap*"]</code> is valid but <code>["geo:GetMapTile"]</code> is not.</p> </note>'
+                        - description: '<p>A list of allowed actions that an API key resource grants permissions to perform. You must have at least one action for each type of resource. For example, if you have a place resource, you must include at least one place action.</p> <p>The following are valid values for the actions.</p> <ul> <li> <p> <b>Map actions</b> </p> <ul> <li> <p> <code>geo:GetMap*</code> - Allows all actions needed for map rendering.</p> </li> </ul> </li> <li> <p> <b>Place actions</b> </p> <ul> <li> <p> <code>geo:SearchPlaceIndexForText</code> - Allows geocoding.</p> </li> <li> <p> <code>geo:SearchPlaceIndexForPosition</code> - Allows reverse geocoding.</p> </li> <li> <p> <code>geo:SearchPlaceIndexForSuggestions</code> - Allows generating suggestions from text.</p> </li> <li> <p> <code>GetPlace</code> - Allows finding a place by place ID.</p> </li> </ul> </li> <li> <p> <b>Route actions</b> </p> <ul> <li> <p> <code>geo:CalculateRoute</code> - Allows point to point routing.</p> </li> <li> <p> <code>geo:CalculateRouteMatrix</code> - Allows calculating a matrix of routes.</p> </li> </ul> </li> </ul> <note> <p>You must use these strings exactly. For example, to provide access to map rendering, the only valid action is <code>geo:GetMap*</code> as an input to the list. <code>["geo:GetMap*"]</code> is valid but <code>["geo:GetMapTile"]</code> is not. Similarly, you cannot use <code>["geo:SearchPlaceIndexFor*"]</code> - you must list each of the Place actions separately.</p> </note>'
                     AllowReferers:
                       allOf:
                         - $ref: '#/components/schemas/ApiKeyRestrictionsAllowReferersList'
@@ -1920,7 +1941,7 @@ paths:
                     AllowResources:
                       allOf:
                         - $ref: '#/components/schemas/ApiKeyRestrictionsAllowResourcesList'
-                        - description: '<p>A list of allowed resource ARNs that a API key bearer can perform actions on</p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p> <note> <p>In this preview, you can allow only map resources.</p> </note> <p>Requirements:</p> <ul> <li> <p>Must be prefixed with <code>arn</code>.</p> </li> <li> <p> <code>partition</code> and <code>service</code> must not be empty and should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).</p> </li> <li> <p> <code>region</code> and <code>account-id</code> can be empty or should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).</p> </li> <li> <p> <code>resource-id</code> can begin with any character except for forward slash (/) and contain any characters after, including forward slashes to form a path.</p> <p> <code>resource-id</code> can also include wildcard characters, denoted by an asterisk (*).</p> </li> <li> <p> <code>arn</code>, <code>partition</code>, <code>service</code>, <code>region</code>, <code>account-id</code> and <code>resource-id</code> must be delimited by a colon (:).</p> </li> <li> <p>No spaces allowed. For example, <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p> </li> </ul>'
+                        - description: '<p>A list of allowed resource ARNs that a API key bearer can perform actions on.</p> <ul> <li> <p>The ARN must be the correct ARN for a map, place, or route ARN. You may include wildcards in the resource-id to match multiple resources of the same type.</p> </li> <li> <p>The resources must be in the same <code>partition</code>, <code>region</code>, and <code>account-id</code> as the key that is being created.</p> </li> <li> <p>Other than wildcards, you must include the full ARN, including the <code>arn</code>, <code>partition</code>, <code>service</code>, <code>region</code>, <code>account-id</code> and <code>resource-id</code>, delimited by colons (:).</p> </li> <li> <p>No spaces allowed, even with wildcards. For example, <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p> </li> </ul> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>'
   '/maps/v0/maps/{MapName}':
     delete:
       operationId: DeleteMap
@@ -2642,6 +2663,9 @@ paths:
                   type: string
                   minLength: 0
                   maxLength: 1000
+                EventBridgeEnabled:
+                  description: <p>Whether to enable position <code>UPDATE</code> events from this tracker to be sent to EventBridge.</p> <note> <p>You do not need enable this feature to get <code>ENTER</code> and <code>EXIT</code> events for geofences with this tracker. Those events are always sent to EventBridge.</p> </note>
+                  type: boolean
                 PositionFiltering:
                   description: '<p>Updates the position filtering for the tracker resource.</p> <p>Valid values:</p> <ul> <li> <p> <code>TimeBased</code> - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID. </p> </li> <li> <p> <code>DistanceBased</code> - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map. </p> </li> <li> <p> <code>AccuracyBased</code> - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This helps educe the effects of GPS noise when displaying device trajectories on a map, and can help control costs by reducing the number of geofence evaluations. </p> </li> </ul>'
                   type: string
@@ -3043,7 +3067,7 @@ paths:
                 - Geometry
               properties:
                 GeofenceProperties:
-                  description: Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
+                  description: '<p>Associates one of more properties with the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence.</p> <p>Format: <code>"key" : "value"</code> </p>'
                   type: object
                   minProperties: 0
                   maxProperties: 3
@@ -3425,6 +3449,15 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+        - name: key
+          in: query
+          required: false
+          description: 'The optional <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">API key</a> to authorize the request.'
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 1000
+            format: password
         - name: language
           in: query
           required: false
@@ -3693,7 +3726,7 @@ paths:
   /metadata/v0/list-keys:
     post:
       operationId: ListKeys
-      description: '<p>Lists API key resources in your Amazon Web Services account.</p> <important> <p>The API keys feature is in preview. We may add, change, or remove features before announcing general availability. For more information, see <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">Using API keys</a>.</p> </important>'
+      description: Lists API key resources in your Amazon Web Services account.
       responses:
         '200':
           description: Success
@@ -4327,6 +4360,15 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+        - name: key
+          in: query
+          required: false
+          description: 'The optional <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">API key</a> to authorize the request.'
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 1000
+            format: password
       requestBody:
         required: true
         content:
@@ -4412,6 +4454,15 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+        - name: key
+          in: query
+          required: false
+          description: 'The optional <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">API key</a> to authorize the request.'
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 1000
+            format: password
       requestBody:
         required: true
         content:
@@ -4524,6 +4575,15 @@ paths:
             pattern: '^[-._\w]+$'
             minLength: 1
             maxLength: 100
+        - name: key
+          in: query
+          required: false
+          description: 'The optional <a href="https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html">API key</a> to authorize the request.'
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 1000
+            format: password
       requestBody:
         required: true
         content:
@@ -4817,7 +4877,7 @@ components:
         GeofenceProperties:
           allOf:
             - $ref: '#/components/schemas/PropertyMap'
-            - description: Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
+            - description: '<p>Associates one of more properties with the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence.</p> <p>Format: <code>"key" : "value"</code> </p>'
         Geometry:
           allOf:
             - $ref: '#/components/schemas/GeofenceGeometry'
@@ -5336,6 +5396,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceDescription'
             - description: The optional description for the tracker resource.
+        EventBridgeEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether <code>UPDATE</code> events from this tracker in EventBridge are enabled. If set to <code>true</code> these events will be sent to EventBridge.
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -5437,7 +5501,7 @@ components:
         GeofenceProperties:
           allOf:
             - $ref: '#/components/schemas/PropertyMap'
-            - description: Contains additional user-defined properties stored with the geofence. An array of key-value pairs.
+            - description: '<p>User defined properties of the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence.</p> <p>Format: <code>"key" : "value"</code> </p>'
         Geometry:
           allOf:
             - $ref: '#/components/schemas/GeofenceGeometry'
@@ -5862,7 +5926,7 @@ components:
         AllowActions:
           allOf:
             - $ref: '#/components/schemas/ApiKeyRestrictionsAllowActionsList'
-            - description: '<p>A list of allowed actions that an API key resource grants permissions to perform</p> <note> <p>Currently, the only valid action is <code>geo:GetMap*</code> as an input to the list. For example, <code>["geo:GetMap*"]</code> is valid but <code>["geo:GetMapTile"]</code> is not.</p> </note>'
+            - description: '<p>A list of allowed actions that an API key resource grants permissions to perform. You must have at least one action for each type of resource. For example, if you have a place resource, you must include at least one place action.</p> <p>The following are valid values for the actions.</p> <ul> <li> <p> <b>Map actions</b> </p> <ul> <li> <p> <code>geo:GetMap*</code> - Allows all actions needed for map rendering.</p> </li> </ul> </li> <li> <p> <b>Place actions</b> </p> <ul> <li> <p> <code>geo:SearchPlaceIndexForText</code> - Allows geocoding.</p> </li> <li> <p> <code>geo:SearchPlaceIndexForPosition</code> - Allows reverse geocoding.</p> </li> <li> <p> <code>geo:SearchPlaceIndexForSuggestions</code> - Allows generating suggestions from text.</p> </li> <li> <p> <code>GetPlace</code> - Allows finding a place by place ID.</p> </li> </ul> </li> <li> <p> <b>Route actions</b> </p> <ul> <li> <p> <code>geo:CalculateRoute</code> - Allows point to point routing.</p> </li> <li> <p> <code>geo:CalculateRouteMatrix</code> - Allows calculating a matrix of routes.</p> </li> </ul> </li> </ul> <note> <p>You must use these strings exactly. For example, to provide access to map rendering, the only valid action is <code>geo:GetMap*</code> as an input to the list. <code>["geo:GetMap*"]</code> is valid but <code>["geo:GetMapTile"]</code> is not. Similarly, you cannot use <code>["geo:SearchPlaceIndexFor*"]</code> - you must list each of the Place actions separately.</p> </note>'
         AllowReferers:
           allOf:
             - $ref: '#/components/schemas/ApiKeyRestrictionsAllowReferersList'
@@ -5870,7 +5934,7 @@ components:
         AllowResources:
           allOf:
             - $ref: '#/components/schemas/ApiKeyRestrictionsAllowResourcesList'
-            - description: '<p>A list of allowed resource ARNs that a API key bearer can perform actions on</p> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p> <note> <p>In this preview, you can allow only map resources.</p> </note> <p>Requirements:</p> <ul> <li> <p>Must be prefixed with <code>arn</code>.</p> </li> <li> <p> <code>partition</code> and <code>service</code> must not be empty and should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).</p> </li> <li> <p> <code>region</code> and <code>account-id</code> can be empty or should begin with only alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-) and periods (.).</p> </li> <li> <p> <code>resource-id</code> can begin with any character except for forward slash (/) and contain any characters after, including forward slashes to form a path.</p> <p> <code>resource-id</code> can also include wildcard characters, denoted by an asterisk (*).</p> </li> <li> <p> <code>arn</code>, <code>partition</code>, <code>service</code>, <code>region</code>, <code>account-id</code> and <code>resource-id</code> must be delimited by a colon (:).</p> </li> <li> <p>No spaces allowed. For example, <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p> </li> </ul>'
+            - description: '<p>A list of allowed resource ARNs that a API key bearer can perform actions on.</p> <ul> <li> <p>The ARN must be the correct ARN for a map, place, or route ARN. You may include wildcards in the resource-id to match multiple resources of the same type.</p> </li> <li> <p>The resources must be in the same <code>partition</code>, <code>region</code>, and <code>account-id</code> as the key that is being created.</p> </li> <li> <p>Other than wildcards, you must include the full ARN, including the <code>arn</code>, <code>partition</code>, <code>service</code>, <code>region</code>, <code>account-id</code> and <code>resource-id</code>, delimited by colons (:).</p> </li> <li> <p>No spaces allowed, even with wildcards. For example, <code>arn:aws:geo:region:<i>account-id</i>:map/ExampleMap*</code>.</p> </li> </ul> <p>For more information about ARN format, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a>.</p>'
       description: 'API Restrictions on the allowed actions, resources, and referers for an API key resource.'
     RefererPattern:
       type: string
@@ -6661,6 +6725,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceDescription'
             - description: An optional description for the tracker resource.
+        EventBridgeEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: <p>Whether to enable position <code>UPDATE</code> events from this tracker to be sent to EventBridge.</p> <note> <p>You do not need enable this feature to get <code>ENTER</code> and <code>EXIT</code> events for geofences with this tracker. Those events are always sent to EventBridge.</p> </note>
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -7126,7 +7194,7 @@ components:
         GeofenceProperties:
           allOf:
             - $ref: '#/components/schemas/PropertyMap'
-            - description: Contains additional user-defined properties stored with the geofence. An array of key-value pairs.
+            - description: '<p>User defined properties of the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence.</p> <p>Format: <code>"key" : "value"</code> </p>'
         Geometry:
           allOf:
             - $ref: '#/components/schemas/GeofenceGeometry'
@@ -7524,7 +7592,7 @@ components:
         GeofenceProperties:
           allOf:
             - $ref: '#/components/schemas/PropertyMap'
-            - description: Specifies additional user-defined properties to store with the Geofence. An array of key-value pairs.
+            - description: '<p>Associates one of more properties with the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence.</p> <p>Format: <code>"key" : "value"</code> </p>'
         Geometry:
           allOf:
             - $ref: '#/components/schemas/GeofenceGeometry'
@@ -8059,6 +8127,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceDescription'
             - description: Updates the description for the tracker resource.
+        EventBridgeEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: <p>Whether to enable position <code>UPDATE</code> events from this tracker to be sent to EventBridge.</p> <note> <p>You do not need enable this feature to get <code>ENTER</code> and <code>EXIT</code> events for geofences with this tracker. Those events are always sent to EventBridge.</p> </note>
         PositionFiltering:
           allOf:
             - $ref: '#/components/schemas/PositionFiltering'

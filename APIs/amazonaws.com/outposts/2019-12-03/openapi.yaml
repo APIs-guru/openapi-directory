@@ -1468,7 +1468,7 @@ paths:
             items:
               $ref: '#/components/schemas/AssetState'
             minItems: 1
-            maxItems: 2
+            maxItems: 3
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2443,6 +2443,7 @@ components:
       enum:
         - ACTIVE
         - RETIRING
+        - ISOLATED
     ListCatalogItemsOutput:
       type: object
       properties:
@@ -2937,7 +2938,7 @@ components:
         OrderType:
           allOf:
             - $ref: '#/components/schemas/OrderType'
-            - description: The type of order.
+            - description: Type of order.
       description: Information about an order.
     OutpostName:
       type: string
@@ -3337,7 +3338,7 @@ components:
         PreviousOrderId:
           allOf:
             - $ref: '#/components/schemas/OrderId'
-            - description: The ID of the previous order.
+            - description: The ID of the previous order item.
       description: Information about a line item.
     MacAddressList:
       type: array
@@ -3368,7 +3369,7 @@ components:
       items:
         $ref: '#/components/schemas/AssetState'
       minItems: 1
-      maxItems: 2
+      maxItems: 3
     ListAssetsInput:
       type: object
       title: ListAssetsInput
@@ -3457,7 +3458,7 @@ components:
         OrderType:
           allOf:
             - $ref: '#/components/schemas/OrderType'
-            - description: The type of order.
+            - description: ' The type of order. '
         Status:
           allOf:
             - $ref: '#/components/schemas/OrderStatus'
