@@ -14295,6 +14295,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TransactionIdString'
             - description: The ID of the transaction.
+        OpenTableFormatInput:
+          allOf:
+            - $ref: '#/components/schemas/OpenTableFormatInput'
+            - description: Specifies an <code>OpenTableFormatInput</code> structure when creating an open format table.
     CreateTriggerResponse:
       type: object
       properties:
@@ -24465,6 +24469,14 @@ components:
       items:
         $ref: '#/components/schemas/PartitionIndex'
       maxItems: 3
+    OpenTableFormatInput:
+      type: object
+      properties:
+        IcebergInput:
+          allOf:
+            - $ref: '#/components/schemas/IcebergInput'
+            - description: Specifies an <code>IcebergInput</code> structure that defines an Apache Iceberg metadata table.
+      description: A structure representing an open format table.
     TriggerType:
       type: string
       enum:
@@ -26605,6 +26617,24 @@ components:
         - lzo
         - uncompressed
         - snappy
+    MetadataOperation:
+      type: string
+      enum:
+        - CREATE
+    IcebergInput:
+      type: object
+      required:
+        - MetadataOperation
+      properties:
+        MetadataOperation:
+          allOf:
+            - $ref: '#/components/schemas/MetadataOperation'
+            - description: A required metadata operation. Can only be set to <code>CREATE</code>.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/VersionString'
+            - description: The table version for the Iceberg table. Defaults to 2.
+      description: A structure that defines an Apache Iceberg metadata table to create in the catalog.
     IcebergTarget:
       type: object
       properties:

@@ -525,6 +525,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.CreateReplicationConfig:
+    post:
+      operationId: CreateReplicationConfig
+      description: Creates a configuration that you can later provide to configure and start an DMS Serverless replication. You can also provide options to validate the configuration inputs before you start the replication.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateReplicationConfigResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '482':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '483':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '484':
+          description: ReplicationSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationSubnetGroupDoesNotCoverEnoughAZs'
+        '485':
+          description: InvalidSubnet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '486':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '487':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReplicationConfigMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.CreateReplicationConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.CreateReplicationInstance:
     post:
       operationId: CreateReplicationInstance
@@ -621,7 +702,7 @@ paths:
   /#X-Amz-Target=AmazonDMSv20160101.CreateReplicationSubnetGroup:
     post:
       operationId: CreateReplicationSubnetGroup
-      description: '<p>Creates a replication subnet group given a list of the subnet IDs in a VPC.</p> <p>The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a <code>ReplicationSubnetGroupDoesNotCoverEnoughAZs</code> exception.</p>'
+      description: '<p>Creates a replication subnet group given a list of the subnet IDs in a VPC.</p> <p>The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a <code>ReplicationSubnetGroupDoesNotCoverEnoughAZs</code> exception.</p> <p>If a replication subnet group exists in your Amazon Web Services account, the CreateReplicationSubnetGroup action returns the following error message: The Replication Subnet Group already exists. In this case, delete the existing replication subnet group. To do so, use the <a href="https://docs.aws.amazon.com/en_us/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html">DeleteReplicationSubnetGroup</a> action. Optionally, choose Subnet groups in the DMS console, then choose your subnet group. Next, choose Delete from Actions.</p>'
       responses:
         '200':
           description: Success
@@ -1020,6 +1101,57 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.DeleteFleetAdvisorDatabases
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DeleteReplicationConfig:
+    post:
+      operationId: DeleteReplicationConfig
+      description: Deletes an DMS Serverless replication configuration. This effectively deprovisions any and all replications that use this configuration. You can't delete the configuration for an DMS Serverless replication that is ongoing. You can delete the configuration when the replication is in a non-RUNNING and non-STARTING state.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteReplicationConfigResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteReplicationConfigMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DeleteReplicationConfig
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2192,6 +2324,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeReplicationConfigs:
+    post:
+      operationId: DescribeReplicationConfigs
+      description: Returns one or more existing DMS Serverless replication configurations as a list of structures.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplicationConfigsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationConfigsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeReplicationConfigs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.DescribeReplicationInstanceTaskLogs:
     post:
       operationId: DescribeReplicationInstanceTaskLogs
@@ -2343,6 +2526,63 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.DescribeReplicationSubnetGroups
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeReplicationTableStatistics:
+    post:
+      operationId: DescribeReplicationTableStatistics
+      description: Returns table and schema statistics for one or more provisioned replications that use a given DMS Serverless replication configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplicationTableStatisticsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationTableStatisticsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeReplicationTableStatistics
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2547,6 +2787,57 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.DescribeReplicationTasks
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeReplications:
+    post:
+      operationId: DescribeReplications
+      description: Provides details on replication progress by returning status information for one or more provisioned DMS Serverless replications.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplicationsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplicationsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeReplications
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2901,6 +3192,75 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.ModifyEventSubscription
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.ModifyReplicationConfig:
+    post:
+      operationId: ModifyReplicationConfig
+      description: '<p>Modifies an existing DMS Serverless replication configuration that you can use to start a replication. This command includes input validation and logic to check the state of any replication that uses this configuration. You can only modify a replication configuration before any replication that uses it has started. As soon as you have initially started a replication with a given configuiration, you can''t modify that configuration, even if you stop it.</p> <p>Other run statuses that allow you to run this command include FAILED and CREATED. A provisioning state that allows you to run this command is FAILED_PROVISION.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyReplicationConfigResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: ReplicationSubnetGroupDoesNotCoverEnoughAZs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReplicationSubnetGroupDoesNotCoverEnoughAZs'
+        '483':
+          description: InvalidSubnet
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidSubnet'
+        '484':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyReplicationConfigMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.ModifyReplicationConfig
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3275,6 +3635,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.ReloadReplicationTables:
+    post:
+      operationId: ReloadReplicationTables
+      description: '<p>Reloads the target database table with the source data for a given DMS Serverless replication configuration.</p> <p>You can only use this operation with a task in the RUNNING state, otherwise the service will throw an <code>InvalidResourceStateFault</code> exception.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReloadReplicationTablesResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReloadReplicationTablesMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.ReloadReplicationTables
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.ReloadTables:
     post:
       operationId: ReloadTables
@@ -3437,6 +3842,57 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.StartRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StartReplication:
+    post:
+      operationId: StartReplication
+      description: 'For a given DMS Serverless replication configuration, DMS connects to the source endpoint and collects the metadata to analyze the replication workload. Using this metadata, DMS then computes and provisions the required capacity and starts replicating to the target endpoint using the server resources that DMS has provisioned for the DMS Serverless replication.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReplicationResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartReplicationMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StartReplication
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3638,6 +4094,57 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.StartReplicationTaskAssessmentRun
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StopReplication:
+    post:
+      operationId: StopReplication
+      description: 'For a given DMS Serverless replication configuration, DMS stops any and all ongoing DMS Serverless replications. This command doesn''t deprovision the stopped replications.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopReplicationResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopReplicationMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StopReplication
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4097,6 +4604,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GcpMySQLSettings'
             - description: Settings in JSON format for the source GCP MySQL endpoint.
+        TimestreamSettings:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamSettings'
+            - description: Settings in JSON format for the target Amazon Timestream endpoint.
       description: <p/>
     KMSKeyNotAccessibleFault: {}
     ResourceAlreadyExistsFault: {}
@@ -4201,6 +4712,68 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.
     S3ResourceNotFoundFault: {}
+    CreateReplicationConfigResponse:
+      type: object
+      properties:
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: Configuration parameters returned from the DMS Serverless replication after it is created.
+      description: <p/>
+    CreateReplicationConfigMessage:
+      type: object
+      required:
+        - ReplicationConfigIdentifier
+        - SourceEndpointArn
+        - TargetEndpointArn
+        - ComputeConfig
+        - ReplicationType
+        - TableMappings
+      title: CreateReplicationConfigMessage
+      properties:
+        ReplicationConfigIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A unique identifier that you want to use to create a <code>ReplicationConfigArn</code> that is returned as part of the output from this action. You can then pass this output <code>ReplicationConfigArn</code> as the value of the <code>ReplicationConfigArn</code> option for other actions to identify both DMS Serverless replications and replication configurations that you want those actions to operate on. For some actions, you can also use either this unique identifier or a corresponding ARN in action filters to identify the specific replication and replication configuration to operate on.'
+        SourceEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the source endpoint for this DMS Serverless replication configuration.
+        TargetEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless replication configuration.
+        ComputeConfig:
+          allOf:
+            - $ref: '#/components/schemas/ComputeConfig'
+            - description: Configuration parameters for provisioning an DMS Serverless replication.
+        ReplicationType:
+          allOf:
+            - $ref: '#/components/schemas/MigrationTypeValue'
+            - description: '<p>The type of DMS Serverless replication to provision using this replication configuration.</p> <p>Possible values:</p> <ul> <li> <p> <code>"full-load"</code> </p> </li> <li> <p> <code>"cdc"</code> </p> </li> <li> <p> <code>"full-load-and-cdc"</code> </p> </li> </ul>'
+        TableMappings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'JSON table mappings for DMS Serverless replications that are provisioned using this replication configuration. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.html"> Specifying table selection and transformations rules using JSON</a>.'
+        ReplicationSettings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Optional JSON settings for DMS Serverless replications that are provisioned using this replication configuration. For example, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.ChangeProcessingTuning.html"> Change processing tuning settings</a>.'
+        SupplementalSettings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Optional JSON settings for specifying supplemental data. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html"> Specifying supplemental data for task settings</a>.'
+        ResourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Optional unique value or name that you set for a given resource that can be used to construct an Amazon Resource Name (ARN) for that resource. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.FineGrainedAccess"> Fine-grained access control using resource names and tags</a>.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'One or more optional tags associated with resources used by the DMS Serverless replication. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tagging.html"> Tagging resources in Database Migration Service</a>.'
+      description: <p/>
+    ReplicationSubnetGroupDoesNotCoverEnoughAZs: {}
+    InvalidSubnet: {}
     CreateReplicationInstanceResponse:
       type: object
       example:
@@ -4262,7 +4835,7 @@ components:
         ReplicationInstanceClass:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>"dms.c4.large"</code>.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth"> Selecting the right DMS replication instance for your migration</a>. </p>'
+            - description: '<p>The compute and memory capacity of the replication instance as defined for the specified replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>"dms.c4.large"</code>.</p> <p>For more information on the settings and capacities for the available replication instance classes, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html "> Choosing the right DMS replication instance</a>; and, <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.SizingReplicationInstance.html">Selecting the best size for a replication instance</a>. </p>'
         VpcSecurityGroupIds:
           allOf:
             - $ref: '#/components/schemas/VpcSecurityGroupIdList'
@@ -4270,7 +4843,7 @@ components:
         AvailabilityZone:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint''s Amazon Web Services Region, for example: <code>us-east-1d</code> '
+            - description: 'The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint''s Amazon Web Services Region, for example: <code>us-east-1d</code>.'
         ReplicationSubnetGroupIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4318,8 +4891,6 @@ components:
       description: <p/>
     InsufficientResourceCapacityFault: {}
     StorageQuotaExceededFault: {}
-    ReplicationSubnetGroupDoesNotCoverEnoughAZs: {}
-    InvalidSubnet: {}
     CreateReplicationSubnetGroupResponse:
       type: object
       example:
@@ -4562,6 +5133,25 @@ components:
             - $ref: '#/components/schemas/StringList'
             - description: The IDs of the Fleet Advisor collector databases to delete.
     InvalidOperationFault: {}
+    DeleteReplicationConfigResponse:
+      type: object
+      properties:
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: Configuration parameters returned for the DMS Serverless replication after it is deleted.
+      description: <p/>
+    DeleteReplicationConfigMessage:
+      type: object
+      required:
+        - ReplicationConfigArn
+      title: DeleteReplicationConfigMessage
+      properties:
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The replication config to delete.
+      description: <p/>
     DeleteReplicationInstanceResponse:
       type: object
       example:
@@ -4842,7 +5432,7 @@ components:
         EngineName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The databse engine used for your source or target endpoint.
+            - description: The database engine used for your source or target endpoint.
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -5289,6 +5879,35 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
       description: <p/>
+    DescribeReplicationConfigsResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+        ReplicationConfigs:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfigList'
+            - description: Returned configuration parameters that describe each provisioned DMS Serverless replication.
+      description: <p/>
+    DescribeReplicationConfigsMessage:
+      type: object
+      title: DescribeReplicationConfigsMessage
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the replication configs.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+      description: <p/>
     DescribeReplicationInstanceTaskLogsResponse:
       type: object
       properties:
@@ -5385,6 +6004,45 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+      description: <p/>
+    DescribeReplicationTableStatisticsResponse:
+      type: object
+      properties:
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name of the replication config.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+        ReplicationTableStatistics:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationTableStatisticsList'
+            - description: 'Returns table statistics on the replication, including table name, rows inserted, rows updated, and rows deleted.'
+      description: <p/>
+    DescribeReplicationTableStatisticsMessage:
+      type: object
+      required:
+        - ReplicationConfigArn
+      title: DescribeReplicationTableStatisticsMessage
+      properties:
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The replication config to describe.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the replication table statistics.
       description: <p/>
     DescribeReplicationTaskAssessmentResultsResponse:
       type: object
@@ -5512,6 +6170,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'An option to set to avoid returning information about settings. Use this to reduce overhead when setting information is too large. To use this option, choose <code>true</code>; otherwise, choose <code>false</code> (the default).'
+      description: <p/>
+    DescribeReplicationsResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+        Replications:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationList'
+            - description: The replication descriptions.
+      description: <p/>
+    DescribeReplicationsMessage:
+      type: object
+      title: DescribeReplicationsMessage
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the replications.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       description: <p/>
     DescribeSchemasResponse:
       type: object
@@ -5791,6 +6478,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GcpMySQLSettings'
             - description: Settings in JSON format for the source GCP MySQL endpoint.
+        TimestreamSettings:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamSettings'
+            - description: Settings in JSON format for the target Amazon Timestream endpoint.
       description: <p/>
     ModifyEventSubscriptionResponse:
       type: object
@@ -5826,6 +6517,56 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: ' A Boolean value; set to <b>true</b> to activate the subscription. '
+      description: <p/>
+    ModifyReplicationConfigResponse:
+      type: object
+      properties:
+        ReplicationConfig:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfig'
+            - description: Information about the serverless replication config that was modified.
+    ModifyReplicationConfigMessage:
+      type: object
+      required:
+        - ReplicationConfigArn
+      title: ModifyReplicationConfigMessage
+      properties:
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name of the replication to modify.
+        ReplicationConfigIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The new replication config to apply to the replication.
+        ReplicationType:
+          allOf:
+            - $ref: '#/components/schemas/MigrationTypeValue'
+            - description: The type of replication.
+        TableMappings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Table mappings specified in the replication.
+        ReplicationSettings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The settings for the replication.
+        SupplementalSettings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Additional settings for the replication.
+        ComputeConfig:
+          allOf:
+            - $ref: '#/components/schemas/ComputeConfig'
+            - description: Configuration parameters for provisioning an DMS Serverless replication.
+        SourceEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the source endpoint for this DMS serverless replication configuration.
+        TargetEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless replication configuration.
       description: <p/>
     ModifyReplicationInstanceResponse:
       type: object
@@ -6083,6 +6824,34 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of the replication instance.
       description: <p/>
+    ReloadReplicationTablesResponse:
+      type: object
+      properties:
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name of the replication config for which to reload tables.
+      description: <p/>
+    ReloadReplicationTablesMessage:
+      type: object
+      required:
+        - ReplicationConfigArn
+        - TablesToReload
+      title: ReloadReplicationTablesMessage
+      properties:
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name of the replication config for which to reload tables.
+        TablesToReload:
+          allOf:
+            - $ref: '#/components/schemas/TableListToReload'
+            - description: The list of tables to reload.
+        ReloadOption:
+          allOf:
+            - $ref: '#/components/schemas/ReloadOptionValue'
+            - description: 'Options for reload. Specify <code>data-reload</code> to reload the data and re-validate it if validation is enabled. Specify <code>validate-only</code> to re-validate the table. This option applies only when validation is enabled for the replication. '
+      description: <p/>
     ReloadTablesResponse:
       type: object
       properties:
@@ -6156,6 +6925,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecommendationSettings'
             - description: 'The settings in JSON format that Fleet Advisor uses to determine target engine recommendations. These parameters include target instance sizing and availability and durability settings. For target instance sizing, Fleet Advisor supports the following two options: total capacity and resource utilization. For availability and durability, Fleet Advisor supports the following two options: production (Multi-AZ deployments) and Dev/Test (Single-AZ deployments).'
+    StartReplicationResponse:
+      type: object
+      properties:
+        Replication:
+          allOf:
+            - $ref: '#/components/schemas/Replication'
+            - description: The replication that DMS started.
+      description: <p/>
+    StartReplicationMessage:
+      type: object
+      required:
+        - ReplicationConfigArn
+        - StartReplicationType
+      title: StartReplicationMessage
+      properties:
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name of the replication for which to start replication.
+        StartReplicationType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The replication type.
+        CdcStartTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: Indicates the start time for a change data capture (CDC) operation. Use either <code>CdcStartTime</code> or <code>CdcStartPosition</code> to specify when you want a CDC operation to start. Specifying both values results in an error.
+        CdcStartPosition:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Indicates when you want a change data capture (CDC) operation to start. Use either <code>CdcStartPosition</code> or <code>CdcStartTime</code> to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>The value can be in date, checkpoint, or LSN/SCN format.</p>'
+        CdcStopPosition:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.
+      description: <p/>
     StartReplicationTaskResponse:
       type: object
       example:
@@ -6278,6 +7083,24 @@ components:
             - description: '<p>Space-separated list of names for specific individual assessments that you want to exclude. These names come from the default list of individual assessments that DMS supports for the associated migration task. This task is specified by <code>ReplicationTaskArn</code>.</p> <note> <p>You can''t set a value for <code>Exclude</code> if you also set a value for <code>IncludeOnly</code> in the API operation.</p> <p>To identify the names of the default individual assessments that DMS supports for the associated migration task, run the <code>DescribeApplicableIndividualAssessments</code> operation using its own <code>ReplicationTaskArn</code> request parameter.</p> </note>'
       description: <p/>
     KMSFault: {}
+    StopReplicationResponse:
+      type: object
+      properties:
+        Replication:
+          allOf:
+            - $ref: '#/components/schemas/Replication'
+            - description: The replication that DMS stopped.
+    StopReplicationMessage:
+      type: object
+      required:
+        - ReplicationConfigArn
+      title: StopReplicationMessage
+      properties:
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name of the replication to stop.
+      description: <p/>
     StopReplicationTaskResponse:
       type: object
       example:
@@ -6691,6 +7514,50 @@ components:
       enum:
         - none
         - gzip
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    ComputeConfig:
+      type: object
+      properties:
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Availability Zone where the DMS Serverless replication using this configuration will run. The default value is a random, system-chosen Availability Zone in the configuration''s Amazon Web Services Region, for example, <code>"us-west-2"</code>. You can''t set this parameter if the <code>MultiAZ</code> parameter is set to <code>true</code>.'
+        DnsNameServers:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A list of custom DNS name servers supported for the DMS Serverless replication to access your source or target database. This list overrides the default name servers supported by the DMS Serverless replication. You can specify a comma-separated list of internet addresses for up to four DNS name servers. For example: <code>"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"</code> '
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>An Key Management Service (KMS) key Amazon Resource Name (ARN) that is used to encrypt the data during DMS Serverless replication.</p> <p>If you don''t specify a value for the <code>KmsKeyId</code> parameter, DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>'
+        MaxCapacityUnits:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'Specifies the maximum value of the DMS capacity units (DCUs) for which a given DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value that you can specify for DMS Serverless is 384. The <code>MaxCapacityUnits</code> parameter is the only DCU parameter you are required to specify.'
+        MinCapacityUnits:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU value that you can specify for DMS Serverless is 2. You don''t have to specify a value for the <code>MinCapacityUnits</code> parameter. If you don''t set this value, DMS scans the current activity of available source tables to identify an optimum setting for this parameter. If there is no current source activity or DMS can''t otherwise identify a more appropriate value, it sets this parameter to the minimum DCU value allowed, 2.'
+        MultiAZ:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Specifies whether the DMS Serverless replication is a Multi-AZ deployment. You can't set the <code>AvailabilityZone</code> parameter if the <code>MultiAZ</code> parameter is set to <code>true</code>.
+        PreferredMaintenanceWindow:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The weekly time range during which system maintenance can occur for the DMS Serverless replication, in Universal Coordinated Time (UTC). The format is <code>ddd:hh24:mi-ddd:hh24:mi</code>.</p> <p>The default is a 30-minute window selected at random from an 8-hour block of time per Amazon Web Services Region. This maintenance occurs on a random day of the week. Valid values for days of the week include <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thu</code>, <code>Fri</code>, <code>Sat</code>, and <code>Sun</code>.</p> <p>Constraints include a minimum 30-minute window.</p>'
+        ReplicationSubnetGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies a subnet group identifier to associate with the DMS Serverless replication.
+        VpcSecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the virtual private cloud (VPC) security group to use with the DMS Serverless replication. The VPC security group must work with the VPC containing the replication.
+      description: Configuration parameters for provisioning an DMS Serverless replication.
     Connection:
       type: object
       properties:
@@ -6818,7 +7685,7 @@ components:
         IncludeOpForFullLoad:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: '<p>A value that enables a full load to write INSERT operations to the comma-separated value (.csv) output files only to indicate how the rows were added to the source database.</p> <note> <p>DMS supports the <code>IncludeOpForFullLoad</code> parameter in versions 3.1.4 and later.</p> </note> <p>For full load, records can only be inserted. By default (the <code>false</code> setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If <code>IncludeOpForFullLoad</code> is set to <code>true</code> or <code>y</code>, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.</p> <note> <p>This setting works together with the <code>CdcInsertsOnly</code> and the <code>CdcInsertsAndUpdates</code> parameters for output to .csv files only. For more information about how these settings work together, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service User Guide.</i>.</p> </note>'
+            - description: '<p>A value that enables a full load to write INSERT operations to the comma-separated value (.csv) or .parquet output files only to indicate how the rows were added to the source database.</p> <note> <p>DMS supports the <code>IncludeOpForFullLoad</code> parameter in versions 3.1.4 and later.</p> <p>DMS supports the use of the .parquet files with the <code>IncludeOpForFullLoad</code> parameter in versions 3.4.7 and later.</p> </note> <p>For full load, records can only be inserted. By default (the <code>false</code> setting), no information is recorded in these output files for a full load to indicate that the rows were inserted at the source database. If <code>IncludeOpForFullLoad</code> is set to <code>true</code> or <code>y</code>, the INSERT is recorded as an I annotation in the first field of the .csv file. This allows the format of your target records from a full load to be consistent with the target records from a CDC load.</p> <note> <p>This setting works together with the <code>CdcInsertsOnly</code> and the <code>CdcInsertsAndUpdates</code> parameters for output to .csv files only. For more information about how these settings work together, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service User Guide.</i>.</p> </note>'
         CdcInsertsOnly:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -6834,7 +7701,7 @@ components:
         CdcInsertsAndUpdates:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: '<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is <code>false</code>, but when <code>CdcInsertsAndUpdates</code> is set to <code>true</code> or <code>y</code>, only INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file. </p> <p>For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the value of the <code>IncludeOpForFullLoad</code> parameter. If <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every CDC record is set to either <code>I</code> or <code>U</code> to indicate INSERT and UPDATE operations at the source. But if <code>IncludeOpForFullLoad</code> is set to <code>false</code>, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service User Guide.</i>.</p> <note> <p>DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in versions 3.3.1 and later.</p> <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can''t both be set to <code>true</code> for the same endpoint. Set either <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code> for the same endpoint, but not both.</p> </note>'
+            - description: '<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE operations to .csv or .parquet (columnar storage) output files. The default setting is <code>false</code>, but when <code>CdcInsertsAndUpdates</code> is set to <code>true</code> or <code>y</code>, only INSERTs and UPDATEs from the source database are migrated to the .csv or .parquet file.</p> <important> <p>DMS supports the use of the .parquet files in versions 3.4.7 and later.</p> </important> <p>How these INSERTs and UPDATEs are recorded depends on the value of the <code>IncludeOpForFullLoad</code> parameter. If <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every CDC record is set to either <code>I</code> or <code>U</code> to indicate INSERT and UPDATE operations at the source. But if <code>IncludeOpForFullLoad</code> is set to <code>false</code>, CDC records are written without an indication of INSERT or UPDATE operations at the source. For more information about how these settings work together, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service User Guide.</i>.</p> <note> <p>DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in versions 3.3.1 and later.</p> <p> <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can''t both be set to <code>true</code> for the same endpoint. Set either <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code> for the same endpoint, but not both.</p> </note>'
         DatePartitionEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -6987,6 +7854,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MongoDB endpoint connection details.'
+        UseUpdateLookUp:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'If <code>true</code>, DMS retrieves the entire document from the MongoDB source during migration. This may cause a migration failure if the server response exceeds bandwidth limits. To fetch only updates and deletes during migration, set this parameter to <code>false</code>.'
+        ReplicateShardCollections:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: '<p>If <code>true</code>, DMS replicates data to shard collections. DMS only uses this setting if the target endpoint is a DocumentDB elastic cluster.</p> <p>When this setting is <code>true</code>, note the following:</p> <ul> <li> <p>You must set <code>TargetTablePrepMode</code> to <code>nothing</code>.</p> </li> <li> <p>DMS automatically sets <code>useUpdateLookup</code> to <code>false</code>.</p> </li> </ul>'
       description: Provides information that defines a MongoDB endpoint.
     KinesisSettings:
       type: object
@@ -7111,6 +7986,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/KafkaSaslMechanism'
             - description: 'For SASL/SSL authentication, DMS supports the <code>SCRAM-SHA-512</code> mechanism by default. DMS versions 3.5.0 and later also support the <code>PLAIN</code> mechanism. To use the <code>PLAIN</code> mechanism, set this parameter to <code>PLAIN.</code> '
+        SslEndpointIdentificationAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/KafkaSslEndpointIdentificationAlgorithm'
+            - description: 'Sets hostname verification for the certificate. This setting is supported in DMS version 3.5.1 and later. '
       description: Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.
     ElasticsearchSettings:
       type: object
@@ -7364,7 +8243,7 @@ components:
         SlotName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>Sets the name of a previously created logical replication slot for a change data capture (CDC) load of the PostgreSQL source instance. </p> <p>When used with the <code>CdcStartPosition</code> request parameter for the DMS API , this attribute also makes it possible to use native CDC start points. DMS verifies that the specified logical replication slot exists before starting the CDC load task. It also verifies that the task was created with a valid setting of <code>CdcStartPosition</code>. If the specified slot doesn''t exist or the task doesn''t have a valid <code>CdcStartPosition</code> setting, DMS raises an error.</p> <p>For more information about setting the <code>CdcStartPosition</code> request parameter, see <a href="dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native">Determining a CDC native start point</a> in the <i>Database Migration Service User Guide</i>. For more information about using <code>CdcStartPosition</code>, see <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html">CreateReplicationTask</a>, <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html">StartReplicationTask</a>, and <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html">ModifyReplicationTask</a>.</p>'
+            - description: '<p>Sets the name of a previously created logical replication slot for a change data capture (CDC) load of the PostgreSQL source instance. </p> <p>When used with the <code>CdcStartPosition</code> request parameter for the DMS API , this attribute also makes it possible to use native CDC start points. DMS verifies that the specified logical replication slot exists before starting the CDC load task. It also verifies that the task was created with a valid setting of <code>CdcStartPosition</code>. If the specified slot doesn''t exist or the task doesn''t have a valid <code>CdcStartPosition</code> setting, DMS raises an error.</p> <p>For more information about setting the <code>CdcStartPosition</code> request parameter, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native">Determining a CDC native start point</a> in the <i>Database Migration Service User Guide</i>. For more information about using <code>CdcStartPosition</code>, see <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html">CreateReplicationTask</a>, <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html">StartReplicationTask</a>, and <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html">ModifyReplicationTask</a>.</p>'
         PluginName:
           allOf:
             - $ref: '#/components/schemas/PluginNameValue'
@@ -7385,6 +8264,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'When true, lets PostgreSQL migrate the boolean type as boolean. By default, PostgreSQL migrates booleans as <code>varchar(5)</code>.'
+        MapJsonbAsClob:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'When true, DMS migrates JSONB values as CLOB.'
+        MapLongVarcharAs:
+          allOf:
+            - $ref: '#/components/schemas/LongVarcharMappingType'
+            - description: 'When true, DMS migrates LONG values as VARCHAR.'
       description: Provides information that defines a PostgreSQL endpoint.
     MySQLSettings:
       type: object
@@ -7617,6 +8504,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'When true, converts timestamps with the <code>timezone</code> datatype to their UTC value.'
+        OpenTransactionWindow:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: <p>The timeframe in minutes to check for open transactions for a CDC-only task.</p> <p>You can specify an integer value between 0 (the default) and 240 (the maximum). </p> <note> <p>This parameter is only valid in DMS version 3.5.0 and later. DMS supports a window of up to 9.5 hours including the value for <code>OpenTransactionWindow</code>.</p> </note>
       description: Provides information that defines an Oracle endpoint.
     SybaseSettings:
       type: object
@@ -7813,6 +8704,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the DocumentDB endpoint connection details.'
+        UseUpdateLookUp:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'If <code>true</code>, DMS retrieves the entire document from the DocumentDB source during migration. This may cause a migration failure if the server response exceeds bandwidth limits. To fetch only updates and deletes during migration, set this parameter to <code>false</code>.'
+        ReplicateShardCollections:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: '<p>If <code>true</code>, DMS replicates data to shard collections. DMS only uses this setting if the target endpoint is a DocumentDB elastic cluster.</p> <p>When this setting is <code>true</code>, note the following:</p> <ul> <li> <p>You must set <code>TargetTablePrepMode</code> to <code>nothing</code>.</p> </li> <li> <p>DMS automatically sets <code>useUpdateLookup</code> to <code>false</code>.</p> </li> </ul>'
       description: Provides information that defines a DocumentDB endpoint.
     RedisSettings:
       type: object
@@ -7909,6 +8808,34 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MySQL endpoint connection details. '
       description: Settings in JSON format for the source GCP MySQL endpoint.
+    TimestreamSettings:
+      type: object
+      required:
+        - DatabaseName
+        - MemoryDuration
+        - MagneticDuration
+      properties:
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Database name for the endpoint.
+        MemoryDuration:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'Set this attribute to specify the length of time to store all of the tables in memory that are migrated into Amazon Timestream from the source database. Time is measured in units of hours. When Timestream data comes in, it first resides in memory for the specified duration, which allows quick access to it.'
+        MagneticDuration:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'Set this attribute to specify the default magnetic duration applied to the Amazon Timestream tables in days. This is the number of days that records remain in magnetic store before being discarded. For more information, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html">Storage</a> in the <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/">Amazon Timestream Developer Guide</a>.'
+        CdcInsertsAndUpdates:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'Set this attribute to <code>true</code> to specify that DMS only applies inserts and updates, and not deletes. Amazon Timestream does not allow deleting records, so if this value is <code>false</code>, DMS nulls out the corresponding record in the Timestream database rather than deleting it.'
+        EnableMagneticStoreWrites:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: 'Set this attribute to <code>true</code> to enable memory store writes. When this value is <code>false</code>, DMS does not write records that are older in days than the value specified in <code>MagneticDuration</code>, because Amazon Timestream does not allow memory writes by default. For more information, see <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html">Storage</a> in the <a href="https://docs.aws.amazon.com/timestream/latest/developerguide/">Amazon Timestream Developer Guide</a>.'
+      description: Provides information that defines an Amazon Timestream endpoint.
     Endpoint:
       type: object
       properties:
@@ -8050,6 +8977,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GcpMySQLSettings'
             - description: Settings in JSON format for the source GCP MySQL endpoint.
+        TimestreamSettings:
+          allOf:
+            - $ref: '#/components/schemas/TimestreamSettings'
+            - description: 'The settings for the Amazon Timestream target endpoint. For more information, see the <code>TimestreamSettings</code> structure.'
       description: '<p>Describes an endpoint of a database instance in response to operations such as the following:</p> <ul> <li> <p> <code>CreateEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpoint</code> </p> </li> <li> <p> <code>ModifyEndpoint</code> </p> </li> </ul>'
     EventCategoriesList:
       type: array
@@ -8099,6 +9030,60 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Boolean value that indicates if the event subscription is enabled.
       description: Describes an event notification subscription created by the <code>CreateEventSubscription</code> operation.
+    MigrationTypeValue:
+      type: string
+      enum:
+        - full-load
+        - cdc
+        - full-load-and-cdc
+    ReplicationConfig:
+      type: object
+      properties:
+        ReplicationConfigIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the <code>ReplicationConfig</code> associated with the replication.
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of this DMS Serverless replication configuration.
+        SourceEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the source endpoint for this DMS serverless replication configuration.
+        TargetEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless replication configuration.
+        ReplicationType:
+          allOf:
+            - $ref: '#/components/schemas/MigrationTypeValue'
+            - description: The type of the replication.
+        ComputeConfig:
+          allOf:
+            - $ref: '#/components/schemas/ComputeConfig'
+            - description: Configuration parameters for provisioning an DMS serverless replication.
+        ReplicationSettings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Configuration parameters for an DMS serverless replication.
+        SupplementalSettings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Additional parameters for an DMS serverless replication.
+        TableMappings:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Table mappings specified in the replication.
+        ReplicationConfigCreateTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time the serverless replication config was created.
+        ReplicationConfigUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time the serverless replication config was updated.
+      description: This object provides configuration information about a serverless replication.
     VpcSecurityGroupIdList:
       type: array
       items:
@@ -8241,12 +9226,6 @@ components:
             - $ref: '#/components/schemas/StringList'
             - description: The IP addressing protocol supported by the subnet group. This is used by a replication instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. IPv6 only is not yet supported.
       description: Describes a subnet group in response to a request by the <code>DescribeReplicationSubnetGroups</code> operation.
-    MigrationTypeValue:
-      type: string
-      enum:
-        - full-load
-        - cdc
-        - full-load-and-cdc
     ReplicationTask:
       type: object
       properties:
@@ -8453,10 +9432,6 @@ components:
         - YYYYMM
         - MMYYYYDD
         - DDMMYYYY
-    StringList:
-      type: array
-      items:
-        $ref: '#/components/schemas/String'
     IndividualAssessmentNameList:
       type: array
       items:
@@ -8545,6 +9520,10 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The last failure message for the schema.
       description: Provides information that describes status of a schema at an endpoint specified by the <code>DescribeRefreshSchemaStatus</code> operation.
+    ReplicationConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationConfig'
     ReplicationInstanceTaskLogsList:
       type: array
       items:
@@ -8557,6 +9536,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ReplicationSubnetGroup'
+    ReplicationTableStatisticsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TableStatistics'
     ReplicationTaskAssessmentResultList:
       type: array
       items:
@@ -8573,6 +9556,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ReplicationTask'
+    ReplicationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Replication'
     SchemaList:
       type: array
       items:
@@ -8816,6 +9803,11 @@ components:
       enum:
         - json
         - json-unformatted
+    KafkaSslEndpointIdentificationAlgorithm:
+      type: string
+      enum:
+        - none
+        - https
     KeyList:
       type: array
       items:
@@ -8848,6 +9840,12 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'The type of the limitation, such as action required, upgrade required, and limited feature.'
       description: '<p>Provides information about the limitations of target Amazon Web Services engines.</p> <p>Your source database might include features that the target Amazon Web Services engine doesn''t support. Fleet Advisor lists these features as limitations. You should consider these limitations during database migration. For each limitation, Fleet Advisor recommends an action that you can take to address or avoid this limitation.</p>'
+    LongVarcharMappingType:
+      type: string
+      enum:
+        - wstring
+        - clob
+        - nclob
     SafeguardPolicy:
       type: string
       enum:
@@ -8949,6 +9947,34 @@ components:
         - no-preference
         - test-decoding
         - pglogical
+    ProvisionData:
+      type: object
+      properties:
+        ProvisionState:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The current provisioning state '
+        ProvisionedCapacityUnits:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of capacity units the replication is using.
+        DateProvisioned:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The timestamp when DMS provisioned replication resources.
+        IsNewProvisioningAvailable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the new provisioning is available to the replication.
+        DateNewProvisioningDataAvailable:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The timestamp when provisioning became available.
+        ReasonForNewProvisioningData:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A message describing the reason that DMS provisioned new resources for the serverless replication.
+      description: Information about provisioning resources for an DMS serverless replication.
     RdsConfiguration:
       type: object
       properties:
@@ -8984,6 +10010,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Describes the deployment option for the recommended Amazon RDS DB instance. The deployment options include Multi-AZ and Single-AZ deployments. Valid values include <code>"MULTI_AZ"</code> and <code>"SINGLE_AZ"</code>.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Describes the recommended target Amazon RDS engine version.
       description: Provides information that describes the configuration of the recommended target engine on Amazon RDS.
     RdsRequirements:
       type: object
@@ -9012,6 +10042,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The required deployment option for the Amazon RDS DB instance. Valid values include <code>"MULTI_AZ"</code> for Multi-AZ deployments and <code>"SINGLE_AZ"</code> for Single-AZ deployments.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The required target Amazon RDS engine version.
       description: Provides information that describes the requirements to the target engine on Amazon RDS.
     RdsRecommendation:
       type: object
@@ -9106,6 +10140,130 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TableToReload'
+    ReplicationStats:
+      type: object
+      properties:
+        FullLoadProgressPercent:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The percent complete for the full load serverless replication.
+        ElapsedTimeMillis:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The elapsed time of the replication, in milliseconds.'
+        TablesLoaded:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of tables loaded for this replication.
+        TablesLoading:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of tables currently loading for this replication.
+        TablesQueued:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of tables queued for this replication.
+        TablesErrored:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The number of errors that have occured for this replication.
+        FreshStartDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date the replication was started either with a fresh start or a target reload.
+        StartDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date the replication is scheduled to start.
+        StopDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date the replication was stopped.
+        FullLoadStartDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date the replication full load was started.
+        FullLoadFinishDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date the replication full load was finished.
+      description: This object provides a collection of statistics about a serverless replication.
+    Replication:
+      type: object
+      properties:
+        ReplicationConfigIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the <code>ReplicationConfig</code> associated with the replication.
+        ReplicationConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name for the <code>ReplicationConfig</code> associated with the replication.
+        SourceEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name for an existing <code>Endpoint</code> the serverless replication uses for its data source.
+        TargetEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name for an existing <code>Endpoint</code> the serverless replication uses for its data target.
+        ReplicationType:
+          allOf:
+            - $ref: '#/components/schemas/MigrationTypeValue'
+            - description: The type of the serverless replication.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The current status of the serverless replication.
+        ProvisionData:
+          allOf:
+            - $ref: '#/components/schemas/ProvisionData'
+            - description: Information about provisioning resources for an DMS serverless replication.
+        StopReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The reason the replication task was stopped. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>"Stop Reason NORMAL"</code> </p> </li> <li> <p> <code>"Stop Reason RECOVERABLE_ERROR"</code> </p> </li> <li> <p> <code>"Stop Reason FATAL_ERROR"</code> </p> </li> <li> <p> <code>"Stop Reason FULL_LOAD_ONLY_FINISHED"</code> </p> </li> <li> <p> <code>"Stop Reason STOPPED_AFTER_FULL_LOAD"</code> – Full load completed, with cached changes not applied</p> </li> <li> <p> <code>"Stop Reason STOPPED_AFTER_CACHED_EVENTS"</code> – Full load completed, with cached changes applied</p> </li> <li> <p> <code>"Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"</code> </p> </li> <li> <p> <code>"Stop Reason STOPPED_AFTER_DDL_APPLY"</code> – User-defined stop task after DDL applied</p> </li> <li> <p> <code>"Stop Reason STOPPED_DUE_TO_LOW_MEMORY"</code> </p> </li> <li> <p> <code>"Stop Reason STOPPED_DUE_TO_LOW_DISK"</code> </p> </li> <li> <p> <code>"Stop Reason STOPPED_AT_SERVER_TIME"</code> – User-defined server time for stopping task</p> </li> <li> <p> <code>"Stop Reason STOPPED_AT_COMMIT_TIME"</code> – User-defined commit time for stopping task</p> </li> <li> <p> <code>"Stop Reason RECONFIGURATION_RESTART"</code> </p> </li> <li> <p> <code>"Stop Reason RECYCLE_TASK"</code> </p> </li> </ul>'
+        FailureMessages:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Error and other information about why a serverless replication failed.
+        ReplicationStats:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationStats'
+            - description: This object provides a collection of statistics about a serverless replication.
+        StartReplicationType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The replication type.
+        CdcStartTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: Indicates the start time for a change data capture (CDC) operation. Use either <code>CdcStartTime</code> or <code>CdcStartPosition</code> to specify when you want a CDC operation to start. Specifying both values results in an error.
+        CdcStartPosition:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Indicates the start time for a change data capture (CDC) operation. Use either <code>CdcStartTime</code> or <code>CdcStartPosition</code> to specify when you want a CDC operation to start. Specifying both values results in an error.
+        CdcStopPosition:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Indicates when you want a change data capture (CDC) operation to stop. The value can be either server time or commit time.
+        RecoveryCheckpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Indicates the last checkpoint that occurred during a change data capture (CDC) operation. You can provide this value to the <code>CdcStartPosition</code> parameter to start a CDC operation that begins at that checkpoint.
+        ReplicationCreateTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time the serverless replication was created.
+        ReplicationUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time the serverless replication was updated.
+        ReplicationLastStopTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The timestamp when replication was last stopped.
+      description: Provides information that describes a serverless replication created by the <code>CreateReplication</code> operation.
     VpcSecurityGroupMembershipList:
       type: array
       items:
@@ -9166,6 +10324,102 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Subnet'
+    TableStatistics:
+      type: object
+      properties:
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The schema name.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the table.
+        Inserts:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of insert actions performed on a table.
+        Deletes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of delete actions performed on a table.
+        Updates:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of update actions performed on a table.
+        Ddls:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The data definition language (DDL) used to build and modify the structure of your tables.
+        AppliedInserts:
+          allOf:
+            - $ref: '#/components/schemas/LongOptional'
+            - description: The number of insert actions applied on a target table.
+        AppliedDeletes:
+          allOf:
+            - $ref: '#/components/schemas/LongOptional'
+            - description: The number of delete actions applied on a target table.
+        AppliedUpdates:
+          allOf:
+            - $ref: '#/components/schemas/LongOptional'
+            - description: The number of update actions applied on a target table.
+        AppliedDdls:
+          allOf:
+            - $ref: '#/components/schemas/LongOptional'
+            - description: The number of data definition language (DDL) statements used to build and modify the structure of your tables applied on the target.
+        FullLoadRows:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of rows added during the full load operation.
+        FullLoadCondtnlChkFailedRows:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of rows that failed conditional checks during the full load operation (valid only for migrations where DynamoDB is the target).
+        FullLoadErrorRows:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of rows that failed to load during the full load operation (valid only for migrations where DynamoDB is the target).
+        FullLoadStartTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time when the full load operation started.
+        FullLoadEndTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The time when the full load operation completed.
+        FullLoadReloaded:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A value that indicates if the table was reloaded (<code>true</code>) or loaded as part of a new full load operation (<code>false</code>).
+        LastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The last time a table was updated.
+        TableState:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The state of the tables described.</p> <p>Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table is being reloaded</p>'
+        ValidationPendingRecords:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of records that have yet to be validated.
+        ValidationFailedRecords:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of records that failed validation.
+        ValidationSuspendedRecords:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of records that couldn't be validated.
+        ValidationState:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The validation state of the table.</p> <p>This parameter can have the following values:</p> <ul> <li> <p>Not enabled – Validation isn''t enabled for the table in the migration task.</p> </li> <li> <p>Pending records – Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records – Some records in the table don''t match between the source and target.</p> </li> <li> <p>Suspended records – Some records in the table couldn''t be validated.</p> </li> <li> <p>No primary key –The table couldn''t be validated because it has no primary key.</p> </li> <li> <p>Table error – The table wasn''t validated because it''s in an error state and some data wasn''t migrated.</p> </li> <li> <p>Validated – All rows in the table are validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error – The table couldn''t be validated because of an unexpected error.</p> </li> <li> <p>Pending validation – The table is waiting validation.</p> </li> <li> <p>Preparing table – Preparing the table enabled in the migration task for validation.</p> </li> <li> <p>Pending revalidation – All rows in the table are pending validation after the table was updated.</p> </li> </ul>'
+        ValidationStateDetails:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Additional details about the state of validation.
+      description: Provides a collection of table statistics in response to a request by the <code>DescribeTableStatistics</code> operation.
     ReplicationTaskStats:
       type: object
       properties:
@@ -9382,102 +10636,6 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The table name of the table to be reloaded.
       description: Provides the name of the schema and table to be reloaded.
-    TableStatistics:
-      type: object
-      properties:
-        SchemaName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The schema name.
-        TableName:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: The name of the table.
-        Inserts:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of insert actions performed on a table.
-        Deletes:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of delete actions performed on a table.
-        Updates:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of update actions performed on a table.
-        Ddls:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The data definition language (DDL) used to build and modify the structure of your tables.
-        AppliedInserts:
-          allOf:
-            - $ref: '#/components/schemas/LongOptional'
-            - description: The number of insert actions applied on a target table.
-        AppliedDeletes:
-          allOf:
-            - $ref: '#/components/schemas/LongOptional'
-            - description: The number of delete actions applied on a target table.
-        AppliedUpdates:
-          allOf:
-            - $ref: '#/components/schemas/LongOptional'
-            - description: The number of update actions applied on a target table.
-        AppliedDdls:
-          allOf:
-            - $ref: '#/components/schemas/LongOptional'
-            - description: The number of data definition language (DDL) statements used to build and modify the structure of your tables applied on the target.
-        FullLoadRows:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of rows added during the full load operation.
-        FullLoadCondtnlChkFailedRows:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of rows that failed conditional checks during the full load operation (valid only for migrations where DynamoDB is the target).
-        FullLoadErrorRows:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of rows that failed to load during the full load operation (valid only for migrations where DynamoDB is the target).
-        FullLoadStartTime:
-          allOf:
-            - $ref: '#/components/schemas/TStamp'
-            - description: The time when the full load operation started.
-        FullLoadEndTime:
-          allOf:
-            - $ref: '#/components/schemas/TStamp'
-            - description: The time when the full load operation completed.
-        FullLoadReloaded:
-          allOf:
-            - $ref: '#/components/schemas/BooleanOptional'
-            - description: A value that indicates if the table was reloaded (<code>true</code>) or loaded as part of a new full load operation (<code>false</code>).
-        LastUpdateTime:
-          allOf:
-            - $ref: '#/components/schemas/TStamp'
-            - description: The last time a table was updated.
-        TableState:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>The state of the tables described.</p> <p>Valid states: Table does not exist | Before load | Full load | Table completed | Table cancelled | Table error | Table is being reloaded</p>'
-        ValidationPendingRecords:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of records that have yet to be validated.
-        ValidationFailedRecords:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of records that failed validation.
-        ValidationSuspendedRecords:
-          allOf:
-            - $ref: '#/components/schemas/Long'
-            - description: The number of records that couldn't be validated.
-        ValidationState:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: '<p>The validation state of the table.</p> <p>This parameter can have the following values:</p> <ul> <li> <p>Not enabled – Validation isn''t enabled for the table in the migration task.</p> </li> <li> <p>Pending records – Some records in the table are waiting for validation.</p> </li> <li> <p>Mismatched records – Some records in the table don''t match between the source and target.</p> </li> <li> <p>Suspended records – Some records in the table couldn''t be validated.</p> </li> <li> <p>No primary key –The table couldn''t be validated because it has no primary key.</p> </li> <li> <p>Table error – The table wasn''t validated because it''s in an error state and some data wasn''t migrated.</p> </li> <li> <p>Validated – All rows in the table are validated. If the table is updated, the status can change from Validated.</p> </li> <li> <p>Error – The table couldn''t be validated because of an unexpected error.</p> </li> <li> <p>Pending validation – The table is waiting validation.</p> </li> <li> <p>Preparing table – Preparing the table enabled in the migration task for validation.</p> </li> <li> <p>Pending revalidation – All rows in the table are pending validation after the table was updated.</p> </li> </ul>'
-        ValidationStateDetails:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - description: Additional details about the state of validation.
-      description: Provides a collection of table statistics in response to a request by the <code>DescribeTableStatistics</code> operation.
     Tag:
       type: object
       properties:

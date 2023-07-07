@@ -1031,6 +1031,12 @@ paths:
                         - $ref: '#/components/schemas/__listOfVideoDescription'
                         - xml:
                             name: videoDescriptions
+                    ThumbnailConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ThumbnailConfiguration'
+                        - xml:
+                            name: thumbnailConfiguration
+                          description: Thumbnail configuration settings.
                 inputAttachments:
                   description: Placeholder documentation for __listOfInputAttachment
                   type: array
@@ -2452,6 +2458,12 @@ paths:
                         - $ref: '#/components/schemas/__listOfVideoDescription'
                         - xml:
                             name: videoDescriptions
+                    ThumbnailConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ThumbnailConfiguration'
+                        - xml:
+                            name: thumbnailConfiguration
+                          description: Thumbnail configuration settings.
                 inputAttachments:
                   description: Placeholder documentation for __listOfInputAttachment
                   type: array
@@ -4059,6 +4071,221 @@ paths:
           in: path
           required: true
           description: 'Unique offering ID, e.g. ''87654321'''
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /prod/accountConfiguration:
+    get:
+      operationId: DescribeAccountConfiguration
+      description: Get account configuration
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAccountConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '484':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateAccountConfiguration
+      description: Update account configuration
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAccountConfigurationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accountConfiguration:
+                  description: Placeholder documentation for AccountConfiguration
+                  type: object
+                  properties:
+                    KmsKeyId:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - xml:
+                            name: kmsKeyId
+                          description: Specifies the KMS key to use for all features that use key encryption. Specify the ARN of a KMS key that you have created. Or leave blank to use the key that MediaLive creates and manages for you.
+  '/prod/channels/{channelId}/thumbnails#pipelineId&thumbnailType':
+    get:
+      operationId: DescribeThumbnails
+      description: Describe the latest thumbnails data.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeThumbnailsResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '487':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: channelId
+          in: path
+          required: true
+          description: Unique ID of the channel
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+        - name: pipelineId
+          in: query
+          required: true
+          description: Pipeline ID ("0" or "1")
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+        - name: thumbnailType
+          in: query
+          required: true
+          description: thumbnail type
           schema:
             type: string
             description: Placeholder documentation for __string
@@ -5801,6 +6028,18 @@ components:
       description: Placeholder documentation for __listOfVideoDescription
       items:
         $ref: '#/components/schemas/VideoDescription'
+    ThumbnailConfiguration:
+      type: object
+      required:
+        - State
+      properties:
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailState'
+            - xml:
+                name: state
+              description: Whether Thumbnail is enabled.
+      description: Thumbnail Configuration
     InputAttachment:
       type: object
       properties:
@@ -7040,6 +7279,24 @@ components:
                 name: scheduleActions
               description: The list of actions in the schedule.
       description: Placeholder documentation for DescribeScheduleResponse
+    DescribeAccountConfigurationResponse:
+      type: object
+      properties:
+        AccountConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AccountConfiguration'
+            - xml:
+                name: accountConfiguration
+      description: Placeholder documentation for DescribeAccountConfigurationResponse
+    DescribeThumbnailsResponse:
+      type: object
+      properties:
+        ThumbnailDetails:
+          allOf:
+            - $ref: '#/components/schemas/__listOfThumbnailDetail'
+            - xml:
+                name: thumbnailDetails
+      description: Placeholder documentation for DescribeThumbnailsResponse
     ListChannelsResponse:
       type: object
       properties:
@@ -7216,6 +7473,15 @@ components:
       type: object
       properties: {}
       description: Placeholder documentation for RejectInputDeviceTransferResponse
+    UpdateAccountConfigurationResponse:
+      type: object
+      properties:
+        AccountConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AccountConfiguration'
+            - xml:
+                name: accountConfiguration
+      description: Placeholder documentation for UpdateAccountConfigurationResponse
     StartChannelResponse:
       type: object
       properties:
@@ -7958,6 +8224,16 @@ components:
         - DOES_NOT_IMPLEMENT_ACCESSIBILITY_FEATURES
         - IMPLEMENTS_ACCESSIBILITY_FEATURES
       description: Accessibility Type
+    AccountConfiguration:
+      type: object
+      properties:
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: kmsKeyId
+              description: Specifies the KMS key to use for all features that use key encryption. Specify the ARN of a KMS key that you have created. Or leave blank to use the key that MediaLive creates and manages for you.
+      description: Placeholder documentation for AccountConfiguration
     AfdSignaling:
       type: string
       enum:
@@ -10349,6 +10625,12 @@ components:
             - $ref: '#/components/schemas/__listOfVideoDescription'
             - xml:
                 name: videoDescriptions
+        ThumbnailConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailConfiguration'
+            - xml:
+                name: thumbnailConfiguration
+              description: Thumbnail configuration settings.
       description: Encoder Settings
     __listOfInputAttachment:
       type: array
@@ -12560,6 +12842,21 @@ components:
                 name: timecodeBurninSettings
               description: Timecode burn-in settings
       description: Frame Capture Settings
+    DescribeAccountConfigurationRequest:
+      type: object
+      title: DescribeAccountConfigurationRequest
+      properties: {}
+      description: Placeholder documentation for DescribeAccountConfigurationRequest
+    DescribeThumbnailsRequest:
+      type: object
+      title: DescribeThumbnailsRequest
+      properties: {}
+      description: Placeholder documentation for DescribeThumbnailsRequest
+    __listOfThumbnailDetail:
+      type: array
+      description: Placeholder documentation for __listOfThumbnailDetail
+      items:
+        $ref: '#/components/schemas/ThumbnailDetail'
     __integerMinNegative60Max60:
       type: integer
       description: Placeholder documentation for __integerMinNegative60Max60
@@ -17406,6 +17703,16 @@ components:
       description: Placeholder documentation for __listOfScte35Descriptor
       items:
         $ref: '#/components/schemas/Scte35Descriptor'
+    UpdateAccountConfigurationRequest:
+      type: object
+      title: UpdateAccountConfigurationRequest
+      properties:
+        AccountConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AccountConfiguration'
+            - xml:
+                name: accountConfiguration
+      description: List of account configuration parameters to update.
     StartChannelRequest:
       type: object
       title: StartChannelRequest
@@ -17459,6 +17766,71 @@ components:
         - STRENGTH_15
         - STRENGTH_16
       description: Temporal Filter Strength
+    ThumbnailType:
+      type: string
+      enum:
+        - UNSPECIFIED
+        - CURRENT_ACTIVE
+      description: Thumbnail type.
+    __timestampIso8601:
+      type: string
+      description: Placeholder documentation for __timestampIso8601
+      format: date-time
+    Thumbnail:
+      type: object
+      properties:
+        Body:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: body
+              description: The binary data for the latest thumbnail.
+        ContentType:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: contentType
+              description: The content type for the latest thumbnail.
+        ThumbnailType:
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailType'
+            - xml:
+                name: thumbnailType
+              description: Thumbnail Type
+        TimeStamp:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: timeStamp
+              description: Time stamp for the latest thumbnail.
+      description: Details of a single thumbnail
+    ThumbnailState:
+      type: string
+      enum:
+        - AUTO
+        - DISABLED
+      description: Thumbnail State
+    __listOfThumbnail:
+      type: array
+      description: Placeholder documentation for __listOfThumbnail
+      items:
+        $ref: '#/components/schemas/Thumbnail'
+    ThumbnailDetail:
+      type: object
+      properties:
+        PipelineId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: pipelineId
+              description: Pipeline ID
+        Thumbnails:
+          allOf:
+            - $ref: '#/components/schemas/__listOfThumbnail'
+            - xml:
+                name: thumbnails
+              description: thumbnails of a single pipeline
+      description: Thumbnail details for one pipeline of a running channel.
     TimecodeBurninFontSize:
       type: string
       enum:

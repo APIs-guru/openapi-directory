@@ -2141,6 +2141,10 @@ components:
     AdBreak:
       type: object
       properties:
+        AdBreakMetadata:
+          allOf:
+            - $ref: '#/components/schemas/AdBreakMetadataList'
+            - description: Defines a list of key/value pairs that MediaTailor generates within the <code>EXT-X-ASSET</code>tag for <code>SCTE35_ENHANCED</code> output.
         MessageType:
           allOf:
             - $ref: '#/components/schemas/MessageType'
@@ -3087,6 +3091,10 @@ components:
             - $ref: '#/components/schemas/SecretsManagerAccessTokenConfiguration'
             - description: AWS Secrets Manager access token configuration parameters.
       description: Access configuration parameters.
+    AdBreakMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeyValuePair'
     MessageType:
       type: string
       enum:
@@ -3134,8 +3142,28 @@ components:
             - $ref: '#/components/schemas/SegmentationDescriptorList'
             - description: The configurations for the SCTE-35 <code>segmentation_descriptor</code> message(s) sent with the <code>time_signal</code> message.
       description: '<p>The SCTE-35 <code>time_signal</code> message can be sent with one or more <code>segmentation_descriptor</code> messages. A <code>time_signal</code> message can be sent only if a single <code>segmentation_descriptor</code> message is sent.</p> <p>The <code>time_signal</code> message contains only the <code>splice_time</code> field which is constructed using a given presentation timestamp. When sending a <code>time_signal</code> message, the <code>splice_command_type</code> field in the <code>splice_info_section</code> message is set to 6 (0x06).</p> <p>See the <code>time_signal()</code> table of the 2022 SCTE-35 specification for more information.</p>'
+    KeyValuePair:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'For <code>SCTE35_ENHANCED</code> output, defines a key. MediaTailor takes this key, and its associated value, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a key, you must also specify a corresponding value.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'For <code>SCTE35_ENHANCED</code> output, defines a vaue. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a value, you must also specify a corresponding key.'
+      description: 'For <code>SCTE35_ENHANCED</code> output, defines a key and corresponding value. MediaTailor generates these pairs within the <code>EXT-X-ASSET</code>tag.'
     __boolean:
       type: boolean
+    AdMarkupType:
+      type: string
+      enum:
+        - DATERANGE
+        - SCTE35_ENHANCED
     __listOf__string:
       type: array
       items:
@@ -3747,9 +3775,17 @@ components:
       type: object
       title: GetPrefetchScheduleRequest
       properties: {}
+    adMarkupTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdMarkupType'
     HlsPlaylistSettings:
       type: object
       properties:
+        AdMarkupType:
+          allOf:
+            - $ref: '#/components/schemas/adMarkupTypes'
+            - description: Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).
         ManifestWindowSeconds:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -3762,6 +3798,8 @@ components:
         - HLS
     Integer:
       type: integer
+    String:
+      type: string
     ListAlertsRequest:
       type: object
       title: ListAlertsRequest
@@ -4178,8 +4216,6 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: The name of the VOD source.
       description: The properties for a schedule.
-    String:
-      type: string
     SegmentationDescriptor:
       type: object
       properties:
