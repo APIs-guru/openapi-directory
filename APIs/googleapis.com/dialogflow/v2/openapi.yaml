@@ -3439,11 +3439,14 @@ components:
       description: The response message for Agents.ExportAgent.
       properties:
         agentContent:
-          description: Uncompressed raw byte content for agent.
+          description: Uncompressed raw byte content for agent. This field is populated if none of `agent_uri` and `git_destination` are specified in ExportAgentRequest.
           format: byte
           type: string
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated if `agent_uri` is specified in ExportAgentRequest.
+          type: string
+        commitSha:
+          description: Commit SHA of the git push. This field is populated if `git_destination` are specified in ExportAgentRequest.
           type: string
       type: object
     GoogleCloudDialogflowCxV3ExportFlowResponse:
@@ -4284,6 +4287,7 @@ components:
           description: "Optional. Maps the values extracted from specific fields of the flexible webhook response into session parameters. - Key: session parameter name - Value: field path in the webhook response"
           type: object
         password:
+          deprecated: true
           description: The password for HTTP Basic authentication.
           type: string
         requestBody:
@@ -4298,6 +4302,7 @@ components:
           description: Required. The webhook URI for receiving POST requests. It must use https protocol.
           type: string
         username:
+          deprecated: true
           description: The user name for HTTP Basic authentication.
           type: string
         webhookType:
@@ -4717,11 +4722,14 @@ components:
       description: The response message for Agents.ExportAgent.
       properties:
         agentContent:
-          description: Uncompressed raw byte content for agent.
+          description: Uncompressed raw byte content for agent. This field is populated if none of `agent_uri` and `git_destination` are specified in ExportAgentRequest.
           format: byte
           type: string
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated if `agent_uri` is specified in ExportAgentRequest.
+          type: string
+        commitSha:
+          description: Commit SHA of the git push. This field is populated if `git_destination` are specified in ExportAgentRequest.
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1ExportFlowResponse:
@@ -5562,6 +5570,7 @@ components:
           description: "Optional. Maps the values extracted from specific fields of the flexible webhook response into session parameters. - Key: session parameter name - Value: field path in the webhook response"
           type: object
         password:
+          deprecated: true
           description: The password for HTTP Basic authentication.
           type: string
         requestBody:
@@ -5576,6 +5585,7 @@ components:
           description: Required. The webhook URI for receiving POST requests. It must use https protocol.
           type: string
         username:
+          deprecated: true
           description: The user name for HTTP Basic authentication.
           type: string
         webhookType:
@@ -5764,6 +5774,7 @@ components:
           description: Optional. Determines whether this agent should log conversation queries.
           type: boolean
         matchMode:
+          deprecated: true
           description: Optional. Determines how intents are detected from user queries.
           enum:
             - MATCH_MODE_UNSPECIFIED
@@ -5786,6 +5797,11 @@ components:
             - TIER_ENTERPRISE
             - TIER_ENTERPRISE_PLUS
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
         timeZone:
           description: Required. The time zone of this agent from the [time zone database](https://www.iana.org/time-zones), e.g., America/New_York, Europe/Paris.
           type: string
@@ -6920,6 +6936,7 @@ components:
       description: "Represents configuration for a generic web service. Dialogflow supports two mechanisms for authentications: - Basic authentication with username and password. - Authentication with additional authentication headers. More information could be found at: https://cloud.google.com/dialogflow/docs/fulfillment-configure."
       properties:
         isCloudFunction:
+          deprecated: true
           description: Optional. Indicates if generic web service is created through Cloud Functions integration. Defaults to false. is_cloud_function is deprecated. Cloud functions can be configured by its uri as a regular web service now.
           type: boolean
         password:
@@ -7332,6 +7349,7 @@ components:
             - USE_ENHANCED
           type: string
         phraseHints:
+          deprecated: true
           description: A list of strings containing words and phrases that the speech recognizer should recognize with higher likelihood. See [the Cloud Speech documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints) for more details. This field is deprecated. Please use [speech_contexts]() instead. If you specify both [phrase_hints]() and [speech_contexts](), Dialogflow will treat the [phrase_hints]() as a single additional [SpeechContext]().
           items:
             type: string
@@ -7954,6 +7972,10 @@ components:
             - EXAMPLE
             - TEMPLATE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
       type: object
     GoogleCloudDialogflowV2IntentTrainingPhrasePart:
       description: Represents a part of a training phrase.
@@ -9354,6 +9376,7 @@ components:
           description: "Optional. Indicates whether Machine Learning is disabled for the intent. Note: If `ml_disabled` setting is set to true, then this intent is not taken into account during inference in `ML ONLY` match mode. Also, auto-markup in the UI is turned off."
           type: boolean
         mlEnabled:
+          deprecated: true
           description: "Optional. Indicates whether Machine Learning is enabled for the intent. Note: If `ml_enabled` setting is set to false, then this intent is not taken into account during inference in `ML ONLY` match mode. Also, auto-markup in the UI is turned off. DEPRECATED! Please use `ml_disabled` field instead. NOTE: If both `ml_enabled` and `ml_disabled` are either not set or false, then the default value is determined as follows: - Before April 15th, 2018 the default is: ml_enabled = false / ml_disabled = true. - After April 15th, 2018 the default is: ml_enabled = true / ml_disabled = false."
           type: boolean
         name:
@@ -10078,6 +10101,10 @@ components:
             - EXAMPLE
             - TEMPLATE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
       type: object
     GoogleCloudDialogflowV2beta1IntentTrainingPhrasePart:
       description: Represents a part of a training phrase.

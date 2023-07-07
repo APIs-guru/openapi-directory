@@ -1607,6 +1607,7 @@ components:
       description: Table display options that can be reused.
       properties:
         shownColumns:
+          deprecated: true
           description: Optional. This field is unused and has been replaced by TimeSeriesTable.column_settings
           items:
             type: string
@@ -1698,6 +1699,7 @@ components:
           description: Apply a second aggregation after aggregation is applied.
         statisticalTimeSeriesFilter:
           $ref: "#/components/schemas/StatisticalTimeSeriesFilter"
+          deprecated: true
           description: "Statistics based time series filter. Note: This field is deprecated and completely ignored by the API."
       type: object
     TimeSeriesFilterRatio:
@@ -1717,6 +1719,7 @@ components:
           description: Apply a second aggregation after the ratio is computed.
         statisticalTimeSeriesFilter:
           $ref: "#/components/schemas/StatisticalTimeSeriesFilter"
+          deprecated: true
           description: "Statistics based time series filter. Note: This field is deprecated and completely ignored by the API."
       type: object
     TimeSeriesQuery:

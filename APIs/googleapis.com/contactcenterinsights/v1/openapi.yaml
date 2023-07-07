@@ -1337,6 +1337,7 @@ components:
           additionalProperties:
             format: int32
             type: integer
+          deprecated: true
           description: "A map associating each issue resource name with its respective number of matches in the set of conversations. Key has the format: `projects//locations//issueModels//issues/` Deprecated, use `issue_matches_stats` field instead."
           type: object
         issueMatchesStats:
@@ -1541,6 +1542,7 @@ components:
       description: The call participant speaking for a given utterance.
       properties:
         dialogflowParticipant:
+          deprecated: true
           description: "Deprecated. Use `dialogflow_participant_name` instead. The name of the Dialogflow participant. Format: projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}"
           type: string
         dialogflowParticipantName:
@@ -2176,6 +2178,7 @@ components:
           description: A filter to reduce the conversations used for training the model to a specific subset.
           type: string
         medium:
+          deprecated: true
           description: Medium of conversations used in training data. This field is being deprecated. To specify the medium to be used in training a new issue model, set the `medium` field on `filter`.
           enum:
             - MEDIUM_UNSPECIFIED
@@ -3041,6 +3044,7 @@ components:
       description: The call participant speaking for a given utterance.
       properties:
         dialogflowParticipant:
+          deprecated: true
           description: "Deprecated. Use `dialogflow_participant_name` instead. The name of the Dialogflow participant. Format: projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}"
           type: string
         dialogflowParticipantName:
@@ -3643,6 +3647,7 @@ components:
           description: A filter to reduce the conversations used for training the model to a specific subset.
           type: string
         medium:
+          deprecated: true
           description: Medium of conversations used in training data. This field is being deprecated. To specify the medium to be used in training a new issue model, set the `medium` field on `filter`.
           enum:
             - MEDIUM_UNSPECIFIED

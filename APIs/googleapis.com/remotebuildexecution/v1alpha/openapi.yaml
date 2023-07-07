@@ -431,11 +431,13 @@ components:
             $ref: "#/components/schemas/BuildBazelRemoteExecutionV2OutputDirectory"
           type: array
         outputDirectorySymlinks:
+          deprecated: true
           description: The output directories of the action that are symbolic links to other directories. Those may be links to other output directories, or input directories, or even absolute paths outside of the working directory, if the server supports SymlinkAbsolutePathStrategy.ALLOWED. For each output directory requested in the `output_directories` field of the Action, if the directory existed after the action completed, a single entry will be present either in this field, or in the `output_directories` field, if the directory was not a symbolic link. If an output of the same name was found, but was a symbolic link to a file instead of a directory, the server will return a FAILED_PRECONDITION. If the action does not produce the requested output, then that output will be omitted from the list. The server is free to arrange the output list as desired; clients MUST NOT assume that the output list is sorted. DEPRECATED as of v2.1. Servers that wish to be compatible with v2.0 API should still populate this field in addition to `output_symlinks`.
           items:
             $ref: "#/components/schemas/BuildBazelRemoteExecutionV2OutputSymlink"
           type: array
         outputFileSymlinks:
+          deprecated: true
           description: The output files of the action that are symbolic links to other files. Those may be links to other output files, or input files, or even absolute paths outside of the working directory, if the server supports SymlinkAbsolutePathStrategy.ALLOWED. For each output file requested in the `output_files` or `output_paths` field of the Action, if the corresponding file existed after the action completed, a single entry will be present either in this field, or in the `output_files` field, if the file was not a symbolic link. If an output symbolic link of the same name as listed in `output_files` of the Command was found, but its target type was not a regular file, the server will return a FAILED_PRECONDITION. If the action does not produce the requested output, then that output will be omitted from the list. The server is free to arrange the output list as desired; clients MUST NOT assume that the output list is sorted. DEPRECATED as of v2.1. Servers that wish to be compatible with v2.0 API should still populate this field in addition to `output_symlinks`.
           items:
             $ref: "#/components/schemas/BuildBazelRemoteExecutionV2OutputSymlink"
@@ -479,11 +481,13 @@ components:
             $ref: "#/components/schemas/BuildBazelRemoteExecutionV2CommandEnvironmentVariable"
           type: array
         outputDirectories:
+          deprecated: true
           description: "A list of the output directories that the client expects to retrieve from the action. Only the listed directories will be returned (an entire directory structure will be returned as a Tree message digest, see OutputDirectory), as well as files listed in `output_files`. Other files or directories that may be created during command execution are discarded. The paths are relative to the working directory of the action execution. The paths are specified using a single forward slash (`/`) as a path separator, even if the execution platform natively uses a different separator. The path MUST NOT include a trailing slash, nor a leading slash, being a relative path. The special value of empty string is allowed, although not recommended, and can be used to capture the entire working directory tree, including inputs. In order to ensure consistent hashing of the same Action, the output paths MUST be sorted lexicographically by code point (or, equivalently, by UTF-8 bytes). An output directory cannot be duplicated or have the same path as any of the listed output files. An output directory is allowed to be a parent of another output directory. Directories leading up to the output directories (but not the output directories themselves) are created by the worker prior to execution, even if they are not explicitly part of the input root. DEPRECATED since 2.1: Use `output_paths` instead."
           items:
             type: string
           type: array
         outputFiles:
+          deprecated: true
           description: "A list of the output files that the client expects to retrieve from the action. Only the listed files, as well as directories listed in `output_directories`, will be returned to the client as output. Other files or directories that may be created during command execution are discarded. The paths are relative to the working directory of the action execution. The paths are specified using a single forward slash (`/`) as a path separator, even if the execution platform natively uses a different separator. The path MUST NOT include a trailing slash, nor a leading slash, being a relative path. In order to ensure consistent hashing of the same Action, the output paths MUST be sorted lexicographically by code point (or, equivalently, by UTF-8 bytes). An output file cannot be duplicated, be a parent of another output file, or have the same path as any of the listed output directories. Directories leading up to the output files are created by the worker prior to execution, even if they are not explicitly part of the input root. DEPRECATED since v2.1: Use `output_paths` instead."
           items:
             type: string
@@ -500,6 +504,7 @@ components:
           type: array
         platform:
           $ref: "#/components/schemas/BuildBazelRemoteExecutionV2Platform"
+          deprecated: true
           description: "The platform requirements for the execution environment. The server MAY choose to execute the action on any worker satisfying the requirements, so the client SHOULD ensure that running the action on any such worker will have the same result. A detailed lexicon for this can be found in the accompanying platform.md. DEPRECATED as of v2.2: platform properties are now specified directly in the action. See documentation note in the Action for migration."
         workingDirectory:
           description: The working directory, relative to the input root, for the command to run in. It must be a directory which exists in the input tree. If it is left empty, then the action is run in the input root.
@@ -930,6 +935,14 @@ components:
             - LOCATION_EXEC_ROOT_RELATIVE_OUTPUT_OUTSIDE_WORKING_DIR
             - LOCATION_EXEC_ROOT_AND_WORKING_DIR_RELATIVE_OUTPUT_OUTSIDE_WORKING_DIR
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - true
         usedAsyncContainer:
           description: Indicates whether an asynchronous container was used for execution.
           type: boolean
@@ -1308,9 +1321,11 @@ components:
           $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaInstance"
           description: Specifies the instance to update.
         loggingEnabled:
+          deprecated: true
           description: Deprecated, use instance.logging_enabled instead. Whether to enable Stackdriver logging for this instance.
           type: boolean
         name:
+          deprecated: true
           description: "Deprecated, use instance.Name instead. Name of the instance to update. Format: `projects/[PROJECT_ID]/instances/[INSTANCE_ID]`."
           type: string
         updateMask:
@@ -1457,6 +1472,7 @@ components:
       description: All information about the execution of a command, suitable for providing as the Bots interface's `Lease.result` field.
       properties:
         duration:
+          deprecated: true
           description: The elapsed time between calling Accept and Complete. The server will also have its own idea of what this should be, but this excludes the overhead of the RPCs and the bot response time.
           format: google-duration
           type: string
@@ -1475,6 +1491,7 @@ components:
           $ref: "#/components/schemas/GoogleDevtoolsRemoteworkersV1test2Digest"
           description: "The output files. The blob referenced by the digest should contain one of the following (implementation-dependent): * A marshalled DirectoryMetadata of the returned filesystem * A LUCI-style .isolated file"
         overhead:
+          deprecated: true
           description: The amount of time *not* spent executing the command (ie uploading/downloading files).
           format: google-duration
           type: string

@@ -1,7 +1,6 @@
 openapi: 3.1.0
 servers:
   - url: https://management-test.adyen.com/v1
-x-hasEquivalentPaths: true
 info:
   contact:
     name: Adyen Developer Experience team
@@ -6270,80 +6269,6 @@ paths:
       x-groupName: Split configuration - merchant level
       x-methodName: updateSplitLogic
       x-sortIndex: 7
-  "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{splitConfigurationRuleId}":
-    delete:
-      description: |-
-        Deletes the split configuration rule specified in the path.
-
-        To make this request, your API credential must have the following [role](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
-        * Management API - SplitConfiguration read and write
-      operationId: delete-merchants-merchantId-splitConfigurations-splitConfigurationId-rules-splitConfigurationRuleId
-      parameters:
-        - description: The unique identifier of the merchant account.
-          in: path
-          name: merchantId
-          required: true
-          schema:
-            type: string
-        - description: The unique identifier of the split configuration.
-          in: path
-          name: splitConfigurationId
-          required: true
-          schema:
-            type: string
-        - in: path
-          name: splitConfigurationRuleId
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SplitConfiguration"
-          description: OK - the request has succeeded.
-        "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RestServiceError"
-          description: Bad Request - a problem reading or understanding the request.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RestServiceError"
-          description: Unauthorized - authentication required.
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RestServiceError"
-          description: Forbidden - insufficient permissions to process the request.
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RestServiceError"
-          description: Unprocessable Entity - a request validation error.
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RestServiceError"
-          description: Internal Server Error - the server could not process the request.
-      security:
-        - BasicAuth: []
-        - ApiKeyAuth: []
-      summary: Delete a split configuration rule
-      tags:
-        - Split configuration - merchant level
-      x-groupName: Split configuration - merchant level
-      x-methodName: deleteSplitConfigurationRule
-      x-sortIndex: 9
   "/merchants/{merchantId}/stores":
     get:
       description: |-
@@ -18631,62 +18556,50 @@ components:
     Terminal:
       properties:
         assigned:
-          deprecated: true
           description: The [assignment status](https://docs.adyen.com/point-of-sale/automating-terminal-management/assign-terminals-api) of the terminal. If true, the terminal is assigned. If false, the terminal is in inventory and can't be boarded.
           type: boolean
         bluetoothIp:
-          deprecated: true
           description: The Bluetooth IP address of the terminal.
           type: string
         bluetoothMac:
           description: The Bluetooth MAC address of the terminal.
           type: string
         city:
-          deprecated: true
           description: The city where the terminal is located.
           type: string
         companyAccount:
-          deprecated: true
           description: The company account that the terminal is associated with. If this is the only account level shown in the response, the terminal is assigned to the inventory of the company account.
           type: string
         countryCode:
-          deprecated: true
           description: The country code of the country where the terminal is located.
           type: string
         deviceModel:
-          deprecated: true
           description: The model name of the terminal.
           type: string
         ethernetIp:
-          deprecated: true
           description: The ethernet IP address of the terminal.
           type: string
         ethernetMac:
-          deprecated: true
           description: The ethernet MAC address of the terminal.
           type: string
         firmwareVersion:
           description: The software release currently in use on the terminal.
           type: string
         iccid:
-          deprecated: true
           description: The integrated circuit card identifier (ICCID) of the SIM card in the terminal.
           type: string
         id:
           description: The unique identifier of the terminal.
           type: string
         lastActivityDateTime:
-          deprecated: true
           description: Date and time of the last activity on the terminal. Not included when the last activity was more than 14 days ago.
           format: date-time
           type: string
         lastTransactionDateTime:
-          deprecated: true
           description: Date and time of the last transaction on the terminal. Not included when the last transaction was more than 14 days ago.
           format: date-time
           type: string
         linkNegotiation:
-          deprecated: true
           description: |-
             The Ethernet link negotiation that the terminal uses:
 
@@ -18698,27 +18611,21 @@ components:
           description: The serial number of the terminal.
           type: string
         simStatus:
-          deprecated: true
           description: "On a terminal that supports 3G or 4G connectivity, indicates the status of the SIM card in the terminal: ACTIVE or INVENTORY."
           type: string
         status:
-          deprecated: true
           description: Indicates when the terminal was last online, whether the terminal is being reassigned, or whether the terminal is turned off. If the terminal was last online more that a week ago, it is also shown as turned off.
           type: string
         storeStatus:
-          deprecated: true
           description: The status of the store that the terminal is assigned to.
           type: string
         wifiIp:
-          deprecated: true
           description: The terminal's IP address in your Wi-Fi network.
           type: string
         wifiMac:
-          deprecated: true
           description: The terminal's MAC address in your Wi-Fi network.
           type: string
         wifiSsid:
-          deprecated: true
           description: The SSID of the Wi-Fi network that your terminal is connected to.
           type: string
       type: object

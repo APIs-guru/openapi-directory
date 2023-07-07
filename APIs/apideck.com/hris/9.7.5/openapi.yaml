@@ -3968,6 +3968,7 @@ components:
                   - salaried-nonexempt
                   - nonexempt
                   - owner
+                  - other
                 readOnly: false
                 type: string
                 x-apideck-enum-id: employees.compensations.flsa_status
@@ -4282,6 +4283,7 @@ components:
           type: object
           x-apideck-weights:
             email: medium
+            employment_status: low
             first_name: medium
             id: critical
             last_name: medium

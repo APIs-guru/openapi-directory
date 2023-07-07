@@ -68,12 +68,6 @@ paths:
     get:
       description: List of available elections to query.
       operationId: civicinfo.elections.electionQuery
-      parameters:
-        - description: Whether to include data that has not been allowlisted yet
-          in: query
-          name: productionDataOnly
-          schema:
-            type: boolean
       responses:
         "200":
           content:
@@ -269,11 +263,6 @@ paths:
         - description: If set to true, only data from official state sources will be returned.
           in: query
           name: officialOnly
-          schema:
-            type: boolean
-        - description: Whether to include data that has not been vetted yet. Should only be made available to internal IPs or trusted partners. This is a non-discoverable parameter in the One Platform API config.
-          in: query
-          name: productionDataOnly
           schema:
             type: boolean
         - description: If set to true, the query will return the success code and include any partial information when it is unable to determine a matching address or unable to determine the election for electionId=0 queries.
@@ -1043,7 +1032,7 @@ components:
         precinctId:
           type: string
         precincts:
-          description: The precincts that match this voter's address. Will only be returned for project IDs which have been allowlisted as "partner projects".
+          description: The precincts that match this voter's address. Will only be returned for project IDs which have been whitelisted as "partner projects".
           items:
             $ref: "#/components/schemas/Precinct"
           type: array
