@@ -3044,6 +3044,7 @@ components:
           $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicy"
         geoPolicy:
           $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicy"
+          deprecated: true
         kind:
           default: dns#rRSetRoutingPolicy
           type: string
@@ -3053,6 +3054,7 @@ components:
           $ref: "#/components/schemas/RRSetRoutingPolicyWrrPolicy"
         wrrPolicy:
           $ref: "#/components/schemas/RRSetRoutingPolicyWrrPolicy"
+          deprecated: true
       type: object
     RRSetRoutingPolicyGeoPolicy:
       description: Configures a RRSetRoutingPolicy that routes based on the geo location of the querying user.

@@ -2861,6 +2861,68 @@ components:
       description: Evaluates whether the column has duplicates.
       properties: {}
       type: object
+    GoogleCloudDataplexV1DataQualityScanRuleResult:
+      description: Information about the result of a data quality rule for data quality scan. The monitored resource is 'DataScan'.
+      properties:
+        column:
+          description: The column which this rule is evaluated against.
+          type: string
+        dataSource:
+          description: The data source of the data scan (e.g. BigQuery table name).
+          type: string
+        evaluatedRowCount:
+          description: The number of rows evaluated against the data quality rule. This field is only valid for rules of PER_ROW evaluation type.
+          format: int64
+          type: string
+        evalutionType:
+          description: The evaluation type of the data quality rule.
+          enum:
+            - EVALUATION_TYPE_UNSPECIFIED
+            - PER_ROW
+            - AGGREGATE
+          type: string
+        jobId:
+          description: Identifier of the specific data scan job this log entry is for.
+          type: string
+        nullRowCount:
+          description: The number of rows with null values in the specified column.
+          format: int64
+          type: string
+        passedRowCount:
+          description: The number of rows which passed a rule evaluation. This field is only valid for rules of PER_ROW evaluation type.
+          format: int64
+          type: string
+        result:
+          description: The result of the data quality rule.
+          enum:
+            - RESULT_UNSPECIFIED
+            - PASSED
+            - FAILED
+          type: string
+        ruleDimension:
+          description: The dimension of the data quality rule.
+          type: string
+        ruleName:
+          description: The name of the data quality rule.
+          type: string
+        ruleType:
+          description: The type of the data quality rule.
+          enum:
+            - RULE_TYPE_UNSPECIFIED
+            - NON_NULL_EXPECTATION
+            - RANGE_EXPECTATION
+            - REGEX_EXPECTATION
+            - ROW_CONDITION_EXPECTATION
+            - SET_EXPECTATION
+            - STATISTIC_RANGE_EXPECTATION
+            - TABLE_CONDITION_EXPECTATION
+            - UNIQUENESS_EXPECTATION
+          type: string
+        thresholdPercent:
+          description: The passing threshold (0.0, 100.0) of the data quality rule.
+          format: double
+          type: number
+      type: object
     GoogleCloudDataplexV1DataQualitySpec:
       description: DataQualityScan related setting.
       properties:
@@ -3422,7 +3484,7 @@ components:
           type: string
       type: object
     GoogleCloudDataplexV1Environment:
-      description: Environment represents a user-visible compute infrastructure for analytics within a lake. LINT.IfChange
+      description: Environment represents a user-visible compute infrastructure for analytics within a lake.
       properties:
         createTime:
           description: Output only. Environment creation time.

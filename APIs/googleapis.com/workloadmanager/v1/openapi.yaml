@@ -6,7 +6,7 @@ info:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: ""
+  description: Workload Manager is a service that provides tooling for enterprise workloads to automate the deployment and validation of your workloads against best practices and recommendations.
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
@@ -1217,10 +1217,23 @@ components:
             type: string
           type: array
         resourceKind:
-          description: ComputeInstance, ComputeDisk, VPC, Bare Metal server, etc.
+          description: Required. ComputeInstance, ComputeDisk, VPC, Bare Metal server, etc.
+          enum:
+            - RESOURCE_KIND_UNSPECIFIED
+            - RESOURCE_KIND_INSTANCE
+            - RESOURCE_KIND_DISK
+            - RESOURCE_KIND_ADDRESS
+            - RESOURCE_KIND_FILESTORE
+            - RESOURCE_KIND_HEALTH_CHECK
+            - RESOURCE_KIND_FORWARDING_RULE
+            - RESOURCE_KIND_BACKEND_SERVICE
+            - RESOURCE_KIND_SUBNETWORK
+            - RESOURCE_KIND_NETWORK
+            - RESOURCE_KIND_PUBLIC_ADDRESS
+            - RESOURCE_KIND_INSTANCE_GROUP
           type: string
         resourceType:
-          description: The type of this resource.
+          description: Required. The type of this resource.
           enum:
             - RESOURCE_TYPE_UNSPECIFIED
             - COMPUTE
@@ -1275,6 +1288,12 @@ components:
       properties:
         agentVersion:
           description: The agent version collected this data point
+          type: string
+        instance:
+          description: "Required. The instance_name of the instance that the Insight data comes from. According to https://linter.aip.dev/122/name-suffix: field names should not use the _name suffix unless the field would be ambiguous without it."
+          type: string
+        projectId:
+          description: Required. The project_id of the cloud project that the Insight data comes from.
           type: string
         validationDetails:
           description: A list of SqlServer validation metrics data.

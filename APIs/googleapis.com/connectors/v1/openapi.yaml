@@ -56,10 +56,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets details of a single connector version.
-      operationId: connectors.projects.locations.providers.connectors.versions.get
+      description: Gets details of a single event type.
+      operationId: connectors.projects.locations.providers.connectors.versions.eventtypes.get
       parameters:
-        - description: "Required. Resource name of the form: `projects/*/locations/*/providers/*/connectors/*/versions/*` Only global location is supported for ConnectorVersion resource."
+        - description: "Required. Resource name of the form: `projects/*/locations/*/providers/*/connectors/*/versions/*/eventtypes/*` Only global location is supported for EventType resource."
           in: path
           name: name
           required: true
@@ -79,7 +79,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ConnectorVersion"
+                $ref: "#/components/schemas/EventType"
           description: Successful response
       security:
         - Oauth2:
@@ -308,6 +308,90 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RefreshConnectionSchemaMetadataRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:repairEventing":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: RepaiEventing tries to repair eventing related event subscriptions.
+      operationId: connectors.projects.locations.connections.repairEventing
+      parameters:
+        - description: "Required. Resource name of the form: `projects/*/locations/*/connections/*`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RepairEventingRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:retry":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: RetryEventSubscription retries the registration of Subscription.
+      operationId: connectors.projects.locations.connections.eventSubscriptions.retry
+      parameters:
+        - description: "Required. Resource name of the form: `projects/*/locations/*/connections/*/eventSubscriptions/*`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RetryEventSubscriptionRequest"
       responses:
         "200":
           content:
@@ -565,6 +649,144 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/eventSubscriptions":
+    get:
+      description: List EventSubscriptions in a given project,location and connection.
+      operationId: connectors.projects.locations.connections.eventSubscriptions.list
+      parameters:
+        - description: "Required. Parent resource of the EventSubscription, of the form: `projects/*/locations/*/connections/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filter. https://g3doc.corp.google.com/cloud/control2/g3doc/dev/apihosting/list_filtering.md#filtering.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Order by parameters.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEventSubscriptionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new EventSubscription in a given project,location and connection.
+      operationId: connectors.projects.locations.connections.eventSubscriptions.create
+      parameters:
+        - description: "Required. Parent resource of the EventSubscription, of the form: `projects/*/locations/*/connections/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Identifier to assign to the Event Subscription. Must be unique within scope of the parent resource.
+          in: query
+          name: eventSubscriptionId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventSubscription"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/eventtypes":
+    get:
+      description: Lists Event Types in a given Connector Version.
+      operationId: connectors.projects.locations.providers.connectors.versions.eventtypes.list
+      parameters:
+        - description: "Required. Parent resource of the connectors, of the form: `projects/*/locations/*/providers/*/connectors/*/versions/*` Only global location is supported for EventType resource."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEventTypesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/managedZones":
     get:
       description: List ManagedZones in a given project
@@ -1293,6 +1515,10 @@ components:
         connectorVersion:
           description: "Required. Connector version on which the connection is created. The format is: projects/*/locations/*/providers/*/connectors/*/versions/* Only global location is supported for ConnectorVersion resource."
           type: string
+        connectorVersionInfraConfig:
+          $ref: "#/components/schemas/ConnectorVersionInfraConfig"
+          description: Output only. Infra configs supported by Connector Version.
+          readOnly: true
         connectorVersionLaunchStage:
           description: Output only. Flag to mark the version indicating the launch stage.
           enum:
@@ -1320,6 +1546,20 @@ components:
           description: "Output only. GCR location where the envoy image is stored. formatted like: gcr.io/{bucketName}/{imageName}"
           readOnly: true
           type: string
+        eventingConfig:
+          $ref: "#/components/schemas/EventingConfig"
+          description: Optional. Eventing config of a connection
+        eventingEnablementType:
+          description: Optional. Eventing enablement type. Will be nil if eventing is not enabled.
+          enum:
+            - EVENTING_ENABLEMENT_TYPE_UNSPECIFIED
+            - EVENTING_AND_CONNECTION
+            - ONLY_EVENTING
+          type: string
+        eventingRuntimeData:
+          $ref: "#/components/schemas/EventingRuntimeData"
+          description: Output only. Eventing Runtime Data.
+          readOnly: true
         imageLocation:
           description: "Output only. GCR location where the runtime image is stored. formatted like: gcr.io/{bucketName}/{imageName}"
           readOnly: true
@@ -1453,6 +1693,10 @@ components:
           description: Output only. Link to documentation page.
           readOnly: true
           type: string
+        eventingDetails:
+          $ref: "#/components/schemas/EventingDetails"
+          description: Output only. Eventing details. Will be null if eventing is not supported.
+          readOnly: true
         externalUri:
           description: Output only. Link to external page.
           readOnly: true
@@ -1487,6 +1731,14 @@ components:
           readOnly: true
           type: string
       type: object
+    ConnectorInfraConfig:
+      description: This cofiguration provides infra configs like rate limit threshold which need to be configurable for every connector version
+      properties:
+        ratelimitThreshold:
+          description: Max QPS supported by the connector version before throttling of requests.
+          format: int64
+          type: string
+      type: object
     ConnectorVersion:
       description: ConnectorVersion indicates a specific version of a connector.
       properties:
@@ -1502,6 +1754,10 @@ components:
             $ref: "#/components/schemas/ConfigVariableTemplate"
           readOnly: true
           type: array
+        connectorInfraConfig:
+          $ref: "#/components/schemas/ConnectorInfraConfig"
+          description: Output only. Infra configs supported by Connector.
+          readOnly: true
         createTime:
           description: Output only. Created time.
           format: google-datetime
@@ -1520,6 +1776,10 @@ components:
         egressControlConfig:
           $ref: "#/components/schemas/EgressControlConfig"
           description: Output only. Configuration for Egress Control.
+          readOnly: true
+        eventingConfigTemplate:
+          $ref: "#/components/schemas/EventingConfigTemplate"
+          description: Output only. Eventing configuration supported by the Connector.
           readOnly: true
         labels:
           additionalProperties:
@@ -1566,6 +1826,15 @@ components:
         updateTime:
           description: Output only. Updated time.
           format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    ConnectorVersionInfraConfig:
+      description: This cofiguration provides infra configs like rate limit threshold which need to be configurable for every connector version
+      properties:
+        ratelimitThreshold:
+          description: Output only. Max QPS supported by the connector version before throttling of requests.
+          format: int64
           readOnly: true
           type: string
       type: object
@@ -1668,6 +1937,18 @@ components:
             - CUSTOMER_MANAGED
           type: string
       type: object
+    EndPoint:
+      description: Endpoint message includes details of the Destination endpoint.
+      properties:
+        endpointUri:
+          description: The URI of the Endpoint.
+          type: string
+        headers:
+          description: List of Header to be added to the Endpoint.
+          items:
+            $ref: "#/components/schemas/Header"
+          type: array
+      type: object
     EndpointAttachment:
       description: represents the Connector's Endpoint Attachment resource
       properties:
@@ -1709,6 +1990,232 @@ components:
           type: string
         id:
           description: Id of the option.
+          type: string
+      type: object
+    EventSubscription:
+      description: represents the Connector's EventSubscription resource
+      properties:
+        createTime:
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        destinations:
+          $ref: "#/components/schemas/EventSubscriptionDestination"
+          description: Optional. The destination to hit when we receive an event
+        eventTypeId:
+          description: Optional. Event type id of the event of current EventSubscription.
+          type: string
+        name:
+          description: "Required. Resource name of the EventSubscription. Format: projects/{project}/locations/{location}/connections/{connection}/eventSubscriptions/{event_subscription}"
+          type: string
+        status:
+          $ref: "#/components/schemas/EventSubscriptionStatus"
+          description: Optional. Status indicates the status of the event subscription resource
+        subscriber:
+          description: Optional. name of the Subscriber for the current EventSubscription.
+          type: string
+        subscriberLink:
+          description: Optional. Link for Subscriber of the current EventSubscription.
+          type: string
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    EventSubscriptionDestination:
+      description: Message for EventSubscription Destination to act on receiving an event
+      properties:
+        endpoint:
+          $ref: "#/components/schemas/EndPoint"
+          description: "OPTION 1: Hit an endpoint when we receive an event."
+        serviceAccount:
+          description: Service account needed for runtime plane to trigger IP workflow.
+          type: string
+        type:
+          description: type of the destination
+          enum:
+            - TYPE_UNSPECIFIED
+            - ENDPOINT
+          type: string
+      type: object
+    EventSubscriptionStatus:
+      description: EventSubscription Status denotes the status of the EventSubscription resource.
+      properties:
+        description:
+          description: Output only. Description of the state.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. State of Event Subscription resource.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - UPDATING
+            - ACTIVE
+            - SUSPENDED
+            - ERROR
+          readOnly: true
+          type: string
+      type: object
+    EventType:
+      description: EventType includes fields.
+      properties:
+        createTime:
+          description: Output only. Created time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        enrichedEventPayloadSchema:
+          description: Output only. Schema of the event payload after enriched. Will be null if read before send is not supported.
+          readOnly: true
+          type: string
+        entityType:
+          description: Output only. Runtime entity type name. Will be null if entity type map is not available. Used for read before send feature.
+          readOnly: true
+          type: string
+        eventPayloadSchema:
+          description: Output only. Schema of webhook event payload.
+          readOnly: true
+          type: string
+        eventTypeId:
+          description: "Output only. Event type id. Example: `ticket.created`."
+          readOnly: true
+          type: string
+        idPath:
+          description: Output only. Id path denotes the path of id in webhook payload.
+          readOnly: true
+          type: string
+        name:
+          description: "Output only. Resource name of the eventtype. Format: projects/{project}/locations/{location}/providers/{provider}/connectors/{connector}/versions/{version}/eventtypes/{eventtype} Only global location is supported for Connector resource."
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Updated time.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    EventingConfig:
+      description: Eventing Configuration of a connection
+      properties:
+        additionalVariables:
+          description: Additional eventing related field values
+          items:
+            $ref: "#/components/schemas/ConfigVariable"
+          type: array
+        authConfig:
+          $ref: "#/components/schemas/AuthConfig"
+          description: Auth details for the webhook adapter.
+        encryptionKey:
+          $ref: "#/components/schemas/ConfigVariable"
+          description: Encryption key (can be either Google managed or CMEK).
+        enrichmentEnabled:
+          description: Enrichment Enabled.
+          type: boolean
+        registrationDestinationConfig:
+          $ref: "#/components/schemas/DestinationConfig"
+          description: Registration endpoint for auto regsitration.
+      type: object
+    EventingConfigTemplate:
+      description: Eventing Config details of a connector version.
+      properties:
+        additionalVariables:
+          description: Additional fields that need to be rendered.
+          items:
+            $ref: "#/components/schemas/ConfigVariableTemplate"
+          type: array
+        authConfigTemplates:
+          description: AuthConfigTemplates represents the auth values for the webhook adapter.
+          items:
+            $ref: "#/components/schemas/AuthConfigTemplate"
+          type: array
+        autoRefresh:
+          description: Auto refresh to extend webhook life.
+          type: boolean
+        autoRegistrationSupported:
+          description: Auto Registration supported.
+          type: boolean
+        encryptionKeyTemplate:
+          $ref: "#/components/schemas/ConfigVariableTemplate"
+          description: Encryption key (can be either Google managed or CMEK).
+        enrichmentSupported:
+          description: Enrichment Supported.
+          type: boolean
+        isEventingSupported:
+          description: Is Eventing Supported.
+          type: boolean
+        registrationDestinationConfig:
+          $ref: "#/components/schemas/DestinationConfigTemplate"
+          description: Registration host destination config template.
+      type: object
+    EventingDetails:
+      description: Eventing Details message.
+      properties:
+        customEventTypes:
+          description: Output only. Custom Event Types.
+          readOnly: true
+          type: boolean
+        description:
+          description: Output only. Description.
+          readOnly: true
+          type: string
+        documentationLink:
+          description: Output only. Link to public documentation.
+          readOnly: true
+          type: string
+        iconLocation:
+          description: Output only. Cloud storage location of the icon.
+          readOnly: true
+          type: string
+        launchStage:
+          description: Output only. Eventing Launch Stage.
+          enum:
+            - LAUNCH_STAGE_UNSPECIFIED
+            - PREVIEW
+            - GA
+            - DEPRECATED
+            - PRIVATE_PREVIEW
+          readOnly: true
+          type: string
+        name:
+          description: Output only. Name of the Eventing trigger.
+          readOnly: true
+          type: string
+        searchTags:
+          description: Output only. Array of search keywords.
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
+    EventingRuntimeData:
+      description: Eventing runtime data has the details related to eventing managed by the system.
+      properties:
+        eventsListenerEndpoint:
+          description: Output only. Events listener endpoint. The value will populated after provisioning the events listener.
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/EventingStatus"
+          description: Output only. Current status of eventing.
+          readOnly: true
+      type: object
+    EventingStatus:
+      description: EventingStatus indicates the state of eventing.
+      properties:
+        description:
+          description: Output only. Description of error if State is set to "ERROR".
+          readOnly: true
+          type: string
+        state:
+          description: Output only. State.
+          enum:
+            - STATE_UNSPECIFIED
+            - ACTIVE
+            - ERROR
+          readOnly: true
           type: string
       type: object
     Expr:
@@ -1803,6 +2310,52 @@ components:
             - DATA_TYPE_TIME_WITH_TIMEZONE
             - DATA_TYPE_TIMESTAMP_WITH_TIMEZONE
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
+            - true
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         defaultValue:
           description: The following field specifies the default value of the Field provided by the external system if a value is not provided.
         description:
@@ -1843,6 +2396,16 @@ components:
           type: string
         stringValue:
           description: String value
+          type: string
+      type: object
+    Header:
+      description: Header details for a given header to be added to Endpoint.
+      properties:
+        key:
+          description: Key of Header.
+          type: string
+        value:
+          description: Value of Header.
           type: string
       type: object
     InputParameter:
@@ -1897,6 +2460,52 @@ components:
             - DATA_TYPE_TIME_WITH_TIMEZONE
             - DATA_TYPE_TIMESTAMP_WITH_TIMEZONE
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
+            - true
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         defaultValue:
           description: The following field specifies the default value of the Parameter provided by the external system if a value is not provided.
         description:
@@ -1989,6 +2598,35 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ListEventSubscriptionsResponse:
+      description: Response message for ConnectorsService.ListEventSubscriptions
+      properties:
+        eventSubscriptions:
+          description: Subscriptions.
+          items:
+            $ref: "#/components/schemas/EventSubscription"
+          type: array
+        nextPageToken:
+          description: Next page token.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListEventTypesResponse:
+      description: Response message for Connectors.ListEventTypes.
+      properties:
+        eventTypes:
+          description: A list of connector versions.
+          items:
+            $ref: "#/components/schemas/EventType"
+          type: array
+        nextPageToken:
+          description: Next page token.
+          type: string
       type: object
     ListLocationsResponse:
       description: The response message for Locations.ListLocations.
@@ -2355,6 +2993,10 @@ components:
       description: Request message for ConnectorsService.RefreshConnectionSchemaMetadata.
       properties: {}
       type: object
+    RepairEventingRequest:
+      description: Request message for ConnectorsService.RepairEventing
+      properties: {}
+      type: object
     Resource:
       description: Resource definition
       properties:
@@ -2423,12 +3065,62 @@ components:
             - DATA_TYPE_TIME_WITH_TIMEZONE
             - DATA_TYPE_TIMESTAMP_WITH_TIMEZONE
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
+            - true
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         description:
           description: A brief description of the field.
           type: string
         field:
           description: Name of the result field.
           type: string
+      type: object
+    RetryEventSubscriptionRequest:
+      description: Request message for ConnectorsService.RefreshEventSubscription
+      properties: {}
       type: object
     RoleGrant:
       description: This configuration defines all the Cloud IAM roles that needs to be granted to a particular GCP resource for the selected principal like service account. These configurations will let UI display to customers what IAM roles need to be granted by them. Or these configurations can be used by the UI to render a 'grant' button to do the same on behalf of the user.
@@ -2522,6 +3214,14 @@ components:
             - UPDATING
           readOnly: true
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
       type: object
     RuntimeEntitySchema:
       description: Schema of a runtime entity.

@@ -3038,6 +3038,21 @@ components:
           $ref: "#/components/schemas/NetworkPolicyConfig"
           description: Configuration for NetworkPolicy. This only tracks whether the addon is enabled or not on the Master, it does not track whether network policy is enabled for the nodes.
       type: object
+    AdvancedDatapathObservabilityConfig:
+      description: AdvancedDatapathObservabilityConfig specifies configuration of observability features of advanced datapath.
+      properties:
+        enableMetrics:
+          description: Expose flow metrics on nodes
+          type: boolean
+        relayMode:
+          description: Method used to make Relay available
+          enum:
+            - RELAY_MODE_UNSPECIFIED
+            - DISABLED
+            - INTERNAL_VPC_LB
+            - EXTERNAL_LB
+          type: string
+      type: object
     AdvancedMachineFeatures:
       description: Specifies options for controlling advanced machine features.
       properties:
@@ -4074,7 +4089,7 @@ components:
           description: Whether a new subnetwork will be created automatically for the cluster. This field is only applicable when `use_ip_aliases` is true.
           type: boolean
         defaultPodIpv4RangeUtilization:
-          description: Output only. [Output only] The utilization of the cluster default IPv4 range for pod. The ratio is Usage/[Total number of IPs in the secondary range], Usage=numNodes*numZones*podIPsPerNode.
+          description: Output only. [Output only] The utilization of the cluster default IPv4 range for the pod. The ratio is Usage/[Total number of IPs in the secondary range], Usage=numNodes*numZones*podIPsPerNode.
           format: double
           readOnly: true
           type: number
@@ -4437,6 +4452,9 @@ components:
     MonitoringConfig:
       description: MonitoringConfig is cluster monitoring configuration.
       properties:
+        advancedDatapathObservabilityConfig:
+          $ref: "#/components/schemas/AdvancedDatapathObservabilityConfig"
+          description: Configuration of Advanced Datapath Observability features.
         componentConfig:
           $ref: "#/components/schemas/MonitoringComponentConfig"
           description: Monitoring components configuration
@@ -4744,7 +4762,7 @@ components:
           description: The IP address range for pod IPs in this node pool. Only applicable if `create_pod_range` is true. Set to blank to have a range chosen with the default size. Set to /netmask (e.g. `/14`) to have a range chosen with a specific netmask. Set to a [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing) notation (e.g. `10.96.0.0/14`) to pick a specific range to use. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: string
         podIpv4RangeUtilization:
-          description: Output only. [Output only] The utilization of the IPv4 range for pod. The ratio is Usage/[Total number of IPs in the secondary range], Usage=numNodes*numZones*podIPsPerNode.
+          description: Output only. [Output only] The utilization of the IPv4 range for the pod. The ratio is Usage/[Total number of IPs in the secondary range], Usage=numNodes*numZones*podIPsPerNode.
           format: double
           readOnly: true
           type: number

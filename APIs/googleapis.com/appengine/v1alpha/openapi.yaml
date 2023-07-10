@@ -1436,8 +1436,10 @@ components:
       properties:
         currentReasons:
           $ref: "#/components/schemas/Reasons"
+          deprecated: true
         previousReasons:
           $ref: "#/components/schemas/Reasons"
+          deprecated: true
           description: "The previous and current reasons for a project state will be sent for a project event. CLHs that need to know the signal that caused the project event to trigger (edges) as opposed to just knowing the state can act upon differences in the previous and current reasons.Reasons will be provided for every system: service management, data governance, abuse, and billing.If this is a CCFE-triggered event used for reconciliation then the current reasons will be set to their *_CONTROL_PLANE_SYNC state. The previous reasons will contain the last known set of non-unknown non-control_plane_sync reasons for the state.Reasons fields are deprecated. New tenants should only use the state field. If you must know the reason(s) behind a specific state, please consult with CCFE team first (cloud-ccfe-discuss@google.com)."
         state:
           description: The current state of the project. This state is the culmination of all of the opinions from external systems that CCFE knows about of the project.
@@ -1519,6 +1521,13 @@ components:
             - ABORT_DEACTIVATION
             - COMMIT_DEACTIVATION
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - true
+            - true
+            - true
       type: object
     ResourceRecord:
       description: A DNS resource record.
