@@ -539,6 +539,7 @@ components:
           description: Required. Business justification explaining the need for violation acknowledgement
           type: string
         nonCompliantOrgPolicy:
+          deprecated: true
           description: "Optional. This field is deprecated and will be removed in future version of the API. Name of the OrgPolicy which was modified with non-compliant change and resulted in this violation. Format: projects/{project_number}/policies/{constraint_name} folders/{folder_id}/policies/{constraint_name} organizations/{organization_id}/policies/{constraint_name}"
           type: string
       type: object
@@ -666,6 +667,12 @@ components:
           description: "Output only. Immutable. Audit Log link to find business justification provided for violation exception. Format: https://console.cloud.google.com/logs/query;query={logName}{protoPayload.resourceName}{protoPayload.methodName}{timeRange}{organization}"
           readOnly: true
           type: string
+        exceptionContexts:
+          description: Output only. List of all the exception detail added for the violation.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1ViolationExceptionContext"
+          readOnly: true
+          type: array
         name:
           description: "Output only. Immutable. Name of the Violation. Format: organizations/{organization}/locations/{location}/workloads/{workload_id}/violations/{violations_id}"
           readOnly: true
@@ -696,6 +703,20 @@ components:
           description: Output only. The last time when the Violation record was updated.
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1ViolationExceptionContext:
+      description: "Violation exception detail. Next Id: 6"
+      properties:
+        acknowledgementTime:
+          description: Timestamp when the violation was acknowledged.
+          format: google-datetime
+          type: string
+        comment:
+          description: Business justification provided towards the acknowledgement of the violation.
+          type: string
+        userName:
+          description: Name of the user (or service account) who acknowledged the violation.
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1ViolationRemediation:
@@ -833,6 +854,7 @@ components:
           type: string
         kmsSettings:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
+          deprecated: true
           description: Input only. Settings used to create a CMEK crypto key. When set, a project with a KMS CMEK key is provisioned. This field is deprecated as of Feb 28, 2022. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
         labels:
           additionalProperties:
@@ -919,6 +941,7 @@ components:
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1WorkloadKMSSettings:
+      deprecated: true
       description: Settings specific to the Key Management Service.
       properties:
         nextRotationTime:
@@ -937,6 +960,7 @@ components:
           description: Allow the partner to view inspectability logs and monitoring violations.
           type: boolean
         remediateFolderViolations:
+          deprecated: true
           description: Allow partner to monitor folder and remediate violations
           type: boolean
       type: object
@@ -956,6 +980,12 @@ components:
             - ENCRYPTION_KEYS_PROJECT
             - KEYRING
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
       type: object
     GoogleCloudAssuredworkloadsV1WorkloadResourceSettings:
       description: Represent the custom settings for the resources to be created.
@@ -975,6 +1005,12 @@ components:
             - ENCRYPTION_KEYS_PROJECT
             - KEYRING
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
       type: object
     GoogleCloudAssuredworkloadsV1WorkloadSaaEnrollmentResponse:
       description: Signed Access Approvals (SAA) enrollment response.

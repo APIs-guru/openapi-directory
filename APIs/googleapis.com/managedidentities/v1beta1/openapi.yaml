@@ -1569,6 +1569,10 @@ components:
     EnableMigrationRequest:
       description: EnableMigrationRequest is the request message for EnableMigration method.
       properties:
+        enableDuration:
+          description: Optional. Period after which the migration would be auto disabled. If unspecified, a default timeout of 48h is used.
+          format: google-duration
+          type: string
         migratingDomains:
           description: Required. List of the on-prem domains to be migrated.
           items:
@@ -1785,6 +1789,7 @@ components:
       description: Maintenance schedule which is exposed to customer and potentially end user, indicating published upcoming future maintenance schedule
       properties:
         canReschedule:
+          deprecated: true
           description: This field is deprecated, and will be always set to true since reschedule can happen multiple times now. This field should not be removed until all service producers remove this for their customers.
           type: boolean
         endTime:

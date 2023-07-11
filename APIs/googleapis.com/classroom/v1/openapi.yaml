@@ -2965,6 +2965,7 @@ components:
           description: The email address of a Google group containing all members of the course. This group does not accept email and can only be used for permissions. Read-only.
           type: string
         courseMaterialSets:
+          deprecated: true
           description: Sets of materials that appear on the "about" page of this course. Read-only.
           items:
             $ref: "#/components/schemas/CourseMaterialSet"

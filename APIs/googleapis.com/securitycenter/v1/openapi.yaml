@@ -1469,6 +1469,7 @@ components:
           description: "Expression that identifies findings that should be updated. The expression is a list of zero or more restrictions combined via logical operators `AND` and `OR`. Parentheses are supported, and `OR` has higher precedence than `AND`. Restrictions have the form ` ` and may have a `-` character in front of them to indicate negation. The fields map to those defined in the corresponding resource. The supported operators are: * `=` for all value types. * `>`, `<`, `>=`, `<=` for integer values. * `:`, meaning substring matching, for strings. The supported value types are: * string literals in quotes. * integer literals without quotes. * boolean literals `true` and `false` without quotes."
           type: string
         muteAnnotation:
+          deprecated: true
           description: This can be a mute configuration name or any identifier for mute/unmute of findings based on the filter.
           type: string
       type: object
@@ -1669,7 +1670,7 @@ components:
           type: string
       type: object
     Database:
-      description: Represents database access information, such as queries. A database may be a sub-resource of an instance (as in the case of Cloud SQL instances or Cloud Spanner instances), or the database instance itself. Some database resources might not have the [full resource name](https://google.aip.dev/122#full-resource-names) populated because these resource types, such as Cloud SQL databases, are not yet supported by Cloud Asset Inventory. In these cases only the display name is provided. Some database resources may not have the [full resource name](https://google.aip.dev/122#full-resource-names) populated because these resource types are not yet supported by Cloud Asset Inventory (e.g. Cloud SQL databases). In these cases only the display name will be provided.
+      description: Represents database access information, such as queries. A database may be a sub-resource of an instance (as in the case of Cloud SQL instances or Cloud Spanner instances), or the database instance itself. Some database resources might not have the [full resource name](https://google.aip.dev/122#full-resource-names) populated because these resource types, such as Cloud SQL databases, are not yet supported by Cloud Asset Inventory. In these cases only the display name is provided.
       properties:
         displayName:
           description: The human-readable name of the database that the user connected to.
@@ -1680,13 +1681,16 @@ components:
             type: string
           type: array
         name:
-          description: The [full resource name](https://google.aip.dev/122#full-resource-names) of the database that the user connected to, if it is supported by Cloud Asset Inventory.
+          description: Some database resources may not have the [full resource name](https://google.aip.dev/122#full-resource-names) populated because these resource types are not yet supported by Cloud Asset Inventory (e.g. Cloud SQL databases). In these cases only the display name will be provided. The [full resource name](https://google.aip.dev/122#full-resource-names) of the database that the user connected to, if it is supported by Cloud Asset Inventory.
           type: string
         query:
           description: The SQL statement that is associated with the database access.
           type: string
         userName:
           description: The username used to connect to the database. The username might not be an IAM principal and does not have a set format.
+          type: string
+        version:
+          description: The version of the database, for example, POSTGRES_14. See [the complete list](https://cloud.google.com/sql/docs/mysql/admin-api/rest/v1/SqlDatabaseVersion).
           type: string
       type: object
     Detection:
@@ -2128,6 +2132,7 @@ components:
           description: A description of the mute config.
           type: string
         displayName:
+          deprecated: true
           description: The human readable name to be displayed for the mute config.
           type: string
         filter:
@@ -2880,6 +2885,7 @@ components:
               - ACCESS_TOKEN_MANIPULATION
               - ABUSE_ELEVATION_CONTROL_MECHANISM
               - DEFAULT_ACCOUNTS
+              - INHIBIT_SYSTEM_RECOVERY
             type: string
           type: array
         primaryTactic:
@@ -2941,6 +2947,7 @@ components:
               - ACCESS_TOKEN_MANIPULATION
               - ABUSE_ELEVATION_CONTROL_MECHANISM
               - DEFAULT_ACCOUNTS
+              - INHIBIT_SYSTEM_RECOVERY
             type: string
           type: array
         version:

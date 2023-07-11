@@ -1035,7 +1035,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Provides functionality to remove logged activity for a user. Currently to be used only for dynamite 1p clients **Note:** This API requires a standard end user account to execute. A service account can't perform Remove Activity requests directly; to use a service account to perform queries, set up [Google Workspace domain-wide delegation of authority](https://developers.google.com/cloud-search/docs/guides/delegation/).
+      description: Provides functionality to remove logged activity for a user. Currently to be used only for Chat 1p clients **Note:** This API requires a standard end user account to execute. A service account can't perform Remove Activity requests directly; to use a service account to perform queries, set up [Google Workspace domain-wide delegation of authority](https://developers.google.com/cloud-search/docs/guides/delegation/).
       operationId: cloudsearch.query.removeActivity
       requestBody:
         content:
@@ -3164,14 +3164,48 @@ components:
             - PERSON_KNOWLEDGE_CARD
             - PEOPLE_SEARCH_PROMOTION_CARD
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - false
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         conflictingMeetingsCard:
           $ref: "#/components/schemas/EnterpriseTopazSidekickConflictingEventsCardProto"
+          deprecated: true
           description: Conflicting events card.
         documentListCard:
           $ref: "#/components/schemas/EnterpriseTopazSidekickDocumentPerCategoryList"
           description: Answer card for documents that are applicable to the current query.
         documentsWithMentions:
           $ref: "#/components/schemas/EnterpriseTopazSidekickDocumentPerCategoryList"
+          deprecated: true
           description: Documents with mentions.
         findMeetingTimeCard:
           $ref: "#/components/schemas/EnterpriseTopazSidekickFindMeetingTimeCardProto"
@@ -3184,6 +3218,7 @@ components:
           description: Get and keep ahead card.
         meeting:
           $ref: "#/components/schemas/EnterpriseTopazSidekickAgendaEntry"
+          deprecated: true
           description: Meeting card.
         meetingNotesCard:
           $ref: "#/components/schemas/EnterpriseTopazSidekickMeetingNotesCardProto"
@@ -3205,15 +3240,18 @@ components:
           description: Full profile card.
         personalizedDocsCard:
           $ref: "#/components/schemas/EnterpriseTopazSidekickPersonalizedDocsCardProto"
+          deprecated: true
           description: Card with recommended documents for the user.
         relatedPeopleAnswerCard:
           $ref: "#/components/schemas/EnterpriseTopazSidekickPeopleAnswerRelatedPeopleAnswerCard"
           description: Answer card that represents a list of people related to a person.
         shareMeetingDocsCard:
           $ref: "#/components/schemas/EnterpriseTopazSidekickShareMeetingDocsCardProto"
+          deprecated: true
           description: Sahre meeting docs card.
         sharedDocuments:
           $ref: "#/components/schemas/EnterpriseTopazSidekickDocumentPerCategoryList"
+          deprecated: true
           description: Shared documents.
         suggestedQueryAnswerCard:
           $ref: "#/components/schemas/EnterpriseTopazSidekickAnswerSuggestedQueryAnswerCard"
@@ -3302,6 +3340,7 @@ components:
           description: MIME type
           type: string
         provenance:
+          deprecated: true
           description: Document provenance.
           enum:
             - UNKNOWN_PROVENANCE
@@ -3311,6 +3350,7 @@ components:
             - CALENDAR_ASSIST_ATTACHMENT
           type: string
         reason:
+          deprecated: true
           description: Justification of why this document is being returned.
           enum:
             - UNKNOWN
@@ -3377,6 +3417,7 @@ components:
       description: Meta data for drive documents.
       properties:
         documentId:
+          deprecated: true
           description: The drive document cosmo id. Client could use the id to build a URL to open a document. Please use Document.document_id.
           type: string
         isPrivate:
@@ -3472,6 +3513,7 @@ components:
           description: The fully formatted address (e.g. 1255 Pear Avenue, Mountain View 94043, United States).
           type: string
         gaiaId:
+          deprecated: true
           description: This field is deprecated. The obfuscated_id should be used instead.
           format: int64
           type: string
@@ -3516,6 +3558,7 @@ components:
       description: Represents a mapping between a document type and its corresponding documents. Use for Work in Progress card in v1 homepage.
       properties:
         groupType:
+          deprecated: true
           description: Document group type
           enum:
             - UNKNOWN_TYPE
@@ -3567,6 +3610,17 @@ components:
             - SHARED_NOT_VIEWED
             - EDITED
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         document:
           $ref: "#/components/schemas/EnterpriseTopazSidekickCommonDocument"
         rationale:
@@ -3745,6 +3799,7 @@ components:
       description: An answer card for a single person.
       properties:
         answer:
+          deprecated: true
           description: List of answers.
           items:
             $ref: "#/components/schemas/SafeHtmlProto"
@@ -3841,6 +3896,7 @@ components:
           description: Email.
           type: string
         gaiaId:
+          deprecated: true
           description: Gaia id.
           format: int64
           type: string

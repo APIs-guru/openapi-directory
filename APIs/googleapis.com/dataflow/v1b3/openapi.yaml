@@ -2840,13 +2840,16 @@ components:
       description: Obsolete in favor of ApproximateReportedProgress and ApproximateSplitRequest.
       properties:
         percentComplete:
+          deprecated: true
           description: Obsolete.
           format: float
           type: number
         position:
           $ref: "#/components/schemas/Position"
+          deprecated: true
           description: Obsolete.
         remainingTime:
+          deprecated: true
           description: Obsolete.
           format: google-duration
           type: string
@@ -4080,6 +4083,7 @@ components:
           description: The physical location of this range assignment to be used for streaming computation cross-worker message delivery.
           type: string
         deprecatedPersistentDirectory:
+          deprecated: true
           description: DEPRECATED. The location of the persistent state for this range, as a persistent directory in the worker local filesystem.
           type: string
         end:
@@ -4523,6 +4527,7 @@ components:
             - WORKER_ZONE
             - BOOLEAN
             - ENUM
+            - NUMBER
           type: string
         parentName:
           description: Optional. Specifies the name of the parent parameter. Used in conjunction with 'parent_trigger_values' to make this parameter conditional (will only be rendered conditionally). Should be mappable to a ParameterMetadata.name field.
@@ -4797,6 +4802,10 @@ components:
         bypassTempDirValidation:
           description: Optional. Whether to bypass the safety checks for the job's temporary directory. Use with caution.
           type: boolean
+        diskSizeGb:
+          description: Optional. The disk size, in gigabytes, to use on each remote Compute Engine worker instance.
+          format: int32
+          type: integer
         enableStreamingEngine:
           description: Optional. Whether to enable Streaming Engine for the job.
           type: boolean
@@ -5223,6 +5232,7 @@ components:
           format: int64
           type: string
         desiredShardSizeBytes:
+          deprecated: true
           description: DEPRECATED in favor of desired_bundle_size_bytes.
           format: int64
           type: string
@@ -5253,6 +5263,7 @@ components:
             - SOURCE_SPLIT_OUTCOME_SPLITTING_HAPPENED
           type: string
         shards:
+          deprecated: true
           description: DEPRECATED in favor of bundles.
           items:
             $ref: "#/components/schemas/SourceSplitShard"
@@ -5928,9 +5939,11 @@ components:
           description: The progress point in the WorkItem where the Dataflow service suggests that the worker truncate the task.
         suggestedStopPoint:
           $ref: "#/components/schemas/ApproximateProgress"
+          deprecated: true
           description: DEPRECATED in favor of split_request.
         suggestedStopPosition:
           $ref: "#/components/schemas/Position"
+          deprecated: true
           description: Obsolete, always empty.
       type: object
     WorkItemStatus:
@@ -5953,12 +5966,14 @@ components:
             $ref: "#/components/schemas/Status"
           type: array
         metricUpdates:
+          deprecated: true
           description: DEPRECATED in favor of counter_updates.
           items:
             $ref: "#/components/schemas/MetricUpdate"
           type: array
         progress:
           $ref: "#/components/schemas/ApproximateProgress"
+          deprecated: true
           description: DEPRECATED in favor of reported_progress.
         reportIndex:
           description: The report index. When a WorkItem is leased, the lease will contain an initial report index. When a WorkItem's status is reported to the system, the report should be sent with that report index, and the response will contain the index the worker should use for the next report. Reports received with unexpected index values will be rejected by the service. In order to preserve idempotency, the worker should not alter the contents of a report, even if the worker must submit the same report multiple times before getting back a response. The worker should not submit a subsequent report until the response for the previous report had been received from the service.
@@ -5973,6 +5988,7 @@ components:
           type: string
         sourceFork:
           $ref: "#/components/schemas/SourceFork"
+          deprecated: true
           description: DEPRECATED in favor of dynamic_source_split.
         sourceOperationResponse:
           $ref: "#/components/schemas/SourceOperationResponse"

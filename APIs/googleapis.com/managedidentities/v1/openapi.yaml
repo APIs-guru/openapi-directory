@@ -32,6 +32,48 @@ externalDocs:
 tags:
   - name: projects
 paths:
+  "/v1/{domain}:checkMigrationPermission":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: CheckMigrationPermission API gets the current state of DomainMigration
+      operationId: managedidentities.projects.locations.global.domains.checkMigrationPermission
+      parameters:
+        - description: "Required. The domain resource name using the form: `projects/{project_id}/locations/global/domains/{domain_name}`"
+          in: path
+          name: domain
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckMigrationPermissionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckMigrationPermissionResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{domain}:disableMigration":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1352,6 +1394,27 @@ components:
           description: The certificate thumbprint which uniquely identifies the certificate.
           type: string
       type: object
+    CheckMigrationPermissionRequest:
+      description: CheckMigrationPermissionRequest is the request message for CheckMigrationPermission method.
+      properties: {}
+      type: object
+    CheckMigrationPermissionResponse:
+      description: CheckMigrationPermissionResponse is the response message for CheckMigrationPermission method.
+      properties:
+        onpremDomains:
+          description: The state of SID filtering of all the domains which has trust established.
+          items:
+            $ref: "#/components/schemas/OnPremDomainSIDDetails"
+          type: array
+        state:
+          description: The state of DomainMigration.
+          enum:
+            - STATE_UNSPECIFIED
+            - DISABLED
+            - ENABLED
+            - NEEDS_MAINTENANCE
+          type: string
+      type: object
     DailyCycle:
       description: Time window specified for daily operations.
       properties:
@@ -1714,6 +1777,7 @@ components:
       description: Maintenance schedule which is exposed to customer and potentially end user, indicating published upcoming future maintenance schedule
       properties:
         canReschedule:
+          deprecated: true
           description: This field is deprecated, and will be always set to true since reschedule can happen multiple times now. This field should not be removed until all service producers remove this for their customers.
           type: boolean
         endTime:
@@ -2011,6 +2075,20 @@ components:
           type: boolean
         domainName:
           description: Required. FQDN of the on-prem domain being migrated.
+          type: string
+      type: object
+    OnPremDomainSIDDetails:
+      description: OnPremDomainDetails is the message which contains details of on-prem domain which is trusted and needs to be migrated.
+      properties:
+        name:
+          description: FQDN of the on-prem domain being migrated.
+          type: string
+        sidFilteringState:
+          description: Current SID filtering state.
+          enum:
+            - SID_FILTERING_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
           type: string
       type: object
     Operation:

@@ -1015,6 +1015,12 @@ components:
             - SECURE_KEY
             - ENROLLED_SECOND_FACTORS
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - false
+            - false
         policyType:
           description: How IAP determines the effective policy in cases of hierarchial policies. Policies are merged from higher in the hierarchy to lower in the hierarchy.
           enum:
