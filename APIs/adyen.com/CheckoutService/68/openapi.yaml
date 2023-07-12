@@ -2027,6 +2027,39 @@ paths:
       x-groupName: Payments
       x-methodName: sessions
       x-sortIndex: 1
+  "/sessions/{sessionId}":
+    get:
+      description: Get a synchronous result of a payment session given a sessionResult.
+      operationId: get-sessions-sessionId
+      parameters:
+        - description: A unique identifier of the session.
+          in: path
+          name: sessionId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: sessionResult
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResultResponse"
+          description: OK - the request has succeeded.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get a synchronous result of a payment session
+      tags:
+        - Payments
+      x-addedInVersion: "68"
+      x-groupName: Payments
+      x-methodName: getSynchronousResultOfPaymentSession
+      x-sortIndex: 2
 components:
   examples:
     generic-400:
@@ -8294,8 +8327,8 @@ components:
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
         lineItems:
           description: |-
-            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
-            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
+            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -8768,8 +8801,8 @@ components:
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
         lineItems:
           description: |-
-            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
-            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, Walley, and Zip.
+            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -11536,7 +11569,6 @@ components:
             - directEbanking
             - boletobancario
             - neteller
-            - dana
             - paysafecard
             - cashticket
             - ikano
@@ -13600,6 +13632,32 @@ components:
         pspReference:
           type: string
       type: object
+    SessionResultResponse:
+      properties:
+        id:
+          description: A unique identifier of the session.
+          type: string
+        status:
+          description: |
+            The status of the session. The status included in the response doesn't get updated. Don't make the request again to check for payment status updates.
+
+            Possible values:
+
+                     * **completed** – The shopper completed the payment. This means that the payment was authorized.
+                     * **paymentPending** – The shopper is in the process of making the payment. This applies to payment methods with an asynchronous flow.
+                     * **refused** – The session has been refused, due to too many refused payment attempts. Shoppers can no longer complete the payment with this session.
+                     * **canceled** – The shopper canceled the payment.
+                     * **active** – The session is still active and can be paid.
+                     * **expired** – The session expired (default: 1 hour after session creation). Shoppers can no longer complete the payment with this session.
+          enum:
+            - active
+            - canceled
+            - completed
+            - expired
+            - paymentPending
+            - refused
+          type: string
+      type: object
     ShopperInput:
       properties:
         billingAddress:
@@ -13839,6 +13897,7 @@ components:
             - grabpay_PH
             - oxxo
             - gcash
+            - dana
             - kakaopay
             - truemoney
           type: string
@@ -14420,21 +14479,6 @@ components:
             - "07"
           type: string
           x-addedInVersion: "67"
-        challengeIndicator:
-          description: |
-            Specifies a preference for receiving a challenge from the issuer.
-            Allowed values:
-            * `noPreference`
-            * `requestNoChallenge`
-            * `requestChallenge`
-            * `requestChallengeAsMandate`
-          enum:
-            - noPreference
-            - requestNoChallenge
-            - requestChallenge
-            - requestChallengeAsMandate
-          type: string
-          x-addedInVersion: "67"
         dsTransID:
           description: The `dsTransID` value as defined in the 3D Secure 2 specification.
           type: string
@@ -14464,6 +14508,24 @@ components:
           description: Risk score calculated by Cartes Bancaires Directory Server (DS).
           type: string
           x-addedInVersion: "67"
+        threeDSRequestorChallengeInd:
+          description: |-
+            Indicates whether a challenge is requested for this transaction. Possible values:
+            * **01** — No preference
+            * **02** — No challenge requested
+            * **03** — Challenge requested (3DS Requestor preference)
+            * **04** — Challenge requested (Mandate)
+            * **05** — No challenge (transactional risk analysis is already performed)
+            * **06** — Data Only
+          enum:
+            - "01"
+            - "02"
+            - "03"
+            - "04"
+            - "05"
+            - "06"
+          type: string
+          x-addedInVersion: "68"
         threeDSServerTransID:
           description: The `threeDSServerTransID` value as defined in the 3D Secure 2 specification.
           type: string

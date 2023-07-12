@@ -554,6 +554,7 @@ components:
           description: Authentication using a custom account.
         googleAccount:
           $ref: "#/components/schemas/GoogleAccount"
+          deprecated: true
           description: Authentication using a Google account.
         iapCredential:
           $ref: "#/components/schemas/IapCredential"
@@ -677,6 +678,7 @@ components:
           type: array
       type: object
     GoogleAccount:
+      deprecated: true
       description: Describes authentication configuration that uses a Google account.
       properties:
         password:

@@ -210,6 +210,7 @@ components:
             - $ref: "#/components/schemas/HULocalAccountIdentification"
             - $ref: "#/components/schemas/IbanAccountIdentification"
             - $ref: "#/components/schemas/NOLocalAccountIdentification"
+            - $ref: "#/components/schemas/NZLocalAccountIdentification"
             - $ref: "#/components/schemas/NumberAndBicAccountIdentification"
             - $ref: "#/components/schemas/PLLocalAccountIdentification"
             - $ref: "#/components/schemas/SELocalAccountIdentification"
@@ -405,6 +406,36 @@ components:
         - type
         - accountNumber
       type: object
+    NZLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 7-digit bank account number, without separators or whitespace.
+          maxLength: 7
+          minLength: 7
+          type: string
+        accountSuffix:
+          description: The 2- to 3-digit account suffix, without separators or whitespace.
+          maxLength: 3
+          minLength: 2
+          type: string
+        bankCode:
+          description: The 6-digit bank code including the 2-digit bank code and 4-digit branch code, without separators or whitespace.
+          maxLength: 6
+          minLength: 6
+          type: string
+        type:
+          default: nzLocal
+          description: "**nzLocal**"
+          enum:
+            - nzLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - accountSuffix
+        - bankCode
+      type: object
     NameLocation:
       properties:
         city:
@@ -477,7 +508,7 @@ components:
           description: Address of the bank account owner.
         dateOfBirth:
           description: |-
-            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before 1st January 1900.
+            The date of birth of the individual in [ISO-8601](https://www.w3.org/TR/NOTE-datetime) format. For example, **YYYY-MM-DD**. Should not be before January 1, 1900.
 
             Allowed only when `type` is **individual**.
           format: date
@@ -498,7 +529,7 @@ components:
             Allowed only when `type` is **individual**.
           type: string
         reference:
-          description: Your unique reference of the party. This should be consistent for all transfers initiated to/from the same party/counterparty. e.g Your client's unique wallet or payee ID
+          description: A unique reference to identify the party or counterparty involved in transfers. This identifier ensures consistency and uniqueness throughout all transactions initiated to and from the same party. For example, your client's unique wallet or payee ID.
           type: string
         type:
           default: unknown
@@ -816,6 +847,19 @@ components:
           x-addedInVersion: "3"
           x-deprecatedInVersion: "3"
           x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
+        platformPaymentType:
+          deprecated: true
+          description: The type of the related split.
+          enum:
+            - BalanceAccount
+            - Commission
+            - Default
+            - PaymentFee
+            - VAT
+          type: string
+          x-addedInVersion: "3"
+          x-deprecatedInVersion: "3"
+          x-deprecatedMessage: This will be removed in v4 and replaced with a new field.
         priority:
           description: |-
             The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Required for transfers with `category` **bank**.
@@ -1016,6 +1060,7 @@ components:
             - bankTransfer
             - capture
             - captureReversal
+            - cardTransfer
             - chargeback
             - chargebackReversal
             - depositCorrection

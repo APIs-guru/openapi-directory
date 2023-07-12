@@ -2327,7 +2327,7 @@ paths:
         - connector: clearbooks-uk
           description: Clearbooks does not support setting the pagination size.
         - connector: quickbooks
-          description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage or discount_amount applies to entire invoice.
+          description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage or discount_amount applies to entire invoice. The default type for a Line Item is a sales item if no type has been provided.
         - Procountor only accepts the following values for the channel field: EMAIL, MAIL, ELECTRONIC_INVOICE, EDIFACT, PAPER_INVOICE, NO_SENDING.
           Procountor only accepts the following values for the language field: EN, FI, SV, ET, NO, and DA.
           Procountor only accepts the following values for the payment_method field: BANK_TRANSFER, DIRECT_PAYMENT, CLEARING, CREDIT_CARD_CHARGE, FOREIGN_PAYMENT, OTHER, CASH, DOMESTIC_PAYMENT_PLUSGIRO, DOMESTIC_PAYMENT_BANKGIRO, DOMESTIC_PAYMENT_CREDITOR, DKLMPKRE, NETS.
@@ -2628,7 +2628,7 @@ paths:
       x-apideck-api: accounting
       x-apideck-gotchas:
         - connector: quickbooks
-          description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage or discount_amount applies to entire invoice.
+          description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage or discount_amount applies to entire invoice. The default type for a Line Item is a sales item if no type has been provided.
         - Procountor only accepts the following values for the channel field: EMAIL, MAIL, ELECTRONIC_INVOICE, EDIFACT, PAPER_INVOICE, NO_SENDING.
           Procountor only accepts the following values for the language field: EN, FI, SV, ET, NO, and DA.
           Procountor only accepts the following values for the payment_method field: BANK_TRANSFER, DIRECT_PAYMENT, CLEARING, CREDIT_CARD_CHARGE, FOREIGN_PAYMENT, OTHER, CASH, DOMESTIC_PAYMENT_PLUSGIRO, DOMESTIC_PAYMENT_BANKGIRO, DOMESTIC_PAYMENT_CREDITOR, DKLMPKRE, NETS.

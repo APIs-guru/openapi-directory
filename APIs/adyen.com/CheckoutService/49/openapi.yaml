@@ -7677,8 +7677,8 @@ components:
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
         lineItems:
           description: |-
-            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
-            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
+            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -8116,8 +8116,8 @@ components:
           description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
         lineItems:
           description: |-
-            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
-            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
+            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
           items:
             $ref: "#/components/schemas/LineItem"
           type: array
@@ -10103,7 +10103,6 @@ components:
             - directEbanking
             - boletobancario
             - neteller
-            - dana
             - paysafecard
             - cashticket
             - ikano
@@ -12263,6 +12262,7 @@ components:
             - grabpay_PH
             - oxxo
             - gcash
+            - dana
             - kakaopay
             - truemoney
           type: string

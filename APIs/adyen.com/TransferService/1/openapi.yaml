@@ -54,7 +54,6 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: TransferService
-  x-timestamp: 2023-06-12T13:25:58Z
 tags:
   - name: Transactions
   - name: Transfers
@@ -678,6 +677,7 @@ components:
             - bankTransfer
             - capture
             - captureReversal
+            - cardTransfer
             - chargeback
             - chargebackReversal
             - depositCorrection

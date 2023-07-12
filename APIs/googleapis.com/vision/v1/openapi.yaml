@@ -1538,6 +1538,7 @@ components:
           $ref: "#/components/schemas/BoundingPoly"
           description: Image region to which this entity belongs. Not produced for `LABEL_DETECTION` features.
         confidence:
+          deprecated: true
           description: '**Deprecated. Use `score` instead.** The accuracy of the entity detection in an image. For example, for an image in which the "Eiffel Tower" entity is detected, this field represents the confidence that there is a tower in the query image. Range [0, 1].'
           format: float
           type: number
@@ -1907,6 +1908,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudVisionV1p1beta1BoundingPoly"
           description: Image region to which this entity belongs. Not produced for `LABEL_DETECTION` features.
         confidence:
+          deprecated: true
           description: '**Deprecated. Use `score` instead.** The accuracy of the entity detection in an image. For example, for an image in which the "Eiffel Tower" entity is detected, this field represents the confidence that there is a tower in the query image. Range [0, 1].'
           format: float
           type: number
@@ -2816,6 +2818,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudVisionV1p2beta1BoundingPoly"
           description: Image region to which this entity belongs. Not produced for `LABEL_DETECTION` features.
         confidence:
+          deprecated: true
           description: '**Deprecated. Use `score` instead.** The accuracy of the entity detection in an image. For example, for an image in which the "Eiffel Tower" entity is detected, this field represents the confidence that there is a tower in the query image. Range [0, 1].'
           format: float
           type: number
@@ -3746,6 +3749,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudVisionV1p3beta1BoundingPoly"
           description: Image region to which this entity belongs. Not produced for `LABEL_DETECTION` features.
         confidence:
+          deprecated: true
           description: '**Deprecated. Use `score` instead.** The accuracy of the entity detection in an image. For example, for an image in which the "Eiffel Tower" entity is detected, this field represents the confidence that there is a tower in the query image. Range [0, 1].'
           format: float
           type: number
@@ -4734,6 +4738,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudVisionV1p4beta1BoundingPoly"
           description: Image region to which this entity belongs. Not produced for `LABEL_DETECTION` features.
         confidence:
+          deprecated: true
           description: '**Deprecated. Use `score` instead.** The accuracy of the entity detection in an image. For example, for an image in which the "Eiffel Tower" entity is detected, this field represents the confidence that there is a tower in the query image. Range [0, 1].'
           format: float
           type: number

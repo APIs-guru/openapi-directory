@@ -639,6 +639,7 @@ components:
           $ref: "#/components/schemas/AliasContext"
           description: An alias, which may be a branch or tag.
         aliasName:
+          deprecated: true
           description: The name of an alias (branch, tag, etc.).
           type: string
         repoId:
@@ -687,6 +688,7 @@ components:
           description: Human readable description of the debuggee. Including a human-readable project name, environment name and version information is recommended.
           type: string
         extSourceContexts:
+          deprecated: true
           description: References to the locations and revisions of the source code used in the deployed application.
           items:
             $ref: "#/components/schemas/ExtendedSourceContext"
@@ -755,6 +757,7 @@ components:
           $ref: "#/components/schemas/AliasContext"
           description: An alias, which may be a branch or tag.
         aliasName:
+          deprecated: true
           description: The name of an alias (branch, tag, etc.).
           type: string
         gerritProject:

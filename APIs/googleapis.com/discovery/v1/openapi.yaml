@@ -224,6 +224,9 @@ components:
                 type: string
               type: array
           type: object
+        deprecated:
+          description: Whether the parameter is deprecated.
+          type: boolean
         description:
           description: A description of this object.
           type: string
@@ -231,6 +234,11 @@ components:
           description: Values this parameter may take (if it is an enum).
           items:
             type: string
+          type: array
+        enumDeprecated:
+          description: The deprecation status for the enums. Each position maps to the corresponding value in the "enum" array.
+          items:
+            type: boolean
           type: array
         enumDescriptions:
           description: The descriptions for the enums. Each position maps to the corresponding value in the "enum" array.
@@ -430,6 +438,9 @@ components:
       type: object
     RestMethod:
       properties:
+        deprecated:
+          description: Whether this method is deprecated.
+          type: boolean
         description:
           description: Description of this method.
           type: string
@@ -534,6 +545,9 @@ components:
       type: object
     RestResource:
       properties:
+        deprecated:
+          description: Whether this resource is deprecated.
+          type: boolean
         methods:
           additionalProperties:
             $ref: "#/components/schemas/RestMethod"

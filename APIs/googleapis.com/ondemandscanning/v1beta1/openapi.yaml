@@ -500,9 +500,40 @@ components:
           $ref: "#/components/schemas/PackageVersion"
           description: The source package. Similar to the above, this is significant when the source is different than the binary itself. Since the top-level package/version fields are based on an if/else, we need a separate field for both binary and source if we want to know definitively where the data is coming from.
       type: object
+    BuildDefinition:
+      properties:
+        buildType:
+          type: string
+        externalParameters:
+          additionalProperties:
+            description: Properties of the object.
+          type: object
+        internalParameters:
+          additionalProperties:
+            description: Properties of the object.
+          type: object
+        resolvedDependencies:
+          items:
+            $ref: "#/components/schemas/ResourceDescriptor"
+          type: array
+      type: object
+    BuildMetadata:
+      properties:
+        finishedOn:
+          format: google-datetime
+          type: string
+        invocationId:
+          type: string
+        startedOn:
+          format: google-datetime
+          type: string
+      type: object
     BuildOccurrence:
       description: Details of a build occurrence.
       properties:
+        inTotoSlsaProvenanceV1:
+          $ref: "#/components/schemas/InTotoSlsaProvenanceV1"
+          description: In-Toto Slsa Provenance V1 represents a slsa provenance meeting the slsa spec, wrapped in an in-toto statement. This allows for direct jsonification of a to-spec in-toto slsa statement with a to-spec slsa provenance.
         intotoProvenance:
           $ref: "#/components/schemas/InTotoProvenance"
           description: Deprecated. See InTotoStatement for the replacement. In-toto Provenance representation as defined in spec.
@@ -816,6 +847,9 @@ components:
           description: The last time this resource was scanned.
           format: google-datetime
           type: string
+        sbomStatus:
+          $ref: "#/components/schemas/SBOMStatus"
+          description: The status of an SBOM generation.
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
@@ -1030,6 +1064,20 @@ components:
         recipe:
           $ref: "#/components/schemas/Recipe"
           description: Identifies the configuration used for the build. When combined with materials, this SHOULD fully describe the build, such that re-running this recipe results in bit-for-bit identical output (if the build is reproducible). required
+      type: object
+    InTotoSlsaProvenanceV1:
+      properties:
+        _type:
+          description: InToto spec defined at https://github.com/in-toto/attestation/tree/main/spec#statement
+          type: string
+        predicate:
+          $ref: "#/components/schemas/SlsaProvenanceV1"
+        predicateType:
+          type: string
+        subject:
+          items:
+            $ref: "#/components/schemas/Subject"
+          type: array
       type: object
     InTotoStatement:
       description: Spec defined at https://github.com/in-toto/attestation/tree/main/spec#statement The serialized InTotoStatement will be stored as Envelope.payload. Envelope.payloadType is always "application/vnd.in-toto+json".
@@ -1452,6 +1500,19 @@ components:
           description: The name of the repo. Leave empty for the default repo.
           type: string
       type: object
+    ProvenanceBuilder:
+      properties:
+        builderDependencies:
+          items:
+            $ref: "#/components/schemas/ResourceDescriptor"
+          type: array
+        id:
+          type: string
+        version:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
     Recipe:
       description: Steps taken to build the artifact. For a TaskRun, typically each container corresponds to one step in the recipe.
       properties:
@@ -1520,6 +1581,38 @@ components:
           description: A server-assigned, globally unique identifier.
           type: string
       type: object
+    ResourceDescriptor:
+      properties:
+        annotations:
+          additionalProperties: {}
+          type: object
+        content:
+          format: byte
+          type: string
+        digest:
+          additionalProperties:
+            type: string
+          type: object
+        downloadLocation:
+          type: string
+        mediaType:
+          type: string
+        name:
+          type: string
+        uri:
+          type: string
+      type: object
+    RunDetails:
+      properties:
+        builder:
+          $ref: "#/components/schemas/ProvenanceBuilder"
+        byproducts:
+          items:
+            $ref: "#/components/schemas/ResourceDescriptor"
+          type: array
+        metadata:
+          $ref: "#/components/schemas/BuildMetadata"
+      type: object
     SBOMReferenceOccurrence:
       description: The occurrence representing an SBOM reference as applied to a specific resource. The occurrence follows the DSSE specification. See https://github.com/secure-systems-lab/dsse/blob/master/envelope.md for more details.
       properties:
@@ -1534,6 +1627,20 @@ components:
           items:
             $ref: "#/components/schemas/EnvelopeSignature"
           type: array
+      type: object
+    SBOMStatus:
+      description: The status of an SBOM generation.
+      properties:
+        error:
+          description: If there was an error generating an SBOM, this will indicate what that error was.
+          type: string
+        sbomState:
+          description: The progress of the SBOM generation.
+          enum:
+            - SBOM_STATE_UNSPECIFIED
+            - PENDING
+            - COMPLETE
+          type: string
       type: object
     SbomReferenceIntotoPayload:
       description: The actual payload that contains the SBOM Reference data. The payload follows the intoto statement specification. See https://github.com/in-toto/attestation/blob/main/spec/v1.0/statement.md for more details.
@@ -1636,6 +1743,14 @@ components:
         recipe:
           $ref: "#/components/schemas/SlsaRecipe"
           description: Identifies the configuration used for the build. When combined with materials, this SHOULD fully describe the build, such that re-running this recipe results in bit-for-bit identical output (if the build is reproducible). required
+      type: object
+    SlsaProvenanceV1:
+      description: Keep in sync with schema at https://github.com/slsa-framework/slsa/blob/main/docs/provenance/schema/v1/provenance.proto Builder renamed to ProvenanceBuilder because of Java conflicts.
+      properties:
+        buildDefinition:
+          $ref: "#/components/schemas/BuildDefinition"
+        runDetails:
+          $ref: "#/components/schemas/RunDetails"
       type: object
     SlsaProvenanceZeroTwo:
       description: See full explanation of fields at slsa.dev/provenance/v0.2.
