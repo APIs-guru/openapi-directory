@@ -1387,6 +1387,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.DeleteDeployment:
+    post:
+      operationId: DeleteDeployment
+      description: Delete the deployment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDeploymentOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDeploymentInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.DeleteDeployment
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AwsProton20200720.DeleteEnvironment:
     post:
       operationId: DeleteEnvironment
@@ -2195,6 +2258,69 @@ paths:
             type: string
             enum:
               - AwsProton20200720.GetComponent
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.GetDeployment:
+    post:
+      operationId: GetDeployment
+      description: Get detailed data for a deployment.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeploymentOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDeploymentInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.GetDeployment
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3404,6 +3530,81 @@ paths:
             type: string
             enum:
               - AwsProton20200720.ListComponents
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AwsProton20200720.ListDeployments:
+    post:
+      operationId: ListDeployments
+      description: 'List deployments. You can filter the result list by environment, service, or a single service instance.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeploymentsOutput'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDeploymentsInput'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AwsProton20200720.ListDeployments
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6597,6 +6798,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the component to delete.
+    DeleteDeploymentOutput:
+      type: object
+      properties:
+        deployment:
+          allOf:
+            - $ref: '#/components/schemas/Deployment'
+            - description: The detailed data of the deployment being deleted.
+    DeleteDeploymentInput:
+      type: object
+      required:
+        - id
+      title: DeleteDeploymentInput
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the deployment to delete.
     DeleteEnvironmentOutput:
       type: object
       properties:
@@ -6825,6 +7043,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the component that you want to get the detailed data for.
+    GetDeploymentOutput:
+      type: object
+      properties:
+        deployment:
+          allOf:
+            - $ref: '#/components/schemas/Deployment'
+            - description: The detailed data of the requested deployment.
+    GetDeploymentInput:
+      type: object
+      required:
+        - id
+      title: GetDeploymentInput
+      properties:
+        componentName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of a component that you want to get the detailed data for.
+        environmentName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of a environment that you want to get the detailed data for.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the deployment that you want to get the detailed data for.
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service instance associated with the given deployment ID. <code>serviceName</code> must be specified to identify the service instance.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service associated with the given deployment ID.
     GetEnvironmentOutput:
       type: object
       required:
@@ -7217,6 +7468,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the component whose outputs you want.
+        deploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the deployment whose outputs you want.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/EmptyNextToken'
@@ -7285,6 +7540,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of a service for result list filtering. Proton returns components attached to service instances of the service.
+    ListDeploymentsOutput:
+      type: object
+      required:
+        - deployments
+      properties:
+        deployments:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentSummaryList'
+            - description: An array of deployment with summary data.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that indicates the location of the next deployment in the array of deployment, after the current requested list of deployment.'
+    ListDeploymentsInput:
+      type: object
+      title: ListDeploymentsInput
+      properties:
+        componentName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of a component for result list filtering. Proton returns deployments associated with that component.
+        environmentName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of an environment for result list filtering. Proton returns deployments associated with the environment.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxPageResults'
+            - description: The maximum number of deployments to list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token that indicates the location of the next deployment in the array of deployment, after the list of deployment that was previously requested.'
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of a service instance for result list filtering. Proton returns the deployments associated with the service instance.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of a service for result list filtering. Proton returns deployments associated with service instances of the service.
     ListEnvironmentAccountConnectionsOutput:
       type: object
       required:
@@ -7343,6 +7639,10 @@ components:
         - environmentName
       title: ListEnvironmentOutputsInput
       properties:
+        deploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the deployment whose outputs you want.
         environmentName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -7549,6 +7849,10 @@ components:
         - serviceName
       title: ListServiceInstanceOutputsInput
       properties:
+        deploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the deployment whose outputs you want.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/EmptyNextToken'
@@ -7653,6 +7957,10 @@ components:
         - serviceName
       title: ListServicePipelineOutputsInput
       properties:
+        deploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the deployment you want the outputs for.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/EmptyNextToken'
@@ -8577,6 +8885,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the Proton environment that this component is associated with.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment of this component.
         lastClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -8593,6 +8905,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the component was last modified.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment of this component.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -8659,6 +8975,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsAccountId'
             - description: The ID of the environment account that the environment infrastructure resources are provisioned in.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment of this environment.
         lastDeploymentAttemptedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -8667,6 +8987,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the environment was last deployed successfully.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment of this environment.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -8735,6 +9059,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the environment that the service instance was deployed into.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment of this service instance.
         lastClientRequestToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -8747,6 +9075,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the service instance was last deployed successfully.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment of this service instance.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -8800,6 +9132,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusMessage'
             - description: A service pipeline deployment status message.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment of this service pipeline.
         lastDeploymentAttemptedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -8808,6 +9144,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the service pipeline was last deployed successfully.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment of this service pipeline.
         spec:
           allOf:
             - $ref: '#/components/schemas/SpecContents'
@@ -8899,6 +9239,9 @@ components:
       minLength: 0
       maxLength: 500
       format: password
+    DeploymentId:
+      type: string
+      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
     String:
       type: string
     SpecContents:
@@ -8906,11 +9249,47 @@ components:
       minLength: 1
       maxLength: 51200
       format: password
+    ComponentDeploymentIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentId'
+      minItems: 0
+      maxItems: 1
     ComponentDeploymentUpdateType:
       type: string
       enum:
         - NONE
         - CURRENT_VERSION
+    ResourceNameOrEmpty:
+      type: string
+      pattern: '(^$)|^[0-9A-Za-z]+[0-9A-Za-z_\-]*$'
+      minLength: 0
+      maxLength: 100
+    TemplateFileContents:
+      type: string
+      minLength: 1
+      maxLength: 51200
+      format: password
+    ComponentState:
+      type: object
+      properties:
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceNameOrEmpty'
+            - description: The name of the service instance that this component is attached to. Provided when a component is attached to a service instance.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceNameOrEmpty'
+            - description: The name of the service that <code>serviceInstanceName</code> is associated with. Provided when a component is attached to a service instance.
+        serviceSpec:
+          allOf:
+            - $ref: '#/components/schemas/SpecContents'
+            - description: The service spec that the component uses to access service inputs. Provided when a component is attached to a service instance.
+        templateFile:
+          allOf:
+            - $ref: '#/components/schemas/TemplateFileContents'
+            - description: The template file used.
+      description: The detailed data about the current state of the component.
     ComponentSummary:
       type: object
       required:
@@ -8941,6 +9320,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the Proton environment that this component is associated with.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment of this component.
         lastDeploymentAttemptedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -8953,6 +9336,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the component was last modified.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment of this component.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -9039,11 +9426,6 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 50
-    TemplateFileContents:
-      type: string
-      minLength: 1
-      maxLength: 51200
-      format: password
     RoleArn:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov):iam::\d{12}:role/([\w+=,.@-]{1,512}[/:])*([\w+=,.@-]{1,64})$'
@@ -9490,9 +9872,284 @@ components:
             - $ref: '#/components/schemas/TemplateType'
             - description: The template type.
       description: The detail data for a template sync configuration.
-    DeploymentId:
+    Deployment:
+      type: object
+      required:
+        - arn
+        - createdAt
+        - deploymentStatus
+        - environmentName
+        - id
+        - lastModifiedAt
+        - targetArn
+        - targetResourceCreatedAt
+        - targetResourceType
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentArn'
+            - description: The Amazon Resource Name (ARN) of the deployment.
+        completedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the deployment was completed.
+        componentName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the component associated with this deployment.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the deployment was created.
+        deploymentStatus:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentStatus'
+            - description: The status of the deployment.
+        deploymentStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/StatusMessage'
+            - description: The deployment status message.
+        environmentName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the environment associated with this deployment.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the deployment.
+        initialState:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentState'
+            - description: The initial state of the target resource at the time of the deployment.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment.
+        lastModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the deployment was last modified.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment.
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the deployment's service instance.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service in this deployment.
+        targetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the target of the deployment.
+        targetResourceCreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the depoyment target was created.
+        targetResourceType:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentTargetResourceType'
+            - description: 'The resource type of the deployment target. It can be an environment, service, service instance, or component.'
+        targetState:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentState'
+            - description: The target state of the target resource at the time of the deployment.
+      description: The detailed information about a deployment.
+    DeploymentArn:
       type: string
-      pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+    DeploymentState:
+      type: object
+      properties:
+        component:
+          allOf:
+            - $ref: '#/components/schemas/ComponentState'
+            - description: The state of the component associated with the deployment.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentState'
+            - description: The state of the environment associated with the deployment.
+        serviceInstance:
+          allOf:
+            - $ref: '#/components/schemas/ServiceInstanceState'
+            - description: The state of the service instance associated with the deployment.
+        servicePipeline:
+          allOf:
+            - $ref: '#/components/schemas/ServicePipelineState'
+            - description: The state of the service pipeline associated with the deployment.
+      description: The detailed data about the current state of the deployment.
+    DeploymentTargetResourceType:
+      type: string
+      enum:
+        - ENVIRONMENT
+        - SERVICE_PIPELINE
+        - SERVICE_INSTANCE
+        - COMPONENT
+    EnvironmentState:
+      type: object
+      required:
+        - templateMajorVersion
+        - templateMinorVersion
+        - templateName
+      properties:
+        spec:
+          allOf:
+            - $ref: '#/components/schemas/SpecContents'
+            - description: The environment spec that was used to create the environment.
+        templateMajorVersion:
+          allOf:
+            - $ref: '#/components/schemas/TemplateVersionPart'
+            - description: The major version of the environment template that was used to create the environment.
+        templateMinorVersion:
+          allOf:
+            - $ref: '#/components/schemas/TemplateVersionPart'
+            - description: The minor version of the environment template that was used to create the environment.
+        templateName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the environment template that was used to create the environment.
+      description: The detailed data about the current state of the environment.
+    ServiceInstanceState:
+      type: object
+      required:
+        - spec
+        - templateMajorVersion
+        - templateMinorVersion
+        - templateName
+      properties:
+        lastSuccessfulComponentDeploymentIds:
+          allOf:
+            - $ref: '#/components/schemas/ComponentDeploymentIdList'
+            - description: The IDs for the last successful components deployed for this service instance.
+        lastSuccessfulEnvironmentDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID for the last successful environment deployed for this service instance.
+        lastSuccessfulServicePipelineDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID for the last successful service pipeline deployed for this service instance.
+        spec:
+          allOf:
+            - $ref: '#/components/schemas/SpecContents'
+            - description: The service spec that was used to create the service instance.
+        templateMajorVersion:
+          allOf:
+            - $ref: '#/components/schemas/TemplateVersionPart'
+            - description: The major version of the service template that was used to create the service pipeline.
+        templateMinorVersion:
+          allOf:
+            - $ref: '#/components/schemas/TemplateVersionPart'
+            - description: The minor version of the service template that was used to create the service pipeline.
+        templateName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service template that was used to create the service instance.
+      description: The detailed data about the current state of this service instance.
+    ServicePipelineState:
+      type: object
+      required:
+        - templateMajorVersion
+        - templateMinorVersion
+        - templateName
+      properties:
+        spec:
+          allOf:
+            - $ref: '#/components/schemas/SpecContents'
+            - description: The service spec that was used to create the service pipeline.
+        templateMajorVersion:
+          allOf:
+            - $ref: '#/components/schemas/TemplateVersionPart'
+            - description: The major version of the service template that was used to create the service pipeline.
+        templateMinorVersion:
+          allOf:
+            - $ref: '#/components/schemas/TemplateVersionPart'
+            - description: The minor version of the service template that was used to create the service pipeline.
+        templateName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service template that was used to create the service pipeline.
+      description: The detailed data about the current state of the service pipeline.
+    DeploymentSummary:
+      type: object
+      required:
+        - arn
+        - createdAt
+        - deploymentStatus
+        - environmentName
+        - id
+        - lastModifiedAt
+        - targetArn
+        - targetResourceCreatedAt
+        - targetResourceType
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentArn'
+            - description: The Amazon Resource Name (ARN) of the deployment.
+        completedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the deployment was completed.
+        componentName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the component associated with the deployment.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the deployment was created.
+        deploymentStatus:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentStatus'
+            - description: The current status of the deployment.
+        environmentName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the environment associated with the deployment.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the deployment.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment.
+        lastModifiedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the deployment was last modified.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment.
+        serviceInstanceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service instance associated with the deployment.
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the service associated with the deployment.
+        targetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the target of the deployment.
+        targetResourceCreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time the target resource was created.
+        targetResourceType:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentTargetResourceType'
+            - description: 'The resource type of the deployment target. It can be an environment, service, service instance, or component.'
+      description: Summary data of the deployment.
+    DeploymentSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeploymentSummary'
     DeploymentUpdateType:
       type: string
       enum:
@@ -9626,6 +10283,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsAccountId'
             - description: The ID of the environment account that the environment infrastructure resources are provisioned in.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment of this environment.
         lastDeploymentAttemptedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -9634,6 +10295,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the environment was last deployed successfully.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment of this environment.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -10201,11 +10866,6 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The type of event.
       description: Repository sync event detail data for a sync attempt.
-    ResourceNameOrEmpty:
-      type: string
-      pattern: '(^$)|^[0-9A-Za-z]+[0-9A-Za-z_\-]*$'
-      minLength: 0
-      maxLength: 100
     ResourceSyncEvents:
       type: array
       items:
@@ -10325,6 +10985,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the environment that the service instance was deployed into.
+        lastAttemptedDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last attempted deployment of this service instance.
         lastDeploymentAttemptedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -10333,6 +10997,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time when the service was last deployed successfully.
+        lastSucceededDeploymentId:
+          allOf:
+            - $ref: '#/components/schemas/DeploymentId'
+            - description: The ID of the last successful deployment of this service instance.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'

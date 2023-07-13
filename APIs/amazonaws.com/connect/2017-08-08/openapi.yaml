@@ -5402,6 +5402,127 @@ paths:
                   pattern: 's3://\S+/.+'
                   minLength: 1
                   maxLength: 512
+  '/queues/{InstanceId}/{QueueId}':
+    delete:
+      operationId: DeleteQueue
+      description: Deletes a queue.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: QueueId
+          in: path
+          required: true
+          description: The identifier for the queue.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeQueue
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the specified queue.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeQueueResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: QueueId
+          in: path
+          required: true
+          description: The identifier for the queue.
+          schema:
+            type: string
   '/quick-connects/{InstanceId}/{QuickConnectId}':
     delete:
       operationId: DeleteQuickConnect
@@ -5515,6 +5636,127 @@ paths:
           in: path
           required: true
           description: The identifier for the quick connect.
+          schema:
+            type: string
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}':
+    delete:
+      operationId: DeleteRoutingProfile
+      description: Deletes a routing profile.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeRoutingProfile
+      description: Describes the specified routing profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRoutingProfileResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
           schema:
             type: string
   '/rules/{InstanceId}/{RuleId}':
@@ -7566,134 +7808,6 @@ paths:
                   description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If not provided, the Amazon Web Services SDK populates this field. For more information about idempotency, see <a href="https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/">Making retries safe with idempotent APIs</a>.'
                   type: string
                   maxLength: 500
-  '/queues/{InstanceId}/{QueueId}':
-    get:
-      operationId: DescribeQueue
-      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the specified queue.</p>
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DescribeQueueResponse'
-        '480':
-          description: InvalidRequestException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestException'
-        '481':
-          description: InvalidParameterException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '482':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '484':
-          description: InternalServiceException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServiceException'
-      parameters:
-        - name: InstanceId
-          in: path
-          required: true
-          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
-          schema:
-            type: string
-            minLength: 1
-            maxLength: 100
-        - name: QueueId
-          in: path
-          required: true
-          description: The identifier for the queue.
-          schema:
-            type: string
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/routing-profiles/{InstanceId}/{RoutingProfileId}':
-    get:
-      operationId: DescribeRoutingProfile
-      description: Describes the specified routing profile.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DescribeRoutingProfileResponse'
-        '480':
-          description: InvalidRequestException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestException'
-        '481':
-          description: InvalidParameterException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '482':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '484':
-          description: InternalServiceException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServiceException'
-      parameters:
-        - name: InstanceId
-          in: path
-          required: true
-          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
-          schema:
-            type: string
-            minLength: 1
-            maxLength: 100
-        - name: RoutingProfileId
-          in: path
-          required: true
-          description: The identifier of the routing profile.
-          schema:
-            type: string
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/user-hierarchy-structure/{InstanceId}':
     get:
       operationId: DescribeUserHierarchyStructure
@@ -21191,9 +21305,17 @@ components:
       type: object
       title: DeletePromptRequest
       properties: {}
+    DeleteQueueRequest:
+      type: object
+      title: DeleteQueueRequest
+      properties: {}
     DeleteQuickConnectRequest:
       type: object
       title: DeleteQuickConnectRequest
+      properties: {}
+    DeleteRoutingProfileRequest:
+      type: object
+      title: DeleteRoutingProfileRequest
       properties: {}
     DeleteRuleRequest:
       type: object
@@ -21507,7 +21629,7 @@ components:
         InstanceAccessUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: This URL allows contact center users to access Amazon Connect admin website.
+            - description: This URL allows contact center users to access the Amazon Connect admin website.
       description: The Amazon Connect instance.
     DescribeInstanceStorageConfigRequest:
       type: object
@@ -23309,7 +23431,7 @@ components:
         InstanceAccessUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: This URL allows contact center users to access Amazon Connect admin website.
+            - description: This URL allows contact center users to access the Amazon Connect admin website.
       description: Information about the instance.
     InstanceSummaryList:
       type: array

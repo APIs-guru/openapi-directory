@@ -8272,6 +8272,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/LongVarcharMappingType'
             - description: 'When true, DMS migrates LONG values as VARCHAR.'
+        DatabaseMode:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseMode'
+            - description: 'Specifies whether to use default or custom replication behavior for PostgreSQL-compatible endpoints. You can use this setting to specify replication behavior for endpoints that require additional configuration, such as Babelfish endpoints.'
+        BabelfishDatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Babelfish for Aurora PostgreSQL database name for the endpoint.
       description: Provides information that defines a PostgreSQL endpoint.
     MySQLSettings:
       type: object
@@ -9379,6 +9387,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DatabaseResponse'
+    DatabaseMode:
+      type: string
+      enum:
+        - default
+        - babelfish
     LongOptional:
       type: integer
     ServerShortInfoResponse:

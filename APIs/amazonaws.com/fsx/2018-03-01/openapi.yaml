@@ -2641,7 +2641,7 @@ paths:
   /#X-Amz-Target=AWSSimbaAPIService_v20180301.UpdateFileSystem:
     post:
       operationId: UpdateFileSystem
-      description: '<p>Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request.</p> <p>For FSx for Windows File Server file systems, you can update the following properties:</p> <ul> <li> <p> <code>AuditLogConfiguration</code> </p> </li> <li> <p> <code>AutomaticBackupRetentionDays</code> </p> </li> <li> <p> <code>DailyAutomaticBackupStartTime</code> </p> </li> <li> <p> <code>SelfManagedActiveDirectoryConfiguration</code> </p> </li> <li> <p> <code>StorageCapacity</code> </p> </li> <li> <p> <code>ThroughputCapacity</code> </p> </li> <li> <p> <code>WeeklyMaintenanceStartTime</code> </p> </li> </ul> <p>For FSx for Lustre file systems, you can update the following properties:</p> <ul> <li> <p> <code>AutoImportPolicy</code> </p> </li> <li> <p> <code>AutomaticBackupRetentionDays</code> </p> </li> <li> <p> <code>DailyAutomaticBackupStartTime</code> </p> </li> <li> <p> <code>DataCompressionType</code> </p> </li> <li> <p> <code>LustreRootSquashConfiguration</code> </p> </li> <li> <p> <code>StorageCapacity</code> </p> </li> <li> <p> <code>WeeklyMaintenanceStartTime</code> </p> </li> </ul> <p>For FSx for ONTAP file systems, you can update the following properties:</p> <ul> <li> <p> <code>AddRouteTableIds</code> </p> </li> <li> <p> <code>AutomaticBackupRetentionDays</code> </p> </li> <li> <p> <code>DailyAutomaticBackupStartTime</code> </p> </li> <li> <p> <code>DiskIopsConfiguration</code> </p> </li> <li> <p> <code>FsxAdminPassword</code> </p> </li> <li> <p> <code>RemoveRouteTableIds</code> </p> </li> <li> <p> <code>StorageCapacity</code> </p> </li> <li> <p> <code>ThroughputCapacity</code> </p> </li> <li> <p> <code>WeeklyMaintenanceStartTime</code> </p> </li> </ul> <p>For FSx for OpenZFS file systems, you can update the following properties:</p> <ul> <li> <p> <code>AutomaticBackupRetentionDays</code> </p> </li> <li> <p> <code>CopyTagsToBackups</code> </p> </li> <li> <p> <code>CopyTagsToVolumes</code> </p> </li> <li> <p> <code>DailyAutomaticBackupStartTime</code> </p> </li> <li> <p> <code>DiskIopsConfiguration</code> </p> </li> <li> <p> <code>StorageCapacity</code> </p> </li> <li> <p> <code>ThroughputCapacity</code> </p> </li> <li> <p> <code>WeeklyMaintenanceStartTime</code> </p> </li> </ul>'
+      description: '<p>Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request.</p> <p>For FSx for Windows File Server file systems, you can update the following properties:</p> <ul> <li> <p> <code>AuditLogConfiguration</code> </p> </li> <li> <p> <code>AutomaticBackupRetentionDays</code> </p> </li> <li> <p> <code>DailyAutomaticBackupStartTime</code> </p> </li> <li> <p> <code>SelfManagedActiveDirectoryConfiguration</code> </p> </li> <li> <p> <code>StorageCapacity</code> </p> </li> <li> <p> <code>ThroughputCapacity</code> </p> </li> <li> <p> <code>WeeklyMaintenanceStartTime</code> </p> </li> </ul> <p>For FSx for Lustre file systems, you can update the following properties:</p> <ul> <li> <p> <code>AutoImportPolicy</code> </p> </li> <li> <p> <code>AutomaticBackupRetentionDays</code> </p> </li> <li> <p> <code>DailyAutomaticBackupStartTime</code> </p> </li> <li> <p> <code>DataCompressionType</code> </p> </li> <li> <p> <code>LogConfiguration</code> </p> </li> <li> <p> <code>LustreRootSquashConfiguration</code> </p> </li> <li> <p> <code>StorageCapacity</code> </p> </li> <li> <p> <code>WeeklyMaintenanceStartTime</code> </p> </li> </ul> <p>For FSx for ONTAP file systems, you can update the following properties:</p> <ul> <li> <p> <code>AddRouteTableIds</code> </p> </li> <li> <p> <code>AutomaticBackupRetentionDays</code> </p> </li> <li> <p> <code>DailyAutomaticBackupStartTime</code> </p> </li> <li> <p> <code>DiskIopsConfiguration</code> </p> </li> <li> <p> <code>FsxAdminPassword</code> </p> </li> <li> <p> <code>RemoveRouteTableIds</code> </p> </li> <li> <p> <code>StorageCapacity</code> </p> </li> <li> <p> <code>ThroughputCapacity</code> </p> </li> <li> <p> <code>WeeklyMaintenanceStartTime</code> </p> </li> </ul> <p>For FSx for OpenZFS file systems, you can update the following properties:</p> <ul> <li> <p> <code>AutomaticBackupRetentionDays</code> </p> </li> <li> <p> <code>CopyTagsToBackups</code> </p> </li> <li> <p> <code>CopyTagsToVolumes</code> </p> </li> <li> <p> <code>DailyAutomaticBackupStartTime</code> </p> </li> <li> <p> <code>DiskIopsConfiguration</code> </p> </li> <li> <p> <code>StorageCapacity</code> </p> </li> <li> <p> <code>ThroughputCapacity</code> </p> </li> <li> <p> <code>WeeklyMaintenanceStartTime</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -4750,6 +4750,33 @@ components:
         - NEW
         - NEW_CHANGED
         - NEW_CHANGED_DELETED
+    AutocommitPeriodType:
+      type: string
+      enum:
+        - MINUTES
+        - HOURS
+        - DAYS
+        - MONTHS
+        - YEARS
+        - NONE
+    AutocommitPeriodValue:
+      type: integer
+      minimum: 1
+      maximum: 65535
+    AutocommitPeriod:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/AutocommitPeriodType'
+            - description: 'Defines the type of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume. Setting this value to <code>NONE</code> disables autocommit. The default value is <code>NONE</code>. '
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/AutocommitPeriodValue'
+            - description: '<p>Defines the amount of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume. The following ranges are valid: </p> <ul> <li> <p> <code>Minutes</code>: 5 - 65,535</p> </li> <li> <p> <code>Hours</code>: 1 - 65,535</p> </li> <li> <p> <code>Days</code>: 1 - 3,650</p> </li> <li> <p> <code>Months</code>: 1 - 120</p> </li> <li> <p> <code>Years</code>: 1 - 10</p> </li> </ul>'
+      description: '<p>Sets the autocommit period of files in an FSx for ONTAP SnapLock volume, which determines how long the files must remain unmodified before they''re automatically transitioned to the write once, read many (WORM) state. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-autocommit">Autocommit</a>. </p>'
     AutomaticBackupRetentionDays:
       type: integer
       description: The number of days to retain automatic backups. Setting this property to <code>0</code> disables automatic backups. You can retain automatic backups for a maximum of 90 days. The default is <code>30</code>.
@@ -5662,7 +5689,7 @@ components:
     VolumeCapacity:
       type: integer
       minimum: 0
-      maximum: 2147483647
+      maximum: 314572800
     StorageVirtualMachineId:
       type: string
       pattern: '^(svm-[0-9a-f]{17,})$'
@@ -5689,6 +5716,36 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    CreateSnaplockConfiguration:
+      type: object
+      required:
+        - SnaplockType
+      properties:
+        AuditLogVolume:
+          allOf:
+            - $ref: '#/components/schemas/Flag'
+            - description: '<p>Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume. The default value is <code>false</code>. If you set <code>AuditLogVolume</code> to <code>true</code>, the SnapLock volume is created as an audit log volume. The minimum retention period for an audit log volume is six months. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume"> SnapLock audit log volumes</a>. </p>'
+        AutocommitPeriod:
+          allOf:
+            - $ref: '#/components/schemas/AutocommitPeriod'
+            - description: 'The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume. '
+        PrivilegedDelete:
+          allOf:
+            - $ref: '#/components/schemas/PrivilegedDelete'
+            - description: '<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete WORM files even if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. If privileged delete is permanently disabled on a SnapLock volume, you can''t re-enable it. The default value is <code>DISABLED</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete">Privileged delete</a>. </p>'
+        RetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/SnaplockRetentionPeriod'
+            - description: 'Specifies the retention period of an FSx for ONTAP SnapLock volume. '
+        SnaplockType:
+          allOf:
+            - $ref: '#/components/schemas/SnaplockType'
+            - description: '<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume. After it is set, it can''t be changed. You can choose one of the following retention modes: </p> <ul> <li> <p> <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can''t be deleted until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect against ransomware attacks. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html">SnapLock Compliance</a>. </p> </li> <li> <p> <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users before their retention periods expire using privileged delete. This retention mode is used to advance an organization''s data integrity and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile">SnapLock Enterprise</a>. </p> </li> </ul>'
+        VolumeAppendModeEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Flag'
+            - description: '<p>Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume. Volume-append mode allows you to create WORM-appendable files and write data to them incrementally. The default value is <code>false</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append">Volume-append mode</a>. </p>'
+      description: 'Defines the SnapLock configuration when creating an FSx for ONTAP SnapLock volume. '
     CreateOntapVolumeConfiguration:
       type: object
       required:
@@ -5706,7 +5763,7 @@ components:
         SizeInMegabytes:
           allOf:
             - $ref: '#/components/schemas/VolumeCapacity'
-            - description: 'Specifies the size of the volume, in megabytes (MB), that you are creating. Provide any whole number in the range of 20–104857600 to specify the size of the volume.'
+            - description: 'Specifies the size of the volume, in megabytes (MB), that you are creating.'
         StorageEfficiencyEnabled:
           allOf:
             - $ref: '#/components/schemas/Flag'
@@ -5729,6 +5786,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Flag'
             - description: 'A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to false. If it''s set to true, all tags for the volume are copied to all automatic and user-initiated backups where the user doesn''t specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the volume, regardless of this value.'
+        SnaplockConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CreateSnaplockConfiguration'
+            - description: 'Specifies the SnapLock configuration for an FSx for ONTAP volume. '
       description: Specifies the configuration of the ONTAP volume that you are creating.
     OpenZFSCopyStrategy:
       type: string
@@ -5820,6 +5881,37 @@ components:
             - $ref: '#/components/schemas/OpenZFSUserAndGroupQuotas'
             - description: An object specifying how much storage users or groups can use on the volume.
       description: Specifies the configuration of the Amazon FSx for OpenZFS volume that you are creating.
+    PrivilegedDelete:
+      type: string
+      enum:
+        - DISABLED
+        - ENABLED
+        - PERMANENTLY_DISABLED
+    SnaplockRetentionPeriod:
+      type: object
+      required:
+        - DefaultRetention
+        - MinimumRetention
+        - MaximumRetention
+      properties:
+        DefaultRetention:
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'The retention period assigned to a write once, read many (WORM) file by default if an explicit retention period is not set for an FSx for ONTAP SnapLock volume. The default retention period must be greater than or equal to the minimum retention period and less than or equal to the maximum retention period. '
+        MinimumRetention:
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'The shortest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume. '
+        MaximumRetention:
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriod'
+            - description: 'The longest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume. '
+      description: 'The configuration to set the retention period of an FSx for ONTAP SnapLock volume. The retention period includes default, maximum, and minimum settings. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html">Working with the retention period in SnapLock</a>. '
+    SnaplockType:
+      type: string
+      enum:
+        - COMPLIANCE
+        - ENTERPRISE
     SnapshotName:
       type: string
       pattern: '^[a-zA-Z0-9_:.-]{1,203}$'
@@ -6233,7 +6325,11 @@ components:
             - description: Set to true if you want to skip taking a final backup of the volume you are deleting.
         FinalBackupTags:
           $ref: '#/components/schemas/Tags'
-      description: 'Use to specify skipping a final backup, or to add tags to a final backup.'
+        BypassSnaplockEnterpriseRetention:
+          allOf:
+            - $ref: '#/components/schemas/Flag'
+            - description: '<p>Setting this to <code>true</code> allows a SnapLock administrator to delete an FSx for ONTAP SnapLock Enterprise volume with unexpired write once, read many (WORM) files. The IAM permission <code>fsx:BypassSnaplockEnterpriseRetention</code> is also required to delete SnapLock Enterprise volumes with unexpired WORM files. The default value is <code>false</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-delete-volume"> Deleting a SnapLock volume </a>. </p>'
+      description: 'Use to specify skipping a final backup, adding tags to a final backup, or bypassing the retention period of an FSx for ONTAP SnapLock Enterprise volume when deleting an FSx for ONTAP volume. '
     DeleteVolumeOntapResponse:
       type: object
       properties:
@@ -6857,6 +6953,34 @@ components:
         - RW
         - DP
         - LS
+    SnaplockConfiguration:
+      type: object
+      properties:
+        AuditLogVolume:
+          allOf:
+            - $ref: '#/components/schemas/Flag'
+            - description: '<p>Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume. The default value is <code>false</code>. If you set <code>AuditLogVolume</code> to <code>true</code>, the SnapLock volume is created as an audit log volume. The minimum retention period for an audit log volume is six months. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume"> SnapLock audit log volumes</a>. </p>'
+        AutocommitPeriod:
+          allOf:
+            - $ref: '#/components/schemas/AutocommitPeriod'
+            - description: 'The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume. '
+        PrivilegedDelete:
+          allOf:
+            - $ref: '#/components/schemas/PrivilegedDelete'
+            - description: '<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete write once, read many (WORM) files even if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. If privileged delete is permanently disabled on a SnapLock volume, you can''t re-enable it. The default value is <code>DISABLED</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete">Privileged delete</a>. </p>'
+        RetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/SnaplockRetentionPeriod'
+            - description: 'Specifies the retention period of an FSx for ONTAP SnapLock volume. '
+        SnaplockType:
+          allOf:
+            - $ref: '#/components/schemas/SnaplockType'
+            - description: '<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume. After it is set, it can''t be changed. You can choose one of the following retention modes: </p> <ul> <li> <p> <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can''t be deleted until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect against ransomware attacks. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html">SnapLock Compliance</a>. </p> </li> <li> <p> <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users before their retention periods expire using privileged delete. This retention mode is used to advance an organization''s data integrity and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile">SnapLock Enterprise</a>. </p> </li> </ul>'
+        VolumeAppendModeEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Flag'
+            - description: '<p>Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume. Volume-append mode allows you to create WORM-appendable files and write data to them incrementally. The default value is <code>false</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append">Volume-append mode</a>. </p>'
+      description: 'Specifies the SnapLock configuration for an FSx for ONTAP SnapLock volume. '
     OntapVolumeConfiguration:
       type: object
       properties:
@@ -6908,6 +7032,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Flag'
             - description: 'A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to false. If it''s set to true, all tags for the volume are copied to all automatic and user-initiated backups where the user doesn''t specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the volume, regardless of this value.'
+        SnaplockConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SnaplockConfiguration'
+            - description: 'The SnapLock configuration object for an FSx for ONTAP SnapLock volume. '
       description: The configuration of an Amazon FSx for NetApp ONTAP volume.
     OpenZFSClients:
       type: string
@@ -7070,6 +7198,35 @@ components:
       items:
         $ref: '#/components/schemas/RestoreOpenZFSVolumeOption'
       maxItems: 2
+    RetentionPeriodType:
+      type: string
+      enum:
+        - SECONDS
+        - MINUTES
+        - HOURS
+        - DAYS
+        - MONTHS
+        - YEARS
+        - INFINITE
+        - UNSPECIFIED
+    RetentionPeriodValue:
+      type: integer
+      minimum: 0
+      maximum: 65535
+    RetentionPeriod:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriodType'
+            - description: 'Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. Set it to one of the valid types. If you set it to <code>INFINITE</code>, the files are retained forever. If you set it to <code>UNSPECIFIED</code>, the files are retained until you set an explicit retention period. '
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/RetentionPeriodValue'
+            - description: '<p>Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. You can''t set a value for <code>INFINITE</code> or <code>UNSPECIFIED</code>. For all other options, the following ranges are valid: </p> <ul> <li> <p> <code>Seconds</code>: 0 - 65,535</p> </li> <li> <p> <code>Minutes</code>: 0 - 65,535</p> </li> <li> <p> <code>Hours</code>: 0 - 24</p> </li> <li> <p> <code>Days</code>: 0 - 365</p> </li> <li> <p> <code>Months</code>: 0 - 12</p> </li> <li> <p> <code>Years</code>: 0 - 100</p> </li> </ul>'
+      description: '<p>Specifies the retention period of an FSx for ONTAP SnapLock volume. After it is set, it can''t be changed. Files can''t be deleted or modified during the retention period. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html">Working with the retention period in SnapLock</a>. </p>'
     RouteTableId:
       type: string
       pattern: '^(rtb-[0-9a-f]{8,})$'
@@ -7392,6 +7549,30 @@ components:
             - $ref: '#/components/schemas/WindowsAuditLogCreateConfiguration'
             - description: 'The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system..'
       description: Updates the configuration for an existing Amazon FSx for Windows File Server file system. Amazon FSx only overwrites existing properties with non-null values provided in the request.
+    UpdateSnaplockConfiguration:
+      type: object
+      properties:
+        AuditLogVolume:
+          allOf:
+            - $ref: '#/components/schemas/Flag'
+            - description: '<p>Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume. The default value is <code>false</code>. If you set <code>AuditLogVolume</code> to <code>true</code>, the SnapLock volume is created as an audit log volume. The minimum retention period for an audit log volume is six months. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume"> SnapLock audit log volumes</a>. </p>'
+        AutocommitPeriod:
+          allOf:
+            - $ref: '#/components/schemas/AutocommitPeriod'
+            - description: 'The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume. '
+        PrivilegedDelete:
+          allOf:
+            - $ref: '#/components/schemas/PrivilegedDelete'
+            - description: '<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete write once, read many (WORM) files even if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. If privileged delete is permanently disabled on a SnapLock volume, you can''t re-enable it. The default value is <code>DISABLED</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete">Privileged delete</a>. </p>'
+        RetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/SnaplockRetentionPeriod'
+            - description: 'Specifies the retention period of an FSx for ONTAP SnapLock volume. '
+        VolumeAppendModeEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Flag'
+            - description: '<p>Enables or disables volume-append mode on an FSx for ONTAP SnapLock volume. Volume-append mode allows you to create WORM-appendable files and write data to them incrementally. The default value is <code>false</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append">Volume-append mode</a>. </p>'
+      description: 'Updates the SnapLock configuration for an existing FSx for ONTAP volume. '
     UpdateOntapVolumeConfiguration:
       type: object
       properties:
@@ -7402,7 +7583,7 @@ components:
         SecurityStyle:
           allOf:
             - $ref: '#/components/schemas/SecurityStyle'
-            - description: 'The security style for the volume, which can be <code>UNIX</code>. <code>NTFS</code>, or <code>MIXED</code>.'
+            - description: 'The security style for the volume, which can be <code>UNIX</code>, <code>NTFS</code>, or <code>MIXED</code>.'
         SizeInMegabytes:
           allOf:
             - $ref: '#/components/schemas/VolumeCapacity'
@@ -7423,6 +7604,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Flag'
             - description: 'A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to false. If it''s set to true, all tags for the volume are copied to all automatic and user-initiated backups where the user doesn''t specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the volume, regardless of this value.'
+        SnaplockConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/UpdateSnaplockConfiguration'
+            - description: 'The configuration object for updating the SnapLock configuration of an FSx for ONTAP SnapLock volume. '
       description: Used to specify changes to the ONTAP configuration for the volume you are updating.
     UpdateOpenZFSVolumeConfiguration:
       type: object

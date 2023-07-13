@@ -3155,7 +3155,7 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'For <code>SCTE35_ENHANCED</code> output, defines a vaue. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a value, you must also specify a corresponding key.'
+            - description: 'For <code>SCTE35_ENHANCED</code> output, defines a value. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a value, you must also specify a corresponding key.'
       description: 'For <code>SCTE35_ENHANCED</code> output, defines a key and corresponding value. MediaTailor generates these pairs within the <code>EXT-X-ASSET</code>tag.'
     __boolean:
       type: boolean
@@ -3164,6 +3164,12 @@ components:
       enum:
         - DATERANGE
         - SCTE35_ENHANCED
+    AlertCategory:
+      type: string
+      enum:
+        - SCHEDULING_ERROR
+        - PLAYBACK_WARNING
+        - INFO
     __listOf__string:
       type: array
       items:
@@ -3185,6 +3191,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'If an alert is generated for a resource, an explanation of the reason for the alert.'
+        Category:
+          allOf:
+            - $ref: '#/components/schemas/AlertCategory'
+            - description: The category that MediaTailor assigns to the alert.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/__timestampUnix'

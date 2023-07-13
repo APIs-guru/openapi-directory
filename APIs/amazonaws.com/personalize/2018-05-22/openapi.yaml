@@ -3555,6 +3555,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonPersonalize.UpdateDataset:
+    post:
+      operationId: UpdateDataset
+      description: 'Update a dataset to replace its schema with a new or existing one. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/updating-dataset-schema.html">Replacing a dataset''s schema</a>. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDatasetResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDatasetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonPersonalize.UpdateDataset
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonPersonalize.UpdateMetricAttribution:
     post:
       operationId: UpdateMetricAttribution
@@ -4197,7 +4248,7 @@ components:
         recipeArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the recipe to use for model training. Only specified when <code>performAutoML</code> is false.
+            - description: The ARN of the recipe to use for model training. This is required when <code>performAutoML</code> is false.
         datasetGroupArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -5199,6 +5250,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/CampaignConfig'
             - description: The configuration details of a campaign.
+    UpdateDatasetResponse:
+      type: object
+      properties:
+        datasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset you updated.
+    UpdateDatasetRequest:
+      type: object
+      required:
+        - datasetArn
+        - schemaArn
+      title: UpdateDatasetRequest
+      properties:
+        datasetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset that you want to update.
+        schemaArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the new schema you want use.
     UpdateMetricAttributionResponse:
       type: object
       properties:
@@ -5950,6 +6023,30 @@ components:
       type: string
       pattern: '(s3|http|https)://.+'
       maxLength: 256
+    DatasetUpdateSummary:
+      type: object
+      properties:
+        schemaArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the schema that replaced the previous schema of the dataset.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: 'The status of the dataset update. '
+        failureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: 'If updating a dataset fails, provides the reason why.'
+        creationDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The creation date and time (in Unix time) of the dataset update.
+        lastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The last update date and time (in Unix time) of the dataset.
+      description: Describes an update to a dataset.
     Dataset:
       type: object
       properties:
@@ -5985,6 +6082,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Date'
             - description: A time stamp that shows when the dataset was updated.
+        latestDatasetUpdate:
+          allOf:
+            - $ref: '#/components/schemas/DatasetUpdateSummary'
+            - description: Describes the latest update to the dataset.
       description: Provides metadata for a dataset.
     DatasetExportJob:
       type: object
@@ -6635,7 +6736,7 @@ components:
         recipeArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The ARN of the recipe used to create the solution.
+            - description: The ARN of the recipe used to create the solution. This is required when <code>performAutoML</code> is false.
         datasetGroupArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
