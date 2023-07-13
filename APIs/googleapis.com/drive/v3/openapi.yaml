@@ -2952,6 +2952,7 @@ components:
           description: Whether the user can create shared drives.
           type: boolean
         canCreateTeamDrives:
+          deprecated: true
           description: "Deprecated: Use `canCreateDrives` instead."
           type: boolean
         driveThemes:
@@ -3023,16 +3024,20 @@ components:
               type: string
           type: object
         teamDriveThemes:
+          deprecated: true
           description: "Deprecated: Use `driveThemes` instead."
           items:
             properties:
               backgroundImageLink:
+                deprecated: true
                 description: "Deprecated: Use `driveThemes/backgroundImageLink` instead."
                 type: string
               colorRgb:
+                deprecated: true
                 description: "Deprecated: Use `driveThemes/colorRgb` instead."
                 type: string
               id:
+                deprecated: true
                 description: "Deprecated: Use `driveThemes/id` instead."
                 type: string
             type: object
@@ -3068,8 +3073,10 @@ components:
           type: boolean
         teamDrive:
           $ref: "#/components/schemas/TeamDrive"
+          deprecated: true
           description: "Deprecated: Use `drive` instead."
         teamDriveId:
+          deprecated: true
           description: "Deprecated: Use `driveId` instead."
           type: string
         time:
@@ -3077,6 +3084,7 @@ components:
           format: date-time
           type: string
         type:
+          deprecated: true
           description: "Deprecated: Use `changeType` instead."
           type: string
       type: object
@@ -3408,6 +3416,7 @@ components:
               description: Output only. Whether the current user can change the securityUpdateEnabled field on link share metadata.
               type: boolean
             canChangeViewersCanCopyContent:
+              deprecated: true
               description: "Deprecated: Output only."
               type: boolean
             canComment:
@@ -3444,30 +3453,36 @@ components:
               description: Output only. Whether the current user can move children of this folder outside of the shared drive. This is false when the item is not a folder. Only populated for items in shared drives.
               type: boolean
             canMoveChildrenOutOfTeamDrive:
+              deprecated: true
               description: "Deprecated: Output only. Use `canMoveChildrenOutOfDrive` instead."
               type: boolean
             canMoveChildrenWithinDrive:
               description: Output only. Whether the current user can move children of this folder within this drive. This is false when the item is not a folder. Note that a request to move the child may still fail depending on the current user's access to the child and to the destination folder.
               type: boolean
             canMoveChildrenWithinTeamDrive:
+              deprecated: true
               description: "Deprecated: Output only. Use `canMoveChildrenWithinDrive` instead."
               type: boolean
             canMoveItemIntoTeamDrive:
+              deprecated: true
               description: "Deprecated: Output only. Use `canMoveItemOutOfDrive` instead."
               type: boolean
             canMoveItemOutOfDrive:
               description: Output only. Whether the current user can move this item outside of this drive by changing its parent. Note that a request to change the parent of the item may still fail depending on the new parent that is being added.
               type: boolean
             canMoveItemOutOfTeamDrive:
+              deprecated: true
               description: "Deprecated: Output only. Use `canMoveItemOutOfDrive` instead."
               type: boolean
             canMoveItemWithinDrive:
               description: Output only. Whether the current user can move this item within this drive. Note that a request to change the parent of the item may still fail depending on the new parent that is being added and the parent that is being removed.
               type: boolean
             canMoveItemWithinTeamDrive:
+              deprecated: true
               description: "Deprecated: Output only. Use `canMoveItemWithinDrive` instead."
               type: boolean
             canMoveTeamDriveItem:
+              deprecated: true
               description: "Deprecated: Output only. Use `canMoveItemWithinDrive` or `canMoveItemOutOfDrive` instead."
               type: boolean
             canReadDrive:
@@ -3480,6 +3495,7 @@ components:
               description: Output only. Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.
               type: boolean
             canReadTeamDrive:
+              deprecated: true
               description: "Deprecated: Output only. Use `canReadDrive` instead."
               type: boolean
             canRemoveChildren:
@@ -3794,6 +3810,7 @@ components:
           description: Whether the user has starred the file.
           type: boolean
         teamDriveId:
+          deprecated: true
           description: "Deprecated: Output only. Use `driveId` instead."
           type: string
         thumbnailLink:
@@ -3841,6 +3858,7 @@ components:
           format: date-time
           type: string
         viewersCanCopyContent:
+          deprecated: true
           description: "Deprecated: Use `copyRequiresWriterPermission` instead."
           type: boolean
         webContentLink:
@@ -4101,19 +4119,24 @@ components:
           description: "The role granted by this permission. While new values may be supported in the future, the following are currently allowed: * `owner` * `organizer` * `fileOrganizer` * `writer` * `commenter` * `reader`"
           type: string
         teamDrivePermissionDetails:
+          deprecated: true
           description: "Output only. Deprecated: Output only. Use `permissionDetails` instead."
           items:
             properties:
               inherited:
+                deprecated: true
                 description: "Deprecated: Output only. Use `permissionDetails/inherited` instead."
                 type: boolean
               inheritedFrom:
+                deprecated: true
                 description: "Deprecated: Output only. Use `permissionDetails/inheritedFrom` instead."
                 type: string
               role:
+                deprecated: true
                 description: "Deprecated: Output only. Use `permissionDetails/role` instead."
                 type: string
               teamDrivePermissionType:
+                deprecated: true
                 description: "Deprecated: Output only. Use `permissionDetails/permissionType` instead."
                 type: string
             type: object
@@ -4343,6 +4366,7 @@ components:
               description: Whether the current user can read the revisions resource of files in this Team Drive.
               type: boolean
             canRemoveChildren:
+              deprecated: true
               description: "Deprecated: Use `canDeleteChildren` or `canTrashChildren` instead."
               type: boolean
             canRename:

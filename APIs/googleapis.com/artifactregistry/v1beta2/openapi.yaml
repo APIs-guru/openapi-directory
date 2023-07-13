@@ -1314,6 +1314,11 @@ components:
             - REDIRECTION_FROM_GCR_IO_ENABLED
             - REDIRECTION_FROM_GCR_IO_FINALIZED
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
         name:
           description: "The name of the project's settings. Always of the form: projects/{project-id}/projectSettings In update request: never set In response: always set"
           type: string

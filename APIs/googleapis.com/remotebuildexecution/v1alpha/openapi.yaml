@@ -912,8 +912,12 @@ components:
         dockerImageName:
           description: Docker Image name.
           type: string
-        inputCacheMiss:
-          description: The input cache miss ratio.
+        inputCacheMissBytes:
+          description: The input cache miss rate as a fraction of the total size of input files.
+          format: float
+          type: number
+        inputCacheMissFiles:
+          description: The input cache miss rate as a fraction of the number of input files.
           format: float
           type: number
         numErrors:

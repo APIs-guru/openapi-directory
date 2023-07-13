@@ -8441,6 +8441,11 @@ components:
       type: object
     PlaylistStatus:
       properties:
+        podcastStatus:
+          enum:
+            - enabled
+            - disabled
+          type: string
         privacyStatus:
           description: The playlist's privacy status.
           enum:

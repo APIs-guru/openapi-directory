@@ -1641,6 +1641,13 @@ components:
             - CLOUD_LOGGING_ONLY
             - NONE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
         machineType:
           description: Compute Engine machine type on which to run the build.
           enum:
@@ -1649,6 +1656,7 @@ components:
             - N1_HIGHCPU_32
             - E2_HIGHCPU_8
             - E2_HIGHCPU_32
+            - E2_MEDIUM
           type: string
         pool:
           $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1BuildOptionsPoolOption"
@@ -1686,6 +1694,7 @@ components:
             $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1Volume"
           type: array
         workerPool:
+          deprecated: true
           description: This field deprecated; please use `pool.name` instead.
           type: string
       type: object
@@ -2287,6 +2296,9 @@ components:
           description: The last time this resource was scanned.
           format: google-datetime
           type: string
+        sbomStatus:
+          $ref: "#/components/schemas/SBOMStatus"
+          description: The status of an SBOM generation.
       type: object
     Distribution:
       description: This represents a particular channel of distribution for a given package. E.g., Debian's jessie-backports dpkg mirror.
@@ -3205,6 +3217,20 @@ components:
           items:
             $ref: "#/components/schemas/EnvelopeSignature"
           type: array
+      type: object
+    SBOMStatus:
+      description: The status of an SBOM generation.
+      properties:
+        error:
+          description: If there was an error generating an SBOM, this will indicate what that error was.
+          type: string
+        sbomState:
+          description: The progress of the SBOM generation.
+          enum:
+            - SBOM_STATE_UNSPECIFIED
+            - PENDING
+            - COMPLETE
+          type: string
       type: object
     SbomReferenceIntotoPayload:
       description: The actual payload that contains the SBOM Reference data. The payload follows the intoto statement specification. See https://github.com/in-toto/attestation/blob/main/spec/v1.0/statement.md for more details.
