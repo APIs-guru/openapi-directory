@@ -3027,6 +3027,29 @@ components:
           format: int64
           type: string
       type: object
+    AdditionalNodeNetworkConfig:
+      description: AdditionalNodeNetworkConfig is the configuration for additional node networks within the NodeNetworkConfig message
+      properties:
+        network:
+          description: Name of the VPC where the additional interface belongs
+          type: string
+        subnetwork:
+          description: Name of the subnetwork where the additional interface belongs
+          type: string
+      type: object
+    AdditionalPodNetworkConfig:
+      description: AdditionalPodNetworkConfig is the configuration for additional pod networks within the NodeNetworkConfig message
+      properties:
+        maxPodsPerNode:
+          $ref: "#/components/schemas/MaxPodsConstraint"
+          description: The maximum number of pods per node which use this pod network
+        secondaryPodRange:
+          description: The name of the secondary range on the subnet which provides IP address for this pod range
+          type: string
+        subnetwork:
+          description: Name of the subnetwork where the additional pod network belongs
+          type: string
+      type: object
     AdditionalPodRangesConfig:
       description: AdditionalPodRangesConfig is the configuration for additional pod secondary ranges supporting the ClusterUpdate message.
       properties:
@@ -3710,6 +3733,9 @@ components:
         desiredGcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: The desired GCFS config for the cluster.
+        desiredHostMaintenancePolicy:
+          $ref: "#/components/schemas/HostMaintenancePolicy"
+          description: HostMaintenancePolicy contains the desired maintenance policy for the Google Compute Engine hosts.
         desiredIdentityServiceConfig:
           $ref: "#/components/schemas/IdentityServiceConfig"
           description: The desired Identity Service component configuration.
@@ -4181,6 +4207,17 @@ components:
         disabled:
           description: Whether the Horizontal Pod Autoscaling feature is enabled in the cluster. When enabled, it ensures that metrics are collected into Stackdriver Monitoring.
           type: boolean
+      type: object
+    HostMaintenancePolicy:
+      description: HostMaintenancePolicy contains the maintenance policy for the hosts on which the GKE VMs run on.
+      properties:
+        maintenanceInterval:
+          description: Specifies the frequency of planned maintenance events.
+          enum:
+            - MAINTENANCE_INTERVAL_UNSPECIFIED
+            - AS_NEEDED
+            - PERIODIC
+          type: string
       type: object
     HttpCacheControlResponseHeader:
       description: "RFC-2616: cache control support"
@@ -4684,6 +4721,9 @@ components:
         enableL4ilbSubsetting:
           description: Whether L4ILB Subsetting is enabled for this cluster.
           type: boolean
+        enableMultiNetworking:
+          description: Whether multi-networking is enabled for this cluster.
+          type: boolean
         gatewayApiConfig:
           $ref: "#/components/schemas/GatewayAPIConfig"
           description: GatewayAPIConfig contains the desired config of Gateway API on this cluster.
@@ -4811,6 +4851,9 @@ components:
         gvnic:
           $ref: "#/components/schemas/VirtualNIC"
           description: Enable or disable gvnic on the node pool.
+        hostMaintenancePolicy:
+          $ref: "#/components/schemas/HostMaintenancePolicy"
+          description: HostMaintenancePolicy contains the desired maintenance policy for the Google Compute Engine hosts.
         imageType:
           description: The image type to use for this node. Note that for a given image type, the latest version of it will be used. Please see https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for available image types.
           type: string
@@ -4903,6 +4946,9 @@ components:
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: GCFS (Google Container File System, also known as Riptide) options.
+        hostMaintenancePolicy:
+          $ref: "#/components/schemas/HostMaintenancePolicy"
+          description: HostMaintenancePolicy contains the desired maintenance policy for the Google Compute Engine hosts.
         loggingConfig:
           $ref: "#/components/schemas/NodePoolLoggingConfig"
           description: Logging configuration for node pools.
@@ -4952,6 +4998,16 @@ components:
     NodeNetworkConfig:
       description: Parameters for node pool-level network config.
       properties:
+        additionalNodeNetworkConfigs:
+          description: We specify the additional node networks for this node pool using this list. Each node network corresponds to an additional interface
+          items:
+            $ref: "#/components/schemas/AdditionalNodeNetworkConfig"
+          type: array
+        additionalPodNetworkConfigs:
+          description: We specify the additional pod networks for this node pool using this list. Each pod network corresponds to an additional alias IP range for the node
+          items:
+            $ref: "#/components/schemas/AdditionalPodNetworkConfig"
+          type: array
         createPodRange:
           description: Input only. Whether to create a new range for pod IPs in this node pool. Defaults are provided for `pod_range` and `pod_ipv4_cidr_block` if they are not specified. If neither `create_pod_range` or `pod_range` are specified, the cluster-level default (`ip_allocation_policy.cluster_ipv4_cidr_block`) is used. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
           type: boolean
@@ -5254,6 +5310,9 @@ components:
     PlacementPolicy:
       description: PlacementPolicy defines the placement policy used by the node pool.
       properties:
+        policyName:
+          description: If set, refers to the name of a custom resource policy supplied by the user. The resource policy must be in the same project and region as the node pool. If not found, InvalidArgument error is returned.
+          type: string
         tpuTopology:
           description: TPU placement topology for pod slice node pool. https://cloud.google.com/tpu/docs/types-topologies#tpu_topologies
           type: string

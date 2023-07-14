@@ -4133,6 +4133,20 @@ components:
           type: boolean
         downstream_id:
           $ref: "#/components/schemas/DownstreamId"
+        export_formats:
+          description: The available file formats when exporting this file.
+          example:
+            - application/pdf
+            - application/vnd.oasis.opendocument.presentation
+            - text/plain
+          items:
+            description: An available file format (typically MIME type) to export this file.
+            example: application/pdf
+            type: string
+          type: array
+        exportable:
+          description: Whether the current file is exportable to other file formats. This property is relevant for proprietary file formats such as Google Docs or Dropbox Paper.
+          type: boolean
         id:
           $ref: "#/components/schemas/Id"
         mime_type:
@@ -4151,12 +4165,19 @@ components:
             $ref: "#/components/schemas/LinkedFolder"
           type: array
         parent_folders_complete:
-          description: Whether the list of parent folder is complete. Some connectors only return the direct parent of a file
+          description: Whether the list of parent folders is complete. Some connectors only return the direct parent of a file
           type: boolean
         path:
           description: The full path of the file or folder (includes the file name)
           example: /Documents/sample.jpg
           type: string
+        permissions:
+          description: Permissions the current user has on this file.
+          properties:
+            download:
+              description: Whether the current user can download this file.
+              type: boolean
+          type: object
         size:
           $ref: "#/components/schemas/FileSize"
         type:

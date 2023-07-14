@@ -1718,7 +1718,7 @@ components:
           description: Labels as key value pairs.
           type: object
         performanceSamples:
-          description: Asset performance data samples. Samples that are older than 40 days are ignored.
+          description: Asset performance data samples. Samples that are from more than 40 days ago or after tomorrow are ignored.
           items:
             $ref: "#/components/schemas/PerformanceSample"
           type: array
@@ -3110,7 +3110,7 @@ components:
           $ref: "#/components/schemas/NetworkUsageSample"
           description: Network usage sample.
         sampleTime:
-          description: Required. Time the sample was collected.
+          description: Time the sample was collected.
           format: google-datetime
           type: string
       type: object

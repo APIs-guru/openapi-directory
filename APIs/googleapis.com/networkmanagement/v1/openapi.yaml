@@ -633,6 +633,8 @@ components:
             - MISMATCHED_IP_VERSION
             - GKE_KONNECTIVITY_PROXY_UNSUPPORTED
             - RESOURCE_CONFIG_NOT_FOUND
+            - GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT
+            - SOURCE_PSC_CLOUD_SQL_UNSUPPORTED
           type: string
         projectsMissingPermission:
           description: List of project IDs that the user has specified in the request but does not have permission to access network configs. Analysis is aborted in this case with the PERMISSION_DENIED cause.
@@ -919,6 +921,9 @@ components:
           description: A [Cloud Run](https://cloud.google.com/run) [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
         cloudSqlInstance:
           description: A [Cloud SQL](https://cloud.google.com/sql) instance URI.
+          type: string
+        forwardingRule:
+          description: "A forwarding rule and its corresponding IP address represent the frontend configuration of a Google Cloud load balancer. Forwarding rules are also used for protocol forwarding, Private Service Connect and other network services to provide forwarding information in the control plane. Format: projects/{project}/global/forwardingRules/{id} or projects/{project}/regions/{region}/forwardingRules/{id}"
           type: string
         gkeMasterCluster:
           description: A cluster URI for [Google Kubernetes Engine master](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture).

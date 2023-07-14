@@ -1661,7 +1661,7 @@ components:
             - ONLY_ID_TOKEN_CLAIMS
           type: string
         responseType:
-          description: Required. The Response Type to request for in the OIDC Authorization Request for web sign-in.
+          description: Required. The Response Type to request for in the OIDC Authorization Request for web sign-in. The `CODE` Response Type is recommended to avoid the Implicit Flow, for security reasons.
           enum:
             - RESPONSE_TYPE_UNSPECIFIED
             - CODE
@@ -1932,6 +1932,7 @@ components:
           description: The name of this Permission.
           type: string
         onlyInPredefinedRoles:
+          deprecated: true
           type: boolean
         primaryPermission:
           description: The preferred name for this permission. If present, then this permission is an alias of, and equivalent to, the listed primary_permission.
@@ -2126,6 +2127,7 @@ components:
           readOnly: true
           type: string
         etag:
+          deprecated: true
           description: Deprecated. Do not use.
           format: byte
           type: string
@@ -2214,6 +2216,7 @@ components:
       description: Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The service account sign blob request.
       properties:
         bytesToSign:
+          deprecated: true
           description: Required. Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The bytes to sign.
           format: byte
           type: string
@@ -2222,9 +2225,11 @@ components:
       description: Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The service account sign blob response.
       properties:
         keyId:
+          deprecated: true
           description: Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The id of the key used to sign the blob.
           type: string
         signature:
+          deprecated: true
           description: Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The signed blob.
           format: byte
           type: string
@@ -2233,6 +2238,7 @@ components:
       description: Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The service account sign JWT request.
       properties:
         payload:
+          deprecated: true
           description: 'Required. Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The JWT payload to sign. Must be a serialized JSON object that contains a JWT Claims Set. For example: `{"sub": "user@example.com", "iat": 313435}` If the JWT Claims Set contains an expiration time (`exp`) claim, it must be an integer timestamp that is not in the past and no more than 12 hours in the future. If the JWT Claims Set does not contain an expiration time (`exp`) claim, this claim is added automatically, with a timestamp that is 1 hour in the future.'
           type: string
       type: object
@@ -2240,9 +2246,11 @@ components:
       description: Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The service account sign JWT response.
       properties:
         keyId:
+          deprecated: true
           description: Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The id of the key used to sign the JWT.
           type: string
         signedJwt:
+          deprecated: true
           description: Deprecated. [Migrate to Service Account Credentials API](https://cloud.google.com/iam/help/credentials/migrate-api). The signed JWT.
           type: string
       type: object
@@ -2348,6 +2356,11 @@ components:
         displayName:
           description: A user-specified display name of the pool in Google Cloud Console. Cannot exceed 32 characters.
           type: string
+        expireTime:
+          description: Output only. Time after which the workforce pool will be permanently purged and cannot be recovered.
+          format: google-datetime
+          readOnly: true
+          type: string
         name:
           description: "Output only. The resource name of the pool. Format: `locations/{location}/workforcePools/{workforce_pool_id}`"
           readOnly: true
@@ -2387,6 +2400,11 @@ components:
           type: boolean
         displayName:
           description: A user-specified display name for the provider. Cannot exceed 32 characters.
+          type: string
+        expireTime:
+          description: Output only. Time after which the workload pool provider will be permanently purged and cannot be recovered.
+          format: google-datetime
+          readOnly: true
           type: string
         name:
           description: "Output only. The resource name of the provider. Format: `locations/{location}/workforcePools/{workforce_pool_id}/providers/{provider_id}`"
@@ -2449,12 +2467,10 @@ components:
         displayName:
           description: A display name for the pool. Cannot exceed 32 characters.
           type: string
-        identityMode:
-          description: Immutable. The identity mode of the pool.
-          enum:
-            - IDENTITY_MODE_UNSPECIFIED
-            - FEDERATION_ONLY
-            - TRUST_DOMAIN
+        expireTime:
+          description: Output only. Time after which the workload identity pool will be permanently purged and cannot be recovered.
+          format: google-datetime
+          readOnly: true
           type: string
         name:
           description: Output only. The resource name of the pool.
@@ -2495,6 +2511,11 @@ components:
           type: boolean
         displayName:
           description: A display name for the provider. Cannot exceed 32 characters.
+          type: string
+        expireTime:
+          description: Output only. Time after which the workload identity pool provider will be permanently purged and cannot be recovered.
+          format: google-datetime
+          readOnly: true
           type: string
         name:
           description: Output only. The resource name of the provider.

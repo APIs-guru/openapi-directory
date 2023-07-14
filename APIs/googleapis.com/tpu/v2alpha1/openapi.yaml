@@ -1367,7 +1367,7 @@ components:
           description: The BestEffort tier.
         guaranteed:
           $ref: "#/components/schemas/Guaranteed"
-          description: The Guaranteed tier
+          description: The Guaranteed tier.
         name:
           description: Output only. Immutable. The name of the QueuedResource.
           readOnly: true
@@ -1378,6 +1378,9 @@ components:
         reservationName:
           description: "Name of the reservation in which the resource should be provisioned. Format: projects/{project}/locations/{zone}/reservations/{reservation}"
           type: string
+        spot:
+          $ref: "#/components/schemas/Spot"
+          description: Optional. The Spot tier.
         state:
           $ref: "#/components/schemas/QueuedResourceState"
           description: Output only. State of the QueuedResource request.
@@ -1504,6 +1507,10 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Spot:
+      description: Spot tier definition.
+      properties: {}
       type: object
     StartNodeRequest:
       description: Request for StartNode.

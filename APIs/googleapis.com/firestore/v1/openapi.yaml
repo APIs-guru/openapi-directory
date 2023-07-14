@@ -375,11 +375,6 @@ paths:
           name: currentDocument.updateTime
           schema:
             type: string
-        - description: If set, validate the request and preview the response, but do not actually delete the database.
-          in: query
-          name: validateOnly
-          schema:
-            type: boolean
       responses:
         "200":
           content:

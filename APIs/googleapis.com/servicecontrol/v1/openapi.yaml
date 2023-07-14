@@ -367,6 +367,7 @@ components:
         serviceData:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
+          deprecated: true
           description: Deprecated. Use the `metadata` field instead. Other service-specific data about the request, response, and other activities.
           type: object
         serviceName:
@@ -1040,6 +1041,7 @@ components:
       description: Contains the quota information for a quota check response.
       properties:
         limitExceeded:
+          deprecated: true
           description: "Quota Metrics that have exceeded quota limits. For QuotaGroup-based quota, this is QuotaGroup.name For QuotaLimit-based quota, this is QuotaLimit.name See: google.api.Quota Deprecated: Use quota_metrics to get per quota group limit exceeded status."
           items:
             type: string
