@@ -650,7 +650,7 @@ paths:
                     ColumnNames:
                       allOf:
                         - $ref: '#/components/schemas/ColumnNames'
-                        - description: A list of column names.
+                        - description: 'A list of column names and/or nested column attributes. When specifying nested attributes, use a qualified dot (.) delimited format such as "address"."zip". Nested attributes within this list may not exceed a depth of 5.'
                     ColumnWildcard:
                       allOf:
                         - $ref: '#/components/schemas/ColumnWildcard'
@@ -1967,7 +1967,6 @@ paths:
               required:
                 - TableArn
                 - Partition
-                - SupportedPermissionTypes
               properties:
                 TableArn:
                   description: The ARN of the partitions' table.
@@ -2069,7 +2068,6 @@ paths:
               type: object
               required:
                 - TableArn
-                - SupportedPermissionTypes
               properties:
                 TableArn:
                   description: The ARN identifying a table in the Data Catalog for the temporary credentials request.
@@ -2556,7 +2554,7 @@ paths:
   /ListPermissions:
     post:
       operationId: ListPermissions
-      description: '<p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p> <p>This operation returns only those permissions that have been explicitly granted.</p> <p>For information about permissions, see <a href="https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>'
+      description: '<p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p> <p>This operation returns only those permissions that have been explicitly granted.</p> <p>For information about permissions, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2985,6 +2983,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/DataLakePrincipalList'
                         - description: A list of Lake Formation principals. Supported principals are IAM users or IAM roles.
+                    ReadOnlyAdmins:
+                      allOf:
+                        - $ref: '#/components/schemas/DataLakePrincipalList'
+                        - description: 'A list of Lake Formation principals with only view access to the resources, without the ability to make changes. Supported principals are IAM users or IAM roles.'
                     CreateDatabaseDefaultPermissions:
                       allOf:
                         - $ref: '#/components/schemas/PrincipalPermissionsList'
@@ -3004,7 +3006,11 @@ paths:
                     AllowExternalDataFiltering:
                       allOf:
                         - $ref: '#/components/schemas/NullableBoolean'
-                        - description: '<p>Whether to allow Amazon EMR clusters to access data managed by Lake Formation. </p> <p>If true, you allow Amazon EMR clusters to access data in Amazon S3 locations that are registered with Lake Formation.</p> <p>If false or null, no Amazon EMR clusters will be able to access data in Amazon S3 locations that are registered with Lake Formation.</p> <p>For more information, see <a href="https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch">(Optional) Allow Data Filtering on Amazon EMR</a>.</p>'
+                        - description: '<p>Whether to allow Amazon EMR clusters to access data managed by Lake Formation. </p> <p>If true, you allow Amazon EMR clusters to access data in Amazon S3 locations that are registered with Lake Formation.</p> <p>If false or null, no Amazon EMR clusters will be able to access data in Amazon S3 locations that are registered with Lake Formation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/initial-LF-setup.html#external-data-filter">(Optional) Allow external data filtering</a>.</p>'
+                    AllowFullTableExternalDataAccess:
+                      allOf:
+                        - $ref: '#/components/schemas/NullableBoolean'
+                        - description: Whether to allow a third-party query engine to get data access credentials without session tags when a caller has full data access permissions.
                     ExternalDataFilteringAllowList:
                       allOf:
                         - $ref: '#/components/schemas/DataLakePrincipalList'
@@ -3739,7 +3745,7 @@ paths:
                     ColumnNames:
                       allOf:
                         - $ref: '#/components/schemas/ColumnNames'
-                        - description: A list of column names.
+                        - description: 'A list of column names and/or nested column attributes. When specifying nested attributes, use a qualified dot (.) delimited format such as "address"."zip". Nested attributes within this list may not exceed a depth of 5.'
                     ColumnWildcard:
                       allOf:
                         - $ref: '#/components/schemas/ColumnWildcard'
@@ -4632,8 +4638,9 @@ components:
         - CREATE_DATABASE
         - CREATE_TABLE
         - DATA_LOCATION_ACCESS
-        - CREATE_TAG
+        - CREATE_LF_TAG
         - ASSOCIATE
+        - GRANT_WITH_LF_TAG_EXPRESSION
     AuditContextString:
       type: string
       minLength: 0
@@ -4644,6 +4651,8 @@ components:
       enum:
         - COLUMN_PERMISSION
         - CELL_FILTER_PERMISSION
+        - NESTED_PERMISSION
+        - NESTED_CELL_PERMISSION
     PermissionTypeMismatchException: {}
     GetTemporaryGlueTableCredentialsResponse:
       type: object
@@ -5262,7 +5271,7 @@ components:
         ColumnNames:
           allOf:
             - $ref: '#/components/schemas/ColumnNames'
-            - description: A list of column names.
+            - description: 'A list of column names and/or nested column attributes. When specifying nested attributes, use a qualified dot (.) delimited format such as "address"."zip". Nested attributes within this list may not exceed a depth of 5.'
         ColumnWildcard:
           allOf:
             - $ref: '#/components/schemas/ColumnWildcard'
@@ -5334,6 +5343,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataLakePrincipalList'
             - description: A list of Lake Formation principals. Supported principals are IAM users or IAM roles.
+        ReadOnlyAdmins:
+          allOf:
+            - $ref: '#/components/schemas/DataLakePrincipalList'
+            - description: 'A list of Lake Formation principals with only view access to the resources, without the ability to make changes. Supported principals are IAM users or IAM roles.'
         CreateDatabaseDefaultPermissions:
           allOf:
             - $ref: '#/components/schemas/PrincipalPermissionsList'
@@ -5353,7 +5366,11 @@ components:
         AllowExternalDataFiltering:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
-            - description: '<p>Whether to allow Amazon EMR clusters to access data managed by Lake Formation. </p> <p>If true, you allow Amazon EMR clusters to access data in Amazon S3 locations that are registered with Lake Formation.</p> <p>If false or null, no Amazon EMR clusters will be able to access data in Amazon S3 locations that are registered with Lake Formation.</p> <p>For more information, see <a href="https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch">(Optional) Allow Data Filtering on Amazon EMR</a>.</p>'
+            - description: '<p>Whether to allow Amazon EMR clusters to access data managed by Lake Formation. </p> <p>If true, you allow Amazon EMR clusters to access data in Amazon S3 locations that are registered with Lake Formation.</p> <p>If false or null, no Amazon EMR clusters will be able to access data in Amazon S3 locations that are registered with Lake Formation.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/initial-LF-setup.html#external-data-filter">(Optional) Allow external data filtering</a>.</p>'
+        AllowFullTableExternalDataAccess:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Whether to allow a third-party query engine to get data access credentials without session tags when a caller has full data access permissions.
         ExternalDataFilteringAllowList:
           allOf:
             - $ref: '#/components/schemas/DataLakePrincipalList'
@@ -5835,7 +5852,6 @@ components:
       required:
         - TableArn
         - Partition
-        - SupportedPermissionTypes
       title: GetTemporaryGluePartitionCredentialsRequest
       properties:
         TableArn:
@@ -5866,7 +5882,6 @@ components:
       type: object
       required:
         - TableArn
-        - SupportedPermissionTypes
       title: GetTemporaryGlueTableCredentialsRequest
       properties:
         TableArn:

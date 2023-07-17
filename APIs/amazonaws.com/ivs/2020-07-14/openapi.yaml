@@ -199,11 +199,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/BatchStartViewerSessionRevocationResponse'
         '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
       parameters: []
       requestBody:
         required: true
@@ -407,6 +425,18 @@ paths:
                   type: integer
                   minimum: 0
                   maximum: 300
+                renditionConfiguration:
+                  description: Object that describes which renditions should be recorded for a stream.
+                  type: object
+                  properties:
+                    renditionSelection:
+                      allOf:
+                        - $ref: '#/components/schemas/RenditionConfigurationRenditionSelection'
+                        - description: 'Indicates which set of renditions are recorded for a stream. For <code>BASIC</code> channels, the <code>CUSTOM</code> value has no effect. If <code>CUSTOM</code> is specified, a set of renditions must be specified in the <code>renditions</code> field. Default: <code>ALL</code>.'
+                    renditions:
+                      allOf:
+                        - $ref: '#/components/schemas/RenditionConfigurationRenditionList'
+                        - description: 'Indicates which renditions are recorded for a stream, if <code>renditionSelection</code> is <code>CUSTOM</code>; otherwise, this field is irrelevant. The selected renditions are recorded if they are available during the stream. If a selected rendition is unavailable, the best available rendition is recorded. For details on the resolution dimensions of each rendition, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>.'
                 tags:
                   description: 'Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
                   type: object
@@ -422,10 +452,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/RecordingMode'
                         - description: 'Thumbnail recording mode. Default: <code>INTERVAL</code>.'
+                    resolution:
+                      allOf:
+                        - $ref: '#/components/schemas/ThumbnailConfigurationResolution'
+                        - description: 'Indicates the desired resolution of recorded thumbnails. Thumbnails are recorded at the selected resolution if the corresponding rendition is available during the stream; otherwise, they are recorded at source resolution. For more information about resolution values and their corresponding height and width dimensions, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>. Default: Null (source resolution is returned).'
+                    storage:
+                      allOf:
+                        - $ref: '#/components/schemas/ThumbnailConfigurationStorageList'
+                        - description: 'Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails in a serial manner, to the media/thumbnails directory. <code>LATEST</code> saves the latest thumbnail in media/latest_thumbnail/thumb.jpg and overwrites it at the interval specified by <code>targetIntervalSeconds</code>. You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default: <code>SEQUENTIAL</code>.'
                     targetIntervalSeconds:
                       allOf:
                         - $ref: '#/components/schemas/TargetIntervalSeconds'
-                        - description: '<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p> <p> <b>Important:</b> Setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the input video must be less than the <code>targetIntervalSeconds</code> value. See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html"> Amazon IVS Streaming Configuration</a> for information on setting <code>IDR/Keyframe</code> to the recommended value in video-encoder settings.</p>'
+                        - description: '<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p> <p> <b>Important:</b> For the <code>BASIC</code> channel type, setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the input video must be less than the <code>targetIntervalSeconds</code> value. See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html"> Amazon IVS Streaming Configuration</a> for information on setting <code>IDR/Keyframe</code> to the recommended value in video-encoder settings.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1765,24 +1803,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/StartViewerSessionRevocationResponse'
         '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
           description: InternalServerException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
-        '481':
+        '482':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '482':
+        '483':
           description: ValidationException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationException'
-        '483':
+        '484':
+          description: PendingVerification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PendingVerification'
+        '485':
           description: ThrottlingException
           content:
             application/json:
@@ -2157,7 +2207,10 @@ components:
             - $ref: '#/components/schemas/ViewerSessionVersion'
             - description: 'An optional filter on which versions of the viewer session to revoke. All versions less than or equal to the specified version will be revoked. Default: 0.'
       description: A viewer session to revoke in the call to <a>BatchStartViewerSessionRevocation</a>.
+    AccessDeniedException: {}
     ValidationException: {}
+    PendingVerification: {}
+    ThrottlingException: {}
     CreateChannelResponse:
       type: object
       properties:
@@ -2174,8 +2227,6 @@ components:
       minLength: 0
       maxLength: 256
     ResourceNotFoundException: {}
-    AccessDeniedException: {}
-    PendingVerification: {}
     ServiceQuotaExceededException: {}
     CreateRecordingConfigurationResponse:
       type: object
@@ -2194,11 +2245,32 @@ components:
             - $ref: '#/components/schemas/S3DestinationBucketName'
             - description: Location (S3 bucket name) where recorded videos will be stored.
       description: A complex type that describes an S3 location where recorded videos will be stored.
+    RenditionConfigurationRenditionSelection:
+      type: string
+      enum:
+        - ALL
+        - NONE
+        - CUSTOM
+    RenditionConfigurationRenditionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RenditionConfigurationRendition'
     RecordingMode:
       type: string
       enum:
         - DISABLED
         - INTERVAL
+    ThumbnailConfigurationResolution:
+      type: string
+      enum:
+        - FULL_HD
+        - HD
+        - SD
+        - LOWEST_RESOLUTION
+    ThumbnailConfigurationStorageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ThumbnailConfigurationStorage'
     TargetIntervalSeconds:
       type: integer
       minimum: 1
@@ -2358,7 +2430,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: 'Tags attached to the resource. Array of maps, each of the form <code>string:string (key:value)</code>.'
-    ThrottlingException: {}
     StartViewerSessionRevocationResponse:
       type: object
       properties: {}
@@ -2732,6 +2803,18 @@ components:
       type: integer
       minimum: 0
       maximum: 300
+    RenditionConfiguration:
+      type: object
+      properties:
+        renditionSelection:
+          allOf:
+            - $ref: '#/components/schemas/RenditionConfigurationRenditionSelection'
+            - description: 'Indicates which set of renditions are recorded for a stream. For <code>BASIC</code> channels, the <code>CUSTOM</code> value has no effect. If <code>CUSTOM</code> is specified, a set of renditions must be specified in the <code>renditions</code> field. Default: <code>ALL</code>.'
+        renditions:
+          allOf:
+            - $ref: '#/components/schemas/RenditionConfigurationRenditionList'
+            - description: 'Indicates which renditions are recorded for a stream, if <code>renditionSelection</code> is <code>CUSTOM</code>; otherwise, this field is irrelevant. The selected renditions are recorded if they are available during the stream. If a selected rendition is unavailable, the best available rendition is recorded. For details on the resolution dimensions of each rendition, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>.'
+      description: Object that describes which renditions should be recorded for a stream.
     ThumbnailConfiguration:
       type: object
       properties:
@@ -2739,10 +2822,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecordingMode'
             - description: 'Thumbnail recording mode. Default: <code>INTERVAL</code>.'
+        resolution:
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailConfigurationResolution'
+            - description: 'Indicates the desired resolution of recorded thumbnails. Thumbnails are recorded at the selected resolution if the corresponding rendition is available during the stream; otherwise, they are recorded at source resolution. For more information about resolution values and their corresponding height and width dimensions, see <a href="https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html">Auto-Record to Amazon S3</a>. Default: Null (source resolution is returned).'
+        storage:
+          allOf:
+            - $ref: '#/components/schemas/ThumbnailConfigurationStorageList'
+            - description: 'Indicates the format in which thumbnails are recorded. <code>SEQUENTIAL</code> records all generated thumbnails in a serial manner, to the media/thumbnails directory. <code>LATEST</code> saves the latest thumbnail in media/latest_thumbnail/thumb.jpg and overwrites it at the interval specified by <code>targetIntervalSeconds</code>. You can enable both <code>SEQUENTIAL</code> and <code>LATEST</code>. Default: <code>SEQUENTIAL</code>.'
         targetIntervalSeconds:
           allOf:
             - $ref: '#/components/schemas/TargetIntervalSeconds'
-            - description: '<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p> <p> <b>Important:</b> Setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the input video must be less than the <code>targetIntervalSeconds</code> value. See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html"> Amazon IVS Streaming Configuration</a> for information on setting <code>IDR/Keyframe</code> to the recommended value in video-encoder settings.</p>'
+            - description: '<p>The targeted thumbnail-generation interval in seconds. This is configurable (and required) only if <code>recordingMode</code> is <code>INTERVAL</code>. Default: 60.</p> <p> <b>Important:</b> For the <code>BASIC</code> channel type, setting a value for <code>targetIntervalSeconds</code> does not guarantee that thumbnails are generated at the specified interval. For thumbnails to be generated at the <code>targetIntervalSeconds</code> interval, the <code>IDR/Keyframe</code> value for the input video must be less than the <code>targetIntervalSeconds</code> value. See <a href="https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html"> Amazon IVS Streaming Configuration</a> for information on setting <code>IDR/Keyframe</code> to the recommended value in video-encoder settings.</p>'
       description: An object representing a configuration of thumbnails for recorded video.
     CreateRecordingConfigurationRequest:
       type: object
@@ -2762,6 +2853,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecordingReconnectWindowSeconds'
             - description: 'If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.'
+        renditionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RenditionConfiguration'
+            - description: Object that describes which renditions should be recorded for a stream.
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -2793,6 +2888,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecordingReconnectWindowSeconds'
             - description: 'If a broadcast disconnects and then reconnects within the specified interval, the multiple streams will be considered a single broadcast and merged together. Default: 0.'
+        renditionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/RenditionConfiguration'
+            - description: Object that describes which renditions should be recorded for a stream.
         state:
           allOf:
             - $ref: '#/components/schemas/RecordingConfigurationState'
@@ -3320,6 +3419,13 @@ components:
             - $ref: '#/components/schemas/Tags'
             - description: 'Tags attached to the resource. Array of 1-50 maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
       description: Summary information about a RecordingConfiguration.
+    RenditionConfigurationRendition:
+      type: string
+      enum:
+        - FULL_HD
+        - HD
+        - SD
+        - LOWEST_RESOLUTION
     S3DestinationBucketName:
       type: string
       pattern: '^[a-z0-9-.]+$'
@@ -3472,6 +3578,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: 'Array of tags to be added or updated. Array of maps, each of the form <code>string:string (key:value)</code>. See <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services Resources</a> for more information, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no service-specific constraints beyond what is documented there.'
+    ThumbnailConfigurationStorage:
+      type: string
+      enum:
+        - SEQUENTIAL
+        - LATEST
     UntagResourceRequest:
       type: object
       title: UntagResourceRequest

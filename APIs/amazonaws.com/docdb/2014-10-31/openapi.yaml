@@ -3,7 +3,7 @@ info:
   version: '2014-10-31'
   x-release: v4
   title: Amazon DocumentDB with MongoDB compatibility
-  description: Amazon DocumentDB API documentation
+  description: 'Amazon DocumentDB is a fast, reliable, and fully managed database service. Amazon DocumentDB makes it easy to set up, operate, and scale MongoDB-compatible databases in the cloud. With Amazon DocumentDB, you can run the same application code and use the same drivers and tools that you use with MongoDB.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -5346,9 +5346,15 @@ paths:
         - name: EngineVersion
           in: query
           required: false
-          description: The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.
+          description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>To list all of the available engine versions for Amazon DocumentDB use the following command:</p> <p> <code>aws docdb describe-db-engine-versions --engine docdb --query "DBEngineVersions[].EngineVersion"</code> </p>'
           schema:
             type: string
+        - name: AllowMajorVersionUpgrade
+          in: query
+          required: false
+          description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p>'
+          schema:
+            type: boolean
         - name: DeletionProtection
           in: query
           required: false
@@ -10395,7 +10401,11 @@ components:
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.
+            - description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>To list all of the available engine versions for Amazon DocumentDB use the following command:</p> <p> <code>aws docdb describe-db-engine-versions --engine docdb --query "DBEngineVersions[].EngineVersion"</code> </p>'
+        AllowMajorVersionUpgrade:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p>'
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
