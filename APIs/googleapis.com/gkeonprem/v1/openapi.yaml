@@ -2795,6 +2795,7 @@ components:
             - DELETE
             - UPDATE
             - UPGRADE
+            - PLATFORM_UPGRADE
           readOnly: true
           type: string
         verb:
@@ -3484,9 +3485,6 @@ components:
         datastore:
           description: The Vsphere datastore used by the control plane Node.
           type: string
-        storagePolicyName:
-          description: The Vsphere storage policy used by the control plane Node.
-          type: string
       type: object
     VmwareDataplaneV2Config:
       description: "Contains configurations for Dataplane V2, which is optimized dataplane for Kubernetes networking. For more information, see: https://cloud.google.com/kubernetes-engine/docs/concepts/dataplane-v2"
@@ -3822,9 +3820,6 @@ components:
         resourcePool:
           description: The name of the vCenter resource pool for the user cluster.
           type: string
-        storagePolicyName:
-          description: The name of the vCenter storage policy for the user cluster.
-          type: string
       type: object
     VmwareVersionInfo:
       description: Contains information about a specific Anthos on VMware version.
@@ -3854,9 +3849,6 @@ components:
       properties:
         datastore:
           description: The name of the vCenter datastore. Inherited from the user cluster.
-          type: string
-        storagePolicyName:
-          description: The name of the vCenter storage policy. Inherited from the user cluster.
           type: string
         tags:
           description: Tags to apply to VMs.

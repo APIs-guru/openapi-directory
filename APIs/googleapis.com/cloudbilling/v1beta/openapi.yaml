@@ -822,15 +822,15 @@ components:
           description: 'Interval at which usage is aggregated to compute cost. Example: "MONTHLY" interval indicates that usage is aggregated every month.'
           enum:
             - INTERVAL_UNSPECIFIED
-            - MONTHLY
-            - DAILY
+            - INTERVAL_MONTHLY
+            - INTERVAL_DAILY
           type: string
         level:
           description: 'Level at which usage is aggregated to compute cost. Example: "ACCOUNT" level indicates that usage is aggregated across all projects in a single account.'
           enum:
             - LEVEL_UNSPECIFIED
-            - ACCOUNT
-            - PROJECT
+            - LEVEL_ACCOUNT
+            - LEVEL_PROJECT
           type: string
       type: object
     GoogleCloudBillingBillingaccountpricesV1betaBillingAccountPrice:
@@ -1075,9 +1075,9 @@ components:
           description: Type of geographic taxonomy associated with the billing account SKU group SKU.
           enum:
             - TYPE_UNSPECIFIED
-            - GLOBAL
-            - REGIONAL
-            - MULTI_REGIONAL
+            - TYPE_GLOBAL
+            - TYPE_REGIONAL
+            - TYPE_MULTI_REGIONAL
           type: string
       type: object
     GoogleCloudBillingBillingaccountskugroupskusV1betaGeoTaxonomyGlobal:
@@ -1173,9 +1173,9 @@ components:
           description: Type of geographic taxonomy associated with the billing account SKU.
           enum:
             - TYPE_UNSPECIFIED
-            - GLOBAL
-            - REGIONAL
-            - MULTI_REGIONAL
+            - TYPE_GLOBAL
+            - TYPE_REGIONAL
+            - TYPE_MULTI_REGIONAL
           type: string
       type: object
     GoogleCloudBillingBillingaccountskusV1betaGeoTaxonomyGlobal:
@@ -1240,15 +1240,15 @@ components:
           description: 'Interval at which usage is aggregated to compute cost. Example: "MONTHLY" interval indicates that usage is aggregated every month.'
           enum:
             - INTERVAL_UNSPECIFIED
-            - MONTHLY
-            - DAILY
+            - INTERVAL_MONTHLY
+            - INTERVAL_DAILY
           type: string
         level:
           description: 'Level at which usage is aggregated to compute cost. Example: "ACCOUNT" level indicates that usage is aggregated across all projects in a single account.'
           enum:
             - LEVEL_UNSPECIFIED
-            - ACCOUNT
-            - PROJECT
+            - LEVEL_ACCOUNT
+            - LEVEL_PROJECT
           type: string
       type: object
     GoogleCloudBillingPricesV1betaPrice:
@@ -1343,9 +1343,9 @@ components:
           description: Type of geographic taxonomy associated with the SKU group SKU.
           enum:
             - TYPE_UNSPECIFIED
-            - GLOBAL
-            - REGIONAL
-            - MULTI_REGIONAL
+            - TYPE_GLOBAL
+            - TYPE_REGIONAL
+            - TYPE_MULTI_REGIONAL
           type: string
       type: object
     GoogleCloudBillingSkugroupskusV1betaGeoTaxonomyGlobal:

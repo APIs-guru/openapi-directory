@@ -2106,6 +2106,9 @@ components:
           items:
             $ref: "#/components/schemas/Target"
           type: array
+        serviceAccount:
+          description: Optional. The service account to run workflow invocations under.
+          type: string
         transitiveDependenciesIncluded:
           description: Optional. When set to true, transitive dependencies of included actions will be executed.
           type: boolean
@@ -2566,6 +2569,9 @@ components:
           type: string
         npmrcEnvironmentVariablesSecretVersion:
           description: Optional. The name of the Secret Manager secret version to be used to interpolate variables into the .npmrc file for package installation operations. Must be in the format `projects/*/secrets/*/versions/*`. The file itself must be in a JSON format.
+          type: string
+        serviceAccount:
+          description: Optional. The service account to run workflow invocations under.
           type: string
         workspaceCompilationOverrides:
           $ref: "#/components/schemas/WorkspaceCompilationOverrides"

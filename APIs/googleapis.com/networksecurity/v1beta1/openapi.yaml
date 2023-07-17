@@ -698,6 +698,198 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{parent}/firewallEndpointAssociations":
+    get:
+      description: Lists Associations in a given project and location.
+      operationId: networksecurity.projects.locations.firewallEndpointAssociations.list
+      parameters:
+        - description: Required. Parent value for ListAssociationsRequest
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Hint for how to order the results
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListFirewallEndpointAssociationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new FirewallEndpointAssociation in a given project and location.
+      operationId: networksecurity.projects.locations.firewallEndpointAssociations.create
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Id of the requesting object. If auto-generating Id server-side, remove this field and firewall_endpoint_association_id from the method_signature of Create RPC.
+          in: query
+          name: firewallEndpointAssociationId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FirewallEndpointAssociation"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{parent}/firewallEndpoints":
+    get:
+      description: Lists FirewallEndpoints in a given project and location.
+      operationId: networksecurity.organizations.locations.firewallEndpoints.list
+      parameters:
+        - description: Required. Parent value for ListEndpointsRequest
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Filtering results
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Hint for how to order the results
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListFirewallEndpointsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new FirewallEndpoint in a given project and location.
+      operationId: networksecurity.organizations.locations.firewallEndpoints.create
+      parameters:
+        - description: Required. Value for parent.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Id of the requesting object. If auto-generating Id server-side, remove this field and firewall_endpoint_id from the method_signature of Create RPC.
+          in: query
+          name: firewallEndpointId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FirewallEndpoint"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1beta1/{parent}/gatewaySecurityPolicies":
     get:
       description: Lists GatewaySecurityPolicies in a given project and location.
@@ -1499,6 +1691,95 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
+    FirewallEndpoint:
+      description: Message describing Endpoint object
+      properties:
+        associatedNetworks:
+          description: "Output only. List of networks that are associated with this endpoint in the local zone. This is a projection of the FirewallEndpointAssociations pointing at this endpoint. A network will only appear in this list after traffic routing is fully configured. Format: projects/{project}/global/networks/{name}."
+          items:
+            type: string
+          readOnly: true
+          type: array
+        createTime:
+          description: Output only. Create time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs
+          type: object
+        name:
+          description: Output only. name of resource
+          readOnly: true
+          type: string
+        reconciling:
+          description: Output only. Whether reconciling is in progress, recommended per https://google.aip.dev/128.
+          readOnly: true
+          type: boolean
+        state:
+          description: Output only. Current state of the endpoint.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+            - INACTIVE
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Update time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    FirewallEndpointAssociation:
+      description: Message describing Association object
+      properties:
+        createTime:
+          description: Output only. Create time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+        firewallEndpoint:
+          description: Required. The URL of the FirewallEndpoint that is being associated.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels as key value pairs
+          type: object
+        name:
+          description: Output only. name of resource
+          readOnly: true
+          type: string
+        network:
+          description: Required. The URL of the network that is being associated.
+          type: string
+        reconciling:
+          description: Output only. Whether reconciling is in progress, recommended per https://google.aip.dev/128.
+          readOnly: true
+          type: boolean
+        state:
+          description: Output only. Current state of the association.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+            - INACTIVE
+          readOnly: true
+          type: string
+        tlsInspectionPolicy:
+          description: Optional. The URL of the TlsInspectionPolicy that is being associated.
+          type: string
+        updateTime:
+          description: Output only. Update time stamp
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GatewaySecurityPolicy:
       description: The GatewaySecurityPolicy resource contains a collection of GatewaySecurityPolicyRules and associated metadata.
       properties:
@@ -1745,6 +2026,40 @@ components:
         nextPageToken:
           description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
           type: string
+      type: object
+    ListFirewallEndpointAssociationsResponse:
+      description: Message for response to listing Associations
+      properties:
+        firewallEndpointAssociations:
+          description: The list of Association
+          items:
+            $ref: "#/components/schemas/FirewallEndpointAssociation"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListFirewallEndpointsResponse:
+      description: Message for response to listing Endpoints
+      properties:
+        firewallEndpoints:
+          description: The list of Endpoint
+          items:
+            $ref: "#/components/schemas/FirewallEndpoint"
+          type: array
+        nextPageToken:
+          description: A token identifying a page of results the server should return.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
       type: object
     ListGatewaySecurityPoliciesResponse:
       description: Response returned by the ListGatewaySecurityPolicies method.
@@ -2052,11 +2367,40 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        customTlsFeatures:
+          description: Optional. List of custom TLS cipher suites selected. This field is valid only if the selected tls_feature_profile is CUSTOM. The compute.SslPoliciesService.ListAvailableFeatures method returns the set of features that can be specified in this list. Note that Secure Web Proxy does not yet honor this field.
+          items:
+            type: string
+          type: array
         description:
           description: Optional. Free-text description of the resource.
           type: string
+        excludePublicCaSet:
+          description: Optional. If FALSE (the default), use our default set of public CAs in addition to any CAs specified in trust_config. These public CAs are currently based on the Mozilla Root Program and are subject to change over time. If TRUE, do not accept our default set of public CAs. Only CAs specified in trust_config will be accepted. This defaults to FALSE (use public CAs in addition to trust_config) for backwards compatibility, but trusting public root CAs is *not recommended* unless the traffic in question is outbound to public web servers. When possible, prefer setting this to "false" and explicitly specifying trusted CAs and certificates in a TrustConfig. Note that Secure Web Proxy does not yet honor this field.
+          type: boolean
+        minTlsVersion:
+          description: Optional. Minimum TLS version that the firewall should use when negotiating connections with both clients and servers. If this is not set, then the default value is to allow the broadest set of clients and servers (TLS 1.0 or higher). Setting this to more restrictive values may improve security, but may also prevent the firewall from connecting to some clients or servers. Note that Secure Web Proxy does not yet honor this field.
+          enum:
+            - TLS_VERSION_UNSPECIFIED
+            - TLS_1_0
+            - TLS_1_1
+            - TLS_1_2
+            - TLS_1_3
+          type: string
         name:
           description: Required. Name of the resource. Name is of the form projects/{project}/locations/{location}/tlsInspectionPolicies/{tls_inspection_policy} tls_inspection_policy should match the pattern:(^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+          type: string
+        tlsFeatureProfile:
+          description: Optional. The selected Profile. If this is not set, then the default value is to allow the broadest set of clients and servers ("PROFILE_COMPATIBLE"). Setting this to more restrictive values may improve security, but may also prevent the TLS inspection proxy from connecting to some clients or servers. Note that Secure Web Proxy does not yet honor this field.
+          enum:
+            - PROFILE_UNSPECIFIED
+            - PROFILE_COMPATIBLE
+            - PROFILE_MODERN
+            - PROFILE_RESTRICTED
+            - PROFILE_CUSTOM
+          type: string
+        trustConfig:
+          description: Optional. A TrustConfig resource used when making a connection to the TLS server. This is a relative resource path following the form "projects/{project}/locations/{location}/trustConfigs/{trust_config}". This is necessary to intercept TLS connections to servers with certificates signed by a private CA or self-signed certificates. Note that Secure Web Proxy does not yet honor this field.
           type: string
         updateTime:
           description: Output only. The timestamp when the resource was updated.

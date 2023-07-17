@@ -785,6 +785,7 @@ components:
       description: Maintenance schedule which is exposed to customer and potentially end user, indicating published upcoming future maintenance schedule
       properties:
         canReschedule:
+          deprecated: true
           description: This field is deprecated, and will be always set to true since reschedule can happen multiple times now. This field should not be removed until all service producers remove this for their customers.
           type: boolean
         endTime:

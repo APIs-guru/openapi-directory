@@ -29,6 +29,7 @@ externalDocs:
 tags:
   - name: accounts
   - name: privacypolicy
+  - name: projects
 paths:
   /v1alpha/privacypolicy:analyze:
     parameters:
@@ -63,7 +64,7 @@ paths:
   "/v1alpha/{name}":
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: checks.accounts.apps.operations.get
+      operationId: checks.projects.privacypolicy.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -84,7 +85,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/xapi.zoo
       tags:
-        - accounts
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

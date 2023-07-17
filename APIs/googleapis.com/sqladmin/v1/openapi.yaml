@@ -3545,6 +3545,7 @@ components:
                 - BAK_TYPE_UNSPECIFIED
                 - FULL
                 - DIFF
+                - TLOG
               type: string
             copyOnly:
               deprecated: true
@@ -3811,6 +3812,7 @@ components:
                 - BAK_TYPE_UNSPECIFIED
                 - FULL
                 - DIFF
+                - TLOG
               type: string
             encryptionOptions:
               properties:
@@ -3830,6 +3832,13 @@ components:
             recoveryOnly:
               description: Whether or not the backup importing request will just bring database online without downloading Bak content only one of "no_recovery" and "recovery_only" can be true otherwise error will return. Applies only to Cloud SQL for SQL Server.
               type: boolean
+            stopAt:
+              description: Optional. StopAt keyword for transaction log import, Applies to Cloud SQL for SQL Server only
+              format: google-datetime
+              type: string
+            stopAtMark:
+              description: Optional. StopAtMark keyword for transaction log import, Applies to Cloud SQL for SQL Server only
+              type: string
             striped:
               description: Whether or not the backup set being restored is striped. Applies only to Cloud SQL for SQL Server.
               type: boolean

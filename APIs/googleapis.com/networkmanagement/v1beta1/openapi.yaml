@@ -633,6 +633,8 @@ components:
             - MISMATCHED_IP_VERSION
             - GKE_KONNECTIVITY_PROXY_UNSUPPORTED
             - RESOURCE_CONFIG_NOT_FOUND
+            - GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT
+            - SOURCE_PSC_CLOUD_SQL_UNSUPPORTED
           type: string
         projectsMissingPermission:
           description: List of project IDs that the user has specified in the request but does not have permission to access network configs. Analysis is aborted in this case with the PERMISSION_DENIED cause.
@@ -937,7 +939,7 @@ components:
           description: A [Cloud SQL](https://cloud.google.com/sql) instance URI.
           type: string
         forwardingRule:
-          description: "Forwarding rule URI. Forwarding rules are frontends for load balancers, PSC endpoints and Protocol Forwarding. Format: projects/{project}/global/forwardingRules/{id} or projects/{project}/regions/{region}/forwardingRules/{id}"
+          description: "A forwarding rule and its corresponding IP address represent the frontend configuration of a Google Cloud load balancer. Forwarding rules are also used for protocol forwarding, Private Service Connect and other network services to provide forwarding information in the control plane. Format: projects/{project}/global/forwardingRules/{id} or projects/{project}/regions/{region}/forwardingRules/{id}"
           type: string
         forwardingRuleTarget:
           description: Output only. Specifies the type of the target of the forwarding rule.
@@ -1063,6 +1065,7 @@ components:
             - IMPLIED_VPC_FIREWALL_RULE
             - SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE
             - NETWORK_FIREWALL_POLICY_RULE
+            - NETWORK_REGIONAL_FIREWALL_POLICY_RULE
           type: string
         networkUri:
           description: The URI of the VPC network that the firewall rule is associated with. This field is not applicable to hierarchical firewall policy rules.
