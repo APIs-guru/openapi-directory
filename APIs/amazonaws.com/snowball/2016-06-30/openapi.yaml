@@ -321,7 +321,7 @@ paths:
   /#X-Amz-Target=AWSIESnowballJobManagementService.CreateJob:
     post:
       operationId: CreateJob
-      description: '<p>Creates a job to import or export data between Amazon S3 and your on-premises data center. Your Amazon Web Services account must have the right trust policies and permissions in place to create a job for a Snow device. If you''re creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. </p> <note> <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p> <p>The device capacity is optional.</p> <p>Availability of device types differ by Amazon Web Services Region. For more information about Region availability, see <a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&amp;loc=4">Amazon Web Services Regional Services</a>.</p> </note> <p/> <p class="title"> <b>Snow Family devices and their capacities.</b> </p> <ul> <li> <p>Device type: <b>SNC1_SSD</b> </p> <ul> <li> <p>Capacity: T14</p> </li> <li> <p>Description: Snowcone </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>SNC1_HDD</b> </p> <ul> <li> <p>Capacity: T8</p> </li> <li> <p>Description: Snowcone </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_S</b> </p> <ul> <li> <p>Capacity: T98</p> </li> <li> <p>Description: Snowball Edge Storage Optimized for data transfer only </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_CG</b> </p> <ul> <li> <p>Capacity: T42</p> </li> <li> <p>Description: Snowball Edge Compute Optimized with GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_C</b> </p> <ul> <li> <p>Capacity: T42</p> </li> <li> <p>Description: Snowball Edge Compute Optimized without GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE</b> </p> <ul> <li> <p>Capacity: T100</p> </li> <li> <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>STANDARD</b> </p> <ul> <li> <p>Capacity: T50</p> </li> <li> <p>Description: Original Snowball device</p> <note> <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region </p> </note> </li> </ul> <p/> </li> <li> <p>Device type: <b>STANDARD</b> </p> <ul> <li> <p>Capacity: T80</p> </li> <li> <p>Description: Original Snowball device</p> <note> <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p> </note> </li> </ul> <p/> </li> <li> <p>Device type: <b>V3_5C</b> </p> <ul> <li> <p>Capacity: T32</p> </li> <li> <p>Description: Snowball Edge Compute Optimized without GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>V3_5S</b> </p> <ul> <li> <p>Capacity: T240</p> </li> <li> <p>Description: Snowball Edge Storage Optimized 210TB</p> </li> </ul> <p/> </li> </ul>'
+      description: '<p>Creates a job to import or export data between Amazon S3 and your on-premises data center. Your Amazon Web Services account must have the right trust policies and permissions in place to create a job for a Snow device. If you''re creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. </p> <note> <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p> <p>The device capacity is optional.</p> <p>Availability of device types differ by Amazon Web Services Region. For more information about Region availability, see <a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&amp;loc=4">Amazon Web Services Regional Services</a>.</p> </note> <p/> <p class="title"> <b>Snow Family devices and their capacities.</b> </p> <ul> <li> <p>Device type: <b>SNC1_SSD</b> </p> <ul> <li> <p>Capacity: T14</p> </li> <li> <p>Description: Snowcone </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>SNC1_HDD</b> </p> <ul> <li> <p>Capacity: T8</p> </li> <li> <p>Description: Snowcone </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_S</b> </p> <ul> <li> <p>Capacity: T98</p> </li> <li> <p>Description: Snowball Edge Storage Optimized for data transfer only </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_CG</b> </p> <ul> <li> <p>Capacity: T42</p> </li> <li> <p>Description: Snowball Edge Compute Optimized with GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_C</b> </p> <ul> <li> <p>Capacity: T42</p> </li> <li> <p>Description: Snowball Edge Compute Optimized without GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE</b> </p> <ul> <li> <p>Capacity: T100</p> </li> <li> <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p> </li> </ul> <note> <p>This device is replaced with T98.</p> </note> <p/> </li> <li> <p>Device type: <b>STANDARD</b> </p> <ul> <li> <p>Capacity: T50</p> </li> <li> <p>Description: Original Snowball device</p> <note> <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region </p> </note> </li> </ul> <p/> </li> <li> <p>Device type: <b>STANDARD</b> </p> <ul> <li> <p>Capacity: T80</p> </li> <li> <p>Description: Original Snowball device</p> <note> <p>This device is only available in the Ningxia, Beijing, and Singapore Amazon Web Services Region. </p> </note> </li> </ul> <p/> </li> <li> <p>Snow Family device type: <b>RACK_5U_C</b> </p> <ul> <li> <p>Capacity: T13 </p> </li> <li> <p>Description: Snowblade.</p> </li> </ul> </li> <li> <p>Device type: <b>V3_5S</b> </p> <ul> <li> <p>Capacity: T240</p> </li> <li> <p>Description: Snowball Edge Storage Optimized 210TB</p> </li> </ul> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -987,7 +987,7 @@ paths:
   /#X-Amz-Target=AWSIESnowballJobManagementService.ListCompatibleImages:
     post:
       operationId: ListCompatibleImages
-      description: 'This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device. Currently, supported AMIs are based on the Amazon Linux-2, Ubuntu 20.04 LTS - Focal, or Ubuntu 22.04 LTS - Jammy images, available on the Amazon Web Services Marketplace. Ubuntu 16.04 LTS - Xenial (HVM) images are no longer supported in the Market, but still supported for use on devices through Amazon EC2 VM Import/Export and running locally in AMIs.'
+      description: 'This action returns a list of the different Amazon EC2-compatible Amazon Machine Images (AMIs) that are owned by your Amazon Web Services accountthat would be supported for use on a Snow device. Currently, supported AMIs are based on the Amazon Linux-2, Ubuntu 20.04 LTS - Focal, or Ubuntu 22.04 LTS - Jammy images, available on the Amazon Web Services Marketplace. Ubuntu 16.04 LTS - Xenial (HVM) images are no longer supported in the Market, but still supported for use on devices through Amazon EC2 VM Import/Export and running locally in AMIs.'
       responses:
         '200':
           description: Success
@@ -1141,6 +1141,57 @@ paths:
             type: string
             enum:
               - AWSIESnowballJobManagementService.ListLongTermPricing
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSIESnowballJobManagementService.ListPickupLocations:
+    post:
+      operationId: ListPickupLocations
+      description: A list of locations from which the customer can choose to pickup a device.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPickupLocationsResult'
+        '480':
+          description: InvalidResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListPickupLocationsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSIESnowballJobManagementService.ListPickupLocations
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1524,7 +1575,7 @@ components:
         JobListEntries:
           allOf:
             - $ref: '#/components/schemas/JobListEntryList'
-            - description: 'List of jobs created for this cluster. For syntax, see <a href="https://docs.aws.amazon.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax">ListJobsResult$JobListEntries</a> in this guide.'
+            - description: 'List of jobs created for this cluster. For syntax, see <a href="http://amazonaws.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax">ListJobsResult$JobListEntries</a> in this guide.'
     CreateClusterRequest:
       type: object
       required:
@@ -1680,11 +1731,19 @@ components:
         RemoteManagement:
           allOf:
             - $ref: '#/components/schemas/RemoteManagement'
-            - description: 'Allows you to securely operate and manage Snowcone devices remotely from outside of your internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Client to manage the device.'
+            - description: 'Allows you to securely operate and manage Snowcone devices remotely from outside of your internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Edge client to manage the device. When set to <code>NOT_INSTALLED</code>, remote management will not be available on the device. '
         LongTermPricingId:
           allOf:
             - $ref: '#/components/schemas/LongTermPricingId'
             - description: The ID of the long-term pricing type for the device.
+        ImpactLevel:
+          allOf:
+            - $ref: '#/components/schemas/ImpactLevel'
+            - description: 'The highest impact level of data that will be stored or processed on the device, provided at job creation.'
+        PickupDetails:
+          allOf:
+            - $ref: '#/components/schemas/PickupDetails'
+            - description: Information identifying the person picking up the device.
     ClusterLimitExceededException: {}
     CreateLongTermPricingResult:
       type: object
@@ -1697,6 +1756,7 @@ components:
       type: object
       required:
         - LongTermPricingType
+        - SnowballType
       title: CreateLongTermPricingRequest
       properties:
         LongTermPricingType:
@@ -2145,6 +2205,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'Because HTTP requests are stateless, this is the starting point for your next list of <code>ListLongTermPricing</code> to return.'
+    ListPickupLocationsResult:
+      type: object
+      example:
+        Addresses:
+          - AddressId: ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b
+            City: Seattle
+            Company: My Company
+            Country: US
+            Name: My Name
+            PhoneNumber: 425-555-5555
+            PostalCode: '98101'
+            StateOrProvince: WA
+            Street1: 123 Main Street
+      properties:
+        Addresses:
+          allOf:
+            - $ref: '#/components/schemas/AddressList'
+            - description: Information about the address of pickup locations.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ListPickupLocationsResult</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
+    ListPickupLocationsRequest:
+      type: object
+      title: ListPickupLocationsRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListLimit'
+            - description: The maximum number of locations to list per page.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'HTTP requests are stateless. To identify what object comes "next" in the list of <code>ListPickupLocationsRequest</code> objects, you have the option of specifying <code>NextToken</code> as the starting point for your returned list.'
     ListServiceVersionsResult:
       type: object
       required:
@@ -2283,6 +2377,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/AddressId'
             - description: The updated ID for the forwarding address for a job. This field is not supported in most regions.
+        PickupDetails:
+          $ref: '#/components/schemas/PickupDetails'
     UpdateJobShipmentStateResult:
       type: object
       properties: {}
@@ -2334,6 +2430,11 @@ components:
       maxLength: 1024
     Boolean:
       type: boolean
+    AddressType:
+      type: string
+      enum:
+        - CUST_PICKUP
+        - AWS_SHIP
     Address:
       type: object
       properties:
@@ -2393,6 +2494,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'If the address you are creating is a primary address, then set this option to true. This field is not supported in most regions.'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/AddressType'
+            - description: Differentiates between delivery address and pickup address in the customer account. Provided at job creation.
       description: 'The address that you want the Snow device(s) associated with a specific job to be shipped to. Addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. Although no individual elements of the <code>Address</code> are required, if the address is invalid or unsupported, then an exception is thrown.'
     AddressList:
       type: array
@@ -2474,6 +2579,7 @@ components:
         - SNC1_SSD
         - V3_5C
         - V3_5S
+        - RACK_5U_C
     JobResource:
       type: object
       properties:
@@ -2512,6 +2618,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Any change in job state will trigger a notification for this job.
+        DevicePickupSnsTopicARN:
+          allOf:
+            - $ref: '#/components/schemas/SnsTopicARN'
+            - description: Used to send SNS notifications for the person picking up the device (identified during job creation).
       description: '<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated with a specific job. The <code>Notification</code> object is returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type.</p> <p>When the notification settings are defined during job creation, you can choose to notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of strings, or you can specify that you want to have Amazon SNS notifications sent out for all job states with <code>NotifyAll</code> set to true.</p>'
     TaxDocuments:
       type: object
@@ -2624,6 +2734,7 @@ components:
       enum:
         - INSTALLED_ONLY
         - INSTALLED_AUTOSTART
+        - NOT_INSTALLED
     InitialClusterSize:
       type: integer
       minimum: 0
@@ -2645,6 +2756,7 @@ components:
         - T32
         - NoPreference
         - T240
+        - T13
     JobListEntryList:
       type: array
       items:
@@ -2662,6 +2774,46 @@ components:
       pattern: 'LTPID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
       minLength: 41
       maxLength: 41
+    ImpactLevel:
+      type: string
+      enum:
+        - IL2
+        - IL4
+        - IL5
+        - IL6
+        - IL99
+    PickupDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the person picking up the device.
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: The phone number of the person picking up the device.
+        Email:
+          allOf:
+            - $ref: '#/components/schemas/Email'
+            - description: The email address of the person picking up the device.
+        IdentificationNumber:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The number on the credential identifying the person picking up the device.
+        IdentificationExpirationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Expiration date of the credential identifying the person picking up the device.
+        IdentificationIssuingOrg:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Organization that issued the credential identifying the person picking up the device.
+        DevicePickupId:
+          allOf:
+            - $ref: '#/components/schemas/DevicePickupId'
+            - description: The unique ID for a device that will be picked up.
+      description: Information identifying the person picking up the device.
     LongTermPricingType:
       type: string
       enum:
@@ -2821,6 +2973,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/OnDeviceServiceConfiguration'
             - description: Represents metadata and configuration settings for services on an Amazon Web Services Snow Family device.
+        ImpactLevel:
+          allOf:
+            - $ref: '#/components/schemas/ImpactLevel'
+            - description: 'The highest impact level of data that will be stored or processed on the device, provided at job creation.'
+        PickupDetails:
+          allOf:
+            - $ref: '#/components/schemas/PickupDetails'
+            - description: Information identifying the person picking up the device.
+        SnowballId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Unique ID associated with a device.
       description: 'Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.'
     JobMetadataList:
       type: array
@@ -2834,6 +2998,11 @@ components:
             - $ref: '#/components/schemas/WirelessConnection'
             - description: Configures the wireless connection for the Snowcone device.
       description: Specifies the device configuration for an Snowcone job.
+    DevicePickupId:
+      type: string
+      pattern: 'DPID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+      minLength: 40
+      maxLength: 40
     DeviceServiceName:
       type: string
       enum:
@@ -2864,11 +3033,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The ID of the AMI on the Snow device.
-      description: 'A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI), including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has these two IDs to simplify identifying the AMI in both the Amazon Web Services Cloud and on the device.'
+      description: 'A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI), including the Amazon EC2-compatible AMI ID and the Snow device AMI ID. Each AMI has these two IDs to simplify identifying the AMI in both the Amazon Web Services Cloud and on the device.'
     Ec2AmiResourceList:
       type: array
       items:
         $ref: '#/components/schemas/Ec2AmiResource'
+    Email:
+      type: string
+      pattern: '^(?=.{3,100}$).+@.+[.].+$'
+      minLength: 3
+      maxLength: 320
+      format: password
     ResourceARN:
       type: string
       pattern: 'arn:aws.*:*'
@@ -3131,6 +3306,12 @@ components:
             - $ref: '#/components/schemas/NodeFaultTolerance'
             - description: '&gt;Fault tolerance level of the cluster. This indicates the number of nodes that can go down without degrading the performance of the cluster. This additional input helps when the specified <code>StorageLimit</code> matches more than one Amazon S3 compatible storage on Snow family devices service configuration.'
       description: Amazon S3 compatible storage on Snow family devices configuration items.
+    PhoneNumber:
+      type: string
+      pattern: '^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$'
+      minLength: 7
+      maxLength: 30
+      format: password
     S3StorageLimit:
       type: number
       format: double

@@ -497,7 +497,7 @@ paths:
                 ElasticsearchVersion:
                   description: 'String of format X.Y to specify version for the Elasticsearch domain eg. "1.5" or "2.3". For more information, see <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains" target="_blank">Creating Elasticsearch Domains</a> in the <i>Amazon Elasticsearch Service Developer Guide</i>.'
                   type: string
-                  pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
+                  pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$|^OS_[0-9]{1,2}\.[0-9]{1,2}$'
                 ElasticsearchClusterConfig:
                   description: 'Specifies the configuration for the domain cluster, such as the type and number of instances.'
                   type: object
@@ -1995,7 +1995,7 @@ paths:
           description: ' Version of Elasticsearch for which <code> <a>Limits</a> </code> are needed. '
           schema:
             type: string
-            pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
+            pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$|^OS_[0-9]{1,2}\.[0-9]{1,2}$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2953,7 +2953,7 @@ paths:
           description: 'Version of Elasticsearch for which list of supported elasticsearch instance types are needed. '
           schema:
             type: string
-            pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
+            pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$|^OS_[0-9]{1,2}\.[0-9]{1,2}$'
         - name: domainName
           in: query
           required: false
@@ -3871,7 +3871,7 @@ paths:
                 TargetVersion:
                   description: The version of Elasticsearch that you intend to upgrade the domain to.
                   type: string
-                  pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
+                  pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$|^OS_[0-9]{1,2}\.[0-9]{1,2}$'
                 PerformCheckOnly:
                   description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
                   type: boolean
@@ -5413,7 +5413,7 @@ components:
         $ref: '#/components/schemas/CompatibleVersionsMap'
     ElasticsearchVersionString:
       type: string
-      pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$'
+      pattern: '^[0-9]{1}\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\.[0-9]{1,2}$|^OS_[0-9]{1,2}\.[0-9]{1,2}$'
     ElasticsearchVersionList:
       type: array
       description: 'List of supported elastic search versions. '

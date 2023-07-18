@@ -127,41 +127,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/CancelBatchJobExecutionResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '485':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -197,41 +197,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateApplicationResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
           description: ServiceQuotaExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '485':
+        '481':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters: []
       requestBody:
         required: true
@@ -278,7 +278,7 @@ paths:
                   type: string
                   pattern: '^[A-Za-z0-9][A-Za-z0-9_\-]{1,59}$'
                 roleArn:
-                  description: The Amazon Resource Name (ARN) of the role associated with the application.
+                  description: The Amazon Resource Name (ARN) that identifies a role that the application uses to access Amazon Web Services resources that are not part of the application or are in a different Amazon Web Services account.
                   type: string
                   pattern: '^arn:(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov):[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:([a-z]{2}-((iso[a-z]{0,1}-)|(gov-)){0,1}[a-z]+-[0-9]|):[0-9]{12}:[A-Za-z0-9/][A-Za-z0-9:_/+=,@.-]{0,1023}$'
                 tags:
@@ -307,29 +307,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListApplicationsResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '482':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '483':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: environmentId
           in: query
@@ -345,7 +345,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: names
           in: query
           required: false
@@ -375,11 +375,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateDataSetImportTaskResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: ServiceQuotaExceededException
           content:
@@ -387,35 +387,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
         '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '485':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '486':
-          description: ResourceNotFoundException
+        '483':
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -468,11 +468,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateDeploymentResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: ServiceQuotaExceededException
           content:
@@ -480,35 +480,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
         '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '485':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '486':
-          description: ResourceNotFoundException
+        '483':
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -557,17 +557,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListDeploymentsResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -575,17 +575,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -601,7 +601,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: nextToken
           in: query
           required: false
@@ -621,41 +621,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateEnvironmentResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
           description: ServiceQuotaExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '485':
+        '481':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters: []
       requestBody:
         required: true
@@ -693,7 +693,7 @@ paths:
                     desiredCapacity:
                       allOf:
                         - $ref: '#/components/schemas/CapacityValue'
-                        - description: The number of instances in a high availability configuration.
+                        - description: The number of instances in a high availability configuration. The minimum possible value is 1 and the maximum is 100.
                 instanceType:
                   description: The type of instance for the runtime environment.
                   type: string
@@ -753,29 +753,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListEnvironmentsResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '482':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '483':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: engineType
           in: query
@@ -793,7 +793,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: names
           in: query
           required: false
@@ -823,35 +823,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteApplicationResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -879,17 +879,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetApplicationResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -897,17 +897,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -927,41 +927,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateApplicationResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '485':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1012,41 +1012,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteApplicationFromEnvironmentResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '485':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1082,35 +1082,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/DeleteEnvironmentResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: environmentId
           in: path
@@ -1138,17 +1138,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetEnvironmentResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1156,17 +1156,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: environmentId
           in: path
@@ -1186,11 +1186,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateEnvironmentResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: ServiceQuotaExceededException
           content:
@@ -1198,35 +1198,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
         '482':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '485':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '486':
-          description: ResourceNotFoundException
+        '483':
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: environmentId
           in: path
@@ -1246,10 +1246,8 @@ paths:
                   description: 'Indicates whether to update the runtime environment during the maintenance window. The default is false. Currently, Amazon Web Services Mainframe Modernization accepts the <code>engineVersion</code> parameter only if <code>applyDuringMaintenanceWindow</code> is true. If any parameter other than <code>engineVersion</code> is provided in <code>UpdateEnvironmentRequest</code>, it will fail if <code>applyDuringMaintenanceWindow</code> is set to true.'
                   type: boolean
                 desiredCapacity:
-                  description: The desired capacity for the runtime environment to update.
+                  description: The desired capacity for the runtime environment to update. The minimum possible value is 0 and the maximum is 100.
                   type: integer
-                  minimum: 1
-                  maximum: 100
                 engineVersion:
                   description: The version of the runtime engine for the runtime environment.
                   type: string
@@ -1273,17 +1271,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetApplicationVersionResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1291,17 +1289,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1337,17 +1335,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetBatchJobExecutionResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1355,17 +1353,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1401,17 +1399,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetDataSetDetailsResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1419,17 +1417,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1465,17 +1463,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetDataSetImportTaskResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1483,17 +1481,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1529,17 +1527,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetDeploymentResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1547,17 +1545,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1581,6 +1579,43 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /signed-bi-url:
+    get:
+      operationId: GetSignedBluinsightsUrl
+      description: Gets a single sign-on URL that can be used to connect to AWS Blu Insights.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSignedBluinsightsUrlResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/applications/{applicationId}/versions':
     get:
       operationId: ListApplicationVersions
@@ -1593,17 +1628,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListApplicationVersionsResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1611,17 +1646,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1637,7 +1672,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: nextToken
           in: query
           required: false
@@ -1665,17 +1700,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListBatchJobDefinitionsResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1683,17 +1718,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1709,7 +1744,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: nextToken
           in: query
           required: false
@@ -1743,17 +1778,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListBatchJobExecutionsResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1761,17 +1796,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1804,7 +1839,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: nextToken
           in: query
           required: false
@@ -1862,17 +1897,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListDataSetImportHistoryResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1880,17 +1915,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1906,7 +1941,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: nextToken
           in: query
           required: false
@@ -1934,17 +1969,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListDataSetsResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -1952,17 +1987,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -1978,7 +2013,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: nextToken
           in: query
           required: false
@@ -2013,29 +2048,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListEngineVersionsResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '482':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '483':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: engineType
           in: query
@@ -2053,7 +2088,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 2000
         - name: nextToken
           in: query
           required: false
@@ -2081,17 +2116,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListTagsForResourceResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -2099,17 +2134,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: resourceArn
           in: path
@@ -2137,11 +2172,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/TagResourceResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
           description: ServiceQuotaExceededException
           content:
@@ -2149,11 +2184,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ServiceQuotaExceededException'
         '482':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '483':
           description: AccessDeniedException
           content:
@@ -2161,17 +2196,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '484':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '485':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: resourceArn
           in: path
@@ -2208,41 +2243,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/StartApplicationResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '485':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -2271,41 +2306,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/StartBatchJobResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '485':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -2362,41 +2397,41 @@ paths:
               schema:
                 $ref: '#/components/schemas/StopApplicationResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-        '484':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '485':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: applicationId
           in: path
@@ -2435,17 +2470,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/UntagResourceResponse'
         '480':
-          description: ValidationException
+          description: ResourceNotFoundException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ResourceNotFoundException'
         '481':
-          description: InternalServerException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InternalServerException'
+                $ref: '#/components/schemas/ThrottlingException'
         '482':
           description: AccessDeniedException
           content:
@@ -2453,17 +2488,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '483':
-          description: ThrottlingException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/ValidationException'
         '484':
-          description: ResourceNotFoundException
+          description: InternalServerException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
+                $ref: '#/components/schemas/InternalServerException'
       parameters:
         - name: resourceArn
           in: path
@@ -2543,12 +2578,12 @@ components:
     CancelBatchJobExecutionResponse:
       type: object
       properties: {}
-    ValidationException: {}
-    ConflictException: {}
-    InternalServerException: {}
-    AccessDeniedException: {}
-    ThrottlingException: {}
     ResourceNotFoundException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
+    ConflictException: {}
+    ValidationException: {}
+    InternalServerException: {}
     CreateApplicationResponse:
       type: object
       required:
@@ -2615,8 +2650,6 @@ components:
             - description: The unique identifier of the runtime environment.
     CapacityValue:
       type: integer
-      minimum: 1
-      maximum: 100
     String50:
       type: string
       pattern: '^\S{1,50}$'
@@ -3021,6 +3054,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/String50'
             - description: The unique identifier for the VPC used with this runtime environment.
+    GetSignedBluinsightsUrlResponse:
+      type: object
+      required:
+        - signedBiUrl
+      properties:
+        signedBiUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Single sign-on AWS Blu Insights URL.
     ListApplicationVersionsResponse:
       type: object
       required:
@@ -3599,7 +3641,7 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of the role associated with the application.
+            - description: The Amazon Resource Name (ARN) that identifies a role that the application uses to access Amazon Web Services resources that are not part of the application or are in a different Amazon Web Services account.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3660,7 +3702,7 @@ components:
         desiredCapacity:
           allOf:
             - $ref: '#/components/schemas/CapacityValue'
-            - description: The number of instances in a high availability configuration.
+            - description: The number of instances in a high availability configuration. The minimum possible value is 1 and the maximum is 100.
       description: Defines the details of a high availability configuration.
     String20:
       type: string
@@ -4210,9 +4252,9 @@ components:
       enum:
         - Creating
         - Available
+        - Updating
         - Deleting
         - Failed
-        - Updating
     EnvironmentSummary:
       type: object
       required:
@@ -4339,7 +4381,7 @@ components:
     MaxResults:
       type: integer
       minimum: 1
-      maximum: 100
+      maximum: 2000
     NextToken:
       type: string
       pattern: '^\S{1,2000}$'
@@ -4512,7 +4554,7 @@ components:
         desiredCapacity:
           allOf:
             - $ref: '#/components/schemas/CapacityValue'
-            - description: The desired capacity for the runtime environment to update.
+            - description: The desired capacity for the runtime environment to update. The minimum possible value is 0 and the maximum is 100.
         engineVersion:
           allOf:
             - $ref: '#/components/schemas/EngineVersion'

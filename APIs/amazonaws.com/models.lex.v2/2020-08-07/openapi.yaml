@@ -6734,6 +6734,348 @@ paths:
                   minLength: 1
                   maxLength: 1024
                   format: password
+  '/bots/{botId}/analytics/intentmetrics':
+    post:
+      operationId: ListIntentMetrics
+      description: '<p>Retrieves summary metrics for the intents in your bot. The following fields are required:</p> <ul> <li> <p> <code>metrics</code> – A list of <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentMetric.html">AnalyticsIntentMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p> </li> <li> <p> <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p> </li> </ul> <p>Of the optional fields, you can organize the results in the following ways:</p> <ul> <li> <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p> </li> <li> <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p> </li> </ul> <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. You can specify only one <code>order</code> in a given request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIntentMetricsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The identifier for the bot for which you want to retrieve intent metrics.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - startDateTime
+                - endDateTime
+                - metrics
+              properties:
+                startDateTime:
+                  description: The timestamp that marks the beginning of the range of time for which you want to see intent metrics.
+                  type: string
+                  format: date-time
+                endDateTime:
+                  description: The date and time that marks the end of the range of time for which you want to see intent metrics.
+                  type: string
+                  format: date-time
+                metrics:
+                  description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the order by which to organize the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsIntentMetric'
+                  minItems: 1
+                  maxItems: 5
+                binBy:
+                  description: 'A list of objects, each of which contains specifications for organizing the results by time.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsBinBySpecification'
+                  minItems: 1
+                  maxItems: 1
+                groupBy:
+                  description: '<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p> <ul> <li> <p> <code>IntentName</code> – The name of the intent.</p> </li> <li> <p> <code>IntentEndState</code> – The final state of the intent. The possible end states are detailed in <a href="https://docs.aws.amazon.com/analytics-key-definitions-intents">Key definitions</a> in the user guide.</p> </li> </ul>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsIntentGroupBySpecification'
+                  minItems: 1
+                  maxItems: 3
+                filters:
+                  description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsIntentFilter'
+                  minItems: 1
+                  maxItems: 9
+                maxResults:
+                  description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: '<p>If the response from the ListIntentMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.</p>'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botId}/analytics/intentpaths':
+    post:
+      operationId: ListIntentPaths
+      description: '<p>Retrieves summary statistics for a path of intents that users take over sessions with your bot. The following fields are required:</p> <ul> <li> <p> <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p> </li> <li> <p> <code>intentPath</code> – Define an order of intents for which you want to retrieve metrics. Separate intents in the path with a forward slash. For example, populate the <code>intentPath</code> field with <code>/BookCar/BookHotel</code> to see details about how many times users invoked the <code>BookCar</code> and <code>BookHotel</code> intents in that order.</p> </li> </ul> <p>Use the optional <code>filters</code> field to filter the results.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIntentPathsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The identifier for the bot for which you want to retrieve intent path metrics.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - startDateTime
+                - endDateTime
+                - intentPath
+              properties:
+                startDateTime:
+                  description: The date and time that marks the beginning of the range of time for which you want to see intent path metrics.
+                  type: string
+                  format: date-time
+                endDateTime:
+                  description: The date and time that marks the end of the range of time for which you want to see intent path metrics.
+                  type: string
+                  format: date-time
+                intentPath:
+                  description: '<p>The intent path for which you want to retrieve metrics. Use a forward slash to separate intents in the path. For example:</p> <ul> <li> <p>/BookCar</p> </li> <li> <p>/BookCar/BookHotel</p> </li> <li> <p>/BookHotel/BookCar</p> </li> </ul>'
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                filters:
+                  description: 'A list of objects, each describes a condition by which you want to filter the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsPathFilter'
+                  minItems: 1
+                  maxItems: 5
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botId}/analytics/intentstagemetrics':
+    post:
+      operationId: ListIntentStageMetrics
+      description: '<p>Retrieves summary metrics for the intent stages in your bot. The following fields are required:</p> <ul> <li> <p> <code>metrics</code> – A list of <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentStageMetric.html">AnalyticsIntentStageMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p> </li> <li> <p> <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p> </li> </ul> <p>Of the optional fields, you can organize the results in the following ways:</p> <ul> <li> <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p> </li> <li> <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p> </li> </ul> <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. You can only specify one <code>order</code> in a given request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIntentStageMetricsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The identifier for the bot for which you want to retrieve intent stage metrics.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - startDateTime
+                - endDateTime
+                - metrics
+              properties:
+                startDateTime:
+                  description: The date and time that marks the beginning of the range of time for which you want to see intent stage metrics.
+                  type: string
+                  format: date-time
+                endDateTime:
+                  description: The date and time that marks the end of the range of time for which you want to see intent stage metrics.
+                  type: string
+                  format: date-time
+                metrics:
+                  description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsIntentStageMetric'
+                  minItems: 1
+                  maxItems: 5
+                binBy:
+                  description: 'A list of objects, each of which contains specifications for organizing the results by time.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsBinBySpecification'
+                  minItems: 1
+                  maxItems: 1
+                groupBy:
+                  description: '<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p> <ul> <li> <p> <code>IntentStageName</code> – The name of the intent stage.</p> </li> <li> <p> <code>SwitchedToIntent</code> – The intent to which the conversation was switched (if any).</p> </li> </ul>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsIntentStageGroupBySpecification'
+                  minItems: 1
+                  maxItems: 2
+                filters:
+                  description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsIntentStageFilter'
+                  minItems: 1
+                  maxItems: 9
+                maxResults:
+                  description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: '<p>If the response from the ListIntentStageMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.</p>'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/intents':
     post:
       operationId: ListRecommendedIntents
@@ -6836,6 +7178,248 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 1000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botId}/analytics/sessions':
+    post:
+      operationId: ListSessionAnalyticsData
+      description: '<p>Retrieves a list of metadata for individual user sessions with your bot. The <code>startDateTime</code> and <code>endDateTime</code> fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:</p> <ul> <li> <p>Use the <code>filters</code> field to filter the results and the <code>sortBy</code> field to specify the values by which to sort the results.</p> </li> <li> <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSessionAnalyticsDataResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The identifier for the bot for which you want to retrieve session analytics.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - startDateTime
+                - endDateTime
+              properties:
+                startDateTime:
+                  description: The date and time that marks the beginning of the range of time for which you want to see session analytics.
+                  type: string
+                  format: date-time
+                endDateTime:
+                  description: The date and time that marks the end of the range of time for which you want to see session analytics.
+                  type: string
+                  format: date-time
+                sortBy:
+                  description: An object specifying the measure and method by which to sort the session analytics data.
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/AnalyticsSessionSortByName'
+                        - description: <p>The measure by which to sort the session analytics data.</p> <ul> <li> <p> <code>conversationStartTime</code> – The date and time when the conversation began. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p> </li> <li> <p> <code>numberOfTurns</code> – The number of turns that the session took.</p> </li> <li> <p> <code>conversationDurationSeconds</code> – The duration of the conversation in seconds.</p> </li> </ul>
+                    order:
+                      allOf:
+                        - $ref: '#/components/schemas/AnalyticsSortOrder'
+                        - description: Specifies whether to sort the results in ascending or descending order.
+                filters:
+                  description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsSessionFilter'
+                  minItems: 1
+                  maxItems: 10
+                maxResults:
+                  description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: '<p>If the response from the ListSessionAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListSessionAnalyticsData request to return the next page of results. For a complete set of results, call the ListSessionAnalyticsData operation until the nextToken returned in the response is null.</p>'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botId}/analytics/sessionmetrics':
+    post:
+      operationId: ListSessionMetrics
+      description: '<p>Retrieves summary metrics for the user sessions with your bot. The following fields are required:</p> <ul> <li> <p> <code>metrics</code> – A list of <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsSessionMetric.html">AnalyticsSessionMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p> </li> <li> <p> <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p> </li> </ul> <p>Of the optional fields, you can organize the results in the following ways:</p> <ul> <li> <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p> </li> <li> <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p> </li> </ul> <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. Currently, you can specify it in either field, but not in both.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSessionMetricsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The identifier for the bot for which you want to retrieve session metrics.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - startDateTime
+                - endDateTime
+                - metrics
+              properties:
+                startDateTime:
+                  description: The date and time that marks the beginning of the range of time for which you want to see session metrics.
+                  type: string
+                  format: date-time
+                endDateTime:
+                  description: The date and time that marks the end of the range of time for which you want to see session metrics.
+                  type: string
+                  format: date-time
+                metrics:
+                  description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsSessionMetric'
+                  minItems: 1
+                  maxItems: 7
+                binBy:
+                  description: 'A list of objects, each of which contains specifications for organizing the results by time.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsBinBySpecification'
+                  minItems: 1
+                  maxItems: 1
+                groupBy:
+                  description: '<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p> <ul> <li> <p> <code>ConversationEndState</code> – The final state of the conversation. The possible end states are detailed in <a href="https://docs.aws.amazon.com/analytics-key-definitions-conversations">Key definitions</a> in the user guide.</p> </li> <li> <p> <code>LocaleId</code> – The unique identifier of the bot locale.</p> </li> </ul>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsSessionGroupBySpecification'
+                  minItems: 1
+                  maxItems: 2
+                filters:
+                  description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsSessionFilter'
+                  minItems: 1
+                  maxItems: 10
+                maxResults:
+                  description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: '<p>If the response from the ListSessionMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.</p>'
+                  type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7298,6 +7882,255 @@ paths:
                   maximum: 1000
                 nextToken:
                   description: 'If the response from the ListTestSets operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botId}/analytics/utterances':
+    post:
+      operationId: ListUtteranceAnalyticsData
+      description: '<p>Retrieves a list of metadata for individual user utterances to your bot. The <code>startDateTime</code> and <code>endDateTime</code> fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:</p> <ul> <li> <p>Use the <code>filters</code> field to filter the results and the <code>sortBy</code> field to specify the values by which to sort the results.</p> </li> <li> <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p> </li> </ul>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUtteranceAnalyticsDataResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The identifier for the bot for which you want to retrieve utterance analytics.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - startDateTime
+                - endDateTime
+              properties:
+                startDateTime:
+                  description: The date and time that marks the beginning of the range of time for which you want to see utterance analytics.
+                  type: string
+                  format: date-time
+                endDateTime:
+                  description: The date and time that marks the end of the range of time for which you want to see utterance analytics.
+                  type: string
+                  format: date-time
+                sortBy:
+                  description: An object specifying the measure and method by which to sort the utterance data.
+                  type: object
+                  properties:
+                    name:
+                      allOf:
+                        - $ref: '#/components/schemas/AnalyticsUtteranceSortByName'
+                        - description: <p>The measure by which to sort the utterance analytics data.</p> <ul> <li> <p> <code>Count</code> – The number of utterances.</p> </li> <li> <p> <code>UtteranceTimeStamp</code> – The date and time of the utterance.</p> </li> </ul>
+                    order:
+                      allOf:
+                        - $ref: '#/components/schemas/AnalyticsSortOrder'
+                        - description: Specifies whether to sort the results in ascending or descending order.
+                filters:
+                  description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsUtteranceFilter'
+                  minItems: 1
+                  maxItems: 9
+                maxResults:
+                  description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: '<p>If the response from the ListUtteranceAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListUtteranceAnalyticsData request to return the next page of results. For a complete set of results, call the ListUtteranceAnalyticsData operation until the nextToken returned in the response is null.</p>'
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/bots/{botId}/analytics/utterancemetrics':
+    post:
+      operationId: ListUtteranceMetrics
+      description: '<p>Retrieves summary metrics for the utterances in your bot. The following fields are required:</p> <ul> <li> <p> <code>metrics</code> – A list of <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsUtteranceMetric.html">AnalyticsUtteranceMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p> </li> <li> <p> <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p> </li> </ul> <p>Of the optional fields, you can organize the results in the following ways:</p> <ul> <li> <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p> </li> <li> <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p> </li> </ul> <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. Currently, you can specify it in either field, but not in both.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUtteranceMetricsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: PreconditionFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The identifier for the bot for which you want to retrieve utterance metrics.
+          schema:
+            type: string
+            pattern: '^[0-9a-zA-Z]+$'
+            minLength: 10
+            maxLength: 10
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - startDateTime
+                - endDateTime
+                - metrics
+              properties:
+                startDateTime:
+                  description: The date and time that marks the beginning of the range of time for which you want to see utterance metrics.
+                  type: string
+                  format: date-time
+                endDateTime:
+                  description: The date and time that marks the end of the range of time for which you want to see utterance metrics.
+                  type: string
+                  format: date-time
+                metrics:
+                  description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsUtteranceMetric'
+                  minItems: 1
+                  maxItems: 4
+                binBy:
+                  description: 'A list of objects, each of which contains specifications for organizing the results by time.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsBinBySpecification'
+                  minItems: 1
+                  maxItems: 1
+                groupBy:
+                  description: '<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p> <ul> <li> <p> <code>UtteranceText</code> – The transcription of the utterance.</p> </li> <li> <p> <code>UtteranceState</code> – The state of the utterance. The possible states are detailed in <a href="https://docs.aws.amazon.com/analytics-key-definitions-utterances">Key definitions</a> in the user guide.</p> </li> </ul>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsUtteranceGroupBySpecification'
+                  minItems: 1
+                  maxItems: 2
+                attributes:
+                  description: '<p>A list containing attributes related to the utterance that you want the response to return. The following attributes are possible:</p> <ul> <li> <p> <code>LastUsedIntent</code> – The last used intent at the time of the utterance.</p> </li> </ul>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsUtteranceAttribute'
+                  minItems: 1
+                  maxItems: 1
+                filters:
+                  description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalyticsUtteranceFilter'
+                  minItems: 1
+                  maxItems: 9
+                maxResults:
+                  description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+                  type: integer
+                  minimum: 1
+                  maximum: 1000
+                nextToken:
+                  description: '<p>If the response from the ListUtteranceMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.</p>'
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -10226,6 +11059,180 @@ components:
             - $ref: '#/components/schemas/ImportFilterOperator'
             - description: The operator to use for the filter. Specify EQ when the <code>ListImports</code> operation should return only resource types that equal the specified value. Specify CO when the <code>ListImports</code> operation should return resource types that contain the specified value.
       description: 'Filters the response from the <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html">ListImports</a> operation.'
+    ListIntentMetricsResponse:
+      type: object
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier for the bot for which you retrieved intent metrics.
+        results:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentResults'
+            - description: The results for the intent metrics.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListIntentMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.</p>'
+    AnalyticsIntentMetric:
+      type: object
+      required:
+        - name
+        - statistic
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentMetricName'
+            - description: <p>The metric for which you want to get intent summary statistics.</p> <ul> <li> <p> <code>Count</code> – The number of times the intent was invoked.</p> </li> <li> <p> <code>Success</code> – The number of times the intent succeeded.</p> </li> <li> <p> <code>Failure</code> – The number of times the intent failed.</p> </li> <li> <p> <code>Switched</code> – The number of times there was a switch to a different intent.</p> </li> <li> <p> <code>Dropped</code> – The number of times the user dropped the intent.</p> </li> </ul>
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricStatistic'
+            - description: <p>The summary statistic to calculate.</p> <ul> <li> <p> <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Average</code> – The total count divided by the number of intents in the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p> </li> </ul>
+        order:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSortOrder'
+            - description: Specifies whether to sort the results in ascending or descending order.
+      description: 'Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the intents in the bot.'
+    AnalyticsBinBySpecification:
+      type: object
+      required:
+        - name
+        - interval
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinByName'
+            - description: Specifies the time metric by which to bin the analytics data.
+        interval:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsInterval'
+            - description: Specifies the interval of time by which to bin the analytics data.
+        order:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSortOrder'
+            - description: 'Specifies whether to bin the analytics data in ascending or descending order. If this field is left blank, the default order is by the key of the bin in descending order.'
+      description: 'Contains the time metric, interval, and method by which to bin the analytics data.'
+    AnalyticsIntentGroupBySpecification:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentField'
+            - description: Specifies whether to group the intent stages by their name or their end state.
+      description: Contains the category by which to group the intents.
+    AnalyticsIntentFilter:
+      type: object
+      required:
+        - name
+        - operator
+        - values
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentFilterName'
+            - description: '<p>The category by which to filter the intents. The descriptions for each option are as follows:</p> <ul> <li> <p> <code>BotAlias</code> – The name of the bot alias.</p> </li> <li> <p> <code>BotVersion</code> – The version of the bot.</p> </li> <li> <p> <code>LocaleId</code> – The locale of the bot.</p> </li> <li> <p> <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p> </li> <li> <p> <code>Channel</code> – The channel that the bot is integrated with.</p> </li> <li> <p> <code>SessionId</code> – The identifier of the session with the bot.</p> </li> <li> <p> <code>OriginatingRequestId</code> – The identifier of the first request in a session.</p> </li> <li> <p> <code>IntentName</code> – The name of the intent.</p> </li> <li> <p> <code>IntentEndState</code> – The final state of the intent.</p> </li> </ul>'
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterOperator'
+            - description: '<p>The operation by which to filter the category. The following operations are possible:</p> <ul> <li> <p> <code>CO</code> – Contains</p> </li> <li> <p> <code>EQ</code> – Equals</p> </li> <li> <p> <code>GT</code> – Greater than</p> </li> <li> <p> <code>LT</code> – Less than</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> <li> <p> <code>SessionId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>OriginatingRequestId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>IntentName</code> – <code>EQ</code>, <code>CO</code>.</p> </li> <li> <p> <code>IntentEndState</code> – <code>EQ</code>, <code>CO</code>.</p> </li> </ul>'
+        values:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterValues'
+            - description: 'An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.'
+      description: '<p>Contains fields describing a condition by which to filter the intents. The expression may be understood as <code>name</code> <code>operator</code> <code>values</code>. For example:</p> <ul> <li> <p> <code>IntentName CO Book</code> – The intent name contains the string "Book."</p> </li> <li> <p> <code>BotVersion EQ 2</code> – The bot version is equal to two.</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> <li> <p> <code>SessionId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>OriginatingRequestId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>IntentName</code> – <code>EQ</code>, <code>CO</code>.</p> </li> <li> <p> <code>IntentEndState</code> – <code>EQ</code>, <code>CO</code>.</p> </li> </ul>'
+    ListIntentPathsResponse:
+      type: object
+      properties:
+        nodeSummaries:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentNodeSummaries'
+            - description: 'A list of objects, each of which contains information about a node in the intent path for which you requested metrics.'
+    AnalyticsPathFilter:
+      type: object
+      required:
+        - name
+        - operator
+        - values
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsCommonFilterName'
+            - description: '<p>The category by which to filter the intent paths. The descriptions for each option are as follows:</p> <ul> <li> <p> <code>BotAlias</code> – The name of the bot alias.</p> </li> <li> <p> <code>BotVersion</code> – The version of the bot.</p> </li> <li> <p> <code>LocaleId</code> – The locale of the bot.</p> </li> <li> <p> <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p> </li> <li> <p> <code>Channel</code> – The channel that the bot is integrated with.</p> </li> </ul>'
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterOperator'
+            - description: '<p>The operation by which to filter the category. The following operations are possible:</p> <ul> <li> <p> <code>CO</code> – Contains</p> </li> <li> <p> <code>EQ</code> – Equals</p> </li> <li> <p> <code>GT</code> – Greater than</p> </li> <li> <p> <code>LT</code> – Less than</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> </ul>'
+        values:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterValues'
+            - description: 'An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.'
+      description: '<p>Contains fields describing a condition by which to filter the paths. The expression may be understood as <code>name</code> <code>operator</code> <code>values</code>. For example:</p> <ul> <li> <p> <code>LocaleId EQ en</code> – The locale is "en".</p> </li> <li> <p> <code>BotVersion EQ 2</code> – The bot version is equal to two.</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> </ul>'
+    ListIntentStageMetricsResponse:
+      type: object
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier for the bot for which you retrieved intent stage metrics.
+        results:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageResults'
+            - description: The results for the intent stage metrics.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListIntentStageMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.</p>'
+    AnalyticsIntentStageMetric:
+      type: object
+      required:
+        - name
+        - statistic
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageMetricName'
+            - description: '<p>The metric for which you want to get intent stage summary statistics. See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html">Key definitions</a> for more details about these metrics.</p> <ul> <li> <p> <code>Count</code> – The number of times the intent stage occurred.</p> </li> <li> <p> <code>Success</code> – The number of times the intent stage succeeded.</p> </li> <li> <p> <code>Failure</code> – The number of times the intent stage failed.</p> </li> <li> <p> <code>Dropped</code> – The number of times the user dropped the intent stage.</p> </li> <li> <p> <code>Retry</code> – The number of times the bot tried to elicit a response from the user at this stage.</p> </li> </ul>'
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricStatistic'
+            - description: <p>The summary statistic to calculate.</p> <ul> <li> <p> <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Average</code> – The total count divided by the number of intent stages in the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p> </li> </ul>
+        order:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSortOrder'
+            - description: Specifies whether to sort the results in ascending or descending order of the summary statistic (<code>value</code> in the response).
+      description: 'Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the intent stages across the user sessions with the bot.'
+    AnalyticsIntentStageGroupBySpecification:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageField'
+            - description: Specifies whether to group the intent stages by their name or the intent to which the session was switched.
+      description: Contains the category by which to group the intent stages.
+    AnalyticsIntentStageFilter:
+      type: object
+      required:
+        - name
+        - operator
+        - values
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageFilterName'
+            - description: '<p>The category by which to filter the intent stages. The descriptions for each option are as follows:</p> <ul> <li> <p> <code>BotAlias</code> – The name of the bot alias.</p> </li> <li> <p> <code>BotVersion</code> – The version of the bot.</p> </li> <li> <p> <code>LocaleId</code> – The locale of the bot.</p> </li> <li> <p> <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p> </li> <li> <p> <code>Channel</code> – The channel that the bot is integrated with.</p> </li> <li> <p> <code>SessionId</code> – The identifier of the session with the bot.</p> </li> <li> <p> <code>OriginatingRequestId</code> – The identifier of the first request in a session.</p> </li> <li> <p> <code>IntentName</code> – The name of the intent.</p> </li> <li> <p> <code>IntentStageName</code> – The stage in the intent.</p> </li> </ul>'
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterOperator'
+            - description: '<p>The operation by which to filter the category. The following operations are possible:</p> <ul> <li> <p> <code>CO</code> – Contains</p> </li> <li> <p> <code>EQ</code> – Equals</p> </li> <li> <p> <code>GT</code> – Greater than</p> </li> <li> <p> <code>LT</code> – Less than</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> <li> <p> <code>SessionId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>OriginatingRequestId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>IntentName</code> – <code>EQ</code>, <code>CO</code>.</p> </li> <li> <p> <code>IntentStageName</code> – <code>EQ</code>, <code>CO</code>.</p> </li> </ul>'
+        values:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterValues'
+            - description: 'An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.'
+      description: '<p>Contains fields describing a condition by which to filter the intent stages. The expression may be understood as <code>name</code> <code>operator</code> <code>values</code>. For example:</p> <ul> <li> <p> <code>IntentName CO Book</code> – The intent name contains the string "Book."</p> </li> <li> <p> <code>BotVersion EQ 2</code> – The bot version is equal to two.</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> <li> <p> <code>SessionId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>OriginatingRequestId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>IntentName</code> – <code>EQ</code>, <code>CO</code>.</p> </li> <li> <p> <code>IntentStageName</code> – <code>EQ</code>, <code>CO</code>.</p> </li> </ul>'
     ListIntentsResponse:
       type: object
       properties:
@@ -10301,6 +11308,96 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'A token that indicates whether there are more results to return in a response to the ListRecommendedIntents operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListRecommendedIntents operation request to get the next page of results.'
+    ListSessionAnalyticsDataResponse:
+      type: object
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the bot that the sessions belong to.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListSessionAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListSessionAnalyticsData request to return the next page of results. For a complete set of results, call the ListSessionAnalyticsData operation until the nextToken returned in the response is null.</p>'
+        sessions:
+          allOf:
+            - $ref: '#/components/schemas/SessionSpecifications'
+            - description: 'A list of objects, each of which contains information about a session with the bot.'
+    AnalyticsSessionSortByName:
+      type: string
+      enum:
+        - ConversationStartTime
+        - NumberOfTurns
+        - Duration
+    AnalyticsSortOrder:
+      type: string
+      enum:
+        - Ascending
+        - Descending
+    AnalyticsSessionFilter:
+      type: object
+      required:
+        - name
+        - operator
+        - values
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionFilterName'
+            - description: '<p>The category by which to filter the sessions. The descriptions for each option are as follows:</p> <ul> <li> <p> <code>BotAlias</code> – The name of the bot alias.</p> </li> <li> <p> <code>BotVersion</code> – The version of the bot.</p> </li> <li> <p> <code>LocaleId</code> – The locale of the bot.</p> </li> <li> <p> <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p> </li> <li> <p> <code>Channel</code> – The channel that the bot is integrated with.</p> </li> <li> <p> <code>Duration</code> – The duration of the session.</p> </li> <li> <p> <code>conversationEndState</code> – The final state of the session.</p> </li> <li> <p> <code>SessionId</code> – The identifier of the session with the bot.</p> </li> <li> <p> <code>OriginatingRequestId</code> – The identifier of the first request in a session.</p> </li> <li> <p> <code>IntentPath</code> – The order of intents taken in a session.</p> </li> </ul>'
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterOperator'
+            - description: '<p>The operation by which to filter the category. The following operations are possible:</p> <ul> <li> <p> <code>CO</code> – Contains</p> </li> <li> <p> <code>EQ</code> – Equals</p> </li> <li> <p> <code>GT</code> – Greater than</p> </li> <li> <p> <code>LT</code> – Less than</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Duration</code> – <code>EQ</code>, <code>GT</code>, <code>LT</code>.</p> </li> <li> <p> <code>conversationEndState</code> – <code>EQ</code>, <code>CO</code>.</p> </li> <li> <p> <code>SessionId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>OriginatingRequestId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>IntentPath</code> – <code>EQ</code>.</p> </li> </ul>'
+        values:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterValues'
+            - description: 'An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.'
+      description: '<p>Contains fields describing a condition by which to filter the sessions. The expression may be understood as <code>name</code> <code>operator</code> <code>values</code>. For example:</p> <ul> <li> <p> <code>LocaleId EQ en</code> – The locale is "en".</p> </li> <li> <p> <code>Duration GT 200</code> – The duration is greater than 200 seconds.</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Duration</code> – <code>EQ</code>, <code>GT</code>, <code>LT</code>.</p> </li> <li> <p> <code>conversationEndState</code> – <code>EQ</code>, <code>CO</code>.</p> </li> <li> <p> <code>SessionId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>OriginatingRequestId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>IntentPath</code> – <code>EQ</code>.</p> </li> </ul>'
+    ListSessionMetricsResponse:
+      type: object
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier for the bot for which you retrieved session metrics.
+        results:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionResults'
+            - description: The results for the session metrics.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListSessionMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.</p>'
+    AnalyticsSessionMetric:
+      type: object
+      required:
+        - name
+        - statistic
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionMetricName'
+            - description: <p>The metric for which you want to get session summary statistics.</p> <ul> <li> <p> <code>Count</code> – The number of sessions.</p> </li> <li> <p> <code>Success</code> – The number of sessions that succeeded.</p> </li> <li> <p> <code>Failure</code> – The number of sessions that failed.</p> </li> <li> <p> <code>Dropped</code> – The number of sessions that the user dropped.</p> </li> <li> <p> <code>Duration</code> – The duration of sessions.</p> </li> <li> <p> <code>TurnsPerSession</code> – The number of turns in the sessions.</p> </li> <li> <p> <code>Concurrency</code> – The number of sessions occurring in the same period of time.</p> </li> </ul>
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricStatistic'
+            - description: <p>The summary statistic to calculate.</p> <ul> <li> <p> <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Average</code> – The total count divided by the number of sessions in the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p> </li> </ul>
+        order:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSortOrder'
+            - description: Specifies whether to sort the results in ascending or descending order.
+      description: 'Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the user sessions with the bot.'
+    AnalyticsSessionGroupBySpecification:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionField'
+            - description: Specifies whether to group the session by their end state or their locale.
+      description: Contains the category by which to group the sessions.
     ListSlotTypesResponse:
       type: object
       properties:
@@ -10478,6 +11575,99 @@ components:
       enum:
         - TestSetName
         - LastUpdatedDateTime
+    ListUtteranceAnalyticsDataResponse:
+      type: object
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the bot that the utterances belong to.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListUtteranceAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListUtteranceAnalyticsData request to return the next page of results. For a complete set of results, call the ListUtteranceAnalyticsData operation until the nextToken returned in the response is null.</p>'
+        utterances:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceSpecifications'
+            - description: 'A list of objects, each of which contains information about an utterance in a user session with your bot.'
+    AnalyticsUtteranceSortByName:
+      type: string
+      enum:
+        - UtteranceTimestamp
+    AnalyticsUtteranceFilter:
+      type: object
+      required:
+        - name
+        - operator
+        - values
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceFilterName'
+            - description: '<p>The category by which to filter the utterances. The descriptions for each option are as follows:</p> <ul> <li> <p> <code>BotAlias</code> – The name of the bot alias.</p> </li> <li> <p> <code>BotVersion</code> – The version of the bot.</p> </li> <li> <p> <code>LocaleId</code> – The locale of the bot.</p> </li> <li> <p> <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p> </li> <li> <p> <code>Channel</code> – The channel that the bot is integrated with.</p> </li> <li> <p> <code>SessionId</code> – The identifier of the session with the bot.</p> </li> <li> <p> <code>OriginatingRequestId</code> – The identifier of the first request in a session.</p> </li> <li> <p> <code>UtteranceState</code> – The state of the utterance.</p> </li> <li> <p> <code>UtteranceText</code> – The text in the utterance.</p> </li> </ul>'
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterOperator'
+            - description: '<p>The operation by which to filter the category. The following operations are possible:</p> <ul> <li> <p> <code>CO</code> – Contains</p> </li> <li> <p> <code>EQ</code> – Equals</p> </li> <li> <p> <code>GT</code> – Greater than</p> </li> <li> <p> <code>LT</code> – Less than</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> <li> <p> <code>SessionId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>OriginatingRequestId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>UtteranceState</code> – <code>EQ</code>.</p> </li> <li> <p> <code>UtteranceText</code> – <code>EQ</code>, <code>CO</code>.</p> </li> </ul>'
+        values:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsFilterValues'
+            - description: 'An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.'
+      description: '<p>Contains fields describing a condition by which to filter the utterances. The expression may be understood as <code>name</code> <code>operator</code> <code>values</code>. For example:</p> <ul> <li> <p> <code>LocaleId EQ Book</code> – The locale is the string "en".</p> </li> <li> <p> <code>UtteranceText CO help</code> – The text of the utterance contains the string "help".</p> </li> </ul> <p>The operators that each filter supports are listed below:</p> <ul> <li> <p> <code>BotAlias</code> – <code>EQ</code>.</p> </li> <li> <p> <code>BotVersion</code> – <code>EQ</code>.</p> </li> <li> <p> <code>LocaleId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Modality</code> – <code>EQ</code>.</p> </li> <li> <p> <code>Channel</code> – <code>EQ</code>.</p> </li> <li> <p> <code>SessionId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>OriginatingRequestId</code> – <code>EQ</code>.</p> </li> <li> <p> <code>UtteranceState</code> – <code>EQ</code>.</p> </li> <li> <p> <code>UtteranceText</code> – <code>EQ</code>, <code>CO</code>.</p> </li> </ul>'
+    ListUtteranceMetricsResponse:
+      type: object
+      properties:
+        botId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier for the bot for which you retrieved utterance metrics.
+        results:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceResults'
+            - description: The results for the utterance metrics.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListUtteranceMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.</p>'
+    AnalyticsUtteranceMetric:
+      type: object
+      required:
+        - name
+        - statistic
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceMetricName'
+            - description: <p>The metric for which you want to get utterance summary statistics.</p> <ul> <li> <p> <code>Count</code> – The number of utterances.</p> </li> <li> <p> <code>Missed</code> – The number of utterances that Amazon Lex failed to recognize.</p> </li> <li> <p> <code>Detected</code> – The number of utterances that Amazon Lex managed to detect.</p> </li> <li> <p> <code>UtteranceTimestamp</code> – The date and time of the utterance.</p> </li> </ul>
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricStatistic'
+            - description: <p>The summary statistic to calculate.</p> <ul> <li> <p> <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Average</code> – The total count divided by the number of utterances in the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p> </li> </ul>
+        order:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSortOrder'
+            - description: Specifies whether to sort the results in ascending or descending order.
+      description: 'Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the utterances across the user sessions with the bot.'
+    AnalyticsUtteranceGroupBySpecification:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceField'
+            - description: Specifies whether to group the utterances by their text or their state.
+      description: Contains the category by which to group the utterances.
+    AnalyticsUtteranceAttribute:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceAttributeName'
+            - description: An attribute to return. The only available attribute is the intent that the bot mapped the utterance to.
+      description: An object that specifies the last used intent at the time of the utterance as an attribute to return.
     SearchAssociatedTranscriptsResponse:
       type: object
       properties:
@@ -11540,6 +12730,565 @@ components:
       type: string
       minLength: 1
       maxLength: 1011
+    AnalyticsBinByList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsBinBySpecification'
+      minItems: 1
+      maxItems: 1
+    AnalyticsBinByName:
+      type: string
+      enum:
+        - ConversationStartTime
+        - UtteranceTimestamp
+    AnalyticsInterval:
+      type: string
+      enum:
+        - OneHour
+        - OneDay
+    AnalyticsBinValue:
+      type: integer
+    AnalyticsBinKey:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinByName'
+            - description: The criterion by which to bin the results.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinValue'
+            - description: The value of the criterion that defines the bin.
+      description: An object containing the criterion by which to bin the results and the value that defines that bin.
+    AnalyticsBinKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsBinKey'
+      minItems: 1
+      maxItems: 1
+    AnalyticsCommonFilterName:
+      type: string
+      enum:
+        - BotAliasId
+        - BotVersion
+        - LocaleId
+        - Modality
+        - Channel
+    AnalyticsFilterOperator:
+      type: string
+      enum:
+        - EQ
+        - GT
+        - LT
+    AnalyticsFilterValue:
+      type: string
+    AnalyticsFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsFilterValue'
+      minItems: 1
+      maxItems: 5
+    AnalyticsGroupByValue:
+      type: string
+    AnalyticsIntentField:
+      type: string
+      enum:
+        - IntentName
+        - IntentEndState
+        - IntentLevel
+    AnalyticsIntentFilterName:
+      type: string
+      enum:
+        - BotAliasId
+        - BotVersion
+        - LocaleId
+        - Modality
+        - Channel
+        - SessionId
+        - OriginatingRequestId
+        - IntentName
+        - IntentEndState
+    AnalyticsIntentFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentFilter'
+      minItems: 1
+      maxItems: 9
+    AnalyticsIntentGroupByKey:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentField'
+            - description: A category by which the intent analytics were grouped.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsGroupByValue'
+            - description: A member of the category by which the intent analytics were grouped.
+      description: Contains the category by which the intent analytics were grouped and a member of that category.
+    AnalyticsIntentGroupByKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentGroupByKey'
+    AnalyticsIntentGroupByList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentGroupBySpecification'
+      minItems: 1
+      maxItems: 3
+    AnalyticsIntentMetricName:
+      type: string
+      enum:
+        - Count
+        - Success
+        - Failure
+        - Switched
+        - Dropped
+    AnalyticsMetricStatistic:
+      type: string
+      enum:
+        - Sum
+        - Avg
+        - Max
+    AnalyticsMetricValue:
+      type: number
+      format: double
+    AnalyticsIntentMetricResult:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentMetricName'
+            - description: '<p>The metric that you requested. See <a href="https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html">Key definitions</a> for more details about these metrics.</p> <ul> <li> <p> <code>Count</code> – The number of times the intent was invoked.</p> </li> <li> <p> <code>Success</code> – The number of times the intent succeeded.</p> </li> <li> <p> <code>Failure</code> – The number of times the intent failed.</p> </li> <li> <p> <code>Switched</code> – The number of times there was a switch to a different intent.</p> </li> <li> <p> <code>Dropped</code> – The number of times the user dropped the intent.</p> </li> </ul>'
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricStatistic'
+            - description: <p>The statistic that you requested to calculate.</p> <ul> <li> <p> <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Average</code> – The total count divided by the number of intents in the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p> </li> </ul>
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricValue'
+            - description: The value of the summary statistic for the metric that you requested.
+      description: An object containing the results for the intent metric you requested.
+    AnalyticsIntentMetricResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentMetricResult'
+    AnalyticsIntentMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentMetric'
+      minItems: 1
+      maxItems: 5
+    AnalyticsIntentNodeSummary:
+      type: object
+      properties:
+        intentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the intent at the end of the requested path.
+        intentPath:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsPath'
+            - description: The path.
+        intentCount:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsNodeCount'
+            - description: The total number of sessions that follow the given path to the given intent.
+        intentLevel:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsNodeLevel'
+            - description: The number of intents up to and including the requested path.
+        nodeType:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsNodeType'
+            - description: Specifies whether the node is the end of a path (<code>Exit</code>) or not (<code>Inner</code>).
+      description: An object containing information about the requested path.
+    AnalyticsIntentNodeSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentNodeSummary'
+      minItems: 1
+      maxItems: 100
+    AnalyticsPath:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    AnalyticsNodeCount:
+      type: integer
+    AnalyticsNodeLevel:
+      type: integer
+      minimum: 0
+      maximum: 100
+    AnalyticsNodeType:
+      type: string
+      enum:
+        - Inner
+        - Exit
+    AnalyticsIntentResult:
+      type: object
+      properties:
+        binKeys:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinKeys'
+            - description: A list of objects containing the criteria you requested for binning results and the values of the bins.
+        groupByKeys:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentGroupByKeys'
+            - description: A list of objects containing the criteria you requested for grouping results and the values of the groups.
+        metricsResults:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentMetricResults'
+            - description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+      description: 'An object containing the results for the intent metrics you requested and the bin and/or group(s) they refer to, if applicable.'
+    AnalyticsIntentResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentResult'
+    AnalyticsIntentStageField:
+      type: string
+      enum:
+        - IntentStageName
+        - SwitchedToIntent
+    AnalyticsIntentStageFilterName:
+      type: string
+      enum:
+        - BotAliasId
+        - BotVersion
+        - LocaleId
+        - Modality
+        - Channel
+        - SessionId
+        - OriginatingRequestId
+        - IntentName
+        - IntentStageName
+    AnalyticsIntentStageFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentStageFilter'
+      minItems: 1
+      maxItems: 9
+    AnalyticsIntentStageGroupByKey:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageField'
+            - description: A category by which the intent stage analytics were grouped.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsGroupByValue'
+            - description: A member of the category by which the intent stage analytics were grouped.
+      description: Contains the category by which the intent stage analytics and the values for that category were grouped.
+    AnalyticsIntentStageGroupByKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentStageGroupByKey'
+    AnalyticsIntentStageGroupByList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentStageGroupBySpecification'
+      minItems: 1
+      maxItems: 2
+    AnalyticsIntentStageMetricName:
+      type: string
+      enum:
+        - Count
+        - Success
+        - Failed
+        - Dropped
+        - Retry
+    AnalyticsIntentStageMetricResult:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageMetricName'
+            - description: <p>The metric that you requested.</p> <ul> <li> <p> <code>Count</code> – The number of times the intent stage occurred.</p> </li> <li> <p> <code>Success</code> – The number of times the intent stage succeeded.</p> </li> <li> <p> <code>Failure</code> – The number of times the intent stage failed.</p> </li> <li> <p> <code>Dropped</code> – The number of times the user dropped the intent stage.</p> </li> <li> <p> <code>Retry</code> – The number of times the bot tried to elicit a response from the user at this stage.</p> </li> </ul>
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricStatistic'
+            - description: <p>The summary statistic that you requested to calculate.</p> <ul> <li> <p> <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Average</code> – The total count divided by the number of intent stages in the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p> </li> </ul>
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricValue'
+            - description: The value of the summary statistic for the metric that you requested.
+      description: An object containing the results for an intent stage metric you requested.
+    AnalyticsIntentStageMetricResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentStageMetricResult'
+    AnalyticsIntentStageMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentStageMetric'
+      minItems: 1
+      maxItems: 5
+    AnalyticsIntentStageResult:
+      type: object
+      properties:
+        binKeys:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinKeys'
+            - description: A list of objects containing the criteria you requested for binning results and the values of the bins.
+        groupByKeys:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageGroupByKeys'
+            - description: A list of objects containing the criteria you requested for grouping results and the values of the bins.
+        metricsResults:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageMetricResults'
+            - description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+      description: 'An object containing the results for the intent stage metrics you requested and the bin and/or group they refer to, if applicable.'
+    AnalyticsIntentStageResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsIntentStageResult'
+    AnalyticsLongValue:
+      type: integer
+    AnalyticsModality:
+      type: string
+      enum:
+        - Speech
+        - Text
+        - DTMF
+        - MultiMode
+    AnalyticsOriginatingRequestId:
+      type: string
+    AnalyticsPathFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsPathFilter'
+      minItems: 1
+      maxItems: 5
+    AnalyticsSessionField:
+      type: string
+      enum:
+        - ConversationEndState
+        - LocaleId
+    AnalyticsSessionFilterName:
+      type: string
+      enum:
+        - BotAliasId
+        - BotVersion
+        - LocaleId
+        - Modality
+        - Channel
+        - Duration
+        - ConversationEndState
+        - SessionId
+        - OriginatingRequestId
+        - IntentPath
+    AnalyticsSessionFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsSessionFilter'
+      minItems: 1
+      maxItems: 10
+    AnalyticsSessionGroupByKey:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionField'
+            - description: The category by which the session analytics were grouped.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsGroupByValue'
+            - description: A member of the category by which the session analytics were grouped.
+      description: Contains the category by which the session analytics were grouped and a member of that category.
+    AnalyticsSessionGroupByKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsSessionGroupByKey'
+    AnalyticsSessionGroupByList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsSessionGroupBySpecification'
+      minItems: 1
+      maxItems: 2
+    AnalyticsSessionId:
+      type: string
+      pattern: '[0-9a-zA-Z._:-]'
+    AnalyticsSessionMetricName:
+      type: string
+      enum:
+        - Count
+        - Success
+        - Failure
+        - Dropped
+        - Duration
+        - TurnsPerConversation
+        - Concurrency
+    AnalyticsSessionMetricResult:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionMetricName'
+            - description: <p>The metric that you requested.</p> <ul> <li> <p> <code>Count</code> – The number of sessions.</p> </li> <li> <p> <code>Success</code> – The number of sessions that succeeded.</p> </li> <li> <p> <code>Failure</code> – The number of sessions that failed.</p> </li> <li> <p> <code>Dropped</code> – The number of sessions that the user dropped.</p> </li> <li> <p> <code>Duration</code> – The duration of sessions.</p> </li> <li> <p> <code>TurnPersession</code> – The number of turns in the sessions.</p> </li> <li> <p> <code>Concurrency</code> – The number of sessions occurring in the same period of time.</p> </li> </ul>
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricStatistic'
+            - description: <p>The summary statistic that you requested to calculate.</p> <ul> <li> <p> <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Average</code> – The total count divided by the number of sessions in the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p> </li> </ul>
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricValue'
+            - description: The value of the summary statistic for the metric that you requested.
+      description: An object containing the results for a session metric you requested.
+    AnalyticsSessionMetricResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsSessionMetricResult'
+    AnalyticsSessionMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsSessionMetric'
+      minItems: 1
+      maxItems: 7
+    AnalyticsSessionResult:
+      type: object
+      properties:
+        binKeys:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinKeys'
+            - description: A list of objects containing the criteria you requested for binning results and the values of the bins.
+        groupByKeys:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionGroupByKeys'
+            - description: A list of objects containing the criteria you requested for grouping results and the values of the bins.
+        metricsResults:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionMetricResults'
+            - description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+      description: 'An object containing the results for the session metrics you requested and the bin and/or group(s) they refer to, if applicable.'
+    AnalyticsSessionResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsSessionResult'
+    AnalyticsUtteranceAttributeName:
+      type: string
+      enum:
+        - LastUsedIntent
+    AnalyticsUtteranceAttributeResult:
+      type: object
+      properties:
+        lastUsedIntent:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The intent that the bot mapped the utterance to.
+      description: An object containing the intent that the bot mapped the utterance to.
+    AnalyticsUtteranceAttributeResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsUtteranceAttributeResult'
+    AnalyticsUtteranceAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsUtteranceAttribute'
+      minItems: 1
+      maxItems: 1
+    AnalyticsUtteranceField:
+      type: string
+      enum:
+        - UtteranceText
+        - UtteranceState
+    AnalyticsUtteranceFilterName:
+      type: string
+      enum:
+        - BotAliasId
+        - BotVersion
+        - LocaleId
+        - Modality
+        - Channel
+        - SessionId
+        - OriginatingRequestId
+        - UtteranceState
+        - UtteranceText
+    AnalyticsUtteranceFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsUtteranceFilter'
+      minItems: 1
+      maxItems: 9
+    AnalyticsUtteranceGroupByKey:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceField'
+            - description: The category by which the utterance analytics were grouped.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsGroupByValue'
+            - description: A member of the category by which the utterance analytics were grouped.
+      description: Contains the category by which the utterance analytics were grouped and the values for that category.
+    AnalyticsUtteranceGroupByKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsUtteranceGroupByKey'
+    AnalyticsUtteranceGroupByList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsUtteranceGroupBySpecification'
+      minItems: 1
+      maxItems: 2
+    AnalyticsUtteranceMetricName:
+      type: string
+      enum:
+        - Count
+        - Missed
+        - Detected
+        - UtteranceTimestamp
+    AnalyticsUtteranceMetricResult:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceMetricName'
+            - description: <p>The metric that you requested.</p> <ul> <li> <p> <code>Count</code> – The number of utterances.</p> </li> <li> <p> <code>Missed</code> – The number of utterances that Amazon Lex failed to recognize.</p> </li> <li> <p> <code>Detected</code> – The number of utterances that Amazon Lex managed to detect.</p> </li> <li> <p> <code>UtteranceTimeStamp</code> – The date and time of the utterance.</p> </li> </ul>
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricStatistic'
+            - description: <p>The summary statistic that you requested to calculate.</p> <ul> <li> <p> <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Average</code> – The total count divided by the number of utterances in the category you provide in <code>name</code>.</p> </li> <li> <p> <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p> </li> </ul>
+        value:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsMetricValue'
+            - description: The value of the summary statistic for the metric that you requested.
+      description: An object containing the results for the utterance metric you requested.
+    AnalyticsUtteranceMetricResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsUtteranceMetricResult'
+    AnalyticsUtteranceMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsUtteranceMetric'
+      minItems: 1
+      maxItems: 4
+    AnalyticsUtteranceResult:
+      type: object
+      properties:
+        binKeys:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinKeys'
+            - description: A list of objects containing the criteria you requested for binning results and the values of the bins.
+        groupByKeys:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceGroupByKeys'
+            - description: A list of objects containing the criteria you requested for grouping results and the values of the bins.
+        metricsResults:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceMetricResults'
+            - description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+        attributeResults:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceAttributeResults'
+            - description: A list of objects containing information about the last used intent at the time of an utterance.
+      description: 'An object containing the results for the utterance metrics you requested and the bin and/or group(s) they refer to, if applicable.'
+    AnalyticsUtteranceResults:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalyticsUtteranceResult'
     Transcript:
       type: string
       pattern: .*
@@ -11842,6 +13591,12 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/BotAliasSummary'
+    BotChannelType:
+      type: string
+      enum:
+        - Facebook
+        - Slack
+        - TwilioSms
     BotFilterName:
       type: string
       enum:
@@ -12453,6 +14208,12 @@ components:
       type: integer
       minimum: 1
       maximum: 20
+    ConversationEndState:
+      type: string
+      enum:
+        - Success
+        - Failure
+        - Dropped
     TestResultMatchStatus:
       type: string
       enum:
@@ -14094,6 +15855,15 @@ components:
             - $ref: '#/components/schemas/SortOrder'
             - description: The order to sort the list. You can choose ascending or descending.
       description: Specifies attributes for sorting a list of intents.
+    IntentState:
+      type: string
+      enum:
+        - Failed
+        - Fulfilled
+        - InProgress
+        - ReadyForFulfillment
+        - Waiting
+        - FulfillmentInProgress
     IntentSummary:
       type: object
       properties:
@@ -14130,6 +15900,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/IntentSummary'
+    InvokedIntentSample:
+      type: object
+      properties:
+        intentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of an intent that was invoked.
+      description: An object containing the name of an intent that was invoked.
+    InvokedIntentSamples:
+      type: array
+      items:
+        $ref: '#/components/schemas/InvokedIntentSample'
     LambdaARN:
       type: string
       pattern: 'arn:aws:lambda:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?'
@@ -14386,6 +16168,110 @@ components:
           allOf:
             - $ref: '#/components/schemas/LocaleId'
             - description: 'Specifies the locale that should be present in the list. If you don''t specify a resource type in the <code>filters</code> parameter, the list contains both bot locales and custom vocabularies.'
+    ListIntentMetricsRequest:
+      type: object
+      required:
+        - startDateTime
+        - endDateTime
+        - metrics
+      title: ListIntentMetricsRequest
+      properties:
+        startDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp that marks the beginning of the range of time for which you want to see intent metrics.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the end of the range of time for which you want to see intent metrics.
+        metrics:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentMetrics'
+            - description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the order by which to organize the results.'
+        binBy:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinByList'
+            - description: 'A list of objects, each of which contains specifications for organizing the results by time.'
+        groupBy:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentGroupByList'
+            - description: '<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p> <ul> <li> <p> <code>IntentName</code> – The name of the intent.</p> </li> <li> <p> <code>IntentEndState</code> – The final state of the intent. The possible end states are detailed in <a href="https://docs.aws.amazon.com/analytics-key-definitions-intents">Key definitions</a> in the user guide.</p> </li> </ul>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentFilters'
+            - description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListIntentMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.</p>'
+    ListIntentPathsRequest:
+      type: object
+      required:
+        - startDateTime
+        - endDateTime
+        - intentPath
+      title: ListIntentPathsRequest
+      properties:
+        startDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the beginning of the range of time for which you want to see intent path metrics.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the end of the range of time for which you want to see intent path metrics.
+        intentPath:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsPath'
+            - description: '<p>The intent path for which you want to retrieve metrics. Use a forward slash to separate intents in the path. For example:</p> <ul> <li> <p>/BookCar</p> </li> <li> <p>/BookCar/BookHotel</p> </li> <li> <p>/BookHotel/BookCar</p> </li> </ul>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsPathFilters'
+            - description: 'A list of objects, each describes a condition by which you want to filter the results.'
+    ListIntentStageMetricsRequest:
+      type: object
+      required:
+        - startDateTime
+        - endDateTime
+        - metrics
+      title: ListIntentStageMetricsRequest
+      properties:
+        startDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the beginning of the range of time for which you want to see intent stage metrics.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the end of the range of time for which you want to see intent stage metrics.
+        metrics:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageMetrics'
+            - description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+        binBy:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinByList'
+            - description: 'A list of objects, each of which contains specifications for organizing the results by time.'
+        groupBy:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageGroupByList'
+            - description: '<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p> <ul> <li> <p> <code>IntentStageName</code> – The name of the intent stage.</p> </li> <li> <p> <code>SwitchedToIntent</code> – The intent to which the conversation was switched (if any).</p> </li> </ul>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsIntentStageFilters'
+            - description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListIntentStageMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.</p>'
     ListIntentsRequest:
       type: object
       title: ListIntentsRequest
@@ -14422,6 +16308,96 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RecommendedIntentSummary'
+    SessionDataSortBy:
+      type: object
+      required:
+        - name
+        - order
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionSortByName'
+            - description: <p>The measure by which to sort the session analytics data.</p> <ul> <li> <p> <code>conversationStartTime</code> – The date and time when the conversation began. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p> </li> <li> <p> <code>numberOfTurns</code> – The number of turns that the session took.</p> </li> <li> <p> <code>conversationDurationSeconds</code> – The duration of the conversation in seconds.</p> </li> </ul>
+        order:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSortOrder'
+            - description: Specifies whether to sort the results in ascending or descending order.
+      description: An object specifying the measure and method by which to sort the session analytics data.
+    ListSessionAnalyticsDataRequest:
+      type: object
+      required:
+        - startDateTime
+        - endDateTime
+      title: ListSessionAnalyticsDataRequest
+      properties:
+        startDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the beginning of the range of time for which you want to see session analytics.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the end of the range of time for which you want to see session analytics.
+        sortBy:
+          allOf:
+            - $ref: '#/components/schemas/SessionDataSortBy'
+            - description: An object specifying the measure and method by which to sort the session analytics data.
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionFilters'
+            - description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListSessionAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListSessionAnalyticsData request to return the next page of results. For a complete set of results, call the ListSessionAnalyticsData operation until the nextToken returned in the response is null.</p>'
+    SessionSpecifications:
+      type: array
+      items:
+        $ref: '#/components/schemas/SessionSpecification'
+    ListSessionMetricsRequest:
+      type: object
+      required:
+        - startDateTime
+        - endDateTime
+        - metrics
+      title: ListSessionMetricsRequest
+      properties:
+        startDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the beginning of the range of time for which you want to see session metrics.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the end of the range of time for which you want to see session metrics.
+        metrics:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionMetrics'
+            - description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+        binBy:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinByList'
+            - description: 'A list of objects, each of which contains specifications for organizing the results by time.'
+        groupBy:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionGroupByList'
+            - description: '<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p> <ul> <li> <p> <code>ConversationEndState</code> – The final state of the conversation. The possible end states are detailed in <a href="https://docs.aws.amazon.com/analytics-key-definitions-conversations">Key definitions</a> in the user guide.</p> </li> <li> <p> <code>LocaleId</code> – The unique identifier of the bot locale.</p> </li> </ul>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionFilters'
+            - description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListSessionMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.</p>'
     SlotTypeSortBy:
       type: object
       required:
@@ -14658,6 +16634,100 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TestSetSummary'
+    UtteranceDataSortBy:
+      type: object
+      required:
+        - name
+        - order
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceSortByName'
+            - description: <p>The measure by which to sort the utterance analytics data.</p> <ul> <li> <p> <code>Count</code> – The number of utterances.</p> </li> <li> <p> <code>UtteranceTimeStamp</code> – The date and time of the utterance.</p> </li> </ul>
+        order:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSortOrder'
+            - description: Specifies whether to sort the results in ascending or descending order.
+      description: An object specifying the measure and method by which to sort the utterance data.
+    ListUtteranceAnalyticsDataRequest:
+      type: object
+      required:
+        - startDateTime
+        - endDateTime
+      title: ListUtteranceAnalyticsDataRequest
+      properties:
+        startDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the beginning of the range of time for which you want to see utterance analytics.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the end of the range of time for which you want to see utterance analytics.
+        sortBy:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceDataSortBy'
+            - description: An object specifying the measure and method by which to sort the utterance analytics data.
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceFilters'
+            - description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListUtteranceAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListUtteranceAnalyticsData request to return the next page of results. For a complete set of results, call the ListUtteranceAnalyticsData operation until the nextToken returned in the response is null.</p>'
+    UtteranceSpecifications:
+      type: array
+      items:
+        $ref: '#/components/schemas/UtteranceSpecification'
+    ListUtteranceMetricsRequest:
+      type: object
+      required:
+        - startDateTime
+        - endDateTime
+        - metrics
+      title: ListUtteranceMetricsRequest
+      properties:
+        startDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the beginning of the range of time for which you want to see utterance metrics.
+        endDateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time that marks the end of the range of time for which you want to see utterance metrics.
+        metrics:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceMetrics'
+            - description: 'A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.'
+        binBy:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsBinByList'
+            - description: 'A list of objects, each of which contains specifications for organizing the results by time.'
+        groupBy:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceGroupByList'
+            - description: '<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p> <ul> <li> <p> <code>UtteranceText</code> – The transcription of the utterance.</p> </li> <li> <p> <code>UtteranceState</code> – The state of the utterance. The possible states are detailed in <a href="https://docs.aws.amazon.com/analytics-key-definitions-utterances">Key definitions</a> in the user guide.</p> </li> </ul>'
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceAttributes'
+            - description: '<p>A list containing attributes related to the utterance that you want the response to return. The following attributes are possible:</p> <ul> <li> <p> <code>LastUsedIntent</code> – The last used intent at the time of the utterance.</p> </li> </ul>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsUtteranceFilters'
+            - description: 'A list of objects, each of which describes a condition by which you want to filter the results.'
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: '<p>If the response from the ListUtteranceMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p> <p>Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.</p>'
     PlainTextMessage:
       type: object
       required:
@@ -15006,6 +17076,62 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextIndex'
             - description: 'If the response from the SearchAssociatedTranscriptsRequest operation contains more results than specified in the maxResults parameter, an index is returned in the response. Use that index in the nextIndex parameter to return the next page of results.'
+    SessionSpecification:
+      type: object
+      properties:
+        botAliasId:
+          allOf:
+            - $ref: '#/components/schemas/BotAliasId'
+            - description: The identifier of the alias of the bot that the session was held with.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/NumericalBotVersion'
+            - description: The version of the bot that the session was held with.
+        localeId:
+          allOf:
+            - $ref: '#/components/schemas/LocaleId'
+            - description: The locale of the bot that the session was held with.
+        channel:
+          allOf:
+            - $ref: '#/components/schemas/BotChannelType'
+            - description: The channel that is integrated with the bot that the session was held with.
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionId'
+            - description: The identifier of the session.
+        conversationStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the conversation began. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.
+        conversationEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the conversation ended. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.
+        conversationDurationSeconds:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsLongValue'
+            - description: The duration of the conversation in seconds. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.
+        conversationEndState:
+          allOf:
+            - $ref: '#/components/schemas/ConversationEndState'
+            - description: The final state of the conversation. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsModality'
+            - description: '<p>The mode of the session. The possible values are as follows:</p> <ul> <li> <p> <code>Speech</code> – The session was spoken.</p> </li> <li> <p> <code>Text</code> – The session was written.</p> </li> <li> <p> <code>DTMF</code> – The session used a touch-tone keypad (Dual Tone Multi-Frequency).</p> </li> <li> <p> <code>MultiMode</code> – The session used multiple modes.</p> </li> </ul>'
+        numberOfTurns:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsLongValue'
+            - description: The number of turns that the session took.
+        invokedIntentSamples:
+          allOf:
+            - $ref: '#/components/schemas/InvokedIntentSamples'
+            - description: A list of objects containing the name of an intent that was invoked.
+        originatingRequestId:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsOriginatingRequestId'
+            - description: The identifier of the first request in a session.
+      description: An object containing information about a specific session.
     SlotDefaultValueString:
       type: string
       minLength: 1
@@ -16007,6 +18133,31 @@ components:
             - $ref: '#/components/schemas/AudioFileS3Location'
             - description: Amazon S3 file pointing to the audio.
       description: Contains information about the audio for an utterance.
+    UtteranceContentType:
+      type: string
+      enum:
+        - PlainText
+        - CustomPayload
+        - SSML
+        - ImageResponseCard
+    UtteranceBotResponse:
+      type: object
+      properties:
+        content:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The text of the response to the utterance from the bot.
+        contentType:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceContentType'
+            - description: '<p>The type of the response. The following values are possible:</p> <ul> <li> <p> <code>PlainText</code> – A plain text string.</p> </li> <li> <p> <code>CustomPayload</code> – A response string that you can customize to include data or metadata for your application.</p> </li> <li> <p> <code>SSML</code> – A string that includes Speech Synthesis Markup Language to customize the audio response.</p> </li> <li> <p> <code>ImageResponseCard</code> – An image with buttons that the customer can select. See <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ImageResponseCard.html">ImageResponseCard</a> for more information.</p> </li> </ul>'
+        imageResponseCard:
+          $ref: '#/components/schemas/ImageResponseCard'
+      description: An object that contains a response to the utterance from the bot.
+    UtteranceBotResponses:
+      type: array
+      items:
+        $ref: '#/components/schemas/UtteranceBotResponse'
     UtteranceLevelTestResultItem:
       type: object
       required:
@@ -16030,5 +18181,99 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UtteranceLevelTestResultItem'
+    UtteranceUnderstood:
+      type: boolean
+    UtteranceSpecification:
+      type: object
+      properties:
+        botAliasId:
+          allOf:
+            - $ref: '#/components/schemas/BotAliasId'
+            - description: The identifier of the alias of the bot that the utterance was made to.
+        botVersion:
+          allOf:
+            - $ref: '#/components/schemas/NumericalBotVersion'
+            - description: The version of the bot that the utterance was made to.
+        localeId:
+          allOf:
+            - $ref: '#/components/schemas/LocaleId'
+            - description: The locale of the bot that the utterance was made to.
+        sessionId:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsSessionId'
+            - description: The identifier of the session that the utterance was made in.
+        channel:
+          allOf:
+            - $ref: '#/components/schemas/BotChannelType'
+            - description: The channel that is integrated with the bot that the utterance was made to.
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsModality'
+            - description: '<p>The mode of the session. The possible values are as follows:</p> <ul> <li> <p> <code>Speech</code> – The session consisted of spoken dialogue.</p> </li> <li> <p> <code>Text</code> – The session consisted of written dialogue.</p> </li> <li> <p> <code>DTMF</code> – The session consisted of touch-tone keypad (Dual Tone Multi-Frequency) key presses.</p> </li> <li> <p> <code>MultiMode</code> – The session consisted of multiple modes.</p> </li> </ul>'
+        conversationStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the conversation in which the utterance took place began. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.
+        conversationEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the conversation in which the utterance took place ended. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.
+        utterance:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The text of the utterance.
+        utteranceTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the utterance took place.
+        audioVoiceDurationMillis:
+          allOf:
+            - $ref: '#/components/schemas/AnalyticsLongValue'
+            - description: The duration in milliseconds of the audio associated with the utterance.
+        utteranceUnderstood:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceUnderstood'
+            - description: Specifies whether the bot understood the utterance or not.
+        inputType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The input type of the utterance. The possible values are as follows:</p> <ul> <li> <p>PCM format: audio data must be in little-endian byte order.</p> <ul> <li> <p> <code>audio/l16; rate=16000; channels=1</code> </p> </li> <li> <p> <code>audio/x-l16; sample-rate=16000; channel-count=1</code> </p> </li> <li> <p> <code>audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false</code> </p> </li> </ul> </li> <li> <p>Opus format</p> <ul> <li> <p> <code>audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4</code> </p> </li> </ul> </li> <li> <p>Text format</p> <ul> <li> <p> <code>text/plain; charset=utf-8</code> </p> </li> </ul> </li> </ul>'
+        outputType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The output type of the utterance. The possible values are as follows:</p> <ul> <li> <p> <code>audio/mpeg</code> </p> </li> <li> <p> <code>audio/ogg</code> </p> </li> <li> <p> <code>audio/pcm (16 KHz)</code> </p> </li> <li> <p> <code>audio/</code> (defaults to <code>mpeg</code>)</p> </li> <li> <p> <code>text/plain; charset=utf-8</code> </p> </li> </ul>'
+        associatedIntentName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the intent that the utterance is associated to.
+        associatedSlotName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the slot that the utterance is associated to.
+        intentState:
+          allOf:
+            - $ref: '#/components/schemas/IntentState'
+            - description: The state of the intent that the utterance is associated to.
+        dialogActionType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of dialog action that the utterance is associated to. See the <code>type</code> field in <a href="https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_DialogAction.html">DialogAction</a> for more information.'
+        botResponseAudioVoiceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the audio of the bot response.
+        slotsFilledInSession:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The slots that have been filled in the session by the time of the utterance.
+        utteranceRequestId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier of the request associated with the utterance.
+        botResponses:
+          allOf:
+            - $ref: '#/components/schemas/UtteranceBotResponses'
+            - description: A list of objects containing information about the bot response to the utterance.
+      description: An object containing information about a specific utterance.
 security:
   - hmac: []
