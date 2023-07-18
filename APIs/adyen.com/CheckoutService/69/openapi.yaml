@@ -2029,7 +2029,7 @@ paths:
       x-sortIndex: 1
   "/sessions/{sessionId}":
     get:
-      description: Get a synchronous result of a payment session given a sessionResult.
+      description: Returns the status of the payment session with the `sessionId` and `sessionResult` specified in the path.
       operationId: get-sessions-sessionId
       parameters:
         - description: A unique identifier of the session.
@@ -2038,7 +2038,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: The `sessionResult` value from the Drop-in or Component.
+          in: query
           name: sessionResult
           required: false
           schema:
@@ -2047,18 +2048,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                success:
+                  $ref: "#/components/examples/get-sessions-sessionId-success-200"
               schema:
                 $ref: "#/components/schemas/SessionResultResponse"
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Get a synchronous result of a payment session
+      summary: Get the result of a payment session
       tags:
         - Payments
       x-addedInVersion: "68"
       x-groupName: Payments
-      x-methodName: getSynchronousResultOfPaymentSession
+      x-methodName: getResultOfPaymentSession
       x-sortIndex: 2
 components:
   examples:
@@ -2115,6 +2119,12 @@ components:
         shopperReference: shopper-reference-LZfdWZ
         status: active
         url: https://test.adyen.link/PL61C53A8B97E6915A
+    get-sessions-sessionId-success-200:
+      description: The status of the session with the specified ID.
+      summary: "Response code: 201. Success."
+      value:
+        id: CS12345678
+        status: completed
     patch-paymentLinks-linkId-basic:
       summary: Update the status of a payment link
       value:
@@ -8201,6 +8211,32 @@ components:
         - orderData
         - resultCode
       type: object
+    CheckoutDelegatedAuthenticationAction:
+      additionalProperties: false
+      properties:
+        authorisationToken:
+          description: A token needed to authorise a payment.
+          type: string
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        token:
+          description: A token to pass to the delegatedAuthentication component.
+          type: string
+        type:
+          description: "**delegatedAuthentication**"
+          enum:
+            - delegatedAuthentication
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
     CheckoutDonationPaymentRequest:
       properties:
         accountInfo:
@@ -12327,6 +12363,7 @@ components:
           description: Action to be taken for completing the payment.
           oneOf:
             - $ref: "#/components/schemas/CheckoutAwaitAction"
+            - $ref: "#/components/schemas/CheckoutDelegatedAuthenticationAction"
             - $ref: "#/components/schemas/CheckoutNativeRedirectAction"
             - $ref: "#/components/schemas/CheckoutQrCodeAction"
             - $ref: "#/components/schemas/CheckoutRedirectAction"

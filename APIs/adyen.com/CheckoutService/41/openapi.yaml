@@ -4535,7 +4535,7 @@ components:
         returnUrl: https://your-company.com/checkout/
         shopperEmail: s.hopper@test.com
     post-payments-card-3d-secure-2-web-200:
-      summary: Example response for request 'card-3d-secure-2-web'
+      summary: Successful card payment with 3D Secure 2 native authentication
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
@@ -4549,19 +4549,14 @@ components:
         pspReference: 993617895005515H
         resultCode: Authorised
     post-payments-card-3d-secure-direct:
-      summary: Make card payment with 3D Secure redirect authentication
+      summary: Make a card payment with 3D Secure redirect authentication
       value:
         amount:
           currency: USD
           value: 1000
         browserInfo:
           acceptHeader: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-          colorDepth: 10
           javaEnabled: true
-          language: en
-          screenHeight: 2000
-          screenWidth: 3000
-          timeZoneOffset: 5
           userAgent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9) Gecko/2008052912 Firefox/3.0
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
@@ -4574,34 +4569,25 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-3d-secure-direct-200:
-      summary: Example response for request 'card-3d-secure-direct'
+      summary: Successful card payment with 3D Secure redirect authentication
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9TJ8Q6
-          authCode: "089261"
+          acquirerReference: 8PQMP9SJ7DN
+          authCode: "074516"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
           cvcResultRaw: M
           refusalReasonRaw: AUTHORISED
-        pspReference: 993617895009516B
+        pspReference: 993617894903480A
         resultCode: Authorised
     post-payments-card-3d-secure-securedfields:
-      summary: Make a payment with 3D Secure 2 native authentication
+      summary: Make a payment with 3D Secure 2 native authentication, using encrypted card details
       value:
         amount:
           currency: USD
           value: 1000
-        browserInfo:
-          acceptHeader: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-          colorDepth: 10
-          javaEnabled: true
-          language: en
-          screenHeight: 2000
-          screenWidth: 3000
-          timeZoneOffset: 5
-          userAgent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9) Gecko/2008052912 Firefox/3.0
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
           encryptedCardNumber: test_4212345678901237
@@ -4613,18 +4599,18 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-3d-secure-securedfields-200:
-      summary: Example response for request 'card-3d-secure-securedfields'
+      summary: Successful payment with 3D Secure 2 native authentication, using encrypted card details
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9TD5G3
-          authCode: "037284"
+          acquirerReference: 8PQMP9SJH66
+          authCode: "083996"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
           cvcResultRaw: M
           refusalReasonRaw: AUTHORISED
-        pspReference: 993617894989510B
+        pspReference: 993617894905481G
         resultCode: Authorised
     post-payments-card-direct:
       summary: Make a card payment
@@ -4643,21 +4629,21 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-direct-200:
-      summary: Example response for request 'card-direct'
+      summary: Successful card payment
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9TEMAE
-          authCode: "034933"
+          acquirerReference: 8PQMP9SJQUL
+          authCode: "036240"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
           cvcResultRaw: M
           refusalReasonRaw: AUTHORISED
-        pspReference: 993617894994515D
+        pspReference: 993617894906488A
         resultCode: Authorised
     post-payments-card-securedfields:
-      summary: Make a card payment (using encrypted card details)
+      summary: Make a card payment using encrypted card details
       value:
         amount:
           currency: USD
@@ -4672,18 +4658,18 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-card-securedfields-200:
-      summary: Example response for request 'card-securedfields'
+      summary: Successful card payment using encrypted card details
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9TIBGH
-          authCode: "089573"
+          acquirerReference: 8PQMP9SM92L
+          authCode: "064649"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
           cvcResultRaw: M
           refusalReasonRaw: AUTHORISED
-        pspReference: 993617895006516E
+        pspReference: 993617894914488A
         resultCode: Authorised
     post-payments-details-3d-secure:
       summary: "Submit details for the 3D Secure payment "
@@ -4711,7 +4697,7 @@ components:
           redirectResult: X6XtfGC3!Y...
         paymentData: Ab02b4c0!BQABAgCJN1wRZuGJmq8dMncmypvknj9s7l5Tj...
     post-payments-enableOneClick-SF:
-      summary: Tokenize card details for one-off payments (using encrypted card details)
+      summary: Tokenize card details for one-off payments, using encrypted card details
       value:
         amount:
           currency: USD
@@ -4744,12 +4730,12 @@ components:
         returnUrl: https://your-company.com/...
         shopperReference: YOUR_UNIQUE_SHOPPER_ID
     post-payments-enableOneClick-raw-200:
-      summary: Example response for request 'enableOneClick-raw'
+      summary: Card details tokenized for one-off payments
       value:
         additionalData:
           acquirerCode: TestPmmAcquirer
-          acquirerReference: 8PQMP9TDF8I
-          authCode: "021498"
+          acquirerReference: 8PQMP9T0BB6
+          authCode: "022966"
           avsResult: 4 AVS not supported for this card type
           avsResultRaw: "4"
           cvcResult: 1 Matches
@@ -4758,7 +4744,7 @@ components:
           recurring.shopperReference: YOUR_UNIQUE_SHOPPER_ID
           recurringProcessingModel: CardOnFile
           refusalReasonRaw: AUTHORISED
-        pspReference: 993617894990511G
+        pspReference: 993617894947495G
         resultCode: Authorised
     post-payments-giropay:
       summary: Make a giropay payment
@@ -4772,15 +4758,15 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-giropay-200:
-      summary: Example response for request 'giropay'
+      summary: Successful giropay payment
       value:
         details:
           - key: payload
             type: text
-        paymentData: Ab02b4c0!BQABAgCthN9/C4DNJMIhc+OqEtrOCtaSH2tFqeA5EC5R5qO7VGZzu21y8wnBMCEyfdOfLaVP96bpaif/3MZ9YM48N6HgYZ/6KIATkt/UOUjS9wIOnGIT8pxqh47FSjCOqmVQhWV7p+gB+w2Liyifl7gBCzmcewgp+NDMAHRB/RQKMzXkBT1B6Jv5DjHCVciK33seD0mxJdZ8xKzYr+BaU6OfKw/pm49D+Q7qCH6zjlTq5pdb137C/y4Eq+gglXZUYFblOFbP897GRlIWu5S2wOnKS1zp2pXVKH4dGu79a34ji1IJFLwUfRLfsojvjU2J5Q8PrwbSUT1Rgk+mklImuPH8t6dXO2nBk/Jky3w2JxrXIioovSlz2+slT28di1hsVUeDAnv9yKWagsqYvvUrS9MDoqO1xfsy62VlEEJTY/MCzqtq49nv0cUHoEKQ0xZF4r8bbXCfhV3/ZINynnRxXWrK5YOFE/ILVJWiEhq+95nqRIxu0Tc2cUEM4P0f6IskIVGqgF+AzqvQQzCgEBJiAbf/paGHeqMz0RX5VCPBq6kFt1Urhx0viuWPAo2c9epK2Wik8y3Q914UjMrtJtuuk41/hI7of7Wd8/zNshHf0gn8h+KH69bS2jZyo2ZtW9hteqBiYtHJlqDl/vO2D6Z+0WHB1ffUkI5Canw2JAUc5wwq3l5mZBDAVDRdCyZlexvkU2tZXkDHAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMife0UnvTuC0KkmKfgI1TES6l5nFhuOPE4VSwvurNlNe9CpZh7tTf2Hv2sS2POMgmoU43DvnOK8tSFYGqbtd2GHtBQJvxOlS5pc/2kreFfccgsd24Y9agn4XmeRdeRvk9FL4v+iB3an850gsOOXiHibuVTVCeZ1A7EZZFPm5ei2sDikUNsKdv12UZGEAggA1O548RtUFRopbDRpWvheSbz7lhsnDw5r6YO4NgKycoLtNho5TVHd7iQ4hK7bOclgyUU8CdGEo3LExOieBEt4zGahgKPMBuJPhNSmI5vIuz9BxdUMIGsTB5jhtHAGltJkqxjdQJTNE1i6/a2ZajgT/9GqRWZ7AFsxok7nvBv4qO7oss0grUiZDh+h4DxwK6wQ3A2smyuHKsRpqB/wcWjab2Y/NSyMhVe7ub4hiK7tyXCxU41HcPko6twA65ntb6RZgxzTykYZNPR5ZUh/MEorfpLVJ7OWB93NLk3aAH0whcpAEi4A6tMRdixVZLpXb2CTkeY+czRI3q49FOzTDHNr+SNzn8U73E3ILb5vn5OnDLjfCpU2MHHP2AyO0dbYPJZWNaEvGbhqzC3VdyXgeHjNdBoN5cWBZh+KeZobkmn6+PYreIWtgozSV8k5lUvOEJDIwk+jbdIelOfy07LkWdkNz8yhWqmoCagt5H+FlT/uLx59zcIp9nYJ1FFWI2OZ3D7oN3i3wTlqQDn2Zzm+dwGI6drzDeeapHrWE47zyzWrnI1nHG8PbJcldsrXcNQn6OqL4P/8YPF5/z1UW+QPLWEtM4rS8o8OD1IMULDC4ibIw==
+        paymentData: Ab02b4c0!BQABAgBdNcOUwhrokraZtM/nJSduq+zXt1Hub2wGGxDvL/j8D63+t+oTWtpsKPus73V1DRhbeEsPDRc6MTCmNRFNlYzRB9+Qmedoot2ccLZvIeIp9JFNURi4eLi70MEjNsT0Me1nkbkkP8btIWrk5UzulQbYCPHUurWCXgIG84Nc5/SQH7t3cpVLWiZeuXDKTUiwFjOP05jgS96jWzZ9w8WYla+tJyOST94mC246dlveWuQCDb70MxoPVi9BcVdppUBtaIXPIXYAa4YbxLAHyi3lw5STnhI0y8/k3tc+dBAFL+vezYDWLZ8czUdl/uqDzsPEe/ewz6TyS9vXZvZOAjcJhJ4wDRwZ5AFQBRBNwSANMswOBXCyh/jJsp9ycJSAT+ahWmSWKaU4oe1jlWBmQ8rxnQNOSWkV9/ZpLsrN36eLCPo6VgQnNKhWx5zkkR5xMS0pVx+Ff7ZdFeKtl0Trc4OyON8lBHTFNd7Pyhl74C21dlZUNGxA5gIc1xNXNFOvCNJQvyO9sR2giM1dEAKXpOm7Ez2u7eDvlpQa2zwPxulu3vQ2xSDVmqboSPx6Wp7ywyiYIIJzUwphVu3IulMjWnmHQOTYatiO9l1O50tqepaFB3/mwdesPw1cJD6UYq+v8kshrYya4w4ojMmQy++0L8UxUBHis71ftJM+nIhXZBpJ3cXtehBMZx+06hofQjgUgsuP+rKKAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMiffpA9iAv0lzUkDkBzjQG0XzMpxNd9Z7Jl1zf68QhTbJ53cSWhqs9FLu4XbuwyQ3ie/rNaLX7uypr+FmxHIZgehW2wSS0XKs7qp6b6z9OiTbZgcUEVtsyZ/Il3HrI+PZnavI3MB//BC5kjX/KE56BEIytAmQIovNHW7i+4YRVCjpNKAuBLr/DcSkLSqTb7HwV51btGbyhB9NwwSqO2rHUwjl+2WScEkbd5b+EUxc0jN7gdc4mu96Ak9ATN/2J/AHoiEdXDaZRkOBU6fSYOEQKpXw1UW9SOJdUji1+T7b8uVuC6gXAzS+wUXkA4ZsvW9UM5yyhaF6UgF3jY700Ufme7r98pjdBydAGGWSNVu9BdZmzDEiUke0eL2k7rYv2IfxtVvyacVNKnYmwmPpWRqvxQF+PJN2KqcVEWbNal5fleujujNZ6LACeSO5a5eREJ6bmdyKR82So08hMEwV9Ky+Sb1REXAMXY3o/FvwzN4HwHNaqi2pYNw37JkLEQTEIeWntLyC+pvc1cVhILipMx2bbBCx/CijEFGJSxVzma1mhv5Q+RJ8XtaqyzJoFOkoIoy63cq6IVYHEy47vgCfKjdnK8jDFfOU4ONDjaTb01vJYwF3XnWxNFspb7oq2ZMbmBtLDGkERkMmcrZV4XIhzF3uhbo8PEjrFhjMepOT/gB1/Tq5XkUAIViviWYaFgGByHjwzFPufEdu4ycZiG5KC0MFJ6Y+T6YrF++U9FRmeJpbdfF2oOM5Rc4jqg90YI3fi7FeKY125Dnl/uGKJhI07uaf5SRt9R3xwJJgUsGadj/AL
         redirect:
           method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUstu2zAQ-BrrZoF6RI*DDoatJHKdxlGtpPElkMm1SNgiFZJSw3x9KdU1gqIAsSRmFrszuzzImpOlIJA1TIquNg7upQSOzQTmVem0IDGtuV5gLHqusx0o-XDBrmTBNTSy1kxwV5sOsuV9vvz2WO3e7vLveVks-5s5gFT2zkLvSpdwhLE-ZEpLxpsvhO4lX9W6ztLUi7w4ScM0SaMIra85P1iT3b2*7reHhKw8MOvweDRh*vjCf8WE7bV5SrZNu6Hr6ml1KvJZsHKs5RasuXby5iGEHAmqKjcZ1bqbBYuZf2vPWeD6TIXSFklQgiyEKeCT6LWioutAWkSBHBgGZZ-bP2ULjkVrXZRAmASsLTN4f8tdch5AU0Fmwe0-g7bqvo565kdyGoHVZqlRnW10Mwq8GSXaYEQv57ZhV3Pj2nsCXdd1FKhxzs-1mRGmTeYj35ujcI6SnRdZR1Pw071z8TLuSNZ43FGW20KjMnDUifHpV3T9wR1897KGOIrj2EuC0P0shp-Bbh2RZDC5Txcfb5hQ*lGhovo8hu*b9-x*kzdgCBG-Acrp2a0
+          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmQ*AuTBD0lKr9ylvSsHVa8vlWs2gBpsYhsU8utv4XJRVVWy1tbMandm12*KiXIrS6BVo2THRpv3SoHg4wwmRWa3oHjNhFlzLnthaA7a3F*wK5kKA5VippHCMWMHdHuXbH-8LPLXb8lDkqXbLzMHUBpvGpArncEepv5AtVGNqD4QplfihhlGVys3dKN4FayCIPSXyTXnd1PR3aPl3W6qh-bIwH0*RUXH63W2yZsz33VPskh1anmbF7L-k*mkfLT8Gxttt4AG29mfSwixFegi29HamM7y11gRz0FydqilNojEJCYI8Rr4u*yNrmXXgUJEgxoaDhqfv-6VTQWXLTrJoGwUcIPM4P4vd8m5B1PL0vJvPw0b1X0ct*WFah4DakNqUoeNlpPA5SQRwyh7tcCGHROjg-cMOo5ja9DTrJ-YoSkbM1KPeO6CBAsS526IjtwlhiB4sS9epj0pxqc90QQLTcrA1u*NmH9G1785g*dcVhGFURS5sR8453R49vPvYRkPY*LV69MrL*v6VJC0OO*D4*6Y3O2SCsaylH8BlM7anA
         resultCode: RedirectShopper
     post-payments-googlepay:
       summary: Make a Google Pay payment
@@ -4807,15 +4793,15 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-ideal-200:
-      summary: Example response for request 'ideal'
+      summary: Successful iDEAL payment
       value:
         details:
           - key: payload
             type: text
-        paymentData: Ab02b4c0!BQABAgCNzlrqgBh3IfW+KEiI5mSYZyYhC4qmvk6ChrTHxEPRFGTYu/8zQz741YsRCVG5LZ+UkffzhZICh3v1yZE7CDOd/xcQgHMW/nExCEG9aGuWwrLYAI/mUKsD3l/NcTS+KbHExyc56HiWWvS9wjcceKx+l6vb8H7JYtRQdRy2dHktwqpigZrwjnbNcNCWpozyVpJe/DT5eNowle4OoT4ii9EbEwFvCIRT9bbob7O5Jdy68nd90XmStFMshZL3MVNeuFATrSyWuoAgMSJkfy0N/SvUlv9kWJxMvmFcPDTcR1uYRE7ugC5iwLZJuBF+zDb1h5tWK2XcBkK70TvzmLFrFsDn9NTeBwN0SmiPFOdxGVcEjEMQDK2yuGzUMOsIyvKhSFJmS3FVGujztxngvVA0XTcV3mVfh4JSKc+8t5i/ddV1f15wcYQmS7WBJPQAY2junKZOWZSMi7Dx5ViPS61OLhkrTcyS6PKsY4s7mohU5qEdiHqF8WRfdNag/5FRGGexCYGf2ewouGKduFtrftnUtQ410jN/TGYI/QS2Ay6eFpGXwH4WZEf2xpUXjHJnpQlPCQ7UwJUVCJYGd7mONUJ6MGJGw9CV4NF0nvx82hKdshDYfIzSWP+HIdBA92XZiqaQijbiTKSEduuf/0uBJ2aJM5k47btuc1aLAZQlrDS4dWLmFBAJANATc3sWIaOKbr/5X8Y7AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifV/rgRI3Jh1fp9Tm3HFJWBK2LFjzVvFPHkJA6jPys0NuLLgzjEsTretHY+dBKZzr5WDJg8wtZz7j2BSgWAggzv9G32BQxasKiRIO0O14LPLpT3EAr07kVPOs2xTu5URyrImVSTQN+IG/uVuWhiaz6U9eqZkQq5OhSOMpsHah1ZaMRRE8S69RwZFYnak7YnjAj2SQ+epRLrq3PN4ixU7M0RZakUWHsqclQgHCxsqqE8jlfmV8YLcO5aNXgZVnq5rqWc3Pvg6dce5B4RoUKO4ZFcyW+25mnQtRGiwEF88UObsy2MgKboA7+PYoS/M1nmAPmKq/f8cUOxuYnBxBBu82Hgz5AJhPiTuH5jxLK2iN8yv6U3Dh4KqRHa1/sornSTtMjNhyySieOwK0o/lheD17m2+aV4b0Notnfgce9MTb7Jg6cbr0b7iiUMV6k+cSQcN/gVtwZ7AxxEwZPhARhu42oEFNArmCzB1y8tnAFVx9TY3DH923Bv0sXg8/a+cjdBeZ6ukctpyMivHI3colbqRR5fIQQ4DCrbWHuQY/2JZLgcfd5vPff3X/isV4EWCWHJItvGTqkKLneb2He82KQuqcrRgXY6R3RPVtYaeWuiJSiRdsUWnPe5lkGXDaL7y706hAbDkeY/8CmuBNkfZKal+iSpVEwmntzWsM1jdjaYOuSqmD96ht8y92BCYq+qA/hjsbjs+TDiAmS6pd+k6o1VlVkc4Kyz9kQbrZc5nAtgTaKj+O0H9uQOGj2jPW4t8cBVFnzwB6GVuXDS5nFJCeb4kavw/paKRht4s=
+        paymentData: Ab02b4c0!BQABAgBOBkMn4vBx6T3DgxR+OR/a1zEA0xbGaYKP9mh/vWDSADlyktW39HZckwcm4Wr9kw2TvE9SYngEf9f6kZb1OimKls3+HEn3dRGOrTbWZZ8/tpmlS62YoDh1eQIE3EHZsUm7CQxhXjm8F0HQCelzIkVgj8DpLgtxwM3nFZxfpzl91HSt9CP/GIsx8S/RPVG2Fwg2S/jtdQ4MlFeG89S+icDvTecTyGoYFZlS/KL77Q4zJCR8Vgn4M9DJZEGRxv6kApLwDMkMyUMQngN95xDSCdLSW7fKkVusSub2+2hB7rzWxtj1E8R9dbtkCxgTe0F/G7tqrzUfEmseiHoKmaF6F8bN0j6BZiFhQJ/KHXJ6Pb+a7f0qYbQCAZmwYmeSSfNzqIDehyufpL0bP3w38spuso3QlhtPIqSHrIHDIQzbYmxPtt/I6A/RCMXJ7VN4nB6JigEygV383lnr8wd7mEynOQXnq9zEF+GGJy0Ool05WEy8L/mATgg++6bpsuSB2Wea5/VffvG6KcMyzs7OBG9zLAdYcrfqlsyXz/42UBJTeA2s6kVb1sBUfd6CQuQRF+37sjMwKiNIxwVaNWIYZMiWhbqPXOS4ozt0kNCtruhHqHgULPfF6aia/BnZKib6n+pBSepTdS47wZ31xC8VPqsoPia8RGNziLO/MmSMpW2fQRdgrhCrSniHb8qrh0vwgbPB4S7vAEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifTMy2HjS+Bb81E9m0fQAZJXCA1BJgLgstBw3wxbdpZevF8c+pSBGUYNUm9ZbwrD93dGdCU2RvlI1gcyKke0cEEqKGjqWFXOWIYkSNzfLrgP3ERdp5t9VGZi6BDQko2CFzP4uAR3jwgR3AP0/mQ/4YWDrBrnYZCWjOpo7izGhNbHYvWbBOqVDvnfReoCrSNSLSo8OfSxuFrN6sJLXrajGu1qbPqQtxFIRyqLgbOfHLHw/DN3I+BZKGrNYynRfM2NparXTQ6ZRgC8E5xIodApr4JHMNeiPTjMlReaLBQwbcqaBzzRNLdV0v8/ZSXexS68WBeUMt7OkomYJBFrpwmpzgx/nzRzV87MZ9TGhZht/1zjcyaSi0Toc6r7UhbADuDX5RH5L0T8Q3iGJfjrYuS5h9aiYSg8oaVJ5DZhJAicDbb8eLvdAGXFTIV+EXbD+4e9Xl+c5um4FdKfufcrrUEo2s6lUuSBSJ3Gf6r+yJMxkamWwfnRUtxt+axRcXfmywYqU7O1r0zzW+RKCbV2qZeUWWeN1u5UIPdJbQbH4633ukPp//aGh8R4IWckBp7DGH4M5P1ZiYJB8OQRS5gD/y+iuwensnq1rKFBOK4gFNSpKmuDQYLeWb5VljHgE1sS4DRhl0fl8UCabehP+3tZu/2i88JTWbdUuvPLmkyv8zQdY36YeSDWmwC40vvbB+lo2e8MgVpfDwn+xyQFpFhasbEyr4VVoPwHq1sGR/QEutxmeoJi1Zux48jSHoGOj5RZ4ei+b8Lxp4rj45wwm0AiROghLnZJZfJaySp/LVxQ=
         redirect:
           method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUlFvmzAQ-jXhLcgGCuTBD4zSlibtJhqmaC*VY1-BSrCpbVjpr59hWVdNk6y703enu**781FTyXPFgQgO9OyxQWuQbFqgoq48YcwAuuQE4wB7HWjWUmkzxtQgLdmDsQ8X7CNZSguNplYo6dupB5LfFfn2a71-vi0ei6rM-1s5gjbOk*jvlApeYGYDxFgtZPMpYQctr6mlZLPBMU7STTQHcZB91DyJhpTNz6nP1GG74Wle6afb9MDvt9svp*hxd2zjoxhyxOKuiGOzCq*9nk4dOHHdog0jhDwNpq52pLW2X4XZKrhx76wYPbfKWIekKEUOYi2wkxqsaVXfg3aIAT0KBsaF3363LSVTnVNRARcamHWZEf9pd6l5ANsqvgpv-lm0Y-d51asg1ssKHDeXmtm5QVczwauZojOTGvTaDeypnHznF9D3fc*Amff8nZ4FF3YiAQrwGkVrlO5x7BQtJsQ-vIuW*UaasvlGpHCNZmbgmZOQyx-ph6M-Bv7lDEmcJAlOw8h-L8dDuL*PeTpORdBmb8*Mt*1bjcr6-SV63b0Wd7uigYlz9QutjNyJ
+          url: https://test.adyen.com/hpp/checkout.shtml?u=redirectIdeal&p=eJxtUl1vozAQ-DXwFmQDAfLgh4jSC730Q1yoqr5Urr0NXIlNbUPj-PozXC6qqpOstTWz2p3Z9auigueSA2k50M5ng1IgmJ2hoq78VusBVMkJxiH2D6BYQ4VZMyYHYcgOtLk9YxeyFAb2ippWisDYHki*KfKf9-Xu5UdxV1Rl-t-MEZR2N4nRha7gDSY1QLRRrdh-IcygxBU1lKxWOMFptopXcZZEyc0l51e7J9XdcHpeDTxC4edG1pFF5WMHnw95FtHf3N5z1MWqipKjF17XXnTl99QewNk7zO4wQshXoOtqSxpjei9au0R3Oslo10htHJKhDDmINcDe5WB0I-selEM0qLFloN3z4W-ZUjB5cD4q4K0CZhwz4n-lzjm3YBrJvej626iduq-D9sJEzUNw2hw1qXONlpPA5STRBSsHtXANeyps4O4ZDILA16CnST-SruWtsSREIV6geIGyHU6cI7x0Ic6e-bOXaUuKsmlLpHCFJmXg6-dWzL*kH16DMQzOi0iTNE1xFsXBqRyfot1NwrPRFmGzPr4w3jTHGpX16S3*2H4Um22xB8u5-ANWgt0s
         resultCode: RedirectShopper
     post-payments-klarna:
       summary: Make a Klarna payment
@@ -4883,7 +4869,7 @@ components:
         returnUrl: https://your-company.com/...
         shopperReference: YOUR_UNIQUE_SHOPPER_ID_6738oneoff
     post-payments-oneclick-securedfields:
-      summary: Make a one-off payment with a token and CVV (using encrypted card details)
+      summary: Make a one-off payment with a token and CVV, using encrypted card details
       value:
         amount:
           currency: USD
@@ -5029,15 +5015,15 @@ components:
         reference: Your order number
         returnUrl: https://your-company.com/...
     post-payments-sofort-200:
-      summary: Example response for request 'sofort'
+      summary: Successful Sofort payment
       value:
         details:
           - key: payload
             type: text
-        paymentData: Ab02b4c0!BQABAgAvIvdVPQD6ljxrC66+FwR0FaxDspHFSr4AyJU3Ceh7lGVk4YaklDVlkXziS1wmSkEIHV90bRQt9tggc/UH1Z9m0uzmx4ZqPdNYCd2I7/l+w0Hstk9/Q5nPTqF/NJUqBPOULOROo2fQRQk9e1Nwlk+hkF5+FBPbX+qfXbIjX2GGc7h/rHXEZJEwWe1gz6Cca3Kq0eDp/lY9zA99MnI1qpZxw73trRe4OgSYXw36kyUiUb4ik197gvekCdd7cjwDzP7ZiHAp+qPKDJPzjjNQNAN/+RWdMva4KdOkycUA7W18L6b5PCk8kddUU5eKQtFMzNoqBPhVvBcPkrsPPPVj0Z8n6bzT6vFdJu2/SDM6Xj+mx1G358d2SkKS0Q/cILxt4pfCVFTFWF6zy4sirG5Pc7Vo/KIUyZxAFV7Ud539NaRVNCYY65KDRXK/ANIcvQSxp0tqGUYzsvAqmp4KQ1MlfZzcxA2JtR4MdAa3SSc8D8q7PdgPVsPCTgN/TbfPQxDalOgY4zJAVoVre8GlvPd7qKjU4Ct6q1qoqcf3mQqYrbTWvLTLDlpHu/btAJrbh9aVKc7JRGM5xaGWPAkclGz7Zsbb/WIXL7i38e/icf0/oWtwXtDsmBUZcgDD+I+8zUW9+3iTeJtXzPjJtlLoJiTWCePpO2r149fwG+xxLi52d69cwxDF6d4B/LTFEjDsyVmmmpP7AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifQmQ7pxA13nYmt54YOm1sEPteTnbdkD6S06nPPQp5kpNdnJrkdFdZ2SsnXIHDNk96S7mt248VYMOpL/y+GAQEw2PBYXRAUMEm3737bnbPmro9cICPuj6plkXLkQs3ZFchEQOyrNIoG0z5u1N48bDie8mnb9p8jpTNw4wxfQpN0sINQ3dqu1+Wt1imG49AjvP+7yEJ4Nv8DDpXwZ6A6wQZnZYuP/XTcbsIw9aJxRZpqyp7nLsDry0pPCkMXfdF87GYYo3xzmy4HdhhbEh2jXZUwbEVW6onalQu4StL0OJjr1WM7XwG/SmHEfZMvjSvUcCEPT3FcXCGA8vaDkyqD4dS+16qlfkG+t4YWf32OVFCSlLDie0BdeMoEePXCkU63qWCY8qGde4NVjoZCt68HyOdYhOZ3QL7ssBYfiCOBYWDnrPUK4sXxBaToEt0Cf+xHnCfJ0CklxMXsh3hEhKLyCbO53uB0T/eYaKEqw1SnoMECNSnkA+Qk7LVfrDZTnFO9c7op/wr1bTjSW0r7eQQhiuLGwwmGSGiueKB0FPt5VVUfmSXMW6s9KRqYFUEjDyKv9g+/ZaiRIS+4L7P7YWuQu+Lo0BvvMPxi2EbCfPTv7wRsZp71mSnJd1Igpjip9itzeF+ZteWFkmvMrVT8TQmxl5AvcAAnyz7yBXgH5sVGV9Up+Eu/XJ/KkzF6X60hcFk0eMLCFA/tr4ejMoSS7Wr54euCmlP7sy1Fv16SZtZkaO/Hp2EaCOIZKhIHOiVEV8tcq9+LZIcYvKVf47F52/nAjc/l+8+dwA83957v8WXhQ=
+        paymentData: Ab02b4c0!BQABAgCrbmh+OQiaXUY3sofxY5aXEujSd/zIwdZ/zDiV440FsfTI6tfDuXPzi9jOQgmGr5UFM7mnTNjHY5fwFD9FmKQre5ewthnSTsBVmC0RxupWRh7OeHYCcLp+G8+vxR680uJwp1stzdzq/lXmyIinV6aC22NzapolomfBvxS3cANwHE4IC65sXt5eyzItZbHIxJqMC7ADM/dX9Qw9HolgxLQXZlmjdHjfEHEmTvvPHXe5cBv4cfKPJ2gp+RH1J4hds1BJxKwobazQ+a/fauTj5N0a2uotli9I+06B5Y9fR8+SFyOIT3X2jHVDrGMMiVTjBSVDYB6/76A6q6GPXUv3cPgLBRdYOxKJewp5o7raTYs39Tp69iZTPF/9+E9TvmSIjcc5yekrt3kUUxnJTITAN5EJa2AnmfdJBro7O5c0C4OQ43MIgMhiMUKzBewWb5rDzfDiUCQKkSdWEbJUWDEZSS3TPChvP6smI8m80rbgig/0IXgt7Zc2UT1GLdai0t30AoX0gcnbZJnS+4o07WivKPI9aagD68dYJZy3VN64p7Q84vzj4IzwftzKW3lWDf2gt6Reo3x4Sgo2KzznEfCeSRB3QtK8Tuk5ibgVgjkCx2p7KaxKtj1Mqdi+DgA63sM4juy2IAf/23TA4fu42OWovbF9DmXf4v8aSvLmCw3NYX0VyxBEf4xCIC8T14KfCMGbP4N9AEp7ImtleSI6IkFGMEFBQTEwM0NBNTM3RUFFRDg3QzI0REQ1MzkwOUI4MEE3OEE5MjNFMzgyM0Q2OERBQ0M5NEI5RkY4MzA1REMifYDX5Nt00CX5QJ7OLRtmg5wXbL8+ctpyuEOjPJt2DpH30H0klwHPxbTfbVgctpO7GFGrUgl+mqy/pTDTlfKGmt2SRWGbo9cDMbUTrcKNh2MiEI7yOroy4iL/DYnvqbqQ3kQTjxtYtyM7qKI5/NbPotypE2Z6UlscFJnMYaaZCXenBnXU7e52p4tk1hQ5KkdZTbkjdZvNkEL7yGvoVgBNRPmTr7fZJib0XPyrAK76VL5yBq0A3mcwSMChj2Uu0ri7lp/g4yO1JNljWTxtEwaTCxGOY3tDF3IqnqELIHtZ3hyqG1n80muT4wVUX6kmCc5zeHybbZTJhPG2Q+fPAqvNXA0y4Zg3JOC51gGRhmN3m7L3eil3ks70Ejx6gpNzLnLZWpzZy/tff7coZGYW1Xo3973NOJcDkEA1QjhKiPycsHy3ZHZ04ShINLc2UssmV0o68FQ0R6sOVbjOevBaK27EySDaZfQnUjDSfgJdtIFDIEVzZtVyUWGo6w+cYLUYZCpeE9VQac1DinR/NH3w5nqHKyTBf9YqoqYZh3CuOA4jGbwadiG1HhAmZg6TOY7GZ+91hB1yOs4fsDfR42Rj6MEWOaqoH/yggwtjdNhdyeSIc0z3vfjsWJCLy4Uy0haQ7ww+81mqalJBILsTJuS3cwpuGuai68o4ApraA/8sXd+wJ7HBuCqaqJ1r9ZdPppgK+9QbZzGA8xvc5IzHqyOgPZ9oRCTbYOmENJO1grH15TyBHBB7N1Eu/76ojkCsdDEK/hu69T/jLin+x7X+aNuWVILJ4Je8HOdI8ddtr79R6WX88cU=
         redirect:
           method: GET
-          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmS*yYMfUEJS2vRy5cLpdC*VY28BJdjENlzpr6*huVxVnYRsNLPanZn1URLOVoIBZo0EqrMj4aeGVzbtpQROx5nLysJuQdKacJ1SKnqu8QGUfrxiNzLnGipJdCO4o8cO8OouWz3sy8PzNvuWFfnqv5UDSGVuHLg3uoAXmOYDVlpOev4Rupd8TTTBy6UbuXGyDBEKoijc3Gp*NBXeNvs*TNb7P6d9pZ7YWQTb2CUrkXX8-qFPL22aRE9BeFHHk*Wv7Y6MLRhz7ezNRQjZElRZ7HCtdWf5qeVtzHcWlJxrobRBEpQgA9Ea6En0WtWi60AaRIEcGgrK-H7-aJtzKlrjooCPlA0zuH-bXWseQdeCWf7mS9BG3eeoLS*ScwRGm6EmdWZQOAkMJ4nmGEUvF2ZgR-jomHsGHcexFagp55-k3LBGj9hDnrtAwQIlBzcyjuYjCH7bVy-TjiSh045wZhpNysBW5n3Mr6Lrj87gOdc1xFEcx27iB85bPvzyD-cRS4Yx8*r09Zmyun4tUV6*vQSX3SW722UVjIyJdwEe3Bg
+          url: https://test.adyen.com/hpp/checkout.shtml?u=skipDetails&p=eJxtUl1vozAQ-DXwFmS*4YGHXEpbemmvR6CK8lIZs8UoiU1sg0J*-RmaS6vTSchGM6vdmVlXArN6xWtI6lYAUWmF2b5ljUl6IYCRcebSMjePIAjFTC0J4T1TSQFSPV*xG5kxBY3AquXMUmMHyeoxXf38VRbvD*lLmmer-1YOIKS*Ew-d6Bw*YJoPiVRi0vNFqF6wO6xwEsd2YIdR7MV*HLjx061m0zZJ1W2bTf7juHfbZVFc3i77cdfsthuPxg8HStH51XupTvn5d1ca7p3Z4fEI2txx9mYjhEwBsszXCVWqM9yl4dzr78AJPlAulUYiFCENEQpkz3slKe86EBqRIIaWgNS-r59tM0b4UbvI4TNlzQz233bXmmdQlNeGe-9P0Frd96gNJxBzBFqbpiZ1epA-CfQnifoYeS8WemCH2WjpewYtyzIlyCnnN3xo61aNiYMce4G8BYoKO9CObF8ffrwzr16mHQlMph0lqW40KQNT6vcxv4qur6zBsa5rCIMwDO3I9axLNmzd4imoo2FMHbo8v5Oa0nOJsvLy4Z3Wp-RxnTYw1jX-A42b3RY
         resultCode: RedirectShopper
     post-payments-split:
       summary: Split a payment between a sub-merchant and a platform account

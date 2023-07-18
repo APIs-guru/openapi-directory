@@ -381,6 +381,10 @@ components:
     Container:
       description: Container associated with the finding.
       properties:
+        createTime:
+          description: The time that the container was created.
+          format: google-datetime
+          type: string
         imageId:
           description: Optional container image ID, if provided by the container runtime. Uniquely identifies the container image launched using a container image digest.
           type: string

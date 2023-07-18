@@ -3995,6 +3995,9 @@ components:
         gcsPrefix:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3GcsPrefix"
           description: The set of documents that match the specified Cloud Storage `gcs_prefix`.
+        rawDocuments:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3RawDocuments"
+          description: The set of documents specified inline.
       type: object
     GoogleCloudDocumentaiV1beta3BatchProcessMetadata:
       description: The long-running operation metadata for BatchProcessDocuments.
@@ -5830,7 +5833,8 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentSchema"
           description: The schema of the processor version. Describes the output.
         googleManaged:
-          description: Denotes that this `ProcessorVersion` is managed by Google.
+          description: Output only. Denotes that this `ProcessorVersion` is managed by Google.
+          readOnly: true
           type: boolean
         kmsKeyName:
           description: The KMS key name used for encryption.
@@ -5886,6 +5890,15 @@ components:
         mimeType:
           description: An IANA MIME type (RFC6838) indicating the nature and format of the content.
           type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3RawDocuments:
+      description: Specifies a set of raw documents.
+      properties:
+        documents:
+          description: Specifies raw document content and mime type.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3RawDocument"
+          type: array
       type: object
     GoogleCloudDocumentaiV1beta3ReviewDocumentOperationMetadata:
       description: The long-running operation metadata for the ReviewDocument method.

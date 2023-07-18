@@ -1617,6 +1617,7 @@ components:
           description: Set to **true** to include shared drives.
           type: boolean
         includeTeamDrives:
+          deprecated: true
           description: Set to true to include Team Drive.
           type: boolean
         versionDate:
@@ -1803,6 +1804,7 @@ components:
           description: To include files in shared drives in the hold, set to **true**.
           type: boolean
         includeTeamDriveFiles:
+          deprecated: true
           description: To include files in Team Drives in the hold, set to **true**.
           type: boolean
       type: object
@@ -2153,10 +2155,20 @@ components:
             - SITES_URL
             - SHARED_DRIVE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
         orgUnitInfo:
           $ref: "#/components/schemas/OrgUnitInfo"
           description: Required when **SearchMethod** is **ORG_UNIT**.
         searchMethod:
+          deprecated: true
           description: The search method to use.
           enum:
             - SEARCH_METHOD_UNSPECIFIED
@@ -2168,6 +2180,15 @@ components:
             - SITES_URL
             - SHARED_DRIVE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
         sharedDriveInfo:
           $ref: "#/components/schemas/SharedDriveInfo"
           description: Required when **SearchMethod** is **SHARED_DRIVE**.
@@ -2180,6 +2201,7 @@ components:
           type: string
         teamDriveInfo:
           $ref: "#/components/schemas/TeamDriveInfo"
+          deprecated: true
           description: Required when **SearchMethod** is **TEAM_DRIVE**.
         terms:
           description: Service-specific [search operators](https://support.google.com/vault/answer/2474474) to filter search results.
@@ -2284,9 +2306,11 @@ components:
           type: string
       type: object
     TeamDriveInfo:
+      deprecated: true
       description: Team Drives to search
       properties:
         teamDriveIds:
+          deprecated: true
           description: List of Team Drive IDs, as provided by the [Drive API](https://developers.google.com/drive).
           items:
             type: string

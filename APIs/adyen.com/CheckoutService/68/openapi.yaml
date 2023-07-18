@@ -2029,7 +2029,7 @@ paths:
       x-sortIndex: 1
   "/sessions/{sessionId}":
     get:
-      description: Get a synchronous result of a payment session given a sessionResult.
+      description: Returns the status of the payment session with the `sessionId` and `sessionResult` specified in the path.
       operationId: get-sessions-sessionId
       parameters:
         - description: A unique identifier of the session.
@@ -2038,7 +2038,8 @@ paths:
           required: true
           schema:
             type: string
-        - in: query
+        - description: The `sessionResult` value from the Drop-in or Component.
+          in: query
           name: sessionResult
           required: false
           schema:
@@ -2047,18 +2048,21 @@ paths:
         "200":
           content:
             application/json:
+              examples:
+                success:
+                  $ref: "#/components/examples/get-sessions-sessionId-success-200"
               schema:
                 $ref: "#/components/schemas/SessionResultResponse"
           description: OK - the request has succeeded.
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
-      summary: Get a synchronous result of a payment session
+      summary: Get the result of a payment session
       tags:
         - Payments
       x-addedInVersion: "68"
       x-groupName: Payments
-      x-methodName: getSynchronousResultOfPaymentSession
+      x-methodName: getResultOfPaymentSession
       x-sortIndex: 2
 components:
   examples:
@@ -2115,6 +2119,12 @@ components:
         shopperReference: shopper-reference-LZfdWZ
         status: active
         url: https://test.adyen.link/PL61C53A8B97E6915A
+    get-sessions-sessionId-success-200:
+      description: The status of the session with the specified ID.
+      summary: "Response code: 201. Success."
+      value:
+        id: CS12345678
+        status: completed
     patch-paymentLinks-linkId-basic:
       summary: Update the status of a payment link
       value:

@@ -502,6 +502,47 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
+  "/v1/{parent}/dnsZones:list":
+    get:
+      description: "* Service producers can use this method to retrieve a list of available DNS zones in the shared producer host project and the matching peering zones in the consumer project. *"
+      operationId: servicenetworking.services.dnsZones.list
+      parameters:
+        - description: "Required. Parent resource identifying the connection which owns this collection of DNS zones in the format services/{service}/projects/{project}/global/networks/{network} Service: The service that is managing connectivity for the service producer's organization. For Google services that support this functionality, this value is `servicenetworking.googleapis.com`. Projects: the consumer project containing the consumer network. Network: The consumer network accessible from the tenant project."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDnsZonesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/dnsZones:remove":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1630,6 +1671,16 @@ components:
           description: User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.
           type: string
       type: object
+    DnsZonePair:
+      description: "* Represents a pair of private and peering DNS zone resources. *"
+      properties:
+        consumerPeeringZone:
+          $ref: "#/components/schemas/DnsZone"
+          description: The DNS peering zone in the consumer project.
+        producerPrivateZone:
+          $ref: "#/components/schemas/DnsZone"
+          description: The private DNS zone in the shared producer host project.
+      type: object
     Documentation:
       description: "`Documentation` provides the information for describing a service. Example: documentation: summary: > The Google Calendar API gives access to most calendar features. pages: - name: Overview content: (== include google/foo/overview.md ==) - name: Tutorial content: (== include google/foo/tutorial.md ==) subpages: - name: Java content: (== include google/foo/tutorial_java.md ==) rules: - selector: google.calendar.Calendar.Get description: > ... - selector: google.calendar.Calendar.Put description: > ... Documentation is provided in markdown syntax. In addition to standard markdown features, definition lists, tables and fenced code blocks are supported. Section headers can be provided and are interpreted relative to the section nesting of the context where a documentation fragment is embedded. Documentation from the IDL is merged with documentation defined via the config at normalization time, where documentation provided by config rules overrides IDL provided. A number of constructs specific to the API platform are supported in documentation text. In order to reference a proto element, the following notation can be used: [fully.qualified.proto.name][] To override the display text used for the link, this can be used: [display text][fully.qualified.proto.name] Text can be excluded from doc using the following notation: (-- internal comment --) A few directives are available in documentation. Note that directives must appear on a single line to be properly identified. The `include` directive includes a markdown file from an external source: (== include path/to/file ==) The `resource_for` directive marks a message to be the resource of a collection in REST view. If it is not specified, tools attempt to infer the resource from the operations in a collection: (== resource_for v1.shelves.books ==) The directive `suppress_warning` does not directly affect documentation and is documented together with service config validation."
       properties:
@@ -2006,6 +2057,15 @@ components:
           description: The list of Connections.
           items:
             $ref: "#/components/schemas/Connection"
+          type: array
+      type: object
+    ListDnsZonesResponse:
+      description: Represents all DNS zones in the shared producer host project and the matching peering zones in the consumer project.
+      properties:
+        dnsZonePairs:
+          description: All pairs of private DNS zones in the shared producer host project and the matching peering zones in the consumer project..
+          items:
+            $ref: "#/components/schemas/DnsZonePair"
           type: array
       type: object
     ListOperationsResponse:

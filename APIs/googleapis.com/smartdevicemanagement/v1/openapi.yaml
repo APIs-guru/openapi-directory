@@ -52,6 +52,10 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - enterprises
     parameters:
@@ -106,6 +110,10 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - enterprises
   "/v1/{parent}/devices":
@@ -146,6 +154,10 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - enterprises
     parameters:
@@ -193,6 +205,10 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - enterprises
     parameters:
@@ -245,6 +261,10 @@ paths:
             - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
             - https://www.googleapis.com/auth/sdm.service
+        - Oauth2:
+            - https://www.googleapis.com/auth/userinfo.email
+          Oauth2c:
+            - https://www.googleapis.com/auth/userinfo.email
       tags:
         - enterprises
     parameters:
@@ -460,6 +480,7 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/sdm.service: See and/or control the devices that you selected
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -468,5 +489,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/sdm.service: See and/or control the devices that you selected
+            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
