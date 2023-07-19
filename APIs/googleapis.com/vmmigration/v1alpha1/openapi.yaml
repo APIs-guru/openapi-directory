@@ -1818,6 +1818,10 @@ components:
     CloneJob:
       description: CloneJob describes the process of creating a clone of a MigratingVM to the requested target based on the latest successful uploaded snapshots. While the migration cycles of a MigratingVm take place, it is possible to verify the uploaded VM can be started in the cloud, by creating a clone. The clone can be created without any downtime, and it is created using the latest snapshots which are already in the cloud. The cloneJob is only responsible for its work, not its products, which means once it is finished, it will never touch the instance it created. It will only delete it in case of the CloneJob being cancelled or upon failure to clone.
       properties:
+        computeEngineDisksTargetDetails:
+          $ref: "#/components/schemas/ComputeEngineDisksTargetDetails"
+          description: Output only. Details of the target Persistent Disks in Compute Engine.
+          readOnly: true
         computeEngineTargetDetails:
           $ref: "#/components/schemas/ComputeEngineTargetDetails"
           description: Output only. Details of the target VM in Compute Engine.
@@ -1895,6 +1899,30 @@ components:
           description: The time the step has started.
           format: google-datetime
           type: string
+      type: object
+    ComputeEngineDisksTargetDefaults:
+      description: ComputeEngineDisksTargetDefaults is a collection of details for creating Persistent Disks in a target Compute Engine project.
+      properties:
+        disks:
+          description: The details of each Persistent Disk to create.
+          items:
+            $ref: "#/components/schemas/PersistentDiskDefaults"
+          type: array
+        targetProject:
+          description: The full path of the resource of type TargetProject which represents the Compute Engine project in which to create the Persistent Disks.
+          type: string
+        zone:
+          description: The zone in which to create the Persistent Disks.
+          type: string
+      type: object
+    ComputeEngineDisksTargetDetails:
+      description: ComputeEngineDisksTargetDetails is a collection of created Persistent Disks details.
+      properties:
+        disks:
+          description: The details of each created Persistent Disk.
+          items:
+            $ref: "#/components/schemas/PersistentDisk"
+          type: array
       type: object
     ComputeEngineTargetDefaults:
       description: ComputeEngineTargetDefaults is a collection of details for creating a VM in a target Compute Engine project.
@@ -2102,6 +2130,10 @@ components:
     CutoverJob:
       description: CutoverJob message describes a cutover of a migrating VM. The CutoverJob is the operation of shutting down the VM, creating a snapshot and clonning the VM using the replicated snapshot.
       properties:
+        computeEngineDisksTargetDetails:
+          $ref: "#/components/schemas/ComputeEngineDisksTargetDetails"
+          description: Output only. Details of the target Persistent Disks in Compute Engine.
+          readOnly: true
         computeEngineTargetDetails:
           $ref: "#/components/schemas/ComputeEngineTargetDetails"
           description: Output only. Details of the target VM in Compute Engine.
@@ -2328,6 +2360,13 @@ components:
           type: string
         displayName:
           description: Display name is a user defined name for this group which can be updated.
+          type: string
+        migrationTargetType:
+          description: Immutable. The target type of this group.
+          enum:
+            - MIGRATION_TARGET_TYPE_UNSPECIFIED
+            - MIGRATION_TARGET_TYPE_GCE
+            - MIGRATION_TARGET_TYPE_DISKS
           type: string
         name:
           description: Output only. The Group name.
@@ -2601,6 +2640,9 @@ components:
           $ref: "#/components/schemas/AwsSourceVmDetails"
           description: Output only. Details of the VM from an AWS source.
           readOnly: true
+        computeEngineDisksTargetDefaults:
+          $ref: "#/components/schemas/ComputeEngineDisksTargetDefaults"
+          description: Details of the target Persistent Disks in Compute Engine.
         computeEngineTargetDefaults:
           $ref: "#/components/schemas/ComputeEngineTargetDefaults"
           description: Details of the target VM in Compute Engine.
@@ -2841,6 +2883,41 @@ components:
     PauseMigrationRequest:
       description: Request message for 'PauseMigration' request.
       properties: {}
+      type: object
+    PersistentDisk:
+      description: Details of a created Persistent Disk.
+      properties:
+        diskUri:
+          description: The URI of the Persistent Disk.
+          type: string
+        sourceDiskNumber:
+          description: The ordinal number of the source VM disk.
+          format: int32
+          type: integer
+      type: object
+    PersistentDiskDefaults:
+      description: Details for creation of a Persistent Disk.
+      properties:
+        additionalLabels:
+          additionalProperties:
+            type: string
+          description: A map of labels to associate with the Persistent Disk.
+          type: object
+        diskName:
+          description: Optional. The name of the Persistent Disk to create.
+          type: string
+        diskType:
+          description: The disk type to use.
+          enum:
+            - COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED
+            - COMPUTE_ENGINE_DISK_TYPE_STANDARD
+            - COMPUTE_ENGINE_DISK_TYPE_SSD
+            - COMPUTE_ENGINE_DISK_TYPE_BALANCED
+          type: string
+        sourceDiskNumber:
+          description: The ordinal number of the source VM disk.
+          format: int32
+          type: integer
       type: object
     PostProcessingStep:
       description: PostProcessingStep contains specific step details.

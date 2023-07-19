@@ -3739,18 +3739,21 @@ components:
           description: Configures how annotations, meaning that the location and infoType of sensitive information findings, are created during de-identification. If unspecified, no annotations are created.
         dicom:
           $ref: "#/components/schemas/DicomConfig"
+          deprecated: true
           description: Configures de-id of application/DICOM content. Deprecated. Use `dicom_tag_config` instead.
         dicomTagConfig:
           $ref: "#/components/schemas/DicomTagConfig"
           description: Configures de-id of application/DICOM content.
         fhir:
           $ref: "#/components/schemas/FhirConfig"
+          deprecated: true
           description: Configures de-id of application/FHIR content. Deprecated. Use `fhir_field_config` instead.
         fhirFieldConfig:
           $ref: "#/components/schemas/FhirFieldConfig"
           description: Configures de-id of application/FHIR content.
         image:
           $ref: "#/components/schemas/ImageConfig"
+          deprecated: true
           description: Configures the de-identification of image pixels in the source_dataset. Deprecated. Use `dicom_tag_config.options.clean_image` instead.
         operationMetadata:
           $ref: "#/components/schemas/DeidentifyOperationMetadata"
@@ -4233,6 +4236,7 @@ components:
           type: string
         notificationConfig:
           $ref: "#/components/schemas/NotificationConfig"
+          deprecated: true
           description: Deprecated. Use `notification_configs` instead. If non-empty, publish all resource modifications of this FHIR store to this destination. The Pub/Sub message attributes contain a map with a string describing the action that has triggered the notification. For example, "action":"CreateResource".
         notificationConfigs:
           description: Specifies where and whether to send notifications upon changes to a Fhir store.
@@ -4635,6 +4639,7 @@ components:
           type: string
         notificationConfig:
           $ref: "#/components/schemas/NotificationConfig"
+          deprecated: true
           description: The notification destination all messages (both Ingest & Create) are published on. Only the message name is sent as part of the notification. If this is unset, no notifications are sent. Supplied by the client.
         notificationConfigs:
           description: A list of notification configs. Each configuration uses a filter to determine whether to publish a message (both Ingest & Create) on the corresponding notification destination. Only the message name is sent as part of the notification. Supplied by the client.
@@ -5601,6 +5606,7 @@ components:
             - BASIC
           type: string
         transformations:
+          deprecated: true
           description: The transformations to apply to the detected data. Deprecated. Use `additional_transformations` instead.
           items:
             $ref: "#/components/schemas/InfoTypeTransformation"

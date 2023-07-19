@@ -960,6 +960,9 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The original request that started the operation.
           type: object
+        sourceToken:
+          description: "An identifier for Firebase function sources. Disclaimer: This field is only supported for Firebase function deployments."
+          type: string
         stages:
           description: Mechanism for reporting in-progress stages
           items:
@@ -1065,6 +1068,9 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The original request that started the operation.
           type: object
+        sourceToken:
+          description: "An identifier for Firebase function sources. Disclaimer: This field is only supported for Firebase function deployments."
+          type: string
         stages:
           description: Mechanism for reporting in-progress stages
           items:
@@ -1170,6 +1176,9 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The original request that started the operation.
           type: object
+        sourceToken:
+          description: "An identifier for Firebase function sources. Disclaimer: This field is only supported for Firebase function deployments."
+          type: string
         stages:
           description: Mechanism for reporting in-progress stages
           items:

@@ -106,6 +106,7 @@ tags:
   - name: regionTargetHttpsProxies
   - name: regionTargetTcpProxies
   - name: regionUrlMaps
+  - name: regionZones
   - name: reservations
   - name: resourcePolicies
   - name: routers
@@ -15278,7 +15279,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+      description: Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
       operationId: compute.securityPolicies.patch
       parameters:
         - description: Project ID for this request.
@@ -15456,7 +15457,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Patches a rule at the specified priority.
+      description: Patches a rule at the specified priority. To clear fields in the rule, leave the fields empty and specify them in the updateMask.
       operationId: compute.securityPolicies.patchRule
       parameters:
         - description: Project ID for this request.
@@ -31487,7 +31488,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+      description: Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
       operationId: compute.regionSecurityPolicies.patch
       parameters:
         - description: Project ID for this request.
@@ -37029,6 +37030,84 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
+  "/projects/{project}/regions/{region}/zones":
+    get:
+      description: Retrieves the list of Zone resources under the specific region available to the specified project.
+      operationId: compute.regionZones.list
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: "A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = \"Intel Skylake\") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = \"Intel Skylake\") OR (cpuPlatform = \"Intel Broadwell\") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq \"double quoted literal\"` `(fieldname1 eq literal) (fieldname2 ne \"literal\")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name \"instance\", you would use `name ne .*instance`."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ZoneList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - regionZones
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
   "/projects/{project}/setCommonInstanceMetadata":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -37115,6 +37194,58 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ProjectsSetDefaultNetworkTierRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - projects
+  "/projects/{project}/setManagedProtectionTier":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the Cloud Armor Managed Protection (CAMP) tier of the project. To set PLUS or above the billing account of the project must be subscribed to Managed Protection Plus. See Subscribing to Managed Protection Plus for more information.
+      operationId: compute.projects.setManagedProtectionTier
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectsSetManagedProtectionTierRequest"
       responses:
         "200":
           content:
@@ -49663,7 +49794,7 @@ components:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
         customResponseHeaders:
-          description: Headers that the HTTP/S load balancer should add to proxied responses.
+          description: Headers that the Application Load Balancer should add to proxied responses.
           items:
             type: string
           type: array
@@ -56662,6 +56793,7 @@ components:
           description: "[Output only] Current state of the request."
           enum:
             - ACCEPTED
+            - CANCELLED
             - CREATING
             - FAILED
             - PROVISIONING
@@ -56905,7 +57037,7 @@ components:
             - SUBSTITUTE
           type: string
         type:
-          description: The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).
+          description: The type of update process. You can specify either PROACTIVE so that the MIG automatically updates VMs to the latest configurations or OPPORTUNISTIC so that you can select the VMs that you want to update.
           enum:
             - OPPORTUNISTIC
             - PROACTIVE
@@ -65650,6 +65782,13 @@ components:
           default: compute#project
           description: "[Output Only] Type of the resource. Always compute#project for projects."
           type: string
+        managedProtectionTier:
+          description: "[Output Only] The Cloud Armor Managed Protection (CAMP) tier for this project. It can be one of the following values: CA_STANDARD, CAMP_PLUS_MONTHLY. If this field is not specified, it is assumed to be CA_STANDARD."
+          enum:
+            - CAMP_PLUS_ANNUAL
+            - CAMP_PLUS_MONTHLY
+            - CA_STANDARD
+          type: string
         name:
           description: "The project ID. For example: my-example-project. Use the project ID to make requests to Compute Engine."
           type: string
@@ -65721,6 +65860,16 @@ components:
             - PREMIUM
             - STANDARD
             - STANDARD_OVERRIDES_FIXED_STANDARD
+          type: string
+      type: object
+    ProjectsSetManagedProtectionTierRequest:
+      properties:
+        managedProtectionTier:
+          description: Managed protection tier to be set.
+          enum:
+            - CAMP_PLUS_ANNUAL
+            - CAMP_PLUS_MONTHLY
+            - CA_STANDARD
           type: string
       type: object
     PublicAdvertisedPrefix:
@@ -66452,6 +66601,10 @@ components:
             type: string
           description: The map holding related quota dimensions.
           type: object
+        futureLimit:
+          description: Future quota limit being rolled out. The limit's unit depends on the quota type or metric.
+          format: double
+          type: number
         limit:
           description: Current effective quota limit. The limit's unit depends on the quota type or metric.
           format: double
@@ -66461,6 +66614,12 @@ components:
           type: string
         metricName:
           description: The Compute Engine quota metric name.
+          type: string
+        rolloutStatus:
+          description: Rollout status of the future quota limit.
+          enum:
+            - IN_PROGRESS
+            - ROLLOUT_STATUS_UNSPECIFIED
           type: string
       type: object
     Reference:
@@ -69903,6 +70062,9 @@ components:
             - INSTANCE_TERMINATION_ACTION_UNSPECIFIED
             - STOP
           type: string
+        localSsdRecoveryTimeout:
+          $ref: "#/components/schemas/Duration"
+          description: Specifies the maximum amount of time a Local Ssd Vm should wait while recovery of the Local Ssd state is attempted. Its value should be in between 0 and 168 hours with hour granularity and the default value being 1 hour.
         locationHint:
           description: An opaque location hint used to place the instance close to other resources. This field is for use by internal tools that use the public API.
           type: string
@@ -71137,6 +71299,9 @@ components:
     ServiceAttachmentConnectedEndpoint:
       description: "[Output Only] A connection connected to this service attachment."
       properties:
+        consumerNetwork:
+          description: The url of the consumer network.
+          type: string
         endpoint:
           description: The url of a connected endpoint.
           type: string

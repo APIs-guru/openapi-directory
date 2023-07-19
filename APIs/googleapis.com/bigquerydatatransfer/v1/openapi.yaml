@@ -938,6 +938,7 @@ components:
             - BOOLEAN
             - RECORD
             - PLUS_PAGE
+            - LIST
           type: string
         validationDescription:
           description: Description of the requirements for this field, in case the user input does not fulfill the regex pattern or min/max values.
@@ -1099,12 +1100,12 @@ components:
       description: A request to start manual transfer runs.
       properties:
         requestedRunTime:
-          description: Specific run_time for a transfer run to be started. The requested_run_time must not be in the future.
+          description: A run_time timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requested_run_time must be a past time and cannot include future time values.
           format: google-datetime
           type: string
         requestedTimeRange:
           $ref: "#/components/schemas/TimeRange"
-          description: Time range for the transfer runs that should be started.
+          description: A time_range start and end timestamp for historical data files or reports that are scheduled to be transferred by the scheduled transfer run. requested_time_range must be a past time and cannot include future time values.
       type: object
     StartManualTransferRunsResponse:
       description: A response to start manual transfer runs.

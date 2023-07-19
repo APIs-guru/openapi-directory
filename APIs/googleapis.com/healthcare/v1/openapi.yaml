@@ -3320,6 +3320,7 @@ components:
           type: string
         notificationConfig:
           $ref: "#/components/schemas/NotificationConfig"
+          deprecated: true
           description: Deprecated. Use `notification_configs` instead. If non-empty, publish all resource modifications of this FHIR store to this destination. The Pub/Sub message attributes contain a map with a string describing the action that has triggered the notification. For example, "action":"CreateResource".
         notificationConfigs:
           description: Specifies where and whether to send notifications upon changes to a FHIR store.

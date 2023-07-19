@@ -2346,6 +2346,13 @@ components:
             - CLOUD_LOGGING_ONLY
             - NONE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
         machineType:
           description: Compute Engine machine type on which to run the build.
           enum:
@@ -2392,6 +2399,7 @@ components:
             $ref: "#/components/schemas/Volume"
           type: array
         workerPool:
+          deprecated: true
           description: This field deprecated; please use `pool.name` instead.
           type: string
       type: object
@@ -2856,24 +2864,28 @@ components:
       description: "GitHubEnterpriseSecrets represents the names of all necessary secrets in Secret Manager for a GitHub Enterprise server. Format is: projects//secrets/."
       properties:
         oauthClientIdName:
+          deprecated: true
           description: The resource name for the OAuth client ID secret in Secret Manager.
           type: string
         oauthClientIdVersionName:
           description: The resource name for the OAuth client ID secret version in Secret Manager.
           type: string
         oauthSecretName:
+          deprecated: true
           description: The resource name for the OAuth secret in Secret Manager.
           type: string
         oauthSecretVersionName:
           description: The resource name for the OAuth secret secret version in Secret Manager.
           type: string
         privateKeyName:
+          deprecated: true
           description: The resource name for the private key secret.
           type: string
         privateKeyVersionName:
           description: The resource name for the private key secret version.
           type: string
         webhookSecretName:
+          deprecated: true
           description: The resource name for the webhook secret in Secret Manager.
           type: string
         webhookSecretVersionName:
@@ -2887,6 +2899,7 @@ components:
           description: 'Optional. The resource name of the github enterprise config that should be applied to this installation. For example: "projects/{$project_id}/locations/{$location_id}/githubEnterpriseConfigs/{$config_id}"'
           type: string
         installationId:
+          deprecated: true
           description: The installationID that emits the GitHub event.
           format: int64
           type: string

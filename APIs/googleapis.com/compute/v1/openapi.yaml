@@ -13600,7 +13600,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+      description: Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
       operationId: compute.securityPolicies.patch
       parameters:
         - description: Project ID for this request.
@@ -13773,7 +13773,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Patches a rule at the specified priority.
+      description: Patches a rule at the specified priority. To clear fields in the rule, leave the fields empty and specify them in the updateMask.
       operationId: compute.securityPolicies.patchRule
       parameters:
         - description: Project ID for this request.
@@ -26589,6 +26589,61 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Modify the specified resource policy.
+      operationId: compute.resourcePolicies.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Id of the resource policy to patch.
+          in: path
+          name: resourcePolicy
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: update_mask indicates fields to be updated as part of this request.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResourcePolicy"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - resourcePolicies
   "/projects/{project}/regions/{region}/resourcePolicies/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -27540,7 +27595,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+      description: Patches the specified policy with the data included in the request. To clear fields in the policy, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
       operationId: compute.regionSecurityPolicies.patch
       parameters:
         - description: Project ID for this request.
@@ -43213,7 +43268,7 @@ components:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
         customResponseHeaders:
-          description: Headers that the HTTP/S load balancer should add to proxied responses.
+          description: Headers that the Application Load Balancer should add to proxied responses.
           items:
             type: string
           type: array
@@ -45913,6 +45968,7 @@ components:
           description: The distribution shape to which the group converges either proactively or on resize events (depending on the value set in updatePolicy.instanceRedistributionType).
           enum:
             - ANY
+            - ANY_SINGLE_ZONE
             - BALANCED
             - EVEN
           type: string
@@ -50026,7 +50082,7 @@ components:
             - SUBSTITUTE
           type: string
         type:
-          description: The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).
+          description: The type of update process. You can specify either PROACTIVE so that the MIG automatically updates VMs to the latest configurations or OPPORTUNISTIC so that you can select the VMs that you want to update.
           enum:
             - OPPORTUNISTIC
             - PROACTIVE
@@ -58871,6 +58927,10 @@ components:
             type: string
           description: The map holding related quota dimensions.
           type: object
+        futureLimit:
+          description: Future quota limit being rolled out. The limit's unit depends on the quota type or metric.
+          format: double
+          type: number
         limit:
           description: Current effective quota limit. The limit's unit depends on the quota type or metric.
           format: double
@@ -58880,6 +58940,12 @@ components:
           type: string
         metricName:
           description: The Compute Engine quota metric name.
+          type: string
+        rolloutStatus:
+          description: Rollout status of the future quota limit.
+          enum:
+            - IN_PROGRESS
+            - ROLLOUT_STATUS_UNSPECIFIED
           type: string
       type: object
     Reference:
@@ -62232,6 +62298,9 @@ components:
             - INSTANCE_TERMINATION_ACTION_UNSPECIFIED
             - STOP
           type: string
+        localSsdRecoveryTimeout:
+          $ref: "#/components/schemas/Duration"
+          description: Specifies the maximum amount of time a Local Ssd Vm should wait while recovery of the Local Ssd state is attempted. Its value should be in between 0 and 168 hours with hour granularity and the default value being 1 hour.
         locationHint:
           description: An opaque location hint used to place the instance close to other resources. This field is for use by internal tools that use the public API.
           type: string
@@ -63178,6 +63247,9 @@ components:
     ServiceAttachmentConnectedEndpoint:
       description: "[Output Only] A connection connected to this service attachment."
       properties:
+        consumerNetwork:
+          description: The url of the consumer network.
+          type: string
         endpoint:
           description: The url of a connected endpoint.
           type: string

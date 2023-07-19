@@ -2904,6 +2904,85 @@ components:
           type: string
       type: object
       x-apideck-schema-id: BadRequest
+    BankAccount:
+      additionalProperties: false
+      properties:
+        account_name:
+          description: The name which you used in opening your bank account.
+          example: SPACEX LLC
+          nullable: true
+          title: Bank Account Name
+          type: string
+        account_number:
+          description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
+          example: "123465"
+          nullable: true
+          title: Bank Account Number
+          type: string
+        account_type:
+          description: The type of bank account.
+          enum:
+            - bank_account
+            - credit_card
+            - other
+          example: credit_card
+          nullable: true
+          title: Account Type
+          type: string
+          x-apideck-enum-id: bank-accounts.account_type
+        bank_code:
+          description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
+          example: BNH
+          nullable: true
+          title: Bank Code
+          type: string
+        bank_name:
+          description: The name of the bank
+          example: Monzo
+          nullable: true
+          title: Bank Name
+          type: string
+        bic:
+          example: AUDSCHGGXXX
+          nullable: true
+          type: string
+        branch_identifier:
+          description: A branch identifier is a unique identifier for a branch of a bank or financial institution.
+          example: "001"
+          nullable: true
+          title: Branch Identifier
+          type: string
+        bsb_number:
+          description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
+          example: 062-001
+          nullable: true
+          title: BSB Number
+          type: string
+        currency:
+          $ref: "#/components/schemas/Currency"
+        iban:
+          example: CH2989144532982975332
+          nullable: true
+          type: string
+        routing_number:
+          description: A routing number is a nine-digit code used to identify a financial institution in the United States.
+          example: "012345678"
+          nullable: true
+          title: Routing number
+          type: string
+      type: object
+      x-apideck-schema-id: BankAccount
+      x-apideck-weights:
+        account_name: medium
+        account_number: critical
+        account_type: medium
+        bank_code: low
+        bank_name: medium
+        bic: medium
+        branch_identifier: low
+        bsb_number: edge-case
+        currency: medium
+        iban: high
     Benefit:
       properties:
         employee_deduction:
@@ -2924,6 +3003,13 @@ components:
         employee_deduction: high
         employer_contribution: high
         name: critical
+    Birthday:
+      description: The date of birth of the person.
+      example: 2000-08-12
+      format: date
+      nullable: true
+      title: Birth Date
+      type: string
     CompanyId:
       description: The unique identifier of the company.
       example: "23456"
@@ -2975,6 +3061,14 @@ components:
         gross_pay: critical
         net_pay: high
         taxes: high
+    Country:
+      description: Country code according to ISO 3166-1 alpha-2.
+      example: US
+      maxLength: 2
+      minLength: 2
+      nullable: true
+      title: Country Code
+      type: string
     CreateDepartmentResponse:
       properties:
         data:
@@ -3721,6 +3815,13 @@ components:
         id: critical
         name: medium
         value: critical
+    DeceasedOn:
+      description: The date the person deceased.
+      example: 2000-08-12
+      format: date
+      nullable: true
+      title: Deceased Date
+      type: string
     Deduction:
       properties:
         amount:
@@ -3867,6 +3968,11 @@ components:
         - operation
         - data
       type: object
+    Deleted:
+      example: true
+      nullable: true
+      title: Deleted
+      type: boolean
     Department:
       additionalProperties: false
       properties:
@@ -3913,6 +4019,13 @@ components:
         parent_id: medium
         updated_at: medium
         updated_by: edge-case
+    DeprecatedDepartment:
+      deprecated: true
+      description: The department the person is currently in. [Deprecated](https://developers.apideck.com/changelog) in favor of the dedicated department_id and department_name field.
+      example: R&D
+      nullable: true
+      title: Department
+      type: string
     Description:
       description: A description of the object.
       example: A description
@@ -3964,177 +4077,20 @@ components:
           type: array
         bank_accounts:
           items:
-            additionalProperties: false
-            properties:
-              account_name:
-                description: The name which you used in opening your bank account.
-                example: SPACEX LLC
-                nullable: true
-                title: Bank Account Name
-                type: string
-              account_number:
-                description: A bank account number is a number that is tied to your bank account. If you have several bank accounts, such as personal, joint, business (and so on), each account will have a different account number.
-                example: "123465"
-                nullable: true
-                title: Bank Account Number
-                type: string
-              account_type:
-                description: The type of bank account.
-                enum:
-                  - bank_account
-                  - credit_card
-                  - other
-                example: credit_card
-                nullable: true
-                title: Account Type
-                type: string
-                x-apideck-enum-id: bank-accounts.account_type
-              bank_code:
-                description: A bank code is a code assigned by a central bank, a bank supervisory body or a Bankers Association in a country to all its licensed member banks or financial institutions.
-                example: BNH
-                nullable: true
-                title: Bank Code
-                type: string
-              bank_name:
-                description: The name of the bank
-                example: Monzo
-                nullable: true
-                title: Bank Name
-                type: string
-              bic:
-                example: AUDSCHGGXXX
-                nullable: true
-                type: string
-              branch_identifier:
-                description: A branch identifier is a unique identifier for a branch of a bank or financial institution.
-                example: "001"
-                nullable: true
-                title: Branch Identifier
-                type: string
-              bsb_number:
-                description: A BSB is a 6 digit numeric code used for identifying the branch of an Australian or New Zealand bank or financial institution.
-                example: 062-001
-                nullable: true
-                title: BSB Number
-                type: string
-              currency:
-                $ref: "#/components/schemas/Currency"
-              iban:
-                example: CH2989144532982975332
-                nullable: true
-                type: string
-              routing_number:
-                description: A routing number is a nine-digit code used to identify a financial institution in the United States.
-                example: "012345678"
-                nullable: true
-                title: Routing number
-                type: string
-            type: object
-            x-apideck-schema-id: BankAccount
-            x-apideck-weights:
-              account_name: medium
-              account_number: critical
-              account_type: medium
-              bank_code: low
-              bank_name: medium
-              bic: medium
-              branch_identifier: low
-              bsb_number: edge-case
-              currency: medium
-              iban: high
+            $ref: "#/components/schemas/BankAccount"
           type: array
         birthday:
-          description: The date of birth of the person.
-          example: 2000-08-12
-          format: date
-          nullable: true
-          title: Birth Date
-          type: string
+          $ref: "#/components/schemas/Birthday"
         company_id:
           $ref: "#/components/schemas/CompanyId"
         company_name:
           $ref: "#/components/schemas/CompanyName"
         compensations:
           items:
-            example:
-              effective_date: 2021-06-11
-              flsa_status: nonexempt
-              id: "3404301363494309004"
-              job_id: "3490439050957906679"
-              payment_unit: hour
-              rate: 50
-            properties:
-              currency:
-                $ref: "#/components/schemas/Currency"
-              effective_date:
-                description: The date on which a change to an employee's compensation takes effect.
-                example: 2020-08-12
-                readOnly: false
-                title: Effective date
-                type: string
-              flsa_status:
-                description: The FLSA status for this compensation.
-                enum:
-                  - exempt
-                  - salaried-nonexempt
-                  - nonexempt
-                  - owner
-                  - other
-                readOnly: false
-                type: string
-                x-apideck-enum-id: employees.compensations.flsa_status
-              id:
-                $ref: "#/components/schemas/Id"
-              job_id:
-                description: The ID of the job to which the compensation belongs.
-                example: "12345"
-                readOnly: true
-                title: Job ID
-                type: string
-              payment_frequency:
-                description: Frequency of employee compensation.
-                enum:
-                  - weekly
-                  - biweekly
-                  - monthly
-                  - pro-rata
-                  - other
-                example: year
-                title: Payment Frequency
-                type: string
-                x-apideck-enum-id: payment_frequency
-              payment_unit:
-                $ref: "#/components/schemas/PaymentUnit"
-              rate:
-                description: The amount paid per payment unit.
-                example: 72000
-                readOnly: false
-                title: Rate
-                type: number
-            title: compensation
-            type: object
-            x-apideck-strict-required:
-              - rate
-              - currency
-              - payment_unit
-            x-apideck-weights:
-              currency: high
-              effective_date: low
-              flsa_status: edge-case
-              id: critical
-              job_id: medium
-              payment_frequency: medium
-              payment_unit: medium
-              rate: high
+            $ref: "#/components/schemas/EmployeeCompensation"
           type: array
         country_of_birth:
-          description: Country code according to ISO 3166-1 alpha-2.
-          example: US
-          maxLength: 2
-          minLength: 2
-          nullable: true
-          title: Country Code
-          type: string
+          $ref: "#/components/schemas/Country"
         created_at:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
@@ -4144,24 +4100,11 @@ components:
             $ref: "#/components/schemas/CustomField"
           type: array
         deceased_on:
-          description: The date the person deceased.
-          example: 2000-08-12
-          format: date
-          nullable: true
-          title: Deceased Date
-          type: string
+          $ref: "#/components/schemas/DeceasedOn"
         deleted:
-          example: true
-          nullable: true
-          title: Deleted
-          type: boolean
+          $ref: "#/components/schemas/Deleted"
         department:
-          deprecated: true
-          description: The department the person is currently in. [Deprecated](https://developers.apideck.com/changelog) in favor of the dedicated department_id and department_name field.
-          example: R&D
-          nullable: true
-          title: Department
-          type: string
+          $ref: "#/components/schemas/DeprecatedDepartment"
         department_id:
           description: Unique identifier of the department ID this employee belongs to.
           example: "12345"
@@ -4183,7 +4126,7 @@ components:
           title: Dietary preference
           type: string
         direct_reports:
-          description: The direct reports refer to the individuals who report directly to a person in the organizational hierarchy.
+          description: Direct reports is an array of ids that reflect the individuals in an organizational hierarchy who are directly supervised by this specific employee.
           example:
             - a0d636c6-43b3-4bde-8c70-85b707d992f4
             - a98lfd96-43b3-4bde-8c70-85b707d992e6
@@ -4272,79 +4215,10 @@ components:
         id:
           $ref: "#/components/schemas/Id"
         initials:
-          description: The initials of the person, usually derived from their first, middle, and last names.
-          example: EM
-          nullable: true
-          title: Initials
-          type: string
+          $ref: "#/components/schemas/Initials"
         jobs:
           items:
-            properties:
-              compensation_rate:
-                description: The rate of pay for the employee in their current job role.
-                example: 72000
-                title: The compensation rate of the job.
-                type: number
-              currency:
-                $ref: "#/components/schemas/Currency"
-              employee_id:
-                $ref: "#/components/schemas/Id"
-              end_date:
-                description: The date on which the employee leaves or is expected to leave their current job role.
-                example: 2020-08-12
-                format: date
-                nullable: true
-                title: The end date of the job.
-                type: string
-              hired_at:
-                description: The date on which the employee was hired by the organization
-                example: 2020-08-12
-                format: date
-                nullable: true
-                title: Hired date
-                type: string
-              id:
-                $ref: "#/components/schemas/Id"
-              is_primary:
-                description: Indicates whether this the employee's primary job.
-                example: true
-                nullable: true
-                title: Primary
-                type: boolean
-              location:
-                $ref: "#/components/schemas/Address"
-              payment_unit:
-                $ref: "#/components/schemas/PaymentUnit"
-              role:
-                description: The position and responsibilities of the person within the organization.
-                example: Sales
-                nullable: true
-                title: Job role
-                type: string
-              start_date:
-                description: The date on which the employee starts working in their current job role.
-                example: 2020-08-12
-                format: date
-                nullable: true
-                title: The start date of the job.
-                type: string
-              title:
-                $ref: "#/components/schemas/Title"
-            title: job
-            type: object
-            x-apideck-weights:
-              compensation_rate: medium
-              currency: medium
-              employee_id: edge-case
-              end_date: high
-              hired_at: medium
-              id: critical
-              is_primary: medium
-              location: medium
-              payment_unit: medium
-              role: medium
-              start_date: high
-              title: critical
+            $ref: "#/components/schemas/EmployeeJob"
           type: array
         languages:
           items:
@@ -4378,11 +4252,7 @@ components:
             first_name:
               $ref: "#/components/schemas/FirstName"
             id:
-              description: A unique identifier for an object.
-              example: "12345"
-              readOnly: false
-              title: ID
-              type: string
+              $ref: "#/components/schemas/WritableId"
             last_name:
               $ref: "#/components/schemas/LastName"
             name:
@@ -4409,52 +4279,10 @@ components:
           $ref: "#/components/schemas/MiddleName"
         nationalities:
           items:
-            description: The nationality of the person, represented as a two-letter country code according to ISO 3166-1 alpha-2.
-            example: US
-            nullable: true
-            title: Nationality
-            type: string
+            $ref: "#/components/schemas/Nationality"
           type: array
         partner:
-          additionalProperties: false
-          properties:
-            birthday:
-              example: 2000-08-12
-              format: date
-              nullable: true
-              type: string
-            deceased_on:
-              example: 2000-08-12
-              format: date
-              nullable: true
-              type: string
-            first_name:
-              $ref: "#/components/schemas/FirstName"
-            gender:
-              $ref: "#/components/schemas/Gender"
-            id:
-              $ref: "#/components/schemas/Id"
-            initials:
-              example: EM
-              nullable: true
-              title: Initials
-              type: string
-            last_name:
-              $ref: "#/components/schemas/LastName"
-            middle_name:
-              $ref: "#/components/schemas/MiddleName"
-          title: Person
-          type: object
-          x-apideck-schema-id: Person
-          x-apideck-weights:
-            birthday: low
-            deceased_on: low
-            first_name: critical
-            gender: medium
-            id: low
-            initials: medium
-            last_name: critical
-            middle_name: low
+          $ref: "#/components/schemas/Person"
         phone_numbers:
           items:
             $ref: "#/components/schemas/PhoneNumber"
@@ -4488,54 +4316,19 @@ components:
           title: Probation period
           type: object
         pronouns:
-          description: The preferred pronouns of the person.
-          example: she,her
-          nullable: true
-          title: Pronouns
-          type: string
+          $ref: "#/components/schemas/Pronouns"
         record_url:
-          example: https://app.intercom.io/contacts/12345
-          nullable: true
-          title: Record URL
-          type: string
+          $ref: "#/components/schemas/RecordUrl"
         row_version:
           $ref: "#/components/schemas/RowVersion"
         salutation:
-          description: A formal salutation for the person. For example, 'Mr', 'Mrs'
-          example: Mr
-          nullable: true
-          type: string
+          $ref: "#/components/schemas/Salutation"
         social_links:
           items:
-            additionalProperties: false
-            properties:
-              id:
-                example: "12345"
-                nullable: true
-                type: string
-              type:
-                example: twitter
-                nullable: true
-                type: string
-              url:
-                example: https://www.twitter.com/apideck-io
-                minLength: 1
-                type: string
-            required:
-              - url
-            type: object
-            x-apideck-schema-id: SocialLink
-            x-apideck-weights:
-              id: edge-case
-              type: critical
-              url: critical
+            $ref: "#/components/schemas/SocialLink"
           type: array
         social_security_number:
-          description: A unique identifier assigned by the government. This field is considered sensitive information and may be subject to special security and privacy restrictions.
-          example: "123456789"
-          nullable: true
-          title: Social Security Number
-          type: string
+          $ref: "#/components/schemas/SocialSecurityNumber"
         source:
           description: When the employee is imported as a new hire, this field indicates what system (e.g. the name of the ATS) this employee was imported from.
           example: lever
@@ -4549,12 +4342,7 @@ components:
           title: Source ID
           type: string
         tags:
-          example:
-            - New
-          items:
-            type: string
-          type: array
-          x-apideck-schema-id: Tags
+          $ref: "#/components/schemas/Tags"
         tax_code:
           example: "1111"
           nullable: true
@@ -4566,28 +4354,9 @@ components:
           title: Tax ID
           type: string
         team:
-          additionalProperties: false
-          description: The team the person is currently in.
-          nullable: true
-          properties:
-            id:
-              description: The unique identifier of the team.
-              example: "1234"
-              nullable: true
-              type: string
-            name:
-              description: The name of the team.
-              example: Full Stack Engineers
-              nullable: true
-              type: string
-          type: object
-          x-apideck-schema-id: Team
+          $ref: "#/components/schemas/Team"
         timezone:
-          description: The time zone related to the resource. The value is a string containing a standard time zone identifier, e.g. Europe/London.
-          example: Europe/London
-          nullable: true
-          title: Timezone
-          type: string
+          $ref: "#/components/schemas/Timezone"
         title:
           $ref: "#/components/schemas/Title"
         updated_at:
@@ -4667,6 +4436,131 @@ components:
         updated_at: high
         updated_by: edge-case
         works_remote: low
+    EmployeeCompensation:
+      example:
+        effective_date: 2021-06-11
+        flsa_status: nonexempt
+        id: "3404301363494309004"
+        job_id: "3490439050957906679"
+        payment_unit: hour
+        rate: 50
+      properties:
+        currency:
+          $ref: "#/components/schemas/Currency"
+        effective_date:
+          description: The date on which a change to an employee's compensation takes effect.
+          example: 2020-08-12
+          readOnly: false
+          title: Effective date
+          type: string
+        flsa_status:
+          description: The FLSA status for this compensation.
+          enum:
+            - exempt
+            - salaried-nonexempt
+            - nonexempt
+            - owner
+            - other
+          readOnly: false
+          type: string
+          x-apideck-enum-id: employees.compensations.flsa_status
+        id:
+          $ref: "#/components/schemas/Id"
+        job_id:
+          description: The ID of the job to which the compensation belongs.
+          example: "12345"
+          readOnly: true
+          title: Job ID
+          type: string
+        payment_frequency:
+          $ref: "#/components/schemas/PaymentFrequency"
+        payment_unit:
+          $ref: "#/components/schemas/PaymentUnit"
+        rate:
+          description: The amount paid per payment unit.
+          example: 72000
+          readOnly: false
+          title: Rate
+          type: number
+      title: compensation
+      type: object
+      x-apideck-strict-required:
+        - rate
+        - currency
+        - payment_unit
+      x-apideck-weights:
+        currency: high
+        effective_date: low
+        flsa_status: edge-case
+        id: critical
+        job_id: medium
+        payment_frequency: medium
+        payment_unit: medium
+        rate: high
+    EmployeeJob:
+      properties:
+        compensation_rate:
+          description: The rate of pay for the employee in their current job role.
+          example: 72000
+          title: The compensation rate of the job.
+          type: number
+        currency:
+          $ref: "#/components/schemas/Currency"
+        employee_id:
+          $ref: "#/components/schemas/Id"
+        end_date:
+          description: The date on which the employee leaves or is expected to leave their current job role.
+          example: 2020-08-12
+          format: date
+          nullable: true
+          title: The end date of the job.
+          type: string
+        hired_at:
+          description: The date on which the employee was hired by the organization
+          example: 2020-08-12
+          format: date
+          nullable: true
+          title: Hired date
+          type: string
+        id:
+          $ref: "#/components/schemas/Id"
+        is_primary:
+          description: Indicates whether this the employee's primary job.
+          example: true
+          nullable: true
+          title: Primary
+          type: boolean
+        location:
+          $ref: "#/components/schemas/Address"
+        payment_unit:
+          $ref: "#/components/schemas/PaymentUnit"
+        role:
+          $ref: "#/components/schemas/JobRole"
+        start_date:
+          description: The date on which the employee starts working in their current job role.
+          example: 2020-08-12
+          format: date
+          nullable: true
+          title: The start date of the job.
+          type: string
+        title:
+          $ref: "#/components/schemas/Title"
+      title: job
+      type: object
+      x-apideck-schema-id: EmployeeJob
+      x-apideck-weights:
+        compensation_rate: medium
+        currency: medium
+        employee_id: edge-case
+        end_date: high
+        hired_at: medium
+        id: critical
+        is_primary: medium
+        location: medium
+        payment_unit: medium
+        role: medium
+        start_date: high
+        title: critical
     EmployeeNumber:
       description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
       example: 123456-AB
@@ -5484,74 +5378,7 @@ components:
       x-apideck-schema-id: HrisJobs
     HrisWebhookEvent:
       allOf:
-        - properties:
-            consumer_id:
-              description: Unique consumer identifier. You can freely choose a consumer ID yourself. Most of the time, this is an ID of your internal data model that represents a user or account in your system (for example account:12345). If the consumer doesn't exist yet, Vault will upsert a consumer based on your ID.
-              example: test_consumer_id
-              type: string
-            entity_id:
-              description: The service provider's ID of the entity that triggered this event
-              example: 123456ASDF
-              type: string
-            entity_type:
-              description: The type entity that triggered this event
-              example: Company
-              type: string
-            entity_url:
-              description: The url to retrieve entity detail.
-              example: https://unify.apideck.com/crm/contacts/123456
-              type: string
-            event_id:
-              description: Unique reference to this request event
-              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
-              type: string
-            execution_attempt:
-              description: The current count this request event has been attempted
-              example: 2
-              type: number
-            occurred_at:
-              description: ISO Datetime for when the original event occurred
-              example: 2021-10-01T03:14:55.419Z
-              type: string
-            service_id:
-              description: Service provider identifier
-              example: close
-              type: string
-            unified_api:
-              description: Name of Apideck Unified API
-              enum:
-                - accounting
-                - ats
-                - calendar
-                - crm
-                - csp
-                - customer-support
-                - ecommerce
-                - email
-                - email-marketing
-                - expense-management
-                - file-storage
-                - form
-                - hris
-                - lead
-                - payroll
-                - pos
-                - procurement
-                - project-management
-                - script
-                - sms
-                - spreadsheet
-                - team-messaging
-                - issue-tracking
-                - time-registration
-                - transactional-email
-                - vault
-                - data-warehouse
-              example: crm
-              type: string
-              x-apideck-enum-id: unified_api
-          type: object
-          x-apideck-schema-id: WebhookEvent
+        - $ref: "#/components/schemas/WebhookEvent"
         - properties:
             event_type:
               $ref: "#/components/schemas/HrisEventType"
@@ -5562,6 +5389,18 @@ components:
       example: "12345"
       readOnly: true
       title: ID
+      type: string
+    Initials:
+      description: The initials of the person, usually derived from their first, middle, and last names.
+      example: EM
+      nullable: true
+      title: Initials
+      type: string
+    JobRole:
+      description: The position and responsibilities of the person within the organization.
+      example: Sales
+      nullable: true
+      title: Job role
       type: string
     Language:
       description: language code according to ISO 639-1. For the United States - EN
@@ -5626,6 +5465,12 @@ components:
       example: D.
       nullable: true
       title: Middle name
+      type: string
+    Nationality:
+      description: The nationality of the person, represented as a two-letter country code according to ISO 3166-1 alpha-2.
+      example: US
+      nullable: true
+      title: Nationality
       type: string
     NotFoundResponse:
       properties:
@@ -5700,6 +5545,18 @@ components:
           description: All passthrough query parameters are passed along to the connector as is (?pass_through[search]=leads becomes ?search=leads)
           type: string
       type: object
+    PaymentFrequency:
+      description: Frequency of employee compensation.
+      enum:
+        - weekly
+        - biweekly
+        - monthly
+        - pro-rata
+        - other
+      example: year
+      title: Payment Frequency
+      type: string
+      x-apideck-enum-id: payment_frequency
     PaymentRequiredResponse:
       properties:
         detail:
@@ -5858,6 +5715,46 @@ components:
           type: string
       type: object
       x-apideck-schema-id: PayrollsFilter
+    Person:
+      additionalProperties: false
+      properties:
+        birthday:
+          example: 2000-08-12
+          format: date
+          nullable: true
+          type: string
+        deceased_on:
+          example: 2000-08-12
+          format: date
+          nullable: true
+          type: string
+        first_name:
+          $ref: "#/components/schemas/FirstName"
+        gender:
+          $ref: "#/components/schemas/Gender"
+        id:
+          $ref: "#/components/schemas/Id"
+        initials:
+          example: EM
+          nullable: true
+          title: Initials
+          type: string
+        last_name:
+          $ref: "#/components/schemas/LastName"
+        middle_name:
+          $ref: "#/components/schemas/MiddleName"
+      title: Person
+      type: object
+      x-apideck-schema-id: Person
+      x-apideck-weights:
+        birthday: low
+        deceased_on: low
+        first_name: critical
+        gender: medium
+        id: low
+        initials: medium
+        last_name: critical
+        middle_name: low
     PhoneNumber:
       additionalProperties: false
       properties:
@@ -5918,11 +5815,27 @@ components:
       nullable: true
       title: Photo URL
       type: string
+    Pronouns:
+      description: The preferred pronouns of the person.
+      example: she,her
+      nullable: true
+      title: Pronouns
+      type: string
+    RecordUrl:
+      example: https://app.intercom.io/contacts/12345
+      nullable: true
+      title: Record URL
+      type: string
     RowVersion:
       description: A binary value used to detect updates to a object and prevent data conflicts. It is incremented each time an update is made to the object.
       example: 1-12345
       nullable: true
       title: Row version
+      type: string
+    Salutation:
+      description: A formal salutation for the person. For example, 'Mr', 'Mrs'
+      example: Mr
+      nullable: true
       type: string
     Schedule:
       additionalProperties: false
@@ -6086,6 +5999,35 @@ components:
         id: critical
         start_date: critical
         work_pattern: critical
+    SocialLink:
+      additionalProperties: false
+      properties:
+        id:
+          example: "12345"
+          nullable: true
+          type: string
+        type:
+          example: twitter
+          nullable: true
+          type: string
+        url:
+          example: https://www.twitter.com/apideck-io
+          minLength: 1
+          type: string
+      required:
+        - url
+      type: object
+      x-apideck-schema-id: SocialLink
+      x-apideck-weights:
+        id: edge-case
+        type: critical
+        url: critical
+    SocialSecurityNumber:
+      description: A unique identifier assigned by the government. This field is considered sensitive information and may be subject to special security and privacy restrictions.
+      example: "123456789"
+      nullable: true
+      title: Social Security Number
+      type: string
     SortDirection:
       default: asc
       description: The direction in which to sort the results
@@ -6095,6 +6037,13 @@ components:
       type: string
       x-apideck-enum-id: sort_direction
       x-apideck-schema-id: SortDirection
+    Tags:
+      example:
+        - New
+      items:
+        type: string
+      type: array
+      x-apideck-schema-id: Tags
     Tax:
       properties:
         amount:
@@ -6115,6 +6064,23 @@ components:
         amount: high
         employer: high
         name: high
+    Team:
+      additionalProperties: false
+      description: The team the person is currently in.
+      nullable: true
+      properties:
+        id:
+          description: The unique identifier of the team.
+          example: "1234"
+          nullable: true
+          type: string
+        name:
+          description: The name of the team.
+          example: Full Stack Engineers
+          nullable: true
+          type: string
+      type: object
+      x-apideck-schema-id: Team
     TimeOffRequest:
       additionalProperties: false
       properties:
@@ -6266,6 +6232,12 @@ components:
           example: ""
           type: string
       type: object
+    Timezone:
+      description: The time zone related to the resource. The value is a string containing a standard time zone identifier, e.g. Europe/London.
+      example: Europe/London
+      nullable: true
+      title: Timezone
+      type: string
     Title:
       description: The job title of the person.
       example: CEO
@@ -6552,6 +6524,75 @@ components:
       readOnly: true
       title: Updated by
       type: string
+    WebhookEvent:
+      properties:
+        consumer_id:
+          description: Unique consumer identifier. You can freely choose a consumer ID yourself. Most of the time, this is an ID of your internal data model that represents a user or account in your system (for example account:12345). If the consumer doesn't exist yet, Vault will upsert a consumer based on your ID.
+          example: test_consumer_id
+          type: string
+        entity_id:
+          description: The service provider's ID of the entity that triggered this event
+          example: 123456ASDF
+          type: string
+        entity_type:
+          description: The type entity that triggered this event
+          example: Company
+          type: string
+        entity_url:
+          description: The url to retrieve entity detail.
+          example: https://unify.apideck.com/crm/contacts/123456
+          type: string
+        event_id:
+          description: Unique reference to this request event
+          example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+          type: string
+        execution_attempt:
+          description: The current count this request event has been attempted
+          example: 2
+          type: number
+        occurred_at:
+          description: ISO Datetime for when the original event occurred
+          example: 2021-10-01T03:14:55.419Z
+          type: string
+        service_id:
+          description: Service provider identifier
+          example: close
+          type: string
+        unified_api:
+          description: Name of Apideck Unified API
+          enum:
+            - accounting
+            - ats
+            - calendar
+            - crm
+            - csp
+            - customer-support
+            - ecommerce
+            - email
+            - email-marketing
+            - expense-management
+            - file-storage
+            - form
+            - hris
+            - lead
+            - payroll
+            - pos
+            - procurement
+            - project-management
+            - script
+            - sms
+            - spreadsheet
+            - team-messaging
+            - issue-tracking
+            - time-registration
+            - transactional-email
+            - vault
+            - data-warehouse
+          example: crm
+          type: string
+          x-apideck-enum-id: unified_api
+      type: object
+      x-apideck-schema-id: WebhookEvent
     Website:
       additionalProperties: false
       properties:
@@ -6581,6 +6622,12 @@ components:
         id: edge-case
         type: critical
         url: critical
+    WritableId:
+      description: A unique identifier for an object.
+      example: "12345"
+      readOnly: false
+      title: ID
+      type: string
   securitySchemes:
     apiKey:
       description: |
