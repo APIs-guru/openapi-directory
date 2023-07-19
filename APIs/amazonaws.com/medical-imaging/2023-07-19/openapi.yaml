@@ -1,0 +1,2739 @@
+openapi: 3.0.0
+info:
+  version: '2023-07-19'
+  x-release: v4
+  title: AWS Health Imaging
+  description: '<p>This is the <i>AWS HealthImaging API Reference</i>. AWS HealthImaging is an AWS service for storing, accessing, and analyzing medical images. For an introduction to the service, see the <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide"> <i>AWS HealthImaging Developer Guide</i> </a>.</p> <note> <p>We recommend using one of the AWS Software Development Kits (SDKs) for your programming language, as they take care of request authentication, serialization, and connection management. For more information, see <a href="http://aws.amazon.com/developer/tools">Tools to build on AWS</a>.</p> <p>For information about using AWS HealthImaging API actions in one of the language-specific AWS SDKs, refer to the <i>See Also</i> link at the end of each section that describes an API action or data type.</p> </note> <p>The following sections list AWS HealthImaging API actions categorized according to functionality. Links are provided to actions within this Reference, along with links back to corresponding sections in the <i>AWS HealthImaging Developer Guide</i> so you can view console procedures and CLI/SDK code examples.</p> <p class="title"> <b>Data store actions</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_CreateDatastore.html">CreateDatastore</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/create-data-store.html">Creating a data store</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetDatastore.html">GetDatastore</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-data-store.html">Getting data store properties</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_ListDatastores.html">ListDatastores</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/list-data-stores.html">Listing data stores</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_DeleteDatastore.html">DeleteDatastore</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/delete-data-store.html">Deleting a data store</a>.</p> </li> </ul> <p class="title"> <b>Import job actions</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_StartDICOMImportJob.html">StartDICOMImportJob</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/start-dicom-import-job.html">Starting an import job</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetDICOMImportJob.html">GetDICOMImportJob</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-dicom-import-job.html">Getting import job properties</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_ListDICOMImportJobs.html">ListDICOMImportJobs</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/list-dicom-import-jobs.html">Listing import jobs</a>.</p> </li> </ul> <p class="title"> <b>Image set access actions</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_SearchImageSets.html">SearchImageSets</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/search-image-sets.html">Searching image sets</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetImageSet.html">GetImageSet</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-image-set-properties.html">Getting image set properties</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetImageSetMetadata.html">GetImageSetMetadata</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-image-set-metadata.html">Getting image set metadata</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetImageFrame.html">GetImageFrame</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-image-frame.html">Getting image set pixel data</a>.</p> </li> </ul> <p class="title"> <b>Image set modification actions</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_ListImageSetVersions.html">ListImageSetVersions</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/list-image-set-versions.html">Listing image set versions</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_UpdateImageSetMetadata.html">UpdateImageSetMetadata</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/update-image-set-metadata.html">Updating image set metadata</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_CopyImageSet.html">CopyImageSet</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/copy-image-set.html">Copying an image set</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_DeleteImageSet.html">DeleteImageSet</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/delete-image-set.html">Deleting an image set</a>.</p> </li> </ul> <p class="title"> <b>Tagging actions</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_TagResource.html">TagResource</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-data-store.html">Tagging a data store</a> and <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-image-set.html">Tagging an image set</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_ListTagsForResource.html">ListTagsForResource</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-data-store.html">Tagging a data store</a> and <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-image-set.html">Tagging an image set</a>.</p> </li> <li> <p> <a href="https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_UntagResource.html">UntagResource</a> – See <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-data-store.html">Tagging a data store</a> and <a href="https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-image-set.html">Tagging an image set</a>.</p> </li> </ul>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: medical-imaging
+  x-aws-signingName: medical-imaging
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/medical-imaging-2023-07-19.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/medical-imaging/'
+servers:
+  - url: 'http://medical-imaging.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Health Imaging multi-region endpoint
+  - url: 'https://medical-imaging.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Health Imaging multi-region endpoint
+  - url: 'http://medical-imaging.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Health Imaging endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://medical-imaging.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Health Imaging endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/datastore/{datastoreId}/imageSet/{sourceImageSetId}/copyImageSet':
+    post:
+      operationId: CopyImageSet
+      description: Copy an image set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyImageSetResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: sourceImageSetId
+          in: path
+          required: true
+          description: The source image set identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - copyImageSetInformation
+              properties:
+                copyImageSetInformation:
+                  description: Copy image set information.
+                  type: object
+                  properties:
+                    sourceImageSet:
+                      allOf:
+                        - $ref: '#/components/schemas/CopySourceImageSetInformation'
+                        - description: The source image set.
+                    destinationImageSet:
+                      allOf:
+                        - $ref: '#/components/schemas/CopyDestinationImageSet'
+                        - description: The destination image set.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /datastore:
+    post:
+      operationId: CreateDatastore
+      description: Create a data store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDatastoreResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - clientToken
+              properties:
+                datastoreName:
+                  description: The data store name.
+                  type: string
+                  pattern: '[A-Za-z0-9._/#-]+'
+                  minLength: 1
+                  maxLength: 256
+                clientToken:
+                  description: A unique identifier for API idempotency.
+                  type: string
+                  pattern: '[A-Za-z0-9._-]+'
+                  minLength: 1
+                  maxLength: 64
+                tags:
+                  description: The tags provided when creating a data store.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                kmsKeyArn:
+                  description: ARN referencing a KMS key or KMS key alias.
+                  type: string
+                  pattern: 'arn:aws[a-zA-Z-]{0,16}:kms:[a-z]{2}(-[a-z]{1,16}){1,3}-\d{1}:\d{12}:((key/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})|(alias/[a-zA-Z0-9:/_-]{1,256}))'
+                  minLength: 1
+                  maxLength: 512
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDatastores
+      description: List data stores created by this AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatastoresResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: datastoreStatus
+          in: query
+          required: false
+          description: The data store status.
+          schema:
+            type: string
+            enum:
+              - CREATING
+              - CREATE_FAILED
+              - ACTIVE
+              - DELETING
+              - DELETED
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token used to request the list of data stores on the next page.
+          schema:
+            type: string
+            pattern: '\p{ASCII}{0,8192}'
+            minLength: 1
+            maxLength: 8192
+        - name: maxResults
+          in: query
+          required: false
+          description: 'Valid Range: Minimum value of 1. Maximum value of 50.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+  '/datastore/{datastoreId}':
+    delete:
+      operationId: DeleteDatastore
+      description: '<p>Delete a data store.</p> <note> <p>Before a data store can be deleted, you must first delete all image sets within it.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDatastoreResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetDatastore
+      description: Get data store properties.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDatastoreResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+  '/datastore/{datastoreId}/imageSet/{imageSetId}/deleteImageSet':
+    post:
+      operationId: DeleteImageSet
+      description: Delete an image set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteImageSetResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: imageSetId
+          in: path
+          required: true
+          description: The image set identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/getDICOMImportJob/datastore/{datastoreId}/job/{jobId}':
+    get:
+      operationId: GetDICOMImportJob
+      description: Get the import job properties to learn more about the job or job progress.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDICOMImportJobResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: jobId
+          in: path
+          required: true
+          description: The import job identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]+'
+            minLength: 1
+            maxLength: 32
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/datastore/{datastoreId}/imageSet/{imageSetId}/getImageFrame':
+    post:
+      operationId: GetImageFrame
+      description: Get an image frame (pixel data) for an image set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImageFrameResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: imageSetId
+          in: path
+          required: true
+          description: The image set identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - imageFrameInformation
+              properties:
+                imageFrameInformation:
+                  description: Information about the image frame (pixel data) identifier.
+                  type: object
+                  properties:
+                    imageFrameId:
+                      allOf:
+                        - $ref: '#/components/schemas/ImageFrameId'
+                        - description: The image frame (pixel data) identifier.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/datastore/{datastoreId}/imageSet/{imageSetId}/getImageSet':
+    post:
+      operationId: GetImageSet
+      description: Get image set properties.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImageSetResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: imageSetId
+          in: path
+          required: true
+          description: The image set identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: version
+          in: query
+          required: false
+          description: The image set version identifier.
+          schema:
+            type: string
+            pattern: \d+
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/datastore/{datastoreId}/imageSet/{imageSetId}/getImageSetMetadata':
+    post:
+      operationId: GetImageSetMetadata
+      description: Get metadata attributes for an image set.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetImageSetMetadataResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: imageSetId
+          in: path
+          required: true
+          description: The image set identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: version
+          in: query
+          required: false
+          description: The image set version identifier.
+          schema:
+            type: string
+            pattern: \d+
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/listDICOMImportJobs/datastore/{datastoreId}':
+    get:
+      operationId: ListDICOMImportJobs
+      description: List import jobs created by this AWS account for a specific data store.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDICOMImportJobsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: jobStatus
+          in: query
+          required: false
+          description: The filters for listing import jobs based on status.
+          schema:
+            type: string
+            enum:
+              - SUBMITTED
+              - IN_PROGRESS
+              - COMPLETED
+              - FAILED
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token used to request the list of import jobs on the next page.
+          schema:
+            type: string
+            pattern: '\p{ASCII}{0,8192}'
+            minLength: 1
+            maxLength: 8192
+        - name: maxResults
+          in: query
+          required: false
+          description: The max results count. The upper bound is determined by load testing.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/datastore/{datastoreId}/imageSet/{imageSetId}/listImageSetVersions':
+    post:
+      operationId: ListImageSetVersions
+      description: List image set versions.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImageSetVersionsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: imageSetId
+          in: path
+          required: true
+          description: The image set identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token used to request the list of image set versions on the next page.
+          schema:
+            type: string
+            pattern: '\p{ASCII}{0,8192}'
+            minLength: 1
+            maxLength: 8192
+        - name: maxResults
+          in: query
+          required: false
+          description: The max results count.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists all tags associated with a medical imaging resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the medical imaging resource to list tags for.
+          schema:
+            type: string
+            pattern: 'arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:medical-imaging:[a-z0-9-]+:[0-9]{12}:datastore/[0-9a-z]{32}(/imageset/[0-9a-z]{32})?'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds a user-specifed key and value tag to a medical imaging resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the medical imaging resource that tags are being added to.
+          schema:
+            type: string
+            pattern: 'arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:medical-imaging:[a-z0-9-]+:[0-9]{12}:datastore/[0-9a-z]{32}(/imageset/[0-9a-z]{32})?'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: The user-specified key and value tag pairs added to a medical imaging resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/datastore/{datastoreId}/searchImageSets':
+    post:
+      operationId: SearchImageSets
+      description: Search image sets based on defined input attributes.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchImageSetsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The identifier of the data store where the image sets reside.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results that can be returned in a search.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+        - name: nextToken
+          in: query
+          required: false
+          description: The token used for pagination of results returned in the response. Use the token returned from the previous request to continue results where the previous request ended.
+          schema:
+            type: string
+            pattern: '\p{ASCII}{0,8192}'
+            minLength: 1
+            maxLength: 8192
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                searchCriteria:
+                  description: The search criteria.
+                  type: object
+                  properties:
+                    filters:
+                      allOf:
+                        - $ref: '#/components/schemas/SearchCriteriaFiltersList'
+                        - description: The filters for the search criteria.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/startDICOMImportJob/datastore/{datastoreId}':
+    post:
+      operationId: StartDICOMImportJob
+      description: Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores processing results in the file specified by the <code>outputS3Uri</code> parameter.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDICOMImportJobResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - dataAccessRoleArn
+                - clientToken
+                - inputS3Uri
+                - outputS3Uri
+              properties:
+                jobName:
+                  description: The import job name.
+                  type: string
+                  pattern: '[A-Za-z0-9._/#-]+'
+                  minLength: 1
+                  maxLength: 64
+                dataAccessRoleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM role that grants permission to access medical imaging resources.
+                  type: string
+                  pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
+                  minLength: 20
+                  maxLength: 2048
+                clientToken:
+                  description: A unique identifier for API idempotency.
+                  type: string
+                  pattern: '[A-Za-z0-9._-]+'
+                  minLength: 1
+                  maxLength: 64
+                inputS3Uri:
+                  description: The input prefix path for the S3 bucket that contains the DICOM files to be imported.
+                  type: string
+                  pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
+                  minLength: 1
+                  maxLength: 1024
+                outputS3Uri:
+                  description: The output prefix of the S3 bucket to upload the results of the DICOM import job.
+                  type: string
+                  pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
+                  minLength: 1
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from a medical imaging resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the medical imaging resource that tags are being removed from.
+          schema:
+            type: string
+            pattern: 'arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:medical-imaging:[a-z0-9-]+:[0-9]{12}:datastore/[0-9a-z]{32}(/imageset/[0-9a-z]{32})?'
+        - name: tagKeys
+          in: query
+          required: true
+          description: The keys for the tags to be removed from the medical imaging resource.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/datastore/{datastoreId}/imageSet/{imageSetId}/updateImageSetMetadata#latestVersion':
+    post:
+      operationId: UpdateImageSetMetadata
+      description: Update image set metadata attributes.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateImageSetMetadataResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: datastoreId
+          in: path
+          required: true
+          description: The data store identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: imageSetId
+          in: path
+          required: true
+          description: The image set identifier.
+          schema:
+            type: string
+            pattern: '[0-9a-z]{32}'
+        - name: latestVersion
+          in: query
+          required: true
+          description: The latest image set version identifier.
+          schema:
+            type: string
+            pattern: \d+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - updateImageSetMetadataUpdates
+              properties:
+                updateImageSetMetadataUpdates:
+                  description: Contains DICOMUpdates.
+                  type: object
+                  properties:
+                    DICOMUpdates:
+                      allOf:
+                        - $ref: '#/components/schemas/DICOMUpdates'
+                        - description: The object containing <code>removableAttributes</code> and <code>updatableAttributes</code>.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CopyImageSetResponse:
+      type: object
+      required:
+        - datastoreId
+        - sourceImageSetProperties
+        - destinationImageSetProperties
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        sourceImageSetProperties:
+          allOf:
+            - $ref: '#/components/schemas/CopySourceImageSetProperties'
+            - description: The properties of the source image set.
+        destinationImageSetProperties:
+          allOf:
+            - $ref: '#/components/schemas/CopyDestinationImageSetProperties'
+            - description: The properties of the destination image set.
+    CopySourceImageSetInformation:
+      type: object
+      required:
+        - latestVersionId
+      properties:
+        latestVersionId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetExternalVersionId'
+            - description: The latest version identifier for the source image set.
+      description: Copy source image set information.
+    CopyDestinationImageSet:
+      type: object
+      required:
+        - imageSetId
+        - latestVersionId
+      properties:
+        imageSetId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetId'
+            - description: The image set identifier for the destination image set.
+        latestVersionId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetExternalVersionId'
+            - description: The latest version identifier for the destination image set.
+      description: Copy the destination image set.
+    ThrottlingException: {}
+    ConflictException: {}
+    AccessDeniedException: {}
+    ValidationException: {}
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    ServiceQuotaExceededException: {}
+    CreateDatastoreResponse:
+      type: object
+      required:
+        - datastoreId
+        - datastoreStatus
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        datastoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: The data store status.
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    DeleteDatastoreResponse:
+      type: object
+      required:
+        - datastoreId
+        - datastoreStatus
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        datastoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: The data store status.
+    DeleteImageSetResponse:
+      type: object
+      required:
+        - datastoreId
+        - imageSetId
+        - imageSetState
+        - imageSetWorkflowStatus
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        imageSetId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetId'
+            - description: The image set identifier.
+        imageSetState:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetState'
+            - description: The image set state.
+        imageSetWorkflowStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetWorkflowStatus'
+            - description: The image set workflow status.
+    GetDICOMImportJobResponse:
+      type: object
+      required:
+        - jobProperties
+      properties:
+        jobProperties:
+          allOf:
+            - $ref: '#/components/schemas/DICOMImportJobProperties'
+            - description: The properties of the import job.
+    GetDatastoreResponse:
+      type: object
+      required:
+        - datastoreProperties
+      properties:
+        datastoreProperties:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreProperties'
+            - description: The data store properties.
+    GetImageFrameResponse:
+      type: object
+      required:
+        - imageFrameBlob
+      properties:
+        imageFrameBlob:
+          allOf:
+            - $ref: '#/components/schemas/PayloadBlob'
+            - description: The blob containing the aggregated image frame information.
+    ImageFrameId:
+      type: string
+      pattern: '[0-9a-z]{32}'
+    GetImageSetResponse:
+      type: object
+      required:
+        - datastoreId
+        - imageSetId
+        - versionId
+        - imageSetState
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        imageSetId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetId'
+            - description: The image set identifier.
+        versionId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetExternalVersionId'
+            - description: The image set version identifier.
+        imageSetState:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetState'
+            - description: The image set state.
+        imageSetWorkflowStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetWorkflowStatus'
+            - description: The image set workflow status.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when image set properties were created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when image set properties were updated.
+        deletedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the image set properties were deleted.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: The error message thrown if an image set action fails.
+        imageSetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) assigned to the image set.
+    GetImageSetMetadataResponse:
+      type: object
+      required:
+        - imageSetMetadataBlob
+      properties:
+        imageSetMetadataBlob:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetMetadataBlob'
+            - description: The blob containing the aggregated metadata information for the image set.
+    ListDICOMImportJobsResponse:
+      type: object
+      required:
+        - jobSummaries
+      properties:
+        jobSummaries:
+          allOf:
+            - $ref: '#/components/schemas/DICOMImportJobSummaries'
+            - description: A list of job summaries.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token used to retrieve the list of import jobs on the next page.
+    ListDatastoresResponse:
+      type: object
+      properties:
+        datastoreSummaries:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreSummaries'
+            - description: The list of summaries of data stores.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token used to retrieve the list of data stores on the next page.
+    ListImageSetVersionsResponse:
+      type: object
+      required:
+        - imageSetPropertiesList
+      properties:
+        imageSetPropertiesList:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetPropertiesList'
+            - description: Lists all properties associated with an image set.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token used to retrieve the list of image set versions on the next page.
+    ListTagsForResourceResponse:
+      type: object
+      required:
+        - tags
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A list of all tags associated with a medical imaging resource.
+    SearchImageSetsResponse:
+      type: object
+      required:
+        - imageSetsMetadataSummaries
+      properties:
+        imageSetsMetadataSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetsMetadataSummaries'
+            - description: The model containing the image set results.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for pagination results.
+    SearchCriteriaFiltersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchFilter'
+      minItems: 1
+      maxItems: 2
+    StartDICOMImportJobResponse:
+      type: object
+      required:
+        - datastoreId
+        - jobId
+        - jobStatus
+        - submittedAt
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The import job identifier.
+        jobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The import job status.
+        submittedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the import job was submitted.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '(?!aws:)[a-zA-Z+-=._:/]+'
+      minLength: 1
+      maxLength: 128
+    UpdateImageSetMetadataResponse:
+      type: object
+      required:
+        - datastoreId
+        - imageSetId
+        - latestVersionId
+        - imageSetState
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        imageSetId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetId'
+            - description: The image set identifier.
+        latestVersionId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetExternalVersionId'
+            - description: The latest image set version identifier.
+        imageSetState:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetState'
+            - description: The image set state.
+        imageSetWorkflowStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetWorkflowStatus'
+            - description: The image set workflow status.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when image set metadata was created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when image set metadata was updated.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: The error message thrown if an update image set metadata action fails.
+    DICOMUpdates:
+      type: object
+      properties:
+        removableAttributes:
+          allOf:
+            - $ref: '#/components/schemas/DICOMAttribute'
+            - description: The DICOM tags to be removed from <code>ImageSetMetadata</code>.
+        updatableAttributes:
+          allOf:
+            - $ref: '#/components/schemas/DICOMAttribute'
+            - description: The DICOM tags that need to be updated in <code>ImageSetMetadata</code>.
+      description: The object containing <code>removableAttributes</code> and <code>updatableAttributes</code>.
+    Arn:
+      type: string
+      pattern: 'arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:medical-imaging:[a-z0-9-]+:[0-9]{12}:datastore/[0-9a-z]{32}(/imageset/[0-9a-z]{32})?'
+    ClientToken:
+      type: string
+      pattern: '[A-Za-z0-9._-]+'
+      minLength: 1
+      maxLength: 64
+    ImageSetId:
+      type: string
+      pattern: '[0-9a-z]{32}'
+    ImageSetExternalVersionId:
+      type: string
+      pattern: \d+
+    ImageSetState:
+      type: string
+      enum:
+        - ACTIVE
+        - LOCKED
+        - DELETED
+    ImageSetWorkflowStatus:
+      type: string
+      enum:
+        - CREATED
+        - COPIED
+        - COPYING
+        - COPYING_WITH_READ_ONLY_ACCESS
+        - COPY_FAILED
+        - UPDATING
+        - UPDATED
+        - UPDATE_FAILED
+        - DELETING
+        - DELETED
+    Date:
+      type: string
+      format: date-time
+    CopyDestinationImageSetProperties:
+      type: object
+      required:
+        - imageSetId
+        - latestVersionId
+      properties:
+        imageSetId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetId'
+            - description: The image set identifier of the copied image set properties.
+        latestVersionId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetExternalVersionId'
+            - description: The latest version identifier for the destination image set properties.
+        imageSetState:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetState'
+            - description: The image set state of the destination image set properties.
+        imageSetWorkflowStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetWorkflowStatus'
+            - description: The image set workflow status of the destination image set properties.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the destination image set properties were created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the destination image set properties were last updated.
+        imageSetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) assigned to the destination image set.
+      description: Copy the image set properties of the destination image set.
+    CopyImageSetInformation:
+      type: object
+      required:
+        - sourceImageSet
+      properties:
+        sourceImageSet:
+          allOf:
+            - $ref: '#/components/schemas/CopySourceImageSetInformation'
+            - description: The source image set.
+        destinationImageSet:
+          allOf:
+            - $ref: '#/components/schemas/CopyDestinationImageSet'
+            - description: The destination image set.
+      description: Copy image set information.
+    DatastoreId:
+      type: string
+      pattern: '[0-9a-z]{32}'
+    CopyImageSetRequest:
+      type: object
+      required:
+        - copyImageSetInformation
+      title: CopyImageSetRequest
+      properties:
+        copyImageSetInformation:
+          allOf:
+            - $ref: '#/components/schemas/CopyImageSetInformation'
+            - description: Copy image set information.
+    CopySourceImageSetProperties:
+      type: object
+      required:
+        - imageSetId
+        - latestVersionId
+      properties:
+        imageSetId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetId'
+            - description: The image set identifier for the copied source image set.
+        latestVersionId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetExternalVersionId'
+            - description: The latest version identifier for the copied source image set.
+        imageSetState:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetState'
+            - description: The image set state of the copied source image set.
+        imageSetWorkflowStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetWorkflowStatus'
+            - description: The workflow status of the copied source image set.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the source image set properties were created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the source image set properties were updated.
+        imageSetArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) assigned to the source image set.
+      description: Copy source image set properties.
+    DatastoreName:
+      type: string
+      pattern: '[A-Za-z0-9._/#-]+'
+      minLength: 1
+      maxLength: 256
+    TagMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    KmsKeyArn:
+      type: string
+      pattern: 'arn:aws[a-zA-Z-]{0,16}:kms:[a-z]{2}(-[a-z]{1,16}){1,3}-\d{1}:\d{12}:((key/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})|(alias/[a-zA-Z0-9:/_-]{1,256}))'
+      description: ARN referencing a KMS key or KMS key alias.
+      minLength: 1
+      maxLength: 512
+    CreateDatastoreRequest:
+      type: object
+      required:
+        - clientToken
+      title: CreateDatastoreRequest
+      properties:
+        datastoreName:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The data store name.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: A unique identifier for API idempotency.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags provided when creating a data store.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS KMS) key for accessing encrypted data.
+    DatastoreStatus:
+      type: string
+      enum:
+        - CREATING
+        - CREATE_FAILED
+        - ACTIVE
+        - DELETING
+        - DELETED
+    DICOMAccessionNumber:
+      type: string
+      minLength: 0
+      maxLength: 16
+      format: password
+    DICOMAttribute:
+      type: string
+      minLength: 1
+      maxLength: 10000
+      format: password
+    JobId:
+      type: string
+      pattern: '[0-9a-z]+'
+      minLength: 1
+      maxLength: 32
+    JobName:
+      type: string
+      pattern: '[A-Za-z0-9._/#-]+'
+      minLength: 1
+      maxLength: 64
+    JobStatus:
+      type: string
+      enum:
+        - SUBMITTED
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+    RoleArn:
+      type: string
+      pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
+      minLength: 20
+      maxLength: 2048
+    S3Uri:
+      type: string
+      pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
+      minLength: 1
+      maxLength: 1024
+    Message:
+      type: string
+      pattern: '[\w -:]+'
+      minLength: 1
+      maxLength: 2048
+    DICOMImportJobProperties:
+      type: object
+      required:
+        - jobId
+        - jobName
+        - jobStatus
+        - datastoreId
+        - dataAccessRoleArn
+        - inputS3Uri
+        - outputS3Uri
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The import job identifier.
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The import job name.
+        jobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The filters for listing import jobs based on status.
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        dataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) that grants permissions to access medical imaging resources.
+        endedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp for when the import job was ended.
+        submittedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp for when the import job was submitted.
+        inputS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The input prefix path for the S3 bucket that contains the DICOM P10 files to be imported.
+        outputS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The output prefix of the S3 bucket to upload the results of the DICOM import job.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: The error message thrown if an import job fails.
+      description: Properties of the import job.
+    DICOMImportJobSummary:
+      type: object
+      required:
+        - jobId
+        - jobName
+        - jobStatus
+        - datastoreId
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The import job identifier.
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The import job name.
+        jobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The filters for listing import jobs based on status.
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        dataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) that grants permissions to access medical imaging resources.
+        endedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when an import job ended.
+        submittedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when an import job was submitted.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: The error message thrown if an import job fails.
+      description: Summary of import job.
+    DICOMImportJobSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/DICOMImportJobSummary'
+    DICOMNumberOfStudyRelatedInstances:
+      type: integer
+      minimum: 0
+      maximum: 10000
+    DICOMNumberOfStudyRelatedSeries:
+      type: integer
+      minimum: 0
+      maximum: 10000
+    DICOMPatientBirthDate:
+      type: string
+      minLength: 0
+      maxLength: 18
+      format: password
+    DICOMPatientId:
+      type: string
+      minLength: 0
+      maxLength: 64
+      format: password
+    DICOMPatientName:
+      type: string
+      minLength: 0
+      maxLength: 256
+      format: password
+    DICOMPatientSex:
+      type: string
+      minLength: 0
+      maxLength: 16
+      format: password
+    DICOMStudyDate:
+      type: string
+      minLength: 0
+      maxLength: 18
+      format: password
+    DICOMStudyTime:
+      type: string
+      minLength: 0
+      maxLength: 28
+      format: password
+    DICOMStudyDateAndTime:
+      type: object
+      required:
+        - DICOMStudyDate
+      properties:
+        DICOMStudyDate:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyDate'
+            - description: The DICOM study date provided in <code>yyMMdd</code> format.
+        DICOMStudyTime:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyTime'
+            - description: The DICOM study time provided in <code>HHmmss.FFFFFF</code> format.
+      description: The aggregated structure to store DICOM study date and study time for search capabilities.
+    DICOMStudyDescription:
+      type: string
+      minLength: 0
+      maxLength: 64
+      format: password
+    DICOMStudyId:
+      type: string
+      minLength: 0
+      maxLength: 16
+      format: password
+    DICOMStudyInstanceUID:
+      type: string
+      pattern: '(?:[1-9][0-9]*|0)(\.(?:[1-9][0-9]*|0))*'
+      minLength: 0
+      maxLength: 64
+      format: password
+    DICOMTags:
+      type: object
+      properties:
+        DICOMPatientId:
+          allOf:
+            - $ref: '#/components/schemas/DICOMPatientId'
+            - description: The unique identifier for a patient in a DICOM Study.
+        DICOMPatientName:
+          allOf:
+            - $ref: '#/components/schemas/DICOMPatientName'
+            - description: The patient name.
+        DICOMPatientBirthDate:
+          allOf:
+            - $ref: '#/components/schemas/DICOMPatientBirthDate'
+            - description: The patient birth date.
+        DICOMPatientSex:
+          allOf:
+            - $ref: '#/components/schemas/DICOMPatientSex'
+            - description: The patient sex.
+        DICOMStudyInstanceUID:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyInstanceUID'
+            - description: The DICOM provided identifier for studyInstanceUid.&gt;
+        DICOMStudyId:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyId'
+            - description: The DICOM provided studyId.
+        DICOMStudyDescription:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyDescription'
+            - description: The description of the study.
+        DICOMNumberOfStudyRelatedSeries:
+          allOf:
+            - $ref: '#/components/schemas/DICOMNumberOfStudyRelatedSeries'
+            - description: The total number of series in the DICOM study.
+        DICOMNumberOfStudyRelatedInstances:
+          allOf:
+            - $ref: '#/components/schemas/DICOMNumberOfStudyRelatedInstances'
+            - description: The total number of instances in the DICOM study.
+        DICOMAccessionNumber:
+          allOf:
+            - $ref: '#/components/schemas/DICOMAccessionNumber'
+            - description: The accession number for the DICOM study.
+        DICOMStudyDate:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyDate'
+            - description: The study date.
+        DICOMStudyTime:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyTime'
+            - description: The study time.
+      description: The DICOM attributes returned as a part of a response. Each image set has these properties as part of a search result.
+    DatastoreProperties:
+      type: object
+      required:
+        - datastoreId
+        - datastoreName
+        - datastoreStatus
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        datastoreName:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The data store name.
+        datastoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: The data store status.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS KMS) key for accessing encrypted data.
+        datastoreArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the data store.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the data store was created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the data store was last updated.
+      description: The properties associated with the data store.
+    DatastoreSummary:
+      type: object
+      required:
+        - datastoreId
+        - datastoreName
+        - datastoreStatus
+      properties:
+        datastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The data store identifier.
+        datastoreName:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The data store name.
+        datastoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: The data store status.
+        datastoreArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the data store.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the data store was created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the data store was last updated.
+      description: List of summaries of data stores.
+    DatastoreSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatastoreSummary'
+    DeleteDatastoreRequest:
+      type: object
+      title: DeleteDatastoreRequest
+      properties: {}
+    DeleteImageSetRequest:
+      type: object
+      title: DeleteImageSetRequest
+      properties: {}
+    GetDICOMImportJobRequest:
+      type: object
+      title: GetDICOMImportJobRequest
+      properties: {}
+    GetDatastoreRequest:
+      type: object
+      title: GetDatastoreRequest
+      properties: {}
+    ImageFrameInformation:
+      type: object
+      required:
+        - imageFrameId
+      properties:
+        imageFrameId:
+          allOf:
+            - $ref: '#/components/schemas/ImageFrameId'
+            - description: The image frame (pixel data) identifier.
+      description: Information about the image frame (pixel data) identifier.
+    GetImageFrameRequest:
+      type: object
+      required:
+        - imageFrameInformation
+      title: GetImageFrameRequest
+      properties:
+        imageFrameInformation:
+          allOf:
+            - $ref: '#/components/schemas/ImageFrameInformation'
+            - description: Information about the image frame (pixel data) identifier.
+    PayloadBlob:
+      type: string
+    String:
+      type: string
+    GetImageSetMetadataRequest:
+      type: object
+      title: GetImageSetMetadataRequest
+      properties: {}
+    ImageSetMetadataBlob:
+      type: string
+    GetImageSetRequest:
+      type: object
+      title: GetImageSetRequest
+      properties: {}
+    ImageSetProperties:
+      type: object
+      required:
+        - imageSetId
+        - versionId
+        - imageSetState
+      properties:
+        imageSetId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetId'
+            - description: The image set identifier.
+        versionId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetExternalVersionId'
+            - description: The image set version identifier.
+        imageSetState:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetState'
+            - description: The image set state.
+        ImageSetWorkflowStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetWorkflowStatus'
+            - description: The image set workflow status.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the image set properties were created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the image set properties were updated.
+        deletedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The timestamp when the image set properties were deleted.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: The error message thrown if an image set action fails.
+      description: The image set properties.
+    ImageSetPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageSetProperties'
+    ImageSetsMetadataSummary:
+      type: object
+      required:
+        - imageSetId
+      properties:
+        imageSetId:
+          allOf:
+            - $ref: '#/components/schemas/ImageSetId'
+            - description: The image set identifier.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The image set version.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: 'The time an image set is created in AWS HealthImaging. Sample creation date is provided in <code>1985-04-12T23:20:50.52Z</code> format.'
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time when an image was last updated in AWS HealthImaging.
+        DICOMTags:
+          allOf:
+            - $ref: '#/components/schemas/DICOMTags'
+            - description: The DICOM tags associated with the image set.
+      description: Summary of the image set metadata.
+    ImageSetsMetadataSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageSetsMetadataSummary'
+    Integer:
+      type: integer
+    NextToken:
+      type: string
+      pattern: '\p{ASCII}{0,8192}'
+      minLength: 1
+      maxLength: 8192
+    ListDICOMImportJobsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListDICOMImportJobsRequest:
+      type: object
+      title: ListDICOMImportJobsRequest
+      properties: {}
+    ListDatastoresRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListDatastoresRequest:
+      type: object
+      title: ListDatastoresRequest
+      properties: {}
+    ListImageSetVersionsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    ListImageSetVersionsRequest:
+      type: object
+      title: ListImageSetVersionsRequest
+      properties: {}
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    MetadataUpdates:
+      type: object
+      properties:
+        DICOMUpdates:
+          allOf:
+            - $ref: '#/components/schemas/DICOMUpdates'
+            - description: The object containing <code>removableAttributes</code> and <code>updatableAttributes</code>.
+      description: Contains DICOMUpdates.
+    Operator:
+      type: string
+      enum:
+        - EQUAL
+        - BETWEEN
+    SearchByAttributeValue:
+      type: object
+      properties:
+        DICOMPatientId:
+          allOf:
+            - $ref: '#/components/schemas/DICOMPatientId'
+            - description: The patient ID input for search.
+        DICOMAccessionNumber:
+          allOf:
+            - $ref: '#/components/schemas/DICOMAccessionNumber'
+            - description: The DICOM accession number for search.
+        DICOMStudyId:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyId'
+            - description: The DICOM study ID for search.
+        DICOMStudyInstanceUID:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyInstanceUID'
+            - description: The DICOM study instance UID for search.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The created at time of the image set provided for search.
+        DICOMStudyDateAndTime:
+          allOf:
+            - $ref: '#/components/schemas/DICOMStudyDateAndTime'
+            - description: The aggregated structure containing DICOM study date and study time for search.
+      description: The search input attribute value.
+    SearchCriteria:
+      type: object
+      properties:
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/SearchCriteriaFiltersList'
+            - description: The filters for the search criteria.
+      description: The search criteria.
+    SearchFilter:
+      type: object
+      required:
+        - values
+        - operator
+      properties:
+        values:
+          allOf:
+            - $ref: '#/components/schemas/SearchFilterValuesList'
+            - description: The search filter values.
+        operator:
+          allOf:
+            - $ref: '#/components/schemas/Operator'
+            - description: The search filter operator for <code>imageSetDateTime</code>.
+      description: The search filter.
+    SearchFilterValuesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SearchByAttributeValue'
+      minItems: 1
+      maxItems: 2
+    SearchImageSetsRequestMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 50
+    SearchImageSetsRequest:
+      type: object
+      title: SearchImageSetsRequest
+      properties:
+        searchCriteria:
+          allOf:
+            - $ref: '#/components/schemas/SearchCriteria'
+            - description: The search criteria that filters by applying a maximum of 1 item to <code>SearchByAttribute</code>.
+    StartDICOMImportJobRequest:
+      type: object
+      required:
+        - dataAccessRoleArn
+        - clientToken
+        - inputS3Uri
+        - outputS3Uri
+      title: StartDICOMImportJobRequest
+      properties:
+        jobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The import job name.
+        dataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role that grants permission to access medical imaging resources.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: A unique identifier for API idempotency.
+        inputS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The input prefix path for the S3 bucket that contains the DICOM files to be imported.
+        outputS3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The output prefix of the S3 bucket to upload the results of the DICOM import job.
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The user-specified key and value tag pairs added to a medical imaging resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateImageSetMetadataRequest:
+      type: object
+      required:
+        - updateImageSetMetadataUpdates
+      title: UpdateImageSetMetadataRequest
+      properties:
+        updateImageSetMetadataUpdates:
+          allOf:
+            - $ref: '#/components/schemas/MetadataUpdates'
+            - description: Update image set metadata updates.
+security:
+  - hmac: []

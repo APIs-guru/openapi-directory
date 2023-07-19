@@ -4879,6 +4879,18 @@ paths:
             enum:
               - SELF
               - DELEGATED_ADMIN
+        - name: TemplateSummaryConfig
+          in: query
+          required: false
+          description: Specifies options for the <code>GetTemplateSummary</code> API action.
+          schema:
+            type: object
+            properties:
+              TreatUnrecognizedResourceTypesAsWarnings:
+                allOf:
+                  - $ref: '#/components/schemas/TreatUnrecognizedResourceTypesAsWarnings'
+                  - description: 'If set to <code>True</code>, any unrecognized resource types generate warnings and not an error. Any unrecognized resource types are returned in the <code>Warnings</code> output parameter.'
+            description: Options for the <code>GetTemplateSummary</code> API action.
         - name: Action
           in: query
           required: true
@@ -9707,7 +9719,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceIdentifierSummaries'
             - description: 'A list of resource identifier summaries that describe the target resources of an import operation and the properties you can provide during the import to identify the target resources. For example, <code>BucketName</code> is a possible identifier property for an <code>AWS::S3::Bucket</code> resource.'
+        Warnings:
+          allOf:
+            - $ref: '#/components/schemas/Warnings'
+            - description: An object containing any warnings returned.
       description: The output for the <a>GetTemplateSummary</a> action.
+    TreatUnrecognizedResourceTypesAsWarnings:
+      type: boolean
     ImportStacksToStackSetOutput:
       type: object
       properties:
@@ -12029,6 +12047,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TemplateStage'
+    TemplateSummaryConfig:
+      type: object
+      properties:
+        TreatUnrecognizedResourceTypesAsWarnings:
+          allOf:
+            - $ref: '#/components/schemas/TreatUnrecognizedResourceTypesAsWarnings'
+            - description: 'If set to <code>True</code>, any unrecognized resource types generate warnings and not an error. Any unrecognized resource types are returned in the <code>Warnings</code> output parameter.'
+      description: Options for the <code>GetTemplateSummary</code> API action.
     GetTemplateSummaryInput:
       type: object
       title: GetTemplateSummaryInput
@@ -12053,6 +12079,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CallAs'
             - description: '<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization''s management account or as a delegated administrator in a member account.</p> <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p> <ul> <li> <p>If you are signed in to the management account, specify <code>SELF</code>.</p> </li> <li> <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p> <p>Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html">Register a delegated administrator</a> in the <i>CloudFormation User Guide</i>.</p> </li> </ul>'
+        TemplateSummaryConfig:
+          allOf:
+            - $ref: '#/components/schemas/TemplateSummaryConfig'
+            - description: Specifies options for the <code>GetTemplateSummary</code> API action.
       description: The input for the <a>GetTemplateSummary</a> action.
     ParameterDeclarations:
       type: array
@@ -12070,6 +12100,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResourceIdentifierSummary'
+    Warnings:
+      type: object
+      properties:
+        UnrecognizedResourceTypes:
+          allOf:
+            - $ref: '#/components/schemas/ResourceTypes'
+            - description: A list of all of the unrecognized resource types. This is only returned if the <code>TemplateSummaryConfig</code> parameter has the <code>TreatUnrecognizedResourceTypesAsWarning</code> configuration set to <code>True</code>.
+      description: Contains any warnings returned by the <code>GetTemplateSummary</code> API action.
     HandlerErrorCode:
       type: string
       enum:

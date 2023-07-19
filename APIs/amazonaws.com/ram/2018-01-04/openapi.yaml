@@ -323,6 +323,11 @@ paths:
                 clientToken:
                   description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>'
                   type: string
+                sources:
+                  description: Specifies from which source accounts the service principal has access to the resources in this resource share.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -694,12 +699,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/TagPolicyViolationException'
         '489':
+          description: TagLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagLimitExceededException'
+        '490':
           description: ServerInternalException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerInternalException'
-        '490':
+        '491':
           description: ServiceUnavailableException
           content:
             application/json:
@@ -741,6 +752,11 @@ paths:
                   type: string
                 permissionArns:
                   description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
+                sources:
+                  description: Specifies from which source accounts the service principal has access to the resources in this resource share.
                   type: array
                   items:
                     $ref: '#/components/schemas/String'
@@ -1095,6 +1111,11 @@ paths:
                 clientToken:
                   description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>'
                   type: string
+                sources:
+                  description: Specifies from which source accounts the service principal no longer has access to the resources in this resource share.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/String'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1482,7 +1503,7 @@ paths:
                   description: '<p>Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of a resource whose resource shares you want to retrieve.</p> <p>You cannot specify this parameter if the association type is <code>PRINCIPAL</code>.</p>'
                   type: string
                 principal:
-                  description: '<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of an individual IAM user or role.</p> <p>You cannot specify this parameter if the association type is <code>RESOURCE</code>.</p>'
+                  description: '<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of an individual IAM role or user.</p> <p>You cannot specify this parameter if the association type is <code>RESOURCE</code>.</p>'
                   type: string
                 associationStatus:
                   description: Specifies that you want to retrieve only associations that have this status.
@@ -3451,6 +3472,7 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The idempotency identifier associated with this request. If you want to repeat the same operation in an idempotent manner then you must include this value in the <code>clientToken</code> request parameter of that later call. All other parameters must also have the same values that you used in the first call.
     TagPolicyViolationException: {}
+    TagLimitExceededException: {}
     DeletePermissionResponse:
       type: object
       properties:
@@ -3741,7 +3763,6 @@ components:
     TagResourceResponse:
       type: object
       properties: {}
-    TagLimitExceededException: {}
     UntagResourceResponse:
       type: object
       properties: {}
@@ -3852,6 +3873,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    SourceArnOrAccountList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     AssociateResourceShareRequest:
       type: object
       required:
@@ -3874,6 +3899,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>'
+        sources:
+          allOf:
+            - $ref: '#/components/schemas/SourceArnOrAccountList'
+            - description: Specifies from which source accounts the service principal has access to the resources in this resource share.
     ResourceShareAssociationList:
       type: array
       items:
@@ -4131,6 +4160,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PermissionArnList'
             - description: 'Specifies the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs)</a> of the RAM permission to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.'
+        sources:
+          allOf:
+            - $ref: '#/components/schemas/SourceArnOrAccountList'
+            - description: Specifies from which source accounts the service principal has access to the resources in this resource share.
     ResourceShare:
       type: object
       properties:
@@ -4235,6 +4268,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request. This lets you safely retry the request without accidentally performing the same operation a second time. Passing the same value to a later call to an operation requires that you also pass the same value for all other parameters. We recommend that you use a <a href="https://wikipedia.org/wiki/Universally_unique_identifier">UUID type of value.</a>.</p> <p>If you don''t provide this value, then Amazon Web Services generates a random one for you.</p> <p>If you retry the operation with the same <code>ClientToken</code>, but with different parameters, the retry fails with an <code>IdempotentParameterMismatch</code> error.</p>'
+        sources:
+          allOf:
+            - $ref: '#/components/schemas/SourceArnOrAccountList'
+            - description: Specifies from which source accounts the service principal no longer has access to the resources in this resource share.
     EnableSharingWithAwsOrganizationRequest:
       type: object
       title: EnableSharingWithAwsOrganizationRequest
@@ -4321,7 +4358,7 @@ components:
         principal:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of an individual IAM user or role.</p> <p>You cannot specify this parameter if the association type is <code>RESOURCE</code>.</p>'
+            - description: '<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a> of an individual IAM role or user.</p> <p>You cannot specify this parameter if the association type is <code>RESOURCE</code>.</p>'
         associationStatus:
           allOf:
             - $ref: '#/components/schemas/ResourceShareAssociationStatus'
