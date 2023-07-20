@@ -161,7 +161,7 @@ paths:
                 - Identifiers
               properties:
                 Identifiers:
-                  description: 'A list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name that have been requested to be retrieved in batch.'
+                  description: 'A list containing the name or Amazon Resource Name (ARN) of the <code>FeatureGroup</code>, the list of names of <code>Feature</code>s to be retrieved, and the corresponding <code>RecordIdentifier</code> values as strings.'
                   type: array
                   items:
                     $ref: '#/components/schemas/BatchGetRecordIdentifier'
@@ -216,12 +216,12 @@ paths:
         - name: FeatureGroupName
           in: path
           required: true
-          description: 'The name of the feature group to delete the record from. '
+          description: 'The name or Amazon Resource Name (ARN) of the feature group to delete the record from. '
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
+            pattern: '(arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:feature-group/)?([a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63})'
             minLength: 1
-            maxLength: 64
+            maxLength: 150
         - name: RecordIdentifierValueAsString
           in: query
           required: true
@@ -310,12 +310,12 @@ paths:
         - name: FeatureGroupName
           in: path
           required: true
-          description: The name of the feature group from which you want to retrieve a record.
+          description: The name or Amazon Resource Name (ARN) of the feature group from which you want to retrieve a record.
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
+            pattern: '(arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:feature-group/)?([a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63})'
             minLength: 1
-            maxLength: 64
+            maxLength: 150
         - name: RecordIdentifierValueAsString
           in: query
           required: true
@@ -336,7 +336,7 @@ paths:
         - name: ExpirationTimeResponse
           in: query
           required: false
-          description: 'Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>, <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return null.'
+          description: 'Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>, <code>GetRecord</code> will return the value of <code>ExpiresAt</code>, if it is not null. If <code>Disabled</code> and null, <code>GetRecord</code> will return null.'
           schema:
             type: string
             enum:
@@ -353,7 +353,7 @@ paths:
   '/FeatureGroup/{FeatureGroupName}':
     put:
       operationId: PutRecord
-      description: 'Used for data ingestion into the <code>FeatureStore</code>. The <code>PutRecord</code> API writes to both the <code>OnlineStore</code> and <code>OfflineStore</code>. If the record is the latest record for the <code>recordIdentifier</code>, the record is written to both the <code>OnlineStore</code> and <code>OfflineStore</code>. If the record is a historic record, it is written only to the <code>OfflineStore</code>.'
+      description: '<p>The <code>PutRecord</code> API is used to ingest a list of <code>Records</code> into your feature group. </p> <p>If a new record’s <code>EventTime</code> is greater, the new record is written to both the <code>OnlineStore</code> and <code>OfflineStore</code>. Otherwise, the record is a historic record and it is written only to the <code>OfflineStore</code>. </p> <p>You can specify the ingestion to be applied to the <code>OnlineStore</code>, <code>OfflineStore</code>, or both by using the <code>TargetStores</code> request parameter. </p> <p>You can set the ingested record to expire at a given time to live (TTL) duration after the record’s event time, <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>, by specifying the <code>TtlDuration</code> parameter. A record level <code>TtlDuration</code> is set when specifying the <code>TtlDuration</code> parameter using the <code>PutRecord</code> API call. If the input <code>TtlDuration</code> is <code>null</code> or unspecified, <code>TtlDuration</code> is set to the default feature group level <code>TtlDuration</code>. A record level <code>TtlDuration</code> supersedes the group level <code>TtlDuration</code>.</p>'
       responses:
         '200':
           description: Success
@@ -385,12 +385,12 @@ paths:
         - name: FeatureGroupName
           in: path
           required: true
-          description: The name of the feature group that you want to insert the record into.
+          description: The name or Amazon Resource Name (ARN) of the feature group that you want to insert the record into.
           schema:
             type: string
-            pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
+            pattern: '(arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:feature-group/)?([a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63})'
             minLength: 1
-            maxLength: 64
+            maxLength: 150
       requestBody:
         required: true
         content:
@@ -512,8 +512,8 @@ components:
       properties:
         FeatureGroupName:
           allOf:
-            - $ref: '#/components/schemas/FeatureGroupName'
-            - description: A <code>FeatureGroupName</code> containing Records you are retrieving in a batch.
+            - $ref: '#/components/schemas/FeatureGroupNameOrArn'
+            - description: The name or Amazon Resource Name (ARN) of the <code>FeatureGroup</code> containing the records you are retrieving in a batch.
         RecordIdentifiersValueAsString:
           allOf:
             - $ref: '#/components/schemas/RecordIdentifiers'
@@ -612,11 +612,11 @@ components:
       items:
         $ref: '#/components/schemas/BatchGetRecordError'
       minItems: 0
-    FeatureGroupName:
+    FeatureGroupNameOrArn:
       type: string
-      pattern: '^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}'
+      pattern: '(arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:feature-group/)?([a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63})'
       minLength: 1
-      maxLength: 64
+      maxLength: 150
     RecordIdentifiers:
       type: array
       items:
@@ -648,7 +648,7 @@ components:
         Identifiers:
           allOf:
             - $ref: '#/components/schemas/BatchGetRecordIdentifiers'
-            - description: 'A list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name that have been requested to be retrieved in batch.'
+            - description: 'A list containing the name or Amazon Resource Name (ARN) of the <code>FeatureGroup</code>, the list of names of <code>Feature</code>s to be retrieved, and the corresponding <code>RecordIdentifier</code> values as strings.'
         ExpirationTimeResponse:
           allOf:
             - $ref: '#/components/schemas/ExpirationTimeResponse'
@@ -693,7 +693,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExpiresAt'
             - description: The <code>ExpiresAt</code> ISO string of the requested record.
-      description: The output of Records that have been retrieved in a batch.
+      description: The output of records that have been retrieved in a batch.
     TargetStores:
       type: array
       items:

@@ -9430,6 +9430,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListResourceCatalogs:
+    post:
+      operationId: ListResourceCatalogs
+      description: ' Lists Amazon SageMaker Catalogs based on given filters and orders. The maximum number of <code>ResourceCatalog</code>s viewable is 1000. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListResourceCatalogsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListResourceCatalogsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListResourceCatalogs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.ListSpaces:
     post:
       operationId: ListSpaces
@@ -11506,7 +11551,7 @@ paths:
   /#X-Amz-Target=SageMaker.UpdateFeatureGroup:
     post:
       operationId: UpdateFeatureGroup
-      description: Updates the feature group.
+      description: '<p>Updates the feature group by either adding features or updating the online store configuration. Use one of the following request parameters at a time while using the <code>UpdateFeatureGroup</code> API.</p> <p>You can add features for your feature group using the <code>FeatureAdditions</code> request parameter. Features cannot be removed from a feature group.</p> <p>You can update the online store configuration by using the <code>OnlineStoreConfig</code> request parameter. If a <code>TtlDuration</code> is specified, the default <code>TtlDuration</code> applies for all records added to the feature group <i>after the feature group is updated</i>. If a record level <code>TtlDuration</code> exists from using the <code>PutRecord</code> API, the record level <code>TtlDuration</code> applies to that record instead of the default <code>TtlDuration</code>.</p>'
       responses:
         '200':
           description: Success
@@ -17006,8 +17051,8 @@ components:
       properties:
         FeatureGroupName:
           allOf:
-            - $ref: '#/components/schemas/FeatureGroupName'
-            - description: 'The name of the <code>FeatureGroup</code> you want described. '
+            - $ref: '#/components/schemas/FeatureGroupNameOrArn'
+            - description: 'The name or Amazon Resource Name (ARN) of the <code>FeatureGroup</code> you want described. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -17063,8 +17108,8 @@ components:
       properties:
         FeatureGroupName:
           allOf:
-            - $ref: '#/components/schemas/FeatureGroupName'
-            - description: The name of the feature group containing the feature.
+            - $ref: '#/components/schemas/FeatureGroupNameOrArn'
+            - description: The name or Amazon Resource Name (ARN) of the feature group containing the feature.
         FeatureName:
           allOf:
             - $ref: '#/components/schemas/FeatureName'
@@ -22584,6 +22629,49 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProjectSortOrder'
             - description: The sort order for results. The default is <code>Ascending</code>.
+    ListResourceCatalogsResponse:
+      type: object
+      properties:
+        ResourceCatalogs:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCatalogList'
+            - description: ' A list of the requested <code>ResourceCatalog</code>s. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A token to resume pagination of <code>ListResourceCatalogs</code> results. '
+    ListResourceCatalogsRequest:
+      type: object
+      title: ListResourceCatalogsRequest
+      properties:
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCatalogName'
+            - description: ' A string that partially matches one or more <code>ResourceCatalog</code>s names. Filters <code>ResourceCatalog</code> by name. '
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Use this parameter to search for <code>ResourceCatalog</code>s created after a specific date and time. '
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' Use this parameter to search for <code>ResourceCatalog</code>s created before a specific date and time. '
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCatalogSortOrder'
+            - description: ' The order in which the resource catalogs are listed. '
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCatalogSortBy'
+            - description: ' The value on which the resource catalog list is sorted. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: ' The maximum number of results returned by <code>ListResourceCatalogs</code>. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A token to resume pagination of <code>ListResourceCatalogs</code> results. '
     ListSpacesResponse:
       type: object
       properties:
@@ -23342,6 +23430,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of results to return.
+        CrossAccountFilterOption:
+          allOf:
+            - $ref: '#/components/schemas/CrossAccountFilterOption'
+            - description: ' A cross account filter option. When the value is <code>"CrossAccount"</code> the search results will only include resources made discoverable to you from other accounts. When the value is <code>"SameAccount"</code> or <code>null</code> the search results will only include resources from your account. Default is <code>null</code>. For more information on searching for resources made discoverable to your account, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html"> Search discoverable resources</a> in the SageMaker Developer Guide. The maximum number of <code>ResourceCatalog</code>s viewable is 1000. '
     SendPipelineExecutionStepFailureResponse:
       type: object
       properties:
@@ -23987,8 +24079,8 @@ components:
       properties:
         FeatureGroupName:
           allOf:
-            - $ref: '#/components/schemas/FeatureGroupName'
-            - description: The name of the feature group that you're updating.
+            - $ref: '#/components/schemas/FeatureGroupNameOrArn'
+            - description: The name or Amazon Resource Name (ARN) of the feature group that you're updating.
         FeatureAdditions:
           allOf:
             - $ref: '#/components/schemas/FeatureAdditions'
@@ -24006,8 +24098,8 @@ components:
       properties:
         FeatureGroupName:
           allOf:
-            - $ref: '#/components/schemas/FeatureGroupName'
-            - description: The name of the feature group containing the feature that you're updating.
+            - $ref: '#/components/schemas/FeatureGroupNameOrArn'
+            - description: The name or Amazon Resource Name (ARN) of the feature group containing the feature that you're updating.
         FeatureName:
           allOf:
             - $ref: '#/components/schemas/FeatureName'
@@ -30705,6 +30797,11 @@ components:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:workteam/.*'
       maxLength: 256
+    CrossAccountFilterOption:
+      type: string
+      enum:
+        - SameAccount
+        - CrossAccount
     CsvContentType:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*\/[a-zA-Z0-9](-*[a-zA-Z0-9.])*'
@@ -31632,6 +31729,11 @@ components:
             - $ref: '#/components/schemas/SourceType'
             - description: The source type.
       description: The source of the experiment.
+    FeatureGroupNameOrArn:
+      type: string
+      pattern: '(arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:feature-group\/)?([a-zA-Z0-9]([_-]*[a-zA-Z0-9]){0,63})'
+      minLength: 1
+      maxLength: 256
     FeatureGroupStatus:
       type: string
       enum:
@@ -33883,7 +33985,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OfflineStoreStatus'
             - description: 'Notifies you if replicating data into the <code>OfflineStore</code> has failed. Returns either: <code>Active</code> or <code>Blocked</code>.'
-      description: 'The name, Arn, <code>CreationTime</code>, <code>FeatureGroup</code> values, <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a <code>FeatureGroup</code>.'
+      description: 'The name, ARN, <code>CreationTime</code>, <code>FeatureGroup</code> values, <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a <code>FeatureGroup</code>.'
     FeatureGroupSummaries:
       type: array
       items:
@@ -36207,6 +36309,23 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ProjectSummary'
+    ResourceCatalogName:
+      type: string
+      minLength: 1
+      maxLength: 64
+    ResourceCatalogSortOrder:
+      type: string
+      enum:
+        - Ascending
+        - Descending
+    ResourceCatalogSortBy:
+      type: string
+      enum:
+        - CreationTime
+    ResourceCatalogList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceCatalog'
     SpaceSortKey:
       type: string
       enum:
@@ -39687,6 +39806,38 @@ components:
       pattern: .*
       minLength: 1
       maxLength: 2048
+    ResourceCatalogArn:
+      type: string
+      pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:sagemaker-catalog/.*'
+      maxLength: 256
+    ResourceCatalogDescription:
+      type: string
+      maxLength: 256
+    ResourceCatalog:
+      type: object
+      required:
+        - ResourceCatalogArn
+        - ResourceCatalogName
+        - Description
+        - CreationTime
+      properties:
+        ResourceCatalogArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCatalogArn'
+            - description: ' The Amazon Resource Name (ARN) of the <code>ResourceCatalog</code>. '
+        ResourceCatalogName:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCatalogName'
+            - description: ' The name of the <code>ResourceCatalog</code>. '
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceCatalogDescription'
+            - description: ' A free form description of the <code>ResourceCatalog</code>. '
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time the <code>ResourceCatalog</code> was created. '
+      description: ' A resource catalog containing all of the resources of a specific resource type within a resource owner account. For an example on sharing the Amazon SageMaker Feature Store <code>DefaultFeatureGroupCatalog</code>, see <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/feature-store-cross-account-discoverability-share-sagemaker-catalog.html">Share Amazon SageMaker Catalog resource type</a> in the Amazon SageMaker Developer Guide. '
     ResourceConfigForUpdate:
       type: object
       required:

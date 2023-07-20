@@ -3,7 +3,7 @@ info:
   version: '2022-09-28'
   x-release: bearer
   title: Amazon CodeCatalyst
-  description: '<p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst API to work with the following objects. </p> <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p> <ul> <li> <p> <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p> </li> <li> <p> <a>CreateDevEnvironment</a>, which creates a Dev Environment, where you can quickly work on the code stored in the source repositories of your project.</p> </li> <li> <p> <a>CreateProject</a> which creates a project in a specified space.</p> </li> <li> <p> <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p> </li> <li> <p> <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p> </li> <li> <p> <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p> </li> <li> <p> <a>GetProject</a>, which returns information about a project.</p> </li> <li> <p> <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source repository.</p> </li> <li> <p> <a>GetSpace</a>, which returns information about a space.</p> </li> <li> <p> <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes and the billing plan for the space.</p> </li> <li> <p> <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p> </li> <li> <p> <a>ListDevEnvironments</a>, which retrieves a list of Dev Environments in a project.</p> </li> <li> <p> <a>ListDevEnvironmentSessions</a>, which retrieves a list of active Dev Environment sessions in a project.</p> </li> <li> <p> <a>ListProjects</a>, which retrieves a list of projects in a space.</p> </li> <li> <p> <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p> </li> <li> <p> <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p> </li> <li> <p> <a>ListSpaces</a>, which retrieves a list of spaces.</p> </li> <li> <p> <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p> </li> <li> <p> <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p> </li> <li> <p> <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p> </li> <li> <p> <a>StopDevEnvironmentSession</a>, which stops a session for a specified Dev Environment.</p> </li> <li> <p> <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p> </li> <li> <p> <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p> </li> </ul> <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p> <ul> <li> <p> <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p> </li> <li> <p> <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p> </li> <li> <p> <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p> </li> </ul> <note> <p>If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must configure your computer to work with Amazon CodeCatalyst and single sign-on (SSO). For more information, see <a href="https://docs.aws.amazon.com/codecatalyst/latest/userguide/set-up-cli.html">Setting up to use the CLI with Amazon CodeCatalyst</a> and the SSO documentation for your SDK.</p> </note>'
+  description: '<p>Welcome to the Amazon CodeCatalyst API reference. This reference provides descriptions of operations and data types for Amazon CodeCatalyst. You can use the Amazon CodeCatalyst API to work with the following objects. </p> <p>Spaces, by calling the following:</p> <ul> <li> <p> <a>DeleteSpace</a>, which deletes a space.</p> </li> <li> <p> <a>GetSpace</a>, which returns information about a space.</p> </li> <li> <p> <a>GetSubscription</a>, which returns information about the Amazon Web Services account used for billing purposes and the billing plan for the space.</p> </li> <li> <p> <a>ListSpaces</a>, which retrieves a list of spaces.</p> </li> <li> <p> <a>UpdateSpace</a>, which hanges one or more values for a space.</p> </li> </ul> <p>Projects, by calling the following:</p> <ul> <li> <p> <a>CreateProject</a> which creates a project in a specified space.</p> </li> <li> <p> <a>GetProject</a>, which returns information about a project.</p> </li> <li> <p> <a>ListProjects</a>, which retrieves a list of projects in a space.</p> </li> </ul> <p>Users, by calling the following:</p> <ul> <li> <p> <a>GetUserDetails</a>, which returns information about a user in Amazon CodeCatalyst.</p> </li> </ul> <p>Source repositories, by calling the following:</p> <ul> <li> <p> <a>CreateSourceRepository</a>, which creates an empty Git-based source repository in a specified project.</p> </li> <li> <p> <a>CreateSourceRepositoryBranch</a>, which creates a branch in a specified repository where you can work on code.</p> </li> <li> <p> <a>DeleteSourceRepository</a>, which deletes a source repository.</p> </li> <li> <p> <a>GetSourceRepository</a>, which returns information about a source repository.</p> </li> <li> <p> <a>GetSourceRepositoryCloneUrls</a>, which returns information about the URLs that can be used with a Git client to clone a source repository.</p> </li> <li> <p> <a>ListSourceRepositories</a>, which retrieves a list of source repositories in a project.</p> </li> <li> <p> <a>ListSourceRepositoryBranches</a>, which retrieves a list of branches in a source repository.</p> </li> </ul> <p>Dev Environments and the Amazon Web Services Toolkits, by calling the following:</p> <ul> <li> <p> <a>CreateDevEnvironment</a>, which creates a Dev Environment, where you can quickly work on the code stored in the source repositories of your project.</p> </li> <li> <p> <a>DeleteDevEnvironment</a>, which deletes a Dev Environment.</p> </li> <li> <p> <a>GetDevEnvironment</a>, which returns information about a Dev Environment.</p> </li> <li> <p> <a>ListDevEnvironments</a>, which retrieves a list of Dev Environments in a project.</p> </li> <li> <p> <a>ListDevEnvironmentSessions</a>, which retrieves a list of active Dev Environment sessions in a project.</p> </li> <li> <p> <a>StartDevEnvironment</a>, which starts a specified Dev Environment and puts it into an active state.</p> </li> <li> <p> <a>StartDevEnvironmentSession</a>, which starts a session to a specified Dev Environment.</p> </li> <li> <p> <a>StopDevEnvironment</a>, which stops a specified Dev Environment and puts it into an stopped state.</p> </li> <li> <p> <a>StopDevEnvironmentSession</a>, which stops a session for a specified Dev Environment.</p> </li> <li> <p> <a>UpdateDevEnvironment</a>, which changes one or more values for a Dev Environment.</p> </li> </ul> <p>Security, activity, and resource management in Amazon CodeCatalyst, by calling the following:</p> <ul> <li> <p> <a>CreateAccessToken</a>, which creates a personal access token (PAT) for the current user.</p> </li> <li> <p> <a>DeleteAccessToken</a>, which deletes a specified personal access token (PAT).</p> </li> <li> <p> <a>ListAccessTokens</a>, which lists all personal access tokens (PATs) associated with a user.</p> </li> <li> <p> <a>ListEventLogs</a>, which retrieves a list of events that occurred during a specified time period in a space.</p> </li> <li> <p> <a>VerifySession</a>, which verifies whether the calling user has a valid Amazon CodeCatalyst login and session.</p> </li> </ul> <note> <p>If you are using the Amazon CodeCatalyst APIs with an SDK or the CLI, you must configure your computer to work with Amazon CodeCatalyst and single sign-on (SSO). For more information, see <a href="https://docs.aws.amazon.com/codecatalyst/latest/userguide/set-up-cli.html">Setting up to use the CLI with Amazon CodeCatalyst</a> and the SSO documentation for your SDK.</p> </note>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -294,7 +294,7 @@ paths:
                   minLength: 1
                   maxLength: 128
                 ides:
-                  description: '<p>Information about the integrated development environment (IDE) configured for a Dev Environment.</p> <note> <p>An IDE is required to create a Dev Environment. For Dev Environment creation, this field contains configuration information and must be provided.</p> </note>'
+                  description: '<p>Information about the integrated development environment (IDE) configured for a Dev Environment.</p> <note> <p>An IDE is required to create a Dev Environment. For Dev Environment creation, this field contains configuration information and must be provided. </p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/IdeConfiguration'
@@ -588,6 +588,241 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/ProjectListFilter'
+  '/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{name}':
+    put:
+      operationId: CreateSourceRepository
+      description: Creates an empty Git-based source repository in a specified project. The repository is created with an initial empty commit with a default branch named <code>main</code>.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSourceRepositoryResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: name
+          in: path
+          required: true
+          description: 'The name of the source repository. For more information about name requirements, see <a href="https://docs.aws.amazon.com/codecatalyst/latest/userguide/source-quotas.html">Quotas for source repositories</a>.'
+          schema:
+            type: string
+            pattern: '(?!.*[.]git$)[\w\-.]*'
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: The description of the source repository.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+    delete:
+      operationId: DeleteSourceRepository
+      description: Deletes a source repository in Amazon CodeCatalyst. You cannot use this API to delete a linked repository. It can only be used to delete a Amazon CodeCatalyst source repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSourceRepositoryResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: name
+          in: path
+          required: true
+          description: The name of the source repository.
+          schema:
+            type: string
+            pattern: '(?!.*[.]git$)[\w\-.]*'
+            minLength: 1
+            maxLength: 100
+    get:
+      operationId: GetSourceRepository
+      description: Returns information about a source repository.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSourceRepositoryResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: projectName
+          in: path
+          required: true
+          description: The name of the project in the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: name
+          in: path
+          required: true
+          description: The name of the source repository.
+          schema:
+            type: string
+            pattern: '(?!.*[.]git$)[\w\-.]*'
+            minLength: 1
+            maxLength: 100
   '/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{sourceRepositoryName}/branches/{name}':
     put:
       operationId: CreateSourceRepositoryBranch
@@ -993,6 +1228,71 @@ paths:
                   minLength: 1
                   maxLength: 1024
   '/v1/spaces/{spaceName}/projects/{name}':
+    delete:
+      operationId: DeleteProject
+      description: Deletes a project in a space.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProjectResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: name
+          in: path
+          required: true
+          description: 'The name of the project in the space. To retrieve a list of project names, use <a>ListProjects</a>.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
     get:
       operationId: GetProject
       description: Returns information about a project.
@@ -1058,6 +1358,266 @@ paths:
             pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
             minLength: 3
             maxLength: 63
+    patch:
+      operationId: UpdateProject
+      description: Changes one or more values for a project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProjectResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: spaceName
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+        - name: name
+          in: path
+          required: true
+          description: The name of the project.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: The description of the project.
+                  type: string
+                  pattern: '[a-zA-Z0-9]+(?:[-_a-zA-Z0-9.,;:/\+=?&$%    ])*'
+                  minLength: 0
+                  maxLength: 200
+  '/v1/spaces/{name}':
+    delete:
+      operationId: DeleteSpace
+      description: '<p>Deletes a space.</p> <important> <p>Deleting a space cannot be undone. Additionally, since space names must be unique across Amazon CodeCatalyst, you cannot reuse names of deleted spaces.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSpaceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: 'The name of the space. To retrieve a list of space names, use <a>ListSpaces</a>.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+    get:
+      operationId: GetSpace
+      description: Returns information about an space.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSpaceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+    patch:
+      operationId: UpdateSpace
+      description: Changes one or more values for a space.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSpaceResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the space.
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
+            minLength: 3
+            maxLength: 63
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: The description of the space.
+                  type: string
+                  pattern: '[a-zA-Z0-9]+(?:[-_a-zA-Z0-9.,;:/\+=?&$%    ])*'
+                  minLength: 0
+                  maxLength: 200
   '/v1/spaces/{spaceName}/projects/{projectName}/sourceRepositories/{sourceRepositoryName}/cloneUrls':
     get:
       operationId: GetSourceRepositoryCloneUrls
@@ -1133,63 +1693,6 @@ paths:
             pattern: '(?!.*[.]git$)[\w\-.]*'
             minLength: 1
             maxLength: 100
-  '/v1/spaces/{name}':
-    get:
-      operationId: GetSpace
-      description: Returns information about an space.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetSpaceResponse'
-        '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
-          description: ConflictException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictException'
-        '482':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '483':
-          description: ServiceQuotaExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '484':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '485':
-          description: AccessDeniedException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccessDeniedException'
-      parameters:
-        - name: name
-          in: path
-          required: true
-          description: The name of the space.
-          schema:
-            type: string
-            pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
-            minLength: 3
-            maxLength: 63
   '/v1/spaces/{spaceName}/subscription':
     get:
       operationId: GetSubscription
@@ -2282,6 +2785,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The description of the project.
+    CreateSourceRepositoryResponse:
+      type: object
+      required:
+        - spaceName
+        - projectName
+        - name
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryNameString'
+            - description: The name of the source repository.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryDescriptionString'
+            - description: The description of the source repository.
     CreateSourceRepositoryBranchResponse:
       type: object
       properties:
@@ -2323,6 +2849,56 @@ components:
           allOf:
             - $ref: '#/components/schemas/Uuid'
             - description: 'The system-generated unique ID of the deleted Dev Environment. '
+    DeleteProjectResponse:
+      type: object
+      required:
+        - spaceName
+        - name
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name displayed to users of the project in Amazon CodeCatalyst.
+    DeleteSourceRepositoryResponse:
+      type: object
+      required:
+        - spaceName
+        - projectName
+        - name
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryNameString'
+            - description: The name of the repository.
+    DeleteSpaceResponse:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name of the space displayed to users of the space in Amazon CodeCatalyst.
     GetDevEnvironmentResponse:
       type: object
       required:
@@ -2410,6 +2986,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The description of the project.
+    GetSourceRepositoryResponse:
+      type: object
+      required:
+        - spaceName
+        - projectName
+        - name
+        - lastUpdatedTime
+        - createdTime
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        projectName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project in the space.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryNameString'
+            - description: The name of the source repository.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryDescriptionString'
+            - description: The description of the source repository.
+        lastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the source repository was last updated, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
+        createdTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time the source repository was created, in coordinated universal time (UTC) timestamp format as specified in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">RFC 3339</a>.'
     GetSourceRepositoryCloneUrlsResponse:
       type: object
       required:
@@ -2523,16 +3132,16 @@ components:
         key:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: A key that can be used to sort results.
         values:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: <p/>
+            - description: The values of the key.
         comparisonOperator:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
-      description: <p/>
+            - description: The operator used to compare the fields.
+      description: Information about a filter used to limit results of a query.
     ListEventLogsResponse:
       type: object
       required:
@@ -2570,7 +3179,7 @@ components:
         values:
           allOf:
             - $ref: '#/components/schemas/StringList'
-            - description: The value of the key.
+            - description: The values of the key.
         comparisonOperator:
           allOf:
             - $ref: '#/components/schemas/ComparisonOperator'
@@ -2767,6 +3376,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: 'A user-specified idempotency token. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, the subsequent retries return the result from the original successful request and have no additional effect.'
+    UpdateProjectResponse:
+      type: object
+      properties:
+        spaceName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the project.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name of the project displayed to users in Amazon CodeCatalyst.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the project.
+    UpdateSpaceResponse:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the space.
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The friendly name of the space displayed to users in Amazon CodeCatalyst.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the space.
     VerifySessionResponse:
       type: object
       properties:
@@ -2904,7 +3547,7 @@ components:
         ides:
           allOf:
             - $ref: '#/components/schemas/IdeConfigurationList'
-            - description: '<p>Information about the integrated development environment (IDE) configured for a Dev Environment.</p> <note> <p>An IDE is required to create a Dev Environment. For Dev Environment creation, this field contains configuration information and must be provided.</p> </note>'
+            - description: '<p>Information about the integrated development environment (IDE) configured for a Dev Environment.</p> <note> <p>An IDE is required to create a Dev Environment. For Dev Environment creation, this field contains configuration information and must be provided. </p> </note>'
         instanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
@@ -2967,6 +3610,18 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    SourceRepositoryDescriptionString:
+      type: string
+      minLength: 1
+      maxLength: 255
+    CreateSourceRepositoryRequest:
+      type: object
+      title: CreateSourceRepositoryRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/SourceRepositoryDescriptionString'
+            - description: The description of the source repository.
     DeleteAccessTokenRequest:
       type: object
       title: DeleteAccessTokenRequest
@@ -2974,6 +3629,18 @@ components:
     DeleteDevEnvironmentRequest:
       type: object
       title: DeleteDevEnvironmentRequest
+      properties: {}
+    DeleteProjectRequest:
+      type: object
+      title: DeleteProjectRequest
+      properties: {}
+    DeleteSourceRepositoryRequest:
+      type: object
+      title: DeleteSourceRepositoryRequest
+      properties: {}
+    DeleteSpaceRequest:
+      type: object
+      title: DeleteSpaceRequest
       properties: {}
     SensitiveString:
       type: string
@@ -3254,7 +3921,7 @@ components:
         userAgent:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: The user agent whose actions are recorded in the event.
       description: Information about an entry in an event log of Amazon CodeCatalyst activity.
     EventLogEntries:
       type: array
@@ -3278,7 +3945,7 @@ components:
         principalId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: <p/>
+            - description: The ID of the Amazon CodeCatalyst service principal.
         userName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3356,6 +4023,13 @@ components:
       type: object
       title: GetSourceRepositoryCloneUrlsRequest
       properties: {}
+    GetSourceRepositoryRequest:
+      type: object
+      title: GetSourceRepositoryRequest
+      properties: {}
+    Timestamp:
+      type: string
+      format: date-time
     GetSpaceRequest:
       type: object
       title: GetSpaceRequest
@@ -3543,13 +4217,6 @@ components:
     SourceRepositoryIdString:
       type: string
       pattern: '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
-    SourceRepositoryDescriptionString:
-      type: string
-      minLength: 1
-      maxLength: 255
-    Timestamp:
-      type: string
-      format: date-time
     ListSourceRepositoriesItem:
       type: object
       required:
@@ -3685,6 +4352,11 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The description of the project.
       description: Information about a project.
+    SpaceDescription:
+      type: string
+      pattern: '[a-zA-Z0-9]+(?:[-_a-zA-Z0-9.,;:/\+=?&$%    ])*'
+      minLength: 0
+      maxLength: 200
     SpaceSummary:
       type: object
       required:
@@ -3786,6 +4458,22 @@ components:
       pattern: '[a-zA-Z0-9]+(?:[-_\.][a-zA-Z0-9]+)*'
       minLength: 1
       maxLength: 128
+    UpdateProjectRequest:
+      type: object
+      title: UpdateProjectRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ProjectDescription'
+            - description: The description of the project.
+    UpdateSpaceRequest:
+      type: object
+      title: UpdateSpaceRequest
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/SpaceDescription'
+            - description: The description of the space.
     UserType:
       type: string
       enum:

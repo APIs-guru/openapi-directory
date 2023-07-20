@@ -822,7 +822,7 @@ components:
         nextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
-            - description: The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+            - description: 'The token to use to retrieve the next page of results. This value is null when there are no more results to return. '
     SavingsPlanRateFilter:
       type: object
       properties:
