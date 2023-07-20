@@ -271,7 +271,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: File storage API
-  version: 9.7.6
+  version: 9.8.0
   x-apideck-api: file-storage
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1007,6 +1007,8 @@ paths:
         - $ref: "#/components/parameters/serviceId"
         - $ref: "#/components/parameters/passThrough"
         - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/cursor"
+        - $ref: "#/components/parameters/limit"
       requestBody:
         content:
           application/json:
@@ -1267,6 +1269,59 @@ paths:
             try {
               const { data } = await apideck.fileStorage.filesDownload({
                 id: 'id_example'
+              })
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+  "/file-storage/files/{id}/export":
+    get:
+      description: Export File
+      operationId: filesExport
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/consumerId"
+        - $ref: "#/components/parameters/applicationId"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/fields"
+        - $ref: "#/components/parameters/format"
+      responses:
+        "200":
+          $ref: "#/components/responses/GetFileDownloadResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Export File
+      tags:
+        - Files
+      x-apideck-api: fileStorage
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY',
+              appId: 'REPLACE_WITH_APP_ID',
+              consumerId: 'REPLACE_WITH_CONSUMER_ID'
+            })
+
+            try {
+              const { data } = await apideck.fileStorage.filesExport({
+                id: 'id_example',
+                format: 'pdf'
               })
               console.log('API called successfully', data)
             } catch (error) {
@@ -2234,6 +2289,14 @@ components:
       schema:
         $ref: "#/components/schemas/FilesSort"
       style: deepObject
+    format:
+      description: File format to export this file to. A list of available file formats for the current file is available as `export_formats` on the File resource.
+      in: query
+      name: format
+      required: true
+      schema:
+        example: pdf
+        type: string
     id:
       description: ID of the record you are acting upon.
       in: path

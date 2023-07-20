@@ -1514,17 +1514,9 @@ components:
           description: The ordinal position of the column in the table.
           format: int32
           type: integer
-        precision:
-          description: Column precision.
-          format: int32
-          type: integer
         primaryKey:
           description: Whether or not the column represents a primary key.
           type: boolean
-        scale:
-          description: Column scale.
-          format: int32
-          type: integer
       type: object
     MysqlDatabase:
       description: MySQL database.

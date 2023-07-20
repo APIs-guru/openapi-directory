@@ -412,7 +412,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Reads the version of the document at the given time. This may not be older than 270 seconds.
+        - description: Reads the version of the document at the given time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
           in: query
           name: readTime
           schema:
@@ -1189,7 +1189,7 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: Perform the read at the provided time. This may not be older than 270 seconds.
+        - description: Perform the read at the provided time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
           in: query
           name: readTime
           schema:
@@ -1590,7 +1590,7 @@ components:
           $ref: "#/components/schemas/TransactionOptions"
           description: Starts a new transaction and reads the documents. Defaults to a read-only transaction. The new transaction ID will be returned as the first response in the stream.
         readTime:
-          description: Reads documents as they were at the given time. This may not be older than 270 seconds.
+          description: Reads documents as they were at the given time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
           format: google-datetime
           type: string
         transaction:
@@ -2135,6 +2135,10 @@ components:
         progressDocuments:
           $ref: "#/components/schemas/GoogleFirestoreAdminV1Progress"
           description: The progress, in documents, of this operation.
+        snapshotTime:
+          description: The timestamp that corresponds to the version of the database that is being exported. If unspecified, there are no guarantees about the consistency of the documents being exported.
+          format: google-datetime
+          type: string
         startTime:
           description: The time this operation started.
           format: google-datetime
@@ -2638,7 +2642,7 @@ components:
           description: A page token. Must be a value from ListCollectionIdsResponse.
           type: string
         readTime:
-          description: Reads documents as they were at the given time. This may not be older than 270 seconds.
+          description: Reads documents as they were at the given time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
           format: google-datetime
           type: string
       type: object
@@ -2774,7 +2778,7 @@ components:
           format: int64
           type: string
         readTime:
-          description: Reads documents as they were at the given time. This may not be older than 270 seconds.
+          description: Reads documents as they were at the given time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
           format: google-datetime
           type: string
         structuredQuery:
@@ -2827,7 +2831,7 @@ components:
       description: Options for a transaction that can only be used to read documents.
       properties:
         readTime:
-          description: Reads documents at the given time. This may not be older than 60 seconds.
+          description: Reads documents at the given time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
           format: google-datetime
           type: string
       type: object
@@ -2854,7 +2858,7 @@ components:
           $ref: "#/components/schemas/TransactionOptions"
           description: Starts a new transaction as part of the query, defaulting to read-only. The new transaction ID will be returned as the first response in the stream.
         readTime:
-          description: "Executes the query at the given timestamp. Requires: * Cannot be more than 270 seconds in the past."
+          description: Executes the query at the given timestamp. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
           format: google-datetime
           type: string
         structuredAggregationQuery:
@@ -2887,7 +2891,7 @@ components:
           $ref: "#/components/schemas/TransactionOptions"
           description: Starts a new transaction and reads the documents. Defaults to a read-only transaction. The new transaction ID will be returned as the first response in the stream.
         readTime:
-          description: Reads documents as they were at the given time. This may not be older than 270 seconds.
+          description: Reads documents as they were at the given time. This must be a microsecond precision timestamp within the past one hour, or if Point-in-Time Recovery is enabled, can additionally be a whole minute timestamp within the past 7 days.
           format: google-datetime
           type: string
         structuredQuery:
