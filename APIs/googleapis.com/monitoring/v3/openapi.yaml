@@ -1916,7 +1916,7 @@ components:
           $ref: "#/components/schemas/MutationRecord"
           description: A read-only record of the creation of the alerting policy. If provided in a call to create or update, this field will be ignored.
         displayName:
-          description: A short name or phrase used to identify the policy in dashboards, notifications, and incidents. To avoid confusion, don't use the same display name for multiple policies in the same project. The name is limited to 512 Unicode characters.The convention for the display_name of a PrometheusQueryLanguageCondition is "/", where the and should be taken from the corresponding Prometheus configuration file. This convention is not enforced. In any case the display_name is not a unique key of the AlertPolicy.
+          description: A short name or phrase used to identify the policy in dashboards, notifications, and incidents. To avoid confusion, don't use the same display name for multiple policies in the same project. The name is limited to 512 Unicode characters.The convention for the display_name of a PrometheusQueryLanguageCondition is "{rule group name}/{alert name}", where the {rule group name} and {alert name} should be taken from the corresponding Prometheus configuration file. This convention is not enforced. In any case the display_name is not a unique key of the AlertPolicy.
           type: string
         documentation:
           $ref: "#/components/schemas/Documentation"
@@ -1938,7 +1938,7 @@ components:
         userLabels:
           additionalProperties:
             type: string
-          description: User-supplied key/value data to be used for organizing and identifying the AlertPolicy objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.Note that Prometheus and are valid Prometheus label names (https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels). This means that they cannot be stored as is in user labels, because Prometheus labels may contain upper-case letters.
+          description: User-supplied key/value data to be used for organizing and identifying the AlertPolicy objects.The field can contain up to 64 entries. Each key and value is limited to 63 Unicode characters or 128 bytes, whichever is smaller. Labels and values can contain only lowercase letters, numerals, underscores, and dashes. Keys must begin with a letter.Note that Prometheus {rule group name} and {alert name} are valid Prometheus label names (https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels). This means that they cannot be stored as-is in user labels, because Prometheus labels may contain upper-case letters.
           type: object
         validity:
           $ref: "#/components/schemas/Status"
@@ -2036,6 +2036,17 @@ components:
       properties:
         service:
           description: The name of the Cloud Endpoints service underlying this service. Corresponds to the service resource label in the api monitored resource (https://cloud.google.com/monitoring/api/resources#tag_api).
+          type: string
+      type: object
+    CloudFunctionV2Target:
+      description: A Synthetic Monitor deployed to a Cloud Functions V2 instance.
+      properties:
+        cloudRunRevision:
+          $ref: "#/components/schemas/MonitoredResource"
+          description: Output only. The cloud_run_revision Monitored Resource associated with the GCFv2. The Synthetic Monitor execution results (metrics, logs, and spans) are reported against this Monitored Resource. This field is output only.
+          readOnly: true
+        name:
+          description: Required. Fully qualified GCFv2 resource name i.e. projects/{project}/locations/{location}/functions/{function} Required.
           type: string
       type: object
     CloudRun:
@@ -3661,6 +3672,13 @@ components:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
+    SyntheticMonitorTarget:
+      description: Describes a Synthetic Monitor to be invoked by Uptime.
+      properties:
+        cloudFunctionV2:
+          $ref: "#/components/schemas/CloudFunctionV2Target"
+          description: Target a Synthetic Monitor GCFv2 instance.
+      type: object
     TcpCheck:
       description: Information required for a TCP Uptime check request.
       properties:
@@ -3898,6 +3916,9 @@ components:
               - USA_VIRGINIA
             type: string
           type: array
+        syntheticMonitor:
+          $ref: "#/components/schemas/SyntheticMonitorTarget"
+          description: Specifies a Synthetic Monitor to invoke.
         tcpCheck:
           $ref: "#/components/schemas/TcpCheck"
           description: Contains information needed to make a TCP check.

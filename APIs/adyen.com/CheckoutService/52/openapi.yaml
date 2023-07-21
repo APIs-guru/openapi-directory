@@ -4561,7 +4561,12 @@ components:
           value: 1000
         browserInfo:
           acceptHeader: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+          colorDepth: 24
           javaEnabled: true
+          language: nl
+          screenHeight: 1800
+          screenWidth: 2880
+          timeZoneOffset: 60
           userAgent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9) Gecko/2008052912 Firefox/3.0
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         paymentMethod:
@@ -5007,10 +5012,10 @@ components:
     post-payments-result-basic-200:
       summary: Payment authorised
       value:
+        authResponse: Authorised
         merchantReference: Your order number
         paymentMethod: ideal
         pspReference: V4HZ4RBFJGXXGN82
-        resultCode: Authorised
         shopperLocale: nl_NL
     post-payments-sofort:
       summary: Make a Sofort payment
@@ -8849,11 +8854,11 @@ components:
           description: |-
             The date when the payment link expires.
 
-            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with time zone designator **Z**: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30Z**.
 
             The maximum expiry date is 70 days after the payment link is created.
 
-            If not provided, the payment link expires 24 hours after it was created.This value is represented in Zulu format which is utilized for API v70 and lower.
+            If not provided, the payment link expires 24 hours after it was created.
           type: string
         installmentOptions:
           additionalProperties:
@@ -10405,11 +10410,11 @@ components:
           description: |-
             The date when the payment link expires.
 
-            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with time zone designator **Z**: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30Z**.
 
             The maximum expiry date is 70 days after the payment link is created.
 
-            If not provided, the payment link expires 24 hours after it was created.This value is represented in Zulu format which is utilized for API v70 and lower.
+            If not provided, the payment link expires 24 hours after it was created.
           type: string
         id:
           description: A unique identifier of the payment link.

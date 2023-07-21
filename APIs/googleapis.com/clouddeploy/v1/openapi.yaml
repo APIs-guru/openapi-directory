@@ -1709,6 +1709,10 @@ components:
         httpRoute:
           description: Required. Name of the Gateway API HTTPRoute.
           type: string
+        routeUpdateWaitTime:
+          description: Optional. The time to wait for route updates to propagate. The maximum configurable time is 3 hours, in seconds format. If unspecified, there is no wait time.
+          format: google-duration
+          type: string
         service:
           description: Required. Name of the Kubernetes Service.
           type: string

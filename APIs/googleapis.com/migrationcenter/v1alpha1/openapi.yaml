@@ -3110,7 +3110,7 @@ components:
           $ref: "#/components/schemas/NetworkUsageSample"
           description: Network usage sample.
         sampleTime:
-          description: Time the sample was collected.
+          description: Time the sample was collected. If omitted, the frame report time will be used.
           format: google-datetime
           type: string
       type: object

@@ -1174,12 +1174,12 @@ components:
     SapDiscoveryComponent:
       description: Message describing the system component.
       properties:
-        applicationType:
-          description: The component is a SAP application.
-          type: string
-        databaseType:
-          description: The component is a SAP database.
-          type: string
+        applicationProperties:
+          $ref: "#/components/schemas/SapDiscoveryComponentApplicationProperties"
+          description: Optional. The component is a SAP application.
+        databaseProperties:
+          $ref: "#/components/schemas/SapDiscoveryComponentDatabaseProperties"
+          description: Optional. The component is a SAP database.
         hostProject:
           description: Pantheon Project in which the resources reside.
           type: string
@@ -1190,6 +1190,40 @@ components:
           type: array
         sid:
           description: The sap identifier, used by the SAP software and helps differentiate systems for customers.
+          type: string
+      type: object
+    SapDiscoveryComponentApplicationProperties:
+      description: A set of properties describing an SAP Application layer.
+      properties:
+        applicationType:
+          description: Required. Type of the application. Netweaver, etc.
+          enum:
+            - APPLICATION_TYPE_UNSPECIFIED
+            - NETWEAVER
+          type: string
+        ascsUri:
+          description: Required. Resource URI of the recognized ASCS host of the application.
+          type: string
+        nfsUri:
+          description: Optional. Resource URI of the recognized shared NFS of the application. May be empty if the application server has only a single node.
+          type: string
+      type: object
+    SapDiscoveryComponentDatabaseProperties:
+      description: A set of properties describing an SAP Database layer.
+      properties:
+        databaseType:
+          description: Required. Type of the database. HANA, DB2, etc.
+          enum:
+            - DATABASE_TYPE_UNSPECIFIED
+            - HANA
+            - MAX_DB
+            - DB2
+          type: string
+        primaryInstanceUri:
+          description: Required. URI of the recognized primary instance of the database.
+          type: string
+        sharedNfsUri:
+          description: Optional. URI of the recognized shared NFS of the database. May be empty if the database has only a single node.
           type: string
       type: object
     SapDiscoveryMetadata:
@@ -1236,9 +1270,9 @@ components:
           description: Required. The type of this resource.
           enum:
             - RESOURCE_TYPE_UNSPECIFIED
-            - COMPUTE
-            - STORAGE
-            - NETWORK
+            - RESOURCE_TYPE_COMPUTE
+            - RESOURCE_TYPE_STORAGE
+            - RESOURCE_TYPE_NETWORK
           type: string
         resourceUri:
           description: URI of the resource, includes project, location, and name.
