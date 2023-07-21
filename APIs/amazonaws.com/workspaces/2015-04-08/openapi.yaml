@@ -6201,7 +6201,7 @@ components:
         VolumeEncryptionKey:
           allOf:
             - $ref: '#/components/schemas/VolumeEncryptionKey'
-            - description: The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
+            - description: The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
         UserVolumeEncryptionEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
@@ -6819,7 +6819,7 @@ components:
         VolumeEncryptionKey:
           allOf:
             - $ref: '#/components/schemas/VolumeEncryptionKey'
-            - description: The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
+            - description: The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon WorkSpaces does not support asymmetric KMS keys.
         UserVolumeEncryptionEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
