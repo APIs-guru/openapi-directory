@@ -1423,6 +1423,14 @@ components:
             - SUSPENDING
             - SUSPENDED
           type: string
+        stateInitiator:
+          description: Output only. The initiator of the QueuedResources's current state.
+          enum:
+            - STATE_INITIATOR_UNSPECIFIED
+            - USER
+            - SERVICE
+          readOnly: true
+          type: string
         suspendedData:
           $ref: "#/components/schemas/SuspendedData"
           description: Further data for the suspended state.

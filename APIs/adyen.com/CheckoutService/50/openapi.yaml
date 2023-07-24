@@ -82,7 +82,7 @@ paths:
               basic:
                 $ref: "#/components/examples/post-applePay-sessions-basic"
             schema:
-              $ref: "#/components/schemas/CreateApplePaySessionRequest"
+              $ref: "#/components/schemas/ApplePaySessionRequest"
       responses:
         "200":
           content:
@@ -125,13 +125,13 @@ paths:
               cancel-with-own-reference:
                 $ref: "#/components/examples/post-cancels-cancel-with-own-reference"
             schema:
-              $ref: "#/components/schemas/CreateStandalonePaymentCancelRequest"
+              $ref: "#/components/schemas/StandalonePaymentCancelRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/StandalonePaymentCancelResource"
+                $ref: "#/components/schemas/StandalonePaymentCancelResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -143,7 +143,7 @@ paths:
                 cancel-with-own-reference:
                   $ref: "#/components/examples/post-cancels-cancel-with-own-reference-201"
               schema:
-                $ref: "#/components/schemas/StandalonePaymentCancelResource"
+                $ref: "#/components/schemas/StandalonePaymentCancelResponse"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
           headers:
             Idempotency-Key:
@@ -267,7 +267,7 @@ paths:
               donations-with-token:
                 $ref: "#/components/examples/post-donations-donations-with-token"
             schema:
-              $ref: "#/components/schemas/CheckoutDonationPaymentRequest"
+              $ref: "#/components/schemas/DonationPaymentRequest"
       responses:
         "200":
           content:
@@ -276,7 +276,7 @@ paths:
                 donations:
                   $ref: "#/components/examples/post-donations-donations-200"
               schema:
-                $ref: "#/components/schemas/DonationResponse"
+                $ref: "#/components/schemas/DonationPaymentResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -351,7 +351,7 @@ paths:
               basic:
                 $ref: "#/components/examples/post-orders-basic"
             schema:
-              $ref: "#/components/schemas/CheckoutCreateOrderRequest"
+              $ref: "#/components/schemas/CreateOrderRequest"
       responses:
         "200":
           content:
@@ -360,7 +360,7 @@ paths:
                 basic:
                   $ref: "#/components/examples/post-orders-basic-200"
               schema:
-                $ref: "#/components/schemas/CheckoutCreateOrderResponse"
+                $ref: "#/components/schemas/CreateOrderResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -435,7 +435,7 @@ paths:
               basic:
                 $ref: "#/components/examples/post-orders-cancel-basic"
             schema:
-              $ref: "#/components/schemas/CheckoutCancelOrderRequest"
+              $ref: "#/components/schemas/CancelOrderRequest"
       responses:
         "200":
           content:
@@ -444,7 +444,7 @@ paths:
                 basic:
                   $ref: "#/components/examples/post-orders-cancel-basic-200"
               schema:
-                $ref: "#/components/schemas/CheckoutCancelOrderResponse"
+                $ref: "#/components/schemas/CancelOrderResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -521,7 +521,7 @@ paths:
               basic:
                 $ref: "#/components/examples/post-originKeys-basic"
             schema:
-              $ref: "#/components/schemas/CheckoutUtilityRequest"
+              $ref: "#/components/schemas/UtilityRequest"
       responses:
         "200":
           content:
@@ -530,7 +530,7 @@ paths:
                 basic:
                   $ref: "#/components/examples/post-originKeys-basic-200"
               schema:
-                $ref: "#/components/schemas/CheckoutUtilityResponse"
+                $ref: "#/components/schemas/UtilityResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -608,7 +608,7 @@ paths:
               basic:
                 $ref: "#/components/examples/post-paymentLinks-basic"
             schema:
-              $ref: "#/components/schemas/CreatePaymentLinkRequest"
+              $ref: "#/components/schemas/PaymentLinkRequest"
       responses:
         "200":
           content:
@@ -955,7 +955,7 @@ paths:
               not-enough:
                 $ref: "#/components/examples/post-paymentMethods-balance-not-enough"
             schema:
-              $ref: "#/components/schemas/CheckoutBalanceCheckRequest"
+              $ref: "#/components/schemas/BalanceCheckRequest"
       responses:
         "200":
           content:
@@ -966,7 +966,7 @@ paths:
                 not-enough:
                   $ref: "#/components/examples/post-paymentMethods-balance-not-enough-200"
               schema:
-                $ref: "#/components/schemas/CheckoutBalanceCheckResponse"
+                $ref: "#/components/schemas/BalanceCheckResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -1178,7 +1178,7 @@ paths:
               subscription-first-transaction:
                 $ref: "#/components/examples/post-payments-subscription-first-transaction"
             schema:
-              $ref: "#/components/schemas/CheckoutPaymentRequest"
+              $ref: "#/components/schemas/PaymentRequest"
       responses:
         "200":
           content:
@@ -1288,7 +1288,7 @@ paths:
               redirect:
                 $ref: "#/components/examples/post-payments-details-redirect"
             schema:
-              $ref: "#/components/schemas/DetailsRequest"
+              $ref: "#/components/schemas/PaymentDetailsRequest"
       responses:
         "200":
           content:
@@ -1471,13 +1471,13 @@ paths:
               amount-update:
                 $ref: "#/components/examples/post-payments-paymentPspReference-amountUpdates-amount-update"
             schema:
-              $ref: "#/components/schemas/CreatePaymentAmountUpdateRequest"
+              $ref: "#/components/schemas/PaymentAmountUpdateRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentAmountUpdateResource"
+                $ref: "#/components/schemas/PaymentAmountUpdateResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -1489,7 +1489,7 @@ paths:
                 amount-update:
                   $ref: "#/components/examples/post-payments-paymentPspReference-amountUpdates-amount-update-201"
               schema:
-                $ref: "#/components/schemas/PaymentAmountUpdateResource"
+                $ref: "#/components/schemas/PaymentAmountUpdateResponse"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
           headers:
             Idempotency-Key:
@@ -1577,13 +1577,13 @@ paths:
               cancel-with-psp-reference:
                 $ref: "#/components/examples/post-payments-paymentPspReference-cancels-cancel-with-psp-reference"
             schema:
-              $ref: "#/components/schemas/CreatePaymentCancelRequest"
+              $ref: "#/components/schemas/PaymentCancelRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentCancelResource"
+                $ref: "#/components/schemas/PaymentCancelResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -1595,7 +1595,7 @@ paths:
                 cancel-with-psp-reference:
                   $ref: "#/components/examples/post-payments-paymentPspReference-cancels-cancel-with-psp-reference-201"
               schema:
-                $ref: "#/components/schemas/PaymentCancelResource"
+                $ref: "#/components/schemas/PaymentCancelResponse"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
           headers:
             Idempotency-Key:
@@ -1683,13 +1683,13 @@ paths:
               capture:
                 $ref: "#/components/examples/post-payments-paymentPspReference-captures-capture"
             schema:
-              $ref: "#/components/schemas/CreatePaymentCaptureRequest"
+              $ref: "#/components/schemas/PaymentCaptureRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentCaptureResource"
+                $ref: "#/components/schemas/PaymentCaptureResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -1701,7 +1701,7 @@ paths:
                 capture:
                   $ref: "#/components/examples/post-payments-paymentPspReference-captures-capture-201"
               schema:
-                $ref: "#/components/schemas/PaymentCaptureResource"
+                $ref: "#/components/schemas/PaymentCaptureResponse"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
           headers:
             Idempotency-Key:
@@ -1791,13 +1791,13 @@ paths:
               refund:
                 $ref: "#/components/examples/post-payments-paymentPspReference-refunds-refund"
             schema:
-              $ref: "#/components/schemas/CreatePaymentRefundRequest"
+              $ref: "#/components/schemas/PaymentRefundRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentRefundResource"
+                $ref: "#/components/schemas/PaymentRefundResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -1809,7 +1809,7 @@ paths:
                 refund:
                   $ref: "#/components/examples/post-payments-paymentPspReference-refunds-refund-201"
               schema:
-                $ref: "#/components/schemas/PaymentRefundResource"
+                $ref: "#/components/schemas/PaymentRefundResponse"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
           headers:
             Idempotency-Key:
@@ -1896,13 +1896,13 @@ paths:
               reversal:
                 $ref: "#/components/examples/post-payments-paymentPspReference-reversals-reversal"
             schema:
-              $ref: "#/components/schemas/CreatePaymentReversalRequest"
+              $ref: "#/components/schemas/PaymentReversalRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaymentReversalResource"
+                $ref: "#/components/schemas/PaymentReversalResponse"
           description: OK - the request has succeeded.
           headers:
             Idempotency-Key:
@@ -1914,7 +1914,7 @@ paths:
                 reversal:
                   $ref: "#/components/examples/post-payments-paymentPspReference-reversals-reversal-201"
               schema:
-                $ref: "#/components/schemas/PaymentReversalResource"
+                $ref: "#/components/schemas/PaymentReversalResponse"
           description: Created - the request has been fulfilled and has resulted in one or more new resources being created.
           headers:
             Idempotency-Key:
@@ -6739,6 +6739,31 @@ components:
         - applePayToken
       title: Apple Pay
       type: object
+    ApplePaySessionRequest:
+      properties:
+        displayName:
+          description: |-
+            This is the name that your shoppers will see in the Apple Pay interface.
+
+            The value returned as `configuration.merchantName` field from the [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response.
+          type: string
+        domainName:
+          description: |-
+            The domain name you provided when you added Apple Pay in your Customer Area.
+
+            This must match the `window.location.hostname` of the web shop.
+          type: string
+        merchantIdentifier:
+          description: |-
+            Your merchant identifier registered with Apple Pay.
+
+            Use the value of the `configuration.merchantId` field from the [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response.
+          type: string
+      required:
+        - domainName
+        - merchantIdentifier
+        - displayName
+      type: object
     ApplePaySessionResponse:
       properties:
         data:
@@ -6809,366 +6834,7 @@ components:
           type: string
       title: BACS Direct Debit
       type: object
-    BankAccount:
-      properties:
-        bankAccountNumber:
-          description: The bank account number (without separators).
-          type: string
-        bankCity:
-          description: The bank city.
-          type: string
-          x-addedInVersion: "18"
-        bankLocationId:
-          description: The location id of the bank. The field value is `nil` in most cases.
-          type: string
-        bankName:
-          description: The name of the bank.
-          type: string
-        bic:
-          description: The [Business Identifier Code](https://en.wikipedia.org/wiki/ISO_9362) (BIC) is the SWIFT address assigned to a bank. The field value is `nil` in most cases.
-          type: string
-        countryCode:
-          description: |-
-            Country code where the bank is located.
-
-            A valid value is an ISO two-character country code (e.g. 'NL').
-          type: string
-        iban:
-          description: The [International Bank Account Number](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (IBAN).
-          type: string
-        ownerName:
-          description: |-
-            The name of the bank account holder.
-            If you submit a name with non-Latin characters, we automatically replace some of them with corresponding Latin characters to meet the FATF recommendations. For example:
-            * χ12 is converted to ch12.
-            * üA is converted to euA.
-            * Peter Møller is converted to Peter Mller, because banks don't accept 'ø'.
-            After replacement, the ownerName must have at least three alphanumeric characters (A-Z, a-z, 0-9), and at least one of them must be a valid Latin character (A-Z, a-z). For example:
-            * John17 - allowed.
-            * J17 - allowed.
-            * 171 - not allowed.
-            * John-7 - allowed.
-            > If provided details don't match the required format, the response returns the error message: 203 'Invalid bank account holder name'.
-          type: string
-        taxId:
-          description: The bank account holder's tax ID.
-          type: string
-          x-addedInVersion: "18"
-      type: object
-    BillDeskDetails:
-      additionalProperties: false
-      properties:
-        issuer:
-          description: The issuer id of the shopper's selected bank.
-          type: string
-        type:
-          description: "**billdesk**"
-          enum:
-            - billdesk_online
-            - billdesk_wallet
-            - onlinebanking_IN
-            - wallet_IN
-          type: string
-      required:
-        - type
-        - issuer
-      title: BillDesk
-      type: object
-    BlikDetails:
-      additionalProperties: false
-      properties:
-        blikCode:
-          description: BLIK code consisting of 6 digits.
-          type: string
-        recurringDetailReference:
-          deprecated: true
-          description: This is the `recurringDetailReference` returned in the response when you created the token.
-          type: string
-          x-deprecatedInVersion: "49"
-          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
-        storedPaymentMethodId:
-          description: This is the `recurringDetailReference` returned in the response when you created the token.
-          maxLength: 64
-          type: string
-          x-addedInVersion: "49"
-        type:
-          description: "**blik**"
-          enum:
-            - blik
-          type: string
-      title: BLIK
-      type: object
-    BrowserInfo:
-      properties:
-        acceptHeader:
-          description: The accept header value of the shopper's browser.
-          type: string
-        colorDepth:
-          description: "The color depth of the shopper's browser in bits per pixel. This should be obtained by using the browser's `screen.colorDepth` property. Accepted values: 1, 4, 8, 15, 16, 24, 30, 32 or 48 bit color depth."
-          format: int32
-          type: integer
-          x-addedInVersion: "40"
-        javaEnabled:
-          description: Boolean value indicating if the shopper's browser is able to execute Java.
-          type: boolean
-          x-addedInVersion: "40"
-        javaScriptEnabled:
-          default: true
-          description: Boolean value indicating if the shopper's browser is able to execute JavaScript. A default 'true' value is assumed if the field is not present.
-          type: boolean
-          x-addedInVersion: "40"
-        language:
-          description: The `navigator.language` value of the shopper's browser (as defined in IETF BCP 47).
-          type: string
-          x-addedInVersion: "40"
-        screenHeight:
-          description: The total height of the shopper's device screen in pixels.
-          format: int32
-          type: integer
-          x-addedInVersion: "40"
-        screenWidth:
-          description: The total width of the shopper's device screen in pixels.
-          format: int32
-          type: integer
-          x-addedInVersion: "40"
-        timeZoneOffset:
-          description: Time difference between UTC time and the shopper's browser local time, in minutes.
-          format: int32
-          type: integer
-          x-addedInVersion: "40"
-        userAgent:
-          description: The user agent value of the shopper's browser.
-          type: string
-      required:
-        - userAgent
-        - acceptHeader
-        - javaEnabled
-        - colorDepth
-        - screenHeight
-        - screenWidth
-        - timeZoneOffset
-        - language
-      type: object
-    Card:
-      properties:
-        cvc:
-          description: |-
-            The [card verification code](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid) (1-20 characters). Depending on the card brand, it is known also as:
-            * CVV2/CVC2 – length: 3 digits
-            * CID – length: 4 digits
-            > If you are using [Client-Side Encryption](https://docs.adyen.com/classic-integration/cse-integration-ecommerce), the CVC code is present in the encrypted data. You must never post the card details to the server.
-            > This field must be always present in a [one-click payment request](https://docs.adyen.com/classic-integration/recurring-payments).
-            > When this value is returned in a response, it is always empty because it is not stored.
-          maxLength: 20
-          minLength: 1
-          type: string
-        expiryMonth:
-          description: |-
-            The card expiry month.
-            Format: 2 digits, zero-padded for single digits. For example:
-            * 03 = March
-            * 11 = November
-          maxLength: 2
-          minLength: 1
-          type: string
-        expiryYear:
-          description: |-
-            The card expiry year.
-            Format: 4 digits. For example: 2020
-          maxLength: 4
-          minLength: 4
-          type: string
-        holderName:
-          description: The name of the cardholder, as printed on the card.
-          maxLength: 50
-          minLength: 1
-          type: string
-        issueNumber:
-          description: The issue number of the card (for some UK debit cards only).
-          maxLength: 2
-          minLength: 1
-          type: string
-        number:
-          description: |-
-            The card number (4-19 characters). Do not use any separators.
-            When this value is returned in a response, only the last 4 digits of the card number are returned.
-          maxLength: 19
-          minLength: 4
-          type: string
-        startMonth:
-          description: The month component of the start date (for some UK debit cards only).
-          maxLength: 2
-          minLength: 1
-          type: string
-        startYear:
-          description: The year component of the start date (for some UK debit cards only).
-          maxLength: 4
-          minLength: 4
-          type: string
-      type: object
-    CardBrandDetails:
-      properties:
-        supported:
-          description: Indicates if you support the card brand.
-          type: boolean
-        type:
-          description: The name of the card brand.
-          type: string
-      type: object
-    CardDetails:
-      additionalProperties: false
-      properties:
-        brand:
-          description: "Secondary brand of the card. For example: **plastix**, **hmclub**."
-          type: string
-        cupsecureplus.smscode:
-          deprecated: true
-          type: string
-        cvc:
-          description: The card verification code. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
-          type: string
-        encryptedCardNumber:
-          description: The encrypted card number.
-          maxLength: 10000
-          type: string
-        encryptedExpiryMonth:
-          description: The encrypted card expiry month.
-          maxLength: 10000
-          type: string
-        encryptedExpiryYear:
-          description: The encrypted card expiry year.
-          maxLength: 10000
-          type: string
-        encryptedSecurityCode:
-          description: The encrypted card verification code.
-          maxLength: 10000
-          type: string
-        expiryMonth:
-          description: The card expiry month. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
-          type: string
-        expiryYear:
-          description: The card expiry year. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
-          type: string
-        fundingSource:
-          description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
-          enum:
-            - debit
-          type: string
-        holderName:
-          description: The name of the card holder.
-          type: string
-        networkPaymentReference:
-          description: The network token reference. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment.
-          type: string
-        number:
-          description: The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
-          type: string
-        recurringDetailReference:
-          deprecated: true
-          description: This is the `recurringDetailReference` returned in the response when you created the token.
-          type: string
-          x-deprecatedInVersion: "49"
-          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
-        shopperNotificationReference:
-          description: The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
-          type: string
-        storedPaymentMethodId:
-          description: This is the `recurringDetailReference` returned in the response when you created the token.
-          maxLength: 64
-          type: string
-          x-addedInVersion: "49"
-        threeDS2SdkVersion:
-          description: Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
-          maxLength: 12
-          type: string
-        type:
-          default: scheme
-          description: Default payment method details. Common for scheme payment methods, and for simple payment method details.
-          enum:
-            - scheme
-            - networkToken
-            - giftcard
-            - alliancedata
-            - card
-          type: string
-      title: Card
-      type: object
-    CardDetailsRequest:
-      properties:
-        cardNumber:
-          description: |-
-            A minimum of the first 8 digits of the card number and a maximum of the full card number. 11 digits gives the best result. 
-
-            You must be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide) to collect raw card data.
-          type: string
-        countryCode:
-          description: |-
-            The shopper country.
-
-            Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-            Example: NL or DE
-          type: string
-        encryptedCardNumber:
-          description: The encrypted card number.
-          type: string
-        merchantAccount:
-          description: The merchant account identifier, with which you want to process the transaction.
-          type: string
-        supportedBrands:
-          description: |-
-            The card brands you support. This is the [`brands`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods__resParam_paymentMethods-brands) array from your [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response. 
-
-            If not included, our API uses the ones configured for your merchant account and, if provided, the country code.
-          items:
-            type: string
-          type: array
-      required:
-        - cardNumber
-        - merchantAccount
-      type: object
-    CardDetailsResponse:
-      properties:
-        brands:
-          description: The list of brands identified for the card.
-          items:
-            $ref: "#/components/schemas/CardBrandDetails"
-          type: array
-      type: object
-    CellulantDetails:
-      additionalProperties: false
-      properties:
-        issuer:
-          description: The Cellulant issuer.
-          type: string
-        type:
-          default: cellulant
-          description: "**Cellulant**"
-          enum:
-            - cellulant
-          type: string
-      title: Cellulant
-      type: object
-    CheckoutAwaitAction:
-      additionalProperties: false
-      properties:
-        paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
-          type: string
-        paymentMethodType:
-          description: Specifies the payment method.
-          type: string
-        type:
-          description: "**await**"
-          enum:
-            - await
-          type: string
-        url:
-          description: Specifies the URL to redirect to.
-          type: string
-      required:
-        - type
-      type: object
-    CheckoutBalanceCheckRequest:
+    BalanceCheckRequest:
       properties:
         accountInfo:
           $ref: "#/components/schemas/AccountInfo"
@@ -7437,7 +7103,7 @@ components:
         - amount
         - paymentMethod
       type: object
-    CheckoutBalanceCheckResponse:
+    BalanceCheckResponse:
       properties:
         additionalData:
           additionalProperties:
@@ -7486,7 +7152,147 @@ components:
         - balance
         - resultCode
       type: object
-    CheckoutCancelOrderRequest:
+    BankAccount:
+      properties:
+        bankAccountNumber:
+          description: The bank account number (without separators).
+          type: string
+        bankCity:
+          description: The bank city.
+          type: string
+          x-addedInVersion: "18"
+        bankLocationId:
+          description: The location id of the bank. The field value is `nil` in most cases.
+          type: string
+        bankName:
+          description: The name of the bank.
+          type: string
+        bic:
+          description: The [Business Identifier Code](https://en.wikipedia.org/wiki/ISO_9362) (BIC) is the SWIFT address assigned to a bank. The field value is `nil` in most cases.
+          type: string
+        countryCode:
+          description: |-
+            Country code where the bank is located.
+
+            A valid value is an ISO two-character country code (e.g. 'NL').
+          type: string
+        iban:
+          description: The [International Bank Account Number](https://en.wikipedia.org/wiki/International_Bank_Account_Number) (IBAN).
+          type: string
+        ownerName:
+          description: |-
+            The name of the bank account holder.
+            If you submit a name with non-Latin characters, we automatically replace some of them with corresponding Latin characters to meet the FATF recommendations. For example:
+            * χ12 is converted to ch12.
+            * üA is converted to euA.
+            * Peter Møller is converted to Peter Mller, because banks don't accept 'ø'.
+            After replacement, the ownerName must have at least three alphanumeric characters (A-Z, a-z, 0-9), and at least one of them must be a valid Latin character (A-Z, a-z). For example:
+            * John17 - allowed.
+            * J17 - allowed.
+            * 171 - not allowed.
+            * John-7 - allowed.
+            > If provided details don't match the required format, the response returns the error message: 203 'Invalid bank account holder name'.
+          type: string
+        taxId:
+          description: The bank account holder's tax ID.
+          type: string
+          x-addedInVersion: "18"
+      type: object
+    BillDeskDetails:
+      additionalProperties: false
+      properties:
+        issuer:
+          description: The issuer id of the shopper's selected bank.
+          type: string
+        type:
+          description: "**billdesk**"
+          enum:
+            - billdesk_online
+            - billdesk_wallet
+            - onlinebanking_IN
+            - wallet_IN
+          type: string
+      required:
+        - type
+        - issuer
+      title: BillDesk
+      type: object
+    BlikDetails:
+      additionalProperties: false
+      properties:
+        blikCode:
+          description: BLIK code consisting of 6 digits.
+          type: string
+        recurringDetailReference:
+          deprecated: true
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-deprecatedInVersion: "49"
+          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          maxLength: 64
+          type: string
+          x-addedInVersion: "49"
+        type:
+          description: "**blik**"
+          enum:
+            - blik
+          type: string
+      title: BLIK
+      type: object
+    BrowserInfo:
+      properties:
+        acceptHeader:
+          description: The accept header value of the shopper's browser.
+          type: string
+        colorDepth:
+          description: "The color depth of the shopper's browser in bits per pixel. This should be obtained by using the browser's `screen.colorDepth` property. Accepted values: 1, 4, 8, 15, 16, 24, 30, 32 or 48 bit color depth."
+          format: int32
+          type: integer
+          x-addedInVersion: "40"
+        javaEnabled:
+          description: Boolean value indicating if the shopper's browser is able to execute Java.
+          type: boolean
+          x-addedInVersion: "40"
+        javaScriptEnabled:
+          default: true
+          description: Boolean value indicating if the shopper's browser is able to execute JavaScript. A default 'true' value is assumed if the field is not present.
+          type: boolean
+          x-addedInVersion: "40"
+        language:
+          description: The `navigator.language` value of the shopper's browser (as defined in IETF BCP 47).
+          type: string
+          x-addedInVersion: "40"
+        screenHeight:
+          description: The total height of the shopper's device screen in pixels.
+          format: int32
+          type: integer
+          x-addedInVersion: "40"
+        screenWidth:
+          description: The total width of the shopper's device screen in pixels.
+          format: int32
+          type: integer
+          x-addedInVersion: "40"
+        timeZoneOffset:
+          description: Time difference between UTC time and the shopper's browser local time, in minutes.
+          format: int32
+          type: integer
+          x-addedInVersion: "40"
+        userAgent:
+          description: The user agent value of the shopper's browser.
+          type: string
+      required:
+        - userAgent
+        - acceptHeader
+        - javaEnabled
+        - colorDepth
+        - screenHeight
+        - screenWidth
+        - timeZoneOffset
+        - language
+      type: object
+    CancelOrderRequest:
       properties:
         merchantAccount:
           description: The merchant account identifier that orderData belongs to.
@@ -7498,7 +7304,7 @@ components:
         - order
         - merchantAccount
       type: object
-    CheckoutCancelOrderResponse:
+    CancelOrderResponse:
       properties:
         pspReference:
           description: A unique reference of the cancellation request.
@@ -7517,7 +7323,528 @@ components:
         - pspReference
         - resultCode
       type: object
-    CheckoutCreateOrderRequest:
+    Card:
+      properties:
+        cvc:
+          description: |-
+            The [card verification code](https://docs.adyen.com/payments-fundamentals/payment-glossary#card-security-code-cvc-cvv-cid) (1-20 characters). Depending on the card brand, it is known also as:
+            * CVV2/CVC2 – length: 3 digits
+            * CID – length: 4 digits
+            > If you are using [Client-Side Encryption](https://docs.adyen.com/classic-integration/cse-integration-ecommerce), the CVC code is present in the encrypted data. You must never post the card details to the server.
+            > This field must be always present in a [one-click payment request](https://docs.adyen.com/classic-integration/recurring-payments).
+            > When this value is returned in a response, it is always empty because it is not stored.
+          maxLength: 20
+          minLength: 1
+          type: string
+        expiryMonth:
+          description: |-
+            The card expiry month.
+            Format: 2 digits, zero-padded for single digits. For example:
+            * 03 = March
+            * 11 = November
+          maxLength: 2
+          minLength: 1
+          type: string
+        expiryYear:
+          description: |-
+            The card expiry year.
+            Format: 4 digits. For example: 2020
+          maxLength: 4
+          minLength: 4
+          type: string
+        holderName:
+          description: The name of the cardholder, as printed on the card.
+          maxLength: 50
+          minLength: 1
+          type: string
+        issueNumber:
+          description: The issue number of the card (for some UK debit cards only).
+          maxLength: 2
+          minLength: 1
+          type: string
+        number:
+          description: |-
+            The card number (4-19 characters). Do not use any separators.
+            When this value is returned in a response, only the last 4 digits of the card number are returned.
+          maxLength: 19
+          minLength: 4
+          type: string
+        startMonth:
+          description: The month component of the start date (for some UK debit cards only).
+          maxLength: 2
+          minLength: 1
+          type: string
+        startYear:
+          description: The year component of the start date (for some UK debit cards only).
+          maxLength: 4
+          minLength: 4
+          type: string
+      type: object
+    CardBrandDetails:
+      properties:
+        supported:
+          description: Indicates if you support the card brand.
+          type: boolean
+        type:
+          description: The name of the card brand.
+          type: string
+      type: object
+    CardDetails:
+      additionalProperties: false
+      properties:
+        brand:
+          description: "Secondary brand of the card. For example: **plastix**, **hmclub**."
+          type: string
+        cupsecureplus.smscode:
+          deprecated: true
+          type: string
+        cvc:
+          description: The card verification code. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
+          type: string
+        encryptedCardNumber:
+          description: The encrypted card number.
+          maxLength: 10000
+          type: string
+        encryptedExpiryMonth:
+          description: The encrypted card expiry month.
+          maxLength: 10000
+          type: string
+        encryptedExpiryYear:
+          description: The encrypted card expiry year.
+          maxLength: 10000
+          type: string
+        encryptedSecurityCode:
+          description: The encrypted card verification code.
+          maxLength: 10000
+          type: string
+        expiryMonth:
+          description: The card expiry month. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
+          type: string
+        expiryYear:
+          description: The card expiry year. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
+          type: string
+        fundingSource:
+          description: The funding source that should be used when multiple sources are available. For Brazilian combo cards, by default the funding source is credit. To use debit, set this value to **debit**.
+          enum:
+            - debit
+          type: string
+        holderName:
+          description: The name of the card holder.
+          type: string
+        networkPaymentReference:
+          description: The network token reference. This is the [`networkTxReference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__resParam_additionalData-ResponseAdditionalDataCommon-networkTxReference) from the response to the first payment.
+          type: string
+        number:
+          description: The card number. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
+          type: string
+        recurringDetailReference:
+          deprecated: true
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          type: string
+          x-deprecatedInVersion: "49"
+          x-deprecatedMessage: Use `storedPaymentMethodId` instead.
+        shopperNotificationReference:
+          description: The `shopperNotificationReference` returned in the response when you requested to notify the shopper. Used only for recurring payments in India.
+          type: string
+        storedPaymentMethodId:
+          description: This is the `recurringDetailReference` returned in the response when you created the token.
+          maxLength: 64
+          type: string
+          x-addedInVersion: "49"
+        threeDS2SdkVersion:
+          description: Required for mobile integrations. Version of the 3D Secure 2 mobile SDK.
+          maxLength: 12
+          type: string
+        type:
+          default: scheme
+          description: Default payment method details. Common for scheme payment methods, and for simple payment method details.
+          enum:
+            - scheme
+            - networkToken
+            - giftcard
+            - alliancedata
+            - card
+          type: string
+      title: Card
+      type: object
+    CardDetailsRequest:
+      properties:
+        cardNumber:
+          description: |-
+            A minimum of the first 8 digits of the card number and a maximum of the full card number. 11 digits gives the best result. 
+
+            You must be [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide) to collect raw card data.
+          type: string
+        countryCode:
+          description: |-
+            The shopper country.
+
+            Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+            Example: NL or DE
+          type: string
+        encryptedCardNumber:
+          description: The encrypted card number.
+          type: string
+        merchantAccount:
+          description: The merchant account identifier, with which you want to process the transaction.
+          type: string
+        supportedBrands:
+          description: |-
+            The card brands you support. This is the [`brands`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods__resParam_paymentMethods-brands) array from your [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response. 
+
+            If not included, our API uses the ones configured for your merchant account and, if provided, the country code.
+          items:
+            type: string
+          type: array
+      required:
+        - cardNumber
+        - merchantAccount
+      type: object
+    CardDetailsResponse:
+      properties:
+        brands:
+          description: The list of brands identified for the card.
+          items:
+            $ref: "#/components/schemas/CardBrandDetails"
+          type: array
+      type: object
+    CellulantDetails:
+      additionalProperties: false
+      properties:
+        issuer:
+          description: The Cellulant issuer.
+          type: string
+        type:
+          default: cellulant
+          description: "**Cellulant**"
+          enum:
+            - cellulant
+          type: string
+      title: Cellulant
+      type: object
+    CheckoutAwaitAction:
+      additionalProperties: false
+      properties:
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        type:
+          description: "**await**"
+          enum:
+            - await
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
+    CheckoutNativeRedirectAction:
+      additionalProperties: false
+      properties:
+        data:
+          additionalProperties:
+            type: string
+          description: When the redirect URL must be accessed via POST, use this data to post to the redirect URL.
+          type: object
+        method:
+          description: Specifies the HTTP method, for example GET or POST.
+          type: string
+        nativeRedirectData:
+          description: Native SDK's redirect data containing the direct issuer link and state data that must be submitted to the /v1/nativeRedirect/redirectResult.
+          type: string
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        type:
+          description: "**nativeRedirect**"
+          enum:
+            - nativeRedirect
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
+    CheckoutOrderResponse:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The initial amount of the order.
+        expiresAt:
+          description: The expiry date for the order.
+          type: string
+        orderData:
+          description: The encrypted order data.
+          type: string
+        pspReference:
+          description: The `pspReference` that belongs to the order.
+          type: string
+        reference:
+          description: The merchant reference for the order.
+          type: string
+        remainingAmount:
+          $ref: "#/components/schemas/Amount"
+          description: The updated remaining amount.
+      required:
+        - pspReference
+      type: object
+    CheckoutQrCodeAction:
+      additionalProperties: false
+      properties:
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        qrCodeData:
+          description: The contents of the QR code as a UTF8 string.
+          type: string
+        type:
+          description: "**qrCode**"
+          enum:
+            - qrCode
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
+    CheckoutRedirectAction:
+      additionalProperties: false
+      properties:
+        data:
+          additionalProperties:
+            type: string
+          description: When the redirect URL must be accessed via POST, use this data to post to the redirect URL.
+          type: object
+        method:
+          description: Specifies the HTTP method, for example GET or POST.
+          type: string
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        type:
+          description: "**redirect**"
+          enum:
+            - redirect
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
+    CheckoutSDKAction:
+      additionalProperties: false
+      properties:
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        sdkData:
+          additionalProperties:
+            type: string
+          description: The data to pass to the SDK.
+          type: object
+        type:
+          description: The type of the action.
+          enum:
+            - sdk
+            - wechatpaySDK
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
+    CheckoutThreeDS2ChallengeAction:
+      additionalProperties: false
+      properties:
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        token:
+          description: A token to pass to the 3DS2 Component to get the challenge.
+          type: string
+        type:
+          description: "**threeDS2Challenge**"
+          enum:
+            - threeDS2Challenge
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
+    CheckoutThreeDS2FingerPrintAction:
+      additionalProperties: false
+      properties:
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        token:
+          description: A token to pass to the 3DS2 Component to get the fingerprint.
+          type: string
+        type:
+          description: "**threeDS2Fingerprint**"
+          enum:
+            - threeDS2Fingerprint
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
+    CheckoutVoucherAction:
+      additionalProperties: false
+      properties:
+        alternativeReference:
+          description: The voucher alternative reference code.
+          type: string
+        collectionInstitutionNumber:
+          description: A collection institution number (store number) for Econtext Pay-Easy ATM.
+          type: string
+        downloadUrl:
+          description: The URL to download the voucher.
+          type: string
+        entity:
+          description: An entity number of Multibanco.
+          type: string
+        expiresAt:
+          description: The date time of the voucher expiry.
+          type: string
+        initialAmount:
+          $ref: "#/components/schemas/Amount"
+          description: The initial amount.
+        instructionsUrl:
+          description: The URL to the detailed instructions to make payment using the voucher.
+          type: string
+        issuer:
+          description: The issuer of the voucher.
+          type: string
+        maskedTelephoneNumber:
+          description: The shopper telephone number (partially masked).
+          type: string
+        merchantName:
+          description: The merchant name.
+          type: string
+        merchantReference:
+          description: The merchant reference.
+          type: string
+        paymentData:
+          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
+          type: string
+        paymentMethodType:
+          description: Specifies the payment method.
+          type: string
+        reference:
+          description: The voucher reference code.
+          type: string
+        shopperEmail:
+          description: The shopper email.
+          type: string
+        shopperName:
+          description: The shopper name.
+          type: string
+        surcharge:
+          $ref: "#/components/schemas/Amount"
+          description: The surcharge amount.
+        totalAmount:
+          $ref: "#/components/schemas/Amount"
+          description: The total amount (initial plus surcharge amount).
+        type:
+          description: "**voucher**"
+          enum:
+            - voucher
+          type: string
+        url:
+          description: Specifies the URL to redirect to.
+          type: string
+      required:
+        - type
+      type: object
+    CommonField:
+      properties:
+        name:
+          description: Name of the field. For example, Name of External Platform.
+          type: string
+        version:
+          description: Version of the field. For example, Version of External Platform.
+          type: string
+      type: object
+    Company:
+      properties:
+        homepage:
+          description: The company website's home page.
+          type: string
+        name:
+          description: The company name.
+          type: string
+        registrationNumber:
+          description: Registration number of the company.
+          type: string
+        registryLocation:
+          description: Registry location of the company.
+          type: string
+        taxId:
+          description: Tax ID of the company.
+          type: string
+        type:
+          description: The company type.
+          type: string
+      type: object
+    Configuration:
+      properties:
+        avs:
+          $ref: "#/components/schemas/Avs"
+          description: Describes the configuration for AVS ([Address Verification System](https://en.wikipedia.org/wiki/Address_Verification_System)).
+        cardHolderName:
+          description: |-
+            Determines whether the cardholder name should be provided or not.
+
+            Permitted values:
+            * NONE
+            * OPTIONAL
+            * REQUIRED
+          enum:
+            - NONE
+            - OPTIONAL
+            - REQUIRED
+          type: string
+          x-addedInVersion: "37"
+        installments:
+          $ref: "#/components/schemas/InstallmentsNumber"
+          description: Describes the configuration for [installment payments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
+        shopperInput:
+          $ref: "#/components/schemas/ShopperInput"
+          description: Determines how to display the details fields.
+          x-addedInVersion: "37"
+      type: object
+    CreateOrderRequest:
       properties:
         amount:
           $ref: "#/components/schemas/Amount"
@@ -7536,7 +7863,7 @@ components:
         - reference
         - amount
       type: object
-    CheckoutCreateOrderResponse:
+    CreateOrderResponse:
       properties:
         additionalData:
           additionalProperties:
@@ -7589,7 +7916,73 @@ components:
         - orderData
         - resultCode
       type: object
-    CheckoutDonationPaymentRequest:
+    DeviceRenderOptions:
+      properties:
+        sdkInterface:
+          default: both
+          description: |-
+            Supported SDK interface types.
+            Allowed values:
+            * native
+            * html
+            * both
+          enum:
+            - native
+            - html
+            - both
+          type: string
+        sdkUiType:
+          description: |-
+            UI types supported for displaying specific challenges.
+            Allowed values:
+            * text
+            * singleSelect
+            * outOfBand
+            * otherHtml
+            * multiSelect
+          items:
+            enum:
+              - multiSelect
+              - otherHtml
+              - outOfBand
+              - singleSelect
+              - text
+            type: string
+          type: array
+      type: object
+    DokuDetails:
+      additionalProperties: false
+      properties:
+        firstName:
+          description: The shopper's first name.
+          type: string
+        lastName:
+          description: The shopper's last name.
+          type: string
+        shopperEmail:
+          description: The shopper's email.
+          type: string
+        type:
+          description: "**doku**"
+          enum:
+            - doku_mandiri_va
+            - doku_cimb_va
+            - doku_danamon_va
+            - doku_bni_va
+            - doku_permata_lite_atm
+            - doku_bri_va
+            - doku_bca_va
+            - doku_alfamart
+            - doku_indomaret
+          type: string
+      required:
+        - type
+        - firstName
+        - lastName
+        - shopperEmail
+      title: Doku
+      type: object
+    DonationPaymentRequest:
       properties:
         accountInfo:
           $ref: "#/components/schemas/AccountInfo"
@@ -7988,1102 +8381,7 @@ components:
         - returnUrl
         - donationAccount
       type: object
-    CheckoutNativeRedirectAction:
-      additionalProperties: false
-      properties:
-        data:
-          additionalProperties:
-            type: string
-          description: When the redirect URL must be accessed via POST, use this data to post to the redirect URL.
-          type: object
-        method:
-          description: Specifies the HTTP method, for example GET or POST.
-          type: string
-        nativeRedirectData:
-          description: Native SDK's redirect data containing the direct issuer link and state data that must be submitted to the /v1/nativeRedirect/redirectResult.
-          type: string
-        paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
-          type: string
-        paymentMethodType:
-          description: Specifies the payment method.
-          type: string
-        type:
-          description: "**nativeRedirect**"
-          enum:
-            - nativeRedirect
-          type: string
-        url:
-          description: Specifies the URL to redirect to.
-          type: string
-      required:
-        - type
-      type: object
-    CheckoutOrderResponse:
-      properties:
-        amount:
-          $ref: "#/components/schemas/Amount"
-          description: The initial amount of the order.
-        expiresAt:
-          description: The expiry date for the order.
-          type: string
-        orderData:
-          description: The encrypted order data.
-          type: string
-        pspReference:
-          description: The `pspReference` that belongs to the order.
-          type: string
-        reference:
-          description: The merchant reference for the order.
-          type: string
-        remainingAmount:
-          $ref: "#/components/schemas/Amount"
-          description: The updated remaining amount.
-      required:
-        - pspReference
-      type: object
-    CheckoutPaymentRequest:
-      properties:
-        accountInfo:
-          $ref: "#/components/schemas/AccountInfo"
-          description: |-
-            Shopper account information for 3D Secure 2.
-            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
-          x-addedInVersion: "40"
-        additionalAmount:
-          $ref: "#/components/schemas/Amount"
-          description: |-
-            If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
-            Required to be in the same currency as the `amount`. 
-        additionalData:
-          additionalProperties:
-            type: string
-          anyOf:
-            - $ref: "#/components/schemas/AdditionalData3DSecure"
-            - $ref: "#/components/schemas/AdditionalDataAirline"
-            - $ref: "#/components/schemas/AdditionalDataCarRental"
-            - $ref: "#/components/schemas/AdditionalDataCommon"
-            - $ref: "#/components/schemas/AdditionalDataLevel23"
-            - $ref: "#/components/schemas/AdditionalDataLodging"
-            - $ref: "#/components/schemas/AdditionalDataOpenInvoice"
-            - $ref: "#/components/schemas/AdditionalDataOpi"
-            - $ref: "#/components/schemas/AdditionalDataRatepay"
-            - $ref: "#/components/schemas/AdditionalDataRetry"
-            - $ref: "#/components/schemas/AdditionalDataRisk"
-            - $ref: "#/components/schemas/AdditionalDataRiskStandalone"
-            - $ref: "#/components/schemas/AdditionalDataSubMerchant"
-            - $ref: "#/components/schemas/AdditionalDataTemporaryServices"
-            - $ref: "#/components/schemas/AdditionalDataWallets"
-          description: |-
-            This field contains additional data, which may be required for a particular payment request.
-
-            The `additionalData` object consists of entries, each of which includes the key and value.
-          type: object
-        amount:
-          $ref: "#/components/schemas/Amount"
-          description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
-        applicationInfo:
-          $ref: "#/components/schemas/ApplicationInfo"
-          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-          x-addedInVersion: "40"
-        billingAddress:
-          $ref: "#/components/schemas/Address"
-          description: |-
-            The address where to send the invoice.
-            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
-            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
-            >* For cross-border payouts to and from Canada.
-        browserInfo:
-          $ref: "#/components/schemas/BrowserInfo"
-          description: |-
-            The shopper's browser information.
-            > For 3D Secure, the full object is required for web integrations. For mobile app integrations, include the `userAgent` and `acceptHeader` fields to indicate  that your integration can support a redirect in case a payment is routed to 3D Secure 1.
-        captureDelayHours:
-          description: The delay between the authorisation and scheduled auto-capture, specified in hours.
-          format: int32
-          type: integer
-        channel:
-          description: |-
-            The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.
-
-            Possible values:
-            * iOS
-            * Android
-            * Web
-          enum:
-            - iOS
-            - Android
-            - Web
-          type: string
-        company:
-          $ref: "#/components/schemas/Company"
-          description: Information regarding the company.
-          x-addedInVersion: "32"
-        conversionId:
-          description: Conversion ID that corresponds to the Id generated by the client SDK for tracking user payment journey.
-          type: string
-          x-addedInVersion: "49"
-        countryCode:
-          description: |-
-            The shopper country.
-
-            Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-            Example: NL or DE
-          type: string
-        dateOfBirth:
-          description: |-
-            The shopper's date of birth.
-
-            Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
-          format: date-time
-          type: string
-        dccQuote:
-          $ref: "#/components/schemas/ForexQuote"
-          description: The forex quote as returned in the response of the forex service.
-        deliveryAddress:
-          $ref: "#/components/schemas/Address"
-          description: The address where the purchased goods should be delivered.
-        deliveryDate:
-          description: |-
-            The date and time the purchased goods should be delivered.
-
-            Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD
-
-            Example: 2017-07-17T13:42:40.428+01:00
-          format: date-time
-          type: string
-        deviceFingerprint:
-          description: A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
-          maxLength: 5000
-          type: string
-        enableOneClick:
-          description: When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
-          type: boolean
-          x-addedInVersion: "32"
-        enablePayOut:
-          description: When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
-          type: boolean
-          x-addedInVersion: "32"
-        enableRecurring:
-          description: When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments.
-          type: boolean
-          x-addedInVersion: "32"
-        entityType:
-          description: The type of the entity the payment is processed for.
-          enum:
-            - NaturalPerson
-            - CompanyName
-          type: string
-        fraudOffset:
-          description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
-          format: int32
-          type: integer
-        fundOrigin:
-          $ref: "#/components/schemas/FundOrigin"
-          description: The person or entity funding the money.
-        fundRecipient:
-          $ref: "#/components/schemas/FundRecipient"
-          description: the person or entity receiving the money
-        installments:
-          $ref: "#/components/schemas/Installments"
-          description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
-        lineItems:
-          description: |-
-            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
-          items:
-            $ref: "#/components/schemas/LineItem"
-          type: array
-          x-addedInVersion: "32"
-        mandate:
-          $ref: "#/components/schemas/Mandate"
-          description: The mandate details to initiate recurring transaction.
-        mcc:
-          description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
-          type: string
-        merchantAccount:
-          description: The merchant account identifier, with which you want to process the transaction.
-          type: string
-        merchantOrderReference:
-          description: |-
-            This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle.
-            The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
-            > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
-          type: string
-        merchantRiskIndicator:
-          $ref: "#/components/schemas/MerchantRiskIndicator"
-          description: |-
-            Additional risk fields for 3D Secure 2.
-            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
-          x-addedInVersion: "40"
-        metadata:
-          additionalProperties:
-            type: string
-          description: |-
-            Metadata consists of entries, each of which includes a key and a value.
-            Limits:
-            * Maximum 20 key-value pairs per request. When exceeding, the "177" error occurs: "Metadata size exceeds limit".
-            * Maximum 20 characters per key.
-            * Maximum 80 characters per value. 
-          type: object
-        mpiData:
-          $ref: "#/components/schemas/ThreeDSecureData"
-          description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
-        order:
-          $ref: "#/components/schemas/EncryptedOrderData"
-          description: The order information required for partial payments.
-        orderReference:
-          description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
-          type: string
-        origin:
-          description: |-
-            Required for the 3D Secure 2 `channel` **Web** integration.
-
-            Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
-          maxLength: 80
-          type: string
-          x-addedInVersion: "40"
-        paymentMethod:
-          description: The type and required details of a payment method to use.
-          oneOf:
-            - $ref: "#/components/schemas/AchDetails"
-            - $ref: "#/components/schemas/AfterpayDetails"
-            - $ref: "#/components/schemas/AmazonPayDetails"
-            - $ref: "#/components/schemas/AndroidPayDetails"
-            - $ref: "#/components/schemas/ApplePayDetails"
-            - $ref: "#/components/schemas/BacsDirectDebitDetails"
-            - $ref: "#/components/schemas/BillDeskDetails"
-            - $ref: "#/components/schemas/BlikDetails"
-            - $ref: "#/components/schemas/CardDetails"
-            - $ref: "#/components/schemas/CellulantDetails"
-            - $ref: "#/components/schemas/DokuDetails"
-            - $ref: "#/components/schemas/DotpayDetails"
-            - $ref: "#/components/schemas/DragonpayDetails"
-            - $ref: "#/components/schemas/EcontextVoucherDetails"
-            - $ref: "#/components/schemas/GenericIssuerPaymentMethodDetails"
-            - $ref: "#/components/schemas/GiropayDetails"
-            - $ref: "#/components/schemas/GooglePayDetails"
-            - $ref: "#/components/schemas/IdealDetails"
-            - $ref: "#/components/schemas/KlarnaDetails"
-            - $ref: "#/components/schemas/MasterpassDetails"
-            - $ref: "#/components/schemas/MbwayDetails"
-            - $ref: "#/components/schemas/MobilePayDetails"
-            - $ref: "#/components/schemas/MolPayDetails"
-            - $ref: "#/components/schemas/OpenInvoiceDetails"
-            - $ref: "#/components/schemas/PayPalDetails"
-            - $ref: "#/components/schemas/PayUUpiDetails"
-            - $ref: "#/components/schemas/PayWithGoogleDetails"
-            - $ref: "#/components/schemas/PaymentDetails"
-            - $ref: "#/components/schemas/RatepayDetails"
-            - $ref: "#/components/schemas/SamsungPayDetails"
-            - $ref: "#/components/schemas/SepaDirectDebitDetails"
-            - $ref: "#/components/schemas/StoredPaymentMethodDetails"
-            - $ref: "#/components/schemas/UpiCollectDetails"
-            - $ref: "#/components/schemas/UpiIntentDetails"
-            - $ref: "#/components/schemas/VippsDetails"
-            - $ref: "#/components/schemas/VisaCheckoutDetails"
-            - $ref: "#/components/schemas/WeChatPayDetails"
-            - $ref: "#/components/schemas/WeChatPayMiniProgramDetails"
-            - $ref: "#/components/schemas/ZipDetails"
-        recurringExpiry:
-          description: Date after which no further authorisations shall be performed. Only for 3D Secure 2.
-          type: string
-        recurringFrequency:
-          description: Minimum number of days between authorisations. Only for 3D Secure 2.
-          type: string
-        recurringProcessingModel:
-          description: |
-            Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details.
-            Allowed values:
-            * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
-            * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
-            * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
-          enum:
-            - CardOnFile
-            - Subscription
-            - UnscheduledCardOnFile
-          type: string
-          x-addedInVersion: "30"
-        redirectFromIssuerMethod:
-          description: Specifies the redirect method (GET or POST) when redirecting back from the issuer.
-          type: string
-          x-addedInVersion: "32"
-        redirectToIssuerMethod:
-          description: Specifies the redirect method (GET or POST) when redirecting to the issuer.
-          type: string
-          x-addedInVersion: "32"
-        reference:
-          description: |-
-            The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
-            If you need to provide multiple references for a transaction, separate them with hyphens ("-").
-            Maximum length: 80 characters.
-          type: string
-        returnUrl:
-          description: |-
-            The URL to return to in case of a redirection.
-            The format depends on the channel. This URL can have a maximum of 1024 characters.
-            * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number.
-            Example: `https://your-company.com/checkout?shopperOrder=12xy`
-            * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app).
-            Example: `my-app://`
-            * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters).
-            Example: `my-app://your.package.name`
-          maxLength: 8000
-          type: string
-        riskData:
-          $ref: "#/components/schemas/RiskData"
-          description: Contains risk data, such as client-side data, used to identify risk for a transaction.
-        sessionValidity:
-          description: |-
-            The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.
-
-            For example: 2020-07-18T15:42:40.428+01:00
-          type: string
-        shopperEmail:
-          description: |-
-            The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks.
-            > For 3D Secure 2 transactions, schemes require `shopperEmail` for all browser-based and mobile implementations.
-          type: string
-        shopperIP:
-          description: |-
-            The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
-            > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations.
-            This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
-          type: string
-        shopperInteraction:
-          description: |-
-            Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer.
-            For the web service API, Adyen assumes Ecommerce shopper interaction by default.
-
-            This field has the following possible values:
-            * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request.
-            * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment).
-            * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone.
-            * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
-          enum:
-            - Ecommerce
-            - ContAuth
-            - Moto
-            - POS
-          type: string
-        shopperLocale:
-          description: The combination of a language code and a country code to specify the language to be used in the payment.
-          type: string
-        shopperName:
-          $ref: "#/components/schemas/Name"
-          description: The shopper's full name.
-        shopperReference:
-          description: |-
-            Required for recurring payments. 
-            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
-            > Your reference must not include personally identifiable information (PII), for example name or email address.
-          maxLength: 256
-          minLength: 3
-          type: string
-        shopperStatement:
-          description: |-
-            The text to be shown on the shopper's bank statement.
-             We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
-             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
-          type: string
-        socialSecurityNumber:
-          description: The shopper's social security number.
-          type: string
-        splits:
-          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
-          items:
-            $ref: "#/components/schemas/Split"
-          type: array
-          x-addedInVersion: "37"
-        store:
-          description: |-
-            The ecommerce or point-of-sale store that is processing the payment. Used in:
-
-            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
-            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
-          maxLength: 16
-          minLength: 1
-          type: string
-        storePaymentMethod:
-          description: When true and `shopperReference` is provided, the payment details will be stored.
-          type: boolean
-          x-addedInVersion: "49"
-        telephoneNumber:
-          description: The shopper's telephone number.
-          type: string
-        threeDS2RequestData:
-          $ref: "#/components/schemas/ThreeDS2RequestData-2"
-          description: Request fields for 3D Secure 2. To check if any of the following fields are required for your integration, refer to [Online payments](https://docs.adyen.com/online-payments) or [Classic integration](https://docs.adyen.com/classic-integration) documentation.
-          x-addedInVersion: "40"
-        threeDSAuthenticationOnly:
-          default: false
-          description: If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
-          type: boolean
-          x-addedInVersion: "50"
-        trustedShopper:
-          description: Set to true if the payment should be routed to a trusted MID.
-          type: boolean
-          x-addedInVersion: "37"
-      required:
-        - merchantAccount
-        - reference
-        - amount
-        - paymentMethod
-        - returnUrl
-      type: object
-    CheckoutQrCodeAction:
-      additionalProperties: false
-      properties:
-        paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
-          type: string
-        paymentMethodType:
-          description: Specifies the payment method.
-          type: string
-        qrCodeData:
-          description: The contents of the QR code as a UTF8 string.
-          type: string
-        type:
-          description: "**qrCode**"
-          enum:
-            - qrCode
-          type: string
-        url:
-          description: Specifies the URL to redirect to.
-          type: string
-      required:
-        - type
-      type: object
-    CheckoutRedirectAction:
-      additionalProperties: false
-      properties:
-        data:
-          additionalProperties:
-            type: string
-          description: When the redirect URL must be accessed via POST, use this data to post to the redirect URL.
-          type: object
-        method:
-          description: Specifies the HTTP method, for example GET or POST.
-          type: string
-        paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
-          type: string
-        paymentMethodType:
-          description: Specifies the payment method.
-          type: string
-        type:
-          description: "**redirect**"
-          enum:
-            - redirect
-          type: string
-        url:
-          description: Specifies the URL to redirect to.
-          type: string
-      required:
-        - type
-      type: object
-    CheckoutSDKAction:
-      additionalProperties: false
-      properties:
-        paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
-          type: string
-        paymentMethodType:
-          description: Specifies the payment method.
-          type: string
-        sdkData:
-          additionalProperties:
-            type: string
-          description: The data to pass to the SDK.
-          type: object
-        type:
-          description: The type of the action.
-          enum:
-            - sdk
-            - wechatpaySDK
-          type: string
-        url:
-          description: Specifies the URL to redirect to.
-          type: string
-      required:
-        - type
-      type: object
-    CheckoutThreeDS2ChallengeAction:
-      additionalProperties: false
-      properties:
-        paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
-          type: string
-        paymentMethodType:
-          description: Specifies the payment method.
-          type: string
-        token:
-          description: A token to pass to the 3DS2 Component to get the challenge.
-          type: string
-        type:
-          description: "**threeDS2Challenge**"
-          enum:
-            - threeDS2Challenge
-          type: string
-        url:
-          description: Specifies the URL to redirect to.
-          type: string
-      required:
-        - type
-      type: object
-    CheckoutThreeDS2FingerPrintAction:
-      additionalProperties: false
-      properties:
-        paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
-          type: string
-        paymentMethodType:
-          description: Specifies the payment method.
-          type: string
-        token:
-          description: A token to pass to the 3DS2 Component to get the fingerprint.
-          type: string
-        type:
-          description: "**threeDS2Fingerprint**"
-          enum:
-            - threeDS2Fingerprint
-          type: string
-        url:
-          description: Specifies the URL to redirect to.
-          type: string
-      required:
-        - type
-      type: object
-    CheckoutUtilityRequest:
-      properties:
-        originDomains:
-          description: The list of origin domains, for which origin keys are requested.
-          items:
-            type: string
-          type: array
-      required:
-        - originDomains
-      type: object
-    CheckoutUtilityResponse:
-      properties:
-        originKeys:
-          additionalProperties:
-            type: string
-          description: The list of origin keys for all requested domains. For each list item, the key is the domain and the value is the origin key.
-          type: object
-          x-addedInVersion: "1"
-      type: object
-    CheckoutVoucherAction:
-      additionalProperties: false
-      properties:
-        alternativeReference:
-          description: The voucher alternative reference code.
-          type: string
-        collectionInstitutionNumber:
-          description: A collection institution number (store number) for Econtext Pay-Easy ATM.
-          type: string
-        downloadUrl:
-          description: The URL to download the voucher.
-          type: string
-        entity:
-          description: An entity number of Multibanco.
-          type: string
-        expiresAt:
-          description: The date time of the voucher expiry.
-          type: string
-        initialAmount:
-          $ref: "#/components/schemas/Amount"
-          description: The initial amount.
-        instructionsUrl:
-          description: The URL to the detailed instructions to make payment using the voucher.
-          type: string
-        issuer:
-          description: The issuer of the voucher.
-          type: string
-        maskedTelephoneNumber:
-          description: The shopper telephone number (partially masked).
-          type: string
-        merchantName:
-          description: The merchant name.
-          type: string
-        merchantReference:
-          description: The merchant reference.
-          type: string
-        paymentData:
-          description: A value that must be submitted to the `/payments/details` endpoint to verify this payment.
-          type: string
-        paymentMethodType:
-          description: Specifies the payment method.
-          type: string
-        reference:
-          description: The voucher reference code.
-          type: string
-        shopperEmail:
-          description: The shopper email.
-          type: string
-        shopperName:
-          description: The shopper name.
-          type: string
-        surcharge:
-          $ref: "#/components/schemas/Amount"
-          description: The surcharge amount.
-        totalAmount:
-          $ref: "#/components/schemas/Amount"
-          description: The total amount (initial plus surcharge amount).
-        type:
-          description: "**voucher**"
-          enum:
-            - voucher
-          type: string
-        url:
-          description: Specifies the URL to redirect to.
-          type: string
-      required:
-        - type
-      type: object
-    CommonField:
-      properties:
-        name:
-          description: Name of the field. For example, Name of External Platform.
-          type: string
-        version:
-          description: Version of the field. For example, Version of External Platform.
-          type: string
-      type: object
-    Company:
-      properties:
-        homepage:
-          description: The company website's home page.
-          type: string
-        name:
-          description: The company name.
-          type: string
-        registrationNumber:
-          description: Registration number of the company.
-          type: string
-        registryLocation:
-          description: Registry location of the company.
-          type: string
-        taxId:
-          description: Tax ID of the company.
-          type: string
-        type:
-          description: The company type.
-          type: string
-      type: object
-    Configuration:
-      properties:
-        avs:
-          $ref: "#/components/schemas/Avs"
-          description: Describes the configuration for AVS ([Address Verification System](https://en.wikipedia.org/wiki/Address_Verification_System)).
-        cardHolderName:
-          description: |-
-            Determines whether the cardholder name should be provided or not.
-
-            Permitted values:
-            * NONE
-            * OPTIONAL
-            * REQUIRED
-          enum:
-            - NONE
-            - OPTIONAL
-            - REQUIRED
-          type: string
-          x-addedInVersion: "37"
-        installments:
-          $ref: "#/components/schemas/InstallmentsNumber"
-          description: Describes the configuration for [installment payments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
-        shopperInput:
-          $ref: "#/components/schemas/ShopperInput"
-          description: Determines how to display the details fields.
-          x-addedInVersion: "37"
-      type: object
-    CreateApplePaySessionRequest:
-      properties:
-        displayName:
-          description: |-
-            This is the name that your shoppers will see in the Apple Pay interface.
-
-            The value returned as `configuration.merchantName` field from the [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response.
-          type: string
-        domainName:
-          description: |-
-            The domain name you provided when you added Apple Pay in your Customer Area.
-
-            This must match the `window.location.hostname` of the web shop.
-          type: string
-        merchantIdentifier:
-          description: |-
-            Your merchant identifier registered with Apple Pay.
-
-            Use the value of the `configuration.merchantId` field from the [`/paymentMethods`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/paymentMethods) response.
-          type: string
-      required:
-        - domainName
-        - merchantIdentifier
-        - displayName
-      type: object
-    CreatePaymentAmountUpdateRequest:
-      properties:
-        amount:
-          $ref: "#/components/schemas/Amount"
-          description: The updated amount. The `currency` must match the currency used in authorisation.
-        merchantAccount:
-          description: The merchant account that is used to process the payment.
-          type: string
-        reason:
-          description: |-
-            The reason for the amount update. Possible values: 
-            * **delayedCharge** 
-            * **noShow**
-          enum:
-            - delayedCharge
-            - noShow
-          type: string
-        reference:
-          description: "Your reference for the amount update request. Maximum length: 80 characters."
-          type: string
-        splits:
-          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
-          items:
-            $ref: "#/components/schemas/Split"
-          type: array
-      required:
-        - merchantAccount
-        - amount
-      type: object
-    CreatePaymentCancelRequest:
-      properties:
-        merchantAccount:
-          description: The merchant account that is used to process the payment.
-          type: string
-        reference:
-          description: "Your reference for the cancel request. Maximum length: 80 characters."
-          type: string
-      required:
-        - merchantAccount
-      type: object
-    CreatePaymentCaptureRequest:
-      properties:
-        amount:
-          $ref: "#/components/schemas/Amount"
-          description: The amount that you want to capture. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
-        lineItems:
-          description: |-
-            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
-            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
-          items:
-            $ref: "#/components/schemas/LineItem"
-          type: array
-        merchantAccount:
-          description: The merchant account that is used to process the payment.
-          type: string
-        reference:
-          description: "Your reference for the capture request. Maximum length: 80 characters."
-          type: string
-        splits:
-          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
-          items:
-            $ref: "#/components/schemas/Split"
-          type: array
-      required:
-        - merchantAccount
-        - amount
-      type: object
-    CreatePaymentLinkRequest:
-      properties:
-        allowedPaymentMethods:
-          description: |-
-            List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
-
-            Example: `"allowedPaymentMethods":["ideal","giropay"]`
-          items:
-            type: string
-          type: array
-        amount:
-          $ref: "#/components/schemas/Amount"
-          description: The payment amount and currency.
-        applicationInfo:
-          $ref: "#/components/schemas/ApplicationInfo"
-          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
-        billingAddress:
-          $ref: "#/components/schemas/Address"
-          description: The address where to send the invoice.
-        blockedPaymentMethods:
-          description: |-
-            List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
-
-            Example: `"blockedPaymentMethods":["ideal","giropay"]`
-          items:
-            type: string
-          type: array
-        countryCode:
-          description: The shopper's two-letter country code.
-          type: string
-        deliverAt:
-          description: |-
-            The date and time when the purchased goods should be delivered.
-
-            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
-          format: date-time
-          type: string
-        deliveryAddress:
-          $ref: "#/components/schemas/Address"
-          description: The address where the purchased goods should be delivered.
-        description:
-          description: |-
-            A short description visible on the payment page.
-            Maximum length: 280 characters.
-          type: string
-        expiresAt:
-          description: |-
-            The date when the payment link expires.
-
-            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with time zone designator **Z**: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30Z**.
-
-            The maximum expiry date is 70 days after the payment link is created.
-
-            If not provided, the payment link expires 24 hours after it was created.
-          type: string
-        installmentOptions:
-          additionalProperties:
-            $ref: "#/components/schemas/InstallmentOption"
-          description: A set of key-value pairs that specifies the installment options available per payment method. The key must be a payment method name in lowercase. For example, **card** to specify installment options for all cards, or **visa** or **mc**. The value must be an object containing the installment options.
-          type: object
-        lineItems:
-          description: |-
-            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
-            This parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, and Zip.
-          items:
-            $ref: "#/components/schemas/LineItem"
-          type: array
-        manualCapture:
-          description: Indicates if the payment must be [captured manually](https://docs.adyen.com/online-payments/capture).
-          type: boolean
-        merchantAccount:
-          description: The merchant account identifier for which the payment link is created.
-          type: string
-        merchantOrderReference:
-          description: This reference allows linking multiple transactions to each other for reporting purposes (for example, order auth-rate). The reference should be unique per billing cycle.
-          type: string
-        metadata:
-          additionalProperties:
-            type: string
-          description: |-
-            Metadata consists of entries, each of which includes a key and a value.
-            Limitations:
-            * Maximum 20 key-value pairs per request. Otherwise, error "177" occurs: "Metadata size exceeds limit"
-            * Maximum 20 characters per key. Otherwise, error "178" occurs: "Metadata key size exceeds limit"
-            * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
-          type: object
-        recurringProcessingModel:
-          description: |
-            Defines a recurring payment type. Required when `storePaymentMethodMode` is set to **askForConsent** or **enabled**.
-            Possible values:
-            * **Subscription** – A transaction for a fixed or variable amount, which follows a fixed schedule.
-            * **CardOnFile** – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
-            * **UnscheduledCardOnFile** – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
-          enum:
-            - CardOnFile
-            - Subscription
-            - UnscheduledCardOnFile
-          type: string
-        reference:
-          description: A reference that is used to uniquely identify the payment in future communications about the payment status.
-          type: string
-        returnUrl:
-          description: |-
-            Website URL used for redirection after payment is completed.
-            If provided, a **Continue** button will be shown on the payment page. If shoppers select the button, they are redirected to the specified URL.
-          type: string
-        reusable:
-          description: Indicates whether the payment link can be reused for multiple payments. If not provided, this defaults to **false** which means the link can be used for one successful payment only.
-          type: boolean
-        shopperEmail:
-          description: The shopper's email address.
-          type: string
-        shopperLocale:
-          description: |-
-            The language to be used in the payment page, specified by a combination of a language and country code. For example, `en-US`.
-
-            For a list of shopper locales that Pay by Link supports, refer to [Language and localization](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#language).
-          type: string
-        shopperName:
-          $ref: "#/components/schemas/Name"
-          description: The shopper's full name. This object is required for some payment methods such as AfterPay, Klarna, or if you're enrolled in the PayPal Seller Protection program.
-        shopperReference:
-          description: |-
-            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
-            > Your reference must not include personally identifiable information (PII), for example name or email address.
-          maxLength: 256
-          minLength: 3
-          type: string
-        showRemovePaymentMethodButton:
-          default: true
-          description: Set to **false** to hide the button that lets the shopper remove a stored payment method.
-          type: boolean
-        splits:
-          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
-          items:
-            $ref: "#/components/schemas/Split"
-          type: array
-        store:
-          description: The physical store, for which this payment is processed.
-          type: string
-        storePaymentMethod:
-          description: When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
-          type: boolean
-          x-addedInVersion: "50"
-      required:
-        - amount
-        - reference
-        - merchantAccount
-      type: object
-    CreatePaymentRefundRequest:
-      properties:
-        amount:
-          $ref: "#/components/schemas/Amount"
-          description: The amount that you want to refund. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
-        lineItems:
-          description: |-
-            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
-            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
-          items:
-            $ref: "#/components/schemas/LineItem"
-          type: array
-        merchantAccount:
-          description: The merchant account that is used to process the payment.
-          type: string
-        merchantRefundReason:
-          description: Your reason for the refund request
-          enum:
-            - FRAUD
-            - CUSTOMER REQUEST
-            - RETURN
-            - DUPLICATE
-            - OTHER
-          type: string
-        reference:
-          description: "Your reference for the refund request. Maximum length: 80 characters."
-          type: string
-        splits:
-          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
-          items:
-            $ref: "#/components/schemas/Split"
-          type: array
-      required:
-        - merchantAccount
-        - amount
-      type: object
-    CreatePaymentReversalRequest:
-      properties:
-        merchantAccount:
-          description: The merchant account that is used to process the payment.
-          type: string
-        reference:
-          description: "Your reference for the reversal request. Maximum length: 80 characters."
-          type: string
-      required:
-        - merchantAccount
-      type: object
-    CreateStandalonePaymentCancelRequest:
-      properties:
-        merchantAccount:
-          description: The merchant account that is used to process the payment.
-          type: string
-        paymentReference:
-          description: The [`reference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_reference) of the payment that you want to cancel.
-          type: string
-        reference:
-          description: "Your reference for the cancel request. Maximum length: 80 characters."
-          type: string
-      required:
-        - merchantAccount
-        - paymentReference
-      type: object
-    DetailsRequest:
-      properties:
-        details:
-          $ref: "#/components/schemas/PaymentCompletionDetails"
-          description: Use this collection to submit the details that were returned as a result of the `/payments` call.
-        paymentData:
-          description: "The `paymentData` value from the `/payments` response. Required if the `/payments` response returns this value. "
-          maxLength: 100000
-          type: string
-        threeDSAuthenticationOnly:
-          description: Change the `authenticationOnly` indicator originally set in the `/payments` request. Only needs to be set if you want to modify the value set previously.
-          type: boolean
-          x-addedInVersion: "40"
-      required:
-        - details
-      type: object
-    DeviceRenderOptions:
-      properties:
-        sdkInterface:
-          default: both
-          description: |-
-            Supported SDK interface types.
-            Allowed values:
-            * native
-            * html
-            * both
-          enum:
-            - native
-            - html
-            - both
-          type: string
-        sdkUiType:
-          description: |-
-            UI types supported for displaying specific challenges.
-            Allowed values:
-            * text
-            * singleSelect
-            * outOfBand
-            * otherHtml
-            * multiSelect
-          items:
-            enum:
-              - multiSelect
-              - otherHtml
-              - outOfBand
-              - singleSelect
-              - text
-            type: string
-          type: array
-      type: object
-    DokuDetails:
-      additionalProperties: false
-      properties:
-        firstName:
-          description: The shopper's first name.
-          type: string
-        lastName:
-          description: The shopper's last name.
-          type: string
-        shopperEmail:
-          description: The shopper's email.
-          type: string
-        type:
-          description: "**doku**"
-          enum:
-            - doku_mandiri_va
-            - doku_cimb_va
-            - doku_danamon_va
-            - doku_bni_va
-            - doku_permata_lite_atm
-            - doku_bri_va
-            - doku_bca_va
-            - doku_alfamart
-            - doku_indomaret
-          type: string
-      required:
-        - type
-        - firstName
-        - lastName
-        - shopperEmail
-      title: Doku
-      type: object
-    DonationResponse:
+    DonationPaymentResponse:
       properties:
         amount:
           $ref: "#/components/schemas/Amount"
@@ -9962,7 +9260,36 @@ components:
         - googlePayToken
       title: Google Pay
       type: object
-    PaymentAmountUpdateResource:
+    PaymentAmountUpdateRequest:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The updated amount. The `currency` must match the currency used in authorisation.
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reason:
+          description: |-
+            The reason for the amount update. Possible values: 
+            * **delayedCharge** 
+            * **noShow**
+          enum:
+            - delayedCharge
+            - noShow
+          type: string
+        reference:
+          description: "Your reference for the amount update request. Maximum length: 80 characters."
+          type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
+      required:
+        - merchantAccount
+        - amount
+      type: object
+    PaymentAmountUpdateResponse:
       properties:
         amount:
           $ref: "#/components/schemas/Amount"
@@ -10006,7 +9333,18 @@ components:
         - pspReference
         - paymentPspReference
       type: object
-    PaymentCancelResource:
+    PaymentCancelRequest:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reference:
+          description: "Your reference for the cancel request. Maximum length: 80 characters."
+          type: string
+      required:
+        - merchantAccount
+      type: object
+    PaymentCancelResponse:
       properties:
         merchantAccount:
           description: The merchant account that is used to process the payment.
@@ -10031,7 +9369,34 @@ components:
         - paymentPspReference
         - pspReference
       type: object
-    PaymentCaptureResource:
+    PaymentCaptureRequest:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount that you want to capture. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
+        lineItems:
+          description: |-
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
+          items:
+            $ref: "#/components/schemas/LineItem"
+          type: array
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reference:
+          description: "Your reference for the capture request. Maximum length: 80 characters."
+          type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
+      required:
+        - merchantAccount
+        - amount
+      type: object
+    PaymentCaptureResponse:
       properties:
         amount:
           $ref: "#/components/schemas/Amount"
@@ -10232,6 +9597,22 @@ components:
           type: string
       title: Payment Details
       type: object
+    PaymentDetailsRequest:
+      properties:
+        details:
+          $ref: "#/components/schemas/PaymentCompletionDetails"
+          description: Use this collection to submit the details that were returned as a result of the `/payments` call.
+        paymentData:
+          description: "The `paymentData` value from the `/payments` response. Required if the `/payments` response returns this value. "
+          maxLength: 100000
+          type: string
+        threeDSAuthenticationOnly:
+          description: Change the `authenticationOnly` indicator originally set in the `/payments` request. Only needs to be set if you want to modify the value set previously.
+          type: boolean
+          x-addedInVersion: "40"
+      required:
+        - details
+      type: object
     PaymentDetailsResponse:
       properties:
         action:
@@ -10341,6 +9722,155 @@ components:
           $ref: "#/components/schemas/ThreeDS2Result"
           description: Result of the 3D Secure 2 authentication.
           x-addedInVersion: "41"
+      type: object
+    PaymentLinkRequest:
+      properties:
+        allowedPaymentMethods:
+          description: |-
+            List of payment methods to be presented to the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
+
+            Example: `"allowedPaymentMethods":["ideal","giropay"]`
+          items:
+            type: string
+          type: array
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The payment amount and currency.
+        applicationInfo:
+          $ref: "#/components/schemas/ApplicationInfo"
+          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
+        billingAddress:
+          $ref: "#/components/schemas/Address"
+          description: The address where to send the invoice.
+        blockedPaymentMethods:
+          description: |-
+            List of payment methods to be hidden from the shopper. To refer to payment methods, use their [payment method type](https://docs.adyen.com/payment-methods/payment-method-types).
+
+            Example: `"blockedPaymentMethods":["ideal","giropay"]`
+          items:
+            type: string
+          type: array
+        countryCode:
+          description: The shopper's two-letter country code.
+          type: string
+        deliverAt:
+          description: |-
+            The date and time when the purchased goods should be delivered.
+
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30+01:00**.
+          format: date-time
+          type: string
+        deliveryAddress:
+          $ref: "#/components/schemas/Address"
+          description: The address where the purchased goods should be delivered.
+        description:
+          description: |-
+            A short description visible on the payment page.
+            Maximum length: 280 characters.
+          type: string
+        expiresAt:
+          description: |-
+            The date when the payment link expires.
+
+            [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format with time zone designator **Z**: YYYY-MM-DDThh:mm:ss+TZD, for example, **2020-12-18T10:15:30Z**.
+
+            The maximum expiry date is 70 days after the payment link is created.
+
+            If not provided, the payment link expires 24 hours after it was created.
+          type: string
+        installmentOptions:
+          additionalProperties:
+            $ref: "#/components/schemas/InstallmentOption"
+          description: A set of key-value pairs that specifies the installment options available per payment method. The key must be a payment method name in lowercase. For example, **card** to specify installment options for all cards, or **visa** or **mc**. The value must be an object containing the installment options.
+          type: object
+        lineItems:
+          description: |-
+            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
+            This parameter is required for open invoice (_buy now, pay later_) payment methods such Afterpay, Clearpay, Klarna, RatePay, and Zip.
+          items:
+            $ref: "#/components/schemas/LineItem"
+          type: array
+        manualCapture:
+          description: Indicates if the payment must be [captured manually](https://docs.adyen.com/online-payments/capture).
+          type: boolean
+        merchantAccount:
+          description: The merchant account identifier for which the payment link is created.
+          type: string
+        merchantOrderReference:
+          description: This reference allows linking multiple transactions to each other for reporting purposes (for example, order auth-rate). The reference should be unique per billing cycle.
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            Metadata consists of entries, each of which includes a key and a value.
+            Limitations:
+            * Maximum 20 key-value pairs per request. Otherwise, error "177" occurs: "Metadata size exceeds limit"
+            * Maximum 20 characters per key. Otherwise, error "178" occurs: "Metadata key size exceeds limit"
+            * A key cannot have the name `checkout.linkId`. Any value that you provide with this key is going to be replaced by the real payment link ID.
+          type: object
+        recurringProcessingModel:
+          description: |
+            Defines a recurring payment type. Required when `storePaymentMethodMode` is set to **askForConsent** or **enabled**.
+            Possible values:
+            * **Subscription** – A transaction for a fixed or variable amount, which follows a fixed schedule.
+            * **CardOnFile** – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
+            * **UnscheduledCardOnFile** – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or has variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+          enum:
+            - CardOnFile
+            - Subscription
+            - UnscheduledCardOnFile
+          type: string
+        reference:
+          description: A reference that is used to uniquely identify the payment in future communications about the payment status.
+          type: string
+        returnUrl:
+          description: |-
+            Website URL used for redirection after payment is completed.
+            If provided, a **Continue** button will be shown on the payment page. If shoppers select the button, they are redirected to the specified URL.
+          type: string
+        reusable:
+          description: Indicates whether the payment link can be reused for multiple payments. If not provided, this defaults to **false** which means the link can be used for one successful payment only.
+          type: boolean
+        shopperEmail:
+          description: The shopper's email address.
+          type: string
+        shopperLocale:
+          description: |-
+            The language to be used in the payment page, specified by a combination of a language and country code. For example, `en-US`.
+
+            For a list of shopper locales that Pay by Link supports, refer to [Language and localization](https://docs.adyen.com/unified-commerce/pay-by-link/payment-links/api#language).
+          type: string
+        shopperName:
+          $ref: "#/components/schemas/Name"
+          description: The shopper's full name. This object is required for some payment methods such as AfterPay, Klarna, or if you're enrolled in the PayPal Seller Protection program.
+        shopperReference:
+          description: |-
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
+          maxLength: 256
+          minLength: 3
+          type: string
+        showRemovePaymentMethodButton:
+          default: true
+          description: Set to **false** to hide the button that lets the shopper remove a stored payment method.
+          type: boolean
+        splits:
+          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
+        store:
+          description: The physical store, for which this payment is processed.
+          type: string
+        storePaymentMethod:
+          description: When this is set to **true** and the `shopperReference` is provided, the payment details will be stored.
+          type: boolean
+          x-addedInVersion: "50"
+      required:
+        - amount
+        - reference
+        - merchantAccount
       type: object
     PaymentLinkResponse:
       properties:
@@ -10691,7 +10221,43 @@ components:
           type: array
           x-addedInVersion: "49"
       type: object
-    PaymentRefundResource:
+    PaymentRefundRequest:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount that you want to refund. The `currency` must match the currency used in authorisation, the `value` must be smaller than or equal to the authorised amount.
+        lineItems:
+          description: |-
+            Price and product information of the refunded items, required for [partial refunds](https://docs.adyen.com/online-payments/refund#refund-a-payment).
+            > This field is required for partial refunds with 3x 4x Oney, Affirm, Afterpay, Atome, Clearpay, Klarna, Ratepay, and Zip.
+          items:
+            $ref: "#/components/schemas/LineItem"
+          type: array
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        merchantRefundReason:
+          description: Your reason for the refund request
+          enum:
+            - FRAUD
+            - CUSTOMER REQUEST
+            - RETURN
+            - DUPLICATE
+            - OTHER
+          type: string
+        reference:
+          description: "Your reference for the refund request. Maximum length: 80 characters."
+          type: string
+        splits:
+          description: An array of objects specifying how the amount should be split between accounts when using Adyen for Platforms. For details, refer to [Providing split information](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
+      required:
+        - merchantAccount
+        - amount
+      type: object
+    PaymentRefundResponse:
       properties:
         amount:
           $ref: "#/components/schemas/Amount"
@@ -10740,6 +10306,395 @@ components:
         - amount
         - pspReference
         - paymentPspReference
+      type: object
+    PaymentRequest:
+      properties:
+        accountInfo:
+          $ref: "#/components/schemas/AccountInfo"
+          description: |-
+            Shopper account information for 3D Secure 2.
+            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+          x-addedInVersion: "40"
+        additionalAmount:
+          $ref: "#/components/schemas/Amount"
+          description: |-
+            If you want a [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) request to use a non-zero value, assign this value to `additionalAmount` (while the amount must be still set to 0 to trigger BIN or card verification).
+            Required to be in the same currency as the `amount`. 
+        additionalData:
+          additionalProperties:
+            type: string
+          anyOf:
+            - $ref: "#/components/schemas/AdditionalData3DSecure"
+            - $ref: "#/components/schemas/AdditionalDataAirline"
+            - $ref: "#/components/schemas/AdditionalDataCarRental"
+            - $ref: "#/components/schemas/AdditionalDataCommon"
+            - $ref: "#/components/schemas/AdditionalDataLevel23"
+            - $ref: "#/components/schemas/AdditionalDataLodging"
+            - $ref: "#/components/schemas/AdditionalDataOpenInvoice"
+            - $ref: "#/components/schemas/AdditionalDataOpi"
+            - $ref: "#/components/schemas/AdditionalDataRatepay"
+            - $ref: "#/components/schemas/AdditionalDataRetry"
+            - $ref: "#/components/schemas/AdditionalDataRisk"
+            - $ref: "#/components/schemas/AdditionalDataRiskStandalone"
+            - $ref: "#/components/schemas/AdditionalDataSubMerchant"
+            - $ref: "#/components/schemas/AdditionalDataTemporaryServices"
+            - $ref: "#/components/schemas/AdditionalDataWallets"
+          description: |-
+            This field contains additional data, which may be required for a particular payment request.
+
+            The `additionalData` object consists of entries, each of which includes the key and value.
+          type: object
+        amount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount information for the transaction (in [minor units](https://docs.adyen.com/development-resources/currency-codes)). For [BIN or card verification](https://docs.adyen.com/payment-methods/cards/bin-data-and-card-verification) requests, set amount to 0 (zero).
+        applicationInfo:
+          $ref: "#/components/schemas/ApplicationInfo"
+          description: Information about your application. For more details, see [Building Adyen solutions](https://docs.adyen.com/development-resources/building-adyen-solutions).
+          x-addedInVersion: "40"
+        billingAddress:
+          $ref: "#/components/schemas/Address"
+          description: |-
+            The address where to send the invoice.
+            > The `billingAddress` object is required in the following scenarios. Include all of the fields within this object.
+            >* For 3D Secure 2 transactions in all browser-based and mobile implementations.
+            >* For cross-border payouts to and from Canada.
+        browserInfo:
+          $ref: "#/components/schemas/BrowserInfo"
+          description: |-
+            The shopper's browser information.
+            > For 3D Secure, the full object is required for web integrations. For mobile app integrations, include the `userAgent` and `acceptHeader` fields to indicate  that your integration can support a redirect in case a payment is routed to 3D Secure 1.
+        captureDelayHours:
+          description: The delay between the authorisation and scheduled auto-capture, specified in hours.
+          format: int32
+          type: integer
+        channel:
+          description: |-
+            The platform where a payment transaction takes place. This field is optional for filtering out payment methods that are only available on specific platforms. If this value is not set, then we will try to infer it from the `sdkVersion` or `token`.
+
+            Possible values:
+            * iOS
+            * Android
+            * Web
+          enum:
+            - iOS
+            - Android
+            - Web
+          type: string
+        company:
+          $ref: "#/components/schemas/Company"
+          description: Information regarding the company.
+          x-addedInVersion: "32"
+        conversionId:
+          description: Conversion ID that corresponds to the Id generated by the client SDK for tracking user payment journey.
+          type: string
+          x-addedInVersion: "49"
+        countryCode:
+          description: |-
+            The shopper country.
+
+            Format: [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+            Example: NL or DE
+          type: string
+        dateOfBirth:
+          description: |-
+            The shopper's date of birth.
+
+            Format [ISO-8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DD
+          format: date-time
+          type: string
+        dccQuote:
+          $ref: "#/components/schemas/ForexQuote"
+          description: The forex quote as returned in the response of the forex service.
+        deliveryAddress:
+          $ref: "#/components/schemas/Address"
+          description: The address where the purchased goods should be delivered.
+        deliveryDate:
+          description: |-
+            The date and time the purchased goods should be delivered.
+
+            Format [ISO 8601](https://www.w3.org/TR/NOTE-datetime): YYYY-MM-DDThh:mm:ss.sssTZD
+
+            Example: 2017-07-17T13:42:40.428+01:00
+          format: date-time
+          type: string
+        deviceFingerprint:
+          description: A string containing the shopper's device fingerprint. For more information, refer to [Device fingerprinting](https://docs.adyen.com/risk-management/device-fingerprinting).
+          maxLength: 5000
+          type: string
+        enableOneClick:
+          description: When true and `shopperReference` is provided, the shopper will be asked if the payment details should be stored for future one-click payments.
+          type: boolean
+          x-addedInVersion: "32"
+        enablePayOut:
+          description: When true and `shopperReference` is provided, the payment details will be tokenized for payouts.
+          type: boolean
+          x-addedInVersion: "32"
+        enableRecurring:
+          description: When true and `shopperReference` is provided, the payment details will be tokenized for recurring payments.
+          type: boolean
+          x-addedInVersion: "32"
+        entityType:
+          description: The type of the entity the payment is processed for.
+          enum:
+            - NaturalPerson
+            - CompanyName
+          type: string
+        fraudOffset:
+          description: An integer value that is added to the normal fraud score. The value can be either positive or negative.
+          format: int32
+          type: integer
+        fundOrigin:
+          $ref: "#/components/schemas/FundOrigin"
+          description: The person or entity funding the money.
+        fundRecipient:
+          $ref: "#/components/schemas/FundRecipient"
+          description: the person or entity receiving the money
+        installments:
+          $ref: "#/components/schemas/Installments"
+          description: Contains installment settings. For more information, refer to [Installments](https://docs.adyen.com/payment-methods/cards/credit-card-installments).
+        lineItems:
+          description: |-
+            Price and product information about the purchased items, to be included on the invoice sent to the shopper.
+            > This field is required for 3x 4x Oney, Affirm, Afterpay, Clearpay, Klarna, Ratepay, and Zip.
+          items:
+            $ref: "#/components/schemas/LineItem"
+          type: array
+          x-addedInVersion: "32"
+        mandate:
+          $ref: "#/components/schemas/Mandate"
+          description: The mandate details to initiate recurring transaction.
+        mcc:
+          description: The [merchant category code](https://en.wikipedia.org/wiki/Merchant_category_code) (MCC) is a four-digit number, which relates to a particular market segment. This code reflects the predominant activity that is conducted by the merchant.
+          type: string
+        merchantAccount:
+          description: The merchant account identifier, with which you want to process the transaction.
+          type: string
+        merchantOrderReference:
+          description: |-
+            This reference allows linking multiple transactions to each other for reporting purposes (i.e. order auth-rate). The reference should be unique per billing cycle.
+            The same merchant order reference should never be reused after the first authorised attempt. If used, this field should be supplied for all incoming authorisations.
+            > We strongly recommend you send the `merchantOrderReference` value to benefit from linking payment requests when authorisation retries take place. In addition, we recommend you provide `retry.orderAttemptNumber`, `retry.chainAttemptNumber`, and `retry.skipRetry` values in `PaymentRequest.additionalData`.
+          type: string
+        merchantRiskIndicator:
+          $ref: "#/components/schemas/MerchantRiskIndicator"
+          description: |-
+            Additional risk fields for 3D Secure 2.
+            > For 3D Secure 2 transactions, we recommend that you include this object to increase the chances of achieving a frictionless flow.
+          x-addedInVersion: "40"
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            Metadata consists of entries, each of which includes a key and a value.
+            Limits:
+            * Maximum 20 key-value pairs per request. When exceeding, the "177" error occurs: "Metadata size exceeds limit".
+            * Maximum 20 characters per key.
+            * Maximum 80 characters per value. 
+          type: object
+        mpiData:
+          $ref: "#/components/schemas/ThreeDSecureData"
+          description: Authentication data produced by an MPI (Mastercard SecureCode, Visa Secure, or Cartes Bancaires).
+        order:
+          $ref: "#/components/schemas/EncryptedOrderData"
+          description: The order information required for partial payments.
+        orderReference:
+          description: When you are doing multiple partial (gift card) payments, this is the `pspReference` of the first payment. We use this to link the multiple payments to each other. As your own reference for linking multiple payments, use the `merchantOrderReference`instead.
+          type: string
+        origin:
+          description: |-
+            Required for the 3D Secure 2 `channel` **Web** integration.
+
+            Set this parameter to the origin URL of the page that you are loading the 3D Secure Component from.
+          maxLength: 80
+          type: string
+          x-addedInVersion: "40"
+        paymentMethod:
+          description: The type and required details of a payment method to use.
+          oneOf:
+            - $ref: "#/components/schemas/AchDetails"
+            - $ref: "#/components/schemas/AfterpayDetails"
+            - $ref: "#/components/schemas/AmazonPayDetails"
+            - $ref: "#/components/schemas/AndroidPayDetails"
+            - $ref: "#/components/schemas/ApplePayDetails"
+            - $ref: "#/components/schemas/BacsDirectDebitDetails"
+            - $ref: "#/components/schemas/BillDeskDetails"
+            - $ref: "#/components/schemas/BlikDetails"
+            - $ref: "#/components/schemas/CardDetails"
+            - $ref: "#/components/schemas/CellulantDetails"
+            - $ref: "#/components/schemas/DokuDetails"
+            - $ref: "#/components/schemas/DotpayDetails"
+            - $ref: "#/components/schemas/DragonpayDetails"
+            - $ref: "#/components/schemas/EcontextVoucherDetails"
+            - $ref: "#/components/schemas/GenericIssuerPaymentMethodDetails"
+            - $ref: "#/components/schemas/GiropayDetails"
+            - $ref: "#/components/schemas/GooglePayDetails"
+            - $ref: "#/components/schemas/IdealDetails"
+            - $ref: "#/components/schemas/KlarnaDetails"
+            - $ref: "#/components/schemas/MasterpassDetails"
+            - $ref: "#/components/schemas/MbwayDetails"
+            - $ref: "#/components/schemas/MobilePayDetails"
+            - $ref: "#/components/schemas/MolPayDetails"
+            - $ref: "#/components/schemas/OpenInvoiceDetails"
+            - $ref: "#/components/schemas/PayPalDetails"
+            - $ref: "#/components/schemas/PayUUpiDetails"
+            - $ref: "#/components/schemas/PayWithGoogleDetails"
+            - $ref: "#/components/schemas/PaymentDetails"
+            - $ref: "#/components/schemas/RatepayDetails"
+            - $ref: "#/components/schemas/SamsungPayDetails"
+            - $ref: "#/components/schemas/SepaDirectDebitDetails"
+            - $ref: "#/components/schemas/StoredPaymentMethodDetails"
+            - $ref: "#/components/schemas/UpiCollectDetails"
+            - $ref: "#/components/schemas/UpiIntentDetails"
+            - $ref: "#/components/schemas/VippsDetails"
+            - $ref: "#/components/schemas/VisaCheckoutDetails"
+            - $ref: "#/components/schemas/WeChatPayDetails"
+            - $ref: "#/components/schemas/WeChatPayMiniProgramDetails"
+            - $ref: "#/components/schemas/ZipDetails"
+        recurringExpiry:
+          description: Date after which no further authorisations shall be performed. Only for 3D Secure 2.
+          type: string
+        recurringFrequency:
+          description: Minimum number of days between authorisations. Only for 3D Secure 2.
+          type: string
+        recurringProcessingModel:
+          description: |
+            Defines a recurring payment type. Required when creating a token to store payment details or using stored payment details.
+            Allowed values:
+            * `Subscription` – A transaction for a fixed or variable amount, which follows a fixed schedule.
+            * `CardOnFile` – With a card-on-file (CoF) transaction, card details are stored to enable one-click or omnichannel journeys, or simply to streamline the checkout process. Any subscription not following a fixed schedule is also considered a card-on-file transaction.
+            * `UnscheduledCardOnFile` – An unscheduled card-on-file (UCoF) transaction is a transaction that occurs on a non-fixed schedule and/or have variable amounts. For example, automatic top-ups when a cardholder's balance drops below a certain amount.
+          enum:
+            - CardOnFile
+            - Subscription
+            - UnscheduledCardOnFile
+          type: string
+          x-addedInVersion: "30"
+        redirectFromIssuerMethod:
+          description: Specifies the redirect method (GET or POST) when redirecting back from the issuer.
+          type: string
+          x-addedInVersion: "32"
+        redirectToIssuerMethod:
+          description: Specifies the redirect method (GET or POST) when redirecting to the issuer.
+          type: string
+          x-addedInVersion: "32"
+        reference:
+          description: |-
+            The reference to uniquely identify a payment. This reference is used in all communication with you about the payment status. We recommend using a unique value per payment; however, it is not a requirement.
+            If you need to provide multiple references for a transaction, separate them with hyphens ("-").
+            Maximum length: 80 characters.
+          type: string
+        returnUrl:
+          description: |-
+            The URL to return to in case of a redirection.
+            The format depends on the channel. This URL can have a maximum of 1024 characters.
+            * For web, include the protocol `http://` or `https://`. You can also include your own additional query parameters, for example, shopper ID or order reference number.
+            Example: `https://your-company.com/checkout?shopperOrder=12xy`
+            * For iOS, use the custom URL for your app. To know more about setting custom URL schemes, refer to the [Apple Developer documentation](https://developer.apple.com/documentation/uikit/inter-process_communication/allowing_apps_and_websites_to_link_to_your_content/defining_a_custom_url_scheme_for_your_app).
+            Example: `my-app://`
+            * For Android, use a custom URL handled by an Activity on your app. You can configure it with an [intent filter](https://developer.android.com/guide/components/intents-filters).
+            Example: `my-app://your.package.name`
+          maxLength: 8000
+          type: string
+        riskData:
+          $ref: "#/components/schemas/RiskData"
+          description: Contains risk data, such as client-side data, used to identify risk for a transaction.
+        sessionValidity:
+          description: |-
+            The date and time until when the session remains valid, in [ISO 8601](https://www.w3.org/TR/NOTE-datetime) format.
+
+            For example: 2020-07-18T15:42:40.428+01:00
+          type: string
+        shopperEmail:
+          description: |-
+            The shopper's email address. We recommend that you provide this data, as it is used in velocity fraud checks.
+            > For 3D Secure 2 transactions, schemes require `shopperEmail` for all browser-based and mobile implementations.
+          type: string
+        shopperIP:
+          description: |-
+            The shopper's IP address. In general, we recommend that you provide this data, as it is used in a number of risk checks (for instance, number of payment attempts or location-based checks).
+            > For 3D Secure 2 transactions, schemes require `shopperIP` for all browser-based implementations.
+            This field is also mandatory for some merchants depending on your business model. For more information, [contact Support](https://www.adyen.help/hc/en-us/requests/new).
+          type: string
+        shopperInteraction:
+          description: |-
+            Specifies the sales channel, through which the shopper gives their card details, and whether the shopper is a returning customer.
+            For the web service API, Adyen assumes Ecommerce shopper interaction by default.
+
+            This field has the following possible values:
+            * `Ecommerce` - Online transactions where the cardholder is present (online). For better authorisation rates, we recommend sending the card security code (CSC) along with the request.
+            * `ContAuth` - Card on file and/or subscription transactions, where the cardholder is known to the merchant (returning customer). If the shopper is present (online), you can supply also the CSC to improve authorisation (one-click payment).
+            * `Moto` - Mail-order and telephone-order transactions where the shopper is in contact with the merchant via email or telephone.
+            * `POS` - Point-of-sale transactions where the shopper is physically present to make a payment using a secure payment terminal.
+          enum:
+            - Ecommerce
+            - ContAuth
+            - Moto
+            - POS
+          type: string
+        shopperLocale:
+          description: The combination of a language code and a country code to specify the language to be used in the payment.
+          type: string
+        shopperName:
+          $ref: "#/components/schemas/Name"
+          description: The shopper's full name.
+        shopperReference:
+          description: |-
+            Required for recurring payments. 
+            Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters.
+            > Your reference must not include personally identifiable information (PII), for example name or email address.
+          maxLength: 256
+          minLength: 3
+          type: string
+        shopperStatement:
+          description: |-
+            The text to be shown on the shopper's bank statement.
+             We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
+          type: string
+        socialSecurityNumber:
+          description: The shopper's social security number.
+          type: string
+        splits:
+          description: An array of objects specifying how to split a payment when using [Adyen for Platforms](https://docs.adyen.com/marketplaces-and-platforms/processing-payments#providing-split-information), [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic/processing-payments#providing-split-information), or [Issuing](https://docs.adyen.com/issuing/manage-funds#split).
+          items:
+            $ref: "#/components/schemas/Split"
+          type: array
+          x-addedInVersion: "37"
+        store:
+          description: |-
+            The ecommerce or point-of-sale store that is processing the payment. Used in:
+
+            * [Partner platform integrations](https://docs.adyen.com/marketplaces-and-platforms/classic/platforms-for-partners#route-payments) for the [Classic Platforms integration](https://docs.adyen.com/marketplaces-and-platforms/classic).
+            * [Platform setup integrations](https://docs.adyen.com/marketplaces-and-platforms/additional-for-platform-setup/route-payment-to-store) for the [Balance Platform](https://docs.adyen.com/marketplaces-and-platforms).
+          maxLength: 16
+          minLength: 1
+          type: string
+        storePaymentMethod:
+          description: When true and `shopperReference` is provided, the payment details will be stored.
+          type: boolean
+          x-addedInVersion: "49"
+        telephoneNumber:
+          description: The shopper's telephone number.
+          type: string
+        threeDS2RequestData:
+          $ref: "#/components/schemas/ThreeDS2RequestData-2"
+          description: Request fields for 3D Secure 2. To check if any of the following fields are required for your integration, refer to [Online payments](https://docs.adyen.com/online-payments) or [Classic integration](https://docs.adyen.com/classic-integration) documentation.
+          x-addedInVersion: "40"
+        threeDSAuthenticationOnly:
+          default: false
+          description: If set to true, you will only perform the [3D Secure 2 authentication](https://docs.adyen.com/online-payments/3d-secure/other-3ds-flows/authentication-only), and not the payment authorisation.
+          type: boolean
+          x-addedInVersion: "50"
+        trustedShopper:
+          description: Set to true if the payment should be routed to a trusted MID.
+          type: boolean
+          x-addedInVersion: "37"
+      required:
+        - merchantAccount
+        - reference
+        - amount
+        - paymentMethod
+        - returnUrl
       type: object
     PaymentResponse:
       properties:
@@ -10861,7 +10816,18 @@ components:
           description: Result of the 3D Secure 2 authentication.
           x-addedInVersion: "41"
       type: object
-    PaymentReversalResource:
+    PaymentReversalRequest:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        reference:
+          description: "Your reference for the reversal request. Maximum length: 80 characters."
+          type: string
+      required:
+        - merchantAccount
+      type: object
+    PaymentReversalResponse:
       properties:
         merchantAccount:
           description: The merchant account that is used to process the payment.
@@ -12249,7 +12215,22 @@ components:
       required:
         - value
       type: object
-    StandalonePaymentCancelResource:
+    StandalonePaymentCancelRequest:
+      properties:
+        merchantAccount:
+          description: The merchant account that is used to process the payment.
+          type: string
+        paymentReference:
+          description: The [`reference`](https://docs.adyen.com/api-explorer/#/CheckoutService/latest/post/payments__reqParam_reference) of the payment that you want to cancel.
+          type: string
+        reference:
+          description: "Your reference for the cancel request. Maximum length: 80 characters."
+          type: string
+      required:
+        - merchantAccount
+        - paymentReference
+      type: object
+    StandalonePaymentCancelResponse:
       properties:
         merchantAccount:
           description: The merchant account that is used to process the payment.
@@ -12800,6 +12781,25 @@ components:
       required:
         - type
       title: UPI Intent
+      type: object
+    UtilityRequest:
+      properties:
+        originDomains:
+          description: The list of origin domains, for which origin keys are requested.
+          items:
+            type: string
+          type: array
+      required:
+        - originDomains
+      type: object
+    UtilityResponse:
+      properties:
+        originKeys:
+          additionalProperties:
+            type: string
+          description: The list of origin keys for all requested domains. For each list item, the key is the domain and the value is the origin key.
+          type: object
+          x-addedInVersion: "1"
       type: object
     VippsDetails:
       additionalProperties: false

@@ -315,6 +315,43 @@ paths:
             - https://www.googleapis.com/auth/xapi.zoo
       tags:
         - projects
+  "/v1alpha/{parent}/privacyPolicies:find":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Finds the privacy policy of a given website.
+      operationId: checks.projects.privacyPolicies.find
+      parameters:
+        - description: "Required. Resource name of the GCP project to which PrivacyPolicy resources will be added, in the format: `projects/{projectNumber}`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FindPrivacyPolicyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -449,6 +486,13 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    FindPrivacyPolicyRequest:
+      description: Request message for `FindPrivacyPolicy`.
+      properties:
+        websiteUri:
+          description: Required. URI for the website from where to find the privacy policy.
+          type: string
       type: object
     LastUpdatedDate:
       description: Information about the date when the privacy policy was last updated.

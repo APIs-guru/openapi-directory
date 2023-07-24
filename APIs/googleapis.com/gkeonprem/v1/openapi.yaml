@@ -2316,7 +2316,7 @@ components:
       description: BareMetalParallelUpgradeConfig defines the parallel upgrade settings for worker node pools.
       properties:
         concurrentNodes:
-          description: Required. The maximum number of nodes that can be upgraded at once. Defaults to 1.
+          description: The maximum number of nodes that can be upgraded at once.
           format: int32
           type: integer
         minimumAvailableNodes:
@@ -3186,6 +3186,10 @@ components:
           description: The number of mebibytes of memory for the control-plane node of the admin cluster.
           format: int64
           type: string
+        replicas:
+          description: "The number of control plane nodes for this VMware admin cluster. (default: 1 replica)."
+          format: int64
+          type: string
       type: object
     VmwareAdminF5BigIpConfig:
       description: VmwareAdminF5BigIpConfig represents configuration parameters for an F5 BIG-IP load balancer.
@@ -3200,6 +3204,13 @@ components:
           description: The pool name. Only necessary, if using SNAT.
           type: string
       type: object
+    VmwareAdminHAControlPlaneConfig:
+      description: Specifies HA admin control plane config.
+      properties:
+        controlPlaneIpBlock:
+          $ref: "#/components/schemas/VmwareIpBlock"
+          description: Static IP addresses for the admin control plane nodes.
+      type: object
     VmwareAdminLoadBalancerConfig:
       description: VmwareAdminLoadBalancerConfig contains load balancer configuration for VMware admin cluster.
       properties:
@@ -3212,6 +3223,10 @@ components:
         metalLbConfig:
           $ref: "#/components/schemas/VmwareAdminMetalLbConfig"
           description: MetalLB load balancers.
+        seesawConfig:
+          $ref: "#/components/schemas/VmwareAdminSeesawConfig"
+          description: Output only. Configuration for Seesaw typed load balancers.
+          readOnly: true
         vipConfig:
           $ref: "#/components/schemas/VmwareAdminVipConfig"
           description: The VIPs used by the load balancer.
@@ -3249,6 +3264,9 @@ components:
         dhcpIpConfig:
           $ref: "#/components/schemas/VmwareDhcpIpConfig"
           description: Configuration settings for a DHCP IP configuration.
+        haControlPlaneConfig:
+          $ref: "#/components/schemas/VmwareAdminHAControlPlaneConfig"
+          description: Configuration for HA admin cluster control plane.
         hostConfig:
           $ref: "#/components/schemas/VmwareHostConfig"
           description: Represents common network settings irrespective of the host's IP address.
@@ -3268,6 +3286,29 @@ components:
         vcenterNetwork:
           description: vcenter_network specifies vCenter network name.
           type: string
+      type: object
+    VmwareAdminSeesawConfig:
+      description: "VmwareSeesawConfig represents configuration parameters for an already existing Seesaw load balancer. IMPORTANT: Please note that the Anthos On-Prem API will not generate or update Seesaw configurations it can only bind a pre-existing configuration to a new user cluster. IMPORTANT: When attempting to create a user cluster with a pre-existing Seesaw load balancer you will need to follow some preparation steps before calling the 'CreateVmwareCluster' API method. First you will need to create the user cluster's namespace via kubectl. The namespace will need to use the following naming convention : -gke-onprem-mgmt or -gke-onprem-mgmt depending on whether you used the 'VmwareCluster.local_name' to disambiguate collisions; for more context see the documentation of 'VmwareCluster.local_name'. Once the namespace is created you will need to create a secret resource via kubectl. This secret will contain copies of your Seesaw credentials. The Secret must be called 'user-cluster-creds' and contain Seesaw's SSH and Cert credentials. The credentials must be keyed with the following names: 'seesaw-ssh-private-key', 'seesaw-ssh-public-key', 'seesaw-ssh-ca-key', 'seesaw-ssh-ca-cert'."
+      properties:
+        enableHa:
+          description: Enable two load balancer VMs to achieve a highly-available Seesaw load balancer.
+          type: boolean
+        group:
+          description: "In general the following format should be used for the Seesaw group name: seesaw-for-[cluster_name]."
+          type: string
+        ipBlocks:
+          description: The IP Blocks to be used by the Seesaw load balancer
+          items:
+            $ref: "#/components/schemas/VmwareIpBlock"
+          type: array
+        masterIp:
+          description: MasterIP is the IP announced by the master of Seesaw group.
+          type: string
+        vms:
+          description: Names of the VMs created for this Seesaw group.
+          items:
+            type: string
+          type: array
       type: object
     VmwareAdminVCenterConfig:
       description: VmwareAdminVCenterConfig contains VCenter configuration for VMware admin cluster.
@@ -3469,8 +3510,7 @@ components:
           type: string
         vsphereConfig:
           $ref: "#/components/schemas/VmwareControlPlaneVsphereConfig"
-          description: Output only. Vsphere-specific config.
-          readOnly: true
+          description: Vsphere-specific config.
       type: object
     VmwareControlPlaneV2Config:
       description: Specifies control plane V2 config.
@@ -3678,8 +3718,7 @@ components:
           type: array
         vsphereConfig:
           $ref: "#/components/schemas/VmwareVsphereConfig"
-          description: Output only. Specifies the vSphere config for node pool.
-          readOnly: true
+          description: Specifies the vSphere config for node pool.
       type: object
     VmwareNodePool:
       description: "Resource VmwareNodePool represents a VMware node pool. ##"

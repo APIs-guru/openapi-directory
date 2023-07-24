@@ -193,6 +193,47 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
+  "/v1/{name}/dnsZone:get":
+    get:
+      description: Service producers can use this method to retrieve a DNS zone in the shared producer host project and the matching peering zones in consumer project
+      operationId: servicenetworking.services.dnsZones.dnsZone.get
+      parameters:
+        - description: Required. The network that the consumer is using to connect with services. Must be in the form of services/{service}/projects/{project}/global/networks/{network}/zones/{zoneName} Where {service} is the peering service that is managing connectivity for the service producer's organization. For Google services that support this {project} is the project number, as in '12345' {network} is the network name. {zoneName} is the DNS zone name
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDnsZoneResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -318,6 +359,118 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
+  "/v1/{parent}/dnsRecordSet:LIST":
+    get:
+      description: Producers can use this method to retrieve a list of available DNS RecordSets available inside the private zone on the tenant host project accessible from their network.
+      operationId: servicenetworking.services.projects.global.networks.zones.dnsRecordSet.lIST
+      parameters:
+        - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is the project number, as in '12345' {network} is the network name.
+          in: query
+          name: consumerNetwork
+          schema:
+            type: string
+        - description: Required. The name of the private DNS zone in the shared producer host project from which the record set will be removed.
+          in: query
+          name: zone
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDnsRecordSetsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/dnsRecordSet:get":
+    get:
+      description: Producers can use this method to retrieve information about the DNS record set added to the private zone inside the shared tenant host project associated with a consumer network.
+      operationId: servicenetworking.services.dnsRecordSet.get
+      parameters:
+        - description: Required. Parent resource identifying the connection which owns this collection of DNS zones in the format services/{service}.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The consumer network containing the record set. Must be in the form of projects/{project}/global/networks/{network}
+          in: query
+          name: consumerNetwork
+          schema:
+            type: string
+        - description: Required. The domain name of the zone containing the recordset.
+          in: query
+          name: domain
+          schema:
+            type: string
+        - description: Required. RecordSet Type eg. type='A'. See the list of [Supported DNS Types](https://dns.corp.google.com/docs/overview).
+          in: query
+          name: type
+          schema:
+            type: string
+        - description: Required. The name of the zone containing the record set.
+          in: query
+          name: zone
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DnsRecordSet"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/dnsRecordSets:add":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1917,6 +2070,16 @@ components:
           description: Selects one or more request or response message fields to apply this `FieldPolicy`. When a `FieldPolicy` is used in proto annotation, the selector must be left as empty. The service config generator will automatically fill the correct value. When a `FieldPolicy` is used in service config, the selector must be a comma-separated string with valid request or response field paths, such as "foo.bar" or "foo.bar,foo.baz".
           type: string
       type: object
+    GetDnsZoneResponse:
+      description: Represents managed DNS zones created in the shared Producer host and consumer projects.
+      properties:
+        consumerPeeringZone:
+          $ref: "#/components/schemas/DnsZone"
+          description: The DNS peering zone created in the consumer project.
+        producerPrivateZone:
+          $ref: "#/components/schemas/DnsZone"
+          description: The private DNS zone created in the shared producer host project.
+      type: object
     GoSettings:
       description: Settings for Go client libraries.
       properties:
@@ -2075,6 +2238,15 @@ components:
           description: The list of Connections.
           items:
             $ref: "#/components/schemas/Connection"
+          type: array
+      type: object
+    ListDnsRecordSetsResponse:
+      description: Represents all DNS RecordSets associated with the producer network
+      properties:
+        dnsRecordSets:
+          description: DNS record Set Resource
+          items:
+            $ref: "#/components/schemas/DnsRecordSet"
           type: array
       type: object
     ListDnsZonesResponse:

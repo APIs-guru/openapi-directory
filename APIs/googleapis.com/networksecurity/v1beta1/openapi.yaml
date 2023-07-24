@@ -1052,6 +1052,168 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1beta1/{parent}/securityProfileGroups":
+    get:
+      description: Lists SecurityProfileGroups in a given organization and location.
+      operationId: networksecurity.organizations.locations.securityProfileGroups.list
+      parameters:
+        - description: Required. The project or organization and location from which the SecurityProfileGroups should be listed, specified in the format `projects|organizations/*/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of SecurityProfileGroups to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last `ListSecurityProfileGroupsResponse` Indicates that this is a continuation of a prior `ListSecurityProfileGroups` call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSecurityProfileGroupsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new SecurityProfileGroup in a given organization and location.
+      operationId: networksecurity.organizations.locations.securityProfileGroups.create
+      parameters:
+        - description: Required. The parent resource of the SecurityProfileGroup. Must be in the format `projects|organizations/*/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Short name of the SecurityProfileGroup resource to be created. This value should be 1-63 characters long, containing only letters, numbers, hyphens, and underscores, and should not start with a number. E.g. "security_profile_group1".
+          in: query
+          name: securityProfileGroupId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityProfileGroup"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1beta1/{parent}/securityProfiles":
+    get:
+      description: Lists SecurityProfiles in a given organization and location.
+      operationId: networksecurity.organizations.locations.securityProfiles.list
+      parameters:
+        - description: Required. The project or organization and location from which the SecurityProfiles should be listed, specified in the format `projects|organizations/*/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of SecurityProfiles to return per call.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The value returned by the last `ListSecurityProfilesResponse` Indicates that this is a continuation of a prior `ListSecurityProfiles` call, and that the system should return the next page of data.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSecurityProfilesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new SecurityProfile in a given organization and location.
+      operationId: networksecurity.organizations.locations.securityProfiles.create
+      parameters:
+        - description: Required. The parent resource of the SecurityProfile. Must be in the format `projects|organizations/*/locations/{location}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Short name of the SecurityProfile resource to be created. This value should be 1-63 characters long, containing only letters, numbers, hyphens, and underscores, and should not start with a number. E.g. "security_profile1".
+          in: query
+          name: securityProfileId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityProfile"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1beta1/{parent}/serverTlsPolicies":
     get:
       description: Lists ServerTlsPolicies in a given project and location.
@@ -2119,6 +2281,30 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    ListSecurityProfileGroupsResponse:
+      description: Response returned by the ListSecurityProfileGroups method.
+      properties:
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
+          type: string
+        securityProfileGroups:
+          description: List of SecurityProfileGroups resources.
+          items:
+            $ref: "#/components/schemas/SecurityProfileGroup"
+          type: array
+      type: object
+    ListSecurityProfilesResponse:
+      description: Response returned by the ListSecurityProfiles method.
+      properties:
+        nextPageToken:
+          description: If there might be more results than those appearing in this response, then `next_page_token` is included. To get the next set of results, call this method again using the value of `next_page_token` as `page_token`.
+          type: string
+        securityProfiles:
+          description: List of SecurityProfile resources.
+          items:
+            $ref: "#/components/schemas/SecurityProfile"
+          type: array
+      type: object
     ListServerTlsPoliciesResponse:
       description: Response returned by the ListServerTlsPolicies method.
       properties:
@@ -2290,6 +2476,76 @@ components:
             $ref: "#/components/schemas/Source"
           type: array
       type: object
+    SecurityProfile:
+      description: "SecurityProfile is a resource that defines the behavior for one of many ProfileTypes. Next ID: 9"
+      properties:
+        createTime:
+          description: Output only. Resource creation timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. An optional description of the profile. Max length 512 characters.
+          type: string
+        etag:
+          description: Output only. This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Labels as key value pairs.
+          type: object
+        name:
+          description: Immutable. Name of the SecurityProfile resource. It matches pattern `projects|organizations/*/locations/{location}/securityProfiles/{security_profile}`.
+          type: string
+        threatPreventionProfile:
+          $ref: "#/components/schemas/ThreatPreventionProfile"
+          description: The threat prevention configuration for the SecurityProfile.
+        type:
+          description: Immutable. The single ProfileType that the SecurityProfile resource configures.
+          enum:
+            - PROFILE_TYPE_UNSPECIFIED
+            - THREAT_PREVENTION
+          type: string
+        updateTime:
+          description: Output only. Last resource update timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    SecurityProfileGroup:
+      description: "SecurityProfileGroup is a resource that defines the behavior for various ProfileTypes. Next ID: 8"
+      properties:
+        createTime:
+          description: Output only. Resource creation timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. An optional description of the profile group. Max length 2048 characters.
+          type: string
+        etag:
+          description: Output only. This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Labels as key value pairs.
+          type: object
+        name:
+          description: Immutable. Name of the SecurityProfileGroup resource. It matches pattern `projects|organizations/*/locations/{location}/securityProfileGroups/{security_profile_group}`.
+          type: string
+        threatPreventionProfile:
+          description: Optional. Reference to a SecurityProfile with the threat prevention configuration for the SecurityProfileGroup.
+          type: string
+        updateTime:
+          description: Output only. Last resource update timestamp.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     ServerTlsPolicy:
       description: ServerTlsPolicy is a resource that specifies how a server should authenticate incoming requests. This resource itself does not affect configuration unless it is attached to a target HTTPS proxy or endpoint config selector resource. ServerTlsPolicy in the form accepted by external HTTPS load balancers can be attached only to TargetHttpsProxy with an `EXTERNAL` or `EXTERNAL_MANAGED` load balancing scheme. Traffic Director compatible ServerTlsPolicies can be attached to EndpointPolicy and TargetHttpsProxy with Traffic Director `INTERNAL_SELF_MANAGED` load balancing scheme.
       properties:
@@ -2324,6 +2580,29 @@ components:
           readOnly: true
           type: string
       type: object
+    SeverityOverride:
+      description: Defines what action to take for a specific severity match.
+      properties:
+        action:
+          description: Required. Threat action override.
+          enum:
+            - THREAT_ACTION_UNSPECIFIED
+            - DEFAULT_ACTION
+            - ALLOW
+            - ALERT
+            - DENY
+          type: string
+        severity:
+          description: Required. Severity level to match.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - INFORMATIONAL
+            - LOW
+            - MEDIUM
+            - HIGH
+            - CRITICAL
+          type: string
+      type: object
     Source:
       description: Specification of traffic source attributes.
       properties:
@@ -2355,6 +2634,47 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    ThreatOverride:
+      description: Defines what action to take for a specific threat_id match.
+      properties:
+        action:
+          description: Required. Threat action override. For some threat types, only a subset of actions applies.
+          enum:
+            - THREAT_ACTION_UNSPECIFIED
+            - DEFAULT_ACTION
+            - ALLOW
+            - ALERT
+            - DENY
+          type: string
+        threatId:
+          description: Required. Vendor-specific ID of a threat to override.
+          type: string
+        type:
+          description: Output only. Type of the threat (read only).
+          enum:
+            - THREAT_TYPE_UNSPECIFIED
+            - UNKNOWN
+            - VULNERABILITY
+            - ANTIVIRUS
+            - SPYWARE
+            - DNS
+          readOnly: true
+          type: string
+      type: object
+    ThreatPreventionProfile:
+      description: ThreatPreventionProfile defines an action for specific threat signatures or severity levels.
+      properties:
+        severityOverrides:
+          description: Optional. Configuration for overriding threats actions by severity match.
+          items:
+            $ref: "#/components/schemas/SeverityOverride"
+          type: array
+        threatOverrides:
+          description: Optional. Configuration for overriding threats actions by threat_id match. If a threat is matched both by configuration provided in severity_overrides and threat_overrides, the threat_overrides action is applied.
+          items:
+            $ref: "#/components/schemas/ThreatOverride"
+          type: array
       type: object
     TlsInspectionPolicy:
       description: The TlsInspectionPolicy resource contains references to CA pools in Certificate Authority Service and associated metadata.

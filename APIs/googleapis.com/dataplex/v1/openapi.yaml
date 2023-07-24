@@ -2752,7 +2752,7 @@ components:
           type: number
         uniquenessExpectation:
           $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualityRuleUniquenessExpectation"
-          description: Aggregate rule which evaluates whether the column has duplicates.
+          description: Row-level rule which evaluates whether each column value is unique.
       type: object
     GoogleCloudDataplexV1DataQualityRuleNonNullExpectation:
       description: Evaluates whether each column value is null.
@@ -3015,8 +3015,12 @@ components:
           type: string
       type: object
     GoogleCloudDataplexV1DataScanEvent:
-      description: These messages contain information about the execution of a datascan. The monitored resource is 'DataScan'
+      description: "These messages contain information about the execution of a datascan. The monitored resource is 'DataScan' Next ID: 13"
       properties:
+        createTime:
+          description: The time when the data scan job was created.
+          format: google-datetime
+          type: string
         dataProfile:
           $ref: "#/components/schemas/GoogleCloudDataplexV1DataScanEventDataProfileResult"
           description: Data profile result for data profile type data scan.
@@ -3067,6 +3071,7 @@ components:
             - SUCCEEDED
             - FAILED
             - CANCELLED
+            - CREATED
           type: string
         trigger:
           description: The trigger type of the data scan job.
