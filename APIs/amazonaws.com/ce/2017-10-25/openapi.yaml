@@ -1000,6 +1000,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSInsightsIndexService.GetSavingsPlanPurchaseRecommendationDetails:
+    post:
+      operationId: GetSavingsPlanPurchaseRecommendationDetails
+      description: 'Retrieves the details for a Savings Plan recommendation. These details include the hourly data-points that construct the new cost, coverage, and utilization charts.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSavingsPlanPurchaseRecommendationDetailsResponse'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: DataUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataUnavailableException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSavingsPlanPurchaseRecommendationDetailsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSInsightsIndexService.GetSavingsPlanPurchaseRecommendationDetails
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSInsightsIndexService.GetSavingsPlansCoverage:
     post:
       operationId: GetSavingsPlansCoverage
@@ -1461,6 +1506,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidNextTokenException'
+        '482':
+          description: DataUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataUnavailableException'
       requestBody:
         required: true
         content:
@@ -1596,6 +1647,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenerationExistsException'
+        '483':
+          description: DataUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataUnavailableException'
       requestBody:
         required: true
         content:
@@ -1762,7 +1819,7 @@ paths:
   /#X-Amz-Target=AWSInsightsIndexService.UpdateAnomalySubscription:
     post:
       operationId: UpdateAnomalySubscription
-      description: 'Updates an existing cost anomaly monitor subscription. '
+      description: '<p>Updates an existing cost anomaly subscription. Specify the fields that you want to update. Omitted fields are unchanged.</p> <note> <p>The JSON below describes the generic construct for each type. See <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_UpdateAnomalySubscription.html#API_UpdateAnomalySubscription_RequestParameters">Request Parameters</a> for possible values as they apply to <code>AnomalySubscription</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -2687,6 +2744,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
             - description: The pagination token that indicates the next set of results that you want to retrieve.
+    GetSavingsPlanPurchaseRecommendationDetailsResponse:
+      type: object
+      properties:
+        RecommendationDetailId:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationDetailId'
+            - description: The ID that is associated with the Savings Plan recommendation.
+        RecommendationDetailData:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationDetailData'
+            - description: Contains detailed information about a specific Savings Plan recommendation.
+    GetSavingsPlanPurchaseRecommendationDetailsRequest:
+      type: object
+      required:
+        - RecommendationDetailId
+      title: GetSavingsPlanPurchaseRecommendationDetailsRequest
+      properties:
+        RecommendationDetailId:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationDetailId'
+            - description: The ID that is associated with the Savings Plan recommendation.
     GetSavingsPlansCoverageResponse:
       type: object
       required:
@@ -3211,7 +3289,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableNonNegativeDouble'
             - deprecated: true
-              description: '<p>(deprecated)</p> <p>The update to the threshold value for receiving notifications. </p> <p>This field has been deprecated. To update a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p>Threshold has been deprecated in favor of ThresholdExpression'
+              description: '<p>(deprecated)</p> <p>The update to the threshold value for receiving notifications. </p> <p>This field has been deprecated. To update a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p> <p>You can specify either Threshold or ThresholdExpression, but not both.</p>Threshold has been deprecated in favor of ThresholdExpression'
         Frequency:
           allOf:
             - $ref: '#/components/schemas/AnomalySubscriptionFrequency'
@@ -3231,7 +3309,7 @@ components:
         ThresholdExpression:
           allOf:
             - $ref: '#/components/schemas/Expression'
-            - description: '<p>The update to the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>. The supported nested expression types are <code>AND</code> and <code>OR</code>. The match option <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and 10,000,000,000.</p> <p>The following are examples of valid ThresholdExpressions:</p> <ul> <li> <p>Absolute threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p>Percentage threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p> <code>AND</code> two thresholds together: <code>{ "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> <li> <p> <code>OR</code> two thresholds together: <code>{ "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> </ul>'
+            - description: '<p>The update to the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>, corresponding to an anomaly’s TotalImpact and TotalImpactPercentage, respectively (see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html">Impact</a> for more details). The supported nested expression types are <code>AND</code> and <code>OR</code>. The match option <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and 10,000,000,000 in string format.</p> <p>You can specify either Threshold or ThresholdExpression, but not both.</p> <p>The following are examples of valid ThresholdExpressions:</p> <ul> <li> <p>Absolute threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p>Percentage threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p> <code>AND</code> two thresholds together: <code>{ "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> <li> <p> <code>OR</code> two thresholds together: <code>{ "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> </ul>'
     UpdateCostAllocationTagsStatusResponse:
       type: object
       properties:
@@ -3457,7 +3535,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CostCategoryValues'
             - description: The filter that's based on <code>CostCategory</code> values.
-      description: '<p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p> <p>Not all <code>Expression</code> types are supported in each API. Refer to the documentation for each specific API to see what is supported.</p> <p>There are two patterns:</p> <ul> <li> <p>Simple dimension values.</p> <ul> <li> <p>There are three types of simple dimension values: <code>CostCategories</code>, <code>Tags</code>, and <code>Dimensions</code>.</p> <ul> <li> <p>Specify the <code>CostCategories</code> field to define a filter that acts on Cost Categories.</p> </li> <li> <p>Specify the <code>Tags</code> field to define a filter that acts on Cost Allocation Tags.</p> </li> <li> <p>Specify the <code>Dimensions</code> field to define a filter that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html"> <code>DimensionValues</code> </a>.</p> </li> </ul> </li> <li> <p>For each filter type, you can set the dimension name and values for the filters that you plan to use.</p> <ul> <li> <p>For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. For <code>GetRightsizingRecommendation</code>, the Region is a full name (for example, <code>REGION==US East (N. Virginia)</code>.</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }</code> </p> </li> <li> <p>As shown in the previous example, lists of dimension values are combined with <code>OR</code> when applying the filter.</p> </li> </ul> </li> <li> <p>You can also set different match options to further control how the filter behaves. Not all APIs support match options. Refer to the documentation for each specific API to see what is supported.</p> <ul> <li> <p>For example, you can filter for linked account names that start with “a”.</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] } }</code> </p> </li> </ul> </li> </ul> </li> <li> <p>Compound <code>Expression</code> types with logical operations.</p> <ul> <li> <p>You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. By doing this, you can filter by more advanced options.</p> </li> <li> <p>For example, you can filter by <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>.</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> </li> </ul> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error: <code> { "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> <p>The following is an example of the corresponding error message: <code>"Expression has more than one roots. Only one root operator is allowed for each expression: And, Or, Not, Dimensions, Tags, CostCategories"</code> </p> </note> </li> </ul> <note> <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT isn''t supported. OR isn''t supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is supported. AND and OR aren''t supported. Dimensions are limited to <code>LINKED_ACCOUNT</code>.</p> </note>'
+      description: '<p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p> <p>Not all <code>Expression</code> types are supported in each API. Refer to the documentation for each specific API to see what is supported.</p> <p>There are two patterns:</p> <ul> <li> <p>Simple dimension values.</p> <ul> <li> <p>There are three types of simple dimension values: <code>CostCategories</code>, <code>Tags</code>, and <code>Dimensions</code>.</p> <ul> <li> <p>Specify the <code>CostCategories</code> field to define a filter that acts on Cost Categories.</p> </li> <li> <p>Specify the <code>Tags</code> field to define a filter that acts on Cost Allocation Tags.</p> </li> <li> <p>Specify the <code>Dimensions</code> field to define a filter that acts on the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html"> <code>DimensionValues</code> </a>.</p> </li> </ul> </li> <li> <p>For each filter type, you can set the dimension name and values for the filters that you plan to use.</p> <ul> <li> <p>For example, you can filter for <code>REGION==us-east-1 OR REGION==us-west-1</code>. For <code>GetRightsizingRecommendation</code>, the Region is a full name (for example, <code>REGION==US East (N. Virginia)</code>.</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] } }</code> </p> </li> <li> <p>As shown in the previous example, lists of dimension values are combined with <code>OR</code> when applying the filter.</p> </li> </ul> </li> <li> <p>You can also set different match options to further control how the filter behaves. Not all APIs support match options. Refer to the documentation for each specific API to see what is supported.</p> <ul> <li> <p>For example, you can filter for linked account names that start with "a".</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "Dimensions": { "Key": "LINKED_ACCOUNT_NAME", "MatchOptions": [ "STARTS_WITH" ], "Values": [ "a" ] } }</code> </p> </li> </ul> </li> </ul> </li> <li> <p>Compound <code>Expression</code> types with logical operations.</p> <ul> <li> <p>You can use multiple <code>Expression</code> types and the logical operators <code>AND/OR/NOT</code> to create a list of one or more <code>Expression</code> objects. By doing this, you can filter by more advanced options.</p> </li> <li> <p>For example, you can filter by <code>((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE != DataTransfer)</code>.</p> </li> <li> <p>The corresponding <code>Expression</code> for this example is as follows: <code>{ "And": [ {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] } </code> </p> </li> </ul> <note> <p>Because each <code>Expression</code> can have only one operator, the service returns an error if more than one is specified. The following example shows an <code>Expression</code> object that creates an error: <code> { "And": [ ... ], "Dimensions": { "Key": "USAGE_TYPE", "Values": [ "DataTransfer" ] } } </code> </p> <p>The following is an example of the corresponding error message: <code>"Expression has more than one roots. Only one root operator is allowed for each expression: And, Or, Not, Dimensions, Tags, CostCategories"</code> </p> </note> </li> </ul> <note> <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT isn''t supported. OR isn''t supported between different dimensions, or dimensions and tags. NOT operators aren''t supported. Dimensions are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or <code>RIGHTSIZING_TYPE</code>.</p> <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is supported. AND and OR aren''t supported. Dimensions are limited to <code>LINKED_ACCOUNT</code>.</p> </note>'
     NonNegativeInteger:
       type: integer
       minimum: 0
@@ -3555,11 +3633,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableNonNegativeDouble'
             - deprecated: true
-              description: '<p>(deprecated)</p> <p>The dollar value that triggers a notification if the threshold is exceeded. </p> <p>This field has been deprecated. To specify a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p> <p>One of Threshold or ThresholdExpression is required for this resource.</p>Threshold has been deprecated in favor of ThresholdExpression'
+              description: '<p>(deprecated)</p> <p>An absolute dollar value that must be exceeded by the anomaly''s total impact (see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html">Impact</a> for more details) for an anomaly notification to be generated.</p> <p>This field has been deprecated. To specify a threshold, use ThresholdExpression. Continued use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p> <p>One of Threshold or ThresholdExpression is required for this resource. You cannot specify both.</p>Threshold has been deprecated in favor of ThresholdExpression'
         Frequency:
           allOf:
             - $ref: '#/components/schemas/AnomalySubscriptionFrequency'
-            - description: 'The frequency that anomaly reports are sent over email. '
+            - description: 'The frequency that anomaly notifications are sent. Notifications are sent either over email (for DAILY and WEEKLY frequencies) or SNS (for IMMEDIATE frequency). For more information, see <a href="https://docs.aws.amazon.com/cost-management/latest/userguide/ad-SNS.html">Creating an Amazon SNS topic for anomaly notifications</a>.'
         SubscriptionName:
           allOf:
             - $ref: '#/components/schemas/GenericString'
@@ -3567,8 +3645,8 @@ components:
         ThresholdExpression:
           allOf:
             - $ref: '#/components/schemas/Expression'
-            - description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>. The supported nested expression types are <code>AND</code> and <code>OR</code>. The match option <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and 10,000,000,000.</p> <p>One of Threshold or ThresholdExpression is required for this resource.</p> <p>The following are examples of valid ThresholdExpressions:</p> <ul> <li> <p>Absolute threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p>Percentage threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p> <code>AND</code> two thresholds together: <code>{ "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> <li> <p> <code>OR</code> two thresholds together: <code>{ "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> </ul>'
-      description: 'The association between a monitor, threshold, and list of subscribers used to deliver notifications about anomalies detected by a monitor that exceeds a threshold. The content consists of the detailed metadata and the current status of the <code>AnomalySubscription</code> object. '
+            - description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to specify the anomalies that you want to generate alerts for. This supports dimensions and nested expressions. The supported dimensions are <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>, corresponding to an anomaly’s TotalImpact and TotalImpactPercentage, respectively (see <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html">Impact</a> for more details). The supported nested expression types are <code>AND</code> and <code>OR</code>. The match option <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and 10,000,000,000 in string format.</p> <p>One of Threshold or ThresholdExpression is required for this resource. You cannot specify both.</p> <p>The following are examples of valid ThresholdExpressions:</p> <ul> <li> <p>Absolute threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p>Percentage threshold: <code>{ "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }</code> </p> </li> <li> <p> <code>AND</code> two thresholds together: <code>{ "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> <li> <p> <code>OR</code> two thresholds together: <code>{ "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }</code> </p> </li> </ul>'
+      description: '<p>An <code>AnomalySubscription</code> resource (also referred to as an alert subscription) sends notifications about specific anomalies that meet an alerting criteria defined by you.</p> <p>You can specify the frequency of the alerts and the subscribers to notify.</p> <p>Anomaly subscriptions can be associated with one or more <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html"> <code>AnomalyMonitor</code> </a> resources, and they only send notifications about anomalies detected by those associated monitors. You can also configure a threshold to further control which anomalies are included in the notifications.</p> <p>Anomalies that don’t exceed the chosen threshold and therefore don’t trigger notifications from an anomaly subscription will still be available on the console and from the <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetAnomalies.html"> <code>GetAnomalies</code> </a> API.</p>'
     AnomalySubscriptions:
       type: array
       items:
@@ -3842,7 +3920,7 @@ components:
         Rule:
           allOf:
             - $ref: '#/components/schemas/Expression'
-            - description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>, <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and <code>LINKED_ACCOUNT_NAME</code>.</p> <p>Root level <code>OR</code> isn''t supported. We recommend that you create a separate rule instead.</p> <p> <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you''re using the console or API/JSON editor. For a detailed comparison, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms">Term Comparisons</a> in the <i>Billing and Cost Management User Guide</i>.</p>'
+            - description: '<p>An <a href="https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html">Expression</a> object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>, <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, <code>LINKED_ACCOUNT_NAME</code>, <code>REGION</code>, and <code>USAGE_TYPE</code>.</p> <p> <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you''re using the console or API/JSON editor. For a detailed comparison, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms">Term Comparisons</a> in the <i>Billing and Cost Management User Guide</i>.</p>'
         InheritedValue:
           allOf:
             - $ref: '#/components/schemas/CostCategoryInheritedValueDimension'
@@ -4828,6 +4906,127 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RightsizingRecommendation'
+    RecommendationDetailId:
+      type: string
+      pattern: '^[\S\s]{8}-[\S\s]{4}-[\S\s]{4}-[\S\s]{4}-[\S\s]{12}$'
+      minLength: 36
+      maxLength: 36
+    RecommendationDetailData:
+      type: object
+      properties:
+        AccountScope:
+          allOf:
+            - $ref: '#/components/schemas/AccountScope'
+            - description: 'The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the management account and member accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual member accounts only.'
+        LookbackPeriodInDays:
+          allOf:
+            - $ref: '#/components/schemas/LookbackPeriodInDays'
+            - description: How many days of previous usage that Amazon Web Services considers when making this recommendation.
+        SavingsPlansType:
+          allOf:
+            - $ref: '#/components/schemas/SupportedSavingsPlansType'
+            - description: The requested Savings Plan recommendation type.
+        TermInYears:
+          allOf:
+            - $ref: '#/components/schemas/TermInYears'
+            - description: The term of the commitment in years.
+        PaymentOption:
+          allOf:
+            - $ref: '#/components/schemas/PaymentOption'
+            - description: 'The payment option for the commitment (for example, All Upfront or No Upfront).'
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The AccountID that the recommendation is generated for.
+        CurrencyCode:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The currency code that Amazon Web Services used to generate the recommendation and present potential savings.
+        InstanceFamily:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The instance family of the recommended Savings Plan.
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The region the recommendation is generated for.
+        OfferingId:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The unique ID that's used to distinguish Savings Plans from one another.
+        GenerationTimestamp:
+          $ref: '#/components/schemas/ZonedDateTime'
+        LatestUsageTimestamp:
+          $ref: '#/components/schemas/ZonedDateTime'
+        CurrentAverageHourlyOnDemandSpend:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The average value of hourly On-Demand spend over the lookback period of the applicable usage type.
+        CurrentMaximumHourlyOnDemandSpend:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The highest value of hourly On-Demand spend over the lookback period of the applicable usage type.
+        CurrentMinimumHourlyOnDemandSpend:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The lowest value of hourly On-Demand spend over the lookback period of the applicable usage type.
+        EstimatedAverageUtilization:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The estimated utilization of the recommended Savings Plan.
+        EstimatedMonthlySavingsAmount:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The estimated monthly savings amount based on the recommended Savings Plan.
+        EstimatedOnDemandCost:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The remaining On-Demand cost estimated to not be covered by the recommended Savings Plan, over the length of the lookback period.'
+        EstimatedOnDemandCostWithCurrentCommitment:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The estimated On-Demand costs you expect with no additional commitment, based on your usage of the selected time period and the Savings Plan you own.'
+        EstimatedROI:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The estimated return on investment that's based on the recommended Savings Plan that you purchased. This is calculated as estimatedSavingsAmount/estimatedSPCost*100.
+        EstimatedSPCost:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The cost of the recommended Savings Plan over the length of the lookback period.
+        EstimatedSavingsAmount:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The estimated savings amount that's based on the recommended Savings Plan over the length of the lookback period.
+        EstimatedSavingsPercentage:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The estimated savings percentage relative to the total cost of applicable On-Demand usage over the lookback period.
+        ExistingHourlyCommitment:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The existing hourly commitment for the Savings Plan type.
+        HourlyCommitmentToPurchase:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The recommended hourly commitment level for the Savings Plan type and the configuration that's based on the usage during the lookback period.
+        UpfrontCost:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The upfront cost of the recommended Savings Plan, based on the selected payment option.'
+        CurrentAverageCoverage:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The average value of hourly coverage over the lookback period.
+        EstimatedAverageCoverage:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The estimated coverage of the recommended Savings Plan.
+        MetricsOverLookbackPeriod:
+          allOf:
+            - $ref: '#/components/schemas/MetricsOverLookbackPeriod'
+            - description: 'The related hourly cost, coverage, and utilization metrics over the lookback period.'
+      description: The details and metrics for the given recommendation.
     SavingsPlansCoverages:
       type: array
       items:
@@ -5081,6 +5280,32 @@ components:
       maxLength: 1024
     MetricUnit:
       type: string
+    RecommendationDetailHourlyMetrics:
+      type: object
+      properties:
+        StartTime:
+          $ref: '#/components/schemas/ZonedDateTime'
+        EstimatedOnDemandCost:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The remaining On-Demand cost estimated to not be covered by the recommended Savings Plan, over the length of the lookback period.'
+        CurrentCoverage:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The current amount of Savings Plans eligible usage that the Savings Plan covered.
+        EstimatedCoverage:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The estimated coverage amount based on the recommended Savings Plan.
+        EstimatedNewCommitmentUtilization:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: The estimated utilization for the recommended Savings Plan.
+      description: 'Contains the hourly metrics for the given recommendation over the lookback period. '
+    MetricsOverLookbackPeriod:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationDetailHourlyMetrics'
     TargetInstancesList:
       type: array
       items:
@@ -5635,6 +5860,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GenericString'
             - description: The average value of hourly On-Demand spend over the lookback period of the applicable usage type.
+        RecommendationDetailId:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationDetailId'
+            - description: Contains detailed information about a specific Savings Plan recommendation.
       description: Details for your recommended Savings Plans.
     SavingsPlansSavings:
       type: object

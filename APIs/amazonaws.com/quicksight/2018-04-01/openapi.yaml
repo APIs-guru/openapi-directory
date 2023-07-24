@@ -509,12 +509,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '487':
           description: InternalFailureException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalFailureException'
-        '486':
+        '488':
           description: ResourceUnavailableException
           content:
             application/json:
@@ -3397,6 +3409,18 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
             maxLength: 64
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members/{MemberName}':
     put:
       operationId: CreateGroupMembership
@@ -9777,6 +9801,172 @@ paths:
                   items:
                     $ref: '#/components/schemas/ResourcePermission'
                   maxItems: 2
+  '/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs/{SnapshotJobId}':
+    get:
+      operationId: DescribeDashboardSnapshotJob
+      description: '<p>Describes an existing snapshot job.</p> <p>Poll job descriptions after a job starts to know the status of the job. For information on available status codes, see <code>JobStatus</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDashboardSnapshotJobResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: DashboardId
+          in: path
+          required: true
+          description: The ID of the dashboard that you have started a snapshot job for.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 512
+        - name: SnapshotJobId
+          in: path
+          required: true
+          description: The ID of the job to be described. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 512
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs/{SnapshotJobId}/result':
+    get:
+      operationId: DescribeDashboardSnapshotJobResult
+      description: '<p>Describes the result of an existing snapshot job that has finished running.</p> <p>A finished snapshot job will return a <code>COMPLETED</code> or <code>FAILED</code> status when you poll the job with a <code>DescribeDashboardSnapshotJob</code> API call.</p> <p>If the job has not finished running, this operation returns a message that says <code>Dashboard Snapshot Job with id &lt;SnapshotjobId&gt; has not reached a terminal state.</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDashboardSnapshotJobResultResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '485':
+          description: PreconditionNotMetException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionNotMetException'
+        '486':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: DashboardId
+          in: path
+          required: true
+          description: The ID of the dashboard that you have started a snapshot job for.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 512
+        - name: SnapshotJobId
+          in: path
+          required: true
+          description: The ID of the job to be described. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 512
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/accounts/{AwsAccountId}/data-sets/{DataSetId}/permissions':
     get:
       operationId: DescribeDataSetPermissions
@@ -12527,6 +12717,18 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
             maxLength: 64
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -12624,6 +12826,18 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -12725,6 +12939,18 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
             maxLength: 64
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -13749,6 +13975,18 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -13848,6 +14086,18 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
             maxLength: 64
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -14665,6 +14915,18 @@ paths:
             type: string
             pattern: '^[a-zA-Z0-9._-]*$'
             maxLength: 64
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
       requestBody:
         required: true
         content:
@@ -14962,6 +15224,137 @@ paths:
                   enum:
                     - DO_NOTHING
                     - ROLLBACK
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/{AwsAccountId}/dashboards/{DashboardId}/snapshot-jobs':
+    post:
+      operationId: StartDashboardSnapshotJob
+      description: '<p>Starts an asynchronous job that generates a dashboard snapshot. You can request up to one paginated PDF and up to five CSVs per API call.</p> <p>Poll job descriptions with a <code>DescribeDashboardSnapshotJob</code> API call. Once the job succeeds, use the <code>DescribeDashboardSnapshotJobResult</code> API to obtain the download URIs that the job generates.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDashboardSnapshotJobResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ResourceExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceExistsException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: UnsupportedUserEditionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedUserEditionException'
+        '487':
+          description: UnsupportedPricingPlanException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedPricingPlanException'
+        '488':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: AwsAccountId
+          in: path
+          required: true
+          description: The ID of the Amazon Web Services account that the dashboard snapshot job is executed in.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
+        - name: DashboardId
+          in: path
+          required: true
+          description: 'The ID of the dashboard that you want to start a snapshot job for. '
+          schema:
+            type: string
+            pattern: '[\w\-]+'
+            minLength: 1
+            maxLength: 512
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - SnapshotJobId
+                - UserConfiguration
+                - SnapshotConfiguration
+              properties:
+                SnapshotJobId:
+                  description: An ID for the dashboard snapshot job. This ID is unique to the dashboard while the job is running. This ID can be used to poll the status of a job with a <code>DescribeDashboardSnapshotJob</code> while the job runs. You can reuse this ID for another job 24 hours after the current job is completed.
+                  type: string
+                  pattern: '[\w\-]+'
+                  minLength: 1
+                  maxLength: 512
+                UserConfiguration:
+                  description: A structure that contains information about the users that the dashboard snapshot is generated for.
+                  type: object
+                  properties:
+                    AnonymousUsers:
+                      allOf:
+                        - $ref: '#/components/schemas/SnapshotAnonymousUserList'
+                        - description: An array of records that describe the anonymous users that the dashboard snapshot is generated for.
+                SnapshotConfiguration:
+                  description: Describes the configuration of the dashboard snapshot.
+                  type: object
+                  properties:
+                    FileGroups:
+                      allOf:
+                        - $ref: '#/components/schemas/SnapshotFileGroupList'
+                        - description: A list of <code>SnapshotJobResultFileGroup</code> objects that contain information about the snapshot that is generated. This list can hold a maximum of 6 <code>FileGroup</code> configurations.
+                    DestinationConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/SnapshotDestinationConfiguration'
+                        - description: A structure that contains information on the Amazon S3 bucket that the generated snapshot is stored in.
+                    Parameters:
+                      $ref: '#/components/schemas/Parameters'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -17386,6 +17779,88 @@ components:
           allOf:
             - $ref: '#/components/schemas/LinkSharingConfiguration'
             - description: 'A structure that contains the configuration of a shareable link that grants access to the dashboard. Your users can use the link to view and interact with the dashboard, if the dashboard has been shared with them. For more information about sharing dashboards, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html">Sharing Dashboards</a>.'
+    DescribeDashboardSnapshotJobResponse:
+      type: object
+      properties:
+        AwsAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AwsAccountId'
+            - description: ' The ID of the Amazon Web Services account that the dashboard snapshot job is executed in. '
+        DashboardId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: The ID of the dashboard that you have started a snapshot job for.
+        SnapshotJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: The ID of the job to be described. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.
+        UserConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotUserConfigurationRedacted'
+            - description: The user configuration for the snapshot job. This information is provided when you make a <code>StartDashboardSnapshotJob</code> API call.
+        SnapshotConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotConfiguration'
+            - description: The snapshot configuration of the job. This information is provided when you make a <code>StartDashboardSnapshotJob</code> API call.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the snapshot job. The job ARN is generated when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotJobStatus'
+            - description: <p>Indicates the status of a job. The status updates as the job executes. This shows one of the following values.</p> <ul> <li> <p> <code>COMPLETED</code> - The job was completed successfully.</p> </li> <li> <p> <code>FAILED</code> - The job failed to execute.</p> </li> <li> <p> <code>QUEUED</code> - The job is queued and hasn't started yet.</p> </li> <li> <p> <code>RUNNING</code> - The job is still running.</p> </li> </ul>
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time that the snapshot job was created. '
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time that the snapshot job status was last updated. '
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Web Services request ID for this operation. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request
+    DescribeDashboardSnapshotJobResultResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the snapshot job. The job ARN is generated when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotJobStatus'
+            - description: Indicates the status of a job after it has reached a terminal state. A finished snapshot job will retuen a <code>COMPLETED</code> or <code>FAILED</code> status.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that a snapshot job was created.
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that a snapshot job status was last updated.
+        Result:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotJobResult'
+            - description: The result of the snapshot job. Jobs that have successfully completed will return the S3Uri where they are located. Jobs that have failedwill return information on the error that caused the job to fail.
+        ErrorInfo:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotJobErrorInfo'
+            - description: Displays information for the error that caused a job to fail.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Web Services request ID for this operation.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request
     DescribeDataSetResponse:
       type: object
       properties:
@@ -19044,6 +19519,65 @@ components:
         $ref: '#/components/schemas/AssetBundleImportJobDashboardOverrideParameters'
       minItems: 1
       maxItems: 50
+    StartDashboardSnapshotJobResponse:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the dashboard snapshot job.
+        SnapshotJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: The ID of the job. The job ID is set when you start a new job with a <code>StartDashboardSnapshotJob</code> API call.
+        RequestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: ' The Amazon Web Services request ID for this operation. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/StatusCode'
+            - description: The HTTP status of the request
+    SnapshotAnonymousUserList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotAnonymousUser'
+      minItems: 1
+      maxItems: 1
+    SnapshotFileGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotFileGroup'
+      minItems: 1
+      maxItems: 6
+    SnapshotDestinationConfiguration:
+      type: object
+      properties:
+        S3Destinations:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotS3DestinationConfigurationList'
+            - description: ' A list of <code>SnapshotS3DestinationConfiguration</code> objects that contain Amazon S3 destination configurations. This structure can hold a maximum of 1 <code>S3DestinationConfiguration</code>. '
+      description: A structure that contains information on the Amazon S3 destinations of the generated snapshot.
+    Parameters:
+      type: object
+      properties:
+        StringParameters:
+          allOf:
+            - $ref: '#/components/schemas/StringParameterList'
+            - description: The parameters that have a data type of string.
+        IntegerParameters:
+          allOf:
+            - $ref: '#/components/schemas/IntegerParameterList'
+            - description: The parameters that have a data type of integer.
+        DecimalParameters:
+          allOf:
+            - $ref: '#/components/schemas/DecimalParameterList'
+            - description: The parameters that have a data type of decimal.
+        DateTimeParameters:
+          allOf:
+            - $ref: '#/components/schemas/DateTimeParameterList'
+            - description: The parameters that have a data type of date-time.
+      description: A list of Amazon QuickSight parameters and the list's override values.
     TagResourceResponse:
       type: object
       properties:
@@ -19824,6 +20358,18 @@ components:
         - DISTINCT_COUNT
         - MIN
         - MAX
+    AttributeAggregationFunction:
+      type: object
+      properties:
+        SimpleAttributeAggregation:
+          allOf:
+            - $ref: '#/components/schemas/SimpleAttributeAggregationFunction'
+            - description: '<p>The built-in aggregation functions for attributes.</p> <ul> <li> <p> <code>UNIQUE_VALUE</code>: Returns the unique value for a field, aggregated by the dimension fields.</p> </li> </ul>'
+        ValueForMultipleValues:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Used by the <code>UNIQUE_VALUE</code> aggregation function. If there are multiple values for the field used by the aggregation, the value for this property will be returned instead. Defaults to ''*''.'
+      description: Aggregation for attributes.
     AggregationFunction:
       type: object
       properties:
@@ -19839,6 +20385,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateAggregationFunction'
             - description: '<p>Aggregation for date values.</p> <ul> <li> <p> <code>COUNT</code>: Aggregate by the total number of values, including duplicates.</p> </li> <li> <p> <code>DISTINCT_COUNT</code>: Aggregate by the total number of distinct values.</p> </li> <li> <p> <code>MIN</code>: Select the smallest date value.</p> </li> <li> <p> <code>MAX</code>: Select the largest date value.</p> </li> </ul>'
+        AttributeAggregationFunction:
+          allOf:
+            - $ref: '#/components/schemas/AttributeAggregationFunction'
+            - description: Aggregation for attributes.
       description: '<p>An aggregation function aggregates values from a dimension or measure.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
     AggregationFunctionParameters:
       type: object
@@ -20184,6 +20734,22 @@ components:
       pattern: '[\w\-]+'
       minLength: 1
       maxLength: 2048
+    SnapshotJobResultFileGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotJobResultFileGroup'
+    AnonymousUserSnapshotJobResult:
+      type: object
+      properties:
+        FileGroups:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotJobResultFileGroupList'
+            - description: 'A list of <code>SnapshotJobResultFileGroup</code> objects that contain information on the files that are requested during a <code>StartDashboardSnapshotJob</code> API call. If the job succeeds, these objects contain the location where the snapshot artifacts are stored. If the job fails, the objects contain information about the error that caused the job to fail.'
+      description: 'A structure that contains the file groups that are requested for the artifact generation in a <code>StartDashboardSnapshotJob</code> API call. '
+    AnonymousUserSnapshotJobResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnonymousUserSnapshotJobResult'
     ArcAxisDisplayRange:
       type: object
       properties:
@@ -20980,6 +21546,10 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    SimpleAttributeAggregationFunction:
+      type: string
+      enum:
+        - UNIQUE_VALUE
     Host:
       type: string
       minLength: 1
@@ -23670,26 +24240,6 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'The type of Active Directory that is being used to authenticate the Amazon QuickSight account. Valid values are <code>SIMPLE_AD</code>, <code>AD_CONNECTOR</code>, and <code>MICROSOFT_AD</code>.'
       description: A <code>SignupResponse</code> object that contains a summary of a newly created account.
-    Parameters:
-      type: object
-      properties:
-        StringParameters:
-          allOf:
-            - $ref: '#/components/schemas/StringParameterList'
-            - description: The parameters that have a data type of string.
-        IntegerParameters:
-          allOf:
-            - $ref: '#/components/schemas/IntegerParameterList'
-            - description: The parameters that have a data type of integer.
-        DecimalParameters:
-          allOf:
-            - $ref: '#/components/schemas/DecimalParameterList'
-            - description: The parameters that have a data type of decimal.
-        DateTimeParameters:
-          allOf:
-            - $ref: '#/components/schemas/DateTimeParameterList'
-            - description: The parameters that have a data type of date-time.
-      description: A list of Amazon QuickSight parameters and the list's override values.
     ResourcePermissionList:
       type: array
       items:
@@ -26279,6 +26829,18 @@ components:
         MappedDataSetParameters:
           $ref: '#/components/schemas/MappedDataSetParameters'
       description: A parameter declaration for the <code>DateTime</code> data type.
+    SheetControlInfoIconLabelOptions:
+      type: object
+      properties:
+        Visibility:
+          allOf:
+            - $ref: '#/components/schemas/Visibility'
+            - description: The visibility configuration of info icon label options.
+        InfoIconText:
+          allOf:
+            - $ref: '#/components/schemas/SheetControlInfoIconText'
+            - description: ' The text content of info icon.'
+      description: A control to display info icons for filters and parameters.
     DateTimePickerControlDisplayOptions:
       type: object
       properties:
@@ -26290,6 +26852,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTimeFormat'
             - description: Customize how dates are formatted in controls.
+        InfoIconLabelOptions:
+          allOf:
+            - $ref: '#/components/schemas/SheetControlInfoIconLabelOptions'
+            - description: The configuration of info icon label options.
       description: The display options of a control.
     ValueWhenUnsetOption:
       type: string
@@ -26732,6 +27298,65 @@ components:
       type: object
       title: DescribeDashboardRequest
       properties: {}
+    DescribeDashboardSnapshotJobRequest:
+      type: object
+      title: DescribeDashboardSnapshotJobRequest
+      properties: {}
+    SnapshotUserConfigurationRedacted:
+      type: object
+      properties:
+        AnonymousUsers:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotAnonymousUserRedactedList'
+            - description: ' An array of records that describe anonymous users that the dashboard snapshot is generated for. Sensitive user information is excluded. '
+      description: 'A structure that contains information about the users that the dashboard snapshot is generated for. Sensitive user information is excluded. '
+    SnapshotConfiguration:
+      type: object
+      required:
+        - FileGroups
+      properties:
+        FileGroups:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotFileGroupList'
+            - description: A list of <code>SnapshotJobResultFileGroup</code> objects that contain information about the snapshot that is generated. This list can hold a maximum of 6 <code>FileGroup</code> configurations.
+        DestinationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotDestinationConfiguration'
+            - description: A structure that contains information on the Amazon S3 bucket that the generated snapshot is stored in.
+        Parameters:
+          $ref: '#/components/schemas/Parameters'
+      description: Describes the configuration of the dashboard snapshot.
+    SnapshotJobStatus:
+      type: string
+      enum:
+        - QUEUED
+        - RUNNING
+        - COMPLETED
+        - FAILED
+    DescribeDashboardSnapshotJobResultRequest:
+      type: object
+      title: DescribeDashboardSnapshotJobResultRequest
+      properties: {}
+    SnapshotJobResult:
+      type: object
+      properties:
+        AnonymousUsers:
+          allOf:
+            - $ref: '#/components/schemas/AnonymousUserSnapshotJobResultList'
+            - description: ' A list of <code>AnonymousUserSnapshotJobResult</code> objects that contain information on anonymous users and their user configurations. This data provided by you when you make a <code>StartDashboardSnapshotJob</code> API call.'
+      description: 'An object that provides information on the result of a snapshot job. This object provides information about the job, the job status, and the location of the generated file.'
+    SnapshotJobErrorInfo:
+      type: object
+      properties:
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
+        ErrorType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error type.
+      description: An object that contains information on the error that caused the snapshot job to fail.
     DescribeDataSetPermissionsRequest:
       type: object
       title: DescribeDataSetPermissionsRequest
@@ -27324,6 +27949,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LabelOptions'
             - description: 'The options to configure the title visibility, name, and font size.'
+        InfoIconLabelOptions:
+          allOf:
+            - $ref: '#/components/schemas/SheetControlInfoIconLabelOptions'
+            - description: The configuration of info icon label options.
       description: The display options of a control.
     EmbeddingIdentityType:
       type: string
@@ -28356,6 +28985,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LabelOptions'
             - description: 'The options to configure the title visibility, name, and font size.'
+        InfoIconLabelOptions:
+          allOf:
+            - $ref: '#/components/schemas/SheetControlInfoIconLabelOptions'
+            - description: The configuration of info icon label options.
       description: The display options of a control.
     FilterOperation:
       type: object
@@ -28400,6 +29033,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTimeFormat'
             - description: Customize how dates are formatted in controls.
+        InfoIconLabelOptions:
+          allOf:
+            - $ref: '#/components/schemas/SheetControlInfoIconLabelOptions'
+            - description: The configuration of info icon label options.
       description: The display options of a control.
     SelectedSheetsFilterScopeConfiguration:
       type: object
@@ -28421,6 +29058,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LabelOptions'
             - description: 'The options to configure the title visibility, name, and font size.'
+        InfoIconLabelOptions:
+          allOf:
+            - $ref: '#/components/schemas/SheetControlInfoIconLabelOptions'
+            - description: The configuration of info icon label options.
       description: The display options of a control.
     SheetControlSliderType:
       type: string
@@ -28442,6 +29083,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TextControlPlaceholderOptions'
             - description: The configuration of the placeholder options in a text area control.
+        InfoIconLabelOptions:
+          allOf:
+            - $ref: '#/components/schemas/SheetControlInfoIconLabelOptions'
+            - description: The configuration of info icon label options.
       description: The display options of a control.
     TextFieldControlDisplayOptions:
       type: object
@@ -28454,6 +29099,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TextControlPlaceholderOptions'
             - description: The configuration of the placeholder options in a text field control.
+        InfoIconLabelOptions:
+          allOf:
+            - $ref: '#/components/schemas/SheetControlInfoIconLabelOptions'
+            - description: The configuration of info icon label options.
       description: The display options of a control.
     FilterVisualScope:
       type: string
@@ -33011,6 +33660,26 @@ components:
       items:
         $ref: '#/components/schemas/FieldSortOptions'
       maxItems: 100
+    S3BucketConfiguration:
+      type: object
+      required:
+        - BucketName
+        - BucketPrefix
+        - BucketRegion
+      properties:
+        BucketName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of an existing Amazon S3 bucket where the generated snapshot artifacts are sent.
+        BucketPrefix:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The prefix of the Amazon S3 bucket that the generated snapshots are stored in.
+        BucketRegion:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The region that the Amazon S3 bucket is located in. The bucket must be located in the same region that the <code>StartDashboardSnapshotJob</code> API call is made.
+      description: 'An optional structure that contains the Amazon S3 bucket configuration that the generated snapshots are stored in. If you don''t provide this information, generated snapshots are stored in the default Amazon QuickSight bucket.'
     UploadSettings:
       type: object
       properties:
@@ -33485,6 +34154,10 @@ components:
             - $ref: '#/components/schemas/SensitiveStringList'
             - description: The other names or aliases for the false cell value.
       description: A structure that represents a semantic type.
+    SensitiveS3Uri:
+      type: string
+      pattern: '^(https|s3)://([^/]+)/?(.*)$'
+      format: password
     SensitiveStringObject:
       type: string
       format: password
@@ -33500,6 +34173,12 @@ components:
             - $ref: '#/components/schemas/DataFieldSeriesItem'
             - description: The data field series item configuration of a line chart.
       description: '<p>The series item configuration of a line chart.</p> <p>This is a union type structure. For this structure to be valid, only one of the attributes can be defined.</p>'
+    SessionTagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SessionTagKey'
+      minItems: 1
+      maxItems: 50
     SetParameterValueConfiguration:
       type: object
       required:
@@ -33529,6 +34208,10 @@ components:
             - $ref: '#/components/schemas/SheetName'
             - description: The name of a sheet. This name is displayed on the sheet's tab in the Amazon QuickSight console.
       description: 'A <i>sheet</i>, which is an object that contains a set of visuals that are viewed together on one page in Amazon QuickSight. Every analysis and dashboard contains at least one sheet. Each sheet contains at least one visualization widget, for example a chart, pivot table, or narrative insight. Sheets can be associated with other components, such as controls, filters, and so on.'
+    SheetControlInfoIconText:
+      type: string
+      minLength: 1
+      maxLength: 100
     SheetControlLayoutConfiguration:
       type: object
       properties:
@@ -33750,6 +34433,168 @@ components:
       type: integer
       minimum: 1
       maximum: 10
+    SnapshotAnonymousUser:
+      type: object
+      properties:
+        RowLevelPermissionTags:
+          allOf:
+            - $ref: '#/components/schemas/SessionTagList'
+            - description: '<p>The tags to be used for row-level security (RLS). Make sure that the relevant datasets have RLS tags configured before you start a snapshot export job. You can configure the RLS tags of a dataset with a <code>DataSet$RowLevelPermissionTagConfiguration</code> API call.</p> <p>These are not the tags that are used for Amazon Web Services resource tagging. For more information on row level security in Amazon QuickSight, see <a href="https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html">Using Row-Level Security (RLS) with Tags</a>in the <i>Amazon QuickSight User Guide</i>.</p>'
+      description: A structure that contains information on the anonymous user configuration.
+    SnapshotAnonymousUserRedacted:
+      type: object
+      properties:
+        RowLevelPermissionTagKeys:
+          allOf:
+            - $ref: '#/components/schemas/SessionTagKeyList'
+            - description: The tag keys for the <code>RowLevelPermissionTags</code>.
+      description: Use this structure to redact sensitive information that you provide about an anonymous user from the snapshot.
+    SnapshotAnonymousUserRedactedList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotAnonymousUserRedacted'
+      minItems: 1
+      maxItems: 1
+    SnapshotS3DestinationConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotS3DestinationConfiguration'
+      minItems: 1
+      maxItems: 1
+    SnapshotFileSheetSelectionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotFileSheetSelection'
+      minItems: 1
+      maxItems: 1
+    SnapshotFileFormatType:
+      type: string
+      enum:
+        - CSV
+        - PDF
+    SnapshotFile:
+      type: object
+      required:
+        - SheetSelections
+        - FormatType
+      properties:
+        SheetSelections:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotFileSheetSelectionList'
+            - description: A list of <code>SnapshotFileSheetSelection</code> objects that contain information on the dashboard sheet that is exported. These objects provide information about the snapshot artifacts that are generated during the job. This structure can hold a maximum of 5 CSV configurations or 1 configuration for PDF.
+        FormatType:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotFileFormatType'
+            - description: The format of the snapshot file to be generated. You can choose between <code>CSV</code> and <code>PDF</code>.
+      description: A structure that contains the information for the snapshot that you want to generate. This information is provided by you when you start a new snapshot job.
+    SnapshotFileList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotFile'
+      minItems: 1
+      maxItems: 1
+    SnapshotFileGroup:
+      type: object
+      properties:
+        Files:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotFileList'
+            - description: A list of <code>SnapshotFile</code> objects that contain the information on the snapshot files that need to be generated. This structure can hold 1 configuration at a time.
+      description: A structure that contains the information on the snapshot files.
+    SnapshotFileSheetSelectionScope:
+      type: string
+      enum:
+        - ALL_VISUALS
+        - SELECTED_VISUALS
+    SnapshotFileSheetSelectionVisualIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ShortRestrictiveResourceId'
+      minItems: 1
+      maxItems: 1
+    SnapshotFileSheetSelection:
+      type: object
+      required:
+        - SheetId
+        - SelectionScope
+      properties:
+        SheetId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: The sheet ID of the dashboard to generate the snapshot artifact from. This value is required for CSV or PDF format types.
+        SelectionScope:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotFileSheetSelectionScope'
+            - description: <p>The selection scope of the visuals on a sheet of a dashboard that you are generating a snapthot of. You can choose one of the following options.</p> <ul> <li> <p> <code>ALL_VISUALS</code> - Selects all visuals that are on the sheet. This value is required if the snapshot is a PDF.</p> </li> <li> <p> <code>SELECTED_VISUALS</code> - Select the visual that you want to add to the snapshot. This value is required if the snapshot is a CSV.</p> </li> </ul>
+        VisualIds:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotFileSheetSelectionVisualIdList'
+            - description: ' A structure that lists the IDs of the visuals in the selected sheet. Supported visual types are table, pivot table visuals. This value is required if you are generating a CSV. This value supports a maximum of 1 visual ID. '
+      description: A structure that contains information that identifies the snapshot that needs to be generated.
+    SnapshotJobResultErrorInfo:
+      type: object
+      properties:
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
+        ErrorType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error type.
+      description: Information on the error that caused the snapshot job to fail.
+    SnapshotJobResultErrorInfoList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotJobResultErrorInfo'
+    SnapshotJobS3ResultList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SnapshotJobS3Result'
+    SnapshotJobResultFileGroup:
+      type: object
+      properties:
+        Files:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotFileList'
+            - description: ' A list of <code>SnapshotFile</code> objects.'
+        S3Results:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotJobS3ResultList'
+            - description: ' A list of <code>SnapshotJobS3Result</code> objects.'
+      description: A structure that contains information on the generated snapshot file groups.
+    SnapshotS3DestinationConfiguration:
+      type: object
+      properties:
+        BucketConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketConfiguration'
+            - description: A structure that contains details about the Amazon S3 bucket that the generated dashboard snapshot is saved in.
+      description: A structure that describes the Amazon S3 settings to use to save the generated dashboard snapshot.
+    SnapshotJobS3Result:
+      type: object
+      properties:
+        S3DestinationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotS3DestinationConfiguration'
+            - description: 'A list of Amazon S3 bucket configurations that are provided when you make a <code>StartDashboardSnapshotJob</code> API call. '
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveS3Uri'
+            - description: The Amazon S3 Uri.
+        ErrorInfo:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotJobResultErrorInfoList'
+            - description: An array of error records that describe any failures that occur while the dashboard snapshot job runs.
+      description: 'The Amazon S3 result from the snapshot job. The result includes the <code>DestinationConfiguration</code> and the Amazon S3 Uri. If an error occured during the job, the result returns information on the error.'
+    SnapshotUserConfiguration:
+      type: object
+      properties:
+        AnonymousUsers:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotAnonymousUserList'
+            - description: An array of records that describe the anonymous users that the dashboard snapshot is generated for.
+      description: A structure that contains information about the users that the dashboard snapshot is generated for.
     Warehouse:
       type: string
       maxLength: 128
@@ -33804,6 +34649,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetBundleImportFailureAction'
             - description: '<p>The failure action for the import job.</p> <p>If you choose <code>ROLLBACK</code>, failed import jobs will attempt to undo any asset changes caused by the failed job.</p> <p>If you choose <code>DO_NOTHING</code>, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly keeping the Amazon QuickSight account in an inconsistent state.</p>'
+    StartDashboardSnapshotJobRequest:
+      type: object
+      required:
+        - SnapshotJobId
+        - UserConfiguration
+        - SnapshotConfiguration
+      title: StartDashboardSnapshotJobRequest
+      properties:
+        SnapshotJobId:
+          allOf:
+            - $ref: '#/components/schemas/ShortRestrictiveResourceId'
+            - description: An ID for the dashboard snapshot job. This ID is unique to the dashboard while the job is running. This ID can be used to poll the status of a job with a <code>DescribeDashboardSnapshotJob</code> while the job runs. You can reuse this ID for another job 24 hours after the current job is completed.
+        UserConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotUserConfiguration'
+            - description: ' A structure that contains information about the anonymous users that the generated snapshot is for. This API will not return information about registered Amazon QuickSight.'
+        SnapshotConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotConfiguration'
+            - description: A structure that describes the configuration of the dashboard snapshot.
     StringDatasetParameterDefaultValues:
       type: object
       properties:

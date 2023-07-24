@@ -2174,6 +2174,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/MediaInsightsPipelineConfiguration'
             - description: The updated configuration settings.
+    ActiveSpeakerPosition:
+      type: string
+      enum:
+        - TopLeft
+        - TopRight
+        - BottomLeft
+        - BottomRight
+    ActiveSpeakerOnlyConfiguration:
+      type: object
+      properties:
+        ActiveSpeakerPosition:
+          allOf:
+            - $ref: '#/components/schemas/ActiveSpeakerPosition'
+            - description: The position of the <code>ActiveSpeakerOnly</code> video tile.
+      description: Defines the configuration for an <code>ActiveSpeakerOnly</code> video tile.
     AmazonResourceName:
       type: string
       pattern: '^arn[\/\:\-\_\.a-zA-Z0-9]+$'
@@ -2314,10 +2329,23 @@ components:
             - $ref: '#/components/schemas/CategoryNameList'
             - description: 'By default, all <code>CategoryEvents</code> are sent to the insights target. If this parameter is specified, only included categories are sent to the insights target. '
       description: A structure that contains the configuration settings for an Amazon Transcribe call analytics processor.
+    LanguageOptions:
+      type: string
+      pattern: '^[a-zA-Z-,]+'
+      minLength: 1
+      maxLength: 200
+    VocabularyNames:
+      type: string
+      pattern: '^[a-zA-Z0-9,-._]+'
+      minLength: 1
+      maxLength: 3000
+    VocabularyFilterNames:
+      type: string
+      pattern: '^[a-zA-Z0-9,-._]+'
+      minLength: 1
+      maxLength: 3000
     AmazonTranscribeProcessorConfiguration:
       type: object
-      required:
-        - LanguageCode
       properties:
         LanguageCode:
           allOf:
@@ -2367,6 +2395,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'If true, <code>TranscriptEvents</code> with <code>IsPartial: true</code> are filtered out of the insights target.'
+        IdentifyLanguage:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Turns language identification on or off.
+        LanguageOptions:
+          allOf:
+            - $ref: '#/components/schemas/LanguageOptions'
+            - description: 'The language options for the transcription, such as automatic language detection.'
+        PreferredLanguage:
+          allOf:
+            - $ref: '#/components/schemas/CallAnalyticsLanguageCode'
+            - description: The preferred language for the transcription.
+        VocabularyNames:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyNames'
+            - description: The names of the custom vocabulary or vocabularies used during transcription.
+        VocabularyFilterNames:
+          allOf:
+            - $ref: '#/components/schemas/VocabularyFilterNames'
+            - description: The names of the custom vocabulary filter or filters using during transcription.
       description: A structure that contains the configuration settings for an Amazon Transcribe processor.
     AudioConcatenationConfiguration:
       type: object
@@ -2572,6 +2620,24 @@ components:
     AudioSampleRateOption:
       type: string
       pattern: 44100|48000
+    BorderColor:
+      type: string
+      enum:
+        - Black
+        - Blue
+        - Red
+        - Green
+        - White
+        - Yellow
+    BorderThickness:
+      type: integer
+      minimum: 1
+      maximum: 20
+    CanvasOrientation:
+      type: string
+      enum:
+        - Landscape
+        - Portrait
     CategoryName:
       type: string
       pattern: '^[0-9a-zA-Z._-]+'
@@ -2684,6 +2750,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/PresenterOnlyConfiguration'
             - description: Defines the configuration options for a presenter only video tile.
+        ActiveSpeakerOnlyConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ActiveSpeakerOnlyConfiguration'
+            - description: The configuration settings for an <code>ActiveSpeakerOnly</code> video tile.
+        HorizontalLayoutConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/HorizontalLayoutConfiguration'
+            - description: The configuration settings for a horizontal layout.
+        VerticalLayoutConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/VerticalLayoutConfiguration'
+            - description: The configuration settings for a vertical layout.
+        VideoAttribute:
+          allOf:
+            - $ref: '#/components/schemas/VideoAttribute'
+            - description: The attribute settings for the video tiles.
+        CanvasOrientation:
+          allOf:
+            - $ref: '#/components/schemas/CanvasOrientation'
+            - description: 'The orientation setting, horizontal or vertical.'
       description: Specifies the type of grid layout.
     ConcatenationSinkType:
       type: string
@@ -2745,6 +2831,11 @@ components:
         - PresenterOnly
         - Horizontal
         - Vertical
+        - ActiveSpeakerOnly
+    CornerRadius:
+      type: integer
+      minimum: 1
+      maximum: 20
     MediaPipelineSourceType:
       type: string
       enum:
@@ -3063,7 +3154,7 @@ components:
         S3RecordingSinkRuntimeConfiguration:
           allOf:
             - $ref: '#/components/schemas/S3RecordingSinkRuntimeConfiguration'
-            - description: The runtime configuration for the S3 recording sink.
+            - description: 'The runtime configuration for the S3 recording sink. If specified, the settings in this structure override any settings in <code>S3RecordingSinkConfiguration</code>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -3270,6 +3361,92 @@ components:
             - $ref: '#/components/schemas/PresenterPosition'
             - description: 'Defines the position of the presenter video tile. Default: <code>TopRight</code>.'
       description: Defines the configuration for a presenter-only video tile.
+    HorizontalLayoutConfiguration:
+      type: object
+      properties:
+        TileOrder:
+          allOf:
+            - $ref: '#/components/schemas/TileOrder'
+            - description: Sets the automatic ordering of the video tiles.
+        TilePosition:
+          allOf:
+            - $ref: '#/components/schemas/HorizontalTilePosition'
+            - description: Sets the position of horizontal tiles.
+        TileCount:
+          allOf:
+            - $ref: '#/components/schemas/TileCount'
+            - description: The maximum number of video tiles to display.
+        TileAspectRatio:
+          allOf:
+            - $ref: '#/components/schemas/TileAspectRatio'
+            - description: 'Sets the aspect ratio of the video tiles, such as 16:9.'
+      description: Defines the configuration settings for the horizontal layout.
+    VerticalLayoutConfiguration:
+      type: object
+      properties:
+        TileOrder:
+          allOf:
+            - $ref: '#/components/schemas/TileOrder'
+            - description: Sets the automatic ordering of the video tiles.
+        TilePosition:
+          allOf:
+            - $ref: '#/components/schemas/VerticalTilePosition'
+            - description: Sets the position of vertical tiles.
+        TileCount:
+          allOf:
+            - $ref: '#/components/schemas/TileCount'
+            - description: The maximum number of tiles to display.
+        TileAspectRatio:
+          allOf:
+            - $ref: '#/components/schemas/TileAspectRatio'
+            - description: 'Sets the aspect ratio of the video tiles, such as 16:9.'
+      description: Defines the configuration settings for a vertial layout.
+    VideoAttribute:
+      type: object
+      properties:
+        CornerRadius:
+          allOf:
+            - $ref: '#/components/schemas/CornerRadius'
+            - description: Sets the corner radius of all video tiles.
+        BorderColor:
+          allOf:
+            - $ref: '#/components/schemas/BorderColor'
+            - description: Defines the border color of all video tiles.
+        HighlightColor:
+          allOf:
+            - $ref: '#/components/schemas/HighlightColor'
+            - description: Defines the highlight color for the active video tile.
+        BorderThickness:
+          allOf:
+            - $ref: '#/components/schemas/BorderThickness'
+            - description: Defines the border thickness for all video tiles.
+      description: Defines the settings for a video tile.
+    HighlightColor:
+      type: string
+      enum:
+        - Black
+        - Blue
+        - Red
+        - Green
+        - White
+        - Yellow
+    TileOrder:
+      type: string
+      enum:
+        - JoinSequence
+        - SpeakerSequence
+    HorizontalTilePosition:
+      type: string
+      enum:
+        - Top
+        - Bottom
+    TileCount:
+      type: integer
+      minimum: 1
+      maximum: 10
+    TileAspectRatio:
+      type: string
+      pattern: '^\d{1,2}\/\d{1,2}$'
     Iso8601Timestamp:
       type: string
       format: date-time
@@ -3699,6 +3876,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/MediaPipelineStatusUpdate'
             - description: The requested status of the media insights pipeline.
+    VerticalTilePosition:
+      type: string
+      enum:
+        - Left
+        - Right
     VideoMuxType:
       type: string
       enum:

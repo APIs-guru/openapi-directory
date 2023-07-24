@@ -22482,6 +22482,26 @@ components:
             - $ref: '#/components/schemas/DQStopJobOnFailureOptions'
             - description: Options to configure how your job will stop if your data quality evaluation fails.
       description: Specifies your data quality evaluation criteria.
+    Recipe:
+      type: object
+      required:
+        - Name
+        - Inputs
+        - RecipeReference
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NodeName'
+            - description: The name of the Glue Studio node.
+        Inputs:
+          allOf:
+            - $ref: '#/components/schemas/OneInput'
+            - description: 'The nodes that are inputs to the recipe node, identified by id.'
+        RecipeReference:
+          allOf:
+            - $ref: '#/components/schemas/RecipeReference'
+            - description: A reference to the DataBrew recipe used by the node.
+      description: A Glue Studio node that uses a Glue DataBrew recipe in Glue jobs.
     CodeGenConfigurationNode:
       type: object
       properties:
@@ -22747,6 +22767,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EvaluateDataQualityMultiFrame'
             - description: Specifies your data quality evaluation criteria. Allows multiple input data and returns a collection of Dynamic Frames.
+        Recipe:
+          allOf:
+            - $ref: '#/components/schemas/Recipe'
+            - description: Specifies a Glue DataBrew recipe node.
       description: ' <code>CodeGenConfigurationNode</code> enumerates all valid Node types. One and only one of its member variables can be populated.'
     CodeGenConfigurationNodes:
       type: object
@@ -27645,6 +27669,25 @@ components:
         - quillemet
         - single_quote
         - disabled
+    RecipeReference:
+      type: object
+      required:
+        - RecipeArn
+        - RecipeVersion
+      properties:
+        RecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: The ARN of the DataBrew recipe.
+        RecipeVersion:
+          allOf:
+            - $ref: '#/components/schemas/RecipeVersion'
+            - description: The RecipeVersion of the DataBrew recipe.
+      description: A reference to a Glue DataBrew recipe.
+    RecipeVersion:
+      type: string
+      minLength: 1
+      maxLength: 16
     RecrawlBehavior:
       type: string
       enum:
