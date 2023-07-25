@@ -209,6 +209,15 @@ paths:
             pattern: '[\w+=,.@-]*'
             minLength: 2
             maxLength: 64
+        - name: ProvidedContexts
+          in: query
+          required: false
+          description: Reserved for future use.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/ProvidedContext'
+            maxItems: 5
         - name: Action
           in: query
           required: true
@@ -552,7 +561,7 @@ paths:
         - name: WebIdentityToken
           in: query
           required: true
-          description: 'The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider. Your application must get this token by authenticating the user who is using your application with a web identity provider before the application makes an <code>AssumeRoleWithWebIdentity</code> call. '
+          description: The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider. Your application must get this token by authenticating the user who is using your application with a web identity provider before the application makes an <code>AssumeRoleWithWebIdentity</code> call. Only tokens with RSA algorithms (RS256) are supported.
           schema:
             type: string
             minLength: 4
@@ -1272,6 +1281,18 @@ components:
       pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]+'
       minLength: 1
       maxLength: 128
+    ProvidedContext:
+      type: object
+      properties:
+        ProviderArn:
+          allOf:
+            - $ref: '#/components/schemas/arnType'
+            - description: Reserved for future use.
+        ContextAssertion:
+          allOf:
+            - $ref: '#/components/schemas/contextAssertionType'
+            - description: Reserved for future use.
+      description: Reserved for future use.
     MalformedPolicyDocumentException: {}
     PackedPolicyTooLargeException: {}
     RegionDisabledException: {}
@@ -1510,6 +1531,11 @@ components:
       pattern: '[\w+=,.@-]*'
       minLength: 2
       maxLength: 64
+    ProvidedContextsListType:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProvidedContext'
+      maxItems: 5
     AssumeRoleRequest:
       type: object
       required:
@@ -1561,6 +1587,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/sourceIdentityType'
             - description: '<p>The source identity specified by the principal that is calling the <code>AssumeRole</code> operation.</p> <p>You can require users to specify a source identity when they assume a role. You do this by using the <code>sts:SourceIdentity</code> condition key in a role trust policy. You can use source identity information in CloudTrail logs to determine who took actions with a role. You can use the <code>aws:SourceIdentity</code> condition key to further control access to Amazon Web Services resources based on the value of source identity. For more information about using source identity, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html">Monitor and control actions taken with assumed roles</a> in the <i>IAM User Guide</i>.</p> <p>The regex used to validate this parameter is a string of characters consisting of upper- and lower-case alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@-. You cannot use a value that begins with the text <code>aws:</code>. This prefix is reserved for Amazon Web Services internal use.</p>'
+        ProvidedContexts:
+          allOf:
+            - $ref: '#/components/schemas/ProvidedContextsListType'
+            - description: Reserved for future use.
     Credentials:
       type: object
       required:
@@ -1679,7 +1709,7 @@ components:
         WebIdentityToken:
           allOf:
             - $ref: '#/components/schemas/clientTokenType'
-            - description: 'The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider. Your application must get this token by authenticating the user who is using your application with a web identity provider before the application makes an <code>AssumeRoleWithWebIdentity</code> call. '
+            - description: The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider. Your application must get this token by authenticating the user who is using your application with a web identity provider before the application makes an <code>AssumeRoleWithWebIdentity</code> call. Only tokens with RSA algorithms (RS256) are supported.
         ProviderId:
           allOf:
             - $ref: '#/components/schemas/urlType'
@@ -1823,6 +1853,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/tokenCodeType'
             - description: '<p>The value provided by the MFA device, if MFA is required. If any policy requires the IAM user to submit an MFA code, specify this value. If MFA authentication is required, the user must provide a code when requesting a set of temporary security credentials. A user who fails to provide the code receives an "access denied" response when requesting resources that require MFA authentication.</p> <p>The format for this parameter, as described by its regex pattern, is a sequence of six numeric digits.</p>'
+    contextAssertionType:
+      type: string
+      minLength: 4
+      maxLength: 2048
     tagValueType:
       type: string
       pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'

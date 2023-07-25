@@ -250,7 +250,7 @@ paths:
   /#X-Amz-Target=TransferService.CreateConnector:
     post:
       operationId: CreateConnector
-      description: 'Creates the connector, which captures the parameters for an outbound connection for the AS2 protocol. The connector is required for sending files to an externally hosted AS2 server. For more details about connectors, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector">Create AS2 connectors</a>.'
+      description: '<p>Creates the connector, which captures the parameters for an outbound connection for the AS2 or SFTP protocol. The connector is required for sending files to an externally hosted AS2 or SFTP server. For more details about AS2 connectors, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/create-b2b-server.html#configure-as2-connector">Create AS2 connectors</a>.</p> <note> <p>You must specify exactly one configuration object: either for AS2 (<code>As2Config</code>) or SFTP (<code>SftpConfig</code>).</p> </note>'
       responses:
         '200':
           description: Success
@@ -748,7 +748,7 @@ paths:
   /#X-Amz-Target=TransferService.DeleteConnector:
     post:
       operationId: DeleteConnector
-      description: Deletes the agreement that's specified in the provided <code>ConnectorId</code>.
+      description: Deletes the connector that's specified in the provided <code>ConnectorId</code>.
       responses:
         '200':
           description: Success
@@ -2898,7 +2898,7 @@ paths:
   /#X-Amz-Target=TransferService.StartFileTransfer:
     post:
       operationId: StartFileTransfer
-      description: 'Begins an outbound file transfer to a remote AS2 server. You specify the <code>ConnectorId</code> and the file paths for where to send the files. '
+      description: '<p>Begins a file transfer between local Amazon Web Services storage and a remote AS2 or SFTP server.</p> <ul> <li> <p>For an AS2 connector, you specify the <code>ConnectorId</code> and one or more <code>SendFilePaths</code> to identify the files you want to transfer.</p> </li> <li> <p>For an SFTP connector, the file transfer can be either outbound or inbound. In both cases, you specify the <code>ConnectorId</code>. Depending on the direction of the transfer, you also specify the following items:</p> <ul> <li> <p>If you are transferring file from a partner''s SFTP server to a Transfer Family server, you specify one or more <code>RetreiveFilePaths</code> to identify the files you want to transfer, and a <code>LocalDirectoryPath</code> to specify the destination folder.</p> </li> <li> <p>If you are transferring file to a partner''s SFTP server from Amazon Web Services storage, you specify one or more <code>SendFilePaths</code> to identify the files you want to transfer, and a <code>RemoteDirectoryPath</code> to specify the destination folder.</p> </li> </ul> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -3121,6 +3121,63 @@ paths:
             type: string
             enum:
               - TransferService.TagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=TransferService.TestConnection:
+    post:
+      operationId: TestConnection
+      description: Tests whether your SFTP connector is set up successfully. We highly recommend that you call this operation to test your ability to transfer files between a Transfer Family server and a trading partner's SFTP server.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestConnectionResponse'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: InternalServiceError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceError'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestConnectionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - TransferService.TestConnection
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3953,18 +4010,17 @@ components:
       type: object
       required:
         - Url
-        - As2Config
         - AccessRole
       title: CreateConnectorRequest
       properties:
         Url:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: The URL of the partner's AS2 endpoint.
+            - description: The URL of the partner's AS2 or SFTP endpoint.
         As2Config:
           allOf:
             - $ref: '#/components/schemas/As2ConnectorConfig'
-            - description: A structure that contains the parameters for a connector object.
+            - description: A structure that contains the parameters for an AS2 connector object.
         AccessRole:
           allOf:
             - $ref: '#/components/schemas/Role'
@@ -3977,6 +4033,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.
+        SftpConfig:
+          allOf:
+            - $ref: '#/components/schemas/SftpConnectorConfig'
+            - description: A structure that contains the parameters for an SFTP connector object.
     CreateProfileResponse:
       type: object
       required:
@@ -4120,7 +4180,7 @@ components:
         HomeDirectoryMappings:
           allOf:
             - $ref: '#/components/schemas/HomeDirectoryMappings'
-            - description: '<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) role provides access to paths in <code>Target</code>. This value can be set only when <code>HomeDirectoryType</code> is set to <i>LOGICAL</i>.</p> <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p> <p> <code>[ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]</code> </p> <p>In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("<code>chroot</code>"). To do this, you can set <code>Entry</code> to <code>/</code> and set <code>Target</code> to the HomeDirectory parameter value.</p> <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p> <p> <code>[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]</code> </p>'
+            - description: '<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) role provides access to paths in <code>Target</code>. This value can be set only when <code>HomeDirectoryType</code> is set to <i>LOGICAL</i>.</p> <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p> <p> <code>[ { "Entry": "/directory1", "Target": "/bucket_name/home/mydirectory" } ]</code> </p> <p>In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("<code>chroot</code>"). To do this, you can set <code>Entry</code> to <code>/</code> and set <code>Target</code> to the value the user should see for their home directory when they log in.</p> <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p> <p> <code>[ { "Entry": "/", "Target": "/bucket_name/home/mydirectory" } ]</code> </p>'
         Policy:
           allOf:
             - $ref: '#/components/schemas/Policy'
@@ -5083,22 +5143,33 @@ components:
         TransferId:
           allOf:
             - $ref: '#/components/schemas/TransferId'
-            - description: 'Returns the unique identifier for this file transfer. '
+            - description: Returns the unique identifier for the file transfer.
     StartFileTransferRequest:
       type: object
       required:
         - ConnectorId
-        - SendFilePaths
       title: StartFileTransferRequest
       properties:
         ConnectorId:
           allOf:
             - $ref: '#/components/schemas/ConnectorId'
-            - description: 'The unique identifier for the connector. '
+            - description: The unique identifier for the connector.
         SendFilePaths:
           allOf:
             - $ref: '#/components/schemas/FilePaths'
-            - description: 'An array of strings. Each string represents the absolute path for one outbound file transfer. For example, <code> <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i> </code>. '
+            - description: 'One or more source paths for the Transfer Family server. Each string represents a source file path for one outbound file transfer. For example, <code> <i>DOC-EXAMPLE-BUCKET</i>/<i>myfile.txt</i> </code>.'
+        RetrieveFilePaths:
+          allOf:
+            - $ref: '#/components/schemas/FilePaths'
+            - description: One or more source paths for the partner's SFTP server. Each string represents a source file path for one inbound file transfer.
+        LocalDirectoryPath:
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: 'For an inbound transfer, the <code>LocaDirectoryPath</code> specifies the destination for one or more files that are transferred from the partner''s SFTP server.'
+        RemoteDirectoryPath:
+          allOf:
+            - $ref: '#/components/schemas/FilePath'
+            - description: 'For an outbound transfer, the <code>RemoteDirectoryPath</code> specifies the destination for one or more files that are transferred to the partner''s SFTP server. If you don''t specify a <code>RemoteDirectoryPath</code>, the destination for transferred files is the SFTP user''s home directory.'
     StartServerRequest:
       type: object
       required:
@@ -5134,6 +5205,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: 'Key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to resources (servers, users, workflows, and so on) for any purpose.'
+    TestConnectionResponse:
+      type: object
+      properties:
+        ConnectorId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorId'
+            - description: Returns the identifier of the connector object that you are testing.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/Status'
+            - description: 'Returns <code>OK</code> for successful test, or <code>ERROR</code> if the test fails.'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: '<p>Returns <code>Connection succeeded</code> if the test is successful. Or, returns a descriptive error message if the test fails. The following list provides the details for some error messages and troubleshooting steps for each.</p> <ul> <li> <p> <b>Unable to access secrets manager</b>: Verify that your secret name aligns with the one in Transfer Role permissions.</p> </li> <li> <p> <b>Unknown Host/Connection failed</b>: Verify the server URL in the connector configuration , and verify that the login credentials work successfully outside of the connector.</p> </li> <li> <p> <b>Private key not found</b>: Verify that the secret exists and is formatted correctly.</p> </li> <li> <p> <b>Invalid trusted host keys</b>: Verify that the trusted host key in the connector configuration matches the <code>ssh-keyscan</code> output.</p> </li> </ul>'
+    TestConnectionRequest:
+      type: object
+      required:
+        - ConnectorId
+      title: TestConnectionRequest
+      properties:
+        ConnectorId:
+          allOf:
+            - $ref: '#/components/schemas/ConnectorId'
+            - description: The unique identifier for the connector.
     TestIdentityProviderResponse:
       type: object
       required:
@@ -5350,11 +5446,11 @@ components:
         Url:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: The URL of the partner's AS2 endpoint.
+            - description: The URL of the partner's AS2 or SFTP endpoint.
         As2Config:
           allOf:
             - $ref: '#/components/schemas/As2ConnectorConfig'
-            - description: A structure that contains the parameters for a connector object.
+            - description: A structure that contains the parameters for an AS2 connector object.
         AccessRole:
           allOf:
             - $ref: '#/components/schemas/Role'
@@ -5363,6 +5459,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Role'
             - description: 'The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that allows a connector to turn on CloudWatch logging for Amazon S3 events. When set, you can view connector activity in your CloudWatch logs.'
+        SftpConfig:
+          allOf:
+            - $ref: '#/components/schemas/SftpConnectorConfig'
+            - description: A structure that contains the parameters for an SFTP connector object.
     UpdateHostKeyResponse:
       type: object
       required:
@@ -5654,7 +5754,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/As2ConnectorSecretId'
             - description: '<p>Provides Basic authentication support to the AS2 Connectors API. To use Basic authentication, you must provide the name or Amazon Resource Name (ARN) of a secret in Secrets Manager.</p> <p>The default value for this parameter is <code>null</code>, which indicates that Basic authentication is not enabled for the connector.</p> <p>If the connector should use Basic authentication, the secret needs to be in the following format:</p> <p> <code>{ "Username": "user-name", "Password": "user-password" }</code> </p> <p>Replace <code>user-name</code> and <code>user-password</code> with the credentials for the actual user that is being authenticated.</p> <p>Note the following:</p> <ul> <li> <p>You are storing these credentials in Secrets Manager, <i>not passing them directly</i> into this API.</p> </li> <li> <p>If you are using the API, SDKs, or CloudFormation to configure your connector, then you must create the secret before you can enable Basic authentication. However, if you are using the Amazon Web Services management console, you can have the system create the secret for you.</p> </li> </ul> <p>If you have previously enabled Basic authentication for a connector, you can disable it by using the <code>UpdateConnector</code> API call. For example, if you are using the CLI, you can run the following command to remove Basic authentication:</p> <p> <code>update-connector --connector-id my-connector-id --as2-config ''BasicAuthSecretId=""''</code> </p>'
-      description: 'Contains the details for a connector object. The connector object is used for AS2 outbound processes, to connect the Transfer Family customer with the trading partner.'
+      description: 'Contains the details for an AS2 connector object. The connector object is used for AS2 outbound processes, to connect the Transfer Family customer with the trading partner.'
     As2Id:
       type: string
       pattern: '^[\p{Print}\s]*'
@@ -5839,6 +5939,18 @@ components:
     Url:
       type: string
       maxLength: 255
+    SftpConnectorConfig:
+      type: object
+      properties:
+        UserSecretId:
+          allOf:
+            - $ref: '#/components/schemas/SecretId'
+            - description: The identifiers for the secrets (in Amazon Web Services Secrets Manager) that contain the SFTP user's private keys or passwords.
+        TrustedHostKeys:
+          allOf:
+            - $ref: '#/components/schemas/SftpConnectorTrustedHostKeyList'
+            - description: '<p>The public portion of the host key, or keys, that are used to authenticate the user to the external server to which you are connecting. You can use the <code>ssh-keyscan</code> command against the SFTP server to retrieve the necessary key.</p> <p>The three standard SSH public key format elements are <code>&lt;key type&gt;</code>, <code>&lt;body base64&gt;</code>, and an optional <code>&lt;comment&gt;</code>, with spaces between each element.</p> <p>For the trusted host key, Transfer Family accepts RSA and ECDSA keys.</p> <ul> <li> <p>For RSA keys, the key type is <code>ssh-rsa</code>.</p> </li> <li> <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>, <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the size of the key you generated.</p> </li> </ul>'
+      description: Contains the details for an SFTP connector object. The connector object is used for transferring files to and from a partner's SFTP server.
     ProfileType:
       type: string
       enum:
@@ -6236,11 +6348,11 @@ components:
         Url:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: The URL of the partner's AS2 endpoint.
+            - description: The URL of the partner's AS2 or SFTP endpoint.
         As2Config:
           allOf:
             - $ref: '#/components/schemas/As2ConnectorConfig'
-            - description: A structure that contains the parameters for a connector object.
+            - description: A structure that contains the parameters for an AS2 connector object.
         AccessRole:
           allOf:
             - $ref: '#/components/schemas/Role'
@@ -6253,6 +6365,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tags'
             - description: Key-value pairs that can be used to group and search for connectors.
+        SftpConfig:
+          allOf:
+            - $ref: '#/components/schemas/SftpConnectorConfig'
+            - description: A structure that contains the parameters for an SFTP connector object.
       description: 'Describes the parameters for the connector, as identified by the <code>ConnectorId</code>.'
     ExecutionId:
       type: string
@@ -6974,7 +7090,7 @@ components:
         Url:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: The URL of the partner's AS2 endpoint.
+            - description: The URL of the partner's AS2 or SFTP endpoint.
       description: Returns details of the connector that is specified.
     ListedExecution:
       type: object
@@ -7250,6 +7366,10 @@ components:
         $ref: '#/components/schemas/S3Tag'
       minItems: 1
       maxItems: 10
+    SecretId:
+      type: string
+      minLength: 1
+      maxLength: 2048
     SecurityGroupId:
       type: string
       pattern: '^sg-[0-9a-f]{8,17}$'
@@ -7282,6 +7402,16 @@ components:
       pattern: '^[\w-]*$'
       minLength: 3
       maxLength: 32
+    SftpConnectorTrustedHostKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SftpConnectorTrustedHostKey'
+      minItems: 1
+      maxItems: 10
+    SftpConnectorTrustedHostKey:
+      type: string
+      minLength: 1
+      maxLength: 2048
     SourceIp:
       type: string
       pattern: '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
@@ -7311,6 +7441,8 @@ components:
       pattern: '^[0-9a-zA-Z./-]+$'
       minLength: 1
       maxLength: 512
+    Status:
+      type: string
     StatusCode:
       type: integer
     SubnetId:

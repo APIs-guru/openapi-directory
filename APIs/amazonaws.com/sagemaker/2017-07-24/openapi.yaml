@@ -26615,6 +26615,9 @@ components:
       description: Stores the configuration information for the image classification problem of an AutoML job V2.
     TextClassificationJobConfig:
       type: object
+      required:
+        - ContentColumn
+        - TargetLabelColumn
       properties:
         CompletionCriteria:
           allOf:
@@ -26623,11 +26626,11 @@ components:
         ContentColumn:
           allOf:
             - $ref: '#/components/schemas/ContentColumn'
-            - description: The name of the column used to provide the sentences to be classified. It should not be the same as the target column (Required).
+            - description: The name of the column used to provide the sentences to be classified. It should not be the same as the target column.
         TargetLabelColumn:
           allOf:
             - $ref: '#/components/schemas/TargetLabelColumn'
-            - description: The name of the column used to provide the class labels. It should not be same as the content column (Required).
+            - description: The name of the column used to provide the class labels. It should not be same as the content column.
       description: Stores the configuration information for the text classification problem of an AutoML job V2.
     TabularJobConfig:
       type: object

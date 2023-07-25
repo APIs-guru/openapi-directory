@@ -250,6 +250,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.CreateLocationAzureBlob:
+    post:
+      operationId: CreateLocationAzureBlob
+      description: '<p>Creates an endpoint for a Microsoft Azure Blob Storage container that DataSync can use as a transfer source or destination.</p> <p>Before you begin, make sure you know <a href="https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access">how DataSync accesses Azure Blob Storage</a> and works with <a href="https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers">access tiers</a> and <a href="https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#blob-types">blob types</a>. You also need a <a href="https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-creating-agent">DataSync agent</a> that can connect to your container.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLocationAzureBlobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLocationAzureBlobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.CreateLocationAzureBlob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=FmrsService.CreateLocationEfs:
     post:
       operationId: CreateLocationEfs
@@ -523,7 +568,7 @@ paths:
   /#X-Amz-Target=FmrsService.CreateLocationNfs:
     post:
       operationId: CreateLocationNfs
-      description: Defines a file system on a Network File System (NFS) server that can be read from or written to.
+      description: Creates an endpoint for an Network File System (NFS) file server that DataSync can use for a data transfer.
       responses:
         '200':
           description: Success
@@ -658,7 +703,7 @@ paths:
   /#X-Amz-Target=FmrsService.CreateLocationSmb:
     post:
       operationId: CreateLocationSmb
-      description: 'Creates an endpoint for a Server Message Block (SMB) file server that DataSync can access for a transfer. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html">Creating an SMB location</a>.'
+      description: '<p>Creates an endpoint for a Server Message Block (SMB) file server that DataSync can use for a data transfer.</p> <p>Before you begin, make sure that you understand how DataSync <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-smb-location.html">accesses an SMB file server</a>.</p>'
       responses:
         '200':
           description: Success
@@ -962,6 +1007,51 @@ paths:
             type: string
             enum:
               - FmrsService.DescribeDiscoveryJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.DescribeLocationAzureBlob:
+    post:
+      operationId: DescribeLocationAzureBlob
+      description: Provides details about how an DataSync transfer location for Microsoft Azure Blob Storage is configured.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeLocationAzureBlobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeLocationAzureBlobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.DescribeLocationAzureBlob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1582,7 +1672,7 @@ paths:
   /#X-Amz-Target=FmrsService.DescribeTask:
     post:
       operationId: DescribeTask
-      description: Returns metadata about a task.
+      description: Provides information about an DataSync transfer task.
       responses:
         '200':
           description: Success
@@ -1627,7 +1717,7 @@ paths:
   /#X-Amz-Target=FmrsService.DescribeTaskExecution:
     post:
       operationId: DescribeTaskExecution
-      description: Returns detailed metadata about a task that is being executed.
+      description: Provides information about an DataSync transfer task that's running.
       responses:
         '200':
           description: Success
@@ -2473,6 +2563,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.UpdateLocationAzureBlob:
+    post:
+      operationId: UpdateLocationAzureBlob
+      description: Modifies some configurations of the Microsoft Azure Blob Storage transfer location that you're using with DataSync.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLocationAzureBlobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLocationAzureBlobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.UpdateLocationAzureBlob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=FmrsService.UpdateLocationHdfs:
     post:
       operationId: UpdateLocationHdfs
@@ -2870,7 +3005,7 @@ components:
         AgentArns:
           allOf:
             - $ref: '#/components/schemas/DiscoveryAgentArnList'
-            - description: Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads from your on-premises storage system's management interface.
+            - description: Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads from your on-premises storage system's management interface. You can only specify one ARN.
         CloudWatchLogGroupArn:
           allOf:
             - $ref: '#/components/schemas/LogGroupArn'
@@ -2940,12 +3075,59 @@ components:
         SubnetArns:
           allOf:
             - $ref: '#/components/schemas/PLSubnetArnList'
-            - description: 'Specifies the ARN of the subnet where you want to run your DataSync task when using a VPC endpoint. This is the subnet where DataSync creates and manages the <a href="https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces">network interfaces</a> for your transfer.'
+            - description: 'Specifies the ARN of the subnet where you want to run your DataSync task when using a VPC endpoint. This is the subnet where DataSync creates and manages the <a href="https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces">network interfaces</a> for your transfer. You can only specify one ARN.'
         SecurityGroupArns:
           allOf:
             - $ref: '#/components/schemas/PLSecurityGroupArnList'
-            - description: 'Specifies the Amazon Resource Name (ARN) of the security group that protects your task''s <a href="https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces">network interfaces</a> when <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc">using a virtual private cloud (VPC) endpoint</a>.'
+            - description: 'Specifies the Amazon Resource Name (ARN) of the security group that protects your task''s <a href="https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces">network interfaces</a> when <a href="https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc">using a virtual private cloud (VPC) endpoint</a>. You can only specify one ARN.'
       description: CreateAgentRequest
+    CreateLocationAzureBlobResponse:
+      type: object
+      properties:
+        LocationArn:
+          allOf:
+            - $ref: '#/components/schemas/LocationArn'
+            - description: The ARN of the Azure Blob Storage transfer location that you created.
+    CreateLocationAzureBlobRequest:
+      type: object
+      required:
+        - ContainerUrl
+        - AuthenticationType
+        - AgentArns
+      title: CreateLocationAzureBlobRequest
+      properties:
+        ContainerUrl:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobContainerUrl'
+            - description: Specifies the URL of the Azure Blob Storage container involved in your transfer.
+        AuthenticationType:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobAuthenticationType'
+            - description: Specifies the authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+        SasConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobSasConfiguration'
+            - description: Specifies the SAS configuration that allows DataSync to access your Azure Blob Storage.
+        BlobType:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobType'
+            - description: 'Specifies the type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the <a href="https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs">Azure Blob Storage documentation</a>.'
+        AccessTier:
+          allOf:
+            - $ref: '#/components/schemas/AzureAccessTier'
+            - description: 'Specifies the access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers">Access tiers</a>.'
+        Subdirectory:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobSubdirectory'
+            - description: 'Specifies path segments if you want to limit your transfer to a virtual directory in your container (for example, <code>/my/images</code>).'
+        AgentArns:
+          allOf:
+            - $ref: '#/components/schemas/AgentArnList'
+            - description: '<p>Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container.</p> <p>You can specify more than one agent. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html">Using multiple agents for your transfer</a>.</p>'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/InputTagList'
+            - description: 'Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your transfer location.'
     CreateLocationEfsResponse:
       type: object
       properties:
@@ -3205,7 +3387,7 @@ components:
         LocationArn:
           allOf:
             - $ref: '#/components/schemas/LocationArn'
-            - description: The Amazon Resource Name (ARN) of the source NFS file system location that is created.
+            - description: The ARN of the transfer location that you created for your NFS file server.
       description: CreateLocationNfsResponse
     CreateLocationNfsRequest:
       type: object
@@ -3218,23 +3400,23 @@ components:
         Subdirectory:
           allOf:
             - $ref: '#/components/schemas/NfsSubdirectory'
-            - description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server, run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
+            - description: '<p>Specifies the subdirectory in the NFS file server that DataSync transfers to or from. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server, run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on Snowcone</a> for more information.</p>'
         ServerHostname:
           allOf:
             - $ref: '#/components/schemas/ServerHostname'
-            - description: '<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this hostname to mount the NFS server in a network. </p> <p>If you are copying data to or from your Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on Snowcone</a> for more information.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>'
+            - description: '<p>Specifies the IP address or domain name of your NFS file server. An agent that is installed on-premises uses this hostname to mount the NFS server in a network. </p> <p>If you are copying data to or from your Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on Snowcone</a> for more information.</p> <note> <p>You must specify be an IP version 4 address or Domain Name System (DNS)-compliant name.</p> </note>'
         OnPremConfig:
           allOf:
             - $ref: '#/components/schemas/OnPremConfig'
-            - description: '<p>Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server. </p> <p>If you are copying data to or from your Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on Snowcone</a> for more information.</p>'
+            - description: '<p>Specifies the Amazon Resource Names (ARNs) of agents that DataSync uses to connect to your NFS file server. </p> <p>If you are copying data to or from your Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on Snowcone</a> for more information.</p>'
         MountOptions:
           allOf:
             - $ref: '#/components/schemas/NfsMountOptions'
-            - description: The NFS mount options that DataSync can use to mount your NFS share.
+            - description: Specifies the mount options that DataSync can use to mount your NFS share.
         Tags:
           allOf:
             - $ref: '#/components/schemas/InputTagList'
-            - description: The key-value pair that represents the tag that you want to add to the location. The value can be an empty string. We recommend using tags to name your resources.
+            - description: 'Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources. We recommend creating at least a name tag for your location.'
       description: CreateLocationNfsRequest
     CreateLocationObjectStorageResponse:
       type: object
@@ -3556,6 +3738,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/DiscoveryJobArn'
             - description: Specifies the Amazon Resource Name (ARN) of the discovery job that you want information about.
+    DescribeLocationAzureBlobResponse:
+      type: object
+      properties:
+        LocationArn:
+          allOf:
+            - $ref: '#/components/schemas/LocationArn'
+            - description: The ARN of your Azure Blob Storage transfer location.
+        LocationUri:
+          allOf:
+            - $ref: '#/components/schemas/LocationUri'
+            - description: The URL of the Azure Blob Storage container involved in your transfer.
+        AuthenticationType:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobAuthenticationType'
+            - description: The authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+        BlobType:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobType'
+            - description: 'The type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the <a href="https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs">Azure Blob Storage documentation</a>.'
+        AccessTier:
+          allOf:
+            - $ref: '#/components/schemas/AzureAccessTier'
+            - description: 'The access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers">Access tiers</a>.'
+        AgentArns:
+          allOf:
+            - $ref: '#/components/schemas/AgentArnList'
+            - description: The ARNs of the DataSync agents that can connect with your Azure Blob Storage container.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Time'
+            - description: The time that your Azure Blob Storage transfer location was created.
+    DescribeLocationAzureBlobRequest:
+      type: object
+      required:
+        - LocationArn
+      title: DescribeLocationAzureBlobRequest
+      properties:
+        LocationArn:
+          allOf:
+            - $ref: '#/components/schemas/LocationArn'
+            - description: Specifies the Amazon Resource Name (ARN) of your Azure Blob Storage transfer location.
     DescribeLocationEfsResponse:
       type: object
       properties:
@@ -3812,7 +4035,7 @@ components:
         MountOptions:
           allOf:
             - $ref: '#/components/schemas/NfsMountOptions'
-            - description: The NFS mount options that DataSync used to mount your NFS share.
+            - description: The mount options that DataSync uses to mount your NFS share.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Time'
@@ -4175,7 +4398,7 @@ components:
         TaskArn:
           allOf:
             - $ref: '#/components/schemas/TaskArn'
-            - description: The Amazon Resource Name (ARN) of the task to describe.
+            - description: Specifies the Amazon Resource Name (ARN) of the transfer task.
       description: DescribeTaskRequest
     DescribeTaskExecutionResponse:
       type: object
@@ -4240,7 +4463,7 @@ components:
         TaskExecutionArn:
           allOf:
             - $ref: '#/components/schemas/TaskExecutionArn'
-            - description: The Amazon Resource Name (ARN) of the task that is being executed.
+            - description: Specifies the Amazon Resource Name (ARN) of the transfer task that's running.
       description: DescribeTaskExecutionRequest
     GenerateRecommendationsResponse:
       type: object
@@ -4622,6 +4845,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/CollectionDurationMinutes'
             - description: Specifies in minutes how long that you want the discovery job to run. (You can't set this parameter to less than the number of minutes that the job has already run for.)
+    UpdateLocationAzureBlobResponse:
+      type: object
+      properties: {}
+    UpdateLocationAzureBlobRequest:
+      type: object
+      required:
+        - LocationArn
+      title: UpdateLocationAzureBlobRequest
+      properties:
+        LocationArn:
+          allOf:
+            - $ref: '#/components/schemas/LocationArn'
+            - description: Specifies the ARN of the Azure Blob Storage transfer location that you're updating.
+        Subdirectory:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobSubdirectory'
+            - description: 'Specifies path segments if you want to limit your transfer to a virtual directory in your container (for example, <code>/my/images</code>).'
+        AuthenticationType:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobAuthenticationType'
+            - description: Specifies the authentication method DataSync uses to access your Azure Blob Storage. DataSync can access blob storage using a shared access signature (SAS).
+        SasConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobSasConfiguration'
+            - description: Specifies the SAS configuration that allows DataSync to access your Azure Blob Storage.
+        BlobType:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobType'
+            - description: 'Specifies the type of blob that you want your objects or files to be when transferring them into Azure Blob Storage. Currently, DataSync only supports moving data into Azure Blob Storage as block blobs. For more information on blob types, see the <a href="https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs">Azure Blob Storage documentation</a>.'
+        AccessTier:
+          allOf:
+            - $ref: '#/components/schemas/AzureAccessTier'
+            - description: 'Specifies the access tier that you want your objects or files transferred into. This only applies when using the location as a transfer destination. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers">Access tiers</a>.'
+        AgentArns:
+          allOf:
+            - $ref: '#/components/schemas/AgentArnList'
+            - description: '<p>Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect with your Azure Blob Storage container.</p> <p>You can specify more than one agent. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html">Using multiple agents for your transfer</a>.</p>'
     UpdateLocationHdfsResponse:
       type: object
       properties: {}
@@ -4695,11 +4955,11 @@ components:
         LocationArn:
           allOf:
             - $ref: '#/components/schemas/LocationArn'
-            - description: The Amazon Resource Name (ARN) of the NFS location to update.
+            - description: Specifies the Amazon Resource Name (ARN) of the NFS location that you want to update.
         Subdirectory:
           allOf:
             - $ref: '#/components/schemas/NfsSubdirectory'
-            - description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.</p> <p>To see all the paths exported by your NFS server, run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash</code>, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
+            - description: '<p>Specifies the subdirectory in your NFS file system that DataSync uses to read from or write to during a transfer. The NFS path should be exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.</p> <p>To see all the paths exported by your NFS server, run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash</code>, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on Snowcone</a> for more information.</p>'
         OnPremConfig:
           $ref: '#/components/schemas/OnPremConfig'
         MountOptions:
@@ -4800,7 +5060,7 @@ components:
         AgentArns:
           allOf:
             - $ref: '#/components/schemas/DiscoveryAgentArnList'
-            - description: Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads your on-premises storage system.
+            - description: Specifies the Amazon Resource Name (ARN) of the DataSync agent that connects to and reads your on-premises storage system. You can only specify one ARN.
         Name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -4975,6 +5235,44 @@ components:
       enum:
         - NONE
         - BEST_EFFORT
+    AzureAccessTier:
+      type: string
+      enum:
+        - HOT
+        - COOL
+        - ARCHIVE
+    AzureBlobAuthenticationType:
+      type: string
+      enum:
+        - SAS
+    AzureBlobContainerUrl:
+      type: string
+      pattern: '^https:\/\/[A-Za-z0-9]((\.|-+)?[A-Za-z0-9]){0,252}\/[a-z0-9](-?[a-z0-9]){2,62}$'
+      maxLength: 325
+    AzureBlobSasToken:
+      type: string
+      pattern: ^.+$
+      minLength: 1
+      maxLength: 255
+      format: password
+    AzureBlobSasConfiguration:
+      type: object
+      required:
+        - Token
+      properties:
+        Token:
+          allOf:
+            - $ref: '#/components/schemas/AzureBlobSasToken'
+            - description: '<p>Specifies a SAS token that provides permissions at the Azure storage account, container, or folder level.</p> <p>The token is part of the SAS URI string that comes after the storage resource URI and a question mark. A token looks something like this:</p> <p> <code>sp=r&amp;st=2023-12-20T14:54:52Z&amp;se=2023-12-20T22:54:52Z&amp;spr=https&amp;sv=2021-06-08&amp;sr=c&amp;sig=aBBKDWQvyuVcTPH9EBp%2FXTI9E%2F%2Fmq171%2BZU178wcwqU%3D</code> </p>'
+      description: '<p>The shared access signature (SAS) configuration that allows DataSync to access your Microsoft Azure Blob Storage.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-sas-tokens">SAS tokens</a> for accessing your Azure Blob Storage.</p>'
+    AzureBlobSubdirectory:
+      type: string
+      pattern: '^[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}\p{C}]*$'
+      maxLength: 1024
+    AzureBlobType:
+      type: string
+      enum:
+        - BLOCK
     BytesPerSecond:
       type: integer
       minimum: -1
@@ -5020,6 +5318,10 @@ components:
         $ref: '#/components/schemas/Ec2SecurityGroupArn'
       minItems: 1
       maxItems: 1
+    LocationArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$'
+      maxLength: 128
     EfsSubdirectory:
       type: string
       pattern: '^[a-zA-Z0-9_\-\+\./\(\)\p{Zs}]*$'
@@ -5056,10 +5358,6 @@ components:
       enum:
         - NONE
         - TLS1_2
-    LocationArn:
-      type: string
-      pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$'
-      maxLength: 128
     FsxFilesystemArn:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\-0-9]*:[0-9]{12}:file-system/fs-.*$'
@@ -5374,20 +5672,20 @@ components:
         VpcEndpointId:
           allOf:
             - $ref: '#/components/schemas/VpcEndpointId'
-            - description: The ID of the VPC endpoint that is configured for an agent. An agent that is configured with a VPC endpoint will not be accessible over the public internet.
+            - description: Specifies the ID of the VPC endpoint that your agent connects to.
         PrivateLinkEndpoint:
           allOf:
             - $ref: '#/components/schemas/Endpoint'
-            - description: 'The private endpoint that is configured for an agent that has access to IP addresses in a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">PrivateLink</a>. An agent that is configured with this endpoint will not be accessible over the public internet.'
+            - description: 'Specifies the VPC endpoint provided by <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">Amazon Web Services PrivateLink</a> that your agent connects to.'
         SubnetArns:
           allOf:
             - $ref: '#/components/schemas/PLSubnetArnList'
-            - description: The Amazon Resource Names (ARNs) of the subnets that are configured for an agent activated in a VPC or an agent that has access to a VPC endpoint.
+            - description: Specifies the ARN of the subnet where your VPC endpoint is located. You can only specify one ARN.
         SecurityGroupArns:
           allOf:
             - $ref: '#/components/schemas/PLSecurityGroupArnList'
-            - description: The Amazon Resource Names (ARNs) of the security groups that are configured for the EC2 resource that hosts an agent activated in a VPC or an agent that has access to a VPC endpoint.
-      description: 'The VPC endpoint, subnet, and security group that an agent uses to access IP addresses in a VPC (Virtual Private Cloud).'
+            - description: Specifies the Amazon Resource Names (ARN) of the security group that provides DataSync access to your VPC endpoint. You can only specify one ARN.
+      description: Specifies how your DataSync agent connects to Amazon Web Services using a virtual private cloud (VPC) service endpoint. An agent that uses a VPC endpoint isn't accessible over the public internet.
     DiscoveryJobArn:
       type: string
       pattern: '^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\-0-9]+:[0-9]{12}:system/storage-system-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/job/discovery-job-[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'

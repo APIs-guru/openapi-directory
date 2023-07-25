@@ -2448,6 +2448,14 @@ components:
       pattern: '^[a-zA-Z0-9\s_.,-]+'
       minLength: 1
       maxLength: 255
+    AssistantIntegrationConfiguration:
+      type: object
+      properties:
+        topicIntegrationArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericArn'
+            - description: The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for streaming chat messages.
+      description: The configuration information for the Wisdom assistant integration.
     Name:
       type: string
       pattern: '^[a-zA-Z0-9\s_.,-]+'
@@ -2495,6 +2503,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Description'
             - description: The description.
+        integrationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AssistantIntegrationConfiguration'
+            - description: The configuration information for the Wisdom assistant integration.
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -2537,6 +2549,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Description'
             - description: The description of the assistant.
+        integrationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/AssistantIntegrationConfiguration'
+            - description: The configuration information for the Wisdom assistant integration.
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -2998,6 +3014,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Description'
             - description: The description of the session.
+        integrationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SessionIntegrationConfiguration'
+            - description: The configuration information for the session integration.
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -3456,6 +3476,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SessionSummary'
+    SessionIntegrationConfiguration:
+      type: object
+      properties:
+        topicIntegrationArn:
+          allOf:
+            - $ref: '#/components/schemas/GenericArn'
+            - description: The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for streaming chat messages.
+      description: The configuration information for the session integration.
     SessionSummary:
       type: object
       required:

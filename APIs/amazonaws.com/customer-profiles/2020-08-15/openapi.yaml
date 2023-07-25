@@ -550,7 +550,7 @@ paths:
   '/domains/{DomainName}':
     post:
       operationId: CreateDomain
-      description: '<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true. </p> <p>To prevent cross-service impersonation when you call this API, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html">Cross-service confused deputy prevention</a> for sample policies that you should apply. </p>'
+      description: '<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html">UpdateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true.</p> <p>To prevent cross-service impersonation when you call this API, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html">Cross-service confused deputy prevention</a> for sample policies that you should apply. </p>'
       responses:
         '200':
           description: Success
@@ -642,6 +642,34 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ExportingConfig'
                         - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
+                RuleBasedMatching:
+                  description: The request to enable the rule-based matching.
+                  type: object
+                  properties:
+                    Enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/optionalBoolean'
+                        - description: The flag that enables the rule-based matching process of duplicate profiles.
+                    MatchingRules:
+                      allOf:
+                        - $ref: '#/components/schemas/MatchingRules'
+                        - description: Configures how the rule-based matching process should match profiles. You can have up to 15 <code>MatchingRule</code> in the <code>MatchingRules</code>.
+                    MaxAllowedRuleLevelForMerging:
+                      allOf:
+                        - $ref: '#/components/schemas/MaxAllowedRuleLevelForMerging'
+                        - description: ' <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html">MatchingRule</a> '
+                    MaxAllowedRuleLevelForMatching:
+                      allOf:
+                        - $ref: '#/components/schemas/MaxAllowedRuleLevelForMatching'
+                        - description: Indicates the maximum allowed rule level.
+                    AttributeTypesSelector:
+                      allOf:
+                        - $ref: '#/components/schemas/AttributeTypesSelector'
+                        - description: Configures information about the <code>AttributeTypesSelector</code> where the rule-based identity resolution uses to match profiles.
+                    ConflictResolution:
+                      $ref: '#/components/schemas/ConflictResolution'
+                    ExportingConfig:
+                      $ref: '#/components/schemas/ExportingConfig'
                 Tags:
                   description: 'The tags used to organize, track, or control access for this resource.'
                   type: object
@@ -759,7 +787,7 @@ paths:
             maxLength: 64
     put:
       operationId: UpdateDomain
-      description: '<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true. </p> <p>To prevent cross-service impersonation when you call this API, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html">Cross-service confused deputy prevention</a> for sample policies that you should apply. </p> <p>To add or remove tags on an existing Domain, see <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html">TagResource</a>/<a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>'
+      description: '<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p> <p>Use this API or <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html">CreateDomain</a> to enable <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">identity resolution</a>: set <code>Matching</code> to true.</p> <p>To prevent cross-service impersonation when you call this API, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html">Cross-service confused deputy prevention</a> for sample policies that you should apply. </p> <p>To add or remove tags on an existing Domain, see <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html">TagResource</a>/<a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html">UntagResource</a>.</p>'
       responses:
         '200':
           description: Success
@@ -849,6 +877,34 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ExportingConfig'
                         - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
+                RuleBasedMatching:
+                  description: The request to enable the rule-based matching.
+                  type: object
+                  properties:
+                    Enabled:
+                      allOf:
+                        - $ref: '#/components/schemas/optionalBoolean'
+                        - description: The flag that enables the rule-based matching process of duplicate profiles.
+                    MatchingRules:
+                      allOf:
+                        - $ref: '#/components/schemas/MatchingRules'
+                        - description: Configures how the rule-based matching process should match profiles. You can have up to 15 <code>MatchingRule</code> in the <code>MatchingRules</code>.
+                    MaxAllowedRuleLevelForMerging:
+                      allOf:
+                        - $ref: '#/components/schemas/MaxAllowedRuleLevelForMerging'
+                        - description: ' <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html">MatchingRule</a> '
+                    MaxAllowedRuleLevelForMatching:
+                      allOf:
+                        - $ref: '#/components/schemas/MaxAllowedRuleLevelForMatching'
+                        - description: Indicates the maximum allowed rule level.
+                    AttributeTypesSelector:
+                      allOf:
+                        - $ref: '#/components/schemas/AttributeTypesSelector'
+                        - description: Configures information about the <code>AttributeTypesSelector</code> where the rule-based identity resolution uses to match profiles.
+                    ConflictResolution:
+                      $ref: '#/components/schemas/ConflictResolution'
+                    ExportingConfig:
+                      $ref: '#/components/schemas/ExportingConfig'
                 Tags:
                   description: 'The tags used to organize, track, or control access for this resource.'
                   type: object
@@ -3092,6 +3148,99 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: GetSimilarProfiles
+      description: Returns a set of profiles that belong to the same matching group using the <code>matchId</code> or <code>profileId</code>. You can also specify the type of matching that you want for finding similar profiles using either <code>RULE_BASED_MATCHING</code> or <code>ML_BASED_MATCHING</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSimilarProfilesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The pagination token from the previous <code>GetSimilarProfiles</code> API call.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of objects returned per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - MatchType
+                - SearchKey
+                - SearchValue
+              properties:
+                MatchType:
+                  description: Specify the type of matching to get similar profiles for.
+                  type: string
+                  enum:
+                    - RULE_BASED_MATCHING
+                    - ML_BASED_MATCHING
+                SearchKey:
+                  description: The string indicating the search key to be used.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                SearchValue:
+                  description: The string based on <code>SearchKey</code> to be searched for similar profiles.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
   '/templates/{TemplateId}':
     get:
       operationId: GetProfileObjectTypeTemplate
@@ -4023,6 +4172,81 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 256000
+  '/domains/{DomainName}/profiles/ruleBasedMatches':
+    get:
+      operationId: ListRuleBasedMatches
+      description: Returns a set of <code>MatchIds</code> that belong to the given domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRuleBasedMatchesResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: next-token
+          in: query
+          required: false
+          description: The pagination token from the previous <code>ListRuleBasedMatches</code> API call.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1024
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of <code>MatchIds</code> returned per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: DomainName
+          in: path
+          required: true
+          description: The unique name of the domain.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_-]+$'
+            minLength: 1
+            maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}':
     get:
       operationId: ListTagsForResource
@@ -4737,6 +4961,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
             - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
+        RuleBasedMatching:
+          allOf:
+            - $ref: '#/components/schemas/RuleBasedMatchingResponse'
+            - description: 'The process of matching duplicate profiles using the Rule-Based matching. If <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code> and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you can download the results from S3.'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -4796,6 +5024,56 @@ components:
             - $ref: '#/components/schemas/S3ExportingConfig'
             - description: The S3 location where Identity Resolution Jobs write result files.
       description: '<p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p> <note> <p>You need to give Customer Profiles service principal write permission to your S3 bucket. Otherwise, you''ll get an exception in the API response. For an example policy, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service">Amazon Connect Customer Profiles cross-service confused deputy prevention</a>. </p> </note>'
+    MatchingRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchingRule'
+      minItems: 1
+      maxItems: 15
+    MaxAllowedRuleLevelForMerging:
+      type: integer
+      minimum: 1
+      maximum: 15
+    MaxAllowedRuleLevelForMatching:
+      type: integer
+      minimum: 1
+      maximum: 15
+    AttributeTypesSelector:
+      type: object
+      required:
+        - AttributeMatchingModel
+      properties:
+        AttributeMatchingModel:
+          allOf:
+            - $ref: '#/components/schemas/AttributeMatchingModel'
+            - description: 'Configures the <code>AttributeMatchingModel</code>, you can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code>.'
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/AddressList'
+            - description: '<p>The <code>Address</code> type. You can choose from <code>Address</code>, <code>BusinessAddress</code>, <code>MaillingAddress</code>, and <code>ShippingAddress</code>.</p> <p>You only can use the Address type in the <code>MatchingRule</code>. For example, if you want to match profile based on <code>BusinessAddress.City</code> or <code>MaillingAddress.City</code>, you need to choose the <code>BusinessAddress</code> and the <code>MaillingAddress</code> to represent the Address type and specify the <code>Address.City</code> on the matching rule.</p>'
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberList'
+            - description: '<p>The <code>PhoneNumber</code> type. You can choose from <code>PhoneNumber</code>, <code>HomePhoneNumber</code>, and <code>MobilePhoneNumber</code>.</p> <p>You only can use the <code>PhoneNumber</code> type in the <code>MatchingRule</code>. For example, if you want to match a profile based on <code>Phone</code> or <code>HomePhone</code>, you need to choose the <code>Phone</code> and the <code>HomePhone</code> to represent the <code>PhoneNumber</code> type and only specify the <code>PhoneNumber</code> on the matching rule.</p>'
+        EmailAddress:
+          allOf:
+            - $ref: '#/components/schemas/EmailList'
+            - description: '<p>The <code>Email</code> type. You can choose from <code>EmailAddress</code>, <code>BusinessEmailAddress</code> and <code>PersonalEmailAddress</code>.</p> <p>You only can use the <code>EmailAddress</code> type in the <code>MatchingRule</code>. For example, if you want to match profile based on <code>PersonalEmailAddress</code> or <code>BusinessEmailAddress</code>, you need to choose the <code>PersonalEmailAddress</code> and the <code>BusinessEmailAddress</code> to represent the <code>EmailAddress</code> type and only specify the <code>EmailAddress</code> on the matching rule.</p>'
+      description: '<p>Configuration information about the <code>AttributeTypesSelector </code>where the rule-based identity resolution uses to match profiles. You can choose how profiles are compared across attribute types and which attribute to use for matching from each type. There are three attribute types you can configure:</p> <ul> <li> <p>Email type</p> <ul> <li> <p>You can choose from <code>Email</code>, <code>BusinessEmail</code>, and <code>PersonalEmail</code> </p> </li> </ul> </li> <li> <p>Phone number type</p> <ul> <li> <p>You can choose from <code>Phone</code>, <code>HomePhone</code>, and <code>MobilePhone</code> </p> </li> </ul> </li> <li> <p>Address type</p> <ul> <li> <p>You can choose from <code>Address</code>, <code>BusinessAddress</code>, <code>MaillingAddress</code>, and <code>ShippingAddress</code> </p> </li> </ul> </li> </ul> <p>You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the <code>AttributeMatchingModel</code>. When choosing <code>MANY_TO_MANY</code>, the system can match attribute across the sub-types of an attribute type. For example, if the value of the <code>Email</code> field of Profile A and the value of <code>BusinessEmail</code> field of Profile B matches, the two profiles are matched on the Email type. When choosing <code>ONE_TO_ONE</code> the system can only match if the sub-types are exact matches. For example, only when the value of the <code>Email</code> field of Profile A and the value of the <code>Email</code> field of Profile B matches, the two profiles are matched on the Email type.</p>'
+    ConflictResolution:
+      type: object
+      required:
+        - ConflictResolvingModel
+      properties:
+        ConflictResolvingModel:
+          allOf:
+            - $ref: '#/components/schemas/ConflictResolvingModel'
+            - description: '<p>How the auto-merging process should resolve conflicts between different profiles.</p> <ul> <li> <p> <code>RECENCY</code>: Uses the data that was most recently updated.</p> </li> <li> <p> <code>SOURCE</code>: Uses the data from a specific source. For example, if a company has been aquired or two departments have merged, data from the specified source is used. If two duplicate profiles are from the same source, then <code>RECENCY</code> is used again.</p> </li> </ul>'
+        SourceName:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The <code>ObjectType</code> name that is used to resolve profile merging conflicts when choosing <code>SOURCE</code> as the <code>ConflictResolvingModel</code>.
+      description: How the auto-merging process should resolve conflicts between different profiles.
     CreateEventStreamResponse:
       type: object
       required:
@@ -5022,6 +5300,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
             - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
+        RuleBasedMatching:
+          allOf:
+            - $ref: '#/components/schemas/RuleBasedMatchingResponse'
+            - description: 'The process of matching duplicate profiles using the Rule-Based matching. If <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code> and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you can download the results from S3.'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -5266,6 +5548,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/KeyMap'
             - description: A list of unique keys that can be used to map data to the profile.
+    GetSimilarProfilesResponse:
+      type: object
+      properties:
+        ProfileIds:
+          allOf:
+            - $ref: '#/components/schemas/ProfileIdList'
+            - description: Set of <code>profileId</code>s that belong to the same matching group.
+        MatchId:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The string <code>matchId</code> that the similar profiles belong to.
+        MatchType:
+          allOf:
+            - $ref: '#/components/schemas/MatchType'
+            - description: Specify the type of matching to get similar profiles for.
+        RuleLevel:
+          allOf:
+            - $ref: '#/components/schemas/RuleLevel'
+            - description: The integer rule level that the profiles matched on.
+        ConfidenceScore:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: 'It only has value when the <code>MatchType</code> is <code>ML_BASED_MATCHING</code>.A number between 0 and 1, where a higher score means higher similarity. Examining match confidence scores lets you distinguish between groups of similar records in which the system is highly confident (which you may decide to merge), groups of similar records about which the system is uncertain (which you may decide to have reviewed by a human), and groups of similar records that the system deems to be unlikely (which you may decide to reject). Given confidence scores vary as per the data input, it should not be used as an absolute measure of matching quality.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: The pagination token from the previous <code>GetSimilarProfiles</code> API call.
     GetWorkflowResponse:
       type: object
       properties:
@@ -5439,6 +5748,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/string1To255'
+    ListRuleBasedMatchesResponse:
+      type: object
+      properties:
+        MatchIds:
+          allOf:
+            - $ref: '#/components/schemas/MatchIdList'
+            - description: The list of <code>MatchIds</code> for the given domain.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/token'
+            - description: The pagination token from the previous <code>ListRuleBasedMatches</code> API call.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -5758,6 +6078,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MatchingResponse'
             - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
+        RuleBasedMatching:
+          allOf:
+            - $ref: '#/components/schemas/RuleBasedMatchingResponse'
+            - description: 'The process of matching duplicate profiles using the rule-Based matching. If <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code> and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you can download the results from S3.'
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/timestamp'
@@ -5847,6 +6171,12 @@ components:
             - $ref: '#/components/schemas/string1To255'
             - description: The postal code of a customer address.
       description: 'A generic address associated with the customer that is not mailing, shipping, or billing.'
+    AddressList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string1To255'
+      minItems: 1
+      maxItems: 4
     FlowDefinition:
       type: object
       required:
@@ -6026,6 +6356,23 @@ components:
             - $ref: '#/components/schemas/attributeName'
             - description: The name of an attribute defined in a profile object type.
       description: The details of a single attribute item specified in the mathematical expression.
+    AttributeMatchingModel:
+      type: string
+      enum:
+        - ONE_TO_ONE
+        - MANY_TO_MANY
+    PhoneNumberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string1To255'
+      minItems: 1
+      maxItems: 4
+    EmailList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string1To255'
+      minItems: 1
+      maxItems: 3
     Attributes:
       type: object
       additionalProperties:
@@ -6040,20 +6387,6 @@ components:
             - $ref: '#/components/schemas/MatchingAttributesList'
             - description: A list of matching criteria.
       description: 'The matching criteria to be used during the auto-merging process. '
-    ConflictResolution:
-      type: object
-      required:
-        - ConflictResolvingModel
-      properties:
-        ConflictResolvingModel:
-          allOf:
-            - $ref: '#/components/schemas/ConflictResolvingModel'
-            - description: '<p>How the auto-merging process should resolve conflicts between different profiles.</p> <ul> <li> <p> <code>RECENCY</code>: Uses the data that was most recently updated.</p> </li> <li> <p> <code>SOURCE</code>: Uses the data from a specific source. For example, if a company has been aquired or two departments have merged, data from the specified source is used. If two duplicate profiles are from the same source, then <code>RECENCY</code> is used again.</p> </li> </ul>'
-        SourceName:
-          allOf:
-            - $ref: '#/components/schemas/string1To255'
-            - description: The <code>ObjectType</code> name that is used to resolve profile merging conflicts when choosing <code>SOURCE</code> as the <code>ConflictResolvingModel</code>.
-      description: How the auto-merging process should resolve conflicts between different profiles.
     Double0To1:
       type: number
       format: double
@@ -6377,6 +6710,36 @@ components:
             - $ref: '#/components/schemas/ExportingConfig'
             - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
       description: The flag that enables the matching process of duplicate profiles.
+    RuleBasedMatchingRequest:
+      type: object
+      required:
+        - Enabled
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/optionalBoolean'
+            - description: The flag that enables the rule-based matching process of duplicate profiles.
+        MatchingRules:
+          allOf:
+            - $ref: '#/components/schemas/MatchingRules'
+            - description: Configures how the rule-based matching process should match profiles. You can have up to 15 <code>MatchingRule</code> in the <code>MatchingRules</code>.
+        MaxAllowedRuleLevelForMerging:
+          allOf:
+            - $ref: '#/components/schemas/MaxAllowedRuleLevelForMerging'
+            - description: ' <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html">MatchingRule</a> '
+        MaxAllowedRuleLevelForMatching:
+          allOf:
+            - $ref: '#/components/schemas/MaxAllowedRuleLevelForMatching'
+            - description: Indicates the maximum allowed rule level.
+        AttributeTypesSelector:
+          allOf:
+            - $ref: '#/components/schemas/AttributeTypesSelector'
+            - description: Configures information about the <code>AttributeTypesSelector</code> where the rule-based identity resolution uses to match profiles.
+        ConflictResolution:
+          $ref: '#/components/schemas/ConflictResolution'
+        ExportingConfig:
+          $ref: '#/components/schemas/ExportingConfig'
+      description: The request to enable the rule-based matching.
     CreateDomainRequest:
       type: object
       required:
@@ -6399,6 +6762,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MatchingRequest'
             - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
+        RuleBasedMatching:
+          allOf:
+            - $ref: '#/components/schemas/RuleBasedMatchingRequest'
+            - description: 'The process of matching duplicate profiles using the Rule-Based matching. If <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code> and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you can download the results from S3.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -6423,6 +6790,38 @@ components:
             - $ref: '#/components/schemas/ExportingConfig'
             - description: 'Configuration information for exporting Identity Resolution results, for example, to an S3 bucket.'
       description: The flag that enables the matching process of duplicate profiles.
+    RuleBasedMatchingResponse:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/optionalBoolean'
+            - description: The flag that enables the rule-based matching process of duplicate profiles.
+        MatchingRules:
+          allOf:
+            - $ref: '#/components/schemas/MatchingRules'
+            - description: Configures how the rule-based matching process should match profiles. You can have up to 15 <code>MatchingRule</code> in the <code>MatchingRules</code>.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/RuleBasedMatchingStatus'
+            - description: '<p>PENDING</p> <ul> <li> <p>The first status after configuration a rule-based matching rule. If it is an existing domain, the rule-based Identity Resolution waits one hour before creating the matching rule. If it is a new domain, the system will skip the <code>PENDING</code> stage.</p> </li> </ul> <p>IN_PROGRESS</p> <ul> <li> <p>The system is creating the rule-based matching rule. Under this status, the system is evaluating the existing data and you can no longer change the Rule-based matching configuration.</p> </li> </ul> <p>ACTIVE</p> <ul> <li> <p>The rule is ready to use. You can change the rule a day after the status is in <code>ACTIVE</code>.</p> </li> </ul>'
+        MaxAllowedRuleLevelForMerging:
+          allOf:
+            - $ref: '#/components/schemas/MaxAllowedRuleLevelForMerging'
+            - description: ' <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_MatchingRule.html">MatchingRule</a> '
+        MaxAllowedRuleLevelForMatching:
+          allOf:
+            - $ref: '#/components/schemas/MaxAllowedRuleLevelForMatching'
+            - description: Indicates the maximum allowed rule level.
+        AttributeTypesSelector:
+          allOf:
+            - $ref: '#/components/schemas/AttributeTypesSelector'
+            - description: Configures information about the <code>AttributeTypesSelector</code> where the rule-based identity resolution uses to match profiles.
+        ConflictResolution:
+          $ref: '#/components/schemas/ConflictResolution'
+        ExportingConfig:
+          $ref: '#/components/schemas/ExportingConfig'
+      description: The response of the Rule-based matching request.
     CreateEventStreamRequest:
       type: object
       required:
@@ -7104,6 +7503,39 @@ components:
       type: object
       title: GetProfileObjectTypeTemplateRequest
       properties: {}
+    MatchType:
+      type: string
+      enum:
+        - RULE_BASED_MATCHING
+        - ML_BASED_MATCHING
+    GetSimilarProfilesRequest:
+      type: object
+      required:
+        - MatchType
+        - SearchKey
+        - SearchValue
+      title: GetSimilarProfilesRequest
+      properties:
+        MatchType:
+          allOf:
+            - $ref: '#/components/schemas/MatchType'
+            - description: Specify the type of matching to get similar profiles for.
+        SearchKey:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The string indicating the search key to be used.
+        SearchValue:
+          allOf:
+            - $ref: '#/components/schemas/string1To255'
+            - description: The string based on <code>SearchKey</code> to be searched for similar profiles.
+    ProfileIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/uuid'
+    RuleLevel:
+      type: integer
+      minimum: 1
+      maximum: 15
     GetWorkflowRequest:
       type: object
       title: GetWorkflowRequest
@@ -7395,6 +7827,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ListProfileObjectsItem'
+    ListRuleBasedMatchesRequest:
+      type: object
+      title: ListRuleBasedMatchesRequest
+      properties: {}
+    MatchIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string1To255'
     TagArn:
       type: string
       pattern: '^arn:[a-z0-9]{1,10}:profile'
@@ -7476,10 +7916,6 @@ components:
             - $ref: '#/components/schemas/Object'
             - description: The object specified in the Marketo flow source.
       description: The properties that are applied when Marketo is being used as a source.
-    ProfileIdList:
-      type: array
-      items:
-        $ref: '#/components/schemas/uuid'
     MatchItem:
       type: object
       properties:
@@ -7502,6 +7938,22 @@ components:
         $ref: '#/components/schemas/string1To255'
       minItems: 1
       maxItems: 20
+    MatchingRuleAttributeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string1To255'
+      minItems: 1
+      maxItems: 15
+    MatchingRule:
+      type: object
+      required:
+        - Rule
+      properties:
+        Rule:
+          allOf:
+            - $ref: '#/components/schemas/MatchingRuleAttributeList'
+            - description: A single rule level of the <code>MatchRules</code>. Configures how the rule-based matching process should match profiles.
+      description: '<p>Specifies how does the rule-based matching process should match profiles. You can choose from the following attributes to build the matching Rule:</p> <ul> <li> <p>AccountNumber</p> </li> <li> <p>Address.Address</p> </li> <li> <p>Address.City</p> </li> <li> <p>Address.Country</p> </li> <li> <p>Address.County</p> </li> <li> <p>Address.PostalCode</p> </li> <li> <p>Address.State</p> </li> <li> <p>Address.Province</p> </li> <li> <p>BirthDate</p> </li> <li> <p>BusinessName</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>FirstName</p> </li> <li> <p>Gender</p> </li> <li> <p>LastName</p> </li> <li> <p>MiddleName</p> </li> <li> <p>PhoneNumber</p> </li> <li> <p>Any customized profile attributes that start with the <code>Attributes</code> </p> </li> </ul>'
     ProfileIdToBeMergedList:
       type: array
       items:
@@ -7774,6 +8226,12 @@ components:
       type: string
       enum:
         - DAYS
+    RuleBasedMatchingStatus:
+      type: string
+      enum:
+        - PENDING
+        - IN_PROGRESS
+        - ACTIVE
     s3BucketName:
       type: string
       pattern: '^[a-z0-9.-]+$'
@@ -8119,6 +8577,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MatchingRequest'
             - description: '<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to detect duplicate profiles in your domains. </p> <p>After the Identity Resolution Job completes, use the <a href="https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html">GetMatches</a> API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from S3.</p>'
+        RuleBasedMatching:
+          allOf:
+            - $ref: '#/components/schemas/RuleBasedMatchingRequest'
+            - description: 'The process of matching duplicate profiles using the rule-Based matching. If <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start to match and merge your profiles according to your configuration in the <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code> and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you can download the results from S3.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'

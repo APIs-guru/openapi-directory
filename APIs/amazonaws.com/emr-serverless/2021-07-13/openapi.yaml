@@ -648,7 +648,7 @@ paths:
   '/applications/{applicationId}/jobruns/{jobRunId}/dashboard':
     get:
       operationId: GetDashboardForJobRun
-      description: 'Returns a URL to access the job run dashboard. The generated URL is valid for one hour, after which you must invoke the API again to generate a new URL.'
+      description: '<p>Creates and returns a URL that you can use to access the application UIs for a job run.</p> <p>For jobs in a running state, the application UI is a live user interface such as the Spark or Tez web UI. For completed jobs, the application UI is a persistent application user interface such as the Spark History Server or persistent Tez UI.</p> <note> <p>The URL is valid for one hour after you generate it. To access the application UI after that hour elapses, you must invoke the API again to generate a new URL.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1460,6 +1460,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ManagedPersistenceMonitoringConfiguration'
             - description: The managed log persistence configuration for a job run.
+        cloudWatchLoggingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchLoggingConfiguration'
+            - description: The Amazon CloudWatch configuration for monitoring logs. You can configure your jobs to send log information to CloudWatch.
       description: The configuration setting for monitoring.
     StopApplicationResponse:
       type: object
@@ -1762,6 +1766,53 @@ components:
       pattern: '[A-Za-z0-9._-]+'
       minLength: 1
       maxLength: 64
+    LogGroupName:
+      type: string
+      pattern: '[\.\-_/#A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 512
+    LogStreamNamePrefix:
+      type: string
+      pattern: '[^:*]*'
+      minLength: 1
+      maxLength: 512
+    EncryptionKeyArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z0-9-]*):kms:[a-zA-Z0-9\-]*:(\d{12})?:key\/[a-zA-Z0-9-]+'
+      minLength: 20
+      maxLength: 2048
+    LogTypeMap:
+      type: object
+      minProperties: 1
+      maxProperties: 4
+      additionalProperties:
+        $ref: '#/components/schemas/LogTypeList'
+    CloudWatchLoggingConfiguration:
+      type: object
+      required:
+        - enabled
+      properties:
+        enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enables CloudWatch logging.
+        logGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: The name of the log group in Amazon CloudWatch Logs where you want to publish your logs.
+        logStreamNamePrefix:
+          allOf:
+            - $ref: '#/components/schemas/LogStreamNamePrefix'
+            - description: Prefix for the CloudWatch log stream name.
+        encryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The Key Management Service (KMS) key ARN to encrypt the logs that you store in CloudWatch Logs.
+        logTypes:
+          allOf:
+            - $ref: '#/components/schemas/LogTypeMap'
+            - description: '<p>The types of logs that you want to publish to CloudWatch. If you don''t specify any log types, driver STDOUT and STDERR logs will be published to CloudWatch Logs by default. For more information including the supported worker types for Hive and Spark, see <a href="https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/logging.html#jobs-log-storage-cw">Logging for EMR Serverless with CloudWatch</a>.</p> <ul> <li> <p> <b>Key Valid Values</b>: <code>SPARK_DRIVER</code>, <code>SPARK_EXECUTOR</code>, <code>HIVE_DRIVER</code>, <code>TEZ_TASK</code> </p> </li> <li> <p> <b>Array Members Valid Values</b>: <code>STDOUT</code>, <code>STDERR</code>, <code>HIVE_LOG</code>, <code>TEZ_AM</code>, <code>SYSTEM_LOGS</code> </p> </li> </ul>'
+      description: The Amazon CloudWatch configuration for monitoring logs. You can configure your jobs to send log information to CloudWatch.
     String1024:
       type: string
       pattern: .*\S.*
@@ -1878,11 +1929,6 @@ components:
       type: integer
       minimum: 0
       maximum: 1000000
-    EncryptionKeyArn:
-      type: string
-      pattern: 'arn:(aws[a-zA-Z0-9-]*):kms:[a-zA-Z0-9\-]*:(\d{12})?:key\/[a-zA-Z0-9-]+'
-      minLength: 20
-      maxLength: 2048
     EntryPointArgument:
       type: string
       pattern: .*\S.*
@@ -2215,6 +2261,18 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    LogTypeString:
+      type: string
+      pattern: '[a-zA-Z]+[-_]*[a-zA-Z]+'
+      description: Log type for a Spark/Hive job-run.
+      minLength: 1
+      maxLength: 50
+    LogTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LogTypeString'
+      minItems: 1
+      maxItems: 5
     ManagedPersistenceMonitoringConfiguration:
       type: object
       properties:
@@ -2384,6 +2442,7 @@ components:
     WorkerTypeString:
       type: string
       pattern: '[a-zA-Z]+[-_]*[a-zA-Z]+'
+      description: Worker type for an analytics framework.
       minLength: 1
       maxLength: 50
 security:

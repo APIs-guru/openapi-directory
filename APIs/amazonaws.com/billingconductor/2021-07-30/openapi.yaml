@@ -357,17 +357,17 @@ paths:
                   minItems: 1
                   maxItems: 30
                 BillingPeriodRange:
-                  description: ' The billing period range in which the custom line item request will be applied. '
+                  description: The billing period range in which the custom line item request will be applied.
                   type: object
                   properties:
                     InclusiveStartBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive start billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive start billing period that defines a billing period range where a custom line is applied.
                     ExclusiveEndBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive end billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive end billing period that defines a billing period range where a custom line is applied.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -446,17 +446,17 @@ paths:
                   minItems: 1
                   maxItems: 30
                 BillingPeriodRange:
-                  description: ' The billing period range in which the custom line item request will be applied. '
+                  description: The billing period range in which the custom line item request will be applied.
                   type: object
                   properties:
                     InclusiveStartBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive start billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive start billing period that defines a billing period range where a custom line is applied.
                     ExclusiveEndBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive end billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive end billing period that defines a billing period range where a custom line is applied.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -541,15 +541,19 @@ paths:
                   maxLength: 128
                   format: password
                 AccountGrouping:
-                  description: ' The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated family. '
+                  description: The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated billing family.
                   type: object
                   properties:
                     LinkedAccountIds:
                       allOf:
                         - $ref: '#/components/schemas/AccountIdList'
-                        - description: ' The account IDs that make up the billing group. Account IDs must be a part of the consolidated billing family, and not associated with another billing group. '
+                        - description: 'The account IDs that make up the billing group. Account IDs must be a part of the consolidated billing family, and not associated with another billing group.'
+                    AutoAssociate:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.
                 ComputationPreference:
-                  description: ' The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group. '
+                  description: The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
                   type: object
                   properties:
                     PricingPlanArn:
@@ -668,17 +672,17 @@ paths:
                   type: string
                   pattern: '(arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/)?[0-9]{12}'
                 BillingPeriodRange:
-                  description: ' The billing period range in which the custom line item request will be applied. '
+                  description: The billing period range in which the custom line item request will be applied.
                   type: object
                   properties:
                     InclusiveStartBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive start billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive start billing period that defines a billing period range where a custom line is applied.
                     ExclusiveEndBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive end billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive end billing period that defines a billing period range where a custom line is applied.
                 Tags:
                   description: ' A map that contains tag keys and tag values that are attached to a custom line item. '
                   type: object
@@ -687,21 +691,21 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 ChargeDetails:
-                  description: ' The charge details of a custom line item. It should contain only one of <code>Flat</code> or <code>Percentage</code>. '
+                  description: The charge details of a custom line item. It should contain only one of <code>Flat</code> or <code>Percentage</code>.
                   type: object
                   properties:
                     Flat:
                       allOf:
                         - $ref: '#/components/schemas/CustomLineItemFlatChargeDetails'
-                        - description: ' A <code>CustomLineItemFlatChargeDetails</code> that describes the charge details of a flat custom line item. '
+                        - description: A <code>CustomLineItemFlatChargeDetails</code> that describes the charge details of a flat custom line item.
                     Percentage:
                       allOf:
                         - $ref: '#/components/schemas/CustomLineItemPercentageChargeDetails'
-                        - description: ' A <code>CustomLineItemPercentageChargeDetails</code> that describes the charge details of a percentage custom line item. '
+                        - description: A <code>CustomLineItemPercentageChargeDetails</code> that describes the charge details of a percentage custom line item.
                     Type:
                       allOf:
                         - $ref: '#/components/schemas/CustomLineItemType'
-                        - description: ' The type of the custom line item that indicates whether the charge is a fee or credit. '
+                        - description: The type of the custom line item that indicates whether the charge is a fee or credit.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1076,17 +1080,17 @@ paths:
                   type: string
                   pattern: '(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}'
                 BillingPeriodRange:
-                  description: ' The billing period range in which the custom line item request will be applied. '
+                  description: The billing period range in which the custom line item request will be applied.
                   type: object
                   properties:
                     InclusiveStartBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive start billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive start billing period that defines a billing period range where a custom line is applied.
                     ExclusiveEndBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive end billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive end billing period that defines a billing period range where a custom line is applied.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1435,17 +1439,17 @@ paths:
                   type: string
                   pattern: '\d{4}-(0?[1-9]|1[012])'
                 Filters:
-                  description: '<p>The filter on the account ID of the linked account, or any of the following:</p> <p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that are not associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided Billing Group Arn. </p>'
+                  description: '<p>The filter on the account ID of the linked account, or any of the following:</p> <p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that are not associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided Billing Group Arn.</p>'
                   type: object
                   properties:
                     Association:
                       allOf:
                         - $ref: '#/components/schemas/Association'
-                        - description: '<p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that are not associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided Billing Group Arn. </p>'
+                        - description: '<p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that are not associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided Billing Group Arn.</p>'
                     AccountId:
                       allOf:
                         - $ref: '#/components/schemas/AccountId'
-                        - description: ' The Amazon Web Services account ID to filter on. '
+                        - description: The Amazon Web Services account ID to filter on.
                     AccountIds:
                       allOf:
                         - $ref: '#/components/schemas/AccountIdFilterList'
@@ -1535,7 +1539,7 @@ paths:
                   description: 'The pagination token that''s used on subsequent calls to get reports. '
                   type: string
                 Filters:
-                  description: 'The filter used to retrieve specific <code>BillingGroupCostReportElements</code>. '
+                  description: The filter used to retrieve specific <code>BillingGroupCostReportElements</code>.
                   type: object
                   properties:
                     BillingGroupArns:
@@ -1624,21 +1628,25 @@ paths:
                   description: 'The pagination token that''s used on subsequent calls to get billing groups. '
                   type: string
                 Filters:
-                  description: 'The filter that specifies the billing groups and pricing plans to retrieve billing group information. '
+                  description: The filter that specifies the billing groups and pricing plans to retrieve billing group information.
                   type: object
                   properties:
                     Arns:
                       allOf:
                         - $ref: '#/components/schemas/BillingGroupArnList'
-                        - description: 'The list of billing group Amazon Resource Names (ARNs) to retrieve information. '
+                        - description: The list of billing group Amazon Resource Names (ARNs) to retrieve information.
                     PricingPlan:
                       allOf:
                         - $ref: '#/components/schemas/PricingPlanFullArn'
-                        - description: 'The pricing plan Amazon Resource Names (ARNs) to retrieve information. '
+                        - description: The pricing plan Amazon Resource Names (ARNs) to retrieve information.
                     Statuses:
                       allOf:
                         - $ref: '#/components/schemas/BillingGroupStatusList'
                         - description: ' A list of billing groups to retrieve their current status for a specific time range '
+                    AutoAssociate:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1806,21 +1814,21 @@ paths:
                   description: ' The pagination token that''s used on subsequent calls to get custom line items (FFLIs). '
                   type: string
                 Filters:
-                  description: ' A filter that specifies the custom line items and billing groups to retrieve FFLI information. '
+                  description: A filter that specifies the custom line items and billing groups to retrieve FFLI information.
                   type: object
                   properties:
                     Names:
                       allOf:
                         - $ref: '#/components/schemas/CustomLineItemNameList'
-                        - description: ' A list of custom line items to retrieve information. '
+                        - description: A list of custom line items to retrieve information.
                     BillingGroups:
                       allOf:
                         - $ref: '#/components/schemas/BillingGroupArnList'
-                        - description: ' The billing group Amazon Resource Names (ARNs) to retrieve information. '
+                        - description: The billing group Amazon Resource Names (ARNs) to retrieve information.
                     Arns:
                       allOf:
                         - $ref: '#/components/schemas/CustomLineItemArns'
-                        - description: ' A list of custom line item ARNs to retrieve information. '
+                        - description: A list of custom line item ARNs to retrieve information.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1889,13 +1897,13 @@ paths:
                   type: string
                   pattern: '\d{4}-(0?[1-9]|1[012])'
                 Filters:
-                  description: 'The filter that specifies the Amazon Resource Names (ARNs) of pricing plans, to retrieve pricing plan information. '
+                  description: 'The filter that specifies the Amazon Resource Names (ARNs) of pricing plans, to retrieve pricing plan information.'
                   type: object
                   properties:
                     Arns:
                       allOf:
                         - $ref: '#/components/schemas/PricingPlanArns'
-                        - description: 'A list of pricing plan Amazon Resource Names (ARNs) to retrieve information. '
+                        - description: A list of pricing plan Amazon Resource Names (ARNs) to retrieve information.
                 MaxResults:
                   description: The maximum number of pricing plans to retrieve.
                   type: integer
@@ -2059,13 +2067,13 @@ paths:
                   type: string
                   pattern: '\d{4}-(0?[1-9]|1[012])'
                 Filters:
-                  description: ' The filter that specifies criteria that the pricing rules returned by the <code>ListPricingRules</code> API will adhere to. '
+                  description: ' The filter that specifies criteria that the pricing rules returned by the <code>ListPricingRules</code> API will adhere to.'
                   type: object
                   properties:
                     Arns:
                       allOf:
                         - $ref: '#/components/schemas/PricingRuleArns'
-                        - description: ' A list containing the pricing rule Amazon Resource Names (ARNs) to include in the API response. '
+                        - description: A list containing the pricing rule Amazon Resource Names (ARNs) to include in the API response.
                 MaxResults:
                   description: ' The maximum number of pricing rules to retrieve. '
                   type: integer
@@ -2533,7 +2541,7 @@ paths:
                     - ACTIVE
                     - PRIMARY_ACCOUNT_MISSING
                 ComputationPreference:
-                  description: ' The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group. '
+                  description: The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
                   type: object
                   properties:
                     PricingPlanArn:
@@ -2546,6 +2554,14 @@ paths:
                   minLength: 0
                   maxLength: 1024
                   format: password
+                AccountGrouping:
+                  description: Specifies if the billing group has the following features enabled.
+                  type: object
+                  properties:
+                    AutoAssociate:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2635,17 +2651,17 @@ paths:
                         - $ref: '#/components/schemas/UpdateCustomLineItemPercentageChargeDetails'
                         - description: ' An <code>UpdateCustomLineItemPercentageChargeDetails</code> that describes the new charge details of a percentage custom line item. '
                 BillingPeriodRange:
-                  description: ' The billing period range in which the custom line item request will be applied. '
+                  description: The billing period range in which the custom line item request will be applied.
                   type: object
                   properties:
                     InclusiveStartBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive start billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive start billing period that defines a billing period range where a custom line is applied.
                     ExclusiveEndBillingPeriod:
                       allOf:
                         - $ref: '#/components/schemas/BillingPeriod'
-                        - description: ' The inclusive end billing period that defines a billing period range where a custom line is applied. '
+                        - description: The inclusive end billing period that defines a billing period range where a custom line is applied.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2958,6 +2974,8 @@ components:
         $ref: '#/components/schemas/AccountId'
       minItems: 1
       maxItems: 30
+    Boolean:
+      type: boolean
     PricingPlanFullArn:
       type: string
       pattern: 'arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/[a-zA-Z0-9]{10}'
@@ -2980,8 +2998,8 @@ components:
         ChargeValue:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemChargeValue'
-            - description: ' The custom line item''s fixed charge value in USD. '
-      description: ' A representation of the charge details that are associated with a flat custom line item. '
+            - description: The custom line item's fixed charge value in USD.
+      description: A representation of the charge details that are associated with a flat custom line item.
     CustomLineItemPercentageChargeDetails:
       type: object
       required:
@@ -2990,12 +3008,12 @@ components:
         PercentageValue:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemPercentageChargeValue'
-            - description: ' The custom line item''s percentage value. This will be multiplied against the combined value of its associated resources to determine its charge value. '
+            - description: 'The custom line item''s percentage value. This will be multiplied against the combined value of its associated resources to determine its charge value. '
         AssociatedValues:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemAssociationsList'
-            - description: ' A list of resource ARNs to associate to the percentage custom line item. '
-      description: ' A representation of the charge details that are associated with a percentage custom line item. '
+            - description: A list of resource ARNs to associate to the percentage custom line item.
+      description: A representation of the charge details that are associated with a percentage custom line item.
     CustomLineItemType:
       type: string
       enum:
@@ -3323,6 +3341,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BillingGroupStatusReason'
             - description: ' The reason why the billing group is in its current status. '
+        AccountGrouping:
+          allOf:
+            - $ref: '#/components/schemas/UpdateBillingGroupAccountGrouping'
+            - description: Specifies if the billing group has automatic account association (<code>AutoAssociate</code>) enabled.
     UpdateCustomLineItemOutput:
       type: object
       properties:
@@ -3470,20 +3492,20 @@ components:
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The associating array of account IDs. '
+            - description: The associating array of account IDs.
         BillingGroupArn:
           allOf:
             - $ref: '#/components/schemas/BillingGroupArn'
-            - description: ' The Billing Group Arn that the linked account is associated to. '
+            - description: The Billing Group Arn that the linked account is associated to.
         AccountName:
           allOf:
             - $ref: '#/components/schemas/AccountName'
-            - description: ' The Amazon Web Services account name. '
+            - description: The Amazon Web Services account name.
         AccountEmail:
           allOf:
             - $ref: '#/components/schemas/AccountEmail'
-            - description: ' The Amazon Web Services account email. '
-      description: ' A representation of a linked account. '
+            - description: The Amazon Web Services account email.
+      description: A representation of a linked account.
     AccountAssociationsList:
       type: array
       items:
@@ -3505,8 +3527,12 @@ components:
         LinkedAccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIdList'
-            - description: ' The account IDs that make up the billing group. Account IDs must be a part of the consolidated billing family, and not associated with another billing group. '
-      description: ' The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated family. '
+            - description: 'The account IDs that make up the billing group. Account IDs must be a part of the consolidated billing family, and not associated with another billing group.'
+        AutoAssociate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.
+      description: The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated billing family.
     Arn:
       type: string
       pattern: 'arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}$|^arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/[a-zA-Z0-9]{10}$|^arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}$|^(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}'
@@ -3567,24 +3593,24 @@ components:
         Message:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The reason why the resource association failed. '
+            - description: The reason why the resource association failed.
         Reason:
           allOf:
             - $ref: '#/components/schemas/AssociateResourceErrorReason'
-            - description: ' A static error code that''s used to classify the type of failure. '
-      description: ' A representation of a resource association error. '
+            - description: A static error code that's used to classify the type of failure.
+      description: A representation of a resource association error.
     AssociateResourceResponseElement:
       type: object
       properties:
         Arn:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemAssociationElement'
-            - description: ' The resource ARN that was associated to the custom line item. '
+            - description: The resource ARN that was associated to the custom line item.
         Error:
           allOf:
             - $ref: '#/components/schemas/AssociateResourceError'
-            - description: ' An <code>AssociateResourceError</code> that will populate if the resource association fails. '
-      description: ' A resource association result for a percentage custom line item. '
+            - description: An <code>AssociateResourceError</code> that will populate if the resource association fails.
+      description: A resource association result for a percentage custom line item.
     AssociateResourcesResponseList:
       type: array
       items:
@@ -3606,12 +3632,12 @@ components:
         InclusiveStartBillingPeriod:
           allOf:
             - $ref: '#/components/schemas/BillingPeriod'
-            - description: ' The inclusive start billing period that defines a billing period range where a custom line is applied. '
+            - description: The inclusive start billing period that defines a billing period range where a custom line is applied.
         ExclusiveEndBillingPeriod:
           allOf:
             - $ref: '#/components/schemas/BillingPeriod'
-            - description: ' The inclusive end billing period that defines a billing period range where a custom line is applied. '
-      description: ' The billing period range in which the custom line item request will be applied. '
+            - description: The inclusive end billing period that defines a billing period range where a custom line is applied.
+      description: The billing period range in which the custom line item request will be applied.
     BatchAssociateResourcesToCustomLineItemInput:
       type: object
       required:
@@ -3673,28 +3699,28 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/BillingGroupArn'
-            - description: 'The Amazon Resource Name (ARN) of a billing group. '
+            - description: The Amazon Resource Name (ARN) of a billing group.
         AWSCost:
           allOf:
             - $ref: '#/components/schemas/AWSCost'
-            - description: 'The actual Amazon Web Services charges for the billing group. '
+            - description: The actual Amazon Web Services charges for the billing group.
         ProformaCost:
           allOf:
             - $ref: '#/components/schemas/ProformaCost'
-            - description: 'The hypothetical Amazon Web Services charges based on the associated pricing plan of a billing group. '
+            - description: The hypothetical Amazon Web Services charges based on the associated pricing plan of a billing group.
         Margin:
           allOf:
             - $ref: '#/components/schemas/Margin'
-            - description: ' The billing group margin. '
+            - description: The billing group margin.
         MarginPercentage:
           allOf:
             - $ref: '#/components/schemas/MarginPercentage'
-            - description: ' The percentage of billing group margin. '
+            - description: The percentage of billing group margin.
         Currency:
           allOf:
             - $ref: '#/components/schemas/Currency'
-            - description: 'The displayed currency. '
-      description: 'A summary report of actual Amazon Web Services charges and calculated Amazon Web Services charges, based on the associated pricing plan of a billing group. '
+            - description: The displayed currency.
+      description: 'A summary report of actual Amazon Web Services charges and calculated Amazon Web Services charges, based on the associated pricing plan of a billing group.'
     BillingGroupCostReportList:
       type: array
       items:
@@ -3713,42 +3739,46 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/BillingGroupName'
-            - description: 'The name of the billing group. '
+            - description: The name of the billing group.
         Arn:
           allOf:
             - $ref: '#/components/schemas/BillingGroupArn'
-            - description: 'The Amazon Resource Number (ARN) that can be used to uniquely identify the billing group. '
+            - description: The Amazon Resource Number (ARN) that can be used to uniquely identify the billing group.
         Description:
           allOf:
             - $ref: '#/components/schemas/BillingGroupDescription'
-            - description: 'The description of the billing group. '
+            - description: The description of the billing group.
         PrimaryAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: 'The account ID that serves as the main account in a billing group. '
+            - description: The account ID that serves as the main account in a billing group.
         ComputationPreference:
           $ref: '#/components/schemas/ComputationPreference'
         Size:
           allOf:
             - $ref: '#/components/schemas/NumberOfAccounts'
-            - description: 'The number of accounts in the particular billing group. '
+            - description: The number of accounts in the particular billing group.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Instant'
-            - description: ' The time when the billing group was created. '
+            - description: The time when the billing group was created.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Instant'
-            - description: ' The most recent time when the billing group was modified. '
+            - description: The most recent time when the billing group was modified.
         Status:
           allOf:
             - $ref: '#/components/schemas/BillingGroupStatus'
-            - description: 'The billing group status. Only one of the valid values can be used. '
+            - description: The billing group status. Only one of the valid values can be used.
         StatusReason:
           allOf:
             - $ref: '#/components/schemas/BillingGroupStatusReason'
-            - description: 'The reason why the billing group is in its current status. '
-      description: 'A representation of a billing group. '
+            - description: The reason why the billing group is in its current status.
+        AccountGrouping:
+          allOf:
+            - $ref: '#/components/schemas/ListBillingGroupAccountGrouping'
+            - description: Specifies if the billing group has automatic account association (<code>AutoAssociate</code>) enabled.
+      description: A representation of a billing group.
     BillingGroupList:
       type: array
       items:
@@ -3768,7 +3798,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PricingPlanFullArn'
             - description: ' The Amazon Resource Name (ARN) of the pricing plan that''s used to compute the Amazon Web Services charges for a billing group. '
-      description: ' The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group. '
+      description: The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
     NumberOfAccounts:
       type: integer
       minimum: 0
@@ -3781,6 +3811,14 @@ components:
         - PRIMARY_ACCOUNT_MISSING
     BillingGroupStatusReason:
       type: string
+    ListBillingGroupAccountGrouping:
+      type: object
+      properties:
+        AutoAssociate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.
+      description: Specifies if the billing group has the following features enabled.
     ClientToken:
       type: string
       pattern: '[a-zA-Z0-9-]+'
@@ -3807,7 +3845,7 @@ components:
         AccountGrouping:
           allOf:
             - $ref: '#/components/schemas/AccountGrouping'
-            - description: ' The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated family. '
+            - description: ' The set of accounts that will be under the billing group. The set of accounts resemble the linked accounts in a consolidated billing family. '
         ComputationPreference:
           allOf:
             - $ref: '#/components/schemas/ComputationPreference'
@@ -3843,16 +3881,16 @@ components:
         Flat:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemFlatChargeDetails'
-            - description: ' A <code>CustomLineItemFlatChargeDetails</code> that describes the charge details of a flat custom line item. '
+            - description: A <code>CustomLineItemFlatChargeDetails</code> that describes the charge details of a flat custom line item.
         Percentage:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemPercentageChargeDetails'
-            - description: ' A <code>CustomLineItemPercentageChargeDetails</code> that describes the charge details of a percentage custom line item. '
+            - description: A <code>CustomLineItemPercentageChargeDetails</code> that describes the charge details of a percentage custom line item.
         Type:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemType'
-            - description: ' The type of the custom line item that indicates whether the charge is a fee or credit. '
-      description: ' The charge details of a custom line item. It should contain only one of <code>Flat</code> or <code>Percentage</code>. '
+            - description: The type of the custom line item that indicates whether the charge is a fee or credit.
+      description: The charge details of a custom line item. It should contain only one of <code>Flat</code> or <code>Percentage</code>.
     CreateCustomLineItemInput:
       type: object
       required:
@@ -4054,44 +4092,44 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemArn'
-            - description: ' The Amazon Resource Names (ARNs) for custom line items. '
+            - description: The Amazon Resource Names (ARNs) for custom line items.
         Name:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemName'
-            - description: ' The custom line item''s name. '
+            - description: The custom line item's name.
         ChargeDetails:
           allOf:
             - $ref: '#/components/schemas/ListCustomLineItemChargeDetails'
-            - description: ' A <code>ListCustomLineItemChargeDetails</code> that describes the charge details of a custom line item. '
+            - description: A <code>ListCustomLineItemChargeDetails</code> that describes the charge details of a custom line item.
         CurrencyCode:
           allOf:
             - $ref: '#/components/schemas/CurrencyCode'
-            - description: ' The custom line item''s charge value currency. Only one of the valid values can be used. '
+            - description: The custom line item's charge value currency. Only one of the valid values can be used.
         Description:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemDescription'
-            - description: ' The custom line item''s description. This is shown on the Bills page in association with the charge value. '
+            - description: The custom line item's description. This is shown on the Bills page in association with the charge value.
         ProductCode:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemProductCode'
-            - description: ' The product code that''s associated with the custom line item. '
+            - description: The product code that's associated with the custom line item.
         BillingGroupArn:
           allOf:
             - $ref: '#/components/schemas/BillingGroupArn'
-            - description: ' The Amazon Resource Name (ARN) that references the billing group where the custom line item applies to. '
+            - description: The Amazon Resource Name (ARN) that references the billing group where the custom line item applies to.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Instant'
-            - description: ' The time created. '
+            - description: The time created.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Instant'
-            - description: ' The most recent time when the custom line item was modified. '
+            - description: The most recent time when the custom line item was modified.
         AssociationSize:
           allOf:
             - $ref: '#/components/schemas/NumberOfAssociations'
-            - description: ' The number of resources that are associated to the custom line item. '
-      description: ' A representation of a custom line item. '
+            - description: The number of resources that are associated to the custom line item.
+      description: A representation of a custom line item.
     CustomLineItemList:
       type: array
       items:
@@ -4262,12 +4300,12 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemAssociationElement'
-            - description: ' The resource ARN that was disassociated from the custom line item. '
+            - description: 'The resource ARN that was disassociated from the custom line item. '
         Error:
           allOf:
             - $ref: '#/components/schemas/AssociateResourceError'
             - description: ' An <code>AssociateResourceError</code> that''s shown if the resource disassociation fails. '
-      description: ' A resource disassociation result for a percentage custom line item. '
+      description: A resource disassociation result for a percentage custom line item.
     FreeTierConfig:
       type: object
       required:
@@ -4284,16 +4322,16 @@ components:
         Association:
           allOf:
             - $ref: '#/components/schemas/Association'
-            - description: '<p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that are not associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided Billing Group Arn. </p>'
+            - description: '<p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that are not associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided Billing Group Arn.</p>'
         AccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
-            - description: ' The Amazon Web Services account ID to filter on. '
+            - description: The Amazon Web Services account ID to filter on.
         AccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIdFilterList'
             - description: ' The list of Amazon Web Services IDs to retrieve their associated billing group for a given time range. '
-      description: '<p>The filter on the account ID of the linked account, or any of the following:</p> <p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that are not associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided Billing Group Arn. </p>'
+      description: '<p>The filter on the account ID of the linked account, or any of the following:</p> <p> <code>MONITORED</code>: linked accounts that are associated to billing groups.</p> <p> <code>UNMONITORED</code>: linked accounts that are not associated to billing groups.</p> <p> <code>Billing Group Arn</code>: linked accounts that are associated to the provided Billing Group Arn.</p>'
     Token:
       type: string
     ListAccountAssociationsInput:
@@ -4319,7 +4357,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/BillingGroupArnList'
             - description: 'The list of Amazon Resource Names (ARNs) used to filter billing groups to retrieve reports. '
-      description: 'The filter used to retrieve specific <code>BillingGroupCostReportElements</code>. '
+      description: The filter used to retrieve specific <code>BillingGroupCostReportElements</code>.
     MaxBillingGroupResults:
       type: integer
       minimum: 1
@@ -4350,16 +4388,20 @@ components:
         Arns:
           allOf:
             - $ref: '#/components/schemas/BillingGroupArnList'
-            - description: 'The list of billing group Amazon Resource Names (ARNs) to retrieve information. '
+            - description: The list of billing group Amazon Resource Names (ARNs) to retrieve information.
         PricingPlan:
           allOf:
             - $ref: '#/components/schemas/PricingPlanFullArn'
-            - description: 'The pricing plan Amazon Resource Names (ARNs) to retrieve information. '
+            - description: The pricing plan Amazon Resource Names (ARNs) to retrieve information.
         Statuses:
           allOf:
             - $ref: '#/components/schemas/BillingGroupStatusList'
             - description: ' A list of billing groups to retrieve their current status for a specific time range '
-      description: 'The filter that specifies the billing groups and pricing plans to retrieve billing group information. '
+        AutoAssociate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.
+      description: The filter that specifies the billing groups and pricing plans to retrieve billing group information.
     ListBillingGroupsInput:
       type: object
       title: ListBillingGroupsInput
@@ -4440,16 +4482,16 @@ components:
         Names:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemNameList'
-            - description: ' A list of custom line items to retrieve information. '
+            - description: A list of custom line items to retrieve information.
         BillingGroups:
           allOf:
             - $ref: '#/components/schemas/BillingGroupArnList'
-            - description: ' The billing group Amazon Resource Names (ARNs) to retrieve information. '
+            - description: The billing group Amazon Resource Names (ARNs) to retrieve information.
         Arns:
           allOf:
             - $ref: '#/components/schemas/CustomLineItemArns'
-            - description: ' A list of custom line item ARNs to retrieve information. '
-      description: ' A filter that specifies the custom line items and billing groups to retrieve FFLI information. '
+            - description: A list of custom line item ARNs to retrieve information.
+      description: A filter that specifies the custom line items and billing groups to retrieve FFLI information.
     ListCustomLineItemsInput:
       type: object
       title: ListCustomLineItemsInput
@@ -4502,8 +4544,8 @@ components:
         Arns:
           allOf:
             - $ref: '#/components/schemas/PricingPlanArns'
-            - description: 'A list of pricing plan Amazon Resource Names (ARNs) to retrieve information. '
-      description: 'The filter that specifies the Amazon Resource Names (ARNs) of pricing plans, to retrieve pricing plan information. '
+            - description: A list of pricing plan Amazon Resource Names (ARNs) to retrieve information.
+      description: 'The filter that specifies the Amazon Resource Names (ARNs) of pricing plans, to retrieve pricing plan information.'
     MaxPricingPlanResults:
       type: integer
       minimum: 1
@@ -4560,8 +4602,8 @@ components:
         Arns:
           allOf:
             - $ref: '#/components/schemas/PricingRuleArns'
-            - description: ' A list containing the pricing rule Amazon Resource Names (ARNs) to include in the API response. '
-      description: ' The filter that specifies criteria that the pricing rules returned by the <code>ListPricingRules</code> API will adhere to. '
+            - description: A list containing the pricing rule Amazon Resource Names (ARNs) to include in the API response.
+      description: ' The filter that specifies criteria that the pricing rules returned by the <code>ListPricingRules</code> API will adhere to.'
     ListPricingRulesInput:
       type: object
       title: ListPricingRulesInput
@@ -4656,71 +4698,71 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/PricingPlanName'
-            - description: 'The name of a pricing plan. '
+            - description: The name of a pricing plan.
         Arn:
           allOf:
             - $ref: '#/components/schemas/PricingPlanArn'
-            - description: 'The pricing plan Amazon Resource Names (ARN). This can be used to uniquely identify a pricing plan. '
+            - description: The pricing plan Amazon Resource Names (ARN). This can be used to uniquely identify a pricing plan.
         Description:
           allOf:
             - $ref: '#/components/schemas/PricingPlanDescription'
-            - description: 'The pricing plan description. '
+            - description: The pricing plan description.
         Size:
           allOf:
             - $ref: '#/components/schemas/NumberOfAssociatedPricingRules'
-            - description: ' The pricing rules count that''s currently associated with this pricing plan list element. '
+            - description: The pricing rules count that's currently associated with this pricing plan list element.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Instant'
-            - description: ' The time when the pricing plan was created. '
+            - description: The time when the pricing plan was created.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Instant'
-            - description: ' The most recent time when the pricing plan was modified. '
-      description: 'A representation of a pricing plan. '
+            - description: The most recent time when the pricing plan was modified.
+      description: A representation of a pricing plan.
     PricingRuleListElement:
       type: object
       properties:
         Name:
           allOf:
             - $ref: '#/components/schemas/PricingRuleName'
-            - description: ' The name of a pricing rule. '
+            - description: The name of a pricing rule.
         Arn:
           allOf:
             - $ref: '#/components/schemas/PricingRuleArn'
-            - description: ' The Amazon Resource Name (ARN) used to uniquely identify a pricing rule. '
+            - description: The Amazon Resource Name (ARN) used to uniquely identify a pricing rule.
         Description:
           allOf:
             - $ref: '#/components/schemas/PricingRuleDescription'
-            - description: ' The pricing rule description. '
+            - description: The pricing rule description.
         Scope:
           allOf:
             - $ref: '#/components/schemas/PricingRuleScope'
-            - description: ' The scope of pricing rule that indicates if it is globally applicable, or if it is service-specific. '
+            - description: 'The scope of pricing rule that indicates if it is globally applicable, or if it is service-specific.'
         Type:
           allOf:
             - $ref: '#/components/schemas/PricingRuleType'
-            - description: ' The type of pricing rule. '
+            - description: The type of pricing rule.
         ModifierPercentage:
           allOf:
             - $ref: '#/components/schemas/ModifierPercentage'
-            - description: ' A percentage modifier applied on the public pricing rates. '
+            - description: A percentage modifier applied on the public pricing rates.
         Service:
           allOf:
             - $ref: '#/components/schemas/Service'
-            - description: ' If the <code>Scope</code> attribute is <code>SERVICE</code>, this attribute indicates which service the <code>PricingRule</code> is applicable for. '
+            - description: 'If the <code>Scope</code> attribute is <code>SERVICE</code>, this attribute indicates which service the <code>PricingRule</code> is applicable for.'
         AssociatedPricingPlanCount:
           allOf:
             - $ref: '#/components/schemas/NumberOfPricingPlansAssociatedWith'
-            - description: ' The pricing plans count that this pricing rule is associated with. '
+            - description: The pricing plans count that this pricing rule is associated with.
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Instant'
-            - description: ' The time when the pricing rule was created. '
+            - description: The time when the pricing rule was created.
         LastModifiedTime:
           allOf:
             - $ref: '#/components/schemas/Instant'
-            - description: ' The most recent time when the pricing rule was modified. '
+            - description: ' The most recent time when the pricing rule was modified.'
         BillingEntity:
           allOf:
             - $ref: '#/components/schemas/BillingEntity'
@@ -4737,7 +4779,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Operation'
             - description: '<p> Operation is the specific Amazon Web Services action covered by this line item. This describes the specific usage of the line item.</p> <p> If the <code>Scope</code> attribute is set to <code>SKU</code>, this attribute indicates which operation the <code>PricingRule</code> is modifying. For example, a value of <code>RunInstances:0202</code> indicates the operation of running an Amazon EC2 instance.</p>'
-      description: ' A representation of a pricing rule. '
+      description: A representation of a pricing rule.
     Tiering:
       type: object
       required:
@@ -4768,6 +4810,14 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateBillingGroupAccountGrouping:
+      type: object
+      properties:
+        AutoAssociate:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies if this billing group will automatically associate newly added Amazon Web Services accounts that join your consolidated billing family.
+      description: Specifies if the billing group has the following features enabled.
     UpdateBillingGroupInput:
       type: object
       required:
@@ -4794,6 +4844,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BillingGroupDescription'
             - description: 'A description of the billing group. '
+        AccountGrouping:
+          allOf:
+            - $ref: '#/components/schemas/UpdateBillingGroupAccountGrouping'
+            - description: Specifies if the billing group has automatic account association (<code>AutoAssociate</code>) enabled.
     UpdateCustomLineItemChargeDetails:
       type: object
       properties:

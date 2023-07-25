@@ -5864,7 +5864,7 @@ paths:
     get:
       x-aws-operation-name: CreateGlobalCluster
       operationId: GET_CreateGlobalCluster
-      description: '<p>Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem.</p> <p>You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.</p> <note> <p>This operation applies only to Aurora DB clusters.</p> </note>'
+      description: '<p>Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem.</p> <p>You can create a global database that is initially empty, and then create the primary and secondary DB clusters in the global database. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.</p> <note> <p>This operation applies only to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -5964,7 +5964,7 @@ paths:
     post:
       x-aws-operation-name: CreateGlobalCluster
       operationId: POST_CreateGlobalCluster
-      description: '<p>Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem.</p> <p>You can create a global database that is initially empty, and then add a primary cluster and a secondary cluster to it. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.</p> <note> <p>This operation applies only to Aurora DB clusters.</p> </note>'
+      description: '<p>Creates an Aurora global database spread across multiple Amazon Web Services Regions. The global database contains a single primary cluster with read-write capability, and a read-only secondary cluster that receives data from the primary cluster through high-speed replication performed by the Aurora storage subsystem.</p> <p>You can create a global database that is initially empty, and then create the primary and secondary DB clusters in the global database. Or you can specify an existing Aurora cluster during the create operation, and this cluster becomes the primary cluster of the global database.</p> <note> <p>This operation applies only to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -15061,7 +15061,7 @@ paths:
         - name: CACertificateIdentifier
           in: query
           required: false
-          description: '<p>The CA certificate identifier to use for the DB instance6''s server certificate.</p> <p>This setting doesn''t apply to RDS Custom DB instances.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB instance</a> in the <i>Amazon RDS User Guide</i> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html"> Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora User Guide</i>.</p>'
+          description: '<p>The CA certificate identifier to use for the DB instance''s server certificate.</p> <p>This setting doesn''t apply to RDS Custom DB instances.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB instance</a> in the <i>Amazon RDS User Guide</i> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html"> Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora User Guide</i>.</p>'
           schema:
             type: string
         - name: Domain
@@ -16574,7 +16574,7 @@ paths:
     get:
       x-aws-operation-name: ModifyGlobalCluster
       operationId: GET_ModifyGlobalCluster
-      description: '<p>Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Modifies a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This operation only applies to Aurora global database clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -16610,31 +16610,31 @@ paths:
         - name: GlobalClusterIdentifier
           in: query
           required: false
-          description: '<p>The DB cluster identifier for the global cluster being modified. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global database cluster.</p> </li> </ul>'
+          description: '<p>The cluster identifier for the global cluster to modify. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global database cluster.</p> </li> </ul>'
           schema:
             type: string
         - name: NewGlobalClusterIdentifier
           in: query
           required: false
-          description: '<p>The new cluster identifier for the global database cluster when modifying a global database cluster. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> </li> <li> <p>The first character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
+          description: '<p>The new cluster identifier for the global database cluster. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
           schema:
             type: string
         - name: DeletionProtection
           in: query
           required: false
-          description: Indicates if the global database cluster has deletion protection enabled. The global database cluster can't be deleted when deletion protection is enabled.
+          description: Specifies whether to enable deletion protection for the global database cluster. The global database cluster can't be deleted when deletion protection is enabled.
           schema:
             type: boolean
         - name: EngineVersion
           in: query
           required: false
-          description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL-based Aurora global databases), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-mysql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p> <p>To list all of the available engine versions for <code>aurora-postgresql</code> (for PostgreSQL-based Aurora global databases), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p>'
+          description: '<p>The version number of the database engine to which you want to upgrade. </p> <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL-based Aurora global databases), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-mysql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p> <p>To list all of the available engine versions for <code>aurora-postgresql</code> (for PostgreSQL-based Aurora global databases), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p>'
           schema:
             type: string
         - name: AllowMajorVersionUpgrade
           in: query
           required: false
-          description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p> <p>If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version. Apply any custom parameter groups after completing the upgrade.</p>'
+          description: '<p>Specifies whether to allow major version upgrades.</p> <p>Constraints: Must be enabled if you specify a value for the <code>EngineVersion</code> parameter that''s a different major version than the global cluster''s current version.</p> <p>If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version. Apply any custom parameter groups after completing the upgrade.</p>'
           schema:
             type: boolean
         - name: Action
@@ -16662,7 +16662,7 @@ paths:
     post:
       x-aws-operation-name: ModifyGlobalCluster
       operationId: POST_ModifyGlobalCluster
-      description: '<p>Modify a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Modifies a setting for an Amazon Aurora global cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide</i>.</p> <note> <p>This operation only applies to Aurora global database clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -27549,6 +27549,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The identifier of the source DB cluster if this DB instance is a read replica.
+        PercentProgress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The progress of the storage optimization operation as a percentage.
       description: '<p>Contains the details of an Amazon RDS DB instance.</p> <p>This data type is used as a response element in the operations <code>CreateDBInstance</code>, <code>CreateDBInstanceReadReplica</code>, <code>DeleteDBInstance</code>, <code>DescribeDBInstances</code>, <code>ModifyDBInstance</code>, <code>PromoteReadReplica</code>, <code>RebootDBInstance</code>, <code>RestoreDBInstanceFromDBSnapshot</code>, <code>RestoreDBInstanceFromS3</code>, <code>RestoreDBInstanceToPointInTime</code>, <code>StartDBInstance</code>, and <code>StopDBInstance</code>.</p>'
     CreateDBParameterGroupMessage:
       type: object
@@ -30956,7 +30960,7 @@ components:
         CACertificateIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The CA certificate identifier to use for the DB instance6''s server certificate.</p> <p>This setting doesn''t apply to RDS Custom DB instances.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB instance</a> in the <i>Amazon RDS User Guide</i> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html"> Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora User Guide</i>.</p>'
+            - description: '<p>The CA certificate identifier to use for the DB instance''s server certificate.</p> <p>This setting doesn''t apply to RDS Custom DB instances.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB instance</a> in the <i>Amazon RDS User Guide</i> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html"> Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora User Guide</i>.</p>'
         Domain:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -31285,23 +31289,23 @@ components:
         GlobalClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The DB cluster identifier for the global cluster being modified. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global database cluster.</p> </li> </ul>'
+            - description: '<p>The cluster identifier for the global cluster to modify. This parameter isn''t case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global database cluster.</p> </li> </ul>'
         NewGlobalClusterIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The new cluster identifier for the global database cluster when modifying a global database cluster. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> </li> <li> <p>The first character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
+            - description: '<p>The new cluster identifier for the global database cluster. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: Indicates if the global database cluster has deletion protection enabled. The global database cluster can't be deleted when deletion protection is enabled.
+            - description: Specifies whether to enable deletion protection for the global database cluster. The global database cluster can't be deleted when deletion protection is enabled.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p> <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL-based Aurora global databases), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-mysql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p> <p>To list all of the available engine versions for <code>aurora-postgresql</code> (for PostgreSQL-based Aurora global databases), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p>'
+            - description: '<p>The version number of the database engine to which you want to upgrade. </p> <p>To list all of the available engine versions for <code>aurora-mysql</code> (for MySQL-based Aurora global databases), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-mysql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p> <p>To list all of the available engine versions for <code>aurora-postgresql</code> (for PostgreSQL-based Aurora global databases), use the following command:</p> <p> <code>aws rds describe-db-engine-versions --engine aurora-postgresql --query ''*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]''</code> </p>'
         AllowMajorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: '<p>A value that indicates whether major version upgrades are allowed.</p> <p>Constraints: You must allow major version upgrades when specifying a value for the <code>EngineVersion</code> parameter that is a different major version than the DB cluster''s current version.</p> <p>If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version. Apply any custom parameter groups after completing the upgrade.</p>'
+            - description: '<p>Specifies whether to allow major version upgrades.</p> <p>Constraints: Must be enabled if you specify a value for the <code>EngineVersion</code> parameter that''s a different major version than the global cluster''s current version.</p> <p>If you upgrade the major version of a global database, the cluster and DB instance parameter groups are set to the default parameter groups for the new version. Apply any custom parameter groups after completing the upgrade.</p>'
     OptionConfigurationList:
       type: array
       items:
