@@ -1100,6 +1100,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{parent}:validateCustomModule":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Validates the given Event Threat Detection Custom Module.
+      operationId: securitycenter.projects.eventThreatDetectionSettings.validateCustomModule
+      parameters:
+        - description: 'Required. Resource name of the parent to validate the Custom Module under. Its format is: * "organizations/{organization}/eventThreatDetectionSettings". * "folders/{folder}/eventThreatDetectionSettings". * "projects/{project}/eventThreatDetectionSettings".'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ValidateEventThreatDetectionCustomModuleRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateEventThreatDetectionCustomModuleResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{resource}:getIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1585,6 +1627,30 @@ components:
           description: Container image URI provided when configuring a pod or container. This string can identify a container image version using mutable tags.
           type: string
       type: object
+    CustomModuleValidationError:
+      description: An error encountered while validating the uploaded configuration of an Event Threat Detection Custom Module.
+      properties:
+        description:
+          description: A description of the error, suitable for human consumption. Required.
+          type: string
+        end:
+          $ref: "#/components/schemas/Position"
+          description: The end position of the error in the uploaded text version of the module. This field may be omitted if no specific position applies, or if one could not be computed..
+        fieldPath:
+          description: The path, in RFC 8901 JSON Pointer format, to the field that failed validation. This may be left empty if no specific field is affected.
+          type: string
+        start:
+          $ref: "#/components/schemas/Position"
+          description: The initial position of the error in the uploaded text version of the module. This field may be omitted if no specific position applies, or if one could not be computed.
+      type: object
+    CustomModuleValidationErrors:
+      description: A list of zero or more errors encountered while validating the uploaded configuration of an Event Threat Detection Custom Module.
+      properties:
+        errors:
+          items:
+            $ref: "#/components/schemas/CustomModuleValidationError"
+          type: array
+      type: object
     Cve:
       description: "CVE stands for Common Vulnerabilities and Exposures. More information: https://cve.mitre.org"
       properties:
@@ -1720,6 +1786,43 @@ components:
           type: string
         val:
           description: Environment variable value as a JSON encoded string.
+          type: string
+      type: object
+    EventThreatDetectionCustomModule:
+      description: Represents an instance of an Event Threat Detection custom module, including its full module name, display name, enablement state, and last updated time. You can create a custom module at the organization level only.
+      properties:
+        config:
+          additionalProperties:
+            description: Properties of the object.
+          description: Config for the module. For the resident module, its config value is defined at this level. For the inherited module, its config value is inherited from the ancestor module.
+          type: object
+        description:
+          description: The description for the module.
+          type: string
+        displayName:
+          description: The human readable name to be displayed for the module.
+          type: string
+        enablementState:
+          description: The state of enablement for the module at the given level of the hierarchy.
+          enum:
+            - ENABLEMENT_STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+          type: string
+        lastEditor:
+          description: Output only. The editor the module was last updated by.
+          readOnly: true
+          type: string
+        name:
+          description: 'Immutable. The resource name of the Event Threat Detection custom module. Its format is: * "organizations/{organization}/eventThreatDetectionSettings/customModules/{module}". * "folders/{folder}/eventThreatDetectionSettings/customModules/{module}". * "projects/{project}/eventThreatDetectionSettings/customModules/{module}".'
+          type: string
+        type:
+          description: Type for the module. e.g. CONFIGURABLE_BAD_IP.
+          type: string
+        updateTime:
+          description: Output only. The time the module was last updated.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     ExfilResource:
@@ -2713,6 +2816,18 @@ components:
           description: If not empty, indicates that there may be more effective custom modules to be returned.
           type: string
       type: object
+    ListEventThreatDetectionCustomModulesResponse:
+      description: Response for listing EventThreatDetectionCustomModules.
+      properties:
+        eventThreatDetectionCustomModules:
+          description: Custom modules belonging to the requested parent.
+          items:
+            $ref: "#/components/schemas/EventThreatDetectionCustomModule"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     ListFindingsResponse:
       description: Response message for listing findings.
       properties:
@@ -3075,6 +3190,16 @@ components:
           format: int32
           type: integer
       type: object
+    Position:
+      description: A position in the uploaded text version of a module.
+      properties:
+        columnNumber:
+          format: int32
+          type: integer
+        lineNumber:
+          format: int32
+          type: integer
+      type: object
     Process:
       description: Represents an operating system process.
       properties:
@@ -3362,6 +3487,23 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ValidateEventThreatDetectionCustomModuleRequest:
+      description: Request to validate an EventThreatDetectionCustomModule.
+      properties:
+        rawText:
+          description: Required. The raw text of the module's contents. Used to generate error messages.
+          type: string
+        type:
+          description: Required. The type of the module (e.g. CONFIGURABLE_BAD_IP).
+          type: string
+      type: object
+    ValidateEventThreatDetectionCustomModuleResponse:
+      description: Response to validating an Event Threat Detection Custom Module.
+      properties:
+        errors:
+          $ref: "#/components/schemas/CustomModuleValidationErrors"
+          description: A list of errors returned by the validator. If the list is empty, there were no errors.
       type: object
     Vulnerability:
       description: Refers to common vulnerability fields e.g. cve, cvss, cwe etc.

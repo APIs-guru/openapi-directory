@@ -1678,6 +1678,13 @@ components:
     DeviceRadioState:
       description: Controls for device radio settings.
       properties:
+        airplaneModeState:
+          description: Controls whether airplane mode can be toggled by the user or not
+          enum:
+            - AIRPLANE_MODE_STATE_UNSPECIFIED
+            - AIRPLANE_MODE_USER_CHOICE
+            - AIRPLANE_MODE_DISABLED
+          type: string
         wifiState:
           description: Controls current state of Wi-Fi and if user can change its state.
           enum:
