@@ -2505,6 +2505,10 @@ components:
     GoogleCloudDataplexV1DataProfileResult:
       description: DataProfileResult defines the output of DataProfileScan. Each field of the table will have field type specific profile result.
       properties:
+        postScanActionsResult:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataProfileResultPostScanActionsResult"
+          description: Output only. The result of post scan actions.
+          readOnly: true
         profile:
           $ref: "#/components/schemas/GoogleCloudDataplexV1DataProfileResultProfile"
           description: The profile information per field.
@@ -2515,6 +2519,31 @@ components:
         scannedData:
           $ref: "#/components/schemas/GoogleCloudDataplexV1ScannedData"
           description: The data scanned for this result.
+      type: object
+    GoogleCloudDataplexV1DataProfileResultPostScanActionsResult:
+      description: The result of post scan actions of DataProfileScan job.
+      properties:
+        bigqueryExportResult:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataProfileResultPostScanActionsResultBigQueryExportResult"
+          description: Output only. The result of BigQuery export post scan action.
+          readOnly: true
+      type: object
+    GoogleCloudDataplexV1DataProfileResultPostScanActionsResultBigQueryExportResult:
+      description: The result of BigQuery export post scan action.
+      properties:
+        message:
+          description: Output only. Additional information about the BigQuery exporting.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. Execution state for the BigQuery exporting.
+          enum:
+            - STATE_UNSPECIFIED
+            - SUCCEEDED
+            - FAILED
+            - SKIPPED
+          readOnly: true
+          type: string
       type: object
     GoogleCloudDataplexV1DataProfileResultProfile:
       description: Contains name, type, mode and field type specific profile information.
@@ -2659,6 +2688,9 @@ components:
         includeFields:
           $ref: "#/components/schemas/GoogleCloudDataplexV1DataProfileSpecSelectedFields"
           description: Optional. The fields to include in data profile.If not specified, all fields at the time of profile scan job execution are included, except for ones listed in exclude_fields.
+        postScanActions:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataProfileSpecPostScanActions"
+          description: Optional. Actions to take upon job completion..
         rowFilter:
           description: "Optional. A filter applied to all rows in a single DataScan job. The filter needs to be a valid SQL expression for a WHERE clause in BigQuery standard SQL syntax. Example: col1 >= 0 AND col2 < 10"
           type: string
@@ -2666,6 +2698,20 @@ components:
           description: Optional. The percentage of the records to be selected from the dataset for DataScan. Value can range between 0.0 and 100.0 with up to 3 significant decimal digits. Sampling is not applied if sampling_percent is not specified, 0 or 100.
           format: float
           type: number
+      type: object
+    GoogleCloudDataplexV1DataProfileSpecPostScanActions:
+      description: The configuration of post scan actions of DataProfileScan job.
+      properties:
+        bigqueryExport:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataProfileSpecPostScanActionsBigQueryExport"
+          description: Optional. If set, results will be exported to the provided BigQuery table.
+      type: object
+    GoogleCloudDataplexV1DataProfileSpecPostScanActionsBigQueryExport:
+      description: The configuration of BigQuery export post scan action.
+      properties:
+        resultsTable:
+          description: "Optional. The BigQuery table to export DataProfileScan results to. Format: projects/{project}/datasets/{dataset}/tables/{table}"
+          type: string
       type: object
     GoogleCloudDataplexV1DataProfileSpecSelectedFields:
       description: The specification for fields to include or exclude in data profile scan.
@@ -2694,6 +2740,10 @@ components:
         passed:
           description: Overall data quality result -- true if all rules passed.
           type: boolean
+        postScanActionsResult:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualityResultPostScanActionsResult"
+          description: Output only. The result of post scan actions.
+          readOnly: true
         rowCount:
           description: The count of rows processed.
           format: int64
@@ -2706,6 +2756,31 @@ components:
         scannedData:
           $ref: "#/components/schemas/GoogleCloudDataplexV1ScannedData"
           description: The data scanned for this result.
+      type: object
+    GoogleCloudDataplexV1DataQualityResultPostScanActionsResult:
+      description: The result of post scan actions of DataQualityScan job.
+      properties:
+        bigqueryExportResult:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualityResultPostScanActionsResultBigQueryExportResult"
+          description: Output only. The result of BigQuery export post scan action.
+          readOnly: true
+      type: object
+    GoogleCloudDataplexV1DataQualityResultPostScanActionsResultBigQueryExportResult:
+      description: The result of BigQuery export post scan action.
+      properties:
+        message:
+          description: Output only. Additional information about the BigQuery exporting.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. Execution state for the BigQuery exporting.
+          enum:
+            - STATE_UNSPECIFIED
+            - SUCCEEDED
+            - FAILED
+            - SKIPPED
+          readOnly: true
+          type: string
       type: object
     GoogleCloudDataplexV1DataQualityRule:
       description: A rule captures data quality intent about a data source.
@@ -2926,6 +3001,9 @@ components:
     GoogleCloudDataplexV1DataQualitySpec:
       description: DataQualityScan related setting.
       properties:
+        postScanActions:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualitySpecPostScanActions"
+          description: Optional. Actions to take upon job completion.
         rowFilter:
           description: "Optional. A filter applied to all rows in a single DataScan job. The filter needs to be a valid SQL expression for a WHERE clause in BigQuery standard SQL syntax. Example: col1 >= 0 AND col2 < 10"
           type: string
@@ -2938,6 +3016,20 @@ components:
           description: Optional. The percentage of the records to be selected from the dataset for DataScan. Value can range between 0.0 and 100.0 with up to 3 significant decimal digits. Sampling is not applied if sampling_percent is not specified, 0 or 100.
           format: float
           type: number
+      type: object
+    GoogleCloudDataplexV1DataQualitySpecPostScanActions:
+      description: The configuration of post scan actions of DataQualityScan.
+      properties:
+        bigqueryExport:
+          $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualitySpecPostScanActionsBigQueryExport"
+          description: Optional. If set, results will be exported to the provided BigQuery table.
+      type: object
+    GoogleCloudDataplexV1DataQualitySpecPostScanActionsBigQueryExport:
+      description: The configuration of BigQuery export post scan action.
+      properties:
+        resultsTable:
+          description: "Optional. The BigQuery table to export DataQualityScan results to. Format: projects/{project}/datasets/{dataset}/tables/{table}"
+          type: string
       type: object
     GoogleCloudDataplexV1DataScan:
       description: "Represents a user-visible job which provides the insights for the related data source.For example: Data Quality: generates queries based on the rules and runs against the data to get data quality check results. Data Profile: analyzes the data in table(s) and generates insights about the structure, content and relationships (such as null percent, cardinality, min/max/mean, etc)."
@@ -3258,6 +3350,11 @@ components:
       properties:
         attributeCount:
           description: Output only. The number of attributes in the DataTaxonomy.
+          format: int32
+          readOnly: true
+          type: integer
+        classCount:
+          description: Output only. The number of classes in the DataTaxonomy.
           format: int32
           readOnly: true
           type: integer

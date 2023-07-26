@@ -5715,6 +5715,18 @@ components:
         deviceId:
           description: The unique ID of the Chrome device.
           type: string
+        deviceLicenseType:
+          description: Output only. Device license type.
+          enum:
+            - deviceLicenseTypeUnspecified
+            - enterprise
+            - enterpriseUpgrade
+            - educationUpgrade
+            - education
+            - terminal
+            - kioskUpgrade
+          readOnly: true
+          type: string
         diskVolumeReports:
           description: Reports of disk space and other info about mounted/connected volumes.
           items:

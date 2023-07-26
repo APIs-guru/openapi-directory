@@ -579,7 +579,7 @@ paths:
         - spaces
   "/v1/{parent}/messages":
     get:
-      description: Lists messages in a space that the caller is a member of, including messages from blocked members and spaces. For an example, see [List messages](/chat/api/guides/v1/messages/list). Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.messages` or `chat.messages.readonly` authorization scope. This method is only supported in spaces that don't allow users from outside the Workspace organization to join.
+      description: Lists messages in a space that the caller is a member of, including messages from blocked members and spaces. For an example, see [List messages](/chat/api/guides/v1/messages/list). Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.messages` or `chat.messages.readonly` authorization scope.
       operationId: chat.spaces.messages.list
       parameters:
         - description: "Required. The resource name of the space to list messages from. Format: `spaces/{space}`"
@@ -2446,6 +2446,9 @@ components:
         displayName:
           description: The space's display name. Required when [creating a space](https://developers.google.com/chat/api/reference/rest/v1/spaces/create). For direct messages, this field might be empty. Supports up to 128 characters.
           type: string
+        externalUserAllowed:
+          description: Immutable. Whether this space permits any Google Chat user as a member. Input when creating a space. For existing spaces, this field is output only.
+          type: boolean
         name:
           description: "Resource name of the space. Format: `spaces/{space}`"
           type: string
