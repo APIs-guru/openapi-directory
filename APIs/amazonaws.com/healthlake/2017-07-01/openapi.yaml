@@ -3,7 +3,7 @@ info:
   version: '2017-07-01'
   x-release: v4
   title: Amazon HealthLake
-  description: 'Amazon HealthLake is a HIPAA eligibile service that allows customers to store, transform, query, and analyze their FHIR-formatted data in a consistent fashion in the cloud.'
+  description: 'AWS HealthLake is a HIPAA eligibile service that allows customers to store, transform, query, and analyze their FHIR-formatted data in a consistent fashion in the cloud.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -118,7 +118,7 @@ paths:
   /#X-Amz-Target=HealthLake.CreateFHIRDatastore:
     post:
       operationId: CreateFHIRDatastore
-      description: Creates a Data Store that can ingest and export FHIR formatted data.
+      description: Creates a data store that can ingest and export FHIR formatted data.
       responses:
         '200':
           description: Success
@@ -175,7 +175,7 @@ paths:
   /#X-Amz-Target=HealthLake.DeleteFHIRDatastore:
     post:
       operationId: DeleteFHIRDatastore
-      description: 'Deletes a Data Store. '
+      description: 'Deletes a data store. '
       responses:
         '200':
           description: Success
@@ -244,7 +244,7 @@ paths:
   /#X-Amz-Target=HealthLake.DescribeFHIRDatastore:
     post:
       operationId: DescribeFHIRDatastore
-      description: 'Gets the properties associated with the FHIR Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.'
+      description: 'Gets the properties associated with the FHIR data store, including the data store ID, data store ARN, data store name, data store status, when the data store was created, data store type version, and the data store''s endpoint.'
       responses:
         '200':
           description: Success
@@ -415,7 +415,7 @@ paths:
   /#X-Amz-Target=HealthLake.ListFHIRDatastores:
     post:
       operationId: ListFHIRDatastores
-      description: 'Lists all FHIR Data Stores that are in the user’s account, regardless of Data Store status.'
+      description: 'Lists all FHIR data stores that are in the user’s account, regardless of data store status.'
       responses:
         '200':
           description: Success
@@ -628,7 +628,7 @@ paths:
   /#X-Amz-Target=HealthLake.ListTagsForResource:
     post:
       operationId: ListTagsForResource
-      description: ' Returns a list of all existing tags associated with a Data Store. '
+      description: ' Returns a list of all existing tags associated with a data store. '
       responses:
         '200':
           description: Success
@@ -799,7 +799,7 @@ paths:
   /#X-Amz-Target=HealthLake.TagResource:
     post:
       operationId: TagResource
-      description: ' Adds a user specified key and value tag to a Data Store. '
+      description: ' Adds a user specified key and value tag to a data store. '
       responses:
         '200':
           description: Success
@@ -844,7 +844,7 @@ paths:
   /#X-Amz-Target=HealthLake.UntagResource:
     post:
       operationId: UntagResource
-      description: ' Removes tags from a Data Store. '
+      description: ' Removes tags from a data store. '
       responses:
         '200':
           description: Success
@@ -949,19 +949,19 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store id. This id is in the output from the initial Data Store creation call.
+            - description: The AWS-generated data store id. This id is in the output from the initial data store creation call.
         DatastoreArn:
           allOf:
             - $ref: '#/components/schemas/DatastoreArn'
-            - description: The Data Store ARN is generated during the creation of the Data Store and can be found in the output from the initial Data Store creation call.
+            - description: The data store ARN is generated during the creation of the data store and can be found in the output from the initial data store creation call.
         DatastoreStatus:
           allOf:
             - $ref: '#/components/schemas/DatastoreStatus'
-            - description: 'The status of the FHIR Data Store. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’, ‘DELETED’.'
+            - description: The status of the FHIR data store.
         DatastoreEndpoint:
           allOf:
             - $ref: '#/components/schemas/BoundedLengthString'
-            - description: 'The AWS endpoint for the created Data Store. '
+            - description: The AWS endpoint for the created data store.
     CreateFHIRDatastoreRequest:
       type: object
       required:
@@ -971,19 +971,19 @@ components:
         DatastoreName:
           allOf:
             - $ref: '#/components/schemas/DatastoreName'
-            - description: The user generated name for the Data Store.
+            - description: The user generated name for the data store.
         DatastoreTypeVersion:
           allOf:
             - $ref: '#/components/schemas/FHIRVersion'
-            - description: The FHIR version of the Data Store. The only supported version is R4.
+            - description: The FHIR version of the data store. The only supported version is R4.
         SseConfiguration:
           allOf:
             - $ref: '#/components/schemas/SseConfiguration'
-            - description: ' The server-side encryption key configuration for a customer provided encryption key specified for creating a Data Store. '
+            - description: ' The server-side encryption key configuration for a customer provided encryption key specified for creating a data store. '
         PreloadDataConfig:
           allOf:
             - $ref: '#/components/schemas/PreloadDataConfig'
-            - description: 'Optional parameter to preload data upon creation of the Data Store. Currently, the only supported preloaded data is synthetic data generated from Synthea.'
+            - description: 'Optional parameter to preload data upon creation of the data store. Currently, the only supported preloaded data is synthetic data generated from Synthea.'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenString'
@@ -991,11 +991,11 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: ' Resource tags that are applied to a Data Store when it is created. '
+            - description: ' Resource tags that are applied to a data store when it is created. '
         IdentityProviderConfiguration:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderConfiguration'
-            - description: The configuration of the identity provider that you want to use for your Data Store.
+            - description: The configuration of the identity provider that you want to use for your data store.
     ValidationException: {}
     ThrottlingException: {}
     AccessDeniedException: {}
@@ -1011,19 +1011,19 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated ID for the Data Store to be deleted.
+            - description: The AWS-generated ID for the data store to be deleted.
         DatastoreArn:
           allOf:
             - $ref: '#/components/schemas/DatastoreArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+            - description: The Amazon Resource Name (ARN) that gives AWS HealthLake access permission.
         DatastoreStatus:
           allOf:
             - $ref: '#/components/schemas/DatastoreStatus'
-            - description: 'The status of the Data Store that the user has requested to be deleted. '
+            - description: 'The status of the data store that the user has requested to be deleted. '
         DatastoreEndpoint:
           allOf:
             - $ref: '#/components/schemas/BoundedLengthString'
-            - description: The AWS endpoint for the Data Store the user has requested to be deleted.
+            - description: The AWS endpoint for the data store the user has requested to be deleted.
     DeleteFHIRDatastoreRequest:
       type: object
       required:
@@ -1033,7 +1033,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: ' The AWS-generated ID for the Data Store to be deleted.'
+            - description: ' The AWS-generated ID for the data store to be deleted.'
     ConflictException: {}
     ResourceNotFoundException: {}
     DescribeFHIRDatastoreResponse:
@@ -1044,7 +1044,7 @@ components:
         DatastoreProperties:
           allOf:
             - $ref: '#/components/schemas/DatastoreProperties'
-            - description: 'All properties associated with a Data Store, including the Data Store ID, Data Store ARN, Data Store name, Data Store status, created at, Data Store type version, and Data Store endpoint.'
+            - description: 'All properties associated with a data store, including the data store ID, data store ARN, data store name, data store status, when the data store was created, data store type version, and the data store''s endpoint.'
     DescribeFHIRDatastoreRequest:
       type: object
       required:
@@ -1054,7 +1054,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store ID.
+            - description: The AWS-generated data store ID.
     DescribeFHIRExportJobResponse:
       type: object
       required:
@@ -1074,7 +1074,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS generated ID for the Data Store from which files are being exported from for an export job.
+            - description: The AWS generated ID for the data store from which files are being exported from for an export job.
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
@@ -1098,7 +1098,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated ID of the Data Store.
+            - description: The AWS-generated ID of the data store.
         JobId:
           allOf:
             - $ref: '#/components/schemas/JobId'
@@ -1111,7 +1111,7 @@ components:
         DatastorePropertiesList:
           allOf:
             - $ref: '#/components/schemas/DatastorePropertiesList'
-            - description: All properties associated with the listed Data Stores.
+            - description: All properties associated with the listed data stores.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1123,15 +1123,15 @@ components:
         Filter:
           allOf:
             - $ref: '#/components/schemas/DatastoreFilter'
-            - description: Lists all filters associated with a FHIR Data Store request.
+            - description: Lists all filters associated with a FHIR data store request.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: Fetches the next page of Data Stores when results are paginated.
+            - description: Fetches the next page of data stores when results are paginated.
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResultsInteger'
-            - description: The maximum number of Data Stores returned in a single page of a ListFHIRDatastoresRequest call.
+            - description: The maximum number of data stores returned in a single page of a ListFHIRDatastoresRequest call.
     ListFHIRExportJobsResponse:
       type: object
       required:
@@ -1154,7 +1154,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: ' This parameter limits the response to the export job with the specified Data Store ID. '
+            - description: ' This parameter limits the response to the export job with the specified data store ID. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1201,7 +1201,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: ' This parameter limits the response to the import job with the specified Data Store ID. '
+            - description: ' This parameter limits the response to the import job with the specified data store ID. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1232,7 +1232,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: ' Returns a list of tags associated with a Data Store. '
+            - description: ' Returns a list of tags associated with a data store. '
     ListTagsForResourceRequest:
       type: object
       required:
@@ -1242,7 +1242,7 @@ components:
         ResourceARN:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: ' The Amazon Resource Name(ARN) of the Data Store for which tags are being added. '
+            - description: ' The Amazon Resource Name(ARN) of the data store for which tags are being added. '
     StartFHIRExportJobResponse:
       type: object
       required:
@@ -1260,7 +1260,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS generated ID for the Data Store from which files are being exported for an export job.
+            - description: The AWS generated ID for the data store from which files are being exported for an export job.
     StartFHIRExportJobRequest:
       type: object
       required:
@@ -1281,7 +1281,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS generated ID for the Data Store from which files are being exported for an export job.
+            - description: The AWS generated ID for the data store from which files are being exported for an export job.
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
@@ -1307,7 +1307,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store ID.
+            - description: The AWS-generated data store ID.
     StartFHIRImportJobRequest:
       type: object
       required:
@@ -1331,11 +1331,11 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated Data Store ID.
+            - description: The AWS-generated data store ID.
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+            - description: The Amazon Resource Name (ARN) that gives AWS HealthLake access permission.
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenString'
@@ -1353,11 +1353,11 @@ components:
         ResourceARN:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: ' The Amazon Resource Name(ARN)that gives Amazon HealthLake access to the Data Store which tags are being added to. '
+            - description: ' The Amazon Resource Name(ARN)that gives AWS HealthLake access to the data store which tags are being added to. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: ' The user specified key and value pair tags being added to a Data Store. '
+            - description: ' The user specified key and value pair tags being added to a data store. '
     UntagResourceResponse:
       type: object
       properties: {}
@@ -1371,11 +1371,11 @@ components:
         ResourceARN:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceName'
-            - description: ' "The Amazon Resource Name(ARN) of the Data Store for which tags are being removed '
+            - description: The Amazon Resource Name(ARN) of the data store for which tags are being removed.
         TagKeys:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
-            - description: ' The keys for the tags to be removed from the Healthlake Data Store. '
+            - description: ' The keys for the tags to be removed from the HealthLake data store. '
     AmazonResourceName:
       type: string
       pattern: '^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}'
@@ -1433,7 +1433,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PreloadDataType'
             - description: The type of preloaded data. Only Synthea preloaded data is supported.
-      description: ' The input properties for the preloaded Data Store. Only data preloaded from Synthea is supported.'
+      description: ' The input properties for the preloaded data store. Only data preloaded from Synthea is supported.'
     TagList:
       type: array
       items:
@@ -1448,11 +1448,11 @@ components:
         AuthorizationStrategy:
           allOf:
             - $ref: '#/components/schemas/AuthorizationStrategy'
-            - description: The authorization strategy that you selected when you created the Data Store.
+            - description: The authorization strategy that you selected when you created the data store.
         FineGrainedAuthorizationEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: If you enabled fine-grained authorization when you created the Data Store.
+            - description: If you enabled fine-grained authorization when you created the data store.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/ConfigurationMetadata'
@@ -1461,7 +1461,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/LambdaArn'
             - description: The Amazon Resource Name (ARN) of the Lambda function that you want to use to decode the access token created by the authorization server.
-      description: The identity provider configuration that you gave when the Data Store was created.
+      description: The identity provider configuration that you gave when the data store was created.
     DatastoreId:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
@@ -1486,20 +1486,20 @@ components:
         DatastoreName:
           allOf:
             - $ref: '#/components/schemas/DatastoreName'
-            - description: Allows the user to filter Data Store results by name.
+            - description: Allows the user to filter data store results by name.
         DatastoreStatus:
           allOf:
             - $ref: '#/components/schemas/DatastoreStatus'
-            - description: Allows the user to filter Data Store results by status.
+            - description: Allows the user to filter data store results by status.
         CreatedBefore:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'A filter that allows the user to set cutoff dates for records. All Data Stores created before the specified date will be included in the results. '
+            - description: 'A filter that allows the user to set cutoff dates for records. All data stores created before the specified date will be included in the results. '
         CreatedAfter:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: A filter that allows the user to set cutoff dates for records. All Data Stores created after the specified date will be included in the results.
-      description: The filters applied to Data Store query.
+            - description: A filter that allows the user to set cutoff dates for records. All data stores created after the specified date will be included in the results.
+      description: The filters applied to data store query.
     String:
       type: string
       pattern: '[\P{M}\p{M}]{0,10000}'
@@ -1516,23 +1516,23 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS-generated ID number for the Data Store.
+            - description: The AWS-generated ID number for the data store.
         DatastoreArn:
           allOf:
             - $ref: '#/components/schemas/DatastoreArn'
-            - description: The Amazon Resource Name used in the creation of the Data Store.
+            - description: The Amazon Resource Name used in the creation of the data store.
         DatastoreName:
           allOf:
             - $ref: '#/components/schemas/DatastoreName'
-            - description: The user-generated name for the Data Store.
+            - description: The user-generated name for the data store.
         DatastoreStatus:
           allOf:
             - $ref: '#/components/schemas/DatastoreStatus'
-            - description: 'The status of the Data Store. Possible statuses are ''CREATING'', ''ACTIVE'', ''DELETING'', or ''DELETED''.'
+            - description: The status of the data store.
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: 'The time that a Data Store was created. '
+            - description: 'The time that a data store was created. '
         DatastoreTypeVersion:
           allOf:
             - $ref: '#/components/schemas/FHIRVersion'
@@ -1540,7 +1540,7 @@ components:
         DatastoreEndpoint:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.
+            - description: The AWS endpoint for the data store. Each data store will have it's own endpoint with data store ID in the endpoint URL.
         SseConfiguration:
           allOf:
             - $ref: '#/components/schemas/SseConfiguration'
@@ -1548,12 +1548,12 @@ components:
         PreloadDataConfig:
           allOf:
             - $ref: '#/components/schemas/PreloadDataConfig'
-            - description: The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
+            - description: The preloaded data configuration for the data store. Only data preloaded from Synthea is supported.
         IdentityProviderConfiguration:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderConfiguration'
-            - description: The identity provider that you selected when you created the Data Store.
-      description: 'Displays the properties of the Data Store, including the ID, ARN, name, and the status of the Data Store.'
+            - description: The identity provider that you selected when you created the data store.
+      description: 'Displays the properties of the data store, including the ID, ARN, name, and the status of the data store.'
     DatastorePropertiesList:
       type: array
       items:
@@ -1595,7 +1595,7 @@ components:
         DatastoreId:
           allOf:
             - $ref: '#/components/schemas/DatastoreId'
-            - description: The AWS generated ID for the Data Store from which files are being exported for an export job.
+            - description: The AWS generated ID for the data store from which files are being exported for an export job.
         OutputDataConfig:
           allOf:
             - $ref: '#/components/schemas/OutputDataConfig'
@@ -1651,12 +1651,12 @@ components:
         DataAccessRoleArn:
           allOf:
             - $ref: '#/components/schemas/IamRoleArn'
-            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.
+            - description: The Amazon Resource Name (ARN) that gives AWS HealthLake access to your input data.
         Message:
           allOf:
             - $ref: '#/components/schemas/Message'
             - description: 'An explanation of any errors that may have occurred during the FHIR import job. '
-      description: 'Displays the properties of the import job, including the ID, Arn, Name, and the status of the Data Store.'
+      description: 'Displays the properties of the import job, including the ID, Arn, Name, and the status of the data store.'
     EncryptionKeyID:
       type: string
       pattern: '(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))'
@@ -1712,7 +1712,7 @@ components:
         S3Uri:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
-            - description: 'The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. '
+            - description: 'The S3Uri is the user specified S3 location of the FHIR data to be imported into AWS HealthLake. '
       description: ' The input properties for an import job.'
     ImportJobPropertiesList:
       type: array
@@ -1730,12 +1730,12 @@ components:
         CmkType:
           allOf:
             - $ref: '#/components/schemas/CmkType'
-            - description: ' The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. '
+            - description: ' The type of customer-managed-key(CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. '
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/EncryptionKeyID'
-            - description: ' The KMS encryption key id/alias used to encrypt the Data Store contents at rest. '
-      description: ' The customer-managed-key(CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption. '
+            - description: ' The KMS encryption key id/alias used to encrypt the data store contents at rest. '
+      description: ' The customer-managed-key(CMK) used when creating a data store. If a customer owned key is not specified, an AWS owned key will be used for encryption. '
     NextToken:
       type: string
       pattern: '\p{ASCII}{0,8192}'
@@ -1753,7 +1753,7 @@ components:
         S3Uri:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
-            - description: ' The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. '
+            - description: ' The S3Uri is the user specified S3 location of the FHIR data to be imported into AWS HealthLake. '
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/EncryptionKeyID'

@@ -19417,7 +19417,7 @@ components:
         Data:
           allOf:
             - $ref: '#/components/schemas/AmazonRedshiftNodeData'
-            - description: Specifies the data of the Amazon Reshift target node.
+            - description: Specifies the data of the Amazon Redshift target node.
         Inputs:
           allOf:
             - $ref: '#/components/schemas/OneInput'
@@ -22502,6 +22502,44 @@ components:
             - $ref: '#/components/schemas/RecipeReference'
             - description: A reference to the DataBrew recipe used by the node.
       description: A Glue Studio node that uses a Glue DataBrew recipe in Glue jobs.
+    SnowflakeSource:
+      type: object
+      required:
+        - Name
+        - Data
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NodeName'
+            - description: The name of the Snowflake data source.
+        Data:
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeNodeData'
+            - description: Configuration for the Snowflake data source.
+        OutputSchemas:
+          allOf:
+            - $ref: '#/components/schemas/GlueSchemas'
+            - description: Specifies user-defined schemas for your output data.
+      description: Specifies a Snowflake data source.
+    SnowflakeTarget:
+      type: object
+      required:
+        - Name
+        - Data
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/NodeName'
+            - description: The name of the Snowflake target.
+        Data:
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeNodeData'
+            - description: Specifies the data of the Snowflake target node.
+        Inputs:
+          allOf:
+            - $ref: '#/components/schemas/OneInput'
+            - description: The nodes that are inputs to the data target.
+      description: Specifies a Snowflake target.
     CodeGenConfigurationNode:
       type: object
       properties:
@@ -22771,6 +22809,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Recipe'
             - description: Specifies a Glue DataBrew recipe node.
+        SnowflakeSource:
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeSource'
+            - description: Specifies a Snowflake data source.
+        SnowflakeTarget:
+          allOf:
+            - $ref: '#/components/schemas/SnowflakeTarget'
+            - description: Specifies a target that writes to a Snowflake data source.
       description: ' <code>CodeGenConfigurationNode</code> enumerates all valid Node types. One and only one of its member variables can be populated.'
     CodeGenConfigurationNodes:
       type: object
@@ -28008,6 +28054,94 @@ components:
             - $ref: '#/components/schemas/LocationMap'
             - description: A mapping of skewed values to the columns that contain them.
       description: Specifies skewed values in a table. Skewed values are those that occur with very high frequency.
+    SnowflakeNodeData:
+      type: object
+      properties:
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: 'Specifies how retrieved data is specified. Valid values: <code>"table"</code>, <code> "query"</code>.'
+        Connection:
+          allOf:
+            - $ref: '#/components/schemas/Option'
+            - description: Specifies a Glue Data Catalog Connection to a Snowflake endpoint.
+        Schema:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies a Snowflake database schema for your node to use.
+        Table:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies a Snowflake table for your node to use.
+        Database:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Specifies a Snowflake database for your node to use.
+        TempDir:
+          allOf:
+            - $ref: '#/components/schemas/EnclosedInStringProperty'
+            - description: Not currently used.
+        IamRole:
+          allOf:
+            - $ref: '#/components/schemas/Option'
+            - description: Not currently used.
+        AdditionalOptions:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalOptions'
+            - description: 'Specifies additional options passed to the Snowflake connector. If options are specified elsewhere in this node, this will take precedence.'
+        SampleQuery:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: A SQL string used to retrieve data with the <code>query</code> sourcetype.
+        PreAction:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: A SQL string run before the Snowflake connector performs its standard actions.
+        PostAction:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: A SQL string run after the Snowflake connector performs its standard actions.
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'Specifies what action to take when writing to a table with preexisting data. Valid values: <code> append</code>, <code>merge</code>, <code>truncate</code>, <code>drop</code>.'
+        Upsert:
+          allOf:
+            - $ref: '#/components/schemas/BooleanValue'
+            - description: 'Used when Action is <code>append</code>. Specifies the resolution behavior when a row already exists. If true, preexisting rows will be updated. If false, those rows will be inserted.'
+        MergeAction:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: 'Specifies a merge action. Valid values: <code>simple</code>, <code>custom</code>. If simple, merge behavior is defined by <code>MergeWhenMatched</code> and <code> MergeWhenNotMatched</code>. If custom, defined by <code>MergeClause</code>.'
+        MergeWhenMatched:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: 'Specifies how to resolve records that match preexisting data when merging. Valid values: <code> update</code>, <code>delete</code>.'
+        MergeWhenNotMatched:
+          allOf:
+            - $ref: '#/components/schemas/GenericLimitedString'
+            - description: 'Specifies how to process records that do not match preexisting data when merging. Valid values: <code>insert</code>, <code>none</code>.'
+        MergeClause:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: A SQL statement that specifies a custom merge behavior.
+        StagingTable:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: 'The name of a staging table used when performing <code>merge</code> or upsert <code>append</code> actions. Data is written to this table, then moved to <code>table</code> by a generated postaction.'
+        SelectedColumns:
+          allOf:
+            - $ref: '#/components/schemas/OptionList'
+            - description: 'Specifies the columns combined to identify a record when detecting matches for merges and upserts. A list of structures with <code>value</code>, <code>label</code> and <code> description</code> keys. Each structure describes a column.'
+        AutoPushdown:
+          allOf:
+            - $ref: '#/components/schemas/BooleanValue'
+            - description: 'Specifies whether automatic query pushdown is enabled. If pushdown is enabled, then when a query is run on Spark, if part of the query can be "pushed down" to the Snowflake server, it is pushed down. This improves performance of some queries.'
+        TableSchema:
+          allOf:
+            - $ref: '#/components/schemas/OptionList'
+            - description: 'Manually defines the target schema for the node. A list of structures with <code>value</code> , <code>label</code> and <code>description</code> keys. Each structure defines a column.'
+      description: Specifies configuration for Snowflake nodes in Glue Studio.
     Sort:
       type: string
       enum:

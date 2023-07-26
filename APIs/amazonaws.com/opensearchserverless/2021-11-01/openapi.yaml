@@ -2843,6 +2843,7 @@ components:
       enum:
         - SEARCH
         - TIMESERIES
+        - VECTORSEARCH
     CollectionDetail:
       type: object
       properties:
@@ -3275,7 +3276,7 @@ components:
       type: string
       pattern: '[\u0009\u000A\u000D\u0020-\u007E\u00A1-\u00FF]+'
       minLength: 1
-      maxLength: 20480
+      maxLength: 51200
     SamlConfigOptionsSessionTimeoutInteger:
       type: integer
       minimum: 5

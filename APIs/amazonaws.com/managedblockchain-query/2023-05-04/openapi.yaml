@@ -1,0 +1,1363 @@
+openapi: 3.0.0
+info:
+  version: '2023-05-04'
+  x-release: v4
+  title: Amazon Managed Blockchain Query
+  description: 'Amazon Managed Blockchain (AMB) Query provides you with convenient access to multi-blockchain network data, which makes it easier for you to extract contextual data related to blockchain activity. You can use AMB Query to read data from public blockchain networks, such as Bitcoin Mainnet and Ethereum Mainnet. You can also get information such as the current and historical balances of addresses, or you can get a list of blockchain transactions for a given time period. Additionally, you can get details of a given transaction, such as transaction events, which you can further analyze or use in business logic for your applications.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: managedblockchain-query
+  x-aws-signingName: managedblockchain-query
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/managedblockchain-query-2023-05-04.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/managedblockchain-query/'
+servers:
+  - url: 'http://managedblockchain-query.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Managed Blockchain Query multi-region endpoint
+  - url: 'https://managedblockchain-query.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon Managed Blockchain Query multi-region endpoint
+  - url: 'http://managedblockchain-query.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Managed Blockchain Query endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://managedblockchain-query.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon Managed Blockchain Query endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /batch-get-token-balance:
+    post:
+      operationId: BatchGetTokenBalance
+      description: '<p>Gets the token balance for a batch of tokens by using the <code>GetTokenBalance</code> action for every token in the request.</p> <note> <p>Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetTokenBalanceOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                getTokenBalanceInputs:
+                  description: An array of <code>GetTokenBalanceInput</code> objects whose balance is being requested.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BatchGetTokenBalanceInputItem'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-token-balance:
+    post:
+      operationId: GetTokenBalance
+      description: '<p>Gets the balance of a specific token, including native tokens, for a given address (wallet or contract) on the blockchain.</p> <note> <p>Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTokenBalanceOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tokenIdentifier
+                - ownerIdentifier
+              properties:
+                tokenIdentifier:
+                  description: '<p>The container for the identifier for the token including the unique token ID and its blockchain network.</p> <note> <p>Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported.</p> </note>'
+                  type: object
+                  properties:
+                    network:
+                      allOf:
+                        - $ref: '#/components/schemas/QueryNetwork'
+                        - description: The blockchain network of the token.
+                    contractAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/ChainAddress'
+                        - description: This is the token's contract address.
+                    tokenId:
+                      allOf:
+                        - $ref: '#/components/schemas/QueryTokenId'
+                        - description: The unique identifier of the token.
+                ownerIdentifier:
+                  description: The container for the identifier of the owner.
+                  type: object
+                  properties:
+                    address:
+                      allOf:
+                        - $ref: '#/components/schemas/ChainAddress'
+                        - description: The contract or wallet address for the owner.
+                atBlockchainInstant:
+                  description: The container for time.
+                  type: object
+                  properties:
+                    time:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: <p>The container of the <code>Timestamp</code> of the blockchain instant.</p> <note> <p>This <code>timestamp</code> will only be recorded up to the second.</p> </note>
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /get-transaction:
+    post:
+      operationId: GetTransaction
+      description: Get the details of a transaction.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - transactionHash
+                - network
+              properties:
+                transactionHash:
+                  description: The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+                  type: string
+                  pattern: '(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})'
+                network:
+                  description: The blockchain network where the transaction occurred.
+                  type: string
+                  enum:
+                    - ETHEREUM_MAINNET
+                    - BITCOIN_MAINNET
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-token-balances:
+    post:
+      operationId: ListTokenBalances
+      description: '<p>This action returns the following for a given a blockchain network:</p> <ul> <li> <p>Lists all token balances owned by an address (either a contact address or a wallet address).</p> </li> <li> <p>Lists all token balances for all tokens created by a contract.</p> </li> <li> <p>Lists all token balances for a given token.</p> </li> </ul> <note> <p>You must always specify the network property of the <code>tokenFilter</code> when using this operation.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTokenBalancesOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tokenFilter
+              properties:
+                ownerFilter:
+                  description: The container for the owner information to filter by.
+                  type: object
+                  properties:
+                    address:
+                      allOf:
+                        - $ref: '#/components/schemas/ChainAddress'
+                        - description: The contract or wallet address.
+                tokenFilter:
+                  description: <p>The container of the token filter like the contract address on a given blockchain network or a unique token identifier on a given blockchain network.</p> <note> <p>You must always specify the network property of this container when using this operation.</p> </note>
+                  type: object
+                  properties:
+                    network:
+                      allOf:
+                        - $ref: '#/components/schemas/QueryNetwork'
+                        - description: The blockchain network of the token.
+                    contractAddress:
+                      allOf:
+                        - $ref: '#/components/schemas/ChainAddress'
+                        - description: This is the address of the contract.
+                    tokenId:
+                      allOf:
+                        - $ref: '#/components/schemas/QueryTokenId'
+                        - description: The unique identifier of the token.
+                nextToken:
+                  description: The pagination token that indicates the next set of results to retrieve.
+                  type: string
+                  minLength: 0
+                  maxLength: 131070
+                maxResults:
+                  description: The maximum number of token balances to return.
+                  type: integer
+                  minimum: 1
+                  maximum: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-transaction-events:
+    post:
+      operationId: ListTransactionEvents
+      description: An array of <code>TransactionEvent</code> objects. Each object contains details about the transaction event.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTransactionEventsOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - transactionHash
+                - network
+              properties:
+                transactionHash:
+                  description: The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+                  type: string
+                  pattern: '(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})'
+                network:
+                  description: The blockchain network where the transaction events occurred.
+                  type: string
+                  enum:
+                    - ETHEREUM_MAINNET
+                    - BITCOIN_MAINNET
+                nextToken:
+                  description: The pagination token that indicates the next set of results to retrieve.
+                  type: string
+                  minLength: 0
+                  maxLength: 131070
+                maxResults:
+                  description: '<p>The maximum number of transaction events to list.</p> <note> <p>Even if additional results can be retrieved, the request can return less results than <code>maxResults</code> or an empty array of results.</p> <p>To retrieve the next set of results, make another request with the returned <code>nextToken</code> value. The value of <code>nextToken</code> is <code>null</code> when there are no more results to return</p> </note>'
+                  type: integer
+                  minimum: 1
+                  maximum: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /list-transactions:
+    post:
+      operationId: ListTransactions
+      description: Lists all of the transactions on a given wallet address or to a specific contract.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTransactionsOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - address
+                - network
+              properties:
+                address:
+                  description: 'The address (either a contract or wallet), whose transactions are being requested.'
+                  type: string
+                  pattern: '[-A-Za-z0-9]{13,74}'
+                network:
+                  description: The blockchain network where the transactions occurred.
+                  type: string
+                  enum:
+                    - ETHEREUM_MAINNET
+                    - BITCOIN_MAINNET
+                fromBlockchainInstant:
+                  description: The container for time.
+                  type: object
+                  properties:
+                    time:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: <p>The container of the <code>Timestamp</code> of the blockchain instant.</p> <note> <p>This <code>timestamp</code> will only be recorded up to the second.</p> </note>
+                toBlockchainInstant:
+                  description: The container for time.
+                  type: object
+                  properties:
+                    time:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: <p>The container of the <code>Timestamp</code> of the blockchain instant.</p> <note> <p>This <code>timestamp</code> will only be recorded up to the second.</p> </note>
+                sort:
+                  description: The container for determining how the list transaction result will be sorted.
+                  type: object
+                  properties:
+                    sortBy:
+                      allOf:
+                        - $ref: '#/components/schemas/ListTransactionsSortBy'
+                        - description: Defaults to the value <code>TRANSACTION_TIMESTAMP</code>.
+                    sortOrder:
+                      allOf:
+                        - $ref: '#/components/schemas/SortOrder'
+                        - description: The container for the <i>sort order</i> for <code>ListTransactions</code>. The <code>SortOrder</code> field only accepts the values <code>ASCENDING</code> and <code>DESCENDING</code>. Not providing <code>SortOrder</code> will default to <code>ASCENDING</code>.
+                nextToken:
+                  description: The pagination token that indicates the next set of results to retrieve.
+                  type: string
+                  minLength: 0
+                  maxLength: 131070
+                maxResults:
+                  description: '<p>The maximum number of transactions to list.</p> <note> <p>Even if additional results can be retrieved, the request can return less results than <code>maxResults</code> or an empty array of results.</p> <p>To retrieve the next set of results, make another request with the returned <code>nextToken</code> value. The value of <code>nextToken</code> is <code>null</code> when there are no more results to return</p> </note>'
+                  type: integer
+                  minimum: 1
+                  maximum: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchGetTokenBalanceOutput:
+      type: object
+      required:
+        - tokenBalances
+        - errors
+      properties:
+        tokenBalances:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetTokenBalanceOutputList'
+            - description: An array of <code>BatchGetTokenBalanceOutputItem</code> objects returned by the response.
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetTokenBalanceErrors'
+            - description: An array of <code>BatchGetTokenBalanceErrorItem</code> objects returned from the request.
+    BatchGetTokenBalanceInputItem:
+      type: object
+      required:
+        - tokenIdentifier
+        - ownerIdentifier
+      properties:
+        tokenIdentifier:
+          $ref: '#/components/schemas/TokenIdentifier'
+        ownerIdentifier:
+          $ref: '#/components/schemas/OwnerIdentifier'
+        atBlockchainInstant:
+          $ref: '#/components/schemas/BlockchainInstant'
+      description: The container for the input for getting a token balance.
+    ThrottlingException: {}
+    ValidationException: {}
+    ResourceNotFoundException: {}
+    AccessDeniedException: {}
+    InternalServerException: {}
+    ServiceQuotaExceededException: {}
+    GetTokenBalanceOutput:
+      type: object
+      required:
+        - balance
+        - atBlockchainInstant
+      properties:
+        ownerIdentifier:
+          $ref: '#/components/schemas/OwnerIdentifier'
+        tokenIdentifier:
+          $ref: '#/components/schemas/TokenIdentifier'
+        balance:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The container for the token balance.
+        atBlockchainInstant:
+          $ref: '#/components/schemas/BlockchainInstant'
+        lastUpdatedTime:
+          $ref: '#/components/schemas/BlockchainInstant'
+    QueryNetwork:
+      type: string
+      enum:
+        - ETHEREUM_MAINNET
+        - BITCOIN_MAINNET
+    ChainAddress:
+      type: string
+      pattern: '[-A-Za-z0-9]{13,74}'
+    QueryTokenId:
+      type: string
+      pattern: '[a-zA-Z0-9]{1,66}'
+    Timestamp:
+      type: string
+      format: date-time
+    GetTransactionOutput:
+      type: object
+      required:
+        - transaction
+      properties:
+        transaction:
+          allOf:
+            - $ref: '#/components/schemas/Transaction'
+            - description: Contains the details of the transaction.
+    ListTokenBalancesOutput:
+      type: object
+      required:
+        - tokenBalances
+      properties:
+        tokenBalances:
+          allOf:
+            - $ref: '#/components/schemas/TokenBalanceList'
+            - description: An array of <code>TokenBalance</code> objects. Each object contains details about the token balance.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
+    ListTransactionEventsOutput:
+      type: object
+      required:
+        - events
+      properties:
+        events:
+          allOf:
+            - $ref: '#/components/schemas/TransactionEventList'
+            - description: An array of <code>TransactionEvent</code> objects. Each object contains details about the transaction events.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
+    ListTransactionsOutput:
+      type: object
+      required:
+        - transactions
+      properties:
+        transactions:
+          allOf:
+            - $ref: '#/components/schemas/TransactionOutputList'
+            - description: The array of transactions returned by the request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
+    ListTransactionsSortBy:
+      type: string
+      enum:
+        - TRANSACTION_TIMESTAMP
+    SortOrder:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    TokenIdentifier:
+      type: object
+      required:
+        - network
+      properties:
+        network:
+          allOf:
+            - $ref: '#/components/schemas/QueryNetwork'
+            - description: The blockchain network of the token.
+        contractAddress:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: This is the token's contract address.
+        tokenId:
+          allOf:
+            - $ref: '#/components/schemas/QueryTokenId'
+            - description: The unique identifier of the token.
+      description: '<p>The container for the identifier for the token including the unique token ID and its blockchain network.</p> <note> <p>Only the native tokens BTC,ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported.</p> </note>'
+    OwnerIdentifier:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: The contract or wallet address for the owner.
+      description: The container for the identifier of the owner.
+    BlockchainInstant:
+      type: object
+      properties:
+        time:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: <p>The container of the <code>Timestamp</code> of the blockchain instant.</p> <note> <p>This <code>timestamp</code> will only be recorded up to the second.</p> </note>
+      description: The container for time.
+    String:
+      type: string
+    ErrorType:
+      type: string
+      enum:
+        - VALIDATION_EXCEPTION
+        - RESOURCE_NOT_FOUND_EXCEPTION
+    BatchGetTokenBalanceErrorItem:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+        - errorType
+      properties:
+        tokenIdentifier:
+          $ref: '#/components/schemas/TokenIdentifier'
+        ownerIdentifier:
+          $ref: '#/components/schemas/OwnerIdentifier'
+        atBlockchainInstant:
+          $ref: '#/components/schemas/BlockchainInstant'
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error code associated with the error.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The message associated with the error.
+        errorType:
+          allOf:
+            - $ref: '#/components/schemas/ErrorType'
+            - description: The type of error.
+      description: Error generated from a failed <code>BatchGetTokenBalance</code> request.
+    BatchGetTokenBalanceErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetTokenBalanceErrorItem'
+      minItems: 0
+      maxItems: 10
+    GetTokenBalanceInputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetTokenBalanceInputItem'
+      minItems: 1
+      maxItems: 10
+    BatchGetTokenBalanceInput:
+      type: object
+      title: BatchGetTokenBalanceInput
+      properties:
+        getTokenBalanceInputs:
+          allOf:
+            - $ref: '#/components/schemas/GetTokenBalanceInputList'
+            - description: An array of <code>GetTokenBalanceInput</code> objects whose balance is being requested.
+    BatchGetTokenBalanceOutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetTokenBalanceOutputItem'
+      minItems: 0
+      maxItems: 10
+    BatchGetTokenBalanceOutputItem:
+      type: object
+      required:
+        - balance
+        - atBlockchainInstant
+      properties:
+        ownerIdentifier:
+          $ref: '#/components/schemas/OwnerIdentifier'
+        tokenIdentifier:
+          $ref: '#/components/schemas/TokenIdentifier'
+        balance:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The container for the token balance.
+        atBlockchainInstant:
+          $ref: '#/components/schemas/BlockchainInstant'
+        lastUpdatedTime:
+          $ref: '#/components/schemas/BlockchainInstant'
+      description: The container for the properties of a token balance output.
+    BlockHash:
+      type: string
+      pattern: '(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})'
+    GetTokenBalanceInput:
+      type: object
+      required:
+        - tokenIdentifier
+        - ownerIdentifier
+      title: GetTokenBalanceInput
+      properties:
+        tokenIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/TokenIdentifier'
+            - description: 'The container for the identifier for the token, including the unique token ID and its blockchain network.'
+        ownerIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/OwnerIdentifier'
+            - description: The container for the identifier for the owner.
+        atBlockchainInstant:
+          allOf:
+            - $ref: '#/components/schemas/BlockchainInstant'
+            - description: <p>The time for when the TokenBalance is requested or the current time if a time is not provided in the request.</p> <note> <p>This time will only be recorded up to the second.</p> </note>
+    QueryTransactionHash:
+      type: string
+      pattern: '(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})'
+    GetTransactionInput:
+      type: object
+      required:
+        - transactionHash
+        - network
+      title: GetTransactionInput
+      properties:
+        transactionHash:
+          allOf:
+            - $ref: '#/components/schemas/QueryTransactionHash'
+            - description: The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+        network:
+          allOf:
+            - $ref: '#/components/schemas/QueryNetwork'
+            - description: The blockchain network where the transaction occurred.
+    Transaction:
+      type: object
+      required:
+        - network
+        - transactionHash
+        - transactionTimestamp
+        - transactionIndex
+        - numberOfTransactions
+        - status
+        - to
+      properties:
+        network:
+          allOf:
+            - $ref: '#/components/schemas/QueryNetwork'
+            - description: The blockchain network where the transaction occured.
+        blockHash:
+          allOf:
+            - $ref: '#/components/schemas/BlockHash'
+            - description: The block hash is a unique identifier for a block. It is a fixed-size string that is calculated by using the information in the block. The block hash is used to verify the integrity of the data in the block.
+        transactionHash:
+          allOf:
+            - $ref: '#/components/schemas/QueryTransactionHash'
+            - description: The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+        blockNumber:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The block number in which the transaction is recorded.
+        transactionTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The <code>Timestamp</code> of the transaction. '
+        transactionIndex:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The index of the transaction within a blockchain.
+        numberOfTransactions:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of transactions in the block.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/QueryTransactionStatus'
+            - description: The status of the transaction.
+        to:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: The identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+        from:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: The initiator of the transaction. It is either in the form a public key or a contract address.
+        contractAddress:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: The blockchain address for the contract.
+        gasUsed:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The amount of gas used for the transaction.
+        cumulativeGasUsed:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The amount of gas used up to the specified point in the block.
+        effectiveGasPrice:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The effective gas price.
+        signatureV:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The signature of the transaction. The Z coordinate of a point V.
+        signatureR:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The signature of the transaction. The X coordinate of a point R.
+        signatureS:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The signature of the transaction. The Y coordinate of a point S.
+        transactionFee:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The transaction fee.
+        transactionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+      description: '<p>There are two possible types of transactions used for this data type:</p> <ul> <li> <p>A Bitcoin transaction is a movement of BTC from one address to another.</p> </li> <li> <p>An Ethereum transaction refers to an action initiated by an externally owned account, which is an account managed by a human, not a contract. For example, if Bob sends Alice 1 ETH, Bob''s account must be debited and Alice''s must be credited. This state-changing action occurs within a transaction.</p> </li> </ul>'
+    Integer:
+      type: integer
+    OwnerFilter:
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: The contract or wallet address.
+      description: The container for the owner information to filter by.
+    TokenFilter:
+      type: object
+      required:
+        - network
+      properties:
+        network:
+          allOf:
+            - $ref: '#/components/schemas/QueryNetwork'
+            - description: The blockchain network of the token.
+        contractAddress:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: This is the address of the contract.
+        tokenId:
+          allOf:
+            - $ref: '#/components/schemas/QueryTokenId'
+            - description: The unique identifier of the token.
+      description: <p>The container of the token filter like the contract address on a given blockchain network or a unique token identifier on a given blockchain network.</p> <note> <p>You must always specify the network property of this container when using this operation.</p> </note>
+    NextToken:
+      type: string
+      minLength: 0
+      maxLength: 131070
+    ListTokenBalancesInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 250
+    ListTokenBalancesInput:
+      type: object
+      required:
+        - tokenFilter
+      title: ListTokenBalancesInput
+      properties:
+        ownerFilter:
+          allOf:
+            - $ref: '#/components/schemas/OwnerFilter'
+            - description: The contract or wallet address on the blockchain network by which to filter the request. You must specify the <code>address</code> property of the <code>ownerFilter</code> when listing balances of tokens owned by the address.
+        tokenFilter:
+          allOf:
+            - $ref: '#/components/schemas/TokenFilter'
+            - description: <p>The contract address or a token identifier on the blockchain network by which to filter the request. You must specify the contractAddress property of this container when listing tokens minted by a contract.</p> <note> <p>You must always specify the network property of this container when using this operation.</p> </note>
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListTokenBalancesInputMaxResultsInteger'
+            - description: The maximum number of token balances to return.
+    TokenBalanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenBalance'
+      minItems: 0
+      maxItems: 250
+    ListTransactionEventsInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 250
+    ListTransactionEventsInput:
+      type: object
+      required:
+        - transactionHash
+        - network
+      title: ListTransactionEventsInput
+      properties:
+        transactionHash:
+          allOf:
+            - $ref: '#/components/schemas/QueryTransactionHash'
+            - description: The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+        network:
+          allOf:
+            - $ref: '#/components/schemas/QueryNetwork'
+            - description: The blockchain network where the transaction events occurred.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListTransactionEventsInputMaxResultsInteger'
+            - description: '<p>The maximum number of transaction events to list.</p> <note> <p>Even if additional results can be retrieved, the request can return less results than <code>maxResults</code> or an empty array of results.</p> <p>To retrieve the next set of results, make another request with the returned <code>nextToken</code> value. The value of <code>nextToken</code> is <code>null</code> when there are no more results to return</p> </note>'
+    TransactionEventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionEvent'
+      minItems: 0
+      maxItems: 250
+    ListTransactionsSort:
+      type: object
+      properties:
+        sortBy:
+          allOf:
+            - $ref: '#/components/schemas/ListTransactionsSortBy'
+            - description: Defaults to the value <code>TRANSACTION_TIMESTAMP</code>.
+        sortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: The container for the <i>sort order</i> for <code>ListTransactions</code>. The <code>SortOrder</code> field only accepts the values <code>ASCENDING</code> and <code>DESCENDING</code>. Not providing <code>SortOrder</code> will default to <code>ASCENDING</code>.
+      description: The container for determining how the list transaction result will be sorted.
+    ListTransactionsInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 250
+    ListTransactionsInput:
+      type: object
+      required:
+        - address
+        - network
+      title: ListTransactionsInput
+      properties:
+        address:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: 'The address (either a contract or wallet), whose transactions are being requested.'
+        network:
+          allOf:
+            - $ref: '#/components/schemas/QueryNetwork'
+            - description: The blockchain network where the transactions occurred.
+        fromBlockchainInstant:
+          $ref: '#/components/schemas/BlockchainInstant'
+        toBlockchainInstant:
+          $ref: '#/components/schemas/BlockchainInstant'
+        sort:
+          allOf:
+            - $ref: '#/components/schemas/ListTransactionsSort'
+            - description: Sorts items in an ascending order if the first page starts at <code>fromTime</code>. Sorts items in a descending order if the first page starts at <code>toTime</code>.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token that indicates the next set of results to retrieve.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListTransactionsInputMaxResultsInteger'
+            - description: '<p>The maximum number of transactions to list.</p> <note> <p>Even if additional results can be retrieved, the request can return less results than <code>maxResults</code> or an empty array of results.</p> <p>To retrieve the next set of results, make another request with the returned <code>nextToken</code> value. The value of <code>nextToken</code> is <code>null</code> when there are no more results to return</p> </note>'
+    TransactionOutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransactionOutputItem'
+      minItems: 0
+      maxItems: 250
+    Long:
+      type: integer
+    QueryTransactionEventType:
+      type: string
+      enum:
+        - ERC20_TRANSFER
+        - ERC20_MINT
+        - ERC20_BURN
+        - ERC20_DEPOSIT
+        - ERC20_WITHDRAWAL
+        - ERC721_TRANSFER
+        - ERC1155_TRANSFER
+        - BITCOIN_VIN
+        - BITCOIN_VOUT
+        - INTERNAL_ETH_TRANSFER
+        - ETH_TRANSFER
+    QueryTransactionStatus:
+      type: string
+      enum:
+        - FINAL
+        - FAILED
+    TokenBalance:
+      type: object
+      required:
+        - balance
+        - atBlockchainInstant
+      properties:
+        ownerIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/OwnerIdentifier'
+            - description: The container for the identifier of the owner.
+        tokenIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/TokenIdentifier'
+            - description: 'The identifier for the token, including the unique token ID and its blockchain network.'
+        balance:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The container of the token balance.
+        atBlockchainInstant:
+          allOf:
+            - $ref: '#/components/schemas/BlockchainInstant'
+            - description: <p>The time for when the TokenBalance is requested or the current time if a time is not provided in the request.</p> <note> <p>This time will only be recorded up to the second.</p> </note>
+        lastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/BlockchainInstant'
+            - description: The <code>timestamp</code> of the last transaction at which the balance for the token in the wallet was updated.
+      description: The balance of the token.
+    TransactionEvent:
+      type: object
+      required:
+        - network
+        - transactionHash
+        - eventType
+      properties:
+        network:
+          allOf:
+            - $ref: '#/components/schemas/QueryNetwork'
+            - description: The blockchain network where the transaction occurred.
+        transactionHash:
+          allOf:
+            - $ref: '#/components/schemas/QueryTransactionHash'
+            - description: The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+        eventType:
+          allOf:
+            - $ref: '#/components/schemas/QueryTransactionEventType'
+            - description: The type of transaction event.
+        from:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: The wallet address initiating the transaction. It can either be a public key or a contract.
+        to:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: The wallet address receiving the transaction. It can either be a public key or a contract.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The value that was transacted.
+        contractAddress:
+          allOf:
+            - $ref: '#/components/schemas/ChainAddress'
+            - description: The blockchain address. for the contract
+        tokenId:
+          allOf:
+            - $ref: '#/components/schemas/QueryTokenId'
+            - description: The unique identifier for the token involved in the transaction.
+        transactionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+        voutIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The position of the vout in the transaction output list.
+      description: The container for the properties of a transaction event.
+    TransactionOutputItem:
+      type: object
+      required:
+        - transactionHash
+        - network
+        - transactionTimestamp
+      properties:
+        transactionHash:
+          allOf:
+            - $ref: '#/components/schemas/QueryTransactionHash'
+            - description: The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.
+        network:
+          allOf:
+            - $ref: '#/components/schemas/QueryNetwork'
+            - description: The blockchain network where the transaction occurred.
+        transactionTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the transaction occurred.
+      description: The container of the transaction output.
+security:
+  - hmac: []

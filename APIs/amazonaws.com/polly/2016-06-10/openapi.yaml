@@ -332,6 +332,7 @@ paths:
               - ar-AE
               - fi-FI
               - en-IE
+              - nl-BE
         - name: IncludeAdditionalLanguageCodes
           in: query
           required: false
@@ -640,6 +641,7 @@ paths:
                     - ar-AE
                     - fi-FI
                     - en-IE
+                    - nl-BE
                 LexiconNames:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
                   type: array
@@ -778,6 +780,7 @@ paths:
                     - Tomoko
                     - Niamh
                     - Sofie
+                    - Lisa
   /v1/speech:
     post:
       operationId: SynthesizeSpeech
@@ -902,6 +905,7 @@ paths:
                     - ar-AE
                     - fi-FI
                     - en-IE
+                    - nl-BE
                 LexiconNames:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.'
                   type: array
@@ -1028,6 +1032,7 @@ paths:
                     - Tomoko
                     - Niamh
                     - Sofie
+                    - Lisa
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1292,6 +1297,7 @@ components:
         - ar-AE
         - fi-FI
         - en-IE
+        - nl-BE
     IncludeAdditionalLanguageCodes:
       type: boolean
     NextToken:
@@ -1629,6 +1635,7 @@ components:
         - Tomoko
         - Niamh
         - Sofie
+        - Lisa
     StartSpeechSynthesisTaskInput:
       type: object
       required:

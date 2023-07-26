@@ -1,0 +1,2127 @@
+openapi: 3.0.0
+info:
+  version: '2018-05-10'
+  x-release: v4
+  title: AWS EntityResolution
+  description: '<p>Welcome to the <i>AWS Entity Resolution API Reference</i>.</p> <p>AWS Entity Resolution is an AWS service that provides pre-configured entity resolution capabilities that enable developers and analysts at advertising and marketing companies to build an accurate and complete view of their consumers.</p> <p> With AWS Entity Resolution, you have the ability to match source records containing consumer identifiers, such as name, email address, and phone number. This holds true even when these records have incomplete or conflicting identifiers. For example, AWS Entity Resolution can effectively match a source record from a customer relationship management (CRM) system, which includes account information like first name, last name, postal address, phone number, and email address, with a source record from a marketing system containing campaign information, such as username and email address.</p> <p>To learn more about AWS Entity Resolution concepts, procedures, and best practices, see the <a href="https://docs.aws.amazon.com/entityresolution/latest/userguide/what-is-service.html">AWS Entity Resolution User Guide</a>.</p>'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: entityresolution
+  x-aws-signingName: entityresolution
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/entityresolution-2018-05-10.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/entityresolution/'
+servers:
+  - url: 'http://entityresolution.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWSEntityResolution multi-region endpoint
+  - url: 'https://entityresolution.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWSEntityResolution multi-region endpoint
+  - url: 'http://entityresolution.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWSEntityResolution endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://entityresolution.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWSEntityResolution endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /matchingworkflows:
+    post:
+      operationId: CreateMatchingWorkflow
+      description: 'Creates a <code>MatchingWorkflow</code> object which stores the configuration of the data processing job to be run. It is important to note that there should not be a pre-existing <code>MatchingWorkflow</code> with the same name. To modify an existing workflow, utilize the <code>UpdateMatchingWorkflow</code> API.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMatchingWorkflowOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ExceedsLimitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceedsLimitException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - inputSourceConfig
+                - outputSourceConfig
+                - resolutionTechniques
+                - roleArn
+                - workflowName
+              properties:
+                description:
+                  description: A description of the workflow.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                incrementalRunConfig:
+                  description: An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.
+                  type: object
+                  properties:
+                    incrementalRunType:
+                      allOf:
+                        - $ref: '#/components/schemas/IncrementalRunType'
+                        - description: 'The type of incremental run. It takes only one value: <code>IMMEDIATE</code>.'
+                inputSourceConfig:
+                  description: 'A list of <code>InputSource</code> objects, which have the fields <code>InputSourceARN</code> and <code>SchemaName</code>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InputSource'
+                  minItems: 1
+                  maxItems: 20
+                outputSourceConfig:
+                  description: 'A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OutputSource'
+                  minItems: 1
+                  maxItems: 1
+                resolutionTechniques:
+                  description: 'An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code> '
+                  type: object
+                  properties:
+                    resolutionType:
+                      allOf:
+                        - $ref: '#/components/schemas/ResolutionType'
+                        - description: 'There are two types of matching, <code>RULE_MATCHING</code> and <code>ML_MATCHING</code> '
+                    ruleBasedProperties:
+                      allOf:
+                        - $ref: '#/components/schemas/RuleBasedProperties'
+                        - description: 'An object which defines the list of matching rules to run and has a field <code>Rules</code>, which is a list of rule objects.'
+                roleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+                  type: string
+                tags:
+                  description: 'The tags used to organize, track, or control access for this resource.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                workflowName:
+                  description: The name of the workflow. There cannot be multiple <code>DataIntegrationWorkflows</code> with the same name.
+                  type: string
+                  pattern: '^[a-zA-Z_0-9-]*$'
+                  minLength: 0
+                  maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListMatchingWorkflows
+      description: Returns a list of all the <code>MatchingWorkflows</code> that have been created for an AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMatchingWorkflowsOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of objects returned per page.
+          schema:
+            type: integer
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token from the previous <code>ListSchemaMappings</code> API call.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-=+/]*$'
+            minLength: 1
+            maxLength: 1024
+  /schemas:
+    post:
+      operationId: CreateSchemaMapping
+      description: 'Creates a schema mapping, which defines the schema of the input customer records table. The <code>SchemaMapping</code> also provides Entity Resolution with some metadata about the table, such as the attribute types of the columns and which columns to match on.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSchemaMappingOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ExceedsLimitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceedsLimitException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - schemaName
+              properties:
+                description:
+                  description: A description of the schema.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                mappedInputFields:
+                  description: 'A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds to a column the source data table, and contains column name plus additional information that Entity Resolution uses for matching.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SchemaInputAttribute'
+                  minItems: 2
+                  maxItems: 25
+                schemaName:
+                  description: The name of the schema. There cannot be multiple <code>SchemaMappings</code> with the same name.
+                  type: string
+                  pattern: '^[a-zA-Z_0-9-]*$'
+                  minLength: 0
+                  maxLength: 255
+                tags:
+                  description: 'The tags used to organize, track, or control access for this resource.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSchemaMappings
+      description: Returns a list of all the <code>SchemaMappings</code> that have been created for an AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSchemaMappingsOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of objects returned per page.
+          schema:
+            type: integer
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token from the previous <code>ListSchemaMappings</code> API call.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-=+/]*$'
+            minLength: 1
+            maxLength: 1024
+  '/matchingworkflows/{workflowName}':
+    delete:
+      operationId: DeleteMatchingWorkflow
+      description: Deletes the <code>MatchingWorkflow</code> with a given name. This operation will succeed even if a workflow with the given name does not exist.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMatchingWorkflowOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: workflowName
+          in: path
+          required: true
+          description: The name of the workflow to be retrieved.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetMatchingWorkflow
+      description: 'Returns the <code>MatchingWorkflow</code> with a given name, if it exists.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatchingWorkflowOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: workflowName
+          in: path
+          required: true
+          description: The name of the workflow.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+    put:
+      operationId: UpdateMatchingWorkflow
+      description: 'Updates an existing <code>MatchingWorkflow</code>. This method is identical to <code>CreateMatchingWorkflow</code>, except it uses an HTTP <code>PUT</code> request instead of a <code>POST</code> request, and the <code>MatchingWorkflow</code> must already exist for the method to succeed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMatchingWorkflowOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: workflowName
+          in: path
+          required: true
+          description: The name of the workflow to be retrieved.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - inputSourceConfig
+                - outputSourceConfig
+                - resolutionTechniques
+                - roleArn
+              properties:
+                description:
+                  description: A description of the workflow.
+                  type: string
+                  minLength: 0
+                  maxLength: 255
+                incrementalRunConfig:
+                  description: An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.
+                  type: object
+                  properties:
+                    incrementalRunType:
+                      allOf:
+                        - $ref: '#/components/schemas/IncrementalRunType'
+                        - description: 'The type of incremental run. It takes only one value: <code>IMMEDIATE</code>.'
+                inputSourceConfig:
+                  description: 'A list of <code>InputSource</code> objects, which have the fields <code>InputSourceARN</code> and <code>SchemaName</code>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InputSource'
+                  minItems: 1
+                  maxItems: 20
+                outputSourceConfig:
+                  description: 'A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OutputSource'
+                  minItems: 1
+                  maxItems: 1
+                resolutionTechniques:
+                  description: 'An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code> '
+                  type: object
+                  properties:
+                    resolutionType:
+                      allOf:
+                        - $ref: '#/components/schemas/ResolutionType'
+                        - description: 'There are two types of matching, <code>RULE_MATCHING</code> and <code>ML_MATCHING</code> '
+                    ruleBasedProperties:
+                      allOf:
+                        - $ref: '#/components/schemas/RuleBasedProperties'
+                        - description: 'An object which defines the list of matching rules to run and has a field <code>Rules</code>, which is a list of rule objects.'
+                roleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+                  type: string
+  '/schemas/{schemaName}':
+    delete:
+      operationId: DeleteSchemaMapping
+      description: Deletes the <code>SchemaMapping</code> with a given name. This operation will succeed even if a schema with the given name does not exist. This operation will fail if there is a <code>DataIntegrationWorkflow</code> object that references the <code>SchemaMapping</code> in the workflow's <code>InputSourceConfig</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSchemaMappingOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: schemaName
+          in: path
+          required: true
+          description: The name of the schema to delete.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSchemaMapping
+      description: Returns the SchemaMapping of a given name.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaMappingOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: schemaName
+          in: path
+          required: true
+          description: The name of the schema to be retrieved.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+  '/matchingworkflows/{workflowName}/matches':
+    post:
+      operationId: GetMatchId
+      description: Returns the corresponding Match ID of a customer record if the record has been processed.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatchIdOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: workflowName
+          in: path
+          required: true
+          description: The name of the workflow.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - record
+              properties:
+                record:
+                  description: The record to fetch the Match ID for.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/RecordAttributeMapValueString'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/matchingworkflows/{workflowName}/jobs/{jobId}':
+    get:
+      operationId: GetMatchingJob
+      description: 'Gets the status, metrics, and errors (if there are any) that are associated with a job.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetMatchingJobOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the job.
+          schema:
+            type: string
+            pattern: '^[a-f0-9]{32}$'
+        - name: workflowName
+          in: path
+          required: true
+          description: The name of the workflow.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/matchingworkflows/{workflowName}/jobs':
+    get:
+      operationId: ListMatchingJobs
+      description: Lists all jobs for a given workflow.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMatchingJobsOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of objects returned per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+        - name: nextToken
+          in: query
+          required: false
+          description: The pagination token from the previous <code>ListSchemaMappings</code> API call.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-=+/]*$'
+            minLength: 1
+            maxLength: 1024
+        - name: workflowName
+          in: path
+          required: true
+          description: The name of the workflow to be retrieved.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: StartMatchingJob
+      description: Starts the <code>MatchingJob</code> of a workflow. The workflow must have previously been created using the <code>CreateMatchingWorkflow</code> endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMatchingJobOutput'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ExceedsLimitException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceedsLimitException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: workflowName
+          in: path
+          required: true
+          description: The name of the matching job to be retrieved.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z_0-9-]*$'
+            minLength: 0
+            maxLength: 255
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: 'Displays the tags associated with an AWS Entity Resolution resource. In Entity Resolution, <code>SchemaMapping</code>, and <code>MatchingWorkflow</code> can be tagged.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource for which you want to view tags.
+          schema:
+            type: string
+            pattern: '^arn:(aws|aws-us-gov|aws-cn):(entityresolution):.*:[0-9]+:((schemamapping|matchingworkflow)/[a-zA-Z0-9_-]+)$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Assigns one or more tags (key-value pairs) to the specified AWS Entity Resolution resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In Entity Resolution, <code>SchemaMapping</code>, and <code>MatchingWorkflow</code> can be tagged. Tags don''t have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource for which you want to view tags.
+          schema:
+            type: string
+            pattern: '^arn:(aws|aws-us-gov|aws-cn):(entityresolution):.*:[0-9]+:((schemamapping|matchingworkflow)/[a-zA-Z0-9_-]+)$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: 'The tags used to organize, track, or control access for this resource.'
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: 'Removes one or more tags from the specified AWS Entity Resolution resource. In Entity Resolution, <code>SchemaMapping</code>, and <code>MatchingWorkflow</code> can be tagged.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the resource for which you want to untag.
+          schema:
+            type: string
+            pattern: '^arn:(aws|aws-us-gov|aws-cn):(entityresolution):.*:[0-9]+:((schemamapping|matchingworkflow)/[a-zA-Z0-9_-]+)$'
+        - name: tagKeys
+          in: query
+          required: true
+          description: The list of tag keys to remove from the resource.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 0
+            maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateMatchingWorkflowOutput:
+      type: object
+      required:
+        - inputSourceConfig
+        - outputSourceConfig
+        - resolutionTechniques
+        - roleArn
+        - workflowArn
+        - workflowName
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the workflow.
+        incrementalRunConfig:
+          allOf:
+            - $ref: '#/components/schemas/IncrementalRunConfig'
+            - description: An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.
+        inputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputSourceConfig'
+            - description: 'A list of <code>InputSource</code> objects, which have the fields <code>InputSourceARN</code> and <code>SchemaName</code>.'
+        outputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputSourceConfig'
+            - description: 'A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.'
+        resolutionTechniques:
+          allOf:
+            - $ref: '#/components/schemas/ResolutionTechniques'
+            - description: 'An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code> '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+        workflowArn:
+          allOf:
+            - $ref: '#/components/schemas/MatchingWorkflowArn'
+            - description: The ARN (Amazon Resource Name) that Entity Resolution generated for the <code>MatchingWorkflow</code>.
+        workflowName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the workflow.
+    IncrementalRunType:
+      type: string
+      enum:
+        - IMMEDIATE
+    InputSource:
+      type: object
+      required:
+        - inputSourceARN
+        - schemaName
+      properties:
+        applyNormalization:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an <code>AttributeType</code> of <code>PHONE_NUMBER</code>, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.'
+        inputSourceARN:
+          allOf:
+            - $ref: '#/components/schemas/InputSourceInputSourceARNString'
+            - description: An Glue table ARN for the input source table.
+        schemaName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the schema to be retrieved.
+      description: 'An object containing <code>InputSourceARN</code>, <code>SchemaName</code>, and <code>ApplyNormalization</code>.'
+    OutputSource:
+      type: object
+      required:
+        - output
+        - outputS3Path
+      properties:
+        KMSArn:
+          allOf:
+            - $ref: '#/components/schemas/KMSArn'
+            - description: 'Customer KMS ARN for encryption at rest. If not provided, system will use an Entity Resolution managed KMS key.'
+        applyNormalization:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Normalizes the attributes defined in the schema in the input data. For example, if an attribute has an <code>AttributeType</code> of <code>PHONE_NUMBER</code>, and the data in the input table is in a format of 1234567890, Entity Resolution will normalize this field in the output to (123)-456-7890.'
+        output:
+          allOf:
+            - $ref: '#/components/schemas/OutputSourceOutputList'
+            - description: 'A list of <code>OutputAttribute</code> objects, each of which have the fields Name and Hashed. Each of these objects selects a column to be included in the output table, and whether the values of the column should be hashed.'
+        outputS3Path:
+          allOf:
+            - $ref: '#/components/schemas/OutputSourceOutputS3PathString'
+            - description: The S3 path to which Entity Resolution will write the output table.
+      description: 'A list of <code>OutputAttribute</code> objects, each of which have the fields Name and Hashed. Each of these objects selects a column to be included in the output table, and whether the values of the column should be hashed.'
+    ResolutionType:
+      type: string
+      enum:
+        - RULE_MATCHING
+        - ML_MATCHING
+    RuleBasedProperties:
+      type: object
+      required:
+        - attributeMatchingModel
+        - rules
+      properties:
+        attributeMatchingModel:
+          allOf:
+            - $ref: '#/components/schemas/AttributeMatchingModel'
+            - description: 'You can either choose <code>ONE_TO_ONE</code> or <code>MANY_TO_MANY</code> as the AttributeMatchingModel. When choosing <code>MANY_TO_MANY</code>, the system can match attribute across the sub-types of an attribute type. For example, if the value of the Email field of Profile A and the value of BusinessEmail field of Profile B matches, the two profiles are matched on the Email type. When choosing <code>ONE_TO_ONE</code> the system can only match if the sub-types are exact matches. For example, only when the value of the Email field of Profile A and the value of the Email field of Profile B matches, the two profiles are matched on the Email type.'
+        rules:
+          allOf:
+            - $ref: '#/components/schemas/RuleBasedPropertiesRulesList'
+            - description: 'A list of Rule objects, each of which have fields <code>RuleName</code> and <code>MatchingKeys</code>.'
+      description: 'An object which defines the list of matching rules to run and has a field <code>Rules</code>, which is a list of rule objects.'
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    ThrottlingException: {}
+    InternalServerException: {}
+    AccessDeniedException: {}
+    ExceedsLimitException: {}
+    ConflictException: {}
+    ValidationException: {}
+    CreateSchemaMappingOutput:
+      type: object
+      required:
+        - description
+        - mappedInputFields
+        - schemaArn
+        - schemaName
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the schema.
+        mappedInputFields:
+          allOf:
+            - $ref: '#/components/schemas/SchemaInputAttributes'
+            - description: 'A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds to a column the source data table, and contains column name plus additional information that Entity Resolution uses for matching.'
+        schemaArn:
+          allOf:
+            - $ref: '#/components/schemas/SchemaMappingArn'
+            - description: The ARN (Amazon Resource Name) that Entity Resolution generated for the <code>SchemaMapping</code>.
+        schemaName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the schema.
+    SchemaInputAttribute:
+      type: object
+      required:
+        - fieldName
+        - type
+      properties:
+        fieldName:
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: A string containing the field name.
+        groupName:
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: 'Instruct Entity Resolution to combine several columns into a unified column with the identical attribute type. For example, when working with columns such as first_name, middle_name, and last_name, assigning them a common <code>GroupName</code> will prompt Entity Resolution to concatenate them into a single value.'
+        matchKey:
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: 'A key that allows grouping of multiple input attributes into a unified matching group. For example, let''s consider a scenario where the source table contains various addresses, such as business_address and shipping_address. By assigning the <code>MatchKey</code> <i>Address</i>'' to both attributes, Entity Resolution will match records across these fields to create a consolidated matching group. If no <code>MatchKey</code> is specified for a column, it won''t be utilized for matching purposes but will still be included in the output table.'
+        type:
+          allOf:
+            - $ref: '#/components/schemas/SchemaAttributeType'
+            - description: 'The type of the attribute, selected from a list of values.'
+      description: 'An object containing <code>FieldField</code>, <code>Type</code>, <code>GroupName</code>, and <code>MatchKey</code>.'
+    DeleteMatchingWorkflowOutput:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A successful operation message.
+    DeleteSchemaMappingOutput:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A successful operation message.
+    GetMatchIdOutput:
+      type: object
+      properties:
+        matchId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The unique identifiers for this group of match records.
+    RecordAttributeMapValueString:
+      type: string
+      pattern: '^[a-zA-Z_0-9-.@ ()+\t]*$'
+      minLength: 0
+      maxLength: 255
+    ResourceNotFoundException: {}
+    GetMatchingJobOutput:
+      type: object
+      required:
+        - jobId
+        - startTime
+        - status
+      properties:
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the job has finished.
+        errorDetails:
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: 'An object containing an error message, if there was an error.'
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The ID of the job.
+        metrics:
+          allOf:
+            - $ref: '#/components/schemas/JobMetrics'
+            - description: 'Metrics associated with the execution, specifically total records processed, unique IDs generated, and records the execution skipped.'
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the job was started.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: 'The current status of the job. Either <code>running</code>, <code>succeeded</code>, <code>queued</code>, or <code>failed</code>.'
+    GetMatchingWorkflowOutput:
+      type: object
+      required:
+        - createdAt
+        - inputSourceConfig
+        - outputSourceConfig
+        - resolutionTechniques
+        - roleArn
+        - updatedAt
+        - workflowArn
+        - workflowName
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the workflow was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the workflow.
+        incrementalRunConfig:
+          allOf:
+            - $ref: '#/components/schemas/IncrementalRunConfig'
+            - description: An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.
+        inputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputSourceConfig'
+            - description: 'A list of <code>InputSource</code> objects, which have the fields <code>InputSourceARN</code> and <code>SchemaName</code>.'
+        outputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputSourceConfig'
+            - description: 'A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.'
+        resolutionTechniques:
+          allOf:
+            - $ref: '#/components/schemas/ResolutionTechniques'
+            - description: 'An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code> '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to access resources on your behalf.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the workflow was last updated.
+        workflowArn:
+          allOf:
+            - $ref: '#/components/schemas/MatchingWorkflowArn'
+            - description: The ARN (Amazon Resource Name) that Entity Resolution generated for the <code>MatchingWorkflow</code>.
+        workflowName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the workflow.
+    GetSchemaMappingOutput:
+      type: object
+      required:
+        - createdAt
+        - mappedInputFields
+        - schemaArn
+        - schemaName
+        - updatedAt
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the <code>SchemaMapping</code> was created.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the schema.
+        mappedInputFields:
+          allOf:
+            - $ref: '#/components/schemas/SchemaInputAttributes'
+            - description: 'A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds to a column the source data table, and contains column name plus additional information Venice uses for matching.'
+        schemaArn:
+          allOf:
+            - $ref: '#/components/schemas/SchemaMappingArn'
+            - description: The ARN (Amazon Resource Name) that Entity Resolution generated for the SchemaMapping.
+        schemaName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the schema.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the <code>SchemaMapping</code> was last updated.
+    ListMatchingJobsOutput:
+      type: object
+      properties:
+        jobs:
+          allOf:
+            - $ref: '#/components/schemas/JobList'
+            - description: 'A list of JobSummary objects, each of which contain the ID, status, start time, and end time of a job.'
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token from the previous <code>ListSchemaMappings</code> API call.
+    ListMatchingWorkflowsOutput:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token from the previous <code>ListSchemaMappings</code> API call.
+        workflowSummaries:
+          allOf:
+            - $ref: '#/components/schemas/MatchingWorkflowList'
+            - description: 'A list of <code>MatchingWorkflowSummary</code> objects, each of which contain the fields <code>WorkflowName</code>, <code>WorkflowArn</code>, <code>CreatedAt</code>, and <code>UpdatedAt</code>.'
+    ListSchemaMappingsOutput:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token from the previous <code>ListDomains</code> API call.
+        schemaList:
+          allOf:
+            - $ref: '#/components/schemas/SchemaMappingList'
+            - description: 'A list of <code>SchemaMappingSummary</code> objects, each of which contain the fields <code>SchemaName</code>, <code>SchemaArn</code>, <code>CreatedAt</code>, <code>UpdatedAt</code>.'
+    ListTagsForResourceOutput:
+      type: object
+      required:
+        - tags
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+    StartMatchingJobOutput:
+      type: object
+      required:
+        - jobId
+      properties:
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The ID of the job.
+    TagResourceOutput:
+      type: object
+      properties: {}
+    UntagResourceOutput:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    UpdateMatchingWorkflowOutput:
+      type: object
+      required:
+        - inputSourceConfig
+        - outputSourceConfig
+        - resolutionTechniques
+        - roleArn
+        - workflowName
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the workflow.
+        incrementalRunConfig:
+          allOf:
+            - $ref: '#/components/schemas/IncrementalRunConfig'
+            - description: An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.
+        inputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputSourceConfig'
+            - description: 'A list of <code>InputSource</code> objects, which have the fields <code>InputSourceARN</code> and <code>SchemaName</code>.'
+        outputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputSourceConfig'
+            - description: 'A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.'
+        resolutionTechniques:
+          allOf:
+            - $ref: '#/components/schemas/ResolutionTechniques'
+            - description: 'An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code> '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+        workflowName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the workflow.
+    AttributeMatchingModel:
+      type: string
+      enum:
+        - ONE_TO_ONE
+        - MANY_TO_MANY
+    AttributeName:
+      type: string
+      pattern: '^[a-zA-Z_0-9- \t]*$'
+      minLength: 0
+      maxLength: 255
+    Boolean:
+      type: boolean
+    Description:
+      type: string
+      minLength: 0
+      maxLength: 255
+    IncrementalRunConfig:
+      type: object
+      properties:
+        incrementalRunType:
+          allOf:
+            - $ref: '#/components/schemas/IncrementalRunType'
+            - description: 'The type of incremental run. It takes only one value: <code>IMMEDIATE</code>.'
+      description: An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.
+    InputSourceConfig:
+      type: array
+      items:
+        $ref: '#/components/schemas/InputSource'
+      minItems: 1
+      maxItems: 20
+    OutputSourceConfig:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutputSource'
+      minItems: 1
+      maxItems: 1
+    ResolutionTechniques:
+      type: object
+      properties:
+        resolutionType:
+          allOf:
+            - $ref: '#/components/schemas/ResolutionType'
+            - description: 'There are two types of matching, <code>RULE_MATCHING</code> and <code>ML_MATCHING</code> '
+        ruleBasedProperties:
+          allOf:
+            - $ref: '#/components/schemas/RuleBasedProperties'
+            - description: 'An object which defines the list of matching rules to run and has a field <code>Rules</code>, which is a list of rule objects.'
+      description: 'An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code> '
+    String:
+      type: string
+    TagMap:
+      type: object
+      minProperties: 0
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    EntityName:
+      type: string
+      pattern: '^[a-zA-Z_0-9-]*$'
+      minLength: 0
+      maxLength: 255
+    CreateMatchingWorkflowInput:
+      type: object
+      required:
+        - inputSourceConfig
+        - outputSourceConfig
+        - resolutionTechniques
+        - roleArn
+        - workflowName
+      title: CreateMatchingWorkflowInput
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the workflow.
+        incrementalRunConfig:
+          allOf:
+            - $ref: '#/components/schemas/IncrementalRunConfig'
+            - description: An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.
+        inputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputSourceConfig'
+            - description: 'A list of <code>InputSource</code> objects, which have the fields <code>InputSourceARN</code> and <code>SchemaName</code>.'
+        outputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputSourceConfig'
+            - description: 'A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.'
+        resolutionTechniques:
+          allOf:
+            - $ref: '#/components/schemas/ResolutionTechniques'
+            - description: 'An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code> '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+        workflowName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the workflow. There cannot be multiple <code>DataIntegrationWorkflows</code> with the same name.
+    MatchingWorkflowArn:
+      type: string
+      pattern: '^arn:(aws|aws-us-gov|aws-cn):entityresolution:.*:[0-9]+:(matchingworkflow/.*)$'
+    SchemaInputAttributes:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaInputAttribute'
+      minItems: 2
+      maxItems: 25
+    CreateSchemaMappingInput:
+      type: object
+      required:
+        - schemaName
+      title: CreateSchemaMappingInput
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the schema.
+        mappedInputFields:
+          allOf:
+            - $ref: '#/components/schemas/SchemaInputAttributes'
+            - description: 'A list of <code>MappedInputFields</code>. Each <code>MappedInputField</code> corresponds to a column the source data table, and contains column name plus additional information that Entity Resolution uses for matching.'
+        schemaName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the schema. There cannot be multiple <code>SchemaMappings</code> with the same name.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+    SchemaMappingArn:
+      type: string
+      pattern: '^arn:(aws|aws-us-gov|aws-cn):entityresolution:.*:[0-9]+:(schemamapping/.*)$'
+    DeleteMatchingWorkflowInput:
+      type: object
+      title: DeleteMatchingWorkflowInput
+      properties: {}
+    DeleteSchemaMappingInput:
+      type: object
+      title: DeleteSchemaMappingInput
+      properties: {}
+    ErrorMessage:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    ErrorDetails:
+      type: object
+      properties:
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'The error message from the job, if there is one.'
+      description: 'An object containing an error message, if there was an error.'
+    RecordAttributeMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/RecordAttributeMapValueString'
+    GetMatchIdInput:
+      type: object
+      required:
+        - record
+      title: GetMatchIdInput
+      properties:
+        record:
+          allOf:
+            - $ref: '#/components/schemas/RecordAttributeMap'
+            - description: The record to fetch the Match ID for.
+    JobId:
+      type: string
+      pattern: '^[a-f0-9]{32}$'
+    GetMatchingJobInput:
+      type: object
+      title: GetMatchingJobInput
+      properties: {}
+    Timestamp:
+      type: string
+      format: date-time
+    JobMetrics:
+      type: object
+      properties:
+        inputRecords:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total number of input records.
+        matchIDs:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total number of <code>matchID</code>s generated.
+        recordsNotProcessed:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The total number of records that did not get processed,'
+        totalRecordsProcessed:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The total number of records processed.
+      description: 'An object containing <code>InputRecords</code>, <code>TotalRecordsProcessed</code>, <code>MatchIDs</code>, and <code>RecordsNotProcessed</code>.'
+    JobStatus:
+      type: string
+      enum:
+        - RUNNING
+        - SUCCEEDED
+        - FAILED
+        - QUEUED
+    GetMatchingWorkflowInput:
+      type: object
+      title: GetMatchingWorkflowInput
+      properties: {}
+    GetSchemaMappingInput:
+      type: object
+      title: GetSchemaMappingInput
+      properties: {}
+    InputSourceInputSourceARNString:
+      type: string
+      pattern: '^arn:aws:.*:.*:[0-9]+:.*$'
+    Integer:
+      type: integer
+    JobSummary:
+      type: object
+      required:
+        - jobId
+        - startTime
+        - status
+      properties:
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the job has finished.
+        jobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The ID of the job.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the job was started.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: 'The current status of the job. Either <code>running</code>, <code>succeeded</code>, <code>queued</code>, or <code>failed</code>.'
+      description: 'An object containing the <code>JobId</code>, <code>Status</code>, <code>StartTime</code>, and <code>EndTime</code> of a job.'
+    JobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobSummary'
+    KMSArn:
+      type: string
+      pattern: '^arn:aws:kms:.*:[0-9]+:.*$'
+    ListMatchingJobsInputMaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 25
+    NextToken:
+      type: string
+      pattern: '^[a-zA-Z_0-9-=+/]*$'
+      minLength: 1
+      maxLength: 1024
+    ListMatchingJobsInput:
+      type: object
+      title: ListMatchingJobsInput
+      properties: {}
+    ListMatchingWorkflowsInputMaxResultsInteger:
+      type: integer
+      maximum: 25
+    ListMatchingWorkflowsInput:
+      type: object
+      title: ListMatchingWorkflowsInput
+      properties: {}
+    MatchingWorkflowList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MatchingWorkflowSummary'
+    ListSchemaMappingsInputMaxResultsInteger:
+      type: integer
+      maximum: 25
+    ListSchemaMappingsInput:
+      type: object
+      title: ListSchemaMappingsInput
+      properties: {}
+    SchemaMappingList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaMappingSummary'
+    VeniceGlobalArn:
+      type: string
+      pattern: '^arn:(aws|aws-us-gov|aws-cn):(entityresolution):.*:[0-9]+:((schemamapping|matchingworkflow)/[a-zA-Z0-9_-]+)$'
+    ListTagsForResourceInput:
+      type: object
+      title: ListTagsForResourceInput
+      properties: {}
+    MatchingWorkflowSummary:
+      type: object
+      required:
+        - createdAt
+        - updatedAt
+        - workflowArn
+        - workflowName
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the workflow was created.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the workflow was last updated.
+        workflowArn:
+          allOf:
+            - $ref: '#/components/schemas/MatchingWorkflowArn'
+            - description: The ARN (Amazon Resource Name) that Entity Resolution generated for the <code>MatchingWorkflow</code>.
+        workflowName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the workflow.
+      description: 'A list of <code>MatchingWorkflowSummary</code> objects, each of which contain the fields <code>WorkflowName</code>, <code>WorkflowArn</code>, <code>CreatedAt</code>, <code>UpdatedAt</code>.'
+    OutputAttribute:
+      type: object
+      required:
+        - name
+      properties:
+        hashed:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enables the ability to hash the column values in the output.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/AttributeName'
+            - description: A name of a column to be written to the output. This must be an <code>InputField</code> name in the schema mapping.
+      description: 'A list of <code>OutputAttribute</code> objects, each of which have the fields Name and Hashed. Each of these objects selects a column to be included in the output table, and whether the values of the column should be hashed.'
+    OutputSourceOutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OutputAttribute'
+      minItems: 0
+      maxItems: 750
+    OutputSourceOutputS3PathString:
+      type: string
+      pattern: '^s3://([^/]+)/?(.*?([^/]+)/?)$'
+    RecordAttributeMapKeyString:
+      type: string
+      pattern: '^[a-zA-Z_0-9- \t]*$'
+      minLength: 0
+      maxLength: 255
+    RuleMatchingKeysList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeName'
+      minItems: 1
+      maxItems: 15
+    RuleRuleNameString:
+      type: string
+      pattern: '^[a-zA-Z_0-9- \t]*$'
+      minLength: 0
+      maxLength: 255
+    Rule:
+      type: object
+      required:
+        - matchingKeys
+        - ruleName
+      properties:
+        matchingKeys:
+          allOf:
+            - $ref: '#/components/schemas/RuleMatchingKeysList'
+            - description: A list of <code>MatchingKeys</code>. The <code>MatchingKeys</code> must have been defined in the <code>SchemaMapping</code>. Two records are considered to match according to this rule if all of the <code>MatchingKeys</code> match.
+        ruleName:
+          allOf:
+            - $ref: '#/components/schemas/RuleRuleNameString'
+            - description: A name for the matching rule.
+      description: 'An object containing <code>RuleName</code>, and <code>MatchingKeys</code>.'
+    RuleBasedPropertiesRulesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Rule'
+      minItems: 1
+      maxItems: 15
+    SchemaAttributeType:
+      type: string
+      enum:
+        - NAME
+        - NAME_FIRST
+        - NAME_MIDDLE
+        - NAME_LAST
+        - ADDRESS
+        - ADDRESS_STREET1
+        - ADDRESS_STREET2
+        - ADDRESS_STREET3
+        - ADDRESS_CITY
+        - ADDRESS_STATE
+        - ADDRESS_COUNTRY
+        - ADDRESS_POSTALCODE
+        - PHONE
+        - PHONE_NUMBER
+        - PHONE_COUNTRYCODE
+        - EMAIL_ADDRESS
+        - UNIQUE_ID
+        - DATE
+        - STRING
+    SchemaMappingSummary:
+      type: object
+      required:
+        - createdAt
+        - schemaArn
+        - schemaName
+        - updatedAt
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the <code>SchemaMapping</code> was created.
+        schemaArn:
+          allOf:
+            - $ref: '#/components/schemas/SchemaMappingArn'
+            - description: The ARN (Amazon Resource Name) that Entity Resolution generated for the <code>SchemaMapping</code>.
+        schemaName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the schema.
+        updatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the <code>SchemaMapping</code> was last updated.
+      description: 'An object containing <code>SchemaName</code>, <code>SchemaArn</code>, <code>CreatedAt</code>, and<code>UpdatedAt</code>.'
+    StartMatchingJobInput:
+      type: object
+      title: StartMatchingJobInput
+      properties: {}
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 0
+      maxItems: 200
+    TagResourceInput:
+      type: object
+      required:
+        - tags
+      title: TagResourceInput
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'The tags used to organize, track, or control access for this resource.'
+    UntagResourceInput:
+      type: object
+      title: UntagResourceInput
+      properties: {}
+    UpdateMatchingWorkflowInput:
+      type: object
+      required:
+        - inputSourceConfig
+        - outputSourceConfig
+        - resolutionTechniques
+        - roleArn
+      title: UpdateMatchingWorkflowInput
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the workflow.
+        incrementalRunConfig:
+          allOf:
+            - $ref: '#/components/schemas/IncrementalRunConfig'
+            - description: An object which defines an incremental run type and has only <code>incrementalRunType</code> as a field.
+        inputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputSourceConfig'
+            - description: 'A list of <code>InputSource</code> objects, which have the fields <code>InputSourceARN</code> and <code>SchemaName</code>.'
+        outputSourceConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputSourceConfig'
+            - description: 'A list of <code>OutputSource</code> objects, each of which contains fields <code>OutputS3Path</code>, <code>ApplyNormalization</code>, and <code>Output</code>.'
+        resolutionTechniques:
+          allOf:
+            - $ref: '#/components/schemas/ResolutionTechniques'
+            - description: 'An object which defines the <code>resolutionType</code> and the <code>ruleBasedProperties</code> '
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM role. AWS Entity Resolution assumes this role to create resources on your behalf as part of workflow execution.
+security:
+  - hmac: []
