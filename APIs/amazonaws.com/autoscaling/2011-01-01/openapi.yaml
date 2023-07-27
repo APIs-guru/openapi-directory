@@ -869,7 +869,7 @@ paths:
     get:
       x-aws-operation-name: CompleteLifecycleAction
       operationId: GET_CompleteLifecycleAction
-      description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a launch template or launch configuration with a user data script that runs while an instance is in a wait state due to a lifecycle hook.</p> </li> <li> <p>(Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda function when an instance is put into a wait state due to a lifecycle hook.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a wait state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, send a callback by using the <a>CompleteLifecycleAction</a> API call.</b> </p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling lifecycle hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a launch template or launch configuration with a user data script that runs while an instance is in a wait state due to a lifecycle hook.</p> </li> <li> <p>(Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda function when an instance is put into a wait state due to a lifecycle hook.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a wait state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, send a callback by using the <a>CompleteLifecycleAction</a> API call.</b> </p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html">Complete a lifecycle action</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -950,7 +950,7 @@ paths:
     post:
       x-aws-operation-name: CompleteLifecycleAction
       operationId: POST_CompleteLifecycleAction
-      description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a launch template or launch configuration with a user data script that runs while an instance is in a wait state due to a lifecycle hook.</p> </li> <li> <p>(Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda function when an instance is put into a wait state due to a lifecycle hook.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a wait state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, send a callback by using the <a>CompleteLifecycleAction</a> API call.</b> </p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling lifecycle hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
+      description: '<p>Completes the lifecycle action for the specified token or instance with the specified result.</p> <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a launch template or launch configuration with a user data script that runs while an instance is in a wait state due to a lifecycle hook.</p> </li> <li> <p>(Optional) Create a Lambda function and a rule that allows Amazon EventBridge to invoke your Lambda function when an instance is put into a wait state due to a lifecycle hook.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a wait state.</p> </li> <li> <p> <b>If you finish before the timeout period ends, send a callback by using the <a>CompleteLifecycleAction</a> API call.</b> </p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html">Complete a lifecycle action</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -4740,6 +4740,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeWarmPoolType'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -5049,7 +5061,7 @@ paths:
     get:
       x-aws-operation-name: DetachTrafficSources
       operationId: GET_DetachTrafficSources
-      description: '<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p> <p>When you detach a taffic, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>'
+      description: '<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p> <p>When you detach a traffic source, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>'
       responses:
         '200':
           description: Success
@@ -5106,7 +5118,7 @@ paths:
     post:
       x-aws-operation-name: DetachTrafficSources
       operationId: POST_DetachTrafficSources
-      description: '<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p> <p>When you detach a taffic, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>'
+      description: '<p>Detaches one or more traffic sources from the specified Auto Scaling group.</p> <p>When you detach a traffic source, it enters the <code>Removing</code> state while deregistering the instances in the group. When all instances are deregistered, then you can no longer describe the traffic source using the <a>DescribeTrafficSources</a> API call. The instances continue to run.</p>'
       responses:
         '200':
           description: Success
@@ -6105,7 +6117,7 @@ paths:
         - name: ScalingAdjustment
           in: query
           required: false
-          description: '<p>The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value.</p> <p>Required if the policy type is <code>SimpleScaling</code>. (Not used with any other policy type.) </p>'
+          description: '<p>The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a non-negative value.</p> <p>Required if the policy type is <code>SimpleScaling</code>. (Not used with any other policy type.) </p>'
           schema:
             type: integer
         - name: Cooldown
@@ -6825,7 +6837,7 @@ paths:
       parameters:
         - name: AutoScalingGroupName
           in: query
-          required: false
+          required: true
           description: The name of the Auto Scaling group.
           schema:
             type: string
@@ -8229,33 +8241,46 @@ components:
         - AutoScalingGroups
       example:
         AutoScalingGroups:
-          - AutoScalingGroupARN: 'arn:aws:autoscaling:us-west-2:123456789012:autoScalingGroup:930d940e-891e-4781-a11a-7b0acd480f03:autoScalingGroupName/my-auto-scaling-group'
+          - AutoScalingGroupARN: 'arn:aws:autoscaling:us-west-1:123456789012:autoScalingGroup:12345678-1234-1234-1234-123456789012:autoScalingGroupName/my-auto-scaling-group'
             AutoScalingGroupName: my-auto-scaling-group
             AvailabilityZones:
+              - us-west-2a
+              - us-west-2b
               - us-west-2c
-            CreatedTime: '2013-08-19T20:53:25.584Z'
+            CreatedTime: '2023-03-09T22:15:11.611Z'
             DefaultCooldown: 300
-            DesiredCapacity: 1
+            DesiredCapacity: 2
             EnabledMetrics: []
             HealthCheckGracePeriod: 300
             HealthCheckType: EC2
             Instances:
               - AvailabilityZone: us-west-2c
                 HealthStatus: Healthy
-                InstanceId: i-4ba0837f
+                InstanceId: i-05b4f7d5be44822a6
+                InstanceType: t3.micro
+                LaunchConfigurationName: my-launch-config
+                LifecycleState: InService
+                ProtectedFromScaleIn: false
+              - AvailabilityZone: us-west-2b
+                HealthStatus: Healthy
+                InstanceId: i-0c20ac468fa3049e8
+                InstanceType: t3.micro
                 LaunchConfigurationName: my-launch-config
                 LifecycleState: InService
                 ProtectedFromScaleIn: false
             LaunchConfigurationName: my-launch-config
             LoadBalancerNames: []
-            MaxSize: 1
-            MinSize: 0
+            MaxSize: 5
+            MinSize: 1
             NewInstancesProtectedFromScaleIn: false
+            ServiceLinkedRoleARN: 'arn:aws:iam::123456789012:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling'
             SuspendedProcesses: []
             Tags: []
+            TargetGroupARNs: []
             TerminationPolicies:
               - Default
-            VPCZoneIdentifier: subnet-12345678
+            TrafficSources: []
+            VPCZoneIdentifier: 'subnet-5ea0c127,subnet-6194ea3b,subnet-c934b782'
       properties:
         AutoScalingGroups:
           allOf:
@@ -8285,7 +8310,8 @@ components:
           - AutoScalingGroupName: my-auto-scaling-group
             AvailabilityZone: us-west-2c
             HealthStatus: HEALTHY
-            InstanceId: i-4ba0837f
+            InstanceId: i-05b4f7d5be44822a6
+            InstanceType: t3.micro
             LaunchConfigurationName: my-launch-config
             LifecycleState: InService
             ProtectedFromScaleIn: false
@@ -8318,16 +8344,31 @@ components:
         InstanceRefreshes:
           - AutoScalingGroupName: my-auto-scaling-group
             InstanceRefreshId: 08b91cf7-8fa6-48af-b6a6-d227f40f1b9b
-            InstancesToUpdate: 5
-            PercentageComplete: 0
-            StartTime: '2020-06-02T18:11:27Z'
+            InstancesToUpdate: 0
+            PercentageComplete: 50
+            Preferences:
+              AutoRollback: true
+              InstanceWarmup: 60
+              MinHealthyPercentage: 90
+              ScaleInProtectedInstances: Ignore
+              SkipMatching: false
+              StandbyInstances: Ignore
+            StartTime: '2023-06-13T16:46:52+00:00'
             Status: InProgress
+            StatusReason: 'Waiting for instances to warm up before continuing. For example: i-0645704820a8e83ff is warming up.'
           - AutoScalingGroupName: my-auto-scaling-group
-            EndTime: '2020-06-02T16:53:37Z'
-            InstanceRefreshId: dd7728d0-5bc4-4575-96a3-1b2c52bf8bb1
+            EndTime: '2023-06-02T13:59:45+00:00'
+            InstanceRefreshId: 0e151305-1e57-4a32-a256-1fd14157c5ec
             InstancesToUpdate: 0
             PercentageComplete: 100
-            StartTime: '2020-06-02T16:43:19Z'
+            Preferences:
+              AutoRollback: true
+              InstanceWarmup: 60
+              MinHealthyPercentage: 90
+              ScaleInProtectedInstances: Ignore
+              SkipMatching: false
+              StandbyInstances: Ignore
+            StartTime: '2023-06-02T13:53:37+00:00'
             Status: Successful
       properties:
         InstanceRefreshes:
@@ -8516,6 +8557,7 @@ components:
       example:
         Activities:
           - ActivityId: f9f2d65b-f1f2-43e7-b46d-d86756459699
+            AutoScalingGroupARN: 'arn:aws:autoscaling:us-east-1:123456789012:autoScalingGroup:12345678-1234-1234-1234-123456789012:autoScalingGroupName/my-auto-scaling-group'
             AutoScalingGroupName: my-auto-scaling-group
             Cause: 'At 2013-08-19T20:53:25Z a user request created an AutoScalingGroup changing the desired capacity from 0 to 1.  At 2013-08-19T20:53:29Z an instance was started in response to a difference between desired and actual capacity, increasing the capacity from 0 to 1.'
             Description: 'Launching a new EC2 instance: i-4ba0837f'
@@ -8759,7 +8801,7 @@ components:
         ScalingAdjustment:
           allOf:
             - $ref: '#/components/schemas/PolicyIncrement'
-            - description: '<p>The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity.</p> <p>The amount by which to scale. The adjustment is based on the value that you specified in the <code>AdjustmentType</code> property (either an absolute number or a percentage). A positive value adds to the current capacity and a negative number subtracts from the current capacity. </p>'
+            - description: 'The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a non-negative value.'
       description: '<p>Describes information used to create a step adjustment for a step scaling policy.</p> <p>For the following examples, suppose that you have an alarm with a breach threshold of 50:</p> <ul> <li> <p>To trigger the adjustment when the metric is greater than or equal to 50 and less than 60, specify a lower bound of 0 and an upper bound of 10.</p> </li> <li> <p>To trigger the adjustment when the metric is greater than 40 and less than or equal to 50, specify a lower bound of -10 and an upper bound of 0.</p> </li> </ul> <p>There are a few rules for the step adjustments for your step policy:</p> <ul> <li> <p>The ranges of your step adjustments can''t overlap or have a gap.</p> </li> <li> <p>At most, one step adjustment can have a null lower bound. If one step adjustment has a negative lower bound, then there must be a step adjustment with a null lower bound.</p> </li> <li> <p>At most, one step adjustment can have a null upper bound. If one step adjustment has a positive upper bound, then there must be a step adjustment with a null upper bound.</p> </li> <li> <p>The upper and lower bound can''t be null in the same step adjustment.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html#as-scaling-steps">Step adjustments</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
     PredefinedMetricSpecification:
       type: object
@@ -9112,7 +9154,7 @@ components:
         $ref: '#/components/schemas/Alarm'
     AllowedInstanceType:
       type: string
-      pattern: '[a-zA-Z0-9\.\*]+'
+      pattern: '[a-zA-Z0-9\.\*\-]+'
       minLength: 1
       maxLength: 30
     AllowedInstanceTypes:
@@ -10550,7 +10592,7 @@ components:
       type: integer
     ExcludedInstance:
       type: string
-      pattern: '[a-zA-Z0-9\.\*]+'
+      pattern: '[a-zA-Z0-9\.\*\-]+'
       minLength: 1
       maxLength: 30
     ExcludedInstanceTypes:
@@ -11798,7 +11840,7 @@ components:
         ScalingAdjustment:
           allOf:
             - $ref: '#/components/schemas/PolicyIncrement'
-            - description: '<p>The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value.</p> <p>Required if the policy type is <code>SimpleScaling</code>. (Not used with any other policy type.) </p>'
+            - description: '<p>The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a non-negative value.</p> <p>Required if the policy type is <code>SimpleScaling</code>. (Not used with any other policy type.) </p>'
         Cooldown:
           allOf:
             - $ref: '#/components/schemas/Cooldown'
@@ -11938,6 +11980,8 @@ components:
         - Rolling
     RollbackInstanceRefreshType:
       type: object
+      required:
+        - AutoScalingGroupName
       title: RollbackInstanceRefreshType
       properties:
         AutoScalingGroupName:
