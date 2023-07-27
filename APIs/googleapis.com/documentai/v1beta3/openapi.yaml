@@ -1197,7 +1197,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         individualAutoLabelStatuses:
           description: The list of individual auto-labeling statuses of the dataset documents.
           items:
@@ -1226,7 +1226,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         errorDocumentCount:
           description: Total number of documents that failed to be deleted in storage.
           format: int32
@@ -1259,7 +1259,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         destDatasetType:
           deprecated: true
           description: The destination dataset split type.
@@ -1436,7 +1436,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         individualExportStatuses:
           description: The list of response details of each document.
           items:
@@ -1500,7 +1500,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         importConfigValidationResults:
           description: Validation statuses of the batch documents import config.
           items:
@@ -1517,7 +1517,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiUiv1beta3ImportDocumentsMetadataImportConfigValidationResult:
-      description: The validation status of each import config. Status is set to errors if there is no documents to import in the import_config, or OK if the operation will try to proceed at least one document.
+      description: The validation status of each import config. Status is set to an error if there are no documents to import in the `import_config`, or `OK` if the operation will try to proceed with at least one document.
       properties:
         inputGcsSource:
           description: The source Cloud Storage URI specified in the import config.
@@ -1565,7 +1565,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         datasetResyncStatuses:
           description: The list of dataset resync statuses. Not checked when `dataset_documents` is specified in ResyncRequest.
           items:
@@ -1635,7 +1635,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
       type: object
     GoogleCloudDocumentaiUiv1beta3SampleDocumentsResponse:
       description: Response of the sample documents operation.
@@ -1726,7 +1726,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
       type: object
     GoogleCloudDocumentaiUiv1beta3UpdateHumanReviewConfigMetadata:
       description: The long-running operation metadata for updating the human review configuration.
@@ -3951,7 +3951,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         errorDocumentCount:
           description: Total number of documents that failed to be deleted in storage.
           format: int32
@@ -3995,9 +3995,6 @@ components:
         gcsPrefix:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3GcsPrefix"
           description: The set of documents that match the specified Cloud Storage `gcs_prefix`.
-        rawDocuments:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3RawDocuments"
-          description: The set of documents specified inline.
       type: object
     GoogleCloudDocumentaiV1beta3BatchProcessMetadata:
       description: The long-running operation metadata for BatchProcessDocuments.
@@ -5491,7 +5488,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         importConfigValidationResults:
           description: Validation statuses of the batch documents import config.
           items:
@@ -5508,7 +5505,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiV1beta3ImportDocumentsMetadataImportConfigValidationResult:
-      description: The validation status of each import config. Status is set to errors if there is no documents to import in the import_config, or OK if the operation will try to proceed at least one document.
+      description: The validation status of each import config. Status is set to an error if there are no documents to import in the `import_config`, or `OK` if the operation will try to proceed with at least one document.
       properties:
         inputGcsSource:
           description: The source Cloud Storage URI specified in the import config.
@@ -5576,10 +5573,23 @@ components:
           description: The basic metadata for the long-running operation.
       type: object
     GoogleCloudDocumentaiV1beta3ImportProcessorVersionRequest:
-      description: "The request message for the ImportProcessorVersion method. Requirements: - The source processor version and destination processor must be in the same location. - The Document AI [Service Agent](https://cloud.google.com/iam/docs/service-agents) of the destination project must have [Document AI Editor role](https://cloud.google.com/document-ai/docs/access-control/iam-roles) on the source project. The destination project is specified as part of the parent field. The source project is specified as part of the source field."
+      description: "The request message for the ImportProcessorVersion method. Requirements: - The Document AI [Service Agent](https://cloud.google.com/iam/docs/service-agents) of the destination project must have [Document AI Editor role](https://cloud.google.com/document-ai/docs/access-control/iam-roles) on the source project. The destination project is specified as part of the parent field. The source project is specified as part of the source field."
       properties:
+        externalProcessorVersionSource:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3ImportProcessorVersionRequestExternalProcessorVersionSource"
+          description: The source processor version to import from, and can be from different environment and region than the destination processor.
         processorVersionSource:
           description: The source processor version to import from. The source processor version and destination processor need to be in the same environment and region.
+          type: string
+      type: object
+    GoogleCloudDocumentaiV1beta3ImportProcessorVersionRequestExternalProcessorVersionSource:
+      description: The external source processor version.
+      properties:
+        processorVersion:
+          description: "Required. The processor version name. Format: `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`"
+          type: string
+        serviceEndpoint:
+          description: Optional. The Document AI service endpoint. For example, 'https://us-documentai.googleapis.com'
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3ImportProcessorVersionResponse:
@@ -5754,6 +5764,12 @@ components:
           description: Output only. Immutable. The http endpoint that can be called to invoke processing.
           readOnly: true
           type: string
+        processorVersionAliases:
+          description: Output only. The processor version aliases.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3ProcessorVersionAlias"
+          readOnly: true
+          type: array
         state:
           description: Output only. The state of the processor.
           enum:
@@ -5862,6 +5878,16 @@ components:
             - IMPORTING
           type: string
       type: object
+    GoogleCloudDocumentaiV1beta3ProcessorVersionAlias:
+      description: Contains the alias and the aliased resource name of processor version.
+      properties:
+        alias:
+          description: The alias in the form of `processor_version` resource name.
+          type: string
+        processorVersion:
+          description: The resource name of aliased processor version.
+          type: string
+      type: object
     GoogleCloudDocumentaiV1beta3ProcessorVersionDeprecationInfo:
       description: Information about the upcoming deprecation of this processor version.
       properties:
@@ -5887,18 +5913,12 @@ components:
           description: Inline document content.
           format: byte
           type: string
+        displayName:
+          description: "The display name of the document, it supports all Unicode characters except the following: `*`, `?`, `[`, `]`, `%`, `{`, `}`,`'`, `\\\"`, `,` `~`, `=` and `:` are reserved. If not specified, a default ID will be generated."
+          type: string
         mimeType:
           description: An IANA MIME type (RFC6838) indicating the nature and format of the content.
           type: string
-      type: object
-    GoogleCloudDocumentaiV1beta3RawDocuments:
-      description: Specifies a set of raw documents.
-      properties:
-        documents:
-          description: Specifies raw document content and mime type.
-          items:
-            $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3RawDocument"
-          type: array
       type: object
     GoogleCloudDocumentaiV1beta3ReviewDocumentOperationMetadata:
       description: The long-running operation metadata for the ReviewDocument method.
@@ -6108,7 +6128,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
       type: object
     GoogleCloudDocumentaiV1beta3Vertex:
       description: "A vertex represents a 2D point in the image. NOTE: the vertex coordinates are in the same scale as the original image."

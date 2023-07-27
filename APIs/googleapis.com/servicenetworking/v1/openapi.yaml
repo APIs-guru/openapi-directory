@@ -196,7 +196,7 @@ paths:
   "/v1/{name}/dnsZone:get":
     get:
       description: Service producers can use this method to retrieve a DNS zone in the shared producer host project and the matching peering zones in consumer project
-      operationId: servicenetworking.services.dnsZones.dnsZone.get
+      operationId: servicenetworking.services.dnsZone.get
       parameters:
         - description: Required. The network that the consumer is using to connect with services. Must be in the form of services/{service}/projects/{project}/global/networks/{network}/zones/{zoneName} Where {service} is the peering service that is managing connectivity for the service producer's organization. For Google services that support this {project} is the project number, as in '12345' {network} is the network name. {zoneName} is the DNS zone name
           in: path
@@ -359,45 +359,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1/{parent}/dnsRecordSet:LIST":
-    get:
-      description: Producers can use this method to retrieve a list of available DNS RecordSets available inside the private zone on the tenant host project accessible from their network.
-      operationId: servicenetworking.services.projects.global.networks.zones.dnsRecordSet.lIST
-      parameters:
-        - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is the project number, as in '12345' {network} is the network name.
-          in: query
-          name: consumerNetwork
-          schema:
-            type: string
-        - description: Required. The name of the private DNS zone in the shared producer host project from which the record set will be removed.
-          in: query
-          name: zone
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListDnsRecordSetsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/service.management
-          Oauth2c:
-            - https://www.googleapis.com/auth/service.management
-      tags:
-        - services
+  "/v1/{parent}/dnsRecordSets:add":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -410,10 +372,43 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/dnsRecordSet:get":
+    post:
+      description: Service producers can use this method to add DNS record sets to private DNS zones in the shared producer host project.
+      operationId: servicenetworking.services.dnsRecordSets.add
+      parameters:
+        - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddDnsRecordSetRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
+  "/v1/{parent}/dnsRecordSets:get":
     get:
       description: Producers can use this method to retrieve information about the DNS record set added to the private zone inside the shared tenant host project associated with a consumer network.
-      operationId: servicenetworking.services.dnsRecordSet.get
+      operationId: servicenetworking.services.dnsRecordSets.get
       parameters:
         - description: Required. Parent resource identifying the connection which owns this collection of DNS zones in the format services/{service}.
           in: path
@@ -471,22 +466,10 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/dnsRecordSets:add":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Service producers can use this method to add DNS record sets to private DNS zones in the shared producer host project.
-      operationId: servicenetworking.services.dnsRecordSets.add
+  "/v1/{parent}/dnsRecordSets:list":
+    get:
+      description: Producers can use this method to retrieve a list of available DNS RecordSets available inside the private zone on the tenant host project accessible from their network.
+      operationId: servicenetworking.services.dnsRecordSets.list
       parameters:
         - description: Required. The service that is managing peering connectivity for a service producer's organization. For Google services that support this functionality, this value is `services/servicenetworking.googleapis.com`.
           in: path
@@ -494,17 +477,22 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AddDnsRecordSetRequest"
+        - description: Required. The network that the consumer is using to connect with services. Must be in the form of projects/{project}/global/networks/{network} {project} is the project number, as in '12345' {network} is the network name.
+          in: query
+          name: consumerNetwork
+          schema:
+            type: string
+        - description: Required. The name of the private DNS zone in the shared producer host project from which the record set will be removed.
+          in: query
+          name: zone
+          schema:
+            type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/ListDnsRecordSetsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -517,6 +505,18 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/dnsRecordSets:remove":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"

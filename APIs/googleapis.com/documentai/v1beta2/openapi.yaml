@@ -232,7 +232,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         individualAutoLabelStatuses:
           description: The list of individual auto-labeling statuses of the dataset documents.
           items:
@@ -261,7 +261,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         errorDocumentCount:
           description: Total number of documents that failed to be deleted in storage.
           format: int32
@@ -294,7 +294,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         destDatasetType:
           deprecated: true
           description: The destination dataset split type.
@@ -471,7 +471,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         individualExportStatuses:
           description: The list of response details of each document.
           items:
@@ -535,7 +535,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         importConfigValidationResults:
           description: Validation statuses of the batch documents import config.
           items:
@@ -552,7 +552,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiUiv1beta3ImportDocumentsMetadataImportConfigValidationResult:
-      description: The validation status of each import config. Status is set to errors if there is no documents to import in the import_config, or OK if the operation will try to proceed at least one document.
+      description: The validation status of each import config. Status is set to an error if there are no documents to import in the `import_config`, or `OK` if the operation will try to proceed with at least one document.
       properties:
         inputGcsSource:
           description: The source Cloud Storage URI specified in the import config.
@@ -600,7 +600,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         datasetResyncStatuses:
           description: The list of dataset resync statuses. Not checked when `dataset_documents` is specified in ResyncRequest.
           items:
@@ -670,7 +670,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
       type: object
     GoogleCloudDocumentaiUiv1beta3SampleDocumentsResponse:
       description: Response of the sample documents operation.
@@ -761,7 +761,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
       type: object
     GoogleCloudDocumentaiUiv1beta3UpdateHumanReviewConfigMetadata:
       description: The long-running operation metadata for updating the human review configuration.
@@ -3078,7 +3078,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         errorDocumentCount:
           description: Total number of documents that failed to be deleted in storage.
           format: int32
@@ -3367,7 +3367,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
         importConfigValidationResults:
           description: Validation statuses of the batch documents import config.
           items:
@@ -3384,7 +3384,7 @@ components:
           type: integer
       type: object
     GoogleCloudDocumentaiV1beta3ImportDocumentsMetadataImportConfigValidationResult:
-      description: The validation status of each import config. Status is set to errors if there is no documents to import in the import_config, or OK if the operation will try to proceed at least one document.
+      description: The validation status of each import config. Status is set to an error if there are no documents to import in the `import_config`, or `OK` if the operation will try to proceed with at least one document.
       properties:
         inputGcsSource:
           description: The source Cloud Storage URI specified in the import config.
@@ -3558,7 +3558,7 @@ components:
       properties:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3CommonOperationMetadata"
-          description: The basic metadata of the long running operation.
+          description: The basic metadata of the long-running operation.
       type: object
     GoogleLongrunningOperation:
       description: This resource represents a long-running operation that is the result of a network API call.

@@ -2598,6 +2598,12 @@ components:
     AnalyzeEntitiesRequest:
       description: The request to analyze healthcare entities in a document.
       properties:
+        alternativeOutputFormat:
+          description: Optional. Alternative output format to be generated based on the results of analysis.
+          enum:
+            - ALTERNATIVE_OUTPUT_FORMAT_UNSPECIFIED
+            - FHIR_BUNDLE
+          type: string
         documentContent:
           description: document_content is a document to be annotated.
           type: string
@@ -2624,6 +2630,9 @@ components:
           items:
             $ref: "#/components/schemas/EntityMention"
           type: array
+        fhirBundle:
+          description: The FHIR bundle ([`R4`](http://hl7.org/fhir/R4/bundle.html)) that includes all the entities, the entity mentions, and the relationships in JSON format.
+          type: string
         relationships:
           description: relationships contains all the binary relationships that were identified between entity mentions within the provided document.
           items:
