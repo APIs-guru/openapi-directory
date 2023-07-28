@@ -5729,10 +5729,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/__string'
                         - description: 'The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.'
+                    DefaultAuthenticationMethod:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: The default authentication method used for GCM. Values are either "TOKEN" or "KEY". Defaults to "KEY".
                     Enabled:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
                         - description: Specifies whether to enable the GCM channel for the application.
+                    ServiceJson:
+                      allOf:
+                        - $ref: '#/components/schemas/__string'
+                        - description: 'The contents of the JSON file provided by Google during registration in order to generate an access token for authentication. For more information see <a href="https://firebase.google.com/docs/cloud-messaging/migrate-v1">Migrate from legacy FCM APIs to HTTP v1</a>.'
   '/v1/apps/{application-id}/journeys/{journey-id}':
     delete:
       operationId: DeleteJourney
@@ -7311,6 +7319,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/QuietTime'
                         - description: '<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren''t sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint''s time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint''s time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn''t met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p> <p>To override the default quiet time settings for a specific campaign or journey, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource or the <link  linkend="apps-application-id-journeys-journey-id">Journey</link> resource to define a custom quiet time for the campaign or journey.</p>'
+                    JourneyLimits:
+                      allOf:
+                        - $ref: '#/components/schemas/ApplicationSettingsJourneyLimits'
+                        - description: 'The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.'
   '/v1/apps/{application-id}/campaigns/{campaign-id}/activities':
     get:
       operationId: GetCampaignActivities
@@ -10291,6 +10303,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Template'
             - description: The voice template to use for the message. This object isn't supported for campaigns.
+        InAppTemplate:
+          allOf:
+            - $ref: '#/components/schemas/Template'
+            - description: The InApp template to use for the message. The InApp template object is not supported for SendMessages.
       description: 'Specifies the message template to use for the message, for each type of channel.'
     CreateEmailTemplateResponse:
       type: object
@@ -10368,6 +10384,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'Minimum time that must pass before an endpoint can re-enter a given journey. The duration should use an ISO 8601 format, such as PT1H. '
+        TimeframeCap:
+          allOf:
+            - $ref: '#/components/schemas/JourneyTimeframeCap'
+            - description: The number of messages that an endpoint can receive during the specified timeframe.
+        TotalCap:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The maximum number of messages a journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.'
       description: Specifies limits on the messages that a journey can send and the number of times participants can enter a journey.
     QuietTime:
       type: object
@@ -11371,6 +11395,22 @@ components:
       properties:
         ApplicationSettingsResource:
           $ref: '#/components/schemas/ApplicationSettingsResource'
+    ApplicationSettingsJourneyLimits:
+      type: object
+      properties:
+        DailyCap:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The daily number of messages that an endpoint can receive from all journeys. The maximum value is 100. If set to 0, this limit will not apply.'
+        TimeframeCap:
+          allOf:
+            - $ref: '#/components/schemas/JourneyTimeframeCap'
+            - description: The default maximum number of messages that can be sent to an endpoint during the specified timeframe for all journeys.
+        TotalCap:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The default maximum number of messages that a single journey can sent to a single endpoint. The maximum value is 100. If set to 0, this limit will not apply.'
+      description: 'The default sending limits for journeys in the application. To override these limits and define custom limits for a specific journey, use the Journey resource.'
     UpdateBaiduChannelResponse:
       type: object
       required:
@@ -12588,6 +12628,18 @@ components:
             - $ref: '#/components/schemas/__string'
             - description: The date and time when the Application was created.
       description: Provides information about an application.
+    JourneyTimeframeCap:
+      type: object
+      properties:
+        Cap:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The maximum number of messages that all journeys can send to an endpoint during the specified timeframe. The maximum value is 100. If set to 0, this limit will not apply.'
+        Days:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - description: 'The length of the timeframe in days. The maximum value is 30. If set to 0, this limit will not apply.'
+      description: The number of messages that can be sent to an endpoint during the specified timeframe for all journeys.
     ApplicationSettingsResource:
       type: object
       required:
@@ -12613,6 +12665,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/QuietTime'
             - description: '<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren''t sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint''s time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint''s time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn''t met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p>'
+        JourneyLimits:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationSettingsJourneyLimits'
+            - description: 'The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.'
       description: 'Provides information about an application, including the default settings for an application.'
     ListOfApplicationResponse:
       type: array
@@ -14440,7 +14496,6 @@ components:
     GCMChannelResponse:
       type: object
       required:
-        - Credential
         - Platform
       properties:
         ApplicationId:
@@ -14455,6 +14510,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.'
+        DefaultAuthenticationMethod:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The default authentication method used for GCM. Values are either "TOKEN" or "KEY". Defaults to "KEY".
         Enabled:
           allOf:
             - $ref: '#/components/schemas/__boolean'
@@ -14463,6 +14522,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - description: (Not used) This property is retained only for backward compatibility.
+        HasFcmServiceCredentials:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: Returns true if the JSON file provided by Google during registration process was used in the <b>ServiceJson</b> field of the request.
         Id:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -14724,10 +14787,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The URL of an image to display in the push notification.
+        PreferredAuthenticationMethod:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The preferred authentication method, with valid values "KEY" or "TOKEN". If a value isn''t provided then the <b>DefaultAuthenticationMethod</b> is used.'
         Priority:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: '<p>para>normal - The notification might be delayed. Delivery is optimized for battery usage on the recipient''s device. Use this value unless immediate delivery is required.</p>/listitem> <li><p>high - The notification is sent immediately and might wake a sleeping device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM.</p> <p>The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.</p>'
+            - description: '<p>para>normal – The notification might be delayed. Delivery is optimized for battery usage on the recipient''s device. Use this value unless immediate delivery is required.</p>/listitem> <li><p>high – The notification is sent immediately and might wake a sleeping device.</p></li>/para> <p>Amazon Pinpoint specifies this value in the FCM priority parameter when it sends the notification message to FCM.</p> <p>The equivalent values for Apple Push Notification service (APNs) are 5, for normal, and 10, for high. If you specify an APNs value for this property, Amazon Pinpoint accepts and converts the value to the corresponding FCM value.</p>'
         RawContent:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -15441,17 +15508,23 @@ components:
         - IN_APP_EVENT
     GCMChannelRequest:
       type: object
-      required:
-        - ApiKey
       properties:
         ApiKey:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: 'The Web API Key, also referred to as an <i>API_KEY</i> or <i>server key</i>, that you received from Google to communicate with Google services.'
+        DefaultAuthenticationMethod:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The default authentication method used for GCM. Values are either "TOKEN" or "KEY". Defaults to "KEY".
         Enabled:
           allOf:
             - $ref: '#/components/schemas/__boolean'
             - description: Specifies whether to enable the GCM channel for the application.
+        ServiceJson:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The contents of the JSON file provided by Google during registration in order to generate an access token for authentication. For more information see <a href="https://firebase.google.com/docs/cloud-messaging/migrate-v1">Migrate from legacy FCM APIs to HTTP v1</a>.'
       description: 'Specifies the status and settings of the GCM channel for an application. This channel enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.'
     GPSCoordinates:
       type: object
@@ -17325,7 +17398,7 @@ components:
         TemplateType:
           allOf:
             - $ref: '#/components/schemas/TemplateType'
-            - description: 'The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.'
+            - description: 'The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.'
         Version:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -17362,7 +17435,7 @@ components:
         TemplateType:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, and VOICE.'
+            - description: 'The type of channel that the message template is designed for. Possible values are: EMAIL, PUSH, SMS, INAPP, and VOICE.'
         Version:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -17484,6 +17557,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/QuietTime'
             - description: '<p>The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren''t sent to endpoints, if all the following conditions are met:</p> <ul><li><p>The EndpointDemographic.Timezone property of the endpoint is set to a valid value.</p></li> <li><p>The current time in the endpoint''s time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings).</p></li> <li><p>The current time in the endpoint''s time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings).</p></li></ul> <p>If any of the preceding conditions isn''t met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.</p> <p>To override the default quiet time settings for a specific campaign or journey, use the <link  linkend="apps-application-id-campaigns-campaign-id">Campaign</link> resource or the <link  linkend="apps-application-id-journeys-journey-id">Journey</link> resource to define a custom quiet time for the campaign or journey.</p>'
+        JourneyLimits:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationSettingsJourneyLimits'
+            - description: 'The default sending limits for journeys in the application. These limits apply to each journey for the application but can be overridden, on a per journey basis, with the JourneyLimits resource.'
       description: Specifies the default settings for an application.
     UpdateApplicationSettingsRequest:
       type: object

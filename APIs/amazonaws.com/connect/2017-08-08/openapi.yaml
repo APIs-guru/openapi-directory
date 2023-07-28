@@ -10557,7 +10557,7 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/PhoneNumberType'
-            maxItems: 2
+            maxItems: 6
         - name: phoneNumberCountryCodes
           in: query
           required: false
@@ -10686,7 +10686,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/PhoneNumberType'
-                  maxItems: 2
+                  maxItems: 6
                 PhoneNumberPrefix:
                   description: 'The prefix of the phone number. If provided, it must contain <code>+</code> as part of the country code.'
                   type: string
@@ -12484,6 +12484,10 @@ paths:
                   enum:
                     - TOLL_FREE
                     - DID
+                    - UIFN
+                    - SHARED
+                    - THIRD_PARTY_TF
+                    - THIRD_PARTY_DID
                 PhoneNumberPrefix:
                   description: 'The prefix of the phone number. If provided, it must contain <code>+</code> as part of the country code.'
                   type: string
@@ -18030,6 +18034,10 @@ components:
       enum:
         - TOLL_FREE
         - DID
+        - UIFN
+        - SHARED
+        - THIRD_PARTY_TF
+        - THIRD_PARTY_DID
     PhoneNumberCountryCode:
       type: string
       enum:
@@ -23642,7 +23650,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PhoneNumberType'
-      maxItems: 2
+      maxItems: 6
     PhoneNumberCountryCodes:
       type: array
       items:

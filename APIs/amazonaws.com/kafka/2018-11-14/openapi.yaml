@@ -2087,6 +2087,76 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v2/operations/{clusterOperationArn}':
+    get:
+      operationId: DescribeClusterOperationV2
+      description: |2
+
+                    <p>Returns a description of the cluster operation specified by the ARN.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeClusterOperationV2Response'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterOperationArn
+          in: path
+          required: true
+          description: ARN of the cluster operation to describe.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/v1/configurations/{arn}/revisions/{revision}':
     get:
       operationId: DescribeConfigurationRevision
@@ -2367,6 +2437,103 @@ paths:
                         <p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
                         To get the next batch, provide this token in your next request.</p>
                      
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/api/v2/clusters/{clusterArn}/operations':
+    get:
+      operationId: ListClusterOperationsV2
+      description: |2-
+
+                    <p>Returns a list of all the operations that have been performed on the specified MSK cluster.</p>
+                 
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListClusterOperationsV2Response'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: clusterArn
+          in: path
+          required: true
+          description: The arn of the cluster whose operations are being requested.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maxResults of the query.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The nextToken of the query.
           schema:
             type: string
         - name: MaxResults
@@ -5001,6 +5168,17 @@ components:
 
                             <p>Cluster operation information</p>
                          
+    DescribeClusterOperationV2Response:
+      type: object
+      properties:
+        ClusterOperationInfo:
+          allOf:
+            - $ref: '#/components/schemas/ClusterOperationV2'
+            - xml:
+                name: clusterOperationInfo
+              description: |2-
+
+                            <p>Cluster operation information</p>
     DescribeConfigurationResponse:
       type: object
       properties:
@@ -5368,6 +5546,25 @@ components:
 
                             <p>If the response of ListClusterOperations is truncated, it returns a NextToken in the response. This Nexttoken should be sent in the subsequent request to ListClusterOperations.</p>
                          
+    ListClusterOperationsV2Response:
+      type: object
+      properties:
+        ClusterOperationInfoList:
+          allOf:
+            - $ref: '#/components/schemas/__listOfClusterOperationV2Summary'
+            - xml:
+                name: clusterOperationInfoList
+              description: |2-
+
+                            <p>An array of cluster operation information objects.</p>
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: |2-
+
+                            <p>If the response of ListClusterOperationsV2 is truncated, it returns a NextToken in the response. This NextToken should be sent in the subsequent request to ListClusterOperationsV2.</p>
     ListClustersResponse:
       type: object
       properties:
@@ -7691,6 +7888,242 @@ components:
 
                             <p>A map of tags for the VPC connection.</p>
                          
+    ClusterOperationV2Provisioned:
+      type: object
+      properties:
+        OperationSteps:
+          allOf:
+            - $ref: '#/components/schemas/__listOfClusterOperationStep'
+            - xml:
+                name: operationSteps
+              description: |2-
+
+                            <p>Steps completed during the operation.</p>
+        SourceClusterInfo:
+          allOf:
+            - $ref: '#/components/schemas/MutableClusterInfo'
+            - xml:
+                name: sourceClusterInfo
+              description: |2-
+
+                            <p>Information about cluster attributes before a cluster is updated.</p>
+        TargetClusterInfo:
+          allOf:
+            - $ref: '#/components/schemas/MutableClusterInfo'
+            - xml:
+                name: targetClusterInfo
+              description: |2-
+
+                            <p>Information about cluster attributes after a cluster is updated.</p>
+        VpcConnectionInfo:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectionInfo'
+            - xml:
+                name: vpcConnectionInfo
+              description: |2-
+
+                            <p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>
+      description: |2-
+
+                    <p>Returns information about a provisioned cluster operation.</p>
+    ClusterOperationV2Serverless:
+      type: object
+      properties:
+        VpcConnectionInfo:
+          allOf:
+            - $ref: '#/components/schemas/VpcConnectionInfoServerless'
+            - xml:
+                name: vpcConnectionInfo
+              description: |2-
+
+                            <p>Description of the VPC connection for CreateVpcConnection and DeleteVpcConnection operations.</p>
+      description: |2-
+
+                    <p>Returns information about a serverless cluster operation.</p>
+    ClusterOperationV2:
+      type: object
+      properties:
+        ClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clusterArn
+              description: |2-
+
+                            <p>ARN of the cluster.</p>
+        ClusterType:
+          allOf:
+            - $ref: '#/components/schemas/ClusterType'
+            - xml:
+                name: clusterType
+              description: |2-
+
+                            <p>Type of the backend cluster.</p>
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: startTime
+              description: |2-
+
+                            <p>The time at which operation was started.</p>
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: endTime
+              description: |2-
+
+                            <p>The time at which the operation finished.</p>
+        ErrorInfo:
+          allOf:
+            - $ref: '#/components/schemas/ErrorInfo'
+            - xml:
+                name: errorInfo
+              description: |2-
+
+                            <p>If cluster operation failed from an error, it describes the error.</p>
+        OperationArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: operationArn
+              description: |2-
+
+                            <p>ARN of the cluster operation.</p>
+        OperationState:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: operationState
+              description: |2-
+
+                            <p>State of the cluster operation.</p>
+        OperationType:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: operationType
+              description: |2-
+
+                            <p>Type of the cluster operation.</p>
+        Provisioned:
+          allOf:
+            - $ref: '#/components/schemas/ClusterOperationV2Provisioned'
+            - xml:
+                name: provisioned
+              description: |2-
+
+                            <p>Properties of a provisioned cluster.</p>
+        Serverless:
+          allOf:
+            - $ref: '#/components/schemas/ClusterOperationV2Serverless'
+            - xml:
+                name: serverless
+              description: |2-
+
+                            <p>Properties of a serverless cluster.</p>
+      description: |2-
+
+                    <p>Returns information about a cluster operation.</p>
+    VpcConnectionInfoServerless:
+      type: object
+      properties:
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: creationTime
+              description: |2-
+
+                            <p>The time when Amazon MSK creates the VPC Connnection.</p>
+        Owner:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: owner
+              description: |2-
+
+                            <p>The owner of the VPC Connection.</p>
+        UserIdentity:
+          allOf:
+            - $ref: '#/components/schemas/UserIdentity'
+            - xml:
+                name: userIdentity
+              description: |2-
+
+                            <p>Description of the requester that calls the API operation.</p>
+        VpcConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: vpcConnectionArn
+              description: |2-
+
+                            <p>The Amazon Resource Name (ARN) of the VPC connection.</p>
+      description: Description of the VPC connection.
+    ClusterOperationV2Summary:
+      type: object
+      properties:
+        ClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: clusterArn
+              description: |2-
+
+                            <p>ARN of the cluster.</p>
+        ClusterType:
+          allOf:
+            - $ref: '#/components/schemas/ClusterType'
+            - xml:
+                name: clusterType
+              description: |2-
+
+                            <p>Type of the backend cluster.</p>
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: startTime
+              description: |2-
+
+                            <p>The time at which operation was started.</p>
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - xml:
+                name: endTime
+              description: |2-
+
+                            <p>The time at which the operation finished.</p>
+        OperationArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: operationArn
+              description: |2-
+
+                            <p>ARN of the cluster operation.</p>
+        OperationState:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: operationState
+              description: |2-
+
+                            <p>State of the cluster operation.</p>
+        OperationType:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: operationType
+              description: |2-
+
+                            <p>Type of the cluster operation.</p>
+      description: |2-
+
+                    <p>Returns information about a cluster operation.</p>
     DeleteClusterRequest:
       type: object
       title: DeleteClusterRequest
@@ -7710,6 +8143,10 @@ components:
     DescribeClusterOperationRequest:
       type: object
       title: DescribeClusterOperationRequest
+      properties: {}
+    DescribeClusterOperationV2Request:
+      type: object
+      title: DescribeClusterOperationV2Request
       properties: {}
     DescribeClusterRequest:
       type: object
@@ -7821,10 +8258,18 @@ components:
       type: object
       title: ListClusterOperationsRequest
       properties: {}
+    ListClusterOperationsV2Request:
+      type: object
+      title: ListClusterOperationsV2Request
+      properties: {}
     __listOfClusterOperationInfo:
       type: array
       items:
         $ref: '#/components/schemas/ClusterOperationInfo'
+    __listOfClusterOperationV2Summary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ClusterOperationV2Summary'
     ListClustersRequest:
       type: object
       title: ListClustersRequest

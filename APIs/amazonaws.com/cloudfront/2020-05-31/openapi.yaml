@@ -118,7 +118,7 @@ paths:
   '/2020-05-31/distribution/{PrimaryDistributionId}/copy':
     post:
       operationId: CopyDistribution2020_05_31
-      description: '<p>Creates a staging distribution using the configuration of the provided primary distribution. A staging distribution is a copy of an existing distribution (called the primary distribution) that you can use in a continuous deployment workflow.</p> <p>After you create a staging distribution, you can use <code>UpdateDistribution</code> to modify the staging distribution''s configuration. Then you can use <code>CreateContinuousDeploymentPolicy</code> to incrementally move traffic to the staging distribution.</p>'
+      description: '<p>Creates a staging distribution using the configuration of the provided primary distribution. A staging distribution is a copy of an existing distribution (called the primary distribution) that you can use in a continuous deployment workflow.</p> <p>After you create a staging distribution, you can use <code>UpdateDistribution</code> to modify the staging distribution''s configuration. Then you can use <code>CreateContinuousDeploymentPolicy</code> to incrementally move traffic to the staging distribution.</p> <p>This API operation requires the following IAM permissions:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html">GetDistribution</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html">CreateDistribution</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CopyDistribution.html">CopyDistribution</a> </p> </li> </ul>'
       responses:
         '201':
           description: Success
@@ -451,54 +451,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToCachePolicy'
         '534':
+          description: TooManyDistributionsAssociatedToOriginAccessControl
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginAccessControl'
+        '535':
           description: NoSuchResponseHeadersPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchResponseHeadersPolicy'
-        '535':
+        '536':
           description: TooManyDistributionsAssociatedToResponseHeadersPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToResponseHeadersPolicy'
-        '536':
+        '537':
           description: NoSuchOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchOriginRequestPolicy'
-        '537':
+        '538':
           description: TooManyDistributionsAssociatedToOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
-        '538':
+        '539':
           description: TooManyDistributionsAssociatedToKeyGroup
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
-        '539':
+        '540':
           description: TooManyKeyGroupsAssociatedToDistribution
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
-        '540':
+        '541':
           description: TrustedKeyGroupDoesNotExist
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
-        '541':
+        '542':
           description: NoSuchRealtimeLogConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
-        '542':
+        '543':
           description: RealtimeLogConfigOwnerMismatch
           content:
             text/xml:
@@ -535,6 +541,9 @@ paths:
                 CallerReference:
                   description: A value that uniquely identifies a request to create a resource. This helps to prevent CloudFront from creating a duplicate resource if you accidentally resubmit an identical request.
                   type: string
+                Enabled:
+                  description: '<p>A Boolean flag to specify the state of the staging distribution when it''s created. When you set this value to <code>True</code>, the staging distribution is enabled. When you set this value to <code>False</code>, the staging distribution is disabled.</p> <p>If you omit this field, the default value is <code>True</code>.</p>'
+                  type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1451,7 +1460,7 @@ paths:
   /2020-05-31/distribution#WithTags:
     post:
       operationId: CreateDistributionWithTags2020_05_31
-      description: Create a new distribution with tags.
+      description: '<p>Create a new distribution with tags. This API operation requires the following IAM permissions:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html">CreateDistribution</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_TagResource.html">TagResource</a> </p> </li> </ul>'
       responses:
         '201':
           description: Success
@@ -1490,354 +1499,366 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidOriginAccessControl'
         '485':
+          description: IllegalOriginAccessConfiguration
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/IllegalOriginAccessConfiguration'
+        '486':
           description: AccessDenied
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/AccessDenied'
-        '486':
+        '487':
           description: TooManyTrustedSigners
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyTrustedSigners'
-        '487':
+        '488':
           description: TrustedSignerDoesNotExist
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TrustedSignerDoesNotExist'
-        '488':
+        '489':
           description: InvalidViewerCertificate
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidViewerCertificate'
-        '489':
+        '490':
           description: InvalidMinimumProtocolVersion
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidMinimumProtocolVersion'
-        '490':
+        '491':
           description: MissingBody
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/MissingBody'
-        '491':
+        '492':
           description: TooManyDistributionCNAMEs
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionCNAMEs'
-        '492':
+        '493':
           description: TooManyDistributions
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributions'
-        '493':
+        '494':
           description: InvalidDefaultRootObject
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidDefaultRootObject'
-        '494':
+        '495':
           description: InvalidRelativePath
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidRelativePath'
-        '495':
+        '496':
           description: InvalidErrorCode
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidErrorCode'
-        '496':
+        '497':
           description: InvalidResponseCode
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidResponseCode'
-        '497':
+        '498':
           description: InvalidArgument
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidArgument'
-        '498':
+        '499':
           description: InvalidRequiredProtocol
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidRequiredProtocol'
-        '499':
+        '500':
           description: NoSuchOrigin
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchOrigin'
-        '500':
+        '501':
           description: TooManyOrigins
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyOrigins'
-        '501':
+        '502':
           description: TooManyOriginGroupsPerDistribution
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyOriginGroupsPerDistribution'
-        '502':
+        '503':
           description: TooManyCacheBehaviors
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyCacheBehaviors'
-        '503':
+        '504':
           description: TooManyCookieNamesInWhiteList
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyCookieNamesInWhiteList'
-        '504':
+        '505':
           description: InvalidForwardCookies
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidForwardCookies'
-        '505':
+        '506':
           description: TooManyHeadersInForwardedValues
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyHeadersInForwardedValues'
-        '506':
+        '507':
           description: InvalidHeadersForS3Origin
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidHeadersForS3Origin'
-        '507':
+        '508':
           description: InconsistentQuantities
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InconsistentQuantities'
-        '508':
+        '509':
           description: TooManyCertificates
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyCertificates'
-        '509':
+        '510':
           description: InvalidLocationCode
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidLocationCode'
-        '510':
+        '511':
           description: InvalidGeoRestrictionParameter
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidGeoRestrictionParameter'
-        '511':
+        '512':
           description: InvalidProtocolSettings
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidProtocolSettings'
-        '512':
+        '513':
           description: InvalidTTLOrder
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidTTLOrder'
-        '513':
+        '514':
           description: InvalidWebACLId
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidWebACLId'
-        '514':
+        '515':
           description: TooManyOriginCustomHeaders
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyOriginCustomHeaders'
-        '515':
+        '516':
           description: InvalidTagging
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidTagging'
-        '516':
+        '517':
           description: TooManyQueryStringParameters
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyQueryStringParameters'
-        '517':
+        '518':
           description: InvalidQueryStringParameters
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidQueryStringParameters'
-        '518':
+        '519':
           description: TooManyDistributionsWithLambdaAssociations
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsWithLambdaAssociations'
-        '519':
+        '520':
           description: TooManyDistributionsWithSingleFunctionARN
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsWithSingleFunctionARN'
-        '520':
+        '521':
           description: TooManyLambdaFunctionAssociations
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyLambdaFunctionAssociations'
-        '521':
+        '522':
           description: InvalidLambdaFunctionAssociation
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidLambdaFunctionAssociation'
-        '522':
+        '523':
           description: TooManyDistributionsWithFunctionAssociations
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsWithFunctionAssociations'
-        '523':
+        '524':
           description: TooManyFunctionAssociations
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyFunctionAssociations'
-        '524':
+        '525':
           description: InvalidFunctionAssociation
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidFunctionAssociation'
-        '525':
+        '526':
           description: InvalidOriginReadTimeout
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidOriginReadTimeout'
-        '526':
+        '527':
           description: InvalidOriginKeepaliveTimeout
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidOriginKeepaliveTimeout'
-        '527':
+        '528':
           description: NoSuchFieldLevelEncryptionConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchFieldLevelEncryptionConfig'
-        '528':
+        '529':
           description: IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior'
-        '529':
+        '530':
           description: TooManyDistributionsAssociatedToFieldLevelEncryptionConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToFieldLevelEncryptionConfig'
-        '530':
+        '531':
           description: NoSuchCachePolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchCachePolicy'
-        '531':
+        '532':
           description: TooManyDistributionsAssociatedToCachePolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToCachePolicy'
-        '532':
+        '533':
+          description: TooManyDistributionsAssociatedToOriginAccessControl
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginAccessControl'
+        '534':
           description: NoSuchResponseHeadersPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchResponseHeadersPolicy'
-        '533':
+        '535':
           description: TooManyDistributionsAssociatedToResponseHeadersPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToResponseHeadersPolicy'
-        '534':
+        '536':
           description: NoSuchOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchOriginRequestPolicy'
-        '535':
+        '537':
           description: TooManyDistributionsAssociatedToOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
-        '536':
+        '538':
           description: TooManyDistributionsAssociatedToKeyGroup
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
-        '537':
+        '539':
           description: TooManyKeyGroupsAssociatedToDistribution
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
-        '538':
+        '540':
           description: TrustedKeyGroupDoesNotExist
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
-        '539':
+        '541':
           description: NoSuchRealtimeLogConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
-        '540':
+        '542':
           description: RealtimeLogConfigOwnerMismatch
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/RealtimeLogConfigOwnerMismatch'
-        '541':
+        '543':
           description: ContinuousDeploymentPolicyInUse
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ContinuousDeploymentPolicyInUse'
-        '542':
+        '544':
           description: NoSuchContinuousDeploymentPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchContinuousDeploymentPolicy'
-        '543':
+        '545':
           description: InvalidDomainNameForOriginAccessControl
           content:
             text/xml:
@@ -2203,7 +2224,7 @@ paths:
                     Runtime:
                       allOf:
                         - $ref: '#/components/schemas/FunctionRuntime'
-                        - description: The function's runtime environment. The only valid value is <code>cloudfront-js-1.0</code>.
+                        - description: The function's runtime environment verion.
                 FunctionCode:
                   description: 'The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.'
                   type: string
@@ -4460,7 +4481,7 @@ paths:
                     Runtime:
                       allOf:
                         - $ref: '#/components/schemas/FunctionRuntime'
-                        - description: The function's runtime environment. The only valid value is <code>cloudfront-js-1.0</code>.
+                        - description: The function's runtime environment verion.
                 FunctionCode:
                   description: 'The function code. For more information about writing a CloudFront function, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html">Writing function code for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.'
                   type: string
@@ -5986,84 +6007,90 @@ paths:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToCachePolicy'
         '531':
+          description: TooManyDistributionsAssociatedToOriginAccessControl
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginAccessControl'
+        '532':
           description: NoSuchResponseHeadersPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchResponseHeadersPolicy'
-        '532':
+        '533':
           description: TooManyDistributionsAssociatedToResponseHeadersPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToResponseHeadersPolicy'
-        '533':
+        '534':
           description: NoSuchOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchOriginRequestPolicy'
-        '534':
+        '535':
           description: TooManyDistributionsAssociatedToOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
-        '535':
+        '536':
           description: TooManyDistributionsAssociatedToKeyGroup
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
-        '536':
+        '537':
           description: TooManyKeyGroupsAssociatedToDistribution
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
-        '537':
+        '538':
           description: TrustedKeyGroupDoesNotExist
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
-        '538':
+        '539':
           description: NoSuchRealtimeLogConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
-        '539':
+        '540':
           description: RealtimeLogConfigOwnerMismatch
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/RealtimeLogConfigOwnerMismatch'
-        '540':
+        '541':
           description: ContinuousDeploymentPolicyInUse
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ContinuousDeploymentPolicyInUse'
-        '541':
+        '542':
           description: NoSuchContinuousDeploymentPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchContinuousDeploymentPolicy'
-        '542':
+        '543':
           description: StagingDistributionInUse
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/StagingDistributionInUse'
-        '543':
+        '544':
           description: IllegalOriginAccessConfiguration
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/IllegalOriginAccessConfiguration'
-        '544':
+        '545':
           description: InvalidDomainNameForOriginAccessControl
           content:
             text/xml:
@@ -7915,7 +7942,7 @@ paths:
   '/2020-05-31/distribution/{Id}/promote-staging-config':
     put:
       operationId: UpdateDistributionWithStagingConfig2020_05_31
-      description: '<p>Copies the staging distribution''s configuration to its corresponding primary distribution. The primary distribution retains its <code>Aliases</code> (also known as alternate domain names or CNAMEs) and <code>ContinuousDeploymentPolicyId</code> value, but otherwise its configuration is overwritten to match the staging distribution.</p> <p>You can use this operation in a continuous deployment workflow after you have tested configuration changes on the staging distribution. After using a continuous deployment policy to move a portion of your domain name''s traffic to the staging distribution and verifying that it works as intended, you can use this operation to copy the staging distribution''s configuration to the primary distribution. This action will disable the continuous deployment policy and move your domain''s traffic back to the primary distribution.</p>'
+      description: '<p>Copies the staging distribution''s configuration to its corresponding primary distribution. The primary distribution retains its <code>Aliases</code> (also known as alternate domain names or CNAMEs) and <code>ContinuousDeploymentPolicyId</code> value, but otherwise its configuration is overwritten to match the staging distribution.</p> <p>You can use this operation in a continuous deployment workflow after you have tested configuration changes on the staging distribution. After using a continuous deployment policy to move a portion of your domain name''s traffic to the staging distribution and verifying that it works as intended, you can use this operation to copy the staging distribution''s configuration to the primary distribution. This action will disable the continuous deployment policy and move your domain''s traffic back to the primary distribution.</p> <p>This API operation requires the following IAM permissions:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html">GetDistribution</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html">UpdateDistribution</a> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -8230,54 +8257,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToCachePolicy'
         '531':
+          description: TooManyDistributionsAssociatedToOriginAccessControl
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginAccessControl'
+        '532':
           description: NoSuchResponseHeadersPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchResponseHeadersPolicy'
-        '532':
+        '533':
           description: TooManyDistributionsAssociatedToResponseHeadersPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToResponseHeadersPolicy'
-        '533':
+        '534':
           description: NoSuchOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchOriginRequestPolicy'
-        '534':
+        '535':
           description: TooManyDistributionsAssociatedToOriginRequestPolicy
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
-        '535':
+        '536':
           description: TooManyDistributionsAssociatedToKeyGroup
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
-        '536':
+        '537':
           description: TooManyKeyGroupsAssociatedToDistribution
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
-        '537':
+        '538':
           description: TrustedKeyGroupDoesNotExist
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
-        '538':
+        '539':
           description: NoSuchRealtimeLogConfig
           content:
             text/xml:
               schema:
                 $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
-        '539':
+        '540':
           description: RealtimeLogConfigOwnerMismatch
           content:
             text/xml:
@@ -8489,6 +8522,7 @@ components:
     TooManyDistributionsAssociatedToFieldLevelEncryptionConfig: {}
     NoSuchCachePolicy: {}
     TooManyDistributionsAssociatedToCachePolicy: {}
+    TooManyDistributionsAssociatedToOriginAccessControl: {}
     NoSuchResponseHeadersPolicy: {}
     TooManyDistributionsAssociatedToResponseHeadersPolicy: {}
     NoSuchOriginRequestPolicy: {}
@@ -8843,7 +8877,6 @@ components:
         - http3
         - http2and3
     IllegalOriginAccessConfiguration: {}
-    TooManyDistributionsAssociatedToOriginAccessControl: {}
     ContinuousDeploymentPolicyInUse: {}
     NoSuchContinuousDeploymentPolicy: {}
     InvalidDomainNameForOriginAccessControl: {}
@@ -9029,6 +9062,7 @@ components:
       type: string
       enum:
         - cloudfront-js-1.0
+        - cloudfront-js-2.0
     TooManyFunctions: {}
     FunctionAlreadyExists: {}
     FunctionSizeLimitExceeded: {}
@@ -9370,7 +9404,7 @@ components:
         Enabled:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: 'This field is <code>true</code> if any of the Amazon Web Services accounts have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.'
+            - description: 'This field is <code>true</code> if any of the Amazon Web Services accounts in the list are configured as trusted signers. If not, this field is <code>false</code>.'
         Quantity:
           allOf:
             - $ref: '#/components/schemas/integer'
@@ -10047,7 +10081,7 @@ components:
         Enabled:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: 'This field is <code>true</code> if any of the Amazon Web Services accounts in the list have active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.'
+            - description: 'This field is <code>true</code> if any of the Amazon Web Services accounts in the list are configured as trusted signers. If not, this field is <code>false</code>.'
         Quantity:
           allOf:
             - $ref: '#/components/schemas/integer'
@@ -10862,6 +10896,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: A value that uniquely identifies a request to create a resource. This helps to prevent CloudFront from creating a duplicate resource if you accidentally resubmit an identical request.
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: '<p>A Boolean flag to specify the state of the staging distribution when it''s created. When you set this value to <code>True</code>, the staging distribution is enabled. When you set this value to <code>False</code>, the staging distribution is disabled.</p> <p>If you omit this field, the default value is <code>True</code>.</p>'
     Distribution:
       type: object
       required:
@@ -11120,7 +11158,7 @@ components:
         Runtime:
           allOf:
             - $ref: '#/components/schemas/FunctionRuntime'
-            - description: The function's runtime environment. The only valid value is <code>cloudfront-js-1.0</code>.
+            - description: The function's runtime environment verion.
       description: Contains configuration information about a CloudFront function.
     FunctionBlob:
       type: string
