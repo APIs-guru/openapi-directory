@@ -909,6 +909,30 @@ paths:
       tags:
         - projects
   "/v1alpha/{parent}/browserDlpRules":
+    get:
+      description: Lists BrowserDlpRules for PartnerTenant in a given organization.
+      operationId: beyondcorp.organizations.locations.global.partnerTenants.browserDlpRules.list
+      parameters:
+        - description: "Required. The parent partnerTenant to which the BrowserDlpRules belong. Format: `organizations/{organization_id}/locations/global/partnerTenants/{partner_tenant_id}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaListBrowserDlpRulesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2717,6 +2741,15 @@ components:
         id:
           description: Google group id
           type: string
+      type: object
+    GoogleCloudBeyondcorpPartnerservicesV1alphaListBrowserDlpRulesResponse:
+      description: Message for response to listing BrowserDlpRules.
+      properties:
+        browserDlpRules:
+          description: The list of ProxyConfig objects.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBeyondcorpPartnerservicesV1alphaBrowserDlpRule"
+          type: array
       type: object
     GoogleCloudBeyondcorpPartnerservicesV1alphaListPartnerTenantsResponse:
       description: Message for response to listing PartnerTenants.

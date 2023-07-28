@@ -348,6 +348,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:run":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Use this method to start, resume or recover a stream with a non default CDC strategy.
+      operationId: datastream.projects.locations.streams.run
+      parameters:
+        - description: "Required. Name of the stream resource to start, in the format: projects/{project_id}/locations/{location}/streams/{stream_name}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunStreamRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{object}:startBackfillJob":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1131,6 +1173,19 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    CdcStrategy:
+      description: The strategy that the stream uses for CDC replication.
+      properties:
+        mostRecentStartPosition:
+          $ref: "#/components/schemas/MostRecentStartPosition"
+          description: Optional. Start replicating from the most recent position in the source.
+        nextAvailableStartPosition:
+          $ref: "#/components/schemas/NextAvailableStartPosition"
+          description: Optional. Resume replication from the next available position in the source.
+        specificStartPosition:
+          $ref: "#/components/schemas/SpecificStartPosition"
+          description: Optional. Start replicating from a specific position in the source.
+      type: object
     ConnectionProfile:
       description: A set of reusable connection configurations to be used as a source or destination for a stream.
       properties:
@@ -1491,6 +1546,10 @@ components:
           $ref: "#/components/schemas/SourceObjectIdentifier"
           description: Required. The source object identifier which maps to the stream object.
       type: object
+    MostRecentStartPosition:
+      description: CDC strategy to start replicating from the most recent position in the source.
+      properties: {}
+      type: object
     MysqlColumn:
       description: MySQL Column.
       properties:
@@ -1537,6 +1596,17 @@ components:
           items:
             $ref: "#/components/schemas/MysqlTable"
           type: array
+      type: object
+    MysqlLogPosition:
+      description: MySQL log position
+      properties:
+        logFile:
+          description: The binary log file name.
+          type: string
+        logPosition:
+          description: The position within the binary log file. Default is head of file.
+          format: int32
+          type: integer
       type: object
     MysqlObjectIdentifier:
       description: Mysql data source object identifier.
@@ -1631,6 +1701,10 @@ components:
         table:
           description: Table name.
           type: string
+      type: object
+    NextAvailableStartPosition:
+      description: CDC strategy to resume replication from the next available position in the source.
+      properties: {}
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -2019,6 +2093,13 @@ components:
           readOnly: true
           type: string
       type: object
+    RunStreamRequest:
+      description: Request message for running a stream.
+      properties:
+        cdcStrategy:
+          $ref: "#/components/schemas/CdcStrategy"
+          description: Optional. The CDC strategy of the stream. If not set, the system's default value will be used.
+      type: object
     SingleTargetDataset:
       description: A single target dataset to which all data will be streamed.
       properties:
@@ -2061,6 +2142,13 @@ components:
         postgresqlIdentifier:
           $ref: "#/components/schemas/PostgresqlObjectIdentifier"
           description: PostgreSQL data source object identifier.
+      type: object
+    SpecificStartPosition:
+      description: CDC strategy to start replicating from a specific position in the source.
+      properties:
+        mysqlLogPosition:
+          $ref: "#/components/schemas/MysqlLogPosition"
+          description: MySQL specific log position to start replicating from.
       type: object
     StartBackfillJobRequest:
       description: Request for manually initiating a backfill job for a specific stream object.

@@ -1,6 +1,7 @@
 openapi: 3.0.0
 servers:
   - url: https://dataform.googleapis.com/
+x-hasEquivalentPaths: true
 info:
   contact:
     name: Google
@@ -381,6 +382,53 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:fetchHistory":
+    get:
+      description: Fetches a Repository's history of commits. The Repository must not have a value for `git_remote_settings.url`.
+      operationId: dataform.projects.locations.repositories.fetchHistory
+      parameters:
+        - description: Required. The repository's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. Maximum number of commits to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `FetchRepositoryHistory` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `FetchRepositoryHistory` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FetchRepositoryHistoryResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{name}:fetchRemoteBranches":
     get:
       description: Fetches a Repository's remote branches.
@@ -529,6 +577,110 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QueryWorkflowInvocationActionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:queryDirectoryContents":
+    get:
+      description: Returns the contents of a given Repository directory. The Repository must not have a value for `git_remote_settings.url`.
+      operationId: dataform.projects.locations.repositories.queryDirectoryContents
+      parameters:
+        - description: Required. The repository's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The Commit SHA for the commit to query from. If unset, the directory will be queried from HEAD.
+          in: query
+          name: commitSha
+          schema:
+            type: string
+        - description: Optional. Maximum number of paths to return. The server may return fewer items than requested. If unspecified, the server will pick an appropriate default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Page token received from a previous `QueryRepositoryDirectoryContents` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `QueryRepositoryDirectoryContents` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Optional. The directory's full path including directory name, relative to root. If left unset, the root is used.
+          in: query
+          name: path
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QueryRepositoryDirectoryContentsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:readFile":
+    get:
+      description: Returns the contents of a file (inside a Repository). The Repository must not have a value for `git_remote_settings.url`.
+      operationId: dataform.projects.locations.repositories.readFile
+      parameters:
+        - description: Required. The repository's name.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Optional. The commit SHA for the commit to read from. If unset, the file will be read from HEAD.
+          in: query
+          name: commitSha
+          schema:
+            type: string
+        - description: Required. Full file path to read including filename, from repository root.
+          in: query
+          name: path
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadRepositoryFileResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1839,6 +1991,48 @@ components:
           description: Required. The commit author's name.
           type: string
       type: object
+    CommitLogEntry:
+      description: Represents a single commit log.
+      properties:
+        author:
+          $ref: "#/components/schemas/CommitAuthor"
+          description: The commit author for this commit log entry.
+        commitMessage:
+          description: The commit message for this commit log entry.
+          type: string
+        commitSha:
+          description: The commit SHA for this commit log entry.
+          type: string
+        commitTime:
+          description: Commit timestamp.
+          format: google-datetime
+          type: string
+      type: object
+    CommitMetadata:
+      description: Represents a Dataform Git commit.
+      properties:
+        author:
+          $ref: "#/components/schemas/CommitAuthor"
+          description: Required. The commit's author.
+        commitMessage:
+          description: Optional. The commit's message.
+          type: string
+      type: object
+    CommitRepositoryChangesRequest:
+      description: "`CommitRepositoryChanges` request message."
+      properties:
+        commitMetadata:
+          $ref: "#/components/schemas/CommitMetadata"
+          description: Required. The changes to commit to the repository.
+        fileOperations:
+          additionalProperties:
+            $ref: "#/components/schemas/FileOperation"
+          description: A map to the path of the file to the operation. The path is the ull file path including filename, from repository root.
+          type: object
+        requiredHeadCommitSha:
+          description: Optional. The commit SHA which must be the repository's current HEAD before applying this commit; otherwise this request will fail. If unset, no validation on the current HEAD commit SHA is performed.
+          type: string
+      type: object
     CommitWorkspaceChangesRequest:
       description: "`CommitWorkspaceChanges` request message."
       properties:
@@ -1952,6 +2146,10 @@ components:
           $ref: "#/components/schemas/RelationDescriptor"
           description: Descriptor for the relation and its columns. Used as documentation only, i.e. values here will result in no changes to the relation's metadata.
       type: object
+    DeleteFile:
+      description: Represents the delete file operation.
+      properties: {}
+      type: object
     DirectoryEntry:
       description: Represents a single entry in a directory.
       properties:
@@ -2019,11 +2217,33 @@ components:
             type: string
           type: array
       type: object
+    FetchRepositoryHistoryResponse:
+      description: "`FetchRepositoryHistory` response message."
+      properties:
+        commits:
+          description: A list of commit logs, ordered by 'git log' default order.
+          items:
+            $ref: "#/components/schemas/CommitLogEntry"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
+    FileOperation:
+      description: Represents a single file operation to the repository.
+      properties:
+        deleteFile:
+          $ref: "#/components/schemas/DeleteFile"
+          description: Represents the delete operation.
+        writeFile:
+          $ref: "#/components/schemas/WriteFile"
+          description: Represents the write operation.
+      type: object
     GitRemoteSettings:
       description: Controls Git remote configuration for a repository.
       properties:
         authenticationTokenSecretVersion:
-          description: Required. The name of the Secret Manager secret version to use as an authentication token for Git operations. Must be in the format `projects/*/secrets/*/versions/*`.
+          description: Optional. The name of the Secret Manager secret version to use as an authentication token for Git operations. Must be in the format `projects/*/secrets/*/versions/*`.
           type: string
         defaultBranch:
           description: Required. The Git remote's default branch name.
@@ -2412,6 +2632,18 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
+    QueryRepositoryDirectoryContentsResponse:
+      description: "`QueryRepositoryDirectoryContents` response message."
+      properties:
+        directoryEntries:
+          description: List of entries in the directory.
+          items:
+            $ref: "#/components/schemas/DirectoryEntry"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     QueryWorkflowInvocationActionsResponse:
       description: "`QueryWorkflowInvocationActions` response message."
       properties:
@@ -2428,6 +2660,14 @@ components:
       description: "`ReadFile` response message."
       properties:
         fileContents:
+          description: The file's contents.
+          format: byte
+          type: string
+      type: object
+    ReadRepositoryFileResponse:
+      description: "`ReadRepositoryFile` response message."
+      properties:
+        contents:
           description: The file's contents.
           format: byte
           type: string
@@ -2560,9 +2800,17 @@ components:
     Repository:
       description: Represents a Dataform Git repository.
       properties:
+        displayName:
+          description: Optional. The repository's user-friendly name.
+          type: string
         gitRemoteSettings:
           $ref: "#/components/schemas/GitRemoteSettings"
           description: Optional. If set, configures this repository to be linked to a Git remote.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. Repository user labels.
+          type: object
         name:
           description: Output only. The repository's name.
           readOnly: true
@@ -2573,6 +2821,9 @@ components:
         serviceAccount:
           description: Optional. The service account to run workflow invocations under.
           type: string
+        setAuthenticatedUserAdmin:
+          description: Optional. Input only. If set to true, the authenticated user will be granted the roles/dataform.admin role on the created repository. To modify access to the created repository later apply setIamPolicy from https://cloud.google.com/dataform/reference/rest#rest-resource:-v1beta1.projects.locations.repositories
+          type: boolean
         workspaceCompilationOverrides:
           $ref: "#/components/schemas/WorkspaceCompilationOverrides"
           description: Optional. If set, fields of `workspace_compilation_overrides` override the default compilation settings that are specified in dataform.json when creating workspace-scoped compilation results. See documentation for `WorkspaceCompilationOverrides` for more information.
@@ -2802,6 +3053,14 @@ components:
           type: string
         tablePrefix:
           description: Optional. The prefix that should be prepended to all table names.
+          type: string
+      type: object
+    WriteFile:
+      description: Represents the write file operation (for files added or modified).
+      properties:
+        contents:
+          description: The file's contents.
+          format: byte
           type: string
       type: object
     WriteFileRequest:

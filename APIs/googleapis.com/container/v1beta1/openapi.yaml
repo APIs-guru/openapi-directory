@@ -3023,6 +3023,7 @@ components:
           $ref: "#/components/schemas/GPUSharingConfig"
           description: The configuration for GPU sharing options.
         maxTimeSharedClientsPerGpu:
+          deprecated: true
           description: The number of time-shared GPU resources to expose for each physical GPU.
           format: int64
           type: string
@@ -3097,12 +3098,15 @@ components:
           description: Configuration for the HTTP (L7) load balancing controller addon, which makes it easy to set up HTTP load balancers for services in a cluster.
         istioConfig:
           $ref: "#/components/schemas/IstioConfig"
+          deprecated: true
           description: Configuration for Istio, an open platform to connect, manage, and secure microservices.
         kalmConfig:
           $ref: "#/components/schemas/KalmConfig"
+          deprecated: true
           description: Configuration for the KALM addon, which manages the lifecycle of k8s applications.
         kubernetesDashboard:
           $ref: "#/components/schemas/KubernetesDashboard"
+          deprecated: true
           description: "Configuration for the Kubernetes Dashboard. This addon is deprecated, and will be disabled in 1.15. It is recommended to use the Cloud Console to manage and monitor your Kubernetes clusters, workloads and applications. For more information, see: https://cloud.google.com/kubernetes-engine/docs/concepts/dashboards"
         networkPolicyConfig:
           $ref: "#/components/schemas/NetworkPolicyConfig"
@@ -3214,6 +3218,7 @@ components:
           $ref: "#/components/schemas/NodeManagement"
           description: NodeManagement configuration for this NodePool.
         minCpuPlatform:
+          deprecated: true
           description: 'Deprecated. Minimum CPU platform to be used for NAP created node pools. The instance may be scheduled on the specified or newer CPU platform. Applicable values are the friendly names of CPU platforms, such as minCpuPlatform: Intel Haswell or minCpuPlatform: Intel Sandy Bridge. For more information, read [how to specify min CPU platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform). This field is deprecated, min_cpu_platform should be specified using `cloud.google.com/requested-min-cpu-platform` label selector on the pod. To unset the min cpu platform field pass "automatic" as field value.'
           type: string
         oauthScopes:
@@ -3232,6 +3237,7 @@ components:
           description: Upgrade settings control disruption and speed of the upgrade.
       type: object
     AvailableVersion:
+      deprecated: true
       description: Deprecated.
       properties:
         reason:
@@ -3263,6 +3269,7 @@ components:
       description: Configuration for Binary Authorization.
       properties:
         enabled:
+          deprecated: true
           description: This field is deprecated. Leave this unset and instead configure BinaryAuthorization using evaluation_mode. If evaluation_mode is set to anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
           type: boolean
         evaluationMode:
@@ -3323,12 +3330,15 @@ components:
           description: The name (project, location, operation id) of the operation to cancel. Specified in the format `projects/*/locations/*/operations/*`.
           type: string
         operationId:
+          deprecated: true
           description: Required. Deprecated. The server-assigned `name` of the operation. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -3417,10 +3427,12 @@ components:
           description: "[Output only] The current software version of the master endpoint."
           type: string
         currentNodeCount:
+          deprecated: true
           description: "[Output only] The number of nodes currently in the cluster. Deprecated. Call Kubernetes API directly to retrieve node information."
           format: int32
           type: integer
         currentNodeVersion:
+          deprecated: true
           description: "[Output only] Deprecated, use [NodePool.version](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters.nodePools) instead. The current version of the node software components. If they are currently at multiple versions because they're in the process of being upgraded, this reflects the minimum version of all nodes."
           type: string
         databaseEncryption:
@@ -3464,10 +3476,12 @@ components:
           description: 'The initial Kubernetes version for this cluster. Valid versions are those found in validMasterVersions returned by getServerConfig. The version can be upgraded over time; such upgrades are reflected in currentMasterVersion and currentNodeVersion. Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "","-": picks the default Kubernetes version'
           type: string
         initialNodeCount:
+          deprecated: true
           description: The number of nodes to create in this cluster. You must ensure that your Compute Engine [resource quota](https://cloud.google.com/compute/quotas) is sufficient for this number of instances. You must also have available firewall and routes quota. For requests, this field should only be used in lieu of a "node_pool" object, since this configuration (along with the "node_config") will be used to create a "NodePool" object with an auto-generated name. Do not use this and a node_pool at the same time. This field is deprecated, use node_pool.initial_node_count instead.
           format: int32
           type: integer
         instanceGroupUrls:
+          deprecated: true
           description: Deprecated. Use node_pools.instance_group_urls.
           items:
             type: string
@@ -3508,6 +3522,7 @@ components:
           $ref: "#/components/schemas/MasterAuthorizedNetworksConfig"
           description: The configuration options for master authorized networks feature.
         masterIpv4CidrBlock:
+          deprecated: true
           description: The IP prefix in CIDR notation to use for the hosted master network. This prefix will be used for assigning private IP addresses to the master or set of masters, as well as the ILB VIP. This field is deprecated, use private_cluster_config.master_ipv4_cidr_block instead.
           type: string
         meshCertificates:
@@ -3533,6 +3548,7 @@ components:
           description: Configuration options for the NetworkPolicy feature.
         nodeConfig:
           $ref: "#/components/schemas/NodeConfig"
+          deprecated: true
           description: Parameters used in creating the cluster's nodes. For requests, this field should only be used in lieu of a "node_pool" object, since this configuration (along with the "initial_node_count") will be used to create a "NodePool" object with an auto-generated name. Do not use this and a node_pool at the same time. For responses, this field will be populated with the node configuration of the first node pool. (For configuration of each node pool, see `node_pool.config`) If unspecified, the defaults are used. This field is deprecated, use node_pool.config instead.
         nodeIpv4CidrSize:
           description: "[Output only] The size of the address space on each node for hosting containers. This is provisioned from within the `container_ipv4_cidr` range. This field will only be set when cluster is in route-based network mode."
@@ -3556,6 +3572,7 @@ components:
           $ref: "#/components/schemas/PodSecurityPolicyConfig"
           description: Configuration for the PodSecurityPolicy feature.
         privateCluster:
+          deprecated: true
           description: If this is a private cluster setup. Private clusters are clusters that, by default have no external IP addresses on the nodes and where nodes and the master communicate over private IP addresses. This field is deprecated, use private_cluster_config.enable_private_nodes instead.
           type: boolean
         privateClusterConfig:
@@ -3599,6 +3616,7 @@ components:
             - DEGRADED
           type: string
         statusMessage:
+          deprecated: true
           description: "[Output only] Deprecated. Use conditions instead. Additional information about the current status of this cluster, if available."
           type: string
         subnetwork:
@@ -3623,6 +3641,7 @@ components:
           $ref: "#/components/schemas/WorkloadIdentityConfig"
           description: Configuration for the use of Kubernetes Service Accounts in GCP IAM policies.
         zone:
+          deprecated: true
           description: "[Output only] The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field is deprecated, use location instead."
           type: string
       type: object
@@ -3869,15 +3888,18 @@ components:
       description: CompleteIPRotationRequest moves the cluster master back into single-IP mode.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster. This field has been deprecated and replaced by the name field.
           type: string
         name:
           description: The name (project, location, cluster name) of the cluster to complete IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -3923,9 +3945,11 @@ components:
           description: The parent (project and location) where the cluster will be created. Specified in the format `projects/*/locations/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the parent field.
           type: string
       type: object
@@ -3933,6 +3957,7 @@ components:
       description: CreateNodePoolRequest creates a node pool for a cluster.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster. This field has been deprecated and replaced by the parent field.
           type: string
         nodePool:
@@ -3942,9 +3967,11 @@ components:
           description: The parent (project, location, cluster name) where the node pool will be created. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the parent field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the parent field.
           type: string
       type: object
@@ -4258,6 +4285,7 @@ components:
           description: "If true, allow allocation of cluster CIDR ranges that overlap with certain kinds of network routes. By default we do not allow cluster CIDR ranges to intersect with any user declared routes. With allow_route_overlap == true, we allow overlapping with CIDR ranges that are larger than the cluster CIDR range. If this field is set to true, then cluster and services CIDRs must be fully-specified (e.g. `10.96.0.0/14`, but not `/14`), which means: 1) When `use_ip_aliases` is true, `cluster_ipv4_cidr_block` and `services_ipv4_cidr_block` must be fully-specified. 2) When `use_ip_aliases` is false, `cluster.cluster_ipv4_cidr` muse be fully-specified."
           type: boolean
         clusterIpv4Cidr:
+          deprecated: true
           description: This field is deprecated, use cluster_ipv4_cidr_block.
           type: string
         clusterIpv4CidrBlock:
@@ -4282,6 +4310,7 @@ components:
             - EXTERNAL
           type: string
         nodeIpv4Cidr:
+          deprecated: true
           description: This field is deprecated, use node_ipv4_cidr_block.
           type: string
         nodeIpv4CidrBlock:
@@ -4291,6 +4320,7 @@ components:
           $ref: "#/components/schemas/PodCIDROverprovisionConfig"
           description: "[PRIVATE FIELD] Pod CIDR size overprovisioning config for the cluster. Pod CIDR size per node depends on max_pods_per_node. By default, the value of max_pods_per_node is doubled and then rounded off to next power of 2 to get the size of pod CIDR block per node. Example: max_pods_per_node of 30 would result in 64 IPs (/26). This config can disable the doubling of IPs (we still round off to next power of 2) Example: max_pods_per_node of 30 will result in 32 IPs (/27) when overprovisioning is disabled."
         servicesIpv4Cidr:
+          deprecated: true
           description: This field is deprecated, use services_ipv4_cidr_block.
           type: string
         servicesIpv4CidrBlock:
@@ -4345,12 +4375,14 @@ components:
       description: Configuration options for Istio addon.
       properties:
         auth:
+          deprecated: true
           description: The specified Istio auth mode, either none, or mutual TLS.
           enum:
             - AUTH_NONE
             - AUTH_MUTUAL_TLS
           type: string
         disabled:
+          deprecated: true
           description: Whether Istio is enabled for this cluster.
           type: boolean
       type: object
@@ -4398,6 +4430,7 @@ components:
       description: Configuration options for the KALM addon.
       properties:
         enabled:
+          deprecated: true
           description: Whether KALM is enabled for this cluster.
           type: boolean
       type: object
@@ -4613,9 +4646,11 @@ components:
         clusterCaCertificate:
           type: string
         password:
+          deprecated: true
           description: "The password to use for HTTP basic authentication to the master endpoint. Because the master endpoint is open to the Internet, you should create a strong password. If a password is provided for cluster creation, username must be non-empty. Warning: basic authentication is deprecated, and will be removed in GKE control plane versions 1.19 and newer. For a list of recommended authentication methods, see: https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication"
           type: string
         username:
+          deprecated: true
           description: "The username to use for HTTP basic authentication to the master endpoint. For clusters v1.6.0 and later, basic authentication can be disabled by leaving username unspecified (or setting it to the empty string). Warning: basic authentication is deprecated, and will be removed in GKE control plane versions 1.19 and newer. For a list of recommended authentication methods, see: https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication"
           type: string
       type: object
@@ -4681,6 +4716,13 @@ components:
               - SCHEDULER
               - CONTROLLER_MANAGER
             type: string
+            x-enumDeprecated:
+              - false
+              - false
+              - true
+              - false
+              - false
+              - false
           type: array
       type: object
     MonitoringConfig:
@@ -5100,6 +5142,7 @@ components:
             - ERROR
           type: string
         statusMessage:
+          deprecated: true
           description: "[Output only] Deprecated. Use conditions instead. Additional information about the current status of this node pool instance, if available."
           type: string
         updateInfo:
@@ -5205,6 +5248,7 @@ components:
       description: This operation resource represents operations that may have happened or are happening on the cluster. All fields are output only.
       properties:
         clusterConditions:
+          deprecated: true
           description: Which conditions caused the current cluster state. Deprecated. Use field error instead.
           items:
             $ref: "#/components/schemas/StatusCondition"
@@ -5225,6 +5269,7 @@ components:
           description: The server-assigned ID for the operation.
           type: string
         nodepoolConditions:
+          deprecated: true
           description: Which conditions caused the current node pool state. Deprecated. Use field error instead.
           items:
             $ref: "#/components/schemas/StatusCondition"
@@ -5251,6 +5296,25 @@ components:
             - SET_MAINTENANCE_POLICY
             - RESIZE_CLUSTER
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - true
+            - true
+            - false
+            - true
+            - true
+            - false
         progress:
           $ref: "#/components/schemas/OperationProgress"
           description: Output only. [Output only] Progress information for an operation.
@@ -5271,6 +5335,7 @@ components:
             - ABORTING
           type: string
         statusMessage:
+          deprecated: true
           description: Output only. If an error has occurred, a textual description of the error. Deprecated. Use field error instead.
           readOnly: true
           type: string
@@ -5278,6 +5343,7 @@ components:
           description: "Server-defined URI for the target of the operation. The format of this is a URI to the resource being modified (such as a cluster, node pool, or node). For node pool repairs, there may be multiple nodes being repaired, but only one will be the target. Examples: - ## `https://container.googleapis.com/v1/projects/123/locations/us-central1/clusters/my-cluster` ## `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np` `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`"
           type: string
         zone:
+          deprecated: true
           description: The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the operation is taking place. This field is deprecated, use location instead.
           type: string
       type: object
@@ -5438,6 +5504,7 @@ components:
       description: ReleaseChannelConfig exposes configuration for a release channel.
       properties:
         availableVersions:
+          deprecated: true
           description: Deprecated. This field has been deprecated and replaced with the valid_versions field.
           items:
             $ref: "#/components/schemas/AvailableVersion"
@@ -5520,21 +5587,25 @@ components:
       description: RollbackNodePoolUpgradeRequest rollbacks the previously Aborted or Failed NodePool upgrade. This will be an no-op if the last upgrade successfully completed.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to rollback. This field has been deprecated and replaced by the name field.
           type: string
         name:
           description: The name (project, location, cluster, node pool id) of the node poll to rollback upgrade. Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
           type: string
         nodePoolId:
+          deprecated: true
           description: Required. Deprecated. The name of the node pool to rollback. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         respectPdb:
           description: Option for rollback to ignore the PodDisruptionBudget. Default value is false.
           type: boolean
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5542,6 +5613,7 @@ components:
       description: SandboxConfig contains configurations of the sandbox to use for the node.
       properties:
         sandboxType:
+          deprecated: true
           description: Type of the sandbox to use for the node (e.g. 'gvisor')
           type: string
         type:
@@ -5658,15 +5730,18 @@ components:
           $ref: "#/components/schemas/AddonsConfig"
           description: Required. The desired configurations for the various addons available to run in the cluster.
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         name:
           description: The name (project, location, cluster) of the cluster to set addons. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5674,6 +5749,7 @@ components:
       description: SetLabelsRequest sets the Google Cloud Platform labels on a Google Container Engine cluster, which will in turn set them for Google Compute Engine resources used by that cluster
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster. This field has been deprecated and replaced by the name field.
           type: string
         labelFingerprint:
@@ -5683,6 +5759,7 @@ components:
           description: The name (project, location, cluster name) of the cluster to set labels. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         resourceLabels:
@@ -5691,6 +5768,7 @@ components:
           description: Required. The labels to set for that cluster.
           type: object
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5698,6 +5776,7 @@ components:
       description: SetLegacyAbacRequest enables or disables the ABAC authorization mechanism for a cluster.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to update. This field has been deprecated and replaced by the name field.
           type: string
         enabled:
@@ -5707,9 +5786,11 @@ components:
           description: The name (project, location, cluster name) of the cluster to set legacy abac. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5717,6 +5798,7 @@ components:
       description: SetLocationsRequest sets the locations of the cluster.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         locations:
@@ -5728,9 +5810,11 @@ components:
           description: The name (project, location, cluster) of the cluster to set locations. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5738,6 +5822,7 @@ components:
       description: SetLoggingServiceRequest sets the logging service of a cluster.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         loggingService:
@@ -5747,9 +5832,11 @@ components:
           description: The name (project, location, cluster) of the cluster to set logging. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5784,18 +5871,21 @@ components:
             - SET_USERNAME
           type: string
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         name:
           description: The name (project, location, cluster) of the cluster to set auth. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         update:
           $ref: "#/components/schemas/MasterAuth"
           description: Required. A description of the update.
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5803,6 +5893,7 @@ components:
       description: SetMonitoringServiceRequest sets the monitoring service of a cluster.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         monitoringService:
@@ -5812,9 +5903,11 @@ components:
           description: The name (project, location, cluster) of the cluster to set monitoring. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5822,6 +5915,7 @@ components:
       description: SetNetworkPolicyRequest enables/disables network policy for a cluster.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster. This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5831,9 +5925,11 @@ components:
           $ref: "#/components/schemas/NetworkPolicy"
           description: Required. Configuration options for the NetworkPolicy feature.
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5844,18 +5940,22 @@ components:
           $ref: "#/components/schemas/NodePoolAutoscaling"
           description: Required. Autoscaling configuration for the node pool.
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         name:
           description: The name (project, location, cluster, node pool) of the node pool to set autoscaler settings. Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
           type: string
         nodePoolId:
+          deprecated: true
           description: Required. Deprecated. The name of the node pool to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5863,6 +5963,7 @@ components:
       description: SetNodePoolManagementRequest sets the node management properties of a node pool.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to update. This field has been deprecated and replaced by the name field.
           type: string
         management:
@@ -5872,12 +5973,15 @@ components:
           description: The name (project, location, cluster, node pool id) of the node pool to set management properties. Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
           type: string
         nodePoolId:
+          deprecated: true
           description: Required. Deprecated. The name of the node pool to update. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5885,6 +5989,7 @@ components:
       description: SetNodePoolSizeRequest sets the size of a node pool.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to update. This field has been deprecated and replaced by the name field.
           type: string
         name:
@@ -5895,12 +6000,15 @@ components:
           format: int32
           type: integer
         nodePoolId:
+          deprecated: true
           description: Required. Deprecated. The name of the node pool to update. This field has been deprecated and replaced by the name field.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -5950,18 +6058,21 @@ components:
       description: StartIPRotationRequest creates a new IP for the cluster and then performs a node upgrade on each node pool to point to the new IP.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster. This field has been deprecated and replaced by the name field.
           type: string
         name:
           description: The name (project, location, cluster name) of the cluster to start IP rotation. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         rotateCredentials:
           description: Whether to rotate credentials during IP rotation.
           type: boolean
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -6008,6 +6119,7 @@ components:
             - DATA_LOSS
           type: string
         code:
+          deprecated: true
           description: Machine-friendly representation of the condition Deprecated. Use canonical_code instead.
           enum:
             - UNKNOWN
@@ -6054,18 +6166,21 @@ components:
       description: UpdateClusterRequest updates the settings of a cluster.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         name:
           description: The name (project, location, cluster) of the cluster to update. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         update:
           $ref: "#/components/schemas/ClusterUpdate"
           description: Required. A description of the update.
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -6080,6 +6195,7 @@ components:
       description: UpdateMasterRequest updates the master of the cluster.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         masterVersion:
@@ -6089,9 +6205,11 @@ components:
           description: The name (project, location, cluster) of the cluster to update. Specified in the format `projects/*/locations/*/clusters/*`.
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -6099,6 +6217,7 @@ components:
       description: SetNodePoolVersionRequest updates the version of a node pool.
       properties:
         clusterId:
+          deprecated: true
           description: Required. Deprecated. The name of the cluster to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         confidentialNodes:
@@ -6143,12 +6262,14 @@ components:
           $ref: "#/components/schemas/NodeNetworkConfig"
           description: Node network config.
         nodePoolId:
+          deprecated: true
           description: Required. Deprecated. The name of the node pool to upgrade. This field has been deprecated and replaced by the name field.
           type: string
         nodeVersion:
           description: 'Required. The Kubernetes version to change the nodes to (typically an upgrade). Users may specify either explicit versions offered by Kubernetes Engine or version aliases, which have the following behavior: - "latest": picks the highest valid Kubernetes version - "1.X": picks the highest valid patch+gke.N patch in the 1.X version - "1.X.Y": picks the highest valid gke.N patch in the 1.X.Y version - "1.X.Y-gke.N": picks an explicit Kubernetes version - "-": picks the Kubernetes master version'
           type: string
         projectId:
+          deprecated: true
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
         resourceLabels:
@@ -6170,6 +6291,7 @@ components:
           $ref: "#/components/schemas/WorkloadMetadataConfig"
           description: The desired workload metadata config for the node pool.
         zone:
+          deprecated: true
           description: Required. Deprecated. The name of the Google Compute Engine [zone](https://cloud.google.com/compute/docs/zones#available) in which the cluster resides. This field has been deprecated and replaced by the name field.
           type: string
       type: object
@@ -6358,11 +6480,18 @@ components:
             - BASELINE
             - RESTRICTED
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - true
+            - true
       type: object
     WorkloadIdentityConfig:
       description: Configuration for the use of Kubernetes Service Accounts in GCP IAM policies.
       properties:
         identityNamespace:
+          deprecated: true
           description: IAM Identity Namespace to attach all Kubernetes Service Accounts to.
           type: string
         identityProvider:
@@ -6383,6 +6512,7 @@ components:
             - GKE_METADATA
           type: string
         nodeMetadata:
+          deprecated: true
           description: NodeMetadata is the configuration for how to expose metadata to the workloads running on the node.
           enum:
             - UNSPECIFIED

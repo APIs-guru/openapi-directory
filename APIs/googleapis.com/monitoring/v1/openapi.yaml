@@ -270,59 +270,6 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
   "/v1/{name}/location/{location}/prometheus/api/v1/labels":
-    get:
-      description: Lists labels for metrics.
-      operationId: monitoring.projects.location.prometheus.api.v1.labels.list
-      parameters:
-        - description: "The workspace on which to execute the request. It is not part of the open source API but used as a request path prefix to distinguish different virtual Prometheus instances of Google Prometheus Engine. The format is: projects/PROJECT_ID_OR_NUMBER."
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: Location of the resource information. Has to be "global" now.
-          in: path
-          name: location
-          required: true
-          schema:
-            type: string
-        - description: The end time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.
-          in: query
-          name: end
-          schema:
-            type: string
-        - description: A list of matchers encoded in the Prometheus label matcher format to constrain the values to series that satisfy them.
-          in: query
-          name: match
-          schema:
-            type: string
-        - description: The start time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.
-          in: query
-          name: start
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HttpBody"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/monitoring
-          Oauth2c:
-            - https://www.googleapis.com/auth/monitoring
-        - Oauth2:
-            - https://www.googleapis.com/auth/monitoring.read
-          Oauth2c:
-            - https://www.googleapis.com/auth/monitoring.read
-      tags:
-        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -355,7 +302,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ListLabelsRequest"
+              $ref: "#/components/schemas/QueryLabelsRequest"
       responses:
         "200":
           content:
@@ -1245,19 +1192,6 @@ components:
           description: If there are more results than have been returned, then this field is set to a non-empty value. To see the additional results, use that value as page_token in the next call to this method.
           type: string
       type: object
-    ListLabelsRequest:
-      description: ListLabelsRequest holds all parameters of the Prometheus upstream API for returning a list of label names.
-      properties:
-        end:
-          description: The end time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.
-          type: string
-        match:
-          description: A list of matchers encoded in the Prometheus label matcher format to constrain the values to series that satisfy them.
-          type: string
-        start:
-          description: The start time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.
-          type: string
-      type: object
     ListMetricsScopesByMonitoredProjectResponse:
       description: Response for the ListMetricsScopesByMonitoredProject method.
       properties:
@@ -1444,6 +1378,19 @@ components:
           type: string
         timeout:
           description: An upper bound timeout for the query. Either a Prometheus duration string (https://prometheus.io/docs/prometheus/latest/querying/basics/#time-durations) or floating point seconds. This non-standard encoding must be used for compatibility with the open source API. Clients may still implement timeouts at the connection level while ignoring this field.
+          type: string
+      type: object
+    QueryLabelsRequest:
+      description: QueryLabelsRequest holds all parameters of the Prometheus upstream API for returning a list of label names.
+      properties:
+        end:
+          description: The end time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.
+          type: string
+        match:
+          description: A list of matchers encoded in the Prometheus label matcher format to constrain the values to series that satisfy them.
+          type: string
+        start:
+          description: The start time to evaluate the query for. Either floating point UNIX seconds or RFC3339 formatted timestamp.
           type: string
       type: object
     QueryRangeRequest:

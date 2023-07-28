@@ -11,7 +11,7 @@ info:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Google Cloud Deploy API
+  title: Cloud Deploy API
   version: v1
   x-apisguru-categories:
     - analytics
@@ -1493,12 +1493,12 @@ components:
           type: string
       type: object
     DeliveryPipeline:
-      description: A `DeliveryPipeline` resource in the Google Cloud Deploy API. A `DeliveryPipeline` defines a pipeline through which a Skaffold configuration can progress.
+      description: A `DeliveryPipeline` resource in the Cloud Deploy API. A `DeliveryPipeline` defines a pipeline through which a Skaffold configuration can progress.
       properties:
         annotations:
           additionalProperties:
             type: string
-          description: User annotations. These attributes can only be set and used by the user, and not by Google Cloud Deploy.
+          description: User annotations. These attributes can only be set and used by the user, and not by Cloud Deploy.
           type: object
         condition:
           $ref: "#/components/schemas/PipelineCondition"
@@ -1518,7 +1518,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: "Labels are attributes that can be set and used by both the user and by Google Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
+          description: "Labels are attributes that can be set and used by both the user and by Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
           type: object
         name:
           description: Optional. Name of the `DeliveryPipeline`. Format is projects/{project}/ locations/{location}/deliveryPipelines/a-z{0,62}.
@@ -1555,9 +1555,13 @@ components:
             - TYPE_PUBSUB_NOTIFICATION_FAILURE
             - TYPE_RESOURCE_STATE_CHANGE
             - TYPE_PROCESS_ABORTED
+            - TYPE_RESTRICTION_VIOLATED
+            - TYPE_RESOURCE_DELETED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
+            - false
             - false
             - false
             - false
@@ -1788,7 +1792,7 @@ components:
           readOnly: true
       type: object
     JobRun:
-      description: A `JobRun` resource in the Google Cloud Deploy API. A `JobRun` contains information of a single `Rollout` job evaluation.
+      description: A `JobRun` resource in the Cloud Deploy API. A `JobRun` contains information of a single `Rollout` job evaluation.
       properties:
         advanceChildRolloutJobRun:
           $ref: "#/components/schemas/AdvanceChildRolloutJobRun"
@@ -1880,9 +1884,13 @@ components:
             - TYPE_PUBSUB_NOTIFICATION_FAILURE
             - TYPE_RESOURCE_STATE_CHANGE
             - TYPE_PROCESS_ABORTED
+            - TYPE_RESTRICTION_VIOLATED
+            - TYPE_RESOURCE_DELETED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
+            - false
             - false
             - false
             - false
@@ -2232,7 +2240,7 @@ components:
           type: string
       type: object
     Release:
-      description: A `Release` resource in the Google Cloud Deploy API. A `Release` defines a specific Skaffold configuration instance that can be deployed.
+      description: A `Release` resource in the Cloud Deploy API. A `Release` defines a specific Skaffold configuration instance that can be deployed.
       properties:
         abandoned:
           description: Output only. Indicates whether this is an abandoned release.
@@ -2241,7 +2249,7 @@ components:
         annotations:
           additionalProperties:
             type: string
-          description: User annotations. These attributes can only be set and used by the user, and not by Google Cloud Deploy. See https://google.aip.dev/128#annotations for more details such as format and size limitations.
+          description: User annotations. These attributes can only be set and used by the user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations for more details such as format and size limitations.
           type: object
         buildArtifacts:
           description: List of artifacts to pass through to Skaffold command.
@@ -2275,7 +2283,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: "Labels are attributes that can be set and used by both the user and by Google Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
+          description: "Labels are attributes that can be set and used by both the user and by Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
           type: object
         name:
           description: Optional. Name of the `Release`. Format is projects/{project}/ locations/{location}/deliveryPipelines/{deliveryPipeline}/ releases/a-z{0,62}.
@@ -2306,7 +2314,7 @@ components:
           description: Cloud Storage URI of tar.gz archive containing Skaffold configuration.
           type: string
         skaffoldVersion:
-          description: The Skaffold version to use when operating on this release, such as "1.20.0". Not all versions are valid; Google Cloud Deploy supports a specific set of versions. If unset, the most recent supported Skaffold version will be used.
+          description: The Skaffold version to use when operating on this release, such as "1.20.0". Not all versions are valid; Cloud Deploy supports a specific set of versions. If unset, the most recent supported Skaffold version will be used.
           type: string
         targetArtifacts:
           additionalProperties:
@@ -2357,9 +2365,13 @@ components:
             - TYPE_PUBSUB_NOTIFICATION_FAILURE
             - TYPE_RESOURCE_STATE_CHANGE
             - TYPE_PROCESS_ABORTED
+            - TYPE_RESTRICTION_VIOLATED
+            - TYPE_RESOURCE_DELETED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
+            - false
             - false
             - false
             - false
@@ -2406,12 +2418,12 @@ components:
       properties: {}
       type: object
     Rollout:
-      description: A `Rollout` resource in the Google Cloud Deploy API. A `Rollout` contains information around a specific deployment to a `Target`.
+      description: A `Rollout` resource in the Cloud Deploy API. A `Rollout` contains information around a specific deployment to a `Target`.
       properties:
         annotations:
           additionalProperties:
             type: string
-          description: User annotations. These attributes can only be set and used by the user, and not by Google Cloud Deploy. See https://google.aip.dev/128#annotations for more details such as format and size limitations.
+          description: User annotations. These attributes can only be set and used by the user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations for more details such as format and size limitations.
           type: object
         approvalState:
           description: Output only. Approval state of the `Rollout`.
@@ -2482,7 +2494,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: "Labels are attributes that can be set and used by both the user and by Google Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
+          description: "Labels are attributes that can be set and used by both the user and by Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
           type: object
         metadata:
           $ref: "#/components/schemas/Metadata"
@@ -2546,9 +2558,13 @@ components:
             - TYPE_PUBSUB_NOTIFICATION_FAILURE
             - TYPE_RESOURCE_STATE_CHANGE
             - TYPE_PROCESS_ABORTED
+            - TYPE_RESTRICTION_VIOLATED
+            - TYPE_RESOURCE_DELETED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
+            - false
             - false
             - false
             - false
@@ -2695,12 +2711,12 @@ components:
           description: Standard deployment strategy executes a single deploy and allows verifying the deployment.
       type: object
     Target:
-      description: A `Target` resource in the Google Cloud Deploy API. A `Target` defines a location to which a Skaffold configuration can be deployed.
+      description: A `Target` resource in the Cloud Deploy API. A `Target` defines a location to which a Skaffold configuration can be deployed.
       properties:
         annotations:
           additionalProperties:
             type: string
-          description: Optional. User annotations. These attributes can only be set and used by the user, and not by Google Cloud Deploy. See https://google.aip.dev/128#annotations for more details such as format and size limitations.
+          description: Optional. User annotations. These attributes can only be set and used by the user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations for more details such as format and size limitations.
           type: object
         anthosCluster:
           $ref: "#/components/schemas/AnthosCluster"
@@ -2732,7 +2748,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: "Optional. Labels are attributes that can be set and used by both the user and by Google Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
+          description: "Optional. Labels are attributes that can be set and used by both the user and by Cloud Deploy. Labels must meet the following constraints: * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. * All characters must use UTF-8 encoding, and international characters are allowed. * Keys must start with a lowercase letter or international character. * Each resource is limited to a maximum of 64 labels. Both keys and values are additionally constrained to be <= 128 bytes."
           type: object
         multiTarget:
           $ref: "#/components/schemas/MultiTarget"
@@ -2798,9 +2814,13 @@ components:
             - TYPE_PUBSUB_NOTIFICATION_FAILURE
             - TYPE_RESOURCE_STATE_CHANGE
             - TYPE_PROCESS_ABORTED
+            - TYPE_RESTRICTION_VIOLATED
+            - TYPE_RESOURCE_DELETED
             - TYPE_RENDER_STATUES_CHANGE
           type: string
           x-enumDeprecated:
+            - false
+            - false
             - false
             - false
             - false

@@ -1866,6 +1866,10 @@ components:
         diagnosticConfig:
           $ref: "#/components/schemas/DiagnosticConfig"
           description: Required. Defines flags that are used to run the diagnostic tool
+        timeoutMinutes:
+          description: Optional. Maxmium amount of time in minutes before the operation times out.
+          format: int32
+          type: integer
       type: object
     DiagnoseRuntimeRequest:
       description: Request for creating a notebook instance diagnostic file.
@@ -1873,6 +1877,10 @@ components:
         diagnosticConfig:
           $ref: "#/components/schemas/DiagnosticConfig"
           description: Required. Defines flags that are used to run the diagnostic tool
+        timeoutMinutes:
+          description: Optional. Maxmium amount of time in minutes before the operation times out.
+          format: int32
+          type: integer
       type: object
     DiagnosticConfig:
       description: Defines flags that are used to run the diagnostic tool
