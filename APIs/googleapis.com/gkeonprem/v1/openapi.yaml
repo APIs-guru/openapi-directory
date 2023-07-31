@@ -1973,6 +1973,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        upgradePolicy:
+          $ref: "#/components/schemas/BareMetalClusterUpgradePolicy"
+          description: The cluster upgrade policy.
         validationCheck:
           $ref: "#/components/schemas/ValidationCheck"
           description: Output only. The result of the preflight check.
@@ -1984,6 +1987,17 @@ components:
         enableApplicationLogs:
           description: Whether collection of application logs/metrics should be enabled (in addition to system logs/metrics).
           type: boolean
+      type: object
+    BareMetalClusterUpgradePolicy:
+      description: BareMetalClusterUpgradePolicy defines the cluster upgrade policy.
+      properties:
+        policy:
+          description: Specifies which upgrade policy to use.
+          enum:
+            - NODE_POOL_POLICY_UNSPECIFIED
+            - SERIAL
+            - CONCURRENT
+          type: string
       type: object
     BareMetalControlPlaneConfig:
       description: Specifies the control plane configuration.
@@ -3889,6 +3903,11 @@ components:
         datastore:
           description: The name of the vCenter datastore. Inherited from the user cluster.
           type: string
+        hostGroups:
+          description: Vsphere host groups to apply to all VMs in the node pool
+          items:
+            type: string
+          type: array
         tags:
           description: Tags to apply to VMs.
           items:

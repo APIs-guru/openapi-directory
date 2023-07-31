@@ -1806,13 +1806,13 @@ components:
           description: If set, the request is directed as configured by this field.
         requestHeaderModifier:
           $ref: "#/components/schemas/HttpRouteHeaderModifier"
-          description: The specification for modifying the headers of a matching request prior to delivery of the request to the destination.
+          description: The specification for modifying the headers of a matching request prior to delivery of the request to the destination. If HeaderModifiers are set on both the Destination and the RouteAction, they will be merged. Conflicts between the two will not be resolved on the configuration.
         requestMirrorPolicy:
           $ref: "#/components/schemas/HttpRouteRequestMirrorPolicy"
           description: Specifies the policy on how requests intended for the routes destination are shadowed to a separate mirrored destination. Proxy will not wait for the shadow destination to respond before returning the response. Prior to sending traffic to the shadow service, the host/authority header is suffixed with -shadow.
         responseHeaderModifier:
           $ref: "#/components/schemas/HttpRouteHeaderModifier"
-          description: The specification for modifying the headers of a response prior to sending the response back to the client.
+          description: The specification for modifying the headers of a response prior to sending the response back to the client. If HeaderModifiers are set on both the Destination and the RouteAction, they will be merged. Conflicts between the two will not be resolved on the configuration.
         retryPolicy:
           $ref: "#/components/schemas/HttpRouteRetryPolicy"
           description: Specifies the retry policy associated with this route.

@@ -366,7 +366,7 @@ components:
         reviews:
           description: Output only. List of reviews about this place.
           items:
-            $ref: "#/components/schemas/GoogleMapsPlacesV1PlaceReview"
+            $ref: "#/components/schemas/GoogleMapsPlacesV1Review"
           readOnly: true
           type: array
         secondaryOpeningHours:
@@ -579,29 +579,24 @@ components:
           readOnly: true
           type: string
       type: object
-    GoogleMapsPlacesV1PlaceReview:
-      description: Information about a review of the place.
+    GoogleMapsPlacesV1Review:
+      description: Information about a review of a place.
       properties:
         authorAttribution:
           $ref: "#/components/schemas/GoogleMapsPlacesV1AuthorAttribution"
           description: Output only. This review's author.
           readOnly: true
-        originalLanguageCode:
-          deprecated: true
-          description: Output only. A BCP-47 language code indicating the original language of the review. If the review has been translated, then original_language != language. This field contains the main language tag only, and not the secondary tag indicating country or region. For example, all the English reviews are tagged as 'en', and not 'en-AU' or 'en-UK' and so on.This field is empty if there is only a rating with no review text.
-          readOnly: true
-          type: string
         originalText:
           $ref: "#/components/schemas/GoogleTypeLocalizedText"
           description: Output only. The review text in its original language.
           readOnly: true
         publishTime:
-          description: Output only. Timestamp for the review, expressed in seconds since epoch.
+          description: Output only. Timestamp for the review.
           format: google-datetime
           readOnly: true
           type: string
         rating:
-          description: Output only. A whole number between 1.0 and 5.0, a.k.a. the number of stars.
+          description: Output only. A number between 1.0 and 5.0, a.k.a. the number of stars.
           format: double
           readOnly: true
           type: number
@@ -613,11 +608,6 @@ components:
           $ref: "#/components/schemas/GoogleTypeLocalizedText"
           description: Output only. The localized text of the review.
           readOnly: true
-        translated:
-          deprecated: true
-          description: Output only. A boolean value indicating if the review was translated from the original language it was written in. If a review has been translated, corresponding to a value of true, Google recommends that you indicate this to your users. For example, you can add the following string, “Translated by Google”, to the review.
-          readOnly: true
-          type: boolean
       type: object
     GoogleMapsPlacesV1SearchTextRequest:
       description: "Request proto for SearchText. "
