@@ -298,6 +298,66 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /findings/details/batch/get:
+    post:
+      operationId: BatchGetFindingDetails
+      description: Gets vulnerability details for findings.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetFindingDetailsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - findingArns
+              properties:
+                findingArns:
+                  description: A list of finding ARNs.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FindingArn'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /freetrialinfo/batchget:
     post:
       operationId: BatchGetFreeTrialInfo
@@ -795,7 +855,7 @@ paths:
                     networkProtocol:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: Details on the ingress source addresses used to filter findings.
+                        - description: Details on network protocol used to filter findings.
                     portRange:
                       allOf:
                         - $ref: '#/components/schemas/PortRangeFilterList'
@@ -1042,7 +1102,7 @@ paths:
                     networkProtocol:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: Details on the ingress source addresses used to filter findings.
+                        - description: Details on network protocol used to filter findings.
                     portRange:
                       allOf:
                         - $ref: '#/components/schemas/PortRangeFilterList'
@@ -1108,7 +1168,7 @@ paths:
                     keyPrefix:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The prefix of the Amazon S3 bucket used to export findings.
+                        - description: The prefix that the findings will be written under.
                     kmsKeyArn:
                       allOf:
                         - $ref: '#/components/schemas/String'
@@ -1226,7 +1286,7 @@ paths:
                     keyPrefix:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The prefix of the Amazon S3 bucket used to export findings.
+                        - description: The prefix that the findings will be written under.
                     kmsKeyArn:
                       allOf:
                         - $ref: '#/components/schemas/String'
@@ -2886,7 +2946,7 @@ paths:
                     networkProtocol:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: Details on the ingress source addresses used to filter findings.
+                        - description: Details on network protocol used to filter findings.
                     portRange:
                       allOf:
                         - $ref: '#/components/schemas/PortRangeFilterList'
@@ -3836,7 +3896,7 @@ paths:
                     networkProtocol:
                       allOf:
                         - $ref: '#/components/schemas/StringFilterList'
-                        - description: Details on the ingress source addresses used to filter findings.
+                        - description: Details on network protocol used to filter findings.
                     portRange:
                       allOf:
                         - $ref: '#/components/schemas/PortRangeFilterList'
@@ -4136,6 +4196,17 @@ components:
       pattern: '^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:finding/[a-f0-9]{32}$'
       minLength: 1
       maxLength: 100
+    BatchGetFindingDetailsResponse:
+      type: object
+      properties:
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/FindingDetailsErrorList'
+            - description: Error information for findings that details could not be returned for.
+        findingDetails:
+          allOf:
+            - $ref: '#/components/schemas/FindingDetails'
+            - description: A finding's vulnerability details.
     BatchGetFreeTrialInfoResponse:
       type: object
       required:
@@ -5909,6 +5980,31 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CodeSnippetError'
+    FindingArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingArn'
+      minItems: 1
+      maxItems: 10
+    BatchGetFindingDetailsRequest:
+      type: object
+      required:
+        - findingArns
+      title: BatchGetFindingDetailsRequest
+      properties:
+        findingArns:
+          allOf:
+            - $ref: '#/components/schemas/FindingArnList'
+            - description: A list of finding ARNs.
+    FindingDetailsErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingDetailsError'
+    FindingDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/FindingDetail'
+      minItems: 0
     BatchGetFreeTrialInfoRequestAccountIdsList:
       type: array
       items:
@@ -6562,7 +6658,7 @@ components:
         networkProtocol:
           allOf:
             - $ref: '#/components/schemas/StringFilterList'
-            - description: Details on the ingress source addresses used to filter findings.
+            - description: Details on network protocol used to filter findings.
         portRange:
           allOf:
             - $ref: '#/components/schemas/PortRangeFilterList'
@@ -6674,7 +6770,7 @@ components:
         keyPrefix:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The prefix of the Amazon S3 bucket used to export findings.
+            - description: The prefix that the findings will be written under.
         kmsKeyArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -7196,6 +7292,35 @@ components:
         - ACCOUNT_IS_ISOLATED
     ErrorMessage:
       type: string
+    EvidenceDetail:
+      type: string
+      minLength: 0
+    EvidenceRule:
+      type: string
+      minLength: 0
+    EvidenceSeverity:
+      type: string
+      minLength: 0
+    Evidence:
+      type: object
+      properties:
+        evidenceDetail:
+          allOf:
+            - $ref: '#/components/schemas/EvidenceDetail'
+            - description: The evidence details.
+        evidenceRule:
+          allOf:
+            - $ref: '#/components/schemas/EvidenceRule'
+            - description: The evidence rule.
+        severity:
+          allOf:
+            - $ref: '#/components/schemas/EvidenceSeverity'
+            - description: The evidence severity.
+      description: Details of the evidence for a vulnerability identified in a finding.
+    EvidenceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Evidence'
     ExploitAvailable:
       type: string
       enum:
@@ -7566,6 +7691,85 @@ components:
             - $ref: '#/components/schemas/DateTimeTimestamp'
             - description: The date and time the finding was last updated at.
       description: Details about an Amazon Inspector finding.
+    VulnerabilityReferenceUrls:
+      type: array
+      items:
+        $ref: '#/components/schemas/VulnerabilityReferenceUrl'
+      minItems: 0
+      maxItems: 100
+    RiskScore:
+      type: integer
+    Tools:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tool'
+    FindingDetail:
+      type: object
+      properties:
+        cisaData:
+          $ref: '#/components/schemas/CisaData'
+        cwes:
+          allOf:
+            - $ref: '#/components/schemas/Cwes'
+            - description: The Common Weakness Enumerations (CWEs) associated with the vulnerability.
+        epssScore:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The Exploit Prediction Scoring System (EPSS) score of the vulnerability.
+        evidences:
+          allOf:
+            - $ref: '#/components/schemas/EvidenceList'
+            - description: Information on the evidence of the vulnerability.
+        exploitObserved:
+          $ref: '#/components/schemas/ExploitObserved'
+        findingArn:
+          allOf:
+            - $ref: '#/components/schemas/FindingArn'
+            - description: The finding ARN that the vulnerability details are associated with.
+        referenceUrls:
+          allOf:
+            - $ref: '#/components/schemas/VulnerabilityReferenceUrls'
+            - description: The reference URLs for the vulnerability data.
+        riskScore:
+          allOf:
+            - $ref: '#/components/schemas/RiskScore'
+            - description: The risk score of the vulnerability.
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/Tools'
+            - description: The known malware tools or kits that can exploit the vulnerability.
+        ttps:
+          allOf:
+            - $ref: '#/components/schemas/Ttps'
+            - description: 'The MITRE adversary tactics, techniques, or procedures (TTPs) associated with the vulnerability.'
+      description: Details of the vulnerability identified in a finding.
+    FindingDetailsErrorCode:
+      type: string
+      enum:
+        - INTERNAL_ERROR
+        - ACCESS_DENIED
+        - FINDING_DETAILS_NOT_FOUND
+        - INVALID_INPUT
+    FindingDetailsError:
+      type: object
+      required:
+        - errorCode
+        - errorMessage
+        - findingArn
+      properties:
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/FindingDetailsErrorCode'
+            - description: The error code.
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The error message.
+        findingArn:
+          allOf:
+            - $ref: '#/components/schemas/FindingArn'
+            - description: The finding ARN that returned an error.
+      description: Details about an error encountered when trying to return vulnerability data for a finding.
     FindingList:
       type: array
       items:
@@ -8564,6 +8768,9 @@ components:
         - CRITICAL
         - HIGH
         - ALL
+    Tool:
+      type: string
+      minLength: 0
     Ttp:
       type: string
       minLength: 0
@@ -8801,12 +9008,6 @@ components:
       description: Contains details about a specific vulnerability Amazon Inspector can detect.
     VulnerabilityDescription:
       type: string
-    VulnerabilityReferenceUrls:
-      type: array
-      items:
-        $ref: '#/components/schemas/VulnerabilityReferenceUrl'
-      minItems: 0
-      maxItems: 100
     VulnerabilitySource:
       type: string
       enum:

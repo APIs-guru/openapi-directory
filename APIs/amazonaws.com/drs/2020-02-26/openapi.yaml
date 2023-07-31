@@ -374,6 +374,7 @@ paths:
                   enum:
                     - NONE
                     - BASIC
+                    - IN_AWS
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3414,6 +3415,7 @@ paths:
                   enum:
                     - NONE
                     - BASIC
+                    - IN_AWS
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3517,6 +3519,7 @@ paths:
                   enum:
                     - NONE
                     - BASIC
+                    - IN_AWS
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4760,6 +4763,7 @@ components:
       enum:
         - NONE
         - BASIC
+        - IN_AWS
     CreateLaunchConfigurationTemplateRequest:
       type: object
       title: CreateLaunchConfigurationTemplateRequest

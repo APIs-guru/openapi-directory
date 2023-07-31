@@ -4568,6 +4568,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/GeneratedFrom'
                         - description: ' Where the source originated. '
+                    creationType:
+                      allOf:
+                        - $ref: '#/components/schemas/CreationType'
+                        - description: ' The creation type of the read set. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7216,6 +7220,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReadSetStatusMessage'
             - description: ' The status message for a read set. It provides more detail as to why the read set has a status. '
+        creationType:
+          allOf:
+            - $ref: '#/components/schemas/CreationType'
+            - description: ' The creation type of the read set. '
     GetReferenceResponse:
       type: object
       properties:
@@ -7946,6 +7954,11 @@ components:
       pattern: '[\p{L}||\p{M}||\p{Z}||\p{S}||\p{N}||\p{P}]+'
       minLength: 1
       maxLength: 127
+    CreationType:
+      type: string
+      enum:
+        - IMPORT
+        - UPLOAD
     ListReferenceImportJobsResponse:
       type: object
       properties:
@@ -10276,6 +10289,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/GeneratedFrom'
             - description: ' Where the source originated. '
+        creationType:
+          allOf:
+            - $ref: '#/components/schemas/CreationType'
+            - description: ' The creation type of the read set. '
       description: A filter for read sets.
     ListReadSetsRequest:
       type: object
@@ -10745,6 +10762,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReadSetStatusMessage'
             - description: ' The status for a read set. It provides more detail as to why the read set has a status. '
+        creationType:
+          allOf:
+            - $ref: '#/components/schemas/CreationType'
+            - description: ' The creation type of the read set. '
       description: A read set.
     ReadSetPartStreamingBlob:
       type: string

@@ -115,6 +115,81 @@ servers:
     description: The AWS Clean Rooms Service endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/collaborations/{collaborationIdentifier}/batch-analysistemplates':
+    post:
+      operationId: BatchGetCollaborationAnalysisTemplate
+      description: Retrieves multiple analysis templates within a collaboration by their Amazon Resource Names (ARNs).
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchGetCollaborationAnalysisTemplateOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analysisTemplateArns
+              properties:
+                analysisTemplateArns:
+                  description: The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalysisTemplateArn'
+                  minItems: 1
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/collaborations/{collaborationIdentifier}/batch-schema':
     post:
       operationId: BatchGetSchema
@@ -190,6 +265,193 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/memberships/{membershipIdentifier}/analysistemplates':
+    post:
+      operationId: CreateAnalysisTemplate
+      description: Creates a new analysis template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAnalysisTemplateOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a membership resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - format
+                - source
+              properties:
+                description:
+                  description: The description of the analysis template.
+                  type: string
+                  pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+                  minLength: 0
+                  maxLength: 255
+                name:
+                  description: The name of the analysis template.
+                  type: string
+                  pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
+                  minLength: 0
+                  maxLength: 128
+                format:
+                  description: The format of the analysis template.
+                  type: string
+                  enum:
+                    - SQL
+                source:
+                  description: The structure that defines the body of the analysis template.
+                  type: object
+                  properties:
+                    text:
+                      allOf:
+                        - $ref: '#/components/schemas/AnalysisTemplateText'
+                        - description: The query text.
+                tags:
+                  description: Map of tags assigned to a resource
+                  type: object
+                  minProperties: 0
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                analysisParameters:
+                  description: The parameters of the analysis template.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AnalysisParameter'
+                  minItems: 0
+                  maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListAnalysisTemplates
+      description: Lists analysis templates that the caller owns.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnalysisTemplatesOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a membership resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum size of the results that is returned per call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
   /collaborations:
     post:
       operationId: CreateCollaboration
@@ -609,11 +871,12 @@ paths:
                 - analysisRulePolicy
               properties:
                 analysisRuleType:
-                  description: The type of analysis rule. Valid values are AGGREGATION and LIST.
+                  description: The type of analysis rule.
                   type: string
                   enum:
                     - AGGREGATION
                     - LIST
+                    - CUSTOM
                 analysisRulePolicy:
                   description: Controls on the query specifications that can be run on a configured table.
                   type: object
@@ -961,6 +1224,205 @@ paths:
               - ACTIVE
               - REMOVED
               - COLLABORATION_DELETED
+  '/memberships/{membershipIdentifier}/analysistemplates/{analysisTemplateIdentifier}':
+    delete:
+      operationId: DeleteAnalysisTemplate
+      description: Deletes an analysis template.
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteAnalysisTemplateOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a membership resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: analysisTemplateIdentifier
+          in: path
+          required: true
+          description: The identifier for the analysis template resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetAnalysisTemplate
+      description: Retrieves an analysis template.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAnalysisTemplateOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a membership resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: analysisTemplateIdentifier
+          in: path
+          required: true
+          description: The identifier for the analysis template resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+    patch:
+      operationId: UpdateAnalysisTemplate
+      description: Updates the analysis template metadata.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAnalysisTemplateOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: membershipIdentifier
+          in: path
+          required: true
+          description: The identifier for a membership resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: analysisTemplateIdentifier
+          in: path
+          required: true
+          description: The identifier for the analysis template resource.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  description: A new description for the analysis template.
+                  type: string
+                  pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+                  minLength: 0
+                  maxLength: 255
   '/collaborations/{collaborationIdentifier}':
     delete:
       operationId: DeleteCollaboration
@@ -1377,6 +1839,7 @@ paths:
             enum:
               - AGGREGATION
               - LIST
+              - CUSTOM
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1444,6 +1907,7 @@ paths:
             enum:
               - AGGREGATION
               - LIST
+              - CUSTOM
     patch:
       operationId: UpdateConfiguredTableAnalysisRule
       description: Updates a configured table analysis rule.
@@ -1509,6 +1973,7 @@ paths:
             enum:
               - AGGREGATION
               - LIST
+              - CUSTOM
       requestBody:
         required: true
         content:
@@ -2001,6 +2466,74 @@ paths:
                   enum:
                     - ENABLED
                     - DISABLED
+  '/collaborations/{collaborationIdentifier}/analysistemplates/{analysisTemplateArn}':
+    get:
+      operationId: GetCollaborationAnalysisTemplate
+      description: Retrieves an analysis template within a collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCollaborationAnalysisTemplateOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: analysisTemplateArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+          schema:
+            type: string
+            pattern: 'arn:aws:cleanrooms:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:membership/[\d\w-]+/analysistemplate/[\d\w-]+'
+            minLength: 0
+            maxLength: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/memberships/{membershipIdentifier}/protectedQueries/{protectedQueryIdentifier}':
     get:
       operationId: GetProtectedQuery
@@ -2285,6 +2818,82 @@ paths:
             enum:
               - AGGREGATION
               - LIST
+              - CUSTOM
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/collaborations/{collaborationIdentifier}/analysistemplates':
+    get:
+      operationId: ListCollaborationAnalysisTemplates
+      description: Lists analysis templates within a collaboration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCollaborationAnalysisTemplatesOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: collaborationIdentifier
+          in: path
+          required: true
+          description: A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+          schema:
+            type: string
+            pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+            minLength: 36
+            maxLength: 36
+        - name: nextToken
+          in: query
+          required: false
+          description: The token value retrieved from a previous call to access the next page of results.
+          schema:
+            type: string
+            minLength: 0
+            maxLength: 10240
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum size of the results that is returned per call.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2537,6 +3146,14 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ProtectedQuerySQLParametersQueryStringString'
                         - description: The query string to be submitted.
+                    analysisTemplateArn:
+                      allOf:
+                        - $ref: '#/components/schemas/AnalysisTemplateArn'
+                        - description: The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+                    parameters:
+                      allOf:
+                        - $ref: '#/components/schemas/ParameterMap'
+                        - description: The protected query SQL parameters.
                 resultConfiguration:
                   description: Contains configurations for protected query results.
                   type: object
@@ -2818,6 +3435,30 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    BatchGetCollaborationAnalysisTemplateOutput:
+      type: object
+      required:
+        - collaborationAnalysisTemplates
+        - errors
+      properties:
+        collaborationAnalysisTemplates:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationAnalysisTemplateList'
+            - description: The retrieved list of analysis templates within a collaboration.
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/BatchGetCollaborationAnalysisTemplateErrorList'
+            - description: Error reasons for collaboration analysis templates that could not be retrieved. One error is returned for every collaboration analysis template that could not be retrieved.
+    AnalysisTemplateArn:
+      type: string
+      pattern: 'arn:aws:cleanrooms:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:membership/[\d\w-]+/analysistemplate/[\d\w-]+'
+      minLength: 0
+      maxLength: 200
+    ResourceNotFoundException: {}
+    InternalServerException: {}
+    ValidationException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
     BatchGetSchemaOutput:
       type: object
       required:
@@ -2837,11 +3478,44 @@ components:
       pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
       minLength: 0
       maxLength: 128
-    ResourceNotFoundException: {}
-    InternalServerException: {}
-    ValidationException: {}
-    ThrottlingException: {}
-    AccessDeniedException: {}
+    CreateAnalysisTemplateOutput:
+      type: object
+      required:
+        - analysisTemplate
+      properties:
+        analysisTemplate:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplate'
+            - description: The analysis template.
+    AnalysisTemplateText:
+      type: string
+      minLength: 0
+      maxLength: 15000
+    TagValue:
+      type: string
+      minLength: 0
+      maxLength: 256
+    AnalysisParameter:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ParameterName'
+            - description: 'The name of the parameter. The name must use only alphanumeric, underscore (_), or hyphen (-) characters but cannot start or end with a hyphen.'
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ParameterType'
+            - description: The type of parameter.
+        defaultValue:
+          allOf:
+            - $ref: '#/components/schemas/ParameterValue'
+            - description: Optional. The default value that is applied in the analysis template. The member who can query can override this value in the query editor.
+      description: Optional. The member who can query can provide this placeholder for a literal data value in an analysis template.
+    ConflictException: {}
+    ServiceQuotaExceededException: {}
     CreateCollaborationOutput:
       type: object
       required:
@@ -2878,11 +3552,6 @@ components:
         - CAN_RECEIVE_RESULTS
     Boolean:
       type: boolean
-    TagValue:
-      type: string
-      minLength: 0
-      maxLength: 256
-    ServiceQuotaExceededException: {}
     CreateConfiguredTableOutput:
       type: object
       required:
@@ -2912,7 +3581,6 @@ components:
       pattern: '[a-z0-9_](([a-z0-9_ ]+-)*([a-z0-9_ ]+))?'
       minLength: 0
       maxLength: 128
-    ConflictException: {}
     CreateConfiguredTableAnalysisRuleOutput:
       type: object
       required:
@@ -2933,6 +3601,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleAggregation'
             - description: Analysis rule type that enables only aggregation queries on a configured table.
+        custom:
+          $ref: '#/components/schemas/AnalysisRuleCustom'
       description: Controls on the query specifications that can be run on a configured table.
     CreateConfiguredTableAssociationOutput:
       type: object
@@ -2952,6 +3622,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/Membership'
             - description: The membership that was created.
+    DeleteAnalysisTemplateOutput:
+      type: object
+      properties: {}
     DeleteCollaborationOutput:
       type: object
       properties: {}
@@ -2972,6 +3645,15 @@ components:
     DeleteMembershipOutput:
       type: object
       properties: {}
+    GetAnalysisTemplateOutput:
+      type: object
+      required:
+        - analysisTemplate
+      properties:
+        analysisTemplate:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplate'
+            - description: The analysis template.
     GetCollaborationOutput:
       type: object
       required:
@@ -2981,6 +3663,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/Collaboration'
             - description: The entire collaboration for this identifier.
+    GetCollaborationAnalysisTemplateOutput:
+      type: object
+      required:
+        - collaborationAnalysisTemplate
+      properties:
+        collaborationAnalysisTemplate:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationAnalysisTemplate'
+            - description: The analysis template within a collaboration.
     GetConfiguredTableOutput:
       type: object
       required:
@@ -3044,6 +3735,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnalysisRule'
             - description: A specification about how data from the configured table can be used.
+    ListAnalysisTemplatesOutput:
+      type: object
+      required:
+        - analysisTemplateSummaries
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+        analysisTemplateSummaries:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateSummaryList'
+            - description: Lists analysis template metadata.
+    ListCollaborationAnalysisTemplatesOutput:
+      type: object
+      required:
+        - collaborationAnalysisTemplateSummaries
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/PaginationToken'
+            - description: The token value retrieved from a previous call to access the next page of results.
+        collaborationAnalysisTemplateSummaries:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationAnalysisTemplateSummaryList'
+            - description: The metadata of the analysis template within a collaboration.
     ListCollaborationsOutput:
       type: object
       required:
@@ -3157,6 +3874,10 @@ components:
       type: string
       minLength: 0
       maxLength: 15000
+    ParameterMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ParameterValue'
     ProtectedQueryOutputConfiguration:
       type: object
       properties:
@@ -3175,6 +3896,15 @@ components:
       type: string
       minLength: 1
       maxLength: 128
+    UpdateAnalysisTemplateOutput:
+      type: object
+      required:
+        - analysisTemplate
+      properties:
+        analysisTemplate:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplate'
+            - description: The analysis template.
     UpdateCollaborationOutput:
       type: object
       required:
@@ -3304,10 +4034,47 @@ components:
         $ref: '#/components/schemas/ColumnName'
       minItems: 1
       maxItems: 100
+    AnalysisFormat:
+      type: string
+      enum:
+        - SQL
     AnalysisMethod:
       type: string
       enum:
         - DIRECT_QUERY
+    ParameterName:
+      type: string
+      pattern: '[0-9a-zA-Z_]+'
+      minLength: 1
+      maxLength: 100
+    ParameterType:
+      type: string
+      enum:
+        - SMALLINT
+        - INTEGER
+        - BIGINT
+        - DECIMAL
+        - REAL
+        - DOUBLE_PRECISION
+        - BOOLEAN
+        - CHAR
+        - VARCHAR
+        - DATE
+        - TIMESTAMP
+        - TIMESTAMPTZ
+        - TIME
+        - TIMETZ
+        - VARBYTE
+    ParameterValue:
+      type: string
+      minLength: 0
+      maxLength: 250
+    AnalysisParameterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisParameter'
+      minItems: 0
+      maxItems: 10
     CollaborationIdentifier:
       type: string
       pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
@@ -3318,6 +4085,7 @@ components:
       enum:
         - AGGREGATION
         - LIST
+        - CUSTOM
     Timestamp:
       type: string
       format: date-time
@@ -3327,8 +4095,8 @@ components:
         v1:
           allOf:
             - $ref: '#/components/schemas/AnalysisRulePolicyV1'
-            - description: Controls on the query specifications that can be run on configured table..
-      description: Controls on the query specifications that can be run on configured table..
+            - description: Controls on the query specifications that can be run on configured table.
+      description: Controls on the query specifications that can be run on configured table.
     AnalysisRule:
       type: object
       required:
@@ -3346,7 +4114,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleType'
-            - description: The type of analysis rule. Valid values are `AGGREGATION` and `LIST`.
+            - description: The type of analysis rule.
         name:
           allOf:
             - $ref: '#/components/schemas/TableAlias'
@@ -3424,7 +4192,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/AggregationConstraints'
             - description: Columns that must meet a specific threshold value (after an aggregation function is applied to it) for each output row to be returned.
-      description: Enables query structure and specified queries that produce aggregate statistics.
+      description: A type of analysis rule that enables query structure and specified queries that produce aggregate statistics.
+    AnalysisRuleCustomAllowedAnalysesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisTemplateArnOrQueryWildcard'
+      minItems: 0
+    AnalysisRuleCustomAllowedAnalysisProvidersList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccountId'
+      minItems: 0
+    AnalysisRuleCustom:
+      type: object
+      required:
+        - allowedAnalyses
+      properties:
+        allowedAnalyses:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleCustomAllowedAnalysesList'
+            - description: The analysis templates that are allowed by the custom analysis rule.
+        allowedAnalysisProviders:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleCustomAllowedAnalysisProvidersList'
+            - description: The Amazon Web Services accounts that are allowed to query by the custom analysis rule. Required when <code>allowedAnalyses</code> is <code>ANY_QUERY</code>.
+      description: A type of analysis rule that enables the table owner to approve custom SQL queries on their configured tables.
+    AnalysisTemplateArnOrQueryWildcard:
+      type: string
+      pattern: '(ANY_QUERY|arn:aws:cleanrooms:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:membership/[\d\w-]+/analysistemplate/[\d\w-]+)'
+      minLength: 0
+      maxLength: 200
     AnalysisRuleListJoinColumnsList:
       type: array
       items:
@@ -3443,7 +4240,7 @@ components:
         allowedJoinOperators:
           allOf:
             - $ref: '#/components/schemas/JoinOperatorsList'
-            - description: Which logical operators (if any) are to be used in an INNER JOIN match condition. Default is <code>AND</code>.
+            - description: The logical operators (if any) that are to be used in an INNER JOIN match condition. Default is <code>AND</code>.
         listColumns:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleColumnList'
@@ -3460,13 +4257,246 @@ components:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleAggregation'
             - description: Analysis rule type that enables only aggregation queries on a configured table.
-      description: Controls on the query specifications that can be run on configured table..
+        custom:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRuleCustom'
+            - description: Analysis rule type that enables custom SQL queries on a configured table.
+      description: Controls on the query specifications that can be run on configured table.
     AnalysisRuleTypeList:
       type: array
       items:
         $ref: '#/components/schemas/AnalysisRuleType'
+    QueryTables:
+      type: array
+      items:
+        $ref: '#/components/schemas/TableAlias'
+    AnalysisSchema:
+      type: object
+      properties:
+        referencedTables:
+          allOf:
+            - $ref: '#/components/schemas/QueryTables'
+            - description: The tables referenced in the analysis schema.
+      description: A relation within an analysis.
+    AnalysisSource:
+      type: object
+      properties:
+        text:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateText'
+            - description: The query text.
+      description: The structure that defines the body of the analysis template.
+    AnalysisTemplateIdentifier:
+      type: string
+      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+      minLength: 36
+      maxLength: 36
+    UUID:
+      type: string
+      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
+      minLength: 36
+      maxLength: 36
+    CollaborationArn:
+      type: string
+      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:collaboration/[\d\w-]+'
+      minLength: 0
+      maxLength: 100
+    MembershipArn:
+      type: string
+      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:membership/[\d\w-]+'
+      minLength: 0
+      maxLength: 100
+    ResourceDescription:
+      type: string
+      pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t\r\n]*'
+      minLength: 0
+      maxLength: 255
+    ResourceAlias:
+      type: string
+      pattern: '[a-zA-Z0-9_](([a-zA-Z0-9_ ]+-)*([a-zA-Z0-9_ ]+))?'
+      minLength: 0
+      maxLength: 128
+    AnalysisTemplate:
+      type: object
+      required:
+        - id
+        - arn
+        - collaborationId
+        - collaborationArn
+        - membershipId
+        - membershipArn
+        - name
+        - createTime
+        - updateTime
+        - schema
+        - format
+        - source
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateIdentifier'
+            - description: The identifier for the analysis template.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateArn'
+            - description: The Amazon Resource Name (ARN) of the analysis template.
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The unique ID for the associated collaboration of the analysis template.
+        collaborationArn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the analysis template’s associated collaboration.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The identifier of a member who created the analysis template.
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The Amazon Resource Name (ARN) of the member who created the analysis template.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The description of the analysis template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceAlias'
+            - description: The name of the analysis template.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the analysis template was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the analysis template was last updated.
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisSchema'
+            - description: The entire schema object.
+        format:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisFormat'
+            - description: The format of the analysis template.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisSource'
+            - description: The source of the analysis template.
+        analysisParameters:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisParameterList'
+            - description: The parameters of the analysis template.
+      description: The analysis template.
+    AnalysisTemplateArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisTemplateArn'
+      minItems: 1
+      maxItems: 10
+    AnalysisTemplateSummary:
+      type: object
+      required:
+        - arn
+        - createTime
+        - id
+        - name
+        - updateTime
+        - membershipArn
+        - membershipId
+        - collaborationArn
+        - collaborationId
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateArn'
+            - description: The Amazon Resource Name (ARN) of the analysis template.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the analysis template summary was created.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateIdentifier'
+            - description: The identifier of the analysis template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceAlias'
+            - description: 'The name of the analysis template. '
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the analysis template summary was last updated.
+        membershipArn:
+          allOf:
+            - $ref: '#/components/schemas/MembershipArn'
+            - description: The Amazon Resource Name (ARN) of the member who created the analysis template.
+        membershipId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: The identifier for a membership resource.
+        collaborationArn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the analysis template summary’s associated collaboration.
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: A unique identifier for the collaboration that the analysis template summary belongs to. Currently accepts collaboration ID.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The description of the analysis template.
+      description: The metadata of the analysis template.
+    AnalysisTemplateSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AnalysisTemplateSummary'
     String:
       type: string
+    BatchGetCollaborationAnalysisTemplateError:
+      type: object
+      required:
+        - arn
+        - code
+        - message
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateArn'
+            - description: The Amazon Resource Name (ARN) of the analysis template.
+        code:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An error code for the error.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A description of why the call failed.
+      description: Details of errors thrown by the call to retrieve multiple analysis templates within a collaboration by their identifiers.
+    BatchGetCollaborationAnalysisTemplateErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchGetCollaborationAnalysisTemplateError'
+      minItems: 0
+      maxItems: 10
+    BatchGetCollaborationAnalysisTemplateInput:
+      type: object
+      required:
+        - analysisTemplateArns
+      title: BatchGetCollaborationAnalysisTemplateInput
+      properties:
+        analysisTemplateArns:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateArnList'
+            - description: The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+    CollaborationAnalysisTemplateList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollaborationAnalysisTemplate'
+      minItems: 0
+      maxItems: 10
     BatchGetSchemaError:
       type: object
       required:
@@ -3520,16 +4550,6 @@ components:
       pattern: 'arn:aws:cleanrooms:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:[\d\w/-]+'
       minLength: 0
       maxLength: 100
-    UUID:
-      type: string
-      pattern: '.*[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}.*'
-      minLength: 36
-      maxLength: 36
-    CollaborationArn:
-      type: string
-      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:collaboration/[\d\w-]+'
-      minLength: 0
-      maxLength: 100
     CollaborationName:
       type: string
       pattern: '(?!\s*$)[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDBFF-\uDC00\uDFFF\t]*'
@@ -3552,11 +4572,6 @@ components:
         - ACTIVE
         - LEFT
         - REMOVED
-    MembershipArn:
-      type: string
-      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:membership/[\d\w-]+'
-      minLength: 0
-      maxLength: 100
     DataEncryptionMetadata:
       type: object
       required:
@@ -3653,6 +4668,127 @@ components:
             - $ref: '#/components/schemas/CollaborationQueryLogStatus'
             - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
       description: The multi-party data share environment. The collaboration contains metadata about its purpose and participants.
+    CollaborationAnalysisTemplate:
+      type: object
+      required:
+        - id
+        - arn
+        - collaborationId
+        - collaborationArn
+        - creatorAccountId
+        - name
+        - createTime
+        - updateTime
+        - schema
+        - format
+        - source
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateIdentifier'
+            - description: The identifier of the analysis template.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateArn'
+            - description: The Amazon Resource Name (ARN) of the analysis template.
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+        collaborationArn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the analysis template’s associated collaboration.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The description of the analysis template.
+        creatorAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceAlias'
+            - description: The name of the analysis template.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the analysis template within a collaboration was created.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the analysis template in the collaboration was last updated.
+        schema:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisSchema'
+            - description: The entire schema object.
+        format:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisFormat'
+            - description: The format of the analysis template in the collaboration.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisSource'
+            - description: The source of the analysis template within a collaboration.
+        analysisParameters:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisParameterList'
+            - description: The analysis parameters that have been specified in the analysis template.
+      description: The analysis template within a collaboration.
+    CollaborationAnalysisTemplateSummary:
+      type: object
+      required:
+        - arn
+        - createTime
+        - id
+        - name
+        - updateTime
+        - collaborationArn
+        - collaborationId
+        - creatorAccountId
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateArn'
+            - description: The Amazon Resource Name (ARN) of the analysis template.
+        createTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the summary of the analysis template in a collaboration was created.
+        id:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateIdentifier'
+            - description: The identifier of the analysis template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceAlias'
+            - description: The name of the analysis template.
+        updateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the summary of the analysis template in the collaboration was last updated.
+        collaborationArn:
+          allOf:
+            - $ref: '#/components/schemas/CollaborationArn'
+            - description: The unique ARN for the analysis template’s associated collaboration.
+        collaborationId:
+          allOf:
+            - $ref: '#/components/schemas/UUID'
+            - description: A unique identifier for the collaboration that the analysis templates belong to. Currently accepts collaboration ID.
+        creatorAccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The identifier used to reference members of the collaboration. Currently only supports Amazon Web Services account ID.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The description of the analysis template.
+      description: The metadata of the analysis template within a collaboration.
+    CollaborationAnalysisTemplateSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CollaborationAnalysisTemplateSummary'
     CollaborationSummary:
       type: object
       required:
@@ -3736,7 +4872,7 @@ components:
         $ref: '#/components/schemas/Column'
     ConfiguredTableArn:
       type: string
-      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:configuredTable/[\d\w-]+'
+      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:configuredtable/[\d\w-]+'
       minLength: 0
       maxLength: 100
     TableDescription:
@@ -3800,7 +4936,7 @@ components:
         analysisRuleTypes:
           allOf:
             - $ref: '#/components/schemas/ConfiguredTableAnalysisRuleTypeList'
-            - description: 'The types of analysis rules associated with this configured table. Valid values are `AGGREGATION` and `LIST`. Currently, only one analysis rule may be associated with a configured table.'
+            - description: 'The types of analysis rules associated with this configured table. Currently, only one analysis rule may be associated with a configured table.'
         analysisMethod:
           allOf:
             - $ref: '#/components/schemas/AnalysisMethod'
@@ -3823,6 +4959,7 @@ components:
       enum:
         - AGGREGATION
         - LIST
+        - CUSTOM
     ConfiguredTableAnalysisRule:
       type: object
       required:
@@ -3848,7 +4985,7 @@ components:
         type:
           allOf:
             - $ref: '#/components/schemas/ConfiguredTableAnalysisRuleType'
-            - description: The type of configured table analysis rule. Valid values are `AGGREGATION` and `LIST`.
+            - description: The type of configured table analysis rule.
         createTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -3860,7 +4997,7 @@ components:
       description: 'A configured table analysis rule, which limits how data for this table can be used.'
     ConfiguredTableAssociationArn:
       type: string
-      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:configuredTableAssociation/[\d\w-]+/[\d\w-]+'
+      pattern: 'arn:aws:[\w]+:[\w]{2}-[\w]{4,9}-[\d]:[\d]{12}:configuredtableassociation/[\d\w-]+/[\d\w-]+'
       minLength: 0
       maxLength: 100
     RoleArn:
@@ -4037,6 +5174,45 @@ components:
         allOf:
           - $ref: '#/components/schemas/ConfiguredTableSummary'
           - description: The member of the configured table summary list.
+    TagMap:
+      type: object
+      description: Map of tags assigned to a resource
+      minProperties: 0
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateAnalysisTemplateInput:
+      type: object
+      required:
+        - name
+        - format
+        - source
+      title: CreateAnalysisTemplateInput
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: The description of the analysis template.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/TableAlias'
+            - description: The name of the analysis template.
+        format:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisFormat'
+            - description: The format of the analysis template.
+        source:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisSource'
+            - description: 'The information in the analysis template. Currently supports <code>text</code>, the query text for the analysis template.'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: 'An optional label that you can assign to a resource when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to this resource.'
+        analysisParameters:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisParameterList'
+            - description: The parameters of the analysis template.
     MemberList:
       type: array
       items:
@@ -4047,13 +5223,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MemberAbility'
-    TagMap:
-      type: object
-      description: Map of tags assigned to a resource
-      minProperties: 0
-      maxProperties: 200
-      additionalProperties:
-        $ref: '#/components/schemas/TagValue'
     CreateCollaborationInput:
       type: object
       required:
@@ -4107,7 +5276,7 @@ components:
         analysisRuleType:
           allOf:
             - $ref: '#/components/schemas/ConfiguredTableAnalysisRuleType'
-            - description: The type of analysis rule. Valid values are AGGREGATION and LIST.
+            - description: The type of analysis rule.
         analysisRulePolicy:
           allOf:
             - $ref: '#/components/schemas/ConfiguredTableAnalysisRulePolicy'
@@ -4262,6 +5431,10 @@ components:
             - $ref: '#/components/schemas/MembershipQueryLogStatus'
             - description: An indicator as to whether query logging has been enabled or disabled for the collaboration.
       description: The membership object.
+    DeleteAnalysisTemplateInput:
+      type: object
+      title: DeleteAnalysisTemplateInput
+      properties: {}
     DeleteCollaborationInput:
       type: object
       title: DeleteCollaborationInput
@@ -4291,6 +5464,14 @@ components:
       enum:
         - INVITED
         - ACTIVE
+    GetAnalysisTemplateInput:
+      type: object
+      title: GetAnalysisTemplateInput
+      properties: {}
+    GetCollaborationAnalysisTemplateInput:
+      type: object
+      title: GetCollaborationAnalysisTemplateInput
+      properties: {}
     GetCollaborationInput:
       type: object
       title: GetCollaborationInput
@@ -4406,7 +5587,7 @@ components:
         analysisRuleTypes:
           allOf:
             - $ref: '#/components/schemas/AnalysisRuleTypeList'
-            - description: 'The analysis rule types associated with the schema. Valued values are LIST and AGGREGATION. Currently, only one entry is present.'
+            - description: 'The analysis rule types associated with the schema. Currently, only one entry is present.'
         analysisMethod:
           allOf:
             - $ref: '#/components/schemas/AnalysisMethod'
@@ -4470,6 +5651,14 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    ListAnalysisTemplatesInput:
+      type: object
+      title: ListAnalysisTemplatesInput
+      properties: {}
+    ListCollaborationAnalysisTemplatesInput:
+      type: object
+      title: ListCollaborationAnalysisTemplatesInput
+      properties: {}
     ListCollaborationsInput:
       type: object
       title: ListCollaborationsInput
@@ -4650,6 +5839,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProtectedQuerySQLParametersQueryStringString'
             - description: The query string to be submitted.
+        analysisTemplateArn:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisTemplateArn'
+            - description: The Amazon Resource Name (ARN) associated with the analysis template within a collaboration.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/ParameterMap'
+            - description: The protected query SQL parameters.
       description: The parameters for the SQL type Protected Query.
     ProtectedQueryResultConfiguration:
       type: object
@@ -4882,6 +6079,14 @@ components:
       type: object
       title: UntagResourceInput
       properties: {}
+    UpdateAnalysisTemplateInput:
+      type: object
+      title: UpdateAnalysisTemplateInput
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: A new description for the analysis template.
     UpdateCollaborationInput:
       type: object
       title: UpdateCollaborationInput

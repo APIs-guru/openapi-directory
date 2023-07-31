@@ -287,7 +287,7 @@ paths:
   '/app/{appId}/environment/{environmentName}/forms':
     post:
       operationId: CreateForm
-      description: Creates a new form for an Amplify.
+      description: Creates a new form for an Amplify app.
       responses:
         '200':
           description: Success
@@ -1568,7 +1568,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: StartCodegenJob
-      description: Starts a code generation job for for a specified Amplify app and backend environment.
+      description: Starts a code generation job for a specified Amplify app and backend environment.
       responses:
         '200':
           description: Success
@@ -2145,7 +2145,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReactStartCodegenJobData'
             - description: The name of the <code>ReactStartCodegenJobData</code> object.
-      description: Describes the configuration information for rendering the UI component associated the code generation job.
+      description: Describes the configuration information for rendering the UI component associated with the code generation job.
     CodegenJobGenericDataSchema:
       type: object
       required:
@@ -2336,6 +2336,60 @@ components:
             - $ref: '#/components/schemas/MutationActionSetStateParameter'
             - description: A key-value pair that specifies the state property name and its initial value.
       description: Represents the event action configuration for an element of a <code>Component</code> or <code>ComponentChild</code>. Use for the workflow feature in Amplify Studio that allows you to bind events and actions to components. <code>ActionParameters</code> defines the action that is performed when an event occurs on the component.
+    GraphQLRenderConfig:
+      type: object
+      required:
+        - typesFilePath
+        - queriesFilePath
+        - mutationsFilePath
+        - subscriptionsFilePath
+        - fragmentsFilePath
+      properties:
+        typesFilePath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The path to the GraphQL types file, relative to the component output directory.'
+        queriesFilePath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The path to the GraphQL queries file, relative to the component output directory.'
+        mutationsFilePath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The path to the GraphQL mutations file, relative to the component output directory.'
+        subscriptionsFilePath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The path to the GraphQL subscriptions file, relative to the component output directory.'
+        fragmentsFilePath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The path to the GraphQL fragments file, relative to the component output directory.'
+      description: Describes the GraphQL configuration for an API for a code generation job.
+    DataStoreRenderConfig:
+      type: object
+      properties: {}
+      description: Describes the DataStore configuration for an API for a code generation job.
+    NoApiRenderConfig:
+      type: object
+      properties: {}
+      description: Describes the configuration for an application with no API being used.
+    ApiConfiguration:
+      type: object
+      properties:
+        graphQLConfig:
+          allOf:
+            - $ref: '#/components/schemas/GraphQLRenderConfig'
+            - description: The configuration for an application using GraphQL APIs.
+        dataStoreConfig:
+          allOf:
+            - $ref: '#/components/schemas/DataStoreRenderConfig'
+            - description: The configuration for an application using DataStore APIs.
+        noApiConfig:
+          allOf:
+            - $ref: '#/components/schemas/NoApiRenderConfig'
+            - description: The configuration for an application with no API being used.
+      description: Describes the API configuration for a code generation job.
     AppId:
       type: string
       pattern: 'd[a-z0-9]+'
@@ -2617,6 +2671,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Specifies whether the code generation job should render inline source maps.
+        apiConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ApiConfiguration'
+            - description: The API configuration for the code generation job.
       description: Describes the code generation job configuration for a React project.
     CodegenJobSummary:
       type: object

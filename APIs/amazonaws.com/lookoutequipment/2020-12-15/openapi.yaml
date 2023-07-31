@@ -117,7 +117,7 @@ paths:
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.CreateDataset:
     post:
       operationId: CreateDataset
-      description: 'Creates a container for a collection of data being ingested for analysis. The dataset contains the metadata describing where the data is and what the data actually looks like. In other words, it contains the location of the data source, the data schema, and other information. A dataset also contains any tags associated with the ingested data. '
+      description: 'Creates a container for a collection of data being ingested for analysis. The dataset contains the metadata describing where the data is and what the data actually looks like. For example, it contains the location of the data source, the data schema, and other information. A dataset also contains any tags associated with the ingested data. '
       responses:
         '200':
           description: Success
@@ -802,6 +802,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DeleteResourcePolicy:
+    post:
+      operationId: DeleteResourcePolicy
+      description: Deletes the resource policy attached to the resource.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteResourcePolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.DeleteResourcePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeDataIngestionJob:
     post:
       operationId: DescribeDataIngestionJob
@@ -1172,6 +1237,282 @@ paths:
             type: string
             enum:
               - AWSLookoutEquipmentFrontendService.DescribeModel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeModelVersion:
+    post:
+      operationId: DescribeModelVersion
+      description: Retrieves information about a specific machine learning model version.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeModelVersionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeModelVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.DescribeModelVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.DescribeResourcePolicy:
+    post:
+      operationId: DescribeResourcePolicy
+      description: Provides the details of a resource policy attached to a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeResourcePolicyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeResourcePolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.DescribeResourcePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ImportDataset:
+    post:
+      operationId: ImportDataset
+      description: Imports a dataset.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportDatasetResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportDatasetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.ImportDataset
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ImportModelVersion:
+    post:
+      operationId: ImportModelVersion
+      description: Imports a model that has been trained successfully.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportModelVersionResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportModelVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.ImportModelVersion
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1675,6 +2016,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ListModelVersions:
+    post:
+      operationId: ListModelVersions
+      description: 'Generates a list of all model versions for a given model, including the model version, model version ARN, and status. To list a subset of versions, use the <code>MaxModelVersion</code> and <code>MinModelVersion</code> fields.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelVersionsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListModelVersionsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.ListModelVersions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLookoutEquipmentFrontendService.ListModels:
     post:
       operationId: ListModels
@@ -1874,6 +2290,81 @@ paths:
             type: string
             enum:
               - AWSLookoutEquipmentFrontendService.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.PutResourcePolicy:
+    post:
+      operationId: PutResourcePolicy
+      description: Creates a resource control policy for a given resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutResourcePolicyResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutResourcePolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.PutResourcePolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2219,6 +2710,75 @@ paths:
             type: string
             enum:
               - AWSLookoutEquipmentFrontendService.UntagResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLookoutEquipmentFrontendService.UpdateActiveModelVersion:
+    post:
+      operationId: UpdateActiveModelVersion
+      description: Sets the active model version for a given machine learning model.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateActiveModelVersionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateActiveModelVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLookoutEquipmentFrontendService.UpdateActiveModelVersion
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2584,7 +3144,7 @@ components:
         LabelGroupArn:
           allOf:
             - $ref: '#/components/schemas/LabelGroupArn'
-            - description: ' The ARN of the label group that you have created. '
+            - description: ' The Amazon Resource Name (ARN) of the label group that you have created. '
     CreateLabelGroupRequest:
       type: object
       required:
@@ -2738,6 +3298,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelName'
             - description: 'The name of the ML model to be deleted. '
+    DeleteResourcePolicyRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: DeleteResourcePolicyRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource for which the resource policy should be deleted.
     DescribeDataIngestionJobResponse:
       type: object
       properties:
@@ -2791,6 +3361,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: ' Indicates the latest timestamp corresponding to data that was successfully ingested during this specific ingestion job. '
+        SourceDatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/DatasetArn'
+            - description: The Amazon Resource Name (ARN) of the source dataset from which the data used for the data ingestion job was imported from.
     DescribeDataIngestionJobRequest:
       type: object
       required:
@@ -2856,6 +3430,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: ' Indicates the latest timestamp corresponding to data that was successfully ingested during the most recent ingestion of this particular dataset. '
+        SourceDatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/DatasetArn'
+            - description: The Amazon Resource Name (ARN) of the source dataset from which the current data being described was imported from.
     DescribeDatasetRequest:
       type: object
       required:
@@ -2945,7 +3523,7 @@ components:
         LabelGroupArn:
           allOf:
             - $ref: '#/components/schemas/LabelGroupArn'
-            - description: ' The ARN of the requested label group. '
+            - description: ' The Amazon Resource Name (ARN) of the requested label group. '
         LabelId:
           allOf:
             - $ref: '#/components/schemas/LabelId'
@@ -3003,7 +3581,7 @@ components:
         LabelGroupArn:
           allOf:
             - $ref: '#/components/schemas/LabelGroupArn'
-            - description: ' The ARN of the label group. '
+            - description: ' The Amazon Resource Name (ARN) of the label group. '
         FaultCodes:
           allOf:
             - $ref: '#/components/schemas/FaultCodes'
@@ -3113,6 +3691,42 @@ components:
           allOf:
             - $ref: '#/components/schemas/OffCondition'
             - description: 'Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.'
+        SourceModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The Amazon Resource Name (ARN) of the source model version. This field appears if the active model version was imported.
+        ImportJobStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the import job was started. This field appears if the active model version was imported.
+        ImportJobEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the import job was completed. This field appears if the active model version was imported.
+        ActiveModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The name of the model version used by the inference schedular when running a scheduled inference execution.
+        ActiveModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The Amazon Resource Name (ARN) of the model version used by the inference scheduler when running a scheduled inference execution.
+        ModelVersionActivatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the active model version was activated.
+        PreviousActiveModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The model version that was set as the active model version prior to the current active model version.
+        PreviousActiveModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The ARN of the model version that was set as the active model version prior to the current active model version.
+        PreviousModelVersionActivatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the previous active model version was activated.
     DescribeModelRequest:
       type: object
       required:
@@ -3123,6 +3737,268 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelName'
             - description: 'The name of the ML model to be described. '
+    DescribeModelVersionResponse:
+      type: object
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: The name of the machine learning model that this version belongs to.
+        ModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelArn'
+            - description: The Amazon Resource Name (ARN) of the parent machine learning model that this version belong to.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The version of the machine learning model.
+        ModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The Amazon Resource Name (ARN) of the model version.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionStatus'
+            - description: The current status of the model version.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionSourceType'
+            - description: Indicates whether this model version was created by training or by importing.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset used to train the model version.
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/DatasetArn'
+            - description: The Amazon Resource Name (ARN) of the dataset used to train the model version.
+        Schema:
+          allOf:
+            - $ref: '#/components/schemas/InlineDataSchema'
+            - description: The schema of the data used to train the model version.
+        LabelsInputConfiguration:
+          $ref: '#/components/schemas/LabelsInputConfiguration'
+        TrainingDataStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date on which the training data began being gathered. If you imported the version, this is the date that the training data in the source version began being gathered.'
+        TrainingDataEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date on which the training data finished being gathered. If you imported the version, this is the date that the training data in the source version finished being gathered.'
+        EvaluationDataStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date on which the data in the evaluation set began being gathered. If you imported the version, this is the date that the evaluation set data in the source version began being gathered.'
+        EvaluationDataEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date on which the data in the evaluation set began being gathered. If you imported the version, this is the date that the evaluation set data in the source version finished being gathered.'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the role that was used to train the model version.
+        DataPreProcessingConfiguration:
+          $ref: '#/components/schemas/DataPreProcessingConfiguration'
+        TrainingExecutionStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the training of the version began.
+        TrainingExecutionEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the training of the version completed.
+        FailedReason:
+          allOf:
+            - $ref: '#/components/schemas/BoundedLengthString'
+            - description: The failure message if the training of the model version failed.
+        ModelMetrics:
+          allOf:
+            - $ref: '#/components/schemas/ModelMetrics'
+            - description: 'Shows an aggregated summary, in JSON format, of the model''s performance within the evaluation time range. These metrics are created when evaluating the model.'
+        LastUpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Indicates the last time the machine learning model version was updated.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Indicates the time and date at which the machine learning model version was created.
+        ServerSideKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The identifier of the KMS key key used to encrypt model version data by Amazon Lookout for Equipment.
+        OffCondition:
+          allOf:
+            - $ref: '#/components/schemas/OffCondition'
+            - description: 'Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.'
+        SourceModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: 'If model version was imported, then this field is the arn of the source model version.'
+        ImportJobStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the import job began. This field appears if the model version was imported.
+        ImportJobEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date and time when the import job completed. This field appears if the model version was imported.
+        ImportedDataSizeInBytes:
+          allOf:
+            - $ref: '#/components/schemas/DataSizeInBytes'
+            - description: The size in bytes of the imported data. This field appears if the model version was imported.
+    DescribeModelVersionRequest:
+      type: object
+      required:
+        - ModelName
+        - ModelVersion
+      title: DescribeModelVersionRequest
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: The name of the machine learning model that this version belongs to.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The version of the machine learning model.
+    DescribeResourcePolicyResponse:
+      type: object
+      properties:
+        PolicyRevisionId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevisionId'
+            - description: A unique identifier for a revision of the resource policy.
+        ResourcePolicy:
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: The resource policy in a JSON-formatted string.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the resource policy was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the resource policy was last modified.
+    DescribeResourcePolicyRequest:
+      type: object
+      required:
+        - ResourceArn
+      title: DescribeResourcePolicyRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource that is associated with the resource policy.
+    ImportDatasetResponse:
+      type: object
+      properties:
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the created machine learning dataset.
+        DatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/DatasetArn'
+            - description: The Amazon Resource Name (ARN) of the dataset that was imported.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DatasetStatus'
+            - description: The status of the <code>ImportDataset</code> operation.
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/IngestionJobId'
+            - description: A unique identifier for the job of importing the dataset.
+    ImportDatasetRequest:
+      type: object
+      required:
+        - SourceDatasetArn
+        - ClientToken
+      title: ImportDatasetRequest
+      properties:
+        SourceDatasetArn:
+          allOf:
+            - $ref: '#/components/schemas/DatasetArn'
+            - description: The Amazon Resource Name (ARN) of the dataset to import.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: 'The name of the machine learning dataset to be created. If the dataset already exists, Amazon Lookout for Equipment overwrites the existing dataset. If you don''t specify this field, it is filled with the name of the source dataset.'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotenceToken'
+            - description: 'A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
+        ServerSideKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NameOrArn'
+            - description: 'Provides the identifier of the KMS key key used to encrypt model data by Amazon Lookout for Equipment. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Any tags associated with the dataset to be created.
+    ImportModelVersionResponse:
+      type: object
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: The name for the machine learning model.
+        ModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelArn'
+            - description: 'The Amazon Resource Name (ARN) of the model being created. '
+        ModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: 'The Amazon Resource Name (ARN) of the model version being created. '
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The version of the model being created.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionStatus'
+            - description: 'The status of the <code>ImportModelVersion</code> operation. '
+    ImportModelVersionRequest:
+      type: object
+      required:
+        - SourceModelVersionArn
+        - DatasetName
+        - ClientToken
+      title: ImportModelVersionRequest
+      properties:
+        SourceModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The Amazon Resource Name (ARN) of the model version to import.
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: 'The name for the machine learning model to be created. If the model already exists, Amazon Lookout for Equipment creates a new version. If you do not specify this field, it is filled with the name of the source model.'
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetIdentifier'
+            - description: 'The name of the dataset for the machine learning model being imported. '
+        LabelsInputConfiguration:
+          $ref: '#/components/schemas/LabelsInputConfiguration'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotenceToken'
+            - description: 'A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: 'The Amazon Resource Name (ARN) of a role with permission to access the data source being used to create the machine learning model. '
+        ServerSideKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NameOrArn'
+            - description: 'Provides the identifier of the KMS key key used to encrypt model data by Amazon Lookout for Equipment. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The tags associated with the machine learning model to be created. '
     ListDataIngestionJobsResponse:
       type: object
       properties:
@@ -3219,7 +4095,7 @@ components:
         IntervalEndTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Returns all the inference events with an end start time equal to or greater than less than the end time given
+            - description: Returns all the inference events with an end start time equal to or greater than less than the end time given.
     ListInferenceExecutionsResponse:
       type: object
       properties:
@@ -3295,7 +4171,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/InferenceSchedulerStatus'
-            - description: Specifies the current status of the inference schedulers to list.
+            - description: Specifies the current status of the inference schedulers.
     ListLabelGroupsResponse:
       type: object
       properties:
@@ -3368,6 +4244,59 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: ' Specifies the maximum number of labels to list. '
+    ListModelVersionsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the total number of results exceeds the limit that the response can display, the response returns an opaque pagination token indicating where to continue the listing of machine learning model versions. Use this token in the <code>NextToken</code> field in the request to list the next page of results.'
+        ModelVersionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionSummaries'
+            - description: 'Provides information on the specified model version, including the created time, model and dataset ARNs, and status.'
+    ListModelVersionsRequest:
+      type: object
+      required:
+        - ModelName
+      title: ListModelVersionsRequest
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: Then name of the machine learning model for which the model versions are to be listed.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the total number of results exceeds the limit that the response can display, the response returns an opaque pagination token indicating where to continue the listing of machine learning model versions. Use this token in the <code>NextToken</code> field in the request to list the next page of results.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: Specifies the maximum number of machine learning model versions to list.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionStatus'
+            - description: Filter the results based on the current status of the model version.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionSourceType'
+            - description: Filter the results based on the way the model version was generated.
+        CreatedAtEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter results to return all the model versions created before this time.
+        CreatedAtStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter results to return all the model versions created after this time.
+        MaxModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: Specifies the highest version of the model to return in the list.
+        MinModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: Specifies the lowest version of the model to return in the list.
     ListModelsResponse:
       type: object
       properties:
@@ -3453,6 +4382,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmazonResourceArn'
             - description: 'The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is the focus of the <code>ListTagsForResource</code> operation. '
+    PutResourcePolicyResponse:
+      type: object
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource for which the policy was created.
+        PolicyRevisionId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevisionId'
+            - description: A unique identifier for a revision of the resource policy.
+    PutResourcePolicyRequest:
+      type: object
+      required:
+        - ResourceArn
+        - ResourcePolicy
+        - ClientToken
+      title: PutResourcePolicyRequest
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon Resource Name (ARN) of the resource for which the policy is being created.
+        ResourcePolicy:
+          allOf:
+            - $ref: '#/components/schemas/Policy'
+            - description: The JSON-formatted resource policy to create.
+        PolicyRevisionId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyRevisionId'
+            - description: A unique identifier for a revision of the resource policy.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotenceToken'
+            - description: 'A unique identifier for the request. If you do not set the client request token, Amazon Lookout for Equipment generates one. '
     StartDataIngestionJobResponse:
       type: object
       properties:
@@ -3591,6 +4555,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: 'Specifies the key of the tag to be removed from a specified resource. '
+    UpdateActiveModelVersionResponse:
+      type: object
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: The name of the machine learning model for which the active model version was set.
+        ModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelArn'
+            - description: The Amazon Resource Name (ARN) of the machine learning model for which the active model version was set.
+        CurrentActiveVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The version that is currently active of the machine learning model for which the active model version was set.
+        PreviousActiveVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The previous version that was active of the machine learning model for which the active model version was set.
+        CurrentActiveVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The Amazon Resource Name (ARN) of the machine learning model version that is the current active model version.
+        PreviousActiveVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The Amazon Resource Name (ARN) of the machine learning model version that was the previous active model version.
+    UpdateActiveModelVersionRequest:
+      type: object
+      required:
+        - ModelName
+        - ModelVersion
+      title: UpdateActiveModelVersionRequest
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: The name of the machine learning model for which the active model version is being set.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The version of the machine learning model for which the active model version is being set.
     UpdateInferenceSchedulerRequest:
       type: object
       required:
@@ -3740,6 +4746,7 @@ components:
         - CREATED
         - INGESTION_IN_PROGRESS
         - ACTIVE
+        - IMPORT_IN_PROGRESS
     ModelName:
       type: string
       pattern: '^[0-9a-zA-Z_-]{1,200}$'
@@ -3790,7 +4797,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/NameOrArn'
-            - description: 'The ID number for the AWS KMS key used to encrypt the inference output. '
+            - description: 'The ID number for the KMS key key used to encrypt the inference output. '
       description: ' Specifies configuration information for the output results from for the inference, including KMS key ID and output S3 location. '
     IamRoleArn:
       type: string
@@ -3888,6 +4895,7 @@ components:
         - IN_PROGRESS
         - SUCCESS
         - FAILED
+        - IMPORT_IN_PROGRESS
     DataIngestionJobSummary:
       type: object
       properties:
@@ -3936,6 +4944,7 @@ components:
         - IN_PROGRESS
         - SUCCESS
         - FAILED
+        - IMPORT_IN_PROGRESS
     TargetSamplingRate:
       type: string
       enum:
@@ -4081,6 +5090,11 @@ components:
       pattern: '^[0-9a-zA-Z_-]{1,200}$'
       minLength: 1
       maxLength: 200
+    ResourceArn:
+      type: string
+      pattern: 'arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\-]*:[0-9]{12}:.+'
+      minLength: 20
+      maxLength: 2048
     IngestedFilesSummary:
       type: object
       required:
@@ -4114,6 +5128,37 @@ components:
       type: string
       minLength: 1
       maxLength: 50000
+    ModelVersionArn:
+      type: string
+      pattern: '^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\-]*:[0-9]{12}:model\/.+\/.+\/model-version\/[0-9]{1,}$'
+      minLength: 20
+      maxLength: 2048
+    ModelVersion:
+      type: integer
+      minimum: 1
+    ModelVersionStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - SUCCESS
+        - FAILED
+        - IMPORT_IN_PROGRESS
+        - CANCELED
+    ModelVersionSourceType:
+      type: string
+      enum:
+        - TRAINING
+        - RETRAINING
+        - IMPORT
+    PolicyRevisionId:
+      type: string
+      pattern: '[0-9A-Fa-f]+'
+      maxLength: 50
+    Policy:
+      type: string
+      pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
+      minLength: 1
+      maxLength: 20000
     EventDurationInSeconds:
       type: integer
       minimum: 0
@@ -4227,7 +5272,7 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/S3Key'
-            - description: 'The AWS Key Management Service (AWS KMS) key being used to encrypt the S3 object. Without this key, data in the bucket is not accessible. '
+            - description: 'The Amazon Web Services Key Management Service (KMS key) key being used to encrypt the S3 object. Without this key, data in the bucket is not accessible. '
       description: 'Contains information about an S3 bucket. '
     InferenceS3InputConfiguration:
       type: object
@@ -4343,7 +5388,7 @@ components:
         KeyPattern:
           allOf:
             - $ref: '#/components/schemas/KeyPattern'
-            - description: ' Pattern for matching the Amazon S3 files which will be used for ingestion. If no KeyPattern is provided, we will use the default hierarchy file structure, which is same as KeyPattern {prefix}/{component_name}/* '
+            - description: '<p> The pattern for matching the Amazon S3 files that will be used for ingestion. If the schema was created previously without any KeyPattern, then the default KeyPattern {prefix}/{component_name}/* is used to download files from Amazon S3 according to the schema. This field is required when ingestion is being done for the first time.</p> <p>Valid Values: {prefix}/{component_name}_* | {prefix}/{component_name}/* | {prefix}/{component_name}[DELIMITER]* (Allowed delimiters : space, dot, underscore, hyphen)</p>'
       description: ' Specifies S3 configuration information for the input data for the data ingestion job. '
     KeyPattern:
       type: string
@@ -4379,7 +5424,7 @@ components:
         LabelGroupArn:
           allOf:
             - $ref: '#/components/schemas/LabelGroupArn'
-            - description: ' The ARN of the label group. '
+            - description: ' The Amazon Resource Name (ARN) of the label group. '
         CreatedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4407,7 +5452,7 @@ components:
         LabelGroupArn:
           allOf:
             - $ref: '#/components/schemas/LabelGroupArn'
-            - description: ' The ARN of the label group. '
+            - description: ' The Amazon Resource Name (ARN) of the label group. '
         StartTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4477,6 +5522,10 @@ components:
       type: integer
       minimum: 1
       maximum: 500
+    ModelVersionSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ModelVersionSummary'
     ModelSummaries:
       type: array
       items:
@@ -4512,7 +5561,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The time at which the specific model was created. '
+        ActiveModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The model version that the inference scheduler uses to run an inference execution.
+        ActiveModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The Amazon Resource Name (ARN) of the model version that is set as active. The active model version is the model version that the inference scheduler uses to run an inference execution.
       description: 'Provides information about the specified ML model, including dataset and model names and ARNs, as well as status. '
+    ModelVersionSummary:
+      type: object
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/ModelName'
+            - description: The name of the model that this model version is a version of.
+        ModelArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelArn'
+            - description: The Amazon Resource Name (ARN) of the model that this model version is a version of.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersion'
+            - description: The version of the model.
+        ModelVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionArn'
+            - description: The Amazon Resource Name (ARN) of the model version.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when this model version was created.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionStatus'
+            - description: The current status of the model version.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/ModelVersionSourceType'
+            - description: Indicates how this model version was generated.
+      description: Contains information about the specific model version.
     Monotonicity:
       type: string
       enum:

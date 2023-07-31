@@ -2813,6 +2813,12 @@ paths:
           description: '<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.</p> <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets Manager for the DB cluster.</p> <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p> <p>If you don''t specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can''t use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p> <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p> <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>'
           schema:
             type: string
+        - name: EnableLocalWriteForwarding
+          in: query
+          required: false
+          description: '<p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren''t allowed on reader DB instances.</p> <p>Valid for: Aurora DB clusters only</p>'
+          schema:
+            type: boolean
         - name: SourceRegion
           in: query
           required: false
@@ -14243,6 +14249,12 @@ paths:
           description: '<p>Specifies whether engine mode changes from <code>serverless</code> to <code>provisioned</code> are allowed.</p> <p>Valid for Cluster Type: Aurora Serverless v1 DB clusters only</p> <p>Constraints:</p> <ul> <li> <p>You must allow engine mode changes when specifying a different value for the <code>EngineMode</code> parameter from the DB cluster''s current engine mode.</p> </li> </ul>'
           schema:
             type: boolean
+        - name: EnableLocalWriteForwarding
+          in: query
+          required: false
+          description: '<p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren''t allowed on reader DB instances.</p> <p>Valid for: Aurora DB clusters only</p>'
+          schema:
+            type: boolean
         - name: Action
           in: query
           required: true
@@ -23751,6 +23763,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CACertificateIdentifiersList'
             - description: '<p>A list of the supported CA certificate identifiers.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html">Using SSL/TLS to encrypt a connection to a DB instance</a> in the <i>Amazon RDS User Guide</i> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html"> Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora User Guide</i>.</p>'
+        SupportsLocalWriteForwarding:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: '<p>A value that indicates whether the DB engine version supports forwarding write operations from reader DB instances to the writer DB instance in the DB cluster. By default, write operations aren''t allowed on reader DB instances.</p> <p>Valid for: Aurora DB clusters only</p>'
       description: This data type is used as a response element in the action <code>DescribeDBEngineVersions</code>.
     CustomDBEngineVersionAlreadyExistsFault: {}
     CustomDBEngineVersionQuotaExceededFault: {}
@@ -26444,6 +26460,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and managed in Amazon Web Services Secrets Manager.</p> <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets Manager for the DB cluster.</p> <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p> <p>If you don''t specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can''t use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer managed KMS key.</p> <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account has a different default KMS key for each Amazon Web Services Region.</p> <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>'
+        EnableLocalWriteForwarding:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: '<p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren''t allowed on reader DB instances.</p> <p>Valid for: Aurora DB clusters only</p>'
         SourceRegion:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -26759,6 +26779,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TStamp'
             - description: <p>The next time you can modify the DB cluster to use the <code>aurora-iopt1</code> storage type.</p> <p>This setting is only for Aurora DB clusters.</p>
+        LocalWriteForwardingStatus:
+          allOf:
+            - $ref: '#/components/schemas/LocalWriteForwardingStatus'
+            - description: 'Specifies whether an Aurora DB cluster has in-cluster write forwarding enabled, not enabled, requested, or is in the process of enabling it.'
       description: '<p>Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.</p> <p>For an Amazon Aurora DB cluster, this data type is used as a response element in the operations <code>CreateDBCluster</code>, <code>DeleteDBCluster</code>, <code>DescribeDBClusters</code>, <code>FailoverDBCluster</code>, <code>ModifyDBCluster</code>, <code>PromoteReadReplicaDBCluster</code>, <code>RestoreDBClusterFromS3</code>, <code>RestoreDBClusterFromSnapshot</code>, <code>RestoreDBClusterToPointInTime</code>, <code>StartDBCluster</code>, and <code>StopDBCluster</code>.</p> <p>For a Multi-AZ DB cluster, this data type is used as a response element in the operations <code>CreateDBCluster</code>, <code>DeleteDBCluster</code>, <code>DescribeDBClusters</code>, <code>FailoverDBCluster</code>, <code>ModifyDBCluster</code>, <code>RebootDBCluster</code>, <code>RestoreDBClusterFromSnapshot</code>, and <code>RestoreDBClusterToPointInTime</code>.</p> <p>For more information on Amazon Aurora DB clusters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>For more information on Multi-AZ DB clusters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html"> Multi-AZ deployments with two readable standby DB instances</a> in the <i>Amazon RDS User Guide.</i> </p>'
     CreateDBClusterSnapshotMessage:
       type: object
@@ -28180,6 +28204,14 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Web Services KMS key identifier that is used to encrypt the secret.
       description: '<p>Contains the secret managed by RDS in Amazon Web Services Secrets Manager for the master user password.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html">Password management with Amazon Web Services Secrets Manager</a> in the <i>Amazon RDS User Guide</i> and <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html">Password management with Amazon Web Services Secrets Manager</a> in the <i>Amazon Aurora User Guide.</i> </p>'
+    LocalWriteForwardingStatus:
+      type: string
+      enum:
+        - enabled
+        - disabled
+        - enabling
+        - disabling
+        - requested
     DBClusterBacktrackList:
       type: array
       items:
@@ -30818,6 +30850,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>Specifies whether engine mode changes from <code>serverless</code> to <code>provisioned</code> are allowed.</p> <p>Valid for Cluster Type: Aurora Serverless v1 DB clusters only</p> <p>Constraints:</p> <ul> <li> <p>You must allow engine mode changes when specifying a different value for the <code>EngineMode</code> parameter from the DB cluster''s current engine mode.</p> </li> </ul>'
+        EnableLocalWriteForwarding:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: '<p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren''t allowed on reader DB instances.</p> <p>Valid for: Aurora DB clusters only</p>'
       description: <p/>
     ModifyDBClusterParameterGroupMessage:
       type: object
@@ -33463,6 +33499,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: A value that indicates whether you can use Babelfish for Aurora PostgreSQL with the target engine version.
+        SupportsLocalWriteForwarding:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: '<p>A value that indicates whether the target engine version supports forwarding write operations from reader DB instances to the writer DB instance in the DB cluster. By default, write operations aren''t allowed on reader DB instances.</p> <p>Valid for: Aurora DB clusters only</p>'
       description: The version of the database engine that a DB instance can be upgraded to.
     UserAuthConfigInfo:
       type: object
