@@ -6403,6 +6403,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidDBClusterSnapshotStateFault'
+        '485':
+          description: DBClusterAutomatedBackupQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupQuotaExceededFault'
       parameters:
         - name: DBClusterIdentifier
           in: query
@@ -6422,6 +6428,12 @@ paths:
           description: '<p>The DB cluster snapshot identifier of the new DB cluster snapshot created when <code>SkipFinalSnapshot</code> is disabled.</p> <note> <p>Specifying this parameter and also skipping the creation of a final DB cluster snapshot with the <code>SkipFinalShapshot</code> parameter results in an error.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
           schema:
             type: string
+        - name: DeleteAutomatedBackups
+          in: query
+          required: false
+          description: A value that indicates whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted.
+          schema:
+            type: boolean
         - name: Action
           in: query
           required: true
@@ -6485,6 +6497,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidDBClusterSnapshotStateFault'
+        '485':
+          description: DBClusterAutomatedBackupQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupQuotaExceededFault'
       requestBody:
         content:
           text/xml:
@@ -6498,6 +6516,102 @@ paths:
             type: string
             enum:
               - DeleteDBCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=DeleteDBClusterAutomatedBackup:
+    get:
+      x-aws-operation-name: DeleteDBClusterAutomatedBackup
+      operationId: GET_DeleteDBClusterAutomatedBackup
+      description: Deletes automated backups using the <code>DbClusterResourceId</code> value of the source DB cluster or the Amazon Resource Name (ARN) of the automated backups.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteDBClusterAutomatedBackupResult'
+        '480':
+          description: InvalidDBClusterAutomatedBackupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterAutomatedBackupStateFault'
+        '481':
+          description: DBClusterAutomatedBackupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupNotFoundFault'
+      parameters:
+        - name: DbClusterResourceId
+          in: query
+          required: true
+          description: 'The identifier for the source DB cluster, which can''t be changed and which is unique to an Amazon Web Services Region.'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteDBClusterAutomatedBackup
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteDBClusterAutomatedBackup
+      operationId: POST_DeleteDBClusterAutomatedBackup
+      description: Deletes automated backups using the <code>DbClusterResourceId</code> value of the source DB cluster or the Amazon Resource Name (ARN) of the automated backups.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteDBClusterAutomatedBackupResult'
+        '480':
+          description: InvalidDBClusterAutomatedBackupStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterAutomatedBackupStateFault'
+        '481':
+          description: DBClusterAutomatedBackupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteDBClusterAutomatedBackupMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteDBClusterAutomatedBackup
         - name: Version
           in: query
           required: true
@@ -8359,6 +8473,119 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=DescribeDBClusterAutomatedBackups:
+    get:
+      x-aws-operation-name: DescribeDBClusterAutomatedBackups
+      operationId: GET_DescribeDBClusterAutomatedBackups
+      description: '<p>Displays backups for both current and deleted DB clusters. For example, use this operation to find details about automated backups for previously deleted clusters. Current clusters are returned for both the <code>DescribeDBClusterAutomatedBackups</code> and <code>DescribeDBClusters</code> operations.</p> <p>All parameters are optional.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupMessage'
+        '480':
+          description: DBClusterAutomatedBackupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupNotFoundFault'
+      parameters:
+        - name: DbClusterResourceId
+          in: query
+          required: false
+          description: The resource ID of the DB cluster that is the source of the automated backup. This parameter isn't case-sensitive.
+          schema:
+            type: string
+        - name: DBClusterIdentifier
+          in: query
+          required: false
+          description: '(Optional) The user-supplied DB cluster identifier. If this parameter is specified, it must match the identifier of an existing DB cluster. It returns information from the specific DB cluster''s automated backup. This parameter isn''t case-sensitive.'
+          schema:
+            type: string
+        - name: Filters
+          in: query
+          required: false
+          description: '<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>retained</code> - Automated backups for deleted clusters and after backup replication is stopped.</p> </li> </ul> </li> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB cluster automated backups identified by these ARNs.</p> </li> <li> <p> <code>db-cluster-resource-id</code> - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB cluster resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxRecords
+          in: query
+          required: false
+          description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.'
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: 'The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to <code>MaxRecords</code>.'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDBClusterAutomatedBackups
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeDBClusterAutomatedBackups
+      operationId: POST_DescribeDBClusterAutomatedBackups
+      description: '<p>Displays backups for both current and deleted DB clusters. For example, use this operation to find details about automated backups for previously deleted clusters. Current clusters are returned for both the <code>DescribeDBClusterAutomatedBackups</code> and <code>DescribeDBClusters</code> operations.</p> <p>All parameters are optional.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupMessage'
+        '480':
+          description: DBClusterAutomatedBackupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeDBClusterAutomatedBackupsMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDBClusterAutomatedBackups
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=DescribeDBClusterBacktracks:
     get:
       x-aws-operation-name: DescribeDBClusterBacktracks
@@ -9021,6 +9248,12 @@ paths:
           description: '<p>A value that indicates whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account. By default, the public snapshots are not included.</p> <p>You can share a manual DB cluster snapshot as public by using the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>'
           schema:
             type: boolean
+        - name: DbClusterResourceId
+          in: query
+          required: false
+          description: A specific DB cluster resource ID to describe.
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -9388,13 +9621,13 @@ paths:
         - name: DBInstanceIdentifier
           in: query
           required: false
-          description: '(Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance'' automated backup. This parameter isn''t case-sensitive.'
+          description: '(Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance''s automated backup. This parameter isn''t case-sensitive.'
           schema:
             type: string
         - name: Filters
           in: query
           required: false
-          description: '<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>active</code> - automated backups for current instances</p> </li> <li> <p> <code>retained</code> - automated backups for deleted instances and after backup replication is stopped</p> </li> <li> <p> <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available</p> </li> </ul> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance automated backups identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>'
+          description: '<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>active</code> - Automated backups for current instances.</p> </li> <li> <p> <code>creating</code> - Automated backups that are waiting for the first automated snapshot to be available.</p> </li> <li> <p> <code>retained</code> - Automated backups for deleted instances and after backup replication is stopped.</p> </li> </ul> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance automated backups identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>'
           schema:
             type: array
             items:
@@ -19543,6 +19776,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBClusterParameterGroupNotFoundFault'
+        '498':
+          description: DBClusterAutomatedBackupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupNotFoundFault'
       parameters:
         - name: DBClusterIdentifier
           in: query
@@ -19558,7 +19797,7 @@ paths:
             type: string
         - name: SourceDBClusterIdentifier
           in: query
-          required: true
+          required: false
           description: '<p>The identifier of the source DB cluster from which to restore.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing DBCluster.</p> </li> </ul> <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>'
           schema:
             type: string
@@ -19756,6 +19995,12 @@ paths:
           description: '<p>The network type of the DB cluster.</p> <p>Valid values:</p> <ul> <li> <p> <code>IPV4</code> </p> </li> <li> <p> <code>DUAL</code> </p> </li> </ul> <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html"> Working with a DB instance in a VPC</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>Valid for: Aurora DB clusters only</p>'
           schema:
             type: string
+        - name: SourceDbClusterResourceId
+          in: query
+          required: false
+          description: The resource ID of the source DB cluster from which to restore.
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -19897,6 +20142,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/DBClusterParameterGroupNotFoundFault'
+        '498':
+          description: DBClusterAutomatedBackupNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterAutomatedBackupNotFoundFault'
       requestBody:
         content:
           text/xml:
@@ -23994,6 +24245,14 @@ components:
       properties:
         DBCluster:
           $ref: '#/components/schemas/DBCluster'
+    DBClusterAutomatedBackupQuotaExceededFault: {}
+    DeleteDBClusterAutomatedBackupResult:
+      type: object
+      properties:
+        DBClusterAutomatedBackup:
+          $ref: '#/components/schemas/DBClusterAutomatedBackup'
+    InvalidDBClusterAutomatedBackupStateFault: {}
+    DBClusterAutomatedBackupNotFoundFault: {}
     InvalidDBClusterEndpointStateFault: {}
     DBClusterEndpointNotFoundFault: {}
     InvalidDBParameterGroupStateFault: {}
@@ -24099,6 +24358,17 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code> .'
       description: Data returned by the <b>DescribeCertificates</b> action.
+    DBClusterAutomatedBackupMessage:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to <code>MaxRecords</code>.'
+        DBClusterAutomatedBackups:
+          allOf:
+            - $ref: '#/components/schemas/DBClusterAutomatedBackupList'
+            - description: A list of <code>DBClusterAutomatedBackup</code> backups.
     DBClusterBacktrackMessage:
       type: object
       properties:
@@ -25743,7 +26013,7 @@ components:
         DBClusterSnapshotArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) for the DB cluster snapshot.
+            - description: Specifies the Amazon Resource Name (ARN) for the DB cluster snapshot.
         SourceDBClusterSnapshotArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -25762,6 +26032,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: <p>The storage type associated with the DB cluster snapshot.</p> <p>This setting is only for Aurora DB clusters.</p>
+        DbClusterResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies the resource ID of the DB cluster that this DB cluster snapshot was created from.
       description: <p>Contains the details for an Amazon RDS DB cluster snapshot</p> <p>This data type is used as a response element in the <code>DescribeDBClusterSnapshots</code> action.</p>
     CopyDBParameterGroupMessage:
       type: object
@@ -28212,6 +28486,119 @@ components:
         - enabling
         - disabling
         - requested
+    RestoreWindow:
+      type: object
+      properties:
+        EarliestTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The earliest time you can restore an instance to.
+        LatestTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The latest time you can restore an instance to.
+      description: 'Earliest and latest time an instance can be restored to:'
+    DBClusterAutomatedBackup:
+      type: object
+      properties:
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the database engine for this automated backup.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The VPC ID associated with the DB cluster.
+        DBClusterAutomatedBackupsArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the automated backups.
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier for the source DB cluster, which can''t be changed and which is unique to an Amazon Web Services Region.'
+        RestoreWindow:
+          $ref: '#/components/schemas/RestoreWindow'
+        MasterUsername:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The master user name of the automated backup.
+        DbClusterResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The resource ID for the source DB cluster, which can''t be changed and which is unique to an Amazon Web Services Region.'
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Web Services Region associated with the automated backup.
+        LicenseModel:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The license model information for this DB cluster automated backup.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>A list of status information for an automated backup:</p> <ul> <li> <p> <code>retained</code> - Automated backups for deleted clusters.</p> </li> </ul>'
+        IAMDatabaseAuthenticationEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'True if mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
+        ClusterCreateTime:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: 'The time when the DB cluster was created, in Universal Coordinated Time (UTC).'
+        StorageEncrypted:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the source DB cluster is encrypted.
+        AllocatedStorage:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'For all database engines except Amazon Aurora, <code>AllocatedStorage</code> specifies the allocated storage size in gibibytes (GiB). For Aurora, <code>AllocatedStorage</code> always returns 1, because Aurora DB cluster storage size isn''t fixed, but instead automatically adjusts as needed.'
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The version of the database engine for the automated backup.
+        DBClusterArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the source DB cluster.
+        BackupRetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The retention period for the automated backups.
+        EngineMode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The engine mode of the database engine for the automated backup.
+        AvailabilityZones:
+          allOf:
+            - $ref: '#/components/schemas/AvailabilityZones'
+            - description: 'The Availability Zones where instances in the DB cluster can be created. For information on Amazon Web Services Regions and Availability Zones, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html">Regions and Availability Zones</a>.'
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: '<p>The port number that the automated backup used for connections.</p> <p>Default: Inherits from the source DB cluster</p> <p>Valid Values: <code>1150-65535</code> </p>'
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Amazon Web Services KMS key ID for an automated backup.</p> <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.</p>'
+        StorageType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p>The storage type associated with the DB cluster.</p> <p>This setting is only for non-Aurora Multi-AZ DB clusters.</p>
+        Iops:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: <p>The IOPS (I/O operations per second) value for the automated backup.</p> <p>This setting is only for non-Aurora Multi-AZ DB clusters.</p>
+      description: 'An automated backup of a DB cluster. It consists of system backups, transaction logs, and the database cluster properties that existed at the time you deleted the source cluster.'
+    DBClusterAutomatedBackupList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/DBClusterAutomatedBackup'
+          - xml:
+              name: DBClusterAutomatedBackup
     DBClusterBacktrackList:
       type: array
       items:
@@ -28528,18 +28915,6 @@ components:
           - $ref: '#/components/schemas/DBInstanceAutomatedBackupsReplication'
           - xml:
               name: DBInstanceAutomatedBackupsReplication
-    RestoreWindow:
-      type: object
-      properties:
-        EarliestTime:
-          allOf:
-            - $ref: '#/components/schemas/TStamp'
-            - description: The earliest time you can restore an instance to.
-        LatestTime:
-          allOf:
-            - $ref: '#/components/schemas/TStamp'
-            - description: The latest time you can restore an instance to.
-      description: 'Earliest and latest time an instance can be restored to:'
     DBInstanceAutomatedBackup:
       type: object
       properties:
@@ -28550,7 +28925,7 @@ components:
         DbiResourceId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an Amazon Web Services Region.'
+            - description: 'The resource ID for the source DB instance, which can''t be changed and which is unique to an Amazon Web Services Region.'
         Region:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -28558,7 +28933,7 @@ components:
         DBInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The customer id of the instance that is/was associated with the automated backup.
+            - description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an Amazon Web Services Region.'
         RestoreWindow:
           allOf:
             - $ref: '#/components/schemas/RestoreWindow'
@@ -28570,7 +28945,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>Provides a list of status information for an automated backup:</p> <ul> <li> <p> <code>active</code> - automated backups for current instances</p> </li> <li> <p> <code>retained</code> - automated backups for deleted instances</p> </li> <li> <p> <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available.</p> </li> </ul>'
+            - description: '<p>Provides a list of status information for an automated backup:</p> <ul> <li> <p> <code>active</code> - Automated backups for current instances.</p> </li> <li> <p> <code>retained</code> - Automated backups for deleted instances.</p> </li> <li> <p> <code>creating</code> - Automated backups that are waiting for the first automated snapshot to be available.</p> </li> </ul>'
         Port:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -28590,7 +28965,7 @@ components:
         MasterUsername:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The license model of an automated backup.
+            - description: The master user name of an automated backup.
         Engine:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -28980,6 +29355,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/CustomEngineVersion'
             - description: 'The custom engine version (CEV) for your DB instance. This option is required for RDS Custom, but optional for Amazon RDS. The combination of <code>Engine</code> and <code>EngineVersion</code> is unique per customer per Amazon Web Services Region.'
+    DeleteDBClusterAutomatedBackupMessage:
+      type: object
+      required:
+        - DbClusterResourceId
+      title: DeleteDBClusterAutomatedBackupMessage
+      properties:
+        DbClusterResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier for the source DB cluster, which can''t be changed and which is unique to an Amazon Web Services Region.'
     DeleteDBClusterEndpointMessage:
       type: object
       required:
@@ -29008,6 +29393,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>The DB cluster snapshot identifier of the new DB cluster snapshot created when <code>SkipFinalSnapshot</code> is disabled.</p> <note> <p>Specifying this parameter and also skipping the creation of a final DB cluster snapshot with the <code>SkipFinalShapshot</code> parameter results in an error.</p> </note> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Can''t end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
+        DeleteAutomatedBackups:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: A value that indicates whether to remove automated backups immediately after the DB cluster is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB cluster is deleted.
       description: <p/>
     DeleteDBClusterParameterGroupMessage:
       type: object
@@ -29242,6 +29631,30 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
       description: <p/>
+    DescribeDBClusterAutomatedBackupsMessage:
+      type: object
+      title: DescribeDBClusterAutomatedBackupsMessage
+      properties:
+        DbClusterResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource ID of the DB cluster that is the source of the automated backup. This parameter isn't case-sensitive.
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '(Optional) The user-supplied DB cluster identifier. If this parameter is specified, it must match the identifier of an existing DB cluster. It returns information from the specific DB cluster''s automated backup. This parameter isn''t case-sensitive.'
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: '<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>retained</code> - Automated backups for deleted clusters and after backup replication is stopped.</p> </li> </ul> </li> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB cluster automated backups identified by these ARNs.</p> </li> <li> <p> <code>db-cluster-resource-id</code> - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB cluster resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to <code>MaxRecords</code>.'
     DescribeDBClusterBacktracksMessage:
       type: object
       required:
@@ -29388,6 +29801,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>A value that indicates whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account. By default, the public snapshots are not included.</p> <p>You can share a manual DB cluster snapshot as public by using the <a>ModifyDBClusterSnapshotAttribute</a> API action.</p>'
+        DbClusterResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A specific DB cluster resource ID to describe.
       description: <p/>
     DescribeDBClustersMessage:
       type: object
@@ -29469,11 +29886,11 @@ components:
         DBInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '(Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance'' automated backup. This parameter isn''t case-sensitive.'
+            - description: '(Optional) The user-supplied instance identifier. If this parameter is specified, it must match the identifier of an existing DB instance. It returns information from the specific DB instance''s automated backup. This parameter isn''t case-sensitive.'
         Filters:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: '<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>active</code> - automated backups for current instances</p> </li> <li> <p> <code>retained</code> - automated backups for deleted instances and after backup replication is stopped</p> </li> <li> <p> <code>creating</code> - automated backups that are waiting for the first automated snapshot to be available</p> </li> </ul> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance automated backups identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>'
+            - description: '<p>A filter that specifies which resources to return based on status.</p> <p>Supported filters are the following:</p> <ul> <li> <p> <code>status</code> </p> <ul> <li> <p> <code>active</code> - Automated backups for current instances.</p> </li> <li> <p> <code>creating</code> - Automated backups that are waiting for the first automated snapshot to be available.</p> </li> <li> <p> <code>retained</code> - Automated backups for deleted instances and after backup replication is stopped.</p> </li> </ul> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance automated backups identified by these ARNs.</p> </li> <li> <p> <code>dbi-resource-id</code> - Accepts DB resource identifiers and Amazon Resource Names (ARNs). The results list includes only information about the DB instance resources identified by these ARNs.</p> </li> </ul> <p>Returns all resources by default. The status for each resource is specified in the response.</p>'
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -32515,7 +32932,6 @@ components:
       type: object
       required:
         - DBClusterIdentifier
-        - SourceDBClusterIdentifier
       title: RestoreDBClusterToPointInTimeMessage
       properties:
         DBClusterIdentifier:
@@ -32622,6 +33038,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>The network type of the DB cluster.</p> <p>Valid values:</p> <ul> <li> <p> <code>IPV4</code> </p> </li> <li> <p> <code>DUAL</code> </p> </li> </ul> <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 protocols (<code>DUAL</code>).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html"> Working with a DB instance in a VPC</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>Valid for: Aurora DB clusters only</p>'
+        SourceDbClusterResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resource ID of the source DB cluster from which to restore.
       description: <p/>
     RestoreDBInstanceFromDBSnapshotMessage:
       type: object

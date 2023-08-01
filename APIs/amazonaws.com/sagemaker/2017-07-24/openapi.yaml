@@ -16820,7 +16820,7 @@ components:
         EndpointStatus:
           allOf:
             - $ref: '#/components/schemas/EndpointStatus'
-            - description: '<p>The status of the endpoint.</p> <ul> <li> <p> <code>OutOfService</code>: Endpoint is not available to take incoming requests.</p> </li> <li> <p> <code>Creating</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html">CreateEndpoint</a> is executing.</p> </li> <li> <p> <code>Updating</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html">UpdateEndpoint</a> or <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> is executing.</p> </li> <li> <p> <code>SystemUpdating</code>: Endpoint is undergoing maintenance and cannot be updated or deleted or re-scaled until it has completed. This maintenance operation does not change any customer-specified values such as VPC config, KMS encryption, model, instance type, or instance count.</p> </li> <li> <p> <code>RollingBack</code>: Endpoint fails to scale up or down or change its variant weight and is in the process of rolling back to its previous configuration. Once the rollback completes, endpoint returns to an <code>InService</code> status. This transitional status only applies to an endpoint that has autoscaling enabled and is undergoing variant weight or capacity changes as part of an <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> call or when the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> operation is called explicitly.</p> </li> <li> <p> <code>InService</code>: Endpoint is available to process incoming requests.</p> </li> <li> <p> <code>Deleting</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html">DeleteEndpoint</a> is executing.</p> </li> <li> <p> <code>Failed</code>: Endpoint could not be created, updated, or re-scaled. Use the <code>FailureReason</code> value returned by <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html">DescribeEndpoint</a> for information about the failure. <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html">DeleteEndpoint</a> is the only operation that can be performed on a failed endpoint.</p> </li> </ul>'
+            - description: '<p>The status of the endpoint.</p> <ul> <li> <p> <code>OutOfService</code>: Endpoint is not available to take incoming requests.</p> </li> <li> <p> <code>Creating</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html">CreateEndpoint</a> is executing.</p> </li> <li> <p> <code>Updating</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpoint.html">UpdateEndpoint</a> or <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> is executing.</p> </li> <li> <p> <code>SystemUpdating</code>: Endpoint is undergoing maintenance and cannot be updated or deleted or re-scaled until it has completed. This maintenance operation does not change any customer-specified values such as VPC config, KMS encryption, model, instance type, or instance count.</p> </li> <li> <p> <code>RollingBack</code>: Endpoint fails to scale up or down or change its variant weight and is in the process of rolling back to its previous configuration. Once the rollback completes, endpoint returns to an <code>InService</code> status. This transitional status only applies to an endpoint that has autoscaling enabled and is undergoing variant weight or capacity changes as part of an <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> call or when the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_UpdateEndpointWeightsAndCapacities.html">UpdateEndpointWeightsAndCapacities</a> operation is called explicitly.</p> </li> <li> <p> <code>InService</code>: Endpoint is available to process incoming requests.</p> </li> <li> <p> <code>Deleting</code>: <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html">DeleteEndpoint</a> is executing.</p> </li> <li> <p> <code>Failed</code>: Endpoint could not be created, updated, or re-scaled. Use the <code>FailureReason</code> value returned by <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeEndpoint.html">DescribeEndpoint</a> for information about the failure. <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteEndpoint.html">DeleteEndpoint</a> is the only operation that can be performed on a failed endpoint.</p> </li> <li> <p> <code>UpdateRollbackFailed</code>: Both the rolling deployment and auto-rollback failed. Your endpoint is in service with a mix of the old and new endpoint configurations. For information about how to remedy this issue and restore the endpoint''s status to <code>InService</code>, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/deployment-guardrails-rolling.html">Rolling Deployments</a>.</p> </li> </ul>'
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/FailureReason'
@@ -27083,7 +27083,7 @@ components:
         EndTimeOffset:
           allOf:
             - $ref: '#/components/schemas/MonitoringTimeOffsetString'
-            - description: 'If specified, monitoring jobs substract this time from the end time. For information about using offsets for scheduling monitoring jobs, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html">Schedule Model Quality Monitoring Jobs</a>.'
+            - description: 'If specified, monitoring jobs subtract this time from the end time. For information about using offsets for scheduling monitoring jobs, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html">Schedule Model Quality Monitoring Jobs</a>.'
       description: Input object for the batch transform job.
     MaxNumberOfTrainingJobsNotImproving:
       type: integer
@@ -29532,7 +29532,7 @@ components:
         JobDurationInSeconds:
           allOf:
             - $ref: '#/components/schemas/JobDurationInSeconds'
-            - description: 'Specifies the maximum duration of the job, in seconds.&gt;'
+            - description: 'Specifies the maximum duration of the job, in seconds. The maximum value is 7200.'
         TrafficPattern:
           allOf:
             - $ref: '#/components/schemas/TrafficPattern'
@@ -29580,6 +29580,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelLatencyThresholds'
             - description: The interval of time taken by a model to respond as viewed from SageMaker. The interval includes the local communication time taken to send the request and to fetch the response from the container of a model and the time taken to complete the inference in the container.
+        FlatInvocations:
+          allOf:
+            - $ref: '#/components/schemas/FlatInvocations'
+            - description: 'Stops a load test when the number of invocations (TPS) peaks and flattens, which means that the instance has reached capacity. The default value is <code>Stop</code>. If you want the load test to continue after invocations have flattened, set the value to <code>Continue</code>.'
       description: 'Specifies conditions for stopping a job. When a job reaches a stopping condition limit, SageMaker ends the job.'
     RecommendationJobOutputConfig:
       type: object
@@ -34223,6 +34227,11 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: The date and time that the algorithm emitted the metric.
       description: 'The name, value, and date and time of a metric that was emitted to Amazon CloudWatch.'
+    FlatInvocations:
+      type: string
+      enum:
+        - Continue
+        - Stop
     Float:
       type: number
       format: float
@@ -37073,7 +37082,7 @@ components:
         Percentile:
           allOf:
             - $ref: '#/components/schemas/String64'
-            - description: The model latency percentile threshold.
+            - description: 'The model latency percentile threshold. For custom load tests, specify the value as <code>P95</code>.'
         ValueInMilliseconds:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -38117,6 +38126,9 @@ components:
     NotificationTopicArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sns:[a-z0-9\-]*:[0-9]{12}:[a-zA-Z0-9_.-]*'
+    NumberOfSteps:
+      type: integer
+      minimum: 1
     ObjectiveStatusCounter:
       type: integer
       minimum: 0
@@ -38377,7 +38389,7 @@ components:
         InitialNumberOfUsers:
           allOf:
             - $ref: '#/components/schemas/InitialNumberOfUsers'
-            - description: Specifies how many concurrent users to start with.
+            - description: Specifies how many concurrent users to start with. The value should be between 1 and 3.
         SpawnRate:
           allOf:
             - $ref: '#/components/schemas/SpawnRate'
@@ -38385,7 +38397,7 @@ components:
         DurationInSeconds:
           allOf:
             - $ref: '#/components/schemas/TrafficDurationInSeconds'
-            - description: Specifies how long traffic phase should be.
+            - description: 'Specifies how long a traffic phase should be. For custom load tests, the value should be between 120 and 3600. This value should not exceed <code>JobDurationInSeconds</code>.'
       description: Defines the traffic pattern.
     Phases:
       type: array
@@ -39670,11 +39682,15 @@ components:
         TrafficType:
           allOf:
             - $ref: '#/components/schemas/TrafficType'
-            - description: Defines the traffic patterns.
+            - description: Defines the traffic patterns. Choose either <code>PHASES</code> or <code>STAIRS</code>.
         Phases:
           allOf:
             - $ref: '#/components/schemas/Phases'
             - description: Defines the phases traffic specification.
+        Stairs:
+          allOf:
+            - $ref: '#/components/schemas/Stairs'
+            - description: Defines the stairs traffic pattern.
       description: Defines the traffic pattern of the load test.
     RecommendationJobResourceLimit:
       type: object
@@ -40398,6 +40414,26 @@ components:
         - Line
         - RecordIO
         - TFRecord
+    UsersPerStep:
+      type: integer
+      minimum: 1
+      maximum: 3
+    Stairs:
+      type: object
+      properties:
+        DurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/TrafficDurationInSeconds'
+            - description: Defines how long each traffic step should be.
+        NumberOfSteps:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfSteps'
+            - description: Specifies how many steps to perform during traffic.
+        UsersPerStep:
+          allOf:
+            - $ref: '#/components/schemas/UsersPerStep'
+            - description: Specifies how many new users to spawn in each step.
+      description: <p>Defines the stairs traffic pattern for an Inference Recommender load test. This pattern type consists of multiple steps where the number of users increases at each step.</p> <p>Specify either the stairs or phases traffic pattern.</p>
     StudioLifecycleConfigDetails:
       type: object
       properties:
@@ -40528,6 +40564,7 @@ components:
       type: string
       enum:
         - PHASES
+        - STAIRS
     TrafficRoutingConfigType:
       type: string
       enum:

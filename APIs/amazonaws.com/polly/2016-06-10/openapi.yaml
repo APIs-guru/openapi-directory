@@ -333,6 +333,7 @@ paths:
               - fi-FI
               - en-IE
               - nl-BE
+              - fr-BE
         - name: IncludeAdditionalLanguageCodes
           in: query
           required: false
@@ -642,6 +643,7 @@ paths:
                     - fi-FI
                     - en-IE
                     - nl-BE
+                    - fr-BE
                 LexiconNames:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. '
                   type: array
@@ -781,6 +783,7 @@ paths:
                     - Niamh
                     - Sofie
                     - Lisa
+                    - Isabelle
   /v1/speech:
     post:
       operationId: SynthesizeSpeech
@@ -906,6 +909,7 @@ paths:
                     - fi-FI
                     - en-IE
                     - nl-BE
+                    - fr-BE
                 LexiconNames:
                   description: 'List of one or more pronunciation lexicon names you want the service to apply during synthesis. Lexicons are applied only if the language of the lexicon is the same as the language of the voice. For information about storing lexicons, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.'
                   type: array
@@ -1033,6 +1037,7 @@ paths:
                     - Niamh
                     - Sofie
                     - Lisa
+                    - Isabelle
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1298,6 +1303,7 @@ components:
         - fi-FI
         - en-IE
         - nl-BE
+        - fr-BE
     IncludeAdditionalLanguageCodes:
       type: boolean
     NextToken:
@@ -1636,6 +1642,7 @@ components:
         - Niamh
         - Sofie
         - Lisa
+        - Isabelle
     StartSpeechSynthesisTaskInput:
       type: object
       required:

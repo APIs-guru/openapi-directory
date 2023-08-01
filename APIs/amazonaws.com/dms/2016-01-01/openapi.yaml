@@ -1685,6 +1685,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeEngineVersions:
+    post:
+      operationId: DescribeEngineVersions
+      description: Returns information about the replication instance versions used in the project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEngineVersionsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEngineVersionsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeEngineVersions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.DescribeEventCategories:
     post:
       operationId: DescribeEventCategories
@@ -5505,6 +5550,29 @@ components:
             - $ref: '#/components/schemas/String'
             - description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       description: <p/>
+    DescribeEngineVersionsResponse:
+      type: object
+      properties:
+        EngineVersions:
+          allOf:
+            - $ref: '#/components/schemas/EngineVersionList'
+            - description: Returned <code>EngineVersion</code> objects that describe the replication instance engine versions used in the project.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+    DescribeEngineVersionsMessage:
+      type: object
+      title: DescribeEngineVersionsMessage
+      properties:
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. '
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     DescribeEventCategoriesResponse:
       type: object
       properties:
@@ -7242,6 +7310,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    AvailableUpgradesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
     BatchStartRecommendationsErrorEntry:
       type: object
       properties:
@@ -8275,7 +8347,7 @@ components:
         DatabaseMode:
           allOf:
             - $ref: '#/components/schemas/DatabaseMode'
-            - description: 'Specifies whether to use default or custom replication behavior for PostgreSQL-compatible endpoints. You can use this setting to specify replication behavior for endpoints that require additional configuration, such as Babelfish endpoints.'
+            - description: 'Specifies the default behavior of the replication''s handling of PostgreSQL- compatible endpoints that require some additional configuration, such as Babelfish endpoints.'
         BabelfishDatabaseName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -9465,6 +9537,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Endpoint'
+    EngineVersionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EngineVersion'
     EventCategoryGroupList:
       type: array
       items:
@@ -9651,6 +9727,47 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The default value of the endpoint setting if no value is specified using <code>CreateEndpoint</code> or <code>ModifyEndpoint</code>.
       description: Endpoint settings.
+    ReleaseStatusValues:
+      type: string
+      enum:
+        - beta
+        - prod
+    EngineVersion:
+      type: object
+      properties:
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The version number of the replication instance.
+        Lifecycle:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The lifecycle status of the replication instance version. Valid values are <code>DEPRECATED</code>, <code>DEFAULT_VERSION</code>, and <code>ACTIVE</code>.'
+        ReleaseStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReleaseStatusValues'
+            - description: The release status of the replication instance version.
+        LaunchDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date when the replication instance version became publicly available.
+        AutoUpgradeDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date when the replication instance will be automatically upgraded. This setting only applies if the <code>auto-minor-version</code> setting is enabled.
+        DeprecationDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date when the replication instance version will be deprecated and can no longer be requested.
+        ForceUpgradeDate:
+          allOf:
+            - $ref: '#/components/schemas/TStamp'
+            - description: The date when the replication instance will have a version upgrade forced.
+        AvailableUpgrades:
+          allOf:
+            - $ref: '#/components/schemas/AvailableUpgradesList'
+            - description: The list of valid replication instance versions that you can upgrade to.
+      description: Provides information about a replication instance version.
     Event:
       type: object
       properties:
@@ -9872,11 +9989,6 @@ components:
         - PreferBackup
         - PreferTlog
         - TlogOnly
-    ReleaseStatusValues:
-      type: string
-      enum:
-        - beta
-        - prod
     OrderableReplicationInstance:
       type: object
       properties:

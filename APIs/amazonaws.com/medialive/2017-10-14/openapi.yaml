@@ -3935,6 +3935,9 @@ paths:
                         - xml:
                             name: latencyMs
                           description: The Link device's buffer size (latency) in milliseconds (ms).
+                availabilityZone:
+                  description: Placeholder documentation for __string
+                  type: string
   '/prod/inputDevices/{inputDeviceId}/thumbnailData#accept':
     get:
       operationId: DescribeInputDeviceThumbnail
@@ -6926,6 +6929,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: availabilityZone
+              description: The Availability Zone associated with this input device.
       description: Placeholder documentation for DescribeInputDeviceResponse
     DescribeInputDeviceThumbnailResponse:
       type: object
@@ -7962,6 +7971,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: availabilityZone
+              description: The Availability Zone associated with this input device.
       description: Placeholder documentation for UpdateInputDeviceResponse
     InputDeviceConfiguredInput:
       type: string
@@ -15047,6 +15062,12 @@ components:
             - xml:
                 name: tags
               description: A collection of key-value pairs.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: availabilityZone
+              description: The Availability Zone associated with this input device.
       description: Details of the input device.
     InputDeviceTransferType:
       type: string
@@ -18036,6 +18057,12 @@ components:
             - xml:
                 name: uhdDeviceSettings
               description: The settings that you want to apply to the UHD input device.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: availabilityZone
+              description: The Availability Zone you want associated with this input device.
       description: A request to update an input device.
     __listOfInputDeviceRequest:
       type: array
