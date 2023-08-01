@@ -451,6 +451,8 @@ paths:
           description: Clearbooks does not support setting the pagination size.
         - connector: freshbooks
           description: The Freshbooks Bills api is currently in beta.
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1004,6 +1006,8 @@ paths:
       x-apideck-gotchas:
         - connector: clearbooks-uk
           description: Clearbooks does not support setting the pagination size.
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1422,6 +1426,8 @@ paths:
         - Customers
       x-apideck-api: accounting
       x-apideck-gotchas:
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
         - connector: clearbooks-uk
           description: Clearbooks does not support setting the pagination size.
       x-codeSamples:
@@ -1901,6 +1907,9 @@ paths:
       tags:
         - Invoice Items
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2268,6 +2277,11 @@ paths:
       tags:
         - Invoices
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: clearbooks-uk
+          description: Clearbooks does not support setting the pagination size.
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2322,8 +2336,6 @@ paths:
         - Invoices
       x-apideck-api: accounting
       x-apideck-gotchas:
-        - connector: clearbooks-uk
-          description: Clearbooks does not support setting the pagination size.
         - connector: quickbooks
           description: Quickbooks offers limited (regional) support for applying discount on a Line Item. Including discount_percentage or discount_amount applies to entire invoice. The default type for a Line Item is a sales item if no type has been provided.
         - Procountor only accepts the following values for the channel field: EMAIL, MAIL, ELECTRONIC_INVOICE, EDIFACT, PAPER_INVOICE, NO_SENDING.
@@ -2475,6 +2487,11 @@ paths:
                   branch_identifier: '001',
                   bank_code: 'BNH',
                   currency: 'USD'
+                },
+                ledger_account: {
+                  id: '123456',
+                  nominal_code: 'N091',
+                  code: '453'
                 },
                 row_version: '1-12345'
               }
@@ -2778,6 +2795,11 @@ paths:
                   bank_code: 'BNH',
                   currency: 'USD'
                 },
+                ledger_account: {
+                  id: '123456',
+                  nominal_code: 'N091',
+                  code: '453'
+                },
                 row_version: '1-12345'
               }
             }
@@ -2822,6 +2844,9 @@ paths:
       tags:
         - Journal Entries
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -3210,6 +3235,8 @@ paths:
         - Ledger Accounts
       x-apideck-api: accounting
       x-apideck-gotchas:
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
         - connector: clearbooks-uk
           description: Clearbooks does not support setting the pagination size.
       x-codeSamples:
@@ -3570,6 +3597,8 @@ paths:
         - Payments
       x-apideck-api: accounting
       x-apideck-gotchas:
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
         - connector: kashflow
           description: Kashflow only allows to retrieve payments by invoice, so in order to use this endpoint the filter[invoice_number] parameter is required.
       x-codeSamples:
@@ -4020,6 +4049,9 @@ paths:
       tags:
         - Purchase Orders
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -4585,6 +4617,8 @@ paths:
           Procountor only accepts the following values for the payment_method field: BANK_TRANSFER, DIRECT_DEBIT, DIRECT_PAYMENT, CLEARING, CREDIT_CARD_CHARGE, FOREIGN_PAYMENT, OTHER, CASH, DOMESTIC_PAYMENT_PLUSGIRO, DOMESTIC_PAYMENT_BANKGIRO, DOMESTIC_PAYMENT_CREDITOR, DKLMPKRE, NETS.
           connector: procountor-fi
           description: ""
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -5048,6 +5082,9 @@ paths:
       tags:
         - Tax Rates
       x-apideck-api: accounting
+      x-apideck-gotchas:
+        - connector: netsuite
+          description: The minimun page size accepted for Netsuite is 5.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -6957,6 +6994,7 @@ components:
         parent_id:
           description: Parent ID
           example: "22345"
+          nullable: true
           readOnly: true
           type: string
         payee_number:
@@ -7983,6 +8021,7 @@ components:
         sub_total: critical
         tax_code: edge-case
         tax_inclusive: low
+        terms: low
         total_amount: critical
         total_tax: edge-case
         type: edge-case
@@ -10149,6 +10188,8 @@ components:
           type: boolean
         language:
           $ref: "#/components/schemas/Language"
+        ledger_account:
+          $ref: "#/components/schemas/LinkedLedgerAccount"
         line_items:
           items:
             $ref: "#/components/schemas/InvoiceLineItem"
@@ -10278,6 +10319,7 @@ components:
         invoice_date: edge-case
         invoice_sent: low
         language: low
+        ledger_account: edge-case
         line_items: critical
         number: high
         payment_method: low
@@ -11076,6 +11118,7 @@ components:
         display_id: medium
         display_name: medium
         id: medium
+        name: medium
     LinkedInvoiceItem:
       properties:
         code:

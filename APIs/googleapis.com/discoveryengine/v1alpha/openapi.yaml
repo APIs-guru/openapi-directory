@@ -1348,6 +1348,22 @@ components:
           description: The user's search query. See SearchRequest.query for definition. The value must be a UTF-8 encoded string with a length limit of 5,000 characters. Otherwise, an `INVALID_ARGUMENT` error is returned. At least one of search_query or PageInfo.page_category is required for `search` events. Other event types should not set this field. Otherwise, an `INVALID_ARGUMENT` error is returned.
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1alphaSiteVerificationInfo:
+      description: Verification information for target sites in advanced site search.
+      properties:
+        siteVerificationState:
+          description: Site verification state indicating the ownership and validity.
+          enum:
+            - SITE_VERIFICATION_STATE_UNSPECIFIED
+            - VERIFIED
+            - UNVERIFIED
+            - EXEMPTED
+          type: string
+        verifyTime:
+          description: Latest site verification time.
+          format: google-datetime
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1alphaTargetSite:
       description: A target site for the SiteSearchEngine.
       properties:
@@ -1365,6 +1381,10 @@ components:
         providedUriPattern:
           description: Required. Input only. The user provided URI pattern from which the `generated_uri_pattern` is generated.
           type: string
+        siteVerificationInfo:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSiteVerificationInfo"
+          description: Output only. Site ownership and validity verification status.
+          readOnly: true
         type:
           description: The type of the target site, e.g. whether the site is to be included or excluded.
           enum:

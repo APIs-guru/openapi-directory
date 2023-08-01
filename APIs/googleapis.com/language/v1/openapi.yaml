@@ -979,14 +979,14 @@ components:
           type: string
       type: object
     TextSpan:
-      description: Represents an output piece of text.
+      description: Represents a text span in the input document.
       properties:
         beginOffset:
           description: The API calculates the beginning offset of the content in the original document according to the EncodingType specified in the API request.
           format: int32
           type: integer
         content:
-          description: The content of the output text.
+          description: The content of the text span, which is a substring of the document.
           type: string
       type: object
     Token:

@@ -550,7 +550,7 @@ components:
             type: string
           type: array
         negate:
-          description: Whether to negate the Condition. If true, the Condition becomes a NAND over its non-empty fields, each field must be false for the Condition overall to be satisfied. Defaults to false.
+          description: Whether to negate the Condition. If true, the Condition becomes a NAND over its non-empty fields. Any non-empty field criteria evaluating to false will result in the Condition to be satisfied. Defaults to false.
           type: boolean
         regions:
           description: The request must originate from one of the provided countries/regions. Must be valid ISO 3166-1 alpha-2 codes.

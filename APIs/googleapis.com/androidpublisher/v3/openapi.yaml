@@ -3219,13 +3219,13 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The parent subscription (ID) for which the offers should be read.
+        - description: Required. The parent subscription (ID) for which the offers should be read. May be specified as '-' to read all offers under an app.
           in: path
           name: productId
           required: true
           schema:
             type: string
-        - description: Required. The parent base plan (ID) for which the offers should be read. May be specified as '-' to read all offers under a subscription.
+        - description: Required. The parent base plan (ID) for which the offers should be read. May be specified as '-' to read all offers under a subscription or an app. Must be specified as '-' if product_id is specified as '-'.
           in: path
           name: basePlanId
           required: true
