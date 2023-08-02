@@ -6670,6 +6670,45 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.GetScalingConfigurationRecommendation:
+    post:
+      operationId: GetScalingConfigurationRecommendation
+      description: Starts an Amazon SageMaker Inference Recommender autoscaling recommendation job. Returns recommendations for autoscaling policies that you can apply to your SageMaker endpoint.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetScalingConfigurationRecommendationResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetScalingConfigurationRecommendationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.GetScalingConfigurationRecommendation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.GetSearchSuggestions:
     post:
       operationId: GetSearchSuggestions
@@ -19680,6 +19719,63 @@ components:
       type: object
       title: GetSagemakerServicecatalogPortfolioStatusInput
       properties: {}
+    GetScalingConfigurationRecommendationResponse:
+      type: object
+      properties:
+        InferenceRecommendationsJobName:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationJobName'
+            - description: The name of a previously completed Inference Recommender job.
+        RecommendationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The recommendation ID of a previously completed inference recommendation.
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: The name of an endpoint benchmarked during a previously completed Inference Recommender job.
+        TargetCpuUtilizationPerCore:
+          allOf:
+            - $ref: '#/components/schemas/UtilizationPercentagePerCore'
+            - description: 'The percentage of how much utilization you want an instance to use before autoscaling, which you specified in the request. The default value is 50%.'
+        ScalingPolicyObjective:
+          allOf:
+            - $ref: '#/components/schemas/ScalingPolicyObjective'
+            - description: An object representing the anticipated traffic pattern for an endpoint that you specified in the request.
+        Metric:
+          allOf:
+            - $ref: '#/components/schemas/ScalingPolicyMetric'
+            - description: An object with a list of metrics that were benchmarked during the previously completed Inference Recommender job.
+        DynamicScalingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/DynamicScalingConfiguration'
+            - description: An object with the recommended values for you to specify when creating an autoscaling policy.
+    GetScalingConfigurationRecommendationRequest:
+      type: object
+      required:
+        - InferenceRecommendationsJobName
+      title: GetScalingConfigurationRecommendationRequest
+      properties:
+        InferenceRecommendationsJobName:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationJobName'
+            - description: The name of a previously completed Inference Recommender job.
+        RecommendationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p>The recommendation ID of a previously completed inference recommendation. This ID should come from one of the recommendations returned by the job specified in the <code>InferenceRecommendationsJobName</code> field.</p> <p>Specify either this field or the <code>EndpointName</code> field.</p>
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: <p>The name of an endpoint benchmarked during a previously completed inference recommendation job. This name should come from one of the recommendations returned by the job specified in the <code>InferenceRecommendationsJobName</code> field.</p> <p>Specify either this field or the <code>RecommendationId</code> field.</p>
+        TargetCpuUtilizationPerCore:
+          allOf:
+            - $ref: '#/components/schemas/UtilizationPercentagePerCore'
+            - description: The percentage of how much utilization you want an instance to use before autoscaling. The default value is 50%.
+        ScalingPolicyObjective:
+          allOf:
+            - $ref: '#/components/schemas/ScalingPolicyObjective'
+            - description: An object where you specify the anticipated traffic pattern for an endpoint.
     GetSearchSuggestionsResponse:
       type: object
       properties:
@@ -30855,6 +30951,30 @@ components:
       pattern: '^\([\p\{L\}\p\{Z\}\p\{N\}_.:\/=\+\-@]*\)$\{1,256\}'
       minLength: 1
       maxLength: 256
+    Statistic:
+      type: string
+      enum:
+        - Average
+        - Minimum
+        - Maximum
+        - SampleCount
+        - Sum
+    CustomizedMetricSpecification:
+      type: object
+      properties:
+        MetricName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the customized metric.
+        Namespace:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The namespace of the customized metric.
+        Statistic:
+          allOf:
+            - $ref: '#/components/schemas/Statistic'
+            - description: The statistic of the customized metric.
+      description: A customized metric.
     EnableCapture:
       type: boolean
     SamplingPercentage:
@@ -32990,6 +33110,9 @@ components:
             - $ref: '#/components/schemas/DomainSecurityGroupIds'
             - description: The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for communication between Domain-level apps and user apps.
       description: A collection of <code>Domain</code> configuration settings to update.
+    Double:
+      type: number
+      format: double
     DoubleParameterValue:
       type: number
       format: double
@@ -33063,6 +33186,34 @@ components:
             - $ref: '#/components/schemas/S3Uri'
             - description: The Amazon S3 URI for the file source.
       description: Contains details regarding the file source.
+    ScalingPolicies:
+      type: array
+      items:
+        $ref: '#/components/schemas/ScalingPolicy'
+    DynamicScalingConfiguration:
+      type: object
+      properties:
+        MinCapacity:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The recommended minimum capacity to specify for your autoscaling policy.
+        MaxCapacity:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The recommended maximum capacity to specify for your autoscaling policy.
+        ScaleInCooldown:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The recommended scale in cooldown time for your autoscaling policy.
+        ScaleOutCooldown:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The recommended scale out cooldown time for your autoscaling policy.
+        ScalingPolicies:
+          allOf:
+            - $ref: '#/components/schemas/ScalingPolicies'
+            - description: An object of the scaling policies for each metric.
+      description: An object with the recommended values for you to specify when creating an autoscaling policy.
     EMRStepMetadata:
       type: object
       properties:
@@ -34356,6 +34507,34 @@ components:
       enum:
         - Enabled
         - Disabled
+    UtilizationPercentagePerCore:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ScalingPolicyObjective:
+      type: object
+      properties:
+        MinInvocationsPerMinute:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The minimum number of expected requests to your endpoint per minute.
+        MaxInvocationsPerMinute:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of expected requests to your endpoint per minute.
+      description: An object where you specify the anticipated traffic pattern for an endpoint.
+    ScalingPolicyMetric:
+      type: object
+      properties:
+        InvocationsPerInstance:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'The number of invocations sent to a model, normalized by <code>InstanceCount</code> in each ProductionVariant. <code>1/numberOfInstances</code> is sent as the value on each request, where <code>numberOfInstances</code> is the number of active instances for the ProductionVariant behind the endpoint at the time of the request.'
+        ModelLatency:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The interval of time taken by a model to respond as viewed from SageMaker. This interval includes the local communication times taken to send the request and to fetch the response from the container of a model and the time taken to complete the inference in the container.
+      description: The metric for a scaling policy.
     ResourceType:
       type: string
       enum:
@@ -36540,6 +36719,26 @@ components:
             - $ref: '#/components/schemas/MetricRegex'
             - description: 'A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics-variables.html">Defining metrics and environment variables</a>.'
       description: 'Specifies a metric that the training algorithm writes to <code>stderr</code> or <code>stdout</code>. You can view these logs to understand how your training job performs and check for any errors encountered during training. SageMaker hyperparameter tuning captures all defined metrics. Specify one of the defined metrics to use as an objective metric using the <a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-TuningObjective">TuningObjective</a> parameter in the <code>HyperParameterTrainingJobDefinition</code> API to evaluate job performance during hyperparameter tuning.'
+    PredefinedMetricSpecification:
+      type: object
+      properties:
+        PredefinedMetricType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The metric type. You can only apply SageMaker metric types to SageMaker endpoints.
+      description: A specification for a predefined metric.
+    MetricSpecification:
+      type: object
+      properties:
+        Predefined:
+          allOf:
+            - $ref: '#/components/schemas/PredefinedMetricSpecification'
+            - description: Information about a predefined metric.
+        Customized:
+          allOf:
+            - $ref: '#/components/schemas/CustomizedMetricSpecification'
+            - description: Information about a customized metric.
+      description: An object containing information about a metric.
     Model:
       type: object
       properties:
@@ -39903,6 +40102,26 @@ components:
       enum:
         - S3Prefix
         - S3Object
+    ScalingPolicy:
+      type: object
+      properties:
+        TargetTracking:
+          allOf:
+            - $ref: '#/components/schemas/TargetTrackingScalingPolicyConfiguration'
+            - description: A target tracking scaling policy. Includes support for predefined or customized metrics.
+      description: An object containing a recommended scaling policy.
+    TargetTrackingScalingPolicyConfiguration:
+      type: object
+      properties:
+        MetricSpecification:
+          allOf:
+            - $ref: '#/components/schemas/MetricSpecification'
+            - description: An object containing information about a metric.
+        TargetValue:
+          allOf:
+            - $ref: '#/components/schemas/Double'
+            - description: The recommended target value to specify for the metric when creating a scaling policy.
+      description: '<p>A target tracking scaling policy. Includes support for predefined or customized metrics.</p> <p>When using the <a href="https://docs.aws.amazon.com/autoscaling/application/APIReference/API_PutScalingPolicy.html">PutScalingPolicy</a> API, this parameter is required when you are creating a policy with the policy type <code>TargetTrackingScaling</code>.</p>'
     ScheduleExpression:
       type: string
       minLength: 1

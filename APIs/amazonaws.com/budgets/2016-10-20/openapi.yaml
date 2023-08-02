@@ -2536,8 +2536,8 @@ components:
       maxLength: 36
     BudgetName:
       type: string
-      pattern: '[^:\\]+'
-      description: ' A string that represents the budget name. The ":" and "\" characters aren''t allowed.'
+      pattern: '^(?![^:\\]*/action/)[^:\\]+$'
+      description: ' A string that represents the budget name. The ":" and "\" characters, and the "/action/" substring, aren''t allowed.'
       minLength: 1
       maxLength: 100
     NotificationType:
@@ -2908,7 +2908,7 @@ components:
         BudgetName:
           allOf:
             - $ref: '#/components/schemas/BudgetName'
-            - description: 'The name of a budget. The name must be unique within an account. The <code>:</code> and <code>\</code> characters aren''t allowed in <code>BudgetName</code>.'
+            - description: 'The name of a budget. The name must be unique within an account. The <code>:</code> and <code>\</code> characters, and the "/action/" substring, aren''t allowed in <code>BudgetName</code>.'
         BudgetLimit:
           allOf:
             - $ref: '#/components/schemas/Spend'
