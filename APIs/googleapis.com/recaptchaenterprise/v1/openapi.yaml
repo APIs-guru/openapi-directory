@@ -988,7 +988,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1FraudPreventionAssessmentStolenInstrumentVerdict"
           description: Assessment of this transaction for risk of a stolen instrument.
         transactionRisk:
-          description: Probability (0-1) of this transaction being fraudulent. Summarizes the combined risk of attack vectors below.
+          description: Probability of this transaction being fraudulent. Summarizes the combined risk of attack vectors below. Values are from 0.0 (lowest) to 1.0 (highest).
           format: float
           type: number
       type: object
@@ -996,7 +996,7 @@ components:
       description: Information about behavioral trust of the transaction.
       properties:
         trust:
-          description: Probability (0-1) of this transaction attempt being executed in a behaviorally trustworthy way.
+          description: Probability of this transaction attempt being executed in a behaviorally trustworthy way. Values are from 0.0 (lowest) to 1.0 (highest).
           format: float
           type: number
       type: object
@@ -1004,7 +1004,7 @@ components:
       description: Information about card testing fraud, where an adversary is testing fraudulently obtained cards or brute forcing their details.
       properties:
         risk:
-          description: Probability (0-1) of this transaction attempt being part of a card testing attack.
+          description: Probability of this transaction attempt being part of a card testing attack. Values are from 0.0 (lowest) to 1.0 (highest).
           format: float
           type: number
       type: object
@@ -1012,7 +1012,7 @@ components:
       description: Information about stolen instrument fraud, where the user is not the legitimate owner of the instrument being used for the purchase.
       properties:
         risk:
-          description: Probability (0-1) of this transaction being executed with a stolen instrument.
+          description: Probability of this transaction being executed with a stolen instrument. Values are from 0.0 (lowest) to 1.0 (highest).
           format: float
           type: number
       type: object

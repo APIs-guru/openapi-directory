@@ -2345,7 +2345,7 @@ components:
     AcceptTermsOfServiceRequest:
       properties:
         acceptedBy:
-          description: The unique identifier of the user accepting the Terms of Service.
+          description: The individual legal entity ID of the user accepting the Terms of Service. This can also be the legal entity ID of the signatory for an organization.
           type: string
         ipAddress:
           description: The IP address of the user accepting the Terms of Service.
@@ -2785,8 +2785,6 @@ components:
       required:
         - type
         - description
-        - owner
-        - attachments
       type: object
     EntityReference:
       properties:

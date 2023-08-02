@@ -96,16 +96,21 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: ""
-      operationId: contactcenteraiplatform.projects.locations.contactCenters.updateAuthentication-config
+      description: Updates the parameters of a single ContactCenter.
+      operationId: contactcenteraiplatform.projects.locations.contactCenters.patch
       parameters:
-        - description: "Name of authentication config. Format: projects/{project}/locations/{location}/contactCenters/{contact_center}/authentication-config"
+        - description: name of resource
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. Indicates which fields in the provided authentication config to update. Must be specified and non-empty.
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Required. Field mask is used to specify the fields to be overwritten in the ContactCenter resource by the update. The fields specified in the update_mask are relative to the resource, not the full request. A field will be overwritten if it is in the mask. If the user does not provide a mask then all fields will be overwritten.
           in: query
           name: updateMask
           schema:
@@ -114,13 +119,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AuthenticationConfig"
+              $ref: "#/components/schemas/ContactCenter"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AuthenticationConfig"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -494,21 +499,6 @@ components:
           description: Optional. First/given name of the first admin user.
           type: string
       type: object
-    AuthenticationConfig:
-      properties:
-        basicAuthSetting:
-          $ref: "#/components/schemas/BasicAuthConfig"
-        name:
-          description: "Name of authentication config. Format: projects/{project}/locations/{location}/contactCenters/{contact_center}/authentication-config"
-          type: string
-        samlSetting:
-          $ref: "#/components/schemas/SamlConfig"
-      type: object
-    BasicAuthConfig:
-      properties:
-        enabled:
-          type: boolean
-      type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
@@ -560,6 +550,7 @@ components:
             - STATE_FAILED
             - STATE_TERMINATING_FAILED
             - STATE_TERMINATED
+            - STATE_IN_GRACE_PERIOD
           readOnly: true
           type: string
         updateTime:
@@ -811,21 +802,6 @@ components:
         userEmail:
           deprecated: true
           description: Email address of the first admin users.
-          type: string
-      type: object
-    SamlConfig:
-      properties:
-        cert:
-          description: X.509 public certificate for IdP
-          type: string
-        emailMapping:
-          description: IdP field that maps to the user’s email address
-          type: string
-        entityId:
-          description: "The entity ID for the identity provider. Example: https://[IDP Domain]/saml/metadata"
-          type: string
-        loginUri:
-          description: "The sso login url. Example: https://[IDP Domain]/saml/sso/login"
           type: string
       type: object
     Status:

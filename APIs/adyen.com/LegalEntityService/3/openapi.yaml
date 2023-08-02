@@ -2736,7 +2736,7 @@ components:
     AcceptTermsOfServiceRequest:
       properties:
         acceptedBy:
-          description: The unique identifier of the user accepting the Terms of Service.
+          description: The individual legal entity ID of the user accepting the Terms of Service. This can also be the legal entity ID of the signatory for an organization.
           type: string
         ipAddress:
           description: The IP address of the user accepting the Terms of Service.
@@ -3079,8 +3079,6 @@ components:
         webDataExemption:
           $ref: "#/components/schemas/WebDataExemption"
           description: The reason why the web data is not provided.
-      required:
-        - service
       type: object
     BusinessLines:
       properties:
@@ -3370,8 +3368,6 @@ components:
       required:
         - type
         - description
-        - owner
-        - attachments
       type: object
     DocumentPage:
       properties:

@@ -3503,6 +3503,9 @@ components:
         dailyExportEnabled:
           description: If set true, enables daily data export to the linked Google Cloud project.
           type: boolean
+        enterpriseExportEnabled:
+          description: If set true, enables enterprise export to the linked Google Cloud project.
+          type: boolean
         excludedEvents:
           description: The list of event names that will be excluded from exports.
           items:
@@ -3515,9 +3518,6 @@ components:
           type: array
         includeAdvertisingId:
           description: If set true, exported data will include advertising identifiers for mobile app streams.
-          type: boolean
-        intradayExportEnabled:
-          description: If set true, enables intraday export to the linked Google Cloud project.
           type: boolean
         name:
           description: "Output only. Resource name of this BigQuery link. Format: 'properties/{property_id}/bigQueryLinks/{bigquery_link_id}' Format: 'properties/1234/bigQueryLinks/abc567'"

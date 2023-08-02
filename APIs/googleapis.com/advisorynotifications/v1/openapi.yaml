@@ -306,6 +306,8 @@ components:
             - NOTIFICATION_TYPE_UNSPECIFIED
             - NOTIFICATION_TYPE_SECURITY_PRIVACY_ADVISORY
             - NOTIFICATION_TYPE_SENSITIVE_ACTIONS
+            - NOTIFICATION_TYPE_SECURITY_MSA
+            - NOTIFICATION_TYPE_THREAT_HORIZONS
           type: string
         subject:
           $ref: "#/components/schemas/GoogleCloudAdvisorynotificationsV1Subject"

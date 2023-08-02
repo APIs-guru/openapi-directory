@@ -114,6 +114,7 @@ tags:
   - name: securityPolicies
   - name: serviceAttachments
   - name: snapshots
+  - name: snapshotSettings
   - name: sslCertificates
   - name: sslPolicies
   - name: subnetworks
@@ -15563,6 +15564,95 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - securityPolicies
+  "/projects/{project}/global/snapshotSettings":
+    get:
+      description: Get snapshot settings.
+      operationId: compute.snapshotSettings.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotSettings"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - snapshotSettings
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    patch:
+      description: Patch snapshot settings.
+      operationId: compute.snapshotSettings.patch
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: update_mask indicates fields to be updated as part of this request.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnapshotSettings"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - snapshotSettings
   "/projects/{project}/global/snapshots":
     get:
       description: Retrieves the list of Snapshot resources contained within the specified project.
@@ -31097,6 +31187,69 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - routers
+  "/projects/{project}/regions/{region}/routers/{router}/getNatIpInfo":
+    get:
+      description: Retrieves runtime NAT IP information.
+      operationId: compute.routers.getNatIpInfo
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the Router resource to query for Nat IP information. The name should conform to RFC1035.
+          in: path
+          name: router
+          required: true
+          schema:
+            type: string
+        - description: Name of the nat service to filter the NAT IP information. If it is omitted, all nats for this router will be returned. Name should conform to RFC1035.
+          in: query
+          name: natName
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NatIpInfoResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - routers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
   "/projects/{project}/regions/{region}/routers/{router}/getNatMappingInfo":
     get:
       description: Retrieves runtime Nat mapping information of VM endpoints.
@@ -61516,6 +61669,45 @@ components:
           format: int32
           type: integer
       type: object
+    NatIpInfo:
+      description: Contains NAT IP information of a NAT config (i.e. usage status, mode).
+      properties:
+        natIpInfoMappings:
+          description: A list of all NAT IPs assigned to this NAT config.
+          items:
+            $ref: "#/components/schemas/NatIpInfoNatIpInfoMapping"
+          type: array
+        natName:
+          description: Name of the NAT config which the NAT IP belongs to.
+          type: string
+      type: object
+    NatIpInfoNatIpInfoMapping:
+      description: Contains information of a NAT IP.
+      properties:
+        mode:
+          description: Specifies whether NAT IP is auto or manual.
+          enum:
+            - AUTO
+            - MANUAL
+          type: string
+        natIp:
+          description: "NAT IP address. For example: 203.0.113.11."
+          type: string
+        usage:
+          description: Specifies whether NAT IP is currently serving at least one endpoint or not.
+          enum:
+            - IN_USE
+            - UNUSED
+          type: string
+      type: object
+    NatIpInfoResponse:
+      properties:
+        result:
+          description: "[Output Only] A list of NAT IP information."
+          items:
+            $ref: "#/components/schemas/NatIpInfo"
+          type: array
+      type: object
     Network:
       description: Represents a VPC Network resource. Networks connect resources to each other and to the internet. For more information, read Virtual Private Cloud (VPC) Network.
       properties:
@@ -64613,7 +64805,7 @@ components:
           type: object
       type: object
     Operation:
-      description: "Represents an Operation resource. Google Compute Engine has three Operation resources: * [Global](/compute/docs/reference/rest/beta/globalOperations) * [Regional](/compute/docs/reference/rest/beta/regionOperations) * [Zonal](/compute/docs/reference/rest/beta/zoneOperations) You can use an operation resource to manage asynchronous API requests. For more information, read Handling API responses. Operations can be global, regional or zonal. - For global operations, use the `globalOperations` resource. - For regional operations, use the `regionOperations` resource. - For zonal operations, use the `zonalOperations` resource. For more information, read Global, Regional, and Zonal Resources."
+      description: "Represents an Operation resource. Google Compute Engine has three Operation resources: * [Global](/compute/docs/reference/rest/beta/globalOperations) * [Regional](/compute/docs/reference/rest/beta/regionOperations) * [Zonal](/compute/docs/reference/rest/beta/zoneOperations) You can use an operation resource to manage asynchronous API requests. For more information, read Handling API responses. Operations can be global, regional or zonal. - For global operations, use the `globalOperations` resource. - For regional operations, use the `regionOperations` resource. - For zonal operations, use the `zoneOperations` resource. For more information, read Global, Regional, and Zonal Resources."
       properties:
         clientOperationId:
           description: "[Output Only] The value of `requestId` if you provided it in the request. Not present otherwise."
@@ -71982,6 +72174,35 @@ components:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
           type: object
+      type: object
+    SnapshotSettings:
+      properties:
+        storageLocation:
+          $ref: "#/components/schemas/SnapshotSettingsStorageLocationSettings"
+          description: Policy of which storage location is going to be resolved, and additional data that particularizes how the policy is going to be carried out.
+      type: object
+    SnapshotSettingsStorageLocationSettings:
+      properties:
+        locations:
+          additionalProperties:
+            $ref: "#/components/schemas/SnapshotSettingsStorageLocationSettingsStorageLocationPreference"
+          description: When the policy is SPECIFIC_LOCATIONS, snapshots will be stored in the locations listed in this field. Keys are GCS bucket locations.
+          type: object
+        policy:
+          description: The chosen location policy.
+          enum:
+            - LOCAL_REGION
+            - NEAREST_MULTI_REGION
+            - SPECIFIC_LOCATIONS
+            - STORAGE_LOCATION_POLICY_UNSPECIFIED
+          type: string
+      type: object
+    SnapshotSettingsStorageLocationSettingsStorageLocationPreference:
+      description: A structure for specifying storage locations.
+      properties:
+        name:
+          description: Name of the location. It should be one of the GCS buckets.
+          type: string
       type: object
     SourceDiskEncryptionKey:
       properties:

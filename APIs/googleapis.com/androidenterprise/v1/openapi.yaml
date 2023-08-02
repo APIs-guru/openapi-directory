@@ -2164,7 +2164,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs/{installId}":
     delete:
-      description: Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed.
+      description: Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed. A successful response indicates that a removal request has been sent to the device. The call will be considered successful even if the app is not present on the device (e.g. it was never installed, or was removed by the user).
       operationId: androidenterprise.installs.delete
       parameters:
         - description: The ID of the enterprise.

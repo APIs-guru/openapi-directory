@@ -93,6 +93,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaListLabelsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels.readonly
       tags:
         - labels
     parameters:
@@ -133,6 +150,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaLabel"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
   /v2beta/limits/label:
@@ -152,6 +178,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaLabelLimits"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels.readonly
       tags:
         - limits
     parameters:
@@ -194,6 +237,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleProtobufEmpty"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
     get:
@@ -231,6 +283,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaUserCapabilities"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels.readonly
       tags:
         - users
     parameters:
@@ -280,6 +349,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaDeltaUpdateLabelResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
   "/v2beta/{name}:disable":
@@ -317,6 +395,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaLabel"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
   "/v2beta/{name}:enable":
@@ -354,6 +441,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaLabel"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
   "/v2beta/{name}:publish":
@@ -391,6 +487,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaLabel"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
   "/v2beta/{name}:updateLabelCopyMode":
@@ -428,6 +533,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaLabel"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
   "/v2beta/{parent}/locks":
@@ -458,6 +572,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaListLabelLocksResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels.readonly
       tags:
         - labels
     parameters:
@@ -505,6 +636,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaListLabelPermissionsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels.readonly
       tags:
         - labels
     parameters:
@@ -546,6 +694,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaLabelPermission"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
     post:
@@ -575,6 +732,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaLabelPermission"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
   "/v2beta/{parent}/permissions:batchDelete":
@@ -612,6 +778,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleProtobufEmpty"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
   "/v2beta/{parent}/permissions:batchUpdate":
@@ -649,6 +824,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAppsDriveLabelsV2betaBatchUpdateLabelPermissionsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.admin.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.admin.labels
+        - Oauth2:
+            - https://www.googleapis.com/auth/drive.labels
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
 components:
@@ -2126,3 +2310,27 @@ components:
           format: int32
           type: integer
       type: object
+  securitySchemes:
+    Oauth2:
+      description: Oauth 2.0 implicit authentication
+      flows:
+        implicit:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/drive.admin.labels: See, edit, create, and delete all Google Drive labels in your organization, and see your organization's label-related admin policies
+            https://www.googleapis.com/auth/drive.admin.labels.readonly: See all Google Drive labels and label-related admin policies in your organization
+            https://www.googleapis.com/auth/drive.labels: See, edit, create, and delete your Google Drive labels
+            https://www.googleapis.com/auth/drive.labels.readonly: See your Google Drive labels
+      type: oauth2
+    Oauth2c:
+      description: Oauth 2.0 authorizationCode authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          scopes:
+            https://www.googleapis.com/auth/drive.admin.labels: See, edit, create, and delete all Google Drive labels in your organization, and see your organization's label-related admin policies
+            https://www.googleapis.com/auth/drive.admin.labels.readonly: See all Google Drive labels and label-related admin policies in your organization
+            https://www.googleapis.com/auth/drive.labels: See, edit, create, and delete your Google Drive labels
+            https://www.googleapis.com/auth/drive.labels.readonly: See your Google Drive labels
+          tokenUrl: https://accounts.google.com/o/oauth2/token
+      type: oauth2

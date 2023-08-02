@@ -2022,6 +2022,10 @@ paths:
                   nominal_code: 'N091',
                   code: '453'
                 },
+                tracking_category: {
+                  id: '123456',
+                  name: 'New York'
+                },
                 active: true,
                 row_version: '1-12345'
               }
@@ -2231,6 +2235,10 @@ paths:
                   nominal_code: 'N091',
                   code: '453'
                 },
+                tracking_category: {
+                  id: '123456',
+                  name: 'New York'
+                },
                 active: true,
                 row_version: '1-12345'
               }
@@ -2383,6 +2391,10 @@ paths:
                 balance: 27500,
                 deposit: 0,
                 customer_memo: 'Thank you for your business and have a great day!',
+                tracking_category: {
+                  id: '123456',
+                  name: 'New York'
+                },
                 line_items: [
                   {
                     row_id: '12345',
@@ -2690,6 +2702,10 @@ paths:
                 balance: 27500,
                 deposit: 0,
                 customer_memo: 'Thank you for your business and have a great day!',
+                tracking_category: {
+                  id: '123456',
+                  name: 'New York'
+                },
                 line_items: [
                   {
                     row_id: '12345',
@@ -10278,6 +10294,8 @@ components:
           nullable: true
           title: Total tax amount
           type: number
+        tracking_category:
+          $ref: "#/components/schemas/LinkedTrackingCategory"
         type:
           description: Invoice type
           enum:
@@ -10336,6 +10354,7 @@ components:
         terms: low
         total: critical
         total_tax: high
+        tracking_category: low
         type: high
         updated_at: high
         updated_by: low
@@ -10445,6 +10464,8 @@ components:
           nullable: true
           title: Item tracked
           type: boolean
+        tracking_category:
+          $ref: "#/components/schemas/LinkedTrackingCategory"
         type:
           description: Item type
           enum:
@@ -10484,6 +10505,7 @@ components:
         sold: edge-case
         taxable: edge-case
         tracked: edge-case
+        tracking_category: low
         type: high
         unit_price: high
         updated_at: medium
