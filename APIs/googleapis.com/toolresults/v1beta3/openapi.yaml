@@ -1743,6 +1743,10 @@ components:
           $ref: "#/components/schemas/Duration"
           description: The time from app start to the first displayed activity being drawn, as reported in Logcat. See https://developer.android.com/topic/performance/launch-time.html#time-initial
       type: object
+    AssetIssue:
+      description: There was an issue with the assets in this test.
+      properties: {}
+      type: object
     AvailableDeepLinks:
       description: A suggestion to use deep links for a Robo run.
       properties: {}
@@ -1958,7 +1962,7 @@ components:
           type: string
       type: object
     FailedToInstall:
-      description: Failed to install the APK.
+      description: Failed to install the App.
       properties: {}
       type: object
     FailureDetail:
@@ -3067,6 +3071,7 @@ components:
             - deviceOutOfMemory
             - logcatCollectionError
             - detectedAppSplashScreen
+            - assetIssue
           type: string
         warning:
           $ref: "#/components/schemas/Any"

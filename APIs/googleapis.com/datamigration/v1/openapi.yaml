@@ -3334,6 +3334,7 @@ components:
             - ERROR_RDBMS
             - SOURCE_SIZE_EXCEEDS_THRESHOLD
             - EXISTING_CONFLICTING_DATABASES
+            - PARALLEL_IMPORT_INSUFFICIENT_PRIVILEGE
           readOnly: true
           type: string
         errorDetailMessage:
@@ -3670,7 +3671,7 @@ components:
           type: string
       type: object
     PrivateServiceConnectConnectivity:
-      description: Private Service Connect connectivity (https://cloud.google.com/vpc/docs/private-service-connect#service-attachments)
+      description: "[Private Service Connect connectivity](https://cloud.google.com/vpc/docs/private-service-connect#service-attachments)"
       properties:
         serviceAttachment:
           description: "Required. A service attachment that exposes a database, and has the following format: projects/{project}/regions/{region}/serviceAttachments/{service_attachment_name}"
@@ -3682,7 +3683,10 @@ components:
       type: object
     RestartMigrationJobRequest:
       description: Request message for 'RestartMigrationJob' request.
-      properties: {}
+      properties:
+        skipValidation:
+          description: Optional. Restart the migration job without running prior configuration verification. Defaults to `false`.
+          type: boolean
       type: object
     ResumeMigrationJobRequest:
       description: Request message for 'ResumeMigrationJob' request.

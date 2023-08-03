@@ -482,9 +482,15 @@ components:
         alias:
           description: "Optional. Optional name of the property to store the result of the aggregation. If not provided, Datastore will pick a default name following the format `property_`. For example: ``` AGGREGATE COUNT_UP_TO(1) AS count_up_to_1, COUNT_UP_TO(2), COUNT_UP_TO(3) AS count_up_to_3, COUNT(*) OVER ( ... ); ``` becomes: ``` AGGREGATE COUNT_UP_TO(1) AS count_up_to_1, COUNT_UP_TO(2) AS property_1, COUNT_UP_TO(3) AS count_up_to_3, COUNT(*) AS property_2 OVER ( ... ); ``` Requires: * Must be unique across all aggregation aliases. * Conform to entity property name limitations."
           type: string
+        avg:
+          $ref: "#/components/schemas/Avg"
+          description: Average aggregator.
         count:
           $ref: "#/components/schemas/Count"
           description: Count aggregator.
+        sum:
+          $ref: "#/components/schemas/Sum"
+          description: Sum aggregator.
       type: object
     AggregationQuery:
       description: Datastore query for running an aggregation over a Query.
@@ -555,6 +561,13 @@ components:
           items:
             $ref: "#/components/schemas/Value"
           type: array
+      type: object
+    Avg:
+      description: Average of the values of the requested property. * Only numeric values will be aggregated. All non-numeric values including `NULL` are skipped. * If the aggregated values contain `NaN`, returns `NaN`. * If the aggregated value set is empty, returns `NULL`. * Always returns the result as a double.
+      properties:
+        property:
+          $ref: "#/components/schemas/PropertyReference"
+          description: The property to aggregate on.
       type: object
     BeginTransactionRequest:
       description: The request for Datastore.BeginTransaction.
@@ -1410,6 +1423,13 @@ components:
         query:
           $ref: "#/components/schemas/Query"
           description: The parsed form of the `GqlQuery` from the request, if it was set.
+      type: object
+    Sum:
+      description: Sum of the values of the requested property. * Only numeric values will be aggregated. All non-numeric values including `NULL` are skipped. * If the aggregated values contain `NaN`, returns `NaN`. * If the aggregated value set is empty, returns 0. * Returns a 64-bit integer if the sum result is an integer value and does not overflow. Otherwise, the result is returned as a double. Note that even if all the aggregated values are integers, the result is returned as a double if it cannot fit within a 64-bit signed integer. When this occurs, the returned value will lose precision. * When underflow occurs, floating-point aggregation is non-deterministic. This means that running the same query repeatedly without any changes to the underlying values could produce slightly different results each time. In those cases, values should be stored as integers over floating-point numbers.
+      properties:
+        property:
+          $ref: "#/components/schemas/PropertyReference"
+          description: The property to aggregate on.
       type: object
     TransactionOptions:
       description: Options for beginning a new transaction. Transactions can be created explicitly with calls to Datastore.BeginTransaction or implicitly by setting ReadOptions.new_transaction in read requests.

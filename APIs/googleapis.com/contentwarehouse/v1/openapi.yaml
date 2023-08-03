@@ -324,6 +324,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{name}:runPipeline":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Run a predefined pipeline.
+      operationId: contentwarehouse.projects.locations.runPipeline
+      parameters:
+        - description: "Required. The resource name which owns the resources of the pipeline. Format: projects/{project_number}/locations/{location}."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RunPipelineRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/documentLinks":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2600,6 +2642,7 @@ components:
             - MATTERSPACE_AFFINITY
             - TRUSTED_CONTACTS_OOBE_AFFINITY
             - REFERRALS_AFFINITY
+            - WAYMO_TRIAGE_TOOLING_AFFINITY
           type: string
           x-enumDeprecated:
             - false
@@ -2709,6 +2752,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -6918,6 +6962,7 @@ components:
               - THEATER_MODE
               - TOUCH_LOCK
               - ASSISTANT_PRESS_AND_HOLD
+              - WATCH_FACE
               - NOTIFICATION_ANNOUNCEMENT
             type: string
             x-enumDeprecated:
@@ -7210,6 +7255,7 @@ components:
               - false
               - false
               - true
+              - false
               - false
               - false
               - false
@@ -8190,6 +8236,7 @@ components:
             - PIXEL5
             - PIXEL6
             - PIXEL7
+            - PIXEL8
             - PIXEL_BUDS
             - PIXEL_TABLET
             - PIXEL_TABLET_HUB_MODE
@@ -8571,6 +8618,7 @@ components:
             - PIXEL5
             - PIXEL6
             - PIXEL7
+            - PIXEL8
             - PIXEL_BUDS
             - PIXEL_TABLET
             - PIXEL_TABLET_HUB_MODE
@@ -8801,11 +8849,18 @@ components:
           description: A time zone in IANA format.
       type: object
     AssistantApiDeviceCapabilities:
-      description: "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 35"
+      description: "This message describes roughly what a surface is capable of doing and metadata around those capabilities. These capabilities are determined based on: - device hardware - software - status (e.g. volume level, battery percentage) These capabilities refer to the surface and not the physical device. The list of supported surfaces can be found in the assistant.api.core_types.SurfaceType enum. A surface's capabilities can differ from the device's. An example would be ANDROID_ALLO running on Pixel. Allo does not support AudioInput while the Pixel does. In this case, audio_input will be set to false for Assistant Allo requests while it might be set to true for OPA_NEXUS requests. Next ID: 36"
       properties:
         androidIntentCapabilities:
           $ref: "#/components/schemas/AssistantApiAndroidIntentCapabilities"
           description: Capabilites related to Android intent support.
+        assistantCapability:
+          description: Capabilities if surface supports Google Assistant.
+          enum:
+            - UNKNOWN
+            - SUPPORTED
+            - UNSUPPORTED
+          type: string
         audioInput:
           $ref: "#/components/schemas/AssistantApiAudioInput"
           description: These capabilities are scoped to the ability to gather audio. It includes information like the type of audio that can be gathered (e.g. public, private).
@@ -11113,7 +11168,7 @@ components:
           type: integer
       type: object
     AssistantApiSupportedFeatures:
-      description: "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 66"
+      description: "These are the set of features that are supported by the device. It's a part of the SoftwareCapabilities of the device. Next ID: 67"
       properties:
         aaeNotificationSourceSupported:
           description: Whether the client supports the alternative message notification sources on AAE, in which case notification-related operations can access it.
@@ -11263,6 +11318,9 @@ components:
           type: boolean
         readMessagesTtsTaperingSupported:
           description: Whether the client supports tts tapering for the read messages flow. If set to true the tapered tts variant would be used during the read messages flow.
+          type: boolean
+        readNotificationSummarizationSupported:
+          description: Whether the client supports message summarization.
           type: boolean
         remoteCloudCastingEnabled:
           description: "Whether the client has remote casting enabled. For ex: we want to disable this for clients like Auto."
@@ -12381,7 +12439,7 @@ components:
           description: The set of information that helps identify the surface.
       type: object
     AssistantGroundingRankerDeviceTargetingFeatures:
-      description: Features generated by Device Targeting library (Lumos). See go/hgr-lumos-integration and go/lumos-feature-extraction for more details.
+      description: "Features generated by Device Targeting library (Lumos). See go/hgr-lumos-integration and go/lumos-feature-extraction for more details. Next ID: 3"
       properties:
         properties:
           $ref: "#/components/schemas/AssistantGroundingRankerDeviceTargetingFeaturesProperties"
@@ -12389,7 +12447,7 @@ components:
           $ref: "#/components/schemas/AssistantGroundingRankerDeviceTargetingFeaturesStates"
       type: object
     AssistantGroundingRankerDeviceTargetingFeaturesProperties:
-      description: The properties of the device. They are static and won't change.
+      description: "The properties of the device. They are static and won't change. Next ID: 4"
       properties:
         deviceModelId:
           description: The model ID of the device. This should be globally unique across manufacturers/OEMs.
@@ -12397,9 +12455,71 @@ components:
         isOwnedBySpeaker:
           description: Indicate whether the device is owned by the user who is speaking.
           type: boolean
+        surfaceType:
+          description: Assistant surface type (ontology).
+          enum:
+            - UNKNOWN_TYPE
+            - ACCL
+            - AGSA
+            - ANDROID
+            - ANDROID_AUTO
+            - ANDROID_LITE
+            - ANDROID_PHONE
+            - ANDROID_SCREENLESS
+            - ANDROID_SMART_DISPLAY
+            - ANDROID_TABLET
+            - ANDROID_THINGS
+            - ANDROID_THINGS_CUBE
+            - ANDROID_THINGS_JASPER
+            - ANDROID_TV
+            - ANDROID_WEAR
+            - ASSISTANT_KIT
+            - ASSISTANT_SDK
+            - AUTO
+            - CAST_OS
+            - CHROME_OS
+            - CHROMECAST_MANHATTAN
+            - CLOUD_DEVICE
+            - CROS
+            - FITBIT_OS_WATCH
+            - FITBIT_OS_WATCH_ANDROID
+            - FITBIT_OS_WATCH_IOS
+            - GOOGLE_HOME
+            - HEADPHONE
+            - HEADPHONE_ANDROID
+            - HEADPHONE_IOS
+            - IOPA
+            - IOS
+            - IOS_SCREENLESS
+            - IPAD
+            - IPHONE
+            - KAI_OS
+            - KAI_OS_AMA
+            - LIBASSISTANT
+            - PHONE
+            - PIXEL
+            - PIXEL5
+            - PIXEL6
+            - PIXEL7
+            - PIXEL8
+            - PIXEL_BUDS
+            - PIXEL_TABLET
+            - PIXEL_TABLET_HUB_MODE
+            - PIXEL_TABLET_PERSONAL_MODE
+            - PIXEL_WATCH
+            - SCREENLESS
+            - SMART_DISPLAY
+            - SPEAKER
+            - TABLET
+            - TELEPHONE
+            - THING
+            - WATCH
+            - WEAR_OS
+            - WEAR_OS_WATCH
+          type: string
       type: object
     AssistantGroundingRankerDeviceTargetingFeaturesStates:
-      description: The states of the device. They are dynamic and may change based on the current context.
+      description: "The states of the device. They are dynamic and may change based on the current context. Next ID: 5"
       properties:
         distance:
           description: The distance of the device relative to others that hear the user's OKG. Timestamp of when the device was last used. Should correspond to when the AssistantRequestParams (in ASSISTANT_SNAPSHOT corpus) were last written for this device.
@@ -12420,7 +12540,7 @@ components:
           type: boolean
       type: object
     AssistantGroundingRankerDeviceTargetingLabels:
-      description: Labels tagged by Device Targeting library (Lumos). See go/hgr-lumos-integration and go/lumos-feature-extraction for more details.
+      description: "Labels tagged by Device Targeting library (Lumos). See go/hgr-lumos-integration and go/lumos-feature-extraction for more details. Next ID: 2"
       properties:
         isSelectedByLumos:
           description: Indicate whether the device is selected by Lumos as the target device.
@@ -12649,6 +12769,7 @@ components:
             - SPORTS_EVENT
             - TV_CHANNEL
             - VIDEO
+            - VIDEO_RECOMMENDED_PLAYLIST
             - YOUTUBE_CHANNEL
             - YOUTUBE_VIDEO_PLAYLIST
             - TV_SHOW
@@ -13280,6 +13401,7 @@ components:
             - SPORTS_EVENT
             - TV_CHANNEL
             - VIDEO
+            - VIDEO_RECOMMENDED_PLAYLIST
             - YOUTUBE_CHANNEL
             - YOUTUBE_VIDEO_PLAYLIST
             - TV_SHOW
@@ -13440,7 +13562,7 @@ components:
           type: string
         lowConfidenceTargetDevice:
           $ref: "#/components/schemas/AssistantLogsLowConfidenceTargetDeviceLog"
-          description: "////////////////////////////////////////////////////////////////////////// Ambiguous Results: the library failed to select the final target device(s) but it narrows down to a set of devices which are all valid target device candidates. The client needs to do further disambiguation, e.g., giving a dialog or having costomized logic. The low confidence target device means the library falied to select the target device but it picked two devices for the client to do disambiguation."
+          description: "////////////////////////////////////////////////////////////////////////// Ambiguous Results: the library failed to select the final target device(s) but it narrows down to a set of devices which are all valid target device candidates. The client needs to do further disambiguation, e.g., giving a dialog or having customized logic. The low confidence target device means the library falied to select the target device but it picked two devices for the client to do disambiguation."
         mediaFocusSelectionErrorType:
           description: ////////////////////////////////////////////////////////////////////////// This field log the error while selecting target device in media_focus_selector.
           enum:
@@ -13846,6 +13968,7 @@ components:
             - SINGLE_NEARBY_DEVICE
             - PERSONAL_RESPONSE_BIT_OPTOUT_ON_LOCKED_PHONE
             - FURTHER_LOCAL_DEVICE
+            - RESULT_FROM_DEFAULT_MEDIA_OUTPUT_PROMOTER
           type: string
         resultConfidenceLevel:
           enum:
@@ -14065,6 +14188,19 @@ components:
             - QU_PHASE_ANALYZER_INPUT
             - QU_PHASE_NAGE
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - false
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
         pq2tVsAssistantIbstCosine:
           description: Cosine similarity between predicted query-to-term model and assistant intent-type-based salient terms. This is intended to be only used for ACE ranking and only populated for assistant traffic.
           format: double
@@ -14083,20 +14219,17 @@ components:
             - RANKER_NAME_UNSPECIFIED
             - RANKER_NAME_PREFULFILLMENT_RANKER
             - RANKER_NAME_GROUNDING_RANKER
-            - RANKER_NAME_TEST_PFR_DUMMY
             - RANKER_NAME_DEFER_TO_VERTICAL_SCORES
             - RANKER_NAME_GROUNDING_RANKER_V2
             - RANKER_NAME_GROUNDING_RANKER_MEDIA_EXP
             - RANKER_NAME_GROUNDING_RANKER_COMMS_EXP
             - RANKER_NAME_CONSOLIDATED_PFR_HGR
-            - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2
-            - RANKER_NAME_GROUNDING_RANKER_COMMS_EXP_CALIBRATED
             - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED
             - RANKER_NAME_EXPERIMENTAL_PFR_SAGE_NEW_DOMAINS
-            - RANKER_NAME_BUCKETED_PARSING_SCORE_FOR_SMARTHOME
             - RANKER_NAME_CONSOLIDATED_PFR_HGR_V2_COMMS_CALIBRATED_V2
             - RANKER_NAME_GROUNDING_RANKER_COMMS_EXP_CALIBRATED_V2
             - RANKER_NAME_CONSOLIDATED_PFR_HGR_PODCAST
+            - RANKER_NAME_GROUNDING_RANKER_V4
           type: string
         searchDispatch:
           description: The determination made by the SearchDispatchingConfig as to whether and how this interpretation should be dispatched to Search.
@@ -15050,6 +15183,7 @@ components:
             - GET_HUMAN
             - CHECK_INSURANCE_ACCEPTANCE
             - FREE_TEXT
+            - SMART_NOTES
           type: string
           x-enumDeprecated:
             - false
@@ -15095,6 +15229,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -20655,6 +20790,7 @@ components:
           type: integer
       type: object
     GeostoreBoundingMarkerProto:
+      description: "NOTE: BoundingMarkerProto could be compared against one another by canonicalizing them via GetCanonicalBoundingMarker() in google3/geostore/base/internal/lane.cc. Any fields that don't contribute to the definition of a bounding marker in the real world should be bundled with the annotative fields near the bottom and excluded in GetCanonicalBoundingMarker(). LINT.IfChange"
       properties:
         boundingMarker:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
@@ -21780,6 +21916,7 @@ components:
             - PROVIDER_ZEST
             - PROVIDER_EZVOLT
             - PROVIDER_JOLT
+            - PROVIDER_CHARGESMITH
           type: string
           x-enumDeprecated:
             - false
@@ -22489,6 +22626,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -25788,6 +25926,7 @@ components:
             - PROVIDER_ZEST
             - PROVIDER_EZVOLT
             - PROVIDER_JOLT
+            - PROVIDER_CHARGESMITH
           type: string
           x-enumDeprecated:
             - false
@@ -26497,6 +26636,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -27718,6 +27858,7 @@ components:
             - PROVIDER_ZEST
             - PROVIDER_EZVOLT
             - PROVIDER_JOLT
+            - PROVIDER_CHARGESMITH
           type: string
           x-enumDeprecated:
             - false
@@ -28436,6 +28577,7 @@ components:
             - false
             - false
             - false
+            - false
         sourceDataset:
           deprecated: true
           type: string
@@ -28651,7 +28793,7 @@ components:
           type: number
       type: object
     GeostorePhysicalLineProto:
-      description: Describes a single physical marker line.
+      description: "Describes a single physical marker line. NOTE: PhysicalLineProto could be compared against one another by canonicalizing them via GetCanonicalPhysicalLine() in google3/geostore/base/internal/lane_marker.cc. Any fields that don't contribute to the definition of a physical line in the real world should be bundled with the annotative fields near the bottom and excluded in GetCanonicalPhysicalLine(). LINT.IfChange"
       properties:
         dashLengthMeters:
           description: Applicable for DASHED and DOTTED_DASHED lines.
@@ -29810,6 +29952,7 @@ components:
             - PROVIDER_ZEST
             - PROVIDER_EZVOLT
             - PROVIDER_JOLT
+            - PROVIDER_CHARGESMITH
           type: string
           x-enumDeprecated:
             - false
@@ -30519,6 +30662,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -30913,7 +31057,7 @@ components:
           type: array
       type: object
     GeostoreRestrictionProto:
-      description: "A restriction is an expression that limits when an action can be taken. Each restriction has a set of conditions. If all of the conditions are true, then the restriction applies and the action cannot be taken. For example, the restriction \"no turns 3-5pm except buses\" would have two conditions: \"time is 3-5pm\" and \"vehicle is not a bus\". If both of these conditions apply, the restriction is true, and the turn is prohibited. Multiple restrictions may apply to the same action. Clients handle this by always declaring RestrictionProto as a \"repeated\" element. The semantics of having multiple restrictions are that if any restriction applies, then the action cannot be taken. In other words, restrictions are OR-ed together. Putting all of this together, a set of RestrictionProtos can be interpreted as an bool expression in disjunctive normal form: (A and B) or (D and E and F) or (G and H) The action is prohibited if this expression is true. Note that a restriction with no conditions is always true, i.e. its action is always prohibited. NOTE: RestrictionProtos are often compared against one another (e.g. to check for duplicate/redundant restrictions) by canonicalizing them via GetCanonicalRestriction() in //geostore/base/public/restriction.cc. Any fields that don't contribute to the definition of a restriction in the real world should be bundled with the annotative fields near the bottom and excluded in GetCanonicalRestriction(). LINT.IfChange"
+      description: "A restriction is an expression that limits when an action can be taken. Each restriction has a set of conditions. If all of the conditions are true, then the restriction applies and the action cannot be taken. For example, the restriction \"no turns 3-5pm except buses\" would have two conditions: \"time is 3-5pm\" and \"vehicle is not a bus\". If both of these conditions apply, the restriction is true, and the turn is prohibited. Multiple restrictions may apply to the same action. Clients handle this by always declaring RestrictionProto as a \"repeated\" element. The semantics of having multiple restrictions are that if any restriction applies, then the action cannot be taken. In other words, restrictions are OR-ed together. Putting all of this together, a set of RestrictionProtos can be interpreted as an bool expression in disjunctive normal form: (A and B) or (D and E and F) or (G and H) The action is prohibited if this expression is true. Note that a restriction with no conditions is always true, i.e. its action is always prohibited. NOTE: RestrictionProtos are often compared against one another (e.g. to check for duplicate/redundant restrictions) by canonicalizing them via GetCanonicalRestriction() in google3/geostore/base/internal/restriction.cc. Any fields that don't contribute to the definition of a restriction in the real world should be bundled with the annotative fields near the bottom and excluded in GetCanonicalRestriction(). LINT.IfChange"
       properties:
         autonomousDrivingProducts:
           description: "The restriction only applies in these specific autonomous driving product scenarios. NOTE: This should only be set on restrictions with TRAVEL_AUTONOMOUS_VEHICLE travel mode."
@@ -33796,6 +33940,7 @@ components:
               - THEATER_MODE
               - TOUCH_LOCK
               - ASSISTANT_PRESS_AND_HOLD
+              - WATCH_FACE
               - NOTIFICATION_ANNOUNCEMENT
             type: string
             x-enumDeprecated:
@@ -34123,6 +34268,7 @@ components:
               - false
               - false
               - false
+              - false
           type: array
       type: object
     GoogleAssistantAccessoryV1ResponseConfig:
@@ -34403,6 +34549,7 @@ components:
             - PIXEL5
             - PIXEL6
             - PIXEL7
+            - PIXEL8
             - PIXEL_BUDS
             - PIXEL_TABLET
             - PIXEL_TABLET_HUB_MODE
@@ -34713,6 +34860,10 @@ components:
           description: Raw document content.
           format: byte
           type: string
+        legalHold:
+          description: Output only. Indicates if the document has a legal hold on it.
+          readOnly: true
+          type: boolean
         name:
           description: "The resource name of the document. Format: projects/{project_number}/locations/{location}/documents/{document_id}. The name is ignored when creating a document."
           type: string
@@ -34941,6 +35092,25 @@ components:
           description: String value of the enum field. This must match defined set of enums in document schema using EnumTypeOptions.
           type: string
       type: object
+    GoogleCloudContentwarehouseV1ExportToCdwPipeline:
+      description: The configuration of exporting documents from the Document Warehouse to CDW pipeline.
+      properties:
+        docAiDataset:
+          description: "Optional. The CDW dataset resource name. This field is optional. If not set, the documents will be exported to Cloud Storage only. Format: projects/{project}/locations/{location}/processors/{processor}/dataset"
+          type: string
+        documents:
+          description: "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}."
+          items:
+            type: string
+          type: array
+        exportFolderPath:
+          description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: `gs:///`."
+          type: string
+        trainingSplitRatio:
+          description: Ratio of training dataset split. When importing into Document AI Workbench, documents will be automatically split into training and test split category with the specified ratio. This field is required if doc_ai_dataset is set.
+          format: float
+          type: number
+      type: object
     GoogleCloudContentwarehouseV1FetchAclRequest:
       description: Request message for DocumentService.FetchAcl
       properties:
@@ -34986,6 +35156,49 @@ components:
     GoogleCloudContentwarehouseV1FloatTypeOptions:
       description: Configurations for a float property.
       properties: {}
+      type: object
+    GoogleCloudContentwarehouseV1GcsIngestPipeline:
+      description: The configuration of the Cloud Storage Ingestion pipeline.
+      properties:
+        inputPath:
+          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: `gs:///`."
+          type: string
+        pipelineConfig:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1IngestPipelineConfig"
+          description: Optional. The config for the Cloud Storage Ingestion pipeline. It provides additional customization options to run the pipeline and can be skipped if it is not applicable.
+        processorType:
+          description: The Doc AI processor type name. Only used when the format of ingested files is Doc AI Document proto format.
+          type: string
+        schemaName:
+          description: "The Document Warehouse schema resource name. All documents processed by this pipeline will use this schema. Format: projects/{project_number}/locations/{location}/documentSchemas/{document_schema_id}."
+          type: string
+        skipIngestedDocuments:
+          description: The flag whether to skip ingested documents. If it is set to true, documents in Cloud Storage contains key "status" with value "status=ingested" in custom metadata will be skipped to ingest.
+          type: boolean
+      type: object
+    GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline:
+      description: The configuration of the Cloud Storage Ingestion with DocAI Processors pipeline.
+      properties:
+        extractProcessorInfos:
+          description: The extract processors information. One matched extract processor will be used to process documents based on the classify processor result. If no classify processor is specified, the first extract processor will be used.
+          items:
+            $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          type: array
+        inputPath:
+          description: "The input Cloud Storage folder. All files under this folder will be imported to Document Warehouse. Format: `gs:///`."
+          type: string
+        pipelineConfig:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1IngestPipelineConfig"
+          description: Optional. The config for the Cloud Storage Ingestion with DocAI Processors pipeline. It provides additional customization options to run the pipeline and can be skipped if it is not applicable.
+        processorResultsFolderPath:
+          description: "The Cloud Storage folder path used to store the raw results from processors. Format: `gs:///`."
+          type: string
+        skipIngestedDocuments:
+          description: The flag whether to skip ingested documents. If it is set to true, documents in Cloud Storage contains key "status" with value "status=ingested" in custom metadata will be skipped to ingest.
+          type: boolean
+        splitClassifyProcessorInfo:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The split and classify processor information. The split and classify result will be used to find a matched extract processor.
       type: object
     GoogleCloudContentwarehouseV1GetDocumentRequest:
       description: Request message for DocumentService.GetDocument.
@@ -35037,6 +35250,19 @@ components:
           type: object
         histogramQuery:
           description: Requested histogram expression.
+          type: string
+      type: object
+    GoogleCloudContentwarehouseV1IngestPipelineConfig:
+      description: The ingestion pipeline config.
+      properties:
+        documentAclPolicy:
+          $ref: "#/components/schemas/GoogleIamV1Policy"
+          description: "The document level acl policy config. This refers to an Identity and Access (IAM) policy, which specifies access controls for all documents ingested by the pipeline. The role and members under the policy needs to be specified. The following roles are supported for document level acl control: * roles/contentwarehouse.documentAdmin * roles/contentwarehouse.documentEditor * roles/contentwarehouse.documentViewer The following members are supported for document level acl control: * user:user-email@example.com * group:group-email@example.com Note that for documents searched with LLM, only single level user or group acl check is supported."
+        enableDocumentTextExtraction:
+          description: The document text extraction enabled flag. If the flag is set to true, DWH will perform text extraction on the raw document.
+          type: boolean
+        folder:
+          description: Optional. The name of the folder to which all ingested documents will be linked during ingestion process. Format is `projects/{project}/locations/{location}/documents/{folder_id}`
           type: string
       type: object
     GoogleCloudContentwarehouseV1InitializeProjectRequest:
@@ -35225,6 +35451,24 @@ components:
         replaceRepeatedFields:
           description: When merging repeated fields, the default behavior is to append entries from the source repeated field to the destination repeated field. If you instead want to keep only the entries from the source repeated field, set this flag to true. If you want to replace a repeated field within a message field on the destination message, you must set both replace_repeated_fields and replace_message_fields to true, otherwise the repeated fields will be appended.
           type: boolean
+      type: object
+    GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline:
+      description: The configuration of processing documents in Document Warehouse with DocAi processors pipeline.
+      properties:
+        documents:
+          description: "The list of all the resource names of the documents to be processed. Format: projects/{project_number}/locations/{location}/documents/{document_id}."
+          items:
+            type: string
+          type: array
+        exportFolderPath:
+          description: "The Cloud Storage folder path used to store the exported documents before being sent to CDW. Format: `gs:///`."
+          type: string
+        processorInfo:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
+          description: The CDW processor information.
+        processorResultsFolderPath:
+          description: "The Cloud Storage folder path used to store the raw results from processors. Format: `gs:///`."
+          type: string
       type: object
     GoogleCloudContentwarehouseV1ProcessorInfo:
       description: The DocAI processor information.
@@ -35634,6 +35878,25 @@ components:
         processorInfo:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessorInfo"
           description: The DocAI processor to process the documents with.
+      type: object
+    GoogleCloudContentwarehouseV1RunPipelineRequest:
+      description: Request message for DocumentService.RunPipeline.
+      properties:
+        exportCdwPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ExportToCdwPipeline"
+          description: Export docuemnts from Document Warehouse to CDW for training purpose.
+        gcsIngestPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestPipeline"
+          description: Cloud Storage ingestion pipeline.
+        gcsIngestWithDocAiProcessorsPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1GcsIngestWithDocAiProcessorsPipeline"
+          description: Use DocAI processors to process documents in Cloud Storage and ingest them to Document Warehouse.
+        processWithDocAiPipeline:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1ProcessWithDocAiPipeline"
+          description: Use a DocAI processor to process documents in Document Warehouse, and re-ingest the updated results into Document Warehouse.
+        requestMetadata:
+          $ref: "#/components/schemas/GoogleCloudContentwarehouseV1RequestMetadata"
+          description: The meta information collected about the end user, used to enforce access control for the service.
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsRequest:
       description: Request message for DocumentService.SearchDocuments.
@@ -37226,6 +37489,7 @@ components:
             - SUPPORT_CASES_ID
             - FITBIT_P11_ID
             - SHORT_PHONE_NUMBER
+            - EXTERNAL_ID
           type: string
       type: object
     GoogleInternalCommunicationsInstantmessagingV1LocationHint:
@@ -40305,7 +40569,7 @@ components:
           type: array
       type: object
     ImageRepositoryContentBasedVideoMetadata:
-      description: "Next Tag: 49"
+      description: "Next Tag: 51"
       properties:
         amarnaDocid:
           description: A hash of the video bytes used as a key to Amarna's video_metadata table.
@@ -40327,6 +40591,9 @@ components:
         golden7SoapboxSummary:
           $ref: "#/components/schemas/DrishtiFeatureSetData"
           description: Golden7 video-level people features. (go/ypf-video-features)
+        golden7SoapboxTracksBlobInfo:
+          $ref: "#/components/schemas/ImageRepositoryAmarnaSignalsBlobInfo"
+          description: Information on frame-level people feature blob. (go/vpf-frame-features)
         inlinePlayback:
           $ref: "#/components/schemas/VideoCrawlVideoInlinePlaybackMetadata"
           description: Metadata related to Inline playback on the Interest Feed. This field is filled by Hamilton.
@@ -40345,6 +40612,9 @@ components:
         mediaInfo:
           $ref: "#/components/schemas/VideoMediaInfo"
           description: Information about the media file, such as duration, resolution, and detail about each audio/video stream. Note that it contains no PII.
+        multiThumbnailsFramePerdocs:
+          $ref: "#/components/schemas/ImageRepositoryFramePerdocs"
+          description: multi_thumbnails_frame_perdocs contains perdocs(go/vss-signals#perdoc) for all frame thumbnails generated by multiple frames per minutes. See more details in go/multiple-thumbnails-per-minutes.
         representativeFrameData:
           $ref: "#/components/schemas/ImageData"
         s3Asr:
@@ -41031,6 +41301,14 @@ components:
           description: This score correlates with potential child abuse. Google confidential!
           format: double
           type: number
+        csamA1Score:
+          description: Experimental score. Do not use. Google confidential!
+          format: float
+          type: number
+        csamAgeIndeterminateScore:
+          description: Experimental score. Do not use. Google confidential!
+          format: float
+          type: number
         iuInappropriateScore:
           description: "This field contains the probability that an image is inappropriate for Images Universal, according to this policy: go/iupolicy."
           format: float
@@ -41046,6 +41324,10 @@ components:
           type: number
         racyScore:
           description: This score is related to an image being sexually suggestive.
+          format: float
+          type: number
+        semanticSexualizationScore:
+          description: This score is related to racy/sexual images where scores have semantic meaning from 0 to 1.
           format: float
           type: number
         spoofScore:
@@ -42156,7 +42438,7 @@ components:
           $ref: "#/components/schemas/Proto2BridgeMessageSet"
       type: object
     IndexingDocjoinerDataVersion:
-      description: 'DataVersion tracks the version of data in CompositeDoc. The notion of "data" here is loose and people can define the name of their own. For example, a signal generated by Index Signals or an annotation generated by Goldmine (and other components) can all be considered as data here. Each field in this proto represents the human readable version string and the timestamp of one particular data. We choose to explicitly list out all of the data here for better understanding about which data are tracked. NOTE that human_readable_version is not intended for comparison, use timestamp_micros. In addition, we have an annotation about the field paths of each data. With proto reflection (using google3/net/proto2/util/public/field_path.h), downstream systems can take advantage of this annotation to automatically handle newly introduced data without modifying their code. Please also see the comment of FieldProjector above. There are also some fields in DataInfo that annotate who generates the data, the Index Signals or Goldmine annotator name. Next ID: 537'
+      description: 'DataVersion tracks the version of data in CompositeDoc. The notion of "data" here is loose and people can define the name of their own. For example, a signal generated by Index Signals or an annotation generated by Goldmine (and other components) can all be considered as data here. Each field in this proto represents the human readable version string and the timestamp of one particular data. We choose to explicitly list out all of the data here for better understanding about which data are tracked. NOTE that human_readable_version is not intended for comparison, use timestamp_micros. In addition, we have an annotation about the field paths of each data. With proto reflection (using google3/net/proto2/util/public/field_path.h), downstream systems can take advantage of this annotation to automatically handle newly introduced data without modifying their code. Please also see the comment of FieldProjector above. There are also some fields in DataInfo that annotate who generates the data, the Index Signals or Goldmine annotator name. Next ID: 538'
       properties:
         acceleratedShoppingSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
@@ -42294,6 +42576,9 @@ components:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         imageStockStockImageAnnotation:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+        imageembed:
+          $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
+          description: END DATA FIELDS
         indexingAnnotationsAnnotationMeta:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         indexingAnnotationsAppMarketAppMarketAnnotation:
@@ -43159,7 +43444,6 @@ components:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         ucpSignal:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
-          description: END DATA FIELDS
         udrConverterDocumentShoppingData:
           $ref: "#/components/schemas/IndexingDocjoinerDataVersionVersionInfo"
         udrConverterOffer:
@@ -46456,10 +46740,6 @@ components:
           description: This is a cross-intent feature which is calculated by iterating all intent candidates. This feature should be populated in post-IG stage (before GB).
           format: float
           type: number
-        qrewriteCallPathInfo:
-          $ref: "#/components/schemas/NlpLoggingQRewriteClientCallPathInfo"
-          deprecated: true
-          description: This proto holds the complete call path info of the QRewrite client (e.g. the QUS's phase like "RBT","QBT"; the QUS's candidate type like "Identity"; and the ACE's candidate type like "FuzzyMatcher").
         qrewriteCallPathInfoFingerprint:
           description: This proto holds the fingerprint of the call path info of QRewrite client (e.g. the QUS's phase like "RBT","QBT"; the QUS's candidate type like "Identity"; and the ACE's candidate type like "FuzzyMatcher").
           format: uint64
@@ -46930,6 +47210,7 @@ components:
       properties: {}
       type: object
     KnowledgeAnswersOpaqueLocationType:
+      description: A LocationType configures a value whose type is a Location message, for example, the output of the Location subgrammar. Note that this location type is not the same as a "location entity" (an entity with a location indicating type/collection, which is annotated by QRef). The scope of a LocationType is usually broader than a location entity, it may represent - businesses, places, and POIs (location entities from QRef) - addresses ("123 Main St., New York, NY") or even just coordinates (latitude, longitude) - business categories (e.g., "pharmacies" or "gas stations") - SAFT locations - aliases (including "home" and "work") - contacts - combinations of a location with modifiers and constraints (e.g., "chinese restaurant near me" or "cheap kid-friendly hotels") - ungrounded locations produced by ungrounded_location model See go/location-type for the details of the location proto output by location subgrammar.
       properties: {}
       type: object
     KnowledgeAnswersOpaqueMediaType:
@@ -49320,78 +49601,6 @@ components:
           description: required
           format: uint32
           type: integer
-      type: object
-    NlpLoggingQRewriteClientCallPathInfo:
-      description: "The proto that holds the complete call path info of the QRewrite client (e.g. the QUS's phase like \"RBT\",\"QBT\"; the QUS's candidate type like \"Identity\"; and the ACE's candidate type like \"FuzzyMatcher\"). Next ID: 5 ACE tags"
-      properties:
-        qrewriteCandidateId:
-          $ref: "#/components/schemas/QualityQrewriteCandidateId"
-          description: Indicates the type of candidate rewritten by QRewrite. This field is filled within QRewrite instead of QRewrite clients, and we add this here so this proto is able to hold all tags to form the identifier.
-        qusCandidateId:
-          $ref: "#/components/schemas/QualityQrewriteCandidateId"
-          description: QUS tags Indicates the type of the candidate in QUS that sends the QRewrite request.
-        qusClientCallPathInfo:
-          $ref: "#/components/schemas/NlpLoggingQusClientCallPathInfo"
-          description: Upstream call path before QUS.
-        qusPhase:
-          description: Indicates which QUS phase sends the QRewrite request. Note if the QRewrite response is reused in succeeding phases, this field should not be overridden and it is always the phase that initially sends the RPC.
-          enum:
-            - QU_PHASE_UNSPECIFIED
-            - QU_PHASE_REQUEST
-            - QU_PHASE_QREWRITE
-            - QU_PHASE_QBT
-            - QU_PHASE_PROBE_QUERY
-            - QU_PHASE_MULTI_ACCOUNT
-            - QU_PHASE_CQBT
-            - QU_PHASE_QBT_RESOLUTION
-            - QU_PHASE_HIGH_PRECISION
-            - QU_PHASE_COMBINED_RBT_RESOLUTION
-            - QU_PHASE_ANALYZER_INPUT
-            - QU_PHASE_NAGE
-          type: string
-      type: object
-    NlpLoggingQusClientCallPathInfo:
-      description: The proto that holds the complete call path info of the QUS client (e.g. the candidate type like "Identity", "FuzzyMatcher"; The intent generator like "QUS_IG" in ACE).
-      properties:
-        rewriterType:
-          description: "rewriter_type forms part of a unique key to be used to label QUS Requests from ACE. The need to distinguish between the variety of calls from AS into QUS is for two reasons: (a) currently, assistant eval can do NLU Eval only on certain rewrites (b) later AS Hermetic and NLU Eval can be integrated In the furure, the unique key will be expanded to add intent_generator_type or something similar. There are ongoing discussions to confirm these plans"
-          enum:
-            - UNKNOWN_REWRITER_TYPE
-            - GENIE
-            - FUZZY_MATCHER_HC
-            - FUZZY_MATCHER
-            - FUZZY_MATCHER_ADDITIONAL_1
-            - FUZZY_MATCHER_ADDITIONAL_2
-            - IDENTITY
-            - MONDEGREEN_ASSISTANT
-            - MONDEGREEN
-            - SYNTHETIC
-            - SPEECH_RECOGNITION
-            - SPEECH_MISRECOGNITION
-            - SPELL_CORRECTION
-            - AUTO_TRANSLATION
-            - AUTO_TRANSLATION_ARGUMENT_TRANSFER
-          type: string
-          x-enumDeprecated:
-            - false
-            - false
-            - true
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-        temporaryAceTag:
-          description: The timestamp when QUS request is built in ACE. For now we don't care about the actual meaning of this tag, and only want to guarantee its uniqueness per QUS call.
-          format: int64
-          type: string
       type: object
     NlpMeaningMeaningRemodeling:
       properties:
@@ -57143,6 +57352,7 @@ components:
             - ACCESSIBILITY_TRACKER
             - DUCKIEWEB
             - MATTERSPACE
+            - WAYMO_TRIAGE_TOOLING
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -57725,6 +57935,7 @@ components:
             - false
             - true
             - true
+            - false
             - false
             - false
             - false
@@ -60881,7 +61092,7 @@ components:
           type: integer
       type: object
     PtokenPToken:
-      description: "PToken expresses policy-relevant properties of the data objects being processed and stored in Google's production systems. See go/ptoken to learn more. PTokens are intentionally opaque: go/ptokens-are-opaque. The following should be considered implementation details. Next ID: 9 INTERNAL: If both the Scalar and the Compound extensions are populated, we use the Compound and discard the Scalar. In principle, this should never happen."
+      description: "PToken expresses policy-relevant properties of the data objects being processed and stored in Google's production systems. See go/ptoken to learn more. PTokens are intentionally opaque: go/ptokens-are-opaque. The following should be considered implementation details. Next ID: 9 LINT.IfChange INTERNAL: If both the Scalar and the Compound extensions are populated, we use the Compound and discard the Scalar. In principle, this should never happen."
       properties: {}
       type: object
     QualityActionsAppInfo:
@@ -65342,60 +65553,6 @@ components:
         primaryCalendarAlias:
           $ref: "#/components/schemas/QualityQrewritePrimaryCalendarAlias"
       type: object
-    QualityQrewriteCandidateId:
-      description: A complete query candidate Id includes a list of Id fields. The Id field order is maintained as the order by which each field is appended to the list.
-      properties:
-        field:
-          items:
-            $ref: "#/components/schemas/QualityQrewriteCandidateIdField"
-          type: array
-      type: object
-    QualityQrewriteCandidateIdField:
-      description: The message represents a field in the query candidate Id.
-      properties:
-        index:
-          description: If needed, a servlet can use this field to assign an ID to distinguish between different candidates of the same CandidateType.
-          format: int32
-          type: integer
-        type:
-          enum:
-            - CANDIDATE_TYPE_UNSPECIFIED
-            - IDENTITY
-            - SPELLING
-            - S3_TOP_HYPOTHESIS
-            - AUTO_TRANSLATE
-            - ADS_ALTERNATIVE_RUN
-            - NEARBY_RETRIEVAL
-            - CONTEXTUAL_REWRITE
-            - SAFT_TOKENIZER
-            - CONVO_FPR
-            - SPOKEN_INTENT
-            - AUTO_TRANSLATE_ARGUMENT_TRANSFER
-            - CONTEXT_AWARE_SPEECH_RECOGNITION_REWRITE
-            - MAST
-            - FUZZY_MATCHER_REWRITE
-            - SHOPPING_PREFERENCES_REWRITE
-            - MAGI_CONTEXT_ENGINE_REWRITE
-          type: string
-          x-enumDeprecated:
-            - false
-            - false
-            - false
-            - true
-            - false
-            - false
-            - false
-            - false
-            - true
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-            - false
-      type: object
     QualityQrewriteContactCalendarName:
       properties:
         contact:
@@ -66125,7 +66282,8 @@ components:
           type: integer
       type: object
     QualityShoppingShoppingAttachment:
-      description: "This proto is a lightweight version of ShoppingAnnotation in docjoin attachment. We're doing a deep copy of protos defined in ShoppingAnnotation so that we can control individual fields that will sit in Muppet. Data here will be used for scoring organic shopping web results and previews. Many shopping related signals, e.g., product review score, are also served from this attachment. Next ID: 21"
+      deprecated: true
+      description: "This proto is a lightweight version of ShoppingAnnotation in docjoin attachment. We're doing a deep copy of protos defined in ShoppingAnnotation so that we can control individual fields that will sit in Muppet. Data here will be used for scoring organic shopping web results and previews. Many shopping related signals, e.g., product review score, are also served from this attachment. DEPRECATED: Please use UDR (go/udr) instead."
       properties:
         datasetModelArticleScore:
           description: Score from the blockbert article classifier model. go/article-understanding-project
@@ -66693,6 +66851,22 @@ components:
           format: int32
           type: integer
       type: object
+    QualityTimebasedDateReliability:
+      description: Unreliable dates signals per URL. go/unreliable-dates-dd
+      properties:
+        petacatScores:
+          items:
+            $ref: "#/components/schemas/QualityTimebasedPetacatDateReliability"
+          type: array
+        unreliableDatesScore:
+          description: max(petacat.unreliable_dates_score)
+          format: float
+          type: number
+        unreliableDatesScoreExposureAdjusted:
+          description: max(petacat.unreliable_dates_score * petacat.date_exposure_score)
+          format: float
+          type: number
+      type: object
     QualityTimebasedLastSignificantUpdate:
       properties:
         adjustmentInfo:
@@ -66702,6 +66876,8 @@ components:
           description: LastSignificantUpdate as UNIX timestamp in seconds. This is the new signal (go/lsu-dd) from LSU Selector V2 (once that is enabled, see b/171879888 for status), falling back to the legacy V1 signal if the HIGH_PRECISION signal does not exist. Please use the 'source' field to determine where the value comes from.
           format: int64
           type: string
+        dateReliabilityInfo:
+          $ref: "#/components/schemas/QualityTimebasedDateReliability"
         source:
           description: The source the signal comes from.
           enum:
@@ -66834,6 +67010,35 @@ components:
         isQnaPage:
           description: Set to true if this page is classified as a question answers page.
           type: boolean
+      type: object
+    QualityTimebasedPetacatDateReliability:
+      description: Unreliable dates signals per Domain+Petacat. go/unreliable-dates-dd
+      properties:
+        contentageReliability:
+          format: float
+          type: number
+        dateExposure:
+          format: float
+          type: number
+        dateExposureScore:
+          description: This is date_exposure after sigmoid transformation.
+          format: float
+          type: number
+        dateVsContentageDistributionSkew:
+          description: Auxiliary scores. The unreliable_dates_score is a product of these scores excl. date_exposure. The definition for each of the scores you can find at go/unreliable-dates-dd
+          format: float
+          type: number
+        isForumQnaSocialMediaProbability:
+          format: float
+          type: number
+        petacatId:
+          description: go/verticals4
+          format: int32
+          type: integer
+        unreliableDatesScore:
+          description: This is a final score excl. date exposure component.
+          format: float
+          type: number
       type: object
     QualityTimebasedSyntacticDate:
       description: "Next ID: 21"
@@ -69081,12 +69286,17 @@ components:
           description: Optional score. Not present in KG directly but e.g. in WPCat.
           format: float
           type: number
+        typeFprint:
+          description: Fingerprint of type hrid http://cs/google3/repository/webref/universal/base/kg-schema.h;rcl=543911652;l=51
+          format: uint64
+          type: string
         typeMid:
-          description: Mid of this type. Equivalent to type_name, but is more compact. When present, overrides type_name (which can be omitted in this case to save space).
+          deprecated: true
+          description: Mid of this type. Equivalent to type_name, but is more compact. When present, overrides type_name (which can be omitted in this case to save space). This field is deprecated and migrated to fprint.
           format: uint64
           type: string
         typeName:
-          description: 'e.g.: "/business/industry", "/book/book_subject", "/people/person"...'
+          description: 'e.g.: "/business/industry", "/book/book_subject", "/people/person"... HRID of the type. May be missing for optimisation reasons in Refcon, but is present for Qref/Webref. At least one of type_name or type_fprint will be present at all times'
           type: string
       type: object
     RepositoryWebrefGenericIndices:
@@ -69104,6 +69314,7 @@ components:
           $ref: "#/components/schemas/GeostoreAddressProto"
           description: Stores parent/container information containing city, province & country.
         addressSynonyms:
+          description: This field is only provided through the online qref interface (QrefMetadata). This is a fairly simple extraction from the /geo/type/feature/address_proto_blob triple.
           items:
             $ref: "#/components/schemas/RepositoryWebrefGeoMetadataProtoAddressSynonym"
           type: array
@@ -72337,9 +72548,10 @@ components:
           type: string
         queryMetadata:
           $ref: "#/components/schemas/ResearchScamQueryMetadata"
-          description: copybara:strip_begin A field that contains metadata information when the datapoint is acting as a query.
+          description: copybara:strip_begin A field that contains metadata information when the datapoint is acting as a query. copybara:strip_end
         restrictTokens:
           $ref: "#/components/schemas/ResearchScamGenericFeatureVectorRestrictTokens"
+          description: copybara:strip_end_and_replace reserved 15;
         tokens:
           deprecated: true
           items:
@@ -72373,7 +72585,7 @@ components:
           type: number
       type: object
     ResearchScamGenericFeatureVectorRestrictTokens:
-      description: "RestrictTokens - used to perform \"restricted searches\" where boolean rules are used to filter the subset of the database eligible for matching. We currently support V1 and V3 restrict systems. V3 restrict is a superset of V1 restrict. New users are encouraged to use V3 directly for its rich features and cleaner semantics. See the document go/scam-v3-restricts, or read the comments in //research/scam/proto/restricts.proto for details. Nevertheless, V1 restrict is still supported by ScaM team. There's some minor tradeoff of performance between V1 and V3. User may prefer V1 over V3 if performance is the first priority. However, the CPU cost between V1 and V3 should be very minor. --------------------------------------------------------------------------- The semantics of V1 restrict is described below: V1 \"forward\" restricts: The dataset defines a many:many mapping between the database points and a token space. Each token names a set of tokens and each database point is a member of zero-to-many tokens. Queries specify zero-to-many whitelist and blacklist tokens that activate database points according to the following rules: * If whitelist_token is populated, the search will be restricted to points named by at least one whitelist token. If whitelist_token is empty, all points are whitelisted by default. * If blacklist_token is populated, it overrides the whitelist. Points named by a blacklisted token are *not* searched. * Note that, if neither whitelist_token nor blacklist_token is populated, the search remains unrestricted. --------------------------------------------------------------------------- V1 \"reverse\" restricts: Each database point is whitelisted and/or blacklisted for zero or more tokens, specified by whitelist_token and blacklist_token fields. Each query specifies zero or more tokens, and the same rules apply: * If a point's whitelist_token is populated, the point will only be searched if the query has at least one matching whitelist token. If whitelist_token is empty, the point is always whitelisted by default. * If a point's blacklist_token is populated, it overrides the whitelist. The point will be ignored for any query with a matching blacklist token. * Note that, if neither whitelist_token nor blacklist_token is populated, the point will always be searched. NEXT ID TO USE: 9"
+      description: "copybara:strip_begin RestrictTokens - used to perform \"restricted searches\" where boolean rules are used to filter the subset of the database eligible for matching. We currently support V1 and V3 restrict systems. V3 restrict is a superset of V1 restrict. New users are encouraged to use V3 directly for its rich features and cleaner semantics. See the document go/scam-v3-restricts, or read the comments in //research/scam/proto/restricts.proto for details. Nevertheless, V1 restrict is still supported by ScaM team. There's some minor tradeoff of performance between V1 and V3. User may prefer V1 over V3 if performance is the first priority. However, the CPU cost between V1 and V3 should be very minor. --------------------------------------------------------------------------- The semantics of V1 restrict is described below: V1 \"forward\" restricts: The dataset defines a many:many mapping between the database points and a token space. Each token names a set of tokens and each database point is a member of zero-to-many tokens. Queries specify zero-to-many whitelist and blacklist tokens that activate database points according to the following rules: * If whitelist_token is populated, the search will be restricted to points named by at least one whitelist token. If whitelist_token is empty, all points are whitelisted by default. * If blacklist_token is populated, it overrides the whitelist. Points named by a blacklisted token are *not* searched. * Note that, if neither whitelist_token nor blacklist_token is populated, the search remains unrestricted. --------------------------------------------------------------------------- V1 \"reverse\" restricts: Each database point is whitelisted and/or blacklisted for zero or more tokens, specified by whitelist_token and blacklist_token fields. Each query specifies zero or more tokens, and the same rules apply: * If a point's whitelist_token is populated, the point will only be searched if the query has at least one matching whitelist token. If whitelist_token is empty, the point is always whitelisted by default. * If a point's blacklist_token is populated, it overrides the whitelist. The point will be ignored for any query with a matching blacklist token. * Note that, if neither whitelist_token nor blacklist_token is populated, the point will always be searched. NEXT ID TO USE: 9"
       properties:
         blacklistToken:
           items:
@@ -72921,7 +73133,7 @@ components:
           type: string
       type: object
     ResearchScienceSearchReconciledMetadata:
-      description: "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 72"
+      description: "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 73"
       properties:
         alternateName:
           description: Alternate names and acronyms for the dataset.
@@ -73034,6 +73246,9 @@ components:
           items:
             $ref: "#/components/schemas/ResearchScienceSearchOrganization"
           type: array
+        hasCroissantFormat:
+          description: Indicates if the dataset has croissant format (https://github.com/mlcommons/croissant).
+          type: boolean
         hasTableSummaries:
           description: Indicates if the dataset has table summaries. This field is only populated during indexing time.
           type: boolean
@@ -73647,7 +73862,7 @@ components:
           type: number
       type: object
     SafesearchVideoClassifierOutput:
-      description: "Flexible multi-vertical classification output. The output for each vertical should be defined as a proto extension to this proto. When defining an extension for a new vertical please follow the format: message NewVertical { extend safesearch.VideoClassifierOutput { optional NewVertical classifier_output_extension = ; } optional safesearch.VideoVerticalOutput vertical_output = 1; } SafeSearch verticals only: Please also update this message with a new extension declaration. For more details on extension declaration please refer to http://go/proto-proposals/extension-declarations. Please refer to http://go/proto2-extensions for details on message extensions. LINT.IfChange next extension id: 6"
+      description: "Flexible multi-vertical classification output. The output for each vertical should be defined as a proto extension to this proto. When defining an extension for a new vertical please follow the format: message NewVertical { extend safesearch.VideoClassifierOutput { optional NewVertical classifier_output_extension = ; } optional safesearch.VideoVerticalOutput vertical_output = 1; } SafeSearch verticals only: Please also update this message with a new extension declaration. For more details on extension declaration please refer to http://go/proto-proposals/extension-declarations. Please refer to http://go/proto2-extensions for details on message extensions. LINT.IfChange next extension id: 7"
       properties: {}
       type: object
     SafesearchVideoContentSignals:
@@ -75680,6 +75895,9 @@ components:
           type: boolean
         containVulgarCandidates:
           description: Indicates if there are any vulgar snippet candidates.
+          type: boolean
+        disableNg3Scoring:
+          description: Indicates that SR side should disable the ng3 scoring and soly rely on the SnippetBrain scoring for selecting the final candidate. E.g. this can happen when the offline snippet generation routine is triggered.
           type: boolean
         disableQueryFeatures:
           description: Indicates whether the query relevance features is disabled or not in Muppet scoring.
@@ -79586,6 +79804,7 @@ components:
           enum:
             - HIGH_THROUGHPUT
             - LOW_LATENCY
+            - LATENCY_SENSITIVE
             - NUM_REQUEST_TYPES
           type: string
         RequestorFp:
@@ -79717,7 +79936,7 @@ components:
           type: number
       type: object
     TrawlerTrawlerPrivateFetchReplyData:
-      description: "This is an optional container of arbitrary data that can be added to a FetchReplyData. This data is meant to be logged, but not sent back in a fetch reply (it should be added *after* the reply is prepared). Use FetchResponsePreparatorImpl::AddTrawlerPrivateDataToFetchReplyData to add. See also the comment in fetch_response_preparator_impl.cc. Next Tag: 45"
+      description: "This is an optional container of arbitrary data that can be added to a FetchReplyData. This data is meant to be logged, but not sent back in a fetch reply (it should be added *after* the reply is prepared). Use FetchResponsePreparatorImpl::AddTrawlerPrivateDataToFetchReplyData to add. See also the comment in fetch_response_preparator_impl.cc. Next Tag: 46"
       properties:
         BotGroupName:
           description: If we fetched using BotFetchAgent, what is the BotGroupName?
@@ -79831,6 +80050,9 @@ components:
         concurrentStreamNum:
           description: How many concurrent streams are on the connection when the request finishes (including this request). Export this value to monitor the stream multiplexing for HTTP/2.
           format: int64
+          type: string
+        credentialId:
+          description: Log the credential id
           type: string
         dependentFetchType:
           description: Dependent fetch type
@@ -80284,6 +80506,14 @@ components:
               - BATTLESTAR_SELF_SHARE_EVENT_LEVEL
               - SUPPLEMENTAL_TG_ANNOTATION_FOR_WEAR_EVENT_LEVEL
               - PGS_THIRD_PARTY_REVIEW_EVENT_LEVEL
+              - GAME_HUB_DEVELOPER_VIDEO_AT_EVENT_LEVEL
+              - BATTLESTAR_GAME_CENTRIC_BOTTOM_SHEET_ASSETS_EVENT_LEVEL
+              - GAME_HUB_DEVELOPER_VIDEO_ELIGIBLE_AT_EVENT_LEVEL
+              - FOP_ORDERING_RECOMMENDATION_ELIGIBLE_EVENT_LEVEL
+              - FOP_ORDERING_NO_RECOMMENDATION_EVENT_LEVEL
+              - FOP_ORDERING_RECOMMENDATION_OUTDATED_EVENT_LEVEL
+              - FOP_ORDERING_RECOMMENDATION_SAME_FOP_EVENT_LEVEL
+              - FOP_ORDERING_STORED_VALUE_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - ENTERTAINMENT_CLUSTER_TRIGGERING_AT_SESSION_LEVEL
               - BEST_SELLER_CART_TAG_AT_SESSION_LEVEL
@@ -80451,6 +80681,7 @@ components:
               - IN_APP_OFFER_BATTLESTAR_APP_EVONY_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_ASPHALT_9_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_MAGIC_RAMPAGE_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_LAST_SURVIVOR_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_SUMMONERS_WAR_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_AT_SESSION_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_1_AT_SESSION_LEVEL
@@ -80461,6 +80692,7 @@ components:
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_EVONY_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ASPHALT_9_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAGIC_RAMPAGE_AT_SESSION_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_LAST_SURVIVOR_AT_SESSION_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_SUMMONERS_WAR_AT_SESSION_LEVEL
               - IN_APP_OFFER_SAVED_AT_SESSION_LEVEL
               - IN_APP_OFFER_SAVED_APP_1_AT_SESSION_LEVEL
@@ -80915,6 +81147,9 @@ components:
               - BOOKS_USER_P13N_SETTING_OFF_AT_SESSION_LEVEL
               - BATTLESTAR_GAME_IN_MDP_SESSION_LEVEL
               - BATTLESTAR_PSEUDO_CREDIT_OFFER_IN_DP_SESSION_LEVEL
+              - BATTLESTAR_BOTTOMSHEET_FROM_FCP_AUTOSEND
+              - BATTLESTAR_BOTTOMSHEET_FHR_ON_FPC
+              - BATTLESTAR_MERCH_FCP_FROM_FCC_CONTROL
               - REVIEW_HIGHLIGHTS_SESSION_LEVEL
               - BOOKS_NOTIFICATION_RECEIVED_SESSION_LEVEL
               - LANGUAGE_SWITCHER_ELIGIBLE_SESSION_LEVEL
@@ -80927,6 +81162,7 @@ components:
               - LOWQ_APPS_DEMOTION_SESSION_LEVEL
               - PLANOGRAM_MERCH_TW_DYNASTY_EXTRA_FEATURING
               - AMPLIFY_FORM_OF_PAYMENT_ELIGIBLE_SESSION_LEVEL
+              - AMPLIFY_FORM_OF_PAYMENT_ELIGIBLE_WITH_OFFER_SESSION_LEVEL
               - QUERY_TYPE_MDP_SESSION_LEVEL
               - QUERY_TYPE_NON_MDP_SESSION_LEVEL
               - NAV_CARD_SESSION_LEVEL
@@ -80949,6 +81185,17 @@ components:
               - SUPPLEMENTAL_TG_ANNOTATION_FOR_WEAR_SESSION_LEVEL
               - SEARCH_ADS_NON_MDP_RUC_RATE_SESSION_LEVEL
               - PGS_THIRD_PARTY_REVIEW_SESSION_LEVEL
+              - GAME_HUB_DEVELOPER_VIDEO_AT_SESSION_LEVEL
+              - BATTLESTAR_GAME_CENTRIC_BOTTOM_SHEET_ASSETS_SESSION_LEVEL
+              - CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_SESSION_LEVEL
+              - GAME_HUB_DEVELOPER_VIDEO_ELIGIBLE_AT_SESSION_LEVEL
+              - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_SUBSCRIPTION_SESSION_LEVEL
+              - SUBS_PAYMENT_DECLINE_SESSION_LEVEL
+              - CART_ABANDONMENT_REMINDER_SESSION_LEVEL
+              - SUBSCRIPTION_OFFER_SWITCH_DATA_PRESENT_SESSION_LEVEL
+              - BOOKS_READ_NOW_DUAL_FORMAT_REQUEST_SESSION_LEVEL
+              - BOOKS_READ_NOW_WITH_HEADER_REQUEST_SESSION_LEVEL
+              - FCC_FIRST_PARTY_CATEGORICAL_SEARCH_OFFERS_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -81015,6 +81262,7 @@ components:
               - IN_APP_OFFER_BATTLESTAR_APP_EVONY_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_ASPHALT_9_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_MAGIC_RAMPAGE_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_APP_LAST_SURVIVOR_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_APP_SUMMONERS_WAR_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_AT_USER_LEVEL
               - IN_APP_OFFER_ELIGIBLE_APP_1_AT_USER_LEVEL
@@ -81025,6 +81273,7 @@ components:
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_EVONY_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_ASPHALT_9_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_MAGIC_RAMPAGE_AT_USER_LEVEL
+              - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_LAST_SURVIVOR_AT_USER_LEVEL
               - IN_APP_OFFER_BATTLESTAR_ELIGIBLE_APP_SUMMONERS_WAR_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_AT_USER_LEVEL
               - IN_APP_OFFER_SAVED_APP_1_AT_USER_LEVEL
@@ -81209,6 +81458,9 @@ components:
               - PURCHASE_READINESS_ADD_AUTH_USER_LEVEL
               - PURCHASE_READINESS_ADD_FOP_AUTH_USER_LEVEL
               - SUBS_PAYMENT_DECLINE_USER_LEVEL
+              - CART_ABANDONMENT_REMINDER_USER_LEVEL
+              - SUBSCRIPTION_OFFER_SWITCH_DATA_PRESENT_USER_LEVEL
+              - FCC_FIRST_PARTY_CATEGORICAL_SEARCH_OFFERS_USER_LEVEL
               - MERCH_CONTENT_EXP_ACTIVE_PUBG_USER_LEVEL
               - MERCH_CONTENT_EXP_ACTIVE_GENSHIN_USER_LEVEL
               - MERCH_CONTENT_EXP_ACTIVE_ROBLOX_USER_LEVEL
@@ -81237,6 +81489,12 @@ components:
               - IS_ELIGIBLE_FOR_RENEWAL_REMINDER_USER_LEVEL
               - FEATURED_PRODUCTS_LIVE_OPS_AT_USER_LEVEL
               - FIRST_PARTY_OFFERS_REQUEST_TRIGGER_USER_LEVEL
+              - IS_ELIGIBLE_FOR_APP_TARGETED_REWARD_USER_LEVEL
+              - GAME_HUB_DEVELOPER_VIDEO_AT_USER_LEVEL
+              - CART_ABANDONMENT_SUBSCRIPTION_BENEFITS_USER_LEVEL
+              - GAME_HUB_DEVELOPER_VIDEO_ELIGIBLE_AT_USER_LEVEL
+              - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_SUBSCRIPTION_USER_LEVEL
+              - SUBS_PAYMENT_DECLINE_V2_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
             x-enumDeprecated:
@@ -81733,6 +81991,16 @@ components:
               - false
               - false
               - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
               - true
               - false
               - false
@@ -82336,6 +82604,23 @@ components:
               - false
               - false
               - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
               - true
               - false
               - false
@@ -82360,6 +82645,15 @@ components:
               - false
               - false
               - true
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
               - false
               - false
               - false
@@ -82658,6 +82952,7 @@ components:
             - OBJECTIVE_SPEECH_RECOGNITION_DONE
             - OBJECTIVE_MULTI_TRACK_AUDIO_DONE
             - OBJECTIVE_SHORTS_READY
+            - OBJECTIVE_720P_TRANSCODES_ONLY_DONE
           type: string
           x-enumDeprecated:
             - false
@@ -82676,6 +82971,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -83687,7 +83983,7 @@ components:
             - false
             - false
             - false
-            - false
+            - true
             - false
             - false
             - true
@@ -85064,6 +85360,7 @@ components:
             - ASR_SPAN_EDU
             - GENERATIVE_ASR_I18N
             - YT_AUTO_CHAPTERS
+            - OCR_I18N
           type: string
         contextText:
           description: Context text from ASR of long duration, used for longT5 models.
@@ -85330,6 +85627,7 @@ components:
             - ASR_SPAN_EDU
             - GENERATIVE_ASR_I18N
             - YT_AUTO_CHAPTERS
+            - OCR_I18N
           type: string
         entityGroupInfo:
           $ref: "#/components/schemas/VideoContentSearchEntityGroupInfo"
@@ -85396,6 +85694,7 @@ components:
               - ASR_SPAN_EDU
               - GENERATIVE_ASR_I18N
               - YT_AUTO_CHAPTERS
+              - OCR_I18N
             type: string
           type: array
         predictedQuerylessTocUsefulness:

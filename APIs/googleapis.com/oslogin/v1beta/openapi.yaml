@@ -313,6 +313,52 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - users
+  "/v1beta/{parent}:signSshPublicKey":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Signs an SSH public key for a user to authenticate to an instance.
+      operationId: oslogin.users.projects.zones.signSshPublicKey
+      parameters:
+        - description: The parent project and zone for the signing request. This is needed to properly ensure per-organization ISS processing and potentially to provide for the possibility of zone-specific certificates used in the signing process.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SignSshPublicKeyRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SignSshPublicKeyResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - users
 components:
   parameters:
     _.xgafv:
@@ -485,6 +531,18 @@ components:
         webAuthn:
           $ref: "#/components/schemas/WebAuthn"
           description: The Web Authentication protocol type.
+      type: object
+    SignSshPublicKeyRequest:
+      properties:
+        sshPublicKey:
+          description: The SSH public key to sign.
+          type: string
+      type: object
+    SignSshPublicKeyResponse:
+      properties:
+        signedSshPublicKey:
+          description: The signed SSH public key to use in the SSH handshake.
+          type: string
       type: object
     SshPublicKey:
       description: The SSH public key information associated with a Google account.

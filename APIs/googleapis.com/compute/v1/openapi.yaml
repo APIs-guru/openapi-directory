@@ -27154,6 +27154,69 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - routers
+  "/projects/{project}/regions/{region}/routers/{router}/getNatIpInfo":
+    get:
+      description: Retrieves runtime NAT IP information.
+      operationId: compute.routers.getNatIpInfo
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          schema:
+            type: string
+        - description: Name of the Router resource to query for Nat IP information. The name should conform to RFC1035.
+          in: path
+          name: router
+          required: true
+          schema:
+            type: string
+        - description: Name of the nat service to filter the NAT IP information. If it is omitted, all nats for this router will be returned. Name should conform to RFC1035.
+          in: query
+          name: natName
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NatIpInfoResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - routers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
   "/projects/{project}/regions/{region}/routers/{router}/getNatMappingInfo":
     get:
       description: Retrieves runtime Nat mapping information of VM endpoints.
@@ -44403,6 +44466,9 @@ components:
     BulkInsertInstanceResourcePerInstanceProperties:
       description: Per-instance properties to be set on individual instances. To be extended in the future.
       properties:
+        hostname:
+          description: "Specifies the hostname of the instance. More details in: https://cloud.google.com/compute/docs/instances/custom-hostname-vm#naming_convention"
+          type: string
         name:
           description: This field is only temporary. It will be removed. Do not use it.
           type: string
@@ -53952,6 +54018,45 @@ components:
           format: int32
           type: integer
       type: object
+    NatIpInfo:
+      description: Contains NAT IP information of a NAT config (i.e. usage status, mode).
+      properties:
+        natIpInfoMappings:
+          description: A list of all NAT IPs assigned to this NAT config.
+          items:
+            $ref: "#/components/schemas/NatIpInfoNatIpInfoMapping"
+          type: array
+        natName:
+          description: Name of the NAT config which the NAT IP belongs to.
+          type: string
+      type: object
+    NatIpInfoNatIpInfoMapping:
+      description: Contains information of a NAT IP.
+      properties:
+        mode:
+          description: Specifies whether NAT IP is auto or manual.
+          enum:
+            - AUTO
+            - MANUAL
+          type: string
+        natIp:
+          description: "NAT IP address. For example: 203.0.113.11."
+          type: string
+        usage:
+          description: Specifies whether NAT IP is currently serving at least one endpoint or not.
+          enum:
+            - IN_USE
+            - UNUSED
+          type: string
+      type: object
+    NatIpInfoResponse:
+      properties:
+        result:
+          description: "[Output Only] A list of NAT IP information."
+          items:
+            $ref: "#/components/schemas/NatIpInfo"
+          type: array
+      type: object
     Network:
       description: Represents a VPC Network resource. Networks connect resources to each other and to the internet. For more information, read Virtual Private Cloud (VPC) Network.
       properties:
@@ -56974,7 +57079,7 @@ components:
           type: object
       type: object
     Operation:
-      description: "Represents an Operation resource. Google Compute Engine has three Operation resources: * [Global](/compute/docs/reference/rest/v1/globalOperations) * [Regional](/compute/docs/reference/rest/v1/regionOperations) * [Zonal](/compute/docs/reference/rest/v1/zoneOperations) You can use an operation resource to manage asynchronous API requests. For more information, read Handling API responses. Operations can be global, regional or zonal. - For global operations, use the `globalOperations` resource. - For regional operations, use the `regionOperations` resource. - For zonal operations, use the `zonalOperations` resource. For more information, read Global, Regional, and Zonal Resources."
+      description: "Represents an Operation resource. Google Compute Engine has three Operation resources: * [Global](/compute/docs/reference/rest/v1/globalOperations) * [Regional](/compute/docs/reference/rest/v1/regionOperations) * [Zonal](/compute/docs/reference/rest/v1/zoneOperations) You can use an operation resource to manage asynchronous API requests. For more information, read Handling API responses. Operations can be global, regional or zonal. - For global operations, use the `globalOperations` resource. - For regional operations, use the `regionOperations` resource. - For zonal operations, use the `zoneOperations` resource. For more information, read Global, Regional, and Zonal Resources."
       properties:
         clientOperationId:
           description: "[Output Only] The value of `requestId` if you provided it in the request. Not present otherwise."
