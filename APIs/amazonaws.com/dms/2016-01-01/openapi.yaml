@@ -294,6 +294,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.CreateDataProvider:
+    post:
+      operationId: CreateDataProvider
+      description: 'Creates a data provider using the provided settings. A data provider stores a data store type and location information about your database. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataProviderResponse'
+        '480':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '481':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataProviderMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.CreateDataProvider
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.CreateEndpoint:
     post:
       operationId: CreateEndpoint
@@ -517,6 +568,156 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.CreateFleetAdvisorCollector
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.CreateInstanceProfile:
+    post:
+      operationId: CreateInstanceProfile
+      description: Creates the instance profile using the specified parameters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInstanceProfileResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '482':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '483':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '484':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '485':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '486':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '487':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstanceProfileMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.CreateInstanceProfile
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.CreateMigrationProject:
+    post:
+      operationId: CreateMigrationProject
+      description: '<p>Creates the migration project using the specified parameters.</p> <p>You can run this action only after you create an instance profile and data providers using <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html">CreateInstanceProfile</a> and <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html">CreateDataProvider</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMigrationProjectResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '482':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '483':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '484':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '485':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMigrationProjectMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.CreateMigrationProject
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -933,6 +1134,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DeleteDataProvider:
+    post:
+      operationId: DeleteDataProvider
+      description: <p>Deletes the specified data provider.</p> <note> <p>All migration projects associated with the data provider must be deleted or modified before you can delete the data provider.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDataProviderResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDataProviderMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DeleteDataProvider
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.DeleteEndpoint:
     post:
       operationId: DeleteEndpoint
@@ -1101,6 +1353,108 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.DeleteFleetAdvisorDatabases
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DeleteInstanceProfile:
+    post:
+      operationId: DeleteInstanceProfile
+      description: <p>Deletes the specified instance profile.</p> <note> <p>All migration projects associated with the instance profile must be deleted or modified before you can delete the instance profile.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteInstanceProfileResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteInstanceProfileMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DeleteInstanceProfile
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DeleteMigrationProject:
+    post:
+      operationId: DeleteMigrationProject
+      description: <p>Deletes the specified migration project.</p> <note> <p>The migration project must be closed before you can delete it.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMigrationProjectResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteMigrationProjectMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DeleteMigrationProject
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1544,6 +1898,102 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeConversionConfiguration:
+    post:
+      operationId: DescribeConversionConfiguration
+      description: Returns configuration parameters for a schema conversion project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeConversionConfigurationResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeConversionConfigurationMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeConversionConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeDataProviders:
+    post:
+      operationId: DescribeDataProviders
+      description: Returns a paginated list of data providers for your account in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDataProvidersResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDataProvidersMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeDataProviders
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.DescribeEndpointSettings:
     post:
       operationId: DescribeEndpointSettings
@@ -1859,6 +2309,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeExtensionPackAssociations:
+    post:
+      operationId: DescribeExtensionPackAssociations
+      description: Returns a paginated list of extension pack associations for the specified migration project. An extension pack is an add-on module that emulates functions present in a source database that are required when converting objects to the target database.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExtensionPackAssociationsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExtensionPackAssociationsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeExtensionPackAssociations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.DescribeFleetAdvisorCollectors:
     post:
       operationId: DescribeFleetAdvisorCollectors
@@ -2106,6 +2601,375 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.DescribeFleetAdvisorSchemas
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeInstanceProfiles:
+    post:
+      operationId: DescribeInstanceProfiles
+      description: Returns a paginated list of instance profiles for your account in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInstanceProfilesResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeInstanceProfilesMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeInstanceProfiles
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeMetadataModelAssessments:
+    post:
+      operationId: DescribeMetadataModelAssessments
+      description: Returns a paginated list of metadata model assessments for your account in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMetadataModelAssessmentsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMetadataModelAssessmentsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeMetadataModelAssessments
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeMetadataModelConversions:
+    post:
+      operationId: DescribeMetadataModelConversions
+      description: Returns a paginated list of metadata model conversions for a migration project.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMetadataModelConversionsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMetadataModelConversionsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeMetadataModelConversions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeMetadataModelExportsAsScript:
+    post:
+      operationId: DescribeMetadataModelExportsAsScript
+      description: Returns a paginated list of metadata model exports.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMetadataModelExportsAsScriptResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMetadataModelExportsAsScriptMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeMetadataModelExportsAsScript
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeMetadataModelExportsToTarget:
+    post:
+      operationId: DescribeMetadataModelExportsToTarget
+      description: Returns a paginated list of metadata model exports.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMetadataModelExportsToTargetResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMetadataModelExportsToTargetMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeMetadataModelExportsToTarget
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeMetadataModelImports:
+    post:
+      operationId: DescribeMetadataModelImports
+      description: Returns a paginated list of metadata model imports.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMetadataModelImportsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMetadataModelImportsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeMetadataModelImports
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.DescribeMigrationProjects:
+    post:
+      operationId: DescribeMigrationProjects
+      description: Returns a paginated list of migration projects for your account in the current region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeMigrationProjectsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeMigrationProjectsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.DescribeMigrationProjects
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3005,6 +3869,45 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.ExportMetadataModelAssessment:
+    post:
+      operationId: ExportMetadataModelAssessment
+      description: 'Saves a copy of a database migration assessment report to your Amazon S3 bucket. DMS can save your assessment report as a comma-separated value (CSV) or a PDF file. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportMetadataModelAssessmentResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportMetadataModelAssessmentMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.ExportMetadataModelAssessment
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.ImportCertificate:
     post:
       operationId: ImportCertificate
@@ -3087,6 +3990,102 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.ModifyConversionConfiguration:
+    post:
+      operationId: ModifyConversionConfiguration
+      description: 'Modifies the specified schema conversion configuration using the provided parameters. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyConversionConfigurationResponse'
+        '480':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyConversionConfigurationMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.ModifyConversionConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.ModifyDataProvider:
+    post:
+      operationId: ModifyDataProvider
+      description: <p>Modifies the specified data provider using the provided settings.</p> <note> <p>You must remove the data provider from all migration projects before you can modify it.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyDataProviderResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyDataProviderMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.ModifyDataProvider
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3237,6 +4236,138 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.ModifyEventSubscription
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.ModifyInstanceProfile:
+    post:
+      operationId: ModifyInstanceProfile
+      description: <p>Modifies the specified instance profile using the provided parameters.</p> <note> <p>All migration projects associated with the instance profile must be deleted or modified before you can modify the instance profile.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyInstanceProfileResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '483':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '484':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '485':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyInstanceProfileMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.ModifyInstanceProfile
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.ModifyMigrationProject:
+    post:
+      operationId: ModifyMigrationProject
+      description: <p>Modifies the specified migration project using the provided parameters.</p> <note> <p>The migration project must be closed before you can modify it.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyMigrationProjectResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '482':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '483':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '484':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyMigrationProjectMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.ModifyMigrationProject
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3840,6 +4971,492 @@ paths:
             type: string
             enum:
               - AmazonDMSv20160101.RunFleetAdvisorLsaAnalysis
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StartExtensionPackAssociation:
+    post:
+      operationId: StartExtensionPackAssociation
+      description: 'Applies the extension pack to your target database. An extension pack is an add-on module that emulates functions present in a source database that are required when converting objects to the target database. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartExtensionPackAssociationResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '484':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '486':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '487':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartExtensionPackAssociationMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StartExtensionPackAssociation
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StartMetadataModelAssessment:
+    post:
+      operationId: StartMetadataModelAssessment
+      description: 'Creates a database migration assessment report by assessing the migration complexity for your source database. A database migration assessment report summarizes all of the schema conversion tasks. It also details the action items for database objects that can''t be converted to the database engine of your target database instance. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMetadataModelAssessmentResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '484':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '486':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '487':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartMetadataModelAssessmentMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StartMetadataModelAssessment
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StartMetadataModelConversion:
+    post:
+      operationId: StartMetadataModelConversion
+      description: 'Converts your source database objects to a format compatible with the target database. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMetadataModelConversionResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '484':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '486':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '487':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartMetadataModelConversionMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StartMetadataModelConversion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StartMetadataModelExportAsScript:
+    post:
+      operationId: StartMetadataModelExportAsScript
+      description: 'Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3 bucket.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMetadataModelExportAsScriptResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '484':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '486':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '487':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartMetadataModelExportAsScriptMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StartMetadataModelExportAsScript
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StartMetadataModelExportToTarget:
+    post:
+      operationId: StartMetadataModelExportToTarget
+      description: 'Applies converted database objects to your target database. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMetadataModelExportToTargetResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '484':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '486':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '487':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartMetadataModelExportToTargetMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StartMetadataModelExportToTarget
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.StartMetadataModelImport:
+    post:
+      operationId: StartMetadataModelImport
+      description: <p>Loads the metadata for all the dependent database objects of the parent object.</p> <p>This operation uses your project's Amazon S3 bucket as a metadata cache to improve performance.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartMetadataModelImportResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsFault'
+        '483':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+        '484':
+          description: KMSKeyNotAccessibleFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: ResourceQuotaExceededFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceQuotaExceededFault'
+        '486':
+          description: S3ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3ResourceNotFoundFault'
+        '487':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartMetadataModelImportMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.StartMetadataModelImport
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4490,6 +6107,42 @@ components:
             - $ref: '#/components/schemas/String'
             - description: Amazon Resource Name (ARN) of the premigration assessment run to be canceled.
       description: <p/>
+    CreateDataProviderResponse:
+      type: object
+      properties:
+        DataProvider:
+          allOf:
+            - $ref: '#/components/schemas/DataProvider'
+            - description: The data provider that was created.
+    CreateDataProviderMessage:
+      type: object
+      required:
+        - Engine
+        - Settings
+      title: CreateDataProviderMessage
+      properties:
+        DataProviderName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly name for the data provider.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly description of the data provider.
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of database engine for the data provider. Valid values include <code>"aurora"</code>, <code>"aurora_postgresql"</code>, <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, and <code>"sqlserver"</code>. A value of <code>"aurora"</code> represents Amazon Aurora MySQL-Compatible Edition.'
+        Settings:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderSettings'
+            - description: The settings in JSON format for a data provider.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tags to be assigned to the data provider.
+    ResourceQuotaExceededFault: {}
+    ResourceAlreadyExistsFault: {}
     CreateEndpointResponse:
       type: object
       example:
@@ -4655,8 +6308,6 @@ components:
             - description: Settings in JSON format for the target Amazon Timestream endpoint.
       description: <p/>
     KMSKeyNotAccessibleFault: {}
-    ResourceAlreadyExistsFault: {}
-    ResourceQuotaExceededFault: {}
     S3AccessDeniedFault: {}
     CreateEventSubscriptionResponse:
       type: object
@@ -4757,6 +6408,100 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.
     S3ResourceNotFoundFault: {}
+    CreateInstanceProfileResponse:
+      type: object
+      properties:
+        InstanceProfile:
+          allOf:
+            - $ref: '#/components/schemas/InstanceProfile'
+            - description: The instance profile that was created.
+    CreateInstanceProfileMessage:
+      type: object
+      title: CreateInstanceProfileMessage
+      properties:
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Availability Zone where the instance profile will be created. The default value is a random, system-chosen Availability Zone in the Amazon Web Services Region where your data provider is created, for examplem <code>us-east-1d</code>.'
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile.</p> <p>If you don''t specify a value for the <code>KmsKeyArn</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>'
+        PubliclyAccessible:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Specifies the accessibility options for the instance profile. A value of <code>true</code> represents an instance profile with a public IP address. A value of <code>false</code> represents an instance profile with a private IP address. The default value is <code>true</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tags to be assigned to the instance profile.
+        NetworkType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies the network type for the instance profile. A value of <code>IPV4</code> represents an instance profile with IPv4 network type and only supports IPv4 addressing. A value of <code>IPV6</code> represents an instance profile with IPv6 network type and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance profile with dual network type that supports IPv4 and IPv6 addressing.
+        InstanceProfileName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly name for the instance profile.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly description of the instance profile.
+        SubnetGroupIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A subnet group to associate with the instance profile.
+        VpcSecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the VPC security group names to be used with the instance profile. The VPC security group must work with the VPC containing the instance profile.
+    CreateMigrationProjectResponse:
+      type: object
+      properties:
+        MigrationProject:
+          allOf:
+            - $ref: '#/components/schemas/MigrationProject'
+            - description: The migration project that was created.
+    CreateMigrationProjectMessage:
+      type: object
+      required:
+        - SourceDataProviderDescriptors
+        - TargetDataProviderDescriptors
+        - InstanceProfileIdentifier
+      title: CreateMigrationProjectMessage
+      properties:
+        MigrationProjectName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly name for the migration project.
+        SourceDataProviderDescriptors:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderDescriptorDefinitionList'
+            - description: 'Information about the source data provider, including the name, ARN, and Secrets Manager parameters.'
+        TargetDataProviderDescriptors:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderDescriptorDefinitionList'
+            - description: 'Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.'
+        InstanceProfileIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier of the associated instance profile. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can''t end with a hyphen, or contain two consecutive hyphens.'
+        TransformationRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The settings in JSON format for migration rules. Migration rules make it possible for you to change the object names according to the rules that you specify. For example, you can change an object name to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly description of the migration project.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: One or more tags to be assigned to the migration project.
+        SchemaConversionApplicationAttributes:
+          allOf:
+            - $ref: '#/components/schemas/SCApplicationAttributes'
+            - description: 'The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.'
     CreateReplicationConfigResponse:
       type: object
       properties:
@@ -5100,6 +6845,23 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of the replication instance.
       description: <p/>
+    DeleteDataProviderResponse:
+      type: object
+      properties:
+        DataProvider:
+          allOf:
+            - $ref: '#/components/schemas/DataProvider'
+            - description: The data provider that was deleted.
+    DeleteDataProviderMessage:
+      type: object
+      required:
+        - DataProviderIdentifier
+      title: DeleteDataProviderMessage
+      properties:
+        DataProviderIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the data provider to delete.
     DeleteEndpointResponse:
       type: object
       example:
@@ -5178,6 +6940,40 @@ components:
             - $ref: '#/components/schemas/StringList'
             - description: The IDs of the Fleet Advisor collector databases to delete.
     InvalidOperationFault: {}
+    DeleteInstanceProfileResponse:
+      type: object
+      properties:
+        InstanceProfile:
+          allOf:
+            - $ref: '#/components/schemas/InstanceProfile'
+            - description: The instance profile that was deleted.
+    DeleteInstanceProfileMessage:
+      type: object
+      required:
+        - InstanceProfileIdentifier
+      title: DeleteInstanceProfileMessage
+      properties:
+        InstanceProfileIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the instance profile to delete.
+    DeleteMigrationProjectResponse:
+      type: object
+      properties:
+        MigrationProject:
+          allOf:
+            - $ref: '#/components/schemas/MigrationProject'
+            - description: The migration project that was deleted.
+    DeleteMigrationProjectMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: DeleteMigrationProjectMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or Amazon Resource Name (ARN) of the migration project to delete.
     DeleteReplicationConfigResponse:
       type: object
       properties:
@@ -5457,6 +7253,54 @@ components:
             - $ref: '#/components/schemas/String'
             - description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       description: <p/>
+    DescribeConversionConfigurationResponse:
+      type: object
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or Amazon Resource Name (ARN) for the schema conversion project.
+        ConversionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The configuration parameters for the schema conversion project.
+    DescribeConversionConfigurationMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: DescribeConversionConfigurationMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or Amazon Resource Name (ARN) for the schema conversion project to describe.
+    DescribeDataProvidersResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        DataProviders:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderList'
+            - description: A description of data providers.
+    DescribeDataProvidersMessage:
+      type: object
+      title: DescribeDataProvidersMessage
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the data providers described in the form of key-value pairs.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, DMS includes a pagination token in the response so that you can retrieve the remaining results.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
     DescribeEndpointSettingsResponse:
       type: object
       properties:
@@ -5680,6 +7524,39 @@ components:
             - $ref: '#/components/schemas/String'
             - description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
       description: <p/>
+    DescribeExtensionPackAssociationsResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        Requests:
+          allOf:
+            - $ref: '#/components/schemas/SchemaConversionRequestList'
+            - description: A paginated list of extension pack associations for the specified migration project.
+    DescribeExtensionPackAssociationsMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: DescribeExtensionPackAssociationsMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or Amazon Resource Name (ARN) for the migration project.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the extension pack associations described in the form of key-value pairs.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, DMS includes a pagination token in the response so that you can retrieve the remaining results.'
     DescribeFleetAdvisorCollectorsResponse:
       type: object
       properties:
@@ -5811,6 +7688,225 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'If <code>NextToken</code> is returned by a previous response, there are more results available. The value of <code>NextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. '
+    DescribeInstanceProfilesResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        InstanceProfiles:
+          allOf:
+            - $ref: '#/components/schemas/InstanceProfileList'
+            - description: A description of instance profiles.
+    DescribeInstanceProfilesMessage:
+      type: object
+      title: DescribeInstanceProfilesMessage
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the instance profiles described in the form of key-value pairs.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, DMS includes a pagination token in the response so that you can retrieve the remaining results.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+    DescribeMetadataModelAssessmentsResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        Requests:
+          allOf:
+            - $ref: '#/components/schemas/SchemaConversionRequestList'
+            - description: A paginated list of metadata model assessments for the specified migration project.
+    DescribeMetadataModelAssessmentsMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: DescribeMetadataModelAssessmentsMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or Amazon Resource Name (ARN) of the migration project.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the metadata model assessments described in the form of key-value pairs.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, DMS includes a pagination token in the response so that you can retrieve the remaining results.'
+    DescribeMetadataModelConversionsResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        Requests:
+          allOf:
+            - $ref: '#/components/schemas/SchemaConversionRequestList'
+            - description: A paginated list of metadata model conversions.
+    DescribeMetadataModelConversionsMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: DescribeMetadataModelConversionsMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the metadata model conversions described in the form of key-value pairs.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, DMS includes a pagination token in the response so that you can retrieve the remaining results.'
+    DescribeMetadataModelExportsAsScriptResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        Requests:
+          allOf:
+            - $ref: '#/components/schemas/SchemaConversionRequestList'
+            - description: A paginated list of metadata model exports.
+    DescribeMetadataModelExportsAsScriptMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: DescribeMetadataModelExportsAsScriptMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the metadata model exports described in the form of key-value pairs.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, DMS includes a pagination token in the response so that you can retrieve the remaining results.'
+    DescribeMetadataModelExportsToTargetResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        Requests:
+          allOf:
+            - $ref: '#/components/schemas/SchemaConversionRequestList'
+            - description: A paginated list of metadata model exports.
+    DescribeMetadataModelExportsToTargetMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: DescribeMetadataModelExportsToTargetMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the metadata model exports described in the form of key-value pairs.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, DMS includes a pagination token in the response so that you can retrieve the remaining results.'
+    DescribeMetadataModelImportsResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        Requests:
+          allOf:
+            - $ref: '#/components/schemas/SchemaConversionRequestList'
+            - description: A paginated list of metadata model imports.
+    DescribeMetadataModelImportsMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: DescribeMetadataModelImportsMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the metadata model imports described in the form of key-value pairs.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: A paginated list of metadata model imports.
+    DescribeMigrationProjectsResponse:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
+        MigrationProjects:
+          allOf:
+            - $ref: '#/components/schemas/MigrationProjectList'
+            - description: A description of migration projects.
+    DescribeMigrationProjectsMessage:
+      type: object
+      title: DescribeMigrationProjectsMessage
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Filters applied to the migration projects described in the form of key-value pairs.
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: 'The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, DMS includes a pagination token in the response so that you can retrieve the remaining results.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>Specifies the unique pagination token that makes it possible to display the next page of results. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p> <p>If <code>Marker</code> is returned by a previous response, there are more results available. The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, make the call again using the returned token and keeping all other arguments unchanged.</p>'
     DescribeOrderableReplicationInstancesResponse:
       type: object
       example:
@@ -6345,6 +8441,40 @@ components:
             - $ref: '#/components/schemas/FilterList'
             - description: '<p>Filters applied to table statistics.</p> <p>Valid filter names: schema-name | table-name | table-state</p> <p>A combination of filters creates an AND condition where each record matches all specified filters.</p>'
       description: <p/>
+    ExportMetadataModelAssessmentResponse:
+      type: object
+      properties:
+        PdfReport:
+          allOf:
+            - $ref: '#/components/schemas/ExportMetadataModelAssessmentResultEntry'
+            - description: The Amazon S3 details for an assessment exported in PDF format.
+        CsvReport:
+          allOf:
+            - $ref: '#/components/schemas/ExportMetadataModelAssessmentResultEntry'
+            - description: The Amazon S3 details for an assessment exported in CSV format.
+    ExportMetadataModelAssessmentMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+        - SelectionRules
+      title: ExportMetadataModelAssessmentMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        SelectionRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A value that specifies the database objects to assess.
+        FileName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the assessment file to create in your Amazon S3 bucket.
+        AssessmentReportTypes:
+          allOf:
+            - $ref: '#/components/schemas/AssessmentReportTypesList'
+            - description: The file format of the assessment file.
     ImportCertificateResponse:
       type: object
       example:
@@ -6400,6 +8530,65 @@ components:
             - $ref: '#/components/schemas/ArnList'
             - description: 'List of ARNs that identify multiple DMS resources that you want to list tags for. This returns a list of keys (tag names) and their associated tag values. It also returns each tag''s associated <code>ResourceArn</code> value, which is the ARN of the resource for which each listed tag is created. '
       description: <p/>
+    ModifyConversionConfigurationResponse:
+      type: object
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or Amazon Resource Name (ARN) of the modified configuration.
+    ModifyConversionConfigurationMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+        - ConversionConfiguration
+      title: ModifyConversionConfigurationMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        ConversionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The new conversion configuration.
+    ModifyDataProviderResponse:
+      type: object
+      properties:
+        DataProvider:
+          allOf:
+            - $ref: '#/components/schemas/DataProvider'
+            - description: The data provider that was modified.
+    ModifyDataProviderMessage:
+      type: object
+      required:
+        - DataProviderIdentifier
+      title: ModifyDataProviderMessage
+      properties:
+        DataProviderIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier of the data provider. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can''t end with a hyphen, or contain two consecutive hyphens.'
+        DataProviderName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the data provider.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly description of the data provider.
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of database engine for the data provider. Valid values include <code>"aurora"</code>, <code>"aurora_postgresql"</code>, <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, and <code>"sqlserver"</code>. A value of <code>"aurora"</code> represents Amazon Aurora MySQL-Compatible Edition.'
+        ExactSettings:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: '<p>If this attribute is Y, the current call to <code>ModifyDataProvider</code> replaces all existing data provider settings with the exact settings that you specify in this call. If this attribute is N, the current call to <code>ModifyDataProvider</code> does two things: </p> <ul> <li> <p>It replaces any data provider settings that already exist with new values, for settings with the same names.</p> </li> <li> <p>It creates new data provider settings that you specify in the call, for settings with different names. </p> </li> </ul>'
+        Settings:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderSettings'
+            - description: The settings in JSON format for a data provider.
     ModifyEndpointResponse:
       type: object
       example:
@@ -6586,6 +8775,100 @@ components:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: ' A Boolean value; set to <b>true</b> to activate the subscription. '
       description: <p/>
+    ModifyInstanceProfileResponse:
+      type: object
+      properties:
+        InstanceProfile:
+          allOf:
+            - $ref: '#/components/schemas/InstanceProfile'
+            - description: The instance profile that was modified.
+    ModifyInstanceProfileMessage:
+      type: object
+      required:
+        - InstanceProfileIdentifier
+      title: ModifyInstanceProfileMessage
+      properties:
+        InstanceProfileIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier of the instance profile. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can''t end with a hyphen, or contain two consecutive hyphens.'
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Availability Zone where the instance profile runs.
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile.</p> <p>If you don''t specify a value for the <code>KmsKeyArn</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>'
+        PubliclyAccessible:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Specifies the accessibility options for the instance profile. A value of <code>true</code> represents an instance profile with a public IP address. A value of <code>false</code> represents an instance profile with a private IP address. The default value is <code>true</code>.
+        NetworkType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies the network type for the instance profile. A value of <code>IPV4</code> represents an instance profile with IPv4 network type and only supports IPv4 addressing. A value of <code>IPV6</code> represents an instance profile with IPv6 network type and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance profile with dual network type that supports IPv4 and IPv6 addressing.
+        InstanceProfileName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly name for the instance profile.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly description for the instance profile.
+        SubnetGroupIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A subnet group to associate with the instance profile.
+        VpcSecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Specifies the VPC security groups to be used with the instance profile. The VPC security group must work with the VPC containing the instance profile.
+    ModifyMigrationProjectResponse:
+      type: object
+      properties:
+        MigrationProject:
+          allOf:
+            - $ref: '#/components/schemas/MigrationProject'
+            - description: The migration project that was modified.
+    ModifyMigrationProjectMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: ModifyMigrationProjectMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The identifier of the migration project. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can''t end with a hyphen, or contain two consecutive hyphens.'
+        MigrationProjectName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly name for the migration project.
+        SourceDataProviderDescriptors:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderDescriptorDefinitionList'
+            - description: 'Information about the source data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.'
+        TargetDataProviderDescriptors:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderDescriptorDefinitionList'
+            - description: 'Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.'
+        InstanceProfileIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or Amazon Resource Name (ARN) for the instance profile.
+        TransformationRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The settings in JSON format for migration rules. Migration rules make it possible for you to change the object names according to the rules that you specify. For example, you can change an object name to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly description of the migration project.
+        SchemaConversionApplicationAttributes:
+          allOf:
+            - $ref: '#/components/schemas/SCApplicationAttributes'
+            - description: 'The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.'
     ModifyReplicationConfigResponse:
       type: object
       properties:
@@ -6978,6 +9261,155 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The status of the LSA analysis, for example <code>COMPLETED</code>.'
+    StartExtensionPackAssociationResponse:
+      type: object
+      properties:
+        RequestIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the request operation.
+    StartExtensionPackAssociationMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+      title: StartExtensionPackAssociationMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+    StartMetadataModelAssessmentResponse:
+      type: object
+      properties:
+        RequestIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the assessment operation.
+    StartMetadataModelAssessmentMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+        - SelectionRules
+      title: StartMetadataModelAssessmentMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        SelectionRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A value that specifies the database objects to assess.
+    StartMetadataModelConversionResponse:
+      type: object
+      properties:
+        RequestIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the conversion operation.
+    StartMetadataModelConversionMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+        - SelectionRules
+      title: StartMetadataModelConversionMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        SelectionRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A value that specifies the database objects to convert.
+    StartMetadataModelExportAsScriptResponse:
+      type: object
+      properties:
+        RequestIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the export operation.
+    StartMetadataModelExportAsScriptMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+        - SelectionRules
+        - Origin
+      title: StartMetadataModelExportAsScriptMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        SelectionRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A value that specifies the database objects to export.
+        Origin:
+          allOf:
+            - $ref: '#/components/schemas/OriginTypeValue'
+            - description: Whether to export the metadata model from the source or the target.
+        FileName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the model file to create in the Amazon S3 bucket.
+    StartMetadataModelExportToTargetResponse:
+      type: object
+      properties:
+        RequestIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the export operation.
+    StartMetadataModelExportToTargetMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+        - SelectionRules
+      title: StartMetadataModelExportToTargetMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        SelectionRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A value that specifies the database objects to export.
+        OverwriteExtensionPack:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Whether to overwrite the migration project extension pack. An extension pack is an add-on module that emulates functions present in a source database that are required when converting objects to the target database.
+    StartMetadataModelImportResponse:
+      type: object
+      properties:
+        RequestIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the import operation.
+    StartMetadataModelImportMessage:
+      type: object
+      required:
+        - MigrationProjectIdentifier
+        - SelectionRules
+        - Origin
+      title: StartMetadataModelImportMessage
+      properties:
+        MigrationProjectIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project name or Amazon Resource Name (ARN).
+        SelectionRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A value that specifies the database objects to import.
+        Origin:
+          allOf:
+            - $ref: '#/components/schemas/OriginTypeValue'
+            - description: Whether to load metadata to the source or target database.
+        Refresh:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If <code>true</code>, DMS loads metadata for the specified objects from the source database.'
     StartRecommendationsRequest:
       type: object
       required:
@@ -7287,6 +9719,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    AssessmentReportType:
+      type: string
+      enum:
+        - pdf
+        - csv
+    AssessmentReportTypesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssessmentReportType'
+      minItems: 1
     AuthMechanismValue:
       type: string
       enum:
@@ -7662,6 +10104,46 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Connection'
+    DataProviderSettings:
+      type: object
+      properties:
+        PostgreSqlSettings:
+          $ref: '#/components/schemas/PostgreSqlDataProviderSettings'
+        MySqlSettings:
+          $ref: '#/components/schemas/MySqlDataProviderSettings'
+        OracleSettings:
+          $ref: '#/components/schemas/OracleDataProviderSettings'
+        MicrosoftSqlServerSettings:
+          $ref: '#/components/schemas/MicrosoftSqlServerDataProviderSettings'
+      description: Provides information that defines a data provider.
+    DataProvider:
+      type: object
+      properties:
+        DataProviderName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the data provider.
+        DataProviderArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) string that uniquely identifies the data provider.
+        DataProviderCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601DateTime'
+            - description: The time the data provider was created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A description of the data provider. Descriptions can have up to 31 characters. A description can contain only ASCII letters, digits, and hyphens (''-''). Also, it can''t end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.'
+        Engine:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of database engine for the data provider. Valid values include <code>"aurora"</code>, <code>"aurora_postgresql"</code>, <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, and <code>"sqlserver"</code>. A value of <code>"aurora"</code> represents Amazon Aurora MySQL-Compatible Edition.'
+        Settings:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderSettings'
+            - description: The settings in JSON format for a data provider.
+      description: Provides information that defines a data provider.
     ReplicationEndpointTypeValue:
       type: string
       enum:
@@ -9110,6 +11592,110 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Boolean value that indicates if the event subscription is enabled.
       description: Describes an event notification subscription created by the <code>CreateEventSubscription</code> operation.
+    InstanceProfile:
+      type: object
+      properties:
+        InstanceProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) string that uniquely identifies the instance profile.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Availability Zone where the instance profile runs.
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile.</p> <p>If you don''t specify a value for the <code>KmsKeyArn</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>'
+        PubliclyAccessible:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Specifies the accessibility options for the instance profile. A value of <code>true</code> represents an instance profile with a public IP address. A value of <code>false</code> represents an instance profile with a private IP address. The default value is <code>true</code>.
+        NetworkType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specifies the network type for the instance profile. A value of <code>IPV4</code> represents an instance profile with IPv4 network type and only supports IPv4 addressing. A value of <code>IPV6</code> represents an instance profile with IPv6 network type and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance profile with dual network type that supports IPv4 and IPv6 addressing.
+        InstanceProfileName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user-friendly name for the instance profile.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A description of the instance profile. Descriptions can have up to 31 characters. A description can contain only ASCII letters, digits, and hyphens (''-''). Also, it can''t end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.'
+        InstanceProfileCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601DateTime'
+            - description: The time the instance profile was created.
+        SubnetGroupIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the subnet group that is associated with the instance profile.
+        VpcSecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The VPC security groups that are used with the instance profile. The VPC security group must work with the VPC containing the instance profile.
+      description: Provides information that defines an instance profile.
+    DataProviderDescriptorDefinitionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataProviderDescriptorDefinition'
+    SCApplicationAttributes:
+      type: object
+      properties:
+        S3BucketPath:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The path for the Amazon S3 bucket that the application uses for exporting assessment reports.
+        S3BucketRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN for the role the application uses to access its Amazon S3 bucket.
+      description: Provides information that defines a schema conversion application.
+    MigrationProject:
+      type: object
+      properties:
+        MigrationProjectName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the migration project.
+        MigrationProjectArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN string that uniquely identifies the migration project.
+        MigrationProjectCreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601DateTime'
+            - description: The time when the migration project was created.
+        SourceDataProviderDescriptors:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderDescriptorList'
+            - description: 'Information about the source data provider, including the name or ARN, and Secrets Manager parameters.'
+        TargetDataProviderDescriptors:
+          allOf:
+            - $ref: '#/components/schemas/DataProviderDescriptorList'
+            - description: 'Information about the target data provider, including the name or ARN, and Secrets Manager parameters.'
+        InstanceProfileArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the instance profile for your migration project.
+        InstanceProfileName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the associated instance profile.
+        TransformationRules:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The settings in JSON format for migration rules. Migration rules make it possible for you to change the object names according to the rules that you specify. For example, you can change an object name to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A user-friendly description of the migration project.
+        SchemaConversionApplicationAttributes:
+          allOf:
+            - $ref: '#/components/schemas/SCApplicationAttributes'
+            - description: 'The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.'
+      description: Provides information that defines a migration project.
     MigrationTypeValue:
       type: string
       enum:
@@ -9391,6 +11977,167 @@ components:
       enum:
         - csv
         - parquet
+    Iso8601DateTime:
+      type: string
+      format: date-time
+    DataProviderDescriptor:
+      type: object
+      properties:
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the Amazon Web Services Secrets Manager Secret used to store access credentials for the data provider.
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the role used to access Amazon Web Services Secrets Manager.
+        DataProviderName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user-friendly name of the data provider.
+        DataProviderArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the data provider.
+      description: Information about a data provider.
+    DataProviderDescriptorDefinition:
+      type: object
+      required:
+        - DataProviderIdentifier
+      properties:
+        DataProviderIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name or Amazon Resource Name (ARN) of the data provider.
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the Amazon Web Services Secrets Manager Secret used to store access credentials for the data provider.
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the role used to access Amazon Web Services Secrets Manager.
+      description: Information about a data provider.
+    DataProviderDescriptorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataProviderDescriptor'
+    DataProviderList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DataProvider'
+    PostgreSqlDataProviderSettings:
+      type: object
+      properties:
+        ServerName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the PostgreSQL server.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The port value for the PostgreSQL data provider.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The database name on the PostgreSQL data provider.
+        SslMode:
+          allOf:
+            - $ref: '#/components/schemas/DmsSslModeValue'
+            - description: The SSL mode used to connect to the PostgreSQL data provider. The default value is <code>none</code>.
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+      description: Provides information that defines a PostgreSQL data provider.
+    MySqlDataProviderSettings:
+      type: object
+      properties:
+        ServerName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the MySQL server.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The port value for the MySQL data provider.
+        SslMode:
+          allOf:
+            - $ref: '#/components/schemas/DmsSslModeValue'
+            - description: The SSL mode used to connect to the MySQL data provider. The default value is <code>none</code>.
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+      description: Provides information that defines a MySQL data provider.
+    OracleDataProviderSettings:
+      type: object
+      properties:
+        ServerName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Oracle server.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The port value for the Oracle data provider.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The database name on the Oracle data provider.
+        SslMode:
+          allOf:
+            - $ref: '#/components/schemas/DmsSslModeValue'
+            - description: The SSL mode used to connect to the Oracle data provider. The default value is <code>none</code>.
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+        AsmServer:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The address of your Oracle Automatic Storage Management (ASM) server. You can set this value from the <code>asm_server</code> value. You set <code>asm_server</code> as part of the extra connection attribute string to access an Oracle server with Binary Reader that uses ASM. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration">Configuration for change data capture (CDC) on an Oracle source database</a>.'
+        SecretsManagerOracleAsmSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: <p>The identifier of the secret in Secrets Manager that contains the Oracle ASM connection details.</p> <p>Required only if your data provider uses the Oracle ASM server.</p>
+        SecretsManagerOracleAsmAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the IAM role that provides access to the secret in Secrets Manager that contains the Oracle ASM connection details.
+        SecretsManagerSecurityDbEncryptionSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the secret in Secrets Manager that contains the transparent data encryption (TDE) password. DMS requires this password to access Oracle redo logs encrypted by TDE using Binary Reader.
+        SecretsManagerSecurityDbEncryptionAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the IAM role that provides access to the secret in Secrets Manager that contains the TDE password.
+      description: Provides information that defines an Oracle data provider.
+    MicrosoftSqlServerDataProviderSettings:
+      type: object
+      properties:
+        ServerName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The name of the Microsoft SQL Server server.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The port value for the Microsoft SQL Server data provider.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The database name on the Microsoft SQL Server data provider.
+        SslMode:
+          allOf:
+            - $ref: '#/components/schemas/DmsSslModeValue'
+            - description: The SSL mode used to connect to the Microsoft SQL Server data provider. The default value is <code>none</code>.
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the certificate used for SSL connection.
+      description: Provides information that defines a Microsoft SQL Server data provider.
     DatabaseInstanceSoftwareDetailsResponse:
       type: object
       properties:
@@ -9517,6 +12264,14 @@ components:
         - YYYYMM
         - MMYYYYDD
         - DDMMYYYY
+    DefaultErrorDetails:
+      type: object
+      properties:
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The error message.
+      description: Provides error information about a schema conversion operation.
     IndividualAssessmentNameList:
       type: array
       items:
@@ -9557,6 +12312,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Event'
+    SchemaConversionRequestList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaConversionRequest'
     FleetAdvisorLsaAnalysisResponseList:
       type: array
       items:
@@ -9569,6 +12328,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SchemaResponse'
+    InstanceProfileList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceProfile'
+    MigrationProjectList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MigrationProject'
     OrderableReplicationInstanceList:
       type: array
       items:
@@ -9768,6 +12535,14 @@ components:
             - $ref: '#/components/schemas/AvailableUpgradesList'
             - description: The list of valid replication instance versions that you can upgrade to.
       description: Provides information about a replication instance version.
+    ErrorDetails:
+      type: object
+      properties:
+        defaultErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/DefaultErrorDetails'
+            - description: Error information about a project.
+      description: Provides error information about a project.
     Event:
       type: object
       properties:
@@ -9808,6 +12583,30 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    ExportMetadataModelAssessmentResultEntry:
+      type: object
+      properties:
+        S3ObjectKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The object key for the object containing the exported metadata model assessment.
+        ObjectURL:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL for the object containing the exported metadata model assessment.
+      description: Provides information about an exported metadata model assessment.
+    ExportSqlDetails:
+      type: object
+      properties:
+        S3ObjectKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon S3 object key for the object containing the exported metadata model assessment.
+        ObjectURL:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The URL for the object containing the exported metadata model assessment.
+      description: Provides information about a metadata model assessment exported to SQL.
     FilterValueList:
       type: array
       items:
@@ -10029,6 +12828,11 @@ components:
             - $ref: '#/components/schemas/ReleaseStatusValues'
             - description: <p>The value returned when the specified <code>EngineVersion</code> of the replication instance is in Beta or test mode. This indicates some features might not work as expected.</p> <note> <p>DMS supports the <code>ReleaseStatus</code> parameter in versions 3.1.4 and later.</p> </note>
       description: 'In response to the <code>DescribeOrderableReplicationInstances</code> operation, this object describes an available replication instance. This description includes the replication instance''s type, engine version, and allocated storage.'
+    OriginTypeValue:
+      type: string
+      enum:
+        - SOURCE
+        - TARGET
     ParquetVersionValue:
       type: string
       enum:
@@ -10661,6 +13465,26 @@ components:
             - $ref: '#/components/schemas/TStamp'
             - description: Date when this individual assessment was started as part of running the <code>StartReplicationTaskAssessmentRun</code> operation.
       description: Provides information that describes an individual assessment from a premigration assessment run.
+    SchemaConversionRequest:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The schema conversion action status.
+        RequestIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the schema conversion action.
+        MigrationProjectArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The migration project ARN.
+        Error:
+          $ref: '#/components/schemas/ErrorDetails'
+        ExportSqlDetails:
+          $ref: '#/components/schemas/ExportSqlDetails'
+      description: Provides information about a schema conversion action.
     SchemaShortInfoResponse:
       type: object
       properties:
