@@ -3679,6 +3679,9 @@ components:
     Settings:
       description: Describes the Migration Center settings related to the project.
       properties:
+        disableCloudLogging:
+          description: Disable Cloud Logging for the Migration Center API. Users are billed for the logs.
+          type: boolean
         name:
           description: Output only. The name of the resource.
           readOnly: true

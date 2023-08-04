@@ -1573,6 +1573,55 @@ components:
             - MARKDOWN
             - RAW
           type: string
+        style:
+          $ref: "#/components/schemas/TextStyle"
+          description: How the text is styled
+      type: object
+    TextStyle:
+      description: Properties that determine how the title and content are styled
+      properties:
+        backgroundColor:
+          description: The background color as a hex string. "#RRGGBB" or "#RGB"
+          type: string
+        fontSize:
+          description: Font sizes for both the title and content. The title will still be larger relative to the content.
+          enum:
+            - FONT_SIZE_UNSPECIFIED
+            - FS_EXTRA_SMALL
+            - FS_SMALL
+            - FS_MEDIUM
+            - FS_LARGE
+            - FS_EXTRA_LARGE
+          type: string
+        horizontalAlignment:
+          description: The horizontal alignment of both the title and content
+          enum:
+            - HORIZONTAL_ALIGNMENT_UNSPECIFIED
+            - H_LEFT
+            - H_CENTER
+            - H_RIGHT
+          type: string
+        padding:
+          description: The amount of padding around the widget
+          enum:
+            - PADDING_SIZE_UNSPECIFIED
+            - P_EXTRA_SMALL
+            - P_SMALL
+            - P_MEDIUM
+            - P_LARGE
+            - P_EXTRA_LARGE
+          type: string
+        textColor:
+          description: The text color as a hex string. "#RRGGBB" or "#RGB"
+          type: string
+        verticalAlignment:
+          description: The vertical alignment of both the title and content
+          enum:
+            - VERTICAL_ALIGNMENT_UNSPECIFIED
+            - V_TOP
+            - V_CENTER
+            - V_BOTTOM
+          type: string
       type: object
     Threshold:
       description: Defines a threshold for categorizing time series values.

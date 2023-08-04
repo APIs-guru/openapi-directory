@@ -961,12 +961,11 @@ components:
     GoogleCloudAssuredworkloadsV1WorkloadPartnerPermissions:
       description: Permissions granted to the AW Partner SA account for the customer workload
       properties:
+        assuredWorkloadsMonitoring:
+          description: Optional. Allow partner to view violation alerts.
+          type: boolean
         dataLogsViewer:
           description: Allow the partner to view inspectability logs and monitoring violations.
-          type: boolean
-        remediateFolderViolations:
-          deprecated: true
-          description: Allow partner to monitor folder and remediate violations
           type: boolean
         serviceAccessApprover:
           description: Optional. Allow partner to view access approval logs.

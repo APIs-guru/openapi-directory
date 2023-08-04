@@ -2853,7 +2853,7 @@ components:
       description: Evaluates whether each column value matches a specified regex.
       properties:
         regex:
-          description: A regular expression the column value is expected to match.
+          description: Optional. A regular expression the column value is expected to match.
           type: string
       type: object
     GoogleCloudDataplexV1DataQualityRuleResult:
@@ -2889,14 +2889,14 @@ components:
       description: "Evaluates whether each row passes the specified condition.The SQL expression needs to use BigQuery standard SQL syntax and should produce a boolean value per row as the result.Example: col1 >= 0 AND col2 < 10"
       properties:
         sqlExpression:
-          description: The SQL expression.
+          description: Optional. The SQL expression.
           type: string
       type: object
     GoogleCloudDataplexV1DataQualityRuleSetExpectation:
       description: Evaluates whether each column value is contained by a specified set.
       properties:
         values:
-          description: Expected values for the column value.
+          description: Optional. Expected values for the column value.
           items:
             type: string
           type: array
@@ -2905,13 +2905,13 @@ components:
       description: Evaluates whether the column aggregate statistic lies between a specified range.
       properties:
         maxValue:
-          description: The maximum column statistic value allowed for a row to pass this validation.At least one of min_value and max_value need to be provided.
+          description: Optional. The maximum column statistic value allowed for a row to pass this validation.At least one of min_value and max_value need to be provided.
           type: string
         minValue:
-          description: The minimum column statistic value allowed for a row to pass this validation.At least one of min_value and max_value need to be provided.
+          description: Optional. The minimum column statistic value allowed for a row to pass this validation.At least one of min_value and max_value need to be provided.
           type: string
         statistic:
-          description: The aggregate metric to evaluate.
+          description: Optional. The aggregate metric to evaluate.
           enum:
             - STATISTIC_UNDEFINED
             - MEAN
@@ -2919,17 +2919,17 @@ components:
             - MAX
           type: string
         strictMaxEnabled:
-          description: Whether column statistic needs to be strictly lesser than ('<') the maximum, or if equality is allowed.Only relevant if a max_value has been defined. Default = false.
+          description: Optional. Whether column statistic needs to be strictly lesser than ('<') the maximum, or if equality is allowed.Only relevant if a max_value has been defined. Default = false.
           type: boolean
         strictMinEnabled:
-          description: Whether column statistic needs to be strictly greater than ('>') the minimum, or if equality is allowed.Only relevant if a min_value has been defined. Default = false.
+          description: Optional. Whether column statistic needs to be strictly greater than ('>') the minimum, or if equality is allowed.Only relevant if a min_value has been defined. Default = false.
           type: boolean
       type: object
     GoogleCloudDataplexV1DataQualityRuleTableConditionExpectation:
       description: "Evaluates whether the provided expression is true.The SQL expression needs to use BigQuery standard SQL syntax and should produce a scalar boolean result.Example: MIN(col1) >= 0"
       properties:
         sqlExpression:
-          description: The SQL expression.
+          description: Optional. The SQL expression.
           type: string
       type: object
     GoogleCloudDataplexV1DataQualityRuleUniquenessExpectation:
@@ -3008,7 +3008,7 @@ components:
           description: "Optional. A filter applied to all rows in a single DataScan job. The filter needs to be a valid SQL expression for a WHERE clause in BigQuery standard SQL syntax. Example: col1 >= 0 AND col2 < 10"
           type: string
         rules:
-          description: The list of rules to evaluate against a data source. At least one rule is required.
+          description: Required. The list of rules to evaluate against a data source. At least one rule is required.
           items:
             $ref: "#/components/schemas/GoogleCloudDataplexV1DataQualityRule"
           type: array

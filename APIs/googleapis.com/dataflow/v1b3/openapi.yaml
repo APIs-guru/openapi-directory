@@ -3247,6 +3247,52 @@ components:
           description: VM instance name the data disks mounted to, for example "myproject-1014-104817-4c2-harness-0".
           type: string
       type: object
+    DataSamplingConfig:
+      description: Configuration options for sampling elements.
+      properties:
+        behaviors:
+          description: List of given sampling behaviors to enable. For example, specifying behaviors = [ALWAYS_ON] samples in-flight elements but does not sample exceptions. Can be used to specify multiple behaviors like, behaviors = [ALWAYS_ON, EXCEPTIONS] for specifying periodic sampling and exception sampling. If DISABLED is in the list, then sampling will be disabled and ignore the other given behaviors. Ordering does not matter.
+          items:
+            enum:
+              - DATA_SAMPLING_BEHAVIOR_UNSPECIFIED
+              - DISABLED
+              - ALWAYS_ON
+              - EXCEPTIONS
+            type: string
+          type: array
+      type: object
+    DataSamplingReport:
+      description: Contains per-worker telemetry about the data sampling feature.
+      properties:
+        bytesWrittenDelta:
+          description: Optional. Delta of bytes written to file from previous report.
+          format: int64
+          type: string
+        elementsSampledBytes:
+          description: Optional. Delta of bytes sampled from previous report.
+          format: int64
+          type: string
+        elementsSampledCount:
+          description: Optional. Delta of number of elements sampled from previous report.
+          format: int64
+          type: string
+        exceptionsSampledCount:
+          description: Optional. Delta of number of samples taken from user code exceptions from previous report.
+          format: int64
+          type: string
+        pcollectionsSampledCount:
+          description: Optional. Delta of number of PCollections sampled from previous report.
+          format: int64
+          type: string
+        persistenceErrorsCount:
+          description: Optional. Delta of errors counts from persisting the samples from previous report.
+          format: int64
+          type: string
+        translationErrorsCount:
+          description: Optional. Delta of errors counts from retrieving, or translating the samples from previous report.
+          format: int64
+          type: string
+      type: object
     DatastoreIODetails:
       description: Metadata for a Datastore connector used by the job.
       properties:
@@ -3260,6 +3306,9 @@ components:
     DebugOptions:
       description: Describes any options that have an effect on the debugging of pipelines.
       properties:
+        dataSampling:
+          $ref: "#/components/schemas/DataSamplingConfig"
+          description: Configuration options for sampling elements from a running pipeline.
         enableHotKeyLogging:
           description: When true, enables the logging of the literal hot key to the user's Cloud Logging.
           type: boolean
@@ -3430,6 +3479,10 @@ components:
         tempStoragePrefix:
           description: 'The prefix of the resources the system should use for temporary storage. The system will append the suffix "/temp-{JOBNAME} to this resource prefix, where {JOBNAME} is the value of the job_name field. The resulting bucket and object prefix is used as the prefix of the resources used to store temporary data needed during the job execution. NOTE: This will override the value in taskrunner_settings. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}'
           type: string
+        useStreamingEngineResourceBasedBilling:
+          description: Output only. Whether the job uses the new streaming engine billing model based on resource usage.
+          readOnly: true
+          type: boolean
         userAgent:
           additionalProperties:
             description: Properties of the object.
@@ -4891,6 +4944,32 @@ components:
           description: Optional. The SDK version.
           type: string
       type: object
+    SdkBug:
+      description: A bug found in the Dataflow SDK.
+      properties:
+        severity:
+          description: Output only. How severe the SDK bug is.
+          enum:
+            - SEVERITY_UNSPECIFIED
+            - NOTICE
+            - WARNING
+            - SEVERE
+          readOnly: true
+          type: string
+        type:
+          description: Output only. Describes the impact of this SDK bug.
+          enum:
+            - TYPE_UNSPECIFIED
+            - GENERAL
+            - PERFORMANCE
+            - DATALOSS
+          readOnly: true
+          type: string
+        uri:
+          description: Output only. Link to more information on the bug.
+          readOnly: true
+          type: string
+      type: object
     SdkHarnessContainerImage:
       description: Defines an SDK harness container for executing Dataflow pipelines.
       properties:
@@ -4912,6 +4991,12 @@ components:
     SdkVersion:
       description: The version of the SDK used to run the job.
       properties:
+        bugs:
+          description: Output only. Known bugs found in this SDK version.
+          items:
+            $ref: "#/components/schemas/SdkBug"
+          readOnly: true
+          type: array
         sdkSupportStatus:
           description: The support status for this SDK version.
           enum:
@@ -6083,6 +6168,9 @@ components:
     WorkerMessage:
       description: WorkerMessage provides information to the backend about a worker.
       properties:
+        dataSamplingReport:
+          $ref: "#/components/schemas/DataSamplingReport"
+          description: Optional. Contains metrics related to go/dataflow-data-sampling-telemetry.
         labels:
           additionalProperties:
             type: string
