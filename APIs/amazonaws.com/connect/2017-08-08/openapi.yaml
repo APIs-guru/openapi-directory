@@ -2882,6 +2882,12 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                AgentAvailabilityTimer:
+                  description: 'Whether agents with this routing profile will have their routing order calculated based on <i>time since their last inbound contact</i> or <i>longest idle time</i>. '
+                  type: string
+                  enum:
+                    - TIME_SINCE_LAST_ACTIVITY
+                    - TIME_SINCE_LAST_INBOUND
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -15876,6 +15882,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/routing-profiles/{InstanceId}/{RoutingProfileId}/agent-availability-timer':
+    post:
+      operationId: UpdateRoutingProfileAgentAvailabilityTimer
+      description: 'Whether agents with this routing profile will have their routing order calculated based on <i>time since their last inbound contact</i> or <i>longest idle time</i>. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: 'The identifier of the Amazon Connect instance. You can <a href="https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: RoutingProfileId
+          in: path
+          required: true
+          description: The identifier of the routing profile.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AgentAvailabilityTimer
+              properties:
+                AgentAvailabilityTimer:
+                  description: 'Whether agents with this routing profile will have their routing order calculated based on <i>time since their last inbound contact</i> or <i>longest idle time</i>. '
+                  type: string
+                  enum:
+                    - TIME_SINCE_LAST_ACTIVITY
+                    - TIME_SINCE_LAST_INBOUND
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/routing-profiles/{InstanceId}/{RoutingProfileId}/concurrency':
     post:
       operationId: UpdateRoutingProfileConcurrency
@@ -19114,6 +19195,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
             - description: 'The version of the evaluation form to activate. If the version property is not provided, the latest version of the evaluation form is activated.'
+    AgentAvailabilityTimer:
+      type: string
+      enum:
+        - TIME_SINCE_LAST_ACTIVITY
+        - TIME_SINCE_LAST_INBOUND
     Channel:
       type: string
       enum:
@@ -20663,6 +20749,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The tags used to organize, track, or control access for this resource. For example, { "tags": {"key1":"value1", "key2":"value2"} }.'
+        AgentAvailabilityTimer:
+          allOf:
+            - $ref: '#/components/schemas/AgentAvailabilityTimer'
+            - description: 'Whether agents with this routing profile will have their routing order calculated based on <i>time since their last inbound contact</i> or <i>longest idle time</i>. '
     RuleName:
       type: string
       pattern: '^[0-9a-zA-Z._-]+'
@@ -21798,6 +21888,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Long'
             - description: The number of associated users in routing profile.
+        AgentAvailabilityTimer:
+          allOf:
+            - $ref: '#/components/schemas/AgentAvailabilityTimer'
+            - description: 'Whether agents with this routing profile will have their routing order calculated based on <i>time since their last inbound contact</i> or <i>longest idle time</i>. '
       description: Contains information about a routing profile.
     DescribeRuleRequest:
       type: object
@@ -25874,6 +25968,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/UpdateQuickConnectDescription'
             - description: The description of the quick connect.
+    UpdateRoutingProfileAgentAvailabilityTimerRequest:
+      type: object
+      required:
+        - AgentAvailabilityTimer
+      title: UpdateRoutingProfileAgentAvailabilityTimerRequest
+      properties:
+        AgentAvailabilityTimer:
+          allOf:
+            - $ref: '#/components/schemas/AgentAvailabilityTimer'
+            - description: 'Whether agents with this routing profile will have their routing order calculated based on <i>time since their last inbound contact</i> or <i>longest idle time</i>. '
     UpdateRoutingProfileConcurrencyRequest:
       type: object
       required:
