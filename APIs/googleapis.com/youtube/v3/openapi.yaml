@@ -6893,6 +6893,28 @@ components:
           format: uint64
           type: string
       type: object
+    CuepointSchedule:
+      description: Schedule to insert cuepoints into a broadcast by ads automator.
+      properties:
+        enabled:
+          description: This field is semantically required. If it is set false or not set, other fields in this message will be ignored.
+          type: boolean
+        pauseAdsUntil:
+          description: If set, automatic cuepoint insertion is paused until this timestamp ("No Ad Zone").
+          format: google-datetime
+          type: string
+        repeatInterval:
+          description: Interval frequency that api uses to insert cuepoints automatically.
+          format: google-duration
+          type: string
+        scheduleStrategy:
+          description: The strategy to use when scheduling cuepoints.
+          enum:
+            - scheduleStrategyUnspecified
+            - concurrent
+            - nonConcurrent
+          type: string
+      type: object
     Entity:
       properties:
         id:
@@ -7212,6 +7234,9 @@ components:
           default: youtube#liveBroadcast
           description: 'Identifies what kind of resource this is. Value: the fixed string "youtube#liveBroadcast".'
           type: string
+        monetizationDetails:
+          $ref: "#/components/schemas/LiveBroadcastMonetizationDetails"
+          description: The monetizationDetails object contains information about the event's monetization details.
         snippet:
           $ref: "#/components/schemas/LiveBroadcastSnippet"
           description: The snippet object contains basic details about the event, including its title, description, start time, and end time.
@@ -7334,6 +7359,12 @@ components:
           deprecated: true
           description: The visitorId identifies the visitor.
           type: string
+      type: object
+    LiveBroadcastMonetizationDetails:
+      description: Monetization settings of a broadcast.
+      properties:
+        cuepointSchedule:
+          $ref: "#/components/schemas/CuepointSchedule"
       type: object
     LiveBroadcastSnippet:
       description: Basic broadcast information.
@@ -8441,11 +8472,6 @@ components:
       type: object
     PlaylistStatus:
       properties:
-        podcastStatus:
-          enum:
-            - enabled
-            - disabled
-          type: string
         privacyStatus:
           description: The playlist's privacy status.
           enum:

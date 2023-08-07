@@ -320,6 +320,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v2alpha1/{name}:reset":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Resets a QueuedResource TPU instance
+      operationId: tpu.projects.locations.queuedResources.reset
+      parameters:
+        - description: Required. The name of the queued resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetQueuedResourceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2alpha1/{name}:simulateMaintenanceEvent":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1135,6 +1177,17 @@ components:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
       type: object
+    MultiNodeParams:
+      description: Parameters to specify for multi-node QueuedResource requests. This field must be populated in case of multi-node requests instead of node_id. It's an error to specify both node_id and multi_node_params.
+      properties:
+        nodeCount:
+          description: Required. Number of nodes with this spec. The system will attempt to provison "node_count" nodes as part of the request. This needs to be > 1.
+          format: int32
+          type: integer
+        nodeIdPrefix:
+          description: Prefix of node_ids in case of multi-node request Should follow the `^[A-Za-z0-9_.~+%-]+$` regex format. If node_count = 3 and node_id_prefix = "np", node ids of nodes created will be "np-0", "np-1", "np-2". If this field is not provided we use queued_resource_id as the node_id_prefix.
+          type: string
+      type: object
     NetworkConfig:
       description: Network related configurations.
       properties:
@@ -1295,6 +1348,9 @@ components:
     NodeSpec:
       description: Details of the TPU node(s) being requested. Users can request either a single node or multiple nodes. NodeSpec provides the specification for node(s) to be created.
       properties:
+        multiNodeParams:
+          $ref: "#/components/schemas/MultiNodeParams"
+          description: Optional. Fields to specify in case of multi-node request.
         node:
           $ref: "#/components/schemas/Node"
           description: Required. The node.
@@ -1460,6 +1516,10 @@ components:
           description: An absolute time after which resources should not be created. If the request cannot be fulfilled by this time the request will be failed.
           format: google-datetime
           type: string
+      type: object
+    ResetQueuedResourceRequest:
+      description: Request for ResetQueuedResource.
+      properties: {}
       type: object
     RuntimeVersion:
       description: A runtime version that a Node can be configured with.

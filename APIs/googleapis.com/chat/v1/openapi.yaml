@@ -228,7 +228,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a space and adds specified users to it. The calling user is automatically added to the space, and shouldn't be specified as a membership in the request. For an example, see [Set up a space](https://developers.google.com/chat/api/guides/v1/spaces/set-up). To specify the human members to add, add memberships with the appropriate `member.name` in the `SetUpSpaceRequest`. To add a human user, use `users/{user}`, where `{user}` can be the email address for the user. For users in the same Workspace organization `{user}` can also be the `{person_id}` for the person from the People API, or the `id` for the user in the Directory API. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can add the user to the space by setting the `membership.member.name` to `users/user@example.com` or `users/123456789`. For a space or group chat, if the caller blocks or is blocked by some members, then those members aren't added to the created space. To create a direct message (DM) between the calling user and another human user, specify exactly one membership to represent the human user. If one user blocks the other, the request fails and the DM isn't created. To create a DM between the calling user and the calling app, set `Space.singleUserBotDm` to `true` and don't specify any memberships. You can only use this method to set up a DM with the calling app. To add the calling app as a member of a space or an existing DM between two human users, see [create a membership](https://developers.google.com/chat/api/guides/v1/members/create). If a DM already exists between two users, even when one user blocks the other at the time a request is made, then the existing DM is returned. Spaces with threaded replies or guest access aren't supported. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.spaces.create` or `chat.spaces` scope.
+      description: Creates a space and adds specified users to it. The calling user is automatically added to the space, and shouldn't be specified as a membership in the request. For an example, see [Set up a space](https://developers.google.com/chat/api/guides/v1/spaces/set-up). To specify the human members to add, add memberships with the appropriate `member.name` in the `SetUpSpaceRequest`. To add a human user, use `users/{user}`, where `{user}` can be the email address for the user. For users in the same Workspace organization `{user}` can also be the `{person_id}` for the person from the People API, or the `id` for the user in the Directory API. For example, if the People API Person `resourceName` for `user@example.com` is `people/123456789`, you can add the user to the space by setting the `membership.member.name` to `users/user@example.com` or `users/123456789`. For a space or group chat, if the caller blocks or is blocked by some members, then those members aren't added to the created space. To create a direct message (DM) between the calling user and another human user, specify exactly one membership to represent the human user. If one user blocks the other, the request fails and the DM isn't created. To create a DM between the calling user and the calling app, set `Space.singleUserBotDm` to `true` and don't specify any memberships. You can only use this method to set up a DM with the calling app. To add the calling app as a member of a space or an existing DM between two human users, see [create a membership](https://developers.google.com/chat/api/guides/v1/members/create). If a DM already exists between two users, even when one user blocks the other at the time a request is made, then the existing DM is returned. Spaces with threaded replies aren't supported. Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users) and the `chat.spaces.create` or `chat.spaces` scope.
       operationId: chat.spaces.setup
       requestBody:
         content:
@@ -568,6 +568,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.memberships
           Oauth2c:
             - https://www.googleapis.com/auth/chat.memberships
@@ -676,7 +680,7 @@ paths:
           name: requestId
           schema:
             type: string
-        - description: "Optional. Deprecated: Use thread.thread_key instead. Opaque thread identifier. To start or add to a thread, create a message and specify a `threadKey` or the thread.name. For example usage, see [Start or reply to a message thread](https://developers.google.com/chat/api/guides/crudl/messages#start_or_reply_to_a_message_thread)."
+        - description: "Optional. Deprecated: Use thread.thread_key instead. ID for the thread. Supports up to 4000 characters. To start or add to a thread, create a message and specify a `threadKey` or the thread.name. For example usage, see [Start or reply to a message thread](https://developers.google.com/chat/api/guides/crudl/messages#start_or_reply_to_a_message_thread)."
           in: query
           name: threadKey
           schema:
@@ -991,10 +995,12 @@ components:
           $ref: "#/components/schemas/AttachmentDataRef"
           description: A reference to the attachment data. This field is used with the media API to download the attachment data.
         contentName:
-          description: The original file name for the content, not the full path.
+          description: Output only. The original file name for the content, not the full path.
+          readOnly: true
           type: string
         contentType:
-          description: The content type (MIME type) of the file.
+          description: Output only. The content type (MIME type) of the file.
+          readOnly: true
           type: string
         downloadUri:
           description: Output only. The download URL which should be used to allow a human user to download the attachment. Chat apps shouldn't use this URL to download attachment content.
@@ -1002,16 +1008,18 @@ components:
           type: string
         driveDataRef:
           $ref: "#/components/schemas/DriveDataRef"
-          description: A reference to the drive attachment. This field is used with the Drive API.
+          description: Output only. A reference to the Google Drive attachment. This field is used with the Google Drive API.
+          readOnly: true
         name:
           description: Resource name of the attachment, in the form `spaces/*/messages/*/attachments/*`.
           type: string
         source:
-          description: The source of the attachment.
+          description: Output only. The source of the attachment.
           enum:
             - SOURCE_UNSPECIFIED
             - DRIVE_FILE
             - UPLOADED_CONTENT
+          readOnly: true
           type: string
         thumbnailUri:
           description: Output only. The thumbnail URL which should be used to preview the attachment to a human user. Chat apps shouldn't use this URL to download attachment content.
@@ -1737,7 +1745,7 @@ components:
           description: A new card is pushed to the card stack after clicking if specified. Supported by Google Workspace Add-ons, but not Chat apps.
         openDynamicLinkAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
-          description: An add-on triggers this action when the action needs to open a link. This differs from the `open_link` above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back.
+          description: An add-on triggers this action when the action needs to open a link. This differs from the `open_link` above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back. Supported by Google Workspace Add-ons, but not Google Chat apps.
         openLink:
           $ref: "#/components/schemas/GoogleAppsCardV1OpenLink"
           description: If specified, this `onClick` triggers an open link action.
@@ -2558,13 +2566,13 @@ components:
           type: string
       type: object
     Thread:
-      description: A thread in Google Chat.
+      description: A thread in a Google Chat space. For example usage, see [Start or reply to a message thread](https://developers.google.com/chat/api/guides/crudl/messages#start_or_reply_to_a_message_thread).
       properties:
         name:
           description: "Resource name of the thread. Example: `spaces/{space}/threads/{thread}`"
           type: string
         threadKey:
-          description: Optional. Opaque thread identifier. To start or add to a thread, create a message and specify a `threadKey` or the thread.name. For example usage, see [Start or reply to a message thread](https://developers.google.com/chat/api/guides/crudl/messages#start_or_reply_to_a_message_thread). For other requests, this is an output only field.
+          description: Optional. ID for the thread. Supports up to 4000 characters. Input for creating or updating a thread. Otherwise, output only.
           type: string
       type: object
     TimeInput:

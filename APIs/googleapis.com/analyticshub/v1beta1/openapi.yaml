@@ -784,6 +784,14 @@ components:
           format: int32
           type: integer
       type: object
+    LinkedResource:
+      description: Reference to a linked resource tracked by this Subscription.
+      properties:
+        linkedDataset:
+          description: Output only. Name of the linked dataset, e.g. projects/subscriberproject/datasets/linked_dataset
+          readOnly: true
+          type: string
+      type: object
     ListDataExchangesResponse:
       description: Message for response to the list of data exchanges.
       properties:
@@ -958,6 +966,13 @@ components:
           description: "Optional. Email or URL of the listing publisher. Max Length: 1000 bytes."
           type: string
       type: object
+    RefreshSubscriptionResponse:
+      description: Message for response when you refresh a subscription.
+      properties:
+        subscription:
+          $ref: "#/components/schemas/Subscription"
+          description: The refreshed subscription resource.
+      type: object
     RestrictedExportConfig:
       description: Restricted export config, used to configure restricted export on linked dataset.
       properties:
@@ -983,6 +998,13 @@ components:
           format: google-fieldmask
           type: string
       type: object
+    SubscribeDataExchangeResponse:
+      description: Message for response when you subscribe to a Data Exchange.
+      properties:
+        subscription:
+          $ref: "#/components/schemas/Subscription"
+          description: Subscription object created from this subscribe action.
+      type: object
     SubscribeListingRequest:
       description: Message for subscribing to a listing.
       properties:
@@ -993,6 +1015,59 @@ components:
     SubscribeListingResponse:
       description: Message for response when you subscribe to a listing.
       properties: {}
+      type: object
+    Subscription:
+      description: A subscription represents a subscribers' access to a particular set of published data. It contains references to associated listings, data exchanges, and linked datasets. TODO(b/267528977) Consider port the new resource to v1beta1 and dataexchange APIs.
+      properties:
+        creationTime:
+          description: Output only. Timestamp when the subscription was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        dataExchange:
+          description: Output only. Resource name of the source Data Exchange. e.g. projects/123/locations/US/dataExchanges/456
+          readOnly: true
+          type: string
+        lastModifyTime:
+          description: Output only. Timestamp when the subscription was last modified.
+          format: google-datetime
+          readOnly: true
+          type: string
+        linkedDatasetMap:
+          additionalProperties:
+            $ref: "#/components/schemas/LinkedResource"
+          description: Output only. Map of listing resource names to associated linked resource, e.g. projects/123/locations/US/dataExchanges/456/listings/789 -> projects/123/datasets/my_dataset For listing-level subscriptions, this is a map of size 1. Only contains values if state == STATE_ACTIVE.
+          readOnly: true
+          type: object
+        listing:
+          description: Output only. Resource name of the source Listing. e.g. projects/123/locations/US/dataExchanges/456/listings/789
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name of the subscription. e.g. `projects/myproject/locations/US/subscriptions/123`.
+          readOnly: true
+          type: string
+        organizationDisplayName:
+          description: Output only. Display name of the project of this subscription.
+          readOnly: true
+          type: string
+        organizationId:
+          description: Output only. Organization of the project this subscription belongs to.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. Current state of the subscription.
+          enum:
+            - STATE_UNSPECIFIED
+            - STATE_ACTIVE
+            - STATE_STALE
+            - STATE_INACTIVE
+          readOnly: true
+          type: string
+        subscriberContact:
+          description: Output only. Email of the subscriber.
+          readOnly: true
+          type: string
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.

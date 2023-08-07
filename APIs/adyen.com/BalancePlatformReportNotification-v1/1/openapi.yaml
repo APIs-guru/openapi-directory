@@ -22,13 +22,13 @@ info:
   x-providerName: adyen.com
   x-publicVersion: true
   x-serviceName: BalancePlatformReportNotification-v1
-  x-timestamp: 2023-05-30T15:26:38Z
 tags: []
 components:
   examples:
     WebhookAck:
       summary: Acknowledge Webhook
-      value: "[accepted]"
+      value:
+        notificationResponse: "[accepted]"
     post-balancePlatform.report.created-balancePlatform.report.created:
       description: Example webhook when a report was generated and is ready to be downloaded
       summary: Report created
@@ -128,10 +128,6 @@ components:
           type: string
       type: object
   securitySchemes:
-    ApiKeyAuth:
-      in: header
-      name: X-API-Key
-      type: apiKey
     BasicAuth:
       scheme: basic
       type: http
@@ -162,7 +158,7 @@ webhooks:
                 $ref: "#/components/schemas/BalancePlatformNotificationResponse"
           description: OK - the request has succeeded.
       security:
-        - ApiKeyAuth: []
+        - BasicAuth: []
       summary: Report generated
       tags:
         - General
