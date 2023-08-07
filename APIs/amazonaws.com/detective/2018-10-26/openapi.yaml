@@ -1869,7 +1869,7 @@ components:
             - description: <p>The ARN of the behavior graph that the member account is accepting the invitation for.</p> <p>The member account status in the behavior graph must be <code>INVITED</code>.</p>
     EmailAddress:
       type: string
-      pattern: '^.+@(?:(?:(?!-)[A-Za-z0-9-]{1,62})?[A-Za-z0-9]{1}\.)+[A-Za-z]{2,6}$'
+      pattern: '^.+@(?:(?:(?!-)[A-Za-z0-9-]{1,62})?[A-Za-z0-9]{1}\.)+[A-Za-z]{2,63}$'
       minLength: 1
       maxLength: 64
     AccountIdExtendedList:

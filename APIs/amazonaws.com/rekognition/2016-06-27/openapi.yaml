@@ -447,7 +447,7 @@ paths:
   /#X-Amz-Target=RekognitionService.CreateDataset:
     post:
       operationId: CreateDataset
-      description: '<p>Creates a new Amazon Rekognition Custom Labels dataset. You can create a dataset by using an Amazon Sagemaker format manifest file or by copying an existing Amazon Rekognition Custom Labels dataset.</p> <p>To create a training dataset for a project, specify <code>train</code> for the value of <code>DatasetType</code>. To create the test dataset for a project, specify <code>test</code> for the value of <code>DatasetType</code>. </p> <p>The response from <code>CreateDataset</code> is the Amazon Resource Name (ARN) for the dataset. Creating a dataset takes a while to complete. Use <a>DescribeDataset</a> to check the current status. The dataset created successfully if the value of <code>Status</code> is <code>CREATE_COMPLETE</code>. </p> <p>To check if any non-terminal errors occurred, call <a>ListDatasetEntries</a> and check for the presence of <code>errors</code> lists in the JSON Lines.</p> <p>Dataset creation fails if a terminal error occurs (<code>Status</code> = <code>CREATE_FAILED</code>). Currently, you can''t access the terminal error information. </p> <p>For more information, see Creating dataset in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.</p> <p>This operation requires permissions to perform the <code>rekognition:CreateDataset</code> action. If you want to copy an existing dataset, you also require permission to perform the <code>rekognition:ListDatasetEntries</code> action.</p>'
+      description: '<p>Creates a new Amazon Rekognition Custom Labels dataset. You can create a dataset by using an Amazon Sagemaker format manifest file or by copying an existing Amazon Rekognition Custom Labels dataset.</p> <p>To create a training dataset for a project, specify <code>TRAIN</code> for the value of <code>DatasetType</code>. To create the test dataset for a project, specify <code>TEST</code> for the value of <code>DatasetType</code>. </p> <p>The response from <code>CreateDataset</code> is the Amazon Resource Name (ARN) for the dataset. Creating a dataset takes a while to complete. Use <a>DescribeDataset</a> to check the current status. The dataset created successfully if the value of <code>Status</code> is <code>CREATE_COMPLETE</code>. </p> <p>To check if any non-terminal errors occurred, call <a>ListDatasetEntries</a> and check for the presence of <code>errors</code> lists in the JSON Lines.</p> <p>Dataset creation fails if a terminal error occurs (<code>Status</code> = <code>CREATE_FAILED</code>). Currently, you can''t access the terminal error information. </p> <p>For more information, see Creating dataset in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.</p> <p>This operation requires permissions to perform the <code>rekognition:CreateDataset</code> action. If you want to copy an existing dataset, you also require permission to perform the <code>rekognition:ListDatasetEntries</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -534,7 +534,7 @@ paths:
   /#X-Amz-Target=RekognitionService.CreateFaceLivenessSession:
     post:
       operationId: CreateFaceLivenessSession
-      description: 'This API operation initiates a Face Liveness session. It returns a <code>SessionId</code>, which you can use to start streaming Face Liveness video and get the results for a Face Liveness session. You can use the <code>OutputConfig</code> option in the Settings parameter to provide an Amazon S3 bucket location. The Amazon S3 bucket stores reference images and audit images. You can use <code>AuditImagesLimit</code> to limit the number of audit images returned. This number is between 0 and 4. By default, it is set to 0. The limit is best effort and based on the duration of the selfie-video. '
+      description: '<p>This API operation initiates a Face Liveness session. It returns a <code>SessionId</code>, which you can use to start streaming Face Liveness video and get the results for a Face Liveness session. </p> <p>You can use the <code>OutputConfig</code> option in the Settings parameter to provide an Amazon S3 bucket location. The Amazon S3 bucket stores reference images and audit images. If no Amazon S3 bucket is defined, raw bytes are sent instead. </p> <p>You can use <code>AuditImagesLimit</code> to limit the number of audit images returned when <code>GetFaceLivenessSessionResults</code> is called. This number is between 0 and 4. By default, it is set to 0. The limit is best effort and based on the duration of the selfie-video. </p>'
       responses:
         '200':
           description: Success
@@ -2082,7 +2082,7 @@ paths:
   /#X-Amz-Target=RekognitionService.DetectLabels:
     post:
       operationId: DetectLabels
-      description: '<p>Detects instances of real-world entities within an image (JPEG or PNG) provided as input. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; and concepts like landscape, evening, and nature. </p> <p>For an example, see Analyzing images stored in an Amazon S3 bucket in the Amazon Rekognition Developer Guide.</p> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> <b>Optional Parameters</b> </p> <p>You can specify one or both of the <code>GENERAL_LABELS</code> and <code>IMAGE_PROPERTIES</code> feature types when calling the DetectLabels API. Including <code>GENERAL_LABELS</code> will ensure the response includes the labels detected in the input image, while including <code>IMAGE_PROPERTIES </code>will ensure the response includes information about the image quality and color.</p> <p>When using <code>GENERAL_LABELS</code> and/or <code>IMAGE_PROPERTIES</code> you can provide filtering criteria to the Settings parameter. You can filter with sets of individual labels or with label categories. You can specify inclusive filters, exclusive filters, or a combination of inclusive and exclusive filters. For more information on filtering see <a href="https://docs.aws.amazon.com/rekognition/latest/dg/labels-detect-labels-image.html">Detecting Labels in an Image</a>.</p> <p>You can specify <code>MinConfidence</code> to control the confidence threshold for the labels returned. The default is 55%. You can also add the <code>MaxLabels</code> parameter to limit the number of labels returned. The default and upper limit is 1000 labels.</p> <p> <b>Response Elements</b> </p> <p> For each object, scene, and concept the API returns one or more labels. The API returns the following types of information about labels:</p> <ul> <li> <p> Name - The name of the detected label. </p> </li> <li> <p> Confidence - The level of confidence in the label assigned to a detected object. </p> </li> <li> <p> Parents - The ancestor labels for a detected label. DetectLabels returns a hierarchical taxonomy of detected labels. For example, a detected car might be assigned the label car. The label car has two parent labels: Vehicle (its parent) and Transportation (its grandparent). The response includes the all ancestors for a label, where every ancestor is a unique label. In the previous example, Car, Vehicle, and Transportation are returned as unique labels in the response. </p> </li> <li> <p> Aliases - Possible Aliases for the label. </p> </li> <li> <p> Categories - The label categories that the detected label belongs to. </p> </li> <li> <p> BoundingBox — Bounding boxes are described for all instances of detected common object labels, returned in an array of Instance objects. An Instance object contains a BoundingBox object, describing the location of the label on the input image. It also includes the confidence for the accuracy of the detected bounding box. </p> </li> </ul> <p> The API returns the following information regarding the image, as part of the ImageProperties structure:</p> <ul> <li> <p>Quality - Information about the Sharpness, Brightness, and Contrast of the input image, scored between 0 to 100. Image quality is returned for the entire image, as well as the background and the foreground. </p> </li> <li> <p>Dominant Color - An array of the dominant colors in the image. </p> </li> <li> <p>Foreground - Information about the sharpness, brightness, and dominant colors of the input image’s foreground. </p> </li> <li> <p>Background - Information about the sharpness, brightness, and dominant colors of the input image’s background.</p> </li> </ul> <p>The list of returned labels will include at least one label for every detected object, along with information about that label. In the following example, suppose the input image has a lighthouse, the sea, and a rock. The response includes all three labels, one for each object, as well as the confidence in the label:</p> <p> <code>{Name: lighthouse, Confidence: 98.4629}</code> </p> <p> <code>{Name: rock,Confidence: 79.2097}</code> </p> <p> <code> {Name: sea,Confidence: 75.061}</code> </p> <p>The list of labels can include multiple labels for the same object. For example, if the input image shows a flower (for example, a tulip), the operation might return the following three labels. </p> <p> <code>{Name: flower,Confidence: 99.0562}</code> </p> <p> <code>{Name: plant,Confidence: 99.0562}</code> </p> <p> <code>{Name: tulip,Confidence: 99.0562}</code> </p> <p>In this example, the detection algorithm more precisely identifies the flower as a tulip.</p> <note> <p>If the object detected is a person, the operation doesn''t provide the same facial details that the <a>DetectFaces</a> operation provides.</p> </note> <p>This is a stateless API operation that doesn''t return any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectLabels</code> action. </p>'
+      description: '<p>Detects instances of real-world entities within an image (JPEG or PNG) provided as input. This includes objects like flower, tree, and table; events like wedding, graduation, and birthday party; and concepts like landscape, evening, and nature. </p> <p>For an example, see Analyzing images stored in an Amazon S3 bucket in the Amazon Rekognition Developer Guide.</p> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> <b>Optional Parameters</b> </p> <p>You can specify one or both of the <code>GENERAL_LABELS</code> and <code>IMAGE_PROPERTIES</code> feature types when calling the DetectLabels API. Including <code>GENERAL_LABELS</code> will ensure the response includes the labels detected in the input image, while including <code>IMAGE_PROPERTIES </code>will ensure the response includes information about the image quality and color.</p> <p>When using <code>GENERAL_LABELS</code> and/or <code>IMAGE_PROPERTIES</code> you can provide filtering criteria to the Settings parameter. You can filter with sets of individual labels or with label categories. You can specify inclusive filters, exclusive filters, or a combination of inclusive and exclusive filters. For more information on filtering see <a href="https://docs.aws.amazon.com/rekognition/latest/dg/labels-detect-labels-image.html">Detecting Labels in an Image</a>.</p> <p>When getting labels, you can specify <code>MinConfidence</code> to control the confidence threshold for the labels returned. The default is 55%. You can also add the <code>MaxLabels</code> parameter to limit the number of labels returned. The default and upper limit is 1000 labels. These arguments are only valid when supplying GENERAL_LABELS as a feature type.</p> <p> <b>Response Elements</b> </p> <p> For each object, scene, and concept the API returns one or more labels. The API returns the following types of information about labels:</p> <ul> <li> <p> Name - The name of the detected label. </p> </li> <li> <p> Confidence - The level of confidence in the label assigned to a detected object. </p> </li> <li> <p> Parents - The ancestor labels for a detected label. DetectLabels returns a hierarchical taxonomy of detected labels. For example, a detected car might be assigned the label car. The label car has two parent labels: Vehicle (its parent) and Transportation (its grandparent). The response includes the all ancestors for a label, where every ancestor is a unique label. In the previous example, Car, Vehicle, and Transportation are returned as unique labels in the response. </p> </li> <li> <p> Aliases - Possible Aliases for the label. </p> </li> <li> <p> Categories - The label categories that the detected label belongs to. </p> </li> <li> <p> BoundingBox — Bounding boxes are described for all instances of detected common object labels, returned in an array of Instance objects. An Instance object contains a BoundingBox object, describing the location of the label on the input image. It also includes the confidence for the accuracy of the detected bounding box. </p> </li> </ul> <p> The API returns the following information regarding the image, as part of the ImageProperties structure:</p> <ul> <li> <p>Quality - Information about the Sharpness, Brightness, and Contrast of the input image, scored between 0 to 100. Image quality is returned for the entire image, as well as the background and the foreground. </p> </li> <li> <p>Dominant Color - An array of the dominant colors in the image. </p> </li> <li> <p>Foreground - Information about the sharpness, brightness, and dominant colors of the input image’s foreground. </p> </li> <li> <p>Background - Information about the sharpness, brightness, and dominant colors of the input image’s background.</p> </li> </ul> <p>The list of returned labels will include at least one label for every detected object, along with information about that label. In the following example, suppose the input image has a lighthouse, the sea, and a rock. The response includes all three labels, one for each object, as well as the confidence in the label:</p> <p> <code>{Name: lighthouse, Confidence: 98.4629}</code> </p> <p> <code>{Name: rock,Confidence: 79.2097}</code> </p> <p> <code> {Name: sea,Confidence: 75.061}</code> </p> <p>The list of labels can include multiple labels for the same object. For example, if the input image shows a flower (for example, a tulip), the operation might return the following three labels. </p> <p> <code>{Name: flower,Confidence: 99.0562}</code> </p> <p> <code>{Name: plant,Confidence: 99.0562}</code> </p> <p> <code>{Name: tulip,Confidence: 99.0562}</code> </p> <p>In this example, the detection algorithm more precisely identifies the flower as a tulip.</p> <note> <p>If the object detected is a person, the operation doesn''t provide the same facial details that the <a>DetectFaces</a> operation provides.</p> </note> <p>This is a stateless API operation that doesn''t return any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectLabels</code> action. </p>'
       responses:
         '200':
           description: Success
@@ -2811,7 +2811,7 @@ paths:
   /#X-Amz-Target=RekognitionService.GetFaceDetection:
     post:
       operationId: GetFaceDetection
-      description: '<p>Gets face detection results for a Amazon Rekognition Video analysis started by <a>StartFaceDetection</a>.</p> <p>Face detection with Amazon Rekognition Video is an asynchronous operation. You start face detection by calling <a>StartFaceDetection</a> which returns a job identifier (<code>JobId</code>). When the face detection operation finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartFaceDetection</code>. To get the results of the face detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <a>GetFaceDetection</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartFaceDetection</code>.</p> <p> <code>GetFaceDetection</code> returns an array of detected faces (<code>Faces</code>) sorted by the time the faces were detected. </p> <p>Use MaxResults parameter to limit the number of labels returned. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetFaceDetection</code> and populate the <code>NextToken</code> request parameter with the token value returned from the previous call to <code>GetFaceDetection</code>.</p>'
+      description: '<p>Gets face detection results for a Amazon Rekognition Video analysis started by <a>StartFaceDetection</a>.</p> <p>Face detection with Amazon Rekognition Video is an asynchronous operation. You start face detection by calling <a>StartFaceDetection</a> which returns a job identifier (<code>JobId</code>). When the face detection operation finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartFaceDetection</code>. To get the results of the face detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <a>GetFaceDetection</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartFaceDetection</code>.</p> <p> <code>GetFaceDetection</code> returns an array of detected faces (<code>Faces</code>) sorted by the time the faces were detected. </p> <p>Use MaxResults parameter to limit the number of labels returned. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetFaceDetection</code> and populate the <code>NextToken</code> request parameter with the token value returned from the previous call to <code>GetFaceDetection</code>.</p> <p>Note that for the <code>GetFaceDetection</code> operation, the returned values for <code>FaceOccluded</code> and <code>EyeDirection</code> will always be "null".</p>'
       responses:
         '200':
           description: Success
@@ -2898,7 +2898,7 @@ paths:
   /#X-Amz-Target=RekognitionService.GetFaceLivenessSessionResults:
     post:
       operationId: GetFaceLivenessSessionResults
-      description: 'Retrieves the results of a specific Face Liveness session. It requires the <code>sessionId</code> as input, which was created using <code>CreateFaceLivenessSession</code>. Returns the corresponding Face Liveness confidence score, a reference image that includes a face bounding box, and audit images that also contain face bounding boxes. The Face Liveness confidence score ranges from 0 to 100. The reference image can optionally be returned.'
+      description: '<p>Retrieves the results of a specific Face Liveness session. It requires the <code>sessionId</code> as input, which was created using <code>CreateFaceLivenessSession</code>. Returns the corresponding Face Liveness confidence score, a reference image that includes a face bounding box, and audit images that also contain face bounding boxes. The Face Liveness confidence score ranges from 0 to 100. </p> <p>The number of audit images returned by <code>GetFaceLivenessSessionResults</code> is defined by the <code>AuditImagesLimit</code> paramater when calling <code>CreateFaceLivenessSession</code>. Reference images are always returned when possible.</p>'
       responses:
         '200':
           description: Success
@@ -3315,7 +3315,7 @@ paths:
   /#X-Amz-Target=RekognitionService.GetTextDetection:
     post:
       operationId: GetTextDetection
-      description: '<p>Gets the text detection results of a Amazon Rekognition Video analysis started by <a>StartTextDetection</a>.</p> <p>Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by calling <a>StartTextDetection</a> which returns a job identifier (<code>JobId</code>) When the text detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartTextDetection</code>. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. if so, call <code>GetTextDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call of <code>StartLabelDetection</code>.</p> <p> <code>GetTextDetection</code> returns an array of detected text (<code>TextDetections</code>) sorted by the time the text was detected, up to 50 words per frame of video.</p> <p>Each element of the array includes the detected text, the precentage confidence in the acuracy of the detected text, the time the text was detected, bounding box information for where the text was located, and unique identifiers for words and their lines.</p> <p>Use MaxResults parameter to limit the number of text detections returned. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetTextDetection</code> and populate the <code>NextToken</code> request parameter with the token value returned from the previous call to <code>GetTextDetection</code>.</p>'
+      description: '<p>Gets the text detection results of a Amazon Rekognition Video analysis started by <a>StartTextDetection</a>.</p> <p>Text detection with Amazon Rekognition Video is an asynchronous operation. You start text detection by calling <a>StartTextDetection</a> which returns a job identifier (<code>JobId</code>) When the text detection operation finishes, Amazon Rekognition publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartTextDetection</code>. To get the results of the text detection operation, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. if so, call <code>GetTextDetection</code> and pass the job identifier (<code>JobId</code>) from the initial call of <code>StartLabelDetection</code>.</p> <p> <code>GetTextDetection</code> returns an array of detected text (<code>TextDetections</code>) sorted by the time the text was detected, up to 100 words per frame of video.</p> <p>Each element of the array includes the detected text, the precentage confidence in the acuracy of the detected text, the time the text was detected, bounding box information for where the text was located, and unique identifiers for words and their lines.</p> <p>Use MaxResults parameter to limit the number of text detections returned. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetTextDetection</code> and populate the <code>NextToken</code> request parameter with the token value returned from the previous call to <code>GetTextDetection</code>.</p>'
       responses:
         '200':
           description: Success
@@ -6261,6 +6261,8 @@ components:
     ResourceAlreadyExistsException: {}
     CreateDatasetResponse:
       type: object
+      example:
+        DatasetArn: 'arn:aws:rekognition:us-east-1:111122223333:project/my-project/dataset/train/1690476084535'
       properties:
         DatasetArn:
           allOf:
@@ -6280,7 +6282,7 @@ components:
         DatasetType:
           allOf:
             - $ref: '#/components/schemas/DatasetType'
-            - description: ' The type of the dataset. Specify <code>train</code> to create a training dataset. Specify <code>test</code> to create a test dataset. '
+            - description: ' The type of the dataset. Specify <code>TRAIN</code> to create a training dataset. Specify <code>TEST</code> to create a test dataset. '
         ProjectArn:
           allOf:
             - $ref: '#/components/schemas/ProjectArn'
@@ -6312,6 +6314,8 @@ components:
             - description: 'Idempotent token is used to recognize the Face Liveness request. If the same token is used with multiple <code>CreateFaceLivenessSession</code> requests, the same session is returned. This token is employed to avoid unintentionally creating the same session multiple times.'
     CreateProjectResponse:
       type: object
+      example:
+        ProjectArn: 'arn:aws:rekognition:us-east-1:111122223333:project/my-project/1690405809285'
       properties:
         ProjectArn:
           allOf:
@@ -6329,6 +6333,8 @@ components:
             - description: The name of the project to create.
     CreateProjectVersionResponse:
       type: object
+      example:
+        ProjectVersionArn: 'arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958'
       properties:
         ProjectVersionArn:
           allOf:
@@ -6468,6 +6474,7 @@ components:
             - description: ID of the collection to delete.
     DeleteDatasetResponse:
       type: object
+      example: {}
       properties: {}
     DeleteDatasetRequest:
       type: object
@@ -6510,6 +6517,8 @@ components:
             - description: An array of face IDs to delete.
     DeleteProjectResponse:
       type: object
+      example:
+        Status: DELETING
       properties:
         Status:
           allOf:
@@ -6551,6 +6560,8 @@ components:
     InvalidPolicyRevisionIdException: {}
     DeleteProjectVersionResponse:
       type: object
+      example:
+        Status: DELETING
       properties:
         Status:
           allOf:
@@ -6636,6 +6647,18 @@ components:
             - description: The ID of the collection to describe.
     DescribeDatasetResponse:
       type: object
+      example:
+        DatasetDescription:
+          CreationTimestamp: '2023-07-27T09:41:24.738000-07:00'
+          DatasetStats:
+            ErrorEntries: 0
+            LabeledEntries: 15
+            TotalEntries: 15
+            TotalLabels: 9
+          LastUpdatedTimestamp: '2023-07-28T09:46:45.406000-07:00'
+          Status: UPDATE_FAILED
+          StatusMessage: The manifest file contains images from multiple S3 buckets.
+          StatusMessageCode: CLIENT_ERROR
       properties:
         DatasetDescription:
           allOf:
@@ -6653,6 +6676,58 @@ components:
             - description: ' The Amazon Resource Name (ARN) of the dataset that you want to describe. '
     DescribeProjectVersionsResponse:
       type: object
+      example:
+        NextToken: ''
+        ProjectVersionDescriptions:
+          - BillableTrainingTimeInSeconds: 1899
+            CreationTimestamp: '2023-07-28T08:05:51.958000-07:00'
+            EvaluationResult:
+              F1Score: 1
+              Summary:
+                S3Object:
+                  Bucket: custom-labels-console-us-east-1-111111111
+                  Name: my-model-output/EvaluationResultSummary-my-project-1.json
+            ManifestSummary:
+              S3Object:
+                Bucket: custom-labels-console-us-east-1-111111111
+                Name: my-model-output/ManifestSummary-my-project-1.json
+            OutputConfig:
+              S3Bucket: custom-labels-console-us-east-1-111111111
+              S3KeyPrefix: my-model-output
+            ProjectVersionArn: 'arn:aws:rekognition:us-east-1:111122223333:project/my-project/version/1/1690556751958'
+            Status: TRAINING_COMPLETED
+            StatusMessage: The model is ready to run.
+            TestingDataResult:
+              Input:
+                AutoCreate: false
+              Output:
+                Assets:
+                  - GroundTruthManifest:
+                      S3Object:
+                        Bucket: custom-labels-console-us-east-1-111111111
+                        Name: my-model-output/TestingGroundTruth-my-project-1.json
+                AutoCreate: false
+              Validation:
+                Assets:
+                  - GroundTruthManifest:
+                      S3Object:
+                        Bucket: custom-labels-console-us-east-1-111111111
+                        Name: my-model-output/TestingManifestWithValidation-my-project-1.json
+            TrainingDataResult:
+              Input: {}
+              Output:
+                Assets:
+                  - GroundTruthManifest:
+                      S3Object:
+                        Bucket: custom-labels-console-us-east-1-111111111
+                        Name: my-model-output/TrainingGroundTruth-my-project-1.json
+              Validation:
+                Assets:
+                  - GroundTruthManifest:
+                      S3Object:
+                        Bucket: custom-labels-console-us-east-1-111111111
+                        Name: my-model-output/TrainingManifestWithValidation-my-project-1.json
+            TrainingEndTimestamp: '2023-07-28T08:33:10.827000-07:00'
       properties:
         ProjectVersionDescriptions:
           allOf:
@@ -6687,6 +6762,24 @@ components:
     InvalidPaginationTokenException: {}
     DescribeProjectsResponse:
       type: object
+      example:
+        ProjectDescriptions:
+          - CreationTimestamp: '2022-06-13T15:16:00.634000-07:00'
+            Datasets:
+              - CreationTimestamp: '2022-06-13T15:17:34.620000-07:00'
+                DatasetArn: 'arn:aws:rekognition:us-east-1:111122223333:project/my-project/dataset/test/1655158654491'
+                DatasetType: TEST
+                Status: CREATE_COMPLETE
+                StatusMessage: The dataset was successfully created from the manifest file.
+                StatusMessageCode: SUCCESS
+              - CreationTimestamp: '2022-06-13T15:17:50.118000-07:00'
+                DatasetArn: 'arn:aws:rekognition:us-east-1:111122223333:project/my-project/dataset/train/1655158669954'
+                DatasetType: TRAIN
+                Status: CREATE_COMPLETE
+                StatusMessage: The dataset was successfully created from the manifest file.
+                StatusMessageCode: SUCCESS
+            ProjectArn: 'arn:aws:rekognition:us-east-1:111122223333:project/my-project/1655158560634'
+            Status: CREATED
       properties:
         ProjectDescriptions:
           allOf:
@@ -6781,6 +6874,12 @@ components:
             - description: Name of the stream processor for which you want information.
     DetectCustomLabelsResponse:
       type: object
+      example:
+        CustomLabels:
+          - Confidence: 67.56399536132812
+            Name: with_leaves
+          - Confidence: 50.65699768066406
+            Name: without_leaves
       properties:
         CustomLabels:
           allOf:
@@ -6864,7 +6963,7 @@ components:
         Attributes:
           allOf:
             - $ref: '#/components/schemas/Attributes'
-            - description: '<p>An array of facial attributes you want to be returned. A <code>DEFAULT</code> subset of facial attributes - <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code>, and <code>Landmarks</code> - will always be returned. You can request for specific facial attributes (in addition to the default list) - by using [<code>"DEFAULT", "FACE_OCCLUDED"</code>] or just [<code>"FACE_OCCLUDED"</code>]. You can request for all facial attributes by using [<code>"ALL"]</code>. Requesting more attributes may increase response time.</p> <p>If you provide both, <code>["ALL", "DEFAULT"]</code>, the service uses a logical "AND" operator to determine which attributes to return (in this case, all attributes). </p>'
+            - description: '<p>An array of facial attributes you want to be returned. A <code>DEFAULT</code> subset of facial attributes - <code>BoundingBox</code>, <code>Confidence</code>, <code>Pose</code>, <code>Quality</code>, and <code>Landmarks</code> - will always be returned. You can request for specific facial attributes (in addition to the default list) - by using [<code>"DEFAULT", "FACE_OCCLUDED"</code>] or just [<code>"FACE_OCCLUDED"</code>]. You can request for all facial attributes by using [<code>"ALL"]</code>. Requesting more attributes may increase response time.</p> <p>If you provide both, <code>["ALL", "DEFAULT"]</code>, the service uses a logical "AND" operator to determine which attributes to return (in this case, all attributes). </p> <p>Note that while the FaceOccluded and EyeDirection attributes are supported when using <code>DetectFaces</code>, they aren''t supported when analyzing videos with <code>StartFaceDetection</code> and <code>GetFaceDetection</code>.</p>'
     DetectLabelsResponse:
       type: object
       example:
@@ -6903,11 +7002,11 @@ components:
         MaxLabels:
           allOf:
             - $ref: '#/components/schemas/UInteger'
-            - description: 'Maximum number of labels you want the service to return in the response. The service returns the specified number of highest confidence labels. '
+            - description: Maximum number of labels you want the service to return in the response. The service returns the specified number of highest confidence labels. Only valid when GENERAL_LABELS is specified as a feature type in the Feature input parameter.
         MinConfidence:
           allOf:
             - $ref: '#/components/schemas/Percent'
-            - description: '<p>Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn''t return any labels with confidence lower than this specified value.</p> <p>If <code>MinConfidence</code> is not specified, the operation returns labels with a confidence values greater than or equal to 55 percent.</p>'
+            - description: '<p>Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn''t return any labels with confidence lower than this specified value.</p> <p>If <code>MinConfidence</code> is not specified, the operation returns labels with a confidence values greater than or equal to 55 percent. Only valid when GENERAL_LABELS is specified as a feature type in the Feature input parameter.</p>'
         Features:
           allOf:
             - $ref: '#/components/schemas/DetectLabelsFeatureList'
@@ -7054,6 +7153,7 @@ components:
             - description: 'An array of face IDs to disassociate from the UserID. '
     DistributeDatasetEntriesResponse:
       type: object
+      example: {}
       properties: {}
     DistributeDatasetEntriesRequest:
       type: object
@@ -7288,7 +7388,7 @@ components:
         AuditImages:
           allOf:
             - $ref: '#/components/schemas/AuditImages'
-            - description: 'A set of images from the Face Liveness video that can be used for audit purposes. It includes a bounding box of the face and the Base64-encoded bytes that return an image. If the CreateFaceLivenessSession request included an OutputConfig argument, the image will be uploaded to an S3Object specified in the output configuration.'
+            - description: 'A set of images from the Face Liveness video that can be used for audit purposes. It includes a bounding box of the face and the Base64-encoded bytes that return an image. If the CreateFaceLivenessSession request included an OutputConfig argument, the image will be uploaded to an S3Object specified in the output configuration. If no Amazon S3 bucket is defined, raw bytes are sent instead.'
     GetFaceLivenessSessionResultsRequest:
       type: object
       required:
@@ -7752,6 +7852,10 @@ components:
             - description: 'Maximum number of collection IDs to return. '
     ListDatasetEntriesResponse:
       type: object
+      example:
+        DatasetEntries:
+          - '{"source-ref":"s3://custom-labels-console-us-east-1-1111111111/assets/flowers_1_train_dataset/camellia4.jpg","camellia":1,"camellia-metadata":{"confidence":1,"job-name":"labeling-job/camellia","class-name":"camellia","human-annotated":"yes","creation-date":"2021-07-11T03:32:13.456Z","type":"groundtruth/image-classification"},"with_leaves":1,"with_leaves-metadata":{"confidence":1,"job-name":"labeling-job/with_leaves","class-name":"with_leaves","human-annotated":"yes","creation-date":"2021-07-11T03:32:13.456Z","type":"groundtruth/image-classification"},"cl-metadata":{"is_labeled":true}}'
+        NextToken: ''
       properties:
         DatasetEntries:
           allOf:
@@ -7797,6 +7901,17 @@ components:
             - description: 'The maximum number of results to return per paginated call. The largest value you can specify is 100. If you specify a value greater than 100, a ValidationException error occurs. The default value is 100. '
     ListDatasetLabelsResponse:
       type: object
+      example:
+        DatasetLabelDescriptions:
+          - LabelName: camellia
+            LabelStats:
+              EntryCount: 1
+          - LabelName: with_leaves
+            LabelStats:
+              EntryCount: 2
+          - LabelName: mediterranean_spurge
+            LabelStats:
+              EntryCount: 1
       properties:
         DatasetLabelDescriptions:
           allOf:
@@ -7891,11 +8006,11 @@ components:
         UserId:
           allOf:
             - $ref: '#/components/schemas/UserId'
-            - description: An array of user IDs to match when listing faces in a collection.
+            - description: An array of user IDs to filter results with when listing faces in a collection.
         FaceIds:
           allOf:
             - $ref: '#/components/schemas/FaceIdList'
-            - description: An array of face IDs to match when listing faces in a collection.
+            - description: An array of face IDs to filter results with when listing faces in a collection.
     ListProjectPoliciesResponse:
       type: object
       example:
@@ -8539,6 +8654,8 @@ components:
             - description: 'An identifier you specify that''s returned in the completion notification that''s published to your Amazon Simple Notification Service topic. For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.'
     StartProjectVersionResponse:
       type: object
+      example:
+        Status: STARTING
       properties:
         Status:
           allOf:
@@ -8655,6 +8772,8 @@ components:
             - description: Optional parameters that let you set criteria the text must meet to be included in your response.
     StopProjectVersionResponse:
       type: object
+      example:
+        Status: STOPPING
       properties:
         Status:
           allOf:
@@ -8721,6 +8840,7 @@ components:
             - description: ' A list of the tags that you want to remove. '
     UpdateDatasetEntriesResponse:
       type: object
+      example: {}
       properties: {}
     UpdateDatasetEntriesRequest:
       type: object
