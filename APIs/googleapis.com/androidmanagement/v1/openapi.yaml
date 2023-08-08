@@ -218,7 +218,7 @@ paths:
       tags:
         - enterprises
     get:
-      description: Get the device provisioning info by the identifier provided via the sign-in url.
+      description: Get the device provisioning information by the identifier provided in the sign-in url.
       operationId: androidmanagement.provisioningInfo.get
       parameters:
         - description: Required. The identifier that Android Device Policy passes to the 3P sign-in page in the form of provisioningInfo/{provisioning_info}.
@@ -1804,6 +1804,10 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } "
       properties: {}
       type: object
+    EnrollmentCompleteEvent:
+      description: Represents that the device has completed enrollment. User should be in the launcher at this point, device at this point will be compliant and all setup steps have been completed. Intentionally empty.
+      properties: {}
+      type: object
     EnrollmentToken:
       description: An enrollment token.
       properties:
@@ -3272,7 +3276,7 @@ components:
           format: int32
           type: integer
         brand:
-          description: Brand of the device. For example, Google.
+          description: The brand of the device. For example, Google.
           type: string
         enterprise:
           description: The name of the enterprise in the form enterprises/{enterprise}.
@@ -3668,6 +3672,9 @@ components:
         dnsEvent:
           $ref: "#/components/schemas/DnsEvent"
           description: A DNS lookup event was initiated through the standard network stack. Part of NETWORK_ACTIVITY_LOGS.
+        enrollmentCompleteEvent:
+          $ref: "#/components/schemas/EnrollmentCompleteEvent"
+          description: Device has completed enrollment. Part of AMAPI_LOGS.
         eventId:
           description: Unique id of the event.
           format: int64
@@ -3710,6 +3717,7 @@ components:
             - STOP_LOST_MODE_USER_ATTEMPT
             - LOST_MODE_OUTGOING_PHONE_CALL
             - LOST_MODE_LOCATION
+            - ENROLLMENT_COMPLETE
           type: string
         filePulledEvent:
           $ref: "#/components/schemas/FilePulledEvent"

@@ -23,9 +23,9 @@ info:
     - format: google
       url: https://aiplatform.googleapis.com/$discovery/rest?version=v1
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: aiplatform
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/vertex-ai/
 tags:
@@ -7195,8 +7195,7 @@ components:
           description: Properties of the Context. Top level metadata keys' heading and trailing spaces will be trimmed. The size of this field should not exceed 200KB.
           type: object
         name:
-          description: Output only. The resource name of the Context.
-          readOnly: true
+          description: Immutable. The resource name of the Context.
           type: string
         parentContexts:
           description: Output only. A list of resource names of Contexts that are parents of this Context. A Context may have at most 10 parent_contexts.
@@ -12642,8 +12641,7 @@ components:
           format: int64
           type: string
         name:
-          description: Output only. The resource name of the Schedule.
-          readOnly: true
+          description: Immutable. The resource name of the Schedule.
           type: string
         nextRunTime:
           description: Output only. Timestamp when this Schedule should schedule the next run. Having a next_run_time in the past means the runs are being started behind schedule.

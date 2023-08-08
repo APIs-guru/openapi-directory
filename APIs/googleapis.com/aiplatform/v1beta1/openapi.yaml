@@ -23,9 +23,9 @@ info:
     - format: google
       url: https://aiplatform.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: aiplatform
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/vertex-ai/
 tags:
@@ -395,6 +395,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{endpoint}:countTokens":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Perform a token counting.
+      operationId: aiplatform.projects.locations.publishers.models.countTokens
+      parameters:
+        - description: "Required. The name of the Endpoint requested to perform token counting. Format: `projects/{project}/locations/{location}/endpoints/{endpoint}`"
+          in: path
+          name: endpoint
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1CountTokensRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1CountTokensResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{endpoint}:deployModel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -7736,8 +7778,7 @@ components:
           description: Properties of the Context. Top level metadata keys' heading and trailing spaces will be trimmed. The size of this field should not exceed 200KB.
           type: object
         name:
-          description: Output only. The resource name of the Context.
-          readOnly: true
+          description: Immutable. The resource name of the Context.
           type: string
         parentContexts:
           description: Output only. A list of resource names of Contexts that are parents of this Context. A Context may have at most 10 parent_contexts.
@@ -7790,6 +7831,26 @@ components:
           description: Output only. The version ID of the model that is copied.
           readOnly: true
           type: string
+      type: object
+    GoogleCloudAiplatformV1beta1CountTokensRequest:
+      description: Request message for PredictionService.CountTokens.
+      properties:
+        instances:
+          description: Required. The instances that are the input to token counting call. Schema is identical to the prediction schema of the underlying model.
+          items: {}
+          type: array
+      type: object
+    GoogleCloudAiplatformV1beta1CountTokensResponse:
+      description: Response message for PredictionService.CountTokens.
+      properties:
+        totalBillableCharacters:
+          description: The total number of billable characters counted across all instances from the request.
+          format: int32
+          type: integer
+        totalTokens:
+          description: The total number of tokens counted across all instances from the request.
+          format: int32
+          type: integer
       type: object
     GoogleCloudAiplatformV1beta1CreateDatasetOperationMetadata:
       description: Runtime operation information for DatasetService.CreateDataset.
@@ -12535,8 +12596,7 @@ components:
           description: Optional. The labels with user-defined metadata to organize PersistentResource. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information and examples of labels.
           type: object
         name:
-          description: Output only. Resource name of a PersistentResource.
-          readOnly: true
+          description: Immutable. Resource name of a PersistentResource.
           type: string
         network:
           description: Optional. The full name of the Compute Engine [network](/compute/docs/networks-and-firewalls#networks) to peered with Vertex AI to host the persistent resources. For example, `projects/12345/global/networks/myVPC`. [Format](/compute/docs/reference/rest/v1/networks/insert) is of the form `projects/{project}/global/networks/{network}`. Where {project} is a project number, as in `12345`, and {network} is a network name. To specify this field, you must have already [configured VPC Network Peering for Vertex AI](https://cloud.google.com/vertex-ai/docs/general/vpc-peering). If this field is left unspecified, the resources is not peered with any network.
@@ -13052,6 +13112,9 @@ components:
             - GOOGLE_OWNED_OSS
             - THIRD_PARTY_OWNED_OSS
           type: string
+        parent:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PublisherModelParent"
+          description: Optional. The parent that this model was customized from. E.g., Vision API, Natural Language API, LaMDA, T5, etc. Foundation models don't have parents.
         predictSchemata:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PredictSchemata"
           description: Optional. The schemata that describes formats of the PublisherModel's predictions and explanations as given and returned via PredictionService.Predict.
@@ -13159,6 +13222,16 @@ components:
         title:
           description: Required. E.g., OVERVIEW, USE CASES, DOCUMENTATION, SDK & SAMPLES, JAVA, NODE.JS, etc..
           type: string
+      type: object
+    GoogleCloudAiplatformV1beta1PublisherModelParent:
+      description: The information about the parent of a model.
+      properties:
+        displayName:
+          description: Required. The display name of the parent. E.g., LaMDA, T5, Vision API, Natural Language API.
+          type: string
+        reference:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PublisherModelResourceReference"
+          description: Optional. The Google Cloud resource name or the URI reference.
       type: object
     GoogleCloudAiplatformV1beta1PublisherModelResourceReference:
       description: Reference to a resource.
@@ -13748,8 +13821,7 @@ components:
           format: int64
           type: string
         name:
-          description: Output only. The resource name of the Schedule.
-          readOnly: true
+          description: Immutable. The resource name of the Schedule.
           type: string
         nextRunTime:
           description: Output only. Timestamp when this Schedule should schedule the next run. Having a next_run_time in the past means the runs are being started behind schedule.
