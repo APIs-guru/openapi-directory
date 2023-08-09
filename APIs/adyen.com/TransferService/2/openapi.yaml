@@ -64,6 +64,8 @@ paths:
         Returns all transactions related to a balance account with a payment instrument of type **bankAccount**.
 
         This endpoint supports cursor-based pagination. The response returns the first page of results, and returns links to the next page when applicable. You can use the links to page through the results. The response also returns links to the previous page when applicable.
+
+        Provide either `balanceAccountId`, `accountHolderId`, or `balancePlatform` when using this endpoint.
       operationId: get-transactions
       parameters:
         - description: Unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id).
@@ -799,6 +801,10 @@ components:
           format: date-time
           type: string
           x-addedInVersion: "1"
+        creationDate:
+          description: The date and time when the event was triggered, in ISO 8601 extended format. For example, **2020-12-18T10:15:30+01:00**.
+          format: date-time
+          type: string
         description:
           description: The `description` from the `/transfers` request.
           type: string
@@ -1040,6 +1046,10 @@ components:
             - merchantPayinReversedPending
             - miscCost
             - miscCostPending
+            - operationAuthorized
+            - operationBooked
+            - operationPending
+            - operationReceived
             - paymentCost
             - paymentCostPending
             - received

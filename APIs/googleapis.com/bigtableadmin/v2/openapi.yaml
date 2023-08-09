@@ -2024,7 +2024,7 @@ components:
           description: The unique name of the cluster. Values are of the form `projects/{project}/instances/{instance}/clusters/a-z*`.
           type: string
         serveNodes:
-          description: The number of nodes in the cluster. If no value is set, Cloud Bigtable automatically allocates nodes based on your data footprint and optimized for 50% storage utilization.
+          description: The number of nodes allocated to this cluster. More nodes enable higher throughput and more consistent performance.
           format: int32
           type: integer
         state:

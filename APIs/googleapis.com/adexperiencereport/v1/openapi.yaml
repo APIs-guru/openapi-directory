@@ -179,6 +179,11 @@ components:
             - WARNING
             - FAILING
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
+            - false
         enforcementTime:
           description: The time at which [enforcement](https://support.google.com/webtools/answer/7308033) against the site began or will begin on this platform. Not set when the filter_status is OFF.
           format: google-datetime
@@ -197,6 +202,7 @@ components:
           format: google-datetime
           type: string
         region:
+          deprecated: true
           description: The site's regions on this platform. No longer populated, because there is no longer any semantic difference between sites in different regions.
           items:
             enum:

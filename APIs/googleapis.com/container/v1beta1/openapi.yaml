@@ -3278,7 +3278,14 @@ components:
             - EVALUATION_MODE_UNSPECIFIED
             - DISABLED
             - PROJECT_SINGLETON_POLICY_ENFORCE
+            - POLICY_BINDINGS
+            - POLICY_BINDINGS_AND_PROJECT_SINGLETON_POLICY_ENFORCE
           type: string
+        policyBindings:
+          description: Optional. Binauthz policies that apply to this cluster.
+          items:
+            $ref: "#/components/schemas/PolicyBinding"
+          type: array
       type: object
     BlueGreenInfo:
       description: Information relevant to blue-green upgrade.
@@ -5414,6 +5421,13 @@ components:
         enabled:
           description: Enable the PodSecurityPolicy controller for this cluster. If enabled, pods must be valid under a PodSecurityPolicy to be created.
           type: boolean
+      type: object
+    PolicyBinding:
+      description: Binauthz policy that applies to this cluster.
+      properties:
+        name:
+          description: "The relative resource name of the binauthz platform policy to audit. GKE platform policies have the following format: `projects/{project_number}/platforms/gke/policies/{policy_id}`."
+          type: string
       type: object
     PrivateClusterConfig:
       description: Configuration options for private clusters.

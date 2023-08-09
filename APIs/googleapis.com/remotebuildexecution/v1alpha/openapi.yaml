@@ -1077,11 +1077,15 @@ components:
       description: Autoscale defines the autoscaling policy of a worker pool.
       properties:
         maxSize:
-          description: The maximal number of workers. Must be equal to or greater than min_size.
+          description: Optional. The maximal number of workers. Must be equal to or greater than min_size.
+          format: int64
+          type: string
+        minIdleWorkers:
+          description: Optional. The minimum number of idle workers the autoscaler will aim to have in the pool at all times that are immediately available to accept a surge in build traffic. The pool size will still be constrained by min_size and max_size.
           format: int64
           type: string
         minSize:
-          description: The minimal number of workers. Must be greater than 0.
+          description: Optional. The minimal number of workers. Must be greater than 0.
           format: int64
           type: string
       type: object
@@ -1661,7 +1665,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     GoogleProtobufEmpty:

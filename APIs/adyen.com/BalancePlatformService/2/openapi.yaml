@@ -7098,12 +7098,6 @@ components:
       type: object
     UpdateSweepConfigurationV2:
       properties:
-        balanceAccountId:
-          description: |-
-            The unique identifier of the destination or source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
-
-             You can only use this for periodic sweep schedules such as `schedule.type` **daily** or **monthly**.
-          type: string
         category:
           description: |-
             The type of transfer that results from the sweep.
@@ -7215,12 +7209,6 @@ components:
         targetAmount:
           $ref: "#/components/schemas/Amount"
           description: The amount that must be available in the balance account after the sweep. You can configure either `sweepAmount` or `targetAmount`, not both.
-        transferInstrumentId:
-          description: |-
-            The unique identifier of the destination or source [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments__resParam_id).
-
-            You can also use this in combination with a `merchantAccount` and a `type` **pull** to start a direct debit request from the source transfer instrument. To use this feature, reach out to your Adyen contact.
-          type: string
         triggerAmount:
           $ref: "#/components/schemas/Amount"
           description: |-
@@ -7300,6 +7288,12 @@ components:
               - withdrawFromAtmInRestrictedCountries
               - withdrawFromAtmInRestrictedCountriesCommercial
               - withdrawFromAtmInRestrictedCountriesConsumer
+            type: string
+          readOnly: true
+          type: array
+        entityIds:
+          description: The unique identifiers of the bank account(s) that the deadline applies to
+          items:
             type: string
           readOnly: true
           type: array

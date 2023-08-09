@@ -140,17 +140,17 @@ components:
       additionalProperties: false
       properties:
         accountNumber:
-          description: The bank account number (without separators or whitespace).
+          description: The bank account number, without separators or whitespace.
           maxLength: 10
           minLength: 1
           type: string
         bankCode:
-          description: The 3-digit Brazilian bank code (with leading zeros).
+          description: The 3-digit bank code, with leading zeros.
           maxLength: 3
           minLength: 3
           type: string
         branchNumber:
-          description: The bank account branch number (without separators or whitespace).
+          description: The bank account branch number, without separators or whitespace.
           maxLength: 4
           minLength: 1
           type: string
@@ -207,6 +207,7 @@ components:
             - $ref: "#/components/schemas/CALocalAccountIdentification"
             - $ref: "#/components/schemas/CZLocalAccountIdentification"
             - $ref: "#/components/schemas/DKLocalAccountIdentification"
+            - $ref: "#/components/schemas/HKLocalAccountIdentification"
             - $ref: "#/components/schemas/HULocalAccountIdentification"
             - $ref: "#/components/schemas/IbanAccountIdentification"
             - $ref: "#/components/schemas/NOLocalAccountIdentification"
@@ -333,6 +334,30 @@ components:
           description: "**dkLocal**"
           enum:
             - dkLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+        - bankCode
+      type: object
+    HKLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 6- to 19-character bank account number (alphanumeric), without separators or whitespace.
+          maxLength: 19
+          minLength: 6
+          type: string
+        bankCode:
+          description: The 6-digit bank code including the 3-digit bank code and 3-digit branch code, without separators or whitespace.
+          maxLength: 6
+          minLength: 6
+          type: string
+        type:
+          default: hkLocal
+          description: "**hkLocal**"
+          enum:
+            - hkLocal
           type: string
       required:
         - type
@@ -1015,6 +1040,10 @@ components:
             - merchantPayinReversedPending
             - miscCost
             - miscCostPending
+            - operationAuthorized
+            - operationBooked
+            - operationPending
+            - operationReceived
             - paymentCost
             - paymentCostPending
             - received
@@ -1202,6 +1231,10 @@ components:
             - merchantPayinReversedPending
             - miscCost
             - miscCostPending
+            - operationAuthorized
+            - operationBooked
+            - operationPending
+            - operationReceived
             - paymentCost
             - paymentCostPending
             - received
@@ -1222,6 +1255,10 @@ components:
         transactionId:
           description: The id of the transaction that is related to this accounting event. Only sent for events of type **accounting** where the balance changes.
           type: string
+          x-addedInVersion: "3"
+        transferOperation:
+          $ref: "#/components/schemas/TransferOperation"
+          description: ""
           x-addedInVersion: "3"
         type:
           description: "The type of the transfer event. Possible values: **accounting**, **tracking**."
@@ -1284,6 +1321,21 @@ components:
         type:
           description: The type of the validation fact.
           type: string
+      type: object
+    TransferOperation:
+      properties:
+        direction:
+          description: The direction of the money movement.
+          type: string
+          x-addedInVersion: "3"
+        reference:
+          description: The reference returned when the amend was initiated.
+          type: string
+          x-addedInVersion: "3"
+        type:
+          description: The type of amend for the transfer.
+          type: string
+          x-addedInVersion: "3"
       type: object
     UKLocalAccountIdentification:
       additionalProperties: false

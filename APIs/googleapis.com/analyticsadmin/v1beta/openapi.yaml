@@ -1529,6 +1529,13 @@ components:
     GoogleAnalyticsAdminV1betaConversionEvent:
       description: A conversion event in a Google Analytics property.
       properties:
+        countingMethod:
+          description: Optional. The method by which conversions will be counted across multiple events within a session. If this value is not provided, it will be set to `ONCE_PER_EVENT`.
+          enum:
+            - CONVERSION_COUNTING_METHOD_UNSPECIFIED
+            - ONCE_PER_EVENT
+            - ONCE_PER_SESSION
+          type: string
         createTime:
           description: Output only. Time when this conversion event was created in the property.
           format: google-datetime
