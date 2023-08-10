@@ -263,7 +263,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "The language to retrieve the intent for. The following fields are language dependent: * `Intent.training_phrases.parts.text` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
+        - description: "The language to retrieve the transition route group for. The following fields are language dependent: * `TransitionRouteGroup.transition_routes.trigger_fulfillment.messages` * `TransitionRouteGroup.transition_routes.trigger_fulfillment.conditional_cases` If not specified, the agent's default language is used. [Many languages](https://cloud.google.com/dialogflow/cx/docs/reference/language) are supported. Note: languages must be enabled in the agent before they can be used."
           in: query
           name: languageCode
           schema:
@@ -2164,9 +2164,9 @@ paths:
   "/v3beta1/{parent}/transitionRouteGroups":
     get:
       description: Returns the list of all transition route groups in the specified flow.
-      operationId: dialogflow.projects.locations.agents.flows.transitionRouteGroups.list
+      operationId: dialogflow.projects.locations.agents.transitionRouteGroups.list
       parameters:
-        - description: "Required. The flow to list all transition route groups for. Format: `projects//locations//agents//flows/`."
+        - description: "Required. The flow to list all transition route groups for. Format: `projects//locations//agents//flows/` or `projects//locations//agents/."
           in: path
           name: parent
           required: true
@@ -2219,9 +2219,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: "Creates an TransitionRouteGroup in the specified flow. Note: You should always train a flow prior to sending it queries. See the [training documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training)."
-      operationId: dialogflow.projects.locations.agents.flows.transitionRouteGroups.create
+      operationId: dialogflow.projects.locations.agents.transitionRouteGroups.create
       parameters:
-        - description: "Required. The flow to create an TransitionRouteGroup for. Format: `projects//locations//agents//flows/`."
+        - description: "Required. The flow to create an TransitionRouteGroup for. Format: `projects//locations//agents//flows/` or `projects//locations//agents/` for agent-level groups."
           in: path
           name: parent
           required: true
@@ -3249,7 +3249,7 @@ components:
           description: "The unique identifier of the page. Required for the Pages.UpdatePage method. Pages.CreatePage populates the name automatically. Format: `projects//locations//agents//flows//pages/`."
           type: string
         transitionRouteGroups:
-          description: "Ordered list of `TransitionRouteGroups` associated with the page. Transition route groups must be unique within a page. * If multiple transition routes within a page scope refer to the same intent, then the precedence order is: page's transition route -> page's transition route group -> flow's transition routes. * If multiple transition route groups within a page contain the same intent, then the first group in the ordered list takes precedence. Format:`projects//locations//agents//flows//transitionRouteGroups/`."
+          description: "Ordered list of `TransitionRouteGroups` associated with the page. Transition route groups must be unique within a page. * If multiple transition routes within a page scope refer to the same intent, then the precedence order is: page's transition route -> page's transition route group -> flow's transition routes. * If multiple transition route groups within a page contain the same intent, then the first group in the ordered list takes precedence. Format:`projects//locations//agents//flows//transitionRouteGroups/` or `projects//locations//agents//transitionRouteGroups/` for agent-level groups."
           items:
             type: string
           type: array
@@ -3949,7 +3949,7 @@ components:
           type: boolean
       type: object
     GoogleCloudDialogflowCxV3beta1Agent:
-      description: Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way. After you create an agent, you can add Intents, Entity Types, Flows, Fulfillments, Webhooks, and so on to manage the conversation flows..
+      description: Agents are best described as Natural Language Understanding (NLU) modules that transform user requests into actionable data. You can include agents in your app, product, or service to determine user intent and respond to the user in a natural way. After you create an agent, you can add Intents, Entity Types, Flows, Fulfillments, Webhooks, TransitionRouteGroups and so on to manage the conversation flows.
       properties:
         advancedSettings:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AdvancedSettings"
@@ -4810,7 +4810,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1NluSettings"
           description: NLU related settings of the flow.
         transitionRouteGroups:
-          description: "A flow's transition route group serve two purposes: * They are responsible for matching the user's first utterances in the flow. * They are inherited by every page's transition route groups. Transition route groups defined in the page have higher priority than those defined in the flow. Format:`projects//locations//agents//flows//transitionRouteGroups/`."
+          description: "A flow's transition route group serve two purposes: * They are responsible for matching the user's first utterances in the flow. * They are inherited by every page's transition route groups. Transition route groups defined in the page have higher priority than those defined in the flow. Format:`projects//locations//agents//flows//transitionRouteGroups/` or `projects//locations//agents//transitionRouteGroups/` for agent-level groups."
           items:
             type: string
           type: array
@@ -4819,6 +4819,20 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TransitionRoute"
           type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1FlowImportStrategy:
+      description: The flow import strategy used for resource conflict resolution associated with an ImportFlowRequest.
+      properties:
+        globalImportStrategy:
+          description: Optional. Global flow import strategy for resource conflict resolution. The import Import strategy for resource conflict resolution, applied globally throughout the flow. It will be applied for all display name conflicts in the imported content. If not specified, 'CREATE_NEW' is assumed.
+          enum:
+            - IMPORT_STRATEGY_UNSPECIFIED
+            - IMPORT_STRATEGY_CREATE_NEW
+            - IMPORT_STRATEGY_REPLACE
+            - IMPORT_STRATEGY_KEEP
+            - IMPORT_STRATEGY_MERGE
+            - IMPORT_STRATEGY_THROW_ERROR
+          type: string
       type: object
     GoogleCloudDialogflowCxV3beta1FlowValidationResult:
       description: The response message for Flows.GetFlowValidationResult.
@@ -5022,6 +5036,9 @@ components:
           description: Uncompressed raw byte content for flow.
           format: byte
           type: string
+        flowImportStrategy:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FlowImportStrategy"
+          description: Optional. Specifies the import strategy used when resolving resource conflicts.
         flowUri:
           description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to import flow from. The format of this URI must be `gs:///`. Dialogflow performs a read operation for the Cloud Storage object on the caller's behalf, so your request authentication must have read permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           type: string
@@ -5575,7 +5592,7 @@ components:
           description: "The unique identifier of the page. Required for the Pages.UpdatePage method. Pages.CreatePage populates the name automatically. Format: `projects//locations//agents//flows//pages/`."
           type: string
         transitionRouteGroups:
-          description: "Ordered list of `TransitionRouteGroups` associated with the page. Transition route groups must be unique within a page. * If multiple transition routes within a page scope refer to the same intent, then the precedence order is: page's transition route -> page's transition route group -> flow's transition routes. * If multiple transition route groups within a page contain the same intent, then the first group in the ordered list takes precedence. Format:`projects//locations//agents//flows//transitionRouteGroups/`."
+          description: "Ordered list of `TransitionRouteGroups` associated with the page. Transition route groups must be unique within a page. * If multiple transition routes within a page scope refer to the same intent, then the precedence order is: page's transition route -> page's transition route group -> flow's transition routes. * If multiple transition route groups within a page contain the same intent, then the first group in the ordered list takes precedence. Format:`projects//locations//agents//flows//transitionRouteGroups/` or `projects//locations//agents//transitionRouteGroups/` for agent-level groups."
           items:
             type: string
           type: array
@@ -6388,13 +6405,13 @@ components:
           description: The fulfillment to call when the condition is satisfied. At least one of `trigger_fulfillment` and `target` must be specified. When both are defined, `trigger_fulfillment` is executed first.
       type: object
     GoogleCloudDialogflowCxV3beta1TransitionRouteGroup:
-      description: An TransitionRouteGroup represents a group of `TransitionRoutes` to be used by a Page.
+      description: A TransitionRouteGroup represents a group of `TransitionRoutes` to be used by a Page.
       properties:
         displayName:
           description: Required. The human-readable name of the transition route group, unique within the flow. The display name can be no longer than 30 characters.
           type: string
         name:
-          description: "The unique identifier of the transition route group. TransitionRouteGroups.CreateTransitionRouteGroup populates the name automatically. Format: `projects//locations//agents//flows//transitionRouteGroups/`."
+          description: "The unique identifier of the transition route group. TransitionRouteGroups.CreateTransitionRouteGroup populates the name automatically. Format: `projects//locations//agents//flows//transitionRouteGroups/` or `projects//locations//agents//transitionRouteGroups/` for agent-level groups."
           type: string
         transitionRoutes:
           description: Transition routes associated with the TransitionRouteGroup.
@@ -9915,7 +9932,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     GoogleProtobufEmpty:

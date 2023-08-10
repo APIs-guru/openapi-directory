@@ -2643,6 +2643,10 @@ components:
             - TRUSTED_CONTACTS_OOBE_AFFINITY
             - REFERRALS_AFFINITY
             - WAYMO_TRIAGE_TOOLING_AFFINITY
+            - DATA_STUDIO_GAIA_ONLY_AFFINITY
+            - TWENTYPERCENT_JOBPOSTINGS_AFFINITY
+            - ENGAGEMENTS_AFFINITY
+            - TRUSTED_CONTACTS_FL_AFFINITY
           type: string
           x-enumDeprecated:
             - false
@@ -2752,6 +2756,10 @@ components:
             - false
             - false
             - true
+            - false
+            - false
+            - false
+            - false
             - false
             - false
             - false
@@ -7764,7 +7772,7 @@ components:
           description: The unique DeviceConfig to the specific third party device. It is also used by Android Auto Embedded first party device. See go/opa-ids.
         deviceType:
           deprecated: true
-          description: The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string.
+          description: "DEPRECATED. assistant.api.core_types.governed.SurfaceIdentity.surface_type field should be used instead. The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string. WARNING: Clients are not actually setting this field. This field will be removed once references to it within the code base have been removed."
           type: string
         homeGraphDeviceId:
           description: The unique device ID for HomeGraph devices. This is the HomeGraph ID, created when the device is registered into HomeGraph. It is immutable for the same device unless it is completely deleted and recreated. See go/home-graph for details.
@@ -7850,7 +7858,7 @@ components:
           description: The unique DeviceConfig to the specific third party device. It is also used by Android Auto Embedded first party device. See go/opa-ids.
         deviceType:
           deprecated: true
-          description: The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string.
+          description: "DEPRECATED. assistant.api.core_types.governed.SurfaceIdentity.surface_type field should be used instead. The device's surface type. This is the string version of surface_type. The server should use the SurfaceType value derived from this string. If the device_type isn't supported within the SurfaceType enum, it will be set as UNKNOWN. Developers should use the enum in ServerParams instead of this string. WARNING: Clients are not actually setting this field. This field will be removed once references to it within the code base have been removed."
           type: string
         homeGraphDeviceId:
           description: The unique device ID for HomeGraph devices. This is the HomeGraph ID, created when the device is registered into HomeGraph. It is immutable for the same device unless it is completely deleted and recreated. See go/home-graph for details.
@@ -8573,7 +8581,7 @@ components:
           $ref: "#/components/schemas/AssistantApiCoreTypesDeviceId"
           description: The identifier of the device.
         surfaceType:
-          description: "The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl. NOTE: This is the new field that is going to replace the `surface_type_string` field above. For more details please refer to go/ontologicalize-surface-type."
+          description: The device's surface type. The types are defined at google3/assistant/api/core_types/surfaces.gcl. For more details, refer to go/ontologicalize-surface-type.
           enum:
             - UNKNOWN_TYPE
             - ACCL
@@ -8635,7 +8643,8 @@ components:
             - WEAR_OS_WATCH
           type: string
         surfaceTypeString:
-          description: The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.
+          deprecated: true
+          description: DEPRECATED. assistant.api.core_types.governed.SurfaceIdentity.surface_type field should be used instead. The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.
           type: string
         surfaceVersion:
           $ref: "#/components/schemas/AssistantApiCoreTypesSurfaceVersion"
@@ -8974,7 +8983,8 @@ components:
           $ref: "#/components/schemas/AssistantApiCoreTypesSurfaceIdentity"
           description: The set of information that helps the server identify the surface.
         surfaceTypeString:
-          description: The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.
+          deprecated: true
+          description: DEPRECATED. surface_identity field below already contains this information. The device's surface type. This is the string version of the assistant.api.core_types.SurfaceType enum. The server should not use this field, rather it should use the SurfaceType value derived from this string.
           type: string
         systemNotificationRestrictions:
           $ref: "#/components/schemas/AssistantApiSystemNotificationRestrictions"
@@ -14015,7 +14025,7 @@ components:
           type: boolean
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 60"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 61"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -14109,6 +14119,9 @@ components:
           type: boolean
         isPodcastIntent:
           description: Whether the intent is a podcast intent.
+          type: boolean
+        isSageDisabledIntent:
+          description: Whether the intent is an intent marked disabled by the Sage IG.
           type: boolean
         isSageIntent:
           description: Whether this intent was generated by Sage.
@@ -16093,9 +16106,6 @@ components:
           description: The timestamp (the time since the Epoch, in microseconds) when the docjoin is exported from indexing. The main purpose of this field is to identify different versions of the same document.
           format: int64
           type: string
-        isSiblingDeletion:
-          description: Page is deleted when indexing choice flips between different corpora (e.g. desktop, mobile, archive, scholar, etc.) for the same URL. It's only set for deletion cdocs. Downstreams using URL as key should ignore the current deletion if the field is set.
-          type: boolean
         noLongerCanonicalTimestamp:
           description: If set, the timestamp in microseconds when the URL stopped being canonical. This should never be set for exported canonical documents. This field is used by dups during canonical flip, and by webmain when doc selection switched between desktop and mobile. Union respects this timestamp to prevent old doc being deleted until the new doc is picked up
           format: int64
@@ -20211,11 +20221,12 @@ components:
           format: int32
           type: integer
         Pagerank:
-          description: Pagerank for doc (if known)
+          deprecated: true
+          description: This field is long-deprecated in favour of Pagerank_NS, it is no longer maintained and can break at any moment.
           format: int32
           type: integer
         PagerankNS:
-          description: Pagerank-NearestSeeds is an alternative pagerank score for the doc.
+          description: Pagerank-NearestSeeds is a pagerank score for the doc, calculated using NearestSeeds method. This is the production PageRank value teams should use.
           format: int32
           type: integer
         Repid:
@@ -21917,6 +21928,7 @@ components:
             - PROVIDER_EZVOLT
             - PROVIDER_JOLT
             - PROVIDER_CHARGESMITH
+            - PROVIDER_PLUGO
           type: string
           x-enumDeprecated:
             - false
@@ -22626,6 +22638,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -25927,6 +25940,7 @@ components:
             - PROVIDER_EZVOLT
             - PROVIDER_JOLT
             - PROVIDER_CHARGESMITH
+            - PROVIDER_PLUGO
           type: string
           x-enumDeprecated:
             - false
@@ -26636,6 +26650,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -27859,6 +27874,7 @@ components:
             - PROVIDER_EZVOLT
             - PROVIDER_JOLT
             - PROVIDER_CHARGESMITH
+            - PROVIDER_PLUGO
           type: string
           x-enumDeprecated:
             - false
@@ -28568,6 +28584,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -29953,6 +29970,7 @@ components:
             - PROVIDER_EZVOLT
             - PROVIDER_JOLT
             - PROVIDER_CHARGESMITH
+            - PROVIDER_PLUGO
           type: string
           x-enumDeprecated:
             - false
@@ -30662,6 +30680,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -35283,6 +35302,10 @@ components:
             - DB_INFRA_SPANNER
             - DB_CLOUD_SQL_POSTGRES
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
         documentCreatorDefaultRole:
           description: Optional. The default role for the person who create a document.
           enum:
@@ -35501,6 +35524,10 @@ components:
             - DB_INFRA_SPANNER
             - DB_CLOUD_SQL_POSTGRES
           type: string
+          x-enumDeprecated:
+            - false
+            - false
+            - true
         documentCreatorDefaultRole:
           description: The default role for the person who create a document.
           type: string
@@ -37140,7 +37167,7 @@ components:
           type: string
       type: object
     GoogleIamV1Policy:
-      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
@@ -37489,7 +37516,7 @@ components:
             - SUPPORT_CASES_ID
             - FITBIT_P11_ID
             - SHORT_PHONE_NUMBER
-            - EXTERNAL_ID
+            - USER_HANDLE
           type: string
       type: object
     GoogleInternalCommunicationsInstantmessagingV1LocationHint:
@@ -37526,7 +37553,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     GoogleProtobufEmpty:
@@ -57353,6 +57380,8 @@ components:
             - DUCKIEWEB
             - MATTERSPACE
             - WAYMO_TRIAGE_TOOLING
+            - TWENTYPERCENT_JOBPOSTINGS
+            - ENGAGEMENTS
             - DEPRECATED_QUICKSTART_FLUME
             - DUO_CLIENT
             - ALBERT
@@ -57935,6 +57964,8 @@ components:
             - false
             - true
             - true
+            - false
+            - false
             - false
             - false
             - false
@@ -63432,6 +63463,8 @@ components:
         valueInt32:
           format: int32
           type: integer
+        valueString:
+          type: string
         valueUint32:
           format: uint32
           type: integer
@@ -64040,7 +64073,7 @@ components:
               - false
               - false
               - false
-              - false
+              - true
               - false
               - false
               - false
@@ -64369,7 +64402,7 @@ components:
               - false
               - false
               - false
-              - false
+              - true
               - false
               - false
               - false
@@ -64702,7 +64735,7 @@ components:
               - false
               - false
               - false
-              - false
+              - true
               - false
               - false
               - false
@@ -68996,11 +69029,6 @@ components:
           format: float
           type: number
         nameCapitalizationProb:
-          deprecated: true
-          description: Probability that any given name of this entity is capitalized.
-          format: float
-          type: number
-        personProb:
           deprecated: true
           description: "The following fields are deprecated and should eventually be removed. They use data and rules that have not been refreshed for ~10y and KG has changed a lot in the meantime. "
           format: float
@@ -77623,6 +77651,9 @@ components:
             - VERTICAL
             - HORIZONTAL
           type: string
+        rwjPolicyMetadata:
+          $ref: "#/components/schemas/StorageGraphBfgRwjPolicyMetadata"
+          description: Policy metadata fields for Real World Journey (RWJ) data. Only expected to be used by RWJ providers -- please consult ke-data-governance@ before populating this field.
         umpPolicyMetadata:
           $ref: "#/components/schemas/StorageGraphBfgUmpPolicyMetadata"
           description: Policy metadata fields for UMP data. Only expected to be used by UMP providers -- please consult ke-data-governance@ before populating this field.
@@ -77638,6 +77669,16 @@ components:
           description: Most recent date at which 'attribution_url's were verified, as UNIX epoch time in milliseconds. This is required.
           format: int64
           type: string
+      type: object
+    StorageGraphBfgRwjPolicyMetadata:
+      description: Metadata fields for Real World Journey. See go/rwj-kg-dg for details.
+      properties:
+        eligibleSurfaces:
+          description: "Int values correspond to the usecases used in CDS. See: google3/googlebase/verticals/model/usecase_id.proto."
+          items:
+            format: int64
+            type: string
+          type: array
       type: object
     StorageGraphBfgSpiiCertification:
       description: A fact about potentially sensitive personal info (http://what/SPII) can be "certified" iff it meets specific requirements. See go/kg-spii-certification for details.
@@ -77804,6 +77845,7 @@ components:
             - ISOLATION_PKG_STARLIGHT_VISIBLE_TO_GUESTS
             - ISOLATION_PKG_STRUCTURED_MEMORY_FOOTPRINTS
             - ISOLATION_PKG_TEACH_AND_LEARN_ENTITIES
+            - ISOLATION_PKG_TYPED_QUERIES
             - ISOLATION_PKG_ASSISTANT_ROUTINES
             - ISOLATION_PKG_VANITY_COLLECTIONS
             - ISOLATION_PKG_WEBSEARCH
@@ -77913,6 +77955,7 @@ components:
             - false
             - false
             - true
+            - false
             - false
             - false
             - false
@@ -81196,6 +81239,8 @@ components:
               - BOOKS_READ_NOW_DUAL_FORMAT_REQUEST_SESSION_LEVEL
               - BOOKS_READ_NOW_WITH_HEADER_REQUEST_SESSION_LEVEL
               - FCC_FIRST_PARTY_CATEGORICAL_SEARCH_OFFERS_SESSION_LEVEL
+              - MERCH_NOMADS_CN_EXP_CLUSTER_TARGETED_AT_SESSION_LEVEL
+              - MERCH_NOMADS_CN_PROD_CLUSTER_TARGETED_AT_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - CART_ABANDONMENT_USER_LEVEL
               - IN_APP_PRODUCTS_IN_DETAILS_PAGE_USER_LEVEL
@@ -81495,6 +81540,9 @@ components:
               - GAME_HUB_DEVELOPER_VIDEO_ELIGIBLE_AT_USER_LEVEL
               - SHOULD_SEE_FIRST_PARTY_PROMO_LIVE_OP_SUBSCRIPTION_USER_LEVEL
               - SUBS_PAYMENT_DECLINE_V2_USER_LEVEL
+              - MERCH_NOMADS_CN_EXP_CLUSTER_TARGETED_AT_USER_LEVEL
+              - MERCH_NOMADS_CN_PROD_CLUSTER_TARGETED_AT_USER_LEVEL
+              - NOTIFICATION_GUM_FINE_TUNING_MODEL_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
             x-enumDeprecated:
@@ -82621,30 +82669,35 @@ components:
               - false
               - false
               - false
+              - false
+              - false
+              - true
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
+              - false
               - true
               - false
               - false
               - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - false
-              - true
               - false
               - false
               - false
