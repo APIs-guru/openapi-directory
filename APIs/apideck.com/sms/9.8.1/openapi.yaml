@@ -1355,15 +1355,19 @@ components:
         description:
           description: More information about the custom field
           example: Employee Level
+          nullable: true
           title: Description
           type: string
         id:
+          description: Unique identifier for the custom field.
           example: "2389328923893298"
+          nullable: true
           title: ID
           type: string
         name:
           description: Name of the custom field.
           example: employee_level
+          nullable: true
           title: Name
           type: string
         value:
@@ -1430,14 +1434,19 @@ components:
       additionalProperties: false
       properties:
         email:
+          description: Email address
           example: elon@musk.com
           format: email
           minLength: 1
+          nullable: true
           type: string
         id:
+          description: Unique identifier for the email address
           example: "123"
+          nullable: true
           type: string
         type:
+          description: Email type
           enum:
             - primary
             - secondary
@@ -1446,6 +1455,7 @@ components:
             - billing
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: emails.type
       required:
@@ -1560,6 +1570,7 @@ components:
           description: The date and time when the object was created.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
+          nullable: true
           readOnly: true
           title: Created at (timestamp)
           type: string
@@ -1874,6 +1885,7 @@ components:
         - New
       items:
         type: string
+      nullable: true
       type: array
       x-apideck-schema-id: Tags
     TooManyRequestsResponse:

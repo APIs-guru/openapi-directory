@@ -2899,6 +2899,7 @@ components:
       description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
+      nullable: true
       readOnly: true
       title: Created at (timestamp)
       type: string
@@ -3162,6 +3163,7 @@ components:
         display_name:
           description: The display name of the drive group
           example: accounting
+          nullable: true
           type: string
         id:
           $ref: "#/components/schemas/Id"
@@ -3206,11 +3208,13 @@ components:
     ExpiresAt:
       example: 2022-09-30T07:43:32.000Z
       format: date-time
+      nullable: true
       readOnly: true
       type: string
     FileSize:
       description: The size of the file in bytes
       example: 1810673
+      nullable: true
       type: integer
       x-apideck-schema-id: FileSize
     FileStorageEventType:
@@ -3304,6 +3308,7 @@ components:
         - folder
         - url
       example: file
+      nullable: true
       readOnly: true
       type: string
       x-apideck-enum-id: files.type
@@ -3369,6 +3374,7 @@ components:
         description:
           description: Optional description of the folder
           example: My Personal Documents
+          nullable: true
           type: string
         id:
           $ref: "#/components/schemas/Id"
@@ -3390,11 +3396,13 @@ components:
         path:
           description: The full path of the folder (includes the folder name)
           example: /Personal/Documents
+          nullable: true
           readOnly: true
           type: string
         size:
           description: The size of the folder in bytes
           example: 1810673
+          nullable: true
           readOnly: true
           type: integer
         updated_at:
@@ -3820,6 +3828,7 @@ components:
         name:
           description: The name of the folder
           example: Personal
+          nullable: true
           type: string
       required:
         - id
@@ -3943,6 +3952,7 @@ components:
         email:
           description: Email of the owner
           example: hello@apideck.com
+          nullable: true
           readOnly: true
           type: string
         id:
@@ -3953,6 +3963,7 @@ components:
         name:
           description: Name of the owner
           example: Elon Musk
+          nullable: true
           readOnly: true
           type: string
       readOnly: true
@@ -4010,6 +4021,7 @@ components:
         download_url:
           description: The URL that can be used to download the file.
           example: https://www.box.com/shared/static/rh935iit6ewrmw0unyul.jpeg
+          nullable: true
           type: string
         expires_at:
           $ref: "#/components/schemas/ExpiresAt"
@@ -4020,6 +4032,7 @@ components:
           writeOnly: true
         password_protected:
           description: Indicated if the shared link is password protected.
+          nullable: true
           readOnly: true
           type: boolean
         scope:
@@ -4028,12 +4041,14 @@ components:
             - public
             - company
           example: company
+          nullable: true
           type: string
           x-apideck-enum-id: files.scope
         target:
           $ref: "#/components/schemas/SharedLinkTarget"
         target_id:
           description: The ID of the file or folder to link.
+          nullable: true
           type: string
           writeOnly: true
         updated_at:
@@ -4041,6 +4056,7 @@ components:
         url:
           description: The URL that can be used to view the file.
           example: https://www.box.com/s/vspke7y05sb214wjokpk
+          nullable: true
           readOnly: true
           type: string
       required:
@@ -4066,6 +4082,7 @@ components:
         name:
           description: The name of the file
           example: sample.jpg
+          nullable: true
           type: string
         type:
           $ref: "#/components/schemas/FileType"
@@ -4188,6 +4205,7 @@ components:
         description:
           description: Optional description of the file
           example: A sample image
+          nullable: true
           type: string
         downloadable:
           description: Whether the current user can download this file
@@ -4204,6 +4222,7 @@ components:
             description: An available file format (typically MIME type) to export this file.
             example: application/pdf
             type: string
+          nullable: true
           type: array
         exportable:
           description: Whether the current file is exportable to other file formats. This property is relevant for proprietary file formats such as Google Docs or Dropbox Paper.
@@ -4213,10 +4232,12 @@ components:
         mime_type:
           description: The MIME type of the file.
           example: image/jpeg
+          nullable: true
           type: string
         name:
           description: The name of the file
           example: sample.jpg
+          nullable: true
           type: string
         owner:
           $ref: "#/components/schemas/Owner"
@@ -4231,6 +4252,7 @@ components:
         path:
           description: The full path of the file or folder (includes the file name)
           example: /Documents/sample.jpg
+          nullable: true
           type: string
         permissions:
           description: Permissions the current user has on this file.

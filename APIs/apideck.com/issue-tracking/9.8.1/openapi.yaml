@@ -1473,6 +1473,7 @@ components:
           nullable: true
           type: string
         contact_name:
+          description: Name of the contact person at the address
           example: Elon Musk
           nullable: true
           type: string
@@ -1487,18 +1488,22 @@ components:
           nullable: true
           type: string
         email:
+          description: Email address of the address
           example: elon@musk.com
           nullable: true
           type: string
         fax:
+          description: Fax number of the address
           example: 122-111-1111
           nullable: true
           type: string
         id:
+          description: Unique identifier for the address.
           example: "123"
           nullable: true
           type: string
         latitude:
+          description: Latitude of the address
           example: "40.759211"
           nullable: true
           type: string
@@ -1523,19 +1528,23 @@ components:
           nullable: true
           type: string
         longitude:
+          description: Longitude of the address
           example: "-73.984638"
           nullable: true
           type: string
         name:
+          description: The name of the address.
           example: HQ US
           nullable: true
           type: string
         notes:
+          description: Additional notes
           example: Address notes or delivery instructions.
           nullable: true
           title: Notes
           type: string
         phone_number:
+          description: Phone number of the address
           example: 111-111-1111
           nullable: true
           type: string
@@ -1547,6 +1556,7 @@ components:
         row_version:
           $ref: "#/components/schemas/RowVersion"
         salutation:
+          description: Salutation of the contact person at the address
           example: Mr
           nullable: true
           type: string
@@ -1566,6 +1576,7 @@ components:
           nullable: true
           type: string
         type:
+          description: The type of address.
           enum:
             - primary
             - secondary
@@ -1575,9 +1586,11 @@ components:
             - billing
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: addresses.type
         website:
+          description: Website of the address
           example: https://elonmusk.com
           nullable: true
           type: string
@@ -1617,6 +1630,7 @@ components:
           type: string
         username:
           example: Cocoa
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -1668,6 +1682,7 @@ components:
         description:
           description: Description of the collection
           example: IT Issues
+          nullable: true
           title: Description
           type: string
         id:
@@ -1675,15 +1690,18 @@ components:
         name:
           description: Name of the collection
           example: Main IT Issues
+          nullable: true
           title: name
           type: string
         parent_id:
           description: The collections's parent ID
           example: "12345"
+          nullable: true
           type: string
         type:
           description: The collections's type
           example: Technical
+          nullable: true
           title: Type
           type: string
         updated_at:
@@ -1703,10 +1721,13 @@ components:
         id:
           description: A unique identifier for an object.
           example: "12345"
+          nullable: true
           title: ID
           type: string
         name:
+          description: The name of the tag.
           example: User Experience
+          nullable: true
           readOnly: true
           title: Name
           type: string
@@ -1723,6 +1744,7 @@ components:
         body:
           description: Body of the comment
           example: What internet provider do you use?
+          nullable: true
           title: Body
           type: string
         created_at:
@@ -1747,21 +1769,26 @@ components:
         created_at:
           $ref: "#/components/schemas/CreatedAt"
         email:
+          description: Email address of the user
           example: elon@musk.com
           nullable: true
           type: string
         first_name:
+          description: First name of the user
           example: Elon
           nullable: true
           type: string
         id:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/IdOrNull"
         last_name:
+          description: Last name of the user
           example: Musk
           nullable: true
           type: string
         name:
+          description: Full name of the user
           example: Elon Musk
+          nullable: true
           title: Name
           type: string
         photo_url:
@@ -1897,6 +1924,7 @@ components:
       description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
+      nullable: true
       readOnly: true
       title: Created at (timestamp)
       type: string
@@ -2470,15 +2498,19 @@ components:
         description:
           description: More information about the custom field
           example: Employee Level
+          nullable: true
           title: Description
           type: string
         id:
+          description: Unique identifier for the custom field.
           example: "2389328923893298"
+          nullable: true
           title: ID
           type: string
         name:
           description: Name of the custom field.
           example: employee_level
+          nullable: true
           title: Name
           type: string
         value:
@@ -2637,14 +2669,19 @@ components:
       additionalProperties: false
       properties:
         email:
+          description: Email address
           example: elon@musk.com
           format: email
           minLength: 1
+          nullable: true
           type: string
         id:
+          description: Unique identifier for the email address
           example: "123"
+          nullable: true
           type: string
         type:
+          description: Email type
           enum:
             - primary
             - secondary
@@ -2653,6 +2690,7 @@ components:
             - billing
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: emails.type
       required:
@@ -3015,6 +3053,13 @@ components:
       readOnly: true
       title: ID
       type: string
+    IdOrNull:
+      description: A unique identifier for an object.
+      example: "12345"
+      nullable: true
+      readOnly: true
+      title: ID
+      type: string
     IssueTrackingEventType:
       enum:
         - "*"
@@ -3310,30 +3355,36 @@ components:
       additionalProperties: false
       properties:
         area_code:
+          description: The area code of the phone number, e.g. 323
           example: "323"
           nullable: true
           title: Area code
           type: string
         country_code:
+          description: The country code of the phone number, e.g. +1
           example: "1"
           nullable: true
           title: Country code
           type: string
         extension:
+          description: The extension of the phone number
           example: "105"
           nullable: true
           title: Phone extension
           type: string
         id:
+          description: Unique identifier of the phone number
           example: "12345"
           nullable: true
           type: string
         number:
+          description: The phone number
           example: 111-111-1111
           minLength: 1
           title: Phone number
           type: string
         type:
+          description: The type of phone number
           enum:
             - primary
             - secondary
@@ -3347,6 +3398,7 @@ components:
             - personal
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: phone_numbers.type
       required:
@@ -3391,6 +3443,7 @@ components:
         collection_id:
           description: The ticket's collection ID
           example: "12345"
+          nullable: true
           readOnly: true
           type: string
         completed_at:
@@ -3408,6 +3461,7 @@ components:
         description:
           description: The ticket's description. HTML version of description is mapped if supported by the third-party platform
           example: I am facing issues with my internet connection
+          nullable: true
           title: Description
           type: string
         due_date:
@@ -3422,6 +3476,7 @@ components:
         parent_id:
           description: The ticket's parent ID
           example: "12345"
+          nullable: true
           type: string
         priority:
           description: Priority of the ticket
@@ -3431,6 +3486,7 @@ components:
             - high
             - urgent
           example: high
+          nullable: true
           title: Priority
           type: string
           x-apideck-enum-id: tickets.priority
@@ -3442,6 +3498,7 @@ components:
         subject:
           description: Subject of the ticket
           example: Technical Support Request
+          nullable: true
           title: Subject
           type: string
         tags:
@@ -3451,6 +3508,7 @@ components:
         type:
           description: The ticket's type
           example: Technical
+          nullable: true
           title: Type
           type: string
         updated_at:
@@ -3715,10 +3773,12 @@ components:
       additionalProperties: false
       properties:
         id:
+          description: Unique identifier for the website
           example: "12345"
           nullable: true
           type: string
         type:
+          description: The type of website
           enum:
             - primary
             - secondary
@@ -3726,9 +3786,11 @@ components:
             - personal
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: websites.type
         url:
+          description: The website URL
           example: http://example.com
           minLength: 1
           type: string

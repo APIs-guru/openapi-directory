@@ -405,7 +405,7 @@ paths:
                 company_name: 'Spacex',
                 owner_id: '54321',
                 company_id: '2',
-                contact_id: '2',
+                lead_id: '2',
                 lead_source: 'Cold Call',
                 first_name: 'Elon',
                 last_name: 'Musk',
@@ -455,7 +455,7 @@ paths:
                 social_links: [
                   {
                     id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
+                    url: 'https://www.twitter.com/apideck',
                     type: 'twitter'
                   }
                 ],
@@ -651,7 +651,7 @@ paths:
                 company_name: 'Spacex',
                 owner_id: '54321',
                 company_id: '2',
-                contact_id: '2',
+                lead_id: '2',
                 lead_source: 'Cold Call',
                 first_name: 'Elon',
                 last_name: 'Musk',
@@ -701,7 +701,7 @@ paths:
                 social_links: [
                   {
                     id: '12345',
-                    url: 'https://www.twitter.com/apideck-io',
+                    url: 'https://www.twitter.com/apideck',
                     type: 'twitter'
                   }
                 ],
@@ -906,6 +906,7 @@ components:
           nullable: true
           type: string
         contact_name:
+          description: Name of the contact person at the address
           example: Elon Musk
           nullable: true
           type: string
@@ -920,18 +921,22 @@ components:
           nullable: true
           type: string
         email:
+          description: Email address of the address
           example: elon@musk.com
           nullable: true
           type: string
         fax:
+          description: Fax number of the address
           example: 122-111-1111
           nullable: true
           type: string
         id:
+          description: Unique identifier for the address.
           example: "123"
           nullable: true
           type: string
         latitude:
+          description: Latitude of the address
           example: "40.759211"
           nullable: true
           type: string
@@ -956,19 +961,23 @@ components:
           nullable: true
           type: string
         longitude:
+          description: Longitude of the address
           example: "-73.984638"
           nullable: true
           type: string
         name:
+          description: The name of the address.
           example: HQ US
           nullable: true
           type: string
         notes:
+          description: Additional notes
           example: Address notes or delivery instructions.
           nullable: true
           title: Notes
           type: string
         phone_number:
+          description: Phone number of the address
           example: 111-111-1111
           nullable: true
           type: string
@@ -980,6 +989,7 @@ components:
         row_version:
           $ref: "#/components/schemas/RowVersion"
         salutation:
+          description: Salutation of the contact person at the address
           example: Mr
           nullable: true
           type: string
@@ -999,6 +1009,7 @@ components:
           nullable: true
           type: string
         type:
+          description: The type of address.
           enum:
             - primary
             - secondary
@@ -1008,9 +1019,11 @@ components:
             - billing
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: addresses.type
         website:
+          description: Website of the address
           example: https://elonmusk.com
           nullable: true
           type: string
@@ -1112,6 +1125,7 @@ components:
           title: Bank Name
           type: string
         bic:
+          description: The Bank Identifier Code (BIC).
           example: AUDSCHGGXXX
           nullable: true
           type: string
@@ -1130,6 +1144,7 @@ components:
         currency:
           $ref: "#/components/schemas/Currency"
         iban:
+          description: The International Bank Account Number (IBAN).
           example: CH2989144532982975332
           nullable: true
           type: string
@@ -1748,15 +1763,19 @@ components:
         description:
           description: More information about the custom field
           example: Employee Level
+          nullable: true
           title: Description
           type: string
         id:
+          description: Unique identifier for the custom field.
           example: "2389328923893298"
+          nullable: true
           title: ID
           type: string
         name:
           description: Name of the custom field.
           example: employee_level
+          nullable: true
           title: Name
           type: string
         value:
@@ -1823,14 +1842,19 @@ components:
       additionalProperties: false
       properties:
         email:
+          description: Email address
           example: elon@musk.com
           format: email
           minLength: 1
+          nullable: true
           type: string
         id:
+          description: Unique identifier for the email address
           example: "123"
+          nullable: true
           type: string
         type:
+          description: Email type
           enum:
             - primary
             - secondary
@@ -1839,6 +1863,7 @@ components:
             - billing
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: emails.type
       required:
@@ -1929,20 +1954,19 @@ components:
             $ref: "#/components/schemas/Address"
           type: array
         company_id:
+          description: The company the lead is associated with.
           example: "2"
           nullable: true
           type: string
         company_name:
+          description: The name of the company the lead is associated with.
           example: Spacex
-          nullable: true
-          type: string
-        contact_id:
-          example: "2"
           nullable: true
           type: string
         created_at:
           description: Date created in ISO 8601 format
           example: 2020-09-30T07:43:32.000Z
+          nullable: true
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$
           readOnly: true
           type: string
@@ -1953,6 +1977,7 @@ components:
             $ref: "#/components/schemas/CustomField"
           type: array
         description:
+          description: The description of the lead.
           example: A thinker
           nullable: true
           type: string
@@ -1961,14 +1986,17 @@ components:
             $ref: "#/components/schemas/Email"
           type: array
         fax:
+          description: The fax number of the lead.
           example: "+12129876543"
           nullable: true
           type: string
         first_name:
+          description: The first name of the lead.
           example: Elon
           nullable: true
           type: string
         id:
+          description: Unique identifier for the contact.
           example: "12345"
           readOnly: true
           type: string
@@ -1978,29 +2006,41 @@ components:
           nullable: true
           type: string
         last_name:
+          description: The last name of the lead.
           example: Musk
           nullable: true
           type: string
+        lead_id:
+          description: The identifier of the lead.
+          example: "2"
+          nullable: true
+          type: string
         lead_source:
+          description: The source of the lead.
           example: Cold Call
           nullable: true
           type: string
         monetary_amount:
+          description: The monetary amount of the lead.
           example: 75000
           nullable: true
           type: number
         name:
+          description: Full name of the lead.
           example: Elon Musk
           minLength: 1
           type: string
         owner_id:
+          description: The owner of the lead.
           example: "54321"
+          nullable: true
           type: string
         phone_numbers:
           items:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
         prefix:
+          description: The prefix of the lead.
           example: Sir
           nullable: true
           type: string
@@ -2015,12 +2055,14 @@ components:
         tags:
           $ref: "#/components/schemas/Tags"
         title:
+          description: The job title of the lead.
           example: CEO
           nullable: true
           type: string
         updated_at:
           description: Date updated in ISO 8601 format
           example: 2020-09-30T07:43:32.000Z
+          nullable: true
           pattern: ^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$
           readOnly: true
           type: string
@@ -2339,30 +2381,36 @@ components:
       additionalProperties: false
       properties:
         area_code:
+          description: The area code of the phone number, e.g. 323
           example: "323"
           nullable: true
           title: Area code
           type: string
         country_code:
+          description: The country code of the phone number, e.g. +1
           example: "1"
           nullable: true
           title: Country code
           type: string
         extension:
+          description: The extension of the phone number
           example: "105"
           nullable: true
           title: Phone extension
           type: string
         id:
+          description: Unique identifier of the phone number
           example: "12345"
           nullable: true
           type: string
         number:
+          description: The phone number
           example: 111-111-1111
           minLength: 1
           title: Phone number
           type: string
         type:
+          description: The type of phone number
           enum:
             - primary
             - secondary
@@ -2376,6 +2424,7 @@ components:
             - personal
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: phone_numbers.type
       required:
@@ -2399,15 +2448,18 @@ components:
       additionalProperties: false
       properties:
         id:
+          description: Unique identifier of the social link
           example: "12345"
           nullable: true
           type: string
         type:
+          description: Type of the social link, e.g. twitter
           example: twitter
           nullable: true
           type: string
         url:
-          example: https://www.twitter.com/apideck-io
+          description: URL of the social link, e.g. https://www.twitter.com/apideck
+          example: https://www.twitter.com/apideck
           minLength: 1
           type: string
       required:
@@ -2432,6 +2484,7 @@ components:
         - New
       items:
         type: string
+      nullable: true
       type: array
       x-apideck-schema-id: Tags
     TooManyRequestsResponse:
@@ -2605,10 +2658,12 @@ components:
       additionalProperties: false
       properties:
         id:
+          description: Unique identifier for the website
           example: "12345"
           nullable: true
           type: string
         type:
+          description: The type of website
           enum:
             - primary
             - secondary
@@ -2616,9 +2671,11 @@ components:
             - personal
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: websites.type
         url:
+          description: The website URL
           example: http://example.com
           minLength: 1
           type: string

@@ -6068,6 +6068,7 @@ components:
           nullable: true
           type: string
         contact_name:
+          description: Name of the contact person at the address
           example: Elon Musk
           nullable: true
           type: string
@@ -6082,18 +6083,22 @@ components:
           nullable: true
           type: string
         email:
+          description: Email address of the address
           example: elon@musk.com
           nullable: true
           type: string
         fax:
+          description: Fax number of the address
           example: 122-111-1111
           nullable: true
           type: string
         id:
+          description: Unique identifier for the address.
           example: "123"
           nullable: true
           type: string
         latitude:
+          description: Latitude of the address
           example: "40.759211"
           nullable: true
           type: string
@@ -6118,19 +6123,23 @@ components:
           nullable: true
           type: string
         longitude:
+          description: Longitude of the address
           example: "-73.984638"
           nullable: true
           type: string
         name:
+          description: The name of the address.
           example: HQ US
           nullable: true
           type: string
         notes:
+          description: Additional notes
           example: Address notes or delivery instructions.
           nullable: true
           title: Notes
           type: string
         phone_number:
+          description: Phone number of the address
           example: 111-111-1111
           nullable: true
           type: string
@@ -6142,6 +6151,7 @@ components:
         row_version:
           $ref: "#/components/schemas/RowVersion"
         salutation:
+          description: Salutation of the contact person at the address
           example: Mr
           nullable: true
           type: string
@@ -6161,6 +6171,7 @@ components:
           nullable: true
           type: string
         type:
+          description: The type of address.
           enum:
             - primary
             - secondary
@@ -6170,9 +6181,11 @@ components:
             - billing
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: addresses.type
         website:
+          description: Website of the address
           example: https://elonmusk.com
           nullable: true
           type: string
@@ -6525,6 +6538,7 @@ components:
           title: Bank Name
           type: string
         bic:
+          description: The Bank Identifier Code (BIC).
           example: AUDSCHGGXXX
           nullable: true
           type: string
@@ -6543,6 +6557,7 @@ components:
         currency:
           $ref: "#/components/schemas/Currency"
         iban:
+          description: The International Bank Account Number (IBAN).
           example: CH2989144532982975332
           nullable: true
           type: string
@@ -6915,7 +6930,7 @@ components:
             $ref: "#/components/schemas/Address"
           type: array
         annual_revenue:
-          description: Annual revenue
+          description: The annual revenue of the company
           example: +$35m
           nullable: true
           type: string
@@ -6931,11 +6946,14 @@ components:
           title: Birth Date
           type: string
         created_at:
+          description: Creation date
           example: 2020-09-30T07:43:32.000Z
           format: date-time
+          nullable: true
           readOnly: true
           type: string
         created_by:
+          description: Created by user ID
           example: "12345"
           nullable: true
           readOnly: true
@@ -6947,10 +6965,12 @@ components:
             $ref: "#/components/schemas/CustomField"
           type: array
         deleted:
+          description: Whether the company is deleted or not
           example: false
           readOnly: true
           type: boolean
         description:
+          description: A description of the company
           example: Space Exploration Technologies Corp. is an American aerospace manufacturer, space transportation services and communications company headquartered in Hawthorne, California.
           nullable: true
           type: string
@@ -6959,30 +6979,35 @@ components:
             $ref: "#/components/schemas/Email"
           type: array
         fax:
+          description: The fax number of the company
           example: "+12129876543"
           nullable: true
           type: string
         first_name:
           $ref: "#/components/schemas/FirstName"
         id:
+          description: Unique identifier for the company
           example: "12345"
           readOnly: true
           type: string
         image:
+          description: The Image URL of the company
           example: https://www.spacex.com/static/images/share.jpg
           nullable: true
           type: string
         industry:
-          description: Industry
+          description: The industry represents the type of business the company is in.
           example: Apparel
           nullable: true
           type: string
         interaction_count:
+          description: Number of interactions
           example: 1
           nullable: true
           readOnly: true
           type: integer
         last_activity_at:
+          description: Last activity date
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           nullable: true
@@ -6991,8 +7016,10 @@ components:
         last_name:
           $ref: "#/components/schemas/LastName"
         name:
+          description: Name of the company
           example: SpaceX
           minLength: 1
+          title: Name
           type: string
         number_of_employees:
           description: Number of employees
@@ -7000,10 +7027,12 @@ components:
           nullable: true
           type: string
         owner_id:
+          description: Owner ID
           example: "12345"
+          nullable: true
           type: string
         ownership:
-          description: Ownership
+          description: The ownership indicates the type of ownership of the company.
           example: Public
           nullable: true
           type: string
@@ -7014,6 +7043,7 @@ components:
           readOnly: true
           type: string
         payee_number:
+          description: A payee number is a unique number that identifies a payee for tax purposes.
           example: 78932EN
           nullable: true
           title: Payee number
@@ -7023,6 +7053,7 @@ components:
             $ref: "#/components/schemas/PhoneNumber"
           type: array
         read_only:
+          description: Whether the company is read-only or not
           example: false
           nullable: true
           title: Read-only
@@ -7031,9 +7062,11 @@ components:
           properties:
             id:
               example: "12345"
+              nullable: true
               type: string
             name:
               example: Customer Account
+              nullable: true
               type: string
           title: Company Row Type
           type: object
@@ -7041,6 +7074,7 @@ components:
             id: critical
             name: medium
         sales_tax_number:
+          description: A sales tax number is a unique number that identifies a company for tax purposes.
           example: 12456EN
           nullable: true
           title: Sales tax number
@@ -7055,23 +7089,27 @@ components:
             $ref: "#/components/schemas/SocialLink"
           type: array
         status:
+          description: The status of the company
           example: Open
           nullable: true
           type: string
         tags:
           $ref: "#/components/schemas/Tags"
         updated_at:
+          description: Last updated date
           example: 2020-09-30T07:43:32.000Z
           format: date-time
+          nullable: true
           readOnly: true
           type: string
         updated_by:
+          description: Updated by user ID
           example: "12345"
           nullable: true
           readOnly: true
           type: string
         vat_number:
-          description: VAT number
+          description: The VAT number of the company
           example: BE0689615164
           nullable: true
           type: string
@@ -7246,6 +7284,7 @@ components:
       additionalProperties: false
       properties:
         active:
+          description: The active status of the contact.
           example: true
           nullable: true
           type: boolean
@@ -7254,23 +7293,29 @@ components:
             $ref: "#/components/schemas/Address"
           type: array
         birthday:
+          description: The birthday of the contact.
           example: 2000-08-12
           nullable: true
           type: string
         company_id:
+          description: The company the contact is associated with.
           example: "23456"
           nullable: true
           type: string
         company_name:
+          description: The name of the company the contact is associated with.
           example: "23456"
           nullable: true
           type: string
         created_at:
+          description: The creation date of the contact.
           example: 2017-08-12T20:43:21.291Z
           format: date-time
+          nullable: true
           readOnly: true
           type: string
         current_balance:
+          description: The current balance of the contact.
           example: 10.5
           nullable: true
           title: Current Balance
@@ -7280,10 +7325,12 @@ components:
             $ref: "#/components/schemas/CustomField"
           type: array
         department:
+          description: The department of the contact.
           example: Engineering
           nullable: true
           type: string
         description:
+          description: The description of the contact.
           example: Internal champion
           nullable: true
           title: Description
@@ -7297,26 +7344,31 @@ components:
             $ref: "#/components/schemas/Email"
           type: array
         fax:
+          description: The fax number of the contact.
           example: "+12129876543"
           nullable: true
           type: string
         first_call_at:
+          description: The first call date of the contact.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           nullable: true
           readOnly: true
           type: string
         first_email_at:
+          description: The first email date of the contact.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           nullable: true
           readOnly: true
           type: string
         first_name:
+          description: The first name of the contact.
           example: Elon
           nullable: true
           type: string
         gender:
+          description: The gender of the contact.
           enum:
             - male
             - female
@@ -7326,6 +7378,7 @@ components:
           type: string
           x-apideck-enum-id: contacts.gender
         id:
+          description: Unique identifier for the contact.
           example: "12345"
           readOnly: true
           type: string
@@ -7340,32 +7393,40 @@ components:
           nullable: true
           type: string
         last_activity_at:
+          description: The last activity date of the contact.
           example: 2020-09-30T07:43:32.000Z
           format: date-time
           nullable: true
           readOnly: true
           type: string
         last_name:
+          description: The last name of the contact.
           example: Musk
           nullable: true
           type: string
         lead_id:
+          description: The lead the contact is associated with.
           example: "34567"
           nullable: true
           type: string
         lead_source:
+          description: The lead source of the contact.
           example: Cold Call
           nullable: true
           type: string
         middle_name:
+          description: The middle name of the contact.
           example: D.
           nullable: true
           type: string
         name:
+          description: Full name of the contact.
           example: Elon Musk
           minLength: 1
+          nullable: true
           type: string
         owner_id:
+          description: The owner of the contact.
           example: "54321"
           nullable: true
           type: string
@@ -7380,6 +7441,7 @@ components:
           title: Photo URL
           type: string
         prefix:
+          description: The prefix of the contact.
           example: Mr.
           nullable: true
           type: string
@@ -7388,20 +7450,24 @@ components:
             $ref: "#/components/schemas/SocialLink"
           type: array
         status:
+          description: The status of the contact.
           example: open
           nullable: true
           type: string
         suffix:
+          description: The suffix of the contact.
           example: PhD
           nullable: true
           type: string
         tags:
           $ref: "#/components/schemas/Tags"
         title:
+          description: The job title of the contact.
           example: CEO
           nullable: true
           type: string
         type:
+          description: The type of the contact.
           enum:
             - customer
             - supplier
@@ -7412,8 +7478,10 @@ components:
           type: string
           x-apideck-enum-id: contacts.type
         updated_at:
+          description: The last update date of the contact.
           example: 2017-08-12T20:43:21.291Z
           format: date-time
+          nullable: true
           readOnly: true
           type: string
         websites:
@@ -7834,6 +7902,7 @@ components:
       description: The date and time when the object was created.
       example: 2020-09-30T07:43:32.000Z
       format: date-time
+      nullable: true
       readOnly: true
       title: Created at (timestamp)
       type: string
@@ -8612,15 +8681,19 @@ components:
         description:
           description: More information about the custom field
           example: Employee Level
+          nullable: true
           title: Description
           type: string
         id:
+          description: Unique identifier for the custom field.
           example: "2389328923893298"
+          nullable: true
           title: ID
           type: string
         name:
           description: Name of the custom field.
           example: employee_level
+          nullable: true
           title: Name
           type: string
         value:
@@ -9203,14 +9276,19 @@ components:
       additionalProperties: false
       properties:
         email:
+          description: Email address
           example: elon@musk.com
           format: email
           minLength: 1
+          nullable: true
           type: string
         id:
+          description: Unique identifier for the email address
           example: "123"
+          nullable: true
           type: string
         type:
+          description: Email type
           enum:
             - primary
             - secondary
@@ -9219,6 +9297,7 @@ components:
             - billing
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: emails.type
       required:
@@ -11698,30 +11777,36 @@ components:
       additionalProperties: false
       properties:
         area_code:
+          description: The area code of the phone number, e.g. 323
           example: "323"
           nullable: true
           title: Area code
           type: string
         country_code:
+          description: The country code of the phone number, e.g. +1
           example: "1"
           nullable: true
           title: Country code
           type: string
         extension:
+          description: The extension of the phone number
           example: "105"
           nullable: true
           title: Phone extension
           type: string
         id:
+          description: Unique identifier of the phone number
           example: "12345"
           nullable: true
           type: string
         number:
+          description: The phone number
           example: 111-111-1111
           minLength: 1
           title: Phone number
           type: string
         type:
+          description: The type of phone number
           enum:
             - primary
             - secondary
@@ -11735,6 +11820,7 @@ components:
             - personal
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: phone_numbers.type
       required:
@@ -12169,15 +12255,18 @@ components:
       additionalProperties: false
       properties:
         id:
+          description: Unique identifier of the social link
           example: "12345"
           nullable: true
           type: string
         type:
+          description: Type of the social link, e.g. twitter
           example: twitter
           nullable: true
           type: string
         url:
-          example: https://www.twitter.com/apideck-io
+          description: URL of the social link, e.g. https://www.twitter.com/apideck
+          example: https://www.twitter.com/apideck
           minLength: 1
           type: string
       required:
@@ -12387,6 +12476,7 @@ components:
         - New
       items:
         type: string
+      nullable: true
       type: array
       x-apideck-schema-id: Tags
     TaxCode:
@@ -13122,10 +13212,12 @@ components:
       additionalProperties: false
       properties:
         id:
+          description: Unique identifier for the website
           example: "12345"
           nullable: true
           type: string
         type:
+          description: The type of website
           enum:
             - primary
             - secondary
@@ -13133,9 +13225,11 @@ components:
             - personal
             - other
           example: primary
+          nullable: true
           type: string
           x-apideck-enum-id: websites.type
         url:
+          description: The website URL
           example: http://example.com
           minLength: 1
           type: string
