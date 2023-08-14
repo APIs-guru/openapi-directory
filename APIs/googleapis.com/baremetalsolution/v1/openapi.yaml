@@ -228,8 +228,16 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    DisableInteractiveSerialConsoleResponse:
+      description: Message for response of DisableInteractiveSerialConsole.
+      properties: {}
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
+      type: object
+    EnableInteractiveSerialConsoleResponse:
+      description: Message for response of EnableInteractiveSerialConsole.
       properties: {}
       type: object
     ListOperationsResponse:
@@ -243,6 +251,23 @@ components:
           items:
             $ref: "#/components/schemas/Operation"
           type: array
+      type: object
+    LogicalInterface:
+      description: Logical interface.
+      properties:
+        name:
+          description: Interface name. This is not a globally unique identifier. Name is unique only inside the ServerNetworkTemplate. This is of syntax or and forms part of the network template name.
+          type: string
+        required:
+          description: If true, interface must have network connected.
+          type: boolean
+        type:
+          description: Interface type.
+          enum:
+            - INTERFACE_TYPE_UNSPECIFIED
+            - BOND
+            - NIC
+          type: string
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -264,7 +289,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     OperationMetadata:
@@ -323,6 +348,24 @@ components:
     ResetInstanceResponse:
       description: Response message from resetting a server.
       properties: {}
+      type: object
+    ServerNetworkTemplate:
+      description: Network template.
+      properties:
+        applicableInstanceTypes:
+          description: Instance types this template is applicable to.
+          items:
+            type: string
+          type: array
+        logicalInterfaces:
+          description: Logical interfaces.
+          items:
+            $ref: "#/components/schemas/LogicalInterface"
+          type: array
+        name:
+          description: "Output only. Template's unique name. The full resource name follows the pattern: `projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}` Generally, the {server_network_template} follows the syntax of \"bond\" or \"nic\"."
+          readOnly: true
+          type: string
       type: object
     StartInstanceResponse:
       description: Response message from starting a server.

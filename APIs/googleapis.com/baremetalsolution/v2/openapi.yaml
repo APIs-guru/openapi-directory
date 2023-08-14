@@ -782,6 +782,53 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v2/{parent}/osImages":
+    get:
+      description: Retrieves the list of OS images which are currently approved.
+      operationId: baremetalsolution.projects.locations.osImages.list
+      parameters:
+        - description: Required. Parent value for ListProvisioningQuotasRequest.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Requested page size. The server might return fewer items than requested. If unspecified, server will pick an appropriate default. Notice that page_size field is not supported and won't be respected in the API request for now, will be updated when pagination is supported.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results from the server.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOSImagesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v2/{parent}/provisioningConfigs":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1335,12 +1382,20 @@ components:
       description: Message for disabling the interactive serial console on an instance.
       properties: {}
       type: object
+    DisableInteractiveSerialConsoleResponse:
+      description: Message for response of DisableInteractiveSerialConsole.
+      properties: {}
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
       type: object
     EnableInteractiveSerialConsoleRequest:
       description: Message for enabling the interactive serial console on an instance.
+      properties: {}
+      type: object
+    EnableInteractiveSerialConsoleResponse:
+      description: Message for response of EnableInteractiveSerialConsole.
       properties: {}
       type: object
     EvictLunRequest:
@@ -1366,6 +1421,23 @@ components:
           type: array
         name:
           description: Interface name. This is of syntax or and forms part of the network template name.
+          type: string
+      type: object
+    GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface:
+      description: Logical interface.
+      properties:
+        name:
+          description: Interface name. This is not a globally unique identifier. Name is unique only inside the ServerNetworkTemplate. This is of syntax or and forms part of the network template name.
+          type: string
+        required:
+          description: If true, interface must have network connected.
+          type: boolean
+        type:
+          description: Interface type.
+          enum:
+            - INTERFACE_TYPE_UNSPECIFIED
+            - BOND
+            - NIC
           type: string
       type: object
     Instance:
@@ -1635,6 +1707,18 @@ components:
           description: Locations that could not be reached.
           items:
             type: string
+          type: array
+      type: object
+    ListOSImagesResponse:
+      description: Request for getting all available OS images.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        osImages:
+          description: The OS images available.
+          items:
+            $ref: "#/components/schemas/OSImage"
           type: array
       type: object
     ListProvisioningQuotasResponse:
@@ -2076,6 +2160,30 @@ components:
           readOnly: true
           type: string
       type: object
+    OSImage:
+      description: Operation System image.
+      properties:
+        applicableInstanceTypes:
+          description: Instance types this image is applicable to. [Available types](https://cloud.google.com/bare-metal/docs/bms-planning#server_configurations)
+          items:
+            type: string
+          type: array
+        code:
+          description: OS Image code.
+          type: string
+        description:
+          description: OS Image description.
+          type: string
+        name:
+          description: Output only. OS Image's unique name.
+          readOnly: true
+          type: string
+        supportedNetworkTemplates:
+          description: Network templates that can be used with this OS Image.
+          items:
+            type: string
+          type: array
+      type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
@@ -2096,7 +2204,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     ProvisioningConfig:
@@ -2272,6 +2380,24 @@ components:
           type: string
         publicKey:
           description: The public SSH key. This must be in OpenSSH .authorized_keys format.
+          type: string
+      type: object
+    ServerNetworkTemplate:
+      description: Network template.
+      properties:
+        applicableInstanceTypes:
+          description: Instance types this template is applicable to.
+          items:
+            type: string
+          type: array
+        logicalInterfaces:
+          description: Logical interfaces.
+          items:
+            $ref: "#/components/schemas/GoogleCloudBaremetalsolutionV2ServerNetworkTemplateLogicalInterface"
+          type: array
+        name:
+          description: "Output only. Template's unique name. The full resource name follows the pattern: `projects/{project}/locations/{location}/serverNetworkTemplate/{server_network_template}` Generally, the {server_network_template} follows the syntax of \"bond\" or \"nic\"."
+          readOnly: true
           type: string
       type: object
     SnapshotReservationDetail:

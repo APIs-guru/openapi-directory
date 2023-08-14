@@ -1370,8 +1370,22 @@ components:
         exactMatch:
           description: Input only. If set to false, a uri_pattern is generated to include all pages whose address contains the provided_uri_pattern. If set to true, an uri_pattern is generated to try to be an exact match of the provided_uri_pattern or just the specific page if the provided_uri_pattern is a specific one. provided_uri_pattern is always normalized to generate the URI pattern to be used by the search engine.
           type: boolean
+        failureReason:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReason"
+          description: Output only. Failure reason.
+          readOnly: true
         generatedUriPattern:
           description: Output only. This is system-generated based on the provided_uri_pattern.
+          readOnly: true
+          type: string
+        indexingStatus:
+          description: Output only. Indexing status.
+          enum:
+            - INDEXING_STATUS_UNSPECIFIED
+            - PENDING
+            - FAILED
+            - SUCCEEDED
+            - DELETING
           readOnly: true
           type: string
         name:
@@ -1396,6 +1410,20 @@ components:
           description: Output only. The target site's last updated time.
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReason:
+      description: Site search indexing failure reasons.
+      properties:
+        quotaFailure:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReasonQuotaFailure"
+          description: Failed due to insufficient quota.
+      type: object
+    GoogleCloudDiscoveryengineV1alphaTargetSiteFailureReasonQuotaFailure:
+      properties:
+        totalRequiredQuota:
+          description: This number is an estimation on how much total quota this project needs to successfully complete indexing.
+          format: int64
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaTransactionInfo:

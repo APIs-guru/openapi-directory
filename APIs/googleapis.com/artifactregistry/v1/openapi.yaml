@@ -1383,6 +1383,13 @@ components:
           readOnly: true
           type: string
       type: object
+    AptRepository:
+      description: Configuration for an Apt remote repository.
+      properties:
+        publicRepository:
+          $ref: "#/components/schemas/GoogleDevtoolsArtifactregistryV1RemoteRepositoryConfigAptRepositoryPublicRepository"
+          description: One of the publicly available Apt repositories supported by Artifact Registry.
+      type: object
     BatchDeleteVersionsMetadata:
       description: The metadata of an LRO from deleting multiple versions.
       properties:
@@ -1632,6 +1639,38 @@ components:
           description: Output only. The time when the File was last updated.
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    GoogleDevtoolsArtifactregistryV1RemoteRepositoryConfigAptRepositoryPublicRepository:
+      description: Publicly available Apt repositories constructed from a common repository base and a custom repository path.
+      properties:
+        repositoryBase:
+          description: A common public repository base for Apt.
+          enum:
+            - REPOSITORY_BASE_UNSPECIFIED
+            - DEBIAN
+            - UBUNTU
+          type: string
+        repositoryPath:
+          description: A custom field to define a path to a specific repository from the base.
+          type: string
+      type: object
+    GoogleDevtoolsArtifactregistryV1RemoteRepositoryConfigYumRepositoryPublicRepository:
+      description: Publicly available Yum repositories constructed from a common repository base and a custom repository path.
+      properties:
+        repositoryBase:
+          description: A common public repository base for Yum.
+          enum:
+            - REPOSITORY_BASE_UNSPECIFIED
+            - CENTOS
+            - CENTOS_DEBUG
+            - CENTOS_VAULT
+            - CENTOS_STREAM
+            - ROCKY
+            - EPEL
+          type: string
+        repositoryPath:
+          description: A custom field to define a path to a specific repository from the base.
           type: string
       type: object
     Hash:
@@ -2156,6 +2195,9 @@ components:
     RemoteRepositoryConfig:
       description: Remote repository configuration.
       properties:
+        aptRepository:
+          $ref: "#/components/schemas/AptRepository"
+          description: Specific settings for an Apt remote repository.
         description:
           description: The description of the remote source.
           type: string
@@ -2171,6 +2213,9 @@ components:
         pythonRepository:
           $ref: "#/components/schemas/PythonRepository"
           description: Specific settings for a Python remote repository.
+        yumRepository:
+          $ref: "#/components/schemas/YumRepository"
+          description: Specific settings for a Yum remote repository.
       type: object
     Repository:
       description: A Repository for storing artifacts with a specific format.
@@ -2522,6 +2567,13 @@ components:
             - SOURCE
           readOnly: true
           type: string
+      type: object
+    YumRepository:
+      description: Configuration for a Yum remote repository.
+      properties:
+        publicRepository:
+          $ref: "#/components/schemas/GoogleDevtoolsArtifactregistryV1RemoteRepositoryConfigYumRepositoryPublicRepository"
+          description: One of the publicly available Yum repositories supported by Artifact Registry.
       type: object
   securitySchemes:
     Oauth2:

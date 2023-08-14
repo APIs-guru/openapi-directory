@@ -559,7 +559,7 @@ components:
             $ref: "#/components/schemas/VlanAttachment"
           type: array
         interconnectType:
-          description: Vlan attachment type.
+          description: VLAN attachment type
           enum:
             - INTERCONNECT_TYPE_UNSPECIFIED
             - INTERCONNECT_TYPE_DEDICATED
@@ -1688,7 +1688,7 @@ components:
           type: number
       type: object
     VlanAttachment:
-      description: VLAN attachment for cloud interconnect.
+      description: VLAN attachment for Cloud Interconnect.
       properties:
         bandwidth:
           description: "Capacities in the [pricing table](https://cloud.google.com/vpc/network-pricing#interconnect-pricing) Examples of capacity are: 50/100/200/300/400/500-Mbps, 1/2/5/10/20/50-Gbps."
