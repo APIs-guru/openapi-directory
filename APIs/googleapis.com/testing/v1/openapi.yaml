@@ -999,6 +999,19 @@ components:
             type: string
           type: array
       type: object
+    IosRoboTest:
+      description: A test that explores an iOS application on an iOS device.
+      properties:
+        appBundleId:
+          description: The bundle ID for the app-under-test. This is determined by examining the application's "Info.plist" file.
+          type: string
+        appIpa:
+          $ref: "#/components/schemas/FileReference"
+          description: Required. The ipa stored at this file should be used to run the test.
+        roboScript:
+          $ref: "#/components/schemas/FileReference"
+          description: An optional Roboscript to customize the crawl. See https://firebase.google.com/docs/test-lab/android/robo-scripts-reference for more information about Roboscripts.
+      type: object
     IosRuntimeConfiguration:
       description: iOS configuration that can be selected at the time a test is run.
       properties:
@@ -1645,6 +1658,9 @@ components:
         disableVideoRecording:
           description: Disables video recording. May reduce test latency.
           type: boolean
+        iosRoboTest:
+          $ref: "#/components/schemas/IosRoboTest"
+          description: An iOS Robo test.
         iosTestLoop:
           $ref: "#/components/schemas/IosTestLoop"
           description: An iOS application with a test loop.

@@ -5326,7 +5326,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The maximum number of products to return in the response, used for paging.
+        - description: The maximum number of products to return in the response, used for paging. The default value is 25. The maximum value is 250.
           in: query
           name: maxResults
           schema:
@@ -5626,7 +5626,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: The maximum number of product statuses to return in the response, used for paging.
+        - description: The maximum number of product statuses to return in the response, used for paging. The default value is 25. The maximum value is 250.
           in: query
           name: maxResults
           schema:

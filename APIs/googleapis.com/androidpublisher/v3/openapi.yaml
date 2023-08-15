@@ -5560,6 +5560,9 @@ components:
             - WITHDRAWAL_RIGHT_DIGITAL_CONTENT
             - WITHDRAWAL_RIGHT_SERVICE
           type: string
+        isTokenizedDigitalAsset:
+          description: Whether this in-app product is declared as a product representing a tokenized digital asset.
+          type: boolean
         taxRateInfoByRegionCode:
           additionalProperties:
             $ref: "#/components/schemas/RegionalTaxRateInfo"
@@ -6546,6 +6549,9 @@ components:
             - WITHDRAWAL_RIGHT_DIGITAL_CONTENT
             - WITHDRAWAL_RIGHT_SERVICE
           type: string
+        isTokenizedDigitalAsset:
+          description: Whether this subscription is declared as a product representing a tokenized digital asset.
+          type: boolean
         taxRateInfoByRegionCode:
           additionalProperties:
             $ref: "#/components/schemas/RegionalTaxRateInfo"
