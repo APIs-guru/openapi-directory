@@ -68,7 +68,7 @@ info:
   x-serviceName: PaymentService
 tags:
   - name: Modifications
-  - name: General
+  - name: Payments
 paths:
   /authorise:
     post:
@@ -146,8 +146,8 @@ paths:
         - ApiKeyAuth: []
       summary: Create an authorisation
       tags:
-        - General
-      x-groupName: General
+        - Payments
+      x-groupName: Payments
       x-methodName: authorise
       x-sortIndex: 1
   /authorise3d:
@@ -216,8 +216,8 @@ paths:
         - ApiKeyAuth: []
       summary: Complete a 3DS authorisation
       tags:
-        - General
-      x-groupName: General
+        - Payments
+      x-groupName: Payments
       x-methodName: authorise3d
       x-sortIndex: 2
   /cancel:
@@ -1131,7 +1131,7 @@ components:
           description: |-
             Number of days for which the car is being rented.
             * Format: Numeric
-            * maxLength: 2
+            * maxLength: 4
             * Must not be all spaces
           type: string
         carRental.fuelCharges:
@@ -1266,7 +1266,7 @@ components:
           description: |-
             Number of days the car is rented for. This should be included in the auth message.
             * Format: Numeric
-            * maxLength: 2
+            * maxLength: 4
           type: string
         travelEntertainmentAuthData.market:
           description: |-
@@ -1322,11 +1322,6 @@ components:
             - NoShow
             - DelayedCharge
           type: string
-          x-enum:
-            - description: An incremental charge is carried out because of a no-show for a guaranteed reservation.
-              value: NoShow
-            - description: An incremental charge is carried out to process an additional payment after the original services have been rendered and the respective payment has been processed.
-              value: DelayedCharge
         manualCapture:
           description: Set to **true** to require [manual capture](https://docs.adyen.com/online-payments/capture) for the transaction.
           type: string
@@ -1398,7 +1393,7 @@ components:
       properties:
         enhancedSchemeData.customerReference:
           description: |-
-            The customer code, if supplied by a customer.
+            The customer code.
 
             Encoding: ASCII
 
@@ -1656,7 +1651,7 @@ components:
             The total number of nights the room is booked for.
             * Format: numeric
             * Must be a number between 0 and 99
-            * Max length: 2 characters
+            * Max length: 4 characters
           type: string
         lodging.room1.rate:
           description: |-
@@ -1683,7 +1678,7 @@ components:
           description: |-
             The number of nights. This should be included in the auth message.
             * Format: numeric
-            * Max length: 2 characters
+            * Max length: 4 characters
           type: string
         travelEntertainmentAuthData.market:
           description: |-
@@ -3169,6 +3164,8 @@ components:
             * **ChallengeShopper** – The issuer requires further shopper interaction before the payment can be authenticated. Returned for 3D Secure 2 transactions.
             * **Error** – There was an error when the payment was being processed. The reason is given in the `refusalReason` field. This is a final state.
             * **IdentifyShopper** – The issuer requires the shopper's device fingerprint before the payment can be authenticated. Returned for 3D Secure 2 transactions.
+            * **PartiallyAuthorised** – The payment has been authorised for a partial amount.
+            This happens for card payments when the merchant supports Partial Authorisations and the cardholder has insufficient funds.
             * **Pending** – Indicates that it is not possible to obtain the final status of the payment. This can happen if the systems providing final status information for the payment are unavailable, or if the shopper needs to take further action to complete the payment.
             * **PresentToShopper** – Indicates that the response contains additional information that you need to present to a shopper, so that they can use it to complete a payment.
             * **Received** – Indicates the payment has successfully been received by Adyen, and will be processed. This is the initial state for all payments.
@@ -3182,6 +3179,7 @@ components:
             - ChallengeShopper
             - Error
             - IdentifyShopper
+            - PartiallyAuthorised
             - Pending
             - PresentToShopper
             - Received
@@ -3942,5 +3940,5 @@ components:
       scheme: basic
       type: http
 x-groups:
-  - General
+  - Payments
   - Modifications

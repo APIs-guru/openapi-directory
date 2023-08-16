@@ -1796,6 +1796,7 @@ components:
             - CLOUD_BIGTABLE
             - CLOUD_SQL
             - LOOKER
+            - VERTEX_AI
           type: string
       type: object
     GoogleCloudDatacatalogV1DataplexFilesetSpec:
@@ -1836,6 +1837,13 @@ components:
           description: Indicates if the table schema is managed by the user or not.
           type: boolean
       type: object
+    GoogleCloudDatacatalogV1DatasetSpec:
+      description: Specification that applies to a dataset. Valid only for entries with the `DATASET` type.
+      properties:
+        vertexDatasetSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1VertexDatasetSpec"
+          description: Vertex AI Dataset specific fields
+      type: object
     GoogleCloudDatacatalogV1DumpItem:
       description: Wrapper for any item that can be contained in the dump.
       properties:
@@ -1870,6 +1878,9 @@ components:
         databaseTableSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1DatabaseTableSpec"
           description: Specification that applies to a table resource. Valid only for entries with the `TABLE` or `EXPLORE` type.
+        datasetSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1DatasetSpec"
+          description: Specification that applies to a dataset.
         description:
           description: Entry description that can consist of several sentences or paragraphs that describe entry contents. The description must not contain Unicode non-characters as well as C0 and C1 control codes except tabs (HT), new lines (LF), carriage returns (CR), and page breaks (FF). The maximum size is 2000 bytes when encoded in UTF-8. Default value is an empty string.
           type: string
@@ -1897,6 +1908,7 @@ components:
             - CLOUD_BIGTABLE
             - CLOUD_SQL
             - LOOKER
+            - VERTEX_AI
           readOnly: true
           type: string
         labels:
@@ -1910,6 +1922,9 @@ components:
         lookerSystemSpec:
           $ref: "#/components/schemas/GoogleCloudDatacatalogV1LookerSystemSpec"
           description: Specification that applies to Looker sysstem. Only settable when `user_specified_system` is equal to `LOOKER`
+        modelSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1ModelSpec"
+          description: Model specification.
         name:
           description: "Output only. The resource name of an entry in URL format. Note: The entry itself and its child resources might not be stored in the location specified in its name."
           readOnly: true
@@ -2213,6 +2228,13 @@ components:
         parentViewId:
           description: ID of the parent View. Empty if it does not exist.
           type: string
+      type: object
+    GoogleCloudDatacatalogV1ModelSpec:
+      description: Specification that applies to a model. Valid only for entries with the `MODEL` type.
+      properties:
+        vertexModelSpec:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1VertexModelSpec"
+          description: Specification for vertex model resources.
       type: object
     GoogleCloudDatacatalogV1ModifyEntryContactsRequest:
       description: Request message for ModifyEntryContacts.
@@ -2538,6 +2560,7 @@ components:
             - CLOUD_BIGTABLE
             - CLOUD_SQL
             - LOOKER
+            - VERTEX_AI
           readOnly: true
           type: string
         linkedResource:
@@ -2891,6 +2914,68 @@ components:
           description: The number of failed attempts to use the underlying entry.
           format: float
           type: number
+      type: object
+    GoogleCloudDatacatalogV1VertexDatasetSpec:
+      description: Specification for vertex dataset resources.
+      properties:
+        dataItemCount:
+          description: The number of DataItems in this Dataset. Only apply for non-structured Dataset.
+          format: int64
+          type: string
+        dataType:
+          description: Type of the dataset.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - TABLE
+            - IMAGE
+            - TEXT
+            - VIDEO
+            - CONVERSATION
+            - TIME_SERIES
+            - DOCUMENT
+            - TEXT_TO_SPEECH
+            - TRANSLATION
+            - STORE_VISION
+            - ENTERPRISE_KNOWLEDGE_GRAPH
+            - TEXT_PROMPT
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1VertexModelSourceInfo:
+      description: Detail description of the source information of a Vertex model.
+      properties:
+        copy:
+          description: If this Model is copy of another Model. If true then source_type pertains to the original.
+          type: boolean
+        sourceType:
+          description: Type of the model source.
+          enum:
+            - MODEL_SOURCE_TYPE_UNSPECIFIED
+            - AUTOML
+            - CUSTOM
+            - BQML
+            - MODEL_GARDEN
+          type: string
+      type: object
+    GoogleCloudDatacatalogV1VertexModelSpec:
+      description: Specification for vertex model resources.
+      properties:
+        containerImageUri:
+          description: URI of the Docker image to be used as the custom container for serving predictions.
+          type: string
+        versionAliases:
+          description: User provided version aliases so that a model version can be referenced via alias
+          items:
+            type: string
+          type: array
+        versionDescription:
+          description: The description of this version.
+          type: string
+        versionId:
+          description: The version ID of the model.
+          type: string
+        vertexModelSourceInfo:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1VertexModelSourceInfo"
+          description: Source of a Vertex model.
       type: object
     GoogleCloudDatacatalogV1ViewSpec:
       description: Table view specification.

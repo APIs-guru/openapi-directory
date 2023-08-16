@@ -8385,6 +8385,12 @@ components:
         recurringDetailReference:
           description: This is the `recurringDetailReference` returned in the response when you created the token.
           type: string
+        subtype:
+          description: The type of flow to initiate.
+          enum:
+            - redirect
+            - sdk
+          type: string
         type:
           default: klarna
           description: "**klarna**"

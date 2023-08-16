@@ -8802,6 +8802,12 @@ components:
           maxLength: 64
           type: string
           x-addedInVersion: "49"
+        subtype:
+          description: The type of flow to initiate.
+          enum:
+            - redirect
+            - sdk
+          type: string
         type:
           default: klarna
           description: "**klarna**"
