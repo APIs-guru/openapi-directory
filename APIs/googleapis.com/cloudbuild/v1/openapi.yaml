@@ -2630,6 +2630,19 @@ components:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
+    ConnectedRepository:
+      description: Location of the source in a 2nd-gen Google Cloud Build repository resource.
+      properties:
+        dir:
+          description: Directory, relative to the source root, in which to run the build.
+          type: string
+        repository:
+          description: Required. Name of the Google Cloud Build repository, formatted as `projects/*/locations/*/connections/*/repositories/*`.
+          type: string
+        revision:
+          description: The revision to fetch from the Git repository such as a branch, a tag, a commit SHA, or any Git ref.
+          type: string
+      type: object
     CreateBitbucketServerConfigOperationMetadata:
       description: Metadata for `CreateBitbucketServerConfig` operation.
       properties:
@@ -3615,6 +3628,9 @@ components:
     Source:
       description: Location of the source in a supported storage service.
       properties:
+        connectedRepository:
+          $ref: "#/components/schemas/ConnectedRepository"
+          description: Optional. If provided, get the source from this 2nd-gen Google Cloud Build repository resource.
         gitSource:
           $ref: "#/components/schemas/GitSource"
           description: If provided, get the source from this Git repository.

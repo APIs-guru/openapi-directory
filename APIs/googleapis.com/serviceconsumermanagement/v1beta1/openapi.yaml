@@ -2005,6 +2005,9 @@ components:
         producerOverride:
           $ref: "#/components/schemas/V1Beta1QuotaOverride"
           description: Producer override on this quota bucket.
+        producerQuotaPolicy:
+          $ref: "#/components/schemas/V1Beta1ProducerQuotaPolicy"
+          description: Producer policy inherited from the closet ancestor of the current consumer.
       type: object
     V1Beta1QuotaOverride:
       description: A quota override

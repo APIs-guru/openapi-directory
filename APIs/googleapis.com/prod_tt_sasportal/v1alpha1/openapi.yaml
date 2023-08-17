@@ -195,6 +195,45 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - customers
+  /v1alpha1/customers:setupSasAnalytics:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Setups the a GCP Project to receive SAS Analytics messages via GCP Pub/Sub with a subscription to BigQuery. All the Pub/Sub topics and BigQuery tables are created automatically as part of this service.
+      operationId: prod_tt_sasportal.customers.setupSasAnalytics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SasPortalSetupSasAnalyticsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SasPortalOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/sasportal
+          Oauth2c:
+            - https://www.googleapis.com/auth/sasportal
+      tags:
+        - customers
   /v1alpha1/installer:generateSecret:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1641,6 +1680,18 @@ components:
         resource:
           description: Required. The resource for which the policy is being specified. This policy replaces any existing policy.
           type: string
+      type: object
+    SasPortalSetupSasAnalyticsMetadata:
+      description: Metadata returned by the long running operation for the SetupSasAnalytics rpc.
+      properties: {}
+      type: object
+    SasPortalSetupSasAnalyticsRequest:
+      description: Request for the SetupSasAnalytics rpc.
+      properties: {}
+      type: object
+    SasPortalSetupSasAnalyticsResponse:
+      description: Response returned by the long running operation for the SetupSasAnalytics rpc.
+      properties: {}
       type: object
     SasPortalSignDeviceRequest:
       description: Request for SignDevice.
