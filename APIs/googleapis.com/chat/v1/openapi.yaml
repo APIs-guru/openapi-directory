@@ -1235,7 +1235,7 @@ components:
           type: string
       type: object
     DeprecatedEvent:
-      description: Google Chat events. To learn how to use events, see [Receive and respond to Google Chat events](https://developers.google.com/chat/api/guides/message-formats).
+      description: Google Chat app interaction events. To learn about interaction events, see [Receive and respond to Google Chat app interaction events](https://developers.google.com/chat/api/guides/message-formats).
       properties:
         action:
           $ref: "#/components/schemas/FormAction"
@@ -1247,7 +1247,7 @@ components:
           description: The URL the Chat app should redirect the user to after they have completed an authorization or configuration flow outside of Google Chat. For more information, see [Connect a Chat app with other services & tools](https://developers.google.com/chat/how-tos/connect-web-services-tools).
           type: string
         dialogEventType:
-          description: The type of [dialog](https://developers.google.com/chat/how-tos/dialogs) event received.
+          description: The type of [dialog](https://developers.google.com/chat/how-tos/dialogs) interaction event received.
           enum:
             - TYPE_UNSPECIFIED
             - REQUEST_DIALOG
@@ -1255,26 +1255,26 @@ components:
             - CANCEL_DIALOG
           type: string
         eventTime:
-          description: The timestamp indicating when the event occurred.
+          description: The timestamp indicating when the interaction event occurred.
           format: google-datetime
           type: string
         isDialogEvent:
-          description: True when the event is related to [dialogs](https://developers.google.com/chat/how-tos/dialogs).
+          description: True when the interaction event is related to [dialogs](https://developers.google.com/chat/how-tos/dialogs).
           type: boolean
         message:
           $ref: "#/components/schemas/Message"
-          description: The message that triggered the event, if applicable.
+          description: The message that triggered the interaction event, if applicable.
         space:
           $ref: "#/components/schemas/Space"
-          description: The space in which the event occurred.
+          description: The space in which the interaction event occurred.
         threadKey:
-          description: The Chat app-defined key for the thread related to the event. See [`spaces.messages.thread.threadKey`](/chat/api/reference/rest/v1/spaces.messages#Thread.FIELDS.thread_key) for more information.
+          description: The Chat app-defined key for the thread related to the interaction event. See [`spaces.messages.thread.threadKey`](/chat/api/reference/rest/v1/spaces.messages#Thread.FIELDS.thread_key) for more information.
           type: string
         token:
           description: A secret value that legacy Chat apps can use to verify if a request is from Google. Google randomly generates the token, and its value remains static. You can obtain, revoke, or regenerate the token from the [Chat API configuration page](https://console.cloud.google.com/apis/api/chat.googleapis.com/hangouts-chat) in the Google Cloud Console. Modern Chat apps don't use this field. It is absent from API responses and the [Chat API configuration page](https://console.cloud.google.com/apis/api/chat.googleapis.com/hangouts-chat).
           type: string
         type:
-          description: The type of the event.
+          description: The type of the interaction event.
           enum:
             - UNSPECIFIED
             - MESSAGE
@@ -1284,7 +1284,7 @@ components:
           type: string
         user:
           $ref: "#/components/schemas/User"
-          description: The user that triggered the event.
+          description: The user that triggered the interaction event.
       type: object
     Dialog:
       description: Wrapper around the card body of the dialog.
@@ -1435,7 +1435,7 @@ components:
           type: array
       type: object
     GoogleAppsCardV1Card:
-      description: "Cards support a defined layout, interactive UI elements like buttons, and rich media like images. Use cards to present detailed information, gather information from users, and guide users to take a next step. In Google Chat, cards appear in several places: - As stand-alone messages. - Accompanying a text message, just beneath the text message. - As a [dialog](https://developers.google.com/chat/how-tos/dialogs). The following example JSON creates a \"contact card\" that features: - A header with the contact's name, job title, and avatar picture. - A section with the contact information, including formatted text. - Buttons that users can click to share the contact, or see more or less information. For more examples, see [Design dynamic, interactive, and consistent UIs with cards](https://developers.google.com/chat/ui). ![Example contact card](https://developers.google.com/chat/images/card_api_reference.png) ``` { \"cardsV2\": [ { \"cardId\": \"unique-card-id\", \"card\": { \"header\": { \"title\": \"Sasha\", \"subtitle\": \"Software Engineer\", \"imageUrl\": \"https://developers.google.com/chat/images/quickstart-app-avatar.png\", \"imageType\": \"CIRCLE\", \"imageAltText\": \"Avatar for Sasha\", }, \"sections\": [ { \"header\": \"Contact Info\", \"collapsible\": true, \"uncollapsibleWidgetsCount\": 1, \"widgets\": [ { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"EMAIL\", }, \"text\": \"sasha@example.com\", } }, { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"PERSON\", }, \"text\": \"Online\", }, }, { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"PHONE\", }, \"text\": \"+1 (555) 555-1234\", } }, { \"buttonList\": { \"buttons\": [ { \"text\": \"Share\", \"onClick\": { \"openLink\": { \"url\": \"https://example.com/share\", } } }, { \"text\": \"Edit\", \"onClick\": { \"action\": { \"function\": \"goToView\", \"parameters\": [ { \"key\": \"viewType\", \"value\": \"EDIT\", } ], } } }, ], } }, ], }, ], }, } ], } ```"
+      description: "Cards support a defined layout, interactive UI elements like buttons, and rich media like images. Use cards to present detailed information, gather information from users, and guide users to take a next step. In Google Chat, cards appear in several places: - As stand-alone messages. - Accompanying a text message, just beneath the text message. - As a [dialog](https://developers.google.com/chat/how-tos/dialogs). Only Google Chat apps can create card messages in Google Chat. If your Chat app uses [user authentication](https://developers.google.com/chat/api/guides/auth/users) to send messages on behalf of users, the messages can't contain cards. The following example JSON creates a \"contact card\" that features: - A header with the contact's name, job title, and avatar picture. - A section with the contact information, including formatted text. - Buttons that users can click to share the contact, or see more or less information. For more examples, see [Design dynamic, interactive, and consistent UIs with cards](https://developers.google.com/chat/ui). ![Example contact card](https://developers.google.com/chat/images/card_api_reference.png) ``` { \"cardsV2\": [ { \"cardId\": \"unique-card-id\", \"card\": { \"header\": { \"title\": \"Sasha\", \"subtitle\": \"Software Engineer\", \"imageUrl\": \"https://developers.google.com/chat/images/quickstart-app-avatar.png\", \"imageType\": \"CIRCLE\", \"imageAltText\": \"Avatar for Sasha\", }, \"sections\": [ { \"header\": \"Contact Info\", \"collapsible\": true, \"uncollapsibleWidgetsCount\": 1, \"widgets\": [ { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"EMAIL\", }, \"text\": \"sasha@example.com\", } }, { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"PERSON\", }, \"text\": \"Online\", }, }, { \"decoratedText\": { \"startIcon\": { \"knownIcon\": \"PHONE\", }, \"text\": \"+1 (555) 555-1234\", } }, { \"buttonList\": { \"buttons\": [ { \"text\": \"Share\", \"onClick\": { \"openLink\": { \"url\": \"https://example.com/share\", } } }, { \"text\": \"Edit\", \"onClick\": { \"action\": { \"function\": \"goToView\", \"parameters\": [ { \"key\": \"viewType\", \"value\": \"EDIT\", } ], } } }, ], } }, ], }, ], }, } ], } ```"
       properties:
         cardActions:
           description: "The card's actions. Actions are added to the card's toolbar menu. Because Chat app cards have no toolbar, `cardActions[]` isn't supported by Chat apps. For example, the following JSON constructs a card action menu with `Settings` and `Send Feedback` options: ``` \"card_actions\": [ { \"actionLabel\": \"Settings\", \"onClick\": { \"action\": { \"functionName\": \"goToView\", \"parameters\": [ { \"key\": \"viewType\", \"value\": \"SETTING\" } ], \"loadIndicator\": \"LoadIndicator.SPINNER\" } } }, { \"actionLabel\": \"Send Feedback\", \"onClick\": { \"openLink\": { \"url\": \"https://example.com/feedback\" } } } ] ```"
@@ -1742,7 +1742,7 @@ components:
           description: If specified, an action is triggered by this `onClick`.
         card:
           $ref: "#/components/schemas/GoogleAppsCardV1Card"
-          description: A new card is pushed to the card stack after clicking if specified. Supported by Google Workspace Add-ons, but not Chat apps.
+          description: A new card is pushed to the card stack after clicking if specified. Supported by Google Workspace Add-ons, but not Google Chat apps.
         openDynamicLinkAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
           description: An add-on triggers this action when the action needs to open a link. This differs from the `open_link` above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back. Supported by Google Workspace Add-ons, but not Google Chat apps.
@@ -1905,7 +1905,7 @@ components:
       properties:
         autoCompleteAction:
           $ref: "#/components/schemas/GoogleAppsCardV1Action"
-          description: Optional. Specify what action to take when the text input field provides suggestions to users who interact with it. If unspecified, the suggestions are set by `initialSuggestions` and are processed by the client. If specified, the app takes the action specified here, such as running a custom function. Supported by Google Workspace Add-ons, but not Chat apps.
+          description: Optional. Specify what action to take when the text input field provides suggestions to users who interact with it. If unspecified, the suggestions are set by `initialSuggestions` and are processed by the client. If specified, the app takes the action specified here, such as running a custom function. Supported by Google Workspace Add-ons, but not Google Chat apps.
         hintText:
           description: Text that appears below the text input field meant to assist users by prompting them to enter a certain value. This text is always visible. Required if `label` is unspecified. Otherwise, optional.
           type: string

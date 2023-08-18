@@ -2475,9 +2475,6 @@ components:
           format: google-datetime
           readOnly: true
           type: string
-        fleet:
-          description: Whether the membershipbinding is Fleet-wide; true means that this Membership should be bound to all Namespaces in this entire Fleet.
-          type: boolean
         labels:
           additionalProperties:
             type: string
@@ -2785,6 +2782,7 @@ components:
           enum:
             - TYPE_UNSPECIFIED
             - FLEET
+            - FLEET_OUT_OF_SYNC
             - USER
           type: string
       type: object

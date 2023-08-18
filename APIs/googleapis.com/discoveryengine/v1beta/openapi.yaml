@@ -2327,6 +2327,14 @@ components:
           description: The max number of extractive segments returned in each search result. Only applied if the DataStore is set to DataStore.ContentConfig.CONTENT_REQUIRED or DataStore.solution_types is SOLUTION_TYPE_CHAT. An extractive segment is a text segment extracted from the original document that is relevant to the search query, and, in general, more verbose than an extractive answer. The segment could then be used as input for LLMs to generate summaries and answers. If the number of matching segments is less than `max_extractive_segment_count`, return all of the segments. Otherwise, return the `max_extractive_segment_count`.
           format: int32
           type: integer
+        numNextSegments:
+          description: Return at most `num_next_segments` segments after each selected segments.
+          format: int32
+          type: integer
+        numPreviousSegments:
+          description: Specifies whether to also include the adjacent from each selected segments. Return at most `num_previous_segments` segments before each selected segments.
+          format: int32
+          type: integer
         returnExtractiveSegmentScore:
           description: Specifies whether to return the confidence score from the extractive segments in each search result. The default value is `false`.
           type: boolean
@@ -2607,6 +2615,8 @@ components:
               - ADVERSARIAL_QUERY_IGNORED
               - NON_SUMMARY_SEEKING_QUERY_IGNORED
               - OUT_OF_DOMAIN_QUERY_IGNORED
+              - POTENTIAL_POLICY_VIOLATION
+              - LLM_ADDON_NOT_ENABLED
             type: string
           type: array
         summaryText:

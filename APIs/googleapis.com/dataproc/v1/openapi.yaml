@@ -947,6 +947,35 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates the session template, synchronously.Disable check for update_mask, because all updates will be full replacements.
+      operationId: dataproc.projects.locations.sessionTemplates.patch
+      parameters:
+        - description: Required. The resource name of the session template.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SessionTemplate"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionTemplate"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
     put:
       description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
       operationId: dataproc.projects.regions.workflowTemplates.update
@@ -1083,6 +1112,48 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ResizeNodeGroupRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{name}:terminate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Terminates the interactive session.
+      operationId: dataproc.projects.locations.sessions.terminate
+      parameters:
+        - description: Required. The name of the session resource to terminate.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TerminateSessionRequest"
       responses:
         "200":
           content:
@@ -1307,6 +1378,178 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/NodeGroup"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/sessionTemplates":
+    get:
+      description: Lists session templates.
+      operationId: dataproc.projects.locations.sessionTemplates.list
+      parameters:
+        - description: Required. The parent, which owns this collection of session templates.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A filter for the session templates to return in the response. Filters are case sensitive and have the following syntax:field = value AND field = value ...
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of sessions to return in each response. The service may return fewer than this value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token received from a previous ListSessions call. Provide this token to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSessionTemplatesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create an session template, synchronously.
+      operationId: dataproc.projects.locations.sessionTemplates.create
+      parameters:
+        - description: Required. The parent resource where this session template will be created.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SessionTemplate"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionTemplate"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/sessions":
+    get:
+      description: Lists interactive sessions.
+      operationId: dataproc.projects.locations.sessions.list
+      parameters:
+        - description: Required. The parent, which owns this collection of sessions.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. A filter for the sessions to return in the response.A filter is a logical expression constraining the values of various fields in each session resource. Filters are case sensitive, and may contain multiple clauses combined with logical operators (AND/OR). Supported fields are session_id, session_uuid, state, and create_time.e.g. state = ACTIVE and create_time < "2023-01-01T00:00:00Z" filters for sessions in state ACTIVE that were created before 2023-01-01See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed description of the filter syntax and a list of supported comparisons.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of sessions to return in each response. The service may return fewer than this value.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token received from a previous ListSessions call. Provide this token to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSessionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create an interactive session asynchronously.
+      operationId: dataproc.projects.locations.sessions.create
+      parameters:
+        - description: Required. The parent resource where this session will be created.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. A unique ID used to identify the request. If the service receives two CreateSessionRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateSessionRequest)s with the same ID, the second request is ignored and the first Session is created and stored in the backend is returned.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The value must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
+          in: query
+          name: requestId
+          schema:
+            type: string
+        - description: Required. The ID to use for the session, which becomes the final component of the session's resource name.This value must be 4-63 characters. Valid characters are /a-z-/.
+          in: query
+          name: sessionId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Session"
       responses:
         "200":
           content:
@@ -1616,6 +1859,48 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TestIamPermissionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{session}:injectCredentials":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Inject Credentials in the interactive session.
+      operationId: dataproc.projects.locations.sessions.injectCredentials
+      parameters:
+        - description: Required. The name of the session resource to inject credentials to.
+          in: path
+          name: session
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InjectSessionCredentialsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -2309,7 +2594,7 @@ components:
       description: Execution configuration for a workload.
       properties:
         idleTtl:
-          description: "Optional. Applies to sessions only. The duration to keep the session alive while it's idling. Exceeding this threshold causes the session to terminate. This field cannot be set on a batch workload. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)). Defaults to 4 hours if not set. If both ttl and idle_ttl are specified for an interactive session, the conditions are treated as OR conditions: the workload will be terminated when it has been idle for idle_ttl or when ttl has been exceeded, whichever occurs first."
+          description: "Optional. Applies to sessions only. The duration to keep the session alive while it's idling. Exceeding this threshold causes the session to terminate. This field cannot be set on a batch workload. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)). Defaults to 1 hour if not set. If both ttl and idle_ttl are specified for an interactive session, the conditions are treated as OR conditions: the workload will be terminated when it has been idle for idle_ttl or when ttl has been exceeded, whichever occurs first."
           format: google-duration
           type: string
         kmsKey:
@@ -2644,6 +2929,16 @@ components:
           description: Required. The encrypted credentials being injected in to the cluster.The client is responsible for encrypting the credentials in a way that is supported by the cluster.A wrapped value is used here so that the actual contents of the encrypted credentials are not written to audit logs.
           type: string
       type: object
+    InjectSessionCredentialsRequest:
+      description: A request to inject credentials to a session.
+      properties:
+        credentialsCiphertext:
+          description: Required. The encrypted credentials being injected in to the session.The client is responsible for encrypting the credentials in a way that is supported by the session.A wrapped value is used here so that the actual contents of the encrypted credentials are not written to audit logs.
+          type: string
+        requestId:
+          description: "Optional. A unique ID used to identify the request. If the service receives two TerminateSessionRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.TerminateSessionRequest)s with the same ID, the first request is ignored to ensure the most recent credentials are injected.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The value must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
+          type: string
+      type: object
     InstanceGroupAutoscalingPolicyConfig:
       description: Configuration for the size bounds of an instance group, including its proportional size to other groups.
       properties:
@@ -2940,6 +3235,20 @@ components:
           readOnly: true
           type: string
       type: object
+    JupyterConfig:
+      description: Jupyter configuration for an interactive session.
+      properties:
+        displayName:
+          description: Optional. Display name, shown in the Jupyter kernelspec card.
+          type: string
+        kernel:
+          description: Optional. Kernel
+          enum:
+            - KERNEL_UNSPECIFIED
+            - PYTHON
+            - SCALA
+          type: string
+      type: object
     KerberosConfig:
       description: Specifies Kerberos related configuration.
       properties:
@@ -3102,6 +3411,32 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListSessionTemplatesResponse:
+      description: A list of session templates.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        sessionTemplates:
+          description: Output only. Session template list
+          items:
+            $ref: "#/components/schemas/SessionTemplate"
+          readOnly: true
+          type: array
+      type: object
+    ListSessionsResponse:
+      description: A list of interactive sessions.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as page_token to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        sessions:
+          description: Output only. The sessions from the specified collection.
+          items:
+            $ref: "#/components/schemas/Session"
+          readOnly: true
           type: array
       type: object
     ListWorkflowTemplatesResponse:
@@ -3675,6 +4010,76 @@ components:
           $ref: "#/components/schemas/KerberosConfig"
           description: Optional. Kerberos related configuration.
       type: object
+    Session:
+      description: "A representation of a session in the service. Next ID: 18"
+      properties:
+        createTime:
+          description: Output only. The time when the session was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          description: Output only. The email address of the user who created the session.
+          readOnly: true
+          type: string
+        environmentConfig:
+          $ref: "#/components/schemas/EnvironmentConfig"
+          description: Optional. Environment configuration for the session execution.
+        jupyterSession:
+          $ref: "#/components/schemas/JupyterConfig"
+          description: Optional. Jupyter session config.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. The labels to associate with this session. Label keys must contain 1 to 63 characters, and must conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). Label values may be empty, but, if present, must contain 1 to 63 characters, and must conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be associated with a session.
+          type: object
+        name:
+          description: Required. The resource name of the session.
+          type: string
+        runtimeConfig:
+          $ref: "#/components/schemas/RuntimeConfig"
+          description: Optional. Runtime configuration for the session execution.
+        runtimeInfo:
+          $ref: "#/components/schemas/RuntimeInfo"
+          description: Output only. Runtime information about session execution.
+          readOnly: true
+        sessionTemplate:
+          description: "Optional. The session template used by the session.Only resource names including project ID and location are valid.Example: * https://www.googleapis.com/compute/v1/projects/[project_id]/locations/[dataproc_region]/sessionTemplates/[template_id] * projects/[project_id]/locations/[dataproc_region]/sessionTemplates/[template_id]Note that the template must be in the same project and Dataproc region."
+          type: string
+        state:
+          description: Output only. A state of the session.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - TERMINATING
+            - TERMINATED
+            - FAILED
+          readOnly: true
+          type: string
+        stateHistory:
+          description: Output only. Historical state information for the session.
+          items:
+            $ref: "#/components/schemas/SessionStateHistory"
+          readOnly: true
+          type: array
+        stateMessage:
+          description: Output only. Session state details, such as a failure description if the state is FAILED.
+          readOnly: true
+          type: string
+        stateTime:
+          description: Output only. The time when the session entered a current state.
+          format: google-datetime
+          readOnly: true
+          type: string
+        user:
+          description: Optional. The email address of the user who owns the session.
+          type: string
+        uuid:
+          description: Output only. A session UUID (Unique Universal Identifier). The service generates this value when it creates the session.
+          readOnly: true
+          type: string
+      type: object
     SessionOperationMetadata:
       description: Metadata describing the Session operation.
       properties:
@@ -3713,6 +4118,68 @@ components:
           items:
             type: string
           type: array
+      type: object
+    SessionStateHistory:
+      description: Historical state information.
+      properties:
+        state:
+          description: Output only. The state of the session at this point in history.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - TERMINATING
+            - TERMINATED
+            - FAILED
+          readOnly: true
+          type: string
+        stateMessage:
+          description: Output only. Details about the state at this point in history.
+          readOnly: true
+          type: string
+        stateStartTime:
+          description: Output only. The time when the session entered the historical state.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    SessionTemplate:
+      description: "A representation of a session template in the service. Next ID: 12"
+      properties:
+        createTime:
+          description: Output only. The time when the template was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        creator:
+          description: Output only. The email address of the user who created the template.
+          readOnly: true
+          type: string
+        description:
+          description: Optional. Brief description of the template.
+          type: string
+        environmentConfig:
+          $ref: "#/components/schemas/EnvironmentConfig"
+          description: Optional. Environment configuration for session execution.
+        jupyterSession:
+          $ref: "#/components/schemas/JupyterConfig"
+          description: Optional. Jupyter session config.
+        labels:
+          additionalProperties:
+            type: string
+          description: Optional. The labels to associate with sessions created using this template. Label keys must contain 1 to 63 characters, and must conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). Label values may be empty, but, if present, must contain 1 to 63 characters, and must conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be associated with a session.
+          type: object
+        name:
+          description: Required. The resource name of the session template.
+          type: string
+        runtimeConfig:
+          $ref: "#/components/schemas/RuntimeConfig"
+          description: Optional. Runtime configuration for session execution.
+        updateTime:
+          description: Output only. The time template was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
     SetIamPolicyRequest:
       description: Request message for SetIamPolicy method.
@@ -4053,6 +4520,13 @@ components:
         validation:
           $ref: "#/components/schemas/ParameterValidation"
           description: Optional. Validation rules to be applied to this parameter's value.
+      type: object
+    TerminateSessionRequest:
+      description: A request to terminate an interactive session.
+      properties:
+        requestId:
+          description: "Optional. A unique ID used to identify the request. If the service receives two TerminateSessionRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.TerminateSessionRequest)s with the same ID, the second request is ignored.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The value must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
+          type: string
       type: object
     TestIamPermissionsRequest:
       description: Request message for TestIamPermissions method.

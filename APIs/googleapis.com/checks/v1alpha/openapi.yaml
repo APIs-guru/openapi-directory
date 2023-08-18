@@ -28,6 +28,7 @@ externalDocs:
   url: https://developers.google.com/checks
 tags:
   - name: accounts
+  - name: media
   - name: privacypolicy
   - name: projects
 paths:
@@ -45,7 +46,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Analyzes the privacy policy of the given policy URL or content.
+      description: Performs a synchronous analysis of a privacy policy, where the policy content is mapped to privacy categories, data types, and purposes.
       operationId: checks.privacypolicy.analyze
       requestBody:
         content:
@@ -89,6 +90,11 @@ paths:
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: "Optional. An [AIP-160](https://google.aip.dev/160) filter string to filter checks within the report. Only checks that match the filter string are included in the response. Example: `state = FAILED`"
+          in: query
+          name: checksFilter
           schema:
             type: string
       responses:
@@ -285,6 +291,95 @@ paths:
           description: Successful response
       tags:
         - projects
+  "/v1alpha/{parent}/reports":
+    get:
+      description: Lists reports for the specified app. By default, only the name and results_uri fields are returned. You can include other fields by listing them in the `fields` URL query parameter. For example, `?fields=reports(name,checks)` will return the name and checks fields.
+      operationId: checks.accounts.apps.reports.list
+      parameters:
+        - description: "Required. Resource name of the app. Example: `accounts/123/apps/456`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. An [AIP-160](https://google.aip.dev/160) filter string to filter checks within reports. Only checks that match the filter string are included in the response. Example: `state = FAILED`"
+          in: query
+          name: checksFilter
+          schema:
+            type: string
+        - description: "Optional. An [AIP-160](https://google.aip.dev/160) filter string to filter reports. Example: `appBundle.releaseType = PRE_RELEASE`"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of reports to return. If unspecified, at most 10 reports will be returned. The maximum value is 50; values above 50 will be coerced to 50.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token received from a previous `ListReports` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListReports` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChecksReportV1alphaListReportsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{parent}/reports:analyzeUpload":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: 'Analyzes the uploaded app bundle and returns a google.longrunning.Operation containing the generated Report. ## Example (upload only) Send a regular POST request with the header `X-Goog-Upload-Protocol: raw`. ``` POST https://checks.googleapis.com/upload/v1alpha/{parent=accounts/*/apps/*}/reports:analyzeUpload HTTP/1.1 X-Goog-Upload-Protocol: raw Content-Length: Content-Type: application/octet-stream ``` ## Example (upload with metadata) Send a multipart POST request where the first body part contains the metadata JSON and the second body part contains the binary upload. Include the header `X-Goog-Upload-Protocol: multipart`. ``` POST https://checks.googleapis.com/upload/v1alpha/{parent=accounts/*/apps/*}/reports:analyzeUpload HTTP/1.1 X-Goog-Upload-Protocol: multipart Content-Length: ? Content-Type: multipart/related; boundary=BOUNDARY --BOUNDARY Content-Type: application/json {"code_reference_id":"db5bcc20f94055fb5bc08cbb9b0e7a5530308786"} --BOUNDARY --BOUNDARY-- ``` *Note:* Metadata-only requests are not supported. '
+      operationId: checks.media.upload
+      parameters:
+        - description: "Required. Resource name of the app. Example: `accounts/123/apps/456`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              $ref: "#/components/schemas/GoogleChecksReportV1alphaAnalyzeUploadRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      tags:
+        - media
 components:
   parameters:
     _.xgafv:
@@ -362,36 +457,36 @@ components:
         type: string
   schemas:
     AnalyzePrivacyPolicyRequest:
-      description: The request proto for AnalyzePrivacyPolicy method.
+      description: Request for the AnalyzePrivacyPolicy method.
       properties:
         privacyPolicyPageContent:
-          description: Web page raw HTML content for the privacy policy page to be analyzed. Useful when the client wants to analyze a privacy policy already fetched.
+          description: The HTML content of the privacy policy. This is useful if you'd like to manage the crawling and rendering of the privacy policy.
           type: string
         privacyPolicyUri:
-          description: URL for the privacy policy page to be analyzed. https://linter.aip.dev/140/uri (Use `uri` instead of `url` in field name)
+          description: The URI that points to the web page for the privacy policy.
           type: string
       type: object
     AnalyzePrivacyPolicyResponse:
-      description: The response proto for AnalyzePrivacyPolicy method.
+      description: Response containing the analyzed privacy policy for the AnalyzePrivacyPolicy method.
       properties:
         dataPurposeAnnotations:
-          description: List of all data types in the privacy policy.
+          description: A list of detected purposes in the privacy policy.
           items:
             $ref: "#/components/schemas/PolicyPurposeOfUseAnnotation"
           type: array
         dataTypeAnnotations:
-          description: List of all data types in the privacy policy.
+          description: A list of detected data types in the privacy policy.
           items:
             $ref: "#/components/schemas/PolicyDataTypeAnnotation"
           type: array
         htmlContent:
-          description: HTML content for the privacy policy page.
+          description: HTML content for the privacy policy page. The byte offsets in each annotated section will match this content.
           type: string
         lastUpdatedDateInfo:
           $ref: "#/components/schemas/LastUpdatedDate"
           description: Information about the date when the privacy policy was last updated.
         sectionAnnotations:
-          description: List of all sections in the privacy policy.
+          description: A list of detected topics in the privacy policy.
           items:
             $ref: "#/components/schemas/PolicySectionAnnotation"
           type: array
@@ -421,10 +516,704 @@ components:
       properties: {}
       type: object
     FindPrivacyPolicyResponse:
-      description: Operation response for `FindPrivacyPolicy`.
+      description: Response containing the analyzed privacy policy for the FindPrivacyPolicy method.
       properties:
         privacyPolicy:
           description: Resource name of the PrivacyPolicy that was found.
+          type: string
+      type: object
+    GoogleChecksReportV1alphaAnalyzeUploadRequest:
+      description: The request message for ReportService.AnalyzeUpload.
+      properties:
+        codeReferenceId:
+          description: Optional. Git commit hash or changelist number associated with the upload.
+          type: string
+      type: object
+    GoogleChecksReportV1alphaAppBundle:
+      description: Information about the analyzed app bundle.
+      properties:
+        bundleId:
+          description: 'Unique id of the bundle. For example: "com.google.Gmail".'
+          type: string
+        codeReferenceId:
+          description: Git commit hash or changelist number associated with the release.
+          type: string
+        releaseType:
+          description: Identifies the type of release.
+          enum:
+            - APP_BUNDLE_RELEASE_TYPE_UNSPECIFIED
+            - PUBLIC
+            - PRE_RELEASE
+          type: string
+        version:
+          description: 'The user-visible version of the bundle such as the Android `versionName` or iOS `CFBundleShortVersionString`. For example: "7.21.1".'
+          type: string
+        versionId:
+          description: The version used throughout the operating system and store to identify the build such as the Android `versionCode` or iOS `CFBundleVersion`.
+          type: string
+      type: object
+    GoogleChecksReportV1alphaCheck:
+      description: A check that was run on your app.
+      properties:
+        citations:
+          description: Regulations and policies that serve as the legal basis for the check.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckCitation"
+          type: array
+        evidence:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckEvidence"
+          description: Evidence that substantiates the check result.
+        regionCodes:
+          description: Regions that are impacted by the check. For more info, see https://google.aip.dev/143#countries-and-regions.
+          items:
+            type: string
+          type: array
+        severity:
+          description: The urgency or risk level of the check.
+          enum:
+            - CHECK_SEVERITY_UNSPECIFIED
+            - PRIORITY
+            - POTENTIAL
+            - OPPORTUNITY
+          type: string
+        state:
+          description: The result after running the check.
+          enum:
+            - CHECK_STATE_UNSPECIFIED
+            - PASSED
+            - FAILED
+            - UNCHECKED
+          type: string
+        stateMetadata:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckStateMetadata"
+          description: Additional information about the check state in relation to past reports.
+        type:
+          description: The type of check that was run. A type will only appear once in a report's list of checks.
+          enum:
+            - CHECK_TYPE_UNSPECIFIED
+            - STORE_LISTING_PRIVACY_POLICY_LINK_PRESENT
+            - PRIVACY_POLICY_UPDATE_DATE_RECENT
+            - PRIVACY_POLICY_GDPR_GENERAL_RULES
+            - PRIVACY_POLICY_CCPA_GENERAL_RULES
+            - PRIVACY_POLICY_COLLECTION_CATEGORIES_DATA_NOTICE
+            - PRIVACY_POLICY_PROCESSING_PURPOSE_DATA_NOTICE
+            - PRIVACY_POLICY_SHARING_CATEGORIES_DATA_NOTICE
+            - PRIVACY_POLICY_DATA_RETENTION_NOTICE
+            - PRIVACY_POLICY_CONTACT_DETAILS_NOTICE
+            - PRIVACY_POLICY_CHILDREN_GENERAL_RULES
+            - PRIVACY_POLICY_DATA_TYPE_PHONE_NUMBER
+            - PRIVACY_POLICY_DATA_TYPE_USER_ACCOUNT_INFO
+            - PRIVACY_POLICY_DATA_TYPE_PRECISE_LOCATION
+            - PRIVACY_POLICY_DATA_TYPE_DEVICE_ID
+            - PRIVACY_POLICY_DATA_TYPE_APPS_ON_DEVICE
+            - PRIVACY_POLICY_DATA_TYPE_CONTACTS
+            - PRIVACY_POLICY_DATA_TYPE_TEXT_MESSAGES
+            - PRIVACY_POLICY_DATA_TYPE_PII
+            - PRIVACY_POLICY_DATA_TYPE_PII_CATEGORIES
+            - PRIVACY_POLICY_DATA_TYPE_HEALTH_AND_BIOMETRIC
+            - PRIVACY_POLICY_BRAZIL_LGPD_GENERAL_RULES
+            - PRIVACY_POLICY_VIRGINIA_VCDPA_GENERAL_RULES
+            - PRIVACY_POLICY_AFFILIATION_MENTION
+            - PRIVACY_POLICY_RIGHT_TO_DELETE_NOTICE
+            - PRIVACY_POLICY_RIGHT_TO_ACCESS_NOTICE
+            - PRIVACY_POLICY_RIGHT_TO_RECTIFICATION_NOTICE
+            - PRIVACY_POLICY_RIGHT_TO_KNOW_ABOUT_SELLING_NOTICE
+            - PRIVACY_POLICY_RIGHT_TO_KNOW_ABOUT_SHARING_NOTICE
+            - PRIVACY_POLICY_RIGHT_TO_OPT_OUT_FROM_SELLING_NOTICE
+            - PRIVACY_POLICY_METHOD_TO_OPT_OUT_FROM_SELLING_OR_SHARING_NOTICE
+            - PRIVACY_POLICY_DATA_CONTROLLER_IDENTITY
+            - PRIVACY_POLICY_DPO_CONTACT_DETAILS
+            - PRIVACY_POLICY_RIGHT_TO_LODGE_A_COMPLAINT
+            - PRIVACY_POLICY_LEGAL_BASIS
+            - PRIVACY_POLICY_CHILDREN_INFO_COLLECTION
+            - PRIVACY_POLICY_CHILDREN_INFO_USAGE_PURPOSES
+            - PRIVACY_POLICY_CHILDREN_INFO_DISCLOSURE_PRACTICES
+            - PRIVACY_POLICY_CHILDREN_INFO_PUBLICITY
+            - PRIVACY_POLICY_PARENTS_METHOD_OF_INFO_DELETION
+            - PRIVACY_POLICY_PARENTS_METHOD_TO_INFO_REVIEW
+            - PRIVACY_POLICY_PARENTS_METHOD_TO_STOP_FURTHER_INFO_COLLECTION_USE
+            - PRIVACY_POLICY_PARENTS_RIGHT_TO_INFO_DELETION
+            - PRIVACY_POLICY_PARENTS_RIGHT_TO_INFO_REVIEW
+            - PRIVACY_POLICY_PARENTS_RIGHT_TO_STOP_FURTHER_INFO_COLLECTION_USE
+            - PRIVACY_POLICY_PSL_APPROXIMATE_LOCATION
+            - PRIVACY_POLICY_PSL_PRECISE_LOCATION
+            - PRIVACY_POLICY_PSL_NAME
+            - PRIVACY_POLICY_PSL_EMAIL_ADDRESS
+            - PRIVACY_POLICY_PSL_USER_IDENTIFIERS
+            - PRIVACY_POLICY_PSL_ADDRESS
+            - PRIVACY_POLICY_PSL_PHONE_NUMBER
+            - PRIVACY_POLICY_PSL_RACE_AND_ETHNICITY
+            - PRIVACY_POLICY_PSL_CREDIT_SCORE
+            - PRIVACY_POLICY_PSL_PURCHASE_HISTORY
+            - PRIVACY_POLICY_PSL_HEALTH_INFO
+            - PRIVACY_POLICY_PSL_FITNESS_INFO
+            - PRIVACY_POLICY_PSL_EMAIL_MESSAGES
+            - PRIVACY_POLICY_PSL_TEXT_MESSAGES
+            - PRIVACY_POLICY_PSL_PHOTOS
+            - PRIVACY_POLICY_PSL_VIDEOS
+            - PRIVACY_POLICY_PSL_MUSIC_FILES
+            - PRIVACY_POLICY_PSL_VOICE_OR_SOUND_RECORDINGS
+            - PRIVACY_POLICY_PSL_FILES_AND_DOCS
+            - PRIVACY_POLICY_PSL_CALENDAR_EVENTS
+            - PRIVACY_POLICY_PSL_CONTACTS
+            - PRIVACY_POLICY_PSL_APP_INTERACTIONS
+            - PRIVACY_POLICY_PSL_IN_APP_SEARCH_HISTORY
+            - PRIVACY_POLICY_PSL_WEB_BROWSING_HISTORY
+            - PRIVACY_POLICY_PSL_INSTALLED_APPS
+            - PRIVACY_POLICY_PSL_CRASH_LOGS
+            - PRIVACY_POLICY_PSL_DIAGNOSTICS
+            - PRIVACY_POLICY_PSL_DEVICE_OR_OTHER_IDS
+            - DATA_MONITORING_NEW_ENDPOINT
+            - DATA_MONITORING_NEW_PERMISSION
+            - DATA_MONITORING_NEW_DATA_TYPE
+            - DATA_MONITORING_NEW_SDK
+            - DATA_MONITORING_ENCRYPTION
+            - DATA_MONITORING_NEW_DATA_TYPE_VERSION_DIFF
+            - DATA_MONITORING_NEW_ENDPOINT_VERSION_DIFF
+            - DATA_MONITORING_NEW_PERMISSION_VERSION_DIFF
+            - DATA_MONITORING_NEW_SDK_VERSION_DIFF
+            - DATA_MONITORING_SDKS_DENYLIST_VIOLATION
+            - DATA_MONITORING_PERMISSIONS_DENYLIST_VIOLATION
+            - DATA_MONITORING_ENDPOINTS_DENYLIST_VIOLATION
+            - DATA_MONITORING_OUTDATED_SDK_VERSION
+            - DATA_MONITORING_CRITICAL_SDK_ISSUE
+          type: string
+      type: object
+    GoogleChecksReportV1alphaCheckCitation:
+      description: Regulation or policy that serves as the legal basis for the check.
+      properties:
+        type:
+          description: Citation type.
+          enum:
+            - CITATION_TYPE_UNSPECIFIED
+            - COPPA
+            - GDPR
+            - FERPA
+            - CAL_OPPA
+            - CCPA
+            - SOPIPA
+            - LGPD
+            - CPRA
+            - VCDPA
+            - GOOGLE_PLAY_POLICY
+            - APP_STORE_POLICY
+            - CPA
+            - CTDPA
+            - UCPA
+            - PIPEDA
+            - ALBERTA_PIPA
+            - QUEBEC_ACT
+            - QUEBEC_BILL_64
+            - CHINA_PIPL
+          type: string
+      type: object
+    GoogleChecksReportV1alphaCheckDataSecurityEvidence:
+      description: Evidence concerning data security.
+      properties:
+        dataInTransitInfo:
+          description: Evidence related to data in transit.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckDataSecurityEvidenceDataInTransitInfo"
+          type: array
+      type: object
+    GoogleChecksReportV1alphaCheckDataSecurityEvidenceDataInTransitInfo:
+      description: Evidence related to data in transit detected in your app.
+      properties:
+        uri:
+          description: The URL contacted by your app. This includes the protocol, domain, and URL parameters.
+          type: string
+      type: object
+    GoogleChecksReportV1alphaCheckDataTypeEvidence:
+      description: Evidence concerning a data type that was found in your app.
+      properties:
+        dataType:
+          description: The data type that was found in your app.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - DATA_TYPE_APPROXIMATE_LOCATION
+            - DATA_TYPE_PRECISE_LOCATION
+            - DATA_TYPE_PERSONAL_NAME
+            - DATA_TYPE_EMAIL_ADDRESS
+            - DATA_TYPE_USER_IDS
+            - DATA_TYPE_PHYSICAL_ADDRESS
+            - DATA_TYPE_PHONE_NUMBER
+            - DATA_TYPE_RACE_AND_ETHNICITY
+            - DATA_TYPE_POLITICAL_OR_RELIGIOUS_BELIEFS
+            - DATA_TYPE_SEXUAL_ORIENTATION
+            - DATA_TYPE_OTHER_PERSONAL_INFO
+            - DATA_TYPE_PAYMENT_INFO
+            - DATA_TYPE_PURCHASE_HISTORY
+            - DATA_TYPE_CREDIT_SCORE
+            - DATA_TYPE_OTHER_FINANCIAL_INFO
+            - DATA_TYPE_HEALTH_INFO
+            - DATA_TYPE_FITNESS_INFO
+            - DATA_TYPE_EMAILS
+            - DATA_TYPE_TEXT_MESSAGES
+            - DATA_TYPE_PHOTOS
+            - DATA_TYPE_VIDEOS
+            - DATA_TYPE_VOICE_OR_SOUND_RECORDINGS
+            - DATA_TYPE_MUSIC_FILES
+            - DATA_TYPE_OTHER_AUDIO_FILES
+            - DATA_TYPE_FILES_AND_DOCS
+            - DATA_TYPE_CALENDAR_EVENTS
+            - DATA_TYPE_CONTACTS
+            - DATA_TYPE_APP_INTERACTIONS
+            - DATA_TYPE_IN_APP_SEARCH_HISTORY
+            - DATA_TYPE_INSTALLED_APPS
+            - DATA_TYPE_OTHER_USER_GENERATED_CONTENT
+            - DATA_TYPE_OTHER_ACTIONS
+            - DATA_TYPE_WEB_BROWSING_HISTORY
+            - DATA_TYPE_CRASH_LOGS
+            - DATA_TYPE_PERFORMANCE_DIAGNOSTICS
+            - DATA_TYPE_OTHER_APP_PERFORMANCE_DATA
+            - DATA_TYPE_DEVICE_OR_OTHER_IDS
+          type: string
+        dataTypeEvidence:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaDataTypeEvidence"
+          description: Evidence collected about the data type.
+      type: object
+    GoogleChecksReportV1alphaCheckEndpointEvidence:
+      description: Evidence concerning an endpoint that was contacted by your app.
+      properties:
+        endpoint:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaEndpoint"
+          description: The endpoint that was contacted by your app.
+      type: object
+    GoogleChecksReportV1alphaCheckEndpointRestrictionViolationEvidence:
+      description: Evidence collected from endpoint restriction violation analysis.
+      properties:
+        endpointDetails:
+          description: Endpoints in violation.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckEndpointRestrictionViolationEvidenceEndpointDetails"
+          type: array
+      type: object
+    GoogleChecksReportV1alphaCheckEndpointRestrictionViolationEvidenceEndpointDetails:
+      description: Details of the endpoint in violation.
+      properties:
+        endpoint:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaEndpoint"
+          description: The endpoint in violation.
+      type: object
+    GoogleChecksReportV1alphaCheckEvidence:
+      description: Evidence for a check.
+      properties:
+        dataSecurity:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckDataSecurityEvidence"
+          description: Evidence concerning data security.
+        dataTypes:
+          description: Evidence concerning data types found in your app.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckDataTypeEvidence"
+          type: array
+        endpointRestrictionViolations:
+          description: Evidence collected from endpoint restriction violation analysis.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckEndpointRestrictionViolationEvidence"
+          type: array
+        endpoints:
+          description: Evidence concerning endpoints that were contacted by your app.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckEndpointEvidence"
+          type: array
+        permissionRestrictionViolations:
+          description: Evidence collected from permission restriction violation analysis.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckPermissionRestrictionViolationEvidence"
+          type: array
+        permissions:
+          description: Evidence concerning permissions that were found in your app.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckPermissionEvidence"
+          type: array
+        privacyPolicyTexts:
+          description: Evidence collected from your privacy policy(s).
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckPrivacyPolicyTextEvidence"
+          type: array
+        sdkIssues:
+          description: Evidence concerning SDK issues.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckSdkIssueEvidence"
+          type: array
+        sdkRestrictionViolations:
+          description: Evidence collected from SDK restriction violation analysis.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckSdkRestrictionViolationEvidence"
+          type: array
+        sdks:
+          description: Evidence concerning SDKs that were found in your app.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckSdkEvidence"
+          type: array
+      type: object
+    GoogleChecksReportV1alphaCheckPermissionEvidence:
+      description: Evidence concerning a permission that was found in your app.
+      properties:
+        permission:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaPermission"
+          description: The permission that was found in your app.
+      type: object
+    GoogleChecksReportV1alphaCheckPermissionRestrictionViolationEvidence:
+      description: Evidence collected from permission restriction violation analysis.
+      properties:
+        permissionDetails:
+          description: Permissions in violation.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckPermissionRestrictionViolationEvidencePermissionDetails"
+          type: array
+      type: object
+    GoogleChecksReportV1alphaCheckPermissionRestrictionViolationEvidencePermissionDetails:
+      description: Details of the permission in violation.
+      properties:
+        permission:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaPermission"
+          description: The permission in violation.
+      type: object
+    GoogleChecksReportV1alphaCheckPrivacyPolicyTextEvidence:
+      description: Evidence collected from your privacy policy(s).
+      properties:
+        policyFragment:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaPolicyFragment"
+          description: The privacy policy fragment that was used during the check.
+      type: object
+    GoogleChecksReportV1alphaCheckSdkEvidence:
+      description: Evidence conerning an SDK that was found in your app.
+      properties:
+        sdk:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaSdk"
+          description: The SDK that was found in your app.
+      type: object
+    GoogleChecksReportV1alphaCheckSdkIssueEvidence:
+      description: Evidence concerning an SDK issue.
+      properties:
+        sdk:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaSdk"
+          description: The SDK with an issue.
+        sdkVersion:
+          description: The SDK version.
+          type: string
+      type: object
+    GoogleChecksReportV1alphaCheckSdkRestrictionViolationEvidence:
+      description: Evidence collected from SDK restriction violation analysis.
+      properties:
+        sdkDetails:
+          description: SDKs in violation.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheckSdkRestrictionViolationEvidenceSdkDetails"
+          type: array
+      type: object
+    GoogleChecksReportV1alphaCheckSdkRestrictionViolationEvidenceSdkDetails:
+      description: Details of the SDK in violation.
+      properties:
+        sdk:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaSdk"
+          description: The SDK in violation.
+      type: object
+    GoogleChecksReportV1alphaCheckStateMetadata:
+      description: Additional information about the check state in relation to past reports.
+      properties:
+        badges:
+          description: Indicators related to the check state.
+          items:
+            enum:
+              - CHECK_STATE_BADGE_UNSPECIFIED
+              - NEWLY_FAILING
+              - RECENTLY_FAILING
+              - RESOLVED
+            type: string
+          type: array
+        firstFailingTime:
+          description: The time when the check first started failing.
+          format: google-datetime
+          type: string
+        lastFailingTime:
+          description: The last time the check failed.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleChecksReportV1alphaDataMonitoring:
+      description: Represents the data monitoring section of the report.
+      properties:
+        dataTypes:
+          description: Data types that your app shares or collects.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoringDataTypeResult"
+          type: array
+        endpoints:
+          description: Endpoints that were found by dynamic analysis of your app.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoringEndpointResult"
+          type: array
+        permissions:
+          description: Permissions that your app uses.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoringPermissionResult"
+          type: array
+        sdks:
+          description: SDKs that your app uses.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoringSdkResult"
+          type: array
+      type: object
+    GoogleChecksReportV1alphaDataMonitoringDataTypeResult:
+      description: Information about a data type that was found in your app.
+      properties:
+        dataType:
+          description: The data type that was shared or collected by your app.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - DATA_TYPE_APPROXIMATE_LOCATION
+            - DATA_TYPE_PRECISE_LOCATION
+            - DATA_TYPE_PERSONAL_NAME
+            - DATA_TYPE_EMAIL_ADDRESS
+            - DATA_TYPE_USER_IDS
+            - DATA_TYPE_PHYSICAL_ADDRESS
+            - DATA_TYPE_PHONE_NUMBER
+            - DATA_TYPE_RACE_AND_ETHNICITY
+            - DATA_TYPE_POLITICAL_OR_RELIGIOUS_BELIEFS
+            - DATA_TYPE_SEXUAL_ORIENTATION
+            - DATA_TYPE_OTHER_PERSONAL_INFO
+            - DATA_TYPE_PAYMENT_INFO
+            - DATA_TYPE_PURCHASE_HISTORY
+            - DATA_TYPE_CREDIT_SCORE
+            - DATA_TYPE_OTHER_FINANCIAL_INFO
+            - DATA_TYPE_HEALTH_INFO
+            - DATA_TYPE_FITNESS_INFO
+            - DATA_TYPE_EMAILS
+            - DATA_TYPE_TEXT_MESSAGES
+            - DATA_TYPE_PHOTOS
+            - DATA_TYPE_VIDEOS
+            - DATA_TYPE_VOICE_OR_SOUND_RECORDINGS
+            - DATA_TYPE_MUSIC_FILES
+            - DATA_TYPE_OTHER_AUDIO_FILES
+            - DATA_TYPE_FILES_AND_DOCS
+            - DATA_TYPE_CALENDAR_EVENTS
+            - DATA_TYPE_CONTACTS
+            - DATA_TYPE_APP_INTERACTIONS
+            - DATA_TYPE_IN_APP_SEARCH_HISTORY
+            - DATA_TYPE_INSTALLED_APPS
+            - DATA_TYPE_OTHER_USER_GENERATED_CONTENT
+            - DATA_TYPE_OTHER_ACTIONS
+            - DATA_TYPE_WEB_BROWSING_HISTORY
+            - DATA_TYPE_CRASH_LOGS
+            - DATA_TYPE_PERFORMANCE_DIAGNOSTICS
+            - DATA_TYPE_OTHER_APP_PERFORMANCE_DATA
+            - DATA_TYPE_DEVICE_OR_OTHER_IDS
+          type: string
+        dataTypeEvidence:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaDataTypeEvidence"
+          description: Evidence collected about the data type.
+        metadata:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoringResultMetadata"
+          description: Metadata about the result.
+      type: object
+    GoogleChecksReportV1alphaDataMonitoringEndpointResult:
+      description: Information about an endpoint that was contacted by your app.
+      properties:
+        endpoint:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaEndpoint"
+          description: The endpoint that was contacted by your app.
+        hitCount:
+          description: The number of times this endpoint was contacted by your app.
+          format: int32
+          type: integer
+        metadata:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoringResultMetadata"
+          description: Metadata about the result.
+      type: object
+    GoogleChecksReportV1alphaDataMonitoringPermissionResult:
+      description: Information about a permission that was found in your app.
+      properties:
+        metadata:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoringResultMetadata"
+          description: Metadata about the result.
+        permission:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaPermission"
+          description: The permission that was found in your app.
+      type: object
+    GoogleChecksReportV1alphaDataMonitoringResultMetadata:
+      description: Information about a data monitoring result.
+      properties:
+        badges:
+          description: Badges that apply to this result.
+          items:
+            enum:
+              - DATA_MONITORING_RESULT_BADGE_UNSPECIFIED
+              - NEW
+            type: string
+          type: array
+        firstDetectedTime:
+          description: The timestamp when this result was first detected within the last 8 weeks. If not set, it wasn't detected within the last 8 weeks.
+          format: google-datetime
+          type: string
+        lastDetectedAppVersion:
+          description: Your app's version name when this result was last detected within the last 8 weeks. If not set, it wasn't detected within the last 8 weeks.
+          type: string
+        lastDetectedTime:
+          description: The timestamp when this result was last detected within the last 8 weeks. If not set, it wasn't detected within the last 8 weeks.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleChecksReportV1alphaDataMonitoringSdkResult:
+      description: Information about an SDK that was found in your app.
+      properties:
+        metadata:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoringResultMetadata"
+          description: Metadata about the result.
+        sdk:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaSdk"
+          description: The SDK that was found in your app.
+      type: object
+    GoogleChecksReportV1alphaDataTypeEndpointEvidence:
+      description: Evidence based on an endpoint that data was sent to.
+      properties:
+        attributedSdks:
+          description: Set of SDKs that are attributed to the exfiltration.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataTypeEndpointEvidenceAttributedSdk"
+          type: array
+        endpointDetails:
+          description: Endpoints the data type was sent to.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataTypeEndpointEvidenceEndpointDetails"
+          type: array
+        exfiltratedDataType:
+          description: Type of data that was exfiltrated.
+          enum:
+            - EXFILTRATED_DATA_TYPE_UNSPECIFIED
+            - EXFILTRATED_DATA_TYPE_PHONE_NUMBER
+            - EXFILTRATED_DATA_TYPE_PRECISE_LOCATION
+            - EXFILTRATED_DATA_TYPE_CONTACT_NAME
+            - EXFILTRATED_DATA_TYPE_CONTACT_EMAIL
+            - EXFILTRATED_DATA_TYPE_CONTACT_PHONE_NUMBER
+            - EXFILTRATED_DATA_TYPE_INCOMING_TEXT_NUMBER
+            - EXFILTRATED_DATA_TYPE_INCOMING_TEXT_MESSAGE
+            - EXFILTRATED_DATA_TYPE_OUTGOING_TEXT_NUMBER
+            - EXFILTRATED_DATA_TYPE_OUTGOING_TEXT_MESSAGE
+            - EXFILTRATED_DATA_TYPE_ADVERTISING_ID
+            - EXFILTRATED_DATA_TYPE_ANDROID_ID
+            - EXFILTRATED_DATA_TYPE_IMEI
+            - EXFILTRATED_DATA_TYPE_IMSI
+            - EXFILTRATED_DATA_TYPE_SIM_SERIAL_NUMBER
+            - EXFILTRATED_DATA_TYPE_SSID
+            - EXFILTRATED_DATA_TYPE_ACCOUNT
+            - EXFILTRATED_DATA_TYPE_EXTERNAL_ACCOUNT
+            - EXFILTRATED_DATA_TYPE_INSTALLED_PACKAGES
+          type: string
+      type: object
+    GoogleChecksReportV1alphaDataTypeEndpointEvidenceAttributedSdk:
+      description: Details of SDK that is attributed to the exfiltration.
+      properties:
+        sdk:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaSdk"
+          description: SDK that is attributed to the exfiltration.
+      type: object
+    GoogleChecksReportV1alphaDataTypeEndpointEvidenceEndpointDetails:
+      description: Details of the endpoint the data type was sent to.
+      properties:
+        endpoint:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaEndpoint"
+          description: Endpoint the data type was sent to.
+      type: object
+    GoogleChecksReportV1alphaDataTypeEvidence:
+      description: Evidence collected about a data type.
+      properties:
+        endpoints:
+          description: List of endpoints the data type was sent to.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataTypeEndpointEvidence"
+          type: array
+        permissions:
+          description: List of included permissions that imply collection of the data type.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataTypePermissionEvidence"
+          type: array
+        privacyPolicyTexts:
+          description: List of privacy policy texts that imply collection of the data type.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaDataTypePrivacyPolicyTextEvidence"
+          type: array
+      type: object
+    GoogleChecksReportV1alphaDataTypePermissionEvidence:
+      description: Evidence based on the inclusion of a permission.
+      properties:
+        permission:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaPermission"
+          description: Permission declared by your app.
+      type: object
+    GoogleChecksReportV1alphaDataTypePrivacyPolicyTextEvidence:
+      description: Evidence based on information from the privacy policy.
+      properties:
+        policyFragment:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaPolicyFragment"
+          description: The privacy policy fragment that implies collection of the data type.
+      type: object
+    GoogleChecksReportV1alphaEndpoint:
+      description: Information about an endpoint.
+      properties:
+        domain:
+          description: Domain name (e.g. ads.google.com).
+          type: string
+      type: object
+    GoogleChecksReportV1alphaListReportsResponse:
+      description: The response message for ReportService.ListReports.
+      properties:
+        nextPageToken:
+          description: A token which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        reports:
+          description: The reports for the specified app.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaReport"
+          type: array
+      type: object
+    GoogleChecksReportV1alphaPermission:
+      description: Information about a permission.
+      properties:
+        id:
+          description: Permission identifier.
+          type: string
+      type: object
+    GoogleChecksReportV1alphaPolicyFragment:
+      description: Information about a policy fragment.
+      properties:
+        htmlContent:
+          description: HTML content.
+          type: string
+        sourceUri:
+          description: Policy URL.
+          type: string
+      type: object
+    GoogleChecksReportV1alphaReport:
+      description: Privacy report.
+      properties:
+        appBundle:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaAppBundle"
+          description: Information about the analyzed app bundle.
+        baseReport:
+          description: Resource name of the base report used for comparison. May be absent if this is the first report generated for the app.
+          type: string
+        checks:
+          description: List of checks that were run on the app bundle.
+          items:
+            $ref: "#/components/schemas/GoogleChecksReportV1alphaCheck"
+          type: array
+        dataMonitoring:
+          $ref: "#/components/schemas/GoogleChecksReportV1alphaDataMonitoring"
+          description: Information related to data monitoring.
+        name:
+          description: Resource name of the report.
+          type: string
+        resultsUri:
+          description: A URL to view results.
+          type: string
+      type: object
+    GoogleChecksReportV1alphaSdk:
+      description: Information about an SDK.
+      properties:
+        id:
+          description: SDK identifier.
           type: string
       type: object
     LastUpdatedDate:
@@ -442,7 +1231,7 @@ components:
           format: int64
           type: string
         textContent:
-          description: "The bytes of actual text content in the section. NOTE: - This will correspond to the whole sentence that includes the date. - This field might contain HTML and it is not sanitized."
+          description: "The bytes of actual text content in the section. Note: - This will correspond to the whole sentence that includes the date. - This field might contain HTML and it is not sanitized."
           type: string
       type: object
     ListOperationsResponse:
@@ -585,7 +1374,7 @@ components:
           format: int64
           type: string
         textContent:
-          description: "The bytes of actual text content in the sentence that mentions the purpose of use. This makes it much easier to consume the information. NOTE: This field might contain HTML and does not guarantee a SafeHtml security contract go/safehtmltypecontracts#safehtml."
+          description: The bytes of actual text content in the sentence that mentions the purpose of use. This makes it much easier to consume the information.
           type: string
       type: object
     PolicySectionAnnotation:
@@ -599,7 +1388,7 @@ components:
           format: float
           type: number
         sectionType:
-          description: Type of the high-level category in the policy.
+          description: Detected type of the high-level topic in the policy.
           enum:
             - SECTION_TYPE_UNSPECIFIED
             - FIRST_PARTY_COLLECTION
@@ -642,7 +1431,7 @@ components:
           format: int64
           type: string
         textContent:
-          description: "Actual text content in the section. This makes it much easier to consume the information. NOTE: This field might contain HTML and does not guarantee a SafeHtml security contract go/safehtmltypecontracts#safehtml."
+          description: Actual text content in the section.
           type: string
       type: object
     Status:

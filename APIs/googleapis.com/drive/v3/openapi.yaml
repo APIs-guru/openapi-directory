@@ -3146,7 +3146,7 @@ components:
           type: string
       type: object
     Comment:
-      description: A comment on a file.
+      description: A comment on a file. Some resource methods (such as `comments.update`) require a `commentId`. Use the `comments.list` method to retrieve the ID for a comment in a file.
       properties:
         anchor:
           description: A region of the document represented as a JSON string. For details on defining anchor properties, refer to [Manage comments and replies](https://developers.google.com/drive/api/v3/manage-comments).
@@ -3237,7 +3237,7 @@ components:
           type: string
       type: object
     Drive:
-      description: Representation of a shared drive.
+      description: Representation of a shared drive. Some resource methods (such as `drives.update`) require a `driveId`. Use the `drives.list` method to retrieve the ID for a shared drive.
       properties:
         backgroundImageFile:
           description: An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on `drive.drives.update` requests that don't set `themeId`. When specified, all fields of the `backgroundImageFile` must be set.
@@ -3388,7 +3388,7 @@ components:
           type: string
       type: object
     File:
-      description: The metadata for a file.
+      description: The metadata for a file. Some resource methods (such as `files.update`) require a `fileId`. Use the `files.list` method to retrieve the ID for a file.
       properties:
         appProperties:
           additionalProperties:
@@ -4075,7 +4075,7 @@ components:
           type: array
       type: object
     Permission:
-      description: A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
+      description: A permission for a file. A permission grants a user, group, domain, or the world access to a file or a folder hierarchy. Some resource methods (such as `permissions.update`) require a `permissionId`. Use the `permissions.list` method to retrieve the ID for a file, folder, or shared drive.
       properties:
         allowFileDiscovery:
           description: Whether the permission allows the file to be discovered through search. This is only applicable for permissions of type `domain` or `anyone`.
@@ -4179,7 +4179,7 @@ components:
           type: array
       type: object
     Reply:
-      description: A reply to a comment on a file.
+      description: A reply to a comment on a file. Some resource methods (such as `replies.update`) require a `replyId`. Use the `replies.list` method to retrieve the ID for a reply.
       properties:
         action:
           description: "The action the reply performed to the parent comment. Valid values are: * `resolve` * `reopen`"
@@ -4229,7 +4229,7 @@ components:
           type: array
       type: object
     Revision:
-      description: The metadata for a revision to a file.
+      description: The metadata for a revision to a file. Some resource methods (such as `revisions.update`) require a `revisionId`. Use the `revisions.list` method to retrieve the ID for a revision.
       properties:
         exportLinks:
           additionalProperties:

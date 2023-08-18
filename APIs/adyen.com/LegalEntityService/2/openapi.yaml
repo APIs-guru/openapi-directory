@@ -145,7 +145,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -323,6 +323,13 @@ paths:
 
          You should only upload documents when Adyen requests additional information for the legal entity. 
       operationId: post-documents
+      parameters:
+        - description: Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
+          example: 1_3008
+          in: header
+          name: x-requested-verification-code
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -394,7 +401,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -573,6 +580,13 @@ paths:
         >If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
 
       operationId: post-legalEntities
+      parameters:
+        - description: Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
+          example: 1_3004
+          in: header
+          name: x-requested-verification-code
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1581,6 +1595,13 @@ paths:
 
         When the transfer instrument passes the verification checks, you can start sending funds from the balance platform to the transfer instrument (such as payouts).
       operationId: post-transferInstruments
+      parameters:
+        - description: Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
+          example: 1_7002
+          in: header
+          name: x-requested-verification-code
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -1656,7 +1677,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -3560,6 +3581,8 @@ components:
             - **editPrefilledCountry**: The user can change the country of their legal entity's address, for example the registered address of an organization.
 
             By default, this value is set to **false**. Set to **true** to allow the action.
+
+            - **allowBankAccountFormatSelection**: The user can select the format for their payout account if applicable.
 
             - **allowIntraRegionCrossBorderPayout**: The user can select a payout account in a different EU/EEA country than the country of their legal entity.
 

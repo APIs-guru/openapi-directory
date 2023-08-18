@@ -1706,16 +1706,6 @@ components:
             - EFI
             - BIOS
           type: string
-        vmCapabilities:
-          description: Output only. Unordered list. List of VM certain capabilities needed for some Compute Engine features.
-          items:
-            enum:
-              - VM_CAPABILITY_UNSPECIFIED
-              - VM_CAPABILITY_NVME_STORAGE_ACCESS
-              - VM_CAPABILITY_GVNIC_NETWORK_INTERFACE
-            type: string
-          readOnly: true
-          type: array
       type: object
     AwsVmDetails:
       description: AwsVmDetails describes a VM in AWS.

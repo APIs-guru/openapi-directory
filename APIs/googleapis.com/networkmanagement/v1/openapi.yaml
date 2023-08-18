@@ -851,6 +851,7 @@ components:
             - PSC_PUBLISHED_SERVICE
             - PSC_GOOGLE_API
             - PSC_VPC_SC
+            - SERVERLESS_NEG
           type: string
       type: object
     DropInfo:
@@ -969,6 +970,9 @@ components:
         protocol:
           description: 'IP protocol in string format, for example: "TCP", "UDP", "ICMP".'
           type: string
+        sourceAgentUri:
+          description: URI of the source telemetry agent this packet originates from.
+          type: string
         sourceIp:
           description: Source IP address.
           type: string
@@ -1017,6 +1021,7 @@ components:
             - IMPLIED_VPC_FIREWALL_RULE
             - SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE
             - NETWORK_FIREWALL_POLICY_RULE
+            - NETWORK_REGIONAL_FIREWALL_POLICY_RULE
           type: string
         networkUri:
           description: The URI of the VPC network that the firewall rule is associated with. This field is not applicable to hierarchical firewall policy rules.

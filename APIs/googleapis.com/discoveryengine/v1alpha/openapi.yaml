@@ -28,6 +28,7 @@ info:
 externalDocs:
   url: https://cloud.google.com/discovery-engine/docs
 tags:
+  - name: locations
   - name: projects
 paths:
   "/v1alpha/{dataStore}:completeQuery":
@@ -87,6 +88,174 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{location}/lookupWidgetConfig":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Gets the Widget Config using the uuid.
+      operationId: discoveryengine.locations.lookupWidgetConfig
+      parameters:
+        - description: "Required. The location resource where lookup widget will be performed. Format: `locations/{location}`"
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaLookupWidgetConfigRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaLookupWidgetConfigResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - locations
+  "/v1alpha/{location}/widgetCompleteQuery":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Performs a user input completion with keyword suggestion. Similar to the CompletionService.CompleteQuery method, but a widget version that allows CompleteQuery without API Key. It supports CompleteQuery with or without JWT token.
+      operationId: discoveryengine.locations.widgetCompleteQuery
+      parameters:
+        - description: "Required. The location resource where widget complete query will be performed. Format: `locations/{location}`"
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetCompleteQueryRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetCompleteQueryResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - locations
+  "/v1alpha/{location}/widgetConverseConversation":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Converse a conversation with Widget.
+      operationId: discoveryengine.locations.widgetConverseConversation
+      parameters:
+        - description: "Required. The location resource where widget converse conversation will be performed. Format: `locations/{location}`"
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetConverseConversationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetConverseConversationResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - locations
+  "/v1alpha/{location}/widgetSearch":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Performs a search. Similar to the SearchService.Search method, but a widget version that allows search without API Key. It supports search with or without JWT token.
+      operationId: discoveryengine.locations.widgetSearch
+      parameters:
+        - description: "Required. The location resource where widget search will be performed. Format: `locations/{location}`"
+          in: path
+          name: location
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetSearchRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetSearchResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - locations
   "/v1alpha/{name}":
     delete:
       description: Deletes a Schema.
@@ -1207,6 +1376,13 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDiscoveryengineV1alphaAdditionalParams:
+      description: AdditionalParams message for WidgetService methods for security and privacy enhancement.
+      properties:
+        token:
+          description: Token that used for non-human user check.
+          type: string
+      type: object
     GoogleCloudDiscoveryengineV1alphaBatchCreateTargetSitesResponse:
       description: Response message for SiteSearchEngineService.BatchCreateTargetSites method.
       properties:
@@ -1236,6 +1412,25 @@ components:
           type: string
         tableId:
           description: Required. The BigQuery table to copy the data from with a length limit of 1,024 characters.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaCompleteQueryRequest:
+      description: Request message for CompletionService.CompleteQuery method.
+      properties:
+        dataStore:
+          description: Required. The parent data store resource name for which the completion is performed, such as `projects/*/locations/global/collections/default_collection/dataStores/default_data_store`.
+          type: string
+        includeTailSuggestions:
+          description: Indicates if tail suggestions should be returned if there are no suggestions that match the full query. Even if set to true, if there are suggestions that match the full query, those are returned and no tail suggestions are returned.
+          type: boolean
+        query:
+          description: Required. The typeahead input used to fetch suggestions. Maximum length is 128 characters.
+          type: string
+        queryModel:
+          description: "Selects data model of query suggestions for serving. Currently supported values: * `document` - Using suggestions generated from user-imported documents. * `search-history` - Using suggestions generated from the past history of SearchService.Search API calls. Do not use it when there is no traffic for Search API. * `user-event` - Using suggestions generated from user-imported search events. * `document-completable` - Using suggestions taken directly from user-imported document fields marked as completable. Default values: * `document` is the default model for regular dataStores. * `search-history` is the default model for IndustryVertical.SITE_SEARCH dataStores."
+          type: string
+        userPseudoId:
+          description: A unique identifier for tracking visitors. For example, this could be implemented with an HTTP cookie, which should be able to uniquely identify a visitor on a single device. This unique identifier should not change if the visitor logs in or out of the website. This field should NOT have a fixed value such as `unknown_visitor`. This should be the same identifier as UserEvent.user_pseudo_id and SearchRequest.user_pseudo_id. The field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaCompleteQueryResponse:
@@ -1338,6 +1533,9 @@ components:
         conversation:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaConversation"
           description: The conversation to be used by auto session only. The name field will be ignored as we automatically assign new name for the conversation in auto session.
+        name:
+          description: "Required. The resource name of the Conversation to get. Format: `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`. Use `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/-` to activate auto session mode, which automatically creates a new conversation inside a ConverseConversation session."
+          type: string
         query:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaTextInput"
           description: Required. Current user input.
@@ -1765,6 +1963,20 @@ components:
             $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSchema"
           type: array
       type: object
+    GoogleCloudDiscoveryengineV1alphaLookupWidgetConfigRequest:
+      description: Request message for WidgetService.LookupWidgetConfig method.
+      properties:
+        widgetConfigId:
+          description: Required. The UUID of the Widget Config.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaLookupWidgetConfigResponse:
+      description: Response message for WidgetService.LookupWidgetConfig method.
+      properties:
+        anonymousWidgetConfig:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetConfig"
+          description: The Anonymous Widget Config associated with the UUID.
+      type: object
     GoogleCloudDiscoveryengineV1alphaMediaInfo:
       description: Media-specific user event information.
       properties:
@@ -2079,6 +2291,9 @@ components:
         safeSearch:
           description: Whether to turn on safe search. This is only supported for website search.
           type: boolean
+        servingConfig:
+          description: Required. The resource name of the Search serving config, such as `projects/*/locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`. This field is used to identify the serving configuration name, set of models used to make the search.
+          type: string
         spellCorrectionSpec:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchRequestSpellCorrectionSpec"
           description: The spell correction specification that specifies the mode under which spell correction takes effect.
@@ -2136,6 +2351,14 @@ components:
           type: integer
         maxExtractiveSegmentCount:
           description: The max number of extractive segments returned in each search result. Only applied if the DataStore is set to DataStore.ContentConfig.CONTENT_REQUIRED or DataStore.solution_types is SOLUTION_TYPE_CHAT. An extractive segment is a text segment extracted from the original document that is relevant to the search query, and, in general, more verbose than an extractive answer. The segment could then be used as input for LLMs to generate summaries and answers. If the number of matching segments is less than `max_extractive_segment_count`, return all of the segments. Otherwise, return the `max_extractive_segment_count`.
+          format: int32
+          type: integer
+        numNextSegments:
+          description: Return at most `num_next_segments` segments after each selected segments.
+          format: int32
+          type: integer
+        numPreviousSegments:
+          description: Specifies whether to also include the adjacent from each selected segments. Return at most `num_previous_segments` segments before each selected segments.
           format: int32
           type: integer
         returnExtractiveSegmentScore:
@@ -2418,6 +2641,8 @@ components:
               - ADVERSARIAL_QUERY_IGNORED
               - NON_SUMMARY_SEEKING_QUERY_IGNORED
               - OUT_OF_DOMAIN_QUERY_IGNORED
+              - POTENTIAL_POLICY_VIOLATION
+              - LLM_ADDON_NOT_ENABLED
             type: string
           type: array
         summaryText:
@@ -2625,6 +2850,206 @@ components:
           type: string
         userId:
           description: Highly recommended for logged-in users. Unique identifier for logged-in user, such as a user name. Don't set for anonymous users. Always use a hashed value for this ID. Don't set the field to the same fixed ID for different users. This mixes the event history of those users together, which results in degraded model quality. The field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetCompleteQueryRequest:
+      description: Request message for WidgetService.WidgetCompleteQuery method.
+      properties:
+        additionalParams:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaAdditionalParams"
+          description: Additional params for security and privacy enhancement.
+        completeQueryRequest:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaCompleteQueryRequest"
+          description: Required. The CompleteQuery request to perform auto-complete suggestion query.
+        configId:
+          description: Required. The UUID of the WidgetConfig. This field is used to identify the widget configuration, set of models used to make the auto complete query.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetCompleteQueryResponse:
+      description: Response message for WidgetService.WidgetCompleteQuery method.
+      properties:
+        uToken:
+          description: The token in response.
+          type: string
+        widgetQuerySuggestions:
+          description: Results of the matched query suggestions in widget. The result list is ordered and the first result is a top suggestion.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetCompleteQueryResponseWidgetQuerySuggestion"
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetCompleteQueryResponseWidgetQuerySuggestion:
+      description: Suggestions as search queries.
+      properties:
+        suggestion:
+          description: The suggestion for the query.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetConfig:
+      description: WidgetConfig captures configs at the Widget level.
+      properties:
+        allowPublicAccess:
+          description: Whether allow no-auth integration with widget. If set true, public access to search or other solutions from widget is allowed without authenication token provided by customer hosted backend server.
+          type: boolean
+        allowlistedDomains:
+          description: Allowlisted domains that can load this widget.
+          items:
+            type: string
+          type: array
+        configId:
+          description: Output only. Unique obfuscated identifier of a WidgetConfig.
+          readOnly: true
+          type: string
+        contentSearchSpec:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchRequestContentSearchSpec"
+          description: The content search spec that configs the desired behavior of content search.
+        createTime:
+          description: Output only. Timestamp the WidgetConfig was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        dataStoreType:
+          description: Output only. The type of the parent data store.
+          enum:
+            - DATA_STORE_TYPE_UNSPECIFIED
+            - SITE_SEARCH
+            - STRUCTURED
+            - UNSTRUCTURED
+          readOnly: true
+          type: string
+        displayName:
+          description: Required. The human readable widget config display name. Used in Discovery UI. This field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an INVALID_ARGUMENT error is returned.
+          type: string
+        enableAutocomplete:
+          description: Whether or not to enable autocomplete.
+          type: boolean
+        enableConversationalSearch:
+          description: Whether to allow conversational search (LLM, multi-turn) or not (non-LLM, single-turn).
+          type: boolean
+        enableQualityFeedback:
+          description: Turn on or off collecting the search result quality feedback from end users.
+          type: boolean
+        enableResultScore:
+          description: Whether to show the result score.
+          type: boolean
+        enableSafeSearch:
+          description: Whether to enable safe search.
+          type: boolean
+        enableSnippetResultSummary:
+          description: Turn on or off summary for each snippets result.
+          type: boolean
+        enableSummarization:
+          description: Turn on or off summarization for the search response.
+          type: boolean
+        facetField:
+          description: The configuration and appearance of facets in the end user view.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetConfigFacetField"
+          type: array
+        fieldsUiComponentsMap:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaWidgetConfigUIComponentField"
+          description: The key is the UI component. Mock. Currently supported `title`, `thumbnail`, `url`, `custom1`, `custom2`, `custom3`. The value is the name of the field along with its device visibility. The 3 custom fields are optional and can be added or removed. `title`, `thumbnail`, `url` are required UI components that cannot be removed.
+          type: object
+        llmEnabled:
+          description: Output only. Whether LLM is enabled in the corresponding data store.
+          readOnly: true
+          type: boolean
+        name:
+          description: "Immutable. The full resource name of the widget config. Format: `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/widgetConfigs/{widget_config_id}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters."
+          type: string
+        solutionType:
+          description: Required. Immutable. Specifies the solution type that this WidgetConfig can be used for.
+          enum:
+            - SOLUTION_TYPE_UNSPECIFIED
+            - SOLUTION_TYPE_RECOMMENDATION
+            - SOLUTION_TYPE_SEARCH
+            - SOLUTION_TYPE_CHAT
+          type: string
+        updateTime:
+          description: Output only. Timestamp the WidgetConfig was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetConfigFacetField:
+      description: Facet fields that store the mapping of fields to end user widget appearance.
+      properties:
+        displayName:
+          description: Optional. The field name that end users will see.
+          type: string
+        field:
+          description: Required. Registered field name. The format is `field.abc`.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetConfigUIComponentField:
+      description: Facet field that maps to a UI Component.
+      properties:
+        deviceVisibility:
+          description: The field visibility on different types of devices.
+          items:
+            enum:
+              - DEVICE_VISIBILITY_UNSPECIFIED
+              - MOBILE
+              - DESKTOP
+            type: string
+          type: array
+        displayTemplate:
+          description: 'The template to customize how the field is displayed. An example value would be a string that looks like: "Price: {value}".'
+          type: string
+        field:
+          description: Required. Registered field name. The format is `field.abc`.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetConverseConversationRequest:
+      description: Request message for WidgetService.WidgetConverseConversation method.
+      properties:
+        additionalParams:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaAdditionalParams"
+          description: Additional params for security and privacy enhancement.
+        configId:
+          description: Required. The UUID of the WidgetConfig. This field is used to identify the widget configuration, set of models used to make the user event collection.
+          type: string
+        conversationId:
+          description: The id of the Conversation to get. Use "-" to activate auto session mode, which automatically creates a new conversation inside a ConverseConversation session.
+          type: string
+        converseConversationRequest:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaConverseConversationRequest"
+          description: Required. The ConverseConversationRequest request to perform converse a conversation. The ServingConfig id will be `default_search` by default.
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetConverseConversationResponse:
+      description: Response message for WidgetService.WidgetConverseConversation method.
+      properties:
+        conversationId:
+          description: The id of the Conversation returned.
+          type: string
+        converseConversationResponse:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaConverseConversationResponse"
+          description: ConverseConversationResponse returned from ConversationalSearchService.ConverseConversation.
+        uToken:
+          description: The token in response.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetSearchRequest:
+      description: Request message for WidgetService.WidgetSearch method.
+      properties:
+        additionalParams:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaAdditionalParams"
+          description: Additional params for security and privacy enhancement.
+        configId:
+          description: Required. The UUID of the Search WidgetConfig. This field is used to identify the search widget configuration, set of models used to make the search.
+          type: string
+        searchRequest:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchRequest"
+          description: Required. The search request to perform search.
+      type: object
+    GoogleCloudDiscoveryengineV1alphaWidgetSearchResponse:
+      description: Response message for WidgetService.WidgetSearch method.
+      properties:
+        searchResponse:
+          $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponse"
+          description: The search response after performing search.
+        uToken:
+          description: The token in response.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaCreateSchemaMetadata:

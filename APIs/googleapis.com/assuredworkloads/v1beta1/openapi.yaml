@@ -29,7 +29,6 @@ externalDocs:
   url: https://cloud.google.com/learnmoreurl
 tags:
   - name: organizations
-  - name: projects
 paths:
   "/v1beta1/{name}":
     delete:
@@ -452,17 +451,11 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1beta1/{project}/{target}:analyzeWorkloadMove":
+  "/v1beta1/{target}:analyzeWorkloadMove":
     get:
       description: Analyzes a hypothetical move of a source resource to a target(destination) folder-based workload to surface compliance risks.
-      operationId: assuredworkloads.projects.organizations.locations.workloads.analyzeWorkloadMove
+      operationId: assuredworkloads.organizations.locations.workloads.analyzeWorkloadMove
       parameters:
-        - description: "The source type is a project. Specify the project's relative resource name, formatted as either a project number or a project ID: \"projects/{PROJECT_NUMBER}\" or \"projects/{PROJECT_ID}\" For example: \"projects/951040570662\" when specifying a project number, or \"projects/my-project-123\" when specifying a project ID."
-          in: path
-          name: project
-          required: true
-          schema:
-            type: string
         - description: "Required. The resource ID of the folder-based destination workload. This workload is where the source resource will hypothetically be moved to. Specify the workload's relative resource name, formatted as: \"organizations/{ORGANIZATION_ID}/locations/{LOCATION_ID}/workloads/{WORKLOAD_ID}\" For example: \"organizations/123/locations/us-east1/workloads/assured-workload-2\""
           in: path
           name: target
@@ -484,6 +477,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: "The source type is a project. Specify the project's relative resource name, formatted as either a project number or a project ID: \"projects/{PROJECT_NUMBER}\" or \"projects/{PROJECT_ID}\" For example: \"projects/951040570662\" when specifying a project number, or \"projects/my-project-123\" when specifying a project ID."
+          in: query
+          name: project
+          schema:
+            type: string
         - description: "The source type is a project-based workload. Specify the workloads's relative resource name, formatted as: \"organizations/{ORGANIZATION_ID}/locations/{LOCATION_ID}/workloads/{WORKLOAD_ID}\" For example: \"organizations/123/locations/us-east1/workloads/assured-workload-1\" This option is now deprecated."
           in: query
           name: source
@@ -502,7 +500,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -765,7 +763,7 @@ components:
       properties: {}
       type: object
     GoogleCloudAssuredworkloadsV1beta1Violation:
-      description: "Workload monitoring Violation. Next Id: 27"
+      description: "Workload monitoring Violation. Next Id: 28"
       properties:
         acknowledged:
           description: A boolean that indicates if the violation is acknowledged
