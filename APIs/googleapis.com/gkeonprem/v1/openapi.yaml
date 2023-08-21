@@ -1527,6 +1527,9 @@ components:
         bareMetalVersion:
           description: The Anthos clusters on bare metal version for the bare metal admin cluster.
           type: string
+        binaryAuthorization:
+          $ref: "#/components/schemas/BinaryAuthorization"
+          description: Binary Authorization related configurations.
         clusterOperations:
           $ref: "#/components/schemas/BareMetalAdminClusterOperationsConfig"
           description: Cluster operations configuration.
@@ -1646,14 +1649,14 @@ components:
           type: array
         controlPlaneNodePoolConfig:
           $ref: "#/components/schemas/BareMetalAdminControlPlaneNodePoolConfig"
-          description: Configures the node pool running the control plane. If specified the corresponding NodePool will be created for the cluster's control plane. The NodePool will have the same name and namespace as the cluster.
+          description: Required. Configures the node pool running the control plane. If specified the corresponding NodePool will be created for the cluster's control plane. The NodePool will have the same name and namespace as the cluster.
       type: object
     BareMetalAdminControlPlaneNodePoolConfig:
       description: BareMetalAdminControlPlaneNodePoolConfig specifies the control plane node pool configuration. We have a control plane specific node pool config so that we can flexible about supporting control plane specific fields in the future.
       properties:
         nodePoolConfig:
           $ref: "#/components/schemas/BareMetalNodePoolConfig"
-          description: The generic configuration for a node pool running the control plane.
+          description: Required. The generic configuration for a node pool running the control plane.
       type: object
     BareMetalAdminDrainedMachine:
       description: BareMetalAdminDrainedMachine represents the machines that are drained.
@@ -1875,6 +1878,9 @@ components:
         bareMetalVersion:
           description: Required. The Anthos clusters on bare metal version for your user cluster.
           type: string
+        binaryAuthorization:
+          $ref: "#/components/schemas/BinaryAuthorization"
+          description: Binary Authorization related configurations.
         clusterOperations:
           $ref: "#/components/schemas/BareMetalClusterOperationsConfig"
           description: Cluster operations configuration.
@@ -2421,6 +2427,17 @@ components:
           format: int64
           type: string
       type: object
+    BinaryAuthorization:
+      description: Configuration for Binary Authorization.
+      properties:
+        evaluationMode:
+          description: Mode of operation for binauthz policy evaluation. If unspecified, defaults to DISABLED.
+          enum:
+            - EVALUATION_MODE_UNSPECIFIED
+            - DISABLED
+            - PROJECT_SINGLETON_POLICY_ENFORCE
+          type: string
+      type: object
     Binding:
       description: Associates `members`, or principals, with a `role`.
       properties:
@@ -2761,7 +2778,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     OperationMetadata:
@@ -2864,7 +2881,7 @@ components:
           type: string
       type: object
     Policy:
-      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         bindings:
           description: Associates a list of `members`, or principals, with a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one principal. The `bindings` in a `Policy` can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the `bindings` grant 50 different roles to `user:alice@example.com`, and not to any other principal, then you can add another 1,450 principals to the `bindings` in the `Policy`.
@@ -3318,6 +3335,9 @@ components:
         masterIp:
           description: MasterIP is the IP announced by the master of Seesaw group.
           type: string
+        stackdriverName:
+          description: Name to be used by Stackdriver.
+          type: string
         vms:
           description: Names of the VMs created for this Seesaw group.
           items:
@@ -3430,6 +3450,9 @@ components:
         description:
           description: A human readable description of this VMware user cluster.
           type: string
+        disableBundledIngress:
+          description: Disable bundled ingress.
+          type: boolean
         enableControlPlaneV2:
           description: Enable control plane V2. Default to false.
           type: boolean
@@ -3492,6 +3515,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        upgradePolicy:
+          $ref: "#/components/schemas/VmwareClusterUpgradePolicy"
+          description: Specifies upgrade policy for the cluster.
         validationCheck:
           $ref: "#/components/schemas/ValidationCheck"
           description: Output only. ValidationCheck represents the result of the preflight check job.
@@ -3502,6 +3528,13 @@ components:
           readOnly: true
         vmTrackingEnabled:
           description: Enable VM tracking.
+          type: boolean
+      type: object
+    VmwareClusterUpgradePolicy:
+      description: VmwareClusterUpgradePolicy defines the cluster upgrade policy.
+      properties:
+        controlPlaneOnly:
+          description: Controls whether the upgrade applies to the control plane only.
           type: boolean
       type: object
     VmwareControlPlaneNodeConfig:
@@ -3538,6 +3571,9 @@ components:
       properties:
         datastore:
           description: The Vsphere datastore used by the control plane Node.
+          type: string
+        storagePolicyName:
+          description: The Vsphere storage policy used by the control plane Node.
           type: string
       type: object
     VmwareDataplaneV2Config:
@@ -3629,6 +3665,10 @@ components:
         metalLbConfig:
           $ref: "#/components/schemas/VmwareMetalLbConfig"
           description: Configuration for MetalLB typed load balancers.
+        seesawConfig:
+          $ref: "#/components/schemas/VmwareSeesawConfig"
+          description: Output only. Configuration for Seesaw typed load balancers.
+          readOnly: true
         vipConfig:
           $ref: "#/components/schemas/VmwareVipConfig"
           description: The VIPs used by the load balancer.
@@ -3833,6 +3873,32 @@ components:
           description: Output only. Resource status for the platform.
           readOnly: true
       type: object
+    VmwareSeesawConfig:
+      description: "VmwareSeesawConfig represents configuration parameters for an already existing Seesaw load balancer. IMPORTANT: Please note that the Anthos On-Prem API will not generate or update Seesaw configurations it can only bind a pre-existing configuration to a new user cluster. IMPORTANT: When attempting to create a user cluster with a pre-existing Seesaw load balancer you will need to follow some preparation steps before calling the 'CreateVmwareCluster' API method. First you will need to create the user cluster's namespace via kubectl. The namespace will need to use the following naming convention : -gke-onprem-mgmt or -gke-onprem-mgmt depending on whether you used the 'VmwareCluster.local_name' to disambiguate collisions; for more context see the documentation of 'VmwareCluster.local_name'. Once the namespace is created you will need to create a secret resource via kubectl. This secret will contain copies of your Seesaw credentials. The Secret must be called 'user-cluster-creds' and contain Seesaw's SSH and Cert credentials. The credentials must be keyed with the following names: 'seesaw-ssh-private-key', 'seesaw-ssh-public-key', 'seesaw-ssh-ca-key', 'seesaw-ssh-ca-cert'."
+      properties:
+        enableHa:
+          description: Enable two load balancer VMs to achieve a highly-available Seesaw load balancer.
+          type: boolean
+        group:
+          description: "Required. In general the following format should be used for the Seesaw group name: seesaw-for-[cluster_name]."
+          type: string
+        ipBlocks:
+          description: Required. The IP Blocks to be used by the Seesaw load balancer
+          items:
+            $ref: "#/components/schemas/VmwareIpBlock"
+          type: array
+        masterIp:
+          description: Required. MasterIP is the IP announced by the master of Seesaw group.
+          type: string
+        stackdriverName:
+          description: Name to be used by Stackdriver.
+          type: string
+        vms:
+          description: Names of the VMs created for this Seesaw group.
+          items:
+            type: string
+          type: array
+      type: object
     VmwareStaticIpConfig:
       description: Represents the network configuration required for the VMware user clusters with Static IP configurations.
       properties:
@@ -3872,6 +3938,9 @@ components:
           type: string
         resourcePool:
           description: The name of the vCenter resource pool for the user cluster.
+          type: string
+        storagePolicyName:
+          description: The name of the vCenter storage policy for the user cluster.
           type: string
       type: object
     VmwareVersionInfo:

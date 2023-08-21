@@ -44473,6 +44473,33 @@ components:
           description: This field is only temporary. It will be removed. Do not use it.
           type: string
       type: object
+    BulkInsertOperationStatus:
+      properties:
+        createdVmCount:
+          description: "[Output Only] Count of VMs successfully created so far."
+          format: int32
+          type: integer
+        deletedVmCount:
+          description: "[Output Only] Count of VMs that got deleted during rollback."
+          format: int32
+          type: integer
+        failedToCreateVmCount:
+          description: "[Output Only] Count of VMs that started creating but encountered an error."
+          format: int32
+          type: integer
+        status:
+          description: "[Output Only] Creation status of BulkInsert operation - information if the flow is rolling forward or rolling back."
+          enum:
+            - CREATING
+            - DONE
+            - ROLLING_BACK
+            - STATUS_UNSPECIFIED
+          type: string
+        targetVmCount:
+          description: "[Output Only] Count of VMs originally planned to be created."
+          format: int32
+          type: integer
+      type: object
     CacheInvalidationRule:
       properties:
         host:
@@ -45227,7 +45254,7 @@ components:
           description: "[Output Only] Server-defined fully-qualified URL for this resource."
           type: string
         sizeGb:
-          description: Size, in GB, of the persistent disk. You can specify this field when creating a persistent disk using the sourceImage, sourceSnapshot, or sourceDisk parameter, or specify it alone to create an empty persistent disk. If you specify this field along with a source, the value of sizeGb must not be less than the size of the source. Acceptable values are 1 to 65536, inclusive.
+          description: Size, in GB, of the persistent disk. You can specify this field when creating a persistent disk using the sourceImage, sourceSnapshot, or sourceDisk parameter, or specify it alone to create an empty persistent disk. If you specify this field along with a source, the value of sizeGb must not be less than the size of the source. Acceptable values are greater than 0.
           format: int64
           type: string
         sourceConsistencyGroupPolicy:
@@ -51446,6 +51473,14 @@ components:
             type: string
           type: array
       type: object
+    InstancesBulkInsertOperationMetadata:
+      properties:
+        perLocationStatus:
+          additionalProperties:
+            $ref: "#/components/schemas/BulkInsertOperationStatus"
+          description: "Status information per location (location name is key). Example key: zones/us-central1-a"
+          type: object
+      type: object
     InstancesGetEffectiveFirewallsResponse:
       properties:
         firewallPolicys:
@@ -51881,7 +51916,7 @@ components:
             - OS_UNPROVISIONED
           type: string
         pairingKey:
-          description: '[Output only for type PARTNER. Input only for PARTNER_PROVIDER. Not present for DEDICATED]. The opaque identifier of an PARTNER attachment used to initiate provisioning with a selected partner. Of the form "XXXXX/region/domain"'
+          description: '[Output only for type PARTNER. Input only for PARTNER_PROVIDER. Not present for DEDICATED]. The opaque identifier of a PARTNER attachment used to initiate provisioning with a selected partner. Of the form "XXXXX/region/domain"'
           type: string
         partnerAsn:
           description: Optional BGP ASN for the router supplied by a Layer 3 Partner if they configured BGP on behalf of the customer. Output only for PARTNER type, input only for PARTNER_PROVIDER, not available for DEDICATED.
@@ -51889,7 +51924,7 @@ components:
           type: string
         partnerMetadata:
           $ref: "#/components/schemas/InterconnectAttachmentPartnerMetadata"
-          description: Informational metadata about Partner attachments from Partners to display to customers. Output only for for PARTNER type, mutable for PARTNER_PROVIDER, not available for DEDICATED.
+          description: Informational metadata about Partner attachments from Partners to display to customers. Output only for PARTNER type, mutable for PARTNER_PROVIDER, not available for DEDICATED.
         privateInterconnectInfo:
           $ref: "#/components/schemas/InterconnectAttachmentPrivateInfo"
           description: "[Output Only] Information specific to an InterconnectAttachment. This property is populated if the interconnect that this is attached to is of type DEDICATED."
@@ -57140,6 +57175,8 @@ components:
         insertTime:
           description: "[Output Only] The time that this operation was requested. This value is in RFC3339 text format."
           type: string
+        instancesBulkInsertOperationMetadata:
+          $ref: "#/components/schemas/InstancesBulkInsertOperationMetadata"
         kind:
           default: compute#operation
           description: "[Output Only] Type of the resource. Always `compute#operation` for Operation resources."
@@ -58150,7 +58187,7 @@ components:
           type: string
       type: object
     Policy:
-      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
@@ -61078,7 +61115,7 @@ components:
           description: An optional description of this resource. Provide this field when you create the resource.
           type: string
         destRange:
-          description: The destination range of outgoing packets that this route applies to. Both IPv4 and IPv6 are supported.
+          description: The destination range of outgoing packets that this route applies to. Both IPv4 and IPv6 are supported. Must specify an IPv4 range (e.g. 192.0.2.0/24) or an IPv6 range in RFC 4291 format (e.g. 2001:db8::/32). IPv6 range will be displayed using RFC 5952 compressed format.
           type: string
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
@@ -61108,7 +61145,7 @@ components:
           description: "The URL to an instance that should handle matching packets. You can specify this as a full or partial URL. For example: https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/"
           type: string
         nextHopIp:
-          description: The network IP address of an instance that should handle matching packets. Only IPv4 is supported.
+          description: The network IP address of an instance that should handle matching packets. Both IPv6 address and IPv4 addresses are supported. Must specify an IPv4 address in dot-decimal notation (e.g. 192.0.2.99) or an IPv6 address in RFC 4291 format (e.g. 2001:db8::2d9:51:0:0 or 2001:db8:0:0:2d9:51:0:0). IPv6 addresses will be displayed using RFC 5952 compressed format (e.g. 2001:db8::2d9:51:0:0). Should never be an IPv4-mapped IPv6 address.
           type: string
         nextHopNetwork:
           description: The URL of the local network if it should handle matching packets.
@@ -61809,7 +61846,7 @@ components:
       description: Represents a Nat resource. It enables the VMs within the specified subnetworks to access Internet without external IP addresses. It specifies a list of subnetworks (and the ranges within) that want to use NAT. Customers can also provide the external IPs that would be used for NAT. GCP would auto-allocate ephemeral IPs if no external IPs are provided.
       properties:
         autoNetworkTier:
-          description: "The network tier to use when automatically reserving IP addresses. Must be one of: PREMIUM, STANDARD. If not specified, PREMIUM tier will be used."
+          description: "The network tier to use when automatically reserving NAT IP addresses. Must be one of: PREMIUM, STANDARD. If not specified, then the current project-level default tier is used."
           enum:
             - FIXED_STANDARD
             - PREMIUM
@@ -69160,7 +69197,7 @@ components:
           format: int32
           type: integer
         peerGcpGateway:
-          description: URL of the peer side HA GCP VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created. This field can be used when creating highly available VPN from VPC network to VPC network, the field is exclusive with the field peerExternalGateway. If provided, the VPN tunnel will automatically use the same vpnGatewayInterface ID in the peer GCP VPN gateway.
+          description: URL of the peer side HA VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created. This field can be used when creating highly available VPN from VPC network to VPC network, the field is exclusive with the field peerExternalGateway. If provided, the VPN tunnel will automatically use the same vpnGatewayInterface ID in the peer Google Cloud VPN gateway.
           type: string
         peerIp:
           description: IP address of the peer VPN gateway. Only IPv4 is supported.

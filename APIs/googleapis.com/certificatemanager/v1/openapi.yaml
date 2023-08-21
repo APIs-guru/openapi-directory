@@ -797,7 +797,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. A user-provided name of the TrustConfig.
+        - description: Required. A user-provided name of the TrustConfig. Must match the regexp `[a-z0-9-]{1,63}`.
           in: query
           name: trustConfigId
           schema:

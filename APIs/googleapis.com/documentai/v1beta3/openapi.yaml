@@ -5458,6 +5458,13 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3ProcessorType"
           type: array
       type: object
+    GoogleCloudDocumentaiV1beta3FieldExtractionMetadata:
+      description: Metadata for how this field value is extracted.
+      properties:
+        summaryOptions:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3SummaryOptions"
+          description: Summary options config.
+      type: object
     GoogleCloudDocumentaiV1beta3GcsDocument:
       description: Specifies a document stored on Cloud Storage.
       properties:
@@ -5724,6 +5731,9 @@ components:
         ocrConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3OcrConfig"
           description: Only applicable to `OCR_PROCESSOR`. Returns error if set on other processor types.
+        schemaOverride:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentSchema"
+          description: Optional. Override the schema of the ProcessorVersion. Will return an Invalid Argument error if this field is set when the underlying ProcessorVersion doesn't support schema override.
       type: object
     GoogleCloudDocumentaiV1beta3ProcessRequest:
       description: Request message for the ProcessDocument method.
@@ -5928,6 +5938,9 @@ components:
     GoogleCloudDocumentaiV1beta3PropertyMetadata:
       description: Metadata about a property.
       properties:
+        fieldExtractionMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3FieldExtractionMetadata"
+          description: Field extraction metadata on the property.
         inactive:
           description: Whether the property should be considered as "inactive".
           type: boolean
@@ -6052,6 +6065,25 @@ components:
     GoogleCloudDocumentaiV1beta3SetDefaultProcessorVersionResponse:
       description: Response message for the SetDefaultProcessorVersion method.
       properties: {}
+      type: object
+    GoogleCloudDocumentaiV1beta3SummaryOptions:
+      description: Metadata for document summarization.
+      properties:
+        format:
+          description: What format the summary should be in.
+          enum:
+            - FORMAT_UNSPECIFIED
+            - PARAGRAPH
+            - BULLETS
+          type: string
+        length:
+          description: How long the summary should be.
+          enum:
+            - LENGTH_UNSPECIFIED
+            - BRIEF
+            - MODERATE
+            - COMPREHENSIVE
+          type: string
       type: object
     GoogleCloudDocumentaiV1beta3TrainProcessorVersionMetadata:
       description: The metadata that represents a processor version being created.

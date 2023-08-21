@@ -916,8 +916,121 @@ components:
     Query:
       description: 'A wrapper around the SQL query statement. This is needed so that the JSON representation of ExecuteSqlQueryRequest has the following format: `{"query":"select *"}`.'
       properties:
+        maxRows:
+          description: Sets the limit for the maximum number of rows returned after the query execution.
+          format: int64
+          type: string
         query:
           description: Required. Sql query to execute.
+          type: string
+        queryParameters:
+          description: In the struct, the value corresponds to the value of query parameter and date type corresponds to the date type of the query parameter.
+          items:
+            $ref: "#/components/schemas/QueryParameter"
+          type: array
+        timeout:
+          description: Sets the number of seconds the driver will wait for a query to execute.
+          format: int64
+          type: string
+      type: object
+    QueryParameter:
+      description: Query parameter definition
+      properties:
+        dataType:
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - INT
+            - SMALLINT
+            - DOUBLE
+            - DATE
+            - DATETIME
+            - TIME
+            - STRING
+            - LONG
+            - BOOLEAN
+            - DECIMAL
+            - UUID
+            - BLOB
+            - BIT
+            - TINYINT
+            - INTEGER
+            - BIGINT
+            - FLOAT
+            - REAL
+            - NUMERIC
+            - CHAR
+            - VARCHAR
+            - LONGVARCHAR
+            - TIMESTAMP
+            - NCHAR
+            - NVARCHAR
+            - LONGNVARCHAR
+            - "NULL"
+            - OTHER
+            - JAVA_OBJECT
+            - DISTINCT
+            - STRUCT
+            - ARRAY
+            - CLOB
+            - REF
+            - DATALINK
+            - ROWID
+            - BINARY
+            - VARBINARY
+            - LONGVARBINARY
+            - NCLOB
+            - SQLXML
+            - REF_CURSOR
+            - TIME_WITH_TIMEZONE
+            - TIMESTAMP_WITH_TIMEZONE
+          type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
+            - true
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+        value:
           type: string
       type: object
     Reference:

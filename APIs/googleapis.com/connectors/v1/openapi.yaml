@@ -1734,6 +1734,9 @@ components:
     ConnectorInfraConfig:
       description: This cofiguration provides infra configs like rate limit threshold which need to be configurable for every connector version
       properties:
+        hpaConfig:
+          $ref: "#/components/schemas/HPAConfig"
+          description: HPA autoscaling config.
         internalclientRatelimitThreshold:
           description: Max QPS supported for internal requests originating from Connd.
           format: int64
@@ -1742,6 +1745,12 @@ components:
           description: Max QPS supported by the connector version before throttling of requests.
           format: int64
           type: string
+        resourceLimits:
+          $ref: "#/components/schemas/ResourceLimits"
+          description: System resource limits.
+        resourceRequests:
+          $ref: "#/components/schemas/ResourceRequests"
+          description: System resource requests.
       type: object
     ConnectorVersion:
       description: ConnectorVersion indicates a specific version of a connector.
@@ -1836,6 +1845,10 @@ components:
     ConnectorVersionInfraConfig:
       description: This cofiguration provides infra configs like rate limit threshold which need to be configurable for every connector version
       properties:
+        hpaConfig:
+          $ref: "#/components/schemas/HPAConfig"
+          description: Output only. HPA autoscaling config.
+          readOnly: true
         internalclientRatelimitThreshold:
           description: Output only. Max QPS supported for internal requests originating from Connd.
           format: int64
@@ -1846,6 +1859,14 @@ components:
           format: int64
           readOnly: true
           type: string
+        resourceLimits:
+          $ref: "#/components/schemas/ResourceLimits"
+          description: Output only. System resource limits.
+          readOnly: true
+        resourceRequests:
+          $ref: "#/components/schemas/ResourceRequests"
+          description: Output only. System resource requests.
+          readOnly: true
       type: object
     ConnectorsLogConfig:
       description: Log configuration for the connection.
@@ -2405,6 +2426,20 @@ components:
           type: string
         stringValue:
           description: String value
+          type: string
+      type: object
+    HPAConfig:
+      description: Autoscaling config for connector deployment system metrics.
+      properties:
+        cpuUtilizationThreshold:
+          description: Output only. Percent CPU utilization where HPA triggers autoscaling.
+          format: int64
+          readOnly: true
+          type: string
+        memoryUtilizationThreshold:
+          description: Output only. Percent Memory utilization where HPA triggers autoscaling.
+          format: int64
+          readOnly: true
           type: string
       type: object
     Header:
@@ -3020,6 +3055,30 @@ components:
             - GCP_RESOURCE
             - GCP_SECRETMANAGER_SECRET
             - GCP_SECRETMANAGER_SECRET_VERSION
+          type: string
+      type: object
+    ResourceLimits:
+      description: Resource limits defined for connection pods of a given connector type.
+      properties:
+        cpu:
+          description: Output only. CPU limit.
+          readOnly: true
+          type: string
+        memory:
+          description: Output only. Memory limit.
+          readOnly: true
+          type: string
+      type: object
+    ResourceRequests:
+      description: Resource requests defined for connection pods of a given connector type.
+      properties:
+        cpu:
+          description: Output only. CPU request.
+          readOnly: true
+          type: string
+        memory:
+          description: Output only. Memory request.
+          readOnly: true
           type: string
       type: object
     ResultMetadata:

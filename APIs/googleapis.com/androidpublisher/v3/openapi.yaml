@@ -6558,6 +6558,19 @@ components:
           description: A mapping from region code to tax rate details. The keys are region codes as defined by Unicode's "CLDR".
           type: object
       type: object
+    SystemApkOptions:
+      description: Options for system APKs.
+      properties:
+        rotated:
+          description: Whether to use the rotated key for signing the system APK.
+          type: boolean
+        uncompressedDexFiles:
+          description: Whether system APK was generated with uncompressed dex files.
+          type: boolean
+        uncompressedNativeLibraries:
+          description: Whether system APK was generated with uncompressed native libraries.
+          type: boolean
+      type: object
     SystemApksListResponse:
       description: Response to list previously created system APK variants.
       properties:
@@ -6921,6 +6934,9 @@ components:
         deviceSpec:
           $ref: "#/components/schemas/DeviceSpec"
           description: The device spec used to generate the APK.
+        options:
+          $ref: "#/components/schemas/SystemApkOptions"
+          description: Optional. Options applied to the generated APK.
         variantId:
           description: Output only. The ID of a previously created system APK variant.
           format: uint32

@@ -2617,9 +2617,6 @@ components:
         snapshotReservationDetail:
           $ref: "#/components/schemas/SnapshotReservationDetail"
           description: Details about snapshot space reservation and usage on the storage volume.
-        snapshotSchedulePolicy:
-          description: The name of the snapshot schedule policy in use for this volume, if any.
-          type: string
         state:
           description: The state of this storage volume.
           enum:
@@ -2629,9 +2626,6 @@ components:
             - DELETING
             - UPDATING
             - COOL_OFF
-          type: string
-        storageAggregatePool:
-          description: Input only. Name of the storage aggregate pool to allocate the volume in. Can be used only for VOLUME_PERFORMANCE_TIER_ASSIGNED volumes.
           type: string
         storageType:
           description: The storage type for this volume.
@@ -2698,9 +2692,6 @@ components:
         snapshotsEnabled:
           description: Whether snapshots should be enabled.
           type: boolean
-        storageAggregatePool:
-          description: Input only. Name of the storage aggregate pool to allocate the volume in. Can be used only for VOLUME_PERFORMANCE_TIER_ASSIGNED volumes.
-          type: string
         type:
           description: The type of this Volume.
           enum:

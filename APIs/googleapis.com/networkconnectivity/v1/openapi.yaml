@@ -689,6 +689,102 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/policyBasedRoutes":
+    get:
+      description: Lists PolicyBasedRoutes in a given project and location.
+      operationId: networkconnectivity.projects.locations.global.policyBasedRoutes.list
+      parameters:
+        - description: Required. The parent resource's name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: A filter expression that filters the results listed in the response.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Sort the results by a certain order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of results per page that should be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPolicyBasedRoutesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new PolicyBasedRoute in a given project and location.
+      operationId: networkconnectivity.projects.locations.global.policyBasedRoutes.create
+      parameters:
+        - description: Required. The parent resource's name of the PolicyBasedRoute.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. Unique id for the Policy Based Route to create.
+          in: query
+          name: policyBasedRouteId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PolicyBasedRoute"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/routeTables":
     get:
       description: Lists route tables in a given project.
@@ -1524,6 +1620,7 @@ components:
       properties:
         error:
           $ref: "#/components/schemas/GoogleRpcStatus"
+          deprecated: true
           description: The most recent error during operating this connection.
         errorInfo:
           $ref: "#/components/schemas/GoogleRpcErrorInfo"
@@ -1586,6 +1683,25 @@ components:
           type: string
         title:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+    Filter:
+      description: Filter matches L4 traffic.
+      properties:
+        destRange:
+          description: Optional. The destination IP range of outgoing packets that this policy based route applies to. Default is "0.0.0.0/0" if protocol version is IPv4.
+          type: string
+        ipProtocol:
+          description: Optional. The IP protocol that this policy based route applies to. Valid values are 'TCP', 'UDP', and 'ALL'. Default is 'ALL'.
+          type: string
+        protocolVersion:
+          description: Required. Internet protocol versions this policy based route applies to. For this version, only IPV4 is supported.
+          enum:
+            - PROTOCOL_VERSION_UNSPECIFIED
+            - IPV4
+          type: string
+        srcRange:
+          description: Optional. The source IP range of outgoing packets that this policy based route applies to. Default is "0.0.0.0/0" if protocol version is IPv4.
           type: string
       type: object
     GoogleLongrunningCancelOperationRequest:
@@ -1759,6 +1875,13 @@ components:
           description: Output only. The time the hub was last updated.
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    InterconnectAttachment:
+      description: InterconnectAttachment to which this route applies to.
+      properties:
+        region:
+          description: Optional. Cloud region to install this policy based route on interconnect attachment. Use `all` to install it on all interconnect attachments.
           type: string
       type: object
     InternalRange:
@@ -1968,6 +2091,23 @@ components:
         nextPageToken:
           description: The standard List next-page token.
           type: string
+      type: object
+    ListPolicyBasedRoutesResponse:
+      description: Response for PolicyBasedRouting.ListPolicyBasedRoutes method.
+      properties:
+        nextPageToken:
+          description: The next pagination token in the List response. It should be used as page_token for the following request. An empty value means no more result.
+          type: string
+        policyBasedRoutes:
+          description: Policy based routes to be returned.
+          items:
+            $ref: "#/components/schemas/PolicyBasedRoute"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
       type: object
     ListRouteTablesResponse:
       description: Response for HubService.ListRouteTables method.
@@ -2186,6 +2326,70 @@ components:
           format: int32
           type: integer
       type: object
+    PolicyBasedRoute:
+      description: "Policy Based Routes (PBR) are more powerful routes that allows GCP customers to route their L4 network traffic based on not just destination IP, but also source IP, protocol and more. A PBR always take precedence when it conflicts with other types of routes. Next id: 22"
+      properties:
+        createTime:
+          description: Output only. Time when the PolicyBasedRoute was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: Optional. An optional description of this resource. Provide this field when you create the resource.
+          type: string
+        filter:
+          $ref: "#/components/schemas/Filter"
+          description: Required. The filter to match L4 traffic.
+        interconnectAttachment:
+          $ref: "#/components/schemas/InterconnectAttachment"
+          description: Optional. The interconnect attachments to which this route applies to.
+        kind:
+          description: Output only. Type of this resource. Always networkconnectivity#policyBasedRoute for Policy Based Route resources.
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: User-defined labels.
+          type: object
+        name:
+          description: Immutable. A unique name of the resource in the form of `projects/{project_number}/locations/global/PolicyBasedRoutes/{policy_based_route_id}`
+          type: string
+        network:
+          description: Required. Fully-qualified URL of the network that this route applies to. e.g. projects/my-project/global/networks/my-network.
+          type: string
+        nextHopIlbIp:
+          description: Optional. The IP of a global access enabled L4 ILB that should be the next hop to handle matching packets. For this version, only next_hop_ilb_ip is supported.
+          type: string
+        nextHopOtherRoutes:
+          description: Optional. Other routes that will be referenced to determine the next hop of the packet.
+          enum:
+            - OTHER_ROUTES_UNSPECIFIED
+            - DEFAULT_ROUTING
+          type: string
+        priority:
+          description: Optional. The priority of this policy based route. Priority is used to break ties in cases where there are more than one matching policy based routes found. In cases where multiple policy based routes are matched, the one with the lowest-numbered priority value wins. The default value is 1000. The priority value must be from 1 to 65535, inclusive.
+          format: int32
+          type: integer
+        selfLink:
+          description: Output only. Server-defined fully-qualified URL for this resource.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Time when the PolicyBasedRoute was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        virtualMachine:
+          $ref: "#/components/schemas/VirtualMachine"
+          description: Optional. VM instances to which this policy based route applies to.
+        warnings:
+          description: Output only. If potential misconfigurations are detected for this route, this field will be populated with warning messages.
+          items:
+            $ref: "#/components/schemas/Warnings"
+          readOnly: true
+          type: array
+      type: object
     ProducerPscConfig:
       description: The PSC configurations on producer side.
       properties:
@@ -2220,6 +2424,7 @@ components:
           type: string
         error:
           $ref: "#/components/schemas/GoogleRpcStatus"
+          deprecated: true
           description: The most recent error during operating this connection.
         errorInfo:
           $ref: "#/components/schemas/GoogleRpcErrorInfo"
@@ -2776,6 +2981,37 @@ components:
           items:
             type: string
           type: array
+      type: object
+    VirtualMachine:
+      description: VM instances to which this policy based route applies to.
+      properties:
+        tags:
+          description: Optional. A list of VM instance tags to which this policy based route applies to. VM instances that have ANY of tags specified here will install this PBR.
+          items:
+            type: string
+          type: array
+      type: object
+    Warnings:
+      description: Informational warning message.
+      properties:
+        code:
+          description: Output only. A warning code, if applicable.
+          enum:
+            - WARNING_UNSPECIFIED
+            - RESOURCE_NOT_ACTIVE
+            - RESOURCE_BEING_MODIFIED
+          readOnly: true
+          type: string
+        data:
+          additionalProperties:
+            type: string
+          description: "Output only. Metadata about this warning in key: value format. The key should provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement."
+          readOnly: true
+          type: object
+        warningMessage:
+          description: Output only. A human-readable description of the warning code.
+          readOnly: true
+          type: string
       type: object
   securitySchemes:
     Oauth2:
