@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 x-hasEquivalentPaths: true
 info:
   description: Upload and manage files.
@@ -15,15 +15,14 @@ info:
   x-providerName: hubapi.com
   x-serviceName: files
 tags:
-  - description: Operations to upload and edit files.
-    name: Files
-  - description: Operations to create and edit folders.
-    name: Folders
+  - name: Files
+  - name: Folders
 paths:
   /files/v3/files:
     post:
       description: Upload a single file with content specified in request body.
-      operationId: post-/files/v3/files_upload
+      operationId: post-/files/v3/files
+      parameters: []
       requestBody:
         content:
           multipart/form-data:
@@ -48,6 +47,7 @@ paths:
                 options:
                   description: JSON string representing FileUploadOptions.
                   type: string
+              type: object
       responses:
         "201":
           content:
@@ -67,7 +67,8 @@ paths:
   /files/v3/files/import-from-url/async:
     post:
       description: Asynchronously imports the file at the given URL into the file manager.
-      operationId: post-/files/v3/files/import-from-url/async_importFromUrl
+      operationId: post-/files/v3/files/import-from-url/async
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -93,7 +94,7 @@ paths:
   "/files/v3/files/import-from-url/async/tasks/{taskId}/status":
     get:
       description: Check the status of requested import.
-      operationId: get-/files/v3/files/import-from-url/async/tasks/{taskId}/status_checkImport
+      operationId: get-/files/v3/files/import-from-url/async/tasks/{taskId}/status
       parameters:
         - description: Import by URL task ID
           explode: false
@@ -125,7 +126,7 @@ paths:
   /files/v3/files/search:
     get:
       description: Search through files in the file manager. Does not display hidden or archived files.
-      operationId: get-/files/v3/files/search_doSearch
+      operationId: get-/files/v3/files/search
       parameters:
         - description: Desired file properties in the return object.
           explode: true
@@ -245,7 +246,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Search files within given folder ID.
+        - description: Search files within given folderId.
           explode: true
           in: query
           name: parentFolderId
@@ -348,12 +349,51 @@ paths:
       summary: Search files
       tags:
         - Files
+  "/files/v3/files/stat/{path}":
+    get:
+      operationId: get-/files/v3/files/stat/{path}
+      parameters:
+        - explode: false
+          in: path
+          name: path
+          required: true
+          schema:
+            pattern: .+
+            type: string
+          style: simple
+        - explode: true
+          in: query
+          name: properties
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FileStat"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - private_apps_legacy: []
+        - oauth2_legacy:
+            - files.ui_hidden.read
+        - private_apps_legacy: []
+        - oauth2_legacy:
+            - files
+      tags:
+        - Files
   "/files/v3/files/{fileId}":
     delete:
       description: Delete file by ID
-      operationId: delete-/files/v3/files/{fileId}_archive
+      operationId: delete-/files/v3/files/{fileId}
       parameters:
-        - description: File ID to delete
+        - description: FileId to delete
           explode: false
           in: path
           name: fileId
@@ -377,9 +417,9 @@ paths:
         - Files
     get:
       description: Get file by ID.
-      operationId: get-/files/v3/files/{fileId}_getById
+      operationId: get-/files/v3/files/{fileId}
       parameters:
-        - description: Id of the desired file.
+        - description: ID of the desired file.
           explode: false
           in: path
           name: fileId
@@ -418,7 +458,7 @@ paths:
         - Files
     patch:
       description: Update properties of file by ID.
-      operationId: patch-/files/v3/files/{fileId}_updateProperties
+      operationId: patch-/files/v3/files/{fileId}
       parameters:
         - description: ID of file to update
           explode: false
@@ -454,9 +494,9 @@ paths:
         - Files
     put:
       description: Replace existing file data with new file data. Can be used to change image content without having to upload a new file and update all references.
-      operationId: put-/files/v3/files/{fileId}_replace
+      operationId: put-/files/v3/files/{fileId}
       parameters:
-        - description: Id of the desired file.
+        - description: ID of the desired file.
           explode: false
           in: path
           name: fileId
@@ -480,6 +520,7 @@ paths:
                 options:
                   description: JSON String representing FileReplaceOptions
                   type: string
+              type: object
       responses:
         "200":
           content:
@@ -499,7 +540,7 @@ paths:
   "/files/v3/files/{fileId}/gdpr-delete":
     delete:
       description: GDRP delete file
-      operationId: delete-/files/v3/files/{fileId}/gdpr-delete_archiveGDPR
+      operationId: delete-/files/v3/files/{fileId}/gdpr-delete
       parameters:
         - description: ID of file to GDPR delete
           explode: false
@@ -526,7 +567,7 @@ paths:
   "/files/v3/files/{fileId}/signed-url":
     get:
       description: Generates signed URL that allows temporary access to a private file.
-      operationId: get-/files/v3/files/{fileId}/signed-url_getSignedUrl
+      operationId: get-/files/v3/files/{fileId}/signed-url
       parameters:
         - description: ID of file.
           explode: false
@@ -589,7 +630,8 @@ paths:
   /files/v3/folders:
     post:
       description: Creates a folder.
-      operationId: post-/files/v3/folders_create
+      operationId: post-/files/v3/folders
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -616,7 +658,7 @@ paths:
   /files/v3/folders/search:
     get:
       description: Search for folders. Does not contain hidden or archived folders.
-      operationId: get-/files/v3/folders/search_doSearch
+      operationId: get-/files/v3/folders/search
       parameters:
         - description: Properties that should be included in the returned folders.
           explode: true
@@ -736,7 +778,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: Search for folders with the given parent folder ID.
+        - description: Search for folders with the given parent folderId.
           explode: true
           in: query
           name: parentFolderId
@@ -767,7 +809,8 @@ paths:
   /files/v3/folders/update/async:
     post:
       description: Update properties of folder by given ID. This action happens asynchronously and will update all of the folder's children as well.
-      operationId: post-/files/v3/folders/update/async_updateProperties
+      operationId: post-/files/v3/folders/update/async
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -794,9 +837,9 @@ paths:
   "/files/v3/folders/update/async/tasks/{taskId}/status":
     get:
       description: Check status of folder update. Folder updates happen asynchronously.
-      operationId: get-/files/v3/folders/update/async/tasks/{taskId}/status_checkUpdateStatus
+      operationId: get-/files/v3/folders/update/async/tasks/{taskId}/status
       parameters:
-        - description: Task ID of folder update
+        - description: TaskId of folder update
           explode: false
           in: path
           name: taskId
@@ -823,7 +866,7 @@ paths:
   "/files/v3/folders/{folderId}":
     delete:
       description: Delete folder by ID.
-      operationId: delete-/files/v3/folders/{folderId}_archive
+      operationId: delete-/files/v3/folders/{folderId}
       parameters:
         - description: ID of folder to delete.
           explode: false
@@ -849,7 +892,7 @@ paths:
         - Folders
     get:
       description: Get folder by ID
-      operationId: get-/files/v3/folders/{folderId}_getById
+      operationId: get-/files/v3/folders/{folderId}
       parameters:
         - description: ID of desired folder
           explode: false
@@ -892,7 +935,7 @@ paths:
   "/files/v3/folders/{folderPath}":
     delete:
       description: Delete folder by path.
-      operationId: delete-/files/v3/folders/{folderPath}_archiveByPath
+      operationId: delete-/files/v3/folders/{folderPath}
       parameters:
         - description: Path of folder to delete
           explode: false
@@ -918,7 +961,7 @@ paths:
         - Folders
     get:
       description: Get folder by path.
-      operationId: get-/files/v3/folders/{folderPath}_getByPath
+      operationId: get-/files/v3/folders/{folderPath}
       parameters:
         - description: Path of desired folder.
           explode: false
@@ -1041,78 +1084,6 @@ components:
         - correlationId
         - message
       type: object
-    ErrorCategory:
-      properties:
-        httpStatus:
-          enum:
-            - CONTINUE
-            - SWITCHING_PROTOCOLS
-            - PROCESSING
-            - OK
-            - CREATED
-            - ACCEPTED
-            - NON_AUTHORITATIVE_INFORMATION
-            - NO_CONTENT
-            - RESET_CONTENT
-            - PARTIAL_CONTENT
-            - MULTI_STATUS
-            - ALREADY_REPORTED
-            - IM_USED
-            - MULTIPLE_CHOICES
-            - MOVED_PERMANENTLY
-            - FOUND
-            - SEE_OTHER
-            - NOT_MODIFIED
-            - USE_PROXY
-            - TEMPORARY_REDIRECT
-            - PERMANENT_REDIRECT
-            - BAD_REQUEST
-            - UNAUTHORIZED
-            - PAYMENT_REQUIRED
-            - FORBIDDEN
-            - NOT_FOUND
-            - METHOD_NOT_ALLOWED
-            - NOT_ACCEPTABLE
-            - PROXY_AUTHENTICATION_REQUIRED
-            - REQUEST_TIMEOUT
-            - CONFLICT
-            - GONE
-            - LENGTH_REQUIRED
-            - PRECONDITION_FAILED
-            - REQUEST_ENTITY_TOO_LARGE
-            - REQUEST_URI_TOO_LONG
-            - UNSUPPORTED_MEDIA_TYPE
-            - REQUESTED_RANGE_NOT_SATISFIABLE
-            - EXPECTATION_FAILED
-            - IM_A_TEAPOT
-            - MISDIRECTED_REQUEST
-            - UNPROCESSABLE_ENTITY
-            - LOCKED
-            - FAILED_DEPENDENCY
-            - UPGRADE_REQUIRED
-            - PRECONDITION_REQUIRED
-            - TOO_MANY_REQUESTS
-            - REQUEST_HEADERS_FIELDS_TOO_LARGE
-            - INTERNAL_STALE_SERVICE_DISCOVERY
-            - UNAVAILABLE_FOR_LEGAL_REASONS
-            - INTERNAL_SERVER_ERROR
-            - NOT_IMPLEMENTED
-            - BAD_GATEWAY
-            - SERVICE_UNAVAILABLE
-            - GATEWAY_TIMEOUT
-            - HTTP_VERSION_NOT_SUPPORTED
-            - VARIANT_ALSO_NEGOTIATES
-            - INSUFFICIENT_STORAGE
-            - LOOP_DETECTED
-            - NOT_EXTENDED
-            - NETWORK_AUTHENTICATION_REQUIRED
-          type: string
-        name:
-          type: string
-      required:
-        - httpStatus
-        - name
-      type: object
     ErrorDetail:
       properties:
         code:
@@ -1171,8 +1142,11 @@ components:
         encoding:
           description: Encoding of the file.
           type: string
+        expiresAt:
+          format: int64
+          type: integer
         extension:
-          description: Extension of the file. For example png.
+          description: "Extension of the file. ex: .jpg, .png, .gif, .pdf, etc."
           type: string
         height:
           description: For image and video files, the height of the content.
@@ -1188,13 +1162,13 @@ components:
           description: Name of the file.
           type: string
         parentFolderId:
-          description: Id of the folder the file is in.
+          description: ID of the folder the file is in.
           type: string
         path:
           description: Path of the file in the file manager.
           type: string
         size:
-          description: Size in bytes of the file.
+          description: Size of the file in bytes.
           format: int64
           type: integer
         type:
@@ -1257,13 +1231,20 @@ components:
             - COMPLETE
           type: string
         taskId:
-          description: If of the requested task.
+          description: ID of the requested task.
           type: string
       required:
         - completedAt
         - startedAt
         - status
         - taskId
+      type: object
+    FileStat:
+      properties:
+        file:
+          $ref: "#/components/schemas/File"
+        folder:
+          $ref: "#/components/schemas/Folder"
       type: object
     FileUpdateInput:
       description: Object for updating files.
@@ -1279,23 +1260,26 @@ components:
             - HIDDEN_PRIVATE
             - PRIVATE
           type: string
+        expiresAt:
+          format: int64
+          type: integer
         isUsableInContent:
-          description: Mark weather the file should be used in new content or not.
+          description: Mark whether the file should be used in new content or not.
           type: boolean
         name:
           description: New name for the file.
           type: string
         parentFolderId:
-          description: Folder ID where the file should be moved to.  folderId and folderPath cannot be set at the same time.
+          description: FolderId where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
           type: string
         parentFolderPath:
-          description: Folder path where the file should be moved to. folderId and folderPath cannot be set at the same time.
+          description: Folder path where the file should be moved to. folderId and folderPath parameters cannot be set at the same time.
           type: string
       type: object
     Folder:
       properties:
         archived:
-          description: Marks weather the folder is deleted or not.
+          description: Marks whether the folder is deleted or not.
           type: boolean
         archivedAt:
           description: Timestamp of folder deletion.
@@ -1306,13 +1290,13 @@ components:
           format: date-time
           type: string
         id:
-          description: Id of the folder.
+          description: ID of the folder.
           type: string
         name:
           description: Name of the folder.
           type: string
         parentFolderId:
-          description: Id of the parent folder.
+          description: ID of the parent folder.
           type: string
         path:
           description: Path of the folder in the file manager.
@@ -1366,7 +1350,7 @@ components:
             - COMPLETE
           type: string
         taskId:
-          description: Id of the task.
+          description: ID of the task.
           type: string
       required:
         - completedAt
@@ -1381,7 +1365,7 @@ components:
           description: Desired name for the folder.
           type: string
         parentFolderId:
-          description: Folder ID of the parent of the created folder. If not specified, the folder will be created at the root level. parentFolderId and parentFolderPath cannot be set at the same time.
+          description: FolderId of the parent of the created folder. If not specified, the folder will be created at the root level. parentFolderId and parentFolderPath cannot be set at the same time.
           type: string
         parentPath:
           description: Path of the parent of the created folder. If not specified the folder will be created at the root level. parentFolderPath and parentFolderId cannot be set at the same time.
@@ -1393,13 +1377,13 @@ components:
       description: Object for updating folders.
       properties:
         id:
-          description: Id of the folder to change.
+          description: ID of the folder to change.
           type: string
         name:
           description: New name. If specified the folder's name and fullPath will change. All children of the folder will be updated accordingly.
           type: string
         parentFolderId:
-          description: New parent folder ID. If changed, the folder and all it's children will be moved into the specified folder. parentFolderId and parentFolderPath cannot be specified at the same time.
+          description: New parent folderId. If changed, the folder and all it's children will be moved into the specified folder. parentFolderId and parentFolderPath cannot be specified at the same time.
           format: int64
           type: integer
       required:
@@ -1413,7 +1397,7 @@ components:
           - status: https://api.hubspot.com/files/v3/folders/update/async/tasks/57122e26-59f8-4cfc-ba53-96e30c816762/status
       properties:
         id:
-          description: The ID of the task
+          description: ID of the task
           type: string
         links:
           additionalProperties:
@@ -1422,6 +1406,7 @@ components:
           type: object
       required:
         - id
+        - links
       type: object
     ImportFromUrlInput:
       properties:
@@ -1452,7 +1437,7 @@ components:
             - RETURN_EXISTING
           type: string
         folderId:
-          description: One of folderId or folderPath is required. Destination folder ID for the uploaded file.
+          description: One of folderId or folderPath is required. Destination folderId for the uploaded file.
           type: string
         folderPath:
           description: One of folderPath or folderId is required. Destination folder path for the uploaded file. If the folder path does not exist, there will be an attempt to create the folder path.
@@ -1461,19 +1446,16 @@ components:
           description: Name to give the resulting file in the file manager.
           type: string
         overwrite:
-          description: If true, it will overwrite existing files if a file with the same name exists in the given folder.
+          description: If true, will overwrite existing file if one with the same name and extension exists in the given folder. The overwritten file will be deleted and the uploaded file will take its place with a new ID. If unset or set as false, the new file's name will be updated to prevent colliding with existing file if one exists with the same path, name, and extension
           type: boolean
         ttl:
-          description: Time to live. If specified the file will be deleted after the given time frame.
+          description: Time to live. If specified the file will be deleted after the given time frame. If left unset, the file will exist indefinitely
           type: string
         url:
           description: URL to download the new file from.
           type: string
       required:
         - access
-        - duplicateValidationScope
-        - duplicateValidationStrategy
-        - overwrite
         - url
       type: object
     ImportFromUrlTaskLocator:
@@ -1484,7 +1466,7 @@ components:
           - status: https://api.hubspot.com/files/v3/files/import-from-url/async/tasks/57122e26-59f8-4cfc-ba53-96e30c816762/status
       properties:
         id:
-          description: The ID of the task
+          description: ID of the task
           type: string
         links:
           additionalProperties:
@@ -1493,6 +1475,7 @@ components:
           type: object
       required:
         - id
+        - links
       type: object
     NextPage:
       properties:
@@ -1520,6 +1503,7 @@ components:
         - before
       type: object
     SignedUrl:
+      description: Signed Url object with optional ancillary metadata of requested file
       properties:
         expiresAt:
           description: Timestamp of when the URL will no longer grant access to the file.
@@ -1560,7 +1544,7 @@ components:
     StandardError:
       properties:
         category:
-          $ref: "#/components/schemas/ErrorCategory"
+          type: string
         context:
           additionalProperties:
             items:
@@ -1606,8 +1590,3 @@ components:
       in: header
       name: private-app-legacy
       type: apiKey
-x-hubspot-available-client-libraries:
-  - PHP
-  - Node
-  - Python
-  - Ruby

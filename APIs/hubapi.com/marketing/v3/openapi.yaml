@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 info:
   description: |
     These APIs allow you to interact with HubSpot's Marketing Events Extension. It allows you to:
@@ -18,17 +18,18 @@ info:
   x-providerName: hubapi.com
   x-serviceName: marketing
 tags:
-  - description: Endpoints that allow you to search for Marketing Events in HubSpot.
-    name: Search
-  - description: Operations to mark HubSpot contacts as registered, attended or cancelled a registration to a Marketing Event.
-    name: Attendance Subscriber State Changes
+  - name: Batch
+  - name: Attendance Subscriber State Changes
+  - name: Subscriber State Changes
   - name: Marketing_Events_External
-  - name: Settings_External
+  - name: Basic
+  - name: Settings
+  - name: Search
 paths:
   "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create":
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
-      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create_create
+      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -79,8 +80,8 @@ paths:
         - Attendance Subscriber State Changes
   "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create":
     post:
-      description: "Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created. If you set params "
-      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create_createByEmail
+      description: Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created.
+      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -131,12 +132,15 @@ paths:
         - Attendance Subscriber State Changes
   /marketing/v3/marketing-events/events:
     post:
-      operationId: post-/marketing/v3/marketing-events/events_create
+      description: Creates a new marketing event in HubSpot
+      operationId: post-/marketing/v3/marketing-events/events
+      parameters: []
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/MarketingEventCreateRequestParams"
+        description: The details of the marketing event to create
         required: true
       responses:
         "200":
@@ -151,16 +155,20 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Create a marketing event
       tags:
-        - Marketing_Events_External
+        - Basic
   /marketing/v3/marketing-events/events/delete:
     post:
-      operationId: post-/marketing/v3/marketing-events/events/delete_archiveBatch
+      description: Bulk delete a number of marketing events in HubSpot
+      operationId: post-/marketing/v3/marketing-events/events/delete
+      parameters: []
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchInputMarketingEventExternalUniqueIdentifier"
+        description: The details of the marketing events to delete
         required: true
       responses:
         default:
@@ -169,12 +177,13 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Delete multiple marketing events
       tags:
-        - Marketing_Events_External
+        - Batch
   /marketing/v3/marketing-events/events/search:
     get:
       description: Search for marketing events that have an event id that starts with the query string
-      operationId: get-/marketing/v3/marketing-events/events/search_doSearch
+      operationId: get-/marketing/v3/marketing-events/events/search
       parameters:
         - description: The id of the marketing event in the external event application
           explode: true
@@ -202,12 +211,15 @@ paths:
         - Search
   /marketing/v3/marketing-events/events/upsert:
     post:
-      operationId: post-/marketing/v3/marketing-events/events/upsert_doUpsert
+      description: Upset multiple Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
+      operationId: post-/marketing/v3/marketing-events/events/upsert
+      parameters: []
       requestBody:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchInputMarketingEventCreateRequestParams"
+        description: The details of the marketing events to upsert
         required: true
       responses:
         "200":
@@ -222,20 +234,24 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Create or update multiple marketing events
       tags:
-        - Marketing_Events_External
+        - Batch
   "/marketing/v3/marketing-events/events/{externalEventId}":
     delete:
-      operationId: delete-/marketing/v3/marketing-events/events/{externalEventId}_archive
+      description: Deletes an existing Marketing Event with the specified id, if one exists.
+      operationId: delete-/marketing/v3/marketing-events/events/{externalEventId}
       parameters:
-        - explode: false
+        - description: The id of the marketing event to delete
+          explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - explode: true
+        - description: The account id associated with the marketing event
+          explode: true
           in: query
           name: externalAccountId
           required: true
@@ -252,19 +268,23 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Delete a marketing event
       tags:
-        - Marketing_Events_External
+        - Basic
     get:
-      operationId: get-/marketing/v3/marketing-events/events/{externalEventId}_getById
+      description: Returns the details of the Marketing Event with the specified id, if one exists.
+      operationId: get-/marketing/v3/marketing-events/events/{externalEventId}
       parameters:
-        - explode: false
+        - description: The id of the marketing event to return
+          explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - explode: true
+        - description: The account id associated with the marketing event
+          explode: true
           in: query
           name: externalAccountId
           required: true
@@ -284,19 +304,23 @@ paths:
         - oauth2_legacy:
             - crm.objects.marketing_events.read
         - private_apps_legacy: []
+      summary: Get a marketing event
       tags:
-        - Marketing_Events_External
+        - Basic
     patch:
-      operationId: patch-/marketing/v3/marketing-events/events/{externalEventId}_update
+      description: Updates an existing Marketing Event with the specified id, if one exists.
+      operationId: patch-/marketing/v3/marketing-events/events/{externalEventId}
       parameters:
-        - explode: false
+        - description: The id of the marketing event to update
+          explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - explode: true
+        - description: The account id associated with the marketing event
+          explode: true
           in: query
           name: externalAccountId
           required: true
@@ -308,6 +332,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MarketingEventUpdateRequestParams"
+        description: The details of the marketing event to update
         required: true
       responses:
         "200":
@@ -322,12 +347,15 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Update a marketing event
       tags:
-        - Marketing_Events_External
+        - Basic
     put:
-      operationId: put-/marketing/v3/marketing-events/events/{externalEventId}_replace
+      description: Upsets a Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
+      operationId: put-/marketing/v3/marketing-events/events/{externalEventId}
       parameters:
-        - explode: false
+        - description: The id of the marketing event to upsert
+          explode: false
           in: path
           name: externalEventId
           required: true
@@ -339,6 +367,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MarketingEventCreateRequestParams"
+        description: The details of the marketing event to upsert
         required: true
       responses:
         "200":
@@ -353,20 +382,24 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Create or update a marketing event
       tags:
-        - Marketing_Events_External
+        - Basic
   "/marketing/v3/marketing-events/events/{externalEventId}/cancel":
     post:
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/cancel_doCancel
+      description: Mark a marketing event as cancelled.
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/cancel
       parameters:
-        - explode: false
+        - description: The id of the marketing event to mark as cancelled
+          explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - explode: true
+        - description: The account id associated with the marketing event
+          explode: true
           in: query
           name: externalAccountId
           required: true
@@ -386,11 +419,12 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Mark a marketing event as cancelled
       tags:
-        - Marketing_Events_External
+        - Basic
   "/marketing/v3/marketing-events/events/{externalEventId}/complete":
     post:
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/complete_complete
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/complete
       parameters:
         - explode: false
           in: path
@@ -429,23 +463,27 @@ paths:
         - Marketing_Events_External
   "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert":
     post:
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert_doEmailUpsertById
+      description: Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. Note that the contact must already exist in HubSpot; a contact will not be created.
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert
       parameters:
-        - explode: false
+        - description: The id of the marketing event
+          explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - explode: false
+        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
+          explode: false
           in: path
           name: subscriberState
           required: true
           schema:
             type: string
           style: simple
-        - explode: true
+        - description: The account id associated with the marketing event
+          explode: true
           in: query
           name: externalAccountId
           required: true
@@ -457,6 +495,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchInputMarketingEventEmailSubscriber"
+        description: The details of the contacts to subscribe to the event
         required: true
       responses:
         default:
@@ -465,27 +504,32 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Record
       tags:
-        - Marketing_Events_External
+        - Subscriber State Changes
   "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert":
     post:
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert_doUpsertById
+      description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids. Note that the contact must already exist in HubSpot; a contact will not be create.
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert
       parameters:
-        - explode: false
+        - description: The id of the marketing event
+          explode: false
           in: path
           name: externalEventId
           required: true
           schema:
             type: string
           style: simple
-        - explode: false
+        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
+          explode: false
           in: path
           name: subscriberState
           required: true
           schema:
             type: string
           style: simple
-        - explode: true
+        - description: The account id associated with the marketing event
+          explode: true
           in: query
           name: externalAccountId
           required: true
@@ -497,6 +541,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BatchInputMarketingEventSubscriber"
+        description: The details of the contacts to subscribe to the event
         required: true
       responses:
         default:
@@ -505,13 +550,16 @@ paths:
         - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
+      summary: Record
       tags:
-        - Marketing_Events_External
+        - Subscriber State Changes
   "/marketing/v3/marketing-events/{appId}/settings":
     get:
-      operationId: get-/marketing/v3/marketing-events/{appId}/settings_getAll
+      description: Retrieve the current settings for the application.
+      operationId: get-/marketing/v3/marketing-events/{appId}/settings
       parameters:
-        - explode: false
+        - description: The id of the application to retrieve the settings for.
+          explode: false
           in: path
           name: appId
           required: true
@@ -530,12 +578,15 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - developer_hapikey: []
+      summary: Retrieve the application settings
       tags:
-        - Settings_External
+        - Settings
     post:
-      operationId: post-/marketing/v3/marketing-events/{appId}/settings_create
+      description: Create or update the current settings for the application.
+      operationId: post-/marketing/v3/marketing-events/{appId}/settings
       parameters:
-        - explode: false
+        - description: The id of the application to update the settings for.
+          explode: false
           in: path
           name: appId
           required: true
@@ -548,6 +599,7 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EventDetailSettingsUrl"
+        description: The new application settings
         required: true
       responses:
         "200":
@@ -560,8 +612,9 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - developer_hapikey: []
+      summary: Update the application settings
       tags:
-        - Settings_External
+        - Settings
 components:
   responses:
     Error:
@@ -788,79 +841,6 @@ components:
         - correlationId
         - message
       type: object
-    ErrorCategory:
-      properties:
-        httpStatus:
-          enum:
-            - CONTINUE
-            - SWITCHING_PROTOCOLS
-            - PROCESSING
-            - OK
-            - CREATED
-            - ACCEPTED
-            - NON_AUTHORITATIVE_INFORMATION
-            - NO_CONTENT
-            - RESET_CONTENT
-            - PARTIAL_CONTENT
-            - MULTI_STATUS
-            - ALREADY_REPORTED
-            - IM_USED
-            - MULTIPLE_CHOICES
-            - MOVED_PERMANENTLY
-            - FOUND
-            - SEE_OTHER
-            - NOT_MODIFIED
-            - USE_PROXY
-            - TEMPORARY_REDIRECT
-            - PERMANENT_REDIRECT
-            - BAD_REQUEST
-            - UNAUTHORIZED
-            - PAYMENT_REQUIRED
-            - FORBIDDEN
-            - NOT_FOUND
-            - METHOD_NOT_ALLOWED
-            - NOT_ACCEPTABLE
-            - PROXY_AUTHENTICATION_REQUIRED
-            - REQUEST_TIMEOUT
-            - CONFLICT
-            - GONE
-            - LENGTH_REQUIRED
-            - PRECONDITION_FAILED
-            - REQUEST_ENTITY_TOO_LARGE
-            - REQUEST_URI_TOO_LONG
-            - UNSUPPORTED_MEDIA_TYPE
-            - REQUESTED_RANGE_NOT_SATISFIABLE
-            - EXPECTATION_FAILED
-            - IM_A_TEAPOT
-            - MISDIRECTED_REQUEST
-            - UNPROCESSABLE_ENTITY
-            - LOCKED
-            - FAILED_DEPENDENCY
-            - UPGRADE_REQUIRED
-            - PRECONDITION_REQUIRED
-            - TOO_MANY_REQUESTS
-            - REQUEST_HEADERS_FIELDS_TOO_LARGE
-            - INTERNAL_STALE_SERVICE_DISCOVERY
-            - UNAVAILABLE_FOR_LEGAL_REASONS
-            - MIGRATION_IN_PROGRESS
-            - INTERNAL_SERVER_ERROR
-            - NOT_IMPLEMENTED
-            - BAD_GATEWAY
-            - SERVICE_UNAVAILABLE
-            - GATEWAY_TIMEOUT
-            - HTTP_VERSION_NOT_SUPPORTED
-            - VARIANT_ALSO_NEGOTIATES
-            - INSUFFICIENT_STORAGE
-            - LOOP_DETECTED
-            - NOT_EXTENDED
-            - NETWORK_AUTHENTICATION_REQUIRED
-          type: string
-        name:
-          type: string
-      required:
-        - httpStatus
-        - name
-      type: object
     ErrorDetail:
       properties:
         code:
@@ -1015,7 +995,7 @@ components:
             type: string
           type: object
         email:
-          description: The email address of the contact in HubSpot to associate with the event. Note that the contact must already exist in HubSpot; a contact will not be created.
+          description: The email address of the contact in HubSpot to associate with the event.
           type: string
         interactionDateTime:
           description: The date and time at which the contact subscribed to the event.
@@ -1224,6 +1204,8 @@ components:
       type: object
     PropertyValue:
       properties:
+        isLargeValue:
+          type: boolean
         name:
           type: string
         persistenceTimestamp:
@@ -1356,7 +1338,7 @@ components:
     StandardError:
       properties:
         category:
-          $ref: "#/components/schemas/ErrorCategory"
+          type: string
         context:
           additionalProperties:
             items:
@@ -1425,8 +1407,3 @@ components:
       in: header
       name: private-app-legacy
       type: apiKey
-x-hubspot-available-client-libraries:
-  - PHP
-  - Node
-  - Python
-  - Ruby

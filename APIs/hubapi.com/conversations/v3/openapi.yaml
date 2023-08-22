@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 info:
   description: The Visitor Identification API allows you to pass identification information to the HubSpot chat widget for otherwise unknown visitors that were verified by your own authentication system.
   title: Visitor Identification
@@ -14,13 +14,13 @@ info:
   x-providerName: hubapi.com
   x-serviceName: conversations
 tags:
-  - description: Operations to generate a token
-    name: Generate
+  - name: Generate
 paths:
-  /conversations/v3/visitor-identification/tokens/create:
+  /visitor-identification/v3/tokens/create:
     post:
       description: Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
-      operationId: post-/visitor-identification/v3/tokens/create_generateToken
+      operationId: post-/visitor-identification/v3/tokens/create
+      parameters: []
       requestBody:
         content:
           application/json:
@@ -173,8 +173,3 @@ components:
       in: header
       name: private-app-legacy
       type: apiKey
-x-hubspot-available-client-libraries:
-  - PHP
-  - Node
-  - Python
-  - Ruby

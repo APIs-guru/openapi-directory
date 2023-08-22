@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 info:
   description: Retrieve Business Unit information.
   title: Business Unit
@@ -14,8 +14,7 @@ info:
   x-providerName: hubapi.com
   x-serviceName: business units
 tags:
-  - description: Get Business Unit information.
-    name: Business Unit
+  - name: Business Unit
 paths:
   "/business-units/v3/business-units/user/{userId}":
     get:

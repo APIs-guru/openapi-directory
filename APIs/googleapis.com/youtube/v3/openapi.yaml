@@ -3186,6 +3186,14 @@ paths:
               - youtube
               - creativeCommon
             type: string
+        - in: query
+          name: videoPaidProductPlacement
+          schema:
+            enum:
+              - videoPaidProductPlacementUnspecified
+              - any
+              - "true"
+            type: string
         - description: Filter on syndicated videos.
           in: query
           name: videoSyndicated

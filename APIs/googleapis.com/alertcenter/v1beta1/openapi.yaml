@@ -557,6 +557,41 @@ components:
             - LIMITED_DISABLE
           type: string
       type: object
+    AccessApproval:
+      description: Alert that is triggered when Google support requests to access customer data.
+      properties:
+        justificationReason:
+          description: Justification for data access based on justification enums.
+          items:
+            enum:
+              - JUSTIFICATION_UNSPECIFIED
+              - CUSTOMER_INITIATED_SUPPORT
+              - GOOGLE_INITIATED_REVIEW
+              - GOOGLE_INITIATED_SERVICE
+              - THIRD_PARTY_DATA_REQUEST
+              - GOOGLE_RESPONSE_TO_PRODUCTION_ALERT
+            type: string
+          type: array
+        officeLocation:
+          description: Office location of Google staff requesting access such as "US".
+          type: string
+        products:
+          description: Products within scope of the Access Approvals request.
+          items:
+            type: string
+          type: array
+        requestId:
+          description: ID of the Access Approvals request. This is a helpful field when requesting support from Google.
+          type: string
+        scope:
+          description: Scope of access, also known as a resource. This is further narrowed down by the product field.
+          type: string
+        tickets:
+          description: Support tickets related to this Access Approvals request. Populated if there is an associated case number.
+          items:
+            $ref: "#/components/schemas/SupportTicket"
+          type: array
+      type: object
     AccountSuspensionDetails:
       description: Details about why an account is receiving an account suspension warning.
       properties:
@@ -1455,6 +1490,16 @@ components:
       properties:
         userEmail:
           description: email of person whose password was reset
+          type: string
+      type: object
+    SupportTicket:
+      description: Support ticket related to Access Approvals request
+      properties:
+        ticketId:
+          description: Support ticket ID
+          type: string
+        ticketUrl:
+          description: Link to support ticket
           type: string
       type: object
     SuspiciousActivity:
