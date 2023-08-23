@@ -1401,6 +1401,24 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleChromeManagementV1DeviceActivityReport:
+      description: "Device activity report. * Granular permission needed: TELEMETRY_API_DEVICE_ACTIVITY_REPORT"
+      properties:
+        deviceActivityState:
+          description: Output only. Device activity state.
+          enum:
+            - DEVICE_ACTIVITY_STATE_UNSPECIFIED
+            - ACTIVE
+            - IDLE
+            - LOCKED
+          readOnly: true
+          type: string
+        reportTime:
+          description: Output only. Timestamp of when the report was collected.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GoogleChromeManagementV1DeviceAueCountReport:
       description: Report for CountChromeDevicesPerAueDateResponse, contains the count of devices of a specific model and auto update expiration range.
       properties:
@@ -2328,6 +2346,12 @@ components:
           description: Output only. Audio reports collected periodically sorted in a decreasing order of report_time.
           items:
             $ref: "#/components/schemas/GoogleChromeManagementV1AudioStatusReport"
+          readOnly: true
+          type: array
+        deviceActivityReport:
+          description: Output only. Device activity reports collected periodically sorted in a decreasing order of report_time.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1DeviceActivityReport"
           readOnly: true
           type: array
         deviceId:

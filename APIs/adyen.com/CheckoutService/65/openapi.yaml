@@ -5228,6 +5228,17 @@ components:
         bankAccountNumber:
           description: The bank account number (without separators).
           type: string
+        bankAccountType:
+          description: The bank account type (checking, savings...).
+          enum:
+            - balance
+            - checking
+            - deposit
+            - general
+            - other
+            - payment
+            - savings
+          type: string
         bankLocationId:
           description: The bank routing number of the account. The field value is `nil` in most cases.
           type: string
@@ -5366,7 +5377,7 @@ components:
             * minLength: 3 characters
             * maxLength: 3 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.airline_designator_code:
           description: |-
@@ -5376,7 +5387,7 @@ components:
             * minLength: 2 characters
             * maxLength: 2 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.boarding_fee:
           description: |-
@@ -5424,7 +5435,7 @@ components:
             * minLength: 2 characters
             * maxLength: 2 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.class_of_travel:
           description: |-
@@ -5439,7 +5450,7 @@ components:
             * minLength: 1 character
             * maxLength: 1 character
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.date_of_travel:
           description: |-
@@ -5459,7 +5470,7 @@ components:
             * minLength: 3 characters
             * maxLength: 3 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.depart_tax:
           description: |-
@@ -5467,7 +5478,7 @@ components:
             * Encoding: Numeric
             * minLength: 1
             * maxLength: 12
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.destination_code:
           description: |-
@@ -5478,7 +5489,7 @@ components:
             * minLength: 3 characters
             * maxLength: 3 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.fare_base_code:
           description: |-
@@ -5486,7 +5497,7 @@ components:
             * minLength: 1 character
             * maxLength: 6 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.flight_number:
           description: |-
@@ -5494,7 +5505,7 @@ components:
             * minLength: 1 character
             * maxLength: 5 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.stop_over_code:
           description: |-
@@ -5545,8 +5556,8 @@ components:
             * minLength: 1 character
             * maxLength: 20 characters
             * If you send more than 20 characters, the name is truncated
-            * Must not be all spaces
-            * Must not be all zeros
+            * Must not be all spaces 
+            *Must not be all zeros.
           type: string
         airline.ticket_issue_address:
           description: |-
@@ -5560,7 +5571,7 @@ components:
             * minLength: 1 character
             * maxLength: 15 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.travel_agency_code:
           description: |-
@@ -5569,7 +5580,7 @@ components:
             * minLength: 1 character
             * maxLength: 8 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.travel_agency_name:
           description: |-
@@ -5579,7 +5590,7 @@ components:
             * minLength: 1 character
             * maxLength: 25 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
       required:
         - airline.passenger_name
@@ -5598,8 +5609,8 @@ components:
             * maxLength: 17
             * For US and CA numbers must be 10 characters in length
             * Must not start with a space
-            * Must not be all zeros
             * Must not contain any special characters such as + or -
+            *Must not be all zeros.
           type: string
         carRental.daysRented:
           description: |-
@@ -5620,7 +5631,7 @@ components:
             * Format: Numeric
             * maxLength: 12
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.locationCity:
           description: |-
@@ -5628,7 +5639,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 18
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.locationCountry:
           description: |-
@@ -5642,7 +5653,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 2
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.noShowIndicator:
           description: |-
@@ -5673,7 +5684,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 9
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.rentalClassId:
           description: |-
@@ -5681,7 +5692,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 4
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.renterName:
           description: |-
@@ -5690,7 +5701,7 @@ components:
             * maxLength: 26
             * If you send more than 26 characters, the name is truncated
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.returnCity:
           description: |-
@@ -5698,7 +5709,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 18
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.returnCountry:
           description: |-
@@ -5718,7 +5729,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 10
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.returnStateProvince:
           description: |-
@@ -5726,7 +5737,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 3
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.taxExemptIndicator:
           description: |-
@@ -5868,185 +5879,131 @@ components:
         enhancedSchemeData.customerReference:
           description: |-
             The customer code.
-
-            Encoding: ASCII
-
-            Max length: 25 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII
+            * Max length: 25 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         enhancedSchemeData.destinationCountryCode:
           description: |-
             The three-letter [ISO 3166-1 alpha-3 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) for the destination address.
-
-            Encoding: ASCII
-
-            Fixed length: 3 characters
+            * Encoding: ASCII
+            * Fixed length: 3 characters
           type: string
         enhancedSchemeData.destinationPostalCode:
           description: |-
             The postal code of the destination address.
-
-            Encoding: ASCII
-
-            Max length: 10 characters
-
-            Must not start with a space
+            * Encoding: ASCII
+            * Max length: 10 characters
+            * Must not start with a space
           type: string
         enhancedSchemeData.destinationStateProvinceCode:
           description: |-
             Destination state or province code.
-
-            Encoding: ASCII
-
-            Max length: 3 characters
-
-            Must not start with a space
+            * Encoding: ASCII
+            * Max length: 3 characters
+            * Must not start with a space
           type: string
         enhancedSchemeData.dutyAmount:
           description: |-
             The duty amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
+            * For example, 2000 means USD 20.00.
+            * Encoding: Numeric
+            * Max length: 12 characters
           type: string
         enhancedSchemeData.freightAmount:
           description: |-
             The shipping amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
+            * For example, 2000 means USD 20.00.
+            * Encoding: Numeric
+            *Max length: 12 characters
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].commodityCode":
           description: |-
             The [UNSPC commodity code](https://www.unspsc.org/) of the item.
-
-            Encoding: ASCII
-
-            Max length: 12 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII
+            * Max length: 12 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].description":
           description: |-
             A description of the item.
-
-            Encoding: ASCII
-
-            Max length: 26 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII
+            * Max length: 26 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].discountAmount":
           description: |-
             The discount amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
+            * For example, 2000 means USD 20.00.
+            * Encoding: Numeric
+            * Max length: 12 characters
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].productCode":
           description: |-
             The product code.
-
-            Encoding: ASCII.
-
-            Max length: 12 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII.
+            * Max length: 12 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].quantity":
           description: |+
             The number of items. Must be an integer greater than zero.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
-
-            Must not start with a space or be all spaces
+            * Encoding: Numeric
+            * Max length: 12 characters
+            * Must not start with a space or be all spaces
 
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].totalAmount":
           description: |-
             The total amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Max length: 12 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * For example, 2000 means USD 20.00.
+            * Max length: 12 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].unitOfMeasure":
           description: |-
             The unit of measurement for an item.
-
-            Encoding: ASCII
+            * Encoding: ASCII
 
             Max length: 3 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         "enhancedSchemeData.itemDetailLine[itemNr].unitPrice":
           description: |-
             The unit price in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
+            * For example, 2000 means USD 20.00.
+            * Encoding: Numeric
+            * Max length: 12 characters
+            * Must not be all zeros.
           type: string
         enhancedSchemeData.orderDate:
           description: |-
             The order date.
             * Format: `ddMMyy`
-
-            Encoding: ASCII
-
-            Max length: 6 characters
+            * Encoding: ASCII
+            * Max length: 6 characters
           type: string
         enhancedSchemeData.shipFromPostalCode:
           description: |-
             The postal code of the address the item is shipped from.
-
-            Encoding: ASCII
-
-            Max length: 10 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII
+            * Max length: 10 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         enhancedSchemeData.totalTaxAmount:
-          description: |+
+          description: |-
             The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
-
+            * For example, 2000 means USD 20.00.
+            *Encoding: Numeric
+            *Max length: 12 characters
+            * Must not be all zeros.
           type: string
       type: object
     AdditionalDataLodging:
@@ -6068,8 +6025,8 @@ components:
             * Max length: 17 characters.
             * For US and CA numbers must be 10 characters in length
             * Must not start with a space
-            * Must not be all zeros
             * Must not contain any special characters such as + or -
+            *Must not be all zeros.
           type: string
         lodging.fireSafetyActIndicator:
           description: |-
@@ -6088,7 +6045,7 @@ components:
             The card acceptor’s internal invoice or billing ID reference number.
             * Max length: 25 characters.
             * Must not start with a space
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         lodging.foodBeverageCharges:
           description: |-
@@ -6117,8 +6074,8 @@ components:
             * Max length: 17 characters
             * For US and CA numbers must be 10 characters in length
             * Must not start with a space
-            * Must not be all zeros
             * Must not contain any special characters such as + or -
+            *Must not be all zeros.
           type: string
         lodging.room1.numberOfNights:
           description: |-
@@ -6488,16 +6445,16 @@ components:
         enhancedSchemeData.employeeName:
           description: |-
             The name or ID of the person working in a temporary capacity.
-            * maxLength: 40
-            * Must not be all zeros
-            * Must not be all spaces
+            * maxLength: 40.  
+            * Must not be all spaces. 
+            *Must not be all zeros.
           type: string
         enhancedSchemeData.jobDescription:
           description: |-
             The job description of the person working in a temporary capacity.
-            * maxLength: 40
-            * Must not be all zeros
-            * Must not be all spaces
+            * maxLength: 40 
+            * Must not be all spaces. 
+            *Must not be all zeros.
           type: string
         enhancedSchemeData.regularHoursRate:
           description: |-
@@ -6634,7 +6591,10 @@ components:
       additionalProperties: false
       properties:
         amazonPayToken:
-          description: This is the `amazonPayToken` that you obtained from the [Get Checkout Session](https://amazon-pay-acquirer-guide.s3-eu-west-1.amazonaws.com/v1/amazon-pay-api-v2/checkout-session.html#get-checkout-session) response.
+          description: This is the `amazonPayToken` that you obtained from the [Get Checkout Session](https://amazon-pay-acquirer-guide.s3-eu-west-1.amazonaws.com/v1/amazon-pay-api-v2/checkout-session.html#get-checkout-session) response. This token is used for API only integration specifically.
+          type: string
+        checkoutSessionId:
+          description: The `checkoutSessionId` is used to identify the checkout session at the Amazon Pay side. This field is required only for drop-in and components integration, where it replaces the amazonPayToken.
           type: string
         type:
           default: amazonpay
@@ -8864,9 +8824,6 @@ components:
           x-addedInVersion: "49"
         subtype:
           description: The type of flow to initiate.
-          enum:
-            - redirect
-            - sdk
           type: string
         type:
           default: klarna
@@ -12271,6 +12228,7 @@ components:
             - Remainder
             - Surcharge
             - Tip
+            - TopUp
             - VAT
             - Verification
           type: string

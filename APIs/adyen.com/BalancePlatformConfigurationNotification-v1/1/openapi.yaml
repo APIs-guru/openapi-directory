@@ -652,14 +652,6 @@ components:
             - Inactive
             - Suspended
           type: string
-        sweepConfigurations:
-          additionalProperties:
-            $ref: "#/components/schemas/SweepConfiguration"
-          description: |-
-            Contains key-value pairs that specify configurations for balance sweeps per currency code. A sweep pulls in or pushes out funds based on a defined schedule, amount, and a source (for pulling funds) or a destination (for pushing funds).
-
-            The key must be a three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) in uppercase. For example, **EUR**. The value must be an object containing the sweep configuration.
-          type: object
         timeZone:
           description: |-
             The time zone of the balance account. For example, **Europe/Amsterdam**.
@@ -748,6 +740,60 @@ components:
         - country
       type: object
     CapabilityProblem:
+      properties:
+        entity:
+          $ref: "#/components/schemas/CapabilityProblemEntity"
+          description: Contains the type of the entity and the corresponding ID.
+        verificationErrors:
+          description: Contains information about the verification error.
+          items:
+            $ref: "#/components/schemas/VerificationError"
+          type: array
+      type: object
+    CapabilityProblemEntity:
+      properties:
+        documents:
+          description: List of document IDs to which the verification errors related to the capabilities correspond to.
+          items:
+            type: string
+          type: array
+        id:
+          description: The ID of the entity.
+          type: string
+        owner:
+          $ref: "#/components/schemas/CapabilityProblemEntity-recursive"
+          description: Contains details about the owner of the entity that has an error.
+        type:
+          description: |-
+            Type of entity. 
+
+            Possible values: **LegalEntity**, **BankAccount**, **Document**.
+          enum:
+            - BankAccount
+            - Document
+            - LegalEntity
+          type: string
+      type: object
+    CapabilityProblemEntity-recursive:
+      properties:
+        documents:
+          description: List of document IDs to which the verification errors related to the capabilities correspond to.
+          items:
+            type: string
+          type: array
+        id:
+          description: The ID of the entity.
+          type: string
+        type:
+          description: |-
+            Type of entity. 
+
+            Possible values: **LegalEntity**, **BankAccount**, **Document**.
+          enum:
+            - BankAccount
+            - Document
+            - LegalEntity
+          type: string
       type: object
     CapabilitySettings:
       properties:
@@ -1266,6 +1312,15 @@ components:
           format: int32
           type: integer
       type: object
+    RemediatingAction:
+      properties:
+        code:
+          description: The remediating action code.
+          type: string
+        message:
+          description: A description of how you can resolve the verification error.
+          type: string
+      type: object
     Resource:
       properties:
         balancePlatform:
@@ -1278,75 +1333,6 @@ components:
         id:
           description: The ID of the resource.
           type: string
-      type: object
-    SweepConfiguration:
-      properties:
-        balanceAccountId:
-          description: |-
-            The unique identifier of the destination or source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
-
-             You can only use this for periodic sweep schedules such as `schedule.type` **daily** or **monthly**.
-          type: string
-        id:
-          description: The unique identifier of the sweep.
-          type: string
-        merchantAccount:
-          description: The merchant account that will be the source of funds. You can only use this if you are processing payments with Adyen. This can only be used for sweeps of `type` **pull** and `schedule.type` **balance**.
-          type: string
-        schedule:
-          $ref: "#/components/schemas/SweepSchedule"
-          description: The schedule when the `triggerAmount` is evaluated. If the balance meets the threshold, funds are pushed out of or pulled in to the balance account.
-        status:
-          description: |+
-            The status of the sweep. If not provided, by default, this is set to **active**.
-
-            Possible values: 
-
-             * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration. 
-
-             * **inactive**: the sweep is disabled and cannot be triggered. 
-
-          enum:
-            - active
-            - inactive
-          type: string
-        sweepAmount:
-          $ref: "#/components/schemas/Amount"
-          description: The amount that must be pushed out or pulled in. You can configure either `sweepAmount` or `targetAmount`, not both.
-        targetAmount:
-          $ref: "#/components/schemas/Amount"
-          description: The amount that must be available in the balance account after the sweep. You can configure either `sweepAmount` or `targetAmount`, not both.
-        transferInstrumentId:
-          description: |-
-            The unique identifier of the destination or source [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments__resParam_id).
-
-            You can also use this in combination with a `merchantAccount` and a `type` **pull** to start a direct debit request from the source transfer instrument. To use this feature, reach out to your Adyen contact.
-          type: string
-        triggerAmount:
-          $ref: "#/components/schemas/Amount"
-          description: |-
-            The threshold amount that triggers the sweep. If not provided, by default, the amount is set to zero. The `triggerAmount` is evaluated according to the specified `schedule.type`.
-
-            * For `type` **pull**, if the balance is less than or equal to the `triggerAmount`, funds are pulled in to the balance account.
-
-            * For `type` **push**, if the balance is more than or equal to the `triggerAmount`, funds are pushed out of the balance account.
-        type:
-          default: push
-          description: |-
-            The direction of sweep, whether pushing out or pulling in funds to the balance account. If not provided, by default, this is set to **push**.
-
-            Possible values:
-
-             * **push**: _push out funds_ to a destination balance account or transfer instrument.
-
-             * **pull**: _pull in funds_ from a source merchant account, transfer instrument, or balance account.
-          enum:
-            - pull
-            - push
-          type: string
-      required:
-        - id
-        - schedule
       type: object
     SweepConfigurationNotificationData:
       properties:
@@ -1575,6 +1561,171 @@ components:
         - type
         - accountNumber
         - routingNumber
+      type: object
+    VerificationError:
+      properties:
+        capabilities:
+          description: Contains the capabilities that the verification error applies to.
+          items:
+            enum:
+              - acceptExternalFunding
+              - acceptPspFunding
+              - acceptTransactionInRestrictedCountries
+              - acceptTransactionInRestrictedCountriesCommercial
+              - acceptTransactionInRestrictedCountriesConsumer
+              - acceptTransactionInRestrictedIndustries
+              - acceptTransactionInRestrictedIndustriesCommercial
+              - acceptTransactionInRestrictedIndustriesConsumer
+              - acquiring
+              - atmWithdrawal
+              - atmWithdrawalCommercial
+              - atmWithdrawalConsumer
+              - atmWithdrawalInRestrictedCountries
+              - atmWithdrawalInRestrictedCountriesCommercial
+              - atmWithdrawalInRestrictedCountriesConsumer
+              - authorisedPaymentInstrumentUser
+              - getGrantOffers
+              - issueBankAccount
+              - issueCard
+              - issueCardCommercial
+              - issueCardConsumer
+              - localAcceptance
+              - payout
+              - payoutToTransferInstrument
+              - processing
+              - receiveFromBalanceAccount
+              - receiveFromPlatformPayments
+              - receiveFromThirdParty
+              - receiveFromTransferInstrument
+              - receiveGrants
+              - receivePayments
+              - sendToBalanceAccount
+              - sendToThirdParty
+              - sendToTransferInstrument
+              - thirdPartyFunding
+              - useCard
+              - useCardCommercial
+              - useCardConsumer
+              - useCardInRestrictedCountries
+              - useCardInRestrictedCountriesCommercial
+              - useCardInRestrictedCountriesConsumer
+              - useCardInRestrictedIndustries
+              - useCardInRestrictedIndustriesCommercial
+              - useCardInRestrictedIndustriesConsumer
+              - withdrawFromAtm
+              - withdrawFromAtmCommercial
+              - withdrawFromAtmConsumer
+              - withdrawFromAtmInRestrictedCountries
+              - withdrawFromAtmInRestrictedCountriesCommercial
+              - withdrawFromAtmInRestrictedCountriesConsumer
+            type: string
+          type: array
+        code:
+          description: The verification error code.
+          type: string
+        message:
+          description: A description of the error.
+          type: string
+        remediatingActions:
+          description: Contains the actions that you can take to resolve the verification error.
+          items:
+            $ref: "#/components/schemas/RemediatingAction"
+          type: array
+        subErrors:
+          description: Contains more granular information about the verification error.
+          items:
+            $ref: "#/components/schemas/VerificationError-recursive"
+          type: array
+        type:
+          description: |-
+            The type of error.
+
+             Possible values: **invalidInput**, **dataMissing**.
+          enum:
+            - dataMissing
+            - invalidInput
+            - pendingStatus
+          type: string
+      type: object
+    VerificationError-recursive:
+      properties:
+        capabilities:
+          description: Contains the capabilities that the verification error applies to.
+          items:
+            enum:
+              - acceptExternalFunding
+              - acceptPspFunding
+              - acceptTransactionInRestrictedCountries
+              - acceptTransactionInRestrictedCountriesCommercial
+              - acceptTransactionInRestrictedCountriesConsumer
+              - acceptTransactionInRestrictedIndustries
+              - acceptTransactionInRestrictedIndustriesCommercial
+              - acceptTransactionInRestrictedIndustriesConsumer
+              - acquiring
+              - atmWithdrawal
+              - atmWithdrawalCommercial
+              - atmWithdrawalConsumer
+              - atmWithdrawalInRestrictedCountries
+              - atmWithdrawalInRestrictedCountriesCommercial
+              - atmWithdrawalInRestrictedCountriesConsumer
+              - authorisedPaymentInstrumentUser
+              - getGrantOffers
+              - issueBankAccount
+              - issueCard
+              - issueCardCommercial
+              - issueCardConsumer
+              - localAcceptance
+              - payout
+              - payoutToTransferInstrument
+              - processing
+              - receiveFromBalanceAccount
+              - receiveFromPlatformPayments
+              - receiveFromThirdParty
+              - receiveFromTransferInstrument
+              - receiveGrants
+              - receivePayments
+              - sendToBalanceAccount
+              - sendToThirdParty
+              - sendToTransferInstrument
+              - thirdPartyFunding
+              - useCard
+              - useCardCommercial
+              - useCardConsumer
+              - useCardInRestrictedCountries
+              - useCardInRestrictedCountriesCommercial
+              - useCardInRestrictedCountriesConsumer
+              - useCardInRestrictedIndustries
+              - useCardInRestrictedIndustriesCommercial
+              - useCardInRestrictedIndustriesConsumer
+              - withdrawFromAtm
+              - withdrawFromAtmCommercial
+              - withdrawFromAtmConsumer
+              - withdrawFromAtmInRestrictedCountries
+              - withdrawFromAtmInRestrictedCountriesCommercial
+              - withdrawFromAtmInRestrictedCountriesConsumer
+            type: string
+          type: array
+        code:
+          description: The verification error code.
+          type: string
+        message:
+          description: A description of the error.
+          type: string
+        remediatingActions:
+          description: Contains the actions that you can take to resolve the verification error.
+          items:
+            $ref: "#/components/schemas/RemediatingAction"
+          type: array
+        type:
+          description: |-
+            The type of error.
+
+             Possible values: **invalidInput**, **dataMissing**.
+          enum:
+            - dataMissing
+            - invalidInput
+            - pendingStatus
+          type: string
       type: object
   securitySchemes:
     BasicAuth:

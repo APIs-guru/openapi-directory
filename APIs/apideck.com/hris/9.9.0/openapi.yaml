@@ -269,7 +269,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 9.8.1
+  version: 9.9.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -1035,6 +1035,8 @@ paths:
           description: For virtual webhook events on Ceridian Dayforce, we monitor the "List Employees" response, which has a very small set of fields in comparison to the "Get Employee" response. This is the reason why we only support `hris.employee.created` events for this connector.
         - connector: freshteam
           description: The minimum pagination `limit` is 50, since Freshteam does not support pagination with a lower limit. Pagination for Freshteam only support per 50 limits.
+        - connector: paylocity
+          description: For virtual webhook events on Paylocity, we monitor the "List Employees" response, which has a very small set of fields in comparison of the "Get Employee" response.
         - connector: sage-hr
           description: The minimum pagination `limit` is 50, since Sage HR does not support pagination with a lower limit. Pagination for Sage HR only support per 50 limits.
       x-codeSamples:
