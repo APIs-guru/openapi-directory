@@ -143,11 +143,6 @@ paths:
           name: filter
           schema:
             type: string
-        - description: "The config used in internal debugging and manual testing. Use comma to separate multiple values. Examples: To allow entity search to go through tangle `searchUsingTangle` To get only the advertiser Ids use `idOnly`"
-          in: query
-          name: internalDebuggingConfig
-          schema:
-            type: string
         - description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) * `entityStatus` * `updateTime` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. For example, `displayName desc`.'
           in: query
           name: orderBy
@@ -11994,7 +11989,6 @@ components:
               - NO_CREATIVE_FOR_TARGETED_DEALS
               - TARGETING_DEPRECATED_GEO_TARGET
               - DEPRECATED_FIRST_PARTY_AUDIENCE_EXCLUSION
-              - NO_INPUT_REVENUE_MODEL_TYPE_SPECIFIED
             type: string
           readOnly: true
           type: array

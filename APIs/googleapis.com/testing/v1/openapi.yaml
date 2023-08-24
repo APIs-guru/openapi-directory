@@ -1610,7 +1610,7 @@ components:
           $ref: "#/components/schemas/Account"
           description: The device will be logged in on this account for the duration of the test.
         additionalApks:
-          description: APKs to install in addition to those being directly tested. Currently capped at 100.
+          description: APKs to install in addition to those being directly tested. These will be installed after the app under test. Currently capped at 100.
           items:
             $ref: "#/components/schemas/Apk"
           type: array

@@ -143,11 +143,6 @@ paths:
           name: filter
           schema:
             type: string
-        - description: "The config used in internal debugging and manual testing. Use comma to separate multiple values. Examples: To allow entity search to go through tangle `searchUsingTangle` To get only the advertiser Ids use `idOnly`"
-          in: query
-          name: internalDebuggingConfig
-          schema:
-            type: string
         - description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) * `entityStatus` * `updateTime` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. For example, `displayName desc`.'
           in: query
           name: orderBy
@@ -13138,7 +13133,6 @@ components:
               - PARENT_INSERTION_ORDER_PAUSED
               - PARENT_INSERTION_ORDER_EXPIRED
               - DEPRECATED_FIRST_PARTY_AUDIENCE_EXCLUSION
-              - NO_INPUT_REVENUE_MODEL_TYPE_SPECIFIED
             type: string
           readOnly: true
           type: array
@@ -15619,6 +15613,8 @@ components:
             - YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_TARGET_CPM
             - YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_MAXIMIZE_LIFT
             - YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_MAXIMIZE_CONVERSIONS
+            - YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_TARGET_ROAS
+            - YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_MAXIMIZE_CONVERSION_VALUE
           type: string
         value:
           description: "The value used by the bidding strategy. When the bidding strategy is assigned at the line item level, this field is only applicable for the following strategy types: * `YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_TARGET_CPA` * `YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_TARGET_ROAS` When the bidding strategy is assigned at the ad group level, this field is only applicable for the following strategy types: * `YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_MANUAL_CPM` * `YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_MANUAL_CPV` * `YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_TARGET_CPA` * `YOUTUBE_AND_PARTNERS_BIDDING_STRATEGY_TYPE_TARGET_CPM` If not using an applicable strategy, the value of this field will be 0."
@@ -15651,6 +15647,15 @@ components:
             - YOUTUBE_AND_PARTNERS_CONTENT_CATEGORY_STANDARD
             - YOUTUBE_AND_PARTNERS_CONTENT_CATEGORY_EXPANDED
             - YOUTUBE_AND_PARTNERS_CONTENT_CATEGORY_LIMITED
+          type: string
+        effectiveContentCategory:
+          description: Output only. The content category which takes effect when serving the line item. When content category is set in both line item and advertiser, the stricter one will take effect when serving the line item.
+          enum:
+            - YOUTUBE_AND_PARTNERS_CONTENT_CATEGORY_UNSPECIFIED
+            - YOUTUBE_AND_PARTNERS_CONTENT_CATEGORY_STANDARD
+            - YOUTUBE_AND_PARTNERS_CONTENT_CATEGORY_EXPANDED
+            - YOUTUBE_AND_PARTNERS_CONTENT_CATEGORY_LIMITED
+          readOnly: true
           type: string
         inventorySourceSettings:
           $ref: "#/components/schemas/YoutubeAndPartnersInventorySourceConfig"

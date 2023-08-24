@@ -537,6 +537,52 @@ paths:
           description: Successful response
       tags:
         - accounts
+  "/v1beta/{parent}/campaignReport:generate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Generates Campaign Report based on provided specifications.
+      operationId: admob.accounts.campaignReport.generate
+      parameters:
+        - description: "Resource name of the account to generate the report for. Example: accounts/pub-9876543210987654"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateCampaignReportRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GenerateCampaignReportResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admob.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/admob.report
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.report
+      tags:
+        - accounts
   "/v1beta/{parent}/campaigns":
     get:
       description: List the campaigns under the specified AdMob account.
@@ -1159,6 +1205,45 @@ components:
           format: int64
           type: string
       type: object
+    CampaignReportSpec:
+      description: 'The specification for generating a Campaign report. For example, the specification to get IMPRESSIONS and CLICKS sliced by CAMPAIGN_ID can look like the following example: { "date_range": { "start_date": {"year": 2021, "month": 12, "day": 1}, "end_date": {"year": 2021, "month": 12, "day": 30} }, "dimensions": ["CAMPAIGN_ID"], "metrics": ["IMPRESSIONS", "CLICKS"], }'
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/DateRange"
+          description: The date range for which the report is generated. The max range is 30 days.
+        dimensions:
+          description: List of dimensions of the report. The value combination of these dimensions determines the row of the report. If no dimensions are specified, the report returns a single row of requested metrics for the entire account.
+          items:
+            enum:
+              - DIMENSION_UNSPECIFIED
+              - DATE
+              - CAMPAIGN_ID
+              - AD_ID
+              - AD_NAME
+              - PLACEMENT_ID
+              - PLACEMENT_NAME
+              - PLACEMENT_PLATFORM
+              - COUNTRY
+              - FORMAT
+            type: string
+          type: array
+        languageCode:
+          description: Language used for any localized text, such as certain applicable dimension values. The language tag is defined in the IETF BCP47. Defaults to 'en-US' if unspecified or invalid.
+          type: string
+        metrics:
+          description: List of metrics of the report. A report must specify at least one metric.
+          items:
+            enum:
+              - METRIC_UNSPECIFIED
+              - IMPRESSIONS
+              - CLICKS
+              - CLICK_THROUGH_RATE
+              - INSTALLS
+              - ESTIMATED_COST
+              - AVERAGE_CPI
+            type: string
+          type: array
+      type: object
     CreateAdUnitMappingRequest:
       description: Request to create an ad unit mapping under the specific AdMob account and ad unit.
       properties:
@@ -1194,6 +1279,22 @@ components:
         startDate:
           $ref: "#/components/schemas/Date"
           description: Start date of the date range, inclusive. Must be less than or equal to the end date.
+      type: object
+    GenerateCampaignReportRequest:
+      description: Request to generate campaign report.
+      properties:
+        reportSpec:
+          $ref: "#/components/schemas/CampaignReportSpec"
+          description: Campaign report specification.
+      type: object
+    GenerateCampaignReportResponse:
+      description: Campaign Report API response.
+      properties:
+        rows:
+          description: The campaign report data from the specified publisher. At most 100000 rows will be returned from the API.
+          items:
+            $ref: "#/components/schemas/ReportRow"
+          type: array
       type: object
     GenerateMediationReportRequest:
       description: Request to generate an AdMob mediation report.

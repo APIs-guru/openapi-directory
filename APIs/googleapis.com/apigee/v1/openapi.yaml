@@ -268,7 +268,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: List of fields to be updated.
+        - description: Required. The list of fields to update.
           in: query
           name: updateMask
           schema:
@@ -1795,7 +1795,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The filter expression to be used to get the list of AppGroups, where filtering can be done on name, correlationID or channelID of the app group. Example: filter = "name = foobar"'
+        - description: 'The filter expression to be used to get the list of AppGroups, where filtering can be done on status, channelId or channelUri of the app group. Examples: filter=status=active", filter=channelId=, filter=channelUri='
           in: query
           name: filter
           schema:
@@ -1837,7 +1837,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Creates an AppGroup. Once created, user can register apps under the AppGroup to obtain secret key and password. At creation time, the AppGroup's state is set as `active`. The attribute `Attribute` with key `attribute_name` as `__apigee_reserved__developer_details` can be used to store developers and their roles. The JSON format expected is: [ { \"developer_id\":\"\", \"roles\":[ \"\" ] } ] and is dealt in base64encoded format. Etag will be available in attribute `Attribute` with key `attribute_name` as `__apigee_reserved__developer_details_etag` for that AppGroup."
+      description: Creates an AppGroup. Once created, user can register apps under the AppGroup to obtain secret key and password. At creation time, the AppGroup's state is set as `active`.
       operationId: apigee.organizations.appgroups.create
       parameters:
         - description: "Required. Name of the Apigee organization in which the AppGroup is created. Use the following structure in your request: `organizations/{org}`."
@@ -4056,12 +4056,12 @@ paths:
           name: filter
           schema:
             type: string
-        - description: The maximum number of incidents to return. The service may return fewer than this value. If unspecified, at most 50 incidents will be returned.
+        - description: Optional. The maximum number of incidents to return. The service may return fewer than this value. If unspecified, at most 50 incidents will be returned.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: A page token, received from a previous `ListSecurityIncident` call. Provide this to retrieve the subsequent page.
+        - description: Optional. A page token, received from a previous `ListSecurityIncident` call. Provide this to retrieve the subsequent page.
           in: query
           name: pageToken
           schema:
@@ -4139,6 +4139,40 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: CreateSecurityProfile create a new custom security profile.
+      operationId: apigee.organizations.securityProfiles.create
+      parameters:
+        - description: "Required. Name of organization. Format: organizations/{org}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the SecurityProfile, which will become the final component of the action's resource name. This value should be 4-63 characters, and valid characters are /(^[a-z]([a-z0-9-]{​0,61}[a-z0-9])?$/.
+          in: query
+          name: securityProfileId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityProfile"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityProfile"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{parent}/securityReports":
     get:
       description: Return a list of Security Reports
@@ -5158,6 +5192,10 @@ components:
             type: string
           description: Metadata describing the API proxy revision as a key-value map.
           type: object
+        hasExtensiblePolicy:
+          description: Output only. This field will be marked as true if revision contains any policies marked as extensible.
+          readOnly: true
+          type: boolean
         integrationEndpoints:
           description: List of IntegrationEndpoints in the '/integration-endpoints' directory of the API proxy. This is a 'manifest' setting designed to provide visibility into the contents of the API proxy.
           items:
@@ -6152,6 +6190,14 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1PodStatus"
           type: array
+        proxyDeploymentType:
+          description: Output only. The type of the deployment (standard or extensible) Deployed proxy revision will be marked as extensible in following 2 cases. 1. The deployed proxy revision uses extensible policies. 2. If a environment supports flowhooks and flow hook is configured.
+          enum:
+            - PROXY_DEPLOYMENT_TYPE_UNSPECIFIED
+            - STANDARD
+            - EXTENSIBLE
+          readOnly: true
+          type: string
         revision:
           description: API proxy revision.
           type: string
@@ -6648,6 +6694,14 @@ components:
             - DELETING
             - UPDATING
           readOnly: true
+          type: string
+        type:
+          description: Optional. EnvironmentType selected for the environment.
+          enum:
+            - ENVIRONMENT_TYPE_UNSPECIFIED
+            - BASE
+            - INTERMEDIATE
+            - COMPREHENSIVE
           type: string
       type: object
     GoogleCloudApigeeV1EnvironmentConfig:
@@ -8048,6 +8102,61 @@ components:
             $ref: "#/components/schemas/GoogleCloudApigeeV1Result"
           type: array
       type: object
+    GoogleCloudApigeeV1ProfileConfig:
+      description: ProfileConfig defines a set of categories and policies which will be used to compute security score.
+      properties:
+        categories:
+          description: List of categories of profile config.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigCategory"
+          type: array
+      type: object
+    GoogleCloudApigeeV1ProfileConfigAbuse:
+      description: Checks for abuse, which includes any requests sent to the API for purposes other than what it is intended for, such as high volumes of requests, data scraping, and abuse related to authorization.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigAuthorization:
+      description: "By default, following policies will be included: - JWS - JWT - OAuth - BasicAuth - APIKey"
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigCORS:
+      description: Checks to see if you have CORS policy in place.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigCategory:
+      description: Advanced API Security provides security profile that scores the following categories.
+      properties:
+        abuse:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigAbuse"
+          description: Checks for abuse, which includes any requests sent to the API for purposes other than what it is intended for, such as high volumes of requests, data scraping, and abuse related to authorization.
+        authorization:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigAuthorization"
+          description: Checks to see if you have an authorization policy in place.
+        cors:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigCORS"
+          description: Checks to see if you have CORS policy in place.
+        mediation:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigMediation"
+          description: Checks to see if you have a mediation policy in place.
+        mtls:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigMTLS"
+          description: Checks to see if you have configured mTLS for the target server.
+        threat:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfigThreat"
+          description: Checks to see if you have a threat protection policy in place.
+      type: object
+    GoogleCloudApigeeV1ProfileConfigMTLS:
+      description: Checks to see if you have configured mTLS for the target server.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigMediation:
+      description: "By default, following policies will be included: - OASValidation - SOAPMessageValidation"
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1ProfileConfigThreat:
+      description: "By default, following policies will be included: - XMLThreatProtection - JSONThreatProtection"
+      properties: {}
+      type: object
     GoogleCloudApigeeV1Properties:
       description: Message for compatibility with legacy Edge specification for Java Properties object in JSON.
       properties:
@@ -8834,7 +8943,7 @@ components:
           readOnly: true
           type: array
         displayName:
-          description: Display name of the security incident.
+          description: Optional. Display name of the security incident.
           type: string
         firstDetectedTime:
           description: Output only. The time when events associated with the incident were first detected.
@@ -8890,6 +8999,9 @@ components:
         name:
           description: "Immutable. Name of the security profile resource. Format: organizations/{org}/securityProfiles/{profile}"
           type: string
+        profileConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ProfileConfig"
+          description: Required. Customized profile configuration that computes the security score.
         revisionCreateTime:
           description: Output only. The time when revision was created.
           format: google-datetime
@@ -9587,7 +9699,7 @@ components:
           type: string
       type: object
     GoogleIamV1Policy:
-      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
@@ -9669,7 +9781,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     GoogleProtobufEmpty:

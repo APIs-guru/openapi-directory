@@ -762,9 +762,6 @@ components:
           description: Optional. Specifies the end time (exclusive) of the period that the promotion is available in. If unset, the promotion is available indefinitely.
           format: google-datetime
           type: string
-        finiteBillingCycleDetails:
-          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1FiniteBillingCycleDetails"
-          description: Optional. Details for a subscription line item with finite billing cycles. If unset, the line item will be charged indefinitely. Used only with PROMOTION_TYPE_REGULAR_REDUCTION.
         freeTrialDuration:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Duration"
           description: Optional. Specifies the duration of the free trial of the subscription when promotion_type is PROMOTION_TYPE_FREE_TRIAL
@@ -781,7 +778,6 @@ components:
             - PROMOTION_TYPE_UNSPECIFIED
             - PROMOTION_TYPE_FREE_TRIAL
             - PROMOTION_TYPE_INTRODUCTORY_PRICING
-            - PROMOTION_TYPE_REGULAR_REDUCTION
           readOnly: true
           type: string
         regionCodes:
@@ -1044,7 +1040,6 @@ components:
             - PROMOTION_TYPE_UNSPECIFIED
             - PROMOTION_TYPE_FREE_TRIAL
             - PROMOTION_TYPE_INTRODUCTORY_PRICING
-            - PROMOTION_TYPE_REGULAR_REDUCTION
           readOnly: true
           type: string
       type: object

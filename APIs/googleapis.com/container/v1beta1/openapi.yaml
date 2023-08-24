@@ -3236,6 +3236,10 @@ components:
           $ref: "#/components/schemas/UpgradeSettings"
           description: Upgrade settings control disruption and speed of the upgrade.
       type: object
+    AutoscaledRolloutPolicy:
+      description: Autoscaled rollout policy uses cluster autoscaler during blue-green upgrades to scale both the green and blue pools.
+      properties: {}
+      type: object
     AvailableVersion:
       deprecated: true
       description: Deprecated.
@@ -3322,6 +3326,9 @@ components:
     BlueGreenSettings:
       description: Settings for blue-green upgrade.
       properties:
+        autoscaledRolloutPolicy:
+          $ref: "#/components/schemas/AutoscaledRolloutPolicy"
+          description: Autoscaled policy for cluster autoscaler enabled blue-green upgrade.
         nodePoolSoakDuration:
           description: Time needed after draining entire blue pool. After this period, blue pool will be cleaned up.
           format: google-duration
@@ -5705,6 +5712,7 @@ components:
             - VULNERABILITY_MODE_UNSPECIFIED
             - VULNERABILITY_DISABLED
             - VULNERABILITY_BASIC
+            - VULNERABILITY_ENTERPRISE
           type: string
       type: object
     ServerConfig:
@@ -6249,6 +6257,13 @@ components:
         confidentialNodes:
           $ref: "#/components/schemas/ConfidentialNodes"
           description: Confidential nodes config. All the nodes in the node pool will be Confidential VM once enabled.
+        diskSizeGb:
+          description: Optional. The desired disk size for nodes in the node pool. Initiates an upgrade operation that migrates the nodes in the node pool to the specified disk size.
+          format: int64
+          type: string
+        diskType:
+          description: Optional. The desired disk type for nodes in the node pool. Initiates an upgrade operation that migrates the nodes in the node pool to the specified disk type.
+          type: string
         etag:
           description: The current etag of the node pool. If an etag is provided and does not match the current etag of the node pool, update will be blocked and an ABORTED error will be returned.
           type: string
@@ -6281,6 +6296,9 @@ components:
         loggingConfig:
           $ref: "#/components/schemas/NodePoolLoggingConfig"
           description: Logging configuration.
+        machineType:
+          description: Optional. The desired machine type for nodes in the node pool. Initiates an upgrade operation that migrates the nodes in the node pool to the specified machine type.
+          type: string
         name:
           description: The name (project, location, cluster, node pool) of the node pool to update. Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
           type: string
