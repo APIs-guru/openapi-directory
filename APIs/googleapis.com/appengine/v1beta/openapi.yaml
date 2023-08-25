@@ -79,6 +79,15 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Options to include extra data
+          in: query
+          name: includeExtraData
+          schema:
+            enum:
+              - INCLUDE_EXTRA_DATA_UNSPECIFIED
+              - INCLUDE_EXTRA_DATA_NONE
+              - INCLUDE_GOOGLE_GENERATED_METADATA
+            type: string
       responses:
         "200":
           content:

@@ -297,7 +297,8 @@ components:
       description: A storage bucket and its relation to a parent Firebase project.
       properties:
         name:
-          description: Resource name of the bucket.
+          description: Output only. Resource name of the bucket.
+          readOnly: true
           type: string
       type: object
     Empty:
