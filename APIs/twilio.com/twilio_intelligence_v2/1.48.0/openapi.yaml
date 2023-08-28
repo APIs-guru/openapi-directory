@@ -161,7 +161,7 @@ paths:
         - date_created
         - version
       pathType: list
-  "/v2/Services/{Sid}":
+  /v2/Services/{Sid}:
     delete:
       description: Delete a specific Service.
       operationId: DeleteService
@@ -443,7 +443,7 @@ paths:
         operator_result: "{transcript_sid: sid}"
         sentence: "{transcript_sid: sid}"
       pathType: list
-  "/v2/Transcripts/{Sid}":
+  /v2/Transcripts/{Sid}:
     delete:
       description: Delete a specific Transcript.
       operationId: DeleteTranscript
@@ -512,7 +512,7 @@ paths:
         operator_result: "{transcript_sid: sid}"
         sentence: "{transcript_sid: sid}"
       pathType: instance
-  "/v2/Transcripts/{Sid}/Media":
+  /v2/Transcripts/{Sid}/Media:
     description: "TODO: Resource-level docs"
     get:
       description: Get download URLs for media if possible
@@ -554,7 +554,7 @@ paths:
         - sid
       parent: /Transcripts/{Sid}
       pathType: instance
-  "/v2/Transcripts/{TranscriptSid}/OperatorResults":
+  /v2/Transcripts/{TranscriptSid}/OperatorResults:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of Operator Results for the given Transcript.
@@ -641,7 +641,7 @@ paths:
         - operator_sid
       parent: /Transcripts/{Sid}
       pathType: list
-  "/v2/Transcripts/{TranscriptSid}/OperatorResults/{OperatorSid}":
+  /v2/Transcripts/{TranscriptSid}/OperatorResults/{OperatorSid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Operator Result for the given Transcript.
@@ -690,7 +690,7 @@ paths:
         - operator_sid
       parent: /Transcripts/{Sid}
       pathType: instance
-  "/v2/Transcripts/{TranscriptSid}/Sentences":
+  /v2/Transcripts/{TranscriptSid}/Sentences:
     description: "TODO: Resource-level docs"
     get:
       description: Get all Transcript Sentences by TranscriptSid

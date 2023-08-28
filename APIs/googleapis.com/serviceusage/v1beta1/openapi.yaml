@@ -88,7 +88,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a consumer override.
       operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.delete
@@ -240,7 +240,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{name}:disable":
+  /v1beta1/{name}:disable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -286,7 +286,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{name}:enable":
+  /v1beta1/{name}:enable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -332,7 +332,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{parent}/adminOverrides":
+  /v1beta1/{parent}/adminOverrides:
     get:
       description: Lists all admin overrides on this limit.
       operationId: serviceusage.services.consumerQuotaMetrics.limits.adminOverrides.list
@@ -434,7 +434,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{parent}/consumerOverrides":
+  /v1beta1/{parent}/consumerOverrides:
     get:
       description: Lists all consumer overrides on this limit.
       operationId: serviceusage.services.consumerQuotaMetrics.limits.consumerOverrides.list
@@ -536,7 +536,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{parent}/consumerQuotaMetrics":
+  /v1beta1/{parent}/consumerQuotaMetrics:
     get:
       description: Retrieves a summary of all quota information visible to the service consumer, organized by service metric. Each metric includes information about all of its defined limits. Each limit includes the limit configuration (quota unit, preciseness, default value), the current effective limit value, and all of the overrides applied to the limit.
       operationId: serviceusage.services.consumerQuotaMetrics.list
@@ -596,7 +596,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/consumerQuotaMetrics:importAdminOverrides":
+  /v1beta1/{parent}/consumerQuotaMetrics:importAdminOverrides:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -642,7 +642,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{parent}/consumerQuotaMetrics:importConsumerOverrides":
+  /v1beta1/{parent}/consumerQuotaMetrics:importConsumerOverrides:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -688,7 +688,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{parent}/services":
+  /v1beta1/{parent}/services:
     get:
       description: Lists all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project.
       operationId: serviceusage.services.list
@@ -744,7 +744,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/services:batchEnable":
+  /v1beta1/{parent}/services:batchEnable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -790,7 +790,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta1/{parent}:generateServiceIdentity":
+  /v1beta1/{parent}:generateServiceIdentity:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

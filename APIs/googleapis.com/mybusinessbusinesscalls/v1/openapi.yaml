@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: locations
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Returns the Business calls settings resource for the given location.
       operationId: mybusinessbusinesscalls.locations.getBusinesscallssettings
@@ -90,7 +90,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{parent}/businesscallsinsights":
+  /v1/{parent}/businesscallsinsights:
     get:
       description: Returns insights for Business calls for a location.
       operationId: mybusinessbusinesscalls.locations.businesscallsinsights.list

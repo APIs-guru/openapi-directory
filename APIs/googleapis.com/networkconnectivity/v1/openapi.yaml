@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a Network Connectivity Center spoke.
       operationId: networkconnectivity.projects.locations.spokes.delete
@@ -135,7 +135,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: networkconnectivity.projects.locations.list
@@ -187,7 +187,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: networkconnectivity.projects.locations.operations.list
@@ -239,7 +239,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:accept":
+  /v1/{name}:accept:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -281,7 +281,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -323,7 +323,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:listSpokes":
+  /v1/{name}:listSpokes:
     get:
       description: Lists the Network Connectivity Center spokes associated with a specified hub and location. The list includes both spokes that are attached to the hub and spokes that have been proposed but not yet accepted.
       operationId: networkconnectivity.projects.locations.global.hubs.listSpokes
@@ -398,7 +398,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:reject":
+  /v1/{name}:reject:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -440,7 +440,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/groups":
+  /v1/{parent}/groups:
     get:
       description: Lists groups in a given hub.
       operationId: networkconnectivity.projects.locations.global.hubs.groups.list
@@ -497,7 +497,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/hubs":
+  /v1/{parent}/hubs:
     get:
       description: Lists the Network Connectivity Center hubs associated with a given project.
       operationId: networkconnectivity.projects.locations.global.hubs.list
@@ -593,7 +593,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/internalRanges":
+  /v1/{parent}/internalRanges:
     get:
       description: Lists internal ranges in a given project and location.
       operationId: networkconnectivity.projects.locations.internalRanges.list
@@ -689,7 +689,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/policyBasedRoutes":
+  /v1/{parent}/policyBasedRoutes:
     get:
       description: Lists PolicyBasedRoutes in a given project and location.
       operationId: networkconnectivity.projects.locations.global.policyBasedRoutes.list
@@ -785,7 +785,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/routeTables":
+  /v1/{parent}/routeTables:
     get:
       description: Lists route tables in a given project.
       operationId: networkconnectivity.projects.locations.global.hubs.routeTables.list
@@ -842,7 +842,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/routes":
+  /v1/{parent}/routes:
     get:
       description: Lists routes in a given project.
       operationId: networkconnectivity.projects.locations.global.hubs.routeTables.routes.list
@@ -899,7 +899,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/serviceClasses":
+  /v1/{parent}/serviceClasses:
     get:
       description: Lists ServiceClasses in a given project and location.
       operationId: networkconnectivity.projects.locations.serviceClasses.list
@@ -956,7 +956,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/serviceConnectionMaps":
+  /v1/{parent}/serviceConnectionMaps:
     get:
       description: Lists ServiceConnectionMaps in a given project and location.
       operationId: networkconnectivity.projects.locations.serviceConnectionMaps.list
@@ -1052,7 +1052,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/serviceConnectionPolicies":
+  /v1/{parent}/serviceConnectionPolicies:
     get:
       description: Lists ServiceConnectionPolicies in a given project and location.
       operationId: networkconnectivity.projects.locations.serviceConnectionPolicies.list
@@ -1148,7 +1148,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/serviceConnectionTokens":
+  /v1/{parent}/serviceConnectionTokens:
     get:
       description: Lists ServiceConnectionTokens in a given project and location.
       operationId: networkconnectivity.projects.locations.serviceConnectionTokens.list
@@ -1244,7 +1244,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/spokes":
+  /v1/{parent}/spokes:
     get:
       description: Lists the Network Connectivity Center spokes in a specified project and location.
       operationId: networkconnectivity.projects.locations.spokes.list
@@ -1340,7 +1340,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: networkconnectivity.projects.locations.spokes.getIamPolicy
@@ -1382,7 +1382,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1424,7 +1424,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

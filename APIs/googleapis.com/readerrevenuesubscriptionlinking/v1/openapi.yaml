@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: publications
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Removes a publication reader, effectively severing the association with a Google user. If `force` is set to true, any entitlements for this reader will also be deleted. (Otherwise, the request will only work if the reader has no entitlements.) - If the reader does not exist, return NOT_FOUND. - Return FAILED_PRECONDITION if the force field is false (or unset) and entitlements are present.
       operationId: readerrevenuesubscriptionlinking.publications.readers.delete

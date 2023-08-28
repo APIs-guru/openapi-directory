@@ -30,7 +30,7 @@ tags:
   - name: customers
   - name: media
 paths:
-  "/v1/{customer}/policies/files:uploadPolicyFile":
+  /v1/{customer}/policies/files:uploadPolicyFile:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - media
-  "/v1/{customer}/policies/groups:batchDelete":
+  /v1/{customer}/policies/groups:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -114,7 +114,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies/groups:batchModify":
+  /v1/{customer}/policies/groups:batchModify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -156,7 +156,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies/groups:listGroupPriorityOrdering":
+  /v1/{customer}/policies/groups:listGroupPriorityOrdering:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -202,7 +202,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy.readonly
       tags:
         - customers
-  "/v1/{customer}/policies/groups:updateGroupPriorityOrdering":
+  /v1/{customer}/policies/groups:updateGroupPriorityOrdering:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -244,7 +244,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies/networks:defineCertificate":
+  /v1/{customer}/policies/networks:defineCertificate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -286,7 +286,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies/networks:defineNetwork":
+  /v1/{customer}/policies/networks:defineNetwork:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -328,7 +328,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies/networks:removeCertificate":
+  /v1/{customer}/policies/networks:removeCertificate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -370,7 +370,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies/networks:removeNetwork":
+  /v1/{customer}/policies/networks:removeNetwork:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -412,7 +412,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies/orgunits:batchInherit":
+  /v1/{customer}/policies/orgunits:batchInherit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -454,7 +454,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies/orgunits:batchModify":
+  /v1/{customer}/policies/orgunits:batchModify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -496,7 +496,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy
       tags:
         - customers
-  "/v1/{customer}/policies:resolve":
+  /v1/{customer}/policies:resolve:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -542,7 +542,7 @@ paths:
             - https://www.googleapis.com/auth/chrome.management.policy.readonly
       tags:
         - customers
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Get a specific policy schema for a customer by its resource name.
       operationId: chromepolicy.customers.policySchemas.get
@@ -583,7 +583,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/policySchemas":
+  /v1/{parent}/policySchemas:
     get:
       description: Gets a list of policy schemas that match a specified filter value for a given customer.
       operationId: chromepolicy.customers.policySchemas.list

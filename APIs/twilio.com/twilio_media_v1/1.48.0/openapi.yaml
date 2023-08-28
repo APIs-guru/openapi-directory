@@ -170,7 +170,7 @@ paths:
         - extension_context
       mountName: media_processor
       pathType: list
-  "/v1/MediaProcessors/{Sid}":
+  /v1/MediaProcessors/{Sid}:
     description: A MediaProcessor resource provides the ability to capture content from a web application with a Twilio Media Extension to create a livestream.
     get:
       description: Returns a single MediaProcessor resource identified by a SID.
@@ -352,7 +352,7 @@ paths:
         media/v1/media_recording_timed_metadata: "{media_recording_sid: sid}"
       mountName: media_recording
       pathType: list
-  "/v1/MediaRecordings/{Sid}":
+  /v1/MediaRecordings/{Sid}:
     delete:
       description: Deletes a MediaRecording resource identified by a SID.
       operationId: DeleteMediaRecording
@@ -547,7 +547,7 @@ paths:
         playback_grant: "{sid: sid}"
       mountName: player_streamer
       pathType: list
-  "/v1/PlayerStreamers/{Sid}":
+  /v1/PlayerStreamers/{Sid}:
     description: A PlayerStreamer resource provides the ability to send a livestream to a JavaScript, iOS, or Android Player SDK.
     get:
       description: Returns a single PlayerStreamer resource identified by a SID.
@@ -626,7 +626,7 @@ paths:
         playback_grant: "{sid: sid}"
       mountName: player_streamer
       pathType: instance
-  "/v1/PlayerStreamers/{Sid}/PlaybackGrant":
+  /v1/PlayerStreamers/{Sid}/PlaybackGrant:
     description: A PlaybackGrant resource allows developers to generate a grant to initialize the Twilio Live Player SDK and connect to a livestream.
     get:
       description: "**This method is not enabled.** Returns a single PlaybackGrant resource identified by a SID."

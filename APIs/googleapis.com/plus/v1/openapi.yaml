@@ -98,7 +98,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/activities/{activityId}":
+  /activities/{activityId}:
     get:
       description: Shut down. See https://developers.google.com/+/api-shutdown for more details.
       operationId: plus.activities.get
@@ -135,7 +135,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/activities/{activityId}/comments":
+  /activities/{activityId}/comments:
     get:
       description: Shut down. See https://developers.google.com/+/api-shutdown for more details.
       operationId: plus.comments.list
@@ -192,7 +192,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/activities/{activityId}/people/{collection}":
+  /activities/{activityId}/people/{collection}:
     get:
       description: Shut down. See https://developers.google.com/+/api-shutdown for more details.
       operationId: plus.people.listByActivity
@@ -250,7 +250,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/comments/{commentId}":
+  /comments/{commentId}:
     get:
       description: Shut down. See https://developers.google.com/+/api-shutdown for more details.
       operationId: plus.comments.get
@@ -341,7 +341,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/people/{userId}":
+  /people/{userId}:
     get:
       description: Get a person's profile. If your app uses scope https://www.googleapis.com/auth/plus.login, this method is guaranteed to return ageRange and language.
       operationId: plus.people.get
@@ -386,7 +386,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/people/{userId}/activities/{collection}":
+  /people/{userId}/activities/{collection}:
     get:
       description: Shut down. See https://developers.google.com/+/api-shutdown for more details.
       operationId: plus.activities.list
@@ -443,7 +443,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/people/{userId}/people/{collection}":
+  /people/{userId}/people/{collection}:
     get:
       description: List all of the people in the specified collection.
       operationId: plus.people.list

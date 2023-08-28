@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{location}:getStatus":
+  /v1/{location}:getStatus:
     get:
       description: Get the project status.
       operationId: contentwarehouse.projects.locations.getStatus
@@ -66,7 +66,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{location}:initialize":
+  /v1/{location}:initialize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -108,7 +108,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a SynonymSet for a given context. Throws a NOT_FOUND exception if the SynonymSet is not found.
       operationId: contentwarehouse.projects.locations.synonymSets.delete
@@ -198,7 +198,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:delete":
+  /v1/{name}:delete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -240,7 +240,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:get":
+  /v1/{name}:get:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -282,7 +282,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:lock":
+  /v1/{name}:lock:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -324,7 +324,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:runPipeline":
+  /v1/{name}:runPipeline:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -366,7 +366,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/documentLinks":
+  /v1/{parent}/documentLinks:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -408,7 +408,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/documentSchemas":
+  /v1/{parent}/documentSchemas:
     get:
       description: Lists document schemas.
       operationId: contentwarehouse.projects.locations.documentSchemas.list
@@ -484,7 +484,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/documents":
+  /v1/{parent}/documents:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -526,7 +526,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/documents:search":
+  /v1/{parent}/documents:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -568,7 +568,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/linkedSources":
+  /v1/{parent}/linkedSources:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -610,7 +610,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/linkedTargets":
+  /v1/{parent}/linkedTargets:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -652,7 +652,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/ruleSets":
+  /v1/{parent}/ruleSets:
     get:
       description: Lists rulesets.
       operationId: contentwarehouse.projects.locations.ruleSets.list
@@ -728,7 +728,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/synonymSets":
+  /v1/{parent}/synonymSets:
     get:
       description: Returns all SynonymSets (for all contexts) for the specified location.
       operationId: contentwarehouse.projects.locations.synonymSets.list
@@ -804,7 +804,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:fetchAcl":
+  /v1/{resource}:fetchAcl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -846,7 +846,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:setAcl":
+  /v1/{resource}:setAcl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

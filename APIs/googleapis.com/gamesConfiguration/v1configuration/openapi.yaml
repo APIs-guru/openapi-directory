@@ -32,7 +32,7 @@ tags:
   - name: achievementConfigurations
   - name: leaderboardConfigurations
 paths:
-  "/games/v1configuration/achievements/{achievementId}":
+  /games/v1configuration/achievements/{achievementId}:
     delete:
       description: Delete the achievement configuration with the given ID.
       operationId: gamesConfiguration.achievementConfigurations.delete
@@ -118,7 +118,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - achievementConfigurations
-  "/games/v1configuration/applications/{applicationId}/achievements":
+  /games/v1configuration/applications/{applicationId}/achievements:
     get:
       description: Returns a list of the achievement configurations in this application.
       operationId: gamesConfiguration.achievementConfigurations.list
@@ -194,7 +194,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - achievementConfigurations
-  "/games/v1configuration/applications/{applicationId}/leaderboards":
+  /games/v1configuration/applications/{applicationId}/leaderboards:
     get:
       description: Returns a list of the leaderboard configurations in this application.
       operationId: gamesConfiguration.leaderboardConfigurations.list
@@ -270,7 +270,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - leaderboardConfigurations
-  "/games/v1configuration/leaderboards/{leaderboardId}":
+  /games/v1configuration/leaderboards/{leaderboardId}:
     delete:
       description: Delete the leaderboard configuration with the given ID.
       operationId: gamesConfiguration.leaderboardConfigurations.delete

@@ -93,7 +93,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Removes the specified admin as a manager of the specified location.
       operationId: mybusinessaccountmanagement.locations.admins.delete
@@ -178,7 +178,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{name}:accept":
+  /v1/{name}:accept:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -215,7 +215,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v1/{name}:decline":
+  /v1/{name}:decline:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -252,7 +252,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v1/{name}:transfer":
+  /v1/{name}:transfer:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -289,7 +289,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{parent}/admins":
+  /v1/{parent}/admins:
     get:
       description: Lists all of the admins for the specified location.
       operationId: mybusinessaccountmanagement.locations.admins.list
@@ -345,7 +345,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{parent}/invitations":
+  /v1/{parent}/invitations:
     get:
       description: Lists pending invitations for the specified account.
       operationId: mybusinessaccountmanagement.accounts.invitations.list

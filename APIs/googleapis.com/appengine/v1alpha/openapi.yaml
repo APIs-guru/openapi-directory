@@ -33,7 +33,7 @@ tags:
   - name: apps
   - name: projects
 paths:
-  "/v1alpha/apps/{appsId}/authorizedCertificates":
+  /v1alpha/apps/{appsId}/authorizedCertificates:
     get:
       description: Lists all SSL certificates the user is authorized to administer.
       operationId: appengine.apps.authorizedCertificates.list
@@ -125,7 +125,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1alpha/apps/{appsId}/authorizedCertificates/{authorizedCertificatesId}":
+  /v1alpha/apps/{appsId}/authorizedCertificates/{authorizedCertificatesId}:
     delete:
       description: Deletes the specified SSL certificate.
       operationId: appengine.apps.authorizedCertificates.delete
@@ -254,7 +254,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1alpha/apps/{appsId}/authorizedDomains":
+  /v1alpha/apps/{appsId}/authorizedDomains:
     get:
       description: Lists all domains the user is authorized to administer.
       operationId: appengine.apps.authorizedDomains.list
@@ -309,7 +309,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/apps/{appsId}/domainMappings":
+  /v1alpha/apps/{appsId}/domainMappings:
     get:
       description: Lists the domain mappings on an application.
       operationId: appengine.apps.domainMappings.list
@@ -407,7 +407,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1alpha/apps/{appsId}/domainMappings/{domainMappingsId}":
+  /v1alpha/apps/{appsId}/domainMappings/{domainMappingsId}:
     delete:
       description: Deletes the specified domain mapping. A user must be authorized to administer the associated domain in order to delete a DomainMapping resource.
       operationId: appengine.apps.domainMappings.delete
@@ -533,7 +533,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1alpha/apps/{appsId}/locations":
+  /v1alpha/apps/{appsId}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: appengine.apps.locations.list
@@ -593,7 +593,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/apps/{appsId}/locations/{locationsId}":
+  /v1alpha/apps/{appsId}/locations/{locationsId}:
     get:
       description: Gets information about a location.
       operationId: appengine.apps.locations.get
@@ -644,7 +644,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/apps/{appsId}/operations":
+  /v1alpha/apps/{appsId}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.
       operationId: appengine.apps.operations.list
@@ -704,7 +704,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/apps/{appsId}/operations/{operationsId}":
+  /v1alpha/apps/{appsId}/operations/{operationsId}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: appengine.apps.operations.get
@@ -755,7 +755,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/projects/{projectsId}/locations":
+  /v1alpha/projects/{projectsId}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: appengine.projects.locations.list
@@ -815,7 +815,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/projects/{projectsId}/locations/{locationsId}":
+  /v1alpha/projects/{projectsId}/locations/{locationsId}:
     get:
       description: Gets information about a location.
       operationId: appengine.projects.locations.get
@@ -866,7 +866,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/projects/{projectsId}/locations/{locationsId}/operations":
+  /v1alpha/projects/{projectsId}/locations/{locationsId}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.
       operationId: appengine.projects.locations.operations.list
@@ -932,7 +932,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/projects/{projectsId}/locations/{locationsId}/operations/{operationsId}":
+  /v1alpha/projects/{projectsId}/locations/{locationsId}/operations/{operationsId}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: appengine.projects.locations.operations.get

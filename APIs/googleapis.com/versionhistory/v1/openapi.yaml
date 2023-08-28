@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: platforms
 paths:
-  "/v1/{parent}/channels":
+  /v1/{parent}/channels:
     get:
       description: Returns list of channels that are available for a given platform.
       operationId: versionhistory.platforms.channels.list
@@ -71,7 +71,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/platforms":
+  /v1/{parent}/platforms:
     get:
       description: Returns list of platforms that are available for a given product. The resource "product" has no resource name in its name.
       operationId: versionhistory.platforms.list
@@ -113,7 +113,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/releases":
+  /v1/{parent}/releases:
     get:
       description: Returns list of releases of the given version.
       operationId: versionhistory.platforms.channels.versions.releases.list
@@ -165,7 +165,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/versions":
+  /v1/{parent}/versions:
     get:
       description: Returns list of version for the given platform/channel.
       operationId: versionhistory.platforms.channels.versions.list

@@ -218,7 +218,7 @@ paths:
         - friendly_name
         - date_created
       pathType: list
-  "/v1/CompositionHooks/{Sid}":
+  /v1/CompositionHooks/{Sid}:
     delete:
       description: Delete a Recording CompositionHook resource identified by a `CompositionHook SID`.
       operationId: DeleteCompositionHook
@@ -633,7 +633,7 @@ paths:
       dependentProperties:
         video/v1/composition_media: "{composition_sid: sid}"
       pathType: list
-  "/v1/Compositions/{Sid}":
+  /v1/Compositions/{Sid}:
     delete:
       description: Delete a Recording Composition resource identified by a Composition SID.
       operationId: DeleteComposition
@@ -893,7 +893,7 @@ paths:
       dependentProperties:
         video/v1/recording_media: "{recording_sid: sid}"
       pathType: list
-  "/v1/Recordings/{Sid}":
+  /v1/Recordings/{Sid}:
     delete:
       description: Delete a Recording resource identified by a Recording SID.
       operationId: DeleteRecording
@@ -1137,7 +1137,7 @@ paths:
         recording_rules: "{room_sid: sid}"
         room_recording: "{room_sid: sid}"
       pathType: list
-  "/v1/Rooms/{RoomSid}/Participants":
+  /v1/Rooms/{RoomSid}/Participants:
     description: Participants in video rooms
     get:
       description: ""
@@ -1246,7 +1246,7 @@ paths:
         subscribed_track: "{room_sid: room_sid, participant_sid: sid}"
       parent: /Rooms/{Sid}
       pathType: list
-  "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks":
+  /v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks:
     description: "TODO: Resource-level docs"
     get:
       description: Returns a list of tracks associated with a given Participant. Only `currently` Published Tracks are in the list resource.
@@ -1334,7 +1334,7 @@ paths:
         - kind
       parent: /Rooms/{RoomSid}/Participants/{Sid}
       pathType: list
-  "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks/{Sid}":
+  /v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Returns a single Track resource represented by TrackName or SID.
@@ -1381,7 +1381,7 @@ paths:
         - kind
       parent: /Rooms/{RoomSid}/Participants/{Sid}
       pathType: instance
-  "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribeRules":
+  /v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribeRules:
     description: "TODO: Resource-level docs"
     get:
       description: Returns a list of Subscribe Rules for the Participant.
@@ -1460,7 +1460,7 @@ paths:
         - rules
       parent: /Rooms/{RoomSid}/Participants/{Sid}
       pathType: list
-  "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribedTracks":
+  /v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribedTracks:
     description: "TODO: Resource-level docs"
     get:
       description: Returns a list of tracks that are subscribed for the participant.
@@ -1548,7 +1548,7 @@ paths:
         - kind
       parent: /Rooms/{RoomSid}/Participants/{Sid}
       pathType: list
-  "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribedTracks/{Sid}":
+  /v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribedTracks/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: "Returns a single Track resource represented by `track_sid`.  Note: This is one resource with the Video API that requires a SID, be Track Name on the subscriber side is not guaranteed to be unique."
@@ -1598,7 +1598,7 @@ paths:
         - kind
       parent: /Rooms/{RoomSid}/Participants/{Sid}
       pathType: instance
-  "/v1/Rooms/{RoomSid}/Participants/{Sid}":
+  /v1/Rooms/{RoomSid}/Participants/{Sid}:
     description: Participants in video rooms
     get:
       description: ""
@@ -1683,7 +1683,7 @@ paths:
         subscribed_track: "{room_sid: room_sid, participant_sid: sid}"
       parent: /Rooms/{Sid}
       pathType: instance
-  "/v1/Rooms/{RoomSid}/Participants/{Sid}/Anonymize":
+  /v1/Rooms/{RoomSid}/Participants/{Sid}/Anonymize:
     description: "TODO: Resource-level docs"
     post:
       description: ""
@@ -1723,7 +1723,7 @@ paths:
         - status
       parent: /Rooms/{RoomSid}/Participants/{Sid}
       pathType: instance
-  "/v1/Rooms/{RoomSid}/RecordingRules":
+  /v1/Rooms/{RoomSid}/RecordingRules:
     description: "TODO: Resource-level docs"
     get:
       description: Returns a list of Recording Rules for the Room.
@@ -1789,7 +1789,7 @@ paths:
         - rules
       parent: /Rooms/{Sid}
       pathType: list
-  "/v1/Rooms/{RoomSid}/Recordings":
+  /v1/Rooms/{RoomSid}/Recordings:
     description: Single-track, single-media room recordings
     get:
       description: ""
@@ -1905,7 +1905,7 @@ paths:
         video/v1/room_recording_media: "{room_sid: room_sid, sid: sid}"
       parent: /Rooms/{Sid}
       pathType: list
-  "/v1/Rooms/{RoomSid}/Recordings/{Sid}":
+  /v1/Rooms/{RoomSid}/Recordings/{Sid}:
     delete:
       description: ""
       operationId: DeleteRoomRecording
@@ -1988,7 +1988,7 @@ paths:
         video/v1/room_recording_media: "{room_sid: room_sid, sid: sid}"
       parent: /Rooms/{Sid}
       pathType: instance
-  "/v1/Rooms/{Sid}":
+  /v1/Rooms/{Sid}:
     description: Video rooms with one or more participants
     get:
       description: ""

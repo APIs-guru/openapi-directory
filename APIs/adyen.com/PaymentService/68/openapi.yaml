@@ -1742,7 +1742,7 @@ components:
             * minLength: 3 characters
             * maxLength: 3 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.airline_designator_code:
           description: |-
@@ -1752,7 +1752,7 @@ components:
             * minLength: 2 characters
             * maxLength: 2 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.boarding_fee:
           description: |-
@@ -1800,7 +1800,7 @@ components:
             * minLength: 2 characters
             * maxLength: 2 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.class_of_travel:
           description: |-
@@ -1815,7 +1815,7 @@ components:
             * minLength: 1 character
             * maxLength: 1 character
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.date_of_travel:
           description: |-
@@ -1835,7 +1835,7 @@ components:
             * minLength: 3 characters
             * maxLength: 3 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.depart_tax:
           description: |-
@@ -1843,7 +1843,7 @@ components:
             * Encoding: Numeric
             * minLength: 1
             * maxLength: 12
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.destination_code:
           description: |-
@@ -1854,7 +1854,7 @@ components:
             * minLength: 3 characters
             * maxLength: 3 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.fare_base_code:
           description: |-
@@ -1862,7 +1862,7 @@ components:
             * minLength: 1 character
             * maxLength: 6 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.flight_number:
           description: |-
@@ -1870,7 +1870,7 @@ components:
             * minLength: 1 character
             * maxLength: 5 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.leg.stop_over_code:
           description: |-
@@ -1921,8 +1921,8 @@ components:
             * minLength: 1 character
             * maxLength: 20 characters
             * If you send more than 20 characters, the name is truncated
-            * Must not be all spaces
-            * Must not be all zeros
+            * Must not be all spaces 
+            *Must not be all zeros.
           type: string
         airline.ticket_issue_address:
           description: |-
@@ -1936,7 +1936,7 @@ components:
             * minLength: 1 character
             * maxLength: 15 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.travel_agency_code:
           description: |-
@@ -1945,7 +1945,7 @@ components:
             * minLength: 1 character
             * maxLength: 8 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         airline.travel_agency_name:
           description: |-
@@ -1955,7 +1955,7 @@ components:
             * minLength: 1 character
             * maxLength: 25 characters
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
       required:
         - airline.passenger_name
@@ -1974,8 +1974,8 @@ components:
             * maxLength: 17
             * For US and CA numbers must be 10 characters in length
             * Must not start with a space
-            * Must not be all zeros
             * Must not contain any special characters such as + or -
+            *Must not be all zeros.
           type: string
         carRental.daysRented:
           description: |-
@@ -1996,7 +1996,7 @@ components:
             * Format: Numeric
             * maxLength: 12
             * Must not be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.locationCity:
           description: |-
@@ -2004,7 +2004,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 18
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.locationCountry:
           description: |-
@@ -2018,7 +2018,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 2
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.noShowIndicator:
           description: |-
@@ -2049,7 +2049,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 9
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.rentalClassId:
           description: |-
@@ -2057,7 +2057,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 4
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.renterName:
           description: |-
@@ -2066,7 +2066,7 @@ components:
             * maxLength: 26
             * If you send more than 26 characters, the name is truncated
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.returnCity:
           description: |-
@@ -2074,7 +2074,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 18
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.returnCountry:
           description: |-
@@ -2094,7 +2094,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 10
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.returnStateProvince:
           description: |-
@@ -2102,7 +2102,7 @@ components:
             * Format: Alphanumeric
             * maxLength: 3
             * Must not start with a space or be all spaces
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         carRental.taxExemptIndicator:
           description: |-
@@ -2244,185 +2244,131 @@ components:
         enhancedSchemeData.customerReference:
           description: |-
             The customer code.
-
-            Encoding: ASCII
-
-            Max length: 25 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII
+            * Max length: 25 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         enhancedSchemeData.destinationCountryCode:
           description: |-
             The three-letter [ISO 3166-1 alpha-3 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3) for the destination address.
-
-            Encoding: ASCII
-
-            Fixed length: 3 characters
+            * Encoding: ASCII
+            * Fixed length: 3 characters
           type: string
         enhancedSchemeData.destinationPostalCode:
           description: |-
             The postal code of the destination address.
-
-            Encoding: ASCII
-
-            Max length: 10 characters
-
-            Must not start with a space
+            * Encoding: ASCII
+            * Max length: 10 characters
+            * Must not start with a space
           type: string
         enhancedSchemeData.destinationStateProvinceCode:
           description: |-
             Destination state or province code.
-
-            Encoding: ASCII
-
-            Max length: 3 characters
-
-            Must not start with a space
+            * Encoding: ASCII
+            * Max length: 3 characters
+            * Must not start with a space
           type: string
         enhancedSchemeData.dutyAmount:
           description: |-
             The duty amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
+            * For example, 2000 means USD 20.00.
+            * Encoding: Numeric
+            * Max length: 12 characters
           type: string
         enhancedSchemeData.freightAmount:
           description: |-
             The shipping amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
+            * For example, 2000 means USD 20.00.
+            * Encoding: Numeric
+            *Max length: 12 characters
           type: string
-        "enhancedSchemeData.itemDetailLine[itemNr].commodityCode":
+        enhancedSchemeData.itemDetailLine[itemNr].commodityCode:
           description: |-
             The [UNSPC commodity code](https://www.unspsc.org/) of the item.
-
-            Encoding: ASCII
-
-            Max length: 12 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII
+            * Max length: 12 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
-        "enhancedSchemeData.itemDetailLine[itemNr].description":
+        enhancedSchemeData.itemDetailLine[itemNr].description:
           description: |-
             A description of the item.
-
-            Encoding: ASCII
-
-            Max length: 26 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII
+            * Max length: 26 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
-        "enhancedSchemeData.itemDetailLine[itemNr].discountAmount":
+        enhancedSchemeData.itemDetailLine[itemNr].discountAmount:
           description: |-
             The discount amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
+            * For example, 2000 means USD 20.00.
+            * Encoding: Numeric
+            * Max length: 12 characters
           type: string
-        "enhancedSchemeData.itemDetailLine[itemNr].productCode":
+        enhancedSchemeData.itemDetailLine[itemNr].productCode:
           description: |-
             The product code.
-
-            Encoding: ASCII.
-
-            Max length: 12 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII.
+            * Max length: 12 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
-        "enhancedSchemeData.itemDetailLine[itemNr].quantity":
+        enhancedSchemeData.itemDetailLine[itemNr].quantity:
           description: |+
             The number of items. Must be an integer greater than zero.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
-
-            Must not start with a space or be all spaces
+            * Encoding: Numeric
+            * Max length: 12 characters
+            * Must not start with a space or be all spaces
 
           type: string
-        "enhancedSchemeData.itemDetailLine[itemNr].totalAmount":
+        enhancedSchemeData.itemDetailLine[itemNr].totalAmount:
           description: |-
             The total amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Max length: 12 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * For example, 2000 means USD 20.00.
+            * Max length: 12 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
-        "enhancedSchemeData.itemDetailLine[itemNr].unitOfMeasure":
+        enhancedSchemeData.itemDetailLine[itemNr].unitOfMeasure:
           description: |-
             The unit of measurement for an item.
-
-            Encoding: ASCII
+            * Encoding: ASCII
 
             Max length: 3 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
-        "enhancedSchemeData.itemDetailLine[itemNr].unitPrice":
+        enhancedSchemeData.itemDetailLine[itemNr].unitPrice:
           description: |-
             The unit price in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
+            * For example, 2000 means USD 20.00.
+            * Encoding: Numeric
+            * Max length: 12 characters
+            * Must not be all zeros.
           type: string
         enhancedSchemeData.orderDate:
           description: |-
             The order date.
             * Format: `ddMMyy`
-
-            Encoding: ASCII
-
-            Max length: 6 characters
+            * Encoding: ASCII
+            * Max length: 6 characters
           type: string
         enhancedSchemeData.shipFromPostalCode:
           description: |-
             The postal code of the address the item is shipped from.
-
-            Encoding: ASCII
-
-            Max length: 10 characters
-
-            Must not start with a space or be all spaces
-
-            Must not be all zeros
+            * Encoding: ASCII
+            * Max length: 10 characters
+            * Must not start with a space or be all spaces
+            * Must not be all zeros.
           type: string
         enhancedSchemeData.totalTaxAmount:
-          description: |+
+          description: |-
             The total tax amount, in [minor units](https://docs.adyen.com/development-resources/currency-codes).
-
-            For example, 2000 means USD 20.00.
-
-            Encoding: Numeric
-
-            Max length: 12 characters
-
+            * For example, 2000 means USD 20.00.
+            *Encoding: Numeric
+            *Max length: 12 characters
+            * Must not be all zeros.
           type: string
       type: object
     AdditionalDataLodging:
@@ -2444,8 +2390,8 @@ components:
             * Max length: 17 characters.
             * For US and CA numbers must be 10 characters in length
             * Must not start with a space
-            * Must not be all zeros
             * Must not contain any special characters such as + or -
+            *Must not be all zeros.
           type: string
         lodging.fireSafetyActIndicator:
           description: |-
@@ -2464,7 +2410,7 @@ components:
             The card acceptor’s internal invoice or billing ID reference number.
             * Max length: 25 characters.
             * Must not start with a space
-            * Must not be all zeros
+            *Must not be all zeros.
           type: string
         lodging.foodBeverageCharges:
           description: |-
@@ -2493,8 +2439,8 @@ components:
             * Max length: 17 characters
             * For US and CA numbers must be 10 characters in length
             * Must not start with a space
-            * Must not be all zeros
             * Must not contain any special characters such as + or -
+            *Must not be all zeros.
           type: string
         lodging.room1.numberOfNights:
           description: |-
@@ -2570,52 +2516,52 @@ components:
         openinvoicedata.recipientLastName:
           description: Last name of the recipient. If the delivery address and the billing address are different, specify the `recipientFirstName` and `recipientLastName` to share the delivery address with Klarna. Otherwise, only the billing address is shared with Klarna.
           type: string
-        "openinvoicedataLine[itemNr].currencyCode":
+        openinvoicedataLine[itemNr].currencyCode:
           description: The three-character ISO currency code.
           type: string
-        "openinvoicedataLine[itemNr].description":
+        openinvoicedataLine[itemNr].description:
           description: A text description of the product the invoice line refers to.
           type: string
-        "openinvoicedataLine[itemNr].itemAmount":
+        openinvoicedataLine[itemNr].itemAmount:
           description: |-
             The price for one item in the invoice line, represented in minor units.
 
             The due amount for the item, VAT excluded.
           type: string
-        "openinvoicedataLine[itemNr].itemId":
+        openinvoicedataLine[itemNr].itemId:
           description: A unique id for this item. Required for RatePay if the description of each item is not unique.
           type: string
-        "openinvoicedataLine[itemNr].itemVatAmount":
+        openinvoicedataLine[itemNr].itemVatAmount:
           description: The VAT due for one item in the invoice line, represented in minor units.
           type: string
-        "openinvoicedataLine[itemNr].itemVatPercentage":
+        openinvoicedataLine[itemNr].itemVatPercentage:
           description: |-
             The VAT percentage for one item in the invoice line, represented in minor units.
 
             For example, 19% VAT is specified as 1900.
           type: string
-        "openinvoicedataLine[itemNr].numberOfItems":
+        openinvoicedataLine[itemNr].numberOfItems:
           description: The number of units purchased of a specific product.
           type: string
-        "openinvoicedataLine[itemNr].returnShippingCompany":
+        openinvoicedataLine[itemNr].returnShippingCompany:
           description: Name of the shipping company handling the the return shipment.
           type: string
-        "openinvoicedataLine[itemNr].returnTrackingNumber":
+        openinvoicedataLine[itemNr].returnTrackingNumber:
           description: The tracking number for the return of the shipment.
           type: string
-        "openinvoicedataLine[itemNr].returnTrackingUri":
+        openinvoicedataLine[itemNr].returnTrackingUri:
           description: URI where the customer can track the return of their shipment.
           type: string
-        "openinvoicedataLine[itemNr].shippingCompany":
+        openinvoicedataLine[itemNr].shippingCompany:
           description: Name of the shipping company handling the delivery.
           type: string
-        "openinvoicedataLine[itemNr].shippingMethod":
+        openinvoicedataLine[itemNr].shippingMethod:
           description: Shipping method.
           type: string
-        "openinvoicedataLine[itemNr].trackingNumber":
+        openinvoicedataLine[itemNr].trackingNumber:
           description: The tracking number for the shipment.
           type: string
-        "openinvoicedataLine[itemNr].trackingUri":
+        openinvoicedataLine[itemNr].trackingUri:
           description: URI where the customer can track their shipment.
           type: string
       type: object
@@ -2678,64 +2624,64 @@ components:
       type: object
     AdditionalDataRisk:
       properties:
-        "riskdata.[customFieldName]":
+        riskdata.[customFieldName]:
           description: The data for your custom risk field. For more information, refer to [Create custom risk fields](https://docs.adyen.com/risk-management/configure-custom-risk-rules#step-1-create-custom-risk-fields).
           type: string
-        "riskdata.basket.item[itemNr].amountPerItem":
+        riskdata.basket.item[itemNr].amountPerItem:
           description: The price of item in the basket, represented in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
-        "riskdata.basket.item[itemNr].brand":
+        riskdata.basket.item[itemNr].brand:
           description: Brand of the item.
           type: string
-        "riskdata.basket.item[itemNr].category":
+        riskdata.basket.item[itemNr].category:
           description: Category of the item.
           type: string
-        "riskdata.basket.item[itemNr].color":
+        riskdata.basket.item[itemNr].color:
           description: Color of the item.
           type: string
-        "riskdata.basket.item[itemNr].currency":
+        riskdata.basket.item[itemNr].currency:
           description: The three-character [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217).
           type: string
-        "riskdata.basket.item[itemNr].itemID":
+        riskdata.basket.item[itemNr].itemID:
           description: ID of the item.
           type: string
-        "riskdata.basket.item[itemNr].manufacturer":
+        riskdata.basket.item[itemNr].manufacturer:
           description: Manufacturer of the item.
           type: string
-        "riskdata.basket.item[itemNr].productTitle":
+        riskdata.basket.item[itemNr].productTitle:
           description: A text description of the product the invoice line refers to.
           type: string
-        "riskdata.basket.item[itemNr].quantity":
+        riskdata.basket.item[itemNr].quantity:
           description: Quantity of the item purchased.
           type: string
-        "riskdata.basket.item[itemNr].receiverEmail":
+        riskdata.basket.item[itemNr].receiverEmail:
           description: Email associated with the given product in the basket (usually in electronic gift cards).
           type: string
-        "riskdata.basket.item[itemNr].size":
+        riskdata.basket.item[itemNr].size:
           description: Size of the item.
           type: string
-        "riskdata.basket.item[itemNr].sku":
+        riskdata.basket.item[itemNr].sku:
           description: "[Stock keeping unit](https://en.wikipedia.org/wiki/Stock_keeping_unit)."
           type: string
-        "riskdata.basket.item[itemNr].upc":
+        riskdata.basket.item[itemNr].upc:
           description: "[Universal Product Code](https://en.wikipedia.org/wiki/Universal_Product_Code)."
           type: string
-        "riskdata.promotions.promotion[itemNr].promotionCode":
+        riskdata.promotions.promotion[itemNr].promotionCode:
           description: Code of the promotion.
           type: string
-        "riskdata.promotions.promotion[itemNr].promotionDiscountAmount":
+        riskdata.promotions.promotion[itemNr].promotionDiscountAmount:
           description: The discount amount of the promotion, represented in [minor units](https://docs.adyen.com/development-resources/currency-codes).
           type: string
-        "riskdata.promotions.promotion[itemNr].promotionDiscountCurrency":
+        riskdata.promotions.promotion[itemNr].promotionDiscountCurrency:
           description: The three-character [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217).
           type: string
-        "riskdata.promotions.promotion[itemNr].promotionDiscountPercentage":
+        riskdata.promotions.promotion[itemNr].promotionDiscountPercentage:
           description: |-
             Promotion's percentage discount. It is represented in percentage value and there is no need to include the '%' sign.
 
             e.g. for a promotion discount of 30%, the value of the field should be 30.
           type: string
-        "riskdata.promotions.promotion[itemNr].promotionName":
+        riskdata.promotions.promotion[itemNr].promotionName:
           description: Name of the promotion.
           type: string
         riskdata.riskProfileReference:
@@ -2804,55 +2750,55 @@ components:
         subMerchant.numberOfSubSellers:
           description: Required for transactions performed by registered payment facilitators. Indicates the number of sub-merchants contained in the request. For example, **3**.
           type: string
-        "subMerchant.subSeller[subSellerNr].city":
+        subMerchant.subSeller[subSellerNr].city:
           description: |-
             Required for transactions performed by registered payment facilitators. The city of the sub-merchant's address.
             * Format: Alphanumeric
             * Maximum length: 13 characters
           type: string
-        "subMerchant.subSeller[subSellerNr].country":
+        subMerchant.subSeller[subSellerNr].country:
           description: |-
             Required for transactions performed by registered payment facilitators. The three-letter country code of the sub-merchant's address. For example, **BRA** for Brazil. 
             * Format: [ISO 3166-1 alpha-3](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
             * Fixed length: 3 characters
           type: string
-        "subMerchant.subSeller[subSellerNr].id":
+        subMerchant.subSeller[subSellerNr].id:
           description: |-
             Required for transactions performed by registered payment facilitators. A unique identifier that you create for the sub-merchant, used by schemes to identify the sub-merchant. 
             * Format: Alphanumeric
             * Maximum length: 15 characters
           type: string
-        "subMerchant.subSeller[subSellerNr].mcc":
+        subMerchant.subSeller[subSellerNr].mcc:
           description: |-
             Required for transactions performed by registered payment facilitators. The sub-merchant's 4-digit Merchant Category Code (MCC). 
             * Format: Numeric
             * Fixed length: 4 digits
           type: string
-        "subMerchant.subSeller[subSellerNr].name":
+        subMerchant.subSeller[subSellerNr].name:
           description: |-
             Required for transactions performed by registered payment facilitators. The name of the sub-merchant. Based on scheme specifications, this value will overwrite the shopper statement  that will appear in the card statement.
             * Format: Alphanumeric
             * Maximum length: 22 characters
           type: string
-        "subMerchant.subSeller[subSellerNr].postalCode":
+        subMerchant.subSeller[subSellerNr].postalCode:
           description: |-
             Required for transactions performed by registered payment facilitators. The postal code of the sub-merchant's address, without dashes.
             * Format: Numeric
             * Fixed length: 8 digits
           type: string
-        "subMerchant.subSeller[subSellerNr].state":
+        subMerchant.subSeller[subSellerNr].state:
           description: |-
             Required for transactions performed by registered payment facilitators. The state code of the sub-merchant's address, if applicable to the country.
             * Format: Alphanumeric
             * Maximum length: 2 characters
           type: string
-        "subMerchant.subSeller[subSellerNr].street":
+        subMerchant.subSeller[subSellerNr].street:
           description: |-
             Required for transactions performed by registered payment facilitators. The street name and house number of the sub-merchant's address.
             * Format: Alphanumeric
             * Maximum length: 60 characters
           type: string
-        "subMerchant.subSeller[subSellerNr].taxId":
+        subMerchant.subSeller[subSellerNr].taxId:
           description: |-
             Required for transactions performed by registered payment facilitators. The tax ID of the sub-merchant.
             * Format: Numeric
@@ -2870,16 +2816,16 @@ components:
         enhancedSchemeData.employeeName:
           description: |-
             The name or ID of the person working in a temporary capacity.
-            * maxLength: 40
-            * Must not be all zeros
-            * Must not be all spaces
+            * maxLength: 40.  
+            * Must not be all spaces. 
+            *Must not be all zeros.
           type: string
         enhancedSchemeData.jobDescription:
           description: |-
             The job description of the person working in a temporary capacity.
-            * maxLength: 40
-            * Must not be all zeros
-            * Must not be all spaces
+            * maxLength: 40 
+            * Must not be all spaces. 
+            *Must not be all zeros.
           type: string
         enhancedSchemeData.regularHoursRate:
           description: |-
@@ -5323,7 +5269,7 @@ components:
         extraCostsValue:
           description: The value of the extra amount charged due to additional amounts set in the skin used in the HPP payment request. The amount is in minor units.
           type: string
-        "fraudCheck-[itemNr]-[FraudCheckname]":
+        fraudCheck-[itemNr]-[FraudCheckname]:
           description: The fraud score due to a particular fraud check. The fraud check name is found in the key of the key-value pair.
           type: string
         fraudManualReview:
@@ -5572,31 +5518,31 @@ components:
         installmentPaymentData.installmentType:
           description: Type of installment. The value of `installmentType` should be **IssuerFinanced**.
           type: string
-        "installmentPaymentData.option[itemNr].annualPercentageRate":
+        installmentPaymentData.option[itemNr].annualPercentageRate:
           description: Annual interest rate.
           type: string
-        "installmentPaymentData.option[itemNr].firstInstallmentAmount":
+        installmentPaymentData.option[itemNr].firstInstallmentAmount:
           description: First Installment Amount in minor units.
           type: string
-        "installmentPaymentData.option[itemNr].installmentFee":
+        installmentPaymentData.option[itemNr].installmentFee:
           description: Installment fee amount in minor units.
           type: string
-        "installmentPaymentData.option[itemNr].interestRate":
+        installmentPaymentData.option[itemNr].interestRate:
           description: Interest rate for the installment period.
           type: string
-        "installmentPaymentData.option[itemNr].maximumNumberOfInstallments":
+        installmentPaymentData.option[itemNr].maximumNumberOfInstallments:
           description: Maximum number of installments possible for this payment.
           type: string
-        "installmentPaymentData.option[itemNr].minimumNumberOfInstallments":
+        installmentPaymentData.option[itemNr].minimumNumberOfInstallments:
           description: Minimum number of installments possible for this payment.
           type: string
-        "installmentPaymentData.option[itemNr].numberOfInstallments":
+        installmentPaymentData.option[itemNr].numberOfInstallments:
           description: Total number of installments possible for this payment.
           type: string
-        "installmentPaymentData.option[itemNr].subsequentInstallmentAmount":
+        installmentPaymentData.option[itemNr].subsequentInstallmentAmount:
           description: Subsequent Installment Amount in minor units.
           type: string
-        "installmentPaymentData.option[itemNr].totalAmountDue":
+        installmentPaymentData.option[itemNr].totalAmountDue:
           description: Total amount in minor units.
           type: string
         installmentPaymentData.paymentOptions:
@@ -5731,18 +5677,18 @@ components:
             The type of split.
             Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**, **Surcharge**, **Tip**.
           enum:
+            - AcquiringFees
+            - AdyenCommission
+            - AdyenFees
+            - AdyenMarkup
             - BalanceAccount
             - Commission
             - Default
+            - Interchange
             - MarketPlace
             - PaymentFee
-            - PaymentFeeAcquiring
-            - PaymentFeeAdyen
-            - PaymentFeeAdyenCommission
-            - PaymentFeeAdyenMarkup
-            - PaymentFeeInterchange
-            - PaymentFeeSchemeFee
             - Remainder
+            - SchemeFee
             - Surcharge
             - Tip
             - TopUp

@@ -141,7 +141,7 @@ paths:
       x-groupName: Account holders
       x-methodName: createAccountHolder
       x-sortIndex: 1
-  "/accountHolders/{id}":
+  /accountHolders/{id}:
     get:
       description: Returns an account holder.
       operationId: get-accountHolders-id
@@ -304,7 +304,7 @@ paths:
       x-groupName: Account holders
       x-methodName: updateAccountHolder
       x-sortIndex: 2
-  "/accountHolders/{id}/balanceAccounts":
+  /accountHolders/{id}/balanceAccounts:
     get:
       description: |-
         Returns a paginated list of the balance accounts associated with an account holder. To fetch multiple pages, use the query parameters. 
@@ -471,7 +471,7 @@ paths:
       x-groupName: Balance accounts
       x-methodName: createBalanceAccount
       x-sortIndex: 1
-  "/balanceAccounts/{id}":
+  /balanceAccounts/{id}:
     get:
       description: Returns a balance account and its balances for the default currency and other currencies with a non-zero balance.
       operationId: get-balanceAccounts-id
@@ -624,7 +624,7 @@ paths:
       x-groupName: Balance accounts
       x-methodName: updateBalanceAccount
       x-sortIndex: 2
-  "/balanceAccounts/{id}/paymentInstruments":
+  /balanceAccounts/{id}/paymentInstruments:
     get:
       description: |-
         Returns a paginated list of the payment instruments associated with a balance account. 
@@ -717,7 +717,7 @@ paths:
       x-groupName: Balance accounts
       x-methodName: getAllPaymentInstrumentsForBalanceAccount
       x-sortIndex: 4
-  "/balancePlatforms/{id}":
+  /balancePlatforms/{id}:
     get:
       description: Returns a balance platform.
       operationId: get-balancePlatforms-id
@@ -793,7 +793,7 @@ paths:
       x-groupName: Platform
       x-methodName: getBalancePlatform
       x-sortIndex: 1
-  "/balancePlatforms/{id}/accountHolders":
+  /balancePlatforms/{id}/accountHolders:
     get:
       description: |-
         Returns a paginated list of all the account holders that belong to the balance platform. To fetch multiple pages, use the query parameters. 
@@ -953,7 +953,7 @@ paths:
       x-groupName: Documents
       x-methodName: uploadDocumentForVerificationChecks
       x-sortIndex: 4
-  "/documents/{id}":
+  /documents/{id}:
     delete:
       description: Deletes a document.
       operationId: delete-documents-id
@@ -1217,7 +1217,7 @@ paths:
       x-groupName: Legal entities
       x-methodName: createLegalEntity
       x-sortIndex: 1
-  "/legalEntities/{id}":
+  /legalEntities/{id}:
     get:
       description: Returns a legal entity.
       operationId: get-legalEntities-id
@@ -1427,7 +1427,7 @@ paths:
       x-groupName: Payment instrument groups
       x-methodName: createPaymentInstrumentGroup
       x-sortIndex: 1
-  "/paymentInstrumentGroups/{id}":
+  /paymentInstrumentGroups/{id}:
     get:
       description: Returns the details of a payment instrument group.
       operationId: get-paymentInstrumentGroups-id
@@ -1503,7 +1503,7 @@ paths:
       x-groupName: Payment instrument groups
       x-methodName: getPaymentInstrumentGroup
       x-sortIndex: 2
-  "/paymentInstrumentGroups/{id}/transactionRules":
+  /paymentInstrumentGroups/{id}/transactionRules:
     get:
       description: Returns a list of all the transaction rules associated with a payment instrument group.
       operationId: get-paymentInstrumentGroups-id-transactionRules
@@ -1671,7 +1671,7 @@ paths:
       x-groupName: Payment instruments
       x-methodName: createPaymentInstrument
       x-sortIndex: 11
-  "/paymentInstruments/{id}":
+  /paymentInstruments/{id}:
     get:
       description: Returns the details of a payment instrument.
       operationId: get-paymentInstruments-id
@@ -1834,7 +1834,7 @@ paths:
       x-groupName: Payment instruments
       x-methodName: updatePaymentInstrument
       x-sortIndex: 12
-  "/paymentInstruments/{id}/reveal":
+  /paymentInstruments/{id}/reveal:
     get:
       description: |-
         Returns the primary account number (PAN) of a payment instrument.
@@ -1912,7 +1912,7 @@ paths:
       x-groupName: Payment instruments
       x-methodName: getPanOfPaymentInstrument
       x-sortIndex: 14
-  "/paymentInstruments/{id}/transactionRules":
+  /paymentInstruments/{id}/transactionRules:
     get:
       description: Returns a list of transaction rules associated with a payment instrument.
       operationId: get-paymentInstruments-id-transactionRules
@@ -2062,7 +2062,7 @@ paths:
       x-groupName: Transaction rules
       x-methodName: createTransactionRule
       x-sortIndex: 1
-  "/transactionRules/{transactionRuleId}":
+  /transactionRules/{transactionRuleId}:
     delete:
       description: Deletes a transaction rule.
       operationId: delete-transactionRules-transactionRuleId
@@ -2372,7 +2372,7 @@ paths:
       x-groupName: Transfer instruments
       x-methodName: createTransferInstrument
       x-sortIndex: 8
-  "/transferInstruments/{id}":
+  /transferInstruments/{id}:
     delete:
       description: Deletes a transfer instrument.
       operationId: delete-transferInstruments-id

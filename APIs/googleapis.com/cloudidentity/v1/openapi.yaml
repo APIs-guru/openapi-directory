@@ -480,7 +480,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - inboundSsoAssignments
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes an InboundSsoAssignment. To disable SSO, Create (or Update) an assignment that has `sso_mode` == `SSO_OFF`.
       operationId: cloudidentity.inboundSsoAssignments.delete
@@ -601,7 +601,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - inboundSsoAssignments
-  "/v1/{name}:approve":
+  /v1/{name}:approve:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -643,7 +643,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-identity.devices
       tags:
         - devices
-  "/v1/{name}:block":
+  /v1/{name}:block:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -685,7 +685,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-identity.devices
       tags:
         - devices
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -722,7 +722,7 @@ paths:
           description: Successful response
       tags:
         - customers
-  "/v1/{name}:cancelWipe":
+  /v1/{name}:cancelWipe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -764,7 +764,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-identity.devices
       tags:
         - devices
-  "/v1/{name}:isInvitableUser":
+  /v1/{name}:isInvitableUser:
     get:
       description: "Verifies whether a user account is eligible to receive a UserInvitation (is an unmanaged account). Eligibility is based on the following criteria: * the email address is a consumer account and it's the primary email address of the account, and * the domain of the email address matches an existing verified Google Workspace or Cloud Identity domain If both conditions are met, the user is eligible. **Note:** This method is not supported for Workspace Essentials customers."
       operationId: cloudidentity.customers.userinvitations.isInvitableUser
@@ -796,7 +796,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:modifyMembershipRoles":
+  /v1/{name}:modifyMembershipRoles:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -842,7 +842,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  "/v1/{name}:send":
+  /v1/{name}:send:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -879,7 +879,7 @@ paths:
           description: Successful response
       tags:
         - customers
-  "/v1/{name}:wipe":
+  /v1/{name}:wipe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -921,7 +921,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-identity.devices
       tags:
         - devices
-  "/v1/{parent}/clientStates":
+  /v1/{parent}/clientStates:
     get:
       description: Lists the client states for the given search query.
       operationId: cloudidentity.devices.deviceUsers.clientStates.list
@@ -982,7 +982,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/deviceUsers":
+  /v1/{parent}/deviceUsers:
     get:
       description: Lists/Searches DeviceUsers.
       operationId: cloudidentity.devices.deviceUsers.list
@@ -1048,7 +1048,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/idpCredentials":
+  /v1/{parent}/idpCredentials:
     get:
       description: Returns a list of IdpCredentials in an InboundSamlSsoProfile.
       operationId: cloudidentity.inboundSamlSsoProfiles.idpCredentials.list
@@ -1095,7 +1095,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/idpCredentials:add":
+  /v1/{parent}/idpCredentials:add:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1137,7 +1137,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - inboundSamlSsoProfiles
-  "/v1/{parent}/memberships":
+  /v1/{parent}/memberships:
     get:
       description: Lists the `Membership`s within a `Group`.
       operationId: cloudidentity.groups.memberships.list
@@ -1234,7 +1234,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
-  "/v1/{parent}/memberships:checkTransitiveMembership":
+  /v1/{parent}/memberships:checkTransitiveMembership:
     get:
       description: Check a potential member for membership in a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A member has membership to a group as long as there is a single viewable transitive membership between the group and the member. The actor must have view permissions to at least one transitive membership between the member and group.
       operationId: cloudidentity.groups.memberships.checkTransitiveMembership
@@ -1284,7 +1284,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/memberships:getMembershipGraph":
+  /v1/{parent}/memberships:getMembershipGraph:
     get:
       description: Get a membership graph of just a member or both a member and a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. Given a member, the response will contain all membership paths from the member. Given both a group and a member, the response will contain all membership paths between the group and the member.
       operationId: cloudidentity.groups.memberships.getMembershipGraph
@@ -1334,7 +1334,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/memberships:lookup":
+  /v1/{parent}/memberships:lookup:
     get:
       description: Looks up the [resource name](https://cloud.google.com/apis/design/resource_names) of a `Membership` by its `EntityKey`.
       operationId: cloudidentity.groups.memberships.lookup
@@ -1389,7 +1389,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/memberships:searchDirectGroups":
+  /v1/{parent}/memberships:searchDirectGroups:
     get:
       description: Searches direct groups of a member.
       operationId: cloudidentity.groups.memberships.searchDirectGroups
@@ -1454,7 +1454,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/memberships:searchTransitiveGroups":
+  /v1/{parent}/memberships:searchTransitiveGroups:
     get:
       description: Search transitive groups of a member. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the member is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A transitive group is any group that has a direct or indirect membership to the member. Actor must have view permissions all transitive groups.
       operationId: cloudidentity.groups.memberships.searchTransitiveGroups
@@ -1514,7 +1514,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/memberships:searchTransitiveMemberships":
+  /v1/{parent}/memberships:searchTransitiveMemberships:
     get:
       description: Search transitive memberships of a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. If the account of the group is not one of these, a 403 (PERMISSION_DENIED) HTTP status code will be returned. A transitive membership is any direct or indirect membership of a group. Actor must have view permissions to all transitive memberships.
       operationId: cloudidentity.groups.memberships.searchTransitiveMemberships
@@ -1569,7 +1569,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/userinvitations":
+  /v1/{parent}/userinvitations:
     get:
       description: Retrieves a list of UserInvitation resources. **Note:** New consumer accounts with the customer's verified domain created within the previous 48 hours will not appear in the result. This delay also applies to newly-verified domains.
       operationId: cloudidentity.customers.userinvitations.list
@@ -1621,7 +1621,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}:lookup":
+  /v1/{parent}:lookup:
     get:
       description: "Looks up resource names of the DeviceUsers associated with the caller's credentials, as well as the properties provided in the request. This method must be called with end-user credentials with the scope: https://www.googleapis.com/auth/cloud-identity.devices.lookup If multiple properties are provided, only DeviceUsers having all of these properties are considered as matches - i.e. the query behaves like an AND. Different platforms require different amounts of information from the caller to ensure that the DeviceUser is uniquely identified. - iOS: No properties need to be passed, the caller's credentials are sufficient to identify the corresponding DeviceUser. - Android: Specifying the 'android_id' field is required. - Desktop: Specifying the 'raw_resource_id' field is required."
       operationId: cloudidentity.devices.deviceUsers.lookup

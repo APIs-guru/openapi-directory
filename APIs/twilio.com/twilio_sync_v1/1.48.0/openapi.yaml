@@ -161,7 +161,7 @@ paths:
         sync_map: "{service_sid: sid}"
         sync_stream: "{service_sid: sid}"
       pathType: list
-  "/v1/Services/{ServiceSid}/Documents":
+  /v1/Services/{ServiceSid}/Documents:
     description: Sync Document objects
     get:
       description: ""
@@ -282,7 +282,7 @@ paths:
         document_permission: "{service_sid: service_sid, document_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions":
+  /v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions:
     description: Sync document permissions
     get:
       description: Retrieve a list of all Permissions applying to a Sync Document.
@@ -371,7 +371,7 @@ paths:
       mountName: document_permissions
       parent: /Services/{ServiceSid}/Documents/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}":
+  /v1/Services/{ServiceSid}/Documents/{DocumentSid}/Permissions/{Identity}:
     delete:
       description: Delete a specific Sync Document Permission.
       operationId: DeleteDocumentPermission
@@ -505,7 +505,7 @@ paths:
       mountName: document_permissions
       parent: /Services/{ServiceSid}/Documents/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Documents/{Sid}":
+  /v1/Services/{ServiceSid}/Documents/{Sid}:
     delete:
       description: ""
       operationId: DeleteDocument
@@ -618,7 +618,7 @@ paths:
         document_permission: "{service_sid: service_sid, document_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Lists":
+  /v1/Services/{ServiceSid}/Lists:
     description: Sync list objects
     get:
       description: ""
@@ -742,7 +742,7 @@ paths:
       mountName: sync_lists
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items":
+  /v1/Services/{ServiceSid}/Lists/{ListSid}/Items:
     description: Items in a sync list
     get:
       description: ""
@@ -896,7 +896,7 @@ paths:
       mountName: sync_list_items
       parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}":
+  /v1/Services/{ServiceSid}/Lists/{ListSid}/Items/{Index}:
     delete:
       description: ""
       operationId: DeleteSyncListItem
@@ -1037,7 +1037,7 @@ paths:
       mountName: sync_list_items
       parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions":
+  /v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions:
     description: Permissions for Sync list items
     get:
       description: Retrieve a list of all Permissions applying to a Sync List.
@@ -1126,7 +1126,7 @@ paths:
       mountName: sync_list_permissions
       parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}":
+  /v1/Services/{ServiceSid}/Lists/{ListSid}/Permissions/{Identity}:
     delete:
       description: Delete a specific Sync List Permission.
       operationId: DeleteSyncListPermission
@@ -1260,7 +1260,7 @@ paths:
       mountName: sync_list_permissions
       parent: /Services/{ServiceSid}/Lists/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Lists/{Sid}":
+  /v1/Services/{ServiceSid}/Lists/{Sid}:
     delete:
       description: ""
       operationId: DeleteSyncList
@@ -1371,7 +1371,7 @@ paths:
       mountName: sync_lists
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Maps":
+  /v1/Services/{ServiceSid}/Maps:
     description: Sync map objects
     get:
       description: ""
@@ -1495,7 +1495,7 @@ paths:
       mountName: sync_maps
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items":
+  /v1/Services/{ServiceSid}/Maps/{MapSid}/Items:
     description: Keys in a sync map
     get:
       description: ""
@@ -1653,7 +1653,7 @@ paths:
       mountName: sync_map_items
       parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}":
+  /v1/Services/{ServiceSid}/Maps/{MapSid}/Items/{Key}:
     delete:
       description: ""
       operationId: DeleteSyncMapItem
@@ -1794,7 +1794,7 @@ paths:
       mountName: sync_map_items
       parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions":
+  /v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Permissions applying to a Sync Map.
@@ -1883,7 +1883,7 @@ paths:
       mountName: sync_map_permissions
       parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}":
+  /v1/Services/{ServiceSid}/Maps/{MapSid}/Permissions/{Identity}:
     delete:
       description: Delete a specific Sync Map Permission.
       operationId: DeleteSyncMapPermission
@@ -2017,7 +2017,7 @@ paths:
       mountName: sync_map_permissions
       parent: /Services/{ServiceSid}/Maps/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Maps/{Sid}":
+  /v1/Services/{ServiceSid}/Maps/{Sid}:
     delete:
       description: ""
       operationId: DeleteSyncMap
@@ -2128,7 +2128,7 @@ paths:
       mountName: sync_maps
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Streams":
+  /v1/Services/{ServiceSid}/Streams:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Streams in a Service Instance.
@@ -2248,7 +2248,7 @@ paths:
       mountName: sync_streams
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Streams/{Sid}":
+  /v1/Services/{ServiceSid}/Streams/{Sid}:
     delete:
       description: Delete a specific Stream.
       operationId: DeleteSyncStream
@@ -2355,7 +2355,7 @@ paths:
       mountName: sync_streams
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Streams/{StreamSid}/Messages":
+  /v1/Services/{ServiceSid}/Streams/{StreamSid}/Messages:
     description: "TODO: Resource-level docs"
     post:
       description: Create a new Stream Message.
@@ -2405,7 +2405,7 @@ paths:
       mountName: stream_messages
       parent: /Services/{ServiceSid}/Streams/{Sid}
       pathType: list
-  "/v1/Services/{Sid}":
+  /v1/Services/{Sid}:
     delete:
       description: ""
       operationId: DeleteService

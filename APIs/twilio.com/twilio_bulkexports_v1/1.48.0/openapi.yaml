@@ -60,7 +60,7 @@ paths:
         - webhook_url
       parent: /Exports
       pathType: list
-  "/v1/Exports/Jobs/{JobSid}":
+  /v1/Exports/Jobs/{JobSid}:
     delete:
       description: ""
       operationId: DeleteJob
@@ -127,7 +127,7 @@ paths:
         - webhook_url
       parent: /Exports
       pathType: instance
-  "/v1/Exports/{ResourceType}":
+  /v1/Exports/{ResourceType}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Export.
@@ -160,7 +160,7 @@ paths:
         day: "{resource_type: resource_type}"
         export_custom_job: "{resource_type: resource_type}"
       pathType: instance
-  "/v1/Exports/{ResourceType}/Configuration":
+  /v1/Exports/{ResourceType}/Configuration:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Export Configuration.
@@ -236,7 +236,7 @@ paths:
         - webhook_url
       mountName: export_configuration
       pathType: instance
-  "/v1/Exports/{ResourceType}/Days":
+  /v1/Exports/{ResourceType}/Days:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Days for a resource.
@@ -320,7 +320,7 @@ paths:
         - redirectTo
       parent: /Exports/{ResourceType}
       pathType: list
-  "/v1/Exports/{ResourceType}/Days/{Day}":
+  /v1/Exports/{ResourceType}/Days/{Day}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Day.
@@ -363,7 +363,7 @@ paths:
         - redirectTo
       parent: /Exports/{ResourceType}
       pathType: instance
-  "/v1/Exports/{ResourceType}/Jobs":
+  /v1/Exports/{ResourceType}/Jobs:
     description: "TODO: Resource-level docs"
     get:
       description: ""

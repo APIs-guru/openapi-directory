@@ -33,7 +33,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta2/{name}":
+  /v1beta2/{name}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -79,7 +79,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1beta2/{project}/subscriptions":
+  /v1beta2/{project}/subscriptions:
     get:
       description: Lists matching subscriptions.
       operationId: pubsub.projects.subscriptions.list
@@ -130,7 +130,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{project}/topics":
+  /v1beta2/{project}/topics:
     get:
       description: Lists matching topics.
       operationId: pubsub.projects.topics.list
@@ -181,7 +181,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{resource}:getIamPolicy":
+  /v1beta2/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: pubsub.projects.topics.getIamPolicy
@@ -227,7 +227,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{resource}:setIamPolicy":
+  /v1beta2/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -273,7 +273,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1beta2/{resource}:testIamPermissions":
+  /v1beta2/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -319,7 +319,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1beta2/{subscription}":
+  /v1beta2/{subscription}:
     delete:
       description: Deletes an existing subscription. All pending messages in the subscription are immediately dropped. Calls to `Pull` after deletion will return `NOT_FOUND`. After a subscription is deleted, a new one may be created with the same name, but the new one has no association with the old subscription, or its topic unless the same topic is specified.
       operationId: pubsub.projects.subscriptions.delete
@@ -388,7 +388,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{subscription}:acknowledge":
+  /v1beta2/{subscription}:acknowledge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -434,7 +434,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1beta2/{subscription}:modifyAckDeadline":
+  /v1beta2/{subscription}:modifyAckDeadline:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -480,7 +480,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1beta2/{subscription}:modifyPushConfig":
+  /v1beta2/{subscription}:modifyPushConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -526,7 +526,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1beta2/{subscription}:pull":
+  /v1beta2/{subscription}:pull:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -572,7 +572,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1beta2/{topic}":
+  /v1beta2/{topic}:
     delete:
       description: Deletes the topic with the given name. Returns `NOT_FOUND` if the topic does not exist. After a topic is deleted, a new topic may be created with the same name; this is an entirely new topic with none of the old configuration or subscriptions. Existing subscriptions to this topic are not deleted, but their `topic` field is set to `_deleted-topic_`.
       operationId: pubsub.projects.topics.delete
@@ -641,7 +641,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{topic}/subscriptions":
+  /v1beta2/{topic}/subscriptions:
     get:
       description: Lists the name of the subscriptions for this topic.
       operationId: pubsub.projects.topics.subscriptions.list
@@ -692,7 +692,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{topic}:publish":
+  /v1beta2/{topic}:publish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

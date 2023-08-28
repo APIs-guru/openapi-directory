@@ -133,7 +133,7 @@ paths:
       x-groupName: Business lines
       x-methodName: createBusinessLine
       x-sortIndex: 12
-  "/businessLines/{id}":
+  /businessLines/{id}:
     delete:
       description: |-
         Deletes a business line.
@@ -324,7 +324,7 @@ paths:
       x-groupName: Documents
       x-methodName: uploadDocumentForVerificationChecks
       x-sortIndex: 4
-  "/documents/{id}":
+  /documents/{id}:
     delete:
       description: Deletes a document.
       operationId: delete-documents-id
@@ -593,7 +593,7 @@ paths:
       x-groupName: Legal entities
       x-methodName: createLegalEntity
       x-sortIndex: 1
-  "/legalEntities/{id}":
+  /legalEntities/{id}:
     get:
       description: Returns a legal entity.
       operationId: get-legalEntities-id
@@ -729,7 +729,7 @@ paths:
       x-groupName: Legal entities
       x-methodName: updateLegalEntity
       x-sortIndex: 3
-  "/legalEntities/{id}/businessLines":
+  /legalEntities/{id}/businessLines:
     get:
       description: Returns the business lines owned by a legal entity.
       operationId: get-legalEntities-id-businessLines
@@ -790,7 +790,7 @@ paths:
       x-groupName: Legal entities
       x-methodName: getAllBusinessLinesUnderLegalEntity
       x-sortIndex: 4
-  "/legalEntities/{id}/onboardingLinks":
+  /legalEntities/{id}/onboardingLinks:
     post:
       description: |+
         Returns a link to an Adyen-hosted onboarding page where you need to redirect your user.
@@ -863,7 +863,7 @@ paths:
       x-groupName: Hosted Onboarding
       x-methodName: getLinkToAdyenhostedOnboardingPage
       x-sortIndex: 1
-  "/legalEntities/{id}/pciQuestionnaires":
+  /legalEntities/{id}/pciQuestionnaires:
     get:
       description: Get a list of signed PCI questionnaires.
       operationId: get-legalEntities-id-pciQuestionnaires
@@ -924,7 +924,7 @@ paths:
       x-groupName: PCI questionnaires
       x-methodName: getPciQuestionnaireDetails
       x-sortIndex: 3
-  "/legalEntities/{id}/pciQuestionnaires/generatePciTemplates":
+  /legalEntities/{id}/pciQuestionnaires/generatePciTemplates:
     post:
       description: Generates the required PCI questionnaire based on the user's [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels). If multiple questionnaires are required, this request creates a single consodilated document to be signed.
       operationId: post-legalEntities-id-pciQuestionnaires-generatePciTemplates
@@ -993,7 +993,7 @@ paths:
       x-groupName: PCI questionnaires
       x-methodName: generatePciQuestionnaire
       x-sortIndex: 1
-  "/legalEntities/{id}/pciQuestionnaires/signPciTemplates":
+  /legalEntities/{id}/pciQuestionnaires/signPciTemplates:
     post:
       description: Signs the required PCI questionnaire.
       operationId: post-legalEntities-id-pciQuestionnaires-signPciTemplates
@@ -1062,7 +1062,7 @@ paths:
       x-groupName: PCI questionnaires
       x-methodName: signPciQuestionnaire
       x-sortIndex: 2
-  "/legalEntities/{id}/pciQuestionnaires/{pciid}":
+  /legalEntities/{id}/pciQuestionnaires/{pciid}:
     get:
       description: Returns the signed PCI questionnaire.
       operationId: get-legalEntities-id-pciQuestionnaires-pciid
@@ -1129,7 +1129,7 @@ paths:
       x-groupName: PCI questionnaires
       x-methodName: getPciQuestionnaire
       x-sortIndex: 4
-  "/legalEntities/{id}/termsOfService":
+  /legalEntities/{id}/termsOfService:
     post:
       description: Returns the Terms of Service document for a legal entity.
       operationId: post-legalEntities-id-termsOfService
@@ -1198,7 +1198,7 @@ paths:
       x-groupName: Terms of Service
       x-methodName: getTermsOfServiceDocument
       x-sortIndex: 1
-  "/legalEntities/{id}/termsOfService/{termsofservicedocumentid}":
+  /legalEntities/{id}/termsOfService/{termsofservicedocumentid}:
     patch:
       description: Accepts Terms of Service.
       operationId: patch-legalEntities-id-termsOfService-termsofservicedocumentid
@@ -1267,7 +1267,7 @@ paths:
       x-groupName: Terms of Service
       x-methodName: acceptTermsOfService
       x-sortIndex: 2
-  "/legalEntities/{id}/termsOfServiceAcceptanceInfos":
+  /legalEntities/{id}/termsOfServiceAcceptanceInfos:
     get:
       description: Returns Terms of Service information for a legal entity.
       operationId: get-legalEntities-id-termsOfServiceAcceptanceInfos
@@ -1328,7 +1328,7 @@ paths:
       x-groupName: Terms of Service
       x-methodName: getTermsOfServiceInformationForLegalEntity
       x-sortIndex: 3
-  "/legalEntities/{id}/termsOfServiceStatus":
+  /legalEntities/{id}/termsOfServiceStatus:
     get:
       description: Returns the required types of Terms of Service that need to be accepted by a legal entity.
       operationId: get-legalEntities-id-termsOfServiceStatus
@@ -1447,7 +1447,7 @@ paths:
       x-groupName: Hosted Onboarding
       x-methodName: listHostedOnboardingPageThemes
       x-sortIndex: 2
-  "/themes/{id}":
+  /themes/{id}:
     get:
       description: |+
         Returns the details of the theme identified in the path.>If you are using hosted onboarding, [only use v2](https://docs.adyen.com/release-notes/platforms-and-financial-products#releaseNote=2023-05-01-legal-entity-management-api-3) for your API requests.
@@ -1588,7 +1588,7 @@ paths:
       x-groupName: Transfer instruments
       x-methodName: createTransferInstrument
       x-sortIndex: 8
-  "/transferInstruments/{id}":
+  /transferInstruments/{id}:
     delete:
       description: Deletes a transfer instrument.
       operationId: delete-transferInstruments-id

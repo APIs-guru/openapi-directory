@@ -185,7 +185,7 @@ paths:
         - task_sid
       mountName: channel
       pathType: list
-  "/v1/Channels/{Sid}":
+  /v1/Channels/{Sid}:
     delete:
       description: ""
       operationId: DeleteChannel
@@ -452,7 +452,7 @@ paths:
         - integration_type
       mountName: flex_flow
       pathType: list
-  "/v1/FlexFlows/{Sid}":
+  /v1/FlexFlows/{Sid}:
     delete:
       description: ""
       operationId: DeleteFlexFlow
@@ -1006,7 +1006,7 @@ paths:
         - comment
       mountName: insights_assessments_comment
       pathType: list
-  "/v1/Insights/QualityManagement/Assessments/{AssessmentSid}":
+  /v1/Insights/QualityManagement/Assessments/{AssessmentSid}:
     description: "TODO: Resource-level docs"
     post:
       description: Update a specific Assessment assessed earlier
@@ -1182,7 +1182,7 @@ paths:
         - name
       mountName: insights_questionnaires_category
       pathType: list
-  "/v1/Insights/QualityManagement/Categories/{CategorySid}":
+  /v1/Insights/QualityManagement/Categories/{CategorySid}:
     delete:
       description: ""
       operationId: DeleteInsightsQuestionnairesCategory
@@ -1397,7 +1397,7 @@ paths:
         - name
       mountName: insights_questionnaires
       pathType: list
-  "/v1/Insights/QualityManagement/Questionnaires/{QuestionnaireSid}":
+  /v1/Insights/QualityManagement/Questionnaires/{QuestionnaireSid}:
     delete:
       description: To delete the questionnaire
       operationId: DeleteInsightsQuestionnaires
@@ -1666,7 +1666,7 @@ paths:
         - question
       mountName: insights_questionnaires_question
       pathType: list
-  "/v1/Insights/QualityManagement/Questions/{QuestionSid}":
+  /v1/Insights/QualityManagement/Questions/{QuestionSid}:
     delete:
       description: ""
       operationId: DeleteInsightsQuestionnairesQuestion
@@ -2038,7 +2038,7 @@ paths:
         interaction_channel: "{interaction_sid: sid}"
       mountName: interaction
       pathType: list
-  "/v1/Interactions/{InteractionSid}/Channels":
+  /v1/Interactions/{InteractionSid}/Channels:
     description: "TODO: Resource-level docs"
     get:
       description: List all Channels for an Interaction.
@@ -2124,7 +2124,7 @@ paths:
         interaction_channel_participant: "{interaction_sid: interaction_sid, channel_sid: sid}"
       parent: /Interactions/{Sid}
       pathType: list
-  "/v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Invites":
+  /v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Invites:
     description: "TODO: Resource-level docs"
     get:
       description: List all Invites for a Channel.
@@ -2262,7 +2262,7 @@ paths:
         - sid
       parent: /Interactions/{InteractionSid}/Channels/{Sid}
       pathType: list
-  "/v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Participants":
+  /v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Participants:
     description: "TODO: Resource-level docs"
     get:
       description: List all Participants for a Channel.
@@ -2405,7 +2405,7 @@ paths:
         - sid
       parent: /Interactions/{InteractionSid}/Channels/{Sid}
       pathType: list
-  "/v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Participants/{Sid}":
+  /v1/Interactions/{InteractionSid}/Channels/{ChannelSid}/Participants/{Sid}:
     description: "TODO: Resource-level docs"
     post:
       description: Update an existing Channel Participant.
@@ -2472,7 +2472,7 @@ paths:
         - sid
       parent: /Interactions/{InteractionSid}/Channels/{Sid}
       pathType: instance
-  "/v1/Interactions/{InteractionSid}/Channels/{Sid}":
+  /v1/Interactions/{InteractionSid}/Channels/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a Channel for an Interaction.
@@ -2570,7 +2570,7 @@ paths:
         interaction_channel_participant: "{interaction_sid: interaction_sid, channel_sid: sid}"
       parent: /Interactions/{Sid}
       pathType: instance
-  "/v1/Interactions/{Sid}":
+  /v1/Interactions/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -2730,7 +2730,7 @@ paths:
         - flex_flow_sid
       mountName: web_channel
       pathType: list
-  "/v1/WebChannels/{Sid}":
+  /v1/WebChannels/{Sid}:
     delete:
       description: ""
       operationId: DeleteWebChannel

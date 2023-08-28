@@ -32,7 +32,7 @@ tags:
   - name: projects
   - name: organizations
 paths:
-  "/v1beta1/{resource}/catalogs:search":
+  /v1beta1/{resource}/catalogs:search:
     get:
       description: |-
         Search Catalog resources that consumers have access to, within the
@@ -98,7 +98,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}/products:search":
+  /v1beta1/{resource}/products:search:
     get:
       description: |-
         Search Product resources that consumers have access to, within the
@@ -165,7 +165,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}/versions:search":
+  /v1beta1/{resource}/versions:search:
     get:
       description: |-
         Search Version resources that consumers have access to, within the

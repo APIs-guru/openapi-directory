@@ -36,7 +36,7 @@ tags:
   - description: Fraud Management
     name: Fraud Management
 paths:
-  "/check/{format}":
+  /check/{format}:
     post:
       description: |-
         Use Verify check to confirm that the PIN you received from your user matches the one sent by Vonage in your Verify request.
@@ -119,7 +119,7 @@ paths:
                   - $ref: "#/components/schemas/checkErrorResponse"
           description: OK
       summary: Verify Check
-  "/control/{format}":
+  /control/{format}:
     post:
       description: |-
         Control the progress of your Verify requests. To cancel an existing Verify request, or to trigger the next verification event:
@@ -259,7 +259,7 @@ paths:
       summary: Request a network unblock
       tags:
         - Fraud Management
-  "/psd2/{format}":
+  /psd2/{format}:
     post:
       description: |-
         Use Verify request to generate and send a PIN to your user to authorize a payment:
@@ -286,7 +286,7 @@ paths:
                   - $ref: "#/components/schemas/requestErrorResponse"
           description: OK
       summary: PSD2 (Payment Services Directive 2) Request
-  "/search/{format}":
+  /search/{format}:
     get:
       description: |-
         Use Verify search to check the status of past or current verification requests:
@@ -394,7 +394,7 @@ paths:
                   - $ref: "#/components/schemas/searchErrorResponse"
           description: OK
       summary: Verify Search
-  "/{format}":
+  /{format}:
     post:
       description: |-
         Use Verify request to generate and send a PIN to your user:

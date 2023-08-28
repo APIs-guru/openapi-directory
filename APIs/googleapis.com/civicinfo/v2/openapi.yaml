@@ -172,7 +172,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/civicinfo/v2/representatives/{ocdId}":
+  /civicinfo/v2/representatives/{ocdId}:
     get:
       description: Looks up representative information for a single geographic division.
       operationId: civicinfo.representatives.representativeInfoByDivision

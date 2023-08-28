@@ -33,7 +33,7 @@ tags:
   - name: pools
   - name: replicas
 paths:
-  "/{projectName}/zones/{zone}/pools":
+  /{projectName}/zones/{zone}/pools:
     get:
       description: List all replica pools.
       operationId: replicapool.pools.list
@@ -148,7 +148,7 @@ paths:
             - https://www.googleapis.com/auth/replicapool
       tags:
         - pools
-  "/{projectName}/zones/{zone}/pools/{poolName}":
+  /{projectName}/zones/{zone}/pools/{poolName}:
     get:
       description: Gets information about a single replica pool.
       operationId: replicapool.pools.get
@@ -258,7 +258,7 @@ paths:
             - https://www.googleapis.com/auth/replicapool
       tags:
         - pools
-  "/{projectName}/zones/{zone}/pools/{poolName}/replicas":
+  /{projectName}/zones/{zone}/pools/{poolName}/replicas:
     get:
       description: Lists all replicas in a pool.
       operationId: replicapool.replicas.list
@@ -336,7 +336,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{projectName}/zones/{zone}/pools/{poolName}/replicas/{replicaName}":
+  /{projectName}/zones/{zone}/pools/{poolName}/replicas/{replicaName}:
     get:
       description: Gets information about a specific replica.
       operationId: replicapool.replicas.get
@@ -462,7 +462,7 @@ paths:
             - https://www.googleapis.com/auth/replicapool
       tags:
         - replicas
-  "/{projectName}/zones/{zone}/pools/{poolName}/replicas/{replicaName}/restart":
+  /{projectName}/zones/{zone}/pools/{poolName}/replicas/{replicaName}/restart:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -521,7 +521,7 @@ paths:
             - https://www.googleapis.com/auth/replicapool
       tags:
         - replicas
-  "/{projectName}/zones/{zone}/pools/{poolName}/resize":
+  /{projectName}/zones/{zone}/pools/{poolName}/resize:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -579,7 +579,7 @@ paths:
             - https://www.googleapis.com/auth/replicapool
       tags:
         - pools
-  "/{projectName}/zones/{zone}/pools/{poolName}/updateTemplate":
+  /{projectName}/zones/{zone}/pools/{poolName}/updateTemplate:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"

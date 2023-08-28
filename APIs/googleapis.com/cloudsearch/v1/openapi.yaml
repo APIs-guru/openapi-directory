@@ -39,7 +39,7 @@ tags:
   - name: stats
   - name: v1
 paths:
-  "/v1/debug/{name}/items:searchByViewUrl":
+  /v1/debug/{name}/items:searchByViewUrl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -85,7 +85,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.debug
       tags:
         - debug
-  "/v1/debug/{name}:checkAccess":
+  /v1/debug/{name}:checkAccess:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -136,7 +136,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.debug
       tags:
         - debug
-  "/v1/debug/{parent}/items:forunmappedidentity":
+  /v1/debug/{parent}/items:forunmappedidentity:
     get:
       description: Lists names of items associated with an unmapped identity. **Note:** This API requires an admin account to execute.
       operationId: cloudsearch.debug.identitysources.items.listForunmappedidentity
@@ -200,7 +200,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/debug/{parent}/unmappedids":
+  /v1/debug/{parent}/unmappedids:
     get:
       description: Lists unmapped user identities for an identity source. **Note:** This API requires an admin account to execute.
       operationId: cloudsearch.debug.identitysources.unmappedids.list
@@ -268,7 +268,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/indexing/{name}":
+  /v1/indexing/{name}:
     delete:
       description: Deletes Item resource for the specified resource name. This API requires an admin or service account to execute. The service account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.delete
@@ -371,7 +371,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/indexing/{name}/items":
+  /v1/indexing/{name}/items:
     get:
       description: Lists all or a subset of Item resources. This API requires an admin or service account to execute. The service account used is the one whitelisted in the corresponding data source.
       operationId: cloudsearch.indexing.datasources.items.list
@@ -437,7 +437,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/indexing/{name}/items:deleteQueueItems":
+  /v1/indexing/{name}/items:deleteQueueItems:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -483,7 +483,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.indexing
       tags:
         - indexing
-  "/v1/indexing/{name}/items:poll":
+  /v1/indexing/{name}/items:poll:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -529,7 +529,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.indexing
       tags:
         - indexing
-  "/v1/indexing/{name}/items:unreserve":
+  /v1/indexing/{name}/items:unreserve:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -575,7 +575,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.indexing
       tags:
         - indexing
-  "/v1/indexing/{name}/schema":
+  /v1/indexing/{name}/schema:
     delete:
       description: Deletes the schema of a data source. **Note:** This API requires an admin or service account to execute.
       operationId: cloudsearch.indexing.datasources.deleteSchema
@@ -699,7 +699,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.settings.indexing
       tags:
         - indexing
-  "/v1/indexing/{name}:index":
+  /v1/indexing/{name}:index:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -745,7 +745,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.indexing
       tags:
         - indexing
-  "/v1/indexing/{name}:push":
+  /v1/indexing/{name}:push:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -791,7 +791,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.indexing
       tags:
         - indexing
-  "/v1/indexing/{name}:upload":
+  /v1/indexing/{name}:upload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -837,7 +837,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.indexing
       tags:
         - indexing
-  "/v1/media/{resourceName}":
+  /v1/media/{resourceName}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1302,7 +1302,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.settings.query
       tags:
         - settings
-  "/v1/settings/{name}":
+  /v1/settings/{name}:
     delete:
       description: Deletes a search application. **Note:** This API requires an admin account to execute.
       operationId: cloudsearch.settings.searchapplications.delete
@@ -1473,7 +1473,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_search.settings.query
       tags:
         - settings
-  "/v1/settings/{name}:reset":
+  /v1/settings/{name}:reset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1592,7 +1592,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/stats/index/{name}":
+  /v1/stats/index/{name}:
     get:
       description: Gets indexed item statistics for a single data source. **Note:** This API requires a standard end user account to execute.
       operationId: cloudsearch.stats.index.datasources.get
@@ -1736,7 +1736,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/stats/query/{name}":
+  /v1/stats/query/{name}:
     get:
       description: Get the query statistics for search application. **Note:** This API requires a standard end user account to execute.
       operationId: cloudsearch.stats.query.searchapplications.get
@@ -1949,7 +1949,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/stats/session/{name}":
+  /v1/stats/session/{name}:
     get:
       description: "Get the # of search sessions, % of successful sessions with a click query statistics for search application. **Note:** This API requires a standard end user account to execute."
       operationId: cloudsearch.stats.session.searchapplications.get
@@ -2093,7 +2093,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/stats/user/{name}":
+  /v1/stats/user/{name}:
     get:
       description: Get the users statistics for search application. **Note:** This API requires a standard end user account to execute.
       operationId: cloudsearch.stats.user.searchapplications.get
@@ -2168,7 +2168,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: cloudsearch.operations.get
@@ -2225,7 +2225,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/lro":
+  /v1/{name}/lro:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: cloudsearch.operations.lro.list

@@ -30,7 +30,7 @@ tags:
   - name: accounts
   - name: bidders
 paths:
-  "/v2beta1/accounts/{accountId}/clients":
+  /v2beta1/accounts/{accountId}/clients:
     get:
       description: Lists all the clients for the current sponsor buyer.
       operationId: adexchangebuyer2.accounts.clients.list
@@ -111,7 +111,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/clients/{clientAccountId}":
+  /v2beta1/accounts/{accountId}/clients/{clientAccountId}:
     get:
       description: Gets a client buyer with a given client account ID.
       operationId: adexchangebuyer2.accounts.clients.get
@@ -189,7 +189,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations":
+  /v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations:
     get:
       description: Lists all the client users invitations for a client with a given account ID.
       operationId: adexchangebuyer2.accounts.clients.invitations.list
@@ -277,7 +277,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations/{invitationId}":
+  /v2beta1/accounts/{accountId}/clients/{clientAccountId}/invitations/{invitationId}:
     get:
       description: Retrieves an existing client user invitation.
       operationId: adexchangebuyer2.accounts.clients.invitations.get
@@ -326,7 +326,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users":
+  /v2beta1/accounts/{accountId}/clients/{clientAccountId}/users:
     get:
       description: Lists all the known client users for a specified sponsor buyer account ID.
       operationId: adexchangebuyer2.accounts.clients.users.list
@@ -379,7 +379,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/accounts/{accountId}/clients/{clientAccountId}/users/{userId}":
+  /v2beta1/accounts/{accountId}/clients/{clientAccountId}/users/{userId}:
     get:
       description: Retrieves an existing client user.
       operationId: adexchangebuyer2.accounts.clients.users.get
@@ -469,7 +469,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/creatives":
+  /v2beta1/accounts/{accountId}/creatives:
     get:
       description: Lists creatives.
       operationId: adexchangebuyer2.accounts.creatives.list
@@ -558,7 +558,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/creatives/{creativeId}":
+  /v2beta1/accounts/{accountId}/creatives/{creativeId}:
     get:
       description: Gets a creative.
       operationId: adexchangebuyer2.accounts.creatives.get
@@ -636,7 +636,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations":
+  /v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:
     get:
       description: List all creative-deal associations.
       operationId: adexchangebuyer2.accounts.creatives.dealAssociations.list
@@ -694,7 +694,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:add":
+  /v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:add:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -742,7 +742,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:remove":
+  /v2beta1/accounts/{accountId}/creatives/{creativeId}/dealAssociations:remove:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -790,7 +790,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/creatives/{creativeId}:stopWatching":
+  /v2beta1/accounts/{accountId}/creatives/{creativeId}:stopWatching:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -838,7 +838,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/creatives/{creativeId}:watch":
+  /v2beta1/accounts/{accountId}/creatives/{creativeId}:watch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -886,7 +886,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/finalizedProposals":
+  /v2beta1/accounts/{accountId}/finalizedProposals:
     get:
       description: List finalized proposals, regardless if a proposal is being renegotiated. A filter expression (PQL query) may be specified to filter the results. The notes will not be returned.
       operationId: adexchangebuyer2.accounts.finalizedProposals.list
@@ -947,7 +947,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/accounts/{accountId}/finalizedProposals/{proposalId}:pause":
+  /v2beta1/accounts/{accountId}/finalizedProposals/{proposalId}:pause:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -995,7 +995,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/finalizedProposals/{proposalId}:resume":
+  /v2beta1/accounts/{accountId}/finalizedProposals/{proposalId}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1043,7 +1043,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/products":
+  /v2beta1/accounts/{accountId}/products:
     get:
       description: List all products visible to the buyer (optionally filtered by the specified PQL query).
       operationId: adexchangebuyer2.accounts.products.list
@@ -1095,7 +1095,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/accounts/{accountId}/products/{productId}":
+  /v2beta1/accounts/{accountId}/products/{productId}:
     get:
       description: Gets the requested product by ID.
       operationId: adexchangebuyer2.accounts.products.get
@@ -1138,7 +1138,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/accounts/{accountId}/proposals":
+  /v2beta1/accounts/{accountId}/proposals:
     get:
       description: List proposals. A filter expression (PQL query) may be specified to filter the results. To retrieve all finalized proposals, regardless if a proposal is being renegotiated, see the FinalizedProposals resource. Note that Bidder/ChildSeat relationships differ from the usual behavior. A Bidder account can only see its child seats' proposals by specifying the ChildSeat's accountId in the request path.
       operationId: adexchangebuyer2.accounts.proposals.list
@@ -1228,7 +1228,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/proposals/{proposalId}":
+  /v2beta1/accounts/{accountId}/proposals/{proposalId}:
     get:
       description: Gets a proposal given its ID. The proposal is returned at its head revision.
       operationId: adexchangebuyer2.accounts.proposals.get
@@ -1306,7 +1306,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/proposals/{proposalId}:accept":
+  /v2beta1/accounts/{accountId}/proposals/{proposalId}:accept:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1354,7 +1354,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/proposals/{proposalId}:addNote":
+  /v2beta1/accounts/{accountId}/proposals/{proposalId}:addNote:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1402,7 +1402,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/proposals/{proposalId}:cancelNegotiation":
+  /v2beta1/accounts/{accountId}/proposals/{proposalId}:cancelNegotiation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1450,7 +1450,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/proposals/{proposalId}:completeSetup":
+  /v2beta1/accounts/{accountId}/proposals/{proposalId}:completeSetup:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1498,7 +1498,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/proposals/{proposalId}:pause":
+  /v2beta1/accounts/{accountId}/proposals/{proposalId}:pause:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1546,7 +1546,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/proposals/{proposalId}:resume":
+  /v2beta1/accounts/{accountId}/proposals/{proposalId}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1594,7 +1594,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - accounts
-  "/v2beta1/accounts/{accountId}/publisherProfiles":
+  /v2beta1/accounts/{accountId}/publisherProfiles:
     get:
       description: List all publisher profiles visible to the buyer
       operationId: adexchangebuyer2.accounts.publisherProfiles.list
@@ -1641,7 +1641,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/accounts/{accountId}/publisherProfiles/{publisherProfileId}":
+  /v2beta1/accounts/{accountId}/publisherProfiles/{publisherProfileId}:
     get:
       description: Gets the requested publisher profile by id.
       operationId: adexchangebuyer2.accounts.publisherProfiles.get
@@ -1684,7 +1684,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/bidMetrics":
+  /v2beta1/{filterSetName}/bidMetrics:
     get:
       description: Lists all metrics that are measured in terms of number of bids.
       operationId: adexchangebuyer2.bidders.filterSets.bidMetrics.list
@@ -1731,7 +1731,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/bidResponseErrors":
+  /v2beta1/{filterSetName}/bidResponseErrors:
     get:
       description: List all errors that occurred in bid responses, with the number of bid responses affected for each reason.
       operationId: adexchangebuyer2.bidders.filterSets.bidResponseErrors.list
@@ -1778,7 +1778,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/bidResponsesWithoutBids":
+  /v2beta1/{filterSetName}/bidResponsesWithoutBids:
     get:
       description: List all reasons for which bid responses were considered to have no applicable bids, with the number of bid responses affected for each reason.
       operationId: adexchangebuyer2.bidders.filterSets.bidResponsesWithoutBids.list
@@ -1825,7 +1825,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/filteredBidRequests":
+  /v2beta1/{filterSetName}/filteredBidRequests:
     get:
       description: List all reasons that caused a bid request not to be sent for an impression, with the number of bid requests not sent for each reason.
       operationId: adexchangebuyer2.bidders.filterSets.filteredBidRequests.list
@@ -1872,7 +1872,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/filteredBids":
+  /v2beta1/{filterSetName}/filteredBids:
     get:
       description: List all reasons for which bids were filtered, with the number of bids filtered for each reason.
       operationId: adexchangebuyer2.bidders.filterSets.filteredBids.list
@@ -1919,7 +1919,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/filteredBids/{creativeStatusId}/creatives":
+  /v2beta1/{filterSetName}/filteredBids/{creativeStatusId}/creatives:
     get:
       description: List all creatives associated with a specific reason for which bids were filtered, with the number of bids filtered for each creative.
       operationId: adexchangebuyer2.bidders.filterSets.filteredBids.creatives.list
@@ -1972,7 +1972,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/filteredBids/{creativeStatusId}/details":
+  /v2beta1/{filterSetName}/filteredBids/{creativeStatusId}/details:
     get:
       description: List all details associated with a specific reason for which bids were filtered, with the number of bids filtered for each detail.
       operationId: adexchangebuyer2.bidders.filterSets.filteredBids.details.list
@@ -2025,7 +2025,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/impressionMetrics":
+  /v2beta1/{filterSetName}/impressionMetrics:
     get:
       description: Lists all metrics that are measured in terms of number of impressions.
       operationId: adexchangebuyer2.bidders.filterSets.impressionMetrics.list
@@ -2072,7 +2072,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/losingBids":
+  /v2beta1/{filterSetName}/losingBids:
     get:
       description: List all reasons for which bids lost in the auction, with the number of bids that lost for each reason.
       operationId: adexchangebuyer2.bidders.filterSets.losingBids.list
@@ -2119,7 +2119,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{filterSetName}/nonBillableWinningBids":
+  /v2beta1/{filterSetName}/nonBillableWinningBids:
     get:
       description: List all reasons for which winning bids were not billable, with the number of bids not billed for each reason.
       operationId: adexchangebuyer2.bidders.filterSets.nonBillableWinningBids.list
@@ -2166,7 +2166,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{name}":
+  /v2beta1/{name}:
     delete:
       description: Deletes the requested filter set from the account with the given account ID.
       operationId: adexchangebuyer2.bidders.filterSets.delete
@@ -2227,7 +2227,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{ownerName}/filterSets":
+  /v2beta1/{ownerName}/filterSets:
     get:
       description: Lists all filter sets for the account with the given account ID.
       operationId: adexchangebuyer2.bidders.filterSets.list

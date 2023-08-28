@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{environment}:databaseFailover":
+  /v1/{environment}:databaseFailover:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -74,7 +74,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{environment}:executeAirflowCommand":
+  /v1/{environment}:executeAirflowCommand:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -116,7 +116,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{environment}:fetchDatabaseProperties":
+  /v1/{environment}:fetchDatabaseProperties:
     get:
       description: Fetches database properties.
       operationId: composer.projects.locations.environments.fetchDatabaseProperties
@@ -153,7 +153,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{environment}:loadSnapshot":
+  /v1/{environment}:loadSnapshot:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -195,7 +195,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{environment}:pollAirflowCommand":
+  /v1/{environment}:pollAirflowCommand:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -237,7 +237,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{environment}:saveSnapshot":
+  /v1/{environment}:saveSnapshot:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -279,7 +279,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{environment}:stopAirflowCommand":
+  /v1/{environment}:stopAirflowCommand:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -321,7 +321,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: composer.projects.locations.operations.delete
@@ -416,7 +416,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: composer.projects.locations.operations.list
@@ -468,7 +468,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/environments":
+  /v1/{parent}/environments:
     get:
       description: List environments.
       operationId: composer.projects.locations.environments.list
@@ -544,7 +544,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/imageVersions":
+  /v1/{parent}/imageVersions:
     get:
       description: List ImageVersions for provided location.
       operationId: composer.projects.locations.imageVersions.list

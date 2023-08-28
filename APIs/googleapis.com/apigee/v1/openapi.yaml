@@ -73,7 +73,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{instance}:reportStatus":
+  /v1/{instance}:reportStatus:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -115,7 +115,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a category from the portal.
       operationId: apigee.organizations.sites.apicategories.delete
@@ -365,7 +365,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}/attributes":
+  /v1/{name}/attributes:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -407,7 +407,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}/certificate":
+  /v1/{name}/certificate:
     get:
       description: Gets the certificate from an alias in PEM-encoded form.
       operationId: apigee.organizations.environments.keystores.aliases.getCertificate
@@ -444,7 +444,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/csr":
+  /v1/{name}/csr:
     get:
       description: "Generates a PKCS #10 Certificate Signing Request for the private key in an alias."
       operationId: apigee.organizations.environments.keystores.aliases.csr
@@ -481,7 +481,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/data":
+  /v1/{name}/data:
     delete:
       description: Deletes the data from a debug session. This does not cancel the debug session or prevent further data from being collected if the session is still active in runtime pods.
       operationId: apigee.organizations.environments.apis.revisions.debugsessions.deleteData
@@ -518,7 +518,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/deployments":
+  /v1/{name}/deployments:
     delete:
       description: "Undeploys a shared flow revision from an environment. For a request path `organizations/{org}/environments/{env}/sharedflows/{sf}/revisions/{rev}/deployments`, two permissions are required: * `apigee.deployments.delete` on the resource `organizations/{org}/environments/{env}` * `apigee.sharedflowrevisions.undeploy` on the resource `organizations/{org}/sharedflows/{sf}/revisions/{rev}`"
       operationId: apigee.organizations.environments.sharedflows.revisions.undeploy
@@ -618,7 +618,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}/deployments:generateDeployChangeReport":
+  /v1/{name}/deployments:generateDeployChangeReport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -660,7 +660,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}/deployments:generateUndeployChangeReport":
+  /v1/{name}/deployments:generateUndeployChangeReport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -697,7 +697,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: apigee.organizations.operations.list
@@ -749,7 +749,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:activate":
+  /v1/{name}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -791,7 +791,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:adjust":
+  /v1/{name}:adjust:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -833,7 +833,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:credit":
+  /v1/{name}:credit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -875,7 +875,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:expire":
+  /v1/{name}:expire:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -917,7 +917,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:generateDownloadUrl":
+  /v1/{name}:generateDownloadUrl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -959,7 +959,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:getProjectMapping":
+  /v1/{name}:getProjectMapping:
     get:
       description: Gets the project ID and region for an Apigee organization.
       operationId: apigee.organizations.getProjectMapping
@@ -996,7 +996,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:getSyncAuthorization":
+  /v1/{name}:getSyncAuthorization:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1038,7 +1038,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:listRevisions":
+  /v1/{name}:listRevisions:
     get:
       description: ListSecurityProfileRevisions lists all the revisions of the security profile.
       operationId: apigee.organizations.securityProfiles.listRevisions
@@ -1085,7 +1085,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:setSyncAuthorization":
+  /v1/{name}:setSyncAuthorization:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1127,7 +1127,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{orgenv}/securityStats:queryTabularStats":
+  /v1/{orgenv}/securityStats:queryTabularStats:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1169,7 +1169,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{orgenv}/securityStats:queryTimeSeriesStats":
+  /v1/{orgenv}/securityStats:queryTimeSeriesStats:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1211,7 +1211,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{org}:setAddons":
+  /v1/{org}:setAddons:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1253,7 +1253,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}":
+  /v1/{parent}:
     get:
       description: Lists the Apigee organizations and associated Google Cloud projects that you have permission to access. See [Understanding organizations](https://cloud.google.com/apigee/docs/api-platform/fundamentals/organization-structure).
       operationId: apigee.organizations.list
@@ -1290,7 +1290,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/aliases":
+  /v1/{parent}/aliases:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1357,7 +1357,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/analytics/datastores":
+  /v1/{parent}/analytics/datastores:
     get:
       description: List Datastores
       operationId: apigee.organizations.analytics.datastores.list
@@ -1428,7 +1428,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/analytics/datastores:test":
+  /v1/{parent}/analytics/datastores:test:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1470,7 +1470,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/analytics/exports":
+  /v1/{parent}/analytics/exports:
     get:
       description: Lists the details and status of all analytics export jobs belonging to the parent organization and environment.
       operationId: apigee.organizations.environments.analytics.exports.list
@@ -1536,7 +1536,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/apicategories":
+  /v1/{parent}/apicategories:
     get:
       description: Lists the categories on the portal.
       operationId: apigee.organizations.sites.apicategories.list
@@ -1602,7 +1602,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/apiproducts":
+  /v1/{parent}/apiproducts:
     get:
       description: Lists all API product names for an organization. Filter the list by passing an `attributename` and `attibutevalue`. The maximum number of API products returned is 1000. You can paginate the list of API products returned using the `startKey` and `count` query parameters.
       operationId: apigee.organizations.apiproducts.list
@@ -1693,7 +1693,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/apis":
+  /v1/{parent}/apis:
     get:
       description: Lists the names of all API proxies in an organization. The names returned correspond to the names defined in the configuration files for each API proxy.
       operationId: apigee.organizations.apis.list
@@ -1784,7 +1784,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/appgroups":
+  /v1/{parent}/appgroups:
     get:
       description: Lists all AppGroups in an organization. A maximum of 1000 AppGroups are returned in the response if PageSize is not specified, or if the PageSize is greater than 1000.
       operationId: apigee.organizations.appgroups.list
@@ -1865,7 +1865,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/apps":
+  /v1/{parent}/apps:
     get:
       description: Lists all apps created by a developer in an Apigee organization. Optionally, you can request an expanded view of the developer apps. A maximum of 100 developer apps are returned per API call. You can paginate the list of deveoper apps returned using the `startKey` and `count` query parameters.
       operationId: apigee.organizations.developers.apps.list
@@ -1986,7 +1986,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/archiveDeployments":
+  /v1/{parent}/archiveDeployments:
     get:
       description: Lists the ArchiveDeployments in the specified Environment.
       operationId: apigee.organizations.environments.archiveDeployments.list
@@ -2067,7 +2067,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/archiveDeployments:generateUploadUrl":
+  /v1/{parent}/archiveDeployments:generateUploadUrl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2109,7 +2109,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/attachments":
+  /v1/{parent}/attachments:
     get:
       description: Lists all attachments to an instance. **Note:** Not supported for Apigee hybrid.
       operationId: apigee.organizations.instances.attachments.list
@@ -2185,7 +2185,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/attributes":
+  /v1/{parent}/attributes:
     get:
       description: Returns a list of all developer attributes.
       operationId: apigee.organizations.developers.attributes.list
@@ -2251,7 +2251,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/canaryevaluations":
+  /v1/{parent}/canaryevaluations:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2293,7 +2293,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/datacollectors":
+  /v1/{parent}/datacollectors:
     get:
       description: Lists all data collectors.
       operationId: apigee.organizations.datacollectors.list
@@ -2374,7 +2374,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/debugsessions":
+  /v1/{parent}/debugsessions:
     get:
       description: Lists debug sessions that are currently active in the given API Proxy revision.
       operationId: apigee.organizations.environments.apis.revisions.debugsessions.list
@@ -2455,7 +2455,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/deployments":
+  /v1/{parent}/deployments:
     get:
       description: Lists all deployments of a shared flow revision.
       operationId: apigee.organizations.sharedflows.revisions.deployments.list
@@ -2497,7 +2497,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/developers":
+  /v1/{parent}/developers:
     get:
       description: "Lists all developers in an organization by email address. By default, the response does not include company developers. Set the `includeCompany` query parameter to `true` to include company developers. **Note**: A maximum of 1000 developers are returned in the response. You paginate the list of developers returned using the `startKey` and `count` query parameters."
       operationId: apigee.organizations.developers.list
@@ -2593,7 +2593,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/endpointAttachments":
+  /v1/{parent}/endpointAttachments:
     get:
       description: Lists the endpoint attachments in an organization.
       operationId: apigee.organizations.endpointAttachments.list
@@ -2674,7 +2674,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/entries":
+  /v1/{parent}/entries:
     get:
       description: "Lists key value entries for key values maps scoped to an organization, environment, or API proxy. **Note**: Supported for Apigee hybrid 1.8.x and higher."
       operationId: apigee.organizations.keyvaluemaps.entries.list
@@ -2750,7 +2750,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/envgroups":
+  /v1/{parent}/envgroups:
     get:
       description: Lists all environment groups.
       operationId: apigee.organizations.envgroups.list
@@ -2831,7 +2831,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/environments":
+  /v1/{parent}/environments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2878,7 +2878,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/hostQueries":
+  /v1/{parent}/hostQueries:
     get:
       description: Return a list of Asynchronous Queries at host level.
       operationId: apigee.organizations.hostQueries.list
@@ -2979,7 +2979,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/hostSecurityReports":
+  /v1/{parent}/hostSecurityReports:
     get:
       description: Return a list of Security Reports at host level.
       operationId: apigee.organizations.hostSecurityReports.list
@@ -3085,7 +3085,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/instances":
+  /v1/{parent}/instances:
     get:
       description: Lists all Apigee runtime instances for the organization. **Note:** Not supported for Apigee hybrid.
       operationId: apigee.organizations.instances.list
@@ -3161,7 +3161,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/keys":
+  /v1/{parent}/keys:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3203,7 +3203,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/keys/create":
+  /v1/{parent}/keys/create:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3245,7 +3245,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/keystores":
+  /v1/{parent}/keystores:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3292,7 +3292,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/keyvaluemaps":
+  /v1/{parent}/keyvaluemaps:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3334,7 +3334,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/natAddresses":
+  /v1/{parent}/natAddresses:
     get:
       description: Lists the NAT addresses for an Apigee instance. **Note:** Not supported for Apigee hybrid.
       operationId: apigee.organizations.instances.natAddresses.list
@@ -3410,7 +3410,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/overrides":
+  /v1/{parent}/overrides:
     get:
       description: Lists all of the distributed trace configuration overrides in an environment.
       operationId: apigee.organizations.environments.traceConfig.overrides.list
@@ -3486,7 +3486,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/queries":
+  /v1/{parent}/queries:
     get:
       description: Return a list of Asynchronous Queries
       operationId: apigee.organizations.environments.queries.list
@@ -3582,7 +3582,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/rateplans":
+  /v1/{parent}/rateplans:
     get:
       description: Lists all the rate plans for an API product.
       operationId: apigee.organizations.apiproducts.rateplans.list
@@ -3677,7 +3677,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/references":
+  /v1/{parent}/references:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3719,7 +3719,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/reports":
+  /v1/{parent}/reports:
     get:
       description: Return a list of Custom Reports
       operationId: apigee.organizations.reports.list
@@ -3790,7 +3790,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/resourcefiles":
+  /v1/{parent}/resourcefiles:
     get:
       description: Lists all resource files, optionally filtering by type. For more information about resource files, see [Resource files](https://cloud.google.com/apigee/docs/api-platform/develop/resource-files).
       operationId: apigee.organizations.environments.resourcefiles.list
@@ -3871,7 +3871,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/resourcefiles/{type}":
+  /v1/{parent}/resourcefiles/{type}:
     get:
       description: Lists all resource files, optionally filtering by type. For more information about resource files, see [Resource files](https://cloud.google.com/apigee/docs/api-platform/develop/resource-files).
       operationId: apigee.organizations.environments.resourcefiles.listEnvironmentResources
@@ -3914,7 +3914,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/resourcefiles/{type}/{name}":
+  /v1/{parent}/resourcefiles/{type}/{name}:
     delete:
       description: Deletes a resource file. For more information about resource files, see [Resource files](https://cloud.google.com/apigee/docs/api-platform/develop/resource-files).
       operationId: apigee.organizations.environments.resourcefiles.delete
@@ -4040,7 +4040,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/securityIncidents":
+  /v1/{parent}/securityIncidents:
     get:
       description: ListSecurityIncidents lists all the security incident associated with the environment.
       operationId: apigee.organizations.environments.securityIncidents.list
@@ -4092,7 +4092,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/securityProfiles":
+  /v1/{parent}/securityProfiles:
     get:
       description: ListSecurityProfiles lists all the security profiles associated with the org including attached and unattached profiles.
       operationId: apigee.organizations.securityProfiles.list
@@ -4173,7 +4173,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/securityReports":
+  /v1/{parent}/securityReports:
     get:
       description: Return a list of Security Reports
       operationId: apigee.organizations.environments.securityReports.list
@@ -4274,7 +4274,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/sharedflows":
+  /v1/{parent}/sharedflows:
     get:
       description: Lists all shared flows in the organization.
       operationId: apigee.organizations.sharedflows.list
@@ -4360,7 +4360,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/subscriptions":
+  /v1/{parent}/subscriptions:
     get:
       description: Lists all API product subscriptions for a developer.
       operationId: apigee.organizations.developers.subscriptions.list
@@ -4436,7 +4436,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/targetservers":
+  /v1/{parent}/targetservers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4483,7 +4483,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}:subscribe":
+  /v1/{parent}:subscribe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4520,7 +4520,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}:unsubscribe":
+  /v1/{parent}:unsubscribe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4562,7 +4562,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{profileEnvironment}:computeEnvironmentScores":
+  /v1/{profileEnvironment}:computeEnvironmentScores:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4604,7 +4604,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{project}:provisionOrganization":
+  /v1/{project}:provisionOrganization:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4646,7 +4646,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the IAM policy on an environment. For more information, see [Manage users, roles, and permissions using the API](https://cloud.google.com/apigee/docs/api-platform/system-administration/manage-users-roles). You must have the `apigee.environments.getIamPolicy` permission to call this API.
       operationId: apigee.organizations.environments.getIamPolicy
@@ -4688,7 +4688,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4730,7 +4730,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

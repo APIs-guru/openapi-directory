@@ -36,7 +36,7 @@ tags:
   - name: resources
   - name: types
 paths:
-  "/deploymentmanager/v2/projects/{project}/global/deployments":
+  /deploymentmanager/v2/projects/{project}/global/deployments:
     get:
       description: Lists all deployments for a given project.
       operationId: deploymentmanager.deployments.list
@@ -152,7 +152,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.cloudman
       tags:
         - deployments
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{deployment}":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{deployment}:
     delete:
       description: Deletes a deployment and all of the resources in the deployment.
       operationId: deploymentmanager.deployments.delete
@@ -369,7 +369,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.cloudman
       tags:
         - deployments
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/cancelPreview":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/cancelPreview:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -421,7 +421,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.cloudman
       tags:
         - deployments
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/manifests":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/manifests:
     get:
       description: Lists all manifests for a given deployment.
       operationId: deploymentmanager.manifests.list
@@ -497,7 +497,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/manifests/{manifest}":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/manifests/{manifest}:
     get:
       description: Gets information about a specific manifest.
       operationId: deploymentmanager.manifests.get
@@ -558,7 +558,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/resources":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/resources:
     get:
       description: Lists all resources in a given deployment.
       operationId: deploymentmanager.resources.list
@@ -634,7 +634,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/resources/{resource}":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/resources/{resource}:
     get:
       description: Gets information about a single resource.
       operationId: deploymentmanager.resources.get
@@ -695,7 +695,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/stop":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{deployment}/stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -747,7 +747,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.cloudman
       tags:
         - deployments
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{resource}/getIamPolicy":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{resource}/getIamPolicy:
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: deploymentmanager.deployments.getIamPolicy
@@ -799,7 +799,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{resource}/setIamPolicy":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{resource}/setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -851,7 +851,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.cloudman
       tags:
         - deployments
-  "/deploymentmanager/v2/projects/{project}/global/deployments/{resource}/testIamPermissions":
+  /deploymentmanager/v2/projects/{project}/global/deployments/{resource}/testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -903,7 +903,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.cloudman
       tags:
         - deployments
-  "/deploymentmanager/v2/projects/{project}/global/operations":
+  /deploymentmanager/v2/projects/{project}/global/operations:
     get:
       description: Lists all operations for a project.
       operationId: deploymentmanager.operations.list
@@ -973,7 +973,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/deploymentmanager/v2/projects/{project}/global/operations/{operation}":
+  /deploymentmanager/v2/projects/{project}/global/operations/{operation}:
     get:
       description: Gets information about a specific operation.
       operationId: deploymentmanager.operations.get
@@ -1028,7 +1028,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/deploymentmanager/v2/projects/{project}/global/types":
+  /deploymentmanager/v2/projects/{project}/global/types:
     get:
       description: Lists all resource types for Deployment Manager.
       operationId: deploymentmanager.types.list

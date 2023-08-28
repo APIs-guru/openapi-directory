@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: enterprises
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets a room managed by the enterprise.
       operationId: smartdevicemanagement.enterprises.structures.rooms.get
@@ -70,7 +70,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:executeCommand":
+  /v1/{name}:executeCommand:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -116,7 +116,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - enterprises
-  "/v1/{parent}/devices":
+  /v1/{parent}/devices:
     get:
       description: Lists devices managed by the enterprise.
       operationId: smartdevicemanagement.enterprises.devices.list
@@ -162,7 +162,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/rooms":
+  /v1/{parent}/rooms:
     get:
       description: Lists rooms managed by the enterprise.
       operationId: smartdevicemanagement.enterprises.structures.rooms.list
@@ -203,7 +203,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/structures":
+  /v1/{parent}/structures:
     get:
       description: Lists structures managed by the enterprise.
       operationId: smartdevicemanagement.enterprises.structures.list

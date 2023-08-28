@@ -34,7 +34,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a device.
       operationId: cloudiot.projects.locations.registries.devices.delete
@@ -146,7 +146,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{name}/configVersions":
+  /v1/{name}/configVersions:
     get:
       description: "Lists the last few versions of the device configuration in descending order (i.e.: newest first)."
       operationId: cloudiot.projects.locations.registries.devices.configVersions.list
@@ -192,7 +192,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/states":
+  /v1/{name}/states:
     get:
       description: "Lists the last few versions of the device state in descending order (i.e.: newest first)."
       operationId: cloudiot.projects.locations.registries.devices.states.list
@@ -238,7 +238,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:modifyCloudToDeviceConfig":
+  /v1/{name}:modifyCloudToDeviceConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -284,7 +284,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{name}:sendCommandToDevice":
+  /v1/{name}:sendCommandToDevice:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -330,7 +330,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{parent}/devices":
+  /v1/{parent}/devices:
     get:
       description: List devices in a device registry.
       operationId: cloudiot.projects.locations.registries.groups.devices.list
@@ -456,7 +456,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{parent}/registries":
+  /v1/{parent}/registries:
     get:
       description: Lists device registries.
       operationId: cloudiot.projects.locations.registries.list
@@ -540,7 +540,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{parent}:bindDeviceToGateway":
+  /v1/{parent}:bindDeviceToGateway:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -586,7 +586,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{parent}:unbindDeviceFromGateway":
+  /v1/{parent}:unbindDeviceFromGateway:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -632,7 +632,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -678,7 +678,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -724,7 +724,7 @@ paths:
             - https://www.googleapis.com/auth/cloudiot
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

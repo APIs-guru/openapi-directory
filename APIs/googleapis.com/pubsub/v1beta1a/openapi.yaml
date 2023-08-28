@@ -304,7 +304,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - subscriptions
-  "/v1beta1a/subscriptions/{subscription}":
+  /v1beta1a/subscriptions/{subscription}:
     delete:
       description: Deletes an existing subscription. All pending messages in the subscription are immediately dropped. Calls to Pull after deletion will return NOT_FOUND.
       operationId: pubsub.subscriptions.delete
@@ -527,7 +527,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - topics
-  "/v1beta1a/topics/{topic}":
+  /v1beta1a/topics/{topic}:
     delete:
       description: Deletes the topic with the given name. Returns NOT_FOUND if the topic does not exist. After a topic is deleted, a new topic may be created with the same name.
       operationId: pubsub.topics.delete

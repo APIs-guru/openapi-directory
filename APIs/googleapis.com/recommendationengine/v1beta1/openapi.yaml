@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Unregister an apiKey from using for predict method.
       operationId: recommendationengine.projects.locations.catalogs.eventStores.predictionApiKeyRegistrations.delete
@@ -124,7 +124,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/operations":
+  /v1beta1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: recommendationengine.projects.locations.catalogs.operations.list
@@ -176,7 +176,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:predict":
+  /v1beta1/{name}:predict:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -217,7 +217,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/catalogItems":
+  /v1beta1/{parent}/catalogItems:
     get:
       description: Gets a list of catalog items.
       operationId: recommendationengine.projects.locations.catalogs.catalogItems.list
@@ -298,7 +298,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/catalogItems:import":
+  /v1beta1/{parent}/catalogItems:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -340,7 +340,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/catalogs":
+  /v1beta1/{parent}/catalogs:
     get:
       description: Lists all the catalog configurations associated with the project.
       operationId: recommendationengine.projects.locations.catalogs.list
@@ -387,7 +387,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/predictionApiKeyRegistrations":
+  /v1beta1/{parent}/predictionApiKeyRegistrations:
     get:
       description: List the registered apiKeys for use with predict method.
       operationId: recommendationengine.projects.locations.catalogs.eventStores.predictionApiKeyRegistrations.list
@@ -463,7 +463,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/userEvents":
+  /v1beta1/{parent}/userEvents:
     get:
       description: "Gets a list of user events within a time range, with potential filtering. The method does not list unjoined user events. Unjoined user event definition: when a user event is ingested from Recommendations AI User Event APIs, the catalog item included in the user event is connected with the current catalog. If a catalog item of the ingested event is not in the current catalog, it could lead to degraded model quality. This is called an unjoined event."
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.list
@@ -515,7 +515,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/userEvents:collect":
+  /v1beta1/{parent}/userEvents:collect:
     get:
       description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Recommendations AI JavaScript pixel. Users should not call this method directly.
       operationId: recommendationengine.projects.locations.catalogs.eventStores.userEvents.collect
@@ -567,7 +567,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/userEvents:import":
+  /v1beta1/{parent}/userEvents:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -609,7 +609,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/userEvents:purge":
+  /v1beta1/{parent}/userEvents:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -651,7 +651,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/userEvents:rejoin":
+  /v1beta1/{parent}/userEvents:rejoin:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -693,7 +693,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/userEvents:write":
+  /v1beta1/{parent}/userEvents:write:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

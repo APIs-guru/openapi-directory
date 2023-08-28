@@ -228,7 +228,7 @@ paths:
         usage: "{account_sid: sid}"
         validation_request: "{account_sid: sid}"
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Addresses.json":
+  /2010-04-01/Accounts/{AccountSid}/Addresses.json:
     description: An Address instance resource represents your or your customer's physical location within a country. Around the world, some local authorities require the name and address of the user to be on file with Twilio to purchase and own a phone number.
     get:
       description: ""
@@ -401,7 +401,7 @@ paths:
         dependent_phone_number: "{account_sid: account_sid, address_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Addresses/{AddressSid}/DependentPhoneNumbers.json":
+  /2010-04-01/Accounts/{AccountSid}/Addresses/{AddressSid}/DependentPhoneNumbers.json:
     description: Phone numbers dependent on an Address resource
     get:
       description: ""
@@ -493,7 +493,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/Addresses/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json:
     delete:
       description: ""
       operationId: DeleteAddress
@@ -642,7 +642,7 @@ paths:
         dependent_phone_number: "{account_sid: account_sid, address_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Applications.json":
+  /2010-04-01/Accounts/{AccountSid}/Applications.json:
     description: An Application instance resource represents an application that you have created with Twilio. An application inside of Twilio is just a set of URLs and other configuration data that tells Twilio how to behave when one of your Twilio numbers receives a call or SMS message.
     get:
       description: Retrieve a list of applications representing an application within the requesting account
@@ -858,7 +858,7 @@ paths:
         - date_created
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Applications/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Applications/{Sid}.json:
     delete:
       description: Delete the application by the specified application sid
       operationId: DeleteApplication
@@ -1072,7 +1072,7 @@ paths:
         - date_created
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps.json":
+  /2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps.json:
     description: Authorized Twilio Connect apps
     get:
       description: Retrieve a list of authorized-connect-apps belonging to the account used to make the request
@@ -1154,7 +1154,7 @@ paths:
         - connect_app_friendly_name
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps/{ConnectAppSid}.json":
+  /2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps/{ConnectAppSid}.json:
     description: Authorized Twilio Connect apps
     get:
       description: Fetch an instance of an authorized-connect-app
@@ -1199,7 +1199,7 @@ paths:
         - connect_app_friendly_name
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers.json:
     description: Country codes with available phone numbers
     get:
       description: ""
@@ -1291,7 +1291,7 @@ paths:
         voip: "{account_sid: account_sid, country_code: country_code}"
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json:
     description: Country codes with available phone numbers
     get:
       description: ""
@@ -1344,7 +1344,7 @@ paths:
         voip: "{account_sid: account_sid, country_code: country_code}"
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Local.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Local.json:
     description: Available local phone numbers
     get:
       description: ""
@@ -1525,7 +1525,7 @@ paths:
         - beta
       parent: /Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/MachineToMachine.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/MachineToMachine.json:
     description: Available machine-to-machine phone numbers
     get:
       description: ""
@@ -1706,7 +1706,7 @@ paths:
         - beta
       parent: /Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Mobile.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Mobile.json:
     description: Available mobile phone numbers
     get:
       description: ""
@@ -1887,7 +1887,7 @@ paths:
         - beta
       parent: /Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/National.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/National.json:
     description: Available national phone numbers
     get:
       description: ""
@@ -2068,7 +2068,7 @@ paths:
         - beta
       parent: /Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/SharedCost.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/SharedCost.json:
     description: Available shared cost numbers
     get:
       description: ""
@@ -2249,7 +2249,7 @@ paths:
         - beta
       parent: /Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/TollFree.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/TollFree.json:
     description: Available toll free phone numbers
     get:
       description: ""
@@ -2430,7 +2430,7 @@ paths:
         - beta
       parent: /Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Voip.json":
+  /2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Voip.json:
     description: Available VoIP phone numbers
     get:
       description: ""
@@ -2611,7 +2611,7 @@ paths:
         - beta
       parent: /Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Balance.json":
+  /2010-04-01/Accounts/{AccountSid}/Balance.json:
     description: Account balance
     get:
       description: Fetch the balance for an Account based on Account Sid. Balance changes may not be reflected immediately. Child accounts do not contain balance information
@@ -2648,7 +2648,7 @@ paths:
         - currency
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls.json:
     description: A Call is an object that represents a connection between a telephone and Twilio.
     get:
       description: Retrieves a collection of calls made to and from your account
@@ -3008,7 +3008,7 @@ paths:
         user_defined_message_subscription: "{account_sid: account_sid, call_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary.json:
     description: Call FeedbackSummary resources provide an idea of how your end user's perceive the quality of their calls and the most common issues they have encountered in the context of all your voice traffic during a specific time frame.
     post:
       description: Create a FeedbackSummary resource for a call
@@ -3083,7 +3083,7 @@ paths:
       mountName: feedback_summaries
       parent: /Accounts/{AccountSid}/Calls.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary/{Sid}.json:
     delete:
       description: Delete a FeedbackSummary resource from a call
       operationId: DeleteCallFeedbackSummary
@@ -3162,7 +3162,7 @@ paths:
       mountName: feedback_summaries
       parent: /Accounts/{AccountSid}/Calls.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Events.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Events.json:
     description: API and webhook requests and responses. Contains parameters and TwiML for application control.
     get:
       description: Retrieve a list of all events for a call.
@@ -3253,7 +3253,7 @@ paths:
         - response
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Feedback.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Feedback.json:
     description: The call Feedback subresource describes the quality experienced during a phone call.
     get:
       description: Fetch a Feedback resource from a call
@@ -3347,7 +3347,7 @@ paths:
         - date_created
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications.json:
     description: Error notifications for calls
     get:
       description: ""
@@ -3463,7 +3463,7 @@ paths:
         - message_date
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications/{Sid}.json:
     description: Error notifications for calls
     get:
       description: ""
@@ -3519,7 +3519,7 @@ paths:
         - message_date
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Payments.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Payments.json:
     description: Twilio enabled secure payments solution for accepting credit and ACH payments over the phone.
     post:
       description: create an instance of payments. This will start a new payments session
@@ -3624,7 +3624,7 @@ paths:
         - sid
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Payments/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Payments/{Sid}.json:
     description: Twilio enabled secure payments solution for accepting credit and ACH payments over the phone.
     post:
       description: update an instance of payments with different phases of payment flows.
@@ -3702,7 +3702,7 @@ paths:
         - sid
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings.json:
     description: A Recording resource represents the recording associated with a voice call, conference, or SIP Trunk.
     get:
       description: Retrieve a list of recordings belonging to the call used to make the request
@@ -3885,7 +3885,7 @@ paths:
         - duration
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings/{Sid}.json:
     delete:
       description: Delete a recording from your account
       operationId: DeleteCallRecording
@@ -4039,7 +4039,7 @@ paths:
         - duration
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Siprec.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Siprec.json:
     description: Start and stop forked media streaming using the SIPREC protocol.
     post:
       description: Create a Siprec
@@ -4710,7 +4710,7 @@ paths:
         - name
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Siprec/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Siprec/{Sid}.json:
     description: Start and stop forked media streaming using the SIPREC protocol.
     post:
       description: Stop a Siprec using either the SID of the Siprec resource or the `name` used when creating the resource
@@ -4774,7 +4774,7 @@ paths:
         - name
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Streams.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Streams.json:
     description: Twilio enabled secure payments solution for accepting credit and ACH payments over the phone.
     post:
       description: Create a Stream
@@ -5448,7 +5448,7 @@ paths:
         - name
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Streams/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Streams/{Sid}.json:
     description: Twilio enabled secure payments solution for accepting credit and ACH payments over the phone.
     post:
       description: Stop a Stream using either the SID of the Stream resource or the `name` used when creating the resource
@@ -5512,7 +5512,7 @@ paths:
         - name
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/UserDefinedMessageSubscriptions.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/UserDefinedMessageSubscriptions.json:
     description: Subscription for server-side application access to messages sent from the Voice SDK for an active Call.
     post:
       description: Subscribe to User Defined Messages for a given Call SID.
@@ -5583,7 +5583,7 @@ paths:
         - sid
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/UserDefinedMessageSubscriptions/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/UserDefinedMessageSubscriptions/{Sid}.json:
     delete:
       description: Delete a specific User Defined Message Subscription.
       operationId: DeleteUserDefinedMessageSubscription
@@ -5632,7 +5632,7 @@ paths:
         - sid
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/UserDefinedMessages.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/UserDefinedMessages.json:
     description: Allows your server-side application to send messages to the Voice SDK end user during an active Call.
     post:
       description: Create a new User Defined Message for the given Call SID.
@@ -5691,7 +5691,7 @@ paths:
         - sid
       parent: /Accounts/{AccountSid}/Calls/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json:
     delete:
       description: Delete a Call record from your account. Once the record is deleted, it will no longer appear in the API and Account Portal logs.
       operationId: DeleteCall
@@ -5878,7 +5878,7 @@ paths:
         user_defined_message_subscription: "{account_sid: account_sid, call_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Conferences.json":
+  /2010-04-01/Accounts/{AccountSid}/Conferences.json:
     description: Voice call conferences
     get:
       description: Retrieve a list of conferences belonging to the account used to make the request
@@ -6011,7 +6011,7 @@ paths:
         recording: "{account_sid: account_sid, conference_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants.json":
+  /2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants.json:
     description: Conference participants
     get:
       description: Retrieve a list of participants belonging to the account used to make the request
@@ -6373,7 +6373,7 @@ paths:
         - hold
       parent: /Accounts/{AccountSid}/Conferences/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants/{CallSid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants/{CallSid}.json:
     delete:
       description: Kick a participant from a given conference
       operationId: DeleteParticipant
@@ -6578,7 +6578,7 @@ paths:
         - hold
       parent: /Accounts/{AccountSid}/Conferences/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings.json":
+  /2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings.json:
     description: Recordings of conferences
     get:
       description: Retrieve a list of recordings belonging to the call used to make the request
@@ -6690,7 +6690,7 @@ paths:
         - duration
       parent: /Accounts/{AccountSid}/Conferences/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings/{Sid}.json:
     delete:
       description: Delete a recording from your account
       operationId: DeleteConferenceRecording
@@ -6844,7 +6844,7 @@ paths:
         - duration
       parent: /Accounts/{AccountSid}/Conferences/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Conferences/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Conferences/{Sid}.json:
     description: Voice call conferences
     get:
       description: Fetch an instance of a conference
@@ -6951,7 +6951,7 @@ paths:
         recording: "{account_sid: account_sid, conference_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/ConnectApps.json":
+  /2010-04-01/Accounts/{AccountSid}/ConnectApps.json:
     description: Twilio Connect apps
     get:
       description: Retrieve a list of connect-apps belonging to the account used to make the request
@@ -7033,7 +7033,7 @@ paths:
         - friendly_name
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/ConnectApps/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/ConnectApps/{Sid}.json:
     delete:
       description: Delete an instance of a connect-app
       operationId: DeleteConnectApp
@@ -7189,7 +7189,7 @@ paths:
         - friendly_name
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json:
     description: Incoming phone numbers on a Twilio account/project
     get:
       description: Retrieve a list of incoming-phone-numbers belonging to the account used to make the request.
@@ -7473,7 +7473,7 @@ paths:
         assigned_add_on: "{account_sid: account_sid, resource_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Local.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Local.json:
     description: Incoming local phone numbers on a Twilio account/project
     get:
       description: ""
@@ -7750,7 +7750,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/IncomingPhoneNumbers.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Mobile.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Mobile.json:
     description: Incoming mobile phone numbers on a Twilio account/project
     get:
       description: ""
@@ -8027,7 +8027,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/IncomingPhoneNumbers.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/TollFree.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/TollFree.json:
     description: Incoming toll free phone numbers on a Twilio account/project
     get:
       description: ""
@@ -8304,7 +8304,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/IncomingPhoneNumbers.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns.json:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of Add-on installations currently assigned to this Number.
@@ -8449,7 +8449,7 @@ paths:
         assigned_add_on_extension: "{account_sid: account_sid, resource_sid: resource_sid, assigned_add_on_sid: sid}"
       parent: /Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions.json:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of Extensions for the Assigned Add-on.
@@ -8552,7 +8552,7 @@ paths:
         - product_name
       parent: /Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions/{Sid}.json:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch an instance of an Extension for the Assigned Add-on.
@@ -8618,7 +8618,7 @@ paths:
         - product_name
       parent: /Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{Sid}.json:
     delete:
       description: Remove the assignment of an Add-on installation from the Number specified.
       operationId: DeleteIncomingPhoneNumberAssignedAddOn
@@ -8716,7 +8716,7 @@ paths:
         assigned_add_on_extension: "{account_sid: account_sid, resource_sid: resource_sid, assigned_add_on_sid: sid}"
       parent: /Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json:
     delete:
       description: Delete a phone-numbers belonging to the account used to make the request.
       operationId: DeleteIncomingPhoneNumber
@@ -8977,7 +8977,7 @@ paths:
         assigned_add_on: "{account_sid: account_sid, resource_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Keys.json":
+  /2010-04-01/Accounts/{AccountSid}/Keys.json:
     description: API keys
     get:
       description: ""
@@ -9098,7 +9098,7 @@ paths:
         - date_created
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Keys/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Keys/{Sid}.json:
     delete:
       description: ""
       operationId: DeleteKey
@@ -9220,7 +9220,7 @@ paths:
         - date_created
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Messages.json":
+  /2010-04-01/Accounts/{AccountSid}/Messages.json:
     description: A Message resource represents an inbound or outbound message.
     get:
       description: Retrieve a list of Message resources associated with a Twilio Account
@@ -9472,7 +9472,7 @@ paths:
         media: "{account_sid: account_sid, message_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Feedback.json":
+  /2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Feedback.json:
     description: Customer-provided feedback on delivery confirmation
     post:
       description: ""
@@ -9529,7 +9529,7 @@ paths:
         - date_created
       parent: /Accounts/{AccountSid}/Messages/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media.json":
+  /2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media.json:
     description: The Media resource represents a piece of media, such as an image, that is associated with a Message.
     get:
       description: Read a list of Media resources associated with a specific Message resource
@@ -9639,7 +9639,7 @@ paths:
         - content_type
       parent: /Accounts/{AccountSid}/Messages/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media/{Sid}.json:
     delete:
       description: Delete the Media resource.
       operationId: DeleteMedia
@@ -9734,7 +9734,7 @@ paths:
         - content_type
       parent: /Accounts/{AccountSid}/Messages/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json:
     delete:
       description: Deletes a Message resource from your account
       operationId: DeleteMessage
@@ -9866,7 +9866,7 @@ paths:
         media: "{account_sid: account_sid, message_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Notifications.json":
+  /2010-04-01/Accounts/{AccountSid}/Notifications.json:
     description: "[DEPRECATED] Log entries"
     get:
       description: Retrieve a list of notifications belonging to the account used to make the request
@@ -9973,7 +9973,7 @@ paths:
         - message_date
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Notifications/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Notifications/{Sid}.json:
     description: "[DEPRECATED] Log entries"
     get:
       description: Fetch a notification belonging to the account used to make the request
@@ -10020,7 +10020,7 @@ paths:
         - message_date
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds.json":
+  /2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds.json:
     description: An OutgoingCallerId resource represents a single verified number that may be used as a caller ID when making outgoing calls via the REST API and within the TwiML <Dial> verb.
     get:
       description: Retrieve a list of outgoing-caller-ids belonging to the account used to make the request
@@ -10179,7 +10179,7 @@ paths:
         - friendly_name
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds/{Sid}.json:
     delete:
       description: Delete the caller-id specified from the account
       operationId: DeleteOutgoingCallerId
@@ -10301,7 +10301,7 @@ paths:
         - friendly_name
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Queues.json":
+  /2010-04-01/Accounts/{AccountSid}/Queues.json:
     description: Queues of calls
     get:
       description: Retrieve a list of queues belonging to the account used to make the request
@@ -10428,7 +10428,7 @@ paths:
         member: "{account_sid: account_sid, queue_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members.json":
+  /2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members.json:
     description: Calls in a call queue
     get:
       description: Retrieve the members of the queue
@@ -10521,7 +10521,7 @@ paths:
         - wait_time
       parent: /Accounts/{AccountSid}/Queues/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members/{CallSid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members/{CallSid}.json:
     description: Calls in a call queue
     get:
       description: Fetch a specific member from the queue
@@ -10639,7 +10639,7 @@ paths:
         - wait_time
       parent: /Accounts/{AccountSid}/Queues/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Queues/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Queues/{Sid}.json:
     delete:
       description: Remove an empty queue
       operationId: DeleteQueue
@@ -10767,7 +10767,7 @@ paths:
         member: "{account_sid: account_sid, queue_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Recordings.json":
+  /2010-04-01/Accounts/{AccountSid}/Recordings.json:
     description: Recordings of phone calls
     get:
       description: Retrieve a list of recordings belonging to the account used to make the request
@@ -10894,7 +10894,7 @@ paths:
         transcription: "{account_sid: account_sid, recording_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions.json":
+  /2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions.json:
     description: References to text transcriptions of call recordings
     get:
       description: ""
@@ -10987,7 +10987,7 @@ paths:
         - duration
       parent: /Accounts/{AccountSid}/Recordings/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions/{Sid}.json:
     delete:
       description: ""
       operationId: DeleteRecordingTranscription
@@ -11083,7 +11083,7 @@ paths:
         - duration
       parent: /Accounts/{AccountSid}/Recordings/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults.json":
+  /2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults.json:
     description: The results of an Add-on API call
     get:
       description: Retrieve a list of results belonging to the recording
@@ -11178,7 +11178,7 @@ paths:
         payload: "{account_sid: account_sid, reference_sid: reference_sid, add_on_result_sid: sid}"
       parent: /Accounts/{AccountSid}/Recordings/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads.json":
+  /2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads.json:
     description: A single Add-on results' payload
     get:
       description: Retrieve a list of payloads belonging to the AddOnResult
@@ -11281,7 +11281,7 @@ paths:
         api/v2010/recording_add_on_result_payload_data: "{account_sid: account_sid, reference_sid: reference_sid, add_on_result_sid: add_on_result_sid, payload_sid: sid}"
       parent: /Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads/{Sid}.json:
     delete:
       description: Delete a payload from the result along with all associated Data
       operationId: DeleteRecordingAddOnResultPayload
@@ -11396,7 +11396,7 @@ paths:
         api/v2010/recording_add_on_result_payload_data: "{account_sid: account_sid, reference_sid: reference_sid, add_on_result_sid: add_on_result_sid, payload_sid: sid}"
       parent: /Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{Sid}.json:
     delete:
       description: Delete a result and purge all associated Payloads
       operationId: DeleteRecordingAddOnResult
@@ -11494,7 +11494,7 @@ paths:
         payload: "{account_sid: account_sid, reference_sid: reference_sid, add_on_result_sid: sid}"
       parent: /Accounts/{AccountSid}/Recordings/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Recordings/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Recordings/{Sid}.json:
     delete:
       description: Delete a recording from your account
       operationId: DeleteRecording
@@ -11581,7 +11581,7 @@ paths:
         transcription: "{account_sid: account_sid, recording_sid: sid}"
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP.json:
     description: "TODO: Resource-level docs"
     servers:
       - url: https://api.twilio.com
@@ -11589,7 +11589,7 @@ paths:
       defaultOutputProperties: []
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists.json:
     description: Lists of SIP credentials
     get:
       description: Get All Credential Lists
@@ -11711,7 +11711,7 @@ paths:
         credential: "{account_sid: account_sid, credential_list_sid: sid}"
       parent: /Accounts/{AccountSid}/SIP.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials.json:
     description: Username and password information for SIP Domains
     get:
       description: Retrieve a list of credentials.
@@ -11854,7 +11854,7 @@ paths:
         - credential_list_sid
       parent: /Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials/{Sid}.json:
     delete:
       description: Delete a credential resource.
       operationId: DeleteSipCredential
@@ -12003,7 +12003,7 @@ paths:
         - credential_list_sid
       parent: /Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json:
     delete:
       description: Delete a Credential List
       operationId: DeleteSipCredentialList
@@ -12128,7 +12128,7 @@ paths:
         credential: "{account_sid: account_sid, credential_list_sid: sid}"
       parent: /Accounts/{AccountSid}/SIP.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains.json:
     description: Custom DNS hostnames that can accept SIP traffic
     get:
       description: Retrieve a list of domains belonging to the account used to make the request
@@ -12322,7 +12322,7 @@ paths:
         ip_access_control_list_mapping: "{account_sid: account_sid, domain_sid: sid}"
       parent: /Accounts/{AccountSid}/SIP.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth.json:
     description: "TODO: Resource-level docs"
     servers:
       - url: https://api.twilio.com
@@ -12331,7 +12331,7 @@ paths:
       defaultOutputProperties: []
       parent: /Accounts/{AccountSid}/SIP/Domains/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls.json:
     description: "TODO: Resource-level docs"
     servers:
       - url: https://api.twilio.com
@@ -12340,7 +12340,7 @@ paths:
       defaultOutputProperties: []
       parent: /Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings.json:
     description: Credential lists for SIP calls
     get:
       description: Retrieve a list of credential list mappings belonging to the domain used in the request
@@ -12482,7 +12482,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings/{Sid}.json:
     delete:
       description: Delete a credential list mapping from the requested domain
       operationId: DeleteSipAuthCallsCredentialListMapping
@@ -12577,7 +12577,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings.json:
     description: IP address lists for SIP calls
     get:
       description: Retrieve a list of IP Access Control List mappings belonging to the domain used in the request
@@ -12719,7 +12719,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings/{Sid}.json:
     delete:
       description: Delete an IP Access Control List mapping from the requested domain
       operationId: DeleteSipAuthCallsIpAccessControlListMapping
@@ -12814,7 +12814,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations.json:
     description: "TODO: Resource-level docs"
     servers:
       - url: https://api.twilio.com
@@ -12823,7 +12823,7 @@ paths:
       defaultOutputProperties: []
       parent: /Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings.json:
     description: Credential lists for SIP registrations
     get:
       description: Retrieve a list of credential list mappings belonging to the domain used in the request
@@ -12965,7 +12965,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings/{Sid}.json:
     delete:
       description: Delete a credential list mapping from the requested domain
       operationId: DeleteSipAuthRegistrationsCredentialListMapping
@@ -13060,7 +13060,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings.json:
     description: Credential lists associated with a SIP Domain
     get:
       description: Read multiple CredentialListMapping resources from an account.
@@ -13201,7 +13201,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings/{Sid}.json:
     delete:
       description: Delete a CredentialListMapping resource from an account.
       operationId: DeleteSipCredentialListMapping
@@ -13295,7 +13295,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings.json:
     description: Access control lists associated with a SIP Domain
     get:
       description: Retrieve a list of IpAccessControlListMapping resources.
@@ -13436,7 +13436,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings/{Sid}.json:
     delete:
       description: Delete an IpAccessControlListMapping resource.
       operationId: DeleteSipIpAccessControlListMapping
@@ -13530,7 +13530,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/Domains/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/Domains/{Sid}.json:
     delete:
       description: Delete an instance of a Domain
       operationId: DeleteSipDomain
@@ -13725,7 +13725,7 @@ paths:
         ip_access_control_list_mapping: "{account_sid: account_sid, domain_sid: sid}"
       parent: /Accounts/{AccountSid}/SIP.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists.json:
     description: Access control lists of IP address resources
     get:
       description: Retrieve a list of IpAccessControlLists that belong to the account used to make the request
@@ -13847,7 +13847,7 @@ paths:
         ip_address: "{account_sid: account_sid, ip_access_control_list_sid: sid}"
       parent: /Accounts/{AccountSid}/SIP.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses.json:
     description: IP addresses that have access to a SIP Domain
     get:
       description: Read multiple IpAddress resources.
@@ -13993,7 +13993,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses/{Sid}.json:
     delete:
       description: Delete an IpAddress resource.
       operationId: DeleteSipIpAddress
@@ -14148,7 +14148,7 @@ paths:
         - friendly_name
       parent: /Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json:
     delete:
       description: Delete an IpAccessControlList from the requested account
       operationId: DeleteSipIpAccessControlList
@@ -14273,7 +14273,7 @@ paths:
         ip_address: "{account_sid: account_sid, ip_access_control_list_sid: sid}"
       parent: /Accounts/{AccountSid}/SIP.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes.json":
+  /2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes.json:
     description: Messaging short codes
     get:
       description: Retrieve a list of short-codes belonging to the account used to make the request
@@ -14366,7 +14366,7 @@ paths:
         - friendly_name
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes/{Sid}.json:
     description: Messaging short codes
     get:
       description: Fetch an instance of a short code
@@ -14490,7 +14490,7 @@ paths:
         - friendly_name
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/SigningKeys.json":
+  /2010-04-01/Accounts/{AccountSid}/SigningKeys.json:
     description: Create a new signing key
     get:
       description: ""
@@ -14611,7 +14611,7 @@ paths:
         - secret
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/SigningKeys/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/SigningKeys/{Sid}.json:
     delete:
       description: ""
       operationId: DeleteSigningKey
@@ -14732,7 +14732,7 @@ paths:
         - friendly_name
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Tokens.json":
+  /2010-04-01/Accounts/{AccountSid}/Tokens.json:
     description: Credentials for ICE servers
     post:
       description: Create a new token for ICE servers
@@ -14778,7 +14778,7 @@ paths:
         - ice_servers
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Transcriptions.json":
+  /2010-04-01/Accounts/{AccountSid}/Transcriptions.json:
     description: Text transcriptions of call recordings
     get:
       description: Retrieve a list of transcriptions belonging to the account used to make the request
@@ -14862,7 +14862,7 @@ paths:
         - duration
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Transcriptions/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Transcriptions/{Sid}.json:
     delete:
       description: Delete a transcription from the account used to make the request
       operationId: DeleteTranscription
@@ -14940,7 +14940,7 @@ paths:
         - duration
       parent: /Accounts/{Sid}.json
       pathType: instance
-  "/2010-04-01/Accounts/{AccountSid}/Usage.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage.json:
     description: "TODO: Resource-level docs"
     servers:
       - url: https://api.twilio.com
@@ -14948,7 +14948,7 @@ paths:
       defaultOutputProperties: []
       parent: /Accounts/{Sid}.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records.json:
     description: Twilio account usage records
     get:
       description: Retrieve a list of usage-records belonging to the account used to make the request
@@ -15056,7 +15056,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records/AllTime.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records/AllTime.json:
     description: Usage records for all time
     get:
       description: ""
@@ -15164,7 +15164,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage/Records.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Daily.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records/Daily.json:
     description: Usage records summarized by day
     get:
       description: ""
@@ -15272,7 +15272,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage/Records.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records/LastMonth.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records/LastMonth.json:
     description: Usage records for last month
     get:
       description: ""
@@ -15380,7 +15380,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage/Records.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Monthly.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records/Monthly.json:
     description: Usage records summarized by month
     get:
       description: ""
@@ -15488,7 +15488,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage/Records.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records/ThisMonth.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records/ThisMonth.json:
     description: Usage records for this month
     get:
       description: ""
@@ -15596,7 +15596,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage/Records.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Today.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records/Today.json:
     description: Usage records for today
     get:
       description: ""
@@ -15704,7 +15704,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage/Records.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Yearly.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records/Yearly.json:
     description: Usage records summarized by year
     get:
       description: ""
@@ -15812,7 +15812,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage/Records.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Yesterday.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Records/Yesterday.json:
     description: Usage records for yesterday
     get:
       description: ""
@@ -15920,7 +15920,7 @@ paths:
         - count_unit
       parent: /Accounts/{AccountSid}/Usage/Records.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Triggers.json:
     description: Webhooks that notify you of usage thresholds
     get:
       description: Retrieve a list of usage-triggers belonging to the account used to make the request
@@ -16092,7 +16092,7 @@ paths:
         - trigger_by
       parent: /Accounts/{AccountSid}/Usage.json
       pathType: list
-  "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers/{Sid}.json":
+  /2010-04-01/Accounts/{AccountSid}/Usage/Triggers/{Sid}.json:
     delete:
       description: ""
       operationId: DeleteUsageTrigger
@@ -16230,7 +16230,7 @@ paths:
         - trigger_by
       parent: /Accounts/{AccountSid}/Usage.json
       pathType: instance
-  "/2010-04-01/Accounts/{Sid}.json":
+  /2010-04-01/Accounts/{Sid}.json:
     description: Twilio accounts (aka Project) or subaccounts
     get:
       description: Fetch the account specified by the provided Account Sid

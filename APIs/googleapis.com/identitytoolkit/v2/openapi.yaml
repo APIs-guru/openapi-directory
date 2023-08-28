@@ -380,7 +380,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Delete an Oidc Idp configuration for an Identity Toolkit project.
       operationId: identitytoolkit.projects.tenants.oauthIdpConfigs.delete
@@ -487,7 +487,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v2/{parent}/defaultSupportedIdpConfigs":
+  /v2/{parent}/defaultSupportedIdpConfigs:
     get:
       description: List all default supported Idp configurations for an Identity Toolkit project.
       operationId: identitytoolkit.projects.tenants.defaultSupportedIdpConfigs.list
@@ -576,7 +576,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v2/{parent}/inboundSamlConfigs":
+  /v2/{parent}/inboundSamlConfigs:
     get:
       description: List all inbound SAML configurations for an Identity Toolkit project.
       operationId: identitytoolkit.projects.tenants.inboundSamlConfigs.list
@@ -665,7 +665,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v2/{parent}/oauthIdpConfigs":
+  /v2/{parent}/oauthIdpConfigs:
     get:
       description: List all Oidc Idp configurations for an Identity Toolkit project.
       operationId: identitytoolkit.projects.tenants.oauthIdpConfigs.list
@@ -754,7 +754,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v2/{parent}/tenants":
+  /v2/{parent}/tenants:
     get:
       description: List tenants under the given agent project. Requires read permission on the Agent project.
       operationId: identitytoolkit.projects.tenants.list
@@ -838,7 +838,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v2/{project}/identityPlatform:initializeAuth":
+  /v2/{project}/identityPlatform:initializeAuth:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -880,7 +880,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{resource}:getIamPolicy":
+  /v2/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -926,7 +926,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v2/{resource}:setIamPolicy":
+  /v2/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -972,7 +972,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v2/{resource}:testIamPermissions":
+  /v2/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

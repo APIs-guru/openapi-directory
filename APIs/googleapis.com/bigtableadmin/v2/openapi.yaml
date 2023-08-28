@@ -32,7 +32,7 @@ tags:
   - name: operations
   - name: projects
 paths:
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Permanently deletes a specified table and all of its data.
       operationId: bigtableadmin.projects.instances.tables.delete
@@ -258,7 +258,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}/locations":
+  /v2/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: bigtableadmin.projects.locations.list
@@ -334,7 +334,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}/operations":
+  /v2/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: bigtableadmin.operations.projects.operations.list
@@ -410,7 +410,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}:cancel":
+  /v2/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -467,7 +467,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
-  "/v2/{name}:checkConsistency":
+  /v2/{name}:checkConsistency:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -525,7 +525,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:dropRowRange":
+  /v2/{name}:dropRowRange:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -583,7 +583,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:generateConsistencyToken":
+  /v2/{name}:generateConsistencyToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -641,7 +641,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:modifyColumnFamilies":
+  /v2/{name}:modifyColumnFamilies:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -699,7 +699,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:undelete":
+  /v2/{name}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -757,7 +757,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/appProfiles":
+  /v2/{parent}/appProfiles:
     get:
       description: Lists information about app profiles in an instance.
       operationId: bigtableadmin.projects.instances.appProfiles.list
@@ -883,7 +883,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/backups":
+  /v2/{parent}/backups:
     get:
       description: Lists Cloud Bigtable backups. Returns both completed and pending backups.
       operationId: bigtableadmin.projects.instances.clusters.backups.list
@@ -1006,7 +1006,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/backups:copy":
+  /v2/{parent}/backups:copy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1064,7 +1064,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/clusters":
+  /v2/{parent}/clusters:
     get:
       description: Lists information about clusters in an instance.
       operationId: bigtableadmin.projects.instances.clusters.list
@@ -1184,7 +1184,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/hotTablets":
+  /v2/{parent}/hotTablets:
     get:
       description: Lists hot tablets in a cluster, within the time range provided. Hot tablets are ordered based on CPU usage.
       operationId: bigtableadmin.projects.instances.clusters.hotTablets.list
@@ -1261,7 +1261,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/instances":
+  /v2/{parent}/instances:
     get:
       description: Lists information about instances in a project.
       operationId: bigtableadmin.projects.instances.list
@@ -1376,7 +1376,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/tables":
+  /v2/{parent}/tables:
     get:
       description: Lists all tables served from a specified instance.
       operationId: bigtableadmin.projects.instances.tables.list
@@ -1501,7 +1501,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/tables:restore":
+  /v2/{parent}/tables:restore:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1559,7 +1559,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{resource}:getIamPolicy":
+  /v2/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1621,7 +1621,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{resource}:setIamPolicy":
+  /v2/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1683,7 +1683,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{resource}:testIamPermissions":
+  /v2/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

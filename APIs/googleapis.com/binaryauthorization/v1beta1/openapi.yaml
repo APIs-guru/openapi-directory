@@ -33,7 +33,7 @@ tags:
   - name: projects
   - name: systempolicy
 paths:
-  "/v1beta1/{attestor}:validateAttestationOccurrence":
+  /v1beta1/{attestor}:validateAttestationOccurrence:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -75,7 +75,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes an attestor. Returns NOT_FOUND if the attestor does not exist.
       operationId: binaryauthorization.projects.attestors.delete
@@ -165,7 +165,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/attestors":
+  /v1beta1/{parent}/attestors:
     get:
       description: Lists attestors. Returns INVALID_ARGUMENT if the project does not exist.
       operationId: binaryauthorization.projects.attestors.list
@@ -246,7 +246,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: binaryauthorization.projects.policy.getIamPolicy
@@ -288,7 +288,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -330,7 +330,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a single TlsRoute.
       operationId: networkservices.projects.locations.tlsRoutes.delete
@@ -125,7 +125,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  /v1beta1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: networkservices.projects.locations.list
@@ -177,7 +177,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}/operations":
+  /v1beta1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: networkservices.projects.locations.operations.list
@@ -229,7 +229,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:cancel":
+  /v1beta1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -271,7 +271,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/endpointPolicies":
+  /v1beta1/{parent}/endpointPolicies:
     get:
       description: Lists EndpointPolicies in a given project and location.
       operationId: networkservices.projects.locations.endpointPolicies.list
@@ -352,7 +352,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/gateways":
+  /v1beta1/{parent}/gateways:
     get:
       description: Lists Gateways in a given project and location.
       operationId: networkservices.projects.locations.gateways.list
@@ -433,7 +433,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/grpcRoutes":
+  /v1beta1/{parent}/grpcRoutes:
     get:
       description: Lists GrpcRoutes in a given project and location.
       operationId: networkservices.projects.locations.grpcRoutes.list
@@ -514,7 +514,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/httpRoutes":
+  /v1beta1/{parent}/httpRoutes:
     get:
       description: Lists HttpRoute in a given project and location.
       operationId: networkservices.projects.locations.httpRoutes.list
@@ -595,7 +595,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/meshes":
+  /v1beta1/{parent}/meshes:
     get:
       description: Lists Meshes in a given project and location.
       operationId: networkservices.projects.locations.meshes.list
@@ -676,7 +676,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/serviceBindings":
+  /v1beta1/{parent}/serviceBindings:
     get:
       description: Lists ServiceBinding in a given project and location.
       operationId: networkservices.projects.locations.serviceBindings.list
@@ -757,7 +757,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/serviceLbPolicies":
+  /v1beta1/{parent}/serviceLbPolicies:
     get:
       description: Lists ServiceLbPolicies in a given project and location.
       operationId: networkservices.projects.locations.serviceLbPolicies.list
@@ -838,7 +838,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/tcpRoutes":
+  /v1beta1/{parent}/tcpRoutes:
     get:
       description: Lists TcpRoute in a given project and location.
       operationId: networkservices.projects.locations.tcpRoutes.list
@@ -919,7 +919,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/tlsRoutes":
+  /v1beta1/{parent}/tlsRoutes:
     get:
       description: Lists TlsRoute in a given project and location.
       operationId: networkservices.projects.locations.tlsRoutes.list
@@ -1000,7 +1000,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: networkservices.projects.locations.serviceLbPolicies.getIamPolicy
@@ -1042,7 +1042,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1084,7 +1084,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

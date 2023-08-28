@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a version and all of its content. The returned operation will complete once the version has been deleted.
       operationId: artifactregistry.projects.locations.repositories.packages.versions.delete
@@ -145,7 +145,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  /v1beta1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: artifactregistry.projects.locations.list
@@ -201,7 +201,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/files":
+  /v1beta1/{parent}/files:
     get:
       description: Lists files.
       operationId: artifactregistry.projects.locations.repositories.files.list
@@ -257,7 +257,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/packages":
+  /v1beta1/{parent}/packages:
     get:
       description: Lists packages.
       operationId: artifactregistry.projects.locations.repositories.packages.list
@@ -308,7 +308,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/repositories":
+  /v1beta1/{parent}/repositories:
     get:
       description: Lists repositories.
       operationId: artifactregistry.projects.locations.repositories.list
@@ -393,7 +393,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/tags":
+  /v1beta1/{parent}/tags:
     get:
       description: Lists tags.
       operationId: artifactregistry.projects.locations.repositories.packages.tags.list
@@ -483,7 +483,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/versions":
+  /v1beta1/{parent}/versions:
     get:
       description: Lists versions.
       operationId: artifactregistry.projects.locations.repositories.packages.versions.list
@@ -548,7 +548,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     get:
       description: Gets the IAM policy for a given resource.
       operationId: artifactregistry.projects.locations.repositories.getIamPolicy
@@ -594,7 +594,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -636,7 +636,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

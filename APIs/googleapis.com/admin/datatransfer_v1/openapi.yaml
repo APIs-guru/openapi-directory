@@ -85,7 +85,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/admin/datatransfer/v1/applications/{applicationId}":
+  /admin/datatransfer/v1/applications/{applicationId}:
     get:
       description: Retrieves information about an application for the given application ID.
       operationId: datatransfer.applications.get
@@ -215,7 +215,7 @@ paths:
             - https://www.googleapis.com/auth/admin.datatransfer
       tags:
         - transfers
-  "/admin/datatransfer/v1/transfers/{dataTransferId}":
+  /admin/datatransfer/v1/transfers/{dataTransferId}:
     get:
       description: Retrieves a data transfer request by its resource ID.
       operationId: datatransfer.transfers.get

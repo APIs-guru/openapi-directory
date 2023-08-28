@@ -28,7 +28,7 @@ security:
   - apiKey: []
     apiSecret: []
 paths:
-  "/advanced/async/{format}":
+  /advanced/async/{format}:
     get:
       description: |
         Provides [advanced number insight](/number-insight/overview#basic-standard-and-advanced-apis) number information **asynchronously** using the URL specified in the `callback` parameter.  recommends asynchronous use of the Number Insight Advanced API, to avoid timeouts.
@@ -55,7 +55,7 @@ paths:
       summary: Advanced Number Insight (async)
     parameters:
       - $ref: "#/components/parameters/format"
-  "/advanced/{format}":
+  /advanced/{format}:
     get:
       description: |
         Provides [advanced number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number synchronously, in the same way that the basic and standard endpoints do.
@@ -85,7 +85,7 @@ paths:
       summary: Advanced Number Insight (sync)
     parameters:
       - $ref: "#/components/parameters/format"
-  "/basic/{format}":
+  /basic/{format}:
     get:
       description: |
         Provides [basic number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number.
@@ -108,7 +108,7 @@ paths:
       summary: Basic Number Insight
     parameters:
       - $ref: "#/components/parameters/format"
-  "/standard/{format}":
+  /standard/{format}:
     get:
       description: |
         Provides [standard number insight](/number-insight/overview#basic-standard-and-advanced-apis) information about a number.

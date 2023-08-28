@@ -113,7 +113,7 @@ paths:
         content/v1/approval_create: "{sid: sid}"
       mountName: contents
       pathType: list
-  "/v1/Content/{Sid}":
+  /v1/Content/{Sid}:
     delete:
       description: Deletes a Content resource
       operationId: DeleteContent
@@ -180,7 +180,7 @@ paths:
         content/v1/approval_create: "{sid: sid}"
       mountName: contents
       pathType: instance
-  "/v1/Content/{Sid}/ApprovalRequests":
+  /v1/Content/{Sid}/ApprovalRequests:
     description: An Approval Fetch resource represents the approval status of a Content resource.
     get:
       description: Fetch a Content resource's approval status by its unique Content Sid

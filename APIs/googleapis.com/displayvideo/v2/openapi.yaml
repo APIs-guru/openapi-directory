@@ -46,7 +46,7 @@ tags:
   - name: targetingTypes
   - name: users
 paths:
-  "/download/{resourceName}":
+  /download/{resourceName}:
     get:
       description: "Downloads media. Download is supported on the URI `/download/{resource_name=**}?alt=media.` **Note**: Download requests will not be successful without including `alt=media` query string."
       operationId: displayvideo.media.download
@@ -87,7 +87,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/media/{resourceName}":
+  /media/{resourceName}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -211,7 +211,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}":
+  /v2/advertisers/{advertiserId}:
     delete:
       description: Deletes an advertiser. Deleting an advertiser will delete all of its child resources, for example, campaigns, insertion orders and line items. A deleted advertiser cannot be recovered.
       operationId: displayvideo.advertisers.delete
@@ -306,7 +306,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/assets":
+  /v2/advertisers/{advertiserId}/assets:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -348,7 +348,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/campaigns":
+  /v2/advertisers/{advertiserId}/campaigns:
     get:
       description: Lists campaigns in an advertiser. The order is defined by the order_by parameter. If a filter by entity_status is not specified, campaigns with `ENTITY_STATUS_ARCHIVED` will not be included in the results.
       operationId: displayvideo.advertisers.campaigns.list
@@ -442,7 +442,7 @@ paths:
             - https://www.googleapis.com/auth/display-video-mediaplanning
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/campaigns/{campaignId}":
+  /v2/advertisers/{advertiserId}/campaigns/{campaignId}:
     delete:
       description: Permanently deletes a campaign. A deleted campaign cannot be recovered. The campaign should be archived first, i.e. set entity_status to `ENTITY_STATUS_ARCHIVED`, to be able to delete it.
       operationId: displayvideo.advertisers.campaigns.delete
@@ -567,7 +567,7 @@ paths:
             - https://www.googleapis.com/auth/display-video-mediaplanning
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/campaigns/{campaignId}/targetingTypes/{targetingType}/assignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/campaigns/{campaignId}/targetingTypes/{targetingType}/assignedTargetingOptions:
     get:
       description: Lists the targeting options assigned to a campaign for a specified targeting type.
       operationId: displayvideo.advertisers.campaigns.targetingTypes.assignedTargetingOptions.list
@@ -686,7 +686,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/campaigns/{campaignId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+  /v2/advertisers/{advertiserId}/campaigns/{campaignId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}:
     get:
       description: Gets a single targeting option assigned to a campaign.
       operationId: displayvideo.advertisers.campaigns.targetingTypes.assignedTargetingOptions.get
@@ -791,7 +791,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/campaigns/{campaignId}:listAssignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/campaigns/{campaignId}:listAssignedTargetingOptions:
     get:
       description: Lists assigned targeting options of a campaign across targeting types.
       operationId: displayvideo.advertisers.campaigns.listAssignedTargetingOptions
@@ -854,7 +854,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/channels":
+  /v2/advertisers/{advertiserId}/channels:
     get:
       description: Lists channels for a partner or advertiser.
       operationId: displayvideo.advertisers.channels.list
@@ -950,7 +950,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/channels/{channelId}":
+  /v2/advertisers/{advertiserId}/channels/{channelId}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1008,7 +1008,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/channels/{channelId}/sites":
+  /v2/advertisers/{advertiserId}/channels/{channelId}/sites:
     get:
       description: Lists sites in a channel.
       operationId: displayvideo.advertisers.channels.sites.list
@@ -1076,7 +1076,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/channels/{channelId}/sites/{urlOrAppId}":
+  /v2/advertisers/{advertiserId}/channels/{channelId}/sites/{urlOrAppId}:
     delete:
       description: Deletes a site from a channel.
       operationId: displayvideo.advertisers.channels.sites.delete
@@ -1130,7 +1130,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/channels/{channelId}/sites:bulkEdit":
+  /v2/advertisers/{advertiserId}/channels/{channelId}/sites:bulkEdit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1178,7 +1178,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/channels/{channelId}/sites:replace":
+  /v2/advertisers/{advertiserId}/channels/{channelId}/sites:replace:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1226,7 +1226,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/creatives":
+  /v2/advertisers/{advertiserId}/creatives:
     get:
       description: Lists creatives in an advertiser. The order is defined by the order_by parameter. If a filter by entity_status is not specified, creatives with `ENTITY_STATUS_ARCHIVED` will not be included in the results.
       operationId: displayvideo.advertisers.creatives.list
@@ -1312,7 +1312,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/creatives/{creativeId}":
+  /v2/advertisers/{advertiserId}/creatives/{creativeId}:
     delete:
       description: Deletes a creative. Returns error code `NOT_FOUND` if the creative does not exist. The creative should be archived first, i.e. set entity_status to `ENTITY_STATUS_ARCHIVED`, before it can be deleted.
       operationId: displayvideo.advertisers.creatives.delete
@@ -1425,7 +1425,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/insertionOrders":
+  /v2/advertisers/{advertiserId}/insertionOrders:
     get:
       description: Lists insertion orders in an advertiser. The order is defined by the order_by parameter. If a filter by entity_status is not specified, insertion orders with `ENTITY_STATUS_ARCHIVED` will not be included in the results.
       operationId: displayvideo.advertisers.insertionOrders.list
@@ -1511,7 +1511,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}":
+  /v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}:
     delete:
       description: Deletes an insertion order. Returns error code `NOT_FOUND` if the insertion order does not exist. The insertion order should be archived first, i.e. set entity_status to `ENTITY_STATUS_ARCHIVED`, to be able to delete it.
       operationId: displayvideo.advertisers.insertionOrders.delete
@@ -1624,7 +1624,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}/targetingTypes/{targetingType}/assignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}/targetingTypes/{targetingType}/assignedTargetingOptions:
     get:
       description: Lists the targeting options assigned to an insertion order.
       operationId: displayvideo.advertisers.insertionOrders.targetingTypes.assignedTargetingOptions.list
@@ -1834,7 +1834,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+  /v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}:
     delete:
       description: "Deletes an assigned targeting option from an insertion order. Supported targeting types: * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_BROWSER` * `TARGETING_TYPE_CATEGORY` * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DEVICE_MAKE_MODEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_KEYWORD` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_NEGATIVE_KEYWORD_LIST` * `TARGETING_TYPE_OPERATING_SYSTEM` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_VIEWABILITY`"
       operationId: displayvideo.advertisers.insertionOrders.targetingTypes.assignedTargetingOptions.delete
@@ -2031,7 +2031,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}:listAssignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}:listAssignedTargetingOptions:
     get:
       description: Lists assigned targeting options of an insertion order across targeting types.
       operationId: displayvideo.advertisers.insertionOrders.listAssignedTargetingOptions
@@ -2094,7 +2094,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/invoices":
+  /v2/advertisers/{advertiserId}/invoices:
     get:
       description: Lists invoices posted for an advertiser in a given month. Invoices generated by billing profiles with a "Partner" invoice level are not retrievable through this method.
       operationId: displayvideo.advertisers.invoices.list
@@ -2159,7 +2159,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/invoices:lookupInvoiceCurrency":
+  /v2/advertisers/{advertiserId}/invoices:lookupInvoiceCurrency:
     get:
       description: Retrieves the invoice currency used by an advertiser in a given month.
       operationId: displayvideo.advertisers.invoices.lookupInvoiceCurrency
@@ -2205,7 +2205,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/lineItems":
+  /v2/advertisers/{advertiserId}/lineItems:
     get:
       description: Lists line items in an advertiser. The order is defined by the order_by parameter. If a filter by entity_status is not specified, line items with `ENTITY_STATUS_ARCHIVED` will not be included in the results.
       operationId: displayvideo.advertisers.lineItems.list
@@ -2291,7 +2291,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/lineItems/{lineItemId}":
+  /v2/advertisers/{advertiserId}/lineItems/{lineItemId}:
     delete:
       description: Deletes a line item. Returns error code `NOT_FOUND` if the line item does not exist. The line item should be archived first, i.e. set entity_status to `ENTITY_STATUS_ARCHIVED`, to be able to delete it.
       operationId: displayvideo.advertisers.lineItems.delete
@@ -2404,7 +2404,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/lineItems/{lineItemId}/targetingTypes/{targetingType}/assignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/lineItems/{lineItemId}/targetingTypes/{targetingType}/assignedTargetingOptions:
     get:
       description: Lists the targeting options assigned to a line item.
       operationId: displayvideo.advertisers.lineItems.targetingTypes.assignedTargetingOptions.list
@@ -2614,7 +2614,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/lineItems/{lineItemId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+  /v2/advertisers/{advertiserId}/lineItems/{lineItemId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}:
     delete:
       description: "Deletes an assigned targeting option from a line item. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * BulkUpdate * UpdateLineItem * CreateLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.targetingTypes.assignedTargetingOptions.delete
@@ -2811,7 +2811,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/lineItems/{lineItemId}:duplicate":
+  /v2/advertisers/{advertiserId}/lineItems/{lineItemId}:duplicate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2859,7 +2859,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/lineItems:bulkEditAssignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/lineItems:bulkEditAssignedTargetingOptions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2901,7 +2901,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/lineItems:bulkListAssignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/lineItems:bulkListAssignedTargetingOptions:
     get:
       description: Lists assigned targeting options for multiple line items across targeting types.
       operationId: displayvideo.advertisers.lineItems.bulkListAssignedTargetingOptions
@@ -2967,7 +2967,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/lineItems:bulkUpdate":
+  /v2/advertisers/{advertiserId}/lineItems:bulkUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3009,7 +3009,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/lineItems:generateDefault":
+  /v2/advertisers/{advertiserId}/lineItems:generateDefault:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3051,7 +3051,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/locationLists":
+  /v2/advertisers/{advertiserId}/locationLists:
     get:
       description: Lists location lists based on a given advertiser id.
       operationId: displayvideo.advertisers.locationLists.list
@@ -3137,7 +3137,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/locationLists/{locationListId}":
+  /v2/advertisers/{advertiserId}/locationLists/{locationListId}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3190,7 +3190,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations":
+  /v2/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations:
     get:
       description: Lists locations assigned to a location list.
       operationId: displayvideo.advertisers.locationLists.assignedLocations.list
@@ -3288,7 +3288,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations/{assignedLocationId}":
+  /v2/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations/{assignedLocationId}:
     delete:
       description: Deletes the assignment between a location and a location list.
       operationId: displayvideo.advertisers.locationLists.assignedLocations.delete
@@ -3337,7 +3337,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations:bulkEdit":
+  /v2/advertisers/{advertiserId}/locationLists/{locationListId}/assignedLocations:bulkEdit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3385,7 +3385,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/manualTriggers":
+  /v2/advertisers/{advertiserId}/manualTriggers:
     get:
       description: Lists manual triggers that are accessible to the current user for a given advertiser ID. The order is defined by the order_by parameter. A single advertiser_id is required. **Warning:** Line Items using manual triggers no longer serve in Display & Video 360. This method will sunset on August 1, 2023. Read our [feature deprecation announcement](/display-video/api/deprecations#features.manual_triggers) for more information.
       operationId: displayvideo.advertisers.manualTriggers.list
@@ -3471,7 +3471,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/manualTriggers/{triggerId}":
+  /v2/advertisers/{advertiserId}/manualTriggers/{triggerId}:
     get:
       description: Gets a manual trigger. **Warning:** Line Items using manual triggers no longer serve in Display & Video 360. This method will sunset on August 1, 2023. Read our [feature deprecation announcement](/display-video/api/deprecations#features.manual_triggers) for more information.
       operationId: displayvideo.advertisers.manualTriggers.get
@@ -3554,7 +3554,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/manualTriggers/{triggerId}:activate":
+  /v2/advertisers/{advertiserId}/manualTriggers/{triggerId}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3602,7 +3602,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/manualTriggers/{triggerId}:deactivate":
+  /v2/advertisers/{advertiserId}/manualTriggers/{triggerId}:deactivate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3650,7 +3650,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/negativeKeywordLists":
+  /v2/advertisers/{advertiserId}/negativeKeywordLists:
     get:
       description: Lists negative keyword lists based on a given advertiser id.
       operationId: displayvideo.advertisers.negativeKeywordLists.list
@@ -3726,7 +3726,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}":
+  /v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3779,7 +3779,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords":
+  /v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords:
     get:
       description: Lists negative keywords in a negative keyword list.
       operationId: displayvideo.advertisers.negativeKeywordLists.negativeKeywords.list
@@ -3842,7 +3842,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords/{keywordValue}":
+  /v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords/{keywordValue}:
     delete:
       description: Deletes a negative keyword from a negative keyword list.
       operationId: displayvideo.advertisers.negativeKeywordLists.negativeKeywords.delete
@@ -3891,7 +3891,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords:bulkEdit":
+  /v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords:bulkEdit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3939,7 +3939,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords:replace":
+  /v2/advertisers/{advertiserId}/negativeKeywordLists/{negativeKeywordListId}/negativeKeywords:replace:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3987,7 +3987,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/targetingTypes/{targetingType}/assignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/targetingTypes/{targetingType}/assignedTargetingOptions:
     get:
       description: Lists the targeting options assigned to an advertiser.
       operationId: displayvideo.advertisers.targetingTypes.assignedTargetingOptions.list
@@ -4185,7 +4185,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+  /v2/advertisers/{advertiserId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}:
     delete:
       description: Deletes an assigned targeting option from an advertiser.
       operationId: displayvideo.advertisers.targetingTypes.assignedTargetingOptions.delete
@@ -4370,7 +4370,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/youtubeAdGroupAds":
+  /v2/advertisers/{advertiserId}/youtubeAdGroupAds:
     get:
       description: Lists YouTube ad group ads.
       operationId: displayvideo.advertisers.youtubeAdGroupAds.list
@@ -4427,7 +4427,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/youtubeAdGroupAds/{youtubeAdGroupAdId}":
+  /v2/advertisers/{advertiserId}/youtubeAdGroupAds/{youtubeAdGroupAdId}:
     get:
       description: Gets a YouTube ad group ad.
       operationId: displayvideo.advertisers.youtubeAdGroupAds.get
@@ -4470,7 +4470,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/youtubeAdGroups":
+  /v2/advertisers/{advertiserId}/youtubeAdGroups:
     get:
       description: Lists YouTube ad groups.
       operationId: displayvideo.advertisers.youtubeAdGroups.list
@@ -4527,7 +4527,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/youtubeAdGroups/{youtubeAdGroupId}":
+  /v2/advertisers/{advertiserId}/youtubeAdGroups/{youtubeAdGroupId}:
     get:
       description: Gets a YouTube ad group.
       operationId: displayvideo.advertisers.youtubeAdGroups.get
@@ -4570,7 +4570,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/youtubeAdGroups/{youtubeAdGroupId}/targetingTypes/{targetingType}/assignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/youtubeAdGroups/{youtubeAdGroupId}/targetingTypes/{targetingType}/assignedTargetingOptions:
     get:
       description: Lists the targeting options assigned to a YouTube ad group. Inherited assigned targeting options are not included.
       operationId: displayvideo.advertisers.youtubeAdGroups.targetingTypes.assignedTargetingOptions.list
@@ -4689,7 +4689,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/youtubeAdGroups/{youtubeAdGroupId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+  /v2/advertisers/{advertiserId}/youtubeAdGroups/{youtubeAdGroupId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}:
     get:
       description: Gets a single targeting option assigned to a YouTube ad group. Inherited assigned targeting options are not included.
       operationId: displayvideo.advertisers.youtubeAdGroups.targetingTypes.assignedTargetingOptions.get
@@ -4794,7 +4794,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}/youtubeAdGroups:bulkListAdGroupAssignedTargetingOptions":
+  /v2/advertisers/{advertiserId}/youtubeAdGroups:bulkListAdGroupAssignedTargetingOptions:
     get:
       description: Lists assigned targeting options for multiple YouTube ad groups across targeting types. Inherieted assigned targeting options are not included.
       operationId: displayvideo.advertisers.youtubeAdGroups.bulkListAdGroupAssignedTargetingOptions
@@ -4860,7 +4860,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}:audit":
+  /v2/advertisers/{advertiserId}:audit:
     get:
       description: Audits an advertiser. Returns the counts of used entities per resource type under the advertiser provided. Used entities count towards their respective resource limit. See https://support.google.com/displayvideo/answer/6071450.
       operationId: displayvideo.advertisers.audit
@@ -4902,7 +4902,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/advertisers/{advertiserId}:editAssignedTargetingOptions":
+  /v2/advertisers/{advertiserId}:editAssignedTargetingOptions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4944,7 +4944,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - advertisers
-  "/v2/advertisers/{advertiserId}:listAssignedTargetingOptions":
+  /v2/advertisers/{advertiserId}:listAssignedTargetingOptions:
     get:
       description: Lists assigned targeting options of an advertiser across targeting types.
       operationId: displayvideo.advertisers.listAssignedTargetingOptions
@@ -5062,7 +5062,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/combinedAudiences/{combinedAudienceId}":
+  /v2/combinedAudiences/{combinedAudienceId}:
     get:
       description: Gets a combined audience.
       operationId: displayvideo.combinedAudiences.get
@@ -5192,7 +5192,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - customBiddingAlgorithms
-  "/v2/customBiddingAlgorithms/{customBiddingAlgorithmId}":
+  /v2/customBiddingAlgorithms/{customBiddingAlgorithmId}:
     get:
       description: Gets a custom bidding algorithm.
       operationId: displayvideo.customBiddingAlgorithms.get
@@ -5273,7 +5273,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - customBiddingAlgorithms
-  "/v2/customBiddingAlgorithms/{customBiddingAlgorithmId}/scripts":
+  /v2/customBiddingAlgorithms/{customBiddingAlgorithmId}/scripts:
     get:
       description: Lists custom bidding scripts that belong to the given algorithm. The order is defined by the order_by parameter.
       operationId: displayvideo.customBiddingAlgorithms.scripts.list
@@ -5374,7 +5374,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - customBiddingAlgorithms
-  "/v2/customBiddingAlgorithms/{customBiddingAlgorithmId}/scripts/{customBiddingScriptId}":
+  /v2/customBiddingAlgorithms/{customBiddingAlgorithmId}/scripts/{customBiddingScriptId}:
     get:
       description: Gets a custom bidding script.
       operationId: displayvideo.customBiddingAlgorithms.scripts.get
@@ -5427,7 +5427,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/customBiddingAlgorithms/{customBiddingAlgorithmId}:uploadScript":
+  /v2/customBiddingAlgorithms/{customBiddingAlgorithmId}:uploadScript:
     get:
       description: Creates a custom bidding script reference object for a script file. The resulting reference object provides a resource path to which the script file should be uploaded. This reference object should be included in when creating a new custom bidding script object.
       operationId: displayvideo.customBiddingAlgorithms.uploadScript
@@ -5530,7 +5530,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/customLists/{customListId}":
+  /v2/customLists/{customListId}:
     get:
       description: Gets a custom list.
       operationId: displayvideo.customLists.get
@@ -5661,7 +5661,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - firstAndThirdPartyAudiences
-  "/v2/firstAndThirdPartyAudiences/{firstAndThirdPartyAudienceId}":
+  /v2/firstAndThirdPartyAudiences/{firstAndThirdPartyAudienceId}:
     get:
       description: Gets a first and third party audience.
       operationId: displayvideo.firstAndThirdPartyAudiences.get
@@ -5747,7 +5747,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - firstAndThirdPartyAudiences
-  "/v2/firstAndThirdPartyAudiences/{firstAndThirdPartyAudienceId}:editCustomerMatchMembers":
+  /v2/firstAndThirdPartyAudiences/{firstAndThirdPartyAudienceId}:editCustomerMatchMembers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -5789,7 +5789,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - firstAndThirdPartyAudiences
-  "/v2/floodlightGroups/{floodlightGroupId}":
+  /v2/floodlightGroups/{floodlightGroupId}:
     get:
       description: Gets a Floodlight group.
       operationId: displayvideo.floodlightGroups.get
@@ -5892,7 +5892,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/googleAudiences/{googleAudienceId}":
+  /v2/googleAudiences/{googleAudienceId}:
     get:
       description: Gets a Google audience.
       operationId: displayvideo.googleAudiences.get
@@ -6033,7 +6033,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - guaranteedOrders
-  "/v2/guaranteedOrders/{guaranteedOrderId}":
+  /v2/guaranteedOrders/{guaranteedOrderId}:
     get:
       description: Gets a guaranteed order.
       operationId: displayvideo.guaranteedOrders.get
@@ -6124,7 +6124,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - guaranteedOrders
-  "/v2/guaranteedOrders/{guaranteedOrderId}:editGuaranteedOrderReadAccessors":
+  /v2/guaranteedOrders/{guaranteedOrderId}:editGuaranteedOrderReadAccessors:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6260,7 +6260,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - inventorySourceGroups
-  "/v2/inventorySourceGroups/{inventorySourceGroupId}":
+  /v2/inventorySourceGroups/{inventorySourceGroupId}:
     delete:
       description: Deletes an inventory source group.
       operationId: displayvideo.inventorySourceGroups.delete
@@ -6341,7 +6341,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/inventorySourceGroups/{inventorySourceGroupId}/assignedInventorySources":
+  /v2/inventorySourceGroups/{inventorySourceGroupId}/assignedInventorySources:
     get:
       description: Lists inventory sources assigned to an inventory source group.
       operationId: displayvideo.inventorySourceGroups.assignedInventorySources.list
@@ -6447,7 +6447,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - inventorySourceGroups
-  "/v2/inventorySourceGroups/{inventorySourceGroupId}/assignedInventorySources/{assignedInventorySourceId}":
+  /v2/inventorySourceGroups/{inventorySourceGroupId}/assignedInventorySources/{assignedInventorySourceId}:
     delete:
       description: Deletes the assignment between an inventory source and an inventory source group.
       operationId: displayvideo.inventorySourceGroups.assignedInventorySources.delete
@@ -6500,7 +6500,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/inventorySourceGroups/{inventorySourceGroupId}/assignedInventorySources:bulkEdit":
+  /v2/inventorySourceGroups/{inventorySourceGroupId}/assignedInventorySources:bulkEdit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6636,7 +6636,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - inventorySources
-  "/v2/inventorySources/{inventorySourceId}":
+  /v2/inventorySources/{inventorySourceId}:
     get:
       description: Gets an inventory source.
       operationId: displayvideo.inventorySources.get
@@ -6727,7 +6727,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - inventorySources
-  "/v2/inventorySources/{inventorySourceId}:editInventorySourceReadWriteAccessors":
+  /v2/inventorySources/{inventorySourceId}:editInventorySourceReadWriteAccessors:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6820,7 +6820,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/partners/{partnerId}":
+  /v2/partners/{partnerId}:
     get:
       description: Gets a partner.
       operationId: displayvideo.partners.get
@@ -6857,7 +6857,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/partners/{partnerId}/channels":
+  /v2/partners/{partnerId}/channels:
     get:
       description: Lists channels for a partner or advertiser.
       operationId: displayvideo.partners.channels.list
@@ -6953,7 +6953,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - partners
-  "/v2/partners/{partnerId}/channels/{channelId}":
+  /v2/partners/{partnerId}/channels/{channelId}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -7011,7 +7011,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - partners
-  "/v2/partners/{partnerId}/channels/{channelId}/sites":
+  /v2/partners/{partnerId}/channels/{channelId}/sites:
     get:
       description: Lists sites in a channel.
       operationId: displayvideo.partners.channels.sites.list
@@ -7079,7 +7079,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/partners/{partnerId}/channels/{channelId}/sites/{urlOrAppId}":
+  /v2/partners/{partnerId}/channels/{channelId}/sites/{urlOrAppId}:
     delete:
       description: Deletes a site from a channel.
       operationId: displayvideo.partners.channels.sites.delete
@@ -7133,7 +7133,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/partners/{partnerId}/channels/{channelId}/sites:bulkEdit":
+  /v2/partners/{partnerId}/channels/{channelId}/sites:bulkEdit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -7181,7 +7181,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - partners
-  "/v2/partners/{partnerId}/channels/{channelId}/sites:replace":
+  /v2/partners/{partnerId}/channels/{channelId}/sites:replace:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -7229,7 +7229,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - partners
-  "/v2/partners/{partnerId}/targetingTypes/{targetingType}/assignedTargetingOptions":
+  /v2/partners/{partnerId}/targetingTypes/{targetingType}/assignedTargetingOptions:
     get:
       description: Lists the targeting options assigned to a partner.
       operationId: displayvideo.partners.targetingTypes.assignedTargetingOptions.list
@@ -7427,7 +7427,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - partners
-  "/v2/partners/{partnerId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+  /v2/partners/{partnerId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}:
     delete:
       description: Deletes an assigned targeting option from a partner.
       operationId: displayvideo.partners.targetingTypes.assignedTargetingOptions.delete
@@ -7612,7 +7612,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/partners/{partnerId}:editAssignedTargetingOptions":
+  /v2/partners/{partnerId}:editAssignedTargetingOptions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -7689,7 +7689,7 @@ paths:
             - https://www.googleapis.com/auth/display-video
       tags:
         - sdfdownloadtasks
-  "/v2/targetingTypes/{targetingType}/targetingOptions":
+  /v2/targetingTypes/{targetingType}/targetingOptions:
     get:
       description: Lists targeting options of a given type.
       operationId: displayvideo.targetingTypes.targetingOptions.list
@@ -7801,7 +7801,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/targetingTypes/{targetingType}/targetingOptions/{targetingOptionId}":
+  /v2/targetingTypes/{targetingType}/targetingOptions/{targetingOptionId}:
     get:
       description: Gets a single targeting option.
       operationId: displayvideo.targetingTypes.targetingOptions.get
@@ -7899,7 +7899,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/targetingTypes/{targetingType}/targetingOptions:search":
+  /v2/targetingTypes/{targetingType}/targetingOptions:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -8064,7 +8064,7 @@ paths:
             - https://www.googleapis.com/auth/display-video-user-management
       tags:
         - users
-  "/v2/users/{userId}":
+  /v2/users/{userId}:
     delete:
       description: Deletes a user. This method has unique authentication requirements. Read the prerequisites in our [Managing Users guide](/display-video/api/guides/users/overview#prerequisites) before using this method. The "Try this method" feature does not work for this method.
       operationId: displayvideo.users.delete
@@ -8159,7 +8159,7 @@ paths:
             - https://www.googleapis.com/auth/display-video-user-management
       tags:
         - users
-  "/v2/users/{userId}:bulkEditAssignedUserRoles":
+  /v2/users/{userId}:bulkEditAssignedUserRoles:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -8201,7 +8201,7 @@ paths:
             - https://www.googleapis.com/auth/display-video-user-management
       tags:
         - users
-  "/v2/{name}":
+  /v2/{name}:
     get:
       description: Gets the latest state of an asynchronous SDF download task operation. Clients should poll this method at intervals of 30 seconds.
       operationId: displayvideo.sdfdownloadtasks.operations.get

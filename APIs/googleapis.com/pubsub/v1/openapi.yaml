@@ -33,7 +33,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a schema.
       operationId: pubsub.projects.schemas.delete
@@ -177,7 +177,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{name}:commit":
+  /v1/{name}:commit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -223,7 +223,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{name}:deleteRevision":
+  /v1/{name}:deleteRevision:
     delete:
       description: Deletes a specific schema revision.
       operationId: pubsub.projects.schemas.deleteRevision
@@ -269,7 +269,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:listRevisions":
+  /v1/{name}:listRevisions:
     get:
       description: Lists all schema revisions for the named schema.
       operationId: pubsub.projects.schemas.listRevisions
@@ -329,7 +329,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:rollback":
+  /v1/{name}:rollback:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -375,7 +375,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{parent}/schemas":
+  /v1/{parent}/schemas:
     get:
       description: Lists schemas in a project.
       operationId: pubsub.projects.schemas.list
@@ -473,7 +473,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{parent}/schemas:validate":
+  /v1/{parent}/schemas:validate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -519,7 +519,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{parent}/schemas:validateMessage":
+  /v1/{parent}/schemas:validateMessage:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -565,7 +565,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{project}/snapshots":
+  /v1/{project}/snapshots:
     get:
       description: Lists the existing snapshots. Snapshots are used in [Seek]( https://cloud.google.com/pubsub/docs/replay-overview) operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
       operationId: pubsub.projects.snapshots.list
@@ -616,7 +616,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{project}/subscriptions":
+  /v1/{project}/subscriptions:
     get:
       description: Lists matching subscriptions.
       operationId: pubsub.projects.subscriptions.list
@@ -667,7 +667,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{project}/topics":
+  /v1/{project}/topics:
     get:
       description: Lists matching topics.
       operationId: pubsub.projects.topics.list
@@ -718,7 +718,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: pubsub.projects.topics.getIamPolicy
@@ -764,7 +764,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -810,7 +810,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -856,7 +856,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{snapshot}":
+  /v1/{snapshot}:
     delete:
       description: Removes an existing snapshot. Snapshots are used in [Seek] (https://cloud.google.com/pubsub/docs/replay-overview) operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot. When the snapshot is deleted, all messages retained in the snapshot are immediately dropped. After a snapshot is deleted, a new one may be created with the same name, but the new one has no association with the old snapshot or its subscription, unless the same subscription is specified.
       operationId: pubsub.projects.snapshots.delete
@@ -925,7 +925,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{subscription}":
+  /v1/{subscription}:
     delete:
       description: Deletes an existing subscription. All messages retained in the subscription are immediately dropped. Calls to `Pull` after deletion will return `NOT_FOUND`. After a subscription is deleted, a new one may be created with the same name, but the new one has no association with the old subscription or its topic unless the same topic is specified.
       operationId: pubsub.projects.subscriptions.delete
@@ -994,7 +994,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{subscription}:acknowledge":
+  /v1/{subscription}:acknowledge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1040,7 +1040,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{subscription}:detach":
+  /v1/{subscription}:detach:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1081,7 +1081,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{subscription}:modifyAckDeadline":
+  /v1/{subscription}:modifyAckDeadline:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1127,7 +1127,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{subscription}:modifyPushConfig":
+  /v1/{subscription}:modifyPushConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1173,7 +1173,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{subscription}:pull":
+  /v1/{subscription}:pull:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1219,7 +1219,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{subscription}:seek":
+  /v1/{subscription}:seek:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1265,7 +1265,7 @@ paths:
             - https://www.googleapis.com/auth/pubsub
       tags:
         - projects
-  "/v1/{topic}":
+  /v1/{topic}:
     delete:
       description: Deletes the topic with the given name. Returns `NOT_FOUND` if the topic does not exist. After a topic is deleted, a new topic may be created with the same name; this is an entirely new topic with none of the old configuration or subscriptions. Existing subscriptions to this topic are not deleted, but their `topic` field is set to `_deleted-topic_`.
       operationId: pubsub.projects.topics.delete
@@ -1334,7 +1334,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{topic}/snapshots":
+  /v1/{topic}/snapshots:
     get:
       description: Lists the names of the snapshots on this topic. Snapshots are used in [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations, which allow you to manage message acknowledgments in bulk. That is, you can set the acknowledgment state of messages in an existing subscription to the state captured by a snapshot.
       operationId: pubsub.projects.topics.snapshots.list
@@ -1385,7 +1385,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{topic}/subscriptions":
+  /v1/{topic}/subscriptions:
     get:
       description: Lists the names of the attached subscriptions on this topic.
       operationId: pubsub.projects.topics.subscriptions.list
@@ -1436,7 +1436,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{topic}:publish":
+  /v1/{topic}:publish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

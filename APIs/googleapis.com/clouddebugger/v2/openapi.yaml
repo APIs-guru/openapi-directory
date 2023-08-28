@@ -74,7 +74,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - controller
-  "/v2/controller/debuggees/{debuggeeId}/breakpoints":
+  /v2/controller/debuggees/{debuggeeId}/breakpoints:
     get:
       description: Returns the list of all active breakpoints for the debuggee. The breakpoint specification (`location`, `condition`, and `expressions` fields) is semantically immutable, although the field values may change. For example, an agent may update the location line number to reflect the actual line where the breakpoint was set, but this doesn't change the breakpoint semantics. This means that an agent does not need to check if a breakpoint has changed when it encounters the same breakpoint on a successive call. Moreover, an agent should remember the breakpoints that are completed until the controller removes them from the active list to avoid setting those breakpoints again.
       operationId: clouddebugger.controller.debuggees.breakpoints.list
@@ -130,7 +130,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/controller/debuggees/{debuggeeId}/breakpoints/{id}":
+  /v2/controller/debuggees/{debuggeeId}/breakpoints/{id}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -232,7 +232,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/debugger/debuggees/{debuggeeId}/breakpoints":
+  /v2/debugger/debuggees/{debuggeeId}/breakpoints:
     get:
       description: Lists all breakpoints for the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.list
@@ -306,7 +306,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/debugger/debuggees/{debuggeeId}/breakpoints/set":
+  /v2/debugger/debuggees/{debuggeeId}/breakpoints/set:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -366,7 +366,7 @@ paths:
             - https://www.googleapis.com/auth/cloud_debugger
       tags:
         - debugger
-  "/v2/debugger/debuggees/{debuggeeId}/breakpoints/{breakpointId}":
+  /v2/debugger/debuggees/{debuggeeId}/breakpoints/{breakpointId}:
     delete:
       description: Deletes the breakpoint from the debuggee.
       operationId: clouddebugger.debugger.debuggees.breakpoints.delete

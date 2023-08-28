@@ -70,7 +70,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v1/accounts/{accountId}":
+  /tagmanager/v1/accounts/{accountId}:
     get:
       description: Gets a GTM Account.
       operationId: tagmanager.accounts.get
@@ -149,7 +149,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.manage.accounts
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers":
+  /tagmanager/v1/accounts/{accountId}/containers:
     get:
       description: Lists all Containers that belongs to a GTM Account.
       operationId: tagmanager.accounts.containers.list
@@ -219,7 +219,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}:
     delete:
       description: Deletes a Container.
       operationId: tagmanager.accounts.containers.delete
@@ -332,7 +332,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/environments":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/environments:
     get:
       description: Lists all GTM Environments of a GTM Container.
       operationId: tagmanager.accounts.containers.environments.list
@@ -414,7 +414,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/environments/{environmentId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/environments/{environmentId}:
     delete:
       description: Deletes a GTM Environment.
       operationId: tagmanager.accounts.containers.environments.delete
@@ -545,7 +545,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/folders":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/folders:
     get:
       description: Lists all GTM Folders of a Container.
       operationId: tagmanager.accounts.containers.folders.list
@@ -627,7 +627,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/folders/{folderId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/folders/{folderId}:
     delete:
       description: Deletes a GTM Folder.
       operationId: tagmanager.accounts.containers.folders.delete
@@ -758,7 +758,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/folders/{folderId}/entities":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/folders/{folderId}/entities:
     get:
       description: List all entities in a GTM Folder.
       operationId: tagmanager.accounts.containers.folders.entities.list
@@ -811,7 +811,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/move_folders/{folderId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/move_folders/{folderId}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -888,7 +888,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/reauthorize_environments/{environmentId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/reauthorize_environments/{environmentId}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -942,7 +942,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.publish
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/tags":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/tags:
     get:
       description: Lists all GTM Tags of a Container.
       operationId: tagmanager.accounts.containers.tags.list
@@ -1024,7 +1024,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/tags/{tagId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/tags/{tagId}:
     delete:
       description: Deletes a GTM Tag.
       operationId: tagmanager.accounts.containers.tags.delete
@@ -1155,7 +1155,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/triggers":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/triggers:
     get:
       description: Lists all GTM Triggers of a Container.
       operationId: tagmanager.accounts.containers.triggers.list
@@ -1237,7 +1237,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/triggers/{triggerId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/triggers/{triggerId}:
     delete:
       description: Deletes a GTM Trigger.
       operationId: tagmanager.accounts.containers.triggers.delete
@@ -1368,7 +1368,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/variables":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/variables:
     get:
       description: Lists all GTM Variables of a Container.
       operationId: tagmanager.accounts.containers.variables.list
@@ -1450,7 +1450,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/variables/{variableId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/variables/{variableId}:
     delete:
       description: Deletes a GTM Variable.
       operationId: tagmanager.accounts.containers.variables.delete
@@ -1581,7 +1581,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions:
     get:
       description: Lists all Container Versions of a GTM Container.
       operationId: tagmanager.accounts.containers.versions.list
@@ -1677,7 +1677,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containerversions
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}:
     delete:
       description: Deletes a Container Version.
       operationId: tagmanager.accounts.containers.versions.delete
@@ -1812,7 +1812,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containerversions
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/publish":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/publish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1866,7 +1866,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.publish
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/restore":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/restore:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1915,7 +1915,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/undelete":
+  /tagmanager/v1/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1964,7 +1964,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containerversions
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/permissions":
+  /tagmanager/v1/accounts/{accountId}/permissions:
     get:
       description: List all users that have access to the account along with Account and Container Permissions granted to each of them.
       operationId: tagmanager.accounts.permissions.list
@@ -2030,7 +2030,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.manage.users
       tags:
         - accounts
-  "/tagmanager/v1/accounts/{accountId}/permissions/{permissionId}":
+  /tagmanager/v1/accounts/{accountId}/permissions/{permissionId}:
     delete:
       description: Removes a user from the account, revoking access to it and all of its containers.
       operationId: tagmanager.accounts.permissions.delete

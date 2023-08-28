@@ -170,7 +170,7 @@ paths:
         phone_number: "{trunk_sid: sid}"
         recording: "{trunk_sid: sid}"
       pathType: list
-  "/v1/Trunks/{Sid}":
+  /v1/Trunks/{Sid}:
     delete:
       description: ""
       operationId: DeleteTrunk
@@ -302,7 +302,7 @@ paths:
         phone_number: "{trunk_sid: sid}"
         recording: "{trunk_sid: sid}"
       pathType: instance
-  "/v1/Trunks/{TrunkSid}/CredentialLists":
+  /v1/Trunks/{TrunkSid}/CredentialLists:
     description: List of credentials for accessing a trunk
     get:
       description: ""
@@ -429,7 +429,7 @@ paths:
       mountName: credentials_lists
       parent: /Trunks/{Sid}
       pathType: list
-  "/v1/Trunks/{TrunkSid}/CredentialLists/{Sid}":
+  /v1/Trunks/{TrunkSid}/CredentialLists/{Sid}:
     delete:
       description: ""
       operationId: DeleteCredentialList
@@ -508,7 +508,7 @@ paths:
       mountName: credentials_lists
       parent: /Trunks/{Sid}
       pathType: instance
-  "/v1/Trunks/{TrunkSid}/IpAccessControlLists":
+  /v1/Trunks/{TrunkSid}/IpAccessControlLists:
     description: List of IP addresses for accessing a trunk
     get:
       description: List all IP Access Control Lists for a Trunk
@@ -633,7 +633,7 @@ paths:
         - date_created
       parent: /Trunks/{Sid}
       pathType: list
-  "/v1/Trunks/{TrunkSid}/IpAccessControlLists/{Sid}":
+  /v1/Trunks/{TrunkSid}/IpAccessControlLists/{Sid}:
     delete:
       description: Remove an associated IP Access Control List from a Trunk
       operationId: DeleteIpAccessControlList
@@ -710,7 +710,7 @@ paths:
         - date_created
       parent: /Trunks/{Sid}
       pathType: instance
-  "/v1/Trunks/{TrunkSid}/OriginationUrls":
+  /v1/Trunks/{TrunkSid}/OriginationUrls:
     description: Network element entry points into your communications infrastructure
     get:
       description: ""
@@ -851,7 +851,7 @@ paths:
         - weight
       parent: /Trunks/{Sid}
       pathType: list
-  "/v1/Trunks/{TrunkSid}/OriginationUrls/{Sid}":
+  /v1/Trunks/{TrunkSid}/OriginationUrls/{Sid}:
     delete:
       description: ""
       operationId: DeleteOriginationUrl
@@ -988,7 +988,7 @@ paths:
         - weight
       parent: /Trunks/{Sid}
       pathType: instance
-  "/v1/Trunks/{TrunkSid}/PhoneNumbers":
+  /v1/Trunks/{TrunkSid}/PhoneNumbers:
     description: Phone numbers associated with trunks
     get:
       description: ""
@@ -1113,7 +1113,7 @@ paths:
         - phone_number
       parent: /Trunks/{Sid}
       pathType: list
-  "/v1/Trunks/{TrunkSid}/PhoneNumbers/{Sid}":
+  /v1/Trunks/{TrunkSid}/PhoneNumbers/{Sid}:
     delete:
       description: ""
       operationId: DeletePhoneNumber
@@ -1190,7 +1190,7 @@ paths:
         - phone_number
       parent: /Trunks/{Sid}
       pathType: instance
-  "/v1/Trunks/{TrunkSid}/Recording":
+  /v1/Trunks/{TrunkSid}/Recording:
     description: Recording settings for a trunk
     get:
       description: ""

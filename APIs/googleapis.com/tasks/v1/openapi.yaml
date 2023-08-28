@@ -32,7 +32,7 @@ tags:
   - name: tasklists
   - name: tasks
 paths:
-  "/tasks/v1/lists/{tasklist}/clear":
+  /tasks/v1/lists/{tasklist}/clear:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -65,7 +65,7 @@ paths:
             - https://www.googleapis.com/auth/tasks
       tags:
         - tasks
-  "/tasks/v1/lists/{tasklist}/tasks":
+  /tasks/v1/lists/{tasklist}/tasks:
     get:
       description: Returns all tasks in the specified task list.
       operationId: tasks.tasks.list
@@ -195,7 +195,7 @@ paths:
             - https://www.googleapis.com/auth/tasks
       tags:
         - tasks
-  "/tasks/v1/lists/{tasklist}/tasks/{task}":
+  /tasks/v1/lists/{tasklist}/tasks/{task}:
     delete:
       description: Deletes the specified task from the task list.
       operationId: tasks.tasks.delete
@@ -338,7 +338,7 @@ paths:
             - https://www.googleapis.com/auth/tasks
       tags:
         - tasks
-  "/tasks/v1/lists/{tasklist}/tasks/{task}/move":
+  /tasks/v1/lists/{tasklist}/tasks/{task}/move:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -458,7 +458,7 @@ paths:
             - https://www.googleapis.com/auth/tasks
       tags:
         - tasklists
-  "/tasks/v1/users/@me/lists/{tasklist}":
+  /tasks/v1/users/@me/lists/{tasklist}:
     delete:
       description: Deletes the authenticated user's specified task list.
       operationId: tasks.tasklists.delete

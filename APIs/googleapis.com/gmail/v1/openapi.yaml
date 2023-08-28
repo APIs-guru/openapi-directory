@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: users
 paths:
-  "/gmail/v1/users/{userId}/drafts":
+  /gmail/v1/users/{userId}/drafts:
     get:
       description: Lists the drafts in the user's mailbox.
       operationId: gmail.users.drafts.list
@@ -199,7 +199,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/drafts/send":
+  /gmail/v1/users/{userId}/drafts/send:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -310,7 +310,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/drafts/{id}":
+  /gmail/v1/users/{userId}/drafts/{id}:
     delete:
       description: Immediately and permanently deletes the specified draft. Does not simply trash it.
       operationId: gmail.users.drafts.delete
@@ -517,7 +517,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/history":
+  /gmail/v1/users/{userId}/history:
     get:
       description: Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing `historyId`).
       operationId: gmail.users.history.list
@@ -600,7 +600,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/labels":
+  /gmail/v1/users/{userId}/labels:
     get:
       description: Lists all labels in the user's mailbox.
       operationId: gmail.users.labels.list
@@ -690,7 +690,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/labels/{id}":
+  /gmail/v1/users/{userId}/labels/{id}:
     delete:
       description: Immediately and permanently deletes the specified label and removes it from any messages and threads that it is applied to.
       operationId: gmail.users.labels.delete
@@ -869,7 +869,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages":
+  /gmail/v1/users/{userId}/messages:
     get:
       description: Lists the messages in the user's mailbox.
       operationId: gmail.users.messages.list
@@ -1054,7 +1054,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages/batchDelete":
+  /gmail/v1/users/{userId}/messages/batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1092,7 +1092,7 @@ paths:
             - https://mail.google.com/
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages/batchModify":
+  /gmail/v1/users/{userId}/messages/batchModify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1134,7 +1134,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages/import":
+  /gmail/v1/users/{userId}/messages/import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1264,7 +1264,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages/send":
+  /gmail/v1/users/{userId}/messages/send:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1379,7 +1379,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.send
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages/{id}":
+  /gmail/v1/users/{userId}/messages/{id}:
     delete:
       description: Immediately and permanently deletes the specified message. This operation cannot be undone. Prefer `messages.trash` instead.
       operationId: gmail.users.messages.delete
@@ -1491,7 +1491,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/messages/{id}/modify":
+  /gmail/v1/users/{userId}/messages/{id}/modify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1543,7 +1543,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages/{id}/trash":
+  /gmail/v1/users/{userId}/messages/{id}/trash:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1590,7 +1590,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages/{id}/untrash":
+  /gmail/v1/users/{userId}/messages/{id}/untrash:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1637,7 +1637,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/messages/{messageId}/attachments/{id}":
+  /gmail/v1/users/{userId}/messages/{messageId}/attachments/{id}:
     get:
       description: Gets the specified message attachment.
       operationId: gmail.users.messages.attachments.get
@@ -1702,7 +1702,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/profile":
+  /gmail/v1/users/{userId}/profile:
     get:
       description: Gets the current user's Gmail profile.
       operationId: gmail.users.getProfile
@@ -1755,7 +1755,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/settings/autoForwarding":
+  /gmail/v1/users/{userId}/settings/autoForwarding:
     get:
       description: Gets the auto-forwarding setting for the specified account.
       operationId: gmail.users.settings.getAutoForwarding
@@ -1833,7 +1833,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/cse/identities":
+  /gmail/v1/users/{userId}/settings/cse/identities:
     get:
       description: Lists the client-side encrypted identities for an authenticated user.
       operationId: gmail.users.settings.cse.identities.list
@@ -1929,7 +1929,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/cse/identities/{cseEmailAddress}":
+  /gmail/v1/users/{userId}/settings/cse/identities/{cseEmailAddress}:
     delete:
       description: Deletes a client-side encryption identity. The authenticated user can no longer use the identity to send encrypted messages. You cannot restore the identity after you delete it. Instead, use the CreateCseIdentity method to create another identity with the same configuration.
       operationId: gmail.users.settings.cse.identities.delete
@@ -2018,7 +2018,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/settings/cse/identities/{emailAddress}":
+  /gmail/v1/users/{userId}/settings/cse/identities/{emailAddress}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2070,7 +2070,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/cse/keypairs":
+  /gmail/v1/users/{userId}/settings/cse/keypairs:
     get:
       description: Lists client-side encryption key pairs for an authenticated user.
       operationId: gmail.users.settings.cse.keypairs.list
@@ -2166,7 +2166,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/cse/keypairs/{keyPairId}":
+  /gmail/v1/users/{userId}/settings/cse/keypairs/{keyPairId}:
     get:
       description: Retrieves an existing client-side encryption key pair.
       operationId: gmail.users.settings.cse.keypairs.get
@@ -2225,7 +2225,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/settings/cse/keypairs/{keyPairId}:disable":
+  /gmail/v1/users/{userId}/settings/cse/keypairs/{keyPairId}:disable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2277,7 +2277,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/cse/keypairs/{keyPairId}:enable":
+  /gmail/v1/users/{userId}/settings/cse/keypairs/{keyPairId}:enable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2329,7 +2329,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/cse/keypairs/{keyPairId}:obliterate":
+  /gmail/v1/users/{userId}/settings/cse/keypairs/{keyPairId}:obliterate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2377,7 +2377,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/delegates":
+  /gmail/v1/users/{userId}/settings/delegates:
     get:
       description: Lists the delegates for the specified account. This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.delegates.list
@@ -2455,7 +2455,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/delegates/{delegateEmail}":
+  /gmail/v1/users/{userId}/settings/delegates/{delegateEmail}:
     delete:
       description: Removes the specified delegate (which can be of any verification status), and revokes any verification that may have been required for using it. Note that a delegate user must be referred to by their primary email address, and not an email alias. This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.delegates.delete
@@ -2536,7 +2536,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/settings/filters":
+  /gmail/v1/users/{userId}/settings/filters:
     get:
       description: Lists the message filters of a Gmail user.
       operationId: gmail.users.settings.filters.list
@@ -2614,7 +2614,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.basic
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/filters/{id}":
+  /gmail/v1/users/{userId}/settings/filters/{id}:
     delete:
       description: Immediately and permanently deletes the specified filter.
       operationId: gmail.users.settings.filters.delete
@@ -2695,7 +2695,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/settings/forwardingAddresses":
+  /gmail/v1/users/{userId}/settings/forwardingAddresses:
     get:
       description: Lists the forwarding addresses for the specified account.
       operationId: gmail.users.settings.forwardingAddresses.list
@@ -2773,7 +2773,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/forwardingAddresses/{forwardingEmail}":
+  /gmail/v1/users/{userId}/settings/forwardingAddresses/{forwardingEmail}:
     delete:
       description: Deletes the specified forwarding address and revokes any verification that may have been required. This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.forwardingAddresses.delete
@@ -2854,7 +2854,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/settings/imap":
+  /gmail/v1/users/{userId}/settings/imap:
     get:
       description: Gets IMAP settings.
       operationId: gmail.users.settings.getImap
@@ -2932,7 +2932,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.basic
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/language":
+  /gmail/v1/users/{userId}/settings/language:
     get:
       description: Gets language settings.
       operationId: gmail.users.settings.getLanguage
@@ -3010,7 +3010,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.basic
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/pop":
+  /gmail/v1/users/{userId}/settings/pop:
     get:
       description: Gets POP settings.
       operationId: gmail.users.settings.getPop
@@ -3088,7 +3088,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.basic
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/sendAs":
+  /gmail/v1/users/{userId}/settings/sendAs:
     get:
       description: Lists the send-as aliases for the specified account. The result includes the primary send-as address associated with the account as well as any custom "from" aliases.
       operationId: gmail.users.settings.sendAs.list
@@ -3166,7 +3166,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}":
+  /gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}:
     delete:
       description: Deletes the specified send-as alias. Revokes any verification that may have been required for using it. This method is only available to service account clients that have been delegated domain-wide authority.
       operationId: gmail.users.settings.sendAs.delete
@@ -3325,7 +3325,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo":
+  /gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo:
     get:
       description: Lists S/MIME configs for the specified send-as alias.
       operationId: gmail.users.settings.sendAs.smimeInfo.list
@@ -3423,7 +3423,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}":
+  /gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}:
     delete:
       description: Deletes the specified S/MIME config for the specified send-as alias.
       operationId: gmail.users.settings.sendAs.smimeInfo.delete
@@ -3524,7 +3524,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault":
+  /gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/smimeInfo/{id}/setDefault:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3573,7 +3573,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/verify":
+  /gmail/v1/users/{userId}/settings/sendAs/{sendAsEmail}/verify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3612,7 +3612,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.sharing
       tags:
         - users
-  "/gmail/v1/users/{userId}/settings/vacation":
+  /gmail/v1/users/{userId}/settings/vacation:
     get:
       description: Gets vacation responder settings.
       operationId: gmail.users.settings.getVacation
@@ -3690,7 +3690,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.settings.basic
       tags:
         - users
-  "/gmail/v1/users/{userId}/stop":
+  /gmail/v1/users/{userId}/stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3735,7 +3735,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.readonly
       tags:
         - users
-  "/gmail/v1/users/{userId}/threads":
+  /gmail/v1/users/{userId}/threads:
     get:
       description: Lists the threads in the user's mailbox.
       operationId: gmail.users.threads.list
@@ -3813,7 +3813,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/threads/{id}":
+  /gmail/v1/users/{userId}/threads/{id}:
     delete:
       description: Immediately and permanently deletes the specified thread. Any messages that belong to the thread are also deleted. This operation cannot be undone. Prefer `threads.trash` instead.
       operationId: gmail.users.threads.delete
@@ -3924,7 +3924,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/gmail/v1/users/{userId}/threads/{id}/modify":
+  /gmail/v1/users/{userId}/threads/{id}/modify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3976,7 +3976,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/threads/{id}/trash":
+  /gmail/v1/users/{userId}/threads/{id}/trash:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4023,7 +4023,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/threads/{id}/untrash":
+  /gmail/v1/users/{userId}/threads/{id}/untrash:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4070,7 +4070,7 @@ paths:
             - https://www.googleapis.com/auth/gmail.modify
       tags:
         - users
-  "/gmail/v1/users/{userId}/watch":
+  /gmail/v1/users/{userId}/watch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -21,7 +21,7 @@ tags:
   - description: Operations to manage event subscriptions.
     name: Subscriptions
 paths:
-  "/webhooks/v3/{appId}/settings":
+  /webhooks/v3/{appId}/settings:
     delete:
       operationId: delete-/webhooks/v3/{appId}/settings_clear
       parameters:
@@ -97,7 +97,7 @@ paths:
         - developer_hapikey: []
       tags:
         - Settings
-  "/webhooks/v3/{appId}/subscriptions":
+  /webhooks/v3/{appId}/subscriptions:
     get:
       operationId: get-/webhooks/v3/{appId}/subscriptions_getAll
       parameters:
@@ -152,7 +152,7 @@ paths:
         - developer_hapikey: []
       tags:
         - Subscriptions
-  "/webhooks/v3/{appId}/subscriptions/batch/update":
+  /webhooks/v3/{appId}/subscriptions/batch/update:
     post:
       operationId: post-/webhooks/v3/{appId}/subscriptions/batch/update_updateBatch
       parameters:
@@ -189,7 +189,7 @@ paths:
         - developer_hapikey: []
       tags:
         - Subscriptions
-  "/webhooks/v3/{appId}/subscriptions/{subscriptionId}":
+  /webhooks/v3/{appId}/subscriptions/{subscriptionId}:
     delete:
       operationId: delete-/webhooks/v3/{appId}/subscriptions/{subscriptionId}_archive
       parameters:

@@ -180,7 +180,7 @@ paths:
         customer_profiles_entity_assignments: "{customer_profile_sid: sid}"
         customer_profiles_evaluations: "{customer_profile_sid: sid}"
       pathType: list
-  "/v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments":
+  /v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Assigned Items for an account.
@@ -321,7 +321,7 @@ paths:
       mountName: customer_profiles_channel_endpoint_assignment
       parent: /CustomerProfiles/{Sid}
       pathType: list
-  "/v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments/{Sid}":
+  /v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments/{Sid}:
     delete:
       description: Remove an Assignment Item Instance.
       operationId: DeleteCustomerProfileChannelEndpointAssignment
@@ -397,7 +397,7 @@ paths:
       mountName: customer_profiles_channel_endpoint_assignment
       parent: /CustomerProfiles/{Sid}
       pathType: instance
-  "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments":
+  /v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Assigned Items for an account.
@@ -522,7 +522,7 @@ paths:
       mountName: customer_profiles_entity_assignments
       parent: /CustomerProfiles/{Sid}
       pathType: list
-  "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments/{Sid}":
+  /v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments/{Sid}:
     delete:
       description: Remove an Assignment Item Instance.
       operationId: DeleteCustomerProfileEntityAssignment
@@ -599,7 +599,7 @@ paths:
       mountName: customer_profiles_entity_assignments
       parent: /CustomerProfiles/{Sid}
       pathType: instance
-  "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations":
+  /v1/CustomerProfiles/{CustomerProfileSid}/Evaluations:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of Evaluations associated to the customer_profile resource.
@@ -724,7 +724,7 @@ paths:
       mountName: customer_profiles_evaluations
       parent: /CustomerProfiles/{Sid}
       pathType: list
-  "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations/{Sid}":
+  /v1/CustomerProfiles/{CustomerProfileSid}/Evaluations/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch specific Evaluation Instance.
@@ -770,7 +770,7 @@ paths:
       mountName: customer_profiles_evaluations
       parent: /CustomerProfiles/{Sid}
       pathType: instance
-  "/v1/CustomerProfiles/{Sid}":
+  /v1/CustomerProfiles/{Sid}:
     delete:
       description: Delete a specific Customer-Profile.
       operationId: DeleteCustomerProfile
@@ -953,7 +953,7 @@ paths:
         - sid
         - friendly_name
       pathType: list
-  "/v1/EndUserTypes/{Sid}":
+  /v1/EndUserTypes/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific End-User Type Instance.
@@ -1092,7 +1092,7 @@ paths:
         - sid
         - friendly_name
       pathType: list
-  "/v1/EndUsers/{Sid}":
+  /v1/EndUsers/{Sid}:
     delete:
       description: Delete a specific End User.
       operationId: DeleteEndUser
@@ -1261,7 +1261,7 @@ paths:
         - sid
         - friendly_name
       pathType: list
-  "/v1/Policies/{Sid}":
+  /v1/Policies/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch specific Policy Instance.
@@ -1370,7 +1370,7 @@ paths:
         - sid
         - friendly_name
       pathType: list
-  "/v1/SupportingDocumentTypes/{Sid}":
+  /v1/SupportingDocumentTypes/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Supporting Document Type Instance.
@@ -1509,7 +1509,7 @@ paths:
         - sid
         - friendly_name
       pathType: list
-  "/v1/SupportingDocuments/{Sid}":
+  /v1/SupportingDocuments/{Sid}:
     delete:
       description: Delete a specific Supporting Document.
       operationId: DeleteSupportingDocument
@@ -1745,7 +1745,7 @@ paths:
         trust_products_entity_assignments: "{trust_product_sid: sid}"
         trust_products_evaluations: "{trust_product_sid: sid}"
       pathType: list
-  "/v1/TrustProducts/{Sid}":
+  /v1/TrustProducts/{Sid}:
     delete:
       description: Delete a specific Customer-Profile.
       operationId: DeleteTrustProduct
@@ -1855,7 +1855,7 @@ paths:
         trust_products_entity_assignments: "{trust_product_sid: sid}"
         trust_products_evaluations: "{trust_product_sid: sid}"
       pathType: instance
-  "/v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments":
+  /v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Assigned Items for an account.
@@ -1996,7 +1996,7 @@ paths:
       mountName: trust_products_channel_endpoint_assignment
       parent: /TrustProducts/{Sid}
       pathType: list
-  "/v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments/{Sid}":
+  /v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments/{Sid}:
     delete:
       description: Remove an Assignment Item Instance.
       operationId: DeleteTrustProductChannelEndpointAssignment
@@ -2072,7 +2072,7 @@ paths:
       mountName: trust_products_channel_endpoint_assignment
       parent: /TrustProducts/{Sid}
       pathType: instance
-  "/v1/TrustProducts/{TrustProductSid}/EntityAssignments":
+  /v1/TrustProducts/{TrustProductSid}/EntityAssignments:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Assigned Items for an account.
@@ -2197,7 +2197,7 @@ paths:
       mountName: trust_products_entity_assignments
       parent: /TrustProducts/{Sid}
       pathType: list
-  "/v1/TrustProducts/{TrustProductSid}/EntityAssignments/{Sid}":
+  /v1/TrustProducts/{TrustProductSid}/EntityAssignments/{Sid}:
     delete:
       description: Remove an Assignment Item Instance.
       operationId: DeleteTrustProductEntityAssignment
@@ -2274,7 +2274,7 @@ paths:
       mountName: trust_products_entity_assignments
       parent: /TrustProducts/{Sid}
       pathType: instance
-  "/v1/TrustProducts/{TrustProductSid}/Evaluations":
+  /v1/TrustProducts/{TrustProductSid}/Evaluations:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of Evaluations associated to the trust_product resource.
@@ -2399,7 +2399,7 @@ paths:
       mountName: trust_products_evaluations
       parent: /TrustProducts/{Sid}
       pathType: list
-  "/v1/TrustProducts/{TrustProductSid}/Evaluations/{Sid}":
+  /v1/TrustProducts/{TrustProductSid}/Evaluations/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch specific Evaluation Instance.

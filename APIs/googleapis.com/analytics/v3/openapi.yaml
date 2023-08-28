@@ -385,7 +385,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/management/accounts/{accountId}/entityUserLinks":
+  /management/accounts/{accountId}/entityUserLinks:
     get:
       description: Lists account-user links for a given account.
       operationId: analytics.management.accountUserLinks.list
@@ -462,7 +462,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - management
-  "/management/accounts/{accountId}/entityUserLinks/{linkId}":
+  /management/accounts/{accountId}/entityUserLinks/{linkId}:
     delete:
       description: Removes a user from the given account.
       operationId: analytics.management.accountUserLinks.delete
@@ -532,7 +532,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - management
-  "/management/accounts/{accountId}/filters":
+  /management/accounts/{accountId}/filters:
     get:
       description: Lists all filters for an account
       operationId: analytics.management.filters.list
@@ -609,7 +609,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/filters/{filterId}":
+  /management/accounts/{accountId}/filters/{filterId}:
     delete:
       description: Delete a filter.
       operationId: analytics.management.filters.delete
@@ -752,7 +752,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties":
+  /management/accounts/{accountId}/webproperties:
     get:
       description: Lists web properties to which the user has access.
       operationId: analytics.management.webproperties.list
@@ -833,7 +833,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}:
     get:
       description: Gets a web property to which the user has access.
       operationId: analytics.management.webproperties.get
@@ -946,7 +946,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources:
     get:
       description: List custom data sources to which the user has access.
       operationId: analytics.management.customDataSources.list
@@ -1005,7 +1005,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/deleteUploadData":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/deleteUploadData:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1055,7 +1055,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/uploads":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/uploads:
     get:
       description: List uploads to which the user has access.
       operationId: analytics.management.uploads.list
@@ -1160,7 +1160,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/uploads/{uploadId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/uploads/{uploadId}:
     get:
       description: List uploads to which the user has access.
       operationId: analytics.management.uploads.get
@@ -1219,7 +1219,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions:
     get:
       description: Lists custom dimensions to which the user has access.
       operationId: analytics.management.customDimensions.list
@@ -1308,7 +1308,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions/{customDimensionId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions/{customDimensionId}:
     get:
       description: Get a custom dimension to which the user has access.
       operationId: analytics.management.customDimensions.get
@@ -1449,7 +1449,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics:
     get:
       description: Lists custom metrics to which the user has access.
       operationId: analytics.management.customMetrics.list
@@ -1538,7 +1538,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics/{customMetricId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics/{customMetricId}:
     get:
       description: Get a custom metric to which the user has access.
       operationId: analytics.management.customMetrics.get
@@ -1679,7 +1679,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks:
     get:
       description: Lists webProperty-Google Ads links for a given web property.
       operationId: analytics.management.webPropertyAdWordsLinks.list
@@ -1768,7 +1768,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}:
     delete:
       description: Deletes a web property-Google Ads link.
       operationId: analytics.management.webPropertyAdWordsLinks.delete
@@ -1931,7 +1931,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks:
     get:
       description: Lists webProperty-user links for a given web property.
       operationId: analytics.management.webpropertyUserLinks.list
@@ -2020,7 +2020,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks/{linkId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks/{linkId}:
     delete:
       description: Removes a user from the given web property.
       operationId: analytics.management.webpropertyUserLinks.delete
@@ -2102,7 +2102,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles:
     get:
       description: Lists views (profiles) to which the user has access.
       operationId: analytics.management.profiles.list
@@ -2195,7 +2195,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}:
     delete:
       description: Deletes a view (profile).
       operationId: analytics.management.profiles.delete
@@ -2358,7 +2358,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks:
     get:
       description: Lists profile-user links for a given view (profile).
       operationId: analytics.management.profileUserLinks.list
@@ -2459,7 +2459,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks/{linkId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks/{linkId}:
     delete:
       description: Removes a user from the given view (profile).
       operationId: analytics.management.profileUserLinks.delete
@@ -2553,7 +2553,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments:
     get:
       description: Lists experiments to which the user has access.
       operationId: analytics.management.experiments.list
@@ -2662,7 +2662,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments/{experimentId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments/{experimentId}:
     delete:
       description: Delete an experiment.
       operationId: analytics.management.experiments.delete
@@ -2865,7 +2865,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals:
     get:
       description: Lists goals to which the user has access.
       operationId: analytics.management.goals.list
@@ -2970,7 +2970,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals/{goalId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals/{goalId}:
     get:
       description: Gets a goal to which the user has access.
       operationId: analytics.management.goals.get
@@ -3119,7 +3119,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks:
     get:
       description: Lists all profile filter links for a profile.
       operationId: analytics.management.profileFilterLinks.list
@@ -3220,7 +3220,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}:
     delete:
       description: Delete a profile filter link.
       operationId: analytics.management.profileFilterLinks.delete
@@ -3407,7 +3407,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports:
     get:
       description: Lists unsampled reports to which the user has access.
       operationId: analytics.management.unsampledReports.list
@@ -3516,7 +3516,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports/{unsampledReportId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports/{unsampledReportId}:
     delete:
       description: Deletes an unsampled report.
       operationId: analytics.management.unsampledReports.delete
@@ -3613,7 +3613,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences:
     get:
       description: Lists remarketing audiences to which the user has access.
       operationId: analytics.management.remarketingAudience.list
@@ -3706,7 +3706,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - management
-  "/management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences/{remarketingAudienceId}":
+  /management/accounts/{accountId}/webproperties/{webPropertyId}/remarketingAudiences/{remarketingAudienceId}:
     delete:
       description: Delete a remarketing audience.
       operationId: analytics.management.remarketingAudience.delete
@@ -3950,7 +3950,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/metadata/{reportType}/columns":
+  /metadata/{reportType}/columns:
     get:
       description: Lists all columns for a report type
       operationId: analytics.metadata.columns.list

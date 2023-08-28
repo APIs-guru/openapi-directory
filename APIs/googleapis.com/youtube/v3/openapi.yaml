@@ -408,7 +408,7 @@ paths:
             - https://www.googleapis.com/auth/youtubepartner
       tags:
         - captions
-  "/youtube/v3/captions/{id}":
+  /youtube/v3/captions/{id}:
     get:
       description: Downloads a caption track.
       operationId: youtube.captions.download

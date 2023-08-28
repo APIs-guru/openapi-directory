@@ -216,7 +216,7 @@ paths:
       summary: Create a Messenger account
       tags:
         - Facebook Messenger
-  "/messenger/{external_id}":
+  /messenger/{external_id}:
     delete:
       operationId: DeleteMessengerAccount
       parameters:
@@ -399,7 +399,7 @@ paths:
       summary: Update a Messenger account
       tags:
         - Facebook Messenger
-  "/viber_service_msg/{external_id}":
+  /viber_service_msg/{external_id}:
     get:
       operationId: GetVSMAccount
       parameters:
@@ -430,7 +430,7 @@ paths:
       summary: Retrieve a Viber Service Message account
       tags:
         - Viber Service Message
-  "/whatsapp/{external_id}":
+  /whatsapp/{external_id}:
     get:
       operationId: GetWAAccount
       parameters:
@@ -461,7 +461,7 @@ paths:
       summary: Retrieve a Whatsapp account
       tags:
         - WhatsApp
-  "/{provider}/{external_id}/applications":
+  /{provider}/{external_id}/applications:
     post:
       operationId: LinkApplication
       parameters:
@@ -548,7 +548,7 @@ paths:
       summary: Link application to an account
       tags:
         - Application
-  "/{provider}/{external_id}/applications/{application_id}":
+  /{provider}/{external_id}/applications/{application_id}:
     delete:
       operationId: UnliWithoutApplicationnkApplication
       parameters:

@@ -187,7 +187,7 @@ paths:
         - Balance
     servers:
       - url: https://rest.nexmo.com
-  "/accounts/{api_key}/secrets":
+  /accounts/{api_key}/secrets:
     get:
       operationId: retrieveAPISecrets
       parameters:
@@ -320,7 +320,7 @@ paths:
       summary: Create API Secret
       tags:
         - Secret Management
-  "/accounts/{api_key}/secrets/{secret_id}":
+  /accounts/{api_key}/secrets/{secret_id}:
     delete:
       operationId: revokeAPISecret
       parameters:

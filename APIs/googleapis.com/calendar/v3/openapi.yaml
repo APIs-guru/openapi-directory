@@ -69,7 +69,7 @@ paths:
             - https://www.googleapis.com/auth/calendar
       tags:
         - calendars
-  "/calendars/{calendarId}":
+  /calendars/{calendarId}:
     delete:
       description: Deletes a secondary calendar. Use calendars.clear for clearing all events on primary calendars.
       operationId: calendar.calendars.delete
@@ -184,7 +184,7 @@ paths:
             - https://www.googleapis.com/auth/calendar
       tags:
         - calendars
-  "/calendars/{calendarId}/acl":
+  /calendars/{calendarId}/acl:
     get:
       description: Returns the rules in the access control list for the calendar.
       operationId: calendar.acl.list
@@ -276,7 +276,7 @@ paths:
             - https://www.googleapis.com/auth/calendar
       tags:
         - acl
-  "/calendars/{calendarId}/acl/watch":
+  /calendars/{calendarId}/acl/watch:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -339,7 +339,7 @@ paths:
             - https://www.googleapis.com/auth/calendar
       tags:
         - acl
-  "/calendars/{calendarId}/acl/{ruleId}":
+  /calendars/{calendarId}/acl/{ruleId}:
     delete:
       description: Deletes an access control rule.
       operationId: calendar.acl.delete
@@ -488,7 +488,7 @@ paths:
             - https://www.googleapis.com/auth/calendar
       tags:
         - acl
-  "/calendars/{calendarId}/clear":
+  /calendars/{calendarId}/clear:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -517,7 +517,7 @@ paths:
             - https://www.googleapis.com/auth/calendar
       tags:
         - calendars
-  "/calendars/{calendarId}/events":
+  /calendars/{calendarId}/events:
     get:
       description: Returns events on the specified calendar.
       operationId: calendar.events.list
@@ -760,7 +760,7 @@ paths:
             - https://www.googleapis.com/auth/calendar.events
       tags:
         - events
-  "/calendars/{calendarId}/events/import":
+  /calendars/{calendarId}/events/import:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -814,7 +814,7 @@ paths:
             - https://www.googleapis.com/auth/calendar.events
       tags:
         - events
-  "/calendars/{calendarId}/events/quickAdd":
+  /calendars/{calendarId}/events/quickAdd:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -874,7 +874,7 @@ paths:
             - https://www.googleapis.com/auth/calendar.events
       tags:
         - events
-  "/calendars/{calendarId}/events/watch":
+  /calendars/{calendarId}/events/watch:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1054,7 +1054,7 @@ paths:
             - https://www.googleapis.com/auth/calendar.readonly
       tags:
         - events
-  "/calendars/{calendarId}/events/{eventId}":
+  /calendars/{calendarId}/events/{eventId}:
     delete:
       description: Deletes an event.
       operationId: calendar.events.delete
@@ -1326,7 +1326,7 @@ paths:
             - https://www.googleapis.com/auth/calendar.events
       tags:
         - events
-  "/calendars/{calendarId}/events/{eventId}/instances":
+  /calendars/{calendarId}/events/{eventId}/instances:
     get:
       description: Returns instances of the specified recurring event.
       operationId: calendar.events.instances
@@ -1424,7 +1424,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/calendars/{calendarId}/events/{eventId}/move":
+  /calendars/{calendarId}/events/{eventId}/move:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1775,7 +1775,7 @@ paths:
             - https://www.googleapis.com/auth/calendar.readonly
       tags:
         - calendarList
-  "/users/me/calendarList/{calendarId}":
+  /users/me/calendarList/{calendarId}:
     delete:
       description: Removes a calendar from the user's calendar list.
       operationId: calendar.calendarList.delete
@@ -2015,7 +2015,7 @@ paths:
             - https://www.googleapis.com/auth/calendar.settings.readonly
       tags:
         - settings
-  "/users/me/settings/{setting}":
+  /users/me/settings/{setting}:
     get:
       description: Returns a single user setting.
       operationId: calendar.settings.get

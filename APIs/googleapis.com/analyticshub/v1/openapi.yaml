@@ -32,7 +32,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a subscription.
       operationId: analyticshub.projects.locations.subscriptions.delete
@@ -139,7 +139,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:refresh":
+  /v1/{name}:refresh:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -185,7 +185,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:revoke":
+  /v1/{name}:revoke:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -231,7 +231,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:subscribe":
+  /v1/{name}:subscribe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -277,7 +277,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{organization}/dataExchanges":
+  /v1/{organization}/dataExchanges:
     get:
       description: Lists all data exchanges from projects in a given organization and location.
       operationId: analyticshub.organizations.locations.dataExchanges.list
@@ -328,7 +328,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/dataExchanges":
+  /v1/{parent}/dataExchanges:
     get:
       description: Lists all data exchanges in a given project and location.
       operationId: analyticshub.projects.locations.dataExchanges.list
@@ -417,7 +417,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/listings":
+  /v1/{parent}/listings:
     get:
       description: Lists all listings in a given project and location.
       operationId: analyticshub.projects.locations.dataExchanges.listings.list
@@ -506,7 +506,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/subscriptions":
+  /v1/{parent}/subscriptions:
     get:
       description: Lists all subscriptions in a given project and location.
       operationId: analyticshub.projects.locations.subscriptions.list
@@ -562,7 +562,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -608,7 +608,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:listSubscriptions":
+  /v1/{resource}:listSubscriptions:
     get:
       description: Lists all subscriptions on a given Data Exchange or Listing.
       operationId: analyticshub.projects.locations.dataExchanges.listings.listSubscriptions
@@ -664,7 +664,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -710,7 +710,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

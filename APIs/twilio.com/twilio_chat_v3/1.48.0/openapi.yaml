@@ -27,7 +27,7 @@ info:
 tags:
   - name: ChatV3Channel
 paths:
-  "/v3/Services/{ServiceSid}/Channels":
+  /v3/Services/{ServiceSid}/Channels:
     description: A Channel resource represents a chat/conversation channel with an ordered list of messages and a participant roster.
     servers:
       - url: https://chat.twilio.com
@@ -37,7 +37,7 @@ paths:
         - unique_name
         - friendly_name
       pathType: list
-  "/v3/Services/{ServiceSid}/Channels/{Sid}":
+  /v3/Services/{ServiceSid}/Channels/{Sid}:
     description: A Channel resource represents a chat/conversation channel with an ordered list of messages and a participant roster.
     post:
       description: Update a specific Channel.

@@ -77,7 +77,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets information about the specified AdMob publisher account.
       operationId: admob.accounts.get
@@ -118,7 +118,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/adUnits":
+  /v1/{parent}/adUnits:
     get:
       description: List the ad units under the specified AdMob account.
       operationId: admob.accounts.adUnits.list
@@ -165,7 +165,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/apps":
+  /v1/{parent}/apps:
     get:
       description: List the apps under the specified AdMob account.
       operationId: admob.accounts.apps.list
@@ -212,7 +212,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/mediationReport:generate":
+  /v1/{parent}/mediationReport:generate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -258,7 +258,7 @@ paths:
             - https://www.googleapis.com/auth/admob.report
       tags:
         - accounts
-  "/v1/{parent}/networkReport:generate":
+  /v1/{parent}/networkReport:generate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

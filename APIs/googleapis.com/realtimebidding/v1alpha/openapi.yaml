@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: bidders
 paths:
-  "/v1alpha/{name}:activate":
+  /v1alpha/{name}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1alpha/{name}:archive":
+  /v1alpha/{name}:archive:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -114,7 +114,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1alpha/{parent}/biddingFunctions":
+  /v1alpha/{parent}/biddingFunctions:
     get:
       description: Lists the bidding functions that a bidder currently has registered.
       operationId: realtimebidding.bidders.biddingFunctions.list

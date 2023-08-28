@@ -30,7 +30,7 @@ tags:
   - name: customers
   - name: searchAds360Fields
 paths:
-  "/v0/customers/{customerId}/customColumns":
+  /v0/customers/{customerId}/customColumns:
     get:
       description: Returns all the custom columns associated with the customer in full detail.
       operationId: searchads360.customers.customColumns.list
@@ -67,7 +67,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v0/customers/{customerId}/searchAds360:search":
+  /v0/customers/{customerId}/searchAds360:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -174,7 +174,7 @@ paths:
             - https://www.googleapis.com/auth/doubleclicksearch
       tags:
         - searchAds360Fields
-  "/v0/{resourceName}":
+  /v0/{resourceName}:
     get:
       description: "Returns just the requested field. List of thrown errors: [AuthenticationError]() [AuthorizationError]() [HeaderError]() [InternalError]() [QuotaError]() [RequestError]()"
       operationId: searchads360.searchAds360Fields.get

@@ -108,7 +108,7 @@ paths:
       dependentProperties:
         app_manifest: "{app_sid: sid}"
       pathType: list
-  "/v1/Apps/{AppSid}/Manifest":
+  /v1/Apps/{AppSid}/Manifest:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve the Manifest for an App.
@@ -140,7 +140,7 @@ paths:
       mountName: app_manifests
       parent: /Apps/{Sid}
       pathType: instance
-  "/v1/Apps/{Sid}":
+  /v1/Apps/{Sid}:
     delete:
       description: Delete a specific App.
       operationId: DeleteApp
@@ -297,7 +297,7 @@ paths:
       defaultOutputProperties: []
       mountName: account_configs
       pathType: list
-  "/v1/Configs/{Key}":
+  /v1/Configs/{Key}:
     delete:
       description: Delete a config for an Account.
       operationId: DeleteAccountConfig
@@ -458,7 +458,7 @@ paths:
         device_config: "{device_sid: sid}"
         device_secret: "{device_sid: sid}"
       pathType: list
-  "/v1/Devices/{DeviceSid}/Configs":
+  /v1/Devices/{DeviceSid}/Configs:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Configs for a Device.
@@ -576,7 +576,7 @@ paths:
       mountName: device_configs
       parent: /Devices/{Sid}
       pathType: list
-  "/v1/Devices/{DeviceSid}/Configs/{Key}":
+  /v1/Devices/{DeviceSid}/Configs/{Key}:
     delete:
       description: Delete a config for a Microvisor Device.
       operationId: DeleteDeviceConfig
@@ -680,7 +680,7 @@ paths:
       mountName: device_configs
       parent: /Devices/{Sid}
       pathType: instance
-  "/v1/Devices/{DeviceSid}/Secrets":
+  /v1/Devices/{DeviceSid}/Secrets:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Secrets for a Device.
@@ -798,7 +798,7 @@ paths:
       mountName: device_secrets
       parent: /Devices/{Sid}
       pathType: list
-  "/v1/Devices/{DeviceSid}/Secrets/{Key}":
+  /v1/Devices/{DeviceSid}/Secrets/{Key}:
     delete:
       description: Delete a secret for a Microvisor Device.
       operationId: DeleteDeviceSecret
@@ -902,7 +902,7 @@ paths:
       mountName: device_secrets
       parent: /Devices/{Sid}
       pathType: instance
-  "/v1/Devices/{Sid}":
+  /v1/Devices/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Device.
@@ -1083,7 +1083,7 @@ paths:
       defaultOutputProperties: []
       mountName: account_secrets
       pathType: list
-  "/v1/Secrets/{Key}":
+  /v1/Secrets/{Key}:
     delete:
       description: Delete a secret for an Account.
       operationId: DeleteAccountSecret

@@ -74,7 +74,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/queries/{queryId}/reports":
+  /queries/{queryId}/reports:
     get:
       description: Retrieves stored reports.
       operationId: doubleclickbidmanager.reports.listreports
@@ -162,7 +162,7 @@ paths:
             - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
-  "/query/{queryId}":
+  /query/{queryId}:
     delete:
       description: Deletes a stored query as well as the associated stored reports.
       operationId: doubleclickbidmanager.queries.deletequery

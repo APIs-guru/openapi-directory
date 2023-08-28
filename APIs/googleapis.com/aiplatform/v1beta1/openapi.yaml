@@ -32,7 +32,7 @@ tags:
   - name: projects
   - name: publishers
 paths:
-  "/v1beta1/{artifact}:queryArtifactLineageSubgraph":
+  /v1beta1/{artifact}:queryArtifactLineageSubgraph:
     get:
       description: Retrieves lineage of an Artifact represented through Artifacts and Executions connected by Event edges and returned as a LineageSubgraph.
       operationId: aiplatform.projects.locations.metadataStores.artifacts.queryArtifactLineageSubgraph
@@ -79,7 +79,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{context}:addContextArtifactsAndExecutions":
+  /v1beta1/{context}:addContextArtifactsAndExecutions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -121,7 +121,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{context}:addContextChildren":
+  /v1beta1/{context}:addContextChildren:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -163,7 +163,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{context}:queryContextLineageSubgraph":
+  /v1beta1/{context}:queryContextLineageSubgraph:
     get:
       description: Retrieves Artifacts and Executions within the specified Context, connected by Event edges and returned as a LineageSubgraph.
       operationId: aiplatform.projects.locations.metadataStores.contexts.queryContextLineageSubgraph
@@ -200,7 +200,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{context}:removeContextChildren":
+  /v1beta1/{context}:removeContextChildren:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -242,7 +242,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{dataset}:searchDataItems":
+  /v1beta1/{dataset}:searchDataItems:
     get:
       description: Searches DataItems in a Dataset.
       operationId: aiplatform.projects.locations.datasets.searchDataItems
@@ -348,7 +348,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{deploymentResourcePool}:queryDeployedModels":
+  /v1beta1/{deploymentResourcePool}:queryDeployedModels:
     get:
       description: List DeployedModels that have been deployed on this DeploymentResourcePool.
       operationId: aiplatform.projects.locations.deploymentResourcePools.queryDeployedModels
@@ -395,7 +395,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{endpoint}:countTokens":
+  /v1beta1/{endpoint}:countTokens:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -437,7 +437,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{endpoint}:deployModel":
+  /v1beta1/{endpoint}:deployModel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -479,7 +479,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{endpoint}:explain":
+  /v1beta1/{endpoint}:explain:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -521,7 +521,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{endpoint}:mutateDeployedModel":
+  /v1beta1/{endpoint}:mutateDeployedModel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -563,7 +563,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{endpoint}:predict":
+  /v1beta1/{endpoint}:predict:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -605,7 +605,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{endpoint}:rawPredict":
+  /v1beta1/{endpoint}:rawPredict:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -647,7 +647,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{endpoint}:serverStreamingPredict":
+  /v1beta1/{endpoint}:serverStreamingPredict:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -689,7 +689,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{endpoint}:undeployModel":
+  /v1beta1/{endpoint}:undeployModel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -731,7 +731,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{entityType}:deleteFeatureValues":
+  /v1beta1/{entityType}:deleteFeatureValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -773,7 +773,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{entityType}:exportFeatureValues":
+  /v1beta1/{entityType}:exportFeatureValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -815,7 +815,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{entityType}:importFeatureValues":
+  /v1beta1/{entityType}:importFeatureValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -857,7 +857,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{entityType}:readFeatureValues":
+  /v1beta1/{entityType}:readFeatureValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -899,7 +899,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{entityType}:streamingReadFeatureValues":
+  /v1beta1/{entityType}:streamingReadFeatureValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -941,7 +941,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{entityType}:writeFeatureValues":
+  /v1beta1/{entityType}:writeFeatureValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -983,7 +983,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{execution}:addExecutionEvents":
+  /v1beta1/{execution}:addExecutionEvents:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1025,7 +1025,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{execution}:queryExecutionInputsAndOutputs":
+  /v1beta1/{execution}:queryExecutionInputsAndOutputs:
     get:
       description: Obtains the set of input and output Artifacts for this Execution, in the form of LineageSubgraph that also contains the Execution and connecting Events.
       operationId: aiplatform.projects.locations.metadataStores.executions.queryExecutionInputsAndOutputs
@@ -1062,7 +1062,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{featurestore}:batchReadFeatureValues":
+  /v1beta1/{featurestore}:batchReadFeatureValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1104,7 +1104,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{indexEndpoint}:deployIndex":
+  /v1beta1/{indexEndpoint}:deployIndex:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1146,7 +1146,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{indexEndpoint}:findNeighbors":
+  /v1beta1/{indexEndpoint}:findNeighbors:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1188,7 +1188,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{indexEndpoint}:mutateDeployedIndex":
+  /v1beta1/{indexEndpoint}:mutateDeployedIndex:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1230,7 +1230,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{indexEndpoint}:readIndexDatapoints":
+  /v1beta1/{indexEndpoint}:readIndexDatapoints:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1272,7 +1272,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{indexEndpoint}:undeployIndex":
+  /v1beta1/{indexEndpoint}:undeployIndex:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1314,7 +1314,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{index}:removeDatapoints":
+  /v1beta1/{index}:removeDatapoints:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1356,7 +1356,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{index}:upsertDatapoints":
+  /v1beta1/{index}:upsertDatapoints:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1398,7 +1398,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{location}/featurestores:searchFeatures":
+  /v1beta1/{location}/featurestores:searchFeatures:
     get:
       description: Searches Features matching a query in a given project.
       operationId: aiplatform.projects.locations.featurestores.searchFeatures
@@ -1450,7 +1450,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{modelDeploymentMonitoringJob}:searchModelDeploymentMonitoringStatsAnomalies":
+  /v1beta1/{modelDeploymentMonitoringJob}:searchModelDeploymentMonitoringStatsAnomalies:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1492,7 +1492,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{model}:updateExplanationDataset":
+  /v1beta1/{model}:updateExplanationDataset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1534,7 +1534,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: aiplatform.projects.locations.trainingPipelines.operations.delete
@@ -1653,7 +1653,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  /v1beta1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: aiplatform.projects.locations.list
@@ -1705,7 +1705,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}/operations":
+  /v1beta1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: aiplatform.projects.locations.trainingPipelines.operations.list
@@ -1757,7 +1757,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:cancel":
+  /v1beta1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1799,7 +1799,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:complete":
+  /v1beta1/{name}:complete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1841,7 +1841,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:deleteVersion":
+  /v1beta1/{name}:deleteVersion:
     delete:
       description: Deletes a Model version. Model version can only be deleted if there are no DeployedModels created from it. Deleting the only version in the Model is not allowed. Use DeleteModel for deleting the Model instead.
       operationId: aiplatform.projects.locations.models.deleteVersion
@@ -1878,7 +1878,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:export":
+  /v1beta1/{name}:export:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1920,7 +1920,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:generateAccessToken":
+  /v1beta1/{name}:generateAccessToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1962,7 +1962,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:import":
+  /v1beta1/{name}:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2004,7 +2004,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:listVersions":
+  /v1beta1/{name}:listVersions:
     get:
       description: Lists versions of the specified model.
       operationId: aiplatform.projects.locations.models.listVersions
@@ -2066,7 +2066,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:mergeVersionAliases":
+  /v1beta1/{name}:mergeVersionAliases:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2108,7 +2108,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:pause":
+  /v1beta1/{name}:pause:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2150,7 +2150,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:reportEvent":
+  /v1beta1/{name}:reportEvent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2192,7 +2192,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:resume":
+  /v1beta1/{name}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2234,7 +2234,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:start":
+  /v1beta1/{name}:start:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2276,7 +2276,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:stop":
+  /v1beta1/{name}:stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2318,7 +2318,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:wait":
+  /v1beta1/{name}:wait:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2360,7 +2360,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/annotations":
+  /v1beta1/{parent}/annotations:
     get:
       description: Lists Annotations belongs to a dataitem
       operationId: aiplatform.projects.locations.datasets.dataItems.annotations.list
@@ -2422,7 +2422,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/artifacts":
+  /v1beta1/{parent}/artifacts:
     get:
       description: Lists Artifacts in the MetadataStore.
       operationId: aiplatform.projects.locations.metadataStores.artifacts.list
@@ -2513,7 +2513,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/artifacts:purge":
+  /v1beta1/{parent}/artifacts:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2555,7 +2555,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/batchPredictionJobs":
+  /v1beta1/{parent}/batchPredictionJobs:
     get:
       description: Lists BatchPredictionJobs in a Location.
       operationId: aiplatform.projects.locations.batchPredictionJobs.list
@@ -2641,7 +2641,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/contexts":
+  /v1beta1/{parent}/contexts:
     get:
       description: Lists Contexts on the MetadataStore.
       operationId: aiplatform.projects.locations.metadataStores.contexts.list
@@ -2732,7 +2732,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/contexts:purge":
+  /v1beta1/{parent}/contexts:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2774,7 +2774,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/customJobs":
+  /v1beta1/{parent}/customJobs:
     get:
       description: Lists CustomJobs in a Location.
       operationId: aiplatform.projects.locations.customJobs.list
@@ -2860,7 +2860,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/dataItems":
+  /v1beta1/{parent}/dataItems:
     get:
       description: Lists DataItems in a Dataset.
       operationId: aiplatform.projects.locations.datasets.dataItems.list
@@ -2922,7 +2922,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/dataLabelingJobs":
+  /v1beta1/{parent}/dataLabelingJobs:
     get:
       description: Lists DataLabelingJobs in a Location.
       operationId: aiplatform.projects.locations.dataLabelingJobs.list
@@ -3013,7 +3013,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/datasets":
+  /v1beta1/{parent}/datasets:
     get:
       description: Lists Datasets in a Location.
       operationId: aiplatform.projects.locations.datasets.list
@@ -3104,7 +3104,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/deploymentResourcePools":
+  /v1beta1/{parent}/deploymentResourcePools:
     get:
       description: List DeploymentResourcePools in a location.
       operationId: aiplatform.projects.locations.deploymentResourcePools.list
@@ -3180,7 +3180,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/endpoints":
+  /v1beta1/{parent}/endpoints:
     get:
       description: Lists Endpoints in a Location.
       operationId: aiplatform.projects.locations.endpoints.list
@@ -3271,7 +3271,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/entityTypes":
+  /v1beta1/{parent}/entityTypes:
     get:
       description: Lists EntityTypes in a given Featurestore.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.list
@@ -3367,7 +3367,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/evaluations":
+  /v1beta1/{parent}/evaluations:
     get:
       description: Lists ModelEvaluations in a Model.
       operationId: aiplatform.projects.locations.models.evaluations.list
@@ -3424,7 +3424,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/evaluations:import":
+  /v1beta1/{parent}/evaluations:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3466,7 +3466,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/executions":
+  /v1beta1/{parent}/executions:
     get:
       description: Lists Executions in the MetadataStore.
       operationId: aiplatform.projects.locations.metadataStores.executions.list
@@ -3557,7 +3557,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/executions:purge":
+  /v1beta1/{parent}/executions:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3599,7 +3599,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/experiments":
+  /v1beta1/{parent}/experiments:
     get:
       description: Lists TensorboardExperiments in a Location.
       operationId: aiplatform.projects.locations.tensorboards.experiments.list
@@ -3695,7 +3695,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/features":
+  /v1beta1/{parent}/features:
     get:
       description: Lists Features in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.list
@@ -3796,7 +3796,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/features:batchCreate":
+  /v1beta1/{parent}/features:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3838,7 +3838,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/featurestores":
+  /v1beta1/{parent}/featurestores:
     get:
       description: Lists Featurestores in a given project and location.
       operationId: aiplatform.projects.locations.featurestores.list
@@ -3934,7 +3934,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/hyperparameterTuningJobs":
+  /v1beta1/{parent}/hyperparameterTuningJobs:
     get:
       description: Lists HyperparameterTuningJobs in a Location.
       operationId: aiplatform.projects.locations.hyperparameterTuningJobs.list
@@ -4020,7 +4020,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/indexEndpoints":
+  /v1beta1/{parent}/indexEndpoints:
     get:
       description: Lists IndexEndpoints in a Location.
       operationId: aiplatform.projects.locations.indexEndpoints.list
@@ -4106,7 +4106,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/indexes":
+  /v1beta1/{parent}/indexes:
     get:
       description: Lists Indexes in a Location.
       operationId: aiplatform.projects.locations.indexes.list
@@ -4192,7 +4192,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/metadataSchemas":
+  /v1beta1/{parent}/metadataSchemas:
     get:
       description: Lists MetadataSchemas.
       operationId: aiplatform.projects.locations.metadataStores.metadataSchemas.list
@@ -4278,7 +4278,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/metadataStores":
+  /v1beta1/{parent}/metadataStores:
     get:
       description: Lists MetadataStores for a Location.
       operationId: aiplatform.projects.locations.metadataStores.list
@@ -4359,7 +4359,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/migratableResources:batchMigrate":
+  /v1beta1/{parent}/migratableResources:batchMigrate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4401,7 +4401,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/migratableResources:search":
+  /v1beta1/{parent}/migratableResources:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4443,7 +4443,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/modelDeploymentMonitoringJobs":
+  /v1beta1/{parent}/modelDeploymentMonitoringJobs:
     get:
       description: Lists ModelDeploymentMonitoringJobs in a Location.
       operationId: aiplatform.projects.locations.modelDeploymentMonitoringJobs.list
@@ -4529,7 +4529,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/models":
+  /v1beta1/{parent}/models:
     get:
       description: Lists Models in a Location.
       operationId: aiplatform.projects.locations.models.list
@@ -4586,7 +4586,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/models:copy":
+  /v1beta1/{parent}/models:copy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4628,7 +4628,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/models:upload":
+  /v1beta1/{parent}/models:upload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4670,7 +4670,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/nasJobs":
+  /v1beta1/{parent}/nasJobs:
     get:
       description: Lists NasJobs in a Location.
       operationId: aiplatform.projects.locations.nasJobs.list
@@ -4756,7 +4756,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/nasTrialDetails":
+  /v1beta1/{parent}/nasTrialDetails:
     get:
       description: List top NasTrialDetails of a NasJob.
       operationId: aiplatform.projects.locations.nasJobs.nasTrialDetails.list
@@ -4803,7 +4803,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/notebookRuntimeTemplates":
+  /v1beta1/{parent}/notebookRuntimeTemplates:
     get:
       description: Lists NotebookRuntimeTemplates in a Location.
       operationId: aiplatform.projects.locations.notebookRuntimeTemplates.list
@@ -4899,7 +4899,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/notebookRuntimes":
+  /v1beta1/{parent}/notebookRuntimes:
     get:
       description: Lists NotebookRuntimes in a Location.
       operationId: aiplatform.projects.locations.notebookRuntimes.list
@@ -4961,7 +4961,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/notebookRuntimes:assign":
+  /v1beta1/{parent}/notebookRuntimes:assign:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -5003,7 +5003,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/persistentResources":
+  /v1beta1/{parent}/persistentResources:
     get:
       description: Lists PersistentResources in a Location.
       operationId: aiplatform.projects.locations.persistentResources.list
@@ -5084,7 +5084,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/pipelineJobs":
+  /v1beta1/{parent}/pipelineJobs:
     get:
       description: Lists PipelineJobs in a Location.
       operationId: aiplatform.projects.locations.pipelineJobs.list
@@ -5180,7 +5180,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/runs":
+  /v1beta1/{parent}/runs:
     get:
       description: Lists TensorboardRuns in a Location.
       operationId: aiplatform.projects.locations.tensorboards.experiments.runs.list
@@ -5276,7 +5276,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/runs/{runsId}/timeSeries:batchCreate":
+  /v1beta1/{parent}/runs/{runsId}/timeSeries:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -5323,7 +5323,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/runs:batchCreate":
+  /v1beta1/{parent}/runs:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -5365,7 +5365,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/savedQueries":
+  /v1beta1/{parent}/savedQueries:
     get:
       description: Lists SavedQueries in a Dataset.
       operationId: aiplatform.projects.locations.datasets.savedQueries.list
@@ -5427,7 +5427,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/schedules":
+  /v1beta1/{parent}/schedules:
     get:
       description: Lists Schedules in a Location.
       operationId: aiplatform.projects.locations.schedules.list
@@ -5513,7 +5513,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/slices":
+  /v1beta1/{parent}/slices:
     get:
       description: Lists ModelEvaluationSlices in a ModelEvaluation.
       operationId: aiplatform.projects.locations.models.evaluations.slices.list
@@ -5570,7 +5570,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/specialistPools":
+  /v1beta1/{parent}/specialistPools:
     get:
       description: Lists SpecialistPools in a Location.
       operationId: aiplatform.projects.locations.specialistPools.list
@@ -5651,7 +5651,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/studies":
+  /v1beta1/{parent}/studies:
     get:
       description: Lists all the studies in a region for an associated project.
       operationId: aiplatform.projects.locations.studies.list
@@ -5727,7 +5727,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/studies:lookup":
+  /v1beta1/{parent}/studies:lookup:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -5769,7 +5769,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/tensorboards":
+  /v1beta1/{parent}/tensorboards:
     get:
       description: Lists Tensorboards in a Location.
       operationId: aiplatform.projects.locations.tensorboards.list
@@ -5860,7 +5860,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/timeSeries":
+  /v1beta1/{parent}/timeSeries:
     get:
       description: Lists TensorboardTimeSeries in a Location.
       operationId: aiplatform.projects.locations.tensorboards.experiments.runs.timeSeries.list
@@ -5956,7 +5956,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/trainingPipelines":
+  /v1beta1/{parent}/trainingPipelines:
     get:
       description: Lists TrainingPipelines in a Location.
       operationId: aiplatform.projects.locations.trainingPipelines.list
@@ -6042,7 +6042,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/trials":
+  /v1beta1/{parent}/trials:
     get:
       description: Lists the Trials associated with a Study.
       operationId: aiplatform.projects.locations.studies.trials.list
@@ -6118,7 +6118,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/trials:listOptimalTrials":
+  /v1beta1/{parent}/trials:listOptimalTrials:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6160,7 +6160,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/trials:suggest":
+  /v1beta1/{parent}/trials:suggest:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6202,7 +6202,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}:batchImport":
+  /v1beta1/{parent}:batchImport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6244,7 +6244,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6291,7 +6291,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6333,7 +6333,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6384,7 +6384,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{tensorboardExperiment}:write":
+  /v1beta1/{tensorboardExperiment}:write:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6426,7 +6426,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{tensorboardRun}:write":
+  /v1beta1/{tensorboardRun}:write:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6468,7 +6468,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{tensorboardTimeSeries}:exportTensorboardTimeSeries":
+  /v1beta1/{tensorboardTimeSeries}:exportTensorboardTimeSeries:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6510,7 +6510,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{tensorboardTimeSeries}:read":
+  /v1beta1/{tensorboardTimeSeries}:read:
     get:
       description: Reads a TensorboardTimeSeries' data. By default, if the number of data points stored is less than 1000, all data is returned. Otherwise, 1000 data points is randomly selected from this time series and returned. This value can be changed by changing max_data_points, which can't be greater than 10k.
       operationId: aiplatform.projects.locations.tensorboards.experiments.runs.timeSeries.read
@@ -6557,7 +6557,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{tensorboard}/experiments/{experimentsId}/runs/{runsId}/timeSeries:batchRead":
+  /v1beta1/{tensorboard}/experiments/{experimentsId}/runs/{runsId}/timeSeries:batchRead:
     get:
       description: Reads multiple TensorboardTimeSeries' data. The data point number limit is 1000 for scalars, 100 for tensors and blob references. If the number of data points stored is less than the limit, all data is returned. Otherwise, the number limit of data points is randomly selected from this time series and returned.
       operationId: aiplatform.projects.locations.tensorboards.experiments.runs.timeSeries.batchRead
@@ -6613,7 +6613,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{tensorboard}:readSize":
+  /v1beta1/{tensorboard}:readSize:
     get:
       description: Returns the storage size for a given TensorBoard instance.
       operationId: aiplatform.projects.locations.tensorboards.readSize
@@ -6650,7 +6650,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{tensorboard}:readUsage":
+  /v1beta1/{tensorboard}:readUsage:
     get:
       description: Returns a list of monthly active users for a given TensorBoard instance.
       operationId: aiplatform.projects.locations.tensorboards.readUsage
@@ -6687,7 +6687,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{timeSeries}:readBlobData":
+  /v1beta1/{timeSeries}:readBlobData:
     get:
       description: Gets bytes of TensorboardBlobs. This is to allow reading blob data stored in consumer project's Cloud Storage bucket without users having to obtain Cloud Storage access permission.
       operationId: aiplatform.projects.locations.tensorboards.experiments.runs.timeSeries.readBlobData
@@ -6733,7 +6733,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{trialName}:addTrialMeasurement":
+  /v1beta1/{trialName}:addTrialMeasurement:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -6775,7 +6775,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{trialName}:checkTrialEarlyStoppingState":
+  /v1beta1/{trialName}:checkTrialEarlyStoppingState:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

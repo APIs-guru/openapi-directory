@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a single VMware node pool.
       operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.delete
@@ -158,7 +158,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: gkeonprem.projects.locations.list
@@ -210,7 +210,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.operations.list
@@ -262,7 +262,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -304,7 +304,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:unenroll":
+  /v1/{name}:unenroll:
     delete:
       description: Unenrolls a VMware node pool to Anthos On-Prem API
       operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.unenroll
@@ -356,7 +356,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/bareMetalAdminClusters":
+  /v1/{parent}/bareMetalAdminClusters:
     get:
       description: Lists bare metal admin clusters in a given project and location.
       operationId: gkeonprem.projects.locations.bareMetalAdminClusters.list
@@ -451,7 +451,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/bareMetalAdminClusters:enroll":
+  /v1/{parent}/bareMetalAdminClusters:enroll:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -493,7 +493,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/bareMetalAdminClusters:queryVersionConfig":
+  /v1/{parent}/bareMetalAdminClusters:queryVersionConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -535,7 +535,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/bareMetalClusters":
+  /v1/{parent}/bareMetalClusters:
     get:
       description: Lists bare metal clusters in a given project and location.
       operationId: gkeonprem.projects.locations.bareMetalClusters.list
@@ -635,7 +635,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/bareMetalClusters:enroll":
+  /v1/{parent}/bareMetalClusters:enroll:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -677,7 +677,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/bareMetalClusters:queryVersionConfig":
+  /v1/{parent}/bareMetalClusters:queryVersionConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -729,7 +729,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/bareMetalNodePools":
+  /v1/{parent}/bareMetalNodePools:
     get:
       description: Lists bare metal node pools in a given project, location and bare metal cluster.
       operationId: gkeonprem.projects.locations.bareMetalClusters.bareMetalNodePools.list
@@ -824,7 +824,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/bareMetalNodePools:enroll":
+  /v1/{parent}/bareMetalNodePools:enroll:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -866,7 +866,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/vmwareAdminClusters":
+  /v1/{parent}/vmwareAdminClusters:
     get:
       description: Lists VMware admin clusters in a given project and location.
       operationId: gkeonprem.projects.locations.vmwareAdminClusters.list
@@ -922,7 +922,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/vmwareAdminClusters:enroll":
+  /v1/{parent}/vmwareAdminClusters:enroll:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -964,7 +964,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/vmwareClusters":
+  /v1/{parent}/vmwareClusters:
     get:
       description: Lists VMware Clusters in a given project and location.
       operationId: gkeonprem.projects.locations.vmwareClusters.list
@@ -1064,7 +1064,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/vmwareClusters:enroll":
+  /v1/{parent}/vmwareClusters:enroll:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1106,7 +1106,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/vmwareClusters:queryVersionConfig":
+  /v1/{parent}/vmwareClusters:queryVersionConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1158,7 +1158,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/vmwareNodePools":
+  /v1/{parent}/vmwareNodePools:
     get:
       description: Lists VMware node pools in a given project, location and VMWare cluster.
       operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.list
@@ -1253,7 +1253,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/vmwareNodePools:enroll":
+  /v1/{parent}/vmwareNodePools:enroll:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1295,7 +1295,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: gkeonprem.projects.locations.vmwareClusters.vmwareNodePools.getIamPolicy
@@ -1337,7 +1337,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1379,7 +1379,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

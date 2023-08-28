@@ -160,7 +160,7 @@ paths:
       x-groupName: Transactions
       x-methodName: getAllTransactions
       x-sortIndex: 1
-  "/transactions/{id}":
+  /transactions/{id}:
     get:
       description: Returns a transaction.
       operationId: get-transactions-id

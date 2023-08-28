@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1alpha1/{domain}:checkMigrationPermission":
+  /v1alpha1/{domain}:checkMigrationPermission:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -74,7 +74,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{domain}:disableMigration":
+  /v1alpha1/{domain}:disableMigration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -116,7 +116,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{domain}:domainJoinMachine":
+  /v1alpha1/{domain}:domainJoinMachine:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -158,7 +158,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{domain}:enableMigration":
+  /v1alpha1/{domain}:enableMigration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -200,7 +200,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{domain}:extendSchema":
+  /v1alpha1/{domain}:extendSchema:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -242,7 +242,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}":
+  /v1alpha1/{name}:
     delete:
       description: Deletes identified Peering.
       operationId: managedidentities.projects.locations.global.peerings.delete
@@ -337,7 +337,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}/ldapssettings":
+  /v1alpha1/{name}/ldapssettings:
     get:
       description: Gets the domain ldaps settings.
       operationId: managedidentities.projects.locations.global.domains.getLdapssettings
@@ -408,7 +408,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}/locations":
+  /v1alpha1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: managedidentities.projects.locations.list
@@ -460,7 +460,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{name}/operations":
+  /v1alpha1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: managedidentities.projects.locations.global.operations.list
@@ -512,7 +512,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{name}:attachTrust":
+  /v1alpha1/{name}:attachTrust:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -554,7 +554,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}:cancel":
+  /v1alpha1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -596,7 +596,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}:detachTrust":
+  /v1alpha1/{name}:detachTrust:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -638,7 +638,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}:reconfigureTrust":
+  /v1alpha1/{name}:reconfigureTrust:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -680,7 +680,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}:resetAdminPassword":
+  /v1alpha1/{name}:resetAdminPassword:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -722,7 +722,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}:restore":
+  /v1alpha1/{name}:restore:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -764,7 +764,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}:validateTrust":
+  /v1alpha1/{name}:validateTrust:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -806,7 +806,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/backups":
+  /v1alpha1/{parent}/backups:
     get:
       description: Lists Backup in a given project.
       operationId: managedidentities.projects.locations.global.domains.backups.list
@@ -897,7 +897,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/domains":
+  /v1alpha1/{parent}/domains:
     get:
       description: Lists Domains in a given project.
       operationId: managedidentities.projects.locations.global.domains.list
@@ -988,7 +988,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/peerings":
+  /v1alpha1/{parent}/peerings:
     get:
       description: Lists Peerings in a given project.
       operationId: managedidentities.projects.locations.global.peerings.list
@@ -1079,7 +1079,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/sqlIntegrations":
+  /v1alpha1/{parent}/sqlIntegrations:
     get:
       description: Lists SQLIntegrations in a given domain.
       operationId: managedidentities.projects.locations.global.domains.sqlIntegrations.list
@@ -1136,7 +1136,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{resource}:getIamPolicy":
+  /v1alpha1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: managedidentities.projects.locations.global.peerings.getIamPolicy
@@ -1178,7 +1178,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{resource}:setIamPolicy":
+  /v1alpha1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1220,7 +1220,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{resource}:testIamPermissions":
+  /v1alpha1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -36,7 +36,7 @@ tags:
   - name: VoiceV1Settings
   - name: VoiceV1SourceIpMapping
 paths:
-  "/v1/Archives/{Date}/Calls/{Sid}":
+  /v1/Archives/{Date}/Calls/{Sid}:
     delete:
       description: "Delete an archived call record from Bulk Export. Note: this does not also delete the record from the Voice API."
       operationId: DeleteArchivedCall
@@ -233,7 +233,7 @@ paths:
         - friendly_name
         - voice_url
       pathType: list
-  "/v1/ByocTrunks/{Sid}":
+  /v1/ByocTrunks/{Sid}:
     delete:
       description: ""
       operationId: DeleteByocTrunk
@@ -488,7 +488,7 @@ paths:
       dependentProperties:
         connection_policy_target: "{connection_policy_sid: sid}"
       pathType: list
-  "/v1/ConnectionPolicies/{ConnectionPolicySid}/Targets":
+  /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets:
     description: Network element entry points into your communications infrastructure
     get:
       description: ""
@@ -625,7 +625,7 @@ paths:
         - enabled
       parent: /ConnectionPolicies/{Sid}
       pathType: list
-  "/v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}":
+  /v1/ConnectionPolicies/{ConnectionPolicySid}/Targets/{Sid}:
     delete:
       description: ""
       operationId: DeleteConnectionPolicyTarget
@@ -762,7 +762,7 @@ paths:
         - enabled
       parent: /ConnectionPolicies/{Sid}
       pathType: instance
-  "/v1/ConnectionPolicies/{Sid}":
+  /v1/ConnectionPolicies/{Sid}:
     delete:
       description: ""
       operationId: DeleteConnectionPolicy
@@ -1011,7 +1011,7 @@ paths:
         highrisk_special_prefix: "{iso_code: iso_code}"
       parent: /DialingPermissions
       pathType: list
-  "/v1/DialingPermissions/Countries/{IsoCode}":
+  /v1/DialingPermissions/Countries/{IsoCode}:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve voice dialing country permissions identified by the given ISO country code
@@ -1048,7 +1048,7 @@ paths:
         highrisk_special_prefix: "{iso_code: iso_code}"
       parent: /DialingPermissions
       pathType: instance
-  "/v1/DialingPermissions/Countries/{IsoCode}/HighRiskSpecialPrefixes":
+  /v1/DialingPermissions/Countries/{IsoCode}/HighRiskSpecialPrefixes:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch the high-risk special services prefixes from the country resource corresponding to the [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
@@ -1238,7 +1238,7 @@ paths:
         - ip_address
         - cidr_prefix_length
       pathType: list
-  "/v1/IpRecords/{Sid}":
+  /v1/IpRecords/{Sid}:
     delete:
       description: ""
       operationId: DeleteIpRecord
@@ -1497,7 +1497,7 @@ paths:
         - ip_record_sid
         - sip_domain_sid
       pathType: list
-  "/v1/SourceIpMappings/{Sid}":
+  /v1/SourceIpMappings/{Sid}:
     delete:
       description: ""
       operationId: DeleteSourceIpMapping

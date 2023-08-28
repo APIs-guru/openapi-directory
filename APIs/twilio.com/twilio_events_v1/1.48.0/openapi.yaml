@@ -44,7 +44,7 @@ paths:
       dependentProperties:
         schema_version: "{id: id}"
       pathType: list
-  "/v1/Schemas/{Id}":
+  /v1/Schemas/{Id}:
     description: Versioned Schema definitions for Event Types
     get:
       description: Fetch a specific schema with its nested versions.
@@ -77,7 +77,7 @@ paths:
       dependentProperties:
         schema_version: "{id: id}"
       pathType: instance
-  "/v1/Schemas/{Id}/Versions":
+  /v1/Schemas/{Id}/Versions:
     description: Version of the Schema
     get:
       description: Retrieve a paginated list of versions of the schema.
@@ -159,7 +159,7 @@ paths:
         - date_created
       parent: /Schemas/{Id}
       pathType: list
-  "/v1/Schemas/{Id}/Versions/{SchemaVersion}":
+  /v1/Schemas/{Id}/Versions/{SchemaVersion}:
     description: Version of the Schema
     get:
       description: Fetch a specific schema and version.
@@ -327,7 +327,7 @@ paths:
         sink_test: "{sid: sid}"
         sink_validate: "{sid: sid}"
       pathType: list
-  "/v1/Sinks/{Sid}":
+  /v1/Sinks/{Sid}:
     delete:
       description: Delete a specific Sink.
       operationId: DeleteSink
@@ -430,7 +430,7 @@ paths:
         sink_test: "{sid: sid}"
         sink_validate: "{sid: sid}"
       pathType: instance
-  "/v1/Sinks/{Sid}/Test":
+  /v1/Sinks/{Sid}/Test:
     description: Test sink
     post:
       description: Create a new Sink Test Event for the given Sink.
@@ -466,7 +466,7 @@ paths:
       mountName: sink_test
       parent: /Sinks/{Sid}
       pathType: list
-  "/v1/Sinks/{Sid}/Validate":
+  /v1/Sinks/{Sid}/Validate:
     description: Validate sink
     post:
       description: Validate that a test event for a Sink was received.
@@ -640,7 +640,7 @@ paths:
       dependentProperties:
         subscribed_event: "{subscription_sid: sid}"
       pathType: list
-  "/v1/Subscriptions/{Sid}":
+  /v1/Subscriptions/{Sid}:
     delete:
       description: Delete a specific Subscription.
       operationId: DeleteSubscription
@@ -744,7 +744,7 @@ paths:
       dependentProperties:
         subscribed_event: "{subscription_sid: sid}"
       pathType: instance
-  "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents":
+  /v1/Subscriptions/{SubscriptionSid}/SubscribedEvents:
     description: Event subscribed to in the parent subscription
     get:
       description: Retrieve a list of all Subscribed Event types for a Subscription.
@@ -870,7 +870,7 @@ paths:
         - subscription_sid
       parent: /Subscriptions/{Sid}
       pathType: list
-  "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents/{Type}":
+  /v1/Subscriptions/{SubscriptionSid}/SubscribedEvents/{Type}:
     delete:
       description: Remove an event type from a subscription.
       operationId: DeleteSubscribedEvent
@@ -1064,7 +1064,7 @@ paths:
         - description
       mountName: event_types
       pathType: list
-  "/v1/Types/{Type}":
+  /v1/Types/{Type}:
     description: Event Types available
     get:
       description: Fetch a specific Event Type.

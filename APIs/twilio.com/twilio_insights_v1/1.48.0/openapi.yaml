@@ -165,7 +165,7 @@ paths:
       dependentProperties:
         conference_participant: "{conference_sid: conference_sid}"
       pathType: list
-  "/v1/Conferences/{ConferenceSid}":
+  /v1/Conferences/{ConferenceSid}:
     description: "TODO: Resource-level docs"
     get:
       description: Get a specific Conference Summary.
@@ -202,7 +202,7 @@ paths:
       dependentProperties:
         conference_participant: "{conference_sid: conference_sid}"
       pathType: instance
-  "/v1/Conferences/{ConferenceSid}/Participants":
+  /v1/Conferences/{ConferenceSid}/Participants:
     description: "TODO: Resource-level docs"
     get:
       description: Get a list of Conference Participants Summaries for a Conference.
@@ -303,7 +303,7 @@ paths:
       mountName: conference_participants
       parent: /Conferences/{ConferenceSid}
       pathType: list
-  "/v1/Conferences/{ConferenceSid}/Participants/{ParticipantSid}":
+  /v1/Conferences/{ConferenceSid}/Participants/{ParticipantSid}:
     description: "TODO: Resource-level docs"
     get:
       description: Get a specific Conference Participant Summary for a Conference.
@@ -469,7 +469,7 @@ paths:
       dependentProperties:
         participant: "{room_sid: room_sid}"
       pathType: list
-  "/v1/Video/Rooms/{RoomSid}":
+  /v1/Video/Rooms/{RoomSid}:
     description: "TODO: Resource-level docs"
     get:
       description: Get Video Log Analyzer data for a Room.
@@ -503,7 +503,7 @@ paths:
       dependentProperties:
         participant: "{room_sid: room_sid}"
       pathType: instance
-  "/v1/Video/Rooms/{RoomSid}/Participants":
+  /v1/Video/Rooms/{RoomSid}/Participants:
     description: "TODO: Resource-level docs"
     get:
       description: Get a list of room participants.
@@ -582,7 +582,7 @@ paths:
         - participant_sid
       parent: /Video/Rooms/{RoomSid}
       pathType: list
-  "/v1/Video/Rooms/{RoomSid}/Participants/{ParticipantSid}":
+  /v1/Video/Rooms/{RoomSid}/Participants/{ParticipantSid}:
     description: "TODO: Resource-level docs"
     get:
       description: Get Video Log Analyzer data for a Room Participant.
@@ -897,7 +897,7 @@ paths:
         - call_state
       mountName: call_summaries
       pathType: list
-  "/v1/Voice/{CallSid}/Annotation":
+  /v1/Voice/{CallSid}/Annotation:
     description: "TODO: Resource-level docs"
     get:
       description: Get the Annotation for a specific Call.
@@ -990,7 +990,7 @@ paths:
         - account_sid
       parent: /Voice/{Sid}
       pathType: instance
-  "/v1/Voice/{CallSid}/Events":
+  /v1/Voice/{CallSid}/Events:
     description: "TODO: Resource-level docs"
     get:
       description: Get a list of Call Insight Events for a Call.
@@ -1082,7 +1082,7 @@ paths:
         - name
       parent: /Voice/{Sid}
       pathType: list
-  "/v1/Voice/{CallSid}/Metrics":
+  /v1/Voice/{CallSid}/Metrics:
     description: "TODO: Resource-level docs"
     get:
       description: Get a list of Call Metrics for a Call.
@@ -1180,7 +1180,7 @@ paths:
         - direction
       parent: /Voice/{Sid}
       pathType: list
-  "/v1/Voice/{CallSid}/Summary":
+  /v1/Voice/{CallSid}/Summary:
     description: "TODO: Resource-level docs"
     get:
       description: Get a specific Call Summary.
@@ -1225,7 +1225,7 @@ paths:
         - duration
       parent: /Voice/{Sid}
       pathType: instance
-  "/v1/Voice/{Sid}":
+  /v1/Voice/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: ""

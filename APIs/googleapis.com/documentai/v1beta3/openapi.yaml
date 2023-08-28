@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta3/{dataset}:batchDeleteDocuments":
+  /v1beta3/{dataset}:batchDeleteDocuments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{dataset}:getDocument":
+  /v1beta3/{dataset}:getDocument:
     get:
       description: Returns relevant fields present in the requested document.
       operationId: documentai.projects.locations.processors.dataset.getDocument
@@ -159,7 +159,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta3/{dataset}:importDocuments":
+  /v1beta3/{dataset}:importDocuments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -201,7 +201,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{humanReviewConfig}:reviewDocument":
+  /v1beta3/{humanReviewConfig}:reviewDocument:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -243,7 +243,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{name}":
+  /v1beta3/{name}:
     delete:
       description: Deletes the processor version, all artifacts under the processor version will be deleted.
       operationId: documentai.projects.locations.processors.processorVersions.delete
@@ -353,7 +353,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{name}/locations":
+  /v1beta3/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: documentai.projects.locations.list
@@ -405,7 +405,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta3/{name}:batchProcess":
+  /v1beta3/{name}:batchProcess:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -447,7 +447,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{name}:cancel":
+  /v1beta3/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -484,7 +484,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{name}:deploy":
+  /v1beta3/{name}:deploy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -526,7 +526,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{name}:disable":
+  /v1beta3/{name}:disable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -568,7 +568,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{name}:enable":
+  /v1beta3/{name}:enable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -610,7 +610,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{name}:process":
+  /v1beta3/{name}:process:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -652,7 +652,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{name}:undeploy":
+  /v1beta3/{name}:undeploy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -694,7 +694,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{parent}/evaluations":
+  /v1beta3/{parent}/evaluations:
     get:
       description: Retrieves a set of evaluations for a given processor version.
       operationId: documentai.projects.locations.processors.processorVersions.evaluations.list
@@ -741,7 +741,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta3/{parent}/processorTypes":
+  /v1beta3/{parent}/processorTypes:
     get:
       description: Lists the processor types that exist.
       operationId: documentai.projects.locations.processorTypes.list
@@ -788,7 +788,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta3/{parent}/processorVersions":
+  /v1beta3/{parent}/processorVersions:
     get:
       description: Lists all versions of a processor.
       operationId: documentai.projects.locations.processors.processorVersions.list
@@ -835,7 +835,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta3/{parent}/processorVersions:importProcessorVersion":
+  /v1beta3/{parent}/processorVersions:importProcessorVersion:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -877,7 +877,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{parent}/processorVersions:train":
+  /v1beta3/{parent}/processorVersions:train:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -919,7 +919,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{parent}/processors":
+  /v1beta3/{parent}/processors:
     get:
       description: Lists all processors which belong to this project.
       operationId: documentai.projects.locations.processors.list
@@ -995,7 +995,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{parent}:fetchProcessorTypes":
+  /v1beta3/{parent}:fetchProcessorTypes:
     get:
       description: Fetches processor types. Note that we don't use ListProcessorTypes here, because it isn't paginated.
       operationId: documentai.projects.locations.fetchProcessorTypes
@@ -1032,7 +1032,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta3/{processorVersion}:evaluateProcessorVersion":
+  /v1beta3/{processorVersion}:evaluateProcessorVersion:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1074,7 +1074,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta3/{processor}:setDefaultProcessorVersion":
+  /v1beta3/{processor}:setDefaultProcessorVersion:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

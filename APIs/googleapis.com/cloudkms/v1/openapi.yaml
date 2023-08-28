@@ -34,7 +34,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{location}:generateRandomBytes":
+  /v1/{location}:generateRandomBytes:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -80,7 +80,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Returns metadata for a given ImportJob.
       operationId: cloudkms.projects.locations.keyRings.importJobs.get
@@ -159,7 +159,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: cloudkms.projects.locations.list
@@ -215,7 +215,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/publicKey":
+  /v1/{name}/publicKey:
     get:
       description: Returns the public key for the given CryptoKeyVersion. The CryptoKey.purpose must be ASYMMETRIC_SIGN or ASYMMETRIC_DECRYPT.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.getPublicKey
@@ -256,7 +256,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:asymmetricDecrypt":
+  /v1/{name}:asymmetricDecrypt:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -302,7 +302,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:asymmetricSign":
+  /v1/{name}:asymmetricSign:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -348,7 +348,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:decrypt":
+  /v1/{name}:decrypt:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -394,7 +394,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:destroy":
+  /v1/{name}:destroy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -440,7 +440,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:encrypt":
+  /v1/{name}:encrypt:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -486,7 +486,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:macSign":
+  /v1/{name}:macSign:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -532,7 +532,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:macVerify":
+  /v1/{name}:macVerify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -578,7 +578,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:rawDecrypt":
+  /v1/{name}:rawDecrypt:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -624,7 +624,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:rawEncrypt":
+  /v1/{name}:rawEncrypt:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -670,7 +670,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:restore":
+  /v1/{name}:restore:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -716,7 +716,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:updatePrimaryVersion":
+  /v1/{name}:updatePrimaryVersion:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -762,7 +762,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{name}:verifyConnectivity":
+  /v1/{name}:verifyConnectivity:
     get:
       description: Verifies that Cloud KMS can successfully connect to the external key manager specified by an EkmConnection. If there is an error connecting to the EKM, this method returns a FAILED_PRECONDITION status containing structured information as described at https://cloud.google.com/kms/docs/reference/ekm_errors.
       operationId: cloudkms.projects.locations.ekmConnections.verifyConnectivity
@@ -803,7 +803,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/cryptoKeyVersions":
+  /v1/{parent}/cryptoKeyVersions:
     get:
       description: Lists CryptoKeyVersions.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.cryptoKeyVersions.list
@@ -905,7 +905,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{parent}/cryptoKeyVersions:import":
+  /v1/{parent}/cryptoKeyVersions:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -951,7 +951,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{parent}/cryptoKeys":
+  /v1/{parent}/cryptoKeys:
     get:
       description: Lists CryptoKeys.
       operationId: cloudkms.projects.locations.keyRings.cryptoKeys.list
@@ -1063,7 +1063,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{parent}/ekmConnections":
+  /v1/{parent}/ekmConnections:
     get:
       description: Lists EkmConnections.
       operationId: cloudkms.projects.locations.ekmConnections.list
@@ -1162,7 +1162,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{parent}/importJobs":
+  /v1/{parent}/importJobs:
     get:
       description: Lists ImportJobs.
       operationId: cloudkms.projects.locations.keyRings.importJobs.list
@@ -1261,7 +1261,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{parent}/keyRings":
+  /v1/{parent}/keyRings:
     get:
       description: Lists KeyRings.
       operationId: cloudkms.projects.locations.keyRings.list
@@ -1360,7 +1360,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
@@ -1406,7 +1406,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1452,7 +1452,7 @@ paths:
             - https://www.googleapis.com/auth/cloudkms
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

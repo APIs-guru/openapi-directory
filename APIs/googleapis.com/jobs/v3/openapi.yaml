@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v3/{name}":
+  /v3/{name}:
     delete:
       description: Deletes the specified job. Typically, the job becomes unsearchable within 10 seconds, but it may take up to 5 minutes.
       operationId: jobs.projects.jobs.delete
@@ -134,7 +134,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v3/{name}:complete":
+  /v3/{name}:complete:
     get:
       description: Completes the specified prefix with keyword suggestions. Intended for use by a job search auto-complete search box.
       operationId: jobs.projects.complete
@@ -223,7 +223,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/{parent}/clientEvents":
+  /v3/{parent}/clientEvents:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -269,7 +269,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v3/{parent}/companies":
+  /v3/{parent}/companies:
     get:
       description: Lists all companies associated with the service account.
       operationId: jobs.projects.companies.list
@@ -358,7 +358,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v3/{parent}/jobs":
+  /v3/{parent}/jobs:
     get:
       description: Lists jobs by filter.
       operationId: jobs.projects.jobs.list
@@ -458,7 +458,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v3/{parent}/jobs:batchDelete":
+  /v3/{parent}/jobs:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -504,7 +504,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v3/{parent}/jobs:search":
+  /v3/{parent}/jobs:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -550,7 +550,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v3/{parent}/jobs:searchForAlert":
+  /v3/{parent}/jobs:searchForAlert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

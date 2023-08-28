@@ -110,7 +110,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a policy tag. Also deletes all of its descendant policy tags.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.delete
@@ -215,7 +215,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:rename":
+  /v1beta1/{name}:rename:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -257,7 +257,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/entries":
+  /v1beta1/{parent}/entries:
     get:
       description: Lists entries.
       operationId: datacatalog.projects.locations.entryGroups.entries.list
@@ -343,7 +343,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/entryGroups":
+  /v1beta1/{parent}/entryGroups:
     get:
       description: Lists entry groups.
       operationId: datacatalog.projects.locations.entryGroups.list
@@ -424,7 +424,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/fields":
+  /v1beta1/{parent}/fields:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -471,7 +471,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/policyTags":
+  /v1beta1/{parent}/policyTags:
     get:
       description: Lists all policy tags in a taxonomy.
       operationId: datacatalog.projects.locations.taxonomies.policyTags.list
@@ -547,7 +547,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/tagTemplates":
+  /v1beta1/{parent}/tagTemplates:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -594,7 +594,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/tags":
+  /v1beta1/{parent}/tags:
     get:
       description: Lists tags assigned to an Entry. The columns in the response are lowercased.
       operationId: datacatalog.projects.locations.entryGroups.tags.list
@@ -670,7 +670,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/taxonomies":
+  /v1beta1/{parent}/taxonomies:
     get:
       description: Lists all taxonomies in a project in a particular location that the caller has permission to view.
       operationId: datacatalog.projects.locations.taxonomies.list
@@ -751,7 +751,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/taxonomies:export":
+  /v1beta1/{parent}/taxonomies:export:
     get:
       description: Exports all taxonomies and their policy tags in a project. This method generates SerializedTaxonomy protos with nested policy tags that can be used as an input for future ImportTaxonomies calls.
       operationId: datacatalog.projects.locations.taxonomies.export
@@ -802,7 +802,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/taxonomies:import":
+  /v1beta1/{parent}/taxonomies:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -844,7 +844,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -886,7 +886,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -928,7 +928,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

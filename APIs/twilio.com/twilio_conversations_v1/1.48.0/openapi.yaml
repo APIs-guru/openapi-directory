@@ -262,7 +262,7 @@ paths:
         - friendly_name
       mountName: address_configurations
       pathType: list
-  "/v1/Configuration/Addresses/{Sid}":
+  /v1/Configuration/Addresses/{Sid}:
     delete:
       description: Remove an existing address configuration
       operationId: DeleteConfigurationAddress
@@ -610,7 +610,7 @@ paths:
         participant: "{conversation_sid: sid}"
         webhook: "{conversation_sid: sid}"
       pathType: list
-  "/v1/Conversations/{ConversationSid}/Messages":
+  /v1/Conversations/{ConversationSid}/Messages:
     description: A Message resource represents a message in a conversation.
     get:
       description: Retrieve a list of all messages in the conversation
@@ -769,7 +769,7 @@ paths:
         delivery_receipt: "{conversation_sid: conversation_sid, message_sid: sid}"
       parent: /Conversations/{Sid}
       pathType: list
-  "/v1/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts":
+  /v1/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts:
     description: A Message Receipt resource represents a delivery/read receipt of a message in a conversation.
     get:
       description: Retrieve a list of all delivery and read receipts of the conversation message
@@ -861,7 +861,7 @@ paths:
       mountName: delivery_receipts
       parent: /Conversations/{ConversationSid}/Messages/{Sid}
       pathType: list
-  "/v1/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts/{Sid}":
+  /v1/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts/{Sid}:
     description: A Message Receipt resource represents a delivery/read receipt of a message in a conversation.
     get:
       description: Fetch the delivery and read receipts of the conversation message
@@ -915,7 +915,7 @@ paths:
       mountName: delivery_receipts
       parent: /Conversations/{ConversationSid}/Messages/{Sid}
       pathType: instance
-  "/v1/Conversations/{ConversationSid}/Messages/{Sid}":
+  /v1/Conversations/{ConversationSid}/Messages/{Sid}:
     delete:
       description: Remove a message from the conversation
       operationId: DeleteConversationMessage
@@ -1058,7 +1058,7 @@ paths:
         delivery_receipt: "{conversation_sid: conversation_sid, message_sid: sid}"
       parent: /Conversations/{Sid}
       pathType: instance
-  "/v1/Conversations/{ConversationSid}/Participants":
+  /v1/Conversations/{ConversationSid}/Participants:
     description: A Participant resource represents a member of the conversation.
     get:
       description: Retrieve a list of all participants of the conversation
@@ -1203,7 +1203,7 @@ paths:
         - messaging_binding
       parent: /Conversations/{Sid}
       pathType: list
-  "/v1/Conversations/{ConversationSid}/Participants/{Sid}":
+  /v1/Conversations/{ConversationSid}/Participants/{Sid}:
     delete:
       description: Remove a participant from the conversation
       operationId: DeleteConversationParticipant
@@ -1348,7 +1348,7 @@ paths:
         - messaging_binding
       parent: /Conversations/{Sid}
       pathType: instance
-  "/v1/Conversations/{ConversationSid}/Webhooks":
+  /v1/Conversations/{ConversationSid}/Webhooks:
     description: A Scoped Webhook resource manages a set of callback URLs and their configuration for receiving events specific to one conversation.
     get:
       description: Retrieve a list of all webhooks scoped to the conversation
@@ -1490,7 +1490,7 @@ paths:
         - target
       parent: /Conversations/{Sid}
       pathType: list
-  "/v1/Conversations/{ConversationSid}/Webhooks/{Sid}":
+  /v1/Conversations/{ConversationSid}/Webhooks/{Sid}:
     delete:
       description: Remove an existing webhook scoped to the conversation
       operationId: DeleteConversationScopedWebhook
@@ -1622,7 +1622,7 @@ paths:
         - target
       parent: /Conversations/{Sid}
       pathType: instance
-  "/v1/Conversations/{Sid}":
+  /v1/Conversations/{Sid}:
     delete:
       description: Remove a conversation from your account's default service
       operationId: DeleteConversation
@@ -1883,7 +1883,7 @@ paths:
         - friendly_name
         - type
       pathType: list
-  "/v1/Credentials/{Sid}":
+  /v1/Credentials/{Sid}:
     delete:
       description: Remove a push notification credential from your account
       operationId: DeleteCredential
@@ -2201,7 +2201,7 @@ paths:
         - friendly_name
         - type
       pathType: list
-  "/v1/Roles/{Sid}":
+  /v1/Roles/{Sid}:
     delete:
       description: Remove a user role from your account's default service
       operationId: DeleteRole
@@ -2407,7 +2407,7 @@ paths:
         role: "{chat_service_sid: sid}"
         user: "{chat_service_sid: sid}"
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Bindings":
+  /v1/Services/{ChatServiceSid}/Bindings:
     description: A Binding resource represents a push notification binding and its configuration, for delivering conversation events to mobile or web endpoints.
     get:
       description: Retrieve a list of all push notification bindings in the conversation service
@@ -2506,7 +2506,7 @@ paths:
         - identity
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Bindings/{Sid}":
+  /v1/Services/{ChatServiceSid}/Bindings/{Sid}:
     delete:
       description: Remove a push notification binding from the conversation service
       operationId: DeleteServiceBinding
@@ -2583,7 +2583,7 @@ paths:
         - identity
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Configuration":
+  /v1/Services/{ChatServiceSid}/Configuration:
     description: A Service Configuration resource manages service-level settings applicable to the Conversation API.
     get:
       description: Fetch the configuration of a conversation service
@@ -2672,7 +2672,7 @@ paths:
         - chat_service_sid
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Configuration/Notifications":
+  /v1/Services/{ChatServiceSid}/Configuration/Notifications:
     description: A Service Notification resource manages a set of settings to determine push notification behavior at service level.
     get:
       description: Fetch push notification service settings
@@ -2779,7 +2779,7 @@ paths:
         - chat_service_sid
       parent: /Services/{ChatServiceSid}/Configuration
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Configuration/Webhooks":
+  /v1/Services/{ChatServiceSid}/Configuration/Webhooks:
     description: A service webhook configuration resource manages a service-level set of callback URLs and their configuration for receiving all the corresponding service events.
     get:
       description: Fetch a specific service webhook configuration.
@@ -2863,7 +2863,7 @@ paths:
         - chat_service_sid
       parent: /Services/{ChatServiceSid}/Configuration
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Conversations":
+  /v1/Services/{ChatServiceSid}/Conversations:
     description: A Service Conversation resource represents an omnichannel group conversation with an ordered list of messages and a participant roster.
     get:
       description: Retrieve a list of conversations in your service
@@ -3040,7 +3040,7 @@ paths:
         webhook: "{chat_service_sid: chat_service_sid, conversation_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages":
+  /v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages:
     description: A Service Message resource represents a message in a conversation within a specific service.
     get:
       description: Retrieve a list of all messages in the conversation
@@ -3217,7 +3217,7 @@ paths:
         delivery_receipt: "{chat_service_sid: chat_service_sid, conversation_sid: conversation_sid, message_sid: sid}"
       parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts":
+  /v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts:
     description: A Service Message Receipt resource represents a delivery/read receipt of a message in a conversation.
     get:
       description: Retrieve a list of all delivery and read receipts of the conversation message
@@ -3318,7 +3318,7 @@ paths:
       mountName: delivery_receipts
       parent: /Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts/{Sid}":
+  /v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{MessageSid}/Receipts/{Sid}:
     description: A Service Message Receipt resource represents a delivery/read receipt of a message in a conversation.
     get:
       description: Fetch the delivery and read receipts of the conversation message
@@ -3381,7 +3381,7 @@ paths:
       mountName: delivery_receipts
       parent: /Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{Sid}":
+  /v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Messages/{Sid}:
     delete:
       description: Remove a message from the conversation
       operationId: DeleteServiceConversationMessage
@@ -3551,7 +3551,7 @@ paths:
         delivery_receipt: "{chat_service_sid: chat_service_sid, conversation_sid: conversation_sid, message_sid: sid}"
       parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Participants":
+  /v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Participants:
     description: A Service Participant resource represents a member of the conversation within a specific service.
     get:
       description: Retrieve a list of all participants of the conversation
@@ -3714,7 +3714,7 @@ paths:
         - messaging_binding
       parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Participants/{Sid}":
+  /v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Participants/{Sid}:
     delete:
       description: Remove a participant from the conversation
       operationId: DeleteServiceConversationParticipant
@@ -3886,7 +3886,7 @@ paths:
         - messaging_binding
       parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Webhooks":
+  /v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Webhooks:
     description: A Conversation-scoped Webhook resource manages a set of callback URLs and their configuration for receiving events specific to one conversation.
     get:
       description: Retrieve a list of all webhooks scoped to the conversation
@@ -4046,7 +4046,7 @@ paths:
         - target
       parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Webhooks/{Sid}":
+  /v1/Services/{ChatServiceSid}/Conversations/{ConversationSid}/Webhooks/{Sid}:
     delete:
       description: Remove an existing webhook scoped to the conversation
       operationId: DeleteServiceConversationScopedWebhook
@@ -4205,7 +4205,7 @@ paths:
         - target
       parent: /Services/{ChatServiceSid}/Conversations/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Conversations/{Sid}":
+  /v1/Services/{ChatServiceSid}/Conversations/{Sid}:
     delete:
       description: Remove a conversation from your service
       operationId: DeleteServiceConversation
@@ -4365,7 +4365,7 @@ paths:
         webhook: "{chat_service_sid: chat_service_sid, conversation_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/ParticipantConversations":
+  /v1/Services/{ChatServiceSid}/ParticipantConversations:
     description: Service Participant Conversations resource represents a list of Conversations that this Participant belongs to belonging to a specific conversation service.
     get:
       description: Retrieve a list of all Conversations that this Participant belongs to by identity or by address. Only one parameter should be specified.
@@ -4459,7 +4459,7 @@ paths:
         - conversation_sid
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Roles":
+  /v1/Services/{ChatServiceSid}/Roles:
     description: A Service Role resource represents a set of permissions granted to a user within a service or a conversation.
     get:
       description: Retrieve a list of all user roles in your service
@@ -4592,7 +4592,7 @@ paths:
         - type
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Roles/{Sid}":
+  /v1/Services/{ChatServiceSid}/Roles/{Sid}:
     delete:
       description: Remove a user role from your service
       operationId: DeleteServiceRole
@@ -4718,7 +4718,7 @@ paths:
         - type
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Users":
+  /v1/Services/{ChatServiceSid}/Users:
     description: A Service User resource represents a conversation user belonging to a specific conversation service.
     get:
       description: Retrieve a list of all conversation users in your service
@@ -4859,7 +4859,7 @@ paths:
         user_conversation: "{chat_service_sid: chat_service_sid, user_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Users/{Sid}":
+  /v1/Services/{ChatServiceSid}/Users/{Sid}:
     delete:
       description: Remove a conversation user from your service
       operationId: DeleteServiceUser
@@ -4994,7 +4994,7 @@ paths:
         user_conversation: "{chat_service_sid: chat_service_sid, user_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ChatServiceSid}/Users/{UserSid}/Conversations":
+  /v1/Services/{ChatServiceSid}/Users/{UserSid}/Conversations:
     description: A Service User Conversation resource represents a conversation of the user belonging to a specific conversation service.
     get:
       description: Retrieve a list of all User Conversations for the User.
@@ -5087,7 +5087,7 @@ paths:
       mountName: user_conversations
       parent: /Services/{ChatServiceSid}/Users/{Sid}
       pathType: list
-  "/v1/Services/{ChatServiceSid}/Users/{UserSid}/Conversations/{ConversationSid}":
+  /v1/Services/{ChatServiceSid}/Users/{UserSid}/Conversations/{ConversationSid}:
     delete:
       description: Delete a specific User Conversation.
       operationId: DeleteServiceUserConversation
@@ -5230,7 +5230,7 @@ paths:
       mountName: user_conversations
       parent: /Services/{ChatServiceSid}/Users/{Sid}
       pathType: instance
-  "/v1/Services/{Sid}":
+  /v1/Services/{Sid}:
     delete:
       description: Remove a conversation service with all its nested resources from your account
       operationId: DeleteService
@@ -5416,7 +5416,7 @@ paths:
       dependentProperties:
         user_conversation: "{user_sid: sid}"
       pathType: list
-  "/v1/Users/{Sid}":
+  /v1/Users/{Sid}:
     delete:
       description: Remove a conversation user from your account's default service
       operationId: DeleteUser
@@ -5523,7 +5523,7 @@ paths:
       dependentProperties:
         user_conversation: "{user_sid: sid}"
       pathType: instance
-  "/v1/Users/{UserSid}/Conversations":
+  /v1/Users/{UserSid}/Conversations:
     description: A User Conversation resource represents a conversation of the user belonging to a default conversation service.
     get:
       description: Retrieve a list of all User Conversations for the User.
@@ -5607,7 +5607,7 @@ paths:
       mountName: user_conversations
       parent: /Users/{Sid}
       pathType: list
-  "/v1/Users/{UserSid}/Conversations/{ConversationSid}":
+  /v1/Users/{UserSid}/Conversations/{ConversationSid}:
     delete:
       description: Delete a specific User Conversation.
       operationId: DeleteUserConversation

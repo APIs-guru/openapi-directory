@@ -78,7 +78,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes an existing custom dashboard.This method requires the monitoring.dashboards.delete permission on the specified dashboard. For more information, see Cloud Identity and Access Management (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.delete
@@ -197,7 +197,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  "/v1/{name}/location/{location}/prometheus/api/v1/label/{label}/values":
+  /v1/{name}/location/{location}/prometheus/api/v1/label/{label}/values:
     get:
       description: Lists possible values for a given label name.
       operationId: monitoring.projects.location.prometheus.api.v1.label.values
@@ -269,7 +269,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/location/{location}/prometheus/api/v1/labels":
+  /v1/{name}/location/{location}/prometheus/api/v1/labels:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -325,7 +325,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.read
       tags:
         - projects
-  "/v1/{name}/location/{location}/prometheus/api/v1/metadata":
+  /v1/{name}/location/{location}/prometheus/api/v1/metadata:
     get:
       description: Lists metadata for metrics.
       operationId: monitoring.projects.location.prometheus.api.v1.metadata.list
@@ -386,7 +386,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/location/{location}/prometheus/api/v1/query":
+  /v1/{name}/location/{location}/prometheus/api/v1/query:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -442,7 +442,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.read
       tags:
         - projects
-  "/v1/{name}/location/{location}/prometheus/api/v1/query_exemplars":
+  /v1/{name}/location/{location}/prometheus/api/v1/query_exemplars:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -498,7 +498,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.read
       tags:
         - projects
-  "/v1/{name}/location/{location}/prometheus/api/v1/query_range":
+  /v1/{name}/location/{location}/prometheus/api/v1/query_range:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -554,7 +554,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.read
       tags:
         - projects
-  "/v1/{name}/location/{location}/prometheus/api/v1/series":
+  /v1/{name}/location/{location}/prometheus/api/v1/series:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -610,7 +610,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.read
       tags:
         - projects
-  "/v1/{parent}/dashboards":
+  /v1/{parent}/dashboards:
     get:
       description: Lists the existing dashboards.This method requires the monitoring.dashboards.list permission on the specified project. For more information, see Cloud Identity and Access Management (https://cloud.google.com/iam).
       operationId: monitoring.projects.dashboards.list
@@ -707,7 +707,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  "/v1/{parent}/projects":
+  /v1/{parent}/projects:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

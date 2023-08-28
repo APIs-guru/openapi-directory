@@ -121,7 +121,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v2/{parent}/built_in_variables":
+  /tagmanager/v2/{parent}/built_in_variables:
     get:
       description: Lists all the enabled Built-In Variables of a GTM Container.
       operationId: tagmanager.accounts.containers.workspaces.built_in_variables.list
@@ -315,7 +315,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/clients":
+  /tagmanager/v2/{parent}/clients:
     get:
       description: Lists all GTM Clients of a GTM container workspace.
       operationId: tagmanager.accounts.containers.workspaces.clients.list
@@ -390,7 +390,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/containers":
+  /tagmanager/v2/{parent}/containers:
     get:
       description: Lists all Containers that belongs to a GTM Account.
       operationId: tagmanager.accounts.containers.list
@@ -465,7 +465,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/destinations":
+  /tagmanager/v2/{parent}/destinations:
     get:
       description: Lists all Destinations linked to a GTM Container.
       operationId: tagmanager.accounts.containers.destinations.list
@@ -506,7 +506,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v2/{parent}/destinations:link":
+  /tagmanager/v2/{parent}/destinations:link:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -553,7 +553,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/environments":
+  /tagmanager/v2/{parent}/environments:
     get:
       description: Lists all GTM Environments of a GTM Container.
       operationId: tagmanager.accounts.containers.environments.list
@@ -628,7 +628,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/folders":
+  /tagmanager/v2/{parent}/folders:
     get:
       description: Lists all GTM Folders of a Container.
       operationId: tagmanager.accounts.containers.workspaces.folders.list
@@ -703,7 +703,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/gtag_config":
+  /tagmanager/v2/{parent}/gtag_config:
     get:
       description: Lists all Google tag configs in a Container.
       operationId: tagmanager.accounts.containers.workspaces.gtag_config.list
@@ -778,7 +778,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/tags":
+  /tagmanager/v2/{parent}/tags:
     get:
       description: Lists all GTM Tags of a Container.
       operationId: tagmanager.accounts.containers.workspaces.tags.list
@@ -853,7 +853,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/templates":
+  /tagmanager/v2/{parent}/templates:
     get:
       description: Lists all GTM Templates of a GTM container workspace.
       operationId: tagmanager.accounts.containers.workspaces.templates.list
@@ -928,7 +928,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/transformations":
+  /tagmanager/v2/{parent}/transformations:
     get:
       description: Lists all GTM Transformations of a GTM container workspace.
       operationId: tagmanager.accounts.containers.workspaces.transformations.list
@@ -1003,7 +1003,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/triggers":
+  /tagmanager/v2/{parent}/triggers:
     get:
       description: Lists all GTM Triggers of a Container.
       operationId: tagmanager.accounts.containers.workspaces.triggers.list
@@ -1078,7 +1078,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/user_permissions":
+  /tagmanager/v2/{parent}/user_permissions:
     get:
       description: List all users that have access to the account along with Account and Container user access granted to each of them.
       operationId: tagmanager.accounts.user_permissions.list
@@ -1149,7 +1149,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.manage.users
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/variables":
+  /tagmanager/v2/{parent}/variables:
     get:
       description: Lists all GTM Variables of a Container.
       operationId: tagmanager.accounts.containers.workspaces.variables.list
@@ -1224,7 +1224,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/version_headers":
+  /tagmanager/v2/{parent}/version_headers:
     get:
       description: Lists all Container Versions of a GTM Container.
       operationId: tagmanager.accounts.containers.version_headers.list
@@ -1279,7 +1279,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v2/{parent}/version_headers:latest":
+  /tagmanager/v2/{parent}/version_headers:latest:
     get:
       description: Gets the latest container version header
       operationId: tagmanager.accounts.containers.version_headers.latest
@@ -1320,7 +1320,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v2/{parent}/versions:live":
+  /tagmanager/v2/{parent}/versions:live:
     get:
       description: Gets the live (i.e. published) container version
       operationId: tagmanager.accounts.containers.versions.live
@@ -1361,7 +1361,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v2/{parent}/workspaces":
+  /tagmanager/v2/{parent}/workspaces:
     get:
       description: Lists all Workspaces that belong to a GTM Container.
       operationId: tagmanager.accounts.containers.workspaces.list
@@ -1436,7 +1436,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{parent}/zones":
+  /tagmanager/v2/{parent}/zones:
     get:
       description: Lists all GTM Zones of a GTM container workspace.
       operationId: tagmanager.accounts.containers.workspaces.zones.list
@@ -1511,7 +1511,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}":
+  /tagmanager/v2/{path}:
     delete:
       description: Removes a user from the account, revoking access to it and all of its containers.
       operationId: tagmanager.accounts.user_permissions.delete
@@ -1739,7 +1739,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.manage.users
       tags:
         - accounts
-  "/tagmanager/v2/{path}/built_in_variables:revert":
+  /tagmanager/v2/{path}/built_in_variables:revert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1896,7 +1896,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}/status":
+  /tagmanager/v2/{path}/status:
     get:
       description: Finds conflicting and modified entities in the workspace.
       operationId: tagmanager.accounts.containers.workspaces.getStatus
@@ -1937,7 +1937,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v2/{path}:combine":
+  /tagmanager/v2/{path}:combine:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1993,7 +1993,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}:create_version":
+  /tagmanager/v2/{path}:create_version:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2035,7 +2035,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containerversions
       tags:
         - accounts
-  "/tagmanager/v2/{path}:entities":
+  /tagmanager/v2/{path}:entities:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2081,7 +2081,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
-  "/tagmanager/v2/{path}:move_entities_to_folder":
+  /tagmanager/v2/{path}:move_entities_to_folder:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2146,7 +2146,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}:move_tag_id":
+  /tagmanager/v2/{path}:move_tag_id:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2213,7 +2213,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}:publish":
+  /tagmanager/v2/{path}:publish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2255,7 +2255,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.publish
       tags:
         - accounts
-  "/tagmanager/v2/{path}:quick_preview":
+  /tagmanager/v2/{path}:quick_preview:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2292,7 +2292,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containerversions
       tags:
         - accounts
-  "/tagmanager/v2/{path}:reauthorize":
+  /tagmanager/v2/{path}:reauthorize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2334,7 +2334,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.publish
       tags:
         - accounts
-  "/tagmanager/v2/{path}:resolve_conflict":
+  /tagmanager/v2/{path}:resolve_conflict:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2377,7 +2377,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}:revert":
+  /tagmanager/v2/{path}:revert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2419,7 +2419,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}:set_latest":
+  /tagmanager/v2/{path}:set_latest:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2456,7 +2456,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}:snippet":
+  /tagmanager/v2/{path}:snippet:
     get:
       description: Gets the tagging snippet for a Container.
       operationId: tagmanager.accounts.containers.snippet
@@ -2497,7 +2497,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/tagmanager/v2/{path}:sync":
+  /tagmanager/v2/{path}:sync:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2534,7 +2534,7 @@ paths:
             - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  "/tagmanager/v2/{path}:undelete":
+  /tagmanager/v2/{path}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/projects/{projectId}/traces":
+  /v1/projects/{projectId}/traces:
     get:
       description: Returns a list of traces that match the specified filter conditions.
       operationId: cloudtrace.projects.traces.list
@@ -146,7 +146,7 @@ paths:
             - https://www.googleapis.com/auth/trace.append
       tags:
         - projects
-  "/v1/projects/{projectId}/traces/{traceId}":
+  /v1/projects/{projectId}/traces/{traceId}:
     get:
       description: Gets a single trace by its ID.
       operationId: cloudtrace.projects.traces.get

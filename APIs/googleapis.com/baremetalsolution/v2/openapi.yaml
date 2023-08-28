@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2/{instance}:detachLun":
+  /v2/{instance}:detachLun:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{location}/networks:listNetworkUsage":
+  /v2/{location}/networks:listNetworkUsage:
     get:
       description: List all Networks (and used IPs for each Network) in the vendor account associated with the specified project.
       operationId: baremetalsolution.projects.locations.networks.listNetworkUsage
@@ -109,7 +109,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a volume snapshot. Returns INVALID_ARGUMENT if called for a non-boot volume.
       operationId: baremetalsolution.projects.locations.volumes.snapshots.delete
@@ -204,7 +204,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}/locations":
+  /v2/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: baremetalsolution.projects.locations.list
@@ -256,7 +256,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}:disableInteractiveSerialConsole":
+  /v2/{name}:disableInteractiveSerialConsole:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -298,7 +298,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:enableInteractiveSerialConsole":
+  /v2/{name}:enableInteractiveSerialConsole:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -340,7 +340,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:evict":
+  /v2/{name}:evict:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -382,7 +382,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:rename":
+  /v2/{name}:rename:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -424,7 +424,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:reset":
+  /v2/{name}:reset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -466,7 +466,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:start":
+  /v2/{name}:start:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -508,7 +508,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:stop":
+  /v2/{name}:stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -550,7 +550,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/instances":
+  /v2/{parent}/instances:
     get:
       description: List servers in a given project and location.
       operationId: baremetalsolution.projects.locations.instances.list
@@ -602,7 +602,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/luns":
+  /v2/{parent}/luns:
     get:
       description: List storage volume luns for given storage volume.
       operationId: baremetalsolution.projects.locations.volumes.luns.list
@@ -649,7 +649,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/networks":
+  /v2/{parent}/networks:
     get:
       description: List network in a given project and location.
       operationId: baremetalsolution.projects.locations.networks.list
@@ -701,7 +701,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/nfsShares":
+  /v2/{parent}/nfsShares:
     get:
       description: List NFS shares.
       operationId: baremetalsolution.projects.locations.nfsShares.list
@@ -782,7 +782,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/osImages":
+  /v2/{parent}/osImages:
     get:
       description: Retrieves the list of OS images which are currently approved.
       operationId: baremetalsolution.projects.locations.osImages.list
@@ -829,7 +829,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/provisioningConfigs":
+  /v2/{parent}/provisioningConfigs:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -876,7 +876,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/provisioningConfigs:submit":
+  /v2/{parent}/provisioningConfigs:submit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -918,7 +918,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/provisioningQuotas":
+  /v2/{parent}/provisioningQuotas:
     get:
       description: List the budget details to provision resources on a given project.
       operationId: baremetalsolution.projects.locations.provisioningQuotas.list
@@ -965,7 +965,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/snapshots":
+  /v2/{parent}/snapshots:
     get:
       description: Retrieves the list of snapshots for the specified volume. Returns a response with an empty list of snapshots if called for a non-boot volume.
       operationId: baremetalsolution.projects.locations.volumes.snapshots.list
@@ -1041,7 +1041,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/sshKeys":
+  /v2/{parent}/sshKeys:
     get:
       description: Lists the public SSH keys registered for the specified project. These SSH keys are used only for the interactive serial console feature.
       operationId: baremetalsolution.projects.locations.sshKeys.list
@@ -1122,7 +1122,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/volumes":
+  /v2/{parent}/volumes:
     get:
       description: List storage volumes in a given project and location.
       operationId: baremetalsolution.projects.locations.volumes.list
@@ -1174,7 +1174,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{volumeSnapshot}:restoreVolumeSnapshot":
+  /v2/{volumeSnapshot}:restoreVolumeSnapshot:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1216,7 +1216,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{volume}:resize":
+  /v2/{volume}:resize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

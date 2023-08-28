@@ -33,7 +33,7 @@ tags:
   - name: namespaces
   - name: projects
 paths:
-  "/apis/domains.cloudrun.com/v1/{name}":
+  /apis/domains.cloudrun.com/v1/{name}:
     delete:
       description: Delete a domain mapping.
       operationId: run.namespaces.domainmappings.delete
@@ -114,7 +114,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apis/domains.cloudrun.com/v1/{parent}/authorizeddomains":
+  /apis/domains.cloudrun.com/v1/{parent}/authorizeddomains:
     get:
       description: List authorized domains.
       operationId: run.namespaces.authorizeddomains.list
@@ -161,7 +161,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apis/domains.cloudrun.com/v1/{parent}/domainmappings":
+  /apis/domains.cloudrun.com/v1/{parent}/domainmappings:
     get:
       description: List all domain mappings.
       operationId: run.namespaces.domainmappings.list
@@ -267,7 +267,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - namespaces
-  "/apis/run.googleapis.com/v1/{name}":
+  /apis/run.googleapis.com/v1/{name}:
     delete:
       description: Delete a job.
       operationId: run.namespaces.jobs.delete
@@ -372,7 +372,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - namespaces
-  "/apis/run.googleapis.com/v1/{name}:cancel":
+  /apis/run.googleapis.com/v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -414,7 +414,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - namespaces
-  "/apis/run.googleapis.com/v1/{name}:run":
+  /apis/run.googleapis.com/v1/{name}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -456,7 +456,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - namespaces
-  "/apis/run.googleapis.com/v1/{parent}/executions":
+  /apis/run.googleapis.com/v1/{parent}/executions:
     get:
       description: List executions.
       operationId: run.namespaces.executions.list
@@ -528,7 +528,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apis/run.googleapis.com/v1/{parent}/jobs":
+  /apis/run.googleapis.com/v1/{parent}/jobs:
     get:
       description: List jobs.
       operationId: run.namespaces.jobs.list
@@ -629,7 +629,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - namespaces
-  "/apis/run.googleapis.com/v1/{parent}/tasks":
+  /apis/run.googleapis.com/v1/{parent}/tasks:
     get:
       description: List tasks.
       operationId: run.namespaces.tasks.list
@@ -701,7 +701,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apis/serving.knative.dev/v1/{name}":
+  /apis/serving.knative.dev/v1/{name}:
     delete:
       description: Deletes the provided service. This will cause the Service to stop serving traffic and will delete all associated Revisions.
       operationId: run.namespaces.services.delete
@@ -816,7 +816,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - namespaces
-  "/apis/serving.knative.dev/v1/{parent}/configurations":
+  /apis/serving.knative.dev/v1/{parent}/configurations:
     get:
       description: List configurations.
       operationId: run.namespaces.configurations.list
@@ -888,7 +888,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apis/serving.knative.dev/v1/{parent}/revisions":
+  /apis/serving.knative.dev/v1/{parent}/revisions:
     get:
       description: List revisions.
       operationId: run.namespaces.revisions.list
@@ -960,7 +960,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apis/serving.knative.dev/v1/{parent}/routes":
+  /apis/serving.knative.dev/v1/{parent}/routes:
     get:
       description: List routes.
       operationId: run.namespaces.routes.list
@@ -1032,7 +1032,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apis/serving.knative.dev/v1/{parent}/services":
+  /apis/serving.knative.dev/v1/{parent}/services:
     get:
       description: Lists services for the given project and region.
       operationId: run.namespaces.services.list
@@ -1138,7 +1138,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - namespaces
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes the provided service. This will cause the Service to stop serving traffic and will delete all associated Revisions.
       operationId: run.projects.locations.services.delete
@@ -1253,7 +1253,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: run.projects.locations.list
@@ -1305,7 +1305,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/authorizeddomains":
+  /v1/{parent}/authorizeddomains:
     get:
       description: List authorized domains.
       operationId: run.projects.locations.authorizeddomains.list
@@ -1352,7 +1352,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/configurations":
+  /v1/{parent}/configurations:
     get:
       description: List configurations.
       operationId: run.projects.locations.configurations.list
@@ -1424,7 +1424,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/domainmappings":
+  /v1/{parent}/domainmappings:
     get:
       description: List all domain mappings.
       operationId: run.projects.locations.domainmappings.list
@@ -1530,7 +1530,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/revisions":
+  /v1/{parent}/revisions:
     get:
       description: List revisions.
       operationId: run.projects.locations.revisions.list
@@ -1602,7 +1602,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/routes":
+  /v1/{parent}/routes:
     get:
       description: List routes.
       operationId: run.projects.locations.routes.list
@@ -1674,7 +1674,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/services":
+  /v1/{parent}/services:
     get:
       description: Lists services for the given project and region.
       operationId: run.projects.locations.services.list
@@ -1780,7 +1780,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the IAM Access Control policy currently in effect for the given Cloud Run service. This result does not include any inherited policies.
       operationId: run.projects.locations.services.getIamPolicy
@@ -1822,7 +1822,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1864,7 +1864,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

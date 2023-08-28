@@ -88,7 +88,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}":
+  /v3/blogs/{blogId}:
     get:
       description: Gets a blog by id.
       operationId: blogger.blogs.get
@@ -141,7 +141,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/comments":
+  /v3/blogs/{blogId}/comments:
     get:
       description: Lists comments by blog.
       operationId: blogger.comments.listByBlog
@@ -214,7 +214,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/pages":
+  /v3/blogs/{blogId}/pages:
     get:
       description: Lists pages.
       operationId: blogger.pages.list
@@ -319,7 +319,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - pages
-  "/v3/blogs/{blogId}/pages/{pageId}":
+  /v3/blogs/{blogId}/pages/{pageId}:
     delete:
       description: Deletes a page by blog id and page id.
       operationId: blogger.pages.delete
@@ -484,7 +484,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - pages
-  "/v3/blogs/{blogId}/pages/{pageId}/publish":
+  /v3/blogs/{blogId}/pages/{pageId}/publish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -525,7 +525,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - pages
-  "/v3/blogs/{blogId}/pages/{pageId}/revert":
+  /v3/blogs/{blogId}/pages/{pageId}/revert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -566,7 +566,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - pages
-  "/v3/blogs/{blogId}/pageviews":
+  /v3/blogs/{blogId}/pageviews:
     get:
       description: Gets page views by blog id.
       operationId: blogger.pageViews.get
@@ -614,7 +614,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts":
+  /v3/blogs/{blogId}/posts:
     get:
       description: Lists posts.
       operationId: blogger.posts.list
@@ -761,7 +761,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - posts
-  "/v3/blogs/{blogId}/posts/bypath":
+  /v3/blogs/{blogId}/posts/bypath:
     get:
       description: Gets a post by path.
       operationId: blogger.posts.getByPath
@@ -819,7 +819,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts/search":
+  /v3/blogs/{blogId}/posts/search:
     get:
       description: Searches for posts matching given query terms in the specified blog.
       operationId: blogger.posts.search
@@ -876,7 +876,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts/{postId}":
+  /v3/blogs/{blogId}/posts/{postId}:
     delete:
       description: Deletes a post by blog id and post id.
       operationId: blogger.posts.delete
@@ -1077,7 +1077,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - posts
-  "/v3/blogs/{blogId}/posts/{postId}/comments":
+  /v3/blogs/{blogId}/posts/{postId}/comments:
     get:
       description: Lists comments.
       operationId: blogger.comments.list
@@ -1160,7 +1160,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}":
+  /v3/blogs/{blogId}/posts/{postId}/comments/{commentId}:
     delete:
       description: Deletes a comment by blog id, post id and comment id.
       operationId: blogger.comments.delete
@@ -1248,7 +1248,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve":
+  /v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1294,7 +1294,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - comments
-  "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent":
+  /v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1340,7 +1340,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - comments
-  "/v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam":
+  /v3/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1386,7 +1386,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - comments
-  "/v3/blogs/{blogId}/posts/{postId}/publish":
+  /v3/blogs/{blogId}/posts/{postId}/publish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1431,7 +1431,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - posts
-  "/v3/blogs/{blogId}/posts/{postId}/revert":
+  /v3/blogs/{blogId}/posts/{postId}/revert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1472,7 +1472,7 @@ paths:
             - https://www.googleapis.com/auth/blogger
       tags:
         - posts
-  "/v3/users/{userId}":
+  /v3/users/{userId}:
     get:
       description: Gets one user by user_id.
       operationId: blogger.users.get
@@ -1512,7 +1512,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/users/{userId}/blogs":
+  /v3/users/{userId}/blogs:
     get:
       description: Lists blogs by user.
       operationId: blogger.blogs.listByUser
@@ -1590,7 +1590,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/users/{userId}/blogs/{blogId}":
+  /v3/users/{userId}/blogs/{blogId}:
     get:
       description: Gets one blog and user info pair by blog id and user id.
       operationId: blogger.blogUserInfos.get
@@ -1639,7 +1639,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/users/{userId}/blogs/{blogId}/posts":
+  /v3/users/{userId}/blogs/{blogId}/posts:
     get:
       description: Lists post and user info pairs.
       operationId: blogger.postUserInfos.list
@@ -1738,7 +1738,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/users/{userId}/blogs/{blogId}/posts/{postId}":
+  /v3/users/{userId}/blogs/{blogId}/posts/{postId}:
     get:
       description: Gets one post and user info pair, by post_id and user_id.
       operationId: blogger.postUserInfos.get

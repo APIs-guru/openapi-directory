@@ -84,7 +84,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{billingAccount}:estimateCostScenario":
+  /v1beta/{billingAccount}:estimateCostScenario:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -134,7 +134,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
-  "/v1beta/{name}":
+  /v1beta/{name}:
     get:
       description: Gets the latest price for the given SKU.
       operationId: cloudbilling.skus.price.get
@@ -184,7 +184,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/services":
+  /v1beta/{parent}/services:
     get:
       description: Lists services visible to a billing account.
       operationId: cloudbilling.billingAccounts.services.list
@@ -239,7 +239,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/skuGroups":
+  /v1beta/{parent}/skuGroups:
     get:
       description: Lists SKU groups visible to a billing account.
       operationId: cloudbilling.billingAccounts.skuGroups.list
@@ -294,7 +294,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/skus":
+  /v1beta/{parent}/skus:
     get:
       description: Lists all publicly listed SKUs contained by a publicly listed SKU group.
       operationId: cloudbilling.skuGroups.skus.list

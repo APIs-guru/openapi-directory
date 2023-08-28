@@ -71,7 +71,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Get traffic statistics for a domain on a specific date. Returns PERMISSION_DENIED if user does not have permission to access TrafficStats for the domain.
       operationId: gmailpostmastertools.domains.trafficStats.get
@@ -108,7 +108,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/trafficStats":
+  /v1/{parent}/trafficStats:
     get:
       description: List traffic statistics for all available days. Returns PERMISSION_DENIED if user does not have permission to access TrafficStats for the domain.
       operationId: gmailpostmastertools.domains.trafficStats.list

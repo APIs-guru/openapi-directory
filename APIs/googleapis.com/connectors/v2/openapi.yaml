@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2/{connection}:executeSqlQuery":
+  /v2/{connection}:executeSqlQuery:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{entityType}/entities:deleteEntitiesWithConditions":
+  /v2/{entityType}/entities:deleteEntitiesWithConditions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -114,7 +114,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{entityType}/entities:updateEntitiesWithConditions":
+  /v2/{entityType}/entities:updateEntitiesWithConditions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -161,7 +161,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes an existing entity row matching the entity type and entity id specified in the request.
       operationId: connectors.projects.locations.connections.entityTypes.entities.delete
@@ -251,7 +251,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:execute":
+  /v2/{name}:execute:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -293,7 +293,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/actions":
+  /v2/{parent}/actions:
     get:
       description: Gets the schema of all the actions supported by the connector.
       operationId: connectors.projects.locations.connections.actions.list
@@ -340,7 +340,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/entities":
+  /v2/{parent}/entities:
     get:
       description: "Lists entity rows of a particular entity type contained in the request. Note: 1. Currently, only max of one 'sort_by' column is supported. 2. If no 'sort_by' column is provided, the primary key of the table is used. If zero or more than one primary key is available, we default to the unpaginated list entities logic which only returns the first page. 3. The values of the 'sort_by' columns must uniquely identify an entity row, otherwise undefined behaviors may be observed during pagination. 4. Since transactions are not supported, any updates, inserts or deletes during pagination can lead to stale data being returned or other unexpected behaviors."
       operationId: connectors.projects.locations.connections.entityTypes.entities.list
@@ -430,7 +430,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/entityTypes":
+  /v2/{parent}/entityTypes:
     get:
       description: Lists metadata related to all entity types present in the external system.
       operationId: connectors.projects.locations.connections.entityTypes.list

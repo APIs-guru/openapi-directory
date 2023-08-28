@@ -25,7 +25,7 @@ externalDocs:
 security:
   - apikey: []
 paths:
-  "/critics/{resource-type}.json":
+  /critics/{resource-type}.json:
     get:
       parameters:
         - description: |
@@ -142,7 +142,7 @@ paths:
                     type: string
                 type: object
           description: An array of Movies
-  "/reviews/{resource-type}.json":
+  /reviews/{resource-type}.json:
     get:
       parameters:
         - description: |+

@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a single Workspace.
       operationId: dataform.projects.locations.repositories.workspaces.delete
@@ -130,7 +130,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  /v1beta1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: dataform.projects.locations.list
@@ -182,7 +182,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:cancel":
+  /v1beta1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -224,7 +224,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:commit":
+  /v1beta1/{name}:commit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -266,7 +266,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:computeAccessTokenStatus":
+  /v1beta1/{name}:computeAccessTokenStatus:
     get:
       description: Computes a Repository's Git access token status.
       operationId: dataform.projects.locations.repositories.computeAccessTokenStatus
@@ -303,7 +303,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:fetchFileGitStatuses":
+  /v1beta1/{name}:fetchFileGitStatuses:
     get:
       description: Fetches Git statuses for the files in a Workspace.
       operationId: dataform.projects.locations.repositories.workspaces.fetchFileGitStatuses
@@ -340,7 +340,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:fetchGitAheadBehind":
+  /v1beta1/{name}:fetchGitAheadBehind:
     get:
       description: Fetches Git ahead/behind against a remote branch.
       operationId: dataform.projects.locations.repositories.workspaces.fetchGitAheadBehind
@@ -382,7 +382,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:fetchHistory":
+  /v1beta1/{name}:fetchHistory:
     get:
       description: Fetches a Repository's history of commits. The Repository must not have a value for `git_remote_settings.url`.
       operationId: dataform.projects.locations.repositories.fetchHistory
@@ -429,7 +429,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:fetchRemoteBranches":
+  /v1beta1/{name}:fetchRemoteBranches:
     get:
       description: Fetches a Repository's remote branches.
       operationId: dataform.projects.locations.repositories.fetchRemoteBranches
@@ -466,7 +466,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:pull":
+  /v1beta1/{name}:pull:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -508,7 +508,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:push":
+  /v1beta1/{name}:push:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -550,7 +550,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:query":
+  /v1beta1/{name}:query:
     get:
       description: Returns WorkflowInvocationActions in a given WorkflowInvocation.
       operationId: dataform.projects.locations.repositories.workflowInvocations.query
@@ -597,7 +597,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:queryDirectoryContents":
+  /v1beta1/{name}:queryDirectoryContents:
     get:
       description: Returns the contents of a given Repository directory. The Repository must not have a value for `git_remote_settings.url`.
       operationId: dataform.projects.locations.repositories.queryDirectoryContents
@@ -654,7 +654,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:readFile":
+  /v1beta1/{name}:readFile:
     get:
       description: Returns the contents of a file (inside a Repository). The Repository must not have a value for `git_remote_settings.url`.
       operationId: dataform.projects.locations.repositories.readFile
@@ -701,7 +701,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}:reset":
+  /v1beta1/{name}:reset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -743,7 +743,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/compilationResults":
+  /v1beta1/{parent}/compilationResults:
     get:
       description: Lists CompilationResults in a given Repository.
       operationId: dataform.projects.locations.repositories.compilationResults.list
@@ -819,7 +819,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/releaseConfigs":
+  /v1beta1/{parent}/releaseConfigs:
     get:
       description: Lists ReleaseConfigs in a given Repository.
       operationId: dataform.projects.locations.repositories.releaseConfigs.list
@@ -900,7 +900,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/repositories":
+  /v1beta1/{parent}/repositories:
     get:
       description: Lists Repositories in a given project and location.
       operationId: dataform.projects.locations.repositories.list
@@ -991,7 +991,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/workflowConfigs":
+  /v1beta1/{parent}/workflowConfigs:
     get:
       description: Lists WorkflowConfigs in a given Repository.
       operationId: dataform.projects.locations.repositories.workflowConfigs.list
@@ -1072,7 +1072,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/workflowInvocations":
+  /v1beta1/{parent}/workflowInvocations:
     get:
       description: Lists WorkflowInvocations in a given Repository.
       operationId: dataform.projects.locations.repositories.workflowInvocations.list
@@ -1158,7 +1158,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/workspaces":
+  /v1beta1/{parent}/workspaces:
     get:
       description: Lists Workspaces in a given Repository.
       operationId: dataform.projects.locations.repositories.workspaces.list
@@ -1249,7 +1249,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: dataform.projects.locations.repositories.workspaces.getIamPolicy
@@ -1291,7 +1291,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1333,7 +1333,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1375,7 +1375,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{workspace}:fetchFileDiff":
+  /v1beta1/{workspace}:fetchFileDiff:
     get:
       description: Fetches Git diff for an uncommitted file in a Workspace.
       operationId: dataform.projects.locations.repositories.workspaces.fetchFileDiff
@@ -1417,7 +1417,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{workspace}:installNpmPackages":
+  /v1beta1/{workspace}:installNpmPackages:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1459,7 +1459,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{workspace}:makeDirectory":
+  /v1beta1/{workspace}:makeDirectory:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1501,7 +1501,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{workspace}:moveDirectory":
+  /v1beta1/{workspace}:moveDirectory:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1543,7 +1543,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{workspace}:moveFile":
+  /v1beta1/{workspace}:moveFile:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1585,7 +1585,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{workspace}:queryDirectoryContents":
+  /v1beta1/{workspace}:queryDirectoryContents:
     get:
       description: Returns the contents of a given Workspace directory.
       operationId: dataform.projects.locations.repositories.workspaces.queryDirectoryContents
@@ -1637,7 +1637,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{workspace}:readFile":
+  /v1beta1/{workspace}:readFile:
     get:
       description: Returns the contents of a file (inside a Workspace).
       operationId: dataform.projects.locations.repositories.workspaces.readFile
@@ -1679,7 +1679,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{workspace}:removeDirectory":
+  /v1beta1/{workspace}:removeDirectory:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1721,7 +1721,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{workspace}:removeFile":
+  /v1beta1/{workspace}:removeFile:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1763,7 +1763,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{workspace}:writeFile":
+  /v1beta1/{workspace}:writeFile:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -193,7 +193,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - images
-  "/v1p2beta1/{parent}/files:annotate":
+  /v1p2beta1/{parent}/files:annotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -239,7 +239,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - projects
-  "/v1p2beta1/{parent}/files:asyncBatchAnnotate":
+  /v1p2beta1/{parent}/files:asyncBatchAnnotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -285,7 +285,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - projects
-  "/v1p2beta1/{parent}/images:annotate":
+  /v1p2beta1/{parent}/images:annotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -331,7 +331,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-vision
       tags:
         - projects
-  "/v1p2beta1/{parent}/images:asyncBatchAnnotate":
+  /v1p2beta1/{parent}/images:asyncBatchAnnotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

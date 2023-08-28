@@ -82,7 +82,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -124,7 +124,7 @@ paths:
           description: Successful response
       tags:
         - platforms
-  "/v1alpha/{parent}/ideaActivities":
+  /v1alpha/{parent}/ideaActivities:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -161,7 +161,7 @@ paths:
           description: Successful response
       tags:
         - platforms
-  "/v1alpha/{parent}/ideas":
+  /v1alpha/{parent}/ideas:
     get:
       description: List ideas for a given Creator and filter and sort options.
       operationId: ideahub.platforms.properties.ideas.list
@@ -213,7 +213,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/locales":
+  /v1alpha/{parent}/locales:
     get:
       description: Returns which locales ideas are available in for a given Creator.
       operationId: ideahub.platforms.properties.locales.list

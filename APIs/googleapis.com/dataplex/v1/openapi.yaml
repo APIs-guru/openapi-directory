@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns google.rpc.Code.UNIMPLEMENTED.
       operationId: dataplex.projects.locations.operations.delete
@@ -178,7 +178,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: dataplex.projects.locations.list
@@ -230,7 +230,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.
       operationId: dataplex.projects.locations.operations.list
@@ -282,7 +282,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -324,7 +324,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:run":
+  /v1/{name}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -366,7 +366,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/actions":
+  /v1/{parent}/actions:
     get:
       description: Lists action resources in an asset.
       operationId: dataplex.projects.locations.lakes.zones.assets.actions.list
@@ -413,7 +413,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/assets":
+  /v1/{parent}/assets:
     get:
       description: Lists asset resources in a zone.
       operationId: dataplex.projects.locations.lakes.zones.assets.list
@@ -509,7 +509,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/attributes":
+  /v1/{parent}/attributes:
     get:
       description: Lists Data Attribute resources in a DataTaxonomy.
       operationId: dataplex.projects.locations.dataTaxonomies.attributes.list
@@ -605,7 +605,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/content":
+  /v1/{parent}/content:
     get:
       description: List content.
       operationId: dataplex.projects.locations.lakes.content.list
@@ -691,7 +691,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/contentitems":
+  /v1/{parent}/contentitems:
     get:
       description: List content.
       operationId: dataplex.projects.locations.lakes.contentitems.list
@@ -777,7 +777,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/dataAttributeBindings":
+  /v1/{parent}/dataAttributeBindings:
     get:
       description: Lists DataAttributeBinding resources in a project and location.
       operationId: dataplex.projects.locations.dataAttributeBindings.list
@@ -873,7 +873,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/dataScans":
+  /v1/{parent}/dataScans:
     get:
       description: Lists DataScans.
       operationId: dataplex.projects.locations.dataScans.list
@@ -969,7 +969,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/dataTaxonomies":
+  /v1/{parent}/dataTaxonomies:
     get:
       description: Lists DataTaxonomy resources in a project and location.
       operationId: dataplex.projects.locations.dataTaxonomies.list
@@ -1065,7 +1065,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/entities":
+  /v1/{parent}/entities:
     get:
       description: List metadata entities in a zone.
       operationId: dataplex.projects.locations.lakes.zones.entities.list
@@ -1160,7 +1160,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/environments":
+  /v1/{parent}/environments:
     get:
       description: Lists environments under the given lake.
       operationId: dataplex.projects.locations.lakes.environments.list
@@ -1256,7 +1256,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/jobs":
+  /v1/{parent}/jobs:
     get:
       description: Lists Jobs under the given task.
       operationId: dataplex.projects.locations.lakes.tasks.jobs.list
@@ -1303,7 +1303,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/lakes":
+  /v1/{parent}/lakes:
     get:
       description: Lists lake resources in a project and location.
       operationId: dataplex.projects.locations.lakes.list
@@ -1399,7 +1399,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/partitions":
+  /v1/{parent}/partitions:
     get:
       description: List metadata partitions of an entity.
       operationId: dataplex.projects.locations.lakes.zones.entities.partitions.list
@@ -1485,7 +1485,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/sessions":
+  /v1/{parent}/sessions:
     get:
       description: Lists session resources in an environment.
       operationId: dataplex.projects.locations.lakes.environments.sessions.list
@@ -1537,7 +1537,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/tasks":
+  /v1/{parent}/tasks:
     get:
       description: Lists tasks under the given lake.
       operationId: dataplex.projects.locations.lakes.tasks.list
@@ -1633,7 +1633,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/zones":
+  /v1/{parent}/zones:
     get:
       description: Lists zone resources in a lake.
       operationId: dataplex.projects.locations.lakes.zones.list
@@ -1729,7 +1729,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: dataplex.projects.locations.lakes.zones.assets.getIamPolicy
@@ -1771,7 +1771,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1813,7 +1813,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

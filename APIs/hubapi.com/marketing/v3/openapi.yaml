@@ -26,7 +26,7 @@ tags:
   - name: Settings
   - name: Search
 paths:
-  "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create":
+  /marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create:
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
       operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create
@@ -78,7 +78,7 @@ paths:
       summary: Record
       tags:
         - Attendance Subscriber State Changes
-  "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create":
+  /marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create:
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created.
       operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create
@@ -237,7 +237,7 @@ paths:
       summary: Create or update multiple marketing events
       tags:
         - Batch
-  "/marketing/v3/marketing-events/events/{externalEventId}":
+  /marketing/v3/marketing-events/events/{externalEventId}:
     delete:
       description: Deletes an existing Marketing Event with the specified id, if one exists.
       operationId: delete-/marketing/v3/marketing-events/events/{externalEventId}
@@ -385,7 +385,7 @@ paths:
       summary: Create or update a marketing event
       tags:
         - Basic
-  "/marketing/v3/marketing-events/events/{externalEventId}/cancel":
+  /marketing/v3/marketing-events/events/{externalEventId}/cancel:
     post:
       description: Mark a marketing event as cancelled.
       operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/cancel
@@ -422,7 +422,7 @@ paths:
       summary: Mark a marketing event as cancelled
       tags:
         - Basic
-  "/marketing/v3/marketing-events/events/{externalEventId}/complete":
+  /marketing/v3/marketing-events/events/{externalEventId}/complete:
     post:
       operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/complete
       parameters:
@@ -461,7 +461,7 @@ paths:
             - crm.objects.marketing_events.write
       tags:
         - Marketing_Events_External
-  "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert":
+  /marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert:
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. Note that the contact must already exist in HubSpot; a contact will not be created.
       operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/email-upsert
@@ -507,7 +507,7 @@ paths:
       summary: Record
       tags:
         - Subscriber State Changes
-  "/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert":
+  /marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert:
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids. Note that the contact must already exist in HubSpot; a contact will not be create.
       operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/{subscriberState}/upsert
@@ -553,7 +553,7 @@ paths:
       summary: Record
       tags:
         - Subscriber State Changes
-  "/marketing/v3/marketing-events/{appId}/settings":
+  /marketing/v3/marketing-events/{appId}/settings:
     get:
       description: Retrieve the current settings for the application.
       operationId: get-/marketing/v3/marketing-events/{appId}/settings

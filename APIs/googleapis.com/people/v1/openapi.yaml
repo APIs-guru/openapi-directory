@@ -768,7 +768,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resourceName}":
+  /v1/{resourceName}:
     delete:
       description: Delete an existing contact group owned by the authenticated user by specifying a contact group resource name. Mutate requests for the same user should be sent sequentially to avoid increased latency and failures.
       operationId: people.contactGroups.delete
@@ -927,7 +927,7 @@ paths:
             - https://www.googleapis.com/auth/contacts
       tags:
         - contactGroups
-  "/v1/{resourceName}/connections":
+  /v1/{resourceName}/connections:
     get:
       description: Provides a list of the authenticated user's contacts. Sync tokens expire 7 days after the full sync. A request with an expired sync token will get an error with an [google.rpc.ErrorInfo](https://cloud.google.com/apis/design/errors#error_info) with reason "EXPIRED_SYNC_TOKEN". In the case of such an error clients should make a full sync request without a `sync_token`. The first page of a full sync request has an additional quota. If the quota is exceeded, a 429 error will be returned. This quota is fixed and can not be increased. When the `sync_token` is specified, resources deleted since the last sync will be returned as a person with `PersonMetadata.deleted` set to true. When the `page_token` or `sync_token` is specified, all other request parameters must match the first call. Writes may have a propagation delay of several minutes for sync requests. Incremental syncs are not intended for read-after-write use cases. See example usage at [List the user's contacts that have changed](/people/v1/contacts#list_the_users_contacts_that_have_changed).
       operationId: people.people.connections.list
@@ -1022,7 +1022,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resourceName}/members:modify":
+  /v1/{resourceName}/members:modify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1064,7 +1064,7 @@ paths:
             - https://www.googleapis.com/auth/contacts
       tags:
         - contactGroups
-  "/v1/{resourceName}:copyOtherContactToMyContactsGroup":
+  /v1/{resourceName}:copyOtherContactToMyContactsGroup:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1110,7 +1110,7 @@ paths:
             - https://www.googleapis.com/auth/contacts.other.readonly
       tags:
         - otherContacts
-  "/v1/{resourceName}:deleteContact":
+  /v1/{resourceName}:deleteContact:
     delete:
       description: Delete a contact person. Any non-contact data will not be deleted. Mutate requests for the same user should be sent sequentially to avoid increased latency and failures.
       operationId: people.people.deleteContact
@@ -1147,7 +1147,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resourceName}:deleteContactPhoto":
+  /v1/{resourceName}:deleteContactPhoto:
     delete:
       description: Delete a contact's photo. Mutate requests for the same user should be done sequentially to avoid // lock contention.
       operationId: people.people.deleteContactPhoto
@@ -1203,7 +1203,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resourceName}:updateContact":
+  /v1/{resourceName}:updateContact:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1269,7 +1269,7 @@ paths:
             - https://www.googleapis.com/auth/contacts
       tags:
         - people
-  "/v1/{resourceName}:updateContactPhoto":
+  /v1/{resourceName}:updateContactPhoto:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

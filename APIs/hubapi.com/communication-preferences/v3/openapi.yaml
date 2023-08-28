@@ -72,7 +72,7 @@ paths:
       summary: Get subscription definitions
       tags:
         - Definition
-  "/communication-preferences/v3/status/email/{emailAddress}":
+  /communication-preferences/v3/status/email/{emailAddress}:
     get:
       description: Returns a list of subscriptions and their status for a given contact.
       operationId: get-/communication-preferences/v3/status/email/{emailAddress}_getEmailStatus

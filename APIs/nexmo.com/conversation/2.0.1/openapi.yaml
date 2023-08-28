@@ -112,7 +112,7 @@ paths:
       summary: Create a conversation
       tags:
         - conversation
-  "/conversations/{conversation_id}":
+  /conversations/{conversation_id}:
     delete:
       operationId: deleteConversation
       responses:
@@ -195,7 +195,7 @@ paths:
       summary: Update a conversation
       tags:
         - conversation
-  "/conversations/{conversation_id}/events":
+  /conversations/{conversation_id}/events:
     get:
       deprecated: true
       description: This endpoint is **DEPRECATED**. Please use [/v0.2/events](/api/conversation.v2#get-events).
@@ -252,7 +252,7 @@ paths:
       summary: Create an event
       tags:
         - event
-  "/conversations/{conversation_id}/events/{event_id}":
+  /conversations/{conversation_id}/events/{event_id}:
     delete:
       operationId: deleteEvent
       responses:
@@ -276,7 +276,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/conversation_id"
       - $ref: "#/components/parameters/event_id"
-  "/conversations/{conversation_id}/members":
+  /conversations/{conversation_id}/members:
     get:
       deprecated: true
       description: This endpoint is **DEPRECATED**. Please use [/v0.2/members](/api/conversation.v2#get-members).
@@ -360,7 +360,7 @@ paths:
       summary: Create a member
       tags:
         - member
-  "/conversations/{conversation_id}/members/{member_id}":
+  /conversations/{conversation_id}/members/{member_id}:
     delete:
       operationId: deleteMember
       responses:
@@ -413,7 +413,7 @@ paths:
       summary: Update a member
       tags:
         - member
-  "/conversations/{conversation_id}/record":
+  /conversations/{conversation_id}/record:
     parameters:
       - $ref: "#/components/parameters/conversation_id"
     put:
@@ -532,7 +532,7 @@ paths:
       summary: List legs
       tags:
         - leg
-  "/legs/{leg_id}":
+  /legs/{leg_id}:
     delete:
       operationId: deleteLeg
       responses:
@@ -598,7 +598,7 @@ paths:
       summary: Create a user
       tags:
         - user
-  "/users/{user_id}":
+  /users/{user_id}:
     delete:
       operationId: deleteUser
       responses:
@@ -657,7 +657,7 @@ paths:
       summary: Update a user
       tags:
         - user
-  "/users/{user_id}/conversations":
+  /users/{user_id}/conversations:
     get:
       operationId: getuserConversations
       responses:

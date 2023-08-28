@@ -40,7 +40,7 @@ tags:
   - name: threatListUpdates
   - name: threatMatches
 paths:
-  "/v4/encodedFullHashes/{encodedRequest}":
+  /v4/encodedFullHashes/{encodedRequest}:
     get:
       description: ""
       operationId: safebrowsing.encodedFullHashes.get
@@ -82,7 +82,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/encodedUpdates/{encodedRequest}":
+  /v4/encodedUpdates/{encodedRequest}:
     get:
       description: ""
       operationId: safebrowsing.encodedUpdates.get

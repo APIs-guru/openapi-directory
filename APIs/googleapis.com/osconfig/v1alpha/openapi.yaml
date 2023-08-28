@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     delete:
       description: "Delete the OS policy assignment. This method creates a new revision of the OS policy assignment. This method returns a long running operation (LRO) that contains the rollout details. The rollout can be cancelled by cancelling the LRO. If the LRO completes and is not cancelled, all revisions associated with the OS policy assignment are deleted. For more information, see [Method: projects.locations.osPolicyAssignments.operations.cancel](https://cloud.google.com/compute/docs/osconfig/rest/v1alpha/projects.locations.osPolicyAssignments.operations/cancel)."
       operationId: osconfig.projects.locations.osPolicyAssignments.delete
@@ -136,7 +136,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:cancel":
+  /v1alpha/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -178,7 +178,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:listRevisions":
+  /v1alpha/{name}:listRevisions:
     get:
       description: List the OS policy assignment revisions for a given OS policy assignment.
       operationId: osconfig.projects.locations.osPolicyAssignments.listRevisions
@@ -225,7 +225,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/instanceOSPoliciesCompliances":
+  /v1alpha/{parent}/instanceOSPoliciesCompliances:
     get:
       description: List OS policies compliance data for all Compute Engine VM instances in the specified zone.
       operationId: osconfig.projects.locations.instanceOSPoliciesCompliances.list
@@ -277,7 +277,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/inventories":
+  /v1alpha/{parent}/inventories:
     get:
       description: List inventory data for all VM instances in the specified zone.
       operationId: osconfig.projects.locations.instances.inventories.list
@@ -338,7 +338,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/osPolicyAssignments":
+  /v1alpha/{parent}/osPolicyAssignments:
     get:
       description: List the OS policy assignments under the parent resource. For each OS policy assignment, the latest revision is returned.
       operationId: osconfig.projects.locations.osPolicyAssignments.list
@@ -419,7 +419,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/reports":
+  /v1alpha/{parent}/reports:
     get:
       description: List OS policy assignment reports for all Compute Engine VM instances in the specified zone.
       operationId: osconfig.projects.locations.instances.osPolicyAssignments.reports.list
@@ -471,7 +471,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/vulnerabilityReports":
+  /v1alpha/{parent}/vulnerabilityReports:
     get:
       description: List vulnerability reports for all VM instances in the specified zone.
       operationId: osconfig.projects.locations.instances.vulnerabilityReports.list

@@ -112,7 +112,7 @@ paths:
         - price_unit
       parent: /Messaging
       pathType: list
-  "/v1/Messaging/Countries/{IsoCountry}":
+  /v1/Messaging/Countries/{IsoCountry}:
     description: Messaging pricing by country
     get:
       description: ""
@@ -230,7 +230,7 @@ paths:
         - price_unit
       parent: /PhoneNumbers
       pathType: list
-  "/v1/PhoneNumbers/Countries/{IsoCountry}":
+  /v1/PhoneNumbers/Countries/{IsoCountry}:
     description: Phone number pricing by country
     get:
       description: ""
@@ -346,7 +346,7 @@ paths:
         - price_unit
       parent: /Voice
       pathType: list
-  "/v1/Voice/Countries/{IsoCountry}":
+  /v1/Voice/Countries/{IsoCountry}:
     description: Voice pricing by country
     get:
       description: ""
@@ -392,7 +392,7 @@ paths:
         - price_unit
       parent: /Voice
       pathType: list
-  "/v1/Voice/Numbers/{Number}":
+  /v1/Voice/Numbers/{Number}:
     description: Voice pricing for a specific phone number
     get:
       description: ""

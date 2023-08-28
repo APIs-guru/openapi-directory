@@ -80,7 +80,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/instances":
+  /v1/projects/{project}/instances:
     get:
       description: Lists instances under a given project.
       operationId: sql.instances.list
@@ -169,7 +169,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}":
+  /v1/projects/{project}/instances/{instance}:
     delete:
       description: Deletes a Cloud SQL instance.
       operationId: sql.instances.delete
@@ -328,7 +328,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/addServerCa":
+  /v1/projects/{project}/instances/{instance}/addServerCa:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -375,7 +375,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/backupRuns":
+  /v1/projects/{project}/instances/{instance}/backupRuns:
     get:
       description: Lists all backup runs associated with the project or a given instance and configuration in the reverse chronological order of the backup initiation time.
       operationId: sql.backupRuns.list
@@ -471,7 +471,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - backupRuns
-  "/v1/projects/{project}/instances/{instance}/backupRuns/{id}":
+  /v1/projects/{project}/instances/{instance}/backupRuns/{id}:
     delete:
       description: Deletes the backup taken by a backup run.
       operationId: sql.backupRuns.delete
@@ -564,7 +564,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/instances/{instance}/clone":
+  /v1/projects/{project}/instances/{instance}/clone:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -616,7 +616,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/connectSettings":
+  /v1/projects/{project}/instances/{instance}/connectSettings:
     get:
       description: Retrieves connect settings about a Cloud SQL instance.
       operationId: sql.connect.get
@@ -668,7 +668,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/instances/{instance}/createEphemeral":
+  /v1/projects/{project}/instances/{instance}/createEphemeral:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -720,7 +720,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - sslCerts
-  "/v1/projects/{project}/instances/{instance}/databases":
+  /v1/projects/{project}/instances/{instance}/databases:
     get:
       description: Lists databases in the specified Cloud SQL instance.
       operationId: sql.databases.list
@@ -806,7 +806,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
-  "/v1/projects/{project}/instances/{instance}/databases/{database}":
+  /v1/projects/{project}/instances/{instance}/databases/{database}:
     delete:
       description: Deletes a database from a Cloud SQL instance.
       operationId: sql.databases.delete
@@ -989,7 +989,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - databases
-  "/v1/projects/{project}/instances/{instance}/demoteMaster":
+  /v1/projects/{project}/instances/{instance}/demoteMaster:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1041,7 +1041,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/export":
+  /v1/projects/{project}/instances/{instance}/export:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1089,7 +1089,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/failover":
+  /v1/projects/{project}/instances/{instance}/failover:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1141,7 +1141,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/getDiskShrinkConfig":
+  /v1/projects/{project}/instances/{instance}/getDiskShrinkConfig:
     get:
       description: Get Disk Shrink Config for a given instance.
       operationId: sql.projects.instances.getDiskShrinkConfig
@@ -1188,7 +1188,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/instances/{instance}/getLatestRecoveryTime":
+  /v1/projects/{project}/instances/{instance}/getLatestRecoveryTime:
     get:
       description: Get Latest Recovery Time for a given instance.
       operationId: sql.projects.instances.getLatestRecoveryTime
@@ -1235,7 +1235,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/instances/{instance}/import":
+  /v1/projects/{project}/instances/{instance}/import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1283,7 +1283,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/listServerCas":
+  /v1/projects/{project}/instances/{instance}/listServerCas:
     get:
       description: "Lists all of the trusted Certificate Authorities (CAs) for the specified instance. There can be up to three CAs listed: the CA that was used to sign the certificate that is currently in use, a CA that has been added but not yet used to sign a certificate, and a CA used to sign a certificate that has previously rotated out."
       operationId: sql.instances.listServerCas
@@ -1330,7 +1330,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/instances/{instance}/performDiskShrink":
+  /v1/projects/{project}/instances/{instance}/performDiskShrink:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1382,7 +1382,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
-  "/v1/projects/{project}/instances/{instance}/promoteReplica":
+  /v1/projects/{project}/instances/{instance}/promoteReplica:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1429,7 +1429,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/reencrypt":
+  /v1/projects/{project}/instances/{instance}/reencrypt:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1481,7 +1481,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/rescheduleMaintenance":
+  /v1/projects/{project}/instances/{instance}/rescheduleMaintenance:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1533,7 +1533,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
-  "/v1/projects/{project}/instances/{instance}/resetReplicaSize":
+  /v1/projects/{project}/instances/{instance}/resetReplicaSize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1585,7 +1585,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
-  "/v1/projects/{project}/instances/{instance}/resetSslConfig":
+  /v1/projects/{project}/instances/{instance}/resetSslConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1632,7 +1632,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/restart":
+  /v1/projects/{project}/instances/{instance}/restart:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1679,7 +1679,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/restoreBackup":
+  /v1/projects/{project}/instances/{instance}/restoreBackup:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1731,7 +1731,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/rotateServerCa":
+  /v1/projects/{project}/instances/{instance}/rotateServerCa:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1783,7 +1783,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/sslCerts":
+  /v1/projects/{project}/instances/{instance}/sslCerts:
     get:
       description: Lists all of the current SSL certificates for the instance.
       operationId: sql.sslCerts.list
@@ -1869,7 +1869,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - sslCerts
-  "/v1/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}":
+  /v1/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}:
     delete:
       description: Deletes the SSL certificate. For First Generation instances, the certificate remains valid until the instance is restarted.
       operationId: sql.sslCerts.delete
@@ -1962,7 +1962,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/instances/{instance}/startExternalSync":
+  /v1/projects/{project}/instances/{instance}/startExternalSync:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2014,7 +2014,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
-  "/v1/projects/{project}/instances/{instance}/startReplica":
+  /v1/projects/{project}/instances/{instance}/startReplica:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2061,7 +2061,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/stopReplica":
+  /v1/projects/{project}/instances/{instance}/stopReplica:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2108,7 +2108,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/truncateLog":
+  /v1/projects/{project}/instances/{instance}/truncateLog:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2160,7 +2160,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - instances
-  "/v1/projects/{project}/instances/{instance}/users":
+  /v1/projects/{project}/instances/{instance}/users:
     delete:
       description: Deletes a user from a Cloud SQL instance.
       operationId: sql.users.delete
@@ -2339,7 +2339,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - users
-  "/v1/projects/{project}/instances/{instance}/users/{name}":
+  /v1/projects/{project}/instances/{instance}/users/{name}:
     get:
       description: Retrieves a resource containing information about a user.
       operationId: sql.users.get
@@ -2397,7 +2397,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/instances/{instance}/verifyExternalSyncSettings":
+  /v1/projects/{project}/instances/{instance}/verifyExternalSyncSettings:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2449,7 +2449,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - projects
-  "/v1/projects/{project}/instances/{instance}:generateEphemeralCert":
+  /v1/projects/{project}/instances/{instance}:generateEphemeralCert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2501,7 +2501,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - connect
-  "/v1/projects/{project}/operations":
+  /v1/projects/{project}/operations:
     get:
       description: Lists all instance operations that have been performed on the given Cloud SQL instance in the reverse chronological order of the start time.
       operationId: sql.operations.list
@@ -2557,7 +2557,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/operations/{operation}":
+  /v1/projects/{project}/operations/{operation}:
     get:
       description: Retrieves an instance operation that has been performed on an instance.
       operationId: sql.operations.get
@@ -2604,7 +2604,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{project}/operations/{operation}/cancel":
+  /v1/projects/{project}/operations/{operation}/cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2651,7 +2651,7 @@ paths:
             - https://www.googleapis.com/auth/sqlservice.admin
       tags:
         - operations
-  "/v1/projects/{project}/tiers":
+  /v1/projects/{project}/tiers:
     get:
       description: Lists all available machine types (tiers) for Cloud SQL, for example, `db-custom-1-3840`. For more information, see https://cloud.google.com/sql/pricing.
       operationId: sql.tiers.list

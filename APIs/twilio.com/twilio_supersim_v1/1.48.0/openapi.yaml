@@ -171,7 +171,7 @@ paths:
         - status
       mountName: esim_profiles
       pathType: list
-  "/v1/ESimProfiles/{Sid}":
+  /v1/ESimProfiles/{Sid}:
     description: eSIM Profiles that can be loaded onto consumer eUICC SIMs
     get:
       description: Fetch an eSIM Profile.
@@ -353,7 +353,7 @@ paths:
         - unique_name
         - data_metering
       pathType: list
-  "/v1/Fleets/{Sid}":
+  /v1/Fleets/{Sid}:
     description: Configure shared settings inherited by all Super SIMs assigned to the Fleet
     get:
       description: Fetch a Fleet instance from your account.
@@ -606,7 +606,7 @@ paths:
         - status
         - date_created
       pathType: list
-  "/v1/IpCommands/{Sid}":
+  /v1/IpCommands/{Sid}:
     description: Machine-to-machine IP Commands sent to/from Super SIMs
     get:
       description: Fetch IP Command instance from your account.
@@ -749,7 +749,7 @@ paths:
       dependentProperties:
         network_access_profile_network: "{network_access_profile_sid: sid}"
       pathType: list
-  "/v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks":
+  /v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks:
     description: Mobile operator networks which Network Access Profiles allow access to
     get:
       description: Retrieve a list of Network Access Profile resource's Network resource.
@@ -867,7 +867,7 @@ paths:
         - sid
       parent: /NetworkAccessProfiles/{Sid}
       pathType: list
-  "/v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks/{Sid}":
+  /v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks/{Sid}:
     delete:
       description: Remove a Network resource from the Network Access Profile resource's.
       operationId: DeleteNetworkAccessProfileNetwork
@@ -940,7 +940,7 @@ paths:
         - sid
       parent: /NetworkAccessProfiles/{Sid}
       pathType: instance
-  "/v1/NetworkAccessProfiles/{Sid}":
+  /v1/NetworkAccessProfiles/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a Network Access Profile instance from your account.
@@ -1095,7 +1095,7 @@ paths:
       defaultOutputProperties:
         - sid
       pathType: list
-  "/v1/Networks/{Sid}":
+  /v1/Networks/{Sid}:
     description: Mobile operator networks to which Super SIMs can connect
     get:
       description: Fetch a Network resource.
@@ -1340,7 +1340,7 @@ paths:
         billing_period: "{sim_sid: sid}"
         sim_ip_address: "{sim_sid: sid}"
       pathType: list
-  "/v1/Sims/{Sid}":
+  /v1/Sims/{Sid}:
     description: Individual IoT Super SIMs
     get:
       description: Fetch a Super SIM instance from your account.
@@ -1440,7 +1440,7 @@ paths:
         billing_period: "{sim_sid: sid}"
         sim_ip_address: "{sim_sid: sid}"
       pathType: instance
-  "/v1/Sims/{SimSid}/BillingPeriods":
+  /v1/Sims/{SimSid}/BillingPeriods:
     description: Billing Period for an IoT Super SIM
     get:
       description: Retrieve a list of Billing Periods for a Super SIM.
@@ -1523,7 +1523,7 @@ paths:
         - period_type
       parent: /Sims/{Sid}
       pathType: list
-  "/v1/Sims/{SimSid}/IpAddresses":
+  /v1/Sims/{SimSid}/IpAddresses:
     description: IP Addresses for a Super SIM configured to use a VPN connection
     get:
       description: Retrieve a list of IP Addresses for the given Super SIM.
@@ -1742,7 +1742,7 @@ paths:
         - status
         - date_created
       pathType: list
-  "/v1/SmsCommands/{Sid}":
+  /v1/SmsCommands/{Sid}:
     description: Machine-to-machine SMS Commands sent to/from SIMs
     get:
       description: Fetch SMS Command instance from your account.

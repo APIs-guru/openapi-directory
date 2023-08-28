@@ -179,7 +179,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1/services/{serviceName}":
+  /v1/services/{serviceName}:
     delete:
       description: Deletes a managed service. This method will change the service to the `Soft-Delete` state for 30 days. Within this period, service producers may call UndeleteService to restore the service. After 30 days, the service will be permanently deleted. Operation
       operationId: servicemanagement.services.delete
@@ -256,7 +256,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/services/{serviceName}/config":
+  /v1/services/{serviceName}/config:
     get:
       description: Gets a service configuration (version) for a managed service.
       operationId: servicemanagement.services.getConfig
@@ -318,7 +318,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/services/{serviceName}/configs":
+  /v1/services/{serviceName}/configs:
     get:
       description: Lists the history of the service configuration for a managed service, from the newest to the oldest.
       operationId: servicemanagement.services.configs.list
@@ -410,7 +410,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1/services/{serviceName}/configs/{configId}":
+  /v1/services/{serviceName}/configs/{configId}:
     get:
       description: Gets a service configuration (version) for a managed service.
       operationId: servicemanagement.services.configs.get
@@ -473,7 +473,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/services/{serviceName}/configs:submit":
+  /v1/services/{serviceName}/configs:submit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -519,7 +519,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1/services/{serviceName}/rollouts":
+  /v1/services/{serviceName}/rollouts:
     get:
       description: Lists the history of the service configuration rollouts for a managed service, from the newest to the oldest.
       operationId: servicemanagement.services.rollouts.list
@@ -616,7 +616,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1/services/{serviceName}/rollouts/{rolloutId}":
+  /v1/services/{serviceName}/rollouts/{rolloutId}:
     get:
       description: Gets a service configuration rollout.
       operationId: servicemanagement.services.rollouts.get
@@ -671,7 +671,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/services/{serviceName}:undelete":
+  /v1/services/{serviceName}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -751,7 +751,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: servicemanagement.operations.get
@@ -792,7 +792,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -846,7 +846,7 @@ paths:
             - https://www.googleapis.com/auth/service.management.readonly
       tags:
         - services
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -892,7 +892,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

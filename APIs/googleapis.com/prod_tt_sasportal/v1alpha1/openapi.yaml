@@ -429,7 +429,7 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - policies
-  "/v1alpha1/{name}":
+  /v1alpha1/{name}:
     delete:
       description: Deletes a node.
       operationId: prod_tt_sasportal.nodes.nodes.delete
@@ -536,7 +536,7 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
-  "/v1alpha1/{name}:move":
+  /v1alpha1/{name}:move:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -582,7 +582,7 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
-  "/v1alpha1/{name}:signDevice":
+  /v1alpha1/{name}:signDevice:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -628,7 +628,7 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
-  "/v1alpha1/{name}:updateSigned":
+  /v1alpha1/{name}:updateSigned:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -674,7 +674,7 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
-  "/v1alpha1/{parent}/deployments":
+  /v1alpha1/{parent}/deployments:
     get:
       description: Lists deployments.
       operationId: prod_tt_sasportal.nodes.nodes.deployments.list
@@ -763,7 +763,7 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
-  "/v1alpha1/{parent}/devices":
+  /v1alpha1/{parent}/devices:
     get:
       description: Lists devices under a node or customer.
       operationId: prod_tt_sasportal.nodes.nodes.devices.list
@@ -852,7 +852,7 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
-  "/v1alpha1/{parent}/devices:createSigned":
+  /v1alpha1/{parent}/devices:createSigned:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -898,7 +898,7 @@ paths:
             - https://www.googleapis.com/auth/sasportal
       tags:
         - nodes
-  "/v1alpha1/{parent}/nodes":
+  /v1alpha1/{parent}/nodes:
     get:
       description: Lists nodes.
       operationId: prod_tt_sasportal.nodes.nodes.nodes.list

@@ -73,7 +73,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}":
+  /accounts/{accountId}:
     get:
       description: Get information about the selected associated AdSense account.
       operationId: adsensehost.accounts.get
@@ -106,7 +106,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients":
+  /accounts/{accountId}/adclients:
     get:
       description: List all hosted ad clients in the specified hosted account.
       operationId: adsensehost.accounts.adclients.list
@@ -151,7 +151,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}":
+  /accounts/{accountId}/adclients/{adClientId}:
     get:
       description: Get information about one of the ad clients in the specified publisher's AdSense account.
       operationId: adsensehost.accounts.adclients.get
@@ -190,7 +190,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/adunits":
+  /accounts/{accountId}/adclients/{adClientId}/adunits:
     get:
       description: List all ad units in the specified publisher's AdSense account.
       operationId: adsensehost.accounts.adunits.list
@@ -357,7 +357,7 @@ paths:
             - https://www.googleapis.com/auth/adsensehost
       tags:
         - accounts
-  "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}":
+  /accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}:
     delete:
       description: Delete the specified ad unit from the specified publisher AdSense account.
       operationId: adsensehost.accounts.adunits.delete
@@ -438,7 +438,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode":
+  /accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode:
     get:
       description: Get ad code for the specified ad unit, attaching the specified host custom channels.
       operationId: adsensehost.accounts.adunits.getAdCode
@@ -492,7 +492,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/reports":
+  /accounts/{accountId}/reports:
     get:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsensehost.accounts.reports.generate
@@ -631,7 +631,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}":
+  /adclients/{adClientId}:
     get:
       description: Get information about one of the ad clients in the Host AdSense account.
       operationId: adsensehost.adclients.get
@@ -664,7 +664,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/customchannels":
+  /adclients/{adClientId}/customchannels:
     get:
       description: List all host custom channels in this AdSense account.
       operationId: adsensehost.customchannels.list
@@ -802,7 +802,7 @@ paths:
             - https://www.googleapis.com/auth/adsensehost
       tags:
         - customchannels
-  "/adclients/{adClientId}/customchannels/{customChannelId}":
+  /adclients/{adClientId}/customchannels/{customChannelId}:
     delete:
       description: Delete a specific custom channel from the host AdSense account.
       operationId: adsensehost.customchannels.delete
@@ -871,7 +871,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/urlchannels":
+  /adclients/{adClientId}/urlchannels:
     get:
       description: List all host URL channels in the host AdSense account.
       operationId: adsensehost.urlchannels.list
@@ -945,7 +945,7 @@ paths:
             - https://www.googleapis.com/auth/adsensehost
       tags:
         - urlchannels
-  "/adclients/{adClientId}/urlchannels/{urlChannelId}":
+  /adclients/{adClientId}/urlchannels/{urlChannelId}:
     delete:
       description: Delete a URL channel from the host AdSense account.
       operationId: adsensehost.urlchannels.delete

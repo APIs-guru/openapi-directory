@@ -77,7 +77,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}":
+  /v4/spreadsheets/{spreadsheetId}:
     get:
       description: "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids is not returned. You can include grid data in one of 2 ways: * Specify a [field mask](https://developers.google.com/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want. To retrieve only subsets of spreadsheet data, use the ranges URL parameter. Ranges are specified using [A1 notation](/sheets/api/guides/concepts#cell). You can define a single cell (for example, `A1`) or multiple cells (for example, `A1:D5`). You can also get cells from other sheets within the same spreadsheet (for example, `Sheet2!A1:C4`) or retrieve multiple ranges at once (for example, `?ranges=A1:D5&ranges=Sheet2!A1:C4`). Limiting the range returns only the portions of the spreadsheet that intersect the requested ranges."
       operationId: sheets.spreadsheets.get
@@ -144,7 +144,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}":
+  /v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}:
     get:
       description: Returns the developer metadata with the specified ID. The caller must specify the spreadsheet ID and the developer metadata's unique metadataId.
       operationId: sheets.spreadsheets.developerMetadata.get
@@ -195,7 +195,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/spreadsheets/{spreadsheetId}/developerMetadata:search":
+  /v4/spreadsheets/{spreadsheetId}/developerMetadata:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -245,7 +245,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo":
+  /v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -301,7 +301,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/values/{range}":
+  /v4/spreadsheets/{spreadsheetId}/values/{range}:
     get:
       description: Returns a range of values from a spreadsheet. The caller must specify the spreadsheet ID and a range.
       operationId: sheets.spreadsheets.values.get
@@ -460,7 +460,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/values/{range}:append":
+  /v4/spreadsheets/{spreadsheetId}/values/{range}:append:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -555,7 +555,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/values/{range}:clear":
+  /v4/spreadsheets/{spreadsheetId}/values/{range}:clear:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -611,7 +611,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/values:batchClear":
+  /v4/spreadsheets/{spreadsheetId}/values:batchClear:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -661,7 +661,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter":
+  /v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -711,7 +711,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/values:batchGet":
+  /v4/spreadsheets/{spreadsheetId}/values:batchGet:
     get:
       description: Returns one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges.
       operationId: sheets.spreadsheets.values.batchGet
@@ -799,7 +799,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter":
+  /v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -849,7 +849,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/values:batchUpdate":
+  /v4/spreadsheets/{spreadsheetId}/values:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -899,7 +899,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter":
+  /v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -949,7 +949,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}:batchUpdate":
+  /v4/spreadsheets/{spreadsheetId}:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -999,7 +999,7 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
       tags:
         - spreadsheets
-  "/v4/spreadsheets/{spreadsheetId}:getByDataFilter":
+  /v4/spreadsheets/{spreadsheetId}:getByDataFilter:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

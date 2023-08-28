@@ -209,7 +209,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a Label's permission. Permissions affect the Label resource as a whole, are not revisioned, and do not require publishing.
       operationId: drivelabels.labels.revisions.permissions.delete
@@ -314,7 +314,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}:delta":
+  /v2/{name}:delta:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -360,7 +360,7 @@ paths:
             - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
-  "/v2/{name}:disable":
+  /v2/{name}:disable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -406,7 +406,7 @@ paths:
             - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
-  "/v2/{name}:enable":
+  /v2/{name}:enable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -452,7 +452,7 @@ paths:
             - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
-  "/v2/{name}:publish":
+  /v2/{name}:publish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -498,7 +498,7 @@ paths:
             - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
-  "/v2/{name}:updateLabelCopyMode":
+  /v2/{name}:updateLabelCopyMode:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -544,7 +544,7 @@ paths:
             - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
-  "/v2/{parent}/locks":
+  /v2/{parent}/locks:
     get:
       description: Lists the LabelLocks on a Label.
       operationId: drivelabels.labels.revisions.locks.list
@@ -603,7 +603,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/permissions":
+  /v2/{parent}/permissions:
     get:
       description: Lists a Label's permissions.
       operationId: drivelabels.labels.revisions.permissions.list
@@ -743,7 +743,7 @@ paths:
             - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
-  "/v2/{parent}/permissions:batchDelete":
+  /v2/{parent}/permissions:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -789,7 +789,7 @@ paths:
             - https://www.googleapis.com/auth/drive.labels
       tags:
         - labels
-  "/v2/{parent}/permissions:batchUpdate":
+  /v2/{parent}/permissions:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

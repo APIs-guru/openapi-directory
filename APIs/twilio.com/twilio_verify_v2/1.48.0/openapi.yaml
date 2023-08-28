@@ -238,7 +238,7 @@ paths:
         - conversion_rate_percentage
       mountName: verification_attempts_summary
       pathType: instance
-  "/v2/Attempts/{Sid}":
+  /v2/Attempts/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific verification attempt.
@@ -277,7 +277,7 @@ paths:
         - channel
       mountName: verification_attempts
       pathType: instance
-  "/v2/Forms/{FormType}":
+  /v2/Forms/{FormType}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch the forms for a specific Form Type.
@@ -347,7 +347,7 @@ paths:
         - phone_number
       mountName: safelist
       pathType: list
-  "/v2/SafeList/Numbers/{PhoneNumber}":
+  /v2/SafeList/Numbers/{PhoneNumber}:
     delete:
       description: Remove a phone number from SafeList.
       operationId: DeleteSafelist
@@ -566,7 +566,7 @@ paths:
         verification_check: "{service_sid: sid}"
         webhook: "{service_sid: sid}"
       pathType: list
-  "/v2/Services/{ServiceSid}/AccessTokens":
+  /v2/Services/{ServiceSid}/AccessTokens:
     description: "TODO: Resource-level docs"
     post:
       description: Create a new enrollment Access Token for the Entity
@@ -632,7 +632,7 @@ paths:
         - date_created
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/AccessTokens/{Sid}":
+  /v2/Services/{ServiceSid}/AccessTokens/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch an Access Token for the Entity
@@ -684,7 +684,7 @@ paths:
         - date_created
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Entities":
+  /v2/Services/{ServiceSid}/Entities:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Entities for a Service.
@@ -810,7 +810,7 @@ paths:
         new_factor: "{service_sid: service_sid, identity: identity}"
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Entities/{Identity}":
+  /v2/Services/{ServiceSid}/Entities/{Identity}:
     delete:
       description: Delete a specific Entity.
       operationId: DeleteEntity
@@ -885,7 +885,7 @@ paths:
         new_factor: "{service_sid: service_sid, identity: identity}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges":
+  /v2/Services/{ServiceSid}/Entities/{Identity}/Challenges:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Challenges for a Factor.
@@ -1061,7 +1061,7 @@ paths:
         notification: "{service_sid: service_sid, identity: identity, challenge_sid: sid}"
       parent: /Services/{ServiceSid}/Entities/{Identity}
       pathType: list
-  "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{ChallengeSid}/Notifications":
+  /v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{ChallengeSid}/Notifications:
     description: "TODO: Resource-level docs"
     post:
       description: Create a new Notification for the corresponding Challenge
@@ -1124,7 +1124,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Entities/{Identity}/Challenges/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{Sid}":
+  /v2/Services/{ServiceSid}/Entities/{Identity}/Challenges/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Challenge.
@@ -1232,7 +1232,7 @@ paths:
         notification: "{service_sid: service_sid, identity: identity, challenge_sid: sid}"
       parent: /Services/{ServiceSid}/Entities/{Identity}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Entities/{Identity}/Factors":
+  /v2/Services/{ServiceSid}/Entities/{Identity}/Factors:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Factors for an Entity.
@@ -1445,7 +1445,7 @@ paths:
         - factor_type
       parent: /Services/{ServiceSid}/Entities/{Identity}
       pathType: list
-  "/v2/Services/{ServiceSid}/Entities/{Identity}/Factors/{Sid}":
+  /v2/Services/{ServiceSid}/Entities/{Identity}/Factors/{Sid}:
     delete:
       description: Delete a specific Factor.
       operationId: DeleteFactor
@@ -1614,7 +1614,7 @@ paths:
         - factor_type
       parent: /Services/{ServiceSid}/Entities/{Identity}
       pathType: instance
-  "/v2/Services/{ServiceSid}/MessagingConfigurations":
+  /v2/Services/{ServiceSid}/MessagingConfigurations:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Messaging Configurations for a Service.
@@ -1746,7 +1746,7 @@ paths:
         - date_updated
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/MessagingConfigurations/{Country}":
+  /v2/Services/{ServiceSid}/MessagingConfigurations/{Country}:
     delete:
       description: Delete a specific MessagingConfiguration.
       operationId: DeleteMessagingConfiguration
@@ -1867,7 +1867,7 @@ paths:
         - date_updated
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/RateLimits":
+  /v2/Services/{ServiceSid}/RateLimits:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Rate Limits for a service.
@@ -1998,7 +1998,7 @@ paths:
         bucket: "{service_sid: service_sid, rate_limit_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets":
+  /v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Buckets for a Rate Limit.
@@ -2147,7 +2147,7 @@ paths:
         - date_updated
       parent: /Services/{ServiceSid}/RateLimits/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets/{Sid}":
+  /v2/Services/{ServiceSid}/RateLimits/{RateLimitSid}/Buckets/{Sid}:
     delete:
       description: Delete a specific Bucket.
       operationId: DeleteBucket
@@ -2304,7 +2304,7 @@ paths:
         - date_updated
       parent: /Services/{ServiceSid}/RateLimits/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/RateLimits/{Sid}":
+  /v2/Services/{ServiceSid}/RateLimits/{Sid}:
     delete:
       description: Delete a specific Rate Limit.
       operationId: DeleteRateLimit
@@ -2432,7 +2432,7 @@ paths:
         bucket: "{service_sid: service_sid, rate_limit_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/VerificationCheck":
+  /v2/Services/{ServiceSid}/VerificationCheck:
     description: "TODO: Resource-level docs"
     post:
       description: challenge a specific Verification Check.
@@ -2498,7 +2498,7 @@ paths:
       mountName: verification_checks
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Verifications":
+  /v2/Services/{ServiceSid}/Verifications:
     description: "TODO: Resource-level docs"
     post:
       description: Create a new Verification using a Service
@@ -2598,7 +2598,7 @@ paths:
         - date_created
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Verifications/{Sid}":
+  /v2/Services/{ServiceSid}/Verifications/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Verification
@@ -2689,7 +2689,7 @@ paths:
         - date_created
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Webhooks":
+  /v2/Services/{ServiceSid}/Webhooks:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Webhooks for a Service.
@@ -2834,7 +2834,7 @@ paths:
         - date_created
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Webhooks/{Sid}":
+  /v2/Services/{ServiceSid}/Webhooks/{Sid}:
     delete:
       description: Delete a specific Webhook.
       operationId: DeleteWebhook
@@ -2977,7 +2977,7 @@ paths:
         - date_created
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{Sid}":
+  /v2/Services/{Sid}:
     delete:
       description: Delete a specific Verification Service Instance.
       operationId: DeleteService

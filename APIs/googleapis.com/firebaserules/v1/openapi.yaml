@@ -34,7 +34,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Delete a `Ruleset` by resource name. If the `Ruleset` is referenced by a `Release` the operation will fail.
       operationId: firebaserules.projects.rulesets.delete
@@ -140,7 +140,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1/{name}/releases":
+  /v1/{name}/releases:
     get:
       description: List the `Release` values for a project. This list may optionally be filtered by `Release` name, `Ruleset` name, `TestSuite` name, or any combination thereof.
       operationId: firebaserules.projects.releases.list
@@ -233,7 +233,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1/{name}/rulesets":
+  /v1/{name}/rulesets:
     get:
       description: List `Ruleset` metadata only and optionally filter the results by `Ruleset` name. The full `Source` contents of a `Ruleset` may be retrieved with GetRuleset.
       operationId: firebaserules.projects.rulesets.list
@@ -326,7 +326,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1/{name}:getExecutable":
+  /v1/{name}:getExecutable:
     get:
       description: Get the `Release` executable to use when enforcing rules.
       operationId: firebaserules.projects.releases.getExecutable
@@ -380,7 +380,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:test":
+  /v1/{name}:test:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

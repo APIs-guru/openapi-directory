@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta/{name}":
+  /v1beta/{name}:
     delete:
       description: Deletes a workflow with the specified name. This method also cancels and deletes all running executions of the workflow.
       operationId: workflows.projects.locations.workflows.delete
@@ -125,7 +125,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{name}/locations":
+  /v1beta/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: workflows.projects.locations.list
@@ -177,7 +177,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{name}/operations":
+  /v1beta/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: workflows.projects.locations.operations.list
@@ -229,7 +229,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/workflows":
+  /v1beta/{parent}/workflows:
     get:
       description: Lists Workflows in a given project and location. The default order is not specified.
       operationId: workflows.projects.locations.workflows.list

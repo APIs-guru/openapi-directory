@@ -187,7 +187,7 @@ paths:
         - direction
         - date_created
       pathType: list
-  "/v1/Commands/{Sid}":
+  /v1/Commands/{Sid}:
     delete:
       description: Delete a Command instance from your account.
       operationId: DeleteCommand
@@ -381,7 +381,7 @@ paths:
         - friendly_name
         - date_created
       pathType: list
-  "/v1/RatePlans/{Sid}":
+  /v1/RatePlans/{Sid}:
     delete:
       description: ""
       operationId: DeleteRatePlan
@@ -574,7 +574,7 @@ paths:
         data_session: "{sim_sid: sid}"
         usage_record: "{sim_sid: sid}"
       pathType: list
-  "/v1/Sims/{Sid}":
+  /v1/Sims/{Sid}:
     delete:
       description: Delete a Sim resource on your Account.
       operationId: DeleteSim
@@ -770,7 +770,7 @@ paths:
         data_session: "{sim_sid: sid}"
         usage_record: "{sim_sid: sid}"
       pathType: instance
-  "/v1/Sims/{SimSid}/DataSessions":
+  /v1/Sims/{SimSid}/DataSessions:
     description: Data session information for SIMs
     get:
       description: ""
@@ -853,7 +853,7 @@ paths:
         - end
       parent: /Sims/{Sid}
       pathType: list
-  "/v1/Sims/{SimSid}/UsageRecords":
+  /v1/Sims/{SimSid}/UsageRecords:
     description: Usage information for SIMs
     get:
       description: ""

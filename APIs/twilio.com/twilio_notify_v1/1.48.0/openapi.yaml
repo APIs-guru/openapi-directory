@@ -151,7 +151,7 @@ paths:
         - friendly_name
         - type
       pathType: list
-  "/v1/Credentials/{Sid}":
+  /v1/Credentials/{Sid}:
     delete:
       description: ""
       operationId: DeleteCredential
@@ -421,7 +421,7 @@ paths:
         notify/v1/segment: "{service_sid: sid}"
         notify/v1/user: "{service_sid: sid}"
       pathType: list
-  "/v1/Services/{ServiceSid}/Bindings":
+  /v1/Services/{ServiceSid}/Bindings:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -597,7 +597,7 @@ paths:
         - address
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Bindings/{Sid}":
+  /v1/Services/{ServiceSid}/Bindings/{Sid}:
     delete:
       description: ""
       operationId: DeleteBinding
@@ -676,7 +676,7 @@ paths:
         - address
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Notifications":
+  /v1/Services/{ServiceSid}/Notifications:
     description: "TODO: Resource-level docs"
     post:
       description: ""
@@ -780,7 +780,7 @@ paths:
         - title
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{Sid}":
+  /v1/Services/{Sid}:
     delete:
       description: ""
       operationId: DeleteService

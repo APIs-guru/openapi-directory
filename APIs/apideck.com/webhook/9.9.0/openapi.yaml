@@ -342,7 +342,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/webhook/w/{id}/{serviceId}":
+  /webhook/w/{id}/{serviceId}:
     get:
       description: Resolve a webhook based on lookup_id and then execute it
       operationId: webhookVerify
@@ -557,7 +557,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/webhook/webhooks/{id}":
+  /webhook/webhooks/{id}:
     delete:
       description: Delete a webhook subscription
       operationId: webhooksDelete
@@ -710,7 +710,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/webhook/webhooks/{id}/execute/{serviceId}":
+  /webhook/webhooks/{id}/execute/{serviceId}:
     post:
       description: Execute a webhook
       operationId: webhooksExecute
@@ -770,7 +770,7 @@ paths:
             }
       x-internal: true
       x-sdk-exclude: true
-  "/webhook/webhooks/{id}/x/{serviceId}":
+  /webhook/webhooks/{id}/x/{serviceId}:
     post:
       description: Execute a webhook
       operationId: webhooksShortExecute

@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1alpha2/{name}":
+  /v1alpha2/{name}:
     delete:
       description: Deletes a `WorkerPool`.
       operationId: cloudbuild.projects.workerPools.delete
@@ -127,7 +127,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha2/{name}:cancel":
+  /v1alpha2/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -169,7 +169,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha2/{parent}/workerPools":
+  /v1alpha2/{parent}/workerPools:
     get:
       description: Lists `WorkerPool`s by project.
       operationId: cloudbuild.projects.workerPools.list

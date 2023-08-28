@@ -36,7 +36,7 @@ tags:
   - name: projects
   - name: scans
 paths:
-  "/v1/{database}":
+  /v1/{database}:
     delete:
       description: "Drops (aka deletes) a Cloud Spanner database. Completed backups for the database will be retained according to their `expire_time`. Note: Cloud Spanner might continue to accept requests for a few seconds after the database has been deleted."
       operationId: spanner.projects.instances.databases.dropDatabase
@@ -77,7 +77,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{database}/ddl":
+  /v1/{database}/ddl:
     get:
       description: Returns the schema of a Cloud Spanner database as a list of formatted DDL statements. This method does not show pending schema updates, those may be queried using the Operations API.
       operationId: spanner.projects.instances.databases.getDdl
@@ -151,7 +151,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{database}/sessions":
+  /v1/{database}/sessions:
     get:
       description: Lists all sessions in a given database.
       operationId: spanner.projects.instances.databases.sessions.list
@@ -240,7 +240,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{database}/sessions:batchCreate":
+  /v1/{database}/sessions:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -286,7 +286,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: spanner.projects.instances.operations.delete
@@ -418,7 +418,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{name}/scans":
+  /v1/{name}/scans:
     get:
       description: Request a specific scan with Database-specific data for Cloud Key Visualizer.
       operationId: spanner.projects.instances.databases.getScans
@@ -478,7 +478,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -519,7 +519,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{parent}":
+  /v1/{parent}:
     get:
       description: Return available scans given a Database-specific resource name.
       operationId: spanner.scans.list
@@ -584,7 +584,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/backupOperations":
+  /v1/{parent}/backupOperations:
     get:
       description: Lists the backup long-running operations in the given instance. A backup operation has a name of the form `projects//instances//backups//operations/`. The long-running operation metadata field type `metadata.type_url` describes the type of the metadata. Operations returned include those that have completed/failed/canceled within the last 7 days, and pending operations. Operations returned are ordered by `operation.metadata.value.progress.start_time` in descending order starting from the most recently started operation.
       operationId: spanner.projects.instances.backupOperations.list
@@ -640,7 +640,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/backups":
+  /v1/{parent}/backups:
     get:
       description: Lists completed and pending backups. Backups returned are ordered by `create_time` in descending order, starting from the most recent `create_time`.
       operationId: spanner.projects.instances.backups.list
@@ -749,7 +749,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{parent}/backups:copy":
+  /v1/{parent}/backups:copy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -795,7 +795,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{parent}/databaseOperations":
+  /v1/{parent}/databaseOperations:
     get:
       description: Lists database longrunning-operations. A database operation has a name of the form `projects//instances//databases//operations/`. The long-running operation metadata field type `metadata.type_url` describes the type of the metadata. Operations returned include those that have completed/failed/canceled within the last 7 days, and pending operations.
       operationId: spanner.projects.instances.databaseOperations.list
@@ -851,7 +851,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/databaseRoles":
+  /v1/{parent}/databaseRoles:
     get:
       description: Lists Cloud Spanner database roles.
       operationId: spanner.projects.instances.databases.databaseRoles.list
@@ -902,7 +902,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/databases":
+  /v1/{parent}/databases:
     get:
       description: Lists Cloud Spanner databases.
       operationId: spanner.projects.instances.databases.list
@@ -986,7 +986,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{parent}/databases:restore":
+  /v1/{parent}/databases:restore:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1032,7 +1032,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{parent}/instanceConfigOperations":
+  /v1/{parent}/instanceConfigOperations:
     get:
       description: Lists the user-managed instance config long-running operations in the given project. An instance config operation has a name of the form `projects//instanceConfigs//operations/`. The long-running operation metadata field type `metadata.type_url` describes the type of the metadata. Operations returned include those that have completed/failed/canceled within the last 7 days, and pending operations. Operations returned are ordered by `operation.metadata.value.start_time` in descending order starting from the most recently started operation.
       operationId: spanner.projects.instanceConfigOperations.list
@@ -1088,7 +1088,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/instanceConfigs":
+  /v1/{parent}/instanceConfigs:
     get:
       description: Lists the supported instance configurations for a given project.
       operationId: spanner.projects.instanceConfigs.list
@@ -1172,7 +1172,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{parent}/instances":
+  /v1/{parent}/instances:
     get:
       description: Lists all instances in the given project.
       operationId: spanner.projects.instances.list
@@ -1266,7 +1266,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1312,7 +1312,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1358,7 +1358,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1404,7 +1404,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.admin
       tags:
         - projects
-  "/v1/{session}:beginTransaction":
+  /v1/{session}:beginTransaction:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1450,7 +1450,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:commit":
+  /v1/{session}:commit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1496,7 +1496,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:executeBatchDml":
+  /v1/{session}:executeBatchDml:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1542,7 +1542,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:executeSql":
+  /v1/{session}:executeSql:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1588,7 +1588,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:executeStreamingSql":
+  /v1/{session}:executeStreamingSql:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1634,7 +1634,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:partitionQuery":
+  /v1/{session}:partitionQuery:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1680,7 +1680,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:partitionRead":
+  /v1/{session}:partitionRead:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1726,7 +1726,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:read":
+  /v1/{session}:read:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1772,7 +1772,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:rollback":
+  /v1/{session}:rollback:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1818,7 +1818,7 @@ paths:
             - https://www.googleapis.com/auth/spanner.data
       tags:
         - projects
-  "/v1/{session}:streamingRead":
+  /v1/{session}:streamingRead:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

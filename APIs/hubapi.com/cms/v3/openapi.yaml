@@ -177,7 +177,7 @@ paths:
       summary: Get current domains
       tags:
         - Domains
-  "/cms/v3/domains/{domainId}":
+  /cms/v3/domains/{domainId}:
     get:
       description: Returns a single domains with the id specified.
       operationId: get-/cms/v3/domains/{domainId}_getById

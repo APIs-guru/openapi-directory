@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: properties
 paths:
-  "/v1beta/{name}":
+  /v1beta/{name}:
     get:
       description: Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics GA4 Property Identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.
       operationId: analyticsdata.properties.getMetadata
@@ -70,7 +70,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{property}:batchRunPivotReports":
+  /v1beta/{property}:batchRunPivotReports:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -116,7 +116,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
-  "/v1beta/{property}:batchRunReports":
+  /v1beta/{property}:batchRunReports:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -162,7 +162,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
-  "/v1beta/{property}:checkCompatibility":
+  /v1beta/{property}:checkCompatibility:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -208,7 +208,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
-  "/v1beta/{property}:runPivotReport":
+  /v1beta/{property}:runPivotReport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -254,7 +254,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
-  "/v1beta/{property}:runRealtimeReport":
+  /v1beta/{property}:runRealtimeReport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -300,7 +300,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
-  "/v1beta/{property}:runReport":
+  /v1beta/{property}:runReport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

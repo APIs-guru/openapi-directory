@@ -185,7 +185,7 @@ paths:
         workspace_real_time_statistics: "{workspace_sid: sid}"
         workspace_statistics: "{workspace_sid: sid}"
       pathType: list
-  "/v1/Workspaces/{Sid}":
+  /v1/Workspaces/{Sid}:
     delete:
       description: ""
       operationId: DeleteWorkspace
@@ -316,7 +316,7 @@ paths:
         workspace_real_time_statistics: "{workspace_sid: sid}"
         workspace_statistics: "{workspace_sid: sid}"
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Activities":
+  /v1/Workspaces/{WorkspaceSid}/Activities:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -451,7 +451,7 @@ paths:
         - date_created
       parent: /Workspaces/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/Activities/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/Activities/{Sid}:
     delete:
       description: ""
       operationId: DeleteActivity
@@ -573,7 +573,7 @@ paths:
         - date_created
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/CumulativeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/CumulativeStatistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -639,7 +639,7 @@ paths:
         - tasks_completed
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Events":
+  /v1/Workspaces/{WorkspaceSid}/Events:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -798,7 +798,7 @@ paths:
         - event_date
       parent: /Workspaces/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/Events/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/Events/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -844,7 +844,7 @@ paths:
         - event_date
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/RealTimeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/RealTimeStatistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -887,7 +887,7 @@ paths:
         - total_tasks
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Statistics":
+  /v1/Workspaces/{WorkspaceSid}/Statistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -950,7 +950,7 @@ paths:
         - cumulative
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/TaskChannels":
+  /v1/Workspaces/{WorkspaceSid}/TaskChannels:
     description: Types of tasks
     get:
       description: ""
@@ -1079,7 +1079,7 @@ paths:
         - date_created
       parent: /Workspaces/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/TaskChannels/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/TaskChannels/{Sid}:
     delete:
       description: ""
       operationId: DeleteTaskChannel
@@ -1195,7 +1195,7 @@ paths:
         - date_created
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/TaskQueues":
+  /v1/Workspaces/{WorkspaceSid}/TaskQueues:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1366,7 +1366,7 @@ paths:
         task_queue_statistics: "{workspace_sid: workspace_sid, task_queue_sid: sid}"
       parent: /Workspaces/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/TaskQueues/RealTimeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/TaskQueues/RealTimeStatistics:
     description: "TODO: Resource-level docs"
     servers:
       - url: https://taskrouter.twilio.com
@@ -1377,7 +1377,7 @@ paths:
         - workspace_sid
       mountName: bulk_real_time_statistics
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/TaskQueues/Statistics":
+  /v1/Workspaces/{WorkspaceSid}/TaskQueues/Statistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1492,7 +1492,7 @@ paths:
         - cumulative
       parent: /Workspaces/{WorkspaceSid}/TaskQueues
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/TaskQueues/{Sid}:
     delete:
       description: ""
       operationId: DeleteTaskQueue
@@ -1640,7 +1640,7 @@ paths:
         task_queue_statistics: "{workspace_sid: workspace_sid, task_queue_sid: sid}"
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/CumulativeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/CumulativeStatistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1715,7 +1715,7 @@ paths:
         - tasks_completed
       parent: /Workspaces/{WorkspaceSid}/TaskQueues/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/RealTimeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/RealTimeStatistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1767,7 +1767,7 @@ paths:
         - total_tasks
       parent: /Workspaces/{WorkspaceSid}/TaskQueues/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/Statistics":
+  /v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/Statistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1839,7 +1839,7 @@ paths:
         - cumulative
       parent: /Workspaces/{WorkspaceSid}/TaskQueues/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Tasks":
+  /v1/Workspaces/{WorkspaceSid}/Tasks:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -2031,7 +2031,7 @@ paths:
         reservation: "{workspace_sid: workspace_sid, task_sid: sid}"
       parent: /Workspaces/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/Tasks/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/Tasks/{Sid}:
     delete:
       description: ""
       operationId: DeleteTask
@@ -2180,7 +2180,7 @@ paths:
         reservation: "{workspace_sid: workspace_sid, task_sid: sid}"
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations":
+  /v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations:
     description: Tasks reserved for workers
     get:
       description: ""
@@ -2288,7 +2288,7 @@ paths:
         - worker_sid
       parent: /Workspaces/{WorkspaceSid}/Tasks/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations/{Sid}:
     description: Tasks reserved for workers
     get:
       description: ""
@@ -2630,7 +2630,7 @@ paths:
         - worker_sid
       parent: /Workspaces/{WorkspaceSid}/Tasks/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workers":
+  /v1/Workspaces/{WorkspaceSid}/Workers:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -2813,7 +2813,7 @@ paths:
         workers_real_time_statistics: "{workspace_sid: workspace_sid}"
       parent: /Workspaces/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/Workers/CumulativeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/Workers/CumulativeStatistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -2876,7 +2876,7 @@ paths:
         - reservations_rescinded
       parent: /Workspaces/{WorkspaceSid}/Workers/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workers/RealTimeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/Workers/RealTimeStatistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -2917,7 +2917,7 @@ paths:
         - total_workers
       parent: /Workspaces/{WorkspaceSid}/Workers/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workers/Statistics":
+  /v1/Workspaces/{WorkspaceSid}/Workers/Statistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -2993,7 +2993,7 @@ paths:
         - cumulative
       parent: /Workspaces/{WorkspaceSid}/Workers
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workers/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/Workers/{Sid}:
     delete:
       description: ""
       operationId: DeleteWorker
@@ -3143,7 +3143,7 @@ paths:
         workers_real_time_statistics: "{workspace_sid: workspace_sid}"
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels":
+  /v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -3237,7 +3237,7 @@ paths:
       mountName: worker_channels
       parent: /Workspaces/{WorkspaceSid}/Workers/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -3344,7 +3344,7 @@ paths:
       mountName: worker_channels
       parent: /Workspaces/{WorkspaceSid}/Workers/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations":
+  /v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations:
     description: Current and past reservations for a worker
     get:
       description: ""
@@ -3443,7 +3443,7 @@ paths:
         - date_created
       parent: /Workspaces/{WorkspaceSid}/Workers/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations/{Sid}:
     description: Current and past reservations for a worker
     get:
       description: ""
@@ -3777,7 +3777,7 @@ paths:
         - date_created
       parent: /Workspaces/{WorkspaceSid}/Workers/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Statistics":
+  /v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Statistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -3844,7 +3844,7 @@ paths:
         - cumulative
       parent: /Workspaces/{WorkspaceSid}/Workers/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workflows":
+  /v1/Workspaces/{WorkspaceSid}/Workflows:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -3990,7 +3990,7 @@ paths:
         workflow_statistics: "{workspace_sid: workspace_sid, workflow_sid: sid}"
       parent: /Workspaces/{Sid}
       pathType: list
-  "/v1/Workspaces/{WorkspaceSid}/Workflows/{Sid}":
+  /v1/Workspaces/{WorkspaceSid}/Workflows/{Sid}:
     delete:
       description: ""
       operationId: DeleteWorkflow
@@ -4133,7 +4133,7 @@ paths:
         workflow_statistics: "{workspace_sid: workspace_sid, workflow_sid: sid}"
       parent: /Workspaces/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/CumulativeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/CumulativeStatistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -4208,7 +4208,7 @@ paths:
         - tasks_completed
       parent: /Workspaces/{WorkspaceSid}/Workflows/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/RealTimeStatistics":
+  /v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/RealTimeStatistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -4260,7 +4260,7 @@ paths:
         - total_tasks
       parent: /Workspaces/{WorkspaceSid}/Workflows/{Sid}
       pathType: instance
-  "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/Statistics":
+  /v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/Statistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""

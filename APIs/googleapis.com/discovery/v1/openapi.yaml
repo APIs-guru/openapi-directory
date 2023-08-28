@@ -63,7 +63,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/apis/{api}/{version}/rest":
+  /apis/{api}/{version}/rest:
     get:
       description: Retrieve the description of a particular version of an api.
       operationId: discovery.apis.getRest

@@ -31,7 +31,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     delete:
       description: Deletes the specified worker pool. Returns a long running operation, which contains a `google.protobuf.Empty` response on completion. While the long running operation is in progress, any call to `GetWorkerPool` returns a worker pool in state `DELETING`.
       operationId: remotebuildexecution.projects.instances.workerpools.delete
@@ -136,7 +136,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:testNotify":
+  /v1alpha/{name}:testNotify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -178,7 +178,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/instances":
+  /v1alpha/{parent}/instances:
     get:
       description: Lists instances in a project.
       operationId: remotebuildexecution.projects.instances.list
@@ -244,7 +244,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/workerpools":
+  /v1alpha/{parent}/workerpools:
     get:
       description: Lists worker pools in an instance.
       operationId: remotebuildexecution.projects.instances.workerpools.list

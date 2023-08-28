@@ -76,7 +76,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a place action link from the specified location.
       operationId: mybusinessplaceactions.locations.placeActionLinks.delete
@@ -156,7 +156,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{parent}/placeActionLinks":
+  /v1/{parent}/placeActionLinks:
     get:
       description: Lists the place action links for the specified location.
       operationId: mybusinessplaceactions.locations.placeActionLinks.list

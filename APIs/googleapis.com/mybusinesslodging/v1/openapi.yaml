@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: locations
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Returns the Lodging of a specific location.
       operationId: mybusinesslodging.locations.getLodging
@@ -95,7 +95,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{name}:getGoogleUpdated":
+  /v1/{name}:getGoogleUpdated:
     get:
       description: Returns the Google updated Lodging of a specific location.
       operationId: mybusinesslodging.locations.lodging.getGoogleUpdated

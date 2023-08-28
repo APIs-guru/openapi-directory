@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: billingAccounts
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a budget. Returns successfully if already deleted.
       operationId: billingbudgets.billingAccounts.budgets.delete
@@ -134,7 +134,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - billingAccounts
-  "/v1beta1/{parent}/budgets":
+  /v1beta1/{parent}/budgets:
     get:
       description: "Returns a list of budgets for a billing account. WARNING: There are some fields exposed on the Google Cloud Console that aren't available on this API. When reading from the API, you will not see these fields in the return value, though they may have been set in the Cloud Console."
       operationId: billingbudgets.billingAccounts.budgets.list

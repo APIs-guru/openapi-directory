@@ -29,7 +29,7 @@ tags:
   - name: RoutesV2SipDomain
   - name: RoutesV2Trunk
 paths:
-  "/v2/PhoneNumbers/{PhoneNumber}":
+  /v2/PhoneNumbers/{PhoneNumber}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch the Inbound Processing Region assigned to a phone number.
@@ -98,7 +98,7 @@ paths:
         - friendly_name
         - date_created
       pathType: instance
-  "/v2/SipDomains/{SipDomain}":
+  /v2/SipDomains/{SipDomain}:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -167,7 +167,7 @@ paths:
         - friendly_name
         - date_created
       pathType: instance
-  "/v2/Trunks/{SipTrunkDomain}":
+  /v2/Trunks/{SipTrunkDomain}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch the Inbound Processing Region assigned to a SIP Trunk.

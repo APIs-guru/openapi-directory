@@ -99,7 +99,7 @@ paths:
       summary: Get sample card detail response
       tags:
         - SampleResponse
-  "/crm/v3/extensions/cards/{appId}":
+  /crm/v3/extensions/cards/{appId}:
     get:
       description: Returns a list of cards for a given app.
       operationId: get-/crm/v3/extensions/cards/{appId}_getAll
@@ -201,7 +201,7 @@ paths:
       summary: Create a new card
       tags:
         - Cards
-  "/crm/v3/extensions/cards/{appId}/{cardId}":
+  /crm/v3/extensions/cards/{appId}/{cardId}:
     delete:
       description: Permanently deletes a card definition with the given ID. Once deleted, data fetch requests for this card will no longer be sent to your service. This can't be undone.
       operationId: delete-/crm/v3/extensions/cards/{appId}/{cardId}_archive

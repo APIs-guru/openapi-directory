@@ -35,7 +35,7 @@ tags:
   - name: media
   - name: spaces
 paths:
-  "/v1/media/{resourceName}":
+  /v1/media/{resourceName}:
     get:
       description: Downloads media. Download is supported on the URI `/v1/media/{+name}?alt=media`.
       operationId: chat.media.download
@@ -253,7 +253,7 @@ paths:
             - https://www.googleapis.com/auth/chat.spaces.create
       tags:
         - spaces
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a reaction to a message. For an example, see [Delete a reaction](https://developers.google.com/chat/api/guides/v1/reactions/delete). Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).
       operationId: chat.spaces.messages.reactions.delete
@@ -429,7 +429,7 @@ paths:
             - https://www.googleapis.com/auth/chat.messages
       tags:
         - spaces
-  "/v1/{parent}/attachments:upload":
+  /v1/{parent}/attachments:upload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -479,7 +479,7 @@ paths:
             - https://www.googleapis.com/auth/chat.messages.create
       tags:
         - media
-  "/v1/{parent}/members":
+  /v1/{parent}/members:
     get:
       description: Lists memberships in a space. For an example, see [List memberships](https://developers.google.com/chat/api/guides/v1/members/list). Listing memberships with [app authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) lists memberships in spaces that the Chat app has access to, but excludes Chat app memberships, including its own. Listing memberships with [User authentication](https://developers.google.com/chat/api/guides/auth/users) lists memberships in spaces that the authenticated user has access to. Requires [authentication](https://developers.google.com/chat/api/guides/auth). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts) and [user authentication](https://developers.google.com/chat/api/guides/auth/users). [User authentication](https://developers.google.com/chat/api/guides/auth/users).
       operationId: chat.spaces.members.list
@@ -581,7 +581,7 @@ paths:
             - https://www.googleapis.com/auth/chat.memberships.app
       tags:
         - spaces
-  "/v1/{parent}/messages":
+  /v1/{parent}/messages:
     get:
       description: Lists messages in a space that the caller is a member of, including messages from blocked members and spaces. For an example, see [List messages](/chat/api/guides/v1/messages/list). Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).
       operationId: chat.spaces.messages.list
@@ -716,7 +716,7 @@ paths:
             - https://www.googleapis.com/auth/chat.messages.create
       tags:
         - spaces
-  "/v1/{parent}/reactions":
+  /v1/{parent}/reactions:
     get:
       description: Lists reactions to a message. For an example, see [List reactions](https://developers.google.com/chat/api/guides/v1/reactions/list). Requires [user authentication](https://developers.google.com/chat/api/guides/auth/users).
       operationId: chat.spaces.messages.reactions.list

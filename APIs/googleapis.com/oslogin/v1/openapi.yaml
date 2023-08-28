@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: users
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes an SSH public key.
       operationId: oslogin.users.sshPublicKeys.delete
@@ -139,7 +139,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - users
-  "/v1/{name}/loginProfile":
+  /v1/{name}/loginProfile:
     get:
       description: Retrieves the profile information used for logging in to a virtual machine on Google Compute Engine.
       operationId: oslogin.users.getLoginProfile
@@ -198,7 +198,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/sshPublicKeys":
+  /v1/{parent}/sshPublicKeys:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -244,7 +244,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - users
-  "/v1/{parent}:importSshPublicKey":
+  /v1/{parent}:importSshPublicKey:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

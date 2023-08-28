@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{database}/documents:batchGet":
+  /v1beta1/{database}/documents:batchGet:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -78,7 +78,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{database}/documents:batchWrite":
+  /v1beta1/{database}/documents:batchWrite:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -124,7 +124,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{database}/documents:beginTransaction":
+  /v1beta1/{database}/documents:beginTransaction:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -170,7 +170,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{database}/documents:commit":
+  /v1beta1/{database}/documents:commit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -216,7 +216,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{database}/documents:listen":
+  /v1beta1/{database}/documents:listen:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -262,7 +262,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{database}/documents:rollback":
+  /v1beta1/{database}/documents:rollback:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -308,7 +308,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{database}/documents:write":
+  /v1beta1/{database}/documents:write:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -354,7 +354,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes an index.
       operationId: firestore.projects.databases.indexes.delete
@@ -513,7 +513,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{name}:exportDocuments":
+  /v1beta1/{name}:exportDocuments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -559,7 +559,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{name}:importDocuments":
+  /v1beta1/{name}:importDocuments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -605,7 +605,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{parent}/indexes":
+  /v1beta1/{parent}/indexes:
     get:
       description: Lists the indexes that match the specified filters.
       operationId: firestore.projects.databases.indexes.list
@@ -693,7 +693,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{parent}/{collectionId}":
+  /v1beta1/{parent}/{collectionId}:
     get:
       description: Lists documents.
       operationId: firestore.projects.databases.documents.listDocuments
@@ -832,7 +832,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{parent}:listCollectionIds":
+  /v1beta1/{parent}:listCollectionIds:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -878,7 +878,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{parent}:partitionQuery":
+  /v1beta1/{parent}:partitionQuery:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -924,7 +924,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{parent}:runAggregationQuery":
+  /v1beta1/{parent}:runAggregationQuery:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -970,7 +970,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta1/{parent}:runQuery":
+  /v1beta1/{parent}:runQuery:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

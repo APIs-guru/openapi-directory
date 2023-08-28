@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: services
 paths:
-  "/v1/services/{serviceName}:allocateQuota":
+  /v1/services/{serviceName}:allocateQuota:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -78,7 +78,7 @@ paths:
             - https://www.googleapis.com/auth/servicecontrol
       tags:
         - services
-  "/v1/services/{serviceName}:check":
+  /v1/services/{serviceName}:check:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -124,7 +124,7 @@ paths:
             - https://www.googleapis.com/auth/servicecontrol
       tags:
         - services
-  "/v1/services/{serviceName}:report":
+  /v1/services/{serviceName}:report:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -34,7 +34,7 @@ tags:
   - name: operations
   - name: services
 paths:
-  "/v1beta/{name}":
+  /v1beta/{name}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: servicenetworking.operations.get
@@ -75,7 +75,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{name}/connections":
+  /v1beta/{name}/connections:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -131,7 +131,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta/{parent}/connections":
+  /v1beta/{parent}/connections:
     get:
       description: List the private connections that are configured in a service consumer's VPC network.
       operationId: servicenetworking.services.connections.list
@@ -210,7 +210,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta/{parent}:addSubnetwork":
+  /v1beta/{parent}:addSubnetwork:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -256,7 +256,7 @@ paths:
             - https://www.googleapis.com/auth/service.management
       tags:
         - services
-  "/v1beta/{parent}:searchRange":
+  /v1beta/{parent}:searchRange:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

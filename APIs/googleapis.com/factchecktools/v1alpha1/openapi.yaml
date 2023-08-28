@@ -174,7 +174,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - pages
-  "/v1alpha1/{name}":
+  /v1alpha1/{name}:
     delete:
       description: Delete all `ClaimReview` markup on a page.
       operationId: factchecktools.pages.delete

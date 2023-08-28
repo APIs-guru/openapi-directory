@@ -525,7 +525,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/ats/applicants/{id}":
+  /ats/applicants/{id}:
     delete:
       description: Delete Applicant
       operationId: applicantsDelete
@@ -899,7 +899,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/ats/applications/{id}":
+  /ats/applications/{id}:
     delete:
       description: Delete Application
       operationId: applicationsDelete
@@ -1119,7 +1119,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/ats/jobs/{id}":
+  /ats/jobs/{id}:
     get:
       description: Get Job
       operationId: jobsOne

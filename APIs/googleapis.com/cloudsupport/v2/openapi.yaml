@@ -78,7 +78,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}":
+  /v2/{name}:
     get:
       description: 'Retrieve the specified case. Here is an example of calling this endpoint using cURL: ```shell case="projects/some-project/cases/16033687" curl \ --header "Authorization: Bearer $(gcloud auth print-access-token)" \ "https://cloudsupport.googleapis.com/v2/$case" ```'
       operationId: cloudsupport.cases.get
@@ -149,7 +149,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - cases
-  "/v2/{name}:close":
+  /v2/{name}:close:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -191,7 +191,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - cases
-  "/v2/{name}:download":
+  /v2/{name}:download:
     get:
       description: 'Download a file attachment on a case. Note: HTTP requests must append "?alt=media" to the URL. Here is an example of calling this endpoint using cURL: ```shell name="projects/some-project/cases/43594844/attachments/0674M00000WijAnZAJ" curl \ --header "Authorization: Bearer $(gcloud auth print-access-token)" \ "https://cloudsupport.googleapis.com/v2/$name:download?alt=media" ```'
       operationId: cloudsupport.media.download
@@ -228,7 +228,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}:escalate":
+  /v2/{name}:escalate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -270,7 +270,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - cases
-  "/v2/{parent}/attachments":
+  /v2/{parent}/attachments:
     get:
       description: 'Retrieve all attachments associated with a support case. Here is an example of calling this endpoint using cURL: ```shell case="projects/some-project/cases/23598314" curl \ --header "Authorization: Bearer $(gcloud auth print-access-token)" \ "https://cloudsupport.googleapis.com/v2/$case/attachments" ```'
       operationId: cloudsupport.cases.attachments.list
@@ -346,7 +346,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - media
-  "/v2/{parent}/cases":
+  /v2/{parent}/cases:
     get:
       description: 'Retrieve all cases under the specified parent. Note: Listing cases under an organization returns only the cases directly parented by that organization. To retrieve all cases under an organization, including cases parented by projects under that organization, use `cases.search`. Here is an example of calling this endpoint using cURL: ```shell parent="projects/some-project" curl \ --header "Authorization: Bearer $(gcloud auth print-access-token)" \ "https://cloudsupport.googleapis.com/v2/$parent/cases" ```'
       operationId: cloudsupport.cases.list
@@ -427,7 +427,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - cases
-  "/v2/{parent}/cases:search":
+  /v2/{parent}/cases:search:
     get:
       description: 'Search cases using the specified query. Here is an example of calling this endpoint using cURL: ```shell parent="projects/some-project" curl \ --header "Authorization: Bearer $(gcloud auth print-access-token)" \ "https://cloudsupport.googleapis.com/v2/$parent/cases:search" ```'
       operationId: cloudsupport.cases.search
@@ -479,7 +479,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/comments":
+  /v2/{parent}/comments:
     get:
       description: 'Retrieve all comments associated with the Case object. Here is an example of calling this endpoint using cURL: ```shell case="projects/cloud-support-qa-premium/cases/43595344" curl \ --header "Authorization: Bearer $(gcloud auth print-access-token)" \ "https://cloudsupport.googleapis.com/v2/$case/comments" ```'
       operationId: cloudsupport.cases.comments.list

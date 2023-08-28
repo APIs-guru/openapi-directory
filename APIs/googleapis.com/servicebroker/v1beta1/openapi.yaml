@@ -35,7 +35,7 @@ tags:
   - name: projects
   - name: v1beta1
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: |-
         Unbinds from a service instance.
@@ -176,7 +176,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/last_operation":
+  /v1beta1/{name}/last_operation:
     get:
       description: |-
         Returns the state of the last operation for the binding.
@@ -235,7 +235,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-  "/v1beta1/{parent}/bindings":
+  /v1beta1/{parent}/bindings:
     get:
       description: Lists all the bindings in the instance.
       operationId: servicebroker.projects.brokers.instances.bindings.list
@@ -293,7 +293,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-  "/v1beta1/{parent}/brokers":
+  /v1beta1/{parent}/brokers:
     get:
       description: ListBrokers lists brokers.
       operationId: servicebroker.projects.brokers.list
@@ -376,7 +376,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/instances":
+  /v1beta1/{parent}/instances:
     get:
       description: |-
         Lists all the instances in the brokers
@@ -432,7 +432,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-  "/v1beta1/{parent}/service_bindings/{binding_id}":
+  /v1beta1/{parent}/service_bindings/{binding_id}:
     parameters:
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
@@ -495,7 +495,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/v2/catalog":
+  /v1beta1/{parent}/v2/catalog:
     get:
       description: |-
         Lists all the Services registered with this broker for consumption for
@@ -551,7 +551,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-  "/v1beta1/{parent}/v2/service_instances/{instance_id}":
+  /v1beta1/{parent}/v2/service_instances/{instance_id}:
     parameters:
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
@@ -628,7 +628,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     get:
       description: |-
         Gets the access control policy for a resource.
@@ -684,7 +684,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/prettyPrint"
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"
@@ -733,7 +733,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1beta1
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/fields"
       - $ref: "#/components/parameters/uploadType"

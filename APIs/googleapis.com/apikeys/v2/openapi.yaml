@@ -71,7 +71,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: "Deletes an API key. Deleted key can be retrieved within 30 days of deletion. Afterward, key will be purged from the project. NOTE: Key is a global resource; hence the only supported value for location is `global`."
       operationId: apikeys.projects.locations.keys.delete
@@ -175,7 +175,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}/keyString":
+  /v2/{name}/keyString:
     get:
       description: "Get the key string for an API key. NOTE: Key is a global resource; hence the only supported value for location is `global`."
       operationId: apikeys.projects.locations.keys.getKeyString
@@ -216,7 +216,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}:undelete":
+  /v2/{name}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -258,7 +258,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/keys":
+  /v2/{parent}/keys:
     get:
       description: "Lists the API keys owned by a project. The key string of the API key isn't included in the response. NOTE: Key is a global resource; hence the only supported value for location is `global`."
       operationId: apikeys.projects.locations.keys.list

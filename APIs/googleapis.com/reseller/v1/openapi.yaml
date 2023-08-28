@@ -74,7 +74,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - customers
-  "/apps/reseller/v1/customers/{customerId}":
+  /apps/reseller/v1/customers/{customerId}:
     get:
       description: Gets a customer account. Use this operation to see a customer account already in your reseller management, or to see the minimal account information for an existing customer that you do not manage. For more information about the API response for existing customers, see [retrieving a customer account](/admin-sdk/reseller/v1/how-tos/manage_customers#get_customer).
       operationId: reseller.customers.get
@@ -173,7 +173,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - customers
-  "/apps/reseller/v1/customers/{customerId}/subscriptions":
+  /apps/reseller/v1/customers/{customerId}/subscriptions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -234,7 +234,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - subscriptions
-  "/apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}":
+  /apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}:
     delete:
       description: Cancels, suspends, or transfers a subscription to direct.
       operationId: reseller.subscriptions.delete
@@ -317,7 +317,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/activate":
+  /apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -360,7 +360,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - subscriptions
-  "/apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/changePlan":
+  /apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/changePlan:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -408,7 +408,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - subscriptions
-  "/apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/changeRenewalSettings":
+  /apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/changeRenewalSettings:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -456,7 +456,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - subscriptions
-  "/apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/changeSeats":
+  /apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/changeSeats:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -504,7 +504,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - subscriptions
-  "/apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/startPaidService":
+  /apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/startPaidService:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -547,7 +547,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - subscriptions
-  "/apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/suspend":
+  /apps/reseller/v1/customers/{customerId}/subscriptions/{subscriptionId}/suspend:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

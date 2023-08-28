@@ -74,7 +74,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - api
-  "/v2beta2/{name}":
+  /v2beta2/{name}:
     delete:
       description: Deletes a task. A task can be deleted if it is scheduled or dispatched. A task cannot be deleted if it has completed successfully or permanently failed.
       operationId: cloudtasks.projects.locations.queues.tasks.delete
@@ -178,7 +178,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{name}/locations":
+  /v2beta2/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: cloudtasks.projects.locations.list
@@ -230,7 +230,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta2/{name}:acknowledge":
+  /v2beta2/{name}:acknowledge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -272,7 +272,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{name}:cancelLease":
+  /v2beta2/{name}:cancelLease:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -314,7 +314,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{name}:pause":
+  /v2beta2/{name}:pause:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -356,7 +356,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{name}:purge":
+  /v2beta2/{name}:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -398,7 +398,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{name}:renewLease":
+  /v2beta2/{name}:renewLease:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -440,7 +440,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{name}:resume":
+  /v2beta2/{name}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -482,7 +482,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{name}:run":
+  /v2beta2/{name}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -524,7 +524,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{parent}/queues":
+  /v2beta2/{parent}/queues:
     get:
       description: Lists queues. Queues are returned in lexicographical order.
       operationId: cloudtasks.projects.locations.queues.list
@@ -610,7 +610,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{parent}/tasks":
+  /v2beta2/{parent}/tasks:
     get:
       description: Lists the tasks in a queue. By default, only the BASIC view is retrieved due to performance considerations; response_view controls the subset of information which is returned. The tasks may be returned in any order. The ordering may change at any time.
       operationId: cloudtasks.projects.locations.queues.tasks.list
@@ -695,7 +695,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{parent}/tasks:lease":
+  /v2beta2/{parent}/tasks:lease:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -737,7 +737,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{queue}/tasks/{taskId}:buffer":
+  /v2beta2/{queue}/tasks/{taskId}:buffer:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -785,7 +785,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{resource}:getIamPolicy":
+  /v2beta2/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -827,7 +827,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{resource}:setIamPolicy":
+  /v2beta2/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -869,7 +869,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta2/{resource}:testIamPermissions":
+  /v2beta2/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

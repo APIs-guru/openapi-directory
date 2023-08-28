@@ -31,7 +31,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a contact.
       operationId: essentialcontacts.projects.contacts.delete
@@ -126,7 +126,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/contacts":
+  /v1/{parent}/contacts:
     get:
       description: Lists the contacts that have been set on a resource.
       operationId: essentialcontacts.projects.contacts.list
@@ -202,7 +202,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/contacts:compute":
+  /v1/{parent}/contacts:compute:
     get:
       description: Lists all contacts for the resource that are subscribed to the specified notification categories, including contacts inherited from any parent resources.
       operationId: essentialcontacts.projects.contacts.compute
@@ -268,7 +268,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}/contacts:sendTestMessage":
+  /v1/{resource}/contacts:sendTestMessage:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

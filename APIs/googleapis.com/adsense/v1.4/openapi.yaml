@@ -84,7 +84,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}":
+  /accounts/{accountId}:
     get:
       description: Get information about the selected AdSense account.
       operationId: adsense.accounts.get
@@ -126,7 +126,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients":
+  /accounts/{accountId}/adclients:
     get:
       description: List all ad clients in the specified account.
       operationId: adsense.accounts.adclients.list
@@ -175,7 +175,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/adcode":
+  /accounts/{accountId}/adclients/{adClientId}/adcode:
     get:
       description: Get Auto ad code for a given ad client.
       operationId: adsense.accounts.adclients.getAdCode
@@ -223,7 +223,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/adunits":
+  /accounts/{accountId}/adclients/{adClientId}/adunits:
     get:
       description: List all ad units in the specified ad client for the specified account.
       operationId: adsense.accounts.adunits.list
@@ -283,7 +283,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}":
+  /accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}:
     get:
       description: Gets the specified ad unit in the specified ad client for the specified account.
       operationId: adsense.accounts.adunits.get
@@ -332,7 +332,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode":
+  /accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode:
     get:
       description: Get ad code for the specified ad unit.
       operationId: adsense.accounts.adunits.getAdCode
@@ -381,7 +381,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/customchannels":
+  /accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/customchannels:
     get:
       description: List all custom channels which the specified ad unit belongs to.
       operationId: adsense.accounts.adunits.customchannels.list
@@ -442,7 +442,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/customchannels":
+  /accounts/{accountId}/adclients/{adClientId}/customchannels:
     get:
       description: List all custom channels in the specified ad client for the specified account.
       operationId: adsense.accounts.customchannels.list
@@ -497,7 +497,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}":
+  /accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}:
     get:
       description: Get the specified custom channel from the specified ad client for the specified account.
       operationId: adsense.accounts.customchannels.get
@@ -546,7 +546,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}/adunits":
+  /accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}/adunits:
     get:
       description: List all ad units in the specified custom channel.
       operationId: adsense.accounts.customchannels.adunits.list
@@ -612,7 +612,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/adclients/{adClientId}/urlchannels":
+  /accounts/{accountId}/adclients/{adClientId}/urlchannels:
     get:
       description: List all URL channels in the specified ad client for the specified account.
       operationId: adsense.accounts.urlchannels.list
@@ -667,7 +667,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/alerts":
+  /accounts/{accountId}/alerts:
     get:
       description: List the alerts for the specified AdSense account.
       operationId: adsense.accounts.alerts.list
@@ -709,7 +709,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/alerts/{alertId}":
+  /accounts/{accountId}/alerts/{alertId}:
     delete:
       description: Dismiss (delete) the specified alert from the specified publisher AdSense account.
       operationId: adsense.accounts.alerts.delete
@@ -744,7 +744,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/payments":
+  /accounts/{accountId}/payments:
     get:
       description: List the payments for the specified AdSense account.
       operationId: adsense.accounts.payments.list
@@ -781,7 +781,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/reports":
+  /accounts/{accountId}/reports:
     get:
       description: Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify "alt=csv" as a query parameter.
       operationId: adsense.accounts.reports.generate
@@ -895,7 +895,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/reports/saved":
+  /accounts/{accountId}/reports/saved:
     get:
       description: List all saved reports in the specified AdSense account.
       operationId: adsense.accounts.reports.saved.list
@@ -944,7 +944,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/reports/{savedReportId}":
+  /accounts/{accountId}/reports/{savedReportId}:
     get:
       description: Generate an AdSense report based on the saved report ID sent in the query parameters.
       operationId: adsense.accounts.reports.saved.generate
@@ -1006,7 +1006,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/savedadstyles":
+  /accounts/{accountId}/savedadstyles:
     get:
       description: List all saved ad styles in the specified account.
       operationId: adsense.accounts.savedadstyles.list
@@ -1055,7 +1055,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{accountId}/savedadstyles/{savedAdStyleId}":
+  /accounts/{accountId}/savedadstyles/{savedAdStyleId}:
     get:
       description: List a specific saved ad style for the specified account.
       operationId: adsense.accounts.savedadstyles.get
@@ -1141,7 +1141,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/adunits":
+  /adclients/{adClientId}/adunits:
     get:
       description: List all ad units in the specified ad client for this AdSense account.
       operationId: adsense.adunits.list
@@ -1195,7 +1195,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/adunits/{adUnitId}":
+  /adclients/{adClientId}/adunits/{adUnitId}:
     get:
       description: Gets the specified ad unit in the specified ad client.
       operationId: adsense.adunits.get
@@ -1238,7 +1238,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/adunits/{adUnitId}/adcode":
+  /adclients/{adClientId}/adunits/{adUnitId}/adcode:
     get:
       description: Get ad code for the specified ad unit.
       operationId: adsense.adunits.getAdCode
@@ -1281,7 +1281,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/adunits/{adUnitId}/customchannels":
+  /adclients/{adClientId}/adunits/{adUnitId}/customchannels:
     get:
       description: List all custom channels which the specified ad unit belongs to.
       operationId: adsense.adunits.customchannels.list
@@ -1336,7 +1336,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/customchannels":
+  /adclients/{adClientId}/customchannels:
     get:
       description: List all custom channels in the specified ad client for this AdSense account.
       operationId: adsense.customchannels.list
@@ -1385,7 +1385,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/customchannels/{customChannelId}":
+  /adclients/{adClientId}/customchannels/{customChannelId}:
     get:
       description: Get the specified custom channel from the specified ad client.
       operationId: adsense.customchannels.get
@@ -1428,7 +1428,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/customchannels/{customChannelId}/adunits":
+  /adclients/{adClientId}/customchannels/{customChannelId}/adunits:
     get:
       description: List all ad units in the specified custom channel.
       operationId: adsense.customchannels.adunits.list
@@ -1488,7 +1488,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/adclients/{adClientId}/urlchannels":
+  /adclients/{adClientId}/urlchannels:
     get:
       description: List all URL channels in the specified ad client for this AdSense account.
       operationId: adsense.urlchannels.list
@@ -1573,7 +1573,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/alerts/{alertId}":
+  /alerts/{alertId}:
     delete:
       description: Dismiss (delete) the specified alert from the publisher's AdSense account.
       operationId: adsense.alerts.delete
@@ -1852,7 +1852,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/reports/{savedReportId}":
+  /reports/{savedReportId}:
     get:
       description: Generate an AdSense report based on the saved report ID sent in the query parameters.
       operationId: adsense.reports.saved.generate
@@ -1951,7 +1951,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/savedadstyles/{savedAdStyleId}":
+  /savedadstyles/{savedAdStyleId}:
     get:
       description: Get a specific saved ad style from the user's account.
       operationId: adsense.savedadstyles.get

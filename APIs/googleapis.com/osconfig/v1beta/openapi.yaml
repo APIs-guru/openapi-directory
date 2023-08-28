@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta/{instance}:lookupEffectiveGuestPolicy":
+  /v1beta/{instance}:lookupEffectiveGuestPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -74,7 +74,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{name}":
+  /v1beta/{name}:
     delete:
       description: Delete an OS Config patch deployment.
       operationId: osconfig.projects.patchDeployments.delete
@@ -169,7 +169,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{name}:cancel":
+  /v1beta/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -211,7 +211,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{name}:pause":
+  /v1beta/{name}:pause:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -253,7 +253,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{name}:resume":
+  /v1beta/{name}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -295,7 +295,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{parent}/guestPolicies":
+  /v1beta/{parent}/guestPolicies:
     get:
       description: Get a page of OS Config guest policies.
       operationId: osconfig.projects.guestPolicies.list
@@ -376,7 +376,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{parent}/instanceDetails":
+  /v1beta/{parent}/instanceDetails:
     get:
       description: Get a list of instance details for a given patch job.
       operationId: osconfig.projects.patchJobs.instanceDetails.list
@@ -428,7 +428,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/patchDeployments":
+  /v1beta/{parent}/patchDeployments:
     get:
       description: Get a page of OS Config patch deployments.
       operationId: osconfig.projects.patchDeployments.list
@@ -509,7 +509,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{parent}/patchJobs":
+  /v1beta/{parent}/patchJobs:
     get:
       description: Get a list of patch jobs.
       operationId: osconfig.projects.patchJobs.list
@@ -561,7 +561,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/patchJobs:execute":
+  /v1beta/{parent}/patchJobs:execute:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -33,7 +33,7 @@ tags:
   - name: operations
   - name: services
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Delete a tenancy unit. Before you delete the tenancy unit, there should be no tenant resources in it that aren't in a DELETED state. Operation.
       operationId: serviceconsumermanagement.services.tenancyUnits.delete
@@ -109,7 +109,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:applyProjectConfig":
+  /v1/{name}:applyProjectConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -151,7 +151,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1/{name}:attachProject":
+  /v1/{name}:attachProject:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -193,7 +193,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -235,7 +235,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - operations
-  "/v1/{name}:deleteProject":
+  /v1/{name}:deleteProject:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -277,7 +277,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1/{name}:removeProject":
+  /v1/{name}:removeProject:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -319,7 +319,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1/{name}:undeleteProject":
+  /v1/{name}:undeleteProject:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -361,7 +361,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1/{parent}/tenancyUnits":
+  /v1/{parent}/tenancyUnits:
     get:
       description: Find the tenancy unit for a managed service and service consumer. This method shouldn't be used in a service producer's runtime path, for example to find the tenant project number when creating VMs. Service producers must persist the tenant project's information after the project is created.
       operationId: serviceconsumermanagement.services.tenancyUnits.list
@@ -442,7 +442,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1/{parent}:addProject":
+  /v1/{parent}:addProject:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -484,7 +484,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1/{parent}:search":
+  /v1/{parent}:search:
     get:
       description: Search tenancy units for a managed service.
       operationId: serviceconsumermanagement.services.search

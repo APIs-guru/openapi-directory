@@ -791,7 +791,7 @@ paths:
             - https://www.googleapis.com/auth/books
       tags:
         - mylibrary
-  "/books/v1/mylibrary/annotations/{annotationId}":
+  /books/v1/mylibrary/annotations/{annotationId}:
     delete:
       description: Deletes an annotation.
       operationId: books.mylibrary.annotations.delete
@@ -903,7 +903,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/mylibrary/bookshelves/{shelf}":
+  /books/v1/mylibrary/bookshelves/{shelf}:
     get:
       description: Retrieves metadata for a specific bookshelf belonging to the authenticated user.
       operationId: books.mylibrary.bookshelves.get
@@ -945,7 +945,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/mylibrary/bookshelves/{shelf}/addVolume":
+  /books/v1/mylibrary/bookshelves/{shelf}/addVolume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1003,7 +1003,7 @@ paths:
             - https://www.googleapis.com/auth/books
       tags:
         - mylibrary
-  "/books/v1/mylibrary/bookshelves/{shelf}/clearVolumes":
+  /books/v1/mylibrary/bookshelves/{shelf}/clearVolumes:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1045,7 +1045,7 @@ paths:
             - https://www.googleapis.com/auth/books
       tags:
         - mylibrary
-  "/books/v1/mylibrary/bookshelves/{shelf}/moveVolume":
+  /books/v1/mylibrary/bookshelves/{shelf}/moveVolume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1099,7 +1099,7 @@ paths:
             - https://www.googleapis.com/auth/books
       tags:
         - mylibrary
-  "/books/v1/mylibrary/bookshelves/{shelf}/removeVolume":
+  /books/v1/mylibrary/bookshelves/{shelf}/removeVolume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1155,7 +1155,7 @@ paths:
             - https://www.googleapis.com/auth/books
       tags:
         - mylibrary
-  "/books/v1/mylibrary/bookshelves/{shelf}/volumes":
+  /books/v1/mylibrary/bookshelves/{shelf}/volumes:
     get:
       description: Gets volume information for volumes on a bookshelf.
       operationId: books.mylibrary.bookshelves.volumes.list
@@ -1233,7 +1233,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/mylibrary/readingpositions/{volumeId}":
+  /books/v1/mylibrary/readingpositions/{volumeId}:
     get:
       description: Retrieves my reading position information for a volume.
       operationId: books.mylibrary.readingpositions.get
@@ -1280,7 +1280,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/mylibrary/readingpositions/{volumeId}/setPosition":
+  /books/v1/mylibrary/readingpositions/{volumeId}/setPosition:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1839,7 +1839,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/users/{userId}/bookshelves":
+  /books/v1/users/{userId}/bookshelves:
     get:
       description: Retrieves a list of public bookshelves for the specified user.
       operationId: books.bookshelves.list
@@ -1881,7 +1881,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/users/{userId}/bookshelves/{shelf}":
+  /books/v1/users/{userId}/bookshelves/{shelf}:
     get:
       description: Retrieves metadata for a specific bookshelf for the specified user.
       operationId: books.bookshelves.get
@@ -1929,7 +1929,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/users/{userId}/bookshelves/{shelf}/volumes":
+  /books/v1/users/{userId}/bookshelves/{shelf}/volumes:
     get:
       description: Retrieves volumes in a specific bookshelf for the specified user.
       operationId: books.bookshelves.volumes.list
@@ -2406,7 +2406,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/volumes/{volumeId}":
+  /books/v1/volumes/{volumeId}:
     get:
       description: Gets volume information for a single volume.
       operationId: books.volumes.get
@@ -2476,7 +2476,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/volumes/{volumeId}/associated":
+  /books/v1/volumes/{volumeId}/associated:
     get:
       description: Return a list of associated books.
       operationId: books.volumes.associated.list
@@ -2542,7 +2542,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/volumes/{volumeId}/layers/{layerId}":
+  /books/v1/volumes/{volumeId}/layers/{layerId}:
     get:
       description: Gets the volume annotations for a volume and layer.
       operationId: books.layers.volumeAnnotations.list
@@ -2653,7 +2653,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/volumes/{volumeId}/layers/{layerId}/annotations/{annotationId}":
+  /books/v1/volumes/{volumeId}/layers/{layerId}/annotations/{annotationId}:
     get:
       description: Gets the volume annotation.
       operationId: books.layers.volumeAnnotations.get
@@ -2712,7 +2712,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/volumes/{volumeId}/layers/{layerId}/data":
+  /books/v1/volumes/{volumeId}/layers/{layerId}/data:
     get:
       description: Gets the annotation data for a volume and layer.
       operationId: books.layers.annotationData.list
@@ -2818,7 +2818,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/volumes/{volumeId}/layers/{layerId}/data/{annotationDataId}":
+  /books/v1/volumes/{volumeId}/layers/{layerId}/data/{annotationDataId}:
     get:
       description: Gets the annotation data.
       operationId: books.layers.annotationData.get
@@ -2904,7 +2904,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/volumes/{volumeId}/layersummary":
+  /books/v1/volumes/{volumeId}/layersummary:
     get:
       description: List the layer summaries for a volume.
       operationId: books.layers.list
@@ -2963,7 +2963,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/books/v1/volumes/{volumeId}/layersummary/{summaryId}":
+  /books/v1/volumes/{volumeId}/layersummary/{summaryId}:
     get:
       description: Gets the layer summary for a volume.
       operationId: books.layers.get

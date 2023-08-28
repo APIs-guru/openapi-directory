@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: organizations
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets a notification.
       operationId: advisorynotifications.organizations.locations.notifications.get
@@ -71,7 +71,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/notifications":
+  /v1/{parent}/notifications:
     get:
       description: Lists notifications under a given parent.
       operationId: advisorynotifications.organizations.locations.notifications.list

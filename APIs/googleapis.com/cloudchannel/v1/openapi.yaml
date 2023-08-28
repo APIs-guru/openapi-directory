@@ -82,7 +82,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{account}:listSubscribers":
+  /v1/{account}:listSubscribers:
     get:
       description: "Lists service accounts with subscriber privileges on the Cloud Pub/Sub topic created for this Channel Services account. Possible error codes: * PERMISSION_DENIED: The reseller account making the request and the provided reseller account are different, or the impersonated user is not a super admin. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The topic resource doesn't exist. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: A list of service email addresses."
       operationId: cloudchannel.accounts.listSubscribers
@@ -129,7 +129,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{account}:register":
+  /v1/{account}:register:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -171,7 +171,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{account}:unregister":
+  /v1/{account}:unregister:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -213,7 +213,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{customer}:listPurchasableOffers":
+  /v1/{customer}:listPurchasableOffers:
     get:
       description: "Lists the following: * Offers that you can purchase for a customer. * Offers that you can change for an entitlement. Possible error codes: * PERMISSION_DENIED: * The customer doesn't belong to the reseller * The reseller is not authorized to transact on this Product. See https://support.google.com/channelservices/answer/9759265 * INVALID_ARGUMENT: Required request parameters are missing or invalid."
       operationId: cloudchannel.accounts.customers.listPurchasableOffers
@@ -290,7 +290,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}:listPurchasableSkus":
+  /v1/{customer}:listPurchasableSkus:
     get:
       description: "Lists the following: * SKUs that you can purchase for a customer * SKUs that you can upgrade or downgrade for an entitlement. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid."
       operationId: cloudchannel.accounts.customers.listPurchasableSkus
@@ -361,7 +361,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}:provisionCloudIdentity":
+  /v1/{customer}:provisionCloudIdentity:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -403,7 +403,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{customer}:queryEligibleBillingAccounts":
+  /v1/{customer}:queryEligibleBillingAccounts:
     get:
       description: "Lists the billing accounts that are eligible to purchase particular SKUs for a given customer. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: Based on the provided list of SKUs, returns a list of SKU groups that must be purchased using the same billing account and the billing accounts eligible to purchase each SKU group."
       operationId: cloudchannel.accounts.customers.queryEligibleBillingAccounts
@@ -449,7 +449,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{entitlement}:lookupOffer":
+  /v1/{entitlement}:lookupOffer:
     get:
       description: "Returns the requested Offer resource. Possible error codes: * PERMISSION_DENIED: The entitlement doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: Entitlement or offer was not found. Return value: The Offer resource."
       operationId: cloudchannel.accounts.customers.entitlements.lookupOffer
@@ -486,7 +486,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: cloudchannel.operations.delete
@@ -600,7 +600,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{name}:activate":
+  /v1/{name}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -642,7 +642,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -684,7 +684,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - operations
-  "/v1/{name}:changeOffer":
+  /v1/{name}:changeOffer:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -726,7 +726,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{name}:changeParameters":
+  /v1/{name}:changeParameters:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -768,7 +768,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{name}:changeRenewalSettings":
+  /v1/{name}:changeRenewalSettings:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -810,7 +810,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{name}:run":
+  /v1/{name}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -852,7 +852,7 @@ paths:
             - https://www.googleapis.com/auth/apps.reports.usage.readonly
       tags:
         - accounts
-  "/v1/{name}:startPaidService":
+  /v1/{name}:startPaidService:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -894,7 +894,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{name}:suspend":
+  /v1/{name}:suspend:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -936,7 +936,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}/billableSkus":
+  /v1/{parent}/billableSkus:
     get:
       description: "Lists the Billable SKUs in a given SKU group. Possible error codes: PERMISSION_DENIED: If the account making the request and the account being queried for are different, or the account doesn't exist. INVALID_ARGUMENT: Missing or invalid required parameters in the request. INTERNAL: Any non-user error related to technical issue in the backend. In this case, contact cloud channel support. Return Value: If successful, the BillableSku resources. The data for each resource is displayed in the ascending order of: * BillableSku.service_display_name * BillableSku.sku_display_name If unsuccessful, returns an error."
       operationId: cloudchannel.accounts.skuGroups.billableSkus.list
@@ -983,7 +983,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/channelPartnerLinks":
+  /v1/{parent}/channelPartnerLinks:
     get:
       description: "List ChannelPartnerLinks belonging to a distributor. You must be a distributor to call this method. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: The list of the distributor account's ChannelPartnerLink resources."
       operationId: cloudchannel.accounts.channelPartnerLinks.list
@@ -1068,7 +1068,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}/channelPartnerRepricingConfigs":
+  /v1/{parent}/channelPartnerRepricingConfigs:
     get:
       description: "Lists information about how a Reseller modifies their bill before sending it to a ChannelPartner. Possible Error Codes: * PERMISSION_DENIED: If the account making the request and the account being queried are different. * NOT_FOUND: The ChannelPartnerRepricingConfig specified does not exist or is not associated with the given account. * INTERNAL: Any non-user error related to technical issues in the backend. In this case, contact Cloud Channel support. Return Value: If successful, the ChannelPartnerRepricingConfig resources. The data for each resource is displayed in the ascending order of: * Channel Partner ID * RepricingConfig.effective_invoice_month * ChannelPartnerRepricingConfig.update_time If unsuccessful, returns an error."
       operationId: cloudchannel.accounts.channelPartnerLinks.channelPartnerRepricingConfigs.list
@@ -1149,7 +1149,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}/customerRepricingConfigs":
+  /v1/{parent}/customerRepricingConfigs:
     get:
       description: "Lists information about how a Reseller modifies their bill before sending it to a Customer. Possible Error Codes: * PERMISSION_DENIED: If the account making the request and the account being queried are different. * NOT_FOUND: The CustomerRepricingConfig specified does not exist or is not associated with the given account. * INTERNAL: Any non-user error related to technical issues in the backend. In this case, contact Cloud Channel support. Return Value: If successful, the CustomerRepricingConfig resources. The data for each resource is displayed in the ascending order of: * Customer ID * RepricingConfig.EntitlementGranularity.entitlement * RepricingConfig.effective_invoice_month * CustomerRepricingConfig.update_time If unsuccessful, returns an error."
       operationId: cloudchannel.accounts.customers.customerRepricingConfigs.list
@@ -1230,7 +1230,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}/customers":
+  /v1/{parent}/customers:
     get:
       description: "List Customers. Possible error codes: * PERMISSION_DENIED: The reseller account making the request is different from the reseller account in the API request. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: List of Customers, or an empty list if there are no customers."
       operationId: cloudchannel.accounts.customers.list
@@ -1311,7 +1311,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}/customers:import":
+  /v1/{parent}/customers:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1353,7 +1353,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}/entitlements":
+  /v1/{parent}/entitlements:
     get:
       description: "Lists Entitlements belonging to a customer. Possible error codes: * PERMISSION_DENIED: The customer doesn't belong to the reseller. * INVALID_ARGUMENT: Required request parameters are missing or invalid. Return value: A list of the customer's Entitlements."
       operationId: cloudchannel.accounts.customers.entitlements.list
@@ -1429,7 +1429,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}/offers":
+  /v1/{parent}/offers:
     get:
       description: "Lists the Offers the reseller can sell. Possible error codes: * INVALID_ARGUMENT: Required request parameters are missing or invalid."
       operationId: cloudchannel.accounts.offers.list
@@ -1491,7 +1491,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/reports":
+  /v1/{parent}/reports:
     get:
       description: Lists the reports that RunReportJob can run. These reports include an ID, a description, and the list of columns that will be in the result.
       operationId: cloudchannel.accounts.reports.list
@@ -1543,7 +1543,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/skuGroups":
+  /v1/{parent}/skuGroups:
     get:
       description: "Lists the Rebilling supported SKU groups the account is authorized to sell. Reference: https://cloud.google.com/skus/sku-groups Possible Error Codes: * PERMISSION_DENIED: If the account making the request and the account being queried are different, or the account doesn't exist. * INTERNAL: Any non-user error related to technical issues in the backend. In this case, contact Cloud Channel support. Return Value: If successful, the SkuGroup resources. The data for each resource is displayed in the alphabetical order of SKU group display name. The data for each resource is displayed in the ascending order of SkuGroup.display_name If unsuccessful, returns an error."
       operationId: cloudchannel.accounts.skuGroups.list
@@ -1590,7 +1590,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/skus":
+  /v1/{parent}/skus:
     get:
       description: "Lists the SKUs for a product the reseller is authorized to sell. Possible error codes: * INVALID_ARGUMENT: Required request parameters are missing or invalid."
       operationId: cloudchannel.products.skus.list
@@ -1647,7 +1647,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}:checkCloudIdentityAccountsExist":
+  /v1/{parent}:checkCloudIdentityAccountsExist:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1689,7 +1689,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}:listEntitlementChanges":
+  /v1/{parent}:listEntitlementChanges:
     get:
       description: "List entitlement history. Possible error codes: * PERMISSION_DENIED: The reseller account making the request and the provided reseller account are different. * INVALID_ARGUMENT: Missing or invalid required fields in the request. * NOT_FOUND: The parent resource doesn't exist. Usually the result of an invalid name parameter. * INTERNAL: Any non-user error related to a technical issue in the backend. In this case, contact CloudChannel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. In this case, contact Cloud Channel support. Return value: List of EntitlementChanges."
       operationId: cloudchannel.accounts.customers.entitlements.listEntitlementChanges
@@ -1741,7 +1741,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}:listTransferableOffers":
+  /v1/{parent}:listTransferableOffers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1783,7 +1783,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}:listTransferableSkus":
+  /v1/{parent}:listTransferableSkus:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1825,7 +1825,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}:transferEntitlements":
+  /v1/{parent}:transferEntitlements:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1867,7 +1867,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{parent}:transferEntitlementsToGoogle":
+  /v1/{parent}:transferEntitlementsToGoogle:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1909,7 +1909,7 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
-  "/v1/{reportJob}:fetchReportResults":
+  /v1/{reportJob}:fetchReportResults:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

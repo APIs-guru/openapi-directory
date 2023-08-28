@@ -178,7 +178,7 @@ paths:
       dependentProperties:
         dependent_hosted_number_order: "{signing_document_sid: sid}"
       pathType: list
-  "/v2/HostedNumber/AuthorizationDocuments/{Sid}":
+  /v2/HostedNumber/AuthorizationDocuments/{Sid}:
     delete:
       description: Cancel the AuthorizationDocument request.
       operationId: DeleteAuthorizationDocument
@@ -235,7 +235,7 @@ paths:
       dependentProperties:
         dependent_hosted_number_order: "{signing_document_sid: sid}"
       pathType: instance
-  "/v2/HostedNumber/AuthorizationDocuments/{SigningDocumentSid}/DependentHostedNumberOrders":
+  /v2/HostedNumber/AuthorizationDocuments/{SigningDocumentSid}/DependentHostedNumberOrders:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of dependent HostedNumberOrders belonging to the AuthorizationDocument.
@@ -567,7 +567,7 @@ paths:
       defaultOutputProperties: []
       mountName: bulk_hosted_number_orders
       pathType: list
-  "/v2/HostedNumber/Orders/Bulk/{Sid}":
+  /v2/HostedNumber/Orders/Bulk/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific BulkHostedNumberOrder.
@@ -606,7 +606,7 @@ paths:
       defaultOutputProperties: []
       mountName: bulk_hosted_number_orders
       pathType: instance
-  "/v2/HostedNumber/Orders/{Sid}":
+  /v2/HostedNumber/Orders/{Sid}:
     delete:
       description: Cancel the HostedNumberOrder (only available when the status is in `received`).
       operationId: DeleteHostedNumberOrder
@@ -865,7 +865,7 @@ paths:
         replace_items: "{bundle_sid: sid}"
       parent: /RegulatoryCompliance
       pathType: list
-  "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Copies":
+  /v2/RegulatoryCompliance/Bundles/{BundleSid}/Copies:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Bundles Copies for a Bundle.
@@ -983,7 +983,7 @@ paths:
       mountName: bundle_copies
       parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: list
-  "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations":
+  /v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of Evaluations associated to the Bundle resource.
@@ -1091,7 +1091,7 @@ paths:
         - sid
       parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: list
-  "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations/{Sid}":
+  /v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch specific Evaluation Instance.
@@ -1135,7 +1135,7 @@ paths:
         - sid
       parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: instance
-  "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments":
+  /v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Assigned Items for an account.
@@ -1258,7 +1258,7 @@ paths:
         - sid
       parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: list
-  "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments/{Sid}":
+  /v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments/{Sid}:
     delete:
       description: Remove an Assignment Item Instance.
       operationId: DeleteItemAssignment
@@ -1333,7 +1333,7 @@ paths:
         - sid
       parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: instance
-  "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ReplaceItems":
+  /v2/RegulatoryCompliance/Bundles/{BundleSid}/ReplaceItems:
     description: "TODO: Resource-level docs"
     post:
       description: Replaces all bundle items in the target bundle (specified in the path) with all the bundle items of the source bundle (specified by the from_bundle_sid body param)
@@ -1383,7 +1383,7 @@ paths:
       defaultOutputProperties: []
       parent: /RegulatoryCompliance/Bundles/{Sid}
       pathType: list
-  "/v2/RegulatoryCompliance/Bundles/{Sid}":
+  /v2/RegulatoryCompliance/Bundles/{Sid}:
     delete:
       description: Delete a specific Bundle.
       operationId: DeleteBundle
@@ -1568,7 +1568,7 @@ paths:
         - friendly_name
       parent: /RegulatoryCompliance
       pathType: list
-  "/v2/RegulatoryCompliance/EndUserTypes/{Sid}":
+  /v2/RegulatoryCompliance/EndUserTypes/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific End-User Type Instance.
@@ -1710,7 +1710,7 @@ paths:
         - friendly_name
       parent: /RegulatoryCompliance
       pathType: list
-  "/v2/RegulatoryCompliance/EndUsers/{Sid}":
+  /v2/RegulatoryCompliance/EndUsers/{Sid}:
     delete:
       description: Delete a specific End User.
       operationId: DeleteEndUser
@@ -1896,7 +1896,7 @@ paths:
         - friendly_name
       parent: /RegulatoryCompliance
       pathType: list
-  "/v2/RegulatoryCompliance/Regulations/{Sid}":
+  /v2/RegulatoryCompliance/Regulations/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch specific Regulation Instance.
@@ -2006,7 +2006,7 @@ paths:
         - friendly_name
       parent: /RegulatoryCompliance
       pathType: list
-  "/v2/RegulatoryCompliance/SupportingDocumentTypes/{Sid}":
+  /v2/RegulatoryCompliance/SupportingDocumentTypes/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a specific Supporting Document Type Instance.
@@ -2147,7 +2147,7 @@ paths:
         - friendly_name
       parent: /RegulatoryCompliance
       pathType: list
-  "/v2/RegulatoryCompliance/SupportingDocuments/{Sid}":
+  /v2/RegulatoryCompliance/SupportingDocuments/{Sid}:
     delete:
       description: Delete a specific Supporting Document.
       operationId: DeleteSupportingDocument

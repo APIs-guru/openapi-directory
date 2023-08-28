@@ -123,7 +123,7 @@ paths:
             - https://www.googleapis.com/auth/yt-analytics.readonly
       tags:
         - jobs
-  "/v1/jobs/{jobId}":
+  /v1/jobs/{jobId}:
     delete:
       description: Deletes a job.
       operationId: youtubereporting.jobs.delete
@@ -202,7 +202,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/jobs/{jobId}/reports":
+  /v1/jobs/{jobId}/reports:
     get:
       description: Lists reports created by a specific job. Returns NOT_FOUND if the job does not exist.
       operationId: youtubereporting.jobs.reports.list
@@ -273,7 +273,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/jobs/{jobId}/reports/{reportId}":
+  /v1/jobs/{jobId}/reports/{reportId}:
     get:
       description: Gets the metadata of a specific report.
       operationId: youtubereporting.jobs.reports.get
@@ -325,7 +325,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/media/{resourceName}":
+  /v1/media/{resourceName}:
     get:
       description: Method for media download. Download is supported on the URI `/v1/media/{+name}?alt=media`.
       operationId: youtubereporting.media.download

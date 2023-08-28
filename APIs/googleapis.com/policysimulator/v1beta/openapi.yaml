@@ -33,7 +33,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1beta/{name}":
+  /v1beta/{name}:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: policysimulator.projects.locations.replays.operations.list
@@ -85,7 +85,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/orgPolicyViolations":
+  /v1beta/{parent}/orgPolicyViolations:
     get:
       description: ListOrgPolicyViolations lists the OrgPolicyViolations that are present in an OrgPolicyViolationsPreview.
       operationId: policysimulator.organizations.locations.orgPolicyViolationsPreviews.orgPolicyViolations.list
@@ -132,7 +132,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/orgPolicyViolationsPreviews":
+  /v1beta/{parent}/orgPolicyViolationsPreviews:
     get:
       description: ListOrgPolicyViolationsPreviews lists each OrgPolicyViolationsPreview in an organization. Each OrgPolicyViolationsPreview is available for at least 7 days.
       operationId: policysimulator.organizations.locations.orgPolicyViolationsPreviews.list

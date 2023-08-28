@@ -40,7 +40,7 @@ tags:
   - name: responsePolicies
   - name: responsePolicyRules
 paths:
-  "/dns/v2/projects/{project}/locations/{location}":
+  /dns/v2/projects/{project}/locations/{location}:
     get:
       description: Fetches the representation of an existing Project.
       operationId: dns.projects.get
@@ -99,7 +99,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2/projects/{project}/locations/{location}/managedZones":
+  /dns/v2/projects/{project}/locations/{location}/managedZones:
     get:
       description: Enumerates ManagedZones that have been created but not yet deleted.
       operationId: dns.managedZones.list
@@ -213,7 +213,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}:
     delete:
       description: Deletes a previously created ManagedZone.
       operationId: dns.managedZones.delete
@@ -420,7 +420,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/changes":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/changes:
     get:
       description: Enumerates Changes to a ResourceRecordSet collection.
       operationId: dns.changes.list
@@ -551,7 +551,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - changes
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/changes/{changeId}":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/changes/{changeId}:
     get:
       description: Fetches the representation of an existing Change.
       operationId: dns.changes.get
@@ -622,7 +622,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/dnsKeys":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/dnsKeys:
     get:
       description: Enumerates DnsKeys to a ResourceRecordSet collection.
       operationId: dns.dnsKeys.list
@@ -698,7 +698,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}:
     get:
       description: Fetches the representation of an existing DnsKey.
       operationId: dns.dnsKeys.get
@@ -775,7 +775,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/operations":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/operations:
     get:
       description: Enumerates Operations for the given ManagedZone.
       operationId: dns.managedZoneOperations.list
@@ -854,7 +854,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/operations/{operation}":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/operations/{operation}:
     get:
       description: Fetches the representation of an existing Operation.
       operationId: dns.managedZoneOperations.get
@@ -926,7 +926,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/rrsets":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/rrsets:
     get:
       description: Enumerates ResourceRecordSets that you have created but not yet deleted.
       operationId: dns.resourceRecordSets.list
@@ -1057,7 +1057,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - resourceRecordSets
-  "/dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/rrsets/{name}/{type}":
+  /dns/v2/projects/{project}/locations/{location}/managedZones/{managedZone}/rrsets/{name}/{type}:
     delete:
       description: Deletes a previously created ResourceRecordSet.
       operationId: dns.resourceRecordSets.delete
@@ -1250,7 +1250,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - resourceRecordSets
-  "/dns/v2/projects/{project}/locations/{location}/policies":
+  /dns/v2/projects/{project}/locations/{location}/policies:
     get:
       description: Enumerates all Policies associated with a project.
       operationId: dns.policies.list
@@ -1359,7 +1359,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
-  "/dns/v2/projects/{project}/locations/{location}/policies/{policy}":
+  /dns/v2/projects/{project}/locations/{location}/policies/{policy}:
     delete:
       description: Deletes a previously created Policy. Fails if the policy is still being referenced by a network.
       operationId: dns.policies.delete
@@ -1566,7 +1566,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
-  "/dns/v2/projects/{project}/locations/{location}/responsePolicies":
+  /dns/v2/projects/{project}/locations/{location}/responsePolicies:
     get:
       description: Enumerates all Response Policies associated with a project.
       operationId: dns.responsePolicies.list
@@ -1675,7 +1675,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - responsePolicies
-  "/dns/v2/projects/{project}/locations/{location}/responsePolicies/{responsePolicy}":
+  /dns/v2/projects/{project}/locations/{location}/responsePolicies/{responsePolicy}:
     delete:
       description: Deletes a previously created Response Policy. Fails if the response policy is non-empty or still being referenced by a network.
       operationId: dns.responsePolicies.delete
@@ -1882,7 +1882,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - responsePolicies
-  "/dns/v2/projects/{project}/locations/{location}/responsePolicies/{responsePolicy}/rules":
+  /dns/v2/projects/{project}/locations/{location}/responsePolicies/{responsePolicy}/rules:
     get:
       description: Enumerates all Response Policy Rules associated with a project.
       operationId: dns.responsePolicyRules.list
@@ -2003,7 +2003,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - responsePolicyRules
-  "/dns/v2/projects/{project}/locations/{location}/responsePolicies/{responsePolicy}/rules/{responsePolicyRule}":
+  /dns/v2/projects/{project}/locations/{location}/responsePolicies/{responsePolicy}/rules/{responsePolicyRule}:
     delete:
       description: Deletes a previously created Response Policy Rule.
       operationId: dns.responsePolicyRules.delete
@@ -2234,7 +2234,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - responsePolicyRules
-  "/dns/v2/{resource}:getIamPolicy":
+  /dns/v2/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2288,7 +2288,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
-  "/dns/v2/{resource}:setIamPolicy":
+  /dns/v2/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2334,7 +2334,7 @@ paths:
             - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
-  "/dns/v2/{resource}:testIamPermissions":
+  /dns/v2/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

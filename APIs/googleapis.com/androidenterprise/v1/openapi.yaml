@@ -273,7 +273,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - enterprises
-  "/androidenterprise/v1/enterprises/{enterpriseId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}:
     get:
       description: Retrieves the name and domain of an enterprise.
       operationId: androidenterprise.enterprises.get
@@ -310,7 +310,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/account":
+  /androidenterprise/v1/enterprises/{enterpriseId}/account:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -352,7 +352,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - enterprises
-  "/androidenterprise/v1/enterprises/{enterpriseId}/createEnrollmentToken":
+  /androidenterprise/v1/enterprises/{enterpriseId}/createEnrollmentToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -398,7 +398,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - enterprises
-  "/androidenterprise/v1/enterprises/{enterpriseId}/createWebToken":
+  /androidenterprise/v1/enterprises/{enterpriseId}/createWebToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -440,7 +440,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - enterprises
-  "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses":
+  /androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses:
     get:
       description: Retrieves IDs of all products for which the enterprise has a group license. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.grouplicenses.list
@@ -477,7 +477,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}:
     get:
       description: Retrieves details of an enterprise's group license for a product. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.grouplicenses.get
@@ -520,7 +520,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}/users":
+  /androidenterprise/v1/enterprises/{enterpriseId}/groupLicenses/{groupLicenseId}/users:
     get:
       description: Retrieves the IDs of the users who have been granted entitlements under the license. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.grouplicenseusers.list
@@ -563,7 +563,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/products":
+  /androidenterprise/v1/enterprises/{enterpriseId}/products:
     get:
       description: "Finds approved products that match a query, or all approved products if there is no query. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations. "
       operationId: androidenterprise.products.list
@@ -625,7 +625,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}:
     get:
       description: Retrieves details of a product for display to an enterprise admin.
       operationId: androidenterprise.products.get
@@ -673,7 +673,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/appRestrictionsSchema":
+  /androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/appRestrictionsSchema:
     get:
       description: Retrieves the schema that defines the configurable properties for this product. All products have a schema, but this schema may be empty if no managed configurations have been defined. This schema can be used to populate a UI that allows an admin to configure the product. To apply a managed configuration based on the schema obtained using this API, see Managed Configurations through Play.
       operationId: androidenterprise.products.getAppRestrictionsSchema
@@ -721,7 +721,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/approve":
+  /androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/approve:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -765,7 +765,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - products
-  "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/generateApprovalUrl":
+  /androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/generateApprovalUrl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -813,7 +813,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - products
-  "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/managedConfigurationsSettings":
+  /androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/managedConfigurationsSettings:
     get:
       description: Lists all the managed configurations settings for the specified app.
       operationId: androidenterprise.managedconfigurationssettings.list
@@ -856,7 +856,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/permissions":
+  /androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/permissions:
     get:
       description: Retrieves the Android app permissions required by this app.
       operationId: androidenterprise.products.getPermissions
@@ -899,7 +899,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/unapprove":
+  /androidenterprise/v1/enterprises/{enterpriseId}/products/{productId}/unapprove:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -938,7 +938,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - products
-  "/androidenterprise/v1/enterprises/{enterpriseId}/sendTestPushNotification":
+  /androidenterprise/v1/enterprises/{enterpriseId}/sendTestPushNotification:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -975,7 +975,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - enterprises
-  "/androidenterprise/v1/enterprises/{enterpriseId}/serviceAccount":
+  /androidenterprise/v1/enterprises/{enterpriseId}/serviceAccount:
     get:
       description: Returns a service account and credentials. The service account can be bound to the enterprise by calling setAccount. The service account is unique to this enterprise and EMM, and will be deleted if the enterprise is unbound. The credentials contain private key data and are not stored server-side. This method can only be called after calling Enterprises.Enroll or Enterprises.CompleteSignup, and before Enterprises.SetAccount; at other times it will return an error. Subsequent calls after the first will generate a new, unique set of credentials, and invalidate the previously generated credentials. Once the service account is bound to the enterprise, it can be managed using the serviceAccountKeys resource.
       operationId: androidenterprise.enterprises.getServiceAccount
@@ -1020,7 +1020,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/serviceAccountKeys":
+  /androidenterprise/v1/enterprises/{enterpriseId}/serviceAccountKeys:
     get:
       description: Lists all active credentials for the service account associated with this enterprise. Only the ID and key type are returned. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
       operationId: androidenterprise.serviceaccountkeys.list
@@ -1086,7 +1086,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - serviceaccountkeys
-  "/androidenterprise/v1/enterprises/{enterpriseId}/serviceAccountKeys/{keyId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/serviceAccountKeys/{keyId}:
     delete:
       description: Removes and invalidates the specified credentials for the service account associated with this enterprise. The calling service account must have been retrieved by calling Enterprises.GetServiceAccount and must have been set as the enterprise service account by calling Enterprises.SetAccount.
       operationId: androidenterprise.serviceaccountkeys.delete
@@ -1125,7 +1125,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/storeLayout":
+  /androidenterprise/v1/enterprises/{enterpriseId}/storeLayout:
     get:
       description: Returns the store layout for the enterprise. If the store layout has not been set, returns "basic" as the store layout type and no homepage.
       operationId: androidenterprise.enterprises.getStoreLayout
@@ -1191,7 +1191,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - enterprises
-  "/androidenterprise/v1/enterprises/{enterpriseId}/storeLayout/pages":
+  /androidenterprise/v1/enterprises/{enterpriseId}/storeLayout/pages:
     get:
       description: Retrieves the details of all pages in the store.
       operationId: androidenterprise.storelayoutpages.list
@@ -1257,7 +1257,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - storelayoutpages
-  "/androidenterprise/v1/enterprises/{enterpriseId}/storeLayout/pages/{pageId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/storeLayout/pages/{pageId}:
     delete:
       description: Deletes a store page.
       operationId: androidenterprise.storelayoutpages.delete
@@ -1361,7 +1361,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - storelayoutpages
-  "/androidenterprise/v1/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters":
+  /androidenterprise/v1/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters:
     get:
       description: Retrieves the details of all clusters on the specified page.
       operationId: androidenterprise.storelayoutclusters.list
@@ -1439,7 +1439,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - storelayoutclusters
-  "/androidenterprise/v1/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters/{clusterId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/storeLayout/pages/{pageId}/clusters/{clusterId}:
     delete:
       description: Deletes a cluster.
       operationId: androidenterprise.storelayoutclusters.delete
@@ -1561,7 +1561,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - storelayoutclusters
-  "/androidenterprise/v1/enterprises/{enterpriseId}/unenroll":
+  /androidenterprise/v1/enterprises/{enterpriseId}/unenroll:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1594,7 +1594,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - enterprises
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users:
     get:
       description: Looks up a user by primary email address. This is only supported for Google-managed users. Lookup of the id is not needed for EMM-managed users because the id is already returned in the result of the Users.insert call.
       operationId: androidenterprise.users.list
@@ -1666,7 +1666,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - users
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}:
     delete:
       description: Deleted an EMM-managed user.
       operationId: androidenterprise.users.delete
@@ -1770,7 +1770,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - users
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/authenticationToken":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/authenticationToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1813,7 +1813,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - users
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/availableProductSet":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/availableProductSet:
     get:
       description: Retrieves the set of products a user is entitled to access. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.users.getAvailableProductSet
@@ -1891,7 +1891,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - users
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/deviceAccess":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/deviceAccess:
     delete:
       description: Revokes access to all devices currently provisioned to the user. The user will no longer be able to use the managed Play store on any of their managed devices. This call only works with EMM-managed accounts.
       operationId: androidenterprise.users.revokeDeviceAccess
@@ -1930,7 +1930,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices:
     get:
       description: Retrieves the IDs of all of a user's devices.
       operationId: androidenterprise.devices.list
@@ -1973,7 +1973,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}:
     get:
       description: Retrieves the details of a device.
       operationId: androidenterprise.devices.get
@@ -2068,7 +2068,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - devices
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/forceReportUpload":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/forceReportUpload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2113,7 +2113,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - devices
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs:
     get:
       description: Retrieves the details of all apps installed on the specified device.
       operationId: androidenterprise.installs.list
@@ -2162,7 +2162,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs/{installId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/installs/{installId}:
     delete:
       description: Requests to remove an app from a device. A call to get or list will still show the app as installed on the device until it is actually removed. A successful response indicates that a removal request has been sent to the device. The call will be considered successful even if the app is not present on the device (e.g. it was never installed, or was removed by the user).
       operationId: androidenterprise.installs.delete
@@ -2302,7 +2302,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - installs
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice:
     get:
       description: Lists all the per-device managed configurations for the specified device. Only the ID is set.
       operationId: androidenterprise.managedconfigurationsfordevice.list
@@ -2351,7 +2351,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice/{managedConfigurationForDeviceId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/managedConfigurationsForDevice/{managedConfigurationForDeviceId}:
     delete:
       description: Removes a per-device managed configuration for an app for the specified device.
       operationId: androidenterprise.managedconfigurationsfordevice.delete
@@ -2491,7 +2491,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - managedconfigurationsfordevice
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/state":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/devices/{deviceId}/state:
     get:
       description: Retrieves whether a device's access to Google services is enabled or disabled. The device state takes effect only if enforcing EMM policies on Android devices is enabled in the Google Admin Console. Otherwise, the device state is ignored and all devices are allowed access to Google services. This is only supported for Google-managed users.
       operationId: androidenterprise.devices.getState
@@ -2581,7 +2581,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - devices
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/entitlements":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/entitlements:
     get:
       description: Lists all entitlements for the specified user. Only the ID is set. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.entitlements.list
@@ -2624,7 +2624,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/entitlements/{entitlementId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/entitlements/{entitlementId}:
     delete:
       description: Removes an entitlement to an app for a user. **Note:** This item has been deprecated. New integrations cannot use this method and can refer to our new recommendations.
       operationId: androidenterprise.entitlements.delete
@@ -2751,7 +2751,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - entitlements
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser:
     get:
       description: Lists all the per-user managed configurations for the specified user. Only the ID is set.
       operationId: androidenterprise.managedconfigurationsforuser.list
@@ -2794,7 +2794,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser/{managedConfigurationForUserId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/users/{userId}/managedConfigurationsForUser/{managedConfigurationForUserId}:
     delete:
       description: Removes a per-user managed configuration for an app for the specified user.
       operationId: androidenterprise.managedconfigurationsforuser.delete
@@ -2916,7 +2916,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - managedconfigurationsforuser
-  "/androidenterprise/v1/enterprises/{enterpriseId}/webApps":
+  /androidenterprise/v1/enterprises/{enterpriseId}/webApps:
     get:
       description: Retrieves the details of all web apps for a given enterprise.
       operationId: androidenterprise.webapps.list
@@ -2982,7 +2982,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - webapps
-  "/androidenterprise/v1/enterprises/{enterpriseId}/webApps/{webAppId}":
+  /androidenterprise/v1/enterprises/{enterpriseId}/webApps/{webAppId}:
     delete:
       description: Deletes an existing web app.
       operationId: androidenterprise.webapps.delete
@@ -3086,7 +3086,7 @@ paths:
             - https://www.googleapis.com/auth/androidenterprise
       tags:
         - webapps
-  "/androidenterprise/v1/permissions/{permissionId}":
+  /androidenterprise/v1/permissions/{permissionId}:
     get:
       description: Retrieves details of an Android app permission for display to an enterprise admin.
       operationId: androidenterprise.permissions.get

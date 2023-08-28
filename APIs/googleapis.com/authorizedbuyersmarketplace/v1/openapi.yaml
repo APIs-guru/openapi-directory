@@ -30,7 +30,7 @@ tags:
   - name: bidders
   - name: buyers
 paths:
-  "/v1/{auctionPackage}:subscribeClients":
+  /v1/{auctionPackage}:subscribeClients:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{auctionPackage}:unsubscribeClients":
+  /v1/{auctionPackage}:unsubscribeClients:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -114,7 +114,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{buyer}/proposals:sendRfp":
+  /v1/{buyer}/proposals:sendRfp:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -156,7 +156,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{deal}:addCreative":
+  /v1/{deal}:addCreative:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -198,7 +198,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{deal}:setReadyToServe":
+  /v1/{deal}:setReadyToServe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -240,7 +240,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes an existing client user. The client user will lose access to the Authorized Buyers UI. Note that if a client user is deleted, the user's access to the UI can't be restored unless a new client user is created and activated.
       operationId: authorizedbuyersmarketplace.buyers.clients.users.delete
@@ -335,7 +335,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{name}:accept":
+  /v1/{name}:accept:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -377,7 +377,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{name}:activate":
+  /v1/{name}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -419,7 +419,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{name}:deactivate":
+  /v1/{name}:deactivate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -461,7 +461,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{name}:pause":
+  /v1/{name}:pause:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -503,7 +503,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{name}:resume":
+  /v1/{name}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -545,7 +545,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{name}:subscribe":
+  /v1/{name}:subscribe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -587,7 +587,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{name}:unsubscribe":
+  /v1/{name}:unsubscribe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -629,7 +629,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{parent}/auctionPackages":
+  /v1/{parent}/auctionPackages:
     get:
       description: List the auction packages subscribed by a buyer and its clients.
       operationId: authorizedbuyersmarketplace.buyers.auctionPackages.list
@@ -676,7 +676,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/clients":
+  /v1/{parent}/clients:
     get:
       description: Lists all the clients for the current buyer.
       operationId: authorizedbuyersmarketplace.buyers.clients.list
@@ -757,7 +757,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{parent}/deals":
+  /v1/{parent}/deals:
     get:
       description: Lists all deals in a proposal. To retrieve only the finalized revision deals regardless if a deal is being renegotiated, see the FinalizedDeals resource.
       operationId: authorizedbuyersmarketplace.buyers.proposals.deals.list
@@ -804,7 +804,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/deals:batchUpdate":
+  /v1/{parent}/deals:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -846,7 +846,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{parent}/finalizedDeals":
+  /v1/{parent}/finalizedDeals:
     get:
       description: Lists finalized deals. Use the URL path "/v1/buyers/{accountId}/finalizedDeals" to list finalized deals for the current buyer and its clients. Bidders can use the URL path "/v1/bidders/{accountId}/finalizedDeals" to list finalized deals for the bidder, its buyers and all their clients.
       operationId: authorizedbuyersmarketplace.buyers.finalizedDeals.list
@@ -903,7 +903,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/proposals":
+  /v1/{parent}/proposals:
     get:
       description: Lists proposals. A filter expression using [Cloud API list filtering syntax](https://developers.google.com/authorized-buyers/apis/guides/list-filters) may be specified to filter the results.
       operationId: authorizedbuyersmarketplace.buyers.proposals.list
@@ -955,7 +955,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/publisherProfiles":
+  /v1/{parent}/publisherProfiles:
     get:
       description: Lists publisher profiles. The returned publisher profiles aren't in any defined order. The order of the results might change. A new publisher profile can appear in any place in the list of returned results.
       operationId: authorizedbuyersmarketplace.buyers.publisherProfiles.list
@@ -1007,7 +1007,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/users":
+  /v1/{parent}/users:
     get:
       description: Lists all client users for a specified client.
       operationId: authorizedbuyersmarketplace.buyers.clients.users.list
@@ -1083,7 +1083,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{proposal}:addNote":
+  /v1/{proposal}:addNote:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1125,7 +1125,7 @@ paths:
             - https://www.googleapis.com/auth/authorized-buyers-marketplace
       tags:
         - buyers
-  "/v1/{proposal}:cancelNegotiation":
+  /v1/{proposal}:cancelNegotiation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

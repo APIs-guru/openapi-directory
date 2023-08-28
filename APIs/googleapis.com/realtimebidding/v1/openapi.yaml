@@ -113,7 +113,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a pretargeting configuration.
       operationId: realtimebidding.bidders.pretargetingConfigs.delete
@@ -246,7 +246,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - buyers
-  "/v1/{name}:activate":
+  /v1/{name}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -288,7 +288,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{name}:close":
+  /v1/{name}:close:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -330,7 +330,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - buyers
-  "/v1/{name}:getRemarketingTag":
+  /v1/{name}:getRemarketingTag:
     get:
       description: "Deprecated. This will be removed in October 2023. For more information, see the release notes: https://developers.google.com/authorized-buyers/apis/relnotes#real-time-bidding-api Gets remarketing tag for a buyer. A remarketing tag is a piece of JavaScript code that can be placed on a web page. When a user visits a page containing a remarketing tag, Google adds the user to a user list."
       operationId: realtimebidding.buyers.userLists.getRemarketingTag
@@ -367,7 +367,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:open":
+  /v1/{name}:open:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -409,7 +409,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - buyers
-  "/v1/{name}:suspend":
+  /v1/{name}:suspend:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -451,7 +451,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{parent}/creatives":
+  /v1/{parent}/creatives:
     get:
       description: Lists creatives as they are at the time of the initial request. This call may take multiple hours to complete. For large, paginated requests, this method returns a snapshot of creatives at the time of request for the first page. `lastStatusUpdate` and `creativeServingDecision` may be outdated for creatives on sequential pages. We recommend [Google Cloud Pub/Sub](//cloud.google.com/pubsub/docs/overview) to view the latest status.
       operationId: realtimebidding.buyers.creatives.list
@@ -541,7 +541,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - buyers
-  "/v1/{parent}/creatives:watch":
+  /v1/{parent}/creatives:watch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -583,7 +583,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{parent}/endpoints":
+  /v1/{parent}/endpoints:
     get:
       description: Lists all the bidder's endpoints.
       operationId: realtimebidding.bidders.endpoints.list
@@ -630,7 +630,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/pretargetingConfigs":
+  /v1/{parent}/pretargetingConfigs:
     get:
       description: Lists all pretargeting configurations for a single bidder.
       operationId: realtimebidding.bidders.pretargetingConfigs.list
@@ -706,7 +706,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{parent}/publisherConnections":
+  /v1/{parent}/publisherConnections:
     get:
       description: Lists publisher connections for a given bidder.
       operationId: realtimebidding.bidders.publisherConnections.list
@@ -763,7 +763,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/publisherConnections:batchApprove":
+  /v1/{parent}/publisherConnections:batchApprove:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -805,7 +805,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{parent}/publisherConnections:batchReject":
+  /v1/{parent}/publisherConnections:batchReject:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -847,7 +847,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{parent}/userLists":
+  /v1/{parent}/userLists:
     get:
       description: Lists the user lists visible to the current user.
       operationId: realtimebidding.buyers.userLists.list
@@ -923,7 +923,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - buyers
-  "/v1/{pretargetingConfig}:addTargetedApps":
+  /v1/{pretargetingConfig}:addTargetedApps:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -965,7 +965,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{pretargetingConfig}:addTargetedPublishers":
+  /v1/{pretargetingConfig}:addTargetedPublishers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1007,7 +1007,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{pretargetingConfig}:addTargetedSites":
+  /v1/{pretargetingConfig}:addTargetedSites:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1049,7 +1049,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{pretargetingConfig}:removeTargetedApps":
+  /v1/{pretargetingConfig}:removeTargetedApps:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1091,7 +1091,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{pretargetingConfig}:removeTargetedPublishers":
+  /v1/{pretargetingConfig}:removeTargetedPublishers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1133,7 +1133,7 @@ paths:
             - https://www.googleapis.com/auth/realtime-bidding
       tags:
         - bidders
-  "/v1/{pretargetingConfig}:removeTargetedSites":
+  /v1/{pretargetingConfig}:removeTargetedSites:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

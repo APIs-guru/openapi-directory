@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v4/{name}":
+  /v4/{name}:
     delete:
       description: Deletes the specified job. Typically, the job becomes unsearchable within 10 seconds, but it may take up to 5 minutes.
       operationId: jobs.projects.tenants.jobs.delete
@@ -139,7 +139,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/clientEvents":
+  /v4/{parent}/clientEvents:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -185,7 +185,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/companies":
+  /v4/{parent}/companies:
     get:
       description: Lists all companies associated with the project.
       operationId: jobs.projects.tenants.companies.list
@@ -274,7 +274,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/jobs":
+  /v4/{parent}/jobs:
     get:
       description: Lists jobs by filter.
       operationId: jobs.projects.tenants.jobs.list
@@ -374,7 +374,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/jobs:batchCreate":
+  /v4/{parent}/jobs:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -420,7 +420,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/jobs:batchDelete":
+  /v4/{parent}/jobs:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -466,7 +466,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/jobs:batchUpdate":
+  /v4/{parent}/jobs:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -512,7 +512,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/jobs:search":
+  /v4/{parent}/jobs:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -558,7 +558,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/jobs:searchForAlert":
+  /v4/{parent}/jobs:searchForAlert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -604,7 +604,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{parent}/tenants":
+  /v4/{parent}/tenants:
     get:
       description: Lists all tenants associated with the project.
       operationId: jobs.projects.tenants.list
@@ -688,7 +688,7 @@ paths:
             - https://www.googleapis.com/auth/jobs
       tags:
         - projects
-  "/v4/{tenant}:completeQuery":
+  /v4/{tenant}:completeQuery:
     get:
       description: Completes the specified prefix with keyword suggestions. Intended for use by a job search auto-complete search box.
       operationId: jobs.projects.tenants.completeQuery

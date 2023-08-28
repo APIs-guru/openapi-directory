@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta2/{name}":
+  /v1beta2/{name}:
     delete:
       description: Deletes a composite index.
       operationId: firestore.projects.databases.collectionGroups.indexes.delete
@@ -139,7 +139,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta2/{name}:exportDocuments":
+  /v1beta2/{name}:exportDocuments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -185,7 +185,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta2/{name}:importDocuments":
+  /v1beta2/{name}:importDocuments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -231,7 +231,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1beta2/{parent}/fields":
+  /v1beta2/{parent}/fields:
     get:
       description: Lists the field configuration and metadata for this database. Currently, FirestoreAdmin.ListFields only supports listing fields that have been explicitly overridden. To issue this query, call FirestoreAdmin.ListFields with the filter set to `indexConfig.usesAncestorConfig:false`.
       operationId: firestore.projects.databases.collectionGroups.fields.list
@@ -287,7 +287,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{parent}/indexes":
+  /v1beta2/{parent}/indexes:
     get:
       description: Lists composite indexes.
       operationId: firestore.projects.databases.collectionGroups.indexes.list

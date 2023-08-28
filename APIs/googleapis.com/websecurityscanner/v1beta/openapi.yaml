@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta/{name}":
+  /v1beta/{name}:
     delete:
       description: Deletes an existing ScanConfig and its child resources.
       operationId: websecurityscanner.projects.scanConfigs.delete
@@ -127,7 +127,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{name}:start":
+  /v1beta/{name}:start:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -169,7 +169,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{name}:stop":
+  /v1beta/{name}:stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -211,7 +211,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{parent}/crawledUrls":
+  /v1beta/{parent}/crawledUrls:
     get:
       description: List CrawledUrls under a given ScanRun.
       operationId: websecurityscanner.projects.scanConfigs.scanRuns.crawledUrls.list
@@ -258,7 +258,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/findingTypeStats":
+  /v1beta/{parent}/findingTypeStats:
     get:
       description: List all FindingTypeStats under a given ScanRun.
       operationId: websecurityscanner.projects.scanConfigs.scanRuns.findingTypeStats.list
@@ -295,7 +295,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/findings":
+  /v1beta/{parent}/findings:
     get:
       description: List Findings under a given ScanRun.
       operationId: websecurityscanner.projects.scanConfigs.scanRuns.findings.list
@@ -347,7 +347,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/scanConfigs":
+  /v1beta/{parent}/scanConfigs:
     get:
       description: Lists ScanConfigs under a given project.
       operationId: websecurityscanner.projects.scanConfigs.list
@@ -423,7 +423,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{parent}/scanRuns":
+  /v1beta/{parent}/scanRuns:
     get:
       description: Lists ScanRuns under a given ScanConfig, in descending order of ScanRun stop time.
       operationId: websecurityscanner.projects.scanConfigs.scanRuns.list

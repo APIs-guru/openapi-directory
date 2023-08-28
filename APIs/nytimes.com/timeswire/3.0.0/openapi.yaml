@@ -52,7 +52,7 @@ paths:
                     type: string
                 type: object
           description: An array of Articles
-  "/content/{source}/{section}.json":
+  /content/{source}/{section}.json:
     get:
       parameters:
         - description: |
@@ -115,7 +115,7 @@ paths:
                     type: string
                 type: object
           description: An array of Articles
-  "/content/{source}/{section}/{time-period}.json":
+  /content/{source}/{section}/{time-period}.json:
     get:
       parameters:
         - description: |

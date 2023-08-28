@@ -77,7 +77,7 @@ paths:
       defaultOutputProperties:
         - redirect_to
       pathType: instance
-  "/v1/LinkShortening/Domains/{DomainSid}/Certificate":
+  /v1/LinkShortening/Domains/{DomainSid}/Certificate:
     delete:
       description: ""
       operationId: DeleteDomainCertV4
@@ -185,7 +185,7 @@ paths:
         - url
       mountName: domain_certs
       pathType: instance
-  "/v1/LinkShortening/Domains/{DomainSid}/Config":
+  /v1/LinkShortening/Domains/{DomainSid}/Config:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -280,7 +280,7 @@ paths:
         - disable_https
       mountName: domain_config
       pathType: instance
-  "/v1/LinkShortening/Domains/{DomainSid}/MessagingServices/{MessagingServiceSid}":
+  /v1/LinkShortening/Domains/{DomainSid}/MessagingServices/{MessagingServiceSid}:
     delete:
       description: ""
       operationId: DeleteLinkshorteningMessagingService
@@ -357,7 +357,7 @@ paths:
         - url
       mountName: linkshortening_messaging_service
       pathType: instance
-  "/v1/LinkShortening/MessagingService/{MessagingServiceSid}/DomainConfig":
+  /v1/LinkShortening/MessagingService/{MessagingServiceSid}/DomainConfig:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -400,7 +400,7 @@ paths:
         - messaging_service_sid
       mountName: domain_config_messaging_service
       pathType: instance
-  "/v1/LinkShortening/MessagingServices/{MessagingServiceSid}/Domain":
+  /v1/LinkShortening/MessagingServices/{MessagingServiceSid}/Domain:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -681,7 +681,7 @@ paths:
       defaultOutputProperties:
         - usecases
       pathType: list
-  "/v1/Services/{MessagingServiceSid}/ChannelSenders":
+  /v1/Services/{MessagingServiceSid}/ChannelSenders:
     description: A Messaging Service resource to read, fetch all Channel Senders associated with a Messaging Service.
     get:
       description: ""
@@ -765,7 +765,7 @@ paths:
         - sender_type
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{MessagingServiceSid}/ChannelSenders/{Sid}":
+  /v1/Services/{MessagingServiceSid}/ChannelSenders/{Sid}:
     description: A Messaging Service resource to read, fetch all Channel Senders associated with a Messaging Service.
     get:
       description: ""
@@ -808,7 +808,7 @@ paths:
         - sender_type
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p":
+  /v1/Services/{MessagingServiceSid}/Compliance/Usa2p:
     description: A service for (fetch/create/delete) A2P Campaign for a Messaging Service
     get:
       description: ""
@@ -984,7 +984,7 @@ paths:
       mountName: us_app_to_person
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/Usecases":
+  /v1/Services/{MessagingServiceSid}/Compliance/Usa2p/Usecases:
     description: Messaging Service Use Case resource. Fetch possible use cases for service. The Use Cases API returns an empty list if there is an issue with the customer's A2P brand registration. This Brand cannot register any campaign use cases. Customers are requested to contact support with their A2P brand information.
     get:
       description: ""
@@ -1028,7 +1028,7 @@ paths:
       mountName: us_app_to_person_usecases
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/{Sid}":
+  /v1/Services/{MessagingServiceSid}/Compliance/Usa2p/{Sid}:
     delete:
       description: ""
       operationId: DeleteUsAppToPerson
@@ -1106,7 +1106,7 @@ paths:
       mountName: us_app_to_person
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/AlphaSenders":
+  /v1/Services/{ServiceSid}/AlphaSenders:
     description: A Messaging Service resource to add, fetch or remove an Alpha Sender ID from a Messaging Service.
     get:
       description: ""
@@ -1227,7 +1227,7 @@ paths:
         - alpha_sender
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/AlphaSenders/{Sid}":
+  /v1/Services/{ServiceSid}/AlphaSenders/{Sid}:
     delete:
       description: ""
       operationId: DeleteAlphaSender
@@ -1297,7 +1297,7 @@ paths:
         - alpha_sender
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/PhoneNumbers":
+  /v1/Services/{ServiceSid}/PhoneNumbers:
     description: A Messaging Service resource to add, fetch or remove phone numbers from a Messaging Service.
     get:
       description: ""
@@ -1422,7 +1422,7 @@ paths:
         - country_code
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}":
+  /v1/Services/{ServiceSid}/PhoneNumbers/{Sid}:
     delete:
       description: ""
       operationId: DeletePhoneNumber
@@ -1493,7 +1493,7 @@ paths:
         - country_code
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/ShortCodes":
+  /v1/Services/{ServiceSid}/ShortCodes:
     description: A Messaging Service resource to add, fetch or remove short code numbers from a Messaging Service.
     get:
       description: ""
@@ -1618,7 +1618,7 @@ paths:
         - country_code
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/ShortCodes/{Sid}":
+  /v1/Services/{ServiceSid}/ShortCodes/{Sid}:
     delete:
       description: ""
       operationId: DeleteShortCode
@@ -1689,7 +1689,7 @@ paths:
         - country_code
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{Sid}":
+  /v1/Services/{Sid}:
     delete:
       description: ""
       operationId: DeleteService
@@ -2059,7 +2059,7 @@ paths:
         - date_created
       mountName: tollfree_verifications
       pathType: list
-  "/v1/Tollfree/Verifications/{Sid}":
+  /v1/Tollfree/Verifications/{Sid}:
     description: A Messaging resource to add and fetch Tollfree Verifications.
     get:
       description: ""
@@ -2317,7 +2317,7 @@ paths:
         brand_registration_otp: "{brand_registration_sid: sid}"
         brand_vetting: "{brand_sid: sid}"
       pathType: list
-  "/v1/a2p/BrandRegistrations/{BrandRegistrationSid}/SmsOtp":
+  /v1/a2p/BrandRegistrations/{BrandRegistrationSid}/SmsOtp:
     description: A Messaging Service resource to retry OTP verification for Sole Proprietor Brand Registrations.
     post:
       description: ""
@@ -2354,7 +2354,7 @@ paths:
       mountName: brand_registration_otps
       parent: /a2p/BrandRegistrations/{Sid}
       pathType: list
-  "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings":
+  /v1/a2p/BrandRegistrations/{BrandSid}/Vettings:
     description: A Messaging Service resource to add and get Brand Vettings.
     get:
       description: ""
@@ -2491,7 +2491,7 @@ paths:
       mountName: brand_vettings
       parent: /a2p/BrandRegistrations/{Sid}
       pathType: list
-  "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings/{BrandVettingSid}":
+  /v1/a2p/BrandRegistrations/{BrandSid}/Vettings/{BrandVettingSid}:
     description: A Messaging Service resource to add and get Brand Vettings.
     get:
       description: ""
@@ -2542,7 +2542,7 @@ paths:
       mountName: brand_vettings
       parent: /a2p/BrandRegistrations/{Sid}
       pathType: instance
-  "/v1/a2p/BrandRegistrations/{Sid}":
+  /v1/a2p/BrandRegistrations/{Sid}:
     description: A Messaging Service resource to add and fetch Brand Registrations.
     get:
       description: ""

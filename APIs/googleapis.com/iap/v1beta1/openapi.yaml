@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: v1beta1
 paths:
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -74,7 +74,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1beta1
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -116,7 +116,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1beta1
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

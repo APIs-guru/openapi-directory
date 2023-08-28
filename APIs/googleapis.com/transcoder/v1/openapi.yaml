@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a job template.
       operationId: transcoder.projects.locations.jobTemplates.delete
@@ -96,7 +96,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/jobTemplates":
+  /v1/{parent}/jobTemplates:
     get:
       description: Lists job templates in the specified region.
       operationId: transcoder.projects.locations.jobTemplates.list
@@ -187,7 +187,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/jobs":
+  /v1/{parent}/jobs:
     get:
       description: Lists jobs in the specified region.
       operationId: transcoder.projects.locations.jobs.list

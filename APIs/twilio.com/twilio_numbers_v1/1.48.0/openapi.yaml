@@ -45,7 +45,7 @@ paths:
       defaultOutputProperties: []
       mountName: bulk_eligibilities
       pathType: list
-  "/v1/HostedNumber/Eligibility/Bulk/{RequestId}":
+  /v1/HostedNumber/Eligibility/Bulk/{RequestId}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch an eligibility bulk check that you requested to host in Twilio.
@@ -119,7 +119,7 @@ paths:
         - status
       mountName: porting_bulk_portabilities
       pathType: list
-  "/v1/Porting/Portability/PhoneNumber/{PhoneNumber}":
+  /v1/Porting/Portability/PhoneNumber/{PhoneNumber}:
     description: "TODO: Resource-level docs"
     get:
       description: Allows to check if a single phone number can be ported to Twilio or not.
@@ -159,7 +159,7 @@ paths:
       defaultOutputProperties: []
       mountName: porting_portabilities
       pathType: instance
-  "/v1/Porting/Portability/{Sid}":
+  /v1/Porting/Portability/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: Fetch a previous portability check. This should return the current status of the validation and the result for all the numbers provided, given that they have been validated (as this process is performed asynchronously).

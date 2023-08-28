@@ -369,7 +369,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/issue-tracking/collections/{collection_id}":
+  /issue-tracking/collections/{collection_id}:
     get:
       description: Get Collection
       operationId: collectionsOne
@@ -421,7 +421,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/issue-tracking/collections/{collection_id}/tags":
+  /issue-tracking/collections/{collection_id}/tags:
     get:
       description: List Tags
       operationId: collectionTagsAll
@@ -476,7 +476,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/issue-tracking/collections/{collection_id}/tickets":
+  /issue-tracking/collections/{collection_id}/tickets:
     get:
       description: List Tickets
       operationId: collectionTicketsAll
@@ -610,7 +610,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/issue-tracking/collections/{collection_id}/tickets/{ticket_id}":
+  /issue-tracking/collections/{collection_id}/tickets/{ticket_id}:
     delete:
       description: Delete Ticket
       operationId: collectionTicketsDelete
@@ -799,7 +799,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/issue-tracking/collections/{collection_id}/tickets/{ticket_id}/comments":
+  /issue-tracking/collections/{collection_id}/tickets/{ticket_id}/comments:
     get:
       description: List Comments
       operationId: collectionTicketCommentsAll
@@ -922,7 +922,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/issue-tracking/collections/{collection_id}/tickets/{ticket_id}/comments/{id}":
+  /issue-tracking/collections/{collection_id}/tickets/{ticket_id}/comments/{id}:
     delete:
       description: Delete Comment
       operationId: collectionTicketCommentsDelete
@@ -1103,7 +1103,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/issue-tracking/collections/{collection_id}/users":
+  /issue-tracking/collections/{collection_id}/users:
     get:
       description: List Users
       operationId: collectionUsersAll
@@ -1158,7 +1158,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/issue-tracking/collections/{collection_id}/users/{id}":
+  /issue-tracking/collections/{collection_id}/users/{id}:
     get:
       description: Get user
       operationId: collectionUsersOne

@@ -73,7 +73,7 @@ paths:
           description: Successful response
       tags:
         - githubDotComWebhook
-  "/v1/projects/{projectId}/builds":
+  /v1/projects/{projectId}/builds:
     get:
       description: Lists previously requested builds. Previously requested builds may still be in-progress, or may have finished successfully or unsuccessfully.
       operationId: cloudbuild.projects.builds.list
@@ -164,7 +164,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/builds/{id}":
+  /v1/projects/{projectId}/builds/{id}:
     get:
       description: Returns information about a previously requested build. The `Build` that is returned includes its status (such as `SUCCESS`, `FAILURE`, or `WORKING`), and timing information.
       operationId: cloudbuild.projects.builds.get
@@ -212,7 +212,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{projectId}/builds/{id}:cancel":
+  /v1/projects/{projectId}/builds/{id}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -260,7 +260,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/builds/{id}:retry":
+  /v1/projects/{projectId}/builds/{id}:retry:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -308,7 +308,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/triggers":
+  /v1/projects/{projectId}/triggers:
     get:
       description: Lists existing `BuildTrigger`s. This API is experimental.
       operationId: cloudbuild.projects.triggers.list
@@ -394,7 +394,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/triggers/{triggerId}":
+  /v1/projects/{projectId}/triggers/{triggerId}:
     delete:
       description: Deletes a `BuildTrigger` by its project ID and trigger ID. This API is experimental.
       operationId: cloudbuild.projects.triggers.delete
@@ -517,7 +517,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/triggers/{triggerId}:run":
+  /v1/projects/{projectId}/triggers/{triggerId}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -570,7 +570,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/triggers/{trigger}:webhook":
+  /v1/projects/{projectId}/triggers/{trigger}:webhook:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -659,7 +659,7 @@ paths:
           description: Successful response
       tags:
         - v1
-  "/v1/{config}:removeBitbucketServerConnectedRepository":
+  /v1/{config}:removeBitbucketServerConnectedRepository:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -701,7 +701,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{config}:removeGitLabConnectedRepository":
+  /v1/{config}:removeGitLabConnectedRepository:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -743,7 +743,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{location}/regionalWebhook":
+  /v1/{location}/regionalWebhook:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -785,7 +785,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a `WorkerPool`.
       operationId: cloudbuild.projects.locations.workerPools.delete
@@ -910,7 +910,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:approve":
+  /v1/{name}:approve:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -952,7 +952,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -994,7 +994,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:retry":
+  /v1/{name}:retry:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1036,7 +1036,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:run":
+  /v1/{name}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1078,7 +1078,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:webhook":
+  /v1/{name}:webhook:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1130,7 +1130,7 @@ paths:
           description: Successful response
       tags:
         - projects
-  "/v1/{parent}/bitbucketServerConfigs":
+  /v1/{parent}/bitbucketServerConfigs:
     get:
       description: List all `BitbucketServerConfigs` for a given project. This API is experimental.
       operationId: cloudbuild.projects.locations.bitbucketServerConfigs.list
@@ -1211,7 +1211,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/builds":
+  /v1/{parent}/builds:
     get:
       description: Lists previously requested builds. Previously requested builds may still be in-progress, or may have finished successfully or unsuccessfully.
       operationId: cloudbuild.projects.locations.builds.list
@@ -1302,7 +1302,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/connectedRepositories:batchCreate":
+  /v1/{parent}/connectedRepositories:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1344,7 +1344,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/gitLabConfigs":
+  /v1/{parent}/gitLabConfigs:
     get:
       description: List all `GitLabConfigs` for a given project. This API is experimental
       operationId: cloudbuild.projects.locations.gitLabConfigs.list
@@ -1425,7 +1425,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/githubEnterpriseConfigs":
+  /v1/{parent}/githubEnterpriseConfigs:
     get:
       description: List all GitHubEnterpriseConfigs for a given project.
       operationId: cloudbuild.projects.locations.githubEnterpriseConfigs.list
@@ -1506,7 +1506,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/repos":
+  /v1/{parent}/repos:
     get:
       description: List all repositories for a given `GitLabConfig`. This API is experimental
       operationId: cloudbuild.projects.locations.gitLabConfigs.repos.list
@@ -1553,7 +1553,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/triggers":
+  /v1/{parent}/triggers:
     get:
       description: Lists existing `BuildTrigger`s. This API is experimental.
       operationId: cloudbuild.projects.locations.triggers.list
@@ -1639,7 +1639,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/workerPools":
+  /v1/{parent}/workerPools:
     get:
       description: Lists `WorkerPool`s.
       operationId: cloudbuild.projects.locations.workerPools.list
@@ -1725,7 +1725,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resourceName}":
+  /v1/{resourceName}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

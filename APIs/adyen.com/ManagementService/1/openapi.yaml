@@ -144,7 +144,7 @@ paths:
       x-groupName: Account - company level
       x-methodName: listCompanyAccounts
       x-sortIndex: 0
-  "/companies/{companyId}":
+  /companies/{companyId}:
     get:
       description: |-
         Returns the company account specified in the path. Your API credential must have access to the company account. 
@@ -208,7 +208,7 @@ paths:
       x-groupName: Account - company level
       x-methodName: getCompanyAccount
       x-sortIndex: 0
-  "/companies/{companyId}/androidApps":
+  /companies/{companyId}/androidApps:
     get:
       description: |-
         Returns a list of the Android apps that are available for the company identified in the path. 
@@ -301,7 +301,7 @@ paths:
       x-groupName: Terminal actions - company level
       x-methodName: listAndroidApps
       x-sortIndex: 1
-  "/companies/{companyId}/androidCertificates":
+  /companies/{companyId}/androidCertificates:
     get:
       description: |-
         Returns a list of the Android certificates that are available for the company identified in the path.
@@ -387,7 +387,7 @@ paths:
       x-groupName: Terminal actions - company level
       x-methodName: listAndroidCertificates
       x-sortIndex: 2
-  "/companies/{companyId}/apiCredentials":
+  /companies/{companyId}/apiCredentials:
     get:
       description: |-
         Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials) for the company account. The list is grouped into pages as defined by the query parameters.
@@ -545,7 +545,7 @@ paths:
       x-groupName: API credentials - company level
       x-methodName: createApiCredential
       x-sortIndex: 0
-  "/companies/{companyId}/apiCredentials/{apiCredentialId}":
+  /companies/{companyId}/apiCredentials/{apiCredentialId}:
     get:
       description: |-
         Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials) identified in the path.
@@ -692,7 +692,7 @@ paths:
       x-groupName: API credentials - company level
       x-methodName: updateApiCredential
       x-sortIndex: 0
-  "/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins":
+  /companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins:
     get:
       description: |-
         Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) for the API credential identified in the path.
@@ -839,7 +839,7 @@ paths:
       x-groupName: Allowed origins - company level
       x-methodName: createAllowedOrigin
       x-sortIndex: 0
-  "/companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}":
+  /companies/{companyId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}:
     delete:
       description: |-
         Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) identified in the path. As soon as an allowed origin is removed, we no longer accept client-side requests from that domain.
@@ -983,7 +983,7 @@ paths:
       x-groupName: Allowed origins - company level
       x-methodName: getAllowedOrigin
       x-sortIndex: 0
-  "/companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey":
+  /companies/{companyId}/apiCredentials/{apiCredentialId}/generateApiKey:
     post:
       description: |-
         Returns a new API key for the API credential. You can use the new API key a few minutes after generating it. The old API key stops working 24 hours after generating a new one.
@@ -1050,7 +1050,7 @@ paths:
       x-groupName: API key - company level
       x-methodName: generateNewApiKey
       x-sortIndex: 0
-  "/companies/{companyId}/apiCredentials/{apiCredentialId}/generateClientKey":
+  /companies/{companyId}/apiCredentials/{apiCredentialId}/generateClientKey:
     post:
       description: |-
         Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the API credential identified in the path. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.
@@ -1117,7 +1117,7 @@ paths:
       x-groupName: Client key - company level
       x-methodName: generateNewClientKey
       x-sortIndex: 0
-  "/companies/{companyId}/billingEntities":
+  /companies/{companyId}/billingEntities:
     get:
       description: |-
         Returns the billing entities of the company identified in the path and all merchant accounts belonging to the company.
@@ -1189,7 +1189,7 @@ paths:
       x-groupName: Terminal orders - company level
       x-methodName: listBillingEntities
       x-sortIndex: 3
-  "/companies/{companyId}/merchants":
+  /companies/{companyId}/merchants:
     get:
       description: |-
         Returns the list of merchant accounts under the company account specified in the path. The list only includes merchant accounts that your API credential has access to. The list is grouped into pages as defined by the query parameters. 
@@ -1267,7 +1267,7 @@ paths:
       x-groupName: Account - company level
       x-methodName: listMerchantAccounts
       x-sortIndex: 0
-  "/companies/{companyId}/shippingLocations":
+  /companies/{companyId}/shippingLocations:
     get:
       description: |-
         Returns the shipping locations for the company identified in the path and all merchant accounts belonging to the company.
@@ -1424,7 +1424,7 @@ paths:
       x-groupName: Terminal orders - company level
       x-methodName: createShippingLocation
       x-sortIndex: 5
-  "/companies/{companyId}/terminalActions":
+  /companies/{companyId}/terminalActions:
     get:
       description: |-
         Returns the [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) that have been scheduled for the company identified in the path.The response doesn't include actions that are scheduled by Adyen.
@@ -1518,7 +1518,7 @@ paths:
       x-groupName: Terminal actions - company level
       x-methodName: listTerminalActions
       x-sortIndex: 3
-  "/companies/{companyId}/terminalActions/{actionId}":
+  /companies/{companyId}/terminalActions/{actionId}:
     get:
       description: |-
         Returns the details of the [terminal action](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api) identified in the path.
@@ -1588,7 +1588,7 @@ paths:
       x-groupName: Terminal actions - company level
       x-methodName: getTerminalAction
       x-sortIndex: 4
-  "/companies/{companyId}/terminalLogos":
+  /companies/{companyId}/terminalLogos:
     get:
       description: |-
         Returns the logo that is configured for a specific payment terminal model at the company identified in the path. 
@@ -1746,7 +1746,7 @@ paths:
       x-groupName: Terminal settings - company level
       x-methodName: updateTerminalLogo
       x-sortIndex: 4
-  "/companies/{companyId}/terminalModels":
+  /companies/{companyId}/terminalModels:
     get:
       description: |-
         Returns a list of payment terminal models that the company identified in the path has access to.
@@ -1812,7 +1812,7 @@ paths:
       x-groupName: Terminal orders - company level
       x-methodName: listTerminalModels
       x-sortIndex: 1
-  "/companies/{companyId}/terminalOrders":
+  /companies/{companyId}/terminalOrders:
     get:
       description: |-
         Returns a lists of terminal products orders for the company identified in the path.
@@ -1975,7 +1975,7 @@ paths:
       x-groupName: Terminal orders - company level
       x-methodName: createOrder
       x-sortIndex: 6
-  "/companies/{companyId}/terminalOrders/{orderId}":
+  /companies/{companyId}/terminalOrders/{orderId}:
     get:
       description: |-
         Returns the details of the terminal products order identified in the path.
@@ -2128,7 +2128,7 @@ paths:
       x-groupName: Terminal orders - company level
       x-methodName: updateOrder
       x-sortIndex: 9
-  "/companies/{companyId}/terminalOrders/{orderId}/cancel":
+  /companies/{companyId}/terminalOrders/{orderId}/cancel:
     post:
       description: |-
         Cancels the terminal products order identified in the path.
@@ -2200,7 +2200,7 @@ paths:
       x-groupName: Terminal orders - company level
       x-methodName: cancelOrder
       x-sortIndex: 10
-  "/companies/{companyId}/terminalProducts":
+  /companies/{companyId}/terminalProducts:
     get:
       description: |-
         Returns a country-specific list of payment terminal packages and parts that the company identified in the path has access to.
@@ -2291,7 +2291,7 @@ paths:
       x-groupName: Terminal orders - company level
       x-methodName: listTerminalProducts
       x-sortIndex: 2
-  "/companies/{companyId}/terminalSettings":
+  /companies/{companyId}/terminalSettings:
     get:
       description: |-
         Returns the payment terminal settings that are configured for the company identified in the path. These settings apply to all terminals under the company, unless different values are configured at a lower level (merchant account, store, or individual terminal).
@@ -2441,7 +2441,7 @@ paths:
       x-groupName: Terminal settings - company level
       x-methodName: updateTerminalSettings
       x-sortIndex: 3
-  "/companies/{companyId}/users":
+  /companies/{companyId}/users:
     get:
       description: |
         Returns the list of users for the `companyId` identified in the path.
@@ -2593,7 +2593,7 @@ paths:
       x-groupName: Users - company level
       x-methodName: createNewUser
       x-sortIndex: 0
-  "/companies/{companyId}/users/{userId}":
+  /companies/{companyId}/users/{userId}:
     get:
       description: |
         Returns user details for the `userId` and the `companyId` identified in the path.
@@ -2731,7 +2731,7 @@ paths:
       x-groupName: Users - company level
       x-methodName: updateUserDetails
       x-sortIndex: 0
-  "/companies/{companyId}/webhooks":
+  /companies/{companyId}/webhooks:
     get:
       description: |-
         Lists all webhook configurations for the company account.
@@ -2881,7 +2881,7 @@ paths:
       x-groupName: Webhooks - company level
       x-methodName: setUpWebhook
       x-sortIndex: 1
-  "/companies/{companyId}/webhooks/{webhookId}":
+  /companies/{companyId}/webhooks/{webhookId}:
     delete:
       description: |-
         Remove the configuration for the webhook identified in the path.
@@ -3091,7 +3091,7 @@ paths:
       x-groupName: Webhooks - company level
       x-methodName: updateWebhook
       x-sortIndex: 4
-  "/companies/{companyId}/webhooks/{webhookId}/generateHmac":
+  /companies/{companyId}/webhooks/{webhookId}/generateHmac:
     post:
       description: |-
         Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identified in the path. This key allows you to check the integrity and the origin of the notifications you receive.By creating an HMAC key, you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures) from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).
@@ -3161,7 +3161,7 @@ paths:
       x-groupName: Webhooks - company level
       x-methodName: generateHmacKey
       x-sortIndex: 6
-  "/companies/{companyId}/webhooks/{webhookId}/test":
+  /companies/{companyId}/webhooks/{webhookId}/test:
     post:
       description: |-
         Sends sample notifications to test if the webhook is set up correctly.
@@ -3409,7 +3409,7 @@ paths:
       x-groupName: My API credential
       x-methodName: addAllowedOrigin
       x-sortIndex: 0
-  "/me/allowedOrigins/{originId}":
+  /me/allowedOrigins/{originId}:
     delete:
       description: |-
         Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) specified in the path.
@@ -3668,7 +3668,7 @@ paths:
       x-groupName: Account - merchant level
       x-methodName: createMerchantAccount
       x-sortIndex: 1
-  "/merchants/{merchantId}":
+  /merchants/{merchantId}:
     get:
       description: |-
         Returns the merchant account specified in the path. Your API credential must have access to the merchant account.
@@ -3734,7 +3734,7 @@ paths:
       x-groupName: Account - merchant level
       x-methodName: getMerchantAccount
       x-sortIndex: 3
-  "/merchants/{merchantId}/activate":
+  /merchants/{merchantId}/activate:
     post:
       description: |-
         Sends a request to activate the merchant account identified in the path.
@@ -3801,7 +3801,7 @@ paths:
       x-groupName: Account - merchant level
       x-methodName: requestToActivateMerchantAccount
       x-sortIndex: 2
-  "/merchants/{merchantId}/apiCredentials":
+  /merchants/{merchantId}/apiCredentials:
     get:
       description: |-
         Returns the list of [API credentials](https://docs.adyen.com/development-resources/api-credentials) for the merchant account. The list is grouped into pages as defined by the query parameters.
@@ -3963,7 +3963,7 @@ paths:
       x-groupName: API credentials - merchant level
       x-methodName: createApiCredential
       x-sortIndex: 0
-  "/merchants/{merchantId}/apiCredentials/{apiCredentialId}":
+  /merchants/{merchantId}/apiCredentials/{apiCredentialId}:
     get:
       description: |-
         Returns the [API credential](https://docs.adyen.com/development-resources/api-credentials) identified in the path.
@@ -4114,7 +4114,7 @@ paths:
       x-groupName: API credentials - merchant level
       x-methodName: updateApiCredential
       x-sortIndex: 0
-  "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins":
+  /merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins:
     get:
       description: |-
         Returns the list of [allowed origins](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) for the API credential identified in the path.
@@ -4265,7 +4265,7 @@ paths:
       x-groupName: Allowed origins - merchant level
       x-methodName: createAllowedOrigin
       x-sortIndex: 0
-  "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}":
+  /merchants/{merchantId}/apiCredentials/{apiCredentialId}/allowedOrigins/{originId}:
     delete:
       description: |-
         Removes the [allowed origin](https://docs.adyen.com/development-resources/client-side-authentication#allowed-origins) identified in the path. As soon as an allowed origin is removed, we no longer accept client-side requests from that domain.
@@ -4411,7 +4411,7 @@ paths:
       x-groupName: Allowed origins - merchant level
       x-methodName: getAllowedOrigin
       x-sortIndex: 0
-  "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateApiKey":
+  /merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateApiKey:
     post:
       description: |-
         Returns a new API key for the API credential. You can use the new API key a few minutes after generating it. The old API key stops working 24 hours after generating a new one.
@@ -4480,7 +4480,7 @@ paths:
       x-groupName: API key - merchant level
       x-methodName: generateNewApiKey
       x-sortIndex: 0
-  "/merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateClientKey":
+  /merchants/{merchantId}/apiCredentials/{apiCredentialId}/generateClientKey:
     post:
       description: |-
         Returns a new [client key](https://docs.adyen.com/development-resources/client-side-authentication#how-it-works) for the API credential identified in the path. You can use the new client key a few minutes after generating it. The old client key stops working 24 hours after generating a new one.
@@ -4549,7 +4549,7 @@ paths:
       x-groupName: Client key - merchant level
       x-methodName: generateNewClientKey
       x-sortIndex: 0
-  "/merchants/{merchantId}/billingEntities":
+  /merchants/{merchantId}/billingEntities:
     get:
       description: |-
         Returns the billing entities of the merchant account identified in the path.
@@ -4623,7 +4623,7 @@ paths:
       x-groupName: Terminal orders - merchant level
       x-methodName: listBillingEntities
       x-sortIndex: 3
-  "/merchants/{merchantId}/paymentMethodSettings":
+  /merchants/{merchantId}/paymentMethodSettings:
     get:
       description: |
         Returns details for all payment methods of the merchant account identified in the path.
@@ -4789,7 +4789,7 @@ paths:
       x-groupName: Payment methods - merchant level
       x-methodName: requestPaymentMethod
       x-sortIndex: 1
-  "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}":
+  /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}:
     get:
       description: |
         Returns details for the merchant account and the payment method identified in the path.
@@ -4931,7 +4931,7 @@ paths:
       x-groupName: Payment methods - merchant level
       x-methodName: updatePaymentMethod
       x-sortIndex: 4
-  "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/addApplePayDomains":
+  /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/addApplePayDomains:
     post:
       description: |
         Adds the new domain to the list of Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/enable-apple-pay#register-merchant-domain).
@@ -5002,7 +5002,7 @@ paths:
       x-groupName: Payment methods - merchant level
       x-methodName: addApplePayDomain
       x-sortIndex: 5
-  "/merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/getApplePayDomains":
+  /merchants/{merchantId}/paymentMethodSettings/{paymentMethodId}/getApplePayDomains:
     get:
       description: |
         Returns all Apple Pay domains that are registered with the merchant account and the payment method identified in the path. For more information, see [Apple Pay documentation](https://docs.adyen.com/payment-methods/apple-pay/enable-apple-pay#register-merchant-domain).
@@ -5071,7 +5071,7 @@ paths:
       x-groupName: Payment methods - merchant level
       x-methodName: getApplePayDomains
       x-sortIndex: 6
-  "/merchants/{merchantId}/payoutSettings":
+  /merchants/{merchantId}/payoutSettings:
     get:
       description: |-
         Returns the list of payout settings for the merchant account identified in the path.
@@ -5208,7 +5208,7 @@ paths:
       x-groupName: Payout settings - merchant level
       x-methodName: addPayoutSetting
       x-sortIndex: 1
-  "/merchants/{merchantId}/payoutSettings/{payoutSettingsId}":
+  /merchants/{merchantId}/payoutSettings/{payoutSettingsId}:
     delete:
       description: |-
         Deletes the payout setting identified in the path.
@@ -5420,7 +5420,7 @@ paths:
       x-groupName: Payout settings - merchant level
       x-methodName: updatePayoutSetting
       x-sortIndex: 2
-  "/merchants/{merchantId}/shippingLocations":
+  /merchants/{merchantId}/shippingLocations:
     get:
       description: |-
         Returns the shipping locations for the merchant account identified in the path.
@@ -5581,7 +5581,7 @@ paths:
       x-groupName: Terminal orders - merchant level
       x-methodName: createShippingLocation
       x-sortIndex: 5
-  "/merchants/{merchantId}/splitConfigurations":
+  /merchants/{merchantId}/splitConfigurations:
     get:
       description: |-
         Returns the list of split configurations for the merchant account.
@@ -5720,7 +5720,7 @@ paths:
       x-groupName: Split configuration - merchant level
       x-methodName: createSplitConfiguration
       x-sortIndex: 1
-  "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}":
+  /merchants/{merchantId}/splitConfigurations/{splitConfigurationId}:
     delete:
       description: |-
         Deletes the split configuration specified in the path.
@@ -6018,7 +6018,7 @@ paths:
       x-groupName: Split configuration - merchant level
       x-methodName: createRule
       x-sortIndex: 2
-  "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}":
+  /merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}:
     delete:
       description: |-
         Deletes the split configuration rule specified in the path.
@@ -6177,7 +6177,7 @@ paths:
       x-groupName: Split configuration - merchant level
       x-methodName: updateSplitConditions
       x-sortIndex: 6
-  "/merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}/splitLogic/{splitLogicId}":
+  /merchants/{merchantId}/splitConfigurations/{splitConfigurationId}/rules/{ruleId}/splitLogic/{splitLogicId}:
     patch:
       description: |-
         Changes the split logic specified in the path.
@@ -6269,7 +6269,7 @@ paths:
       x-groupName: Split configuration - merchant level
       x-methodName: updateSplitLogic
       x-sortIndex: 7
-  "/merchants/{merchantId}/stores":
+  /merchants/{merchantId}/stores:
     get:
       description: |-
         Returns a list of stores for the merchant account identified in the path. The list is grouped into pages as defined by the query parameters.
@@ -6429,7 +6429,7 @@ paths:
       x-groupName: Account - store level
       x-methodName: createStoreByMerchantId
       x-sortIndex: 0
-  "/merchants/{merchantId}/stores/{reference}/terminalLogos":
+  /merchants/{merchantId}/stores/{reference}/terminalLogos:
     get:
       description: |-
         Returns the logo that is configured for a specific payment terminal model at the store identified in the path. 
@@ -6603,7 +6603,7 @@ paths:
       x-groupName: Terminal settings - store level
       x-methodName: updateTerminalLogo
       x-sortIndex: 4
-  "/merchants/{merchantId}/stores/{reference}/terminalSettings":
+  /merchants/{merchantId}/stores/{reference}/terminalSettings:
     get:
       description: |-
         Returns the payment terminal settings that are configured for the store identified in the path. These settings apply to all terminals under the store unless different values are configured for an individual terminal.
@@ -6769,7 +6769,7 @@ paths:
       x-groupName: Terminal settings - store level
       x-methodName: updateTerminalSettings
       x-sortIndex: 3
-  "/merchants/{merchantId}/stores/{storeId}":
+  /merchants/{merchantId}/stores/{storeId}:
     get:
       description: |-
         Returns the details of the store identified in the path.
@@ -6925,7 +6925,7 @@ paths:
       x-groupName: Account - store level
       x-methodName: updateStore
       x-sortIndex: 3
-  "/merchants/{merchantId}/terminalLogos":
+  /merchants/{merchantId}/terminalLogos:
     get:
       description: |-
         Returns the logo that is configured for a specific payment terminal model at the merchant account identified in the path. 
@@ -7087,7 +7087,7 @@ paths:
       x-groupName: Terminal settings - merchant level
       x-methodName: updateTerminalLogo
       x-sortIndex: 4
-  "/merchants/{merchantId}/terminalModels":
+  /merchants/{merchantId}/terminalModels:
     get:
       description: |-
         Returns the payment terminal models that merchant account identified in the path has access to. The response includes the terminal model ID, which can be used as a query parameter when getting a list of terminals or a list of products for ordering.
@@ -7154,7 +7154,7 @@ paths:
       x-groupName: Terminal orders - merchant level
       x-methodName: listTerminalModels
       x-sortIndex: 1
-  "/merchants/{merchantId}/terminalOrders":
+  /merchants/{merchantId}/terminalOrders:
     get:
       description: |-
         Returns a list of terminal products orders for the merchant account identified in the path.
@@ -7319,7 +7319,7 @@ paths:
       x-groupName: Terminal orders - merchant level
       x-methodName: createOrder
       x-sortIndex: 6
-  "/merchants/{merchantId}/terminalOrders/{orderId}":
+  /merchants/{merchantId}/terminalOrders/{orderId}:
     get:
       description: |-
         Returns the details of the terminal products order identified in the path.
@@ -7476,7 +7476,7 @@ paths:
       x-groupName: Terminal orders - merchant level
       x-methodName: updateOrder
       x-sortIndex: 9
-  "/merchants/{merchantId}/terminalOrders/{orderId}/cancel":
+  /merchants/{merchantId}/terminalOrders/{orderId}/cancel:
     post:
       description: |-
         Cancels the terminal products order identified in the path.
@@ -7550,7 +7550,7 @@ paths:
       x-groupName: Terminal orders - merchant level
       x-methodName: cancelOrder
       x-sortIndex: 10
-  "/merchants/{merchantId}/terminalProducts":
+  /merchants/{merchantId}/terminalProducts:
     get:
       description: |-
         Returns a country-specific list of payment terminal packages and parts that the merchant account identified in the path has access to.
@@ -7643,7 +7643,7 @@ paths:
       x-groupName: Terminal orders - merchant level
       x-methodName: listTerminalProducts
       x-sortIndex: 2
-  "/merchants/{merchantId}/terminalSettings":
+  /merchants/{merchantId}/terminalSettings:
     get:
       description: |-
         Returns the payment terminal settings that are configured for the merchant account identified in the path. These settings apply to all terminals under the merchant account unless different values are configured at a lower level (store or individual terminal).
@@ -7792,7 +7792,7 @@ paths:
       x-groupName: Terminal settings - merchant level
       x-methodName: updateTerminalSettings
       x-sortIndex: 3
-  "/merchants/{merchantId}/users":
+  /merchants/{merchantId}/users:
     get:
       description: |
         Returns a list of users associated with the `merchantId` specified in the path.
@@ -7948,7 +7948,7 @@ paths:
       x-groupName: Users - merchant level
       x-methodName: createNewUser
       x-sortIndex: 0
-  "/merchants/{merchantId}/users/{userId}":
+  /merchants/{merchantId}/users/{userId}:
     get:
       description: |
         Returns user details for the `userId` and the `merchantId` specified in the path.
@@ -8090,7 +8090,7 @@ paths:
       x-groupName: Users - merchant level
       x-methodName: updateUser
       x-sortIndex: 0
-  "/merchants/{merchantId}/webhooks":
+  /merchants/{merchantId}/webhooks:
     get:
       description: |-
         Lists all webhook configurations for the merchant account.
@@ -8244,7 +8244,7 @@ paths:
       x-groupName: Webhooks - merchant level
       x-methodName: setUpWebhook
       x-sortIndex: 1
-  "/merchants/{merchantId}/webhooks/{webhookId}":
+  /merchants/{merchantId}/webhooks/{webhookId}:
     delete:
       description: |-
         Remove the configuration for the webhook identified in the path.
@@ -8458,7 +8458,7 @@ paths:
       x-groupName: Webhooks - merchant level
       x-methodName: updateWebhook
       x-sortIndex: 4
-  "/merchants/{merchantId}/webhooks/{webhookId}/generateHmac":
+  /merchants/{merchantId}/webhooks/{webhookId}/generateHmac:
     post:
       description: |-
         Returns an [HMAC key](https://en.wikipedia.org/wiki/HMAC) for the webhook identified in the path. This key allows you to check the integrity and the origin of the notifications you receive.By creating an HMAC key, you start receiving [HMAC-signed notifications](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures#enable-hmac-signatures) from Adyen. Find out more about how to [verify HMAC signatures](https://docs.adyen.com/development-resources/webhooks/verify-hmac-signatures).
@@ -8529,7 +8529,7 @@ paths:
       x-groupName: Webhooks - merchant level
       x-methodName: generateHmacKey
       x-sortIndex: 6
-  "/merchants/{merchantId}/webhooks/{webhookId}/test":
+  /merchants/{merchantId}/webhooks/{webhookId}/test:
     post:
       description: |-
         Sends sample notifications to test if the webhook is set up correctly.
@@ -8762,7 +8762,7 @@ paths:
       x-groupName: Account - store level
       x-methodName: createStore
       x-sortIndex: 5
-  "/stores/{storeId}":
+  /stores/{storeId}:
     get:
       description: |-
         Returns the details of the store identified in the path.
@@ -8901,7 +8901,7 @@ paths:
       x-groupName: Account - store level
       x-methodName: updateStoreById
       x-sortIndex: 7
-  "/stores/{storeId}/terminalLogos":
+  /stores/{storeId}/terminalLogos:
     get:
       description: |-
         Returns the logo that is configured for a specific payment terminal model at the store identified in the path. 
@@ -9059,7 +9059,7 @@ paths:
       x-groupName: Terminal settings - store level
       x-methodName: updateTerminalLogoByStoreId
       x-sortIndex: 4
-  "/stores/{storeId}/terminalSettings":
+  /stores/{storeId}/terminalSettings:
     get:
       description: |-
         Returns the payment terminal settings that are configured for the store identified in the path. These settings apply to all terminals under the store unless different values are configured for an individual terminal.
@@ -9395,7 +9395,7 @@ paths:
       x-groupName: Terminal actions - terminal level
       x-methodName: createTerminalAction
       x-sortIndex: 1
-  "/terminals/{terminalId}/terminalLogos":
+  /terminals/{terminalId}/terminalLogos:
     get:
       description: |-
         Returns the logo that is configured for the payment terminal identified in the path.
@@ -9539,7 +9539,7 @@ paths:
       x-groupName: Terminal settings - terminal level
       x-methodName: updateLogo
       x-sortIndex: 6
-  "/terminals/{terminalId}/terminalSettings":
+  /terminals/{terminalId}/terminalSettings:
     get:
       description: |-
         Returns the settings that are configured for the payment terminal identified in the path.

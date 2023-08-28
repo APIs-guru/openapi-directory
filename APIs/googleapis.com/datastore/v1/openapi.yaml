@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/projects/{projectId}/indexes":
+  /v1/projects/{projectId}/indexes:
     get:
       description: Lists the indexes that match the specified filters. Datastore uses an eventually consistent query to fetch the list of indexes and may occasionally return stale results.
       operationId: datastore.projects.indexes.list
@@ -120,7 +120,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}/indexes/{indexId}":
+  /v1/projects/{projectId}/indexes/{indexId}:
     delete:
       description: Deletes an existing index. An index can only be deleted if it is in a `READY` or `ERROR` state. On successful execution of the request, the index will be in a `DELETING` state. And on completion of the returned google.longrunning.Operation, the index will be removed. During index deletion, the process could result in an error, in which case the index will move to the `ERROR` state. The process can be recovered by fixing the data that caused the error, followed by calling delete again.
       operationId: datastore.projects.indexes.delete
@@ -201,7 +201,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{projectId}:allocateIds":
+  /v1/projects/{projectId}:allocateIds:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -247,7 +247,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:beginTransaction":
+  /v1/projects/{projectId}:beginTransaction:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -293,7 +293,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:commit":
+  /v1/projects/{projectId}:commit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -339,7 +339,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:export":
+  /v1/projects/{projectId}:export:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -385,7 +385,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:import":
+  /v1/projects/{projectId}:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -431,7 +431,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:lookup":
+  /v1/projects/{projectId}:lookup:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -477,7 +477,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:reserveIds":
+  /v1/projects/{projectId}:reserveIds:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -523,7 +523,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:rollback":
+  /v1/projects/{projectId}:rollback:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -569,7 +569,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:runAggregationQuery":
+  /v1/projects/{projectId}:runAggregationQuery:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -615,7 +615,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/projects/{projectId}:runQuery":
+  /v1/projects/{projectId}:runQuery:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -661,7 +661,7 @@ paths:
             - https://www.googleapis.com/auth/datastore
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: datastore.projects.operations.delete
@@ -730,7 +730,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: datastore.projects.operations.list
@@ -786,7 +786,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

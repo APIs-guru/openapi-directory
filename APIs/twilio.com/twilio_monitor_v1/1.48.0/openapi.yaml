@@ -120,7 +120,7 @@ paths:
         - log_level
         - alert_text
       pathType: list
-  "/v1/Alerts/{Sid}":
+  /v1/Alerts/{Sid}:
     description: Debugger alerts
     get:
       description: ""
@@ -270,7 +270,7 @@ paths:
         - event_type
         - description
       pathType: list
-  "/v1/Events/{Sid}":
+  /v1/Events/{Sid}:
     description: Debugger events
     get:
       description: ""

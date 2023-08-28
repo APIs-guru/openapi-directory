@@ -96,7 +96,7 @@ paths:
       summary: List Conversations
       tags:
         - conversation
-  "/conversations/{conversation_id}/events":
+  /conversations/{conversation_id}/events:
     get:
       operationId: get-events
       parameters:
@@ -160,7 +160,7 @@ paths:
       summary: List Events
       tags:
         - event
-  "/conversations/{conversation_id}/members":
+  /conversations/{conversation_id}/members:
     get:
       operationId: get-members
       parameters:

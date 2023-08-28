@@ -354,7 +354,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/connector/apis/{id}":
+  /connector/apis/{id}:
     get:
       description: Get API
       operationId: apisOne
@@ -397,7 +397,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/connector/apis/{id}/resources/{resource_id}":
+  /connector/apis/{id}/resources/{resource_id}:
     get:
       description: Get API Resource
       operationId: apiResourcesOne
@@ -444,7 +444,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/connector/apis/{id}/resources/{resource_id}/coverage":
+  /connector/apis/{id}/resources/{resource_id}/coverage:
     get:
       description: Get API Resource Coverage
       operationId: apiResourceCoverageOne
@@ -534,7 +534,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/connector/connectors/{id}":
+  /connector/connectors/{id}:
     get:
       description: Get Connector
       operationId: connectorsOne
@@ -577,7 +577,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/connector/connectors/{id}/docs/{doc_id}":
+  /connector/connectors/{id}/docs/{doc_id}:
     get:
       description: Get Connector Doc content
       operationId: connectorDocsOne
@@ -622,7 +622,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/connector/connectors/{id}/resources/{resource_id}":
+  /connector/connectors/{id}/resources/{resource_id}:
     get:
       description: Get Connector Resource
       operationId: connectorResourcesOne

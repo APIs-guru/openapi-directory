@@ -34,7 +34,7 @@ externalDocs:
 tags:
   - name: accounts
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a product certification by its name. This method can only be called by certification bodies.
       operationId: manufacturers.accounts.languages.productCertifications.delete
@@ -129,7 +129,7 @@ paths:
             - https://www.googleapis.com/auth/manufacturercenter
       tags:
         - accounts
-  "/v1/{parent}/productCertifications":
+  /v1/{parent}/productCertifications:
     get:
       description: Lists product certifications from a specified certification body. This method can only be called by certification bodies.
       operationId: manufacturers.accounts.languages.productCertifications.list
@@ -176,7 +176,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/products":
+  /v1/{parent}/products:
     get:
       description: Lists all the products in a Manufacturer Center account.
       operationId: manufacturers.accounts.products.list
@@ -237,7 +237,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/products/{name}":
+  /v1/{parent}/products/{name}:
     delete:
       description: Deletes the product from a Manufacturer Center account.
       operationId: manufacturers.accounts.products.delete

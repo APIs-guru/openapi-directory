@@ -67,7 +67,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}":
+  /v1/apps/{appsId}:
     get:
       description: Gets information about an application.
       operationId: appengine.apps.get
@@ -77,15 +77,6 @@ paths:
           name: appsId
           required: true
           schema:
-            type: string
-        - description: Options to include extra data
-          in: query
-          name: includeExtraData
-          schema:
-            enum:
-              - INCLUDE_EXTRA_DATA_UNSPECIFIED
-              - INCLUDE_EXTRA_DATA_NONE
-              - INCLUDE_GOOGLE_GENERATED_METADATA
             type: string
       responses:
         "200":
@@ -155,7 +146,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/authorizedCertificates":
+  /v1/apps/{appsId}/authorizedCertificates:
     get:
       description: Lists all SSL certificates the user is authorized to administer.
       operationId: appengine.apps.authorizedCertificates.list
@@ -247,7 +238,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/authorizedCertificates/{authorizedCertificatesId}":
+  /v1/apps/{appsId}/authorizedCertificates/{authorizedCertificatesId}:
     delete:
       description: Deletes the specified SSL certificate.
       operationId: appengine.apps.authorizedCertificates.delete
@@ -376,7 +367,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/authorizedDomains":
+  /v1/apps/{appsId}/authorizedDomains:
     get:
       description: Lists all domains the user is authorized to administer.
       operationId: appengine.apps.authorizedDomains.list
@@ -431,7 +422,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/apps/{appsId}/domainMappings":
+  /v1/apps/{appsId}/domainMappings:
     get:
       description: Lists the domain mappings on an application.
       operationId: appengine.apps.domainMappings.list
@@ -524,7 +515,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/domainMappings/{domainMappingsId}":
+  /v1/apps/{appsId}/domainMappings/{domainMappingsId}:
     delete:
       description: Deletes the specified domain mapping. A user must be authorized to administer the associated domain in order to delete a DomainMapping resource.
       operationId: appengine.apps.domainMappings.delete
@@ -645,7 +636,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/firewall/ingressRules":
+  /v1/apps/{appsId}/firewall/ingressRules:
     get:
       description: Lists the firewall rules of an application.
       operationId: appengine.apps.firewall.ingressRules.list
@@ -734,7 +725,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/firewall/ingressRules/{ingressRulesId}":
+  /v1/apps/{appsId}/firewall/ingressRules/{ingressRulesId}:
     delete:
       description: Deletes the specified firewall rule.
       operationId: appengine.apps.firewall.ingressRules.delete
@@ -855,7 +846,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/firewall/ingressRules:batchUpdate":
+  /v1/apps/{appsId}/firewall/ingressRules:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -897,7 +888,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/locations":
+  /v1/apps/{appsId}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: appengine.apps.locations.list
@@ -957,7 +948,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/apps/{appsId}/locations/{locationsId}":
+  /v1/apps/{appsId}/locations/{locationsId}:
     get:
       description: Gets information about a location.
       operationId: appengine.apps.locations.get
@@ -1008,7 +999,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/apps/{appsId}/operations":
+  /v1/apps/{appsId}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.
       operationId: appengine.apps.operations.list
@@ -1068,7 +1059,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/apps/{appsId}/operations/{operationsId}":
+  /v1/apps/{appsId}/operations/{operationsId}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: appengine.apps.operations.get
@@ -1119,7 +1110,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/apps/{appsId}/services":
+  /v1/apps/{appsId}/services:
     get:
       description: Lists all the services in the application.
       operationId: appengine.apps.services.list
@@ -1174,7 +1165,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/apps/{appsId}/services/{servicesId}":
+  /v1/apps/{appsId}/services/{servicesId}:
     delete:
       description: Deletes the specified service and all enclosed versions.
       operationId: appengine.apps.services.delete
@@ -1300,7 +1291,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/services/{servicesId}/versions":
+  /v1/apps/{appsId}/services/{servicesId}/versions:
     get:
       description: Lists the versions of a service.
       operationId: appengine.apps.services.versions.list
@@ -1404,7 +1395,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}":
+  /v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}:
     delete:
       description: Deletes an existing Version resource.
       operationId: appengine.apps.services.versions.delete
@@ -1551,7 +1542,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances":
+  /v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances:
     get:
       description: "Lists the instances of a version.Tip: To aggregate details about instances over time, see the Stackdriver Monitoring API (https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list)."
       operationId: appengine.apps.services.versions.instances.list
@@ -1618,7 +1609,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}":
+  /v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}:
     delete:
       description: Stops a running instance.The instance might be automatically recreated based on the scaling settings of the version. For more information, see "How Instances are Managed" (standard environment (https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | flexible environment (https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)).To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to STOPPED with the apps.services.versions.patch (https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.
       operationId: appengine.apps.services.versions.instances.delete
@@ -1723,7 +1714,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}:debug":
+  /v1/apps/{appsId}/services/{servicesId}/versions/{versionsId}/instances/{instancesId}:debug:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1783,7 +1774,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - apps
-  "/v1/apps/{appsId}:repair":
+  /v1/apps/{appsId}:repair:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2beta1/{conversationProfile}:clearSuggestionFeatureConfig":
+  /v2beta1/{conversationProfile}:clearSuggestionFeatureConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -76,7 +76,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{conversationProfile}:setSuggestionFeatureConfig":
+  /v2beta1/{conversationProfile}:setSuggestionFeatureConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -122,7 +122,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{conversation}/suggestions:suggestConversationSummary":
+  /v2beta1/{conversation}/suggestions:suggestConversationSummary:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -168,7 +168,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{name}":
+  /v2beta1/{name}:
     delete:
       description: "Deletes the specified document. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: KnowledgeOperationMetadata - `response`: An [Empty message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty) Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`."
       operationId: dialogflow.projects.locations.knowledgeBases.documents.delete
@@ -301,7 +301,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{name}/locations":
+  /v2beta1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: dialogflow.projects.locations.list
@@ -357,7 +357,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{name}/operations":
+  /v2beta1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: dialogflow.projects.operations.list
@@ -413,7 +413,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{name}:cancel":
+  /v2beta1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -454,7 +454,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{name}:complete":
+  /v2beta1/{name}:complete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -500,7 +500,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{name}:reload":
+  /v2beta1/{name}:reload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -546,7 +546,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/agent":
+  /v2beta1/{parent}/agent:
     delete:
       description: Deletes the specified agent.
       operationId: dialogflow.projects.locations.deleteAgent
@@ -653,7 +653,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/agent/validationResult":
+  /v2beta1/{parent}/agent/validationResult:
     get:
       description: Gets agent validation result. Agent validation is performed during training time and is updated automatically when training is completed.
       operationId: dialogflow.projects.locations.agent.getValidationResult
@@ -699,7 +699,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{parent}/agent:export":
+  /v2beta1/{parent}/agent:export:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -745,7 +745,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/agent:import":
+  /v2beta1/{parent}/agent:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -791,7 +791,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/agent:restore":
+  /v2beta1/{parent}/agent:restore:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -837,7 +837,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/agent:search":
+  /v2beta1/{parent}/agent:search:
     get:
       description: Returns the list of agents. Since there is at most one conversational agent per project, this method is useful primarily for listing all agents across projects the caller has access to. One can achieve that with a wildcard project collection id "-". Refer to [List Sub-Collections](https://cloud.google.com/apis/design/design_patterns#list_sub-collections).
       operationId: dialogflow.projects.locations.agent.search
@@ -888,7 +888,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{parent}/agent:train":
+  /v2beta1/{parent}/agent:train:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -934,7 +934,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/answerRecords":
+  /v2beta1/{parent}/answerRecords:
     get:
       description: Returns the list of all answer records in the specified project in reverse chronological order.
       operationId: dialogflow.projects.locations.answerRecords.list
@@ -990,7 +990,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{parent}/contexts":
+  /v2beta1/{parent}/contexts:
     delete:
       description: Deletes all active contexts in the specified session.
       operationId: dialogflow.projects.locations.agent.sessions.deleteContexts
@@ -1102,7 +1102,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/conversationProfiles":
+  /v2beta1/{parent}/conversationProfiles:
     get:
       description: Returns the list of all conversation profiles in the specified project.
       operationId: dialogflow.projects.locations.conversationProfiles.list
@@ -1186,7 +1186,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/conversations":
+  /v2beta1/{parent}/conversations:
     get:
       description: Returns the list of all conversations in the specified project.
       operationId: dialogflow.projects.locations.conversations.list
@@ -1280,7 +1280,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/documents":
+  /v2beta1/{parent}/documents:
     get:
       description: "Returns the list of all documents of the knowledge base. Note: The `projects.agent.knowledgeBases.documents` resource is deprecated; only use `projects.knowledgeBases.documents`."
       operationId: dialogflow.projects.locations.knowledgeBases.documents.list
@@ -1374,7 +1374,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/documents:import":
+  /v2beta1/{parent}/documents:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1420,7 +1420,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/entities:batchCreate":
+  /v2beta1/{parent}/entities:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1466,7 +1466,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/entities:batchDelete":
+  /v2beta1/{parent}/entities:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1512,7 +1512,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/entities:batchUpdate":
+  /v2beta1/{parent}/entities:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1558,7 +1558,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/entityTypes":
+  /v2beta1/{parent}/entityTypes:
     get:
       description: Returns the list of all session entity types in the specified session. This method doesn't work with Google Assistant integration. Contact Dialogflow support if you need to use session entities with Google Assistant integration.
       operationId: dialogflow.projects.locations.agent.sessions.entityTypes.list
@@ -1647,7 +1647,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/entityTypes:batchDelete":
+  /v2beta1/{parent}/entityTypes:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1693,7 +1693,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/entityTypes:batchUpdate":
+  /v2beta1/{parent}/entityTypes:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1739,7 +1739,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/environments":
+  /v2beta1/{parent}/environments:
     get:
       description: Returns the list of all non-draft environments of the specified agent.
       operationId: dialogflow.projects.locations.agent.environments.list
@@ -1828,7 +1828,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/history":
+  /v2beta1/{parent}/history:
     get:
       description: Gets the history of the specified environment.
       operationId: dialogflow.projects.locations.agent.environments.getHistory
@@ -1879,7 +1879,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{parent}/intents":
+  /v2beta1/{parent}/intents:
     get:
       description: Returns the list of all intents in the specified agent.
       operationId: dialogflow.projects.locations.agent.intents.list
@@ -1989,7 +1989,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/intents:batchDelete":
+  /v2beta1/{parent}/intents:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2035,7 +2035,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/intents:batchUpdate":
+  /v2beta1/{parent}/intents:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2081,7 +2081,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/knowledgeBases":
+  /v2beta1/{parent}/knowledgeBases:
     get:
       description: "Returns the list of all knowledge bases of the specified agent. Note: The `projects.agent.knowledgeBases` resource is deprecated; only use `projects.knowledgeBases`."
       operationId: dialogflow.projects.locations.knowledgeBases.list
@@ -2170,7 +2170,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/messages":
+  /v2beta1/{parent}/messages:
     get:
       description: Lists messages that belong to a given conversation. `messages` are ordered by `create_time` in descending order. To fetch updates without duplication, send request with filter `create_time_epoch_microseconds > [first item's create_time of previous request]` and empty page_token.
       operationId: dialogflow.projects.locations.conversations.messages.list
@@ -2226,7 +2226,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{parent}/messages:batchCreate":
+  /v2beta1/{parent}/messages:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2272,7 +2272,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/participants":
+  /v2beta1/{parent}/participants:
     get:
       description: Returns the list of all participants in the specified conversation.
       operationId: dialogflow.projects.locations.conversations.participants.list
@@ -2356,7 +2356,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/suggestions":
+  /v2beta1/{parent}/suggestions:
     get:
       description: "Deprecated: Use inline suggestion, event based suggestion or Suggestion* API instead. See HumanAgentAssistantConfig.name for more details. Removal Date: 2020-09-01. Retrieves suggestions for live agents. This method should be used by human agent client software to fetch auto generated suggestions in real-time, while the conversation with an end user is in progress. The functionality is implemented in terms of the [list pagination](https://cloud.google.com/apis/design/design_patterns#list_pagination) design pattern. The client app should use the `next_page_token` field to fetch the next batch of suggestions. `suggestions` are sorted by `create_time` in descending order. To fetch latest suggestion, just set `page_size` to 1. To fetch new suggestions without duplication, send request with filter `create_time_epoch_microseconds > [first item's create_time of previous request]` and empty page_token."
       operationId: dialogflow.projects.conversations.participants.suggestions.list
@@ -2412,7 +2412,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta1/{parent}/suggestions:compile":
+  /v2beta1/{parent}/suggestions:compile:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2458,7 +2458,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/suggestions:generateStatelessSummary":
+  /v2beta1/{parent}/suggestions:generateStatelessSummary:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2504,7 +2504,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/suggestions:suggestArticles":
+  /v2beta1/{parent}/suggestions:suggestArticles:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2550,7 +2550,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/suggestions:suggestFaqAnswers":
+  /v2beta1/{parent}/suggestions:suggestFaqAnswers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2596,7 +2596,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/suggestions:suggestSmartReplies":
+  /v2beta1/{parent}/suggestions:suggestSmartReplies:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2642,7 +2642,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{parent}/versions":
+  /v2beta1/{parent}/versions:
     get:
       description: Returns the list of all versions of the specified agent.
       operationId: dialogflow.projects.locations.agent.versions.list
@@ -2726,7 +2726,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{participant}:analyzeContent":
+  /v2beta1/{participant}:analyzeContent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2772,7 +2772,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v2beta1/{session}:detectIntent":
+  /v2beta1/{session}:detectIntent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

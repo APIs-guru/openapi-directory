@@ -157,7 +157,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{name}":
+  /v1alpha1/{name}:
     delete:
       description: Deletes a row.
       operationId: area120tables.tables.rows.delete
@@ -312,7 +312,7 @@ paths:
             - https://www.googleapis.com/auth/tables
       tags:
         - tables
-  "/v1alpha1/{parent}/rows":
+  /v1alpha1/{parent}/rows:
     get:
       description: Lists rows in a table. Returns NOT_FOUND if the table does not exist.
       operationId: area120tables.tables.rows.list
@@ -446,7 +446,7 @@ paths:
             - https://www.googleapis.com/auth/tables
       tags:
         - tables
-  "/v1alpha1/{parent}/rows:batchCreate":
+  /v1alpha1/{parent}/rows:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -500,7 +500,7 @@ paths:
             - https://www.googleapis.com/auth/tables
       tags:
         - tables
-  "/v1alpha1/{parent}/rows:batchDelete":
+  /v1alpha1/{parent}/rows:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -554,7 +554,7 @@ paths:
             - https://www.googleapis.com/auth/tables
       tags:
         - tables
-  "/v1alpha1/{parent}/rows:batchUpdate":
+  /v1alpha1/{parent}/rows:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta2/{name}":
+  /v1beta2/{name}:
     delete:
       description: Deletes a model
       operationId: firebaseml.projects.models.delete
@@ -127,7 +127,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta2/{name}:download":
+  /v1beta2/{name}:download:
     get:
       description: Gets Download information for a model. This is meant for downloading model resources onto devices. It gives very limited information about the model.
       operationId: firebaseml.projects.models.download
@@ -159,7 +159,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta2/{parent}/models":
+  /v1beta2/{parent}/models:
     get:
       description: Lists the models
       operationId: firebaseml.projects.models.list

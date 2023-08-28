@@ -240,7 +240,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - roles
-  "/v1/{location}/workforcePools":
+  /v1/{location}/workforcePools:
     get:
       description: Lists all non-deleted WorkforcePools under the specified parent. If `show_deleted` is set to `true`, then deleted pools are also listed.
       operationId: iam.locations.workforcePools.list
@@ -331,7 +331,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - locations
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a ServiceAccountKey. Deleting a service account key does not revoke short-lived credentials that have been issued based on the service account key.
       operationId: iam.projects.serviceAccounts.keys.delete
@@ -469,7 +469,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/keys":
+  /v1/{name}/keys:
     get:
       description: Lists every ServiceAccountKey for a service account.
       operationId: iam.projects.serviceAccounts.keys.list
@@ -548,7 +548,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/keys:upload":
+  /v1/{name}/keys:upload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -590,7 +590,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/serviceAccounts":
+  /v1/{name}/serviceAccounts:
     get:
       description: Lists every ServiceAccount that belongs to a specific project.
       operationId: iam.projects.serviceAccounts.list
@@ -666,7 +666,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:disable":
+  /v1/{name}:disable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -708,7 +708,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:enable":
+  /v1/{name}:enable:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -750,7 +750,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:signBlob":
+  /v1/{name}:signBlob:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -792,7 +792,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:signJwt":
+  /v1/{name}:signJwt:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -834,7 +834,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:undelete":
+  /v1/{name}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -876,7 +876,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/keys":
+  /v1/{parent}/keys:
     get:
       description: Lists all non-deleted WorkloadIdentityPoolProviderKeys in a project. If show_deleted is set to `true`, then deleted pools are also listed.
       operationId: iam.projects.locations.workloadIdentityPools.providers.keys.list
@@ -962,7 +962,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/providers":
+  /v1/{parent}/providers:
     get:
       description: Lists all non-deleted WorkloadIdentityPoolProviders in a WorkloadIdentityPool. If `show_deleted` is set to `true`, then deleted providers are also listed.
       operationId: iam.projects.locations.workloadIdentityPools.providers.list
@@ -1048,7 +1048,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/roles":
+  /v1/{parent}/roles:
     get:
       description: Lists every predefined Role that IAM supports, or every custom role that is defined for an organization or project.
       operationId: iam.projects.roles.list
@@ -1137,7 +1137,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/workloadIdentityPools":
+  /v1/{parent}/workloadIdentityPools:
     get:
       description: Lists all non-deleted WorkloadIdentityPools in a project. If `show_deleted` is set to `true`, then deleted pools are also listed.
       operationId: iam.projects.locations.workloadIdentityPools.list
@@ -1223,7 +1223,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1270,7 +1270,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1312,7 +1312,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

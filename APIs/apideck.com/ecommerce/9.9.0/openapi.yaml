@@ -367,7 +367,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/ecommerce/customers/{id}":
+  /ecommerce/customers/{id}:
     get:
       description: Get Customer
       operationId: customersOne
@@ -472,7 +472,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/ecommerce/orders/{id}":
+  /ecommerce/orders/{id}:
     get:
       description: Get Order
       operationId: ordersOne
@@ -579,7 +579,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/ecommerce/products/{id}":
+  /ecommerce/products/{id}:
     get:
       description: Get Product
       operationId: productsOne

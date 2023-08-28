@@ -113,7 +113,7 @@ paths:
         engagement: "{flow_sid: sid}"
         execution: "{flow_sid: sid}"
       pathType: list
-  "/v1/Flows/{FlowSid}/Engagements":
+  /v1/Flows/{FlowSid}/Engagements:
     description: "[DEPRECATED] Excecutions of Studio flows"
     get:
       description: Retrieve a list of all Engagements for the Flow.
@@ -247,7 +247,7 @@ paths:
         step: "{flow_sid: flow_sid, engagement_sid: sid}"
       parent: /Flows/{Sid}
       pathType: list
-  "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Context":
+  /v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Context:
     description: "[DEPRECATED] JSON context for engagements"
     get:
       description: Retrieve the most recent context for an Engagement.
@@ -292,7 +292,7 @@ paths:
       mountName: engagement_context
       parent: /Flows/{FlowSid}/Engagements/{Sid}
       pathType: instance
-  "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps":
+  /v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps:
     description: Steps within a Studio flow
     get:
       description: Retrieve a list of all Steps for an Engagement.
@@ -388,7 +388,7 @@ paths:
         step_context: "{flow_sid: flow_sid, engagement_sid: engagement_sid, step_sid: sid}"
       parent: /Flows/{FlowSid}/Engagements/{Sid}
       pathType: list
-  "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{Sid}":
+  /v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{Sid}:
     description: Steps within a Studio flow
     get:
       description: Retrieve a Step.
@@ -446,7 +446,7 @@ paths:
         step_context: "{flow_sid: flow_sid, engagement_sid: engagement_sid, step_sid: sid}"
       parent: /Flows/{FlowSid}/Engagements/{Sid}
       pathType: instance
-  "/v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{StepSid}/Context":
+  /v1/Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{StepSid}/Context:
     description: JSON context for individual steps
     get:
       description: Retrieve the context for an Engagement Step.
@@ -500,7 +500,7 @@ paths:
       mountName: step_context
       parent: /Flows/{FlowSid}/Engagements/{EngagementSid}/Steps/{Sid}
       pathType: instance
-  "/v1/Flows/{FlowSid}/Engagements/{Sid}":
+  /v1/Flows/{FlowSid}/Engagements/{Sid}:
     delete:
       description: Delete this Engagement and all Steps relating to it.
       operationId: DeleteEngagement
@@ -581,7 +581,7 @@ paths:
         step: "{flow_sid: flow_sid, engagement_sid: sid}"
       parent: /Flows/{Sid}
       pathType: instance
-  "/v1/Flows/{FlowSid}/Executions":
+  /v1/Flows/{FlowSid}/Executions:
     description: Executions of Studio flows
     get:
       description: Retrieve a list of all Executions for the Flow.
@@ -727,7 +727,7 @@ paths:
         execution_step: "{flow_sid: flow_sid, execution_sid: sid}"
       parent: /Flows/{Sid}
       pathType: list
-  "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Context":
+  /v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Context:
     description: JSON context for executions
     get:
       description: Retrieve the most recent context for an Execution.
@@ -772,7 +772,7 @@ paths:
       mountName: execution_context
       parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: instance
-  "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps":
+  /v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps:
     description: Individual steps within an execution
     get:
       description: Retrieve a list of all Steps for an Execution.
@@ -868,7 +868,7 @@ paths:
         execution_step_context: "{flow_sid: flow_sid, execution_sid: execution_sid, step_sid: sid}"
       parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: list
-  "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}":
+  /v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}:
     description: Individual steps within an execution
     get:
       description: Retrieve a Step.
@@ -926,7 +926,7 @@ paths:
         execution_step_context: "{flow_sid: flow_sid, execution_sid: execution_sid, step_sid: sid}"
       parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: instance
-  "/v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{StepSid}/Context":
+  /v1/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{StepSid}/Context:
     description: JSON context for an individual step within an execution
     get:
       description: Retrieve the context for an Execution Step.
@@ -981,7 +981,7 @@ paths:
       mountName: step_context
       parent: /Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}
       pathType: instance
-  "/v1/Flows/{FlowSid}/Executions/{Sid}":
+  /v1/Flows/{FlowSid}/Executions/{Sid}:
     delete:
       description: Delete the Execution and all Steps relating to it.
       operationId: DeleteExecution
@@ -1110,7 +1110,7 @@ paths:
         execution_step: "{flow_sid: flow_sid, execution_sid: sid}"
       parent: /Flows/{Sid}
       pathType: instance
-  "/v1/Flows/{Sid}":
+  /v1/Flows/{Sid}:
     delete:
       description: Delete a specific Flow.
       operationId: DeleteFlow

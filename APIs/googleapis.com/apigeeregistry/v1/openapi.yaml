@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: apigeeregistry.projects.locations.operations.delete
@@ -163,7 +163,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: apigeeregistry.projects.locations.list
@@ -215,7 +215,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: apigeeregistry.projects.locations.operations.list
@@ -267,7 +267,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -309,7 +309,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:deleteRevision":
+  /v1/{name}:deleteRevision:
     delete:
       description: Deletes a revision of a spec.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.deleteRevision
@@ -346,7 +346,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:getContents":
+  /v1/{name}:getContents:
     get:
       description: Returns the contents of a specified artifact. If artifacts are stored with GZip compression, the default behavior is to return the artifact uncompressed (the mime_type response field indicates the exact format returned).
       operationId: apigeeregistry.projects.locations.artifacts.getContents
@@ -383,7 +383,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:listRevisions":
+  /v1/{name}:listRevisions:
     get:
       description: Lists all revisions of a spec. Revisions are returned in descending order of revision creation time.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.listRevisions
@@ -435,7 +435,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:rollback":
+  /v1/{name}:rollback:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -477,7 +477,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:tagRevision":
+  /v1/{name}:tagRevision:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -519,7 +519,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/apis":
+  /v1/{parent}/apis:
     get:
       description: Returns matching APIs.
       operationId: apigeeregistry.projects.locations.apis.list
@@ -610,7 +610,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/artifacts":
+  /v1/{parent}/artifacts:
     get:
       description: Returns matching artifacts.
       operationId: apigeeregistry.projects.locations.artifacts.list
@@ -701,7 +701,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/deployments":
+  /v1/{parent}/deployments:
     get:
       description: Returns matching deployments.
       operationId: apigeeregistry.projects.locations.apis.deployments.list
@@ -792,7 +792,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/instances":
+  /v1/{parent}/instances:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -839,7 +839,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/specs":
+  /v1/{parent}/specs:
     get:
       description: Returns matching specs.
       operationId: apigeeregistry.projects.locations.apis.versions.specs.list
@@ -930,7 +930,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/versions":
+  /v1/{parent}/versions:
     get:
       description: Returns matching versions.
       operationId: apigeeregistry.projects.locations.apis.versions.list
@@ -1021,7 +1021,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: apigeeregistry.projects.locations.runtime.getIamPolicy
@@ -1063,7 +1063,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1105,7 +1105,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

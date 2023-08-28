@@ -72,7 +72,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/accounts/{id}":
+  /accounts/{id}:
     get:
       description: Gets one account by ID.
       operationId: adexchangebuyer.accounts.get
@@ -199,7 +199,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/billinginfo/{accountId}":
+  /billinginfo/{accountId}:
     get:
       description: Returns the billing information for one account specified by account ID.
       operationId: adexchangebuyer.billingInfo.get
@@ -232,7 +232,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/billinginfo/{accountId}/{billingId}":
+  /billinginfo/{accountId}/{billingId}:
     get:
       description: Returns the budget information for the adgroup specified by the accountId and billingId.
       operationId: adexchangebuyer.budget.get
@@ -440,7 +440,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - creatives
-  "/creatives/{accountId}/{buyerCreativeId}":
+  /creatives/{accountId}/{buyerCreativeId}:
     get:
       description: Gets the status for a single creative. A creative will be available 30-40 minutes after submission.
       operationId: adexchangebuyer.creatives.get
@@ -479,7 +479,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/creatives/{accountId}/{buyerCreativeId}/addDeal/{dealId}":
+  /creatives/{accountId}/{buyerCreativeId}/addDeal/{dealId}:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -520,7 +520,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - creatives
-  "/creatives/{accountId}/{buyerCreativeId}/listDeals":
+  /creatives/{accountId}/{buyerCreativeId}/listDeals:
     get:
       description: Lists the external deal ids associated with the creative.
       operationId: adexchangebuyer.creatives.listDeals
@@ -559,7 +559,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/creatives/{accountId}/{buyerCreativeId}/removeDeal/{dealId}":
+  /creatives/{accountId}/{buyerCreativeId}/removeDeal/{dealId}:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -657,7 +657,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/pretargetingconfigs/{accountId}":
+  /pretargetingconfigs/{accountId}:
     get:
       description: Retrieves a list of the authenticated user's pretargeting configurations.
       operationId: adexchangebuyer.pretargetingConfig.list
@@ -719,7 +719,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - pretargetingConfig
-  "/pretargetingconfigs/{accountId}/{configId}":
+  /pretargetingconfigs/{accountId}/{configId}:
     delete:
       description: Deletes an existing pretargeting config.
       operationId: adexchangebuyer.pretargetingConfig.delete
@@ -854,7 +854,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - pretargetingConfig
-  "/privateauction/{privateAuctionId}/updateproposal":
+  /privateauction/{privateAuctionId}/updateproposal:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -920,7 +920,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/products/{productId}":
+  /products/{productId}:
     get:
       description: Gets the requested product by id.
       operationId: adexchangebuyer.products.get
@@ -1016,7 +1016,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/proposals/{proposalId}":
+  /proposals/{proposalId}:
     get:
       description: Get a proposal given its id
       operationId: adexchangebuyer.proposals.get
@@ -1049,7 +1049,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/proposals/{proposalId}/deals":
+  /proposals/{proposalId}/deals:
     get:
       description: List all the deals for a given proposal
       operationId: adexchangebuyer.marketplacedeals.list
@@ -1087,7 +1087,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/proposals/{proposalId}/deals/delete":
+  /proposals/{proposalId}/deals/delete:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1125,7 +1125,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - marketplacedeals
-  "/proposals/{proposalId}/deals/insert":
+  /proposals/{proposalId}/deals/insert:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1163,7 +1163,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - marketplacedeals
-  "/proposals/{proposalId}/deals/update":
+  /proposals/{proposalId}/deals/update:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1201,7 +1201,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - marketplacedeals
-  "/proposals/{proposalId}/notes":
+  /proposals/{proposalId}/notes:
     get:
       description: Get all the notes associated with a proposal
       operationId: adexchangebuyer.marketplacenotes.list
@@ -1239,7 +1239,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/proposals/{proposalId}/notes/insert":
+  /proposals/{proposalId}/notes/insert:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1277,7 +1277,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - marketplacenotes
-  "/proposals/{proposalId}/setupcomplete":
+  /proposals/{proposalId}/setupcomplete:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1306,7 +1306,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - proposals
-  "/proposals/{proposalId}/{revisionNumber}/{updateAction}":
+  /proposals/{proposalId}/{revisionNumber}/{updateAction}:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1411,7 +1411,7 @@ paths:
             - https://www.googleapis.com/auth/adexchange.buyer
       tags:
         - proposals
-  "/publisher/{accountId}/profiles":
+  /publisher/{accountId}/profiles:
     get:
       description: Gets the requested publisher profile(s) by publisher accountId.
       operationId: adexchangebuyer.pubprofiles.list

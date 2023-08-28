@@ -34,7 +34,7 @@ tags:
   - name: projects
   - name: providers
 paths:
-  "/v1alpha1/{name}":
+  /v1alpha1/{name}:
     delete:
       description: Deletes the given `Note` from the system.
       operationId: containeranalysis.providers.notes.delete
@@ -129,7 +129,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - providers
-  "/v1alpha1/{name}/notes":
+  /v1alpha1/{name}/notes:
     get:
       description: Lists all `Notes` for a given project.
       operationId: containeranalysis.providers.notes.list
@@ -225,7 +225,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - providers
-  "/v1alpha1/{name}/occurrences":
+  /v1alpha1/{name}/occurrences:
     get:
       description: Lists `Occurrences` referencing the specified `Note`. Use this method to get all occurrences referencing your `Note` across all your customer projects.
       operationId: containeranalysis.providers.notes.occurrences.list
@@ -277,7 +277,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{parent}/notes":
+  /v1alpha1/{parent}/notes:
     get:
       description: Lists all `Notes` for a given project.
       operationId: containeranalysis.projects.notes.list
@@ -373,7 +373,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/occurrences":
+  /v1alpha1/{parent}/occurrences:
     get:
       description: Lists active `Occurrences` for a given project matching the filters.
       operationId: containeranalysis.projects.occurrences.list
@@ -487,7 +487,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/occurrences:vulnerabilitySummary":
+  /v1alpha1/{parent}/occurrences:vulnerabilitySummary:
     get:
       description: Gets a summary of the number and severity of occurrences.
       operationId: containeranalysis.projects.occurrences.getVulnerabilitySummary
@@ -529,7 +529,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{parent}/operations":
+  /v1alpha1/{parent}/operations:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -571,7 +571,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/scanConfigs":
+  /v1alpha1/{parent}/scanConfigs:
     get:
       description: Lists scan configurations for a project.
       operationId: containeranalysis.projects.scanConfigs.list
@@ -623,7 +623,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{resource}:getIamPolicy":
+  /v1alpha1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -665,7 +665,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - providers
-  "/v1alpha1/{resource}:setIamPolicy":
+  /v1alpha1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -707,7 +707,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - providers
-  "/v1alpha1/{resource}:testIamPermissions":
+  /v1alpha1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

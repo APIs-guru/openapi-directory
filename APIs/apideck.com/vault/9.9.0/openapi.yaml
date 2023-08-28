@@ -205,7 +205,7 @@ tags:
     x-apideck-model:
       $ref: "#/components/schemas/Log"
 paths:
-  "/vault/authorize/{service_id}/{application_id}":
+  /vault/authorize/{service_id}/{application_id}:
     get:
       description: |
         __In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.__
@@ -371,7 +371,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/vault/connections/{unified_api}/{service_id}":
+  /vault/connections/{unified_api}/{service_id}:
     delete:
       description: Deletes a connection
       operationId: connectionsDelete
@@ -644,7 +644,7 @@ paths:
               console.error(error)
             }
       x-sdk-exclude: true
-  "/vault/connections/{unified_api}/{service_id}/import":
+  /vault/connections/{unified_api}/{service_id}/import:
     post:
       description: |
         Import an authorized connection.
@@ -723,7 +723,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/vault/connections/{unified_api}/{service_id}/token":
+  /vault/connections/{unified_api}/{service_id}/token:
     post:
       description: |
         Get an access token for a connection and store it in Vault. Currently only supported for connections with the client_credentials OAuth grant type.
@@ -788,7 +788,7 @@ paths:
               console.error(error)
             }
       x-sdk-exclude: true
-  "/vault/connections/{unified_api}/{service_id}/{resource}/config":
+  /vault/connections/{unified_api}/{service_id}/{resource}/config:
     get:
       description: |
         This endpoint returns custom settings and their defaults required by connection for a given resource.
@@ -1039,7 +1039,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/vault/consumers/{consumer_id}":
+  /vault/consumers/{consumer_id}:
     delete:
       description: Delete consumer and all their connections, including credentials.
       operationId: consumersDelete
@@ -1195,7 +1195,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/vault/consumers/{consumer_id}/stats":
+  /vault/consumers/{consumer_id}/stats:
     get:
       description: |
         Get consumer request counts within a given datetime range.
@@ -1299,7 +1299,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/vault/revoke/{service_id}/{application_id}":
+  /vault/revoke/{service_id}/{application_id}:
     get:
       description: |
         __In most cases the authorize link is provided in the ``/connections`` endpoint. Normally you don't need to manually generate these links.__

@@ -37,7 +37,7 @@ tags:
   - name: savedQueries
   - name: v1
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a saved query.
       operationId: cloudasset.savedQueries.delete
@@ -132,7 +132,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - savedQueries
-  "/v1/{parent}/assets":
+  /v1/{parent}/assets:
     get:
       description: Lists assets with time and resource types and returns paged results in response.
       operationId: cloudasset.assets.list
@@ -215,7 +215,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/feeds":
+  /v1/{parent}/feeds:
     get:
       description: Lists all asset feeds in a parent project/folder/organization.
       operationId: cloudasset.feeds.list
@@ -281,7 +281,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - feeds
-  "/v1/{parent}/savedQueries":
+  /v1/{parent}/savedQueries:
     get:
       description: Lists all saved queries in a parent project/folder/organization.
       operationId: cloudasset.savedQueries.list
@@ -367,7 +367,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - savedQueries
-  "/v1/{parent}:batchGetAssetsHistory":
+  /v1/{parent}:batchGetAssetsHistory:
     get:
       description: Batch gets the update history of assets that overlap a time window. For IAM_POLICY content, this API outputs history when the asset and its attached IAM POLICY both exist. This can create gaps in the output history. Otherwise, this API outputs history with asset in both non-delete or deleted status. If a specified asset does not exist, this API returns an INVALID_ARGUMENT error.
       operationId: cloudasset.batchGetAssetsHistory
@@ -445,7 +445,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}:exportAssets":
+  /v1/{parent}:exportAssets:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -487,7 +487,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
-  "/v1/{parent}:queryAssets":
+  /v1/{parent}:queryAssets:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -529,7 +529,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
-  "/v1/{resource}:analyzeMove":
+  /v1/{resource}:analyzeMove:
     get:
       description: Analyze moving a resource to a specified destination without kicking off the actual move. The analysis is best effort depending on the user's permissions of viewing different hierarchical policies and configurations. The policies and configuration are subject to change before the actual resource migration takes place.
       operationId: cloudasset.analyzeMove
@@ -580,7 +580,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{scope}/effectiveIamPolicies:batchGet":
+  /v1/{scope}/effectiveIamPolicies:batchGet:
     get:
       description: Gets effective IAM policies for a batch of resources.
       operationId: cloudasset.effectiveIamPolicies.batchGet
@@ -626,7 +626,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{scope}:analyzeIamPolicy":
+  /v1/{scope}:analyzeIamPolicy:
     get:
       description: Analyzes IAM policies to answer which identities have what accesses on which resources.
       operationId: cloudasset.analyzeIamPolicy
@@ -736,7 +736,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{scope}:analyzeIamPolicyLongrunning":
+  /v1/{scope}:analyzeIamPolicyLongrunning:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -778,7 +778,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
-  "/v1/{scope}:analyzeOrgPolicies":
+  /v1/{scope}:analyzeOrgPolicies:
     get:
       description: Analyzes organization policies under a scope.
       operationId: cloudasset.analyzeOrgPolicies
@@ -835,7 +835,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{scope}:analyzeOrgPolicyGovernedAssets":
+  /v1/{scope}:analyzeOrgPolicyGovernedAssets:
     get:
       description: "Analyzes organization policies governed assets (Google Cloud resources or policies) under a scope. This RPC supports custom constraints and the following 10 canned constraints: * storage.uniformBucketLevelAccess * iam.disableServiceAccountKeyCreation * iam.allowedPolicyMemberDomains * compute.vmExternalIpAccess * appengine.enforceServiceAccountActAsCheck * gcp.resourceLocations * compute.trustedImageProjects * compute.skipDefaultNetworkCreation * compute.requireOsLogin * compute.disableNestedVirtualization This RPC only returns either resources of types supported by [searchable asset types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types), or IAM policies."
       operationId: cloudasset.analyzeOrgPolicyGovernedAssets
@@ -892,7 +892,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{scope}:analyzeOrgPolicyGovernedContainers":
+  /v1/{scope}:analyzeOrgPolicyGovernedContainers:
     get:
       description: Analyzes organization policies governed containers (projects, folders or organization) under a scope.
       operationId: cloudasset.analyzeOrgPolicyGovernedContainers
@@ -949,7 +949,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{scope}:searchAllIamPolicies":
+  /v1/{scope}:searchAllIamPolicies:
     get:
       description: Searches all IAM policies within the specified scope, such as a project, folder, or organization. The caller must be granted the `cloudasset.assets.searchAllIamPolicies` permission on the desired scope, otherwise the request will be rejected.
       operationId: cloudasset.searchAllIamPolicies
@@ -1015,7 +1015,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{scope}:searchAllResources":
+  /v1/{scope}:searchAllResources:
     get:
       description: Searches all Google Cloud resources within the specified scope, such as a project, folder, or organization. The caller must be granted the `cloudasset.assets.searchAllResources` permission on the desired scope, otherwise the request will be rejected.
       operationId: cloudasset.searchAllResources

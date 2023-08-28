@@ -91,7 +91,7 @@ paths:
       summary: Import a file from a URL into the file manager.
       tags:
         - Files
-  "/files/v3/files/import-from-url/async/tasks/{taskId}/status":
+  /files/v3/files/import-from-url/async/tasks/{taskId}/status:
     get:
       description: Check the status of requested import.
       operationId: get-/files/v3/files/import-from-url/async/tasks/{taskId}/status
@@ -349,7 +349,7 @@ paths:
       summary: Search files
       tags:
         - Files
-  "/files/v3/files/stat/{path}":
+  /files/v3/files/stat/{path}:
     get:
       operationId: get-/files/v3/files/stat/{path}
       parameters:
@@ -388,7 +388,7 @@ paths:
             - files
       tags:
         - Files
-  "/files/v3/files/{fileId}":
+  /files/v3/files/{fileId}:
     delete:
       description: Delete file by ID
       operationId: delete-/files/v3/files/{fileId}
@@ -537,7 +537,7 @@ paths:
       summary: Replace file.
       tags:
         - Files
-  "/files/v3/files/{fileId}/gdpr-delete":
+  /files/v3/files/{fileId}/gdpr-delete:
     delete:
       description: GDRP delete file
       operationId: delete-/files/v3/files/{fileId}/gdpr-delete
@@ -564,7 +564,7 @@ paths:
       summary: GDPR delete
       tags:
         - Files
-  "/files/v3/files/{fileId}/signed-url":
+  /files/v3/files/{fileId}/signed-url:
     get:
       description: Generates signed URL that allows temporary access to a private file.
       operationId: get-/files/v3/files/{fileId}/signed-url
@@ -834,7 +834,7 @@ paths:
       summary: Update folder properties
       tags:
         - Folders
-  "/files/v3/folders/update/async/tasks/{taskId}/status":
+  /files/v3/folders/update/async/tasks/{taskId}/status:
     get:
       description: Check status of folder update. Folder updates happen asynchronously.
       operationId: get-/files/v3/folders/update/async/tasks/{taskId}/status
@@ -863,7 +863,7 @@ paths:
       summary: Check folder update status.
       tags:
         - Folders
-  "/files/v3/folders/{folderId}":
+  /files/v3/folders/{folderId}:
     delete:
       description: Delete folder by ID.
       operationId: delete-/files/v3/folders/{folderId}
@@ -932,7 +932,7 @@ paths:
       summary: Get folder
       tags:
         - Folders
-  "/files/v3/folders/{folderPath}":
+  /files/v3/folders/{folderPath}:
     delete:
       description: Delete folder by path.
       operationId: delete-/files/v3/folders/{folderPath}

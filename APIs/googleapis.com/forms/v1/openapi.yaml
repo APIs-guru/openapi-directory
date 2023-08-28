@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/forms.body
       tags:
         - forms
-  "/v1/forms/{formId}":
+  /v1/forms/{formId}:
     get:
       description: Get a form.
       operationId: forms.forms.get
@@ -125,7 +125,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/forms/{formId}/responses":
+  /v1/forms/{formId}/responses:
     get:
       description: List a form's responses.
       operationId: forms.forms.responses.list
@@ -185,7 +185,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/forms/{formId}/responses/{responseId}":
+  /v1/forms/{formId}/responses/{responseId}:
     get:
       description: Get one response from the form.
       operationId: forms.forms.responses.get
@@ -236,7 +236,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/forms/{formId}/watches":
+  /v1/forms/{formId}/watches:
     get:
       description: "Return a list of the watches owned by the invoking project. The maximum number of watches is two: For each invoker, the limit is one for each event type per form."
       operationId: forms.forms.watches.list
@@ -342,7 +342,7 @@ paths:
             - https://www.googleapis.com/auth/forms.responses.readonly
       tags:
         - forms
-  "/v1/forms/{formId}/watches/{watchId}":
+  /v1/forms/{formId}/watches/{watchId}:
     delete:
       description: Delete a watch.
       operationId: forms.forms.watches.delete
@@ -405,7 +405,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/forms/{formId}/watches/{watchId}:renew":
+  /v1/forms/{formId}/watches/{watchId}:renew:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -473,7 +473,7 @@ paths:
             - https://www.googleapis.com/auth/forms.responses.readonly
       tags:
         - forms
-  "/v1/forms/{formId}:batchUpdate":
+  /v1/forms/{formId}:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

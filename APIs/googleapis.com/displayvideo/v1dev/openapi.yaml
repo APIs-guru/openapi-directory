@@ -33,7 +33,7 @@ tags:
   - name: media
   - name: sdfdownloadtasks
 paths:
-  "/download/{resourceName}":
+  /download/{resourceName}:
     get:
       description: "Downloads media. Download is supported on the URI `/download/{resource_name=**}?alt=media.` **Note**: Download requests will not be successful without including `alt=media` query string."
       operationId: displayvideo.media.download
@@ -74,7 +74,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/media/{resourceName}":
+  /media/{resourceName}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -120,7 +120,7 @@ paths:
             - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - media
-  "/v1dev/{name}":
+  /v1dev/{name}:
     get:
       description: Gets the latest state of an asynchronous SDF download task operation. Clients should poll this method at intervals of 30 seconds.
       operationId: displayvideo.sdfdownloadtasks.operations.get

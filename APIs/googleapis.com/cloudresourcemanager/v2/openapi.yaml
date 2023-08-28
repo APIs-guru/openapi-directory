@@ -33,7 +33,7 @@ tags:
   - name: folders
   - name: operations
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: cloudresourcemanager.operations.get
@@ -196,7 +196,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - folders
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Requests deletion of a Folder. The Folder is moved into the DELETE_REQUESTED state immediately, and is deleted approximately 30 days later. This method may only be called on an empty Folder in the ACTIVE state, where a Folder is empty if it doesn't contain any Folders or Projects in the ACTIVE state. The caller must have `resourcemanager.folders.delete` permission on the identified folder.
       operationId: cloudresourcemanager.folders.delete
@@ -295,7 +295,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - folders
-  "/v2/{name}:move":
+  /v2/{name}:move:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -337,7 +337,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - folders
-  "/v2/{name}:undelete":
+  /v2/{name}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -379,7 +379,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - folders
-  "/v2/{resource}:getIamPolicy":
+  /v2/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -425,7 +425,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - folders
-  "/v2/{resource}:setIamPolicy":
+  /v2/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -467,7 +467,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - folders
-  "/v2/{resource}:testIamPermissions":
+  /v2/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

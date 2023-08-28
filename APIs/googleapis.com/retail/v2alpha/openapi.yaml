@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2alpha/{attributesConfig}:addCatalogAttribute":
+  /v2alpha/{attributesConfig}:addCatalogAttribute:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{attributesConfig}:batchRemoveCatalogAttributes":
+  /v2alpha/{attributesConfig}:batchRemoveCatalogAttributes:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -114,7 +114,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{attributesConfig}:removeCatalogAttribute":
+  /v2alpha/{attributesConfig}:removeCatalogAttribute:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -156,7 +156,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{attributesConfig}:replaceCatalogAttribute":
+  /v2alpha/{attributesConfig}:replaceCatalogAttribute:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -198,7 +198,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{catalog}:completeQuery":
+  /v2alpha/{catalog}:completeQuery:
     get:
       description: Completes the specified prefix with keyword suggestions. This feature is only available for users who have Retail Search enabled. Enable Retail Search on Cloud Console before using this feature.
       operationId: retail.projects.locations.catalogs.completeQuery
@@ -279,7 +279,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha/{catalog}:getDefaultBranch":
+  /v2alpha/{catalog}:getDefaultBranch:
     get:
       description: Get which branch is currently default branch set by CatalogService.SetDefaultBranch method under a specified parent catalog.
       operationId: retail.projects.locations.catalogs.getDefaultBranch
@@ -316,7 +316,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha/{catalog}:setDefaultBranch":
+  /v2alpha/{catalog}:setDefaultBranch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -358,7 +358,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{name}":
+  /v2alpha/{name}:
     delete:
       description: Deletes a ServingConfig. Returns a NotFound error if the ServingConfig does not exist.
       operationId: retail.projects.locations.catalogs.servingConfigs.delete
@@ -458,7 +458,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{name}/operations":
+  /v2alpha/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: retail.projects.operations.list
@@ -510,7 +510,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha/{name}:pause":
+  /v2alpha/{name}:pause:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -552,7 +552,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{name}:resume":
+  /v2alpha/{name}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -594,7 +594,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{name}:setInventory":
+  /v2alpha/{name}:setInventory:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -636,7 +636,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{name}:tune":
+  /v2alpha/{name}:tune:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -678,7 +678,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/catalogs":
+  /v2alpha/{parent}/catalogs:
     get:
       description: Lists all the Catalogs associated with the project.
       operationId: retail.projects.locations.catalogs.list
@@ -725,7 +725,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha/{parent}/completionData:import":
+  /v2alpha/{parent}/completionData:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -767,7 +767,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/controls":
+  /v2alpha/{parent}/controls:
     get:
       description: Lists all Controls by their parent Catalog.
       operationId: retail.projects.locations.catalogs.controls.list
@@ -853,7 +853,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/merchantCenterAccountLinks":
+  /v2alpha/{parent}/merchantCenterAccountLinks:
     get:
       description: Lists all MerchantCenterAccountLinks under the specified parent Catalog.
       operationId: retail.projects.locations.catalogs.merchantCenterAccountLinks.list
@@ -919,7 +919,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/models":
+  /v2alpha/{parent}/models:
     get:
       description: Lists all the models linked to this event store.
       operationId: retail.projects.locations.catalogs.models.list
@@ -1000,7 +1000,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/products":
+  /v2alpha/{parent}/products:
     get:
       description: Gets a list of Products.
       operationId: retail.projects.locations.catalogs.branches.products.list
@@ -1096,7 +1096,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/products:import":
+  /v2alpha/{parent}/products:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1138,7 +1138,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/products:purge":
+  /v2alpha/{parent}/products:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1180,7 +1180,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/servingConfigs":
+  /v2alpha/{parent}/servingConfigs:
     get:
       description: Lists all ServingConfigs linked to this catalog.
       operationId: retail.projects.locations.catalogs.servingConfigs.list
@@ -1261,7 +1261,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/userEvents:collect":
+  /v2alpha/{parent}/userEvents:collect:
     get:
       description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a 3rd party domain. This method is used only by the Retail API JavaScript pixel and Google Tag Manager. Users should not call this method directly.
       operationId: retail.projects.locations.catalogs.userEvents.collect
@@ -1323,7 +1323,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha/{parent}/userEvents:import":
+  /v2alpha/{parent}/userEvents:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1365,7 +1365,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/userEvents:purge":
+  /v2alpha/{parent}/userEvents:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1407,7 +1407,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/userEvents:rejoin":
+  /v2alpha/{parent}/userEvents:rejoin:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1449,7 +1449,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}/userEvents:write":
+  /v2alpha/{parent}/userEvents:write:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1496,7 +1496,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{parent}:enrolledSolutions":
+  /v2alpha/{parent}:enrolledSolutions:
     get:
       description: Lists all the retail API solutions the project has enrolled.
       operationId: retail.projects.listEnrolledSolutions
@@ -1533,7 +1533,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha/{placement}:predict":
+  /v2alpha/{placement}:predict:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1575,7 +1575,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{placement}:search":
+  /v2alpha/{placement}:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1617,7 +1617,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{product}:addFulfillmentPlaces":
+  /v2alpha/{product}:addFulfillmentPlaces:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1659,7 +1659,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{product}:addLocalInventories":
+  /v2alpha/{product}:addLocalInventories:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1701,7 +1701,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{product}:removeFulfillmentPlaces":
+  /v2alpha/{product}:removeFulfillmentPlaces:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1743,7 +1743,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{product}:removeLocalInventories":
+  /v2alpha/{product}:removeLocalInventories:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1785,7 +1785,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{project}:acceptTerms":
+  /v2alpha/{project}:acceptTerms:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1827,7 +1827,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{project}:enrollSolution":
+  /v2alpha/{project}:enrollSolution:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1869,7 +1869,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{servingConfig}:addControl":
+  /v2alpha/{servingConfig}:addControl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1911,7 +1911,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha/{servingConfig}:removeControl":
+  /v2alpha/{servingConfig}:removeControl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

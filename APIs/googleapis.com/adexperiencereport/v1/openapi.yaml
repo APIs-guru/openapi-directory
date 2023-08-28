@@ -60,7 +60,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets a site's Ad Experience Report summary.
       operationId: adexperiencereport.sites.get

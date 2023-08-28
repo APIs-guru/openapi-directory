@@ -161,7 +161,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/projects/{projectId}":
+  /v1beta1/projects/{projectId}:
     delete:
       description: Marks the Project identified by the specified `project_id` (for example, `my-project-123`) for deletion. This method will only affect the Project if it has a lifecycle state of ACTIVE. This method changes the Project's lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the project is no longer accessible. Until the deletion completes, you can check the lifecycle state checked by retrieving the Project with GetProject, and the Project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the Project is not retrievable by the GetProject and ListProjects methods. The caller must have delete permissions for this Project.
       operationId: cloudresourcemanager.projects.delete
@@ -255,7 +255,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/projects/{projectId}:getAncestry":
+  /v1beta1/projects/{projectId}:getAncestry:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -301,7 +301,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
-  "/v1beta1/projects/{projectId}:undelete":
+  /v1beta1/projects/{projectId}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -343,7 +343,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/projects/{resource}:getIamPolicy":
+  /v1beta1/projects/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -389,7 +389,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
-  "/v1beta1/projects/{resource}:setIamPolicy":
+  /v1beta1/projects/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -431,7 +431,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/projects/{resource}:testIamPermissions":
+  /v1beta1/projects/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -477,7 +477,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     get:
       description: Fetches an Organization resource identified by the specified resource name.
       operationId: cloudresourcemanager.organizations.get
@@ -552,7 +552,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -598,7 +598,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - organizations
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -640,7 +640,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

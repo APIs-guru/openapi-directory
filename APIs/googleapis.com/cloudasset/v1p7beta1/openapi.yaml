@@ -33,7 +33,7 @@ tags:
   - name: operations
   - name: v1p7beta1
 paths:
-  "/v1p7beta1/{name}":
+  /v1p7beta1/{name}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: cloudasset.operations.get
@@ -70,7 +70,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1p7beta1/{parent}:exportAssets":
+  /v1p7beta1/{parent}:exportAssets:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

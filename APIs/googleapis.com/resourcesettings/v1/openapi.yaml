@@ -31,7 +31,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Returns a specified setting. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the setting does not exist.
       operationId: resourcesettings.projects.settings.get
@@ -107,7 +107,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/settings":
+  /v1/{parent}/settings:
     get:
       description: Lists all the settings that are available on the Cloud resource `parent`.
       operationId: resourcesettings.projects.settings.list

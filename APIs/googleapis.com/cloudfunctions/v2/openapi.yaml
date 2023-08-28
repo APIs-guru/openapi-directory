@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a function with the given name from the specified project. If the given function is used by some trigger, the trigger will be updated to remove this function.
       operationId: cloudfunctions.projects.locations.functions.delete
@@ -127,7 +127,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}/locations":
+  /v2/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: cloudfunctions.projects.locations.list
@@ -179,7 +179,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}/operations":
+  /v2/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: cloudfunctions.projects.locations.operations.list
@@ -231,7 +231,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}:generateDownloadUrl":
+  /v2/{name}:generateDownloadUrl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -273,7 +273,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/functions":
+  /v2/{parent}/functions:
     get:
       description: Returns a list of functions that belong to the requested project.
       operationId: cloudfunctions.projects.locations.functions.list
@@ -364,7 +364,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/functions:generateUploadUrl":
+  /v2/{parent}/functions:generateUploadUrl:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -406,7 +406,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/runtimes":
+  /v2/{parent}/runtimes:
     get:
       description: Returns a list of runtimes that are supported for the requested project.
       operationId: cloudfunctions.projects.locations.runtimes.list
@@ -448,7 +448,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{resource}:getIamPolicy":
+  /v2/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: cloudfunctions.projects.locations.functions.getIamPolicy
@@ -490,7 +490,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{resource}:setIamPolicy":
+  /v2/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -532,7 +532,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{resource}:testIamPermissions":
+  /v2/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

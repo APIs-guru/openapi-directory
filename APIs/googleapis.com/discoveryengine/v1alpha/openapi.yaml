@@ -31,7 +31,7 @@ tags:
   - name: locations
   - name: projects
 paths:
-  "/v1alpha/{dataStore}:completeQuery":
+  /v1alpha/{dataStore}:completeQuery:
     get:
       description: Completes the specified user input with keyword suggestions.
       operationId: discoveryengine.projects.locations.dataStores.completeQuery
@@ -88,7 +88,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{location}/lookupWidgetConfig":
+  /v1alpha/{location}/lookupWidgetConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -130,7 +130,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - locations
-  "/v1alpha/{location}/widgetCompleteQuery":
+  /v1alpha/{location}/widgetCompleteQuery:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -172,7 +172,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - locations
-  "/v1alpha/{location}/widgetConverseConversation":
+  /v1alpha/{location}/widgetConverseConversation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -214,7 +214,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - locations
-  "/v1alpha/{location}/widgetSearch":
+  /v1alpha/{location}/widgetSearch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -256,7 +256,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - locations
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     delete:
       description: Deletes a Schema.
       operationId: discoveryengine.projects.locations.dataStores.schemas.delete
@@ -351,7 +351,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}/operations":
+  /v1alpha/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: discoveryengine.projects.operations.list
@@ -403,7 +403,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}:converse":
+  /v1alpha/{name}:converse:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -445,7 +445,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/conversations":
+  /v1alpha/{parent}/conversations:
     get:
       description: Lists all Conversations by their parent DataStore.
       operationId: discoveryengine.projects.locations.dataStores.conversations.list
@@ -531,7 +531,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/documents":
+  /v1alpha/{parent}/documents:
     get:
       description: Gets a list of Documents.
       operationId: discoveryengine.projects.locations.dataStores.branches.documents.list
@@ -612,7 +612,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/documents:import":
+  /v1alpha/{parent}/documents:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -654,7 +654,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/documents:purge":
+  /v1alpha/{parent}/documents:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -696,7 +696,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/schemas":
+  /v1alpha/{parent}/schemas:
     get:
       description: Gets a list of Schemas.
       operationId: discoveryengine.projects.locations.dataStores.schemas.list
@@ -777,7 +777,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/userEvents:collect":
+  /v1alpha/{parent}/userEvents:collect:
     get:
       description: Writes a single user event from the browser. This uses a GET request to due to browser restriction of POST-ing to a third-party domain. This method is used only by the Discovery Engine API JavaScript pixel and Google Tag Manager. Users should not call this method directly.
       operationId: discoveryengine.projects.locations.dataStores.userEvents.collect
@@ -829,7 +829,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/userEvents:import":
+  /v1alpha/{parent}/userEvents:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -871,7 +871,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/userEvents:purge":
+  /v1alpha/{parent}/userEvents:purge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -913,7 +913,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/userEvents:write":
+  /v1alpha/{parent}/userEvents:write:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -955,7 +955,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{servingConfig}:recommend":
+  /v1alpha/{servingConfig}:recommend:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -997,7 +997,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{servingConfig}:search":
+  /v1alpha/{servingConfig}:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

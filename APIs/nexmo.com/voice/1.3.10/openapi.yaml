@@ -127,7 +127,7 @@ paths:
       summary: Create an outbound call
       tags:
         - Calls
-  "/{uuid}":
+  /{uuid}:
     get:
       description: Get detail of a specific call
       operationId: getCall
@@ -179,7 +179,7 @@ paths:
       summary: Modify an in progress call
       tags:
         - Calls
-  "/{uuid}/dtmf":
+  /{uuid}/dtmf:
     parameters:
       - description: UUID of the Call Leg
         example: 63f61863-4a51-4f6b-86e1-46edebcf9356
@@ -210,7 +210,7 @@ paths:
       summary: Play DTMF tones into a call
       tags:
         - Play DTMF
-  "/{uuid}/stream":
+  /{uuid}/stream:
     delete:
       description: Stop playing an audio file into a call
       operationId: stopStream
@@ -256,7 +256,7 @@ paths:
       summary: Play an audio file into a call
       tags:
         - Stream Audio
-  "/{uuid}/talk":
+  /{uuid}/talk:
     delete:
       description: Stop text to speech in a call
       operationId: stopTalk

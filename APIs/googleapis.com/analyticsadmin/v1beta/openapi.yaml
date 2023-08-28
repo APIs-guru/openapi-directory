@@ -239,7 +239,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{account}:searchChangeHistoryEvents":
+  /v1beta/{account}:searchChangeHistoryEvents:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -281,7 +281,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - accounts
-  "/v1beta/{entity}:runAccessReport":
+  /v1beta/{entity}:runAccessReport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -327,7 +327,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
-  "/v1beta/{name}":
+  /v1beta/{name}:
     delete:
       description: Deletes a GoogleAdsLink on a property
       operationId: analyticsadmin.properties.googleAdsLinks.delete
@@ -426,7 +426,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{name}:archive":
+  /v1beta/{name}:archive:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -468,7 +468,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{parent}/conversionEvents":
+  /v1beta/{parent}/conversionEvents:
     get:
       description: Returns a list of conversion events in the specified parent property. Returns an empty list if no conversion events are found.
       operationId: analyticsadmin.properties.conversionEvents.list
@@ -548,7 +548,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{parent}/customDimensions":
+  /v1beta/{parent}/customDimensions:
     get:
       description: Lists CustomDimensions on a property.
       operationId: analyticsadmin.properties.customDimensions.list
@@ -628,7 +628,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{parent}/customMetrics":
+  /v1beta/{parent}/customMetrics:
     get:
       description: Lists CustomMetrics on a property.
       operationId: analyticsadmin.properties.customMetrics.list
@@ -708,7 +708,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{parent}/dataStreams":
+  /v1beta/{parent}/dataStreams:
     get:
       description: Lists DataStreams on a property.
       operationId: analyticsadmin.properties.dataStreams.list
@@ -788,7 +788,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{parent}/firebaseLinks":
+  /v1beta/{parent}/firebaseLinks:
     get:
       description: Lists FirebaseLinks on a property. Properties can have at most one FirebaseLink.
       operationId: analyticsadmin.properties.firebaseLinks.list
@@ -868,7 +868,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{parent}/googleAdsLinks":
+  /v1beta/{parent}/googleAdsLinks:
     get:
       description: Lists GoogleAdsLinks on a property.
       operationId: analyticsadmin.properties.googleAdsLinks.list
@@ -948,7 +948,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{parent}/measurementProtocolSecrets":
+  /v1beta/{parent}/measurementProtocolSecrets:
     get:
       description: Returns child MeasurementProtocolSecrets under the specified parent Property.
       operationId: analyticsadmin.properties.dataStreams.measurementProtocolSecrets.list
@@ -1028,7 +1028,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1beta/{property}:acknowledgeUserDataCollection":
+  /v1beta/{property}:acknowledgeUserDataCollection:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

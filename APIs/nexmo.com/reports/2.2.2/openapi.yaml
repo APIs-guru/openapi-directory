@@ -290,7 +290,7 @@ paths:
       security:
         - basicAuth: []
       summary: Load records synchronously
-  "/v2/reports/{report_id}":
+  /v2/reports/{report_id}:
     delete:
       description: Cancel the execution of a pending or processing report.
       operationId: cancel-report
@@ -335,7 +335,7 @@ paths:
       security:
         - basicAuth: []
       summary: Get status of report
-  "/v3/media/{file_id}":
+  /v3/media/{file_id}:
     get:
       description: |
         Download a zipped archive of the rendered report. The file is available for download for 72 hours.<br> The zip file will be named `<PRODUCT>_<REPORT_ID>.zip`<br> The csv file in the zip archive will be named as `report_<PRODUCT>_<ACCOUNT_ID>_<DATE>.csv` the date will be formatted as `yyyyMMdd`.

@@ -435,7 +435,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/drive-groups/{id}":
+  /file-storage/drive-groups/{id}:
     delete:
       description: Delete DriveGroup
       operationId: driveGroupsDelete
@@ -712,7 +712,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/drives/{id}":
+  /file-storage/drives/{id}:
     delete:
       description: Delete Drive
       operationId: drivesDelete
@@ -1056,7 +1056,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/files/{id}":
+  /file-storage/files/{id}:
     delete:
       description: Delete File
       operationId: filesDelete
@@ -1221,7 +1221,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/files/{id}/download":
+  /file-storage/files/{id}/download:
     get:
       description: Download File
       operationId: filesDownload
@@ -1272,7 +1272,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/files/{id}/export":
+  /file-storage/files/{id}/export:
     get:
       description: Export File
       operationId: filesExport
@@ -1389,7 +1389,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/folders/{id}":
+  /file-storage/folders/{id}:
     delete:
       description: Delete Folder
       operationId: foldersDelete
@@ -1557,7 +1557,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/folders/{id}/copy":
+  /file-storage/folders/{id}/copy:
     post:
       description: Copy Folder
       operationId: foldersCopy
@@ -1735,7 +1735,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/shared-links/{id}":
+  /file-storage/shared-links/{id}:
     delete:
       description: Delete Shared Link
       operationId: sharedLinksDelete
@@ -1966,7 +1966,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/file-storage/upload-sessions/{id}":
+  /file-storage/upload-sessions/{id}:
     delete:
       description: Abort Upload Session. Note that the base URL is upload.apideck.com instead of unify.apideck.com. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
       operationId: uploadSessionsDelete
@@ -2141,7 +2141,7 @@ paths:
               console.error(error)
             }
       x-sdk-exclude: true
-  "/file-storage/upload-sessions/{id}/finish":
+  /file-storage/upload-sessions/{id}/finish:
     post:
       description: Finish Upload Session. Only call this endpoint after all File parts have been uploaded to [Upload part of File](#operation/uploadSessionsUpload). Note that the base URL is upload.apideck.com instead of unify.apideck.com. For more information on uploads, refer to the [file upload guide](/guides/file-upload).
       operationId: uploadSessionsFinish

@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1alpha1/{group}:addAssets":
+  /v1alpha1/{group}:addAssets:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{group}:removeAssets":
+  /v1alpha1/{group}:removeAssets:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -114,7 +114,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}":
+  /v1alpha1/{name}:
     delete:
       description: Deletes a source.
       operationId: migrationcenter.projects.locations.sources.delete
@@ -229,7 +229,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}/locations":
+  /v1alpha1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: migrationcenter.projects.locations.list
@@ -281,7 +281,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{name}/operations":
+  /v1alpha1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: migrationcenter.projects.locations.operations.list
@@ -333,7 +333,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{name}:cancel":
+  /v1alpha1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -375,7 +375,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}:run":
+  /v1alpha1/{name}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -417,7 +417,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{name}:validate":
+  /v1alpha1/{name}:validate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -459,7 +459,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/assets":
+  /v1alpha1/{parent}/assets:
     get:
       description: Lists all the assets in a given project and location.
       operationId: migrationcenter.projects.locations.assets.list
@@ -526,7 +526,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{parent}/assets:aggregateValues":
+  /v1alpha1/{parent}/assets:aggregateValues:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -568,7 +568,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/assets:batchDelete":
+  /v1alpha1/{parent}/assets:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -610,7 +610,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/assets:batchUpdate":
+  /v1alpha1/{parent}/assets:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -652,7 +652,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/assets:reportAssetFrames":
+  /v1alpha1/{parent}/assets:reportAssetFrames:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -699,7 +699,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/errorFrames":
+  /v1alpha1/{parent}/errorFrames:
     get:
       description: Lists all error frames in a given source and location.
       operationId: migrationcenter.projects.locations.sources.errorFrames.list
@@ -755,7 +755,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{parent}/groups":
+  /v1alpha1/{parent}/groups:
     get:
       description: Lists all groups in a given project and location.
       operationId: migrationcenter.projects.locations.groups.list
@@ -851,7 +851,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/importDataFiles":
+  /v1alpha1/{parent}/importDataFiles:
     get:
       description: List import data files.
       operationId: migrationcenter.projects.locations.importJobs.importDataFiles.list
@@ -947,7 +947,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/importJobs":
+  /v1alpha1/{parent}/importJobs:
     get:
       description: Lists all import jobs.
       operationId: migrationcenter.projects.locations.importJobs.list
@@ -1052,7 +1052,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/preferenceSets":
+  /v1alpha1/{parent}/preferenceSets:
     get:
       description: Lists all the preference sets in a given project and location.
       operationId: migrationcenter.projects.locations.preferenceSets.list
@@ -1142,7 +1142,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/reportConfigs":
+  /v1alpha1/{parent}/reportConfigs:
     get:
       description: Lists ReportConfigs in a given project and location.
       operationId: migrationcenter.projects.locations.reportConfigs.list
@@ -1238,7 +1238,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/reports":
+  /v1alpha1/{parent}/reports:
     get:
       description: Lists Reports in a given ReportConfig.
       operationId: migrationcenter.projects.locations.reportConfigs.reports.list
@@ -1344,7 +1344,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha1/{parent}/sources":
+  /v1alpha1/{parent}/sources:
     get:
       description: Lists all the sources in a given project and location.
       operationId: migrationcenter.projects.locations.sources.list

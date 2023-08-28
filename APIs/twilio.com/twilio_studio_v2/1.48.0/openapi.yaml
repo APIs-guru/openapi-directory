@@ -200,7 +200,7 @@ paths:
         - valid
       mountName: flow_validate
       pathType: list
-  "/v2/Flows/{FlowSid}/Executions":
+  /v2/Flows/{FlowSid}/Executions:
     description: Executions of Studio flows
     get:
       description: Retrieve a list of all Executions for the Flow.
@@ -345,7 +345,7 @@ paths:
         execution_step: "{flow_sid: flow_sid, execution_sid: sid}"
       parent: /Flows/{Sid}
       pathType: list
-  "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Context":
+  /v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Context:
     description: JSON context for executions
     get:
       description: Retrieve the most recent context for an Execution.
@@ -390,7 +390,7 @@ paths:
       mountName: execution_context
       parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: instance
-  "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps":
+  /v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps:
     description: Individual steps within an execution
     get:
       description: Retrieve a list of all Steps for an Execution.
@@ -486,7 +486,7 @@ paths:
         execution_step_context: "{flow_sid: flow_sid, execution_sid: execution_sid, step_sid: sid}"
       parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: list
-  "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}":
+  /v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}:
     description: Individual steps within an execution
     get:
       description: Retrieve a Step.
@@ -544,7 +544,7 @@ paths:
         execution_step_context: "{flow_sid: flow_sid, execution_sid: execution_sid, step_sid: sid}"
       parent: /Flows/{FlowSid}/Executions/{Sid}
       pathType: instance
-  "/v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{StepSid}/Context":
+  /v2/Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{StepSid}/Context:
     description: JSON context for an individual step within an execution
     get:
       description: Retrieve the context for an Execution Step.
@@ -599,7 +599,7 @@ paths:
       mountName: step_context
       parent: /Flows/{FlowSid}/Executions/{ExecutionSid}/Steps/{Sid}
       pathType: instance
-  "/v2/Flows/{FlowSid}/Executions/{Sid}":
+  /v2/Flows/{FlowSid}/Executions/{Sid}:
     delete:
       description: Delete the Execution and all Steps relating to it.
       operationId: DeleteExecution
@@ -727,7 +727,7 @@ paths:
         execution_step: "{flow_sid: flow_sid, execution_sid: sid}"
       parent: /Flows/{Sid}
       pathType: instance
-  "/v2/Flows/{Sid}":
+  /v2/Flows/{Sid}:
     delete:
       description: Delete a specific Flow.
       operationId: DeleteFlow
@@ -837,7 +837,7 @@ paths:
         flow_revision: "{sid: sid}"
         flow_test_user: "{sid: sid}"
       pathType: instance
-  "/v2/Flows/{Sid}/Revisions":
+  /v2/Flows/{Sid}/Revisions:
     description: Studio flows revisions
     get:
       description: Retrieve a list of all Flows revisions.
@@ -923,7 +923,7 @@ paths:
         - revision
       parent: /Flows/{Sid}
       pathType: list
-  "/v2/Flows/{Sid}/Revisions/{Revision}":
+  /v2/Flows/{Sid}/Revisions/{Revision}:
     description: Studio flows revisions
     get:
       description: Retrieve a specific Flow revision.
@@ -968,7 +968,7 @@ paths:
         - revision
       parent: /Flows/{Sid}
       pathType: instance
-  "/v2/Flows/{Sid}/TestUsers":
+  /v2/Flows/{Sid}/TestUsers:
     description: Test users of a flow
     get:
       description: Fetch flow test users

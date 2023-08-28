@@ -39,7 +39,7 @@ tags:
   - name: nameserver
   - name: v1
 paths:
-  "/v1/autnum/{autnumId}":
+  /v1/autnum/{autnumId}:
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.autnum.get
@@ -70,7 +70,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/domain/{domainName}":
+  /v1/domain/{domainName}:
     get:
       description: Look up RDAP information for a domain by name.
       operationId: domainsrdap.domain.get
@@ -152,7 +152,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/entity/{entityId}":
+  /v1/entity/{entityId}:
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.entity.get
@@ -233,7 +233,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/ip/{ipId}/{ipId1}":
+  /v1/ip/{ipId}/{ipId1}:
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.ip.get
@@ -269,7 +269,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/nameserver/{nameserverId}":
+  /v1/nameserver/{nameserverId}:
     get:
       description: The RDAP API recognizes this command from the RDAP specification but does not support it. The response is a formatted 501 error.
       operationId: domainsrdap.nameserver.get

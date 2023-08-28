@@ -33,7 +33,7 @@ externalDocs:
 tags:
   - name: policies
 paths:
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a policy. This action is permanent.
       operationId: iam.policies.delete
@@ -128,7 +128,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - policies
-  "/v2/{parent}":
+  /v2/{parent}:
     get:
       description: Retrieves the policies of the specified kind that are attached to a resource. The response lists only policy metadata. In particular, policy rules are omitted.
       operationId: iam.policies.listPolicies

@@ -122,7 +122,7 @@ paths:
             - https://www.googleapis.com/auth/games
       tags:
         - achievements
-  "/games/v1management/achievements/{achievementId}/reset":
+  /games/v1management/achievements/{achievementId}/reset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -159,7 +159,7 @@ paths:
             - https://www.googleapis.com/auth/games
       tags:
         - achievements
-  "/games/v1management/achievements/{achievementId}/resetForAllPlayers":
+  /games/v1management/achievements/{achievementId}/resetForAllPlayers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -192,7 +192,7 @@ paths:
             - https://www.googleapis.com/auth/games
       tags:
         - achievements
-  "/games/v1management/applications/{applicationId}/players/hidden":
+  /games/v1management/applications/{applicationId}/players/hidden:
     get:
       description: Get the list of players hidden from the given application. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.applications.listHidden
@@ -239,7 +239,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/games/v1management/applications/{applicationId}/players/hidden/{playerId}":
+  /games/v1management/applications/{applicationId}/players/hidden/{playerId}:
     delete:
       description: Unhide the given player's leaderboard scores from the given application. This method is only available to user accounts for your developer console.
       operationId: gamesManagement.players.unhide
@@ -387,7 +387,7 @@ paths:
             - https://www.googleapis.com/auth/games
       tags:
         - events
-  "/games/v1management/events/{eventId}/reset":
+  /games/v1management/events/{eventId}/reset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -420,7 +420,7 @@ paths:
             - https://www.googleapis.com/auth/games
       tags:
         - events
-  "/games/v1management/events/{eventId}/resetForAllPlayers":
+  /games/v1management/events/{eventId}/resetForAllPlayers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -453,7 +453,7 @@ paths:
             - https://www.googleapis.com/auth/games
       tags:
         - events
-  "/games/v1management/leaderboards/{leaderboardId}/scores/reset":
+  /games/v1management/leaderboards/{leaderboardId}/scores/reset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -490,7 +490,7 @@ paths:
             - https://www.googleapis.com/auth/games
       tags:
         - scores
-  "/games/v1management/leaderboards/{leaderboardId}/scores/resetForAllPlayers":
+  /games/v1management/leaderboards/{leaderboardId}/scores/resetForAllPlayers:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

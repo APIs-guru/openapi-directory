@@ -30,7 +30,7 @@ tags:
   - name: featuretiles
   - name: terraintiles
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets a terrain tile by its tile resource name.
       operationId: vectortile.terraintiles.get

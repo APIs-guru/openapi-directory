@@ -164,7 +164,7 @@ paths:
         - friendly_name
         - type
       pathType: list
-  "/v1/Credentials/{Sid}":
+  /v1/Credentials/{Sid}:
     delete:
       description: ""
       operationId: DeleteCredential
@@ -387,7 +387,7 @@ paths:
         role: "{service_sid: sid}"
         user: "{service_sid: sid}"
       pathType: list
-  "/v1/Services/{ServiceSid}/Channels":
+  /v1/Services/{ServiceSid}/Channels:
     description: Channels represent chat rooms
     get:
       description: ""
@@ -529,7 +529,7 @@ paths:
         message: "{service_sid: service_sid, channel_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites":
+  /v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites:
     description: Pending invitations to users to become channel members
     get:
       description: ""
@@ -676,7 +676,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}":
+  /v1/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}:
     delete:
       description: ""
       operationId: DeleteInvite
@@ -765,7 +765,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members":
+  /v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members:
     description: Users joined to specific channels
     get:
       description: ""
@@ -912,7 +912,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}":
+  /v1/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}:
     delete:
       description: ""
       operationId: DeleteMember
@@ -1059,7 +1059,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages":
+  /v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages:
     description: Individual chat messages
     get:
       description: ""
@@ -1212,7 +1212,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}":
+  /v1/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}:
     delete:
       description: ""
       operationId: DeleteMessage
@@ -1365,7 +1365,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Channels/{Sid}":
+  /v1/Services/{ServiceSid}/Channels/{Sid}:
     delete:
       description: ""
       operationId: DeleteChannel
@@ -1488,7 +1488,7 @@ paths:
         message: "{service_sid: service_sid, channel_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Roles":
+  /v1/Services/{ServiceSid}/Roles:
     description: Roles determining user or member permissions
     get:
       description: ""
@@ -1621,7 +1621,7 @@ paths:
         - type
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Roles/{Sid}":
+  /v1/Services/{ServiceSid}/Roles/{Sid}:
     delete:
       description: ""
       operationId: DeleteRole
@@ -1747,7 +1747,7 @@ paths:
         - type
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Users":
+  /v1/Services/{ServiceSid}/Users:
     description: Unique chat users within a chat service
     get:
       description: ""
@@ -1883,7 +1883,7 @@ paths:
         user_channel: "{service_sid: service_sid, user_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Users/{Sid}":
+  /v1/Services/{ServiceSid}/Users/{Sid}:
     delete:
       description: ""
       operationId: DeleteUser
@@ -2007,7 +2007,7 @@ paths:
         user_channel: "{service_sid: service_sid, user_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Users/{UserSid}/Channels":
+  /v1/Services/{ServiceSid}/Users/{UserSid}/Channels:
     description: "TODO: Resource-level docs"
     get:
       description: List all Channels for a given User.
@@ -2097,7 +2097,7 @@ paths:
       mountName: user_channels
       parent: /Services/{ServiceSid}/Users/{Sid}
       pathType: list
-  "/v1/Services/{Sid}":
+  /v1/Services/{Sid}:
     delete:
       description: ""
       operationId: DeleteService

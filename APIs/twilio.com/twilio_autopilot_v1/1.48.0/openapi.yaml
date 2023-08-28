@@ -207,7 +207,7 @@ paths:
         - friendly_name
       mountName: restore_assistant
       pathType: list
-  "/v1/Assistants/{AssistantSid}/Defaults":
+  /v1/Assistants/{AssistantSid}/Defaults:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -272,7 +272,7 @@ paths:
         - data
       parent: /Assistants/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/Dialogues":
+  /v1/Assistants/{AssistantSid}/Dialogues:
     description: "TODO: Resource-level docs"
     servers:
       - url: https://autopilot.twilio.com
@@ -282,7 +282,7 @@ paths:
         - data
       parent: /Assistants/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/Dialogues/{Sid}":
+  /v1/Assistants/{AssistantSid}/Dialogues/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -321,7 +321,7 @@ paths:
         - data
       parent: /Assistants/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/FieldTypes":
+  /v1/Assistants/{AssistantSid}/FieldTypes:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -442,7 +442,7 @@ paths:
         field_value: "{assistant_sid: assistant_sid, field_type_sid: sid}"
       parent: /Assistants/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues":
+  /v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -582,7 +582,7 @@ paths:
         - language
       parent: /Assistants/{AssistantSid}/FieldTypes/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues/{Sid}":
+  /v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues/{Sid}:
     delete:
       description: ""
       operationId: DeleteFieldValue
@@ -659,7 +659,7 @@ paths:
         - language
       parent: /Assistants/{AssistantSid}/FieldTypes/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/FieldTypes/{Sid}":
+  /v1/Assistants/{AssistantSid}/FieldTypes/{Sid}:
     delete:
       description: ""
       operationId: DeleteFieldType
@@ -768,7 +768,7 @@ paths:
         field_value: "{assistant_sid: assistant_sid, field_type_sid: sid}"
       parent: /Assistants/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/ModelBuilds":
+  /v1/Assistants/{AssistantSid}/ModelBuilds:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -887,7 +887,7 @@ paths:
         - date_created
       parent: /Assistants/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/ModelBuilds/{Sid}":
+  /v1/Assistants/{AssistantSid}/ModelBuilds/{Sid}:
     delete:
       description: ""
       operationId: DeleteModelBuild
@@ -992,7 +992,7 @@ paths:
         - date_created
       parent: /Assistants/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/Queries":
+  /v1/Assistants/{AssistantSid}/Queries:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1142,7 +1142,7 @@ paths:
         - language
       parent: /Assistants/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/Queries/{Sid}":
+  /v1/Assistants/{AssistantSid}/Queries/{Sid}:
     delete:
       description: ""
       operationId: DeleteQuery
@@ -1253,7 +1253,7 @@ paths:
         - language
       parent: /Assistants/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/StyleSheet":
+  /v1/Assistants/{AssistantSid}/StyleSheet:
     description: "TODO: Resource-level docs"
     get:
       description: Returns Style sheet JSON object for the Assistant
@@ -1317,7 +1317,7 @@ paths:
         - data
       parent: /Assistants/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/Tasks":
+  /v1/Assistants/{AssistantSid}/Tasks:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1447,7 +1447,7 @@ paths:
         task_statistics: "{assistant_sid: assistant_sid, task_sid: sid}"
       parent: /Assistants/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/Tasks/{Sid}":
+  /v1/Assistants/{AssistantSid}/Tasks/{Sid}:
     delete:
       description: ""
       operationId: DeleteTask
@@ -1565,7 +1565,7 @@ paths:
         task_statistics: "{assistant_sid: assistant_sid, task_sid: sid}"
       parent: /Assistants/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Actions":
+  /v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Actions:
     description: "TODO: Resource-level docs"
     get:
       description: Returns JSON actions for the Task.
@@ -1643,7 +1643,7 @@ paths:
       mountName: task_actions
       parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields":
+  /v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1775,7 +1775,7 @@ paths:
         - field_type
       parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields/{Sid}":
+  /v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields/{Sid}:
     delete:
       description: ""
       operationId: DeleteField
@@ -1852,7 +1852,7 @@ paths:
         - field_type
       parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples":
+  /v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1993,7 +1993,7 @@ paths:
         - source_channel
       parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}":
+  /v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}:
     delete:
       description: ""
       operationId: DeleteSample
@@ -2131,7 +2131,7 @@ paths:
         - source_channel
       parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Statistics":
+  /v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Statistics:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -2171,7 +2171,7 @@ paths:
         - fields_count
       parent: /Assistants/{AssistantSid}/Tasks/{Sid}
       pathType: instance
-  "/v1/Assistants/{AssistantSid}/Webhooks":
+  /v1/Assistants/{AssistantSid}/Webhooks:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -2301,7 +2301,7 @@ paths:
         - webhook_method
       parent: /Assistants/{Sid}
       pathType: list
-  "/v1/Assistants/{AssistantSid}/Webhooks/{Sid}":
+  /v1/Assistants/{AssistantSid}/Webhooks/{Sid}:
     delete:
       description: ""
       operationId: DeleteWebhook
@@ -2417,7 +2417,7 @@ paths:
         - webhook_method
       parent: /Assistants/{Sid}
       pathType: instance
-  "/v1/Assistants/{Sid}":
+  /v1/Assistants/{Sid}:
     delete:
       description: ""
       operationId: DeleteAssistant

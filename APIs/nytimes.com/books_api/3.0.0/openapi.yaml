@@ -22,7 +22,7 @@ info:
 externalDocs:
   url: http://developer.nytimes.com/
 paths:
-  "/lists.{format}":
+  /lists.{format}:
     get:
       description: ""
       operationId: GET_lists-format
@@ -408,7 +408,7 @@ paths:
         - api-key: []
       summary: Best Seller History List
     parameters: []
-  "/lists/names.{format}":
+  /lists/names.{format}:
     get:
       description: ""
       operationId: GET_lists-names-format
@@ -473,7 +473,7 @@ paths:
             - json
             - jsonp
           type: string
-  "/lists/overview.{format}":
+  /lists/overview.{format}:
     get:
       description: ""
       operationId: GET_lists-overview-format
@@ -600,7 +600,7 @@ paths:
             - json
             - jsonp
           type: string
-  "/lists/{date}/{list}.json":
+  /lists/{date}/{list}.json:
     get:
       description: ""
       operationId: GET_lists-date-list-json
@@ -811,7 +811,7 @@ paths:
         required: true
         schema:
           type: string
-  "/reviews.{format}":
+  /reviews.{format}:
     get:
       description: ""
       operationId: GET_reviews-format

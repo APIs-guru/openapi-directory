@@ -499,7 +499,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/items/{id}":
+  /pos/items/{id}:
     delete:
       description: Delete Item
       operationId: itemsDelete
@@ -855,7 +855,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/locations/{id}":
+  /pos/locations/{id}:
     delete:
       description: Delete Location
       operationId: locationsDelete
@@ -1199,7 +1199,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/merchants/{id}":
+  /pos/merchants/{id}:
     delete:
       description: Delete Merchant
       operationId: merchantsDelete
@@ -1530,7 +1530,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/modifier-groups/{id}":
+  /pos/modifier-groups/{id}:
     delete:
       description: Delete Modifier Group
       operationId: modifierGroupsDelete
@@ -1826,7 +1826,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/modifiers/{id}":
+  /pos/modifiers/{id}:
     delete:
       description: Delete Modifier
       operationId: modifiersDelete
@@ -2108,7 +2108,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/order-types/{id}":
+  /pos/order-types/{id}:
     delete:
       description: Delete Order Type
       operationId: orderTypesDelete
@@ -2616,7 +2616,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/orders/{id}":
+  /pos/orders/{id}:
     delete:
       description: Delete Order
       operationId: ordersDelete
@@ -3010,7 +3010,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/orders/{id}/pay":
+  /pos/orders/{id}/pay:
     post:
       description: Pay Order
       operationId: ordersPay
@@ -3521,7 +3521,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/payments/{id}":
+  /pos/payments/{id}:
     delete:
       description: Delete Payment
       operationId: paymentsDelete
@@ -3908,7 +3908,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/pos/tenders/{id}":
+  /pos/tenders/{id}:
     delete:
       description: Delete Tender
       operationId: tendersDelete

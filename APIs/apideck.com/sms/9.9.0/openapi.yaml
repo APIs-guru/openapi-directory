@@ -414,7 +414,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/sms/messages/{id}":
+  /sms/messages/{id}:
     delete:
       description: Delete Message
       operationId: messagesDelete

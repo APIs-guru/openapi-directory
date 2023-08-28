@@ -36,7 +36,7 @@ tags:
   - name: posts
   - name: users
 paths:
-  "/v2/blogs/{blogId}":
+  /v2/blogs/{blogId}:
     get:
       description: Gets a blog by id.
       operationId: blogger.blogs.get
@@ -72,7 +72,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/blogs/{blogId}/pages":
+  /v2/blogs/{blogId}/pages:
     get:
       description: Lists pages.
       operationId: blogger.pages.list
@@ -112,7 +112,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/blogs/{blogId}/pages/{pageId}":
+  /v2/blogs/{blogId}/pages/{pageId}:
     get:
       description: Gets a page by blog id and page id.
       operationId: blogger.pages.get
@@ -153,7 +153,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/blogs/{blogId}/posts":
+  /v2/blogs/{blogId}/posts:
     get:
       description: Lists posts.
       operationId: blogger.posts.list
@@ -205,7 +205,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/blogs/{blogId}/posts/{postId}":
+  /v2/blogs/{blogId}/posts/{postId}:
     get:
       description: Gets a post by blog id and post id
       operationId: blogger.posts.get
@@ -246,7 +246,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/blogs/{blogId}/posts/{postId}/comments":
+  /v2/blogs/{blogId}/posts/{postId}/comments:
     get:
       description: Lists comments.
       operationId: blogger.comments.list
@@ -303,7 +303,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/blogs/{blogId}/posts/{postId}/comments/{commentId}":
+  /v2/blogs/{blogId}/posts/{postId}/comments/{commentId}:
     get:
       description: Gets a comment by blog id, post id and comment id.
       operationId: blogger.comments.get
@@ -349,7 +349,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/users/{userId}":
+  /v2/users/{userId}:
     get:
       description: Gets a user by user id.
       operationId: blogger.users.get
@@ -385,7 +385,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/users/{userId}/blogs":
+  /v2/users/{userId}/blogs:
     get:
       description: Lists blogs by user id, possibly filtered.
       operationId: blogger.blogs.list

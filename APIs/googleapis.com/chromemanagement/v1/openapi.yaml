@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: customers
 paths:
-  "/v1/{customer}/apps:countChromeAppRequests":
+  /v1/{customer}/apps:countChromeAppRequests:
     get:
       description: Generate summary of app installation requests.
       operationId: chromemanagement.customers.apps.countChromeAppRequests
@@ -86,7 +86,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}/reports:countChromeBrowsersNeedingAttention":
+  /v1/{customer}/reports:countChromeBrowsersNeedingAttention:
     get:
       description: Count of Chrome Browsers that have been recently enrolled, have new policy to be synced, or have no recent activity.
       operationId: chromemanagement.customers.reports.countChromeBrowsersNeedingAttention
@@ -128,7 +128,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}/reports:countChromeDevicesReachingAutoExpirationDate":
+  /v1/{customer}/reports:countChromeDevicesReachingAutoExpirationDate:
     get:
       description: Generate report of the number of devices expiring in each month of the selected time frame. Devices are grouped by auto update expiration date and model. Further information can be found [here](https://support.google.com/chrome/a/answer/10564947).
       operationId: chromemanagement.customers.reports.countChromeDevicesReachingAutoExpirationDate
@@ -180,7 +180,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}/reports:countChromeDevicesThatNeedAttention":
+  /v1/{customer}/reports:countChromeDevicesThatNeedAttention:
     get:
       description: Counts of ChromeOS devices that have not synced policies or have lacked user activity in the past 28 days, are out of date, or are not complaint. Further information can be found here https://support.google.com/chrome/a/answer/10564947
       operationId: chromemanagement.customers.reports.countChromeDevicesThatNeedAttention
@@ -227,7 +227,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}/reports:countChromeHardwareFleetDevices":
+  /v1/{customer}/reports:countChromeHardwareFleetDevices:
     get:
       description: Counts of devices with a specific hardware specification from the requested hardware type (for example model name, processor type). Further information can be found here https://support.google.com/chrome/a/answer/10564947
       operationId: chromemanagement.customers.reports.countChromeHardwareFleetDevices
@@ -274,7 +274,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}/reports:countChromeVersions":
+  /v1/{customer}/reports:countChromeVersions:
     get:
       description: Generate report of installed Chrome versions.
       operationId: chromemanagement.customers.reports.countChromeVersions
@@ -331,7 +331,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}/reports:countInstalledApps":
+  /v1/{customer}/reports:countInstalledApps:
     get:
       description: Generate report of app installations.
       operationId: chromemanagement.customers.reports.countInstalledApps
@@ -393,7 +393,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{customer}/reports:findInstalledAppDevices":
+  /v1/{customer}/reports:findInstalledAppDevices:
     get:
       description: Generate report of managed Chrome browser devices that have a specified app installed.
       operationId: chromemanagement.customers.reports.findInstalledAppDevices
@@ -472,7 +472,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Get telemetry user.
       operationId: chromemanagement.customers.telemetry.users.get
@@ -514,7 +514,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/telemetry/devices":
+  /v1/{parent}/telemetry/devices:
     get:
       description: List all telemetry devices.
       operationId: chromemanagement.customers.telemetry.devices.list
@@ -571,7 +571,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/telemetry/events":
+  /v1/{parent}/telemetry/events:
     get:
       description: List telemetry events.
       operationId: chromemanagement.customers.telemetry.events.list
@@ -628,7 +628,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/telemetry/users":
+  /v1/{parent}/telemetry/users:
     get:
       description: List all telemetry users.
       operationId: chromemanagement.customers.telemetry.users.list

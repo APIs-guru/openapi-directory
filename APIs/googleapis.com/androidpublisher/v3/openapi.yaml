@@ -44,7 +44,7 @@ tags:
   - name: systemapks
   - name: users
 paths:
-  "/androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/apk":
+  /androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/apk:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -81,7 +81,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - internalappsharingartifacts
-  "/androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/bundle":
+  /androidpublisher/v3/applications/internalappsharing/{packageName}/artifacts/bundle:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -118,7 +118,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - internalappsharingartifacts
-  "/androidpublisher/v3/applications/{packageName}/deviceTierConfigs":
+  /androidpublisher/v3/applications/{packageName}/deviceTierConfigs:
     get:
       description: Returns created device tier configs, ordered by descending creation time.
       operationId: androidpublisher.applications.deviceTierConfigs.list
@@ -199,7 +199,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - applications
-  "/androidpublisher/v3/applications/{packageName}/deviceTierConfigs/{deviceTierConfigId}":
+  /androidpublisher/v3/applications/{packageName}/deviceTierConfigs/{deviceTierConfigId}:
     get:
       description: Returns a particular device tier config.
       operationId: androidpublisher.applications.deviceTierConfigs.get
@@ -242,7 +242,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/edits":
+  /androidpublisher/v3/applications/{packageName}/edits:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -284,7 +284,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}:
     delete:
       description: Deletes an app edit.
       operationId: androidpublisher.edits.delete
@@ -353,7 +353,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/apks:
     get:
       description: Lists all current APKs of the app and edit.
       operationId: androidpublisher.edits.apks.list
@@ -426,7 +426,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/externallyHosted":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/externallyHosted:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -474,7 +474,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/deobfuscationFiles/{deobfuscationFileType}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -533,7 +533,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}:
     get:
       description: Fetches the expansion file configuration for the specified APK.
       operationId: androidpublisher.edits.expansionfiles.get
@@ -740,7 +740,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/bundles":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/bundles:
     get:
       description: Lists all current Android App Bundles of the app and edit.
       operationId: androidpublisher.edits.bundles.list
@@ -823,7 +823,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/countryAvailability/{track}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/countryAvailability/{track}:
     get:
       description: Gets country availability.
       operationId: androidpublisher.edits.countryavailability.get
@@ -872,7 +872,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/details":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/details:
     get:
       description: Gets details of an app.
       operationId: androidpublisher.edits.details.get
@@ -985,7 +985,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/listings:
     delete:
       description: Deletes all store listings.
       operationId: androidpublisher.edits.listings.deleteall
@@ -1054,7 +1054,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}:
     delete:
       description: Deletes a localized store listing.
       operationId: androidpublisher.edits.listings.delete
@@ -1217,7 +1217,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}:
     delete:
       description: Deletes all images for the specified language and image type. Returns an empty response if no images are found.
       operationId: androidpublisher.edits.images.deleteall
@@ -1386,7 +1386,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}/{imageId}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/listings/{language}/{imageType}/{imageId}:
     delete:
       description: Deletes the image (specified by id) from the edit.
       operationId: androidpublisher.edits.images.delete
@@ -1453,7 +1453,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/testers/{track}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/testers/{track}:
     get:
       description: "Gets testers. Note: Testers resource does not support email lists."
       operationId: androidpublisher.edits.testers.get
@@ -1584,7 +1584,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks:
     get:
       description: Lists all tracks.
       operationId: androidpublisher.edits.tracks.list
@@ -1627,7 +1627,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks/{track}":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}/tracks/{track}:
     get:
       description: Gets a track.
       operationId: androidpublisher.edits.tracks.get
@@ -1758,7 +1758,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}:commit":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}:commit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1806,7 +1806,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/edits/{editId}:validate":
+  /androidpublisher/v3/applications/{packageName}/edits/{editId}:validate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1849,7 +1849,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - edits
-  "/androidpublisher/v3/applications/{packageName}/generatedApks/{versionCode}":
+  /androidpublisher/v3/applications/{packageName}/generatedApks/{versionCode}:
     get:
       description: Returns download metadata for all APKs that were generated from a given app bundle.
       operationId: androidpublisher.generatedapks.list
@@ -1892,7 +1892,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/generatedApks/{versionCode}/downloads/{downloadId}:download":
+  /androidpublisher/v3/applications/{packageName}/generatedApks/{versionCode}/downloads/{downloadId}:download:
     get:
       description: Downloads a single signed APK generated from an app bundle.
       operationId: androidpublisher.generatedapks.download
@@ -1937,7 +1937,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/inappproducts":
+  /androidpublisher/v3/applications/{packageName}/inappproducts:
     get:
       description: Lists all in-app products - both managed products and subscriptions. If an app has a large number of in-app products, the response may be paginated. In this case the response field `tokenPagination.nextPageToken` will be set and the caller should provide its value as a `token` request parameter to retrieve the next page. This method should no longer be used to retrieve subscriptions. See [this article](https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html) for more information.
       operationId: androidpublisher.inappproducts.list
@@ -2023,7 +2023,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - inappproducts
-  "/androidpublisher/v3/applications/{packageName}/inappproducts/{sku}":
+  /androidpublisher/v3/applications/{packageName}/inappproducts/{sku}:
     delete:
       description: Deletes an in-app product (a managed product or a subscription). This method should no longer be used to delete subscriptions. See [this article](https://android-developers.googleblog.com/2023/06/changes-to-google-play-developer-api-june-2023.html) for more information.
       operationId: androidpublisher.inappproducts.delete
@@ -2177,7 +2177,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - inappproducts
-  "/androidpublisher/v3/applications/{packageName}/orders/{orderId}:refund":
+  /androidpublisher/v3/applications/{packageName}/orders/{orderId}:refund:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2221,7 +2221,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - orders
-  "/androidpublisher/v3/applications/{packageName}/pricing:convertRegionPrices":
+  /androidpublisher/v3/applications/{packageName}/pricing:convertRegionPrices:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2263,7 +2263,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}":
+  /androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}:
     get:
       description: Checks the purchase and consumption status of an inapp item.
       operationId: androidpublisher.purchases.products.get
@@ -2312,7 +2312,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}:acknowledge":
+  /androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}:acknowledge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2362,7 +2362,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - purchases
-  "/androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}:consume":
+  /androidpublisher/v3/applications/{packageName}/purchases/products/{productId}/tokens/{token}:consume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2407,7 +2407,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - purchases
-  "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}":
+  /androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:
     get:
       description: Checks whether a user's subscription purchase is valid and returns its expiry time.
       operationId: androidpublisher.purchases.subscriptions.get
@@ -2456,7 +2456,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:acknowledge":
+  /androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:acknowledge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2506,7 +2506,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - purchases
-  "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel":
+  /androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2551,7 +2551,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - purchases
-  "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer":
+  /androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2605,7 +2605,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - purchases
-  "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund":
+  /androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2650,7 +2650,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - purchases
-  "/androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke":
+  /androidpublisher/v3/applications/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2695,7 +2695,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - purchases
-  "/androidpublisher/v3/applications/{packageName}/purchases/subscriptionsv2/tokens/{token}":
+  /androidpublisher/v3/applications/{packageName}/purchases/subscriptionsv2/tokens/{token}:
     get:
       description: Get metadata about a subscription
       operationId: androidpublisher.purchases.subscriptionsv2.get
@@ -2738,7 +2738,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/purchases/voidedpurchases":
+  /androidpublisher/v3/applications/{packageName}/purchases/voidedpurchases:
     get:
       description: Lists the purchases that were canceled, refunded or charged-back.
       operationId: androidpublisher.purchases.voidedpurchases.list
@@ -2805,7 +2805,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/reviews":
+  /androidpublisher/v3/applications/{packageName}/reviews:
     get:
       description: Lists all reviews.
       operationId: androidpublisher.reviews.list
@@ -2862,7 +2862,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/reviews/{reviewId}":
+  /androidpublisher/v3/applications/{packageName}/reviews/{reviewId}:
     get:
       description: Gets a single review.
       operationId: androidpublisher.reviews.get
@@ -2910,7 +2910,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/reviews/{reviewId}:reply":
+  /androidpublisher/v3/applications/{packageName}/reviews/{reviewId}:reply:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2958,7 +2958,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - reviews
-  "/androidpublisher/v3/applications/{packageName}/subscriptions":
+  /androidpublisher/v3/applications/{packageName}/subscriptions:
     get:
       description: Lists all subscriptions under a given app.
       operationId: androidpublisher.monetization.subscriptions.list
@@ -3049,7 +3049,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}:
     delete:
       description: Deletes a subscription. A subscription can only be deleted if it has never had a base plan published.
       operationId: androidpublisher.monetization.subscriptions.delete
@@ -3163,7 +3163,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}:
     delete:
       description: Deletes a base plan. Can only be done for draft base plans. This action is irreversible.
       operationId: androidpublisher.monetization.subscriptions.basePlans.delete
@@ -3208,7 +3208,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers:
     get:
       description: Lists all offers under a given subscription.
       operationId: androidpublisher.monetization.subscriptions.basePlans.offers.list
@@ -3318,7 +3318,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers/{offerId}":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers/{offerId}:
     delete:
       description: Deletes a subscription offer. Can only be done for draft offers. This action is irreversible.
       operationId: androidpublisher.monetization.subscriptions.basePlans.offers.delete
@@ -3468,7 +3468,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers/{offerId}:activate":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers/{offerId}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3528,7 +3528,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers/{offerId}:deactivate":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}/offers/{offerId}:deactivate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3588,7 +3588,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}:activate":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3642,7 +3642,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}:deactivate":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}:deactivate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3696,7 +3696,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}:migratePrices":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}/basePlans/{basePlanId}:migratePrices:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3750,7 +3750,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/subscriptions/{productId}:archive":
+  /androidpublisher/v3/applications/{packageName}/subscriptions/{productId}:archive:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -3798,7 +3798,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - monetization
-  "/androidpublisher/v3/applications/{packageName}/systemApks/{versionCode}/variants":
+  /androidpublisher/v3/applications/{packageName}/systemApks/{versionCode}/variants:
     get:
       description: Returns the list of previously created system APK variants.
       operationId: androidpublisher.systemapks.variants.list
@@ -3876,7 +3876,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - systemapks
-  "/androidpublisher/v3/applications/{packageName}/systemApks/{versionCode}/variants/{variantId}":
+  /androidpublisher/v3/applications/{packageName}/systemApks/{versionCode}/variants/{variantId}:
     get:
       description: Returns a previously created system APK variant.
       operationId: androidpublisher.systemapks.variants.get
@@ -3925,7 +3925,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/applications/{packageName}/systemApks/{versionCode}/variants/{variantId}:download":
+  /androidpublisher/v3/applications/{packageName}/systemApks/{versionCode}/variants/{variantId}:download:
     get:
       description: Downloads a previously created system APK which is suitable for inclusion in a system image.
       operationId: androidpublisher.systemapks.variants.download
@@ -3970,7 +3970,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/androidpublisher/v3/{name}":
+  /androidpublisher/v3/{name}:
     delete:
       description: Removes all access for the user to the given developer account.
       operationId: androidpublisher.users.delete
@@ -4061,7 +4061,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - users
-  "/androidpublisher/v3/{name}:refund":
+  /androidpublisher/v3/{name}:refund:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4103,7 +4103,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - externaltransactions
-  "/androidpublisher/v3/{parent}/externalTransactions":
+  /androidpublisher/v3/{parent}/externalTransactions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4150,7 +4150,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - externaltransactions
-  "/androidpublisher/v3/{parent}/grants":
+  /androidpublisher/v3/{parent}/grants:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -4192,7 +4192,7 @@ paths:
             - https://www.googleapis.com/auth/androidpublisher
       tags:
         - grants
-  "/androidpublisher/v3/{parent}/users":
+  /androidpublisher/v3/{parent}/users:
     get:
       description: Lists all users with access to a developer account.
       operationId: androidpublisher.users.list

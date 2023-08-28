@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta/{bucket}:addFirebase":
+  /v1beta/{bucket}:addFirebase:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -75,7 +75,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{bucket}:removeFirebase":
+  /v1beta/{bucket}:removeFirebase:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -121,7 +121,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{name}":
+  /v1beta/{name}:
     get:
       description: Gets a single linked storage bucket.
       operationId: firebasestorage.projects.buckets.get
@@ -162,7 +162,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/buckets":
+  /v1beta/{parent}/buckets:
     get:
       description: Lists the linked storage buckets for a project.
       operationId: firebasestorage.projects.buckets.list

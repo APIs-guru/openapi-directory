@@ -73,7 +73,7 @@ paths:
             - https://www.googleapis.com/auth/streetviewpublish
       tags:
         - photo
-  "/v1/photo/{id}":
+  /v1/photo/{id}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -120,7 +120,7 @@ paths:
             - https://www.googleapis.com/auth/streetviewpublish
       tags:
         - photo
-  "/v1/photo/{photoId}":
+  /v1/photo/{photoId}:
     delete:
       description: "Deletes a Photo and its metadata. This method returns the following error codes: * google.rpc.Code.PERMISSION_DENIED if the requesting user did not create the requested photo. * google.rpc.Code.NOT_FOUND if the photo ID does not exist."
       operationId: streetviewpublish.photo.delete
@@ -274,7 +274,7 @@ paths:
             - https://www.googleapis.com/auth/streetviewpublish
       tags:
         - photoSequence
-  "/v1/photoSequence/{sequenceId}":
+  /v1/photoSequence/{sequenceId}:
     delete:
       description: "Deletes a PhotoSequence and its metadata. This method returns the following error codes: * google.rpc.Code.PERMISSION_DENIED if the requesting user did not create the requested photo sequence. * google.rpc.Code.NOT_FOUND if the photo sequence ID does not exist. * google.rpc.Code.FAILED_PRECONDITION if the photo sequence ID is not yet finished processing."
       operationId: streetviewpublish.photoSequence.delete

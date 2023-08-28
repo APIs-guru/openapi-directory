@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta/{name}":
+  /v1beta/{name}:
     get:
       description: Returns an execution of the given name.
       operationId: workflowexecutions.projects.locations.workflows.executions.get
@@ -76,7 +76,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{name}:cancel":
+  /v1beta/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -118,7 +118,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta/{parent}/executions":
+  /v1beta/{parent}/executions:
     get:
       description: Returns a list of executions which belong to the workflow with the given name. The method returns executions of all workflow revisions. Returned executions are ordered by their start time (newest first).
       operationId: workflowexecutions.projects.locations.workflows.executions.list

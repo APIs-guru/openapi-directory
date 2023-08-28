@@ -60,7 +60,7 @@ paths:
           description: Successful response
       tags:
         - verificationTokens
-  "/v1/{location}:fetchVerificationOptions":
+  /v1/{location}:fetchVerificationOptions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -97,7 +97,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{name}/VoiceOfMerchantState":
+  /v1/{name}/VoiceOfMerchantState:
     get:
       description: Gets the VoiceOfMerchant state.
       operationId: mybusinessverifications.locations.getVoiceOfMerchantState
@@ -129,7 +129,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:complete":
+  /v1/{name}:complete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -166,7 +166,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{name}:verify":
+  /v1/{name}:verify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -203,7 +203,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{parent}/verifications":
+  /v1/{parent}/verifications:
     get:
       description: List verifications of a location, ordered by create time.
       operationId: mybusinessverifications.locations.verifications.list

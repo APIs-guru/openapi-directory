@@ -33,7 +33,7 @@ tags:
   - name: projects
   - name: sites
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes the specified version.
       operationId: firebasehosting.sites.versions.delete
@@ -181,7 +181,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
-  "/v1beta1/{parent}/channels":
+  /v1beta1/{parent}/channels:
     get:
       description: Lists the channels for the specified site. All sites have a default `live` channel.
       operationId: firebasehosting.sites.channels.list
@@ -278,7 +278,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
-  "/v1beta1/{parent}/domains":
+  /v1beta1/{parent}/domains:
     get:
       description: Lists the domains for the specified site.
       operationId: firebasehosting.sites.domains.list
@@ -370,7 +370,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
-  "/v1beta1/{parent}/files":
+  /v1beta1/{parent}/files:
     get:
       description: Lists the remaining files to be uploaded for the specified version.
       operationId: firebasehosting.sites.versions.files.list
@@ -438,7 +438,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/releases":
+  /v1beta1/{parent}/releases:
     get:
       description: Lists the releases that have been created for the specified site or channel. When used to list releases for a site, this list includes releases for both the default `live` channel and any active preview channels for the specified site.
       operationId: firebasehosting.sites.releases.list
@@ -535,7 +535,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
-  "/v1beta1/{parent}/sites":
+  /v1beta1/{parent}/sites:
     get:
       description: Lists each Hosting Site associated with the specified parent Firebase project.
       operationId: firebasehosting.projects.sites.list
@@ -609,6 +609,11 @@ paths:
           name: siteId
           schema:
             type: string
+        - description: Optional. If set, validates that the site_id is available and that the request would succeed, returning the expected resulting site or error.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -632,7 +637,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta1/{parent}/versions":
+  /v1beta1/{parent}/versions:
     get:
       description: Lists the versions that have been created for the specified site. This list includes versions for both the default `live` channel and any active preview channels for the specified site.
       operationId: firebasehosting.sites.versions.list
@@ -739,7 +744,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
-  "/v1beta1/{parent}/versions:clone":
+  /v1beta1/{parent}/versions:clone:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -785,7 +790,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
-  "/v1beta1/{parent}:populateFiles":
+  /v1beta1/{parent}:populateFiles:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

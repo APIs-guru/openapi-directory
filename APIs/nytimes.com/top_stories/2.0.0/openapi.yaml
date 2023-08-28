@@ -25,7 +25,7 @@ externalDocs:
 security:
   - apikey: []
 paths:
-  "/{section}.{format}":
+  /{section}.{format}:
     get:
       description: |
         The Top Stories API returns a list of articles and associated images currently on the specified section.  Support JSON and JSONP.

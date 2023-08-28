@@ -31,7 +31,7 @@ externalDocs:
 tags:
   - name: licenseAssignments
 paths:
-  "/apps/licensing/v1/product/{productId}/sku/{skuId}/user":
+  /apps/licensing/v1/product/{productId}/sku/{skuId}/user:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -79,7 +79,7 @@ paths:
             - https://www.googleapis.com/auth/apps.licensing
       tags:
         - licenseAssignments
-  "/apps/licensing/v1/product/{productId}/sku/{skuId}/user/{userId}":
+  /apps/licensing/v1/product/{productId}/sku/{skuId}/user/{userId}:
     delete:
       description: Revoke a license.
       operationId: licensing.licenseAssignments.delete
@@ -246,7 +246,7 @@ paths:
             - https://www.googleapis.com/auth/apps.licensing
       tags:
         - licenseAssignments
-  "/apps/licensing/v1/product/{productId}/sku/{skuId}/users":
+  /apps/licensing/v1/product/{productId}/sku/{skuId}/users:
     get:
       description: List all users assigned licenses for a specific product SKU.
       operationId: licensing.licenseAssignments.listForProductAndSku
@@ -307,7 +307,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/apps/licensing/v1/product/{productId}/users":
+  /apps/licensing/v1/product/{productId}/users:
     get:
       description: List all users assigned licenses for a specific product SKU.
       operationId: licensing.licenseAssignments.listForProduct

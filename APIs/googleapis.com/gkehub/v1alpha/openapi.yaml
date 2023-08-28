@@ -31,7 +31,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     delete:
       description: Deletes a Scope RBACRoleBinding.
       operationId: gkehub.projects.locations.scopes.rbacrolebindings.delete
@@ -136,7 +136,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}/locations":
+  /v1alpha/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: gkehub.projects.locations.list
@@ -188,7 +188,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}/operations":
+  /v1alpha/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: gkehub.projects.locations.operations.list
@@ -240,7 +240,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}:cancel":
+  /v1alpha/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -282,7 +282,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:generateConnectManifest":
+  /v1alpha/{name}:generateConnectManifest:
     get:
       description: Generates the manifest for deployment of the GKE connect agent. **This method is used internally by Google-provided libraries.** Most clients should not need to call this method directly.
       operationId: gkehub.projects.locations.memberships.generateConnectManifest
@@ -349,7 +349,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/bindings":
+  /v1alpha/{parent}/bindings:
     get:
       description: Lists MembershipBindings.
       operationId: gkehub.projects.locations.memberships.bindings.list
@@ -435,7 +435,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/features":
+  /v1alpha/{parent}/features:
     get:
       description: Lists Features in a given project and location.
       operationId: gkehub.projects.locations.features.list
@@ -531,7 +531,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/fleets":
+  /v1alpha/{parent}/fleets:
     get:
       description: Returns all fleets within an organization or a project that the caller has access to.
       operationId: gkehub.projects.locations.fleets.list
@@ -607,7 +607,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/memberships":
+  /v1alpha/{parent}/memberships:
     get:
       description: Lists Memberships in a given project and location.
       operationId: gkehub.projects.locations.memberships.list
@@ -703,7 +703,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/memberships:listAdmin":
+  /v1alpha/{parent}/memberships:listAdmin:
     get:
       description: Lists Memberships of admin clusters in a given project and location. **This method is only used internally**.
       operationId: gkehub.projects.locations.memberships.listAdmin
@@ -760,7 +760,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/memberships:validateCreate":
+  /v1alpha/{parent}/memberships:validateCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -802,7 +802,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/namespaces":
+  /v1alpha/{parent}/namespaces:
     get:
       description: Lists fleet namespaces.
       operationId: gkehub.projects.locations.scopes.namespaces.list
@@ -883,7 +883,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/rbacrolebindings":
+  /v1alpha/{parent}/rbacrolebindings:
     get:
       description: Lists all Scope RBACRoleBindings.
       operationId: gkehub.projects.locations.scopes.rbacrolebindings.list
@@ -964,7 +964,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/rbacrolebindings:generateMembershipRBACRoleBindingYAML":
+  /v1alpha/{parent}/rbacrolebindings:generateMembershipRBACRoleBindingYAML:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1011,7 +1011,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/scopes":
+  /v1alpha/{parent}/scopes:
     get:
       description: Lists Scopes.
       operationId: gkehub.projects.locations.scopes.list
@@ -1092,7 +1092,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{resource}:getIamPolicy":
+  /v1alpha/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: gkehub.projects.locations.scopes.getIamPolicy
@@ -1134,7 +1134,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{resource}:setIamPolicy":
+  /v1alpha/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1176,7 +1176,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{resource}:testIamPermissions":
+  /v1alpha/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

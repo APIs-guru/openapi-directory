@@ -23,7 +23,7 @@ info:
 externalDocs:
   url: http://developer.nytimes.com/
 paths:
-  "/mostemailed/{section}/{time-period}.json":
+  /mostemailed/{section}/{time-period}.json:
     get:
       description: ""
       operationId: GET_mostemailed-section-time-period-json
@@ -118,7 +118,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/Section"
       - $ref: "#/components/parameters/TimePeriod"
-  "/mostshared/{section}/{time-period}.json":
+  /mostshared/{section}/{time-period}.json:
     get:
       description: ""
       operationId: GET_mostshared-section-time-period-json
@@ -206,7 +206,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/Section"
       - $ref: "#/components/parameters/TimePeriod"
-  "/mostviewed/{section}/{time-period}.json":
+  /mostviewed/{section}/{time-period}.json:
     get:
       description: ""
       operationId: GET_mostviewed-section-time-period-json

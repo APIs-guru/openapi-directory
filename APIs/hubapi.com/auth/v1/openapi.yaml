@@ -17,7 +17,7 @@ tags:
   - name: Refresh_Tokens
   - name: Tokens
 paths:
-  "/oauth/v1/access-tokens/{token}":
+  /oauth/v1/access-tokens/{token}:
     get:
       operationId: get-/oauth/v1/access-tokens/{token}_get
       parameters:
@@ -40,7 +40,7 @@ paths:
       security: []
       tags:
         - Access_Tokens
-  "/oauth/v1/refresh-tokens/{token}":
+  /oauth/v1/refresh-tokens/{token}:
     delete:
       operationId: delete-/oauth/v1/refresh-tokens/{token}_archive
       parameters:

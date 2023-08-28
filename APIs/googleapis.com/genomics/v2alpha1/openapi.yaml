@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/genomics
       tags:
         - pipelines
-  "/v2alpha1/workers/{id}:checkIn":
+  /v2alpha1/workers/{id}:checkIn:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -118,7 +118,7 @@ paths:
             - https://www.googleapis.com/auth/genomics
       tags:
         - workers
-  "/v2alpha1/{id}:checkIn":
+  /v2alpha1/{id}:checkIn:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -164,7 +164,7 @@ paths:
             - https://www.googleapis.com/auth/genomics
       tags:
         - projects
-  "/v2alpha1/{name}":
+  /v2alpha1/{name}:
     get:
       description: "Lists operations that match the specified filter in the request. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `genomics.operations.list`"
       operationId: genomics.projects.operations.list
@@ -220,7 +220,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha1/{name}:cancel":
+  /v2alpha1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

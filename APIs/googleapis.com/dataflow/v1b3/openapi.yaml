@@ -34,7 +34,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1b3/projects/{projectId}/WorkerMessages":
+  /v1b3/projects/{projectId}/WorkerMessages:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -88,7 +88,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/jobs":
+  /v1b3/projects/{projectId}/jobs:
     get:
       description: List the jobs of a project. To list the jobs of a project in a region, we recommend using `projects.locations.jobs.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To list the all jobs across all regions, use `projects.jobs.aggregated`. Using `projects.jobs.list` is not recommended, because you can only get the list of jobs that are running in `us-central1`. `projects.locations.jobs.list` and `projects.jobs.list` support filtering the list of jobs by name. Filtering by name isn't supported by `projects.jobs.aggregated`.
       operationId: dataflow.projects.jobs.list
@@ -238,7 +238,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/jobs/{jobId}":
+  /v1b3/projects/{projectId}/jobs/{jobId}:
     get:
       description: Gets the state of the specified Cloud Dataflow job. To get the state of a job, we recommend using `projects.locations.jobs.get` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.get` is not recommended, as you can only get the state of jobs that are running in `us-central1`.
       operationId: dataflow.projects.jobs.get
@@ -365,7 +365,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/jobs/{jobId}/debug/getConfig":
+  /v1b3/projects/{projectId}/jobs/{jobId}/debug/getConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -425,7 +425,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/jobs/{jobId}/debug/sendCapture":
+  /v1b3/projects/{projectId}/jobs/{jobId}/debug/sendCapture:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -485,7 +485,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/jobs/{jobId}/messages":
+  /v1b3/projects/{projectId}/jobs/{jobId}/messages:
     get:
       description: Request the job status. To request the status of a job, we recommend using `projects.locations.jobs.messages.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.messages.list` is not recommended, as you can only request the status of jobs that are running in `us-central1`.
       operationId: dataflow.projects.jobs.messages.list
@@ -577,7 +577,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/jobs/{jobId}/metrics":
+  /v1b3/projects/{projectId}/jobs/{jobId}/metrics:
     get:
       description: Request the job status. To request the status of a job, we recommend using `projects.locations.jobs.getMetrics` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.getMetrics` is not recommended, as you can only request the status of jobs that are running in `us-central1`.
       operationId: dataflow.projects.jobs.getMetrics
@@ -642,7 +642,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/jobs/{jobId}/workItems:lease":
+  /v1b3/projects/{projectId}/jobs/{jobId}/workItems:lease:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -702,7 +702,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/jobs/{jobId}/workItems:reportStatus":
+  /v1b3/projects/{projectId}/jobs/{jobId}/workItems:reportStatus:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -762,7 +762,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/jobs/{jobId}:snapshot":
+  /v1b3/projects/{projectId}/jobs/{jobId}:snapshot:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -822,7 +822,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/jobs:aggregated":
+  /v1b3/projects/{projectId}/jobs:aggregated:
     get:
       description: List the jobs of a project across all regions. **Note:** This method doesn't support filtering the list of jobs by name.
       operationId: dataflow.projects.jobs.aggregated
@@ -911,7 +911,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/WorkerMessages":
+  /v1b3/projects/{projectId}/locations/{location}/WorkerMessages:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -971,7 +971,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/flexTemplates:launch":
+  /v1b3/projects/{projectId}/locations/{location}/flexTemplates:launch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1031,7 +1031,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/jobs":
+  /v1b3/projects/{projectId}/locations/{location}/jobs:
     get:
       description: List the jobs of a project. To list the jobs of a project in a region, we recommend using `projects.locations.jobs.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To list the all jobs across all regions, use `projects.jobs.aggregated`. Using `projects.jobs.list` is not recommended, because you can only get the list of jobs that are running in `us-central1`. `projects.locations.jobs.list` and `projects.jobs.list` support filtering the list of jobs by name. Filtering by name isn't supported by `projects.jobs.aggregated`.
       operationId: dataflow.projects.locations.jobs.list
@@ -1183,7 +1183,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}:
     get:
       description: Gets the state of the specified Cloud Dataflow job. To get the state of a job, we recommend using `projects.locations.jobs.get` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.get` is not recommended, as you can only get the state of jobs that are running in `us-central1`.
       operationId: dataflow.projects.locations.jobs.get
@@ -1312,7 +1312,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/debug/getConfig":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/debug/getConfig:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1378,7 +1378,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/debug/sendCapture":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/debug/sendCapture:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1444,7 +1444,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/executionDetails":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/executionDetails:
     get:
       description: Request detailed information about the execution status of the job. EXPERIMENTAL. This API is subject to change or removal without notice.
       operationId: dataflow.projects.locations.jobs.getExecutionDetails
@@ -1515,7 +1515,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/messages":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/messages:
     get:
       description: Request the job status. To request the status of a job, we recommend using `projects.locations.jobs.messages.list` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.messages.list` is not recommended, as you can only request the status of jobs that are running in `us-central1`.
       operationId: dataflow.projects.locations.jobs.messages.list
@@ -1608,7 +1608,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/metrics":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/metrics:
     get:
       description: Request the job status. To request the status of a job, we recommend using `projects.locations.jobs.getMetrics` with a [regional endpoint] (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using `projects.jobs.getMetrics` is not recommended, as you can only request the status of jobs that are running in `us-central1`.
       operationId: dataflow.projects.locations.jobs.getMetrics
@@ -1674,7 +1674,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/snapshots":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/snapshots:
     get:
       description: Lists snapshots.
       operationId: dataflow.projects.locations.jobs.snapshots.list
@@ -1735,7 +1735,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/stages/{stageId}/executionDetails":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/stages/{stageId}/executionDetails:
     get:
       description: Request detailed information about the execution status of a stage of the job. EXPERIMENTAL. This API is subject to change or removal without notice.
       operationId: dataflow.projects.locations.jobs.stages.getExecutionDetails
@@ -1822,7 +1822,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:lease":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:lease:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1888,7 +1888,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:reportStatus":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/workItems:reportStatus:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1954,7 +1954,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}:snapshot":
+  /v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}:snapshot:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2020,7 +2020,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/snapshots":
+  /v1b3/projects/{projectId}/locations/{location}/snapshots:
     get:
       description: Lists snapshots.
       operationId: dataflow.projects.locations.snapshots.list
@@ -2080,7 +2080,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/snapshots/{snapshotId}":
+  /v1b3/projects/{projectId}/locations/{location}/snapshots/{snapshotId}:
     delete:
       description: Deletes a snapshot.
       operationId: dataflow.projects.locations.snapshots.delete
@@ -2189,7 +2189,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/templates":
+  /v1b3/projects/{projectId}/locations/{location}/templates:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2249,7 +2249,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/locations/{location}/templates:get":
+  /v1b3/projects/{projectId}/locations/{location}/templates:get:
     get:
       description: Get the template associated with a template.
       operationId: dataflow.projects.locations.templates.get
@@ -2316,7 +2316,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/locations/{location}/templates:launch":
+  /v1b3/projects/{projectId}/locations/{location}/templates:launch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2396,7 +2396,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/snapshots":
+  /v1b3/projects/{projectId}/snapshots:
     delete:
       description: Deletes a snapshot.
       operationId: dataflow.projects.deleteSnapshots
@@ -2501,7 +2501,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/snapshots/{snapshotId}":
+  /v1b3/projects/{projectId}/snapshots/{snapshotId}:
     get:
       description: Gets information about a snapshot.
       operationId: dataflow.projects.snapshots.get
@@ -2561,7 +2561,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/templates":
+  /v1b3/projects/{projectId}/templates:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2615,7 +2615,7 @@ paths:
             - https://www.googleapis.com/auth/userinfo.email
       tags:
         - projects
-  "/v1b3/projects/{projectId}/templates:get":
+  /v1b3/projects/{projectId}/templates:get:
     get:
       description: Get the template associated with a template.
       operationId: dataflow.projects.templates.get
@@ -2681,7 +2681,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1b3/projects/{projectId}/templates:launch":
+  /v1b3/projects/{projectId}/templates:launch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

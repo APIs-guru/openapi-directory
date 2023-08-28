@@ -132,7 +132,7 @@ paths:
                 $ref: "#/components/schemas/applicationCreated"
           description: Created
       summary: Create Application
-  "/{app_id}":
+  /{app_id}:
     delete:
       description: You use a `DELETE` request to delete a single application.
       operationId: deleteApplication

@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a single TrustConfig.
       operationId: certificatemanager.projects.locations.trustConfigs.delete
@@ -129,7 +129,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: certificatemanager.projects.locations.list
@@ -181,7 +181,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: certificatemanager.projects.locations.operations.list
@@ -233,7 +233,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -275,7 +275,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/certificateIssuanceConfigs":
+  /v1/{parent}/certificateIssuanceConfigs:
     get:
       description: Lists CertificateIssuanceConfigs in a given project and location.
       operationId: certificatemanager.projects.locations.certificateIssuanceConfigs.list
@@ -366,7 +366,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/certificateMapEntries":
+  /v1/{parent}/certificateMapEntries:
     get:
       description: Lists CertificateMapEntries in a given project and location.
       operationId: certificatemanager.projects.locations.certificateMaps.certificateMapEntries.list
@@ -457,7 +457,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/certificateMaps":
+  /v1/{parent}/certificateMaps:
     get:
       description: Lists CertificateMaps in a given project and location.
       operationId: certificatemanager.projects.locations.certificateMaps.list
@@ -548,7 +548,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/certificates":
+  /v1/{parent}/certificates:
     get:
       description: Lists Certificates in a given project and location.
       operationId: certificatemanager.projects.locations.certificates.list
@@ -639,7 +639,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/dnsAuthorizations":
+  /v1/{parent}/dnsAuthorizations:
     get:
       description: Lists DnsAuthorizations in a given project and location.
       operationId: certificatemanager.projects.locations.dnsAuthorizations.list
@@ -730,7 +730,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/trustConfigs":
+  /v1/{parent}/trustConfigs:
     get:
       description: Lists TrustConfigs in a given project and location.
       operationId: certificatemanager.projects.locations.trustConfigs.list

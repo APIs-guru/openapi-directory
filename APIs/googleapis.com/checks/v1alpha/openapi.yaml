@@ -62,7 +62,7 @@ paths:
           description: Successful response
       tags:
         - privacypolicy
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: checks.projects.privacypolicy.operations.delete
@@ -118,7 +118,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}/operations":
+  /v1alpha/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: checks.accounts.apps.operations.list
@@ -165,7 +165,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}/privacypolicy/operations":
+  /v1alpha/{name}/privacypolicy/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: checks.projects.privacypolicy.operations.list
@@ -212,7 +212,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}:cancel":
+  /v1alpha/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -249,7 +249,7 @@ paths:
           description: Successful response
       tags:
         - projects
-  "/v1alpha/{name}:wait":
+  /v1alpha/{name}:wait:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -291,7 +291,7 @@ paths:
           description: Successful response
       tags:
         - projects
-  "/v1alpha/{parent}/reports":
+  /v1alpha/{parent}/reports:
     get:
       description: Lists reports for the specified app. By default, only the name and results_uri fields are returned. You can include other fields by listing them in the `fields` URL query parameter. For example, `?fields=reports(name,checks)` will return the name and checks fields.
       operationId: checks.accounts.apps.reports.list
@@ -343,7 +343,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/reports:analyzeUpload":
+  /v1alpha/{parent}/reports:analyzeUpload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

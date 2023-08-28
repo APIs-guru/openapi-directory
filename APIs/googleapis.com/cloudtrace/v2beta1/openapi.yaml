@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2beta1/{name}":
+  /v2beta1/{name}:
     delete:
       description: Deletes a sink.
       operationId: cloudtrace.projects.traceSinks.delete
@@ -139,7 +139,7 @@ paths:
             - https://www.googleapis.com/auth/trace.append
       tags:
         - projects
-  "/v2beta1/{parent}/traceSinks":
+  /v2beta1/{parent}/traceSinks:
     get:
       description: List all sinks for the parent resource (GCP project).
       operationId: cloudtrace.projects.traceSinks.list

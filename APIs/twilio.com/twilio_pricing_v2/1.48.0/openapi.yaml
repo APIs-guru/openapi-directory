@@ -101,7 +101,7 @@ paths:
         - country
         - price_unit
       pathType: list
-  "/v2/Trunking/Countries/{IsoCountry}":
+  /v2/Trunking/Countries/{IsoCountry}:
     description: Trunking pricing by country
     get:
       description: Fetch a specific Country.
@@ -144,7 +144,7 @@ paths:
         - inbound_call_price
         - price_unit
       pathType: list
-  "/v2/Trunking/Numbers/{DestinationNumber}":
+  /v2/Trunking/Numbers/{DestinationNumber}:
     description: Trunking pricing for a specific phone number
     get:
       description: Fetch pricing information for a specific destination and, optionally, origination phone number.
@@ -266,7 +266,7 @@ paths:
         - price_unit
       parent: /Voice
       pathType: list
-  "/v2/Voice/Countries/{IsoCountry}":
+  /v2/Voice/Countries/{IsoCountry}:
     description: Voice pricing by country
     get:
       description: Fetch a specific Country.
@@ -311,7 +311,7 @@ paths:
         - price_unit
       parent: /Voice
       pathType: list
-  "/v2/Voice/Numbers/{DestinationNumber}":
+  /v2/Voice/Numbers/{DestinationNumber}:
     description: Voice pricing for a specific phone number
     get:
       description: Fetch pricing information for a specific destination and, optionally, origination phone number.

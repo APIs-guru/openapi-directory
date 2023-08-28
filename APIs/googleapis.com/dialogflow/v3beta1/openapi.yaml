@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v3beta1/{agent}/testCases:calculateCoverage":
+  /v3beta1/{agent}/testCases:calculateCoverage:
     get:
       description: Calculates the test coverage for an agent.
       operationId: dialogflow.projects.locations.agents.testCases.calculateCoverage
@@ -81,7 +81,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3beta1/{baseVersion}:compareVersions":
+  /v3beta1/{baseVersion}:compareVersions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -127,7 +127,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{environment}:deployFlow":
+  /v3beta1/{environment}:deployFlow:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -173,7 +173,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{environment}:runContinuousTest":
+  /v3beta1/{environment}:runContinuousTest:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -219,7 +219,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}":
+  /v3beta1/{name}:
     delete:
       description: Deletes the specified SecuritySettings.
       operationId: dialogflow.projects.locations.securitySettings.delete
@@ -336,7 +336,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}/locations":
+  /v3beta1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: dialogflow.projects.locations.list
@@ -392,7 +392,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3beta1/{name}/operations":
+  /v3beta1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: dialogflow.projects.operations.list
@@ -448,7 +448,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3beta1/{name}:cancel":
+  /v3beta1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -489,7 +489,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}:export":
+  /v3beta1/{name}:export:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -535,7 +535,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}:load":
+  /v3beta1/{name}:load:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -581,7 +581,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}:lookupEnvironmentHistory":
+  /v3beta1/{name}:lookupEnvironmentHistory:
     get:
       description: Looks up the history of the specified Environment.
       operationId: dialogflow.projects.locations.agents.environments.lookupEnvironmentHistory
@@ -632,7 +632,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3beta1/{name}:restore":
+  /v3beta1/{name}:restore:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -678,7 +678,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}:run":
+  /v3beta1/{name}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -724,7 +724,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}:start":
+  /v3beta1/{name}:start:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -770,7 +770,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}:stop":
+  /v3beta1/{name}:stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -816,7 +816,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}:train":
+  /v3beta1/{name}:train:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -862,7 +862,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{name}:validate":
+  /v3beta1/{name}:validate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -908,7 +908,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/agents":
+  /v3beta1/{parent}/agents:
     get:
       description: Returns the list of all agents in the specified location.
       operationId: dialogflow.projects.locations.agents.list
@@ -992,7 +992,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/changelogs":
+  /v3beta1/{parent}/changelogs:
     get:
       description: Returns the list of Changelogs.
       operationId: dialogflow.projects.locations.agents.changelogs.list
@@ -1048,7 +1048,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3beta1/{parent}/continuousTestResults":
+  /v3beta1/{parent}/continuousTestResults:
     get:
       description: Fetches a list of continuous test results for a given environment.
       operationId: dialogflow.projects.locations.agents.environments.continuousTestResults.list
@@ -1099,7 +1099,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3beta1/{parent}/deployments":
+  /v3beta1/{parent}/deployments:
     get:
       description: Returns the list of all deployments in the specified Environment.
       operationId: dialogflow.projects.locations.agents.environments.deployments.list
@@ -1150,7 +1150,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3beta1/{parent}/entityTypes":
+  /v3beta1/{parent}/entityTypes:
     get:
       description: Returns the list of all session entity types in the specified session.
       operationId: dialogflow.projects.locations.agents.sessions.entityTypes.list
@@ -1239,7 +1239,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/environments":
+  /v3beta1/{parent}/environments:
     get:
       description: Returns the list of all environments in the specified Agent.
       operationId: dialogflow.projects.locations.agents.environments.list
@@ -1323,7 +1323,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/experiments":
+  /v3beta1/{parent}/experiments:
     get:
       description: Returns the list of all experiments in the specified Environment.
       operationId: dialogflow.projects.locations.agents.environments.experiments.list
@@ -1407,7 +1407,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/flows":
+  /v3beta1/{parent}/flows:
     get:
       description: Returns the list of all flows in the specified agent.
       operationId: dialogflow.projects.locations.agents.flows.list
@@ -1501,7 +1501,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/flows:import":
+  /v3beta1/{parent}/flows:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1547,7 +1547,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/intents":
+  /v3beta1/{parent}/intents:
     get:
       description: Returns the list of all intents in the specified agent.
       operationId: dialogflow.projects.locations.agents.intents.list
@@ -1650,7 +1650,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/pages":
+  /v3beta1/{parent}/pages:
     get:
       description: Returns the list of all pages in the specified flow.
       operationId: dialogflow.projects.locations.agents.flows.pages.list
@@ -1744,7 +1744,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/results":
+  /v3beta1/{parent}/results:
     get:
       description: Fetches the list of run results for the given test case. A maximum of 100 results are kept for each test case.
       operationId: dialogflow.projects.locations.agents.testCases.results.list
@@ -1800,7 +1800,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3beta1/{parent}/securitySettings":
+  /v3beta1/{parent}/securitySettings:
     get:
       description: Returns the list of all security settings in the specified location.
       operationId: dialogflow.projects.locations.securitySettings.list
@@ -1884,7 +1884,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/testCases":
+  /v3beta1/{parent}/testCases:
     get:
       description: Fetches a list of test cases for a given agent.
       operationId: dialogflow.projects.locations.agents.testCases.list
@@ -1977,7 +1977,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/testCases:batchDelete":
+  /v3beta1/{parent}/testCases:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2023,7 +2023,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/testCases:batchRun":
+  /v3beta1/{parent}/testCases:batchRun:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2069,7 +2069,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/testCases:export":
+  /v3beta1/{parent}/testCases:export:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2115,7 +2115,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/testCases:import":
+  /v3beta1/{parent}/testCases:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2161,7 +2161,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/transitionRouteGroups":
+  /v3beta1/{parent}/transitionRouteGroups:
     get:
       description: Returns the list of all transition route groups in the specified flow.
       operationId: dialogflow.projects.locations.agents.transitionRouteGroups.list
@@ -2255,7 +2255,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/versions":
+  /v3beta1/{parent}/versions:
     get:
       description: Returns the list of all versions in the specified Flow.
       operationId: dialogflow.projects.locations.agents.flows.versions.list
@@ -2339,7 +2339,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{parent}/webhooks":
+  /v3beta1/{parent}/webhooks:
     get:
       description: Returns the list of all webhooks in the specified agent.
       operationId: dialogflow.projects.locations.agents.webhooks.list
@@ -2423,7 +2423,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{session}:detectIntent":
+  /v3beta1/{session}:detectIntent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2469,7 +2469,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{session}:fulfillIntent":
+  /v3beta1/{session}:fulfillIntent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2515,7 +2515,7 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  "/v3beta1/{session}:matchIntent":
+  /v3beta1/{session}:matchIntent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -226,7 +226,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{attachmentName}":
+  /v1beta1/{attachmentName}:
     delete:
       description: Deletes the specified attachment for the given beacon. Each attachment has a unique attachment name (`attachmentName`) which is returned when you fetch the attachment data via this API. You specify this with the delete request to control which attachment is removed. This operation cannot be undone. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
       operationId: proximitybeacon.beacons.attachments.delete
@@ -268,7 +268,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{beaconName}":
+  /v1beta1/{beaconName}:
     delete:
       description: Deletes the specified beacon including all diagnostics data for the beacon as well as any attachments on the beacon (including those belonging to other projects). This operation cannot be undone. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **Is owner** or **Can edit** permissions in the Google Developers Console project.
       operationId: proximitybeacon.beacons.delete
@@ -373,7 +373,7 @@ paths:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
       tags:
         - beacons
-  "/v1beta1/{beaconName}/attachments":
+  /v1beta1/{beaconName}/attachments:
     get:
       description: Returns the attachments for the specified beacon that match the specified namespaced-type pattern. To control which namespaced types are returned, you add the `namespacedType` query parameter to the request. You must either use `*/*`, to return all attachments, or the namespace must be one of the ones returned from the `namespaces` endpoint. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **viewer**, **Is owner** or **Can edit** permissions in the Google Developers Console project.
       operationId: proximitybeacon.beacons.attachments.list
@@ -454,7 +454,7 @@ paths:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
       tags:
         - beacons
-  "/v1beta1/{beaconName}/attachments:batchDelete":
+  /v1beta1/{beaconName}/attachments:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -501,7 +501,7 @@ paths:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
       tags:
         - beacons
-  "/v1beta1/{beaconName}/diagnostics":
+  /v1beta1/{beaconName}/diagnostics:
     get:
       description: List the diagnostics for a single beacon. You can also list diagnostics for all the beacons owned by your Google Developers Console project by using the beacon name `beacons/-`. Authenticate using an [OAuth access token](https://developers.google.com/identity/protocols/OAuth2) from a signed-in user with **viewer**, **Is owner** or **Can edit** permissions in the Google Developers Console project.
       operationId: proximitybeacon.beacons.diagnostics.list
@@ -563,7 +563,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{beaconName}:activate":
+  /v1beta1/{beaconName}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -605,7 +605,7 @@ paths:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
       tags:
         - beacons
-  "/v1beta1/{beaconName}:deactivate":
+  /v1beta1/{beaconName}:deactivate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -647,7 +647,7 @@ paths:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
       tags:
         - beacons
-  "/v1beta1/{beaconName}:decommission":
+  /v1beta1/{beaconName}:decommission:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -689,7 +689,7 @@ paths:
             - https://www.googleapis.com/auth/userlocation.beacon.registry
       tags:
         - beacons
-  "/v1beta1/{namespaceName}":
+  /v1beta1/{namespaceName}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

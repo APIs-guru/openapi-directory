@@ -125,7 +125,7 @@ paths:
             - https://www.googleapis.com/auth/siteverification.verify_only
       tags:
         - webResource
-  "/webResource/{id}":
+  /webResource/{id}:
     delete:
       description: Relinquish ownership of a website or domain.
       operationId: siteVerification.webResource.delete

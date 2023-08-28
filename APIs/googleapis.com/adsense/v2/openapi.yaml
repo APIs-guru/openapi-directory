@@ -77,7 +77,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{account}/reports:generate":
+  /v2/{account}/reports:generate:
     get:
       description: Generates an ad hoc report.
       operationId: adsense.accounts.reports.generate
@@ -309,7 +309,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{account}/reports:generateCsv":
+  /v2/{account}/reports:generateCsv:
     get:
       description: Generates a csv formatted ad hoc report.
       operationId: adsense.accounts.reports.generateCsv
@@ -541,7 +541,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a custom channel. This method can only be used by projects enabled for the [AdSense for Platforms](https://developers.google.com/adsense/platforms/) product.
       operationId: adsense.accounts.adclients.customchannels.delete
@@ -640,7 +640,7 @@ paths:
             - https://www.googleapis.com/auth/adsense
       tags:
         - accounts
-  "/v2/{name}/adBlockingRecoveryTag":
+  /v2/{name}/adBlockingRecoveryTag:
     get:
       description: Gets the ad blocking recovery tag of an account.
       operationId: adsense.accounts.getAdBlockingRecoveryTag
@@ -681,7 +681,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}/adcode":
+  /v2/{name}/adcode:
     get:
       description: Gets the ad unit code for a given ad unit. For more information, see [About the AdSense code](https://support.google.com/adsense/answer/9274634) and [Where to place the ad code in your HTML](https://support.google.com/adsense/answer/9190028).
       operationId: adsense.accounts.adclients.adunits.getAdcode
@@ -722,7 +722,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}/saved":
+  /v2/{name}/saved:
     get:
       description: Gets the saved report from the given resource name.
       operationId: adsense.accounts.reports.getSaved
@@ -763,7 +763,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}/saved:generate":
+  /v2/{name}/saved:generate:
     get:
       description: Generates a saved report.
       operationId: adsense.accounts.reports.saved.generate
@@ -867,7 +867,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}/saved:generateCsv":
+  /v2/{name}/saved:generateCsv:
     get:
       description: Generates a csv formatted saved report.
       operationId: adsense.accounts.reports.saved.generateCsv
@@ -971,7 +971,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/adclients":
+  /v2/{parent}/adclients:
     get:
       description: Lists all the ad clients available in an account.
       operationId: adsense.accounts.adclients.list
@@ -1022,7 +1022,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/adunits":
+  /v2/{parent}/adunits:
     get:
       description: Lists all ad units under a specified account and ad client.
       operationId: adsense.accounts.adclients.adunits.list
@@ -1102,7 +1102,7 @@ paths:
             - https://www.googleapis.com/auth/adsense
       tags:
         - accounts
-  "/v2/{parent}/alerts":
+  /v2/{parent}/alerts:
     get:
       description: Lists all the alerts available in an account.
       operationId: adsense.accounts.alerts.list
@@ -1148,7 +1148,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/customchannels":
+  /v2/{parent}/customchannels:
     get:
       description: Lists all the custom channels available in an ad client.
       operationId: adsense.accounts.adclients.customchannels.list
@@ -1228,7 +1228,7 @@ paths:
             - https://www.googleapis.com/auth/adsense
       tags:
         - accounts
-  "/v2/{parent}/payments":
+  /v2/{parent}/payments:
     get:
       description: Lists all the payments available for an account.
       operationId: adsense.accounts.payments.list
@@ -1269,7 +1269,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/reports/saved":
+  /v2/{parent}/reports/saved:
     get:
       description: Lists saved reports.
       operationId: adsense.accounts.reports.saved.list
@@ -1320,7 +1320,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/sites":
+  /v2/{parent}/sites:
     get:
       description: Lists all the sites available in an account.
       operationId: adsense.accounts.sites.list
@@ -1371,7 +1371,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/urlchannels":
+  /v2/{parent}/urlchannels:
     get:
       description: Lists active url channels.
       operationId: adsense.accounts.adclients.urlchannels.list
@@ -1422,7 +1422,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}:listChildAccounts":
+  /v2/{parent}:listChildAccounts:
     get:
       description: Lists all accounts directly managed by the given AdSense account.
       operationId: adsense.accounts.listChildAccounts
@@ -1473,7 +1473,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}:listLinkedAdUnits":
+  /v2/{parent}:listLinkedAdUnits:
     get:
       description: Lists all the ad units available for a custom channel.
       operationId: adsense.accounts.adclients.customchannels.listLinkedAdUnits
@@ -1524,7 +1524,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}:listLinkedCustomChannels":
+  /v2/{parent}:listLinkedCustomChannels:
     get:
       description: Lists all the custom channels available for an ad unit.
       operationId: adsense.accounts.adclients.adunits.listLinkedCustomChannels

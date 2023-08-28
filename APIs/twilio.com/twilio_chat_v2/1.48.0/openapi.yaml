@@ -167,7 +167,7 @@ paths:
         - friendly_name
         - type
       pathType: list
-  "/v2/Credentials/{Sid}":
+  /v2/Credentials/{Sid}:
     delete:
       description: ""
       operationId: DeleteCredential
@@ -391,7 +391,7 @@ paths:
         role: "{service_sid: sid}"
         user: "{service_sid: sid}"
       pathType: list
-  "/v2/Services/{ServiceSid}/Bindings":
+  /v2/Services/{ServiceSid}/Bindings:
     description: Push notification subscription for users
     get:
       description: ""
@@ -490,7 +490,7 @@ paths:
         - identity
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Bindings/{Sid}":
+  /v2/Services/{ServiceSid}/Bindings/{Sid}:
     delete:
       description: ""
       operationId: DeleteBinding
@@ -567,7 +567,7 @@ paths:
         - identity
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Channels":
+  /v2/Services/{ServiceSid}/Channels:
     description: Channels represent chat rooms
     get:
       description: ""
@@ -727,7 +727,7 @@ paths:
         webhook: "{service_sid: service_sid, channel_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites":
+  /v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites:
     description: Pending invitations to users to become channel members
     get:
       description: ""
@@ -874,7 +874,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}":
+  /v2/Services/{ServiceSid}/Channels/{ChannelSid}/Invites/{Sid}:
     delete:
       description: ""
       operationId: DeleteInvite
@@ -963,7 +963,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members":
+  /v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members:
     description: Users joined to specific channels
     get:
       description: ""
@@ -1135,7 +1135,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}":
+  /v2/Services/{ServiceSid}/Channels/{ChannelSid}/Members/{Sid}:
     delete:
       description: ""
       operationId: DeleteMember
@@ -1300,7 +1300,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages":
+  /v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages:
     description: Individual chat messages
     get:
       description: ""
@@ -1468,7 +1468,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}":
+  /v2/Services/{ServiceSid}/Channels/{ChannelSid}/Messages/{Sid}:
     delete:
       description: ""
       operationId: DeleteMessage
@@ -1638,7 +1638,7 @@ paths:
         - date_created
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks":
+  /v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks:
     description: Webhooks for specific channels
     get:
       description: ""
@@ -1798,7 +1798,7 @@ paths:
         - configuration
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks/{Sid}":
+  /v2/Services/{ServiceSid}/Channels/{ChannelSid}/Webhooks/{Sid}:
     delete:
       description: ""
       operationId: DeleteChannelWebhook
@@ -1960,7 +1960,7 @@ paths:
         - configuration
       parent: /Services/{ServiceSid}/Channels/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Channels/{Sid}":
+  /v2/Services/{ServiceSid}/Channels/{Sid}:
     delete:
       description: ""
       operationId: DeleteChannel
@@ -2107,7 +2107,7 @@ paths:
         webhook: "{service_sid: service_sid, channel_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Roles":
+  /v2/Services/{ServiceSid}/Roles:
     description: Roles determining user or member permissions
     get:
       description: ""
@@ -2240,7 +2240,7 @@ paths:
         - type
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Roles/{Sid}":
+  /v2/Services/{ServiceSid}/Roles/{Sid}:
     delete:
       description: ""
       operationId: DeleteRole
@@ -2366,7 +2366,7 @@ paths:
         - type
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Users":
+  /v2/Services/{ServiceSid}/Users:
     description: Unique chat users within a chat service
     get:
       description: ""
@@ -2510,7 +2510,7 @@ paths:
         user_channel: "{service_sid: service_sid, user_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Users/{Sid}":
+  /v2/Services/{ServiceSid}/Users/{Sid}:
     delete:
       description: ""
       operationId: DeleteUser
@@ -2642,7 +2642,7 @@ paths:
         user_channel: "{service_sid: service_sid, user_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings":
+  /v2/Services/{ServiceSid}/Users/{UserSid}/Bindings:
     description: List of bindings for a given user
     get:
       description: ""
@@ -2742,7 +2742,7 @@ paths:
       mountName: user_bindings
       parent: /Services/{ServiceSid}/Users/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Users/{UserSid}/Bindings/{Sid}":
+  /v2/Services/{ServiceSid}/Users/{UserSid}/Bindings/{Sid}:
     delete:
       description: ""
       operationId: DeleteUserBinding
@@ -2833,7 +2833,7 @@ paths:
       mountName: user_bindings
       parent: /Services/{ServiceSid}/Users/{Sid}
       pathType: instance
-  "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels":
+  /v2/Services/{ServiceSid}/Users/{UserSid}/Channels:
     description: List of channels for a given user
     get:
       description: List all Channels for a given User.
@@ -2923,7 +2923,7 @@ paths:
       mountName: user_channels
       parent: /Services/{ServiceSid}/Users/{Sid}
       pathType: list
-  "/v2/Services/{ServiceSid}/Users/{UserSid}/Channels/{ChannelSid}":
+  /v2/Services/{ServiceSid}/Users/{UserSid}/Channels/{ChannelSid}:
     delete:
       description: Removes User from selected Channel.
       operationId: DeleteUserChannel
@@ -3069,7 +3069,7 @@ paths:
       mountName: user_channels
       parent: /Services/{ServiceSid}/Users/{Sid}
       pathType: instance
-  "/v2/Services/{Sid}":
+  /v2/Services/{Sid}:
     delete:
       description: ""
       operationId: DeleteService

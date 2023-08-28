@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: acmeChallengeSets
 paths:
-  "/v1/acmeChallengeSets/{rootDomain}":
+  /v1/acmeChallengeSets/{rootDomain}:
     get:
       description: Gets the ACME challenge set for a given domain name. Domain names must be provided in Punycode.
       operationId: acmedns.acmeChallengeSets.get
@@ -61,7 +61,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/acmeChallengeSets/{rootDomain}:rotateChallenges":
+  /v1/acmeChallengeSets/{rootDomain}:rotateChallenges:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

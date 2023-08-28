@@ -40,7 +40,7 @@ tags:
   - description: ""
     name: Product
 paths:
-  "/ecosystems/{ecosystem_id}":
+  /ecosystems/{ecosystem_id}:
     get:
       description: Get ecosystem
       operationId: ecosystemsOne
@@ -52,7 +52,7 @@ paths:
       summary: Get ecosystem
       tags:
         - Ecosystem
-  "/ecosystems/{ecosystem_id}/categories":
+  /ecosystems/{ecosystem_id}/categories:
     get:
       description: List categories
       operationId: categoriesAll
@@ -66,7 +66,7 @@ paths:
       summary: List categories
       tags:
         - Category
-  "/ecosystems/{ecosystem_id}/categories/{id}":
+  /ecosystems/{ecosystem_id}/categories/{id}:
     get:
       description: Get category
       operationId: categoriesOne
@@ -79,7 +79,7 @@ paths:
       summary: Get category
       tags:
         - Category
-  "/ecosystems/{ecosystem_id}/categories/{id}/listings":
+  /ecosystems/{ecosystem_id}/categories/{id}/listings:
     get:
       description: List category listings
       operationId: categoryListingsAll
@@ -94,7 +94,7 @@ paths:
       summary: List category listings
       tags:
         - Category
-  "/ecosystems/{ecosystem_id}/collections":
+  /ecosystems/{ecosystem_id}/collections:
     get:
       description: List collections
       operationId: collectionsAll
@@ -108,7 +108,7 @@ paths:
       summary: List collections
       tags:
         - Collection
-  "/ecosystems/{ecosystem_id}/collections/{id}":
+  /ecosystems/{ecosystem_id}/collections/{id}:
     get:
       description: Get collection
       operationId: collectionsOne
@@ -121,7 +121,7 @@ paths:
       summary: Get collection
       tags:
         - Collection
-  "/ecosystems/{ecosystem_id}/collections/{id}/listings":
+  /ecosystems/{ecosystem_id}/collections/{id}/listings:
     get:
       description: List collection listings
       operationId: collectionListingsAll
@@ -136,7 +136,7 @@ paths:
       summary: List collection listings
       tags:
         - Collection
-  "/ecosystems/{ecosystem_id}/listings":
+  /ecosystems/{ecosystem_id}/listings:
     get:
       description: List listings
       operationId: listingsAll
@@ -151,7 +151,7 @@ paths:
       summary: List listings
       tags:
         - Listing
-  "/ecosystems/{ecosystem_id}/listings/{id}":
+  /ecosystems/{ecosystem_id}/listings/{id}:
     get:
       description: Get listing
       operationId: listingsOne
@@ -164,7 +164,7 @@ paths:
       summary: Get listing
       tags:
         - Listing
-  "/ecosystems/{ecosystem_id}/products":
+  /ecosystems/{ecosystem_id}/products:
     get:
       description: List products
       operationId: productsAll
@@ -176,7 +176,7 @@ paths:
       summary: List products
       tags:
         - Product
-  "/ecosystems/{ecosystem_id}/products/{id}":
+  /ecosystems/{ecosystem_id}/products/{id}:
     get:
       description: Get product
       operationId: productsOne
@@ -189,7 +189,7 @@ paths:
       summary: Get product
       tags:
         - Product
-  "/ecosystems/{ecosystem_id}/products/{id}/listings":
+  /ecosystems/{ecosystem_id}/products/{id}/listings:
     get:
       description: List product listings
       operationId: productListingsAll

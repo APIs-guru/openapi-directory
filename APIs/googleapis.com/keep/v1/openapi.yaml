@@ -102,7 +102,7 @@ paths:
             - https://www.googleapis.com/auth/keep
       tags:
         - notes
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a note. Caller must have the `OWNER` role on the note to delete. Deleting a note removes the resource immediately and cannot be undone. Any collaborators will lose access to the note.
       operationId: keep.notes.delete
@@ -172,7 +172,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/permissions:batchCreate":
+  /v1/{parent}/permissions:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -214,7 +214,7 @@ paths:
             - https://www.googleapis.com/auth/keep
       tags:
         - notes
-  "/v1/{parent}/permissions:batchDelete":
+  /v1/{parent}/permissions:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

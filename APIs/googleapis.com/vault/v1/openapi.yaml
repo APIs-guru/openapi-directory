@@ -121,7 +121,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}":
+  /v1/matters/{matterId}:
     delete:
       description: Deletes the specified matter. Returns the matter with updated state.
       operationId: vault.matters.delete
@@ -224,7 +224,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}/exports":
+  /v1/matters/{matterId}/exports:
     get:
       description: Lists details about the exports in the specified matter.
       operationId: vault.matters.exports.list
@@ -304,7 +304,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}/exports/{exportId}":
+  /v1/matters/{matterId}/exports/{exportId}:
     delete:
       description: Deletes an export.
       operationId: vault.matters.exports.delete
@@ -381,7 +381,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/matters/{matterId}/holds":
+  /v1/matters/{matterId}/holds:
     get:
       description: Lists the holds in a matter.
       operationId: vault.matters.holds.list
@@ -470,7 +470,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}/holds/{holdId}":
+  /v1/matters/{matterId}/holds/{holdId}:
     delete:
       description: Removes the specified hold and releases the accounts or organizational unit covered by the hold. If the data is not preserved by another hold or retention rule, it might be purged.
       operationId: vault.matters.holds.delete
@@ -591,7 +591,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}/holds/{holdId}/accounts":
+  /v1/matters/{matterId}/holds/{holdId}/accounts:
     get:
       description: Lists the accounts covered by a hold. This can list only individually-specified accounts covered by the hold. If the hold covers an organizational unit, use the [Admin SDK](https://developers.google.com/admin-sdk/). to list the members of the organizational unit on hold.
       operationId: vault.matters.holds.accounts.list
@@ -673,7 +673,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}/holds/{holdId}/accounts/{accountId}":
+  /v1/matters/{matterId}/holds/{holdId}/accounts/{accountId}:
     delete:
       description: Removes an account from a hold.
       operationId: vault.matters.holds.accounts.delete
@@ -722,7 +722,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/matters/{matterId}/holds/{holdId}:addHeldAccounts":
+  /v1/matters/{matterId}/holds/{holdId}:addHeldAccounts:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -770,7 +770,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}/holds/{holdId}:removeHeldAccounts":
+  /v1/matters/{matterId}/holds/{holdId}:removeHeldAccounts:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -818,7 +818,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}/savedQueries":
+  /v1/matters/{matterId}/savedQueries:
     get:
       description: Lists the saved queries in a matter.
       operationId: vault.matters.savedQueries.list
@@ -898,7 +898,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}/savedQueries/{savedQueryId}":
+  /v1/matters/{matterId}/savedQueries/{savedQueryId}:
     delete:
       description: Deletes the specified saved query.
       operationId: vault.matters.savedQueries.delete
@@ -975,7 +975,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/matters/{matterId}:addPermissions":
+  /v1/matters/{matterId}:addPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1017,7 +1017,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}:close":
+  /v1/matters/{matterId}:close:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1059,7 +1059,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}:count":
+  /v1/matters/{matterId}:count:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1101,7 +1101,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}:removePermissions":
+  /v1/matters/{matterId}:removePermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1143,7 +1143,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}:reopen":
+  /v1/matters/{matterId}:reopen:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1185,7 +1185,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/matters/{matterId}:undelete":
+  /v1/matters/{matterId}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1227,7 +1227,7 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: vault.operations.delete
@@ -1293,7 +1293,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

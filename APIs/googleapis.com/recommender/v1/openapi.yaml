@@ -35,7 +35,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Gets the requested recommendation. Requires the recommender.*.get IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.get
@@ -111,7 +111,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:markAccepted":
+  /v1/{name}:markAccepted:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -153,7 +153,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:markClaimed":
+  /v1/{name}:markClaimed:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -195,7 +195,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:markDismissed":
+  /v1/{name}:markDismissed:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -237,7 +237,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:markFailed":
+  /v1/{name}:markFailed:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -279,7 +279,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:markSucceeded":
+  /v1/{name}:markSucceeded:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -321,7 +321,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/insights":
+  /v1/{parent}/insights:
     get:
       description: Lists insights for the specified Cloud Resource. Requires the recommender.*.list IAM permission for the specified insight type.
       operationId: recommender.projects.locations.insightTypes.insights.list
@@ -373,7 +373,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/recommendations":
+  /v1/{parent}/recommendations:
     get:
       description: Lists recommendations for the specified Cloud Resource. Requires the recommender.*.list IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.list

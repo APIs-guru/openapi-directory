@@ -71,7 +71,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - applicationDetailService
-  "/v1/projects/{projectId}/testMatrices":
+  /v1/projects/{projectId}/testMatrices:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -118,7 +118,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/testMatrices/{testMatrixId}":
+  /v1/projects/{projectId}/testMatrices/{testMatrixId}:
     get:
       description: "Checks the status of a test matrix and the executions once they are created. The test matrix will contain the list of test executions to run if and only if the resultStorage.toolResultsExecution fields have been populated. Note: Flaky test executions may be added to the matrix at a later stage. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to read project - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the Test Matrix does not exist"
       operationId: testing.projects.testMatrices.get
@@ -165,7 +165,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{projectId}/testMatrices/{testMatrixId}:cancel":
+  /v1/projects/{projectId}/testMatrices/{testMatrixId}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -208,7 +208,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/testEnvironmentCatalog/{environmentType}":
+  /v1/testEnvironmentCatalog/{environmentType}:
     get:
       description: "Gets the catalog of supported test environments. May return any of the following canonical error codes: - INVALID_ARGUMENT - if the request is malformed - NOT_FOUND - if the environment type does not exist - INTERNAL - if an internal error occurred"
       operationId: testing.testEnvironmentCatalog.get

@@ -83,7 +83,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{projectId}/datasets":
+  /projects/{projectId}/datasets:
     get:
       description: Lists all datasets in the specified project to which you have been granted the READER dataset role.
       operationId: bigquery.datasets.list
@@ -177,7 +177,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - datasets
-  "/projects/{projectId}/datasets/{datasetId}":
+  /projects/{projectId}/datasets/{datasetId}:
     delete:
       description: Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.
       operationId: bigquery.datasets.delete
@@ -337,7 +337,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - datasets
-  "/projects/{projectId}/datasets/{datasetId}/models":
+  /projects/{projectId}/datasets/{datasetId}/models:
     get:
       description: Lists all models in the specified dataset. Requires the READER dataset role. After retrieving the list of models, you can get information about a particular model by calling the models.get method.
       operationId: bigquery.models.list
@@ -394,7 +394,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{projectId}/datasets/{datasetId}/models/{modelId}":
+  /projects/{projectId}/datasets/{datasetId}/models/{modelId}:
     delete:
       description: Deletes the model specified by modelId from the dataset.
       operationId: bigquery.models.delete
@@ -528,7 +528,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - models
-  "/projects/{projectId}/datasets/{datasetId}/routines":
+  /projects/{projectId}/datasets/{datasetId}/routines:
     get:
       description: Lists all routines in the specified dataset. Requires the READER dataset role.
       operationId: bigquery.routines.list
@@ -634,7 +634,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - routines
-  "/projects/{projectId}/datasets/{datasetId}/routines/{routineId}":
+  /projects/{projectId}/datasets/{datasetId}/routines/{routineId}:
     delete:
       description: Deletes the routine specified by routineId from the dataset.
       operationId: bigquery.routines.delete
@@ -773,7 +773,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - routines
-  "/projects/{projectId}/datasets/{datasetId}/tables":
+  /projects/{projectId}/datasets/{datasetId}/tables:
     get:
       description: Lists all tables in the specified dataset. Requires the READER dataset role.
       operationId: bigquery.tables.list
@@ -869,7 +869,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - tables
-  "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}":
+  /projects/{projectId}/datasets/{datasetId}/tables/{tableId}:
     delete:
       description: Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.
       operationId: bigquery.tables.delete
@@ -1073,7 +1073,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - tables
-  "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data":
+  /projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data:
     get:
       description: Retrieves table data from a specified set of rows. Requires the READER dataset role.
       operationId: bigquery.tabledata.list
@@ -1146,7 +1146,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll":
+  /projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1204,7 +1204,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - tabledata
-  "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies":
+  /projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies:
     get:
       description: Lists all row access policies on the specified table.
       operationId: bigquery.rowAccessPolicies.list
@@ -1267,7 +1267,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{projectId}/jobs":
+  /projects/{projectId}/jobs:
     get:
       description: Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.
       operationId: bigquery.jobs.list
@@ -1404,7 +1404,7 @@ paths:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - jobs
-  "/projects/{projectId}/jobs/{jobId}":
+  /projects/{projectId}/jobs/{jobId}:
     get:
       description: Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.
       operationId: bigquery.jobs.get
@@ -1456,7 +1456,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{projectId}/jobs/{jobId}/cancel":
+  /projects/{projectId}/jobs/{jobId}/cancel:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1504,7 +1504,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - jobs
-  "/projects/{projectId}/jobs/{jobId}/delete":
+  /projects/{projectId}/jobs/{jobId}/delete:
     delete:
       description: Requests the deletion of the metadata of a job. This call returns when the job's metadata is deleted.
       operationId: bigquery.jobs.delete
@@ -1548,7 +1548,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{projectId}/queries":
+  /projects/{projectId}/queries:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1594,7 +1594,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - jobs
-  "/projects/{projectId}/queries/{jobId}":
+  /projects/{projectId}/queries/{jobId}:
     get:
       description: Retrieves the results of a query job.
       operationId: bigquery.jobs.getQueryResults
@@ -1666,7 +1666,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/projects/{projectId}/serviceAccount":
+  /projects/{projectId}/serviceAccount:
     get:
       description: Returns the email address of the service account for your project used for interactions with Google Cloud KMS.
       operationId: bigquery.projects.getServiceAccount
@@ -1707,7 +1707,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{resource}:getIamPolicy":
+  /{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1753,7 +1753,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - tables
-  "/{resource}:setIamPolicy":
+  /{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -1795,7 +1795,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - tables
-  "/{resource}:testIamPermissions":
+  /{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"

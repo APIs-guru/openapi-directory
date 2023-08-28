@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{datacenterConnector}:upgradeAppliance":
+  /v1/{datacenterConnector}:upgradeAppliance:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -72,7 +72,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{group}:addGroupMigration":
+  /v1/{group}:addGroupMigration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -114,7 +114,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{group}:removeGroupMigration":
+  /v1/{group}:removeGroupMigration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -156,7 +156,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{migratingVm}:finalizeMigration":
+  /v1/{migratingVm}:finalizeMigration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -198,7 +198,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{migratingVm}:pauseMigration":
+  /v1/{migratingVm}:pauseMigration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -240,7 +240,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{migratingVm}:resumeMigration":
+  /v1/{migratingVm}:resumeMigration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -282,7 +282,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{migratingVm}:startMigration":
+  /v1/{migratingVm}:startMigration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -324,7 +324,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: "Deletes a single TargetProject. NOTE: TargetProject is a global resource; hence the only supported value for location is `global`."
       operationId: vmmigration.projects.locations.targetProjects.delete
@@ -438,7 +438,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: vmmigration.projects.locations.list
@@ -490,7 +490,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: vmmigration.projects.locations.operations.list
@@ -542,7 +542,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -584,7 +584,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/cloneJobs":
+  /v1/{parent}/cloneJobs:
     get:
       description: Lists CloneJobs of a given migrating VM.
       operationId: vmmigration.projects.locations.sources.migratingVms.cloneJobs.list
@@ -680,7 +680,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/cutoverJobs":
+  /v1/{parent}/cutoverJobs:
     get:
       description: Lists CutoverJobs of a given migrating VM.
       operationId: vmmigration.projects.locations.sources.migratingVms.cutoverJobs.list
@@ -776,7 +776,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/datacenterConnectors":
+  /v1/{parent}/datacenterConnectors:
     get:
       description: Lists DatacenterConnectors in a given Source.
       operationId: vmmigration.projects.locations.sources.datacenterConnectors.list
@@ -872,7 +872,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/groups":
+  /v1/{parent}/groups:
     get:
       description: Lists Groups in a given project and location.
       operationId: vmmigration.projects.locations.groups.list
@@ -968,7 +968,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/migratingVms":
+  /v1/{parent}/migratingVms:
     get:
       description: Lists MigratingVms in a given Source.
       operationId: vmmigration.projects.locations.sources.migratingVms.list
@@ -1073,7 +1073,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/replicationCycles":
+  /v1/{parent}/replicationCycles:
     get:
       description: Lists ReplicationCycles in a given MigratingVM.
       operationId: vmmigration.projects.locations.sources.migratingVms.replicationCycles.list
@@ -1130,7 +1130,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/sources":
+  /v1/{parent}/sources:
     get:
       description: Lists Sources in a given project and location.
       operationId: vmmigration.projects.locations.sources.list
@@ -1226,7 +1226,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/targetProjects":
+  /v1/{parent}/targetProjects:
     get:
       description: "Lists TargetProjects in a given project. NOTE: TargetProject is a global resource; hence the only supported value for location is `global`."
       operationId: vmmigration.projects.locations.targetProjects.list
@@ -1322,7 +1322,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/utilizationReports":
+  /v1/{parent}/utilizationReports:
     get:
       description: Lists Utilization Reports of the given Source.
       operationId: vmmigration.projects.locations.sources.utilizationReports.list
@@ -1427,7 +1427,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{source}:fetchInventory":
+  /v1/{source}:fetchInventory:
     get:
       description: List remote source's inventory of VMs. The remote source is the onprem vCenter (remote in the sense it's not in Compute Engine). The inventory describes the list of existing VMs in that source. Note that this operation lists the VMs on the remote source, as opposed to listing the MigratingVms resources in the vmmigration service.
       operationId: vmmigration.projects.locations.sources.fetchInventory

@@ -494,7 +494,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/hris/companies/{id}":
+  /hris/companies/{id}:
     delete:
       description: Delete Company
       operationId: companiesDelete
@@ -827,7 +827,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/hris/departments/{id}":
+  /hris/departments/{id}:
     delete:
       description: Delete Department
       operationId: departmentsDelete
@@ -1320,7 +1320,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/hris/employees/{id}":
+  /hris/employees/{id}:
     delete:
       description: Delete Employee
       operationId: employeesDelete
@@ -1736,7 +1736,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/hris/payrolls/employees/{employee_id}":
+  /hris/payrolls/employees/{employee_id}:
     get:
       description: List payrolls for employee
       operationId: employeePayrollsAll
@@ -1790,7 +1790,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/hris/payrolls/employees/{employee_id}/payrolls/{payroll_id}":
+  /hris/payrolls/employees/{employee_id}/payrolls/{payroll_id}:
     get:
       description: Get payroll for employee
       operationId: employeePayrollsOne
@@ -1846,7 +1846,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/hris/payrolls/{payroll_id}":
+  /hris/payrolls/{payroll_id}:
     get:
       description: Get Payroll
       operationId: payrollsOne
@@ -1898,7 +1898,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/hris/schedules/employees/{employee_id}":
+  /hris/schedules/employees/{employee_id}:
     get:
       description: List schedules for employee, a schedule is a work pattern, not the actual worked hours, for an employee.
       operationId: employeeSchedulesAll
@@ -2080,7 +2080,7 @@ paths:
             } catch (error) {
               console.error(error)
             }
-  "/hris/time-off-requests/{id}":
+  /hris/time-off-requests/{id}:
     delete:
       description: Delete Time Off Request
       operationId: timeOffRequestsDelete

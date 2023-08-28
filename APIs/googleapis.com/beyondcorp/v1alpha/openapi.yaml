@@ -32,7 +32,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1alpha/{appConnector}:reportStatus":
+  /v1alpha/{appConnector}:reportStatus:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -74,7 +74,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{appConnector}:resolveInstanceConfig":
+  /v1alpha/{appConnector}:resolveInstanceConfig:
     get:
       description: Gets instance configuration for a given AppConnector. An internal method called by a AppConnector to get its container config.
       operationId: beyondcorp.projects.locations.appConnectors.resolveInstanceConfig
@@ -111,7 +111,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{connector}:reportStatus":
+  /v1alpha/{connector}:reportStatus:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -153,7 +153,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{connector}:resolveInstanceConfig":
+  /v1alpha/{connector}:resolveInstanceConfig:
     get:
       description: Gets instance configuration for a given connector. An internal method called by a connector to get its container config.
       operationId: beyondcorp.projects.locations.connectors.resolveInstanceConfig
@@ -190,7 +190,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{insight}:configuredInsight":
+  /v1alpha/{insight}:configuredInsight:
     get:
       description: Gets the value for a selected particular insight based on the provided filters. Use the organization level path for fetching at org level and project level path for fetching the insight value specific to a particular project.
       operationId: beyondcorp.projects.locations.insights.configuredInsight
@@ -283,7 +283,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: beyondcorp.projects.locations.operations.delete
@@ -407,7 +407,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}/locations":
+  /v1alpha/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: beyondcorp.projects.locations.list
@@ -459,7 +459,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}/operations":
+  /v1alpha/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: beyondcorp.projects.locations.operations.list
@@ -511,7 +511,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}:cancel":
+  /v1alpha/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -553,7 +553,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/appConnections":
+  /v1alpha/{parent}/appConnections:
     get:
       description: Lists AppConnections in a given project and location.
       operationId: beyondcorp.projects.locations.appConnections.list
@@ -654,7 +654,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/appConnections:resolve":
+  /v1alpha/{parent}/appConnections:resolve:
     get:
       description: Resolves AppConnections details for a given AppConnector. An internal method called by a connector to find AppConnections to connect to.
       operationId: beyondcorp.projects.locations.appConnections.resolve
@@ -706,7 +706,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/appConnectors":
+  /v1alpha/{parent}/appConnectors:
     get:
       description: Lists AppConnectors in a given project and location.
       operationId: beyondcorp.projects.locations.appConnectors.list
@@ -807,7 +807,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/appGateways":
+  /v1alpha/{parent}/appGateways:
     get:
       description: Lists AppGateways in a given project and location.
       operationId: beyondcorp.projects.locations.appGateways.list
@@ -908,7 +908,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/browserDlpRules":
+  /v1alpha/{parent}/browserDlpRules:
     get:
       description: Lists BrowserDlpRules for PartnerTenant in a given organization.
       operationId: beyondcorp.organizations.locations.global.partnerTenants.browserDlpRules.list
@@ -979,7 +979,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1alpha/{parent}/connections":
+  /v1alpha/{parent}/connections:
     get:
       description: Lists Connections in a given project and location.
       operationId: beyondcorp.projects.locations.connections.list
@@ -1080,7 +1080,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/connections:resolve":
+  /v1alpha/{parent}/connections:resolve:
     get:
       description: Resolves connections details for a given connector. An internal method called by a connector to find connections to connect to.
       operationId: beyondcorp.projects.locations.connections.resolve
@@ -1132,7 +1132,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/connectors":
+  /v1alpha/{parent}/connectors:
     get:
       description: Lists Connectors in a given project and location.
       operationId: beyondcorp.projects.locations.connectors.list
@@ -1233,7 +1233,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/insights":
+  /v1alpha/{parent}/insights:
     get:
       description: Lists for all the available insights that could be fetched from the system. Allows to filter using category. Setting the `view` to `BASIC` will let you iterate over the list of insight metadatas.
       operationId: beyondcorp.projects.locations.insights.list
@@ -1299,7 +1299,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/partnerTenants":
+  /v1alpha/{parent}/partnerTenants:
     get:
       description: Lists PartnerTenants in a given organization.
       operationId: beyondcorp.organizations.locations.global.partnerTenants.list
@@ -1370,7 +1370,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1alpha/{parent}/proxyConfigs":
+  /v1alpha/{parent}/proxyConfigs:
     get:
       description: Lists ProxyConfigs for PartnerTenant in a given organization.
       operationId: beyondcorp.organizations.locations.global.partnerTenants.proxyConfigs.list
@@ -1441,7 +1441,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1alpha/{parent}/subscriptions":
+  /v1alpha/{parent}/subscriptions:
     get:
       description: Lists Subscriptions in a given organization and location.
       operationId: beyondcorp.organizations.locations.subscriptions.list
@@ -1507,7 +1507,7 @@ paths:
           description: Successful response
       tags:
         - organizations
-  "/v1alpha/{resource}:getIamPolicy":
+  /v1alpha/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: beyondcorp.projects.locations.netConnections.getIamPolicy
@@ -1549,7 +1549,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{resource}:setIamPolicy":
+  /v1alpha/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1591,7 +1591,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{resource}:testIamPermissions":
+  /v1alpha/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

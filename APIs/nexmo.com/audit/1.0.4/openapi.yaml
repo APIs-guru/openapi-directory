@@ -124,7 +124,7 @@ paths:
       security:
         - basicAuth: []
       summary: Retrieve audit event types
-  "/events/{id}":
+  /events/{id}:
     get:
       description: |
         Get the specified audit event.

@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{key}:retrieveLegacySecretKey":
+  /v1/{key}:retrieveLegacySecretKey:
     get:
       description: Returns the secret key related to the specified public key. You must use the legacy secret key only in a 3rd party integration with legacy reCAPTCHA.
       operationId: recaptchaenterprise.projects.keys.retrieveLegacySecretKey
@@ -66,7 +66,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes the specified key.
       operationId: recaptchaenterprise.projects.keys.delete
@@ -161,7 +161,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:annotate":
+  /v1/{name}:annotate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -203,7 +203,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:migrate":
+  /v1/{name}:migrate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -245,7 +245,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/assessments":
+  /v1/{parent}/assessments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -287,7 +287,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/firewallpolicies":
+  /v1/{parent}/firewallpolicies:
     get:
       description: Returns the list of all firewall policies that belong to a project.
       operationId: recaptchaenterprise.projects.firewallpolicies.list
@@ -363,7 +363,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/keys":
+  /v1/{parent}/keys:
     get:
       description: Returns the list of all keys that belong to a project.
       operationId: recaptchaenterprise.projects.keys.list
@@ -439,7 +439,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/memberships":
+  /v1/{parent}/memberships:
     get:
       description: Get memberships in a group of related accounts.
       operationId: recaptchaenterprise.projects.relatedaccountgroups.memberships.list
@@ -486,7 +486,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/relatedaccountgroups":
+  /v1/{parent}/relatedaccountgroups:
     get:
       description: List groups of related accounts.
       operationId: recaptchaenterprise.projects.relatedaccountgroups.list
@@ -533,7 +533,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{project}/relatedaccountgroupmemberships:search":
+  /v1/{project}/relatedaccountgroupmemberships:search:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

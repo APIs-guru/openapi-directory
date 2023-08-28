@@ -72,7 +72,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/partners/{metadataOwnerId}/devices/{deviceId}/metadata":
+  /v1/partners/{metadataOwnerId}/devices/{deviceId}/metadata:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -115,7 +115,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/partners/{partnerId}/customers":
+  /v1/partners/{partnerId}/customers:
     get:
       description: Lists the customers that are enrolled to the reseller identified by the `partnerId` argument. This list includes customers that the reseller created and customers that enrolled themselves using the portal.
       operationId: androiddeviceprovisioning.partners.customers.list
@@ -157,7 +157,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/partners/{partnerId}/devices:claim":
+  /v1/partners/{partnerId}/devices:claim:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -194,7 +194,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/partners/{partnerId}/devices:claimAsync":
+  /v1/partners/{partnerId}/devices:claimAsync:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -231,7 +231,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/partners/{partnerId}/devices:findByIdentifier":
+  /v1/partners/{partnerId}/devices:findByIdentifier:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -268,7 +268,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/partners/{partnerId}/devices:findByOwner":
+  /v1/partners/{partnerId}/devices:findByOwner:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -305,7 +305,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/partners/{partnerId}/devices:unclaim":
+  /v1/partners/{partnerId}/devices:unclaim:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -342,7 +342,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/partners/{partnerId}/devices:unclaimAsync":
+  /v1/partners/{partnerId}/devices:unclaimAsync:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -379,7 +379,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/partners/{partnerId}/devices:updateMetadataAsync":
+  /v1/partners/{partnerId}/devices:updateMetadataAsync:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -416,7 +416,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes an unused configuration. The API call fails if the customer has devices with the configuration applied.
       operationId: androiddeviceprovisioning.customers.configurations.delete
@@ -496,7 +496,7 @@ paths:
           description: Successful response
       tags:
         - customers
-  "/v1/{parent}/configurations":
+  /v1/{parent}/configurations:
     get:
       description: Lists a customer's configurations.
       operationId: androiddeviceprovisioning.customers.configurations.list
@@ -552,7 +552,7 @@ paths:
           description: Successful response
       tags:
         - customers
-  "/v1/{parent}/customers":
+  /v1/{parent}/customers:
     get:
       description: Lists the customers of the vendor.
       operationId: androiddeviceprovisioning.partners.vendors.customers.list
@@ -618,7 +618,7 @@ paths:
           description: Successful response
       tags:
         - partners
-  "/v1/{parent}/devices":
+  /v1/{parent}/devices:
     get:
       description: Lists a customer's devices.
       operationId: androiddeviceprovisioning.customers.devices.list
@@ -660,7 +660,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/devices:applyConfiguration":
+  /v1/{parent}/devices:applyConfiguration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -697,7 +697,7 @@ paths:
           description: Successful response
       tags:
         - customers
-  "/v1/{parent}/devices:removeConfiguration":
+  /v1/{parent}/devices:removeConfiguration:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -734,7 +734,7 @@ paths:
           description: Successful response
       tags:
         - customers
-  "/v1/{parent}/devices:unclaim":
+  /v1/{parent}/devices:unclaim:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -771,7 +771,7 @@ paths:
           description: Successful response
       tags:
         - customers
-  "/v1/{parent}/dpcs":
+  /v1/{parent}/dpcs:
     get:
       description: Lists the DPCs (device policy controllers) that support zero-touch enrollment.
       operationId: androiddeviceprovisioning.customers.dpcs.list
@@ -803,7 +803,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/vendors":
+  /v1/{parent}/vendors:
     get:
       description: Lists the vendors of the partner.
       operationId: androiddeviceprovisioning.partners.vendors.list

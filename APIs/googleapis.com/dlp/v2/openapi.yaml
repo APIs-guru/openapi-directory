@@ -88,7 +88,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a stored infoType. See https://cloud.google.com/dlp/docs/creating-stored-infotypes to learn more.
       operationId: dlp.projects.storedInfoTypes.delete
@@ -178,7 +178,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:activate":
+  /v2/{name}:activate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -220,7 +220,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:cancel":
+  /v2/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -262,7 +262,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:finish":
+  /v2/{name}:finish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -304,7 +304,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:hybridInspect":
+  /v2/{name}:hybridInspect:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -346,7 +346,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/content:deidentify":
+  /v2/{parent}/content:deidentify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -388,7 +388,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/content:inspect":
+  /v2/{parent}/content:inspect:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -430,7 +430,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/content:reidentify":
+  /v2/{parent}/content:reidentify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -472,7 +472,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/deidentifyTemplates":
+  /v2/{parent}/deidentifyTemplates:
     get:
       description: Lists DeidentifyTemplates. See https://cloud.google.com/dlp/docs/creating-templates-deid to learn more.
       operationId: dlp.projects.locations.deidentifyTemplates.list
@@ -558,7 +558,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/dlpJobs":
+  /v2/{parent}/dlpJobs:
     get:
       description: Lists DlpJobs that match the specified filter in the request. See https://cloud.google.com/dlp/docs/inspecting-storage and https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
       operationId: dlp.projects.locations.dlpJobs.list
@@ -658,7 +658,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/image:redact":
+  /v2/{parent}/image:redact:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -700,7 +700,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/infoTypes":
+  /v2/{parent}/infoTypes:
     get:
       description: Returns a list of the sensitive information types that DLP API supports. See https://cloud.google.com/dlp/docs/infotypes-reference to learn more.
       operationId: dlp.locations.infoTypes.list
@@ -752,7 +752,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/inspectTemplates":
+  /v2/{parent}/inspectTemplates:
     get:
       description: Lists InspectTemplates. See https://cloud.google.com/dlp/docs/creating-templates to learn more.
       operationId: dlp.projects.locations.inspectTemplates.list
@@ -838,7 +838,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/jobTriggers":
+  /v2/{parent}/jobTriggers:
     get:
       description: Lists job triggers. See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
       operationId: dlp.projects.locations.jobTriggers.list
@@ -938,7 +938,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/storedInfoTypes":
+  /v2/{parent}/storedInfoTypes:
     get:
       description: Lists stored infoTypes. See https://cloud.google.com/dlp/docs/creating-stored-infotypes to learn more.
       operationId: dlp.projects.storedInfoTypes.list

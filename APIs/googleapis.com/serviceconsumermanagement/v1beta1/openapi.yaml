@@ -33,7 +33,7 @@ tags:
   - name: operations
   - name: services
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a producer override.
       operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.producerOverrides.delete
@@ -173,7 +173,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1beta1/{parent}/consumerQuotaMetrics":
+  /v1beta1/{parent}/consumerQuotaMetrics:
     get:
       description: Retrieves a summary of all quota information about this consumer that is visible to the service producer, for each quota metric defined by the service. Each metric includes information about all of its defined limits. Each limit includes the limit configuration (quota unit, preciseness, default value), the current effective limit value, and all of the overrides applied to the limit.
       operationId: serviceconsumermanagement.services.consumerQuotaMetrics.list
@@ -229,7 +229,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/consumerQuotaMetrics:importProducerOverrides":
+  /v1beta1/{parent}/consumerQuotaMetrics:importProducerOverrides:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -271,7 +271,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - services
-  "/v1beta1/{parent}/producerOverrides":
+  /v1beta1/{parent}/producerOverrides:
     get:
       description: Lists all producer overrides on this limit.
       operationId: serviceconsumermanagement.services.consumerQuotaMetrics.limits.producerOverrides.list

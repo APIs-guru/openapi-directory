@@ -35,7 +35,7 @@ tags:
   - name: subscriptions
   - name: timeline
 paths:
-  "/accounts/{userToken}/{accountType}/{accountName}":
+  /accounts/{userToken}/{accountType}/{accountName}:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -125,7 +125,7 @@ paths:
             - https://www.googleapis.com/auth/glass.timeline
       tags:
         - contacts
-  "/contacts/{id}":
+  /contacts/{id}:
     delete:
       description: Deletes a contact.
       operationId: mirror.contacts.delete
@@ -266,7 +266,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/locations/{id}":
+  /locations/{id}:
     get:
       description: Gets a single location by ID.
       operationId: mirror.locations.get
@@ -303,7 +303,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/settings/{id}":
+  /settings/{id}:
     get:
       description: Gets a single setting by ID.
       operationId: mirror.settings.get
@@ -384,7 +384,7 @@ paths:
             - https://www.googleapis.com/auth/glass.timeline
       tags:
         - subscriptions
-  "/subscriptions/{id}":
+  /subscriptions/{id}:
     delete:
       description: Deletes a subscription.
       operationId: mirror.subscriptions.delete
@@ -534,7 +534,7 @@ paths:
             - https://www.googleapis.com/auth/glass.timeline
       tags:
         - timeline
-  "/timeline/{id}":
+  /timeline/{id}:
     delete:
       description: Deletes a timeline item.
       operationId: mirror.timeline.delete
@@ -1738,7 +1738,7 @@ paths:
             - https://www.googleapis.com/auth/glass.timeline
       tags:
         - timeline
-  "/timeline/{itemId}/attachments":
+  /timeline/{itemId}/attachments:
     get:
       description: Returns a list of attachments for a timeline item.
       operationId: mirror.timeline.attachments.list
@@ -1795,7 +1795,7 @@ paths:
             - https://www.googleapis.com/auth/glass.timeline
       tags:
         - timeline
-  "/timeline/{itemId}/attachments/{attachmentId}":
+  /timeline/{itemId}/attachments/{attachmentId}:
     delete:
       description: Deletes an attachment from a timeline item.
       operationId: mirror.timeline.attachments.delete

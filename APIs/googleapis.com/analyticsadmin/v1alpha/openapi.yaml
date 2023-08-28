@@ -462,7 +462,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{account}:searchChangeHistoryEvents":
+  /v1alpha/{account}:searchChangeHistoryEvents:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -504,7 +504,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - accounts
-  "/v1alpha/{entity}:runAccessReport":
+  /v1alpha/{entity}:runAccessReport:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -550,7 +550,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     delete:
       description: Deletes a user link on an account or property.
       operationId: analyticsadmin.properties.userLinks.delete
@@ -649,7 +649,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{name}:approve":
+  /v1alpha/{name}:approve:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -691,7 +691,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{name}:archive":
+  /v1alpha/{name}:archive:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -733,7 +733,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{name}:cancel":
+  /v1alpha/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -775,7 +775,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/accessBindings":
+  /v1alpha/{parent}/accessBindings:
     get:
       description: Lists all access bindings on an account or property.
       operationId: analyticsadmin.properties.accessBindings.list
@@ -855,7 +855,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{parent}/accessBindings:batchCreate":
+  /v1alpha/{parent}/accessBindings:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -897,7 +897,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{parent}/accessBindings:batchDelete":
+  /v1alpha/{parent}/accessBindings:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -939,7 +939,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{parent}/accessBindings:batchGet":
+  /v1alpha/{parent}/accessBindings:batchGet:
     get:
       description: Gets information about multiple access bindings to an account or property.
       operationId: analyticsadmin.properties.accessBindings.batchGet
@@ -989,7 +989,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/accessBindings:batchUpdate":
+  /v1alpha/{parent}/accessBindings:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1031,7 +1031,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{parent}/adSenseLinks":
+  /v1alpha/{parent}/adSenseLinks:
     get:
       description: Lists AdSenseLinks on a property.
       operationId: analyticsadmin.properties.adSenseLinks.list
@@ -1097,7 +1097,7 @@ paths:
           description: Successful response
       tags:
         - properties
-  "/v1alpha/{parent}/audiences":
+  /v1alpha/{parent}/audiences:
     get:
       description: Lists Audiences on a property. Audiences created before 2020 may not be supported. Default audiences will not show filter definitions.
       operationId: analyticsadmin.properties.audiences.list
@@ -1177,7 +1177,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/bigQueryLinks":
+  /v1alpha/{parent}/bigQueryLinks:
     get:
       description: Lists BigQuery Links on a property.
       operationId: analyticsadmin.properties.bigQueryLinks.list
@@ -1228,7 +1228,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/channelGroups":
+  /v1alpha/{parent}/channelGroups:
     get:
       description: Lists ChannelGroups on a property.
       operationId: analyticsadmin.properties.channelGroups.list
@@ -1308,7 +1308,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/conversionEvents":
+  /v1alpha/{parent}/conversionEvents:
     get:
       description: Returns a list of conversion events in the specified parent property. Returns an empty list if no conversion events are found.
       operationId: analyticsadmin.properties.conversionEvents.list
@@ -1388,7 +1388,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/customDimensions":
+  /v1alpha/{parent}/customDimensions:
     get:
       description: Lists CustomDimensions on a property.
       operationId: analyticsadmin.properties.customDimensions.list
@@ -1468,7 +1468,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/customMetrics":
+  /v1alpha/{parent}/customMetrics:
     get:
       description: Lists CustomMetrics on a property.
       operationId: analyticsadmin.properties.customMetrics.list
@@ -1548,7 +1548,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/dataStreams":
+  /v1alpha/{parent}/dataStreams:
     get:
       description: Lists DataStreams on a property.
       operationId: analyticsadmin.properties.dataStreams.list
@@ -1628,7 +1628,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/displayVideo360AdvertiserLinkProposals":
+  /v1alpha/{parent}/displayVideo360AdvertiserLinkProposals:
     get:
       description: Lists DisplayVideo360AdvertiserLinkProposals on a property.
       operationId: analyticsadmin.properties.displayVideo360AdvertiserLinkProposals.list
@@ -1708,7 +1708,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/displayVideo360AdvertiserLinks":
+  /v1alpha/{parent}/displayVideo360AdvertiserLinks:
     get:
       description: Lists all DisplayVideo360AdvertiserLinks on a property.
       operationId: analyticsadmin.properties.displayVideo360AdvertiserLinks.list
@@ -1788,7 +1788,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/eventCreateRules":
+  /v1alpha/{parent}/eventCreateRules:
     get:
       description: Lists EventCreateRules on a web data stream.
       operationId: analyticsadmin.properties.dataStreams.eventCreateRules.list
@@ -1868,7 +1868,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/expandedDataSets":
+  /v1alpha/{parent}/expandedDataSets:
     get:
       description: Lists ExpandedDataSets on a property.
       operationId: analyticsadmin.properties.expandedDataSets.list
@@ -1948,7 +1948,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/firebaseLinks":
+  /v1alpha/{parent}/firebaseLinks:
     get:
       description: Lists FirebaseLinks on a property. Properties can have at most one FirebaseLink.
       operationId: analyticsadmin.properties.firebaseLinks.list
@@ -2028,7 +2028,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/googleAdsLinks":
+  /v1alpha/{parent}/googleAdsLinks:
     get:
       description: Lists GoogleAdsLinks on a property.
       operationId: analyticsadmin.properties.googleAdsLinks.list
@@ -2108,7 +2108,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/measurementProtocolSecrets":
+  /v1alpha/{parent}/measurementProtocolSecrets:
     get:
       description: Returns child MeasurementProtocolSecrets under the specified parent Property.
       operationId: analyticsadmin.properties.dataStreams.measurementProtocolSecrets.list
@@ -2188,7 +2188,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/sKAdNetworkConversionValueSchema":
+  /v1alpha/{parent}/sKAdNetworkConversionValueSchema:
     get:
       description: Lists SKAdNetworkConversionValueSchema on a stream. Properties can have at most one SKAdNetworkConversionValueSchema.
       operationId: analyticsadmin.properties.dataStreams.sKAdNetworkConversionValueSchema.list
@@ -2268,7 +2268,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/searchAds360Links":
+  /v1alpha/{parent}/searchAds360Links:
     get:
       description: Lists all SearchAds360Links on a property.
       operationId: analyticsadmin.properties.searchAds360Links.list
@@ -2348,7 +2348,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
-  "/v1alpha/{parent}/userLinks":
+  /v1alpha/{parent}/userLinks:
     get:
       description: Lists all user links on an account or property.
       operationId: analyticsadmin.properties.userLinks.list
@@ -2433,7 +2433,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{parent}/userLinks:audit":
+  /v1alpha/{parent}/userLinks:audit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2479,7 +2479,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users.readonly
       tags:
         - properties
-  "/v1alpha/{parent}/userLinks:batchCreate":
+  /v1alpha/{parent}/userLinks:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2521,7 +2521,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{parent}/userLinks:batchDelete":
+  /v1alpha/{parent}/userLinks:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2563,7 +2563,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{parent}/userLinks:batchGet":
+  /v1alpha/{parent}/userLinks:batchGet:
     get:
       description: Gets information about multiple users' links to an account or property.
       operationId: analyticsadmin.properties.userLinks.batchGet
@@ -2613,7 +2613,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/userLinks:batchUpdate":
+  /v1alpha/{parent}/userLinks:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2655,7 +2655,7 @@ paths:
             - https://www.googleapis.com/auth/analytics.manage.users
       tags:
         - properties
-  "/v1alpha/{property}:acknowledgeUserDataCollection":
+  /v1alpha/{property}:acknowledgeUserDataCollection:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

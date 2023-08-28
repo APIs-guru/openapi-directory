@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{issueModel}:calculateIssueModelStats":
+  /v1/{issueModel}:calculateIssueModelStats:
     get:
       description: Gets an issue model's statistics.
       operationId: contactcenterinsights.projects.locations.issueModels.calculateIssueModelStats
@@ -66,7 +66,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{location}/conversations:calculateStats":
+  /v1/{location}/conversations:calculateStats:
     get:
       description: Gets conversation statistics.
       operationId: contactcenterinsights.projects.locations.conversations.calculateStats
@@ -108,7 +108,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a view.
       operationId: contactcenterinsights.projects.locations.views.delete
@@ -217,7 +217,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: contactcenterinsights.projects.locations.operations.list
@@ -269,7 +269,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -306,7 +306,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:deploy":
+  /v1/{name}:deploy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -348,7 +348,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:undeploy":
+  /v1/{name}:undeploy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -390,7 +390,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/analyses":
+  /v1/{parent}/analyses:
     get:
       description: Lists analyses.
       operationId: contactcenterinsights.projects.locations.conversations.analyses.list
@@ -471,7 +471,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/conversations":
+  /v1/{parent}/conversations:
     get:
       description: Lists conversations.
       operationId: contactcenterinsights.projects.locations.conversations.list
@@ -566,7 +566,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/conversations:bulkAnalyze":
+  /v1/{parent}/conversations:bulkAnalyze:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -608,7 +608,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/conversations:ingest":
+  /v1/{parent}/conversations:ingest:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -650,7 +650,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/conversations:upload":
+  /v1/{parent}/conversations:upload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -692,7 +692,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/insightsdata:export":
+  /v1/{parent}/insightsdata:export:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -734,7 +734,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/issueModels":
+  /v1/{parent}/issueModels:
     get:
       description: Lists issue models.
       operationId: contactcenterinsights.projects.locations.issueModels.list
@@ -800,7 +800,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/issues":
+  /v1/{parent}/issues:
     get:
       description: Lists issues.
       operationId: contactcenterinsights.projects.locations.issueModels.issues.list
@@ -837,7 +837,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/phraseMatchers":
+  /v1/{parent}/phraseMatchers:
     get:
       description: Lists phrase matchers.
       operationId: contactcenterinsights.projects.locations.phraseMatchers.list
@@ -918,7 +918,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/views":
+  /v1/{parent}/views:
     get:
       description: Lists views.
       operationId: contactcenterinsights.projects.locations.views.list

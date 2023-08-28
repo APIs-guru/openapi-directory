@@ -339,7 +339,7 @@ paths:
           description: Successful response
       tags:
         - googleLocations
-  "/v4/{name}":
+  /v4/{name}:
     delete:
       description: Deletes a specific question written by the current user.
       operationId: mybusiness.accounts.locations.questions.delete
@@ -443,7 +443,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}/localPosts:reportInsights":
+  /v4/{name}/localPosts:reportInsights:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -480,7 +480,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}/locations:batchGet":
+  /v4/{name}/locations:batchGet:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -517,7 +517,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}/locations:batchGetReviews":
+  /v4/{name}/locations:batchGetReviews:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -554,7 +554,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}/locations:reportInsights":
+  /v4/{name}/locations:reportInsights:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -591,7 +591,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}/reply":
+  /v4/{name}/reply:
     delete:
       description: Deletes the response to the specified review. This operation is only valid if the specified location is verified.
       operationId: mybusiness.accounts.locations.reviews.deleteReply
@@ -647,7 +647,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:accept":
+  /v4/{name}:accept:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -684,7 +684,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:associate":
+  /v4/{name}:associate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -721,7 +721,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:clearAssociation":
+  /v4/{name}:clearAssociation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -758,7 +758,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:complete":
+  /v4/{name}:complete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -795,7 +795,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:decline":
+  /v4/{name}:decline:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -832,7 +832,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:fetchVerificationOptions":
+  /v4/{name}:fetchVerificationOptions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -869,7 +869,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:findMatches":
+  /v4/{name}:findMatches:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -906,7 +906,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:generateAccountNumber":
+  /v4/{name}:generateAccountNumber:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -943,7 +943,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:getGoogleUpdated":
+  /v4/{name}:getGoogleUpdated:
     get:
       description: Returns the Google updated Lodging of a specific location.
       operationId: mybusiness.accounts.locations.lodging.getGoogleUpdated
@@ -980,7 +980,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{name}:googleUpdated":
+  /v4/{name}:googleUpdated:
     get:
       description: Gets the Google-updated version of the specified location. Returns `NOT_FOUND` if the location does not exist.
       operationId: mybusiness.accounts.locations.getGoogleUpdated
@@ -1012,7 +1012,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{name}:recommendGoogleLocations":
+  /v4/{name}:recommendGoogleLocations:
     get:
       description: List all the GoogleLocations that have been recommended to the specified Business Profile account. Recommendations are provided for personal accounts and location groups only, requests for all other account types will result in an error. The recommendations for location groups are based on the locations in that group. The recommendations for personal accounts are based on all of the locations that the user has access to on Business Profile (which includes locations they can access through location groups), and is a superset of all recommendations generated for the user.
       operationId: mybusiness.accounts.listRecommendGoogleLocations
@@ -1054,7 +1054,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{name}:report":
+  /v4/{name}:report:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1091,7 +1091,7 @@ paths:
           description: Successful response
       tags:
         - googleLocations
-  "/v4/{name}:transfer":
+  /v4/{name}:transfer:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1128,7 +1128,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{name}:verify":
+  /v4/{name}:verify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1165,7 +1165,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{parent}/admins":
+  /v4/{parent}/admins:
     get:
       description: Lists all of the admins for the specified location.
       operationId: mybusiness.accounts.locations.admins.list
@@ -1221,7 +1221,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{parent}/answers":
+  /v4/{parent}/answers:
     get:
       description: Returns the paginated list of answers for a specified question.
       operationId: mybusiness.accounts.locations.questions.answers.list
@@ -1268,7 +1268,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{parent}/answers:delete":
+  /v4/{parent}/answers:delete:
     delete:
       description: Deletes the answer written by the current user to a question.
       operationId: mybusiness.accounts.locations.questions.answers.delete
@@ -1300,7 +1300,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{parent}/answers:upsert":
+  /v4/{parent}/answers:upsert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1337,7 +1337,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{parent}/insuranceNetworks":
+  /v4/{parent}/insuranceNetworks:
     get:
       description: Returns a list of all insurance networks supported by Google.
       operationId: mybusiness.accounts.locations.insuranceNetworks.list
@@ -1384,7 +1384,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{parent}/invitations":
+  /v4/{parent}/invitations:
     get:
       description: Lists pending invitations for the specified account.
       operationId: mybusiness.accounts.invitations.list
@@ -1425,7 +1425,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{parent}/localPosts":
+  /v4/{parent}/localPosts:
     get:
       description: Returns a list of local posts associated with a location.
       operationId: mybusiness.accounts.locations.localPosts.list
@@ -1491,7 +1491,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{parent}/locations":
+  /v4/{parent}/locations:
     get:
       description: Lists the locations for the specified account.
       operationId: mybusiness.accounts.locations.list
@@ -1582,7 +1582,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{parent}/media":
+  /v4/{parent}/media:
     get:
       description: Returns a list of media items associated with a location.
       operationId: mybusiness.accounts.locations.media.list
@@ -1648,7 +1648,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{parent}/media/customers":
+  /v4/{parent}/media/customers:
     get:
       description: Returns a list of media items associated with a location that have been contributed by customers.
       operationId: mybusiness.accounts.locations.media.customers.list
@@ -1690,7 +1690,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{parent}/media:startUpload":
+  /v4/{parent}/media:startUpload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1727,7 +1727,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{parent}/questions":
+  /v4/{parent}/questions:
     get:
       description: Returns the paginated list of questions and some of its answers for a specified location.
       operationId: mybusiness.accounts.locations.questions.list
@@ -1808,7 +1808,7 @@ paths:
           description: Successful response
       tags:
         - accounts
-  "/v4/{parent}/reviews":
+  /v4/{parent}/reviews:
     get:
       description: Returns the paginated list of reviews for the specified location. This operation is only valid if the specified location is verified.
       operationId: mybusiness.accounts.locations.reviews.list
@@ -1855,7 +1855,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v4/{parent}/verifications":
+  /v4/{parent}/verifications:
     get:
       description: List verifications of a location, ordered by create time.
       operationId: mybusiness.accounts.locations.verifications.list

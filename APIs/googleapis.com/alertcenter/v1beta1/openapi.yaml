@@ -91,7 +91,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/alerts/{alertId}":
+  /v1beta1/alerts/{alertId}:
     delete:
       description: Marks the specified alert for deletion. An alert that has been marked for deletion is removed from Alert Center after 30 days. Marking an alert for deletion has no effect on an alert which has already been marked for deletion. Attempting to mark a nonexistent alert for deletion results in a `NOT_FOUND` error.
       operationId: alertcenter.alerts.delete
@@ -162,7 +162,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/alerts/{alertId}/feedback":
+  /v1beta1/alerts/{alertId}/feedback:
     get:
       description: Lists all the feedback for an alert. Attempting to list feedbacks for a non-existent alert returns `NOT_FOUND` error.
       operationId: alertcenter.alerts.feedback.list
@@ -243,7 +243,7 @@ paths:
             - https://www.googleapis.com/auth/apps.alerts
       tags:
         - alerts
-  "/v1beta1/alerts/{alertId}/metadata":
+  /v1beta1/alerts/{alertId}/metadata:
     get:
       description: Returns the metadata of an alert. Attempting to get metadata for a non-existent alert returns `NOT_FOUND` error.
       operationId: alertcenter.alerts.getMetadata
@@ -285,7 +285,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/alerts/{alertId}:undelete":
+  /v1beta1/alerts/{alertId}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

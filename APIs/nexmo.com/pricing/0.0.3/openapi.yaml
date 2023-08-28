@@ -20,7 +20,7 @@ info:
   x-providerName: nexmo.com
   x-serviceName: pricing
 paths:
-  "/get-full-pricing/outbound/{type}":
+  /get-full-pricing/outbound/{type}:
     get:
       description: |
         Retrieves the pricing information for all countries.
@@ -47,7 +47,7 @@ paths:
       summary: Retrieve outbound pricing for all countries.
       tags:
         - Pricing
-  "/get-prefix-pricing/outbound/{type}":
+  /get-prefix-pricing/outbound/{type}:
     get:
       description: |
         Retrieves the pricing information based on the dialing prefix.
@@ -80,7 +80,7 @@ paths:
       summary: Retrieve outbound pricing for a specific dialing prefix.
       tags:
         - Pricing
-  "/get-pricing/outbound/{type}":
+  /get-pricing/outbound/{type}:
     get:
       description: |
         Retrieves the pricing information based on the specified country.

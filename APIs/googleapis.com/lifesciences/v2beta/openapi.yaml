@@ -34,7 +34,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2beta/{name}":
+  /v2beta/{name}:
     get:
       description: "Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `lifesciences.operations.get`"
       operationId: lifesciences.projects.locations.operations.get
@@ -71,7 +71,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta/{name}/locations":
+  /v2beta/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: lifesciences.projects.locations.list
@@ -123,7 +123,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta/{name}/operations":
+  /v2beta/{name}/operations:
     get:
       description: "Lists operations that match the specified filter in the request. Authorization requires the following [Google IAM](https://cloud.google.com/iam) permission: * `lifesciences.operations.list`"
       operationId: lifesciences.projects.locations.operations.list
@@ -175,7 +175,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2beta/{name}:cancel":
+  /v2beta/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -217,7 +217,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2beta/{parent}/pipelines:run":
+  /v2beta/{parent}/pipelines:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

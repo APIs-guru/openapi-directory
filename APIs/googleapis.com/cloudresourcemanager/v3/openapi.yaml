@@ -784,7 +784,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/{name}":
+  /v3/{name}:
     delete:
       description: Deletes a TagHold.
       operationId: cloudresourcemanager.tagValues.tagHolds.delete
@@ -897,7 +897,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - tagValues
-  "/v3/{name}:move":
+  /v3/{name}:move:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -939,7 +939,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v3/{name}:undelete":
+  /v3/{name}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -981,7 +981,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v3/{parent}/tagHolds":
+  /v3/{parent}/tagHolds:
     get:
       description: Lists TagHolds under a TagValue.
       operationId: cloudresourcemanager.tagValues.tagHolds.list
@@ -1071,7 +1071,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - tagValues
-  "/v3/{resource}:getIamPolicy":
+  /v3/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1117,7 +1117,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - tagValues
-  "/v3/{resource}:setIamPolicy":
+  /v3/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1159,7 +1159,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - tagValues
-  "/v3/{resource}:testIamPermissions":
+  /v3/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

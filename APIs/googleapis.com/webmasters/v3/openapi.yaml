@@ -66,7 +66,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/sites/{siteUrl}":
+  /sites/{siteUrl}:
     delete:
       description: Removes a site from the set of the user's Search Console sites.
       operationId: webmasters.sites.delete
@@ -143,7 +143,7 @@ paths:
             - https://www.googleapis.com/auth/webmasters
       tags:
         - sites
-  "/sites/{siteUrl}/searchAnalytics/query":
+  /sites/{siteUrl}/searchAnalytics/query:
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -188,7 +188,7 @@ paths:
             - https://www.googleapis.com/auth/webmasters.readonly
       tags:
         - searchanalytics
-  "/sites/{siteUrl}/sitemaps":
+  /sites/{siteUrl}/sitemaps:
     get:
       description: Lists the sitemaps-entries submitted for this site, or included in the sitemap index file (if sitemapIndex is specified in the request).
       operationId: webmasters.sitemaps.list
@@ -230,7 +230,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/sites/{siteUrl}/sitemaps/{feedpath}":
+  /sites/{siteUrl}/sitemaps/{feedpath}:
     delete:
       description: Deletes a sitemap from this site.
       operationId: webmasters.sitemaps.delete

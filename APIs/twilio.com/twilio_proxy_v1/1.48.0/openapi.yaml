@@ -168,7 +168,7 @@ paths:
         session: "{service_sid: sid}"
         short_code: "{service_sid: sid}"
       pathType: list
-  "/v1/Services/{ServiceSid}/PhoneNumbers":
+  /v1/Services/{ServiceSid}/PhoneNumbers:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Phone Numbers in the Proxy Number Pool for a Service. A maximum of 100 records will be returned per page.
@@ -298,7 +298,7 @@ paths:
         - phone_number
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}":
+  /v1/Services/{ServiceSid}/PhoneNumbers/{Sid}:
     delete:
       description: Delete a specific Phone Number from a Service.
       operationId: DeletePhoneNumber
@@ -420,7 +420,7 @@ paths:
         - phone_number
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Sessions":
+  /v1/Services/{ServiceSid}/Sessions:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Sessions for the Service. A maximum of 100 records will be returned per page.
@@ -563,7 +563,7 @@ paths:
         participant: "{service_sid: service_sid, session_sid: sid}"
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions":
+  /v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Interactions for a Session. A maximum of 100 records will be returned per page.
@@ -656,7 +656,7 @@ paths:
         - data
       parent: /Services/{ServiceSid}/Sessions/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions/{Sid}":
+  /v1/Services/{ServiceSid}/Sessions/{SessionSid}/Interactions/{Sid}:
     delete:
       description: Delete a specific Interaction.
       operationId: DeleteInteraction
@@ -751,7 +751,7 @@ paths:
         - data
       parent: /Services/{ServiceSid}/Sessions/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants":
+  /v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Participants in a Session.
@@ -906,7 +906,7 @@ paths:
         message_interaction: "{service_sid: service_sid, session_sid: session_sid, participant_sid: sid}"
       parent: /Services/{ServiceSid}/Sessions/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{ParticipantSid}/MessageInteractions":
+  /v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{ParticipantSid}/MessageInteractions:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1072,7 +1072,7 @@ paths:
         - data
       parent: /Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{ParticipantSid}/MessageInteractions/{Sid}":
+  /v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{ParticipantSid}/MessageInteractions/{Sid}:
     description: "TODO: Resource-level docs"
     get:
       description: ""
@@ -1136,7 +1136,7 @@ paths:
         - data
       parent: /Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{Sid}":
+  /v1/Services/{ServiceSid}/Sessions/{SessionSid}/Participants/{Sid}:
     delete:
       description: Delete a specific Participant. This is a soft-delete. The participant remains associated with the session and cannot be re-added. Participants are only permanently deleted when the [Session](https://www.twilio.com/docs/proxy/api/session) is deleted.
       operationId: DeleteParticipant
@@ -1234,7 +1234,7 @@ paths:
         message_interaction: "{service_sid: service_sid, session_sid: session_sid, participant_sid: sid}"
       parent: /Services/{ServiceSid}/Sessions/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/Sessions/{Sid}":
+  /v1/Services/{ServiceSid}/Sessions/{Sid}:
     delete:
       description: Delete a specific Session.
       operationId: DeleteSession
@@ -1365,7 +1365,7 @@ paths:
         participant: "{service_sid: service_sid, session_sid: sid}"
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{ServiceSid}/ShortCodes":
+  /v1/Services/{ServiceSid}/ShortCodes:
     description: "TODO: Resource-level docs"
     get:
       description: Retrieve a list of all Short Codes in the Proxy Number Pool for the Service. A maximum of 100 records will be returned per page.
@@ -1490,7 +1490,7 @@ paths:
         - iso_country
       parent: /Services/{Sid}
       pathType: list
-  "/v1/Services/{ServiceSid}/ShortCodes/{Sid}":
+  /v1/Services/{ServiceSid}/ShortCodes/{Sid}:
     delete:
       description: Delete a specific Short Code from a Service.
       operationId: DeleteShortCode
@@ -1612,7 +1612,7 @@ paths:
         - iso_country
       parent: /Services/{Sid}
       pathType: instance
-  "/v1/Services/{Sid}":
+  /v1/Services/{Sid}:
     delete:
       description: Delete a specific Service.
       operationId: DeleteService

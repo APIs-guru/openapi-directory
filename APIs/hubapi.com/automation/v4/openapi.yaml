@@ -47,7 +47,7 @@ paths:
       summary: Complete a batch of callbacks
       tags:
         - Callbacks
-  "/automation/v4/actions/callbacks/{callbackId}/complete":
+  /automation/v4/actions/callbacks/{callbackId}/complete:
     post:
       description: Completes the given action callback.
       operationId: post-/automation/v4/actions/callbacks/{callbackId}/complete_complete
@@ -80,7 +80,7 @@ paths:
       summary: Complete a callback
       tags:
         - Callbacks
-  "/automation/v4/actions/{appId}":
+  /automation/v4/actions/{appId}:
     get:
       description: Returns a list of all custom workflow actions.
       operationId: get-/automation/v4/actions/{appId}_getPage
@@ -300,7 +300,7 @@ paths:
       summary: Create new custom action
       tags:
         - Definitions
-  "/automation/v4/actions/{appId}/{definitionId}":
+  /automation/v4/actions/{appId}/{definitionId}:
     delete:
       description: Archives a single custom workflow action with the specified ID. Workflows that currently use this custom action will stop attempting to execute the action, and all future executions will be marked as a failure.
       operationId: delete-/automation/v4/actions/{appId}/{definitionId}_archive
@@ -544,7 +544,7 @@ paths:
       summary: Update a custom action
       tags:
         - Definitions
-  "/automation/v4/actions/{appId}/{definitionId}/functions":
+  /automation/v4/actions/{appId}/{definitionId}/functions:
     get:
       description: Returns a list of all functions that are associated with the given custom workflow action.
       operationId: get-/automation/v4/actions/{appId}/{definitionId}/functions_getPage
@@ -587,7 +587,7 @@ paths:
       summary: Get all custom action functions
       tags:
         - Functions
-  "/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}":
+  /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}:
     delete:
       description: Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
       operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}_archiveByFunctionType
@@ -737,7 +737,7 @@ paths:
       summary: Create or replace a custom action function
       tags:
         - Functions
-  "/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}":
+  /automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}:
     delete:
       description: Delete a function for a custom workflow action. This will remove the function itself as well as removing the association between the function and the custom action. This can't be undone.
       operationId: delete-/automation/v4/actions/{appId}/{definitionId}/functions/{functionType}/{functionId}_archive
@@ -913,7 +913,7 @@ paths:
       summary: Create or replace a custom action function
       tags:
         - Functions
-  "/automation/v4/actions/{appId}/{definitionId}/revisions":
+  /automation/v4/actions/{appId}/{definitionId}/revisions:
     get:
       description: Returns a list of revisions for a custom workflow action.
       operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions_getPage
@@ -1044,7 +1044,7 @@ paths:
       summary: Get all revisions for a custom action
       tags:
         - Revisions
-  "/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}":
+  /automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}:
     get:
       description: Returns the given version of a custom workflow action.
       operationId: get-/automation/v4/actions/{appId}/{definitionId}/revisions/{revisionId}_getById

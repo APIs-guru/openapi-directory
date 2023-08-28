@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Delete an OS Config patch deployment.
       operationId: osconfig.projects.patchDeployments.delete
@@ -136,7 +136,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -178,7 +178,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:listRevisions":
+  /v1/{name}:listRevisions:
     get:
       description: List the OS policy assignment revisions for a given OS policy assignment.
       operationId: osconfig.projects.locations.osPolicyAssignments.listRevisions
@@ -225,7 +225,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:pause":
+  /v1/{name}:pause:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -267,7 +267,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:resume":
+  /v1/{name}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -309,7 +309,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/instanceDetails":
+  /v1/{parent}/instanceDetails:
     get:
       description: Get a list of instance details for a given patch job.
       operationId: osconfig.projects.patchJobs.instanceDetails.list
@@ -361,7 +361,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/inventories":
+  /v1/{parent}/inventories:
     get:
       description: List inventory data for all VM instances in the specified zone.
       operationId: osconfig.projects.locations.instances.inventories.list
@@ -422,7 +422,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/osPolicyAssignments":
+  /v1/{parent}/osPolicyAssignments:
     get:
       description: List the OS policy assignments under the parent resource. For each OS policy assignment, the latest revision is returned.
       operationId: osconfig.projects.locations.osPolicyAssignments.list
@@ -503,7 +503,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/patchDeployments":
+  /v1/{parent}/patchDeployments:
     get:
       description: Get a page of OS Config patch deployments.
       operationId: osconfig.projects.patchDeployments.list
@@ -584,7 +584,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/patchJobs":
+  /v1/{parent}/patchJobs:
     get:
       description: Get a list of patch jobs.
       operationId: osconfig.projects.patchJobs.list
@@ -636,7 +636,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/patchJobs:execute":
+  /v1/{parent}/patchJobs:execute:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -678,7 +678,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/reports":
+  /v1/{parent}/reports:
     get:
       description: List OS policy assignment reports for all Compute Engine VM instances in the specified zone.
       operationId: osconfig.projects.locations.instances.osPolicyAssignments.reports.list
@@ -730,7 +730,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/vulnerabilityReports":
+  /v1/{parent}/vulnerabilityReports:
     get:
       description: List vulnerability reports for all VM instances in the specified zone.
       operationId: osconfig.projects.locations.instances.vulnerabilityReports.list

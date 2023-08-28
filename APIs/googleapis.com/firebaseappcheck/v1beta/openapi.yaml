@@ -32,7 +32,7 @@ tags:
   - name: oauthClients
   - name: projects
 paths:
-  "/v1beta/{app}:exchangeAppAttestAssertion":
+  /v1beta/{app}:exchangeAppAttestAssertion:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -78,7 +78,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangeAppAttestAttestation":
+  /v1beta/{app}:exchangeAppAttestAttestation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -124,7 +124,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangeCustomToken":
+  /v1beta/{app}:exchangeCustomToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -170,7 +170,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangeDebugToken":
+  /v1beta/{app}:exchangeDebugToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -216,7 +216,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangeDeviceCheckToken":
+  /v1beta/{app}:exchangeDeviceCheckToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -262,7 +262,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangePlayIntegrityToken":
+  /v1beta/{app}:exchangePlayIntegrityToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -308,7 +308,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangeRecaptchaEnterpriseToken":
+  /v1beta/{app}:exchangeRecaptchaEnterpriseToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -354,7 +354,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangeRecaptchaToken":
+  /v1beta/{app}:exchangeRecaptchaToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -400,7 +400,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangeRecaptchaV3Token":
+  /v1beta/{app}:exchangeRecaptchaV3Token:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -446,7 +446,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:exchangeSafetyNetToken":
+  /v1beta/{app}:exchangeSafetyNetToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -492,7 +492,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:generateAppAttestChallenge":
+  /v1beta/{app}:generateAppAttestChallenge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -538,7 +538,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{app}:generatePlayIntegrityChallenge":
+  /v1beta/{app}:generatePlayIntegrityChallenge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -584,7 +584,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{name}":
+  /v1beta/{name}:
     delete:
       description: Deletes the specified DebugToken. A deleted debug token cannot be used to exchange for an App Check token. Use this method when you suspect the secret `token` has been compromised or when you no longer need the debug token.
       operationId: firebaseappcheck.projects.apps.debugTokens.delete
@@ -691,7 +691,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{parent}/apps/-/appAttestConfig:batchGet":
+  /v1beta/{parent}/apps/-/appAttestConfig:batchGet:
     get:
       description: Atomically gets the AppAttestConfigs for the specified list of apps.
       operationId: firebaseappcheck.projects.apps.appAttestConfig.batchGet
@@ -741,7 +741,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/apps/-/deviceCheckConfig:batchGet":
+  /v1beta/{parent}/apps/-/deviceCheckConfig:batchGet:
     get:
       description: Atomically gets the DeviceCheckConfigs for the specified list of apps. For security reasons, the `private_key` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.deviceCheckConfig.batchGet
@@ -791,7 +791,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/apps/-/playIntegrityConfig:batchGet":
+  /v1beta/{parent}/apps/-/playIntegrityConfig:batchGet:
     get:
       description: Atomically gets the PlayIntegrityConfigs for the specified list of apps.
       operationId: firebaseappcheck.projects.apps.playIntegrityConfig.batchGet
@@ -841,7 +841,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/apps/-/recaptchaConfig:batchGet":
+  /v1beta/{parent}/apps/-/recaptchaConfig:batchGet:
     get:
       description: Atomically gets the RecaptchaConfigs for the specified list of apps. For security reasons, the `site_secret` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.recaptchaConfig.batchGet
@@ -891,7 +891,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/apps/-/recaptchaEnterpriseConfig:batchGet":
+  /v1beta/{parent}/apps/-/recaptchaEnterpriseConfig:batchGet:
     get:
       description: Atomically gets the RecaptchaEnterpriseConfigs for the specified list of apps.
       operationId: firebaseappcheck.projects.apps.recaptchaEnterpriseConfig.batchGet
@@ -941,7 +941,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/apps/-/recaptchaV3Config:batchGet":
+  /v1beta/{parent}/apps/-/recaptchaV3Config:batchGet:
     get:
       description: Atomically gets the RecaptchaV3Configs for the specified list of apps. For security reasons, the `site_secret` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.recaptchaV3Config.batchGet
@@ -991,7 +991,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/apps/-/safetyNetConfig:batchGet":
+  /v1beta/{parent}/apps/-/safetyNetConfig:batchGet:
     get:
       description: Atomically gets the SafetyNetConfigs for the specified list of apps.
       operationId: firebaseappcheck.projects.apps.safetyNetConfig.batchGet
@@ -1041,7 +1041,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/debugTokens":
+  /v1beta/{parent}/debugTokens:
     get:
       description: Lists all DebugTokens for the specified app. For security reasons, the `token` field is never populated in the response.
       operationId: firebaseappcheck.projects.apps.debugTokens.list
@@ -1125,7 +1125,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{parent}/services":
+  /v1beta/{parent}/services:
     get:
       description: Lists all Service configurations for the specified project. Only Services which were explicitly configured using UpdateService or BatchUpdateServices will be returned.
       operationId: firebaseappcheck.projects.services.list
@@ -1176,7 +1176,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta/{parent}/services:batchUpdate":
+  /v1beta/{parent}/services:batchUpdate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1222,7 +1222,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - projects
-  "/v1beta/{project}:verifyAppCheckToken":
+  /v1beta/{project}:verifyAppCheckToken:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

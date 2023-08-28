@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: accounts
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     get:
       description: Returns the pubsub notification settings for the account.
       operationId: mybusinessnotifications.accounts.getNotificationSetting

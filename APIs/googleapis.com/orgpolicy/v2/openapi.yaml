@@ -31,7 +31,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a policy. Returns a `google.rpc.Status` with `google.rpc.Code.NOT_FOUND` if the constraint or organization policy does not exist.
       operationId: orgpolicy.projects.policies.delete
@@ -126,7 +126,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:getEffectivePolicy":
+  /v2/{name}:getEffectivePolicy:
     get:
       description: Gets the effective policy on a resource. This is the result of merging policies in the resource hierarchy and evaluating conditions. The returned policy will not have an `etag` or `condition` set because it is an evaluated policy across multiple resources. Subtrees of Resource Manager resource hierarchy with 'under:' prefix will not be expanded.
       operationId: orgpolicy.projects.policies.getEffectivePolicy
@@ -163,7 +163,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/constraints":
+  /v2/{parent}/constraints:
     get:
       description: Lists constraints that could be applied on the specified resource.
       operationId: orgpolicy.projects.constraints.list
@@ -210,7 +210,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/customConstraints":
+  /v2/{parent}/customConstraints:
     get:
       description: Retrieves all of the custom constraints that exist on a particular organization resource.
       operationId: orgpolicy.organizations.customConstraints.list
@@ -286,7 +286,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v2/{parent}/policies":
+  /v2/{parent}/policies:
     get:
       description: Retrieves all of the policies that exist on a particular resource.
       operationId: orgpolicy.projects.policies.list

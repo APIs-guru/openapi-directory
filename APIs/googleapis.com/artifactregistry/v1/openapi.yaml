@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a version and all of its content. The returned operation will complete once the version has been deleted.
       operationId: artifactregistry.projects.locations.repositories.packages.versions.delete
@@ -145,7 +145,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: artifactregistry.projects.locations.list
@@ -201,7 +201,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/aptArtifacts:create":
+  /v1/{parent}/aptArtifacts:create:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -243,7 +243,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/aptArtifacts:import":
+  /v1/{parent}/aptArtifacts:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -285,7 +285,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/dockerImages":
+  /v1/{parent}/dockerImages:
     get:
       description: Lists docker images.
       operationId: artifactregistry.projects.locations.repositories.dockerImages.list
@@ -341,7 +341,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/files":
+  /v1/{parent}/files:
     get:
       description: Lists files.
       operationId: artifactregistry.projects.locations.repositories.files.list
@@ -402,7 +402,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/goModules:create":
+  /v1/{parent}/goModules:create:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -444,7 +444,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/googetArtifacts:create":
+  /v1/{parent}/googetArtifacts:create:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -486,7 +486,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/googetArtifacts:import":
+  /v1/{parent}/googetArtifacts:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -528,7 +528,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/kfpArtifacts:create":
+  /v1/{parent}/kfpArtifacts:create:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -570,7 +570,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/mavenArtifacts":
+  /v1/{parent}/mavenArtifacts:
     get:
       description: Lists maven artifacts.
       operationId: artifactregistry.projects.locations.repositories.mavenArtifacts.list
@@ -621,7 +621,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/npmPackages":
+  /v1/{parent}/npmPackages:
     get:
       description: Lists npm packages.
       operationId: artifactregistry.projects.locations.repositories.npmPackages.list
@@ -672,7 +672,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/packages":
+  /v1/{parent}/packages:
     get:
       description: Lists packages.
       operationId: artifactregistry.projects.locations.repositories.packages.list
@@ -723,7 +723,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/pythonPackages":
+  /v1/{parent}/pythonPackages:
     get:
       description: Lists python packages.
       operationId: artifactregistry.projects.locations.repositories.pythonPackages.list
@@ -774,7 +774,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/repositories":
+  /v1/{parent}/repositories:
     get:
       description: Lists repositories.
       operationId: artifactregistry.projects.locations.repositories.list
@@ -859,7 +859,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/tags":
+  /v1/{parent}/tags:
     get:
       description: Lists tags.
       operationId: artifactregistry.projects.locations.repositories.packages.tags.list
@@ -949,7 +949,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/versions":
+  /v1/{parent}/versions:
     get:
       description: Lists versions.
       operationId: artifactregistry.projects.locations.repositories.packages.versions.list
@@ -1014,7 +1014,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/versions:batchDelete":
+  /v1/{parent}/versions:batchDelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1056,7 +1056,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/yumArtifacts:create":
+  /v1/{parent}/yumArtifacts:create:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1098,7 +1098,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/yumArtifacts:import":
+  /v1/{parent}/yumArtifacts:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1140,7 +1140,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the IAM policy for a given resource.
       operationId: artifactregistry.projects.locations.repositories.getIamPolicy
@@ -1186,7 +1186,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1228,7 +1228,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

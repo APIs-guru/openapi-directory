@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2alpha1/{name}":
+  /v2alpha1/{name}:
     delete:
       description: Deletes a QueuedResource TPU instance.
       operationId: tpu.projects.locations.queuedResources.delete
@@ -137,7 +137,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{name}/locations":
+  /v2alpha1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: tpu.projects.locations.list
@@ -189,7 +189,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha1/{name}/operations":
+  /v2alpha1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: tpu.projects.locations.operations.list
@@ -241,7 +241,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha1/{name}:cancel":
+  /v2alpha1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -278,7 +278,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{name}:getGuestAttributes":
+  /v2alpha1/{name}:getGuestAttributes:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -320,7 +320,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{name}:reset":
+  /v2alpha1/{name}:reset:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -362,7 +362,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{name}:simulateMaintenanceEvent":
+  /v2alpha1/{name}:simulateMaintenanceEvent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -404,7 +404,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{name}:start":
+  /v2alpha1/{name}:start:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -446,7 +446,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{name}:stop":
+  /v2alpha1/{name}:stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -488,7 +488,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{parent}/acceleratorTypes":
+  /v2alpha1/{parent}/acceleratorTypes:
     get:
       description: Lists accelerator types supported by this API.
       operationId: tpu.projects.locations.acceleratorTypes.list
@@ -545,7 +545,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha1/{parent}/nodes":
+  /v2alpha1/{parent}/nodes:
     get:
       description: Lists nodes.
       operationId: tpu.projects.locations.nodes.list
@@ -631,7 +631,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{parent}/queuedResources":
+  /v2alpha1/{parent}/queuedResources:
     get:
       description: Lists queued resources.
       operationId: tpu.projects.locations.queuedResources.list
@@ -717,7 +717,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2alpha1/{parent}/runtimeVersions":
+  /v2alpha1/{parent}/runtimeVersions:
     get:
       description: Lists runtime versions supported by this API.
       operationId: tpu.projects.locations.runtimeVersions.list
@@ -774,7 +774,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2alpha1/{parent}:generateServiceIdentity":
+  /v2alpha1/{parent}:generateServiceIdentity:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

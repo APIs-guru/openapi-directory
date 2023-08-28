@@ -34,7 +34,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     get:
       description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
       operationId: cloudasset.projects.operations.get
@@ -71,7 +71,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}:batchGetAssetsHistory":
+  /v1beta1/{parent}:batchGetAssetsHistory:
     get:
       description: Batch gets the update history of assets that overlap a time window. For IAM_POLICY content, this API outputs history when the asset and its attached IAM POLICY both exist. This can create gaps in the output history. Otherwise, this API outputs history with asset in both non-delete or deleted status. If a specified asset does not exist, this API returns an INVALID_ARGUMENT error.
       operationId: cloudasset.projects.batchGetAssetsHistory
@@ -136,7 +136,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}:exportAssets":
+  /v1beta1/{parent}:exportAssets:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

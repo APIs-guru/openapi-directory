@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: locations
 paths:
-  "/v1/{location}:fetchMultiDailyMetricsTimeSeries":
+  /v1/{location}:fetchMultiDailyMetricsTimeSeries:
     get:
       description: " Returns the values for each date from a given time range and optionally the sub entity type, where applicable, that are associated with the specific daily metrics. Example request: `GET https://businessprofileperformance.googleapis.com/v1/locations/12345:fetchMultiDailyMetricsTimeSeries?dailyMetrics=WEBSITE_CLICKS&dailyMetrics=CALL_CLICKS&daily_range.start_date.year=2022&daily_range.start_date.month=1&daily_range.start_date.day=1&daily_range.end_date.year=2022&daily_range.end_date.month=3&daily_range.end_date.day=31`"
       operationId: businessprofileperformance.locations.fetchMultiDailyMetricsTimeSeries
@@ -113,7 +113,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:getDailyMetricsTimeSeries":
+  /v1/{name}:getDailyMetricsTimeSeries:
     get:
       description: " Returns the values for each date from a given time range that are associated with the specific daily metric. Example request: `GET https://businessprofileperformance.googleapis.com/v1/locations/12345:getDailyMetricsTimeSeries?dailyMetric=WEBSITE_CLICKS&daily_range.start_date.year=2022&daily_range.start_date.month=1&daily_range.start_date.day=1&daily_range.end_date.year=2022&daily_range.end_date.month=3&daily_range.end_date.day=31`"
       operationId: businessprofileperformance.locations.getDailyMetricsTimeSeries
@@ -227,7 +227,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/searchkeywords/impressions/monthly":
+  /v1/{parent}/searchkeywords/impressions/monthly:
     get:
       description: "Returns the search keywords used to find a business in search or maps. Each search keyword is accompanied by impressions which are aggregated on a monthly basis. Example request: `GET https://businessprofileperformance.googleapis.com/v1/locations/12345/searchkeywords/impressions/monthly?monthly_range.start_month.year=2022&monthly_range.start_month.month=1&monthly_range.end_month.year=2022&monthly_range.end_month.month=3`"
       operationId: businessprofileperformance.locations.searchkeywords.impressions.monthly.list

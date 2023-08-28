@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/projects/{projectId}/zones/{zone}/clusters":
+  /v1/projects/{projectId}/zones/{zone}/clusters:
     get:
       description: Lists all clusters owned by a project in either the specified zone or all zones.
       operationId: container.projects.zones.clusters.list
@@ -115,7 +115,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:
     delete:
       description: Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster, such as load balancer resources, are not deleted if they weren't present when the cluster was initially created.
       operationId: container.projects.zones.clusters.delete
@@ -251,7 +251,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/addons":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/addons:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -305,7 +305,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/legacyAbac":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/legacyAbac:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -359,7 +359,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/locations":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/locations:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -413,7 +413,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/logging":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/logging:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -467,7 +467,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/master":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/master:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -521,7 +521,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/monitoring":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/monitoring:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -575,7 +575,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools:
     get:
       description: Lists the node pools for a cluster.
       operationId: container.projects.zones.clusters.nodePools.list
@@ -670,7 +670,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}:
     delete:
       description: Deletes a node pool from a cluster.
       operationId: container.projects.zones.clusters.nodePools.delete
@@ -777,7 +777,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/autoscaling":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/autoscaling:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -837,7 +837,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setManagement":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setManagement:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -897,7 +897,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setSize":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/setSize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -957,7 +957,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/update":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}/update:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1017,7 +1017,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}:rollback":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/nodePools/{nodePoolId}:rollback:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1077,7 +1077,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/resourceLabels":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}/resourceLabels:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1131,7 +1131,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:completeIpRotation":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:completeIpRotation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1185,7 +1185,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMaintenancePolicy":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMaintenancePolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1239,7 +1239,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMasterAuth":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setMasterAuth:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1293,7 +1293,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setNetworkPolicy":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:setNetworkPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1347,7 +1347,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:startIpRotation":
+  /v1/projects/{projectId}/zones/{zone}/clusters/{clusterId}:startIpRotation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1401,7 +1401,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/operations":
+  /v1/projects/{projectId}/zones/{zone}/operations:
     get:
       description: Lists all operations in a project in a specific zone or all zones.
       operationId: container.projects.zones.operations.list
@@ -1449,7 +1449,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{projectId}/zones/{zone}/operations/{operationId}":
+  /v1/projects/{projectId}/zones/{zone}/operations/{operationId}:
     get:
       description: Gets the specified operation.
       operationId: container.projects.zones.operations.get
@@ -1503,7 +1503,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{projectId}/zones/{zone}/operations/{operationId}:cancel":
+  /v1/projects/{projectId}/zones/{zone}/operations/{operationId}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1557,7 +1557,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/projects/{projectId}/zones/{zone}/serverconfig":
+  /v1/projects/{projectId}/zones/{zone}/serverconfig:
     get:
       description: Returns configuration info about the Google Kubernetes Engine service.
       operationId: container.projects.zones.getServerconfig
@@ -1605,7 +1605,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a node pool from a cluster.
       operationId: container.projects.locations.clusters.nodePools.delete
@@ -1730,7 +1730,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/serverConfig":
+  /v1/{name}/serverConfig:
     get:
       description: Returns configuration info about the Google Kubernetes Engine service.
       operationId: container.projects.locations.getServerConfig
@@ -1777,7 +1777,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1819,7 +1819,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:checkAutopilotCompatibility":
+  /v1/{name}:checkAutopilotCompatibility:
     get:
       description: Checks the cluster compatibility with Autopilot mode, and returns a list of compatibility issues.
       operationId: container.projects.locations.clusters.checkAutopilotCompatibility
@@ -1856,7 +1856,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:completeIpRotation":
+  /v1/{name}:completeIpRotation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1898,7 +1898,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:completeUpgrade":
+  /v1/{name}:completeUpgrade:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1940,7 +1940,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:rollback":
+  /v1/{name}:rollback:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1982,7 +1982,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setAddons":
+  /v1/{name}:setAddons:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2024,7 +2024,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setAutoscaling":
+  /v1/{name}:setAutoscaling:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2066,7 +2066,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setLegacyAbac":
+  /v1/{name}:setLegacyAbac:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2108,7 +2108,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setLocations":
+  /v1/{name}:setLocations:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2150,7 +2150,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setLogging":
+  /v1/{name}:setLogging:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2192,7 +2192,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setMaintenancePolicy":
+  /v1/{name}:setMaintenancePolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2234,7 +2234,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setManagement":
+  /v1/{name}:setManagement:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2276,7 +2276,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setMasterAuth":
+  /v1/{name}:setMasterAuth:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2318,7 +2318,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setMonitoring":
+  /v1/{name}:setMonitoring:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2360,7 +2360,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setNetworkPolicy":
+  /v1/{name}:setNetworkPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2402,7 +2402,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setResourceLabels":
+  /v1/{name}:setResourceLabels:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2444,7 +2444,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:setSize":
+  /v1/{name}:setSize:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2486,7 +2486,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:startIpRotation":
+  /v1/{name}:startIpRotation:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2528,7 +2528,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:updateMaster":
+  /v1/{name}:updateMaster:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2570,7 +2570,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/.well-known/openid-configuration":
+  /v1/{parent}/.well-known/openid-configuration:
     get:
       description: Gets the OIDC discovery document for the cluster. See the [OpenID Connect Discovery 1.0 specification](https://openid.net/specs/openid-connect-discovery-1_0.html) for details. This API is not yet intended for general use, and is not available for all clusters.
       operationId: container.projects.locations.clusters.well-known.getOpenid-configuration
@@ -2602,7 +2602,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/aggregated/usableSubnetworks":
+  /v1/{parent}/aggregated/usableSubnetworks:
     get:
       description: Lists subnetworks that are usable for creating clusters in a project.
       operationId: container.projects.aggregated.usableSubnetworks.list
@@ -2654,7 +2654,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/clusters":
+  /v1/{parent}/clusters:
     get:
       description: Lists all clusters owned by a project in either the specified zone or all zones.
       operationId: container.projects.locations.clusters.list
@@ -2730,7 +2730,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/jwks":
+  /v1/{parent}/jwks:
     get:
       description: Gets the public component of the cluster signing keys in JSON Web Key format. This API is not yet intended for general use, and is not available for all clusters.
       operationId: container.projects.locations.clusters.getJwks
@@ -2762,7 +2762,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/nodePools":
+  /v1/{parent}/nodePools:
     get:
       description: Lists the node pools for a cluster.
       operationId: container.projects.locations.clusters.nodePools.list
@@ -2843,7 +2843,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/operations":
+  /v1/{parent}/operations:
     get:
       description: Lists all operations in a project in a specific zone or all zones.
       operationId: container.projects.locations.operations.list

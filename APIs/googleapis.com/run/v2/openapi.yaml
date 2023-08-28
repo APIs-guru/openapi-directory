@@ -32,7 +32,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a Revision.
       operationId: run.projects.locations.services.revisions.delete
@@ -142,7 +142,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}/operations":
+  /v2/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: run.projects.locations.operations.list
@@ -194,7 +194,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}:cancel":
+  /v2/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -236,7 +236,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:run":
+  /v2/{name}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -278,7 +278,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{name}:wait":
+  /v2/{name}:wait:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -320,7 +320,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/executions":
+  /v2/{parent}/executions:
     get:
       description: Lists Executions from a Job.
       operationId: run.projects.locations.jobs.executions.list
@@ -372,7 +372,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/jobs":
+  /v2/{parent}/jobs:
     get:
       description: Lists Jobs.
       operationId: run.projects.locations.jobs.list
@@ -463,7 +463,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/revisions":
+  /v2/{parent}/revisions:
     get:
       description: Lists Revisions from a given Service, or from a given location.
       operationId: run.projects.locations.services.revisions.list
@@ -515,7 +515,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/services":
+  /v2/{parent}/services:
     get:
       description: Lists Services.
       operationId: run.projects.locations.services.list
@@ -606,7 +606,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{parent}/tasks":
+  /v2/{parent}/tasks:
     get:
       description: Lists Tasks from an Execution of a Job.
       operationId: run.projects.locations.jobs.executions.tasks.list
@@ -658,7 +658,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{resource}:getIamPolicy":
+  /v2/{resource}:getIamPolicy:
     get:
       description: Gets the IAM Access Control policy currently in effect for the given Cloud Run Service. This result does not include any inherited policies.
       operationId: run.projects.locations.services.getIamPolicy
@@ -700,7 +700,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{resource}:setIamPolicy":
+  /v2/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -742,7 +742,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v2/{resource}:testIamPermissions":
+  /v2/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

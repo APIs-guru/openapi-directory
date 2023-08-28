@@ -123,7 +123,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{integrationVersion}:takeoverEditLock":
+  /v1alpha/{integrationVersion}:takeoverEditLock:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -165,7 +165,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}":
+  /v1alpha/{name}:
     delete:
       description: Deletes an sfdc channel.
       operationId: integrations.projects.locations.sfdcInstances.sfdcChannels.delete
@@ -270,7 +270,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:cancel":
+  /v1alpha/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -312,7 +312,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:download":
+  /v1alpha/{name}:download:
     get:
       description: Downloads an integration. Retrieves the `IntegrationVersion` for a given `integration_id` and returns the response as a string.
       operationId: integrations.projects.locations.products.integrations.versions.download
@@ -358,7 +358,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{name}:execute":
+  /v1alpha/{name}:execute:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -400,7 +400,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:executeEvent":
+  /v1alpha/{name}:executeEvent:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -442,7 +442,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:lift":
+  /v1alpha/{name}:lift:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -484,7 +484,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:publish":
+  /v1alpha/{name}:publish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -526,7 +526,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:resolve":
+  /v1alpha/{name}:resolve:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -568,7 +568,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:schedule":
+  /v1alpha/{name}:schedule:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -610,7 +610,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{name}:unpublish":
+  /v1alpha/{name}:unpublish:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -652,7 +652,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/appsScriptProjects":
+  /v1alpha/{parent}/appsScriptProjects:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -694,7 +694,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/appsScriptProjects:link":
+  /v1alpha/{parent}/appsScriptProjects:link:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -736,7 +736,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/authConfigs":
+  /v1alpha/{parent}/authConfigs:
     get:
       description: Lists all auth configs that match the filter. Restrict to auth configs belong to the current client only.
       operationId: integrations.projects.locations.products.authConfigs.list
@@ -837,7 +837,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/certificates":
+  /v1alpha/{parent}/certificates:
     get:
       description: List all the certificates that match the filter. Restrict to certificate of current client only.
       operationId: integrations.projects.locations.products.certificates.list
@@ -923,7 +923,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/connections":
+  /v1alpha/{parent}/connections:
     get:
       description: Lists Connections in a given project and location.
       operationId: integrations.projects.locations.connections.list
@@ -980,7 +980,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/executions":
+  /v1alpha/{parent}/executions:
     get:
       description: Lists the results of all the integration executions. The response includes the same information as the [execution log](https://cloud.google.com/application-integration/docs/viewing-logs) in the Integration UI.
       operationId: integrations.projects.locations.products.integrations.executions.list
@@ -1120,7 +1120,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/integrations":
+  /v1alpha/{parent}/integrations:
     get:
       description: Returns the list of all integrations in the specified project.
       operationId: integrations.projects.locations.products.integrations.list
@@ -1177,7 +1177,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/runtimeActionSchemas":
+  /v1alpha/{parent}/runtimeActionSchemas:
     get:
       description: Lists the JSON schemas for the inputs and outputs of actions, filtered by action name.
       operationId: integrations.projects.locations.connections.runtimeActionSchemas.list
@@ -1229,7 +1229,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/runtimeEntitySchemas":
+  /v1alpha/{parent}/runtimeEntitySchemas:
     get:
       description: Lists the JSON schemas for the properties of runtime entities, filtered by entity name.
       operationId: integrations.projects.locations.connections.runtimeEntitySchemas.list
@@ -1281,7 +1281,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/sfdcChannels":
+  /v1alpha/{parent}/sfdcChannels:
     get:
       description: Lists all sfdc channels that match the filter. Restrict to sfdc channels belonging to the current client only.
       operationId: integrations.projects.locations.sfdcInstances.sfdcChannels.list
@@ -1367,7 +1367,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/sfdcInstances":
+  /v1alpha/{parent}/sfdcInstances:
     get:
       description: Lists all sfdc instances that match the filter. Restrict to sfdc instances belonging to the current client only.
       operationId: integrations.projects.locations.sfdcInstances.list
@@ -1453,7 +1453,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/suspensions":
+  /v1alpha/{parent}/suspensions:
     get:
       description: "* Lists suspensions associated with a specific execution. Only those with permissions to resolve the relevant suspensions will be able to view them."
       operationId: integrations.projects.locations.products.integrations.executions.suspensions.list
@@ -1510,7 +1510,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha/{parent}/versions":
+  /v1alpha/{parent}/versions:
     get:
       description: Returns the list of all IntegrationTemplateVersions in the specified project.
       operationId: integrations.projects.locations.products.integrationtemplates.versions.list
@@ -1596,7 +1596,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1alpha/{parent}/versions:upload":
+  /v1alpha/{parent}/versions:upload:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

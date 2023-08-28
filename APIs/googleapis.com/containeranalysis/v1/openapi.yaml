@@ -33,7 +33,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes the specified occurrence. For example, use this method to delete an occurrence when the occurrence is no longer applicable for the given resource.
       operationId: containeranalysis.projects.occurrences.delete
@@ -128,7 +128,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/notes":
+  /v1/{name}/notes:
     get:
       description: Gets the note attached to the specified occurrence. Consumer projects can use this method to get a note that belongs to a provider project.
       operationId: containeranalysis.projects.occurrences.getNotes
@@ -165,7 +165,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/occurrences":
+  /v1/{name}/occurrences:
     get:
       description: Lists occurrences referencing the specified note. Provider projects can use this method to get all occurrences across consumer projects referencing the specified note.
       operationId: containeranalysis.projects.notes.occurrences.list
@@ -217,7 +217,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/notes":
+  /v1/{parent}/notes:
     get:
       description: Lists notes for the specified project.
       operationId: containeranalysis.projects.notes.list
@@ -303,7 +303,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/notes:batchCreate":
+  /v1/{parent}/notes:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -345,7 +345,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/occurrences":
+  /v1/{parent}/occurrences:
     get:
       description: Lists occurrences for the specified project.
       operationId: containeranalysis.projects.occurrences.list
@@ -426,7 +426,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/occurrences:batchCreate":
+  /v1/{parent}/occurrences:batchCreate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -468,7 +468,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/occurrences:vulnerabilitySummary":
+  /v1/{parent}/occurrences:vulnerabilitySummary:
     get:
       description: Gets a summary of the number and severity of occurrences.
       operationId: containeranalysis.projects.occurrences.getVulnerabilitySummary
@@ -510,7 +510,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -552,7 +552,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -594,7 +594,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

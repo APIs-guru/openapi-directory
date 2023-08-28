@@ -141,7 +141,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/webmasters/v3/sites/{siteUrl}":
+  /webmasters/v3/sites/{siteUrl}:
     delete:
       description: " Removes a site from the set of the user's Search Console sites."
       operationId: webmasters.sites.delete
@@ -222,7 +222,7 @@ paths:
             - https://www.googleapis.com/auth/webmasters
       tags:
         - sites
-  "/webmasters/v3/sites/{siteUrl}/searchAnalytics/query":
+  /webmasters/v3/sites/{siteUrl}/searchAnalytics/query:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -268,7 +268,7 @@ paths:
             - https://www.googleapis.com/auth/webmasters.readonly
       tags:
         - searchanalytics
-  "/webmasters/v3/sites/{siteUrl}/sitemaps":
+  /webmasters/v3/sites/{siteUrl}/sitemaps:
     get:
       description: " Lists the [sitemaps-entries](/webmaster-tools/v3/sitemaps) submitted for this site, or included in the sitemap index file (if `sitemapIndex` is specified in the request)."
       operationId: webmasters.sitemaps.list
@@ -314,7 +314,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/webmasters/v3/sites/{siteUrl}/sitemaps/{feedpath}":
+  /webmasters/v3/sites/{siteUrl}/sitemaps/{feedpath}:
     delete:
       description: Deletes a sitemap from the Sitemaps report. Does not stop Google from crawling this sitemap or the URLs that were previously crawled in the deleted sitemap.
       operationId: webmasters.sitemaps.delete

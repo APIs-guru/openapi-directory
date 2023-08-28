@@ -32,7 +32,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  /v1beta1/{name}:
     delete:
       description: Deletes a listing.
       operationId: analyticshub.projects.locations.dataExchanges.listings.delete
@@ -139,7 +139,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}:subscribe":
+  /v1beta1/{name}:subscribe:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -185,7 +185,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{organization}/dataExchanges":
+  /v1beta1/{organization}/dataExchanges:
     get:
       description: Lists all data exchanges from projects in a given organization and location.
       operationId: analyticshub.organizations.locations.dataExchanges.list
@@ -236,7 +236,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/dataExchanges":
+  /v1beta1/{parent}/dataExchanges:
     get:
       description: Lists all data exchanges in a given project and location.
       operationId: analyticshub.projects.locations.dataExchanges.list
@@ -325,7 +325,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/listings":
+  /v1beta1/{parent}/listings:
     get:
       description: Lists all listings in a given project and location.
       operationId: analyticshub.projects.locations.dataExchanges.listings.list
@@ -414,7 +414,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:getIamPolicy":
+  /v1beta1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -460,7 +460,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:setIamPolicy":
+  /v1beta1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -506,7 +506,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  /v1beta1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

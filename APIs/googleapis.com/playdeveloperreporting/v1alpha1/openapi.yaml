@@ -73,7 +73,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{name}":
+  /v1alpha1/{name}:
     get:
       description: Describes the properties of the metric set.
       operationId: playdeveloperreporting.vitals.stuckbackgroundwakelockrate.get
@@ -110,7 +110,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{name}:fetchReleaseFilterOptions":
+  /v1alpha1/{name}:fetchReleaseFilterOptions:
     get:
       description: Describes filtering options for releases.
       operationId: playdeveloperreporting.apps.fetchReleaseFilterOptions
@@ -147,7 +147,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{name}:query":
+  /v1alpha1/{name}:query:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -189,7 +189,7 @@ paths:
             - https://www.googleapis.com/auth/playdeveloperreporting
       tags:
         - vitals
-  "/v1alpha1/{parent}/anomalies":
+  /v1alpha1/{parent}/anomalies:
     get:
       description: Lists anomalies in any of the datasets.
       operationId: playdeveloperreporting.anomalies.list
@@ -241,7 +241,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{parent}/errorIssues:search":
+  /v1alpha1/{parent}/errorIssues:search:
     get:
       description: Searches all error issues in which reports have been grouped.
       operationId: playdeveloperreporting.vitals.errors.issues.search
@@ -398,7 +398,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1alpha1/{parent}/errorReports:search":
+  /v1alpha1/{parent}/errorReports:search:
     get:
       description: Searches all error reports received for an app.
       operationId: playdeveloperreporting.vitals.errors.reports.search

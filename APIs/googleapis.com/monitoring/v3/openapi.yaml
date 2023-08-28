@@ -85,7 +85,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/{name}":
+  /v3/{name}:
     delete:
       description: Delete the given ServiceLevelObjective.
       operationId: monitoring.services.serviceLevelObjectives.delete
@@ -252,7 +252,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - projects
-  "/v3/{name}/alertPolicies":
+  /v3/{name}/alertPolicies:
     get:
       description: Lists the existing alerting policies for the workspace.
       operationId: monitoring.projects.alertPolicies.list
@@ -350,7 +350,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - projects
-  "/v3/{name}/collectdTimeSeries":
+  /v3/{name}/collectdTimeSeries:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -400,7 +400,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  "/v3/{name}/groups":
+  /v3/{name}/groups:
     get:
       description: Lists the existing groups.
       operationId: monitoring.projects.groups.list
@@ -508,7 +508,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - projects
-  "/v3/{name}/members":
+  /v3/{name}/members:
     get:
       description: Lists the monitored resources that are members of a group.
       operationId: monitoring.projects.groups.members.list
@@ -578,7 +578,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/{name}/metricDescriptors":
+  /v3/{name}/metricDescriptors:
     get:
       description: Lists metric descriptors that match a filter.
       operationId: monitoring.projects.metricDescriptors.list
@@ -679,7 +679,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  "/v3/{name}/monitoredResourceDescriptors":
+  /v3/{name}/monitoredResourceDescriptors:
     get:
       description: Lists monitored resource descriptors that match a filter.
       operationId: monitoring.projects.monitoredResourceDescriptors.list
@@ -743,7 +743,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/{name}/notificationChannelDescriptors":
+  /v3/{name}/notificationChannelDescriptors:
     get:
       description: Lists the descriptors for supported channel types. The use of descriptors makes it possible for new channel types to be dynamically added.
       operationId: monitoring.projects.notificationChannelDescriptors.list
@@ -798,7 +798,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v3/{name}/notificationChannels":
+  /v3/{name}/notificationChannels:
     get:
       description: Lists the notification channels that have been created for the project. To list the types of notification channels that are supported, use the ListNotificationChannelDescriptors method.
       operationId: monitoring.projects.notificationChannels.list
@@ -896,7 +896,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - projects
-  "/v3/{name}/timeSeries":
+  /v3/{name}/timeSeries:
     get:
       description: Lists time series that match a filter.
       operationId: monitoring.projects.timeSeries.list
@@ -1134,7 +1134,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  "/v3/{name}/timeSeries:createService":
+  /v3/{name}/timeSeries:createService:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1184,7 +1184,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  "/v3/{name}/timeSeries:query":
+  /v3/{name}/timeSeries:query:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1234,7 +1234,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.read
       tags:
         - projects
-  "/v3/{name}:getVerificationCode":
+  /v3/{name}:getVerificationCode:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1280,7 +1280,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - projects
-  "/v3/{name}:sendVerificationCode":
+  /v3/{name}:sendVerificationCode:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1326,7 +1326,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - projects
-  "/v3/{name}:verify":
+  /v3/{name}:verify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1372,7 +1372,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - projects
-  "/v3/{parent}/serviceLevelObjectives":
+  /v3/{parent}/serviceLevelObjectives:
     get:
       description: List the ServiceLevelObjectives for the given Service.
       operationId: monitoring.services.serviceLevelObjectives.list
@@ -1479,7 +1479,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - services
-  "/v3/{parent}/services":
+  /v3/{parent}/services:
     get:
       description: List Services for this Metrics Scope.
       operationId: monitoring.services.list
@@ -1577,7 +1577,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - services
-  "/v3/{parent}/snoozes":
+  /v3/{parent}/snoozes:
     get:
       description: Lists the Snoozes associated with a project. Can optionally pass in filter, which specifies predicates to match Snoozes.
       operationId: monitoring.projects.snoozes.list
@@ -1670,7 +1670,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring
       tags:
         - projects
-  "/v3/{parent}/uptimeCheckConfigs":
+  /v3/{parent}/uptimeCheckConfigs:
     get:
       description: Lists the existing valid Uptime check configurations for the project (leaving out any invalid configurations).
       operationId: monitoring.projects.uptimeCheckConfigs.list

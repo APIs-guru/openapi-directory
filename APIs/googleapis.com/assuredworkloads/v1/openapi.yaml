@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: organizations
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes the workload. Make sure that workload's direct children are already in a deleted state, otherwise the request will fail with a FAILED_PRECONDITION error. In addition to assuredworkloads.workload.delete permission, the user should also have orgpolicy.policy.set permission on the deleted folder to remove Assured Workloads OrgPolicies.
       operationId: assuredworkloads.organizations.locations.workloads.delete
@@ -130,7 +130,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: assuredworkloads.organizations.locations.operations.list
@@ -182,7 +182,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:acknowledge":
+  /v1/{name}:acknowledge:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -224,7 +224,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:mutatePartnerPermissions":
+  /v1/{name}:mutatePartnerPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -266,7 +266,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{name}:restrictAllowedResources":
+  /v1/{name}:restrictAllowedResources:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -308,7 +308,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
-  "/v1/{parent}/violations":
+  /v1/{parent}/violations:
     get:
       description: Lists the Violations in the AssuredWorkload Environment. Callers may also choose to read across multiple Workloads as per [AIP-159](https://google.aip.dev/159) by using '-' (the hyphen or dash character) as a wildcard character instead of workload-id in the parent. Format `organizations/{org_id}/locations/{location}/workloads/-`
       operationId: assuredworkloads.organizations.locations.workloads.violations.list
@@ -370,7 +370,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/workloads":
+  /v1/{parent}/workloads:
     get:
       description: Lists Assured Workloads under a CRM Node.
       operationId: assuredworkloads.organizations.locations.workloads.list

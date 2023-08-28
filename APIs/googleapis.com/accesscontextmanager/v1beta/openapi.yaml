@@ -101,7 +101,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - accessPolicies
-  "/v1beta/{name}":
+  /v1beta/{name}:
     delete:
       description: Delete a Service Perimeter by resource name. The longrunning operation from this RPC will have a successful status once the Service Perimeter has been removed from long-lasting storage.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.delete
@@ -205,7 +205,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - accessPolicies
-  "/v1beta/{parent}/accessLevels":
+  /v1beta/{parent}/accessLevels:
     get:
       description: List all Access Levels for an access policy.
       operationId: accesscontextmanager.accessPolicies.accessLevels.list
@@ -290,7 +290,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - accessPolicies
-  "/v1beta/{parent}/servicePerimeters":
+  /v1beta/{parent}/servicePerimeters:
     get:
       description: List all Service Perimeters for an access policy.
       operationId: accesscontextmanager.accessPolicies.servicePerimeters.list

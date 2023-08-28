@@ -142,7 +142,7 @@ paths:
       x-groupName: Account holders
       x-methodName: createAccountHolder
       x-sortIndex: 1
-  "/accountHolders/{id}":
+  /accountHolders/{id}:
     get:
       description: Returns an account holder.
       operationId: get-accountHolders-id
@@ -305,7 +305,7 @@ paths:
       x-groupName: Account holders
       x-methodName: updateAccountHolder
       x-sortIndex: 2
-  "/accountHolders/{id}/balanceAccounts":
+  /accountHolders/{id}/balanceAccounts:
     get:
       description: |-
         Returns a paginated list of the balance accounts associated with an account holder. To fetch multiple pages, use the query parameters. 
@@ -475,7 +475,7 @@ paths:
       x-groupName: Balance accounts
       x-methodName: createBalanceAccount
       x-sortIndex: 1
-  "/balanceAccounts/{balanceAccountId}/sweeps":
+  /balanceAccounts/{balanceAccountId}/sweeps:
     get:
       description: |-
         Returns a list of the sweeps configured for a balance account.
@@ -662,7 +662,7 @@ paths:
       x-groupName: Balance accounts
       x-methodName: createSweep
       x-sortIndex: 5
-  "/balanceAccounts/{balanceAccountId}/sweeps/{sweepId}":
+  /balanceAccounts/{balanceAccountId}/sweeps/{sweepId}:
     delete:
       description: Deletes a sweep for a balance account.
       operationId: delete-balanceAccounts-balanceAccountId-sweeps-sweepId
@@ -907,7 +907,7 @@ paths:
       x-groupName: Balance accounts
       x-methodName: updateSweep
       x-sortIndex: 6
-  "/balanceAccounts/{id}":
+  /balanceAccounts/{id}:
     get:
       description: Returns a balance account and its balances for the default currency and other currencies with a non-zero balance.
       operationId: get-balanceAccounts-id
@@ -1066,7 +1066,7 @@ paths:
       x-groupName: Balance accounts
       x-methodName: updateBalanceAccount
       x-sortIndex: 2
-  "/balanceAccounts/{id}/paymentInstruments":
+  /balanceAccounts/{id}/paymentInstruments:
     get:
       description: |-
         Returns a paginated list of the payment instruments associated with a balance account. 
@@ -1159,7 +1159,7 @@ paths:
       x-groupName: Balance accounts
       x-methodName: getAllPaymentInstrumentsForBalanceAccount
       x-sortIndex: 4
-  "/balancePlatforms/{id}":
+  /balancePlatforms/{id}:
     get:
       description: Returns a balance platform.
       operationId: get-balancePlatforms-id
@@ -1235,7 +1235,7 @@ paths:
       x-groupName: Platform
       x-methodName: getBalancePlatform
       x-sortIndex: 1
-  "/balancePlatforms/{id}/accountHolders":
+  /balancePlatforms/{id}/accountHolders:
     get:
       description: |-
         Returns a paginated list of all the account holders that belong to the balance platform. To fetch multiple pages, use the query parameters. 
@@ -1328,7 +1328,7 @@ paths:
       x-groupName: Platform
       x-methodName: getAllAccountHoldersUnderBalancePlatform
       x-sortIndex: 2
-  "/grantAccounts/{id}":
+  /grantAccounts/{id}:
     get:
       description: Returns the details of the [grant account](https://docs.adyen.com/marketplaces-and-platforms/capital#grant-account).
       operationId: get-grantAccounts-id
@@ -1474,7 +1474,7 @@ paths:
       x-groupName: Grant offers
       x-methodName: getAllAvailableGrantOffers
       x-sortIndex: 1
-  "/grantOffers/{grantOfferId}":
+  /grantOffers/{grantOfferId}:
     get:
       description: Returns the details of a single grant offer.
       operationId: get-grantOffers-grantOfferId
@@ -1547,7 +1547,7 @@ paths:
       x-groupName: Grant offers
       x-methodName: getGrantOffer
       x-sortIndex: 1
-  "/networkTokens/{networkTokenId}":
+  /networkTokens/{networkTokenId}:
     get:
       description: Returns the details of a network token.
       operationId: get-networkTokens-networkTokenId
@@ -1752,7 +1752,7 @@ paths:
       x-groupName: Payment instrument groups
       x-methodName: createPaymentInstrumentGroup
       x-sortIndex: 1
-  "/paymentInstrumentGroups/{id}":
+  /paymentInstrumentGroups/{id}:
     get:
       description: Returns the details of a payment instrument group.
       operationId: get-paymentInstrumentGroups-id
@@ -1828,7 +1828,7 @@ paths:
       x-groupName: Payment instrument groups
       x-methodName: getPaymentInstrumentGroup
       x-sortIndex: 2
-  "/paymentInstrumentGroups/{id}/transactionRules":
+  /paymentInstrumentGroups/{id}/transactionRules:
     get:
       description: Returns a list of all the transaction rules associated with a payment instrument group.
       operationId: get-paymentInstrumentGroups-id-transactionRules
@@ -1996,7 +1996,7 @@ paths:
       x-groupName: Payment instruments
       x-methodName: createPaymentInstrument
       x-sortIndex: 11
-  "/paymentInstruments/{id}":
+  /paymentInstruments/{id}:
     get:
       description: Returns the details of a payment instrument.
       operationId: get-paymentInstruments-id
@@ -2159,7 +2159,7 @@ paths:
       x-groupName: Payment instruments
       x-methodName: updatePaymentInstrument
       x-sortIndex: 12
-  "/paymentInstruments/{id}/networkTokens":
+  /paymentInstruments/{id}/networkTokens:
     get:
       description: List the network tokens connected to a payment instrument.
       operationId: get-paymentInstruments-id-networkTokens
@@ -2232,7 +2232,7 @@ paths:
       x-groupName: Payment instruments
       x-methodName: listNetworkTokens
       x-sortIndex: 15
-  "/paymentInstruments/{id}/reveal":
+  /paymentInstruments/{id}/reveal:
     get:
       description: |-
         Returns the primary account number (PAN) of a payment instrument.
@@ -2313,7 +2313,7 @@ paths:
       x-groupName: Payment instruments
       x-methodName: getPanOfPaymentInstrument
       x-sortIndex: 14
-  "/paymentInstruments/{id}/transactionRules":
+  /paymentInstruments/{id}/transactionRules:
     get:
       description: Returns a list of transaction rules associated with a payment instrument.
       operationId: get-paymentInstruments-id-transactionRules
@@ -2478,7 +2478,7 @@ paths:
       x-groupName: Transaction rules
       x-methodName: createTransactionRule
       x-sortIndex: 1
-  "/transactionRules/{transactionRuleId}":
+  /transactionRules/{transactionRuleId}:
     delete:
       description: Deletes a transaction rule.
       operationId: delete-transactionRules-transactionRuleId

@@ -34,7 +34,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v2/{name}":
+  /v2/{name}:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -89,7 +89,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  "/v2/{parent}/profiles":
+  /v2/{parent}/profiles:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -139,7 +139,7 @@ paths:
             - https://www.googleapis.com/auth/monitoring.write
       tags:
         - projects
-  "/v2/{parent}/profiles:createOffline":
+  /v2/{parent}/profiles:createOffline:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -275,7 +275,7 @@ paths:
           description: Successful response
       tags:
         - googleLocations
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a location. If this location cannot be deleted using the API and it is marked so in the `google.mybusiness.businessinformation.v1.LocationState`, use the [Google Business Profile](https://business.google.com/manage/) website.
       operationId: mybusinessbusinessinformation.locations.delete
@@ -355,7 +355,7 @@ paths:
           description: Successful response
       tags:
         - locations
-  "/v1/{name}:getGoogleUpdated":
+  /v1/{name}:getGoogleUpdated:
     get:
       description: Gets the Google-updated version of the specified location.
       operationId: mybusinessbusinessinformation.locations.attributes.getGoogleUpdated
@@ -392,7 +392,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/locations":
+  /v1/{parent}/locations:
     get:
       description: Lists the locations for the specified account.
       operationId: mybusinessbusinessinformation.accounts.locations.list

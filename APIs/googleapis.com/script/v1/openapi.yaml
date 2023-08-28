@@ -316,7 +316,7 @@ paths:
             - https://www.googleapis.com/auth/script.projects
       tags:
         - projects
-  "/v1/projects/{scriptId}":
+  /v1/projects/{scriptId}:
     get:
       description: Gets a script project's metadata.
       operationId: script.projects.get
@@ -357,7 +357,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{scriptId}/content":
+  /v1/projects/{scriptId}/content:
     get:
       description: Gets the content of the script project, including the code source and metadata for each script file.
       operationId: script.projects.getContent
@@ -432,7 +432,7 @@ paths:
             - https://www.googleapis.com/auth/script.projects
       tags:
         - projects
-  "/v1/projects/{scriptId}/deployments":
+  /v1/projects/{scriptId}/deployments:
     get:
       description: Lists the deployments of an Apps Script project.
       operationId: script.projects.deployments.list
@@ -512,7 +512,7 @@ paths:
             - https://www.googleapis.com/auth/script.deployments
       tags:
         - projects
-  "/v1/projects/{scriptId}/deployments/{deploymentId}":
+  /v1/projects/{scriptId}/deployments/{deploymentId}:
     delete:
       description: Deletes a deployment of an Apps Script project.
       operationId: script.projects.deployments.delete
@@ -624,7 +624,7 @@ paths:
             - https://www.googleapis.com/auth/script.deployments
       tags:
         - projects
-  "/v1/projects/{scriptId}/metrics":
+  /v1/projects/{scriptId}/metrics:
     get:
       description: Get metrics data for scripts, such as number of executions and active users.
       operationId: script.projects.getMetrics
@@ -675,7 +675,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/projects/{scriptId}/versions":
+  /v1/projects/{scriptId}/versions:
     get:
       description: List the versions of a script project.
       operationId: script.projects.versions.list
@@ -755,7 +755,7 @@ paths:
             - https://www.googleapis.com/auth/script.projects
       tags:
         - projects
-  "/v1/projects/{scriptId}/versions/{versionNumber}":
+  /v1/projects/{scriptId}/versions/{versionNumber}:
     get:
       description: Gets a version of a script project.
       operationId: script.projects.versions.get
@@ -802,7 +802,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/scripts/{scriptId}:run":
+  /v1/scripts/{scriptId}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

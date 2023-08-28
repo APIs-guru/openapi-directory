@@ -215,7 +215,7 @@ paths:
         - date_created
       parent: /Credentials
       pathType: list
-  "/v1/Credentials/AWS/{Sid}":
+  /v1/Credentials/AWS/{Sid}:
     delete:
       description: Delete a Credential from your account
       operationId: DeleteCredentialAws
@@ -423,7 +423,7 @@ paths:
       mountName: public_key
       parent: /Credentials
       pathType: list
-  "/v1/Credentials/PublicKeys/{Sid}":
+  /v1/Credentials/PublicKeys/{Sid}:
     delete:
       description: Delete a Credential from your account
       operationId: DeleteCredentialPublicKey

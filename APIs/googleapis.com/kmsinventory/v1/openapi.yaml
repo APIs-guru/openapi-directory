@@ -30,7 +30,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1/{name}/protectedResourcesSummary":
+  /v1/{name}/protectedResourcesSummary:
     get:
       description: Returns aggregate information about the resources protected by the given Cloud KMS CryptoKey. Only resources within the same Cloud organization as the key will be returned. The project that holds the key must be part of an organization in order for this call to succeed.
       operationId: kmsinventory.projects.locations.keyRings.cryptoKeys.getProtectedResourcesSummary
@@ -67,7 +67,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/cryptoKeys":
+  /v1/{parent}/cryptoKeys:
     get:
       description: Returns cryptographic keys managed by Cloud KMS in a given Cloud project. Note that this data is sourced from snapshots, meaning it may not completely reflect the actual state of key metadata at call time.
       operationId: kmsinventory.projects.cryptoKeys.list
@@ -114,7 +114,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{scope}/protectedResources:search":
+  /v1/{scope}/protectedResources:search:
     get:
       description: Returns metadata about the resources protected by the given Cloud KMS CryptoKey in the given Cloud organization.
       operationId: kmsinventory.organizations.protectedResources.search

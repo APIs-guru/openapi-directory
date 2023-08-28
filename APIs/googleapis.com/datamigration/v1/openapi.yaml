@@ -30,7 +30,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{conversionWorkspace}:describeConversionWorkspaceRevisions":
+  /v1/{conversionWorkspace}:describeConversionWorkspaceRevisions:
     get:
       description: Retrieves a list of committed revisions of a specific conversion workspace.
       operationId: datamigration.projects.locations.conversionWorkspaces.describeConversionWorkspaceRevisions
@@ -72,7 +72,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{conversionWorkspace}:describeDatabaseEntities":
+  /v1/{conversionWorkspace}:describeDatabaseEntities:
     get:
       description: Describes the database entities tree for a specific conversion workspace and a specific tree type. Database entities are not resources like conversion workspaces or mapping rules, and they can't be created, updated or deleted. Instead, they are simple data objects describing the structure of the client database.
       operationId: datamigration.projects.locations.conversionWorkspaces.describeDatabaseEntities
@@ -154,7 +154,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{conversionWorkspace}:searchBackgroundJobs":
+  /v1/{conversionWorkspace}:searchBackgroundJobs:
     get:
       description: Searches/lists the background jobs for a specific conversion workspace. The background jobs are not resources like conversion workspaces or mapping rules, and they can't be created, updated or deleted. Instead, they are a way to expose the data plane jobs log.
       operationId: datamigration.projects.locations.conversionWorkspaces.searchBackgroundJobs
@@ -206,7 +206,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{migrationJob}:generateSshScript":
+  /v1/{migrationJob}:generateSshScript:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -248,7 +248,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{migrationJob}:generateTcpProxyScript":
+  /v1/{migrationJob}:generateTcpProxyScript:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -290,7 +290,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a single Database Migration Service private connection.
       operationId: datamigration.projects.locations.privateConnections.delete
@@ -400,7 +400,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: datamigration.projects.locations.list
@@ -452,7 +452,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: datamigration.projects.locations.operations.list
@@ -504,7 +504,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:apply":
+  /v1/{name}:apply:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -546,7 +546,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -588,7 +588,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:commit":
+  /v1/{name}:commit:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -630,7 +630,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:convert":
+  /v1/{name}:convert:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -672,7 +672,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:fetchStaticIps":
+  /v1/{name}:fetchStaticIps:
     get:
       description: Fetches a set of static IP addresses that need to be allowlisted by the customer when using the static-IP connectivity method.
       operationId: datamigration.projects.locations.fetchStaticIps
@@ -719,7 +719,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:promote":
+  /v1/{name}:promote:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -761,7 +761,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:restart":
+  /v1/{name}:restart:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -803,7 +803,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:resume":
+  /v1/{name}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -845,7 +845,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:rollback":
+  /v1/{name}:rollback:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -887,7 +887,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:seed":
+  /v1/{name}:seed:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -929,7 +929,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:start":
+  /v1/{name}:start:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -971,7 +971,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:stop":
+  /v1/{name}:stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1013,7 +1013,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:verify":
+  /v1/{name}:verify:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1055,7 +1055,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/connectionProfiles":
+  /v1/{parent}/connectionProfiles:
     get:
       description: Retrieves a list of all connection profiles in a given project and location.
       operationId: datamigration.projects.locations.connectionProfiles.list
@@ -1161,7 +1161,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/conversionWorkspaces":
+  /v1/{parent}/conversionWorkspaces:
     get:
       description: Lists conversion workspaces in a given project and location.
       operationId: datamigration.projects.locations.conversionWorkspaces.list
@@ -1252,7 +1252,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/mappingRules":
+  /v1/{parent}/mappingRules:
     get:
       description: Lists the mapping rules for a specific conversion workspace.
       operationId: datamigration.projects.locations.conversionWorkspaces.mappingRules.list
@@ -1338,7 +1338,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/mappingRules:import":
+  /v1/{parent}/mappingRules:import:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1380,7 +1380,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/migrationJobs":
+  /v1/{parent}/migrationJobs:
     get:
       description: Lists migration jobs in a given project and location.
       operationId: datamigration.projects.locations.migrationJobs.list
@@ -1476,7 +1476,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/privateConnections":
+  /v1/{parent}/privateConnections:
     get:
       description: Retrieves a list of private connections in a given project and location.
       operationId: datamigration.projects.locations.privateConnections.list
@@ -1577,7 +1577,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: datamigration.projects.locations.privateConnections.getIamPolicy
@@ -1619,7 +1619,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1661,7 +1661,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

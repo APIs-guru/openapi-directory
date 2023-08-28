@@ -100,7 +100,7 @@ paths:
             - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
-  "/queries/{queryId}":
+  /queries/{queryId}:
     delete:
       description: Deletes a query as well as the associated reports.
       operationId: doubleclickbidmanager.queries.delete
@@ -157,7 +157,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/queries/{queryId}/reports":
+  /queries/{queryId}/reports:
     get:
       description: Lists reports associated with a query.
       operationId: doubleclickbidmanager.queries.reports.list
@@ -209,7 +209,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/queries/{queryId}/reports/{reportId}":
+  /queries/{queryId}/reports/{reportId}:
     get:
       description: Retrieves a report.
       operationId: doubleclickbidmanager.queries.reports.get
@@ -252,7 +252,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/queries/{queryId}:run":
+  /queries/{queryId}:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

@@ -575,7 +575,7 @@ paths:
             - https://www.googleapis.com/auth/drive
       tags:
         - drives
-  "/drives/{driveId}":
+  /drives/{driveId}:
     delete:
       description: Permanently deletes a shared drive for which the user is an `organizer`. The shared drive cannot contain any untrashed items.
       operationId: drive.drives.delete
@@ -685,7 +685,7 @@ paths:
             - https://www.googleapis.com/auth/drive
       tags:
         - drives
-  "/drives/{driveId}/hide":
+  /drives/{driveId}/hide:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -722,7 +722,7 @@ paths:
             - https://www.googleapis.com/auth/drive
       tags:
         - drives
-  "/drives/{driveId}/unhide":
+  /drives/{driveId}/unhide:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1063,7 +1063,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/files/{fileId}":
+  /files/{fileId}:
     delete:
       description: Permanently deletes a file owned by the user without moving it to the trash. If the file belongs to a shared drive, the user must be an `organizer` on the parent folder. If the target is a folder, all descendants owned by the user are also deleted.
       operationId: drive.files.delete
@@ -1287,7 +1287,7 @@ paths:
             - https://www.googleapis.com/auth/drive.scripts
       tags:
         - files
-  "/files/{fileId}/comments":
+  /files/{fileId}/comments:
     get:
       description: Lists a file's comments.
       operationId: drive.comments.list
@@ -1387,7 +1387,7 @@ paths:
             - https://www.googleapis.com/auth/drive.file
       tags:
         - comments
-  "/files/{fileId}/comments/{commentId}":
+  /files/{fileId}/comments/{commentId}:
     delete:
       description: Deletes a comment.
       operationId: drive.comments.delete
@@ -1512,7 +1512,7 @@ paths:
             - https://www.googleapis.com/auth/drive.file
       tags:
         - comments
-  "/files/{fileId}/comments/{commentId}/replies":
+  /files/{fileId}/comments/{commentId}/replies:
     get:
       description: Lists a comment's replies.
       operationId: drive.replies.list
@@ -1619,7 +1619,7 @@ paths:
             - https://www.googleapis.com/auth/drive.file
       tags:
         - replies
-  "/files/{fileId}/comments/{commentId}/replies/{replyId}":
+  /files/{fileId}/comments/{commentId}/replies/{replyId}:
     delete:
       description: Deletes a reply.
       operationId: drive.replies.delete
@@ -1762,7 +1762,7 @@ paths:
             - https://www.googleapis.com/auth/drive.file
       tags:
         - replies
-  "/files/{fileId}/copy":
+  /files/{fileId}/copy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1856,7 +1856,7 @@ paths:
             - https://www.googleapis.com/auth/drive.photos.readonly
       tags:
         - files
-  "/files/{fileId}/export":
+  /files/{fileId}/export:
     get:
       description: Exports a Google Workspace document to the requested MIME type and returns exported byte content. Note that the exported content is limited to 10MB.
       operationId: drive.files.export
@@ -1903,7 +1903,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/files/{fileId}/listLabels":
+  /files/{fileId}/listLabels:
     get:
       description: Lists the labels on a file.
       operationId: drive.files.listLabels
@@ -1968,7 +1968,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/files/{fileId}/modifyLabels":
+  /files/{fileId}/modifyLabels:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2018,7 +2018,7 @@ paths:
             - https://www.googleapis.com/auth/drive.metadata
       tags:
         - files
-  "/files/{fileId}/permissions":
+  /files/{fileId}/permissions:
     get:
       description: Lists a file's or shared drive's permissions.
       operationId: drive.permissions.list
@@ -2180,7 +2180,7 @@ paths:
             - https://www.googleapis.com/auth/drive.file
       tags:
         - permissions
-  "/files/{fileId}/permissions/{permissionId}":
+  /files/{fileId}/permissions/{permissionId}:
     delete:
       description: Deletes a permission. **Warning:** Concurrent permissions operations on the same file are not supported; only the last update is applied.
       operationId: drive.permissions.delete
@@ -2367,7 +2367,7 @@ paths:
             - https://www.googleapis.com/auth/drive.file
       tags:
         - permissions
-  "/files/{fileId}/revisions":
+  /files/{fileId}/revisions:
     get:
       description: Lists a file's revisions.
       operationId: drive.revisions.list
@@ -2440,7 +2440,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/files/{fileId}/revisions/{revisionId}":
+  /files/{fileId}/revisions/{revisionId}:
     delete:
       description: Permanently deletes a file version. You can only delete revisions for files with binary content in Google Drive, like images or videos. Revisions for other files, like Google Docs or Sheets, and the last remaining file version can't be deleted.
       operationId: drive.revisions.delete
@@ -2589,7 +2589,7 @@ paths:
             - https://www.googleapis.com/auth/drive.file
       tags:
         - revisions
-  "/files/{fileId}/watch":
+  /files/{fileId}/watch:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -2766,7 +2766,7 @@ paths:
             - https://www.googleapis.com/auth/drive
       tags:
         - teamdrives
-  "/teamdrives/{teamDriveId}":
+  /teamdrives/{teamDriveId}:
     delete:
       description: "Deprecated: Use `drives.delete` instead."
       operationId: drive.teamdrives.delete

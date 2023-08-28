@@ -31,7 +31,7 @@ externalDocs:
 tags:
   - name: users
 paths:
-  "/{userId}/dataSources":
+  /{userId}/dataSources:
     get:
       description: Lists all data sources that are visible to the developer, using the OAuth scopes provided. The list is not exhaustive; the user may have private data sources that are only visible to other developers, or calls using other scopes.
       operationId: fitness.users.dataSources.list
@@ -230,7 +230,7 @@ paths:
             - https://www.googleapis.com/auth/fitness.sleep.write
       tags:
         - users
-  "/{userId}/dataSources/{dataSourceId}":
+  /{userId}/dataSources/{dataSourceId}:
     delete:
       description: Deletes the specified data source. The request will fail if the data source contains any data points.
       operationId: fitness.users.dataSources.delete
@@ -502,7 +502,7 @@ paths:
             - https://www.googleapis.com/auth/fitness.sleep.write
       tags:
         - users
-  "/{userId}/dataSources/{dataSourceId}/dataPointChanges":
+  /{userId}/dataSources/{dataSourceId}/dataPointChanges:
     get:
       description: Queries for user's data point changes for a particular data source.
       operationId: fitness.users.dataSources.dataPointChanges.list
@@ -639,7 +639,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/{userId}/dataSources/{dataSourceId}/datasets/{datasetId}":
+  /{userId}/dataSources/{dataSourceId}/datasets/{datasetId}:
     delete:
       description: Performs an inclusive delete of all data points whose start and end times have any overlap with the time range specified by the dataset ID. For most data types, the entire data point will be deleted. For data types where the time span represents a consistent value (such as com.google.activity.segment), and a data point straddles either end point of the dataset, only the overlapping portion of the data point will be deleted.
       operationId: fitness.users.dataSources.datasets.delete
@@ -935,7 +935,7 @@ paths:
             - https://www.googleapis.com/auth/fitness.sleep.write
       tags:
         - users
-  "/{userId}/dataset:aggregate":
+  /{userId}/dataset:aggregate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1061,7 +1061,7 @@ paths:
             - https://www.googleapis.com/auth/fitness.sleep.write
       tags:
         - users
-  "/{userId}/sessions":
+  /{userId}/sessions:
     get:
       description: Lists sessions previously created.
       operationId: fitness.users.sessions.list
@@ -1211,7 +1211,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/{userId}/sessions/{sessionId}":
+  /{userId}/sessions/{sessionId}:
     delete:
       description: Deletes a session specified by the given session ID.
       operationId: fitness.users.sessions.delete

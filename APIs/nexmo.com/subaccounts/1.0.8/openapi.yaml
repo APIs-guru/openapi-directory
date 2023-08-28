@@ -23,7 +23,7 @@ tags:
   - description: This section shows how you execute credit, balance and number transfers, as well as viewing past transactions.
     name: Transfers
 paths:
-  "/{api_key}/balance-transfers":
+  /{api_key}/balance-transfers:
     get:
       description: |
         Retrieve a list of balance transfers that have taken place for a primary account within a specified time period.
@@ -110,7 +110,7 @@ paths:
       summary: Transfer balance
       tags:
         - Transfers
-  "/{api_key}/credit-transfers":
+  /{api_key}/credit-transfers:
     get:
       description: |
         Retrieve a list of credit transfers that have taken place for a primary account within a specified time period.
@@ -197,7 +197,7 @@ paths:
       summary: Transfer credit
       tags:
         - Transfers
-  "/{api_key}/subaccounts":
+  /{api_key}/subaccounts:
     get:
       description: |
         Get the information of all the subaccounts owned by the primary account.
@@ -264,7 +264,7 @@ paths:
       summary: Create subaccount
       tags:
         - Subaccount Management
-  "/{api_key}/subaccounts/{subaccount_key}":
+  /{api_key}/subaccounts/{subaccount_key}:
     get:
       description: |
         Get the information of a subaccount specified with its API key.
@@ -343,7 +343,7 @@ paths:
       summary: Modify a subaccount
       tags:
         - Subaccount Management
-  "/{api_key}/transfer-number":
+  /{api_key}/transfer-number:
     post:
       description: |
         Transfer number from one account to another.

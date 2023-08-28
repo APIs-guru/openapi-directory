@@ -33,7 +33,7 @@ tags:
   - name: projects
   - name: v1
 paths:
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a TunnelDestGroup.
       operationId: iap.projects.iap_tunnel.locations.destGroups.delete
@@ -128,7 +128,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:iapSettings":
+  /v1/{name}:iapSettings:
     get:
       description: Gets the IAP settings on a particular IAP protected resource.
       operationId: iap.getIapSettings
@@ -199,7 +199,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
-  "/v1/{name}:resetSecret":
+  /v1/{name}:resetSecret:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -241,7 +241,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}:validateAttributeExpression":
+  /v1/{name}:validateAttributeExpression:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -283,7 +283,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
-  "/v1/{parent}/brands":
+  /v1/{parent}/brands:
     get:
       description: Lists the existing brands for the project.
       operationId: iap.projects.brands.list
@@ -349,7 +349,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/destGroups":
+  /v1/{parent}/destGroups:
     get:
       description: "Lists the existing TunnelDestGroups. To group across all locations, use a `-` as the location ID. For example: `/v1/projects/123/iap_tunnel/locations/-/destGroups`"
       operationId: iap.projects.iap_tunnel.locations.destGroups.list
@@ -430,7 +430,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/identityAwareProxyClients":
+  /v1/{parent}/identityAwareProxyClients:
     get:
       description: Lists the existing clients for the brand.
       operationId: iap.projects.brands.identityAwareProxyClients.list
@@ -506,7 +506,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -548,7 +548,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -590,7 +590,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - v1
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

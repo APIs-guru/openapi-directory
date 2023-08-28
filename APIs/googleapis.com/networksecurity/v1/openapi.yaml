@@ -31,7 +31,7 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  "/v1/{addressGroup}:addItems":
+  /v1/{addressGroup}:addItems:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -73,7 +73,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{addressGroup}:cloneItems":
+  /v1/{addressGroup}:cloneItems:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -115,7 +115,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{addressGroup}:listReferences":
+  /v1/{addressGroup}:listReferences:
     get:
       description: Lists references of an address group.
       operationId: networksecurity.projects.locations.addressGroups.listReferences
@@ -162,7 +162,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{addressGroup}:removeItems":
+  /v1/{addressGroup}:removeItems:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -204,7 +204,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a single UrlList.
       operationId: networksecurity.projects.locations.urlLists.delete
@@ -304,7 +304,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: networksecurity.projects.locations.list
@@ -356,7 +356,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: networksecurity.projects.locations.operations.list
@@ -408,7 +408,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -450,7 +450,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/addressGroups":
+  /v1/{parent}/addressGroups:
     get:
       description: Lists address groups in a given project and location.
       operationId: networksecurity.projects.locations.addressGroups.list
@@ -536,7 +536,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/authorizationPolicies":
+  /v1/{parent}/authorizationPolicies:
     get:
       description: Lists AuthorizationPolicies in a given project and location.
       operationId: networksecurity.projects.locations.authorizationPolicies.list
@@ -617,7 +617,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/clientTlsPolicies":
+  /v1/{parent}/clientTlsPolicies:
     get:
       description: Lists ClientTlsPolicies in a given project and location.
       operationId: networksecurity.projects.locations.clientTlsPolicies.list
@@ -698,7 +698,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/gatewaySecurityPolicies":
+  /v1/{parent}/gatewaySecurityPolicies:
     get:
       description: Lists GatewaySecurityPolicies in a given project and location.
       operationId: networksecurity.projects.locations.gatewaySecurityPolicies.list
@@ -779,7 +779,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/rules":
+  /v1/{parent}/rules:
     get:
       description: Lists GatewaySecurityPolicyRules in a given project and location.
       operationId: networksecurity.projects.locations.gatewaySecurityPolicies.rules.list
@@ -860,7 +860,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/serverTlsPolicies":
+  /v1/{parent}/serverTlsPolicies:
     get:
       description: Lists ServerTlsPolicies in a given project and location.
       operationId: networksecurity.projects.locations.serverTlsPolicies.list
@@ -941,7 +941,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/tlsInspectionPolicies":
+  /v1/{parent}/tlsInspectionPolicies:
     get:
       description: Lists TlsInspectionPolicies in a given project and location.
       operationId: networksecurity.projects.locations.tlsInspectionPolicies.list
@@ -1022,7 +1022,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/urlLists":
+  /v1/{parent}/urlLists:
     get:
       description: Lists UrlLists in a given project and location.
       operationId: networksecurity.projects.locations.urlLists.list
@@ -1103,7 +1103,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: networksecurity.projects.locations.serverTlsPolicies.getIamPolicy
@@ -1145,7 +1145,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1187,7 +1187,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"

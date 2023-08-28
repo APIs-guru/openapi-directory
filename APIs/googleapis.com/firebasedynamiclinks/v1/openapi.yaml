@@ -176,7 +176,7 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - shortLinks
-  "/v1/{dynamicLink}/linkStats":
+  /v1/{dynamicLink}/linkStats:
     get:
       description: Fetches analytics stats of a short Dynamic Link for a given duration. Metrics include number of clicks, redirects, installs, app first opens, and app reopens.
       operationId: firebasedynamiclinks.getLinkStats

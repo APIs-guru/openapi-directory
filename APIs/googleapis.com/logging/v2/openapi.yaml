@@ -274,7 +274,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{logName}":
+  /v2/{logName}:
     delete:
       description: Deletes all the log entries in a log for the _Default Log Bucket. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted. Entries received after the delete operation with a timestamp before the operation will be deleted.
       operationId: logging.projects.logs.delete
@@ -315,7 +315,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{metricName}":
+  /v2/{metricName}:
     delete:
       description: Deletes a logs-based metric.
       operationId: logging.projects.metrics.delete
@@ -433,7 +433,7 @@ paths:
             - https://www.googleapis.com/auth/logging.write
       tags:
         - projects
-  "/v2/{name}":
+  /v2/{name}:
     delete:
       description: Deletes a view on a log bucket. If an UNAVAILABLE error is returned, this indicates that system is not in a state where it can delete the view. If this occurs, please try again in a few minutes.
       operationId: logging.projects.locations.buckets.views.delete
@@ -548,7 +548,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{name}/cmekSettings":
+  /v2/{name}/cmekSettings:
     get:
       description: "Gets the Logging CMEK settings for the given resource.Note: CMEK for the Log Router can be configured for Google Cloud projects, folders, organizations and billing accounts. Once configured for an organization, it applies to all projects and folders in the Google Cloud organization.See Enabling CMEK for Log Router (https://cloud.google.com/logging/docs/routing/managed-encryption) for more information."
       operationId: logging.getCmekSettings
@@ -635,7 +635,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - v2
-  "/v2/{name}/locations":
+  /v2/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: logging.projects.locations.list
@@ -699,7 +699,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}/operations":
+  /v2/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns UNIMPLEMENTED.
       operationId: logging.projects.locations.operations.list
@@ -763,7 +763,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{name}/settings":
+  /v2/{name}/settings:
     get:
       description: "Gets the Log Router settings for the given resource.Note: Settings for the Log Router can be get for Google Cloud projects, folders, organizations and billing accounts. Currently it can only be configured for organizations. Once configured for an organization, it applies to all projects and folders in the Google Cloud organization.See Enabling CMEK for Log Router (https://cloud.google.com/logging/docs/routing/managed-encryption) for more information."
       operationId: logging.getSettings
@@ -850,7 +850,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - v2
-  "/v2/{name}:cancel":
+  /v2/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -896,7 +896,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{name}:undelete":
+  /v2/{name}:undelete:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -942,7 +942,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{name}:updateAsync":
+  /v2/{name}:updateAsync:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -993,7 +993,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{parent}/buckets":
+  /v2/{parent}/buckets:
     get:
       description: Lists log buckets.
       operationId: logging.projects.locations.buckets.list
@@ -1090,7 +1090,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{parent}/buckets:createAsync":
+  /v2/{parent}/buckets:createAsync:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1141,7 +1141,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{parent}/exclusions":
+  /v2/{parent}/exclusions:
     get:
       description: Lists all the exclusions on the _Default sink in a parent resource.
       operationId: logging.projects.exclusions.list
@@ -1233,7 +1233,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{parent}/links":
+  /v2/{parent}/links:
     get:
       description: Lists links.
       operationId: logging.projects.locations.buckets.links.list
@@ -1330,7 +1330,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{parent}/logs":
+  /v2/{parent}/logs:
     get:
       description: Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.
       operationId: logging.projects.logs.list
@@ -1398,7 +1398,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v2/{parent}/metrics":
+  /v2/{parent}/metrics:
     get:
       description: Lists logs-based metrics.
       operationId: logging.projects.metrics.list
@@ -1494,7 +1494,7 @@ paths:
             - https://www.googleapis.com/auth/logging.write
       tags:
         - projects
-  "/v2/{parent}/sinks":
+  /v2/{parent}/sinks:
     get:
       description: Lists sinks.
       operationId: logging.sinks.list
@@ -1596,7 +1596,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - sinks
-  "/v2/{parent}/views":
+  /v2/{parent}/views:
     get:
       description: Lists views on a log bucket.
       operationId: logging.projects.locations.buckets.views.list
@@ -1693,7 +1693,7 @@ paths:
             - https://www.googleapis.com/auth/logging.admin
       tags:
         - projects
-  "/v2/{sinkName}":
+  /v2/{sinkName}:
     delete:
       description: Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.
       operationId: logging.sinks.delete

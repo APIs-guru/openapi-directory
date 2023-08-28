@@ -29,7 +29,7 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1/{location}/insights:writeInsight":
+  /v1/{location}/insights:writeInsight:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -71,7 +71,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
       operationId: workloadmanager.projects.locations.operations.delete
@@ -132,7 +132,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/executions:run":
+  /v1/{name}/executions:run:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -174,7 +174,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}/locations":
+  /v1/{name}/locations:
     get:
       description: Lists information about the supported locations for this service.
       operationId: workloadmanager.projects.locations.list
@@ -226,7 +226,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}/operations":
+  /v1/{name}/operations:
     get:
       description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
       operationId: workloadmanager.projects.locations.operations.list
@@ -278,7 +278,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}:cancel":
+  /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -320,7 +320,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/evaluations":
+  /v1/{parent}/evaluations:
     get:
       description: Lists Evaluations in a given project and location.
       operationId: workloadmanager.projects.locations.evaluations.list
@@ -416,7 +416,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/executions":
+  /v1/{parent}/executions:
     get:
       description: Lists Executions in a given project and location.
       operationId: workloadmanager.projects.locations.evaluations.executions.list
@@ -473,7 +473,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/results":
+  /v1/{parent}/results:
     get:
       description: List the running result of a single Execution.
       operationId: workloadmanager.projects.locations.evaluations.executions.results.list
@@ -525,7 +525,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/rules":
+  /v1/{parent}/rules:
     get:
       description: Lists rules in a given project.
       operationId: workloadmanager.projects.locations.rules.list
@@ -582,7 +582,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{parent}/scannedResources":
+  /v1/{parent}/scannedResources:
     get:
       description: List all scanned resources for a single Execution.
       operationId: workloadmanager.projects.locations.evaluations.executions.scannedResources.list

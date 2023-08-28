@@ -33,7 +33,7 @@ tags:
   - name: projects
   - name: systempolicy
 paths:
-  "/v1/{attestor}:validateAttestationOccurrence":
+  /v1/{attestor}:validateAttestationOccurrence:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -75,7 +75,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{name}":
+  /v1/{name}:
     delete:
       description: Deletes a platform policy. Returns NOT_FOUND if the policy doesn't exist.
       operationId: binaryauthorization.projects.platforms.policies.delete
@@ -165,7 +165,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/attestors":
+  /v1/{parent}/attestors:
     get:
       description: Lists attestors. Returns INVALID_ARGUMENT if the project does not exist.
       operationId: binaryauthorization.projects.attestors.list
@@ -246,7 +246,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{parent}/policies":
+  /v1/{parent}/policies:
     get:
       description: Lists platform policies owned by a project in the specified platform. Returns INVALID_ARGUMENT if the project or the platform doesn't exist.
       operationId: binaryauthorization.projects.platforms.policies.list
@@ -327,7 +327,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:getIamPolicy":
+  /v1/{resource}:getIamPolicy:
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: binaryauthorization.projects.policy.getIamPolicy
@@ -369,7 +369,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1/{resource}:setIamPolicy":
+  /v1/{resource}:setIamPolicy:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -411,7 +411,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1/{resource}:testIamPermissions":
+  /v1/{resource}:testIamPermissions:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
