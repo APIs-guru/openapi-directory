@@ -634,6 +634,9 @@ paths:
       tags:
         - Drives
       x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: google-drive
+          description: Google drive does not provide `previous` cursor information, so the cursors for the previous pages will be empty.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -912,6 +915,9 @@ paths:
       tags:
         - Files
       x-apideck-api: fileStorage
+      x-apideck-gotchas:
+        - connector: google-drive
+          description: Google drive does not provide `previous` cursor information, so the cursors for the previous pages will be empty.
       x-codeSamples:
         - label: Node
           lang: TypeScript

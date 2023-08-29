@@ -19,7 +19,7 @@ paths:
   /visitor-identification/v3/tokens/create:
     post:
       description: Generates a new visitor identification token. This token will be unique every time this endpoint is called, even if called with the same email address. This token is temporary and will expire after 12 hours
-      operationId: post-/visitor-identification/v3/tokens/create
+      operationId: post-/visitor-identification/v3/tokens/create_generateToken
       parameters: []
       requestBody:
         content:
@@ -173,3 +173,8 @@ components:
       in: header
       name: private-app-legacy
       type: apiKey
+x-hubspot-available-client-libraries:
+  - PHP
+  - Node
+  - Ruby
+  - Python

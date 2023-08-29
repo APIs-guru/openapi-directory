@@ -1,0 +1,243 @@
+openapi: 3.0.0
+servers:
+  - url: https://playgrouping.googleapis.com/
+info:
+  contact:
+    name: Google
+    url: https://google.com
+    x-twitter: youtube
+  description: playgrouping.googleapis.com API.
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
+  title: Google Play Grouping API
+  version: v1alpha1
+  x-apisguru-categories:
+    - analytics
+    - media
+  x-logo:
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+  x-origin:
+    - format: google
+      url: https://playgrouping.googleapis.com/$discovery/rest?version=v1alpha1
+      version: v1
+  x-providerName: googleapis.com
+  x-serviceName: playgrouping
+externalDocs:
+  url: https://cloud.google.com/playgrouping/
+tags:
+  - name: apps
+paths:
+  /v1alpha1/{appPackage}/{token}/tags:createOrUpdate:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create or update tags for the user and app that are represented by the given token.
+      operationId: playgrouping.apps.tokens.tags.createOrUpdate
+      parameters:
+        - description: "Required. App whose tags are being manipulated. Format: apps/{package_name}"
+          in: path
+          name: appPackage
+          required: true
+          schema:
+            type: string
+        - description: "Required. Token for which the tags are being inserted or updated. Format: tokens/{token}"
+          in: path
+          name: token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateTagsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOrUpdateTagsResponse"
+          description: Successful response
+      tags:
+        - apps
+  /v1alpha1/{appPackage}/{token}:verify:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Verify an API token by asserting the app and persona it belongs to. The verification is a protection against client-side attacks and will fail if the contents of the token don't match the provided values. A token must be verified before it can be used to manipulate user tags.
+      operationId: playgrouping.apps.tokens.verify
+      parameters:
+        - description: "Required. App the token belongs to. Format: apps/{package_name}"
+          in: path
+          name: appPackage
+          required: true
+          schema:
+            type: string
+        - description: "Required. The token to be verified. Format: tokens/{token}"
+          in: path
+          name: token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyTokenRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerifyTokenResponse"
+          description: Successful response
+      tags:
+        - apps
+components:
+  parameters:
+    _.xgafv:
+      description: V1 error format.
+      in: query
+      name: $.xgafv
+      schema:
+        enum:
+          - "1"
+          - "2"
+        type: string
+    access_token:
+      description: OAuth access token.
+      in: query
+      name: access_token
+      schema:
+        type: string
+    alt:
+      description: Data format for response.
+      in: query
+      name: alt
+      schema:
+        enum:
+          - json
+          - media
+          - proto
+        type: string
+    callback:
+      description: JSONP
+      in: query
+      name: callback
+      schema:
+        type: string
+    fields:
+      description: Selector specifying which fields to include in a partial response.
+      in: query
+      name: fields
+      schema:
+        type: string
+    key:
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      in: query
+      name: key
+      schema:
+        type: string
+    oauth_token:
+      description: OAuth 2.0 token for the current user.
+      in: query
+      name: oauth_token
+      schema:
+        type: string
+    prettyPrint:
+      description: Returns response with indentations and line breaks.
+      in: query
+      name: prettyPrint
+      schema:
+        type: boolean
+    quotaUser:
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
+      in: query
+      name: quotaUser
+      schema:
+        type: string
+    uploadType:
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
+      in: query
+      name: uploadType
+      schema:
+        type: string
+    upload_protocol:
+      description: Upload protocol for media (e.g. "raw", "multipart").
+      in: query
+      name: upload_protocol
+      schema:
+        type: string
+  schemas:
+    CreateOrUpdateTagsRequest:
+      description: Request message for CreateOrUpdateTags. VerifyToken.
+      properties:
+        tags:
+          description: Tags to be inserted or updated.
+          items:
+            $ref: "#/components/schemas/Tag"
+          type: array
+      type: object
+    CreateOrUpdateTagsResponse:
+      description: Response message for CreateOrUpdateTags.
+      properties:
+        tags:
+          description: All requested tags are returned, including pre-existing ones.
+          items:
+            $ref: "#/components/schemas/Tag"
+          type: array
+      type: object
+    Tag:
+      description: A tag is associated with exactly one package name and user.
+      properties:
+        booleanValue:
+          description: A boolean value of the tag.
+          type: boolean
+        int64Value:
+          description: A signed 64-bit integer value of the tag.
+          format: int64
+          type: string
+        key:
+          description: Required. Key for the tag.
+          type: string
+        stringValue:
+          description: A string value of the tag.
+          type: string
+        timeValue:
+          description: A time value of the tag.
+          format: google-datetime
+          type: string
+      type: object
+    VerifyTokenRequest:
+      description: Request message for VerifyToken.
+      properties:
+        persona:
+          description: "Required. Persona represented by the token. Format: personas/{persona}"
+          type: string
+      type: object
+    VerifyTokenResponse:
+      description: Response message for VerifyToken.
+      properties: {}
+      type: object
