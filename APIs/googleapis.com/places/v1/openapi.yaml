@@ -229,18 +229,6 @@ components:
           format: double
           type: number
       type: object
-    GoogleMapsPlacesV1Int32Range:
-      description: int 32 range. Both min and max are optional. If only min is set, then the range only has a lower bound. If only max is set, then range only has an upper bound. At least one of min and max must be set. Values are inclusive.
-      properties:
-        max:
-          description: Upper bound. If unset, behavior is documented on the range field.
-          format: int32
-          type: integer
-        min:
-          description: Lower bound. If unset, behavior is documented on the range field.
-          format: int32
-          type: integer
-      type: object
     GoogleMapsPlacesV1Place:
       description: All the information representing a Place.
       properties:
@@ -534,11 +522,6 @@ components:
           $ref: "#/components/schemas/GoogleTypeDate"
           description: Output only. Date in the local timezone for the place.
           readOnly: true
-        dateDeprecated:
-          deprecated: true
-          description: Output only. Date of the endpoint expressed in RFC3339 format in the local timezone for the place. For example 2010-12-31.
-          readOnly: true
-          type: string
         day:
           description: Output only. A day of the week, as an integer in the range 0-6. 0 is Sunday, 1 is Monday, etc.
           format: int32
@@ -618,10 +601,6 @@ components:
         languageCode:
           description: "Place details will be displayed with the preferred language if available. If the language code is unspecified or unrecognized, place details of any language may be returned, with a preference for English if such details exist. Current list of supported languages: https://developers.google.com/maps/faq#languagesupport."
           type: string
-        location:
-          $ref: "#/components/schemas/GoogleMapsPlacesV1SearchTextRequestLocation"
-          deprecated: true
-          description: "[Deprecated!]The region to search. Setting location would usually yields better results. Recommended to set. This location serves as a bias unless strict_restriction is set to true, which turns the location to a strict restriction."
         locationBias:
           $ref: "#/components/schemas/GoogleMapsPlacesV1SearchTextRequestLocationBias"
           description: The region to search. This location serves as a bias which means results around given location might be returned. Cannot be set along with location_restriction.
@@ -651,10 +630,6 @@ components:
               - PRICE_LEVEL_VERY_EXPENSIVE
             type: string
           type: array
-        priceRange:
-          $ref: "#/components/schemas/GoogleMapsPlacesV1Int32Range"
-          deprecated: true
-          description: "[Deprecated!]Used to restrict the search to places that are within a certain price range. This is on a scale of 0 to 4. Set a minimum of 0 or set a maximum of 4 has no effect on the search results. Min price is default to 0 and max price is default to 4. Default value will be used if either min or max is unset."
         rankPreference:
           description: How results will be ranked in the response.
           enum:
@@ -671,16 +646,6 @@ components:
         textQuery:
           description: Required. The text query for textual search.
           type: string
-      type: object
-    GoogleMapsPlacesV1SearchTextRequestLocation:
-      description: "[Deprecated!]The region to search."
-      properties:
-        rectangle:
-          $ref: "#/components/schemas/GoogleGeoTypeViewport"
-          description: A rectangle box defined by northeast and southwest corner.
-        strictRestriction:
-          description: Make location field a strict restriction and filter out POIs outside of the given location. If location type field is unset this field will have no effect.
-          type: boolean
       type: object
     GoogleMapsPlacesV1SearchTextRequestLocationBias:
       description: The region to search. This location serves as a bias which means results around given location might be returned.

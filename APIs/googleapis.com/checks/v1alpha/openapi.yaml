@@ -291,6 +291,48 @@ paths:
           description: Successful response
       tags:
         - projects
+  /v1alpha/{parent}/apps:
+    get:
+      description: Lists the apps under the given account.
+      operationId: checks.accounts.apps.list
+      parameters:
+        - description: "Required. The parent account. Example: `accounts/123`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The maximum number of results to return. The server may further constrain the maximum number of results returned in a single page. If unspecified, the server will decide the number of results to be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A page token received from a previous `ListApps` call. Provide this to retrieve the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChecksAccountV1alphaListAppsResponse"
+          description: Successful response
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1alpha/{parent}/reports:
     get:
       description: Lists reports for the specified app. By default, only the name and results_uri fields are returned. You can include other fields by listing them in the `fields` URL query parameter. For example, `?fields=reports(name,checks)` will return the name and checks fields.
@@ -520,6 +562,28 @@ components:
       properties:
         privacyPolicy:
           description: Resource name of the PrivacyPolicy that was found.
+          type: string
+      type: object
+    GoogleChecksAccountV1alphaApp:
+      description: Represents an app in Checks.
+      properties:
+        name:
+          description: "The resource name of the app. Example: `accounts/123/apps/456`"
+          type: string
+        title:
+          description: The app's title.
+          type: string
+      type: object
+    GoogleChecksAccountV1alphaListAppsResponse:
+      description: The response message for AccountService.ListApps.
+      properties:
+        apps:
+          description: The apps.
+          items:
+            $ref: "#/components/schemas/GoogleChecksAccountV1alphaApp"
+          type: array
+        nextPageToken:
+          description: A token which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
     GoogleChecksReportV1alphaAnalyzeUploadRequest:

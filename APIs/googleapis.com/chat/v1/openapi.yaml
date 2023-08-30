@@ -956,7 +956,7 @@ components:
           type: string
       type: object
     Annotation:
-      description: 'Annotations associated with the plain-text body of the message. Example plain-text message body: ``` Hello @FooBot how are you!" ``` The corresponding annotations metadata: ``` "annotations":[{ "type":"USER_MENTION", "startIndex":6, "length":7, "userMention": { "user": { "name":"users/{user}", "displayName":"FooBot", "avatarUrl":"https://goo.gl/aeDtrS", "type":"BOT" }, "type":"MENTION" } }] ```'
+      description: 'Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/chat/api/guides/message-formats/text#format-texts). Example plain-text message body: ``` Hello @FooBot how are you!" ``` The corresponding annotations metadata: ``` "annotations":[{ "type":"USER_MENTION", "startIndex":6, "length":7, "userMention": { "user": { "name":"users/{user}", "displayName":"FooBot", "avatarUrl":"https://goo.gl/aeDtrS", "type":"BOT" }, "type":"MENTION" } }] ```'
       properties:
         length:
           description: Length of the substring in the plain-text message body this annotation corresponds to.
@@ -2566,13 +2566,13 @@ components:
           type: string
       type: object
     Thread:
-      description: A thread in a Google Chat space. For example usage, see [Start or reply to a message thread](https://developers.google.com/chat/api/guides/crudl/messages#start_or_reply_to_a_message_thread).
+      description: A thread in a Google Chat space. For example usage, see [Start or reply to a message thread](https://developers.google.com/chat/api/guides/v1/messages/create#create-message-thread). If you specify a thread when creating a message, you can set the [`messageReplyOption`](https://developers.google.com/chat/api/reference/rest/v1/spaces.messages/create#messagereplyoption) field to determine what happens if no matching thread is found.
       properties:
         name:
-          description: "Resource name of the thread. Example: `spaces/{space}/threads/{thread}`"
+          description: "Output only. Resource name of the thread. Example: `spaces/{space}/threads/{thread}`"
           type: string
         threadKey:
-          description: Optional. ID for the thread. Supports up to 4000 characters. Input for creating or updating a thread. Otherwise, output only.
+          description: Optional. Input for creating or updating a thread. Otherwise, output only. ID for the thread. Supports up to 4000 characters. This ID is unique to the Chat app that sets it. For example, if multiple Chat apps create a message using the same thread key, the messages are posted in different threads. To reply in a thread created by a person or another Chat app, specify the thread `name` field instead.
           type: string
       type: object
     TimeInput:

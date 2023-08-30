@@ -516,6 +516,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: Only use the requested verification code 0_0001 to resolve any suberrors associated with the document. Requested verification codes can only be used in your test environment.
+          example: 0_0001
+          in: header
+          name: x-requested-verification-code
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -741,6 +747,12 @@ paths:
           in: path
           name: id
           required: true
+          schema:
+            type: string
+        - description: Only use the requested verification code 0_0001 to resolve any suberrors associated with the legal entity. Requested verification codes can only be used in your test environment.
+          example: 0_0001
+          in: header
+          name: x-requested-verification-code
           schema:
             type: string
       requestBody:
@@ -1851,6 +1863,12 @@ paths:
           in: path
           name: id
           required: true
+          schema:
+            type: string
+        - description: Only use the requested verification code 0_0001 to resolve any suberrors associated with the transfer instrument. Requested verification codes can only be used in your test environment.
+          example: 0_0001
+          in: header
+          name: x-requested-verification-code
           schema:
             type: string
       requestBody:

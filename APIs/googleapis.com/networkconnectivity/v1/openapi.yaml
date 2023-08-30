@@ -1777,7 +1777,7 @@ components:
           type: string
       type: object
     Group:
-      description: A group represents a subset of spokes attached to a hub.
+      description: A group is a set of spokes to which you can apply policies. Each group of spokes has its own route table. For each group, you can also set different rules for whether spokes can be automatically attached to the hub.
       properties:
         createTime:
           description: Output only. The time the group was created.
@@ -2797,7 +2797,7 @@ components:
           description: An optional description of the spoke.
           type: string
         group:
-          description: Optional. The name of the group that this spoke is associated with.
+          description: The name of the group that this spoke is associated with.
           type: string
         hub:
           description: Immutable. The name of the hub that this spoke is attached to.
