@@ -1095,8 +1095,9 @@ paths:
       x-apideck-gotchas:
         - connector: hibob
           description: |
+            When creating an employee is required by Hibob to include the following Unifiy fields: first_name, last_name, employment_start_date, jobs[0].location.name and an email with a primary type must be provided within the emails field.
             For countries hibob doesn't accept iso code or name values so just the country common name. Example 'United States'
-            HiBob just API just accepts one compensation, so for the request it will be considered the first one sent in the array and the payment unit is sent yearly by default.
+            HiBob API just accepts one compensation, so for the request it will be considered the first one sent in the array and the payment unit is sent yearly by default.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1150,6 +1151,7 @@ paths:
                   sub_type: 'full_time'
                 },
                 manager: {
+                  id: '12345',
                   name: 'Elon Musk',
                   first_name: 'Elon',
                   last_name: 'Musk',
@@ -1515,6 +1517,7 @@ paths:
                   sub_type: 'full_time'
                 },
                 manager: {
+                  id: '12345',
                   name: 'Elon Musk',
                   first_name: 'Elon',
                   last_name: 'Musk',
@@ -4168,7 +4171,7 @@ components:
             first_name:
               $ref: "#/components/schemas/FirstName"
             id:
-              $ref: "#/components/schemas/IdOrNull"
+              $ref: "#/components/schemas/WritableId"
             last_name:
               $ref: "#/components/schemas/LastName"
             name:
@@ -6610,6 +6613,7 @@ components:
     WritableId:
       description: A unique identifier for an object.
       example: "12345"
+      nullable: true
       readOnly: false
       title: ID
       type: string

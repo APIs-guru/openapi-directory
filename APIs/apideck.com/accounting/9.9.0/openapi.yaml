@@ -4277,6 +4277,7 @@ paths:
                 payment_method: 'cash',
                 tax_code: '1234',
                 channel: 'email',
+                memo: 'Thank you for the partnership and have a great day!',
                 row_version: '1-12345'
               }
             }
@@ -4581,6 +4582,7 @@ paths:
                 payment_method: 'cash',
                 tax_code: '1234',
                 channel: 'email',
+                memo: 'Thank you for the partnership and have a great day!',
                 row_version: '1-12345'
               }
             }
@@ -12137,6 +12139,12 @@ components:
           items:
             $ref: "#/components/schemas/InvoiceLineItem"
           type: array
+        memo:
+          description: Message for the supplier. This text appears on the Purchase Order.
+          example: Thank you for the partnership and have a great day!
+          nullable: true
+          title: Memo
+          type: string
         payment_method:
           $ref: "#/components/schemas/PaymentMethod"
         po_number:
@@ -12221,6 +12229,7 @@ components:
         issued_date: edge-case
         ledger_account: edge-case
         line_items: critical
+        memo: low
         payment_method: low
         po_number: low
         reference: low
@@ -12231,6 +12240,7 @@ components:
         supplier: high
         tax_code: medium
         tax_inclusive: low
+        template_id: low
         total: critical
         total_tax: high
         updated_at: high

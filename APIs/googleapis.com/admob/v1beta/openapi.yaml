@@ -583,95 +583,6 @@ paths:
             - https://www.googleapis.com/auth/admob.report
       tags:
         - accounts
-  /v1beta/{parent}/campaigns:
-    get:
-      description: List the campaigns under the specified AdMob account.
-      operationId: admob.accounts.campaigns.list
-      parameters:
-        - description: "Required. Resource name of the account to list campaigns for. Example: accounts/pub-9876543210987654"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: 'The filter string that uses [EBNF grammar syntax](https://google.aip.dev/assets/misc/ebnf-filtering.txt). Possible field to filter by is: - "CAMPAIGN_GOAL_TYPE" Possible filter function is: - `IN`: Used to filter fields that represent a singleton including "CAMPAIGN_GOAL_TYPE". The filter functions can be added together using `AND`. `OR` functionality is not supported. Example: filter: IN(CAMPAIGN_GOAL_TYPE, "NUMBER_OF_CLICKS", "MEDIATED_ADS")'
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: The maximum number of campaigns to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The value returned by the last `ListCampaignsResponse`; indicates that this is a continuation of a prior `ListGoogleBiddingAdUnits` call, and that the system should return the next page of data.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListCampaignsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/admob.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/admob.readonly
-      tags:
-        - accounts
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  /v1beta/{parent}/campaigns:batchUpdate:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Batch update operation for campaigns under the specified AdMob publisher.
-      operationId: admob.accounts.campaigns.batchUpdate
-      parameters:
-        - description: "Required. Resource name of the account to list campaigns for. The `parent` field in the individual UpdateCampaignRequest messages should match the value set here. Example: accounts/pub-9876543210987654"
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/BatchUpdateCampaignsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BatchUpdateCampaignsResponse"
-          description: Successful response
-      tags:
-        - accounts
   /v1beta/{parent}/mediationAbExperiments:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1152,59 +1063,6 @@ components:
             $ref: "#/components/schemas/AdUnitMapping"
           type: array
       type: object
-    BatchUpdateCampaignsRequest:
-      description: The request for the BatchUpdateCampaigns API.
-      properties:
-        requests:
-          description: Required. The individual requests to update campaigns. Max 1000 allowed.
-          items:
-            $ref: "#/components/schemas/UpdateCampaignRequest"
-          type: array
-      type: object
-    BatchUpdateCampaignsResponse:
-      description: The response for the BatchUpdateCampaigns API.
-      properties:
-        campaigns:
-          description: The updated campaigns per the request.
-          items:
-            $ref: "#/components/schemas/Campaign"
-          type: array
-      type: object
-    Campaign:
-      description: Describes an AdMob campaign.
-      properties:
-        cpiSetting:
-          $ref: "#/components/schemas/CampaignCpiSetting"
-          description: The CPI setting of the campaign.
-        displayName:
-          description: Output only. The display name for the campaign.
-          readOnly: true
-          type: string
-        goalType:
-          description: Output only. The Goal type of the campaign.
-          enum:
-            - GOAL_TYPE_UNSPECIFIED
-            - MEDIATED_ADS
-            - NUMBER_OF_IMPRESSIONS
-            - NUMBER_OF_CLICKS
-            - PERCENTAGE_OF_IMPRESSIONS
-            - MAX_CPI
-            - TARGET_CPI
-          readOnly: true
-          type: string
-        name:
-          description: "Output only. Resource name for this campaign. Format is: accounts/{publisher_id}/campaigns/{campaign_id} Example: accounts/pub-9876543210987654/campaigns/0123456789"
-          readOnly: true
-          type: string
-      type: object
-    CampaignCpiSetting:
-      description: CPI setting for AdMob campaign. Ignored unless campaign goal type is MAX_CPI or TARGET_CPI.
-      properties:
-        cpiMicros:
-          description: Cost-per-install for this campaign in micro units in the currency of the GoogleAds account linked to this AdMob publisher.
-          format: int64
-          type: string
-      type: object
     CampaignReportSpec:
       description: 'The specification for generating a Campaign report. For example, the specification to get IMPRESSIONS and CLICKS sliced by CAMPAIGN_ID can look like the following example: { "date_range": { "start_date": {"year": 2021, "month": 12, "day": 1}, "end_date": {"year": 2021, "month": 12, "day": 30} }, "dimensions": ["CAMPAIGN_ID"], "metrics": ["IMPRESSIONS", "CLICKS"], }'
       properties:
@@ -1394,18 +1252,6 @@ components:
           type: array
         nextPageToken:
           description: If not empty, indicates that there may be more apps for the request; this value should be passed in a new `ListAppsRequest`.
-          type: string
-      type: object
-    ListCampaignsResponse:
-      description: Response for the ListCampaignsRequest.
-      properties:
-        campaigns:
-          description: The resulting mediation groups for the requested account.
-          items:
-            $ref: "#/components/schemas/Campaign"
-          type: array
-        nextPageToken:
-          description: Used to set the `page_token` in the `ListCampaignsRequest` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
       type: object
     ListMediationGroupsResponse:
@@ -1986,17 +1832,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    UpdateCampaignRequest:
-      description: An update request for a singular campaign. Currently only cpi_micros of MAX_CPI and TARGET_CPI campaigns can be updated.
-      properties:
-        campaign:
-          $ref: "#/components/schemas/Campaign"
-          description: Required. The campaign which is being updated.
-        updateMask:
-          description: List of campaign fields to be updated. Currently this field is not supported as only the cpi_micros field can be updated.
-          format: google-fieldmask
-          type: string
       type: object
   securitySchemes:
     Oauth2:

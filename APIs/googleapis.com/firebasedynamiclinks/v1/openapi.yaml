@@ -571,7 +571,7 @@ components:
           description: Google SDK version. Version takes the form "$major.$minor.$patch"
           type: string
         uniqueMatchLinkToCheck:
-          description: Possible unique matched link that server need to check before performing fingerprint match. If passed link is short server need to expand the link. If link is long server need to vslidate the link.
+          description: Possible unique matched link that server need to check before performing device heuristics match. If passed link is short server need to expand the link. If link is long server need to vslidate the link.
           type: string
         visualStyle:
           description: Strong match page information. Disambiguates between default UI and custom page to present when strong match succeeds/fails to find cookie.
@@ -596,7 +596,7 @@ components:
             - UNIQUE
           type: string
         deepLink:
-          description: The deep-link attributed post-install via one of several techniques (fingerprint, copy unique).
+          description: The deep-link attributed post-install via one of several techniques (device heuristics, copy unique).
           type: string
         externalBrowserDestinationLink:
           description: "User-agent specific custom-scheme URIs for iSDK to open. This will be set according to the user-agent tha the click was originally made in. There is no Safari-equivalent custom-scheme open URLs. ie: googlechrome://www.example.com ie: firefox://open-url?url=http://www.example.com ie: opera-http://example.com"
@@ -605,7 +605,7 @@ components:
           description: "The link to navigate to update the app if min version is not met. This is either (in order): 1) fallback link (from ?ifl= parameter, if specified by developer) or 2) AppStore URL (from ?isi= parameter, if specified), or 3) the payload link (from required link= parameter)."
           type: string
         invitationId:
-          description: Invitation ID attributed post-install via one of several techniques (fingerprint, copy unique).
+          description: Invitation ID attributed post-install via one of several techniques (device heuristics, copy unique).
           type: string
         isStrongMatchExecutable:
           description: Instruction for iSDK to attemmpt to perform strong match. For instance, if browser does not support/allow cookie or outside of support browsers, this will be false.
@@ -621,7 +621,7 @@ components:
             - IP_V6
           type: string
         requestedLink:
-          description: Entire FDL (short or long) attributed post-install via one of several techniques (fingerprint, copy unique).
+          description: Entire FDL (short or long) attributed post-install via one of several techniques (device heuristics, copy unique).
           type: string
         resolvedLink:
           description: "The entire FDL, expanded from a short link. It is the same as the requested_link, if it is long. Parameters from this should not be used directly (ie: server can default utm_[campaign|medium|source] to a value when requested_link lack them, server determine the best fallback_link when requested_link specifies >1 fallback links)."

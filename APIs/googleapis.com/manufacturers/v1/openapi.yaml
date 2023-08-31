@@ -598,6 +598,9 @@ components:
         authority:
           description: Required. Name of the certification body.
           type: string
+        code:
+          description: Required. A unique code to identify the certification.
+          type: string
         link:
           description: Optional. A URL link to the certification.
           type: string
@@ -611,7 +614,7 @@ components:
           description: Optional. The expiration date (UTC).
           type: string
         value:
-          description: Required. A custom value of the certification.
+          description: Optional. A custom value of the certification.
           type: string
       type: object
     Count:
