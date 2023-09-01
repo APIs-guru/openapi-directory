@@ -7204,19 +7204,19 @@ components:
           type: string
         encryptedCardNumber:
           description: The encrypted card number.
-          maxLength: 10000
+          maxLength: 15000
           type: string
         encryptedExpiryMonth:
           description: The encrypted card expiry month.
-          maxLength: 10000
+          maxLength: 15000
           type: string
         encryptedExpiryYear:
           description: The encrypted card expiry year.
-          maxLength: 10000
+          maxLength: 15000
           type: string
         encryptedSecurityCode:
           description: The encrypted card verification code.
-          maxLength: 10000
+          maxLength: 15000
           type: string
         expiryMonth:
           description: The card expiry month. Only collect raw card data if you are [fully PCI compliant](https://docs.adyen.com/development-resources/pci-dss-compliance-guide).
@@ -7252,6 +7252,7 @@ components:
           default: scheme
           description: Default payment method details. Common for scheme payment methods, and for simple payment method details.
           enum:
+            - bcmc
             - scheme
             - networkToken
             - giftcard

@@ -351,7 +351,7 @@ paths:
         - Files
   /files/v3/files/stat/{path}:
     get:
-      operationId: get-/files/v3/files/stat/{path}
+      operationId: get-/files/v3/files/stat/{path}_getMetadata
       parameters:
         - explode: false
           in: path
