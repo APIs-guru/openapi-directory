@@ -64,6 +64,7 @@ tags:
   - name: Terminal settings - merchant level
   - name: Webhooks - company level
   - name: Terminals - terminal level
+  - name: Android files - company level
   - name: Account - store level
   - name: Terminal settings - company level
   - name: API credentials - company level
@@ -215,6 +216,8 @@ paths:
         These apps have been uploaded to Adyen and can be installed or uninstalled on Android payment terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).
 
         To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Android files read
+        * Management API—Android files read and write
         * Management API—Terminal actions read
         * Management API—Terminal actions read and write
       operationId: get-companies-companyId-androidApps
@@ -297,10 +300,79 @@ paths:
         - ApiKeyAuth: []
       summary: Get a list of Android apps
       tags:
-        - Terminal actions - company level
-      x-groupName: Terminal actions - company level
+        - Android files - company level
+      x-groupName: Android files - company level
       x-methodName: listAndroidApps
       x-sortIndex: 1
+  /companies/{companyId}/androidApps/{id}:
+    get:
+      description: |-
+        Returns the details of the Android app identified in the path. 
+        These apps have been uploaded to Adyen and can be installed or uninstalled on Android payment terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).
+
+        To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Android files read
+        * Management API—Android files read and write
+      operationId: get-companies-companyId-androidApps-id
+      parameters:
+        - description: The unique identifier of the company account.
+          in: path
+          name: companyId
+          required: true
+          schema:
+            type: string
+        - description: The unique identifier of the app.
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AndroidApp"
+          description: OK - the request has succeeded.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Bad Request - a problem reading or understanding the request.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Get Android app
+      tags:
+        - Android files - company level
+      x-groupName: Android files - company level
+      x-methodName: getAndroidApp
+      x-sortIndex: 3
   /companies/{companyId}/androidCertificates:
     get:
       description: |-
@@ -308,6 +380,8 @@ paths:
         Typically, these certificates enable running apps on Android payment terminals. The certifcates in the list have been uploaded to Adyen and can be installed or uninstalled on Android terminals through [terminal actions](https://docs.adyen.com/point-of-sale/automating-terminal-management/terminal-actions-api).
 
         To make this request, your API credential must have one of the following [roles](https://docs.adyen.com/development-resources/api-credentials#api-permissions):
+        * Management API—Android files read
+        * Management API—Android files read and write
         * Management API—Terminal actions read
         * Management API—Terminal actions read and write
       operationId: get-companies-companyId-androidCertificates
@@ -383,8 +457,8 @@ paths:
         - ApiKeyAuth: []
       summary: Get a list of Android certificates
       tags:
-        - Terminal actions - company level
-      x-groupName: Terminal actions - company level
+        - Android files - company level
+      x-groupName: Android files - company level
       x-methodName: listAndroidCertificates
       x-sortIndex: 2
   /companies/{companyId}/apiCredentials:
@@ -868,7 +942,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -1517,7 +1591,7 @@ paths:
         - Terminal actions - company level
       x-groupName: Terminal actions - company level
       x-methodName: listTerminalActions
-      x-sortIndex: 3
+      x-sortIndex: 1
   /companies/{companyId}/terminalActions/{actionId}:
     get:
       description: |-
@@ -1587,7 +1661,7 @@ paths:
         - Terminal actions - company level
       x-groupName: Terminal actions - company level
       x-methodName: getTerminalAction
-      x-sortIndex: 4
+      x-sortIndex: 2
   /companies/{companyId}/terminalLogos:
     get:
       description: |-
@@ -2904,7 +2978,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -3426,7 +3500,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -3739,7 +3813,7 @@ paths:
       description: |-
         Sends a request to activate the merchant account identified in the path.
 
-        You get the result of the activation asychronously through a [`merchant.updated`](https://docs.adyen.com/api-explorer/ManagementNotification/latest/post/merchant.updated) webhook. Once the merchant account is activated, you can start using it to accept payments and payouts.
+        You get the result of the activation asynchronously through a [`merchant.updated`](https://docs.adyen.com/api-explorer/ManagementNotification/latest/post/merchant.updated) webhook. Once the merchant account is activated, you can start using it to accept payments and payouts.
 
         Use this endpoint if your integration requires it, such as Adyen for Platforms Manage. Your Adyen contact will set up your access.
 
@@ -4294,7 +4368,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -4962,7 +5036,7 @@ paths:
               $ref: "#/components/schemas/ApplePayInfo"
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -5234,7 +5308,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -8267,7 +8341,7 @@ paths:
             type: string
       responses:
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
         "400":
           content:
             application/json:
@@ -14551,7 +14625,7 @@ components:
             includeWeChatPayOpenid: false
             includeZeroAuthFlag: false
             returnAvsData: false
-        certificateAlias: signed-test.adyen.com_2022
+        certificateAlias: signed-test.adyen.com_2023
         communicationFormat: soap
         description: Webhook for YOUR_COMPANY_ACCOUNT - YOUR_COMPANY_CODE
         filterMerchantAccountType: includeAccounts
@@ -15120,7 +15194,7 @@ components:
             includeWeChatPayOpenid: false
             includeZeroAuthFlag: false
             returnAvsData: false
-        certificateAlias: signed-test.adyen.com_2022
+        certificateAlias: signed-test.adyen.com_2023
         communicationFormat: json
         description: Webhook for YOUR_MERCHANT_ACCOUNT - YOUR_MERCHANT_CODE
         hasError: false
@@ -15449,6 +15523,9 @@ components:
         description:
           description: The description that was provided when uploading the app. The description is not shown on the terminal.
           type: string
+        errorCode:
+          description: The error code of the app. It exists if the status is error or invalid.
+          type: string
         id:
           description: The unique identifier of the app.
           type: string
@@ -15461,11 +15538,11 @@ components:
         status:
           description: |-
             The status of the app. Possible values: 
-            * `processing`: The app is being signed and converted to a format that the terminal can handle.
-            * `error`: Something went wrong. Check that the app matches the [requirements](https://docs.adyen.com/point-of-sale/android-terminals/app-requirements).
-            * `invalid`: There is something wrong with the APK file of the app.
-            * `ready`: The app has been signed and converted.
-            * `archived`: The app is no longer available.
+            * `processing`: the app is being signed and converted to a format that the terminal can handle.
+            * `error`: something went wrong. Check that the app matches the [requirements](https://docs.adyen.com/point-of-sale/android-terminals/app-requirements).
+            * `invalid`: there is something wrong with the APK file of the app.
+            * `ready`: the app has been signed and converted.
+            * `archived`: the app is no longer available.
           type: string
         versionCode:
           description: The version number of the app.
@@ -15609,6 +15686,9 @@ components:
         enableBcmcMobile:
           description: Indicates if [Bancontact mobile](https://docs.adyen.com/payment-methods/bancontact/bancontact-mobile) is enabled.
           type: boolean
+        transactionDescription:
+          $ref: "#/components/schemas/TransactionDescriptionInfo"
+          description: Information regarding the transaction description.
       type: object
     BillingEntitiesResponse:
       properties:
@@ -15647,6 +15727,9 @@ components:
         siret:
           description: "Cartes Bancaires SIRET. Format: 14 digits."
           type: string
+        transactionDescription:
+          $ref: "#/components/schemas/TransactionDescriptionInfo"
+          description: Information regarding the transaction description.
       required:
         - siret
       type: object
@@ -16162,11 +16245,14 @@ components:
           description: Your description for this webhook configuration.
           type: string
         filterMerchantAccountType:
-          description: |-
-            Shows how merchant accounts are filtered when configuring the webhook. Possible values:
-            * **includeAccounts**: The webhook is configured for the merchant accounts listed in `filterMerchantAccounts`.
-            * **excludeAccounts**: The webhook is not configured for the merchant accounts listed in `filterMerchantAccounts`.
-            * **allAccounts**: Includes all merchant accounts, and does not require specifying `filterMerchantAccounts`.
+          description: |+
+            Shows how merchant accounts are filtered when configuring the webhook. 
+
+            Possible values:
+            *  **allAccounts** : Includes all merchant accounts, and does not require specifying `filterMerchantAccounts`.
+            *  **includeAccounts** : The webhook is configured for the merchant accounts listed in `filterMerchantAccounts`.
+            *  **excludeAccounts** : The webhook is not configured for the merchant accounts listed in `filterMerchantAccounts`.
+
           enum:
             - allAccounts
             - excludeAccounts
@@ -16228,6 +16314,7 @@ components:
             - **banktransfer-notification**
             - **boletobancario-notification**
             - **directdebit-notification**
+            - **ach-notification-of-change-notification**
             - **pending-notification**
             - **ideal-notification**
             - **ideal-pending-notification**
@@ -16436,6 +16523,7 @@ components:
             - **banktransfer-notification**
             - **boletobancario-notification**
             - **directdebit-notification**
+            - **ach-notification-of-change-notification**
             - **pending-notification**
             - **ideal-notification**
             - **ideal-pending-notification**
@@ -16534,7 +16622,6 @@ components:
             * **CANCELLATION**
             * **REFUND**
             * **CAPTURE**
-            * **DEACTIVATE_RECURRING**
             * **REPORT_AVAILABLE**
             * **CHARGEBACK**
             * **REQUEST_FOR_INFORMATION**
@@ -16672,6 +16759,12 @@ components:
           type: string
       required:
         - hmacKey
+      type: object
+    GenericPmWithTdiInfo:
+      properties:
+        transactionDescription:
+          $ref: "#/components/schemas/TransactionDescriptionInfo"
+          description: Information regarding the transaction description.
       type: object
     GiroPayInfo:
       properties:
@@ -17138,7 +17231,7 @@ components:
           minLength: 14
           type: string
         subTypes:
-          description: "The list of additional payment methods. Allowed values: **mealVoucher_FR_endenred**, **mealVoucher_FR_groupeup**, **mealVoucher_FR_natixis**, **mealVoucher_FR_sodexo**."
+          description: "The list of additional payment methods. Allowed values: **mealVoucher_FR_edenred**, **mealVoucher_FR_groupeup**, **mealVoucher_FR_natixis**, **mealVoucher_FR_sodexo**."
           items:
             type: string
           type: array
@@ -17447,6 +17540,9 @@ components:
           items:
             type: string
           type: array
+        cup:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: China Union Pay details.
         currencies:
           description: The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
           items:
@@ -17457,21 +17553,48 @@ components:
           items:
             type: string
           type: array
+        diners:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Diners details.
+        discover:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Discover details.
+        eftpos_australia:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Eftpos Australia details.
         enabled:
           description: Indicates whether the payment method is enabled (**true**) or disabled (**false**).
           type: boolean
         giroPay:
           $ref: "#/components/schemas/GiroPayInfo"
           description: giropay details.
+        girocard:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Girocard details.
         googlePay:
           $ref: "#/components/schemas/GooglePayInfo"
           description: Google Pay details.
         id:
           description: The identifier of the resource.
           type: string
+        ideal:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: iDeal details.
+        interac_card:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Interac Card details.
+        jcb:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: JCB details.
         klarna:
           $ref: "#/components/schemas/KlarnaInfo"
           description: Klarna details.
+        maestro:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Maestro details.
+        mc:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: MasterCard details.
         mealVoucher_FR:
           $ref: "#/components/schemas/MealVoucherFRInfo"
           description: Meal Voucher FR details.
@@ -17516,6 +17639,9 @@ components:
         vipps:
           $ref: "#/components/schemas/VippsInfo"
           description: Vipps details.
+        visa:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Visa details.
       required:
         - id
       type: object
@@ -17622,6 +17748,9 @@ components:
           items:
             type: string
           type: array
+        cup:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: China Union Pay details.
         currencies:
           description: The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
           items:
@@ -17632,15 +17761,42 @@ components:
           items:
             type: string
           type: array
+        diners:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Diners details.
+        discover:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Discover details.
+        eftpos_australia:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Eftpos Australia details.
         giroPay:
           $ref: "#/components/schemas/GiroPayInfo"
           description: giropay details.
+        girocard:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Girocard details.
         googlePay:
           $ref: "#/components/schemas/GooglePayInfo"
           description: Google Pay details.
+        ideal:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: iDeal details.
+        interac_card:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Interac Card details.
+        jcb:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: JCB details.
         klarna:
           $ref: "#/components/schemas/KlarnaInfo"
           description: Klarna details.
+        maestro:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Maestro details.
+        mc:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: MasterCard details.
         mealVoucher_FR:
           $ref: "#/components/schemas/MealVoucherFRInfo"
           description: Meal Voucher FR details.
@@ -17731,6 +17887,9 @@ components:
         vipps:
           $ref: "#/components/schemas/VippsInfo"
           description: Vipps details.
+        visa:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Visa details.
       type: object
     PaymentMethodWrapper:
       properties:
@@ -18943,6 +19102,28 @@ components:
           format: int32
           type: integer
       type: object
+    TransactionDescriptionInfo:
+      properties:
+        doingBusinessAsName:
+          description: |-
+            The text to be shown on the shopper's bank statement.
+             We recommend sending a maximum of 22 characters, otherwise banks might truncate the string.
+             Allowed characters: **a-z**, **A-Z**, **0-9**, spaces, and special characters **. , ' _ - ? + * /**.
+          maxLength: 22
+          type: string
+        type:
+          default: dynamic
+          description: |-
+            The type of transaction description you want to use:
+            - **fixed**: The transaction description set in this request is used for all payments with this payment method.
+            - **append**: The transaction description set in this request is used as a base for all payments with this payment method. The [transaction description set in the request to process the payment](https://docs.adyen.com/api-explorer/Checkout/70/post/sessions#request-shopperStatement) is appended to this base description. Note that if the combined length exceeds 22 characters, banks may truncate the string.
+            - **dynamic**: Only the [transaction description set in the request to process the payment](https://docs.adyen.com/api-explorer/Checkout/70/post/sessions#request-shopperStatement) is used for payments with this payment method.
+          enum:
+            - append
+            - dynamic
+            - fixed
+          type: string
+      type: object
     TwintInfo:
       properties:
         logo:
@@ -19302,19 +19483,52 @@ components:
           items:
             type: string
           type: array
+        cup:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: China Union Pay details.
         currencies:
           description: The list of currencies that a payment method supports. By default, all currencies supported by the payment method.
           items:
             type: string
           type: array
+        diners:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Diners details.
+        discover:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Discover details.
+        eftpos_australia:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Eftpos Australia details.
         enabled:
           description: Indicates whether the payment method is enabled (**true**) or disabled (**false**).
           type: boolean
+        girocard:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Girocard details.
+        ideal:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: iDeal details.
+        interac_card:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Interac Card details.
+        jcb:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: JCB details.
+        maestro:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Maestro details.
+        mc:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: MasterCard details.
         storeIds:
           description: The list of stores for this payment method
           items:
             type: string
           type: array
+        visa:
+          $ref: "#/components/schemas/GenericPmWithTdiInfo"
+          description: Visa details.
       type: object
     UpdatePayoutSettingsRequest:
       properties:
@@ -19656,6 +19870,7 @@ components:
             - **banktransfer-notification**
             - **boletobancario-notification**
             - **directdebit-notification**
+            - **ach-notification-of-change-notification**
             - **pending-notification**
             - **ideal-notification**
             - **ideal-pending-notification**
@@ -19747,4 +19962,5 @@ x-groups:
   - Terminal settings - merchant level
   - Terminal settings - store level
   - Terminal settings - terminal level
+  - Android files - company level
   - Split configuration - merchant level

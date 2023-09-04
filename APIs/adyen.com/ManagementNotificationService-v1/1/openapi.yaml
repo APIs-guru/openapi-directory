@@ -29,7 +29,8 @@ components:
   examples:
     WebhookAck:
       summary: Acknowledge Webhook
-      value: "[accepted]"
+      value:
+        notificationResponse: "[accepted]"
     post-merchant.created-merchant.created:
       description: Example webhook when a merchant account was created
       summary: Merchant account created
@@ -284,6 +285,58 @@ components:
             - LegalEntity
           type: string
       type: object
+    MerchantCreatedNotificationRequest:
+      properties:
+        createdAt:
+          description: Timestamp for when the webhook was created.
+          format: date-time
+          type: string
+        data:
+          $ref: "#/components/schemas/AccountCreateNotificationData"
+          description: Contains event details.
+        environment:
+          description: |-
+            The environment from which the webhook originated.
+
+            Possible values: **test**, **live**.
+          type: string
+        type:
+          description: Type of notification.
+          enum:
+            - merchant.created
+          type: string
+      required:
+        - environment
+        - createdAt
+        - data
+        - type
+      type: object
+    MerchantUpdatedNotificationRequest:
+      properties:
+        createdAt:
+          description: Timestamp for when the webhook was created.
+          format: date-time
+          type: string
+        data:
+          $ref: "#/components/schemas/AccountUpdateNotificationData"
+          description: Contains event details.
+        environment:
+          description: |-
+            The environment from which the webhook originated.
+
+            Possible values: **test**, **live**.
+          type: string
+        type:
+          description: Type of notification.
+          enum:
+            - merchant.updated
+          type: string
+      required:
+        - environment
+        - createdAt
+        - data
+        - type
+      type: object
     MidServiceNotificationData:
       properties:
         allowed:
@@ -332,55 +385,7 @@ components:
         - id
         - type
       type: object
-    NotificationDataMessage:
-      properties:
-        createdAt:
-          description: Timestamp for when the webhook was created.
-          format: date-time
-          type: string
-        data:
-          $ref: "#/components/schemas/AccountCreateNotificationData"
-          description: Contains event details.
-        environment:
-          description: |-
-            The environment from which the webhook originated.
-
-            Possible values: **test**, **live**.
-          type: string
-        type:
-          description: Type of notification.
-          type: string
-      required:
-        - type
-        - environment
-        - createdAt
-        - data
-      type: object
-    NotificationDataMessage-type2:
-      properties:
-        createdAt:
-          description: Timestamp for when the webhook was created.
-          format: date-time
-          type: string
-        data:
-          $ref: "#/components/schemas/AccountUpdateNotificationData"
-          description: Contains event details.
-        environment:
-          description: |-
-            The environment from which the webhook originated.
-
-            Possible values: **test**, **live**.
-          type: string
-        type:
-          description: Type of notification.
-          type: string
-      required:
-        - type
-        - environment
-        - createdAt
-        - data
-      type: object
-    NotificationDataMessage-type3:
+    PaymentMethodCreatedNotificationRequest:
       properties:
         createdAt:
           description: Timestamp for when the webhook was created.
@@ -397,12 +402,14 @@ components:
           type: string
         type:
           description: Type of notification.
+          enum:
+            - paymentMethod.created
           type: string
       required:
-        - type
         - environment
         - createdAt
         - data
+        - type
       type: object
     PaymentMethodNotificationResponse:
       properties:
@@ -488,7 +495,7 @@ webhooks:
               merchant.created:
                 $ref: "#/components/examples/post-merchant.created-merchant.created"
             schema:
-              $ref: "#/components/schemas/NotificationDataMessage"
+              $ref: "#/components/schemas/MerchantCreatedNotificationRequest"
       responses:
         "200":
           content:
@@ -521,7 +528,7 @@ webhooks:
               merchant-updated-with-errors:
                 $ref: "#/components/examples/post-merchant.updated-merchant-updated-with-errors"
             schema:
-              $ref: "#/components/schemas/NotificationDataMessage-type2"
+              $ref: "#/components/schemas/MerchantUpdatedNotificationRequest"
       responses:
         "200":
           content:
@@ -554,7 +561,7 @@ webhooks:
               paymentMethod.created:
                 $ref: "#/components/examples/post-paymentMethod.created-paymentMethod.created"
             schema:
-              $ref: "#/components/schemas/NotificationDataMessage-type3"
+              $ref: "#/components/schemas/PaymentMethodCreatedNotificationRequest"
       responses:
         "200":
           content:

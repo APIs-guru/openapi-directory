@@ -13629,23 +13629,15 @@ components:
             The type of split.
             Possible values: **Default**, **PaymentFee**, **VAT**, **Commission**, **MarketPlace**, **BalanceAccount**, **Remainder**, **Surcharge**, **Tip**.
           enum:
-            - AcquiringFees
-            - AdyenCommission
-            - AdyenFees
-            - AdyenMarkup
             - BalanceAccount
             - Commission
             - Default
-            - Interchange
             - MarketPlace
             - PaymentFee
             - Remainder
-            - SchemeFee
             - Surcharge
             - Tip
-            - TopUp
             - VAT
-            - Verification
           type: string
       required:
         - amount
