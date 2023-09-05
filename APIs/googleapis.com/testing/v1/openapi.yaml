@@ -261,6 +261,200 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{name}:
+    get:
+      description: GET /v1/projects/{project_id}/deviceSessions/{device_session_id} Return a DeviceSession, which documents the allocation status and whether the device is allocated. Clients making requests from this API must poll GetDeviceSession.
+      operationId: testing.projects.deviceSessions.get
+      parameters:
+        - description: Required. Name of the DeviceSession, e.g. "projects/{project_id}/deviceSessions/{session_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceSession"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: PATCH /v1/projects/{projectId}/deviceSessions/deviceSessionId}:updateDeviceSession Updates the current device session to the fields described by the update_mask.
+      operationId: testing.projects.deviceSessions.patch
+      parameters:
+        - description: Optional. Name of the DeviceSession, e.g. "projects/{project_id}/deviceSessions/{session_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: Required. The list of fields to update.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceSession"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceSession"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{name}:cancel:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: POST /v1/projects/{project_id}/deviceSessions/{device_session_id}:cancel Changes the DeviceSession to state FINISHED and terminates all connections. Canceled sessions are not deleted and can be retrieved or listed by the user until they expire based on the 28 day deletion policy.
+      operationId: testing.projects.deviceSessions.cancel
+      parameters:
+        - description: Required. Name of the DeviceSession, e.g. "projects/{project_id}/deviceSessions/{session_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelDeviceSessionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/deviceSessions:
+    get:
+      description: GET /v1/projects/{project_id}/deviceSessions Lists device Sessions owned by the project user.
+      operationId: testing.projects.deviceSessions.list
+      parameters:
+        - description: Required. The name of the parent to request, e.g. "projects/{project_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. If specified, responses will be filtered by the given filter. Allowed fields are: session_state."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The maximum number of DeviceSessions to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A continuation token for paging.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListDeviceSessionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: POST /v1/projects/{project_id}/deviceSessions
+      operationId: testing.projects.deviceSessions.create
+      parameters:
+        - description: Required. The Compute Engine project under which this device will be allocated. "projects/{project_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceSession"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceSession"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -708,6 +902,10 @@ components:
           $ref: "#/components/schemas/FileReference"
           description: .aab file representing the app bundle under test.
       type: object
+    CancelDeviceSessionRequest:
+      description: The request object for cancelling a Device Session.
+      properties: {}
+      type: object
     CancelTestMatrixResponse:
       description: Response containing the current state of the specified test matrix.
       properties:
@@ -802,6 +1000,76 @@ components:
             $ref: "#/components/schemas/DeviceIpBlock"
           type: array
       type: object
+    DeviceSession:
+      description: Protobuf message describing the device message, used from several RPCs.
+      properties:
+        activeStartTime:
+          description: Output only. The timestamp that the session first became ACTIVE.
+          format: google-datetime
+          readOnly: true
+          type: string
+        androidDevice:
+          $ref: "#/components/schemas/AndroidDevice"
+          description: Required. The requested device
+        androidDeviceList:
+          $ref: "#/components/schemas/AndroidDeviceList"
+          deprecated: true
+          description: Optional. The list of requested devices. At most two devices may be simultaneously requested.
+        createTime:
+          description: Output only. The time that the Session was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Output only. The title of the DeviceSession to be presented in the UI.
+          readOnly: true
+          type: string
+        expireTime:
+          description: Optional. If the device is still in use at this time, any connections will be ended and the SessionState will transition from ACTIVE to FINISHED.
+          format: google-datetime
+          type: string
+        inactivityTimeout:
+          description: Output only. The interval of time that this device must be interacted with before it transitions from ACTIVE to TIMEOUT_INACTIVITY.
+          format: google-duration
+          readOnly: true
+          type: string
+        name:
+          description: Optional. Name of the DeviceSession, e.g. "projects/{project_id}/deviceSessions/{session_id}"
+          type: string
+        state:
+          description: Output only. Current state of the DeviceSession.
+          enum:
+            - SESSION_STATE_UNSPECIFIED
+            - REQUESTED
+            - PENDING
+            - ACTIVE
+            - EXPIRED
+            - FINISHED
+            - UNAVAILABLE
+            - ERROR
+          readOnly: true
+          type: string
+        stateHistories:
+          description: Output only. The historical state transitions of the session_state message including the current session state.
+          items:
+            $ref: "#/components/schemas/SessionStateEvent"
+          readOnly: true
+          type: array
+        ttl:
+          description: "Optional. The amount of time that a device will be initially allocated for. This can eventually be extended with the ExtendDeviceSession RPC. Default: 3 hours."
+          format: google-duration
+          type: string
+      type: object
+    DirectAccessVersionInfo:
+      description: Denotes whether Direct Access is supported, and by which client versions. DirectAccessService is currently available as a preview to select developers. You can register today on behalf of you and your team at https://developer.android.com/studio/preview/android-device-streaming
+      properties:
+        directAccessSupported:
+          description: Whether direct access is supported at all. Clients are expected to filter down the device list to only android models and versions which support Direct Access when that is the user intent.
+          type: boolean
+        minimumAndroidStudioVersion:
+          description: Output only. Indicates client-device compatibility, where a device is known to work only with certain workarounds implemented in the Android Studio client. Expected format "major.minor.micro.patch", e.g. "5921.22.2211.8881706".
+          type: string
+      type: object
     Distribution:
       description: Data about the relative number of devices running a given configuration of the Android platform.
       properties:
@@ -813,6 +1081,10 @@ components:
           description: Output only. The time this distribution was measured.
           format: google-datetime
           type: string
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+      properties: {}
       type: object
     Environment:
       description: The environment in which the test is run.
@@ -1112,6 +1384,18 @@ components:
       description: Specifies an intent that starts the main launcher activity.
       properties: {}
       type: object
+    ListDeviceSessionsResponse:
+      description: A list of device sessions.
+      properties:
+        deviceSessions:
+          description: The sessions matching the specified filter in the given cloud project.
+          items:
+            $ref: "#/components/schemas/DeviceSession"
+          type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+      type: object
     Locale:
       description: A location/region designation for language.
       properties:
@@ -1209,6 +1493,10 @@ components:
             - DEVICE_CAPACITY_LOW
             - DEVICE_CAPACITY_NONE
           type: string
+        directAccessVersionInfo:
+          $ref: "#/components/schemas/DirectAccessVersionInfo"
+          description: Output only. Identifies supported clients for DirectAccess for this Android version.
+          readOnly: true
         versionId:
           description: An Android version.
           type: string
@@ -1311,6 +1599,32 @@ components:
           type: array
         name:
           description: The android:name value
+          type: string
+      type: object
+    SessionStateEvent:
+      description: A message encapsulating a series of Session states and the time that the DeviceSession first entered those states.
+      properties:
+        eventTime:
+          description: Output only. The time that the session_state first encountered that state.
+          format: google-datetime
+          readOnly: true
+          type: string
+        sessionState:
+          description: Output only. The session_state tracked by this event
+          enum:
+            - SESSION_STATE_UNSPECIFIED
+            - REQUESTED
+            - PENDING
+            - ACTIVE
+            - EXPIRED
+            - FINISHED
+            - UNAVAILABLE
+            - ERROR
+          readOnly: true
+          type: string
+        stateMessage:
+          description: Output only. A human-readable message to explain the state.
+          readOnly: true
           type: string
       type: object
     Shard:
