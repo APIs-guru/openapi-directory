@@ -119,7 +119,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Update the specified mediation group under the specified AdMob account.
+      description: Update the specified mediation group under the specified AdMob account. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.mediationGroups.patch
       parameters:
         - description: "Resource name for this mediation group. Format is: accounts/{publisher_id}/mediationGroups/{mediation_group_id} Example: accounts/pub-9876543210987654/mediationGroups/0123456789"
@@ -161,7 +161,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Stop the mediation A/B experiment and choose a variant.
+      description: Stop the mediation A/B experiment and choose a variant. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.mediationGroups.mediationAbExperiments.stop
       parameters:
         - description: "Name of the mediation group, the experiment for which to choose a variant for. Example: accounts/pub-9876543210987654/mediationGroups/0123456789/ mediationAbExperiments"
@@ -237,7 +237,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1beta/{parent}/adUnitMappings:
     get:
-      description: List ad unit mappings under the specified AdMob account and ad unit.
+      description: List ad unit mappings under the specified AdMob account and ad unit. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.adUnits.adUnitMappings.list
       parameters:
         - description: "Required. The parent which owns this collection of ad unit mappings. Format: accounts/{publisher_id}/adUnits/{ad_unit_id}"
@@ -288,7 +288,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create an ad unit mapping under the specific AdMob account and ad unit.
+      description: Create an ad unit mapping under the specific AdMob account and ad unit. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.adUnits.adUnitMappings.create
       parameters:
         - description: "Required. The parent which owns the ad unit mapping. Format: accounts/{publisher_id}/adUnits/{ad_unit_id}"
@@ -325,7 +325,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Batch create the ad unit mappings under the specific AdMob account. The maximum allowed batch size is 100.
+      description: Batch create the ad unit mappings under the specific AdMob account. The maximum allowed batch size is 100. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.adUnitMappings.batchCreate
       parameters:
         - description: "Required. The AdMob account which owns this collection of ad unit mappings. Format: accounts/{publisher_id} See https://support.google.com/admob/answer/2784578 for instructions on how to find your AdMob publisher ID."
@@ -396,7 +396,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an ad unit under the specified AdMob account.
+      description: Creates an ad unit under the specified AdMob account. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.adUnits.create
       parameters:
         - description: "Required. Resource name of the account to create the specified ad unit for. Example: accounts/pub-9876543210987654"
@@ -514,7 +514,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an app under the specified AdMob account.
+      description: Creates an app under the specified AdMob account. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.apps.create
       parameters:
         - description: "Required. Resource name of the account for which the app is being created. Example: accounts/pub-9876543210987654"
@@ -597,7 +597,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create an A/B testing experiment for a specified AdMob account and a mediation group.
+      description: Create an A/B testing experiment for a specified AdMob account and a mediation group. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.mediationGroups.mediationAbExperiments.create
       parameters:
         - description: "Required. The parent which owns the mediation group. Format: accounts/{publisher_id}/mediationGroups/{mediation_group_id}"
@@ -622,7 +622,7 @@ paths:
         - accounts
   /v1beta/{parent}/mediationGroups:
     get:
-      description: List mediation groups under the specified AdMob account.
+      description: List mediation groups under the specified AdMob account. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.mediationGroups.list
       parameters:
         - description: "Required. Resource name of the account to list mediation groups for. Example: accounts/pub-9876543210987654"
@@ -673,7 +673,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create a mediation group under the specific AdMob account.
+      description: Create a mediation group under the specific AdMob account. This method has limited access. If you see a 403 permission denied error, please reach out to your account manager for access.
       operationId: admob.accounts.mediationGroups.create
       parameters:
         - description: "Required. The parent which owns the mediation group. Format: accounts/{publisher_id}"

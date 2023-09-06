@@ -47,7 +47,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Returns whether the given Attestation for the given image URI was signed by the given Attestor
+      description: Returns whether the given `Attestation` for the given image URI was signed by the given `Attestor`
       operationId: binaryauthorization.projects.attestors.validateAttestationOccurrence
       parameters:
         - description: Required. The resource name of the Attestor of the occurrence, in the format `projects/*/attestors/*`.
@@ -745,7 +745,7 @@ components:
       properties:
         attestation:
           $ref: "#/components/schemas/AttestationOccurrence"
-          description: Required. An AttestationOccurrence to be checked that it can be verified by the Attestor. It does not have to be an existing entity in Container Analysis. It must otherwise be a valid AttestationOccurrence.
+          description: Required. An AttestationOccurrence to be checked that it can be verified by the `Attestor`. It does not have to be an existing entity in Container Analysis. It must otherwise be a valid `AttestationOccurrence`.
         occurrenceNote:
           description: Required. The resource name of the Note to which the containing Occurrence is associated.
           type: string

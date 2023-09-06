@@ -994,7 +994,7 @@ paths:
             }
   /hris/employees:
     get:
-      description: List Employees
+      description: Apideck operates as a stateless Unified API, which means that the list endpoint only provides a portion of the employee model. This is due to the fact that most HRIS systems do not readily provide all data in every call. However, you can access the complete employee model through an employee detail call.
       operationId: employeesAll
       parameters:
         - $ref: "#/components/parameters/raw"
@@ -4293,19 +4293,19 @@ components:
       type: object
       x-apideck-schema-id: Employee
       x-apideck-weights:
-        addresses: high
-        birthday: high
-        company_id: high
+        addresses: critical
+        birthday: critical
+        company_id: critical
         company_name: medium
-        compensations: medium
+        compensations: critical
         country_of_birth: high
         created_at: medium
         created_by: edge-case
-        custom_fields: edge-case
+        custom_fields: critical
         deceased_on: low
         deleted: medium
-        department: medium
-        department_id: low
+        department: low
+        department_id: critical
         department_name: low
         description: edge-case
         dietary_preference: edge-case
@@ -4313,27 +4313,27 @@ components:
         display_name: edge-case
         division: medium
         division_id: low
-        emails: high
-        employee_number: high
-        employment_end_date: high
-        employment_role: high
-        employment_start_date: high
-        employment_status: high
+        emails: critical
+        employee_number: critical
+        employment_end_date: critical
+        employment_role: critical
+        employment_start_date: critical
+        employment_status: critical
         first_name: critical
         food_allergies: edge-case
         gender: high
         id: medium
         initials: low
-        jobs: high
+        jobs: critical
         languages: low
         last_name: critical
         leaving_reason: edge-case
-        manager: medium
+        manager: critical
         marital_status: medium
         middle_name: medium
         nationalities: high
         partner: low
-        phone_numbers: high
+        phone_numbers: critical
         photo_url: medium
         preferred_language: high
         preferred_name: medium
@@ -4349,7 +4349,7 @@ components:
         tags: low
         tax_code: edge-case
         tax_id: edge-case
-        team: medium
+        team: critical
         timezone: low
         title: critical
         updated_at: high
@@ -4485,6 +4485,27 @@ components:
         role: medium
         start_date: high
         title: critical
+    EmployeeList:
+      additionalProperties: true
+      properties:
+        created_at:
+          $ref: "#/components/schemas/CreatedAt"
+        first_name:
+          $ref: "#/components/schemas/FirstName"
+        id:
+          $ref: "#/components/schemas/Id"
+        last_name:
+          $ref: "#/components/schemas/LastName"
+        updated_at:
+          $ref: "#/components/schemas/UpdatedAt"
+      type: object
+      x-apideck-schema-id: EmployeeList
+      x-apideck-weights:
+        created_at: medium
+        first_name: critical
+        id: medium
+        last_name: critical
+        updated_at: high
     EmployeeNumber:
       description: An Employee Number, Employee ID or Employee Code, is a unique number that has been assigned to each individual staff member within a company.
       example: 123456-AB
@@ -4842,7 +4863,7 @@ components:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/Employee"
+            $ref: "#/components/schemas/EmployeeList"
           type: array
         links:
           $ref: "#/components/schemas/Links"

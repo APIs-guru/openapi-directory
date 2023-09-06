@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 info:
   description: Provides a way for apps to subscribe to certain change events in HubSpot. Once configured, apps will receive event payloads containing details about the changes at a specified target URL. There can only be one target URL for receiving event notifications per app.
   title: Webhooks API
@@ -16,10 +16,8 @@ info:
   x-providerName: hubapi.com
   x-serviceName: webhooks
 tags:
-  - description: Operations to manage app-level webhook settings.
-    name: Settings
-  - description: Operations to manage event subscriptions.
-    name: Subscriptions
+  - name: Settings
+  - name: Subscriptions
 paths:
   /webhooks/v3/{appId}/settings:
     delete:
@@ -725,5 +723,11 @@ components:
 x-hubspot-available-client-libraries:
   - PHP
   - Node
-  - Python
   - Ruby
+  - Python
+x-hubspot-documentation-banner: NONE
+x-hubspot-product-tier-requirements:
+  cms: FREE
+  marketing: FREE
+  sales: FREE
+  service: FREE
