@@ -814,6 +814,7 @@ components:
           description: Optional. A URI that hosts the employer's company logo.
           type: string
         keywordSearchableJobCustomAttributes:
+          deprecated: true
           description: Optional. This field is deprecated. Please set the searchability of the custom attribute in the Job.custom_attributes going forward. A list of keys of filterable Job.custom_attributes, whose corresponding `string_values` are used in keyword search. Jobs with `string_values` under these specified field keys are returned if any of the values matches the search keyword. Custom field values with parenthesis, brackets and special symbols won't be properly searchable, and those keyword queries need to be surrounded by quotes.
           items:
             type: string
@@ -1339,6 +1340,7 @@ components:
           description: Required. The title of the job, such as "Software Engineer" The maximum number of allowed characters is 500.
           type: string
         visibility:
+          deprecated: true
           description: Deprecated. The job is only visible to the owner. The visibility of the job. Defaults to Visibility.ACCOUNT_ONLY if not specified.
           enum:
             - VISIBILITY_UNSPECIFIED
@@ -1617,6 +1619,11 @@ components:
             - TELECOMMUTE_ALLOWED
             - TELECOMMUTE_JOBS_EXCLUDED
           type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
       type: object
     MatchingJob:
       description: Output only. Job entry with metadata inside SearchJobsResponse.
@@ -1897,6 +1904,7 @@ components:
           $ref: "#/components/schemas/RequestMetadata"
           description: Required. The meta information collected about the job searcher, used to improve the search quality of the service. The identifiers (such as `user_id`) are provided by users, and must be unique and consistent.
         requirePreciseResultSize:
+          deprecated: true
           description: This field is deprecated.
           type: boolean
         searchMode:

@@ -36,6 +36,7 @@ tags:
   - name: leaderboards
   - name: metagame
   - name: players
+  - name: recall
   - name: revisions
   - name: scores
   - name: snapshots
@@ -314,7 +315,6 @@ paths:
           name: endPointType
           schema:
             enum:
-              - END_POINT_TYPE_UNSPECIFIED
               - PROFILE_CREATION
               - PROFILE_SETTINGS
             type: string
@@ -379,7 +379,6 @@ paths:
           name: platformType
           schema:
             enum:
-              - PLATFORM_TYPE_UNSPECIFIED
               - ANDROID
               - IOS
               - WEB_APP
@@ -766,7 +765,6 @@ paths:
           required: true
           schema:
             enum:
-              - SCORE_COLLECTION_UNSPECIFIED
               - PUBLIC
               - SOCIAL
               - FRIENDS
@@ -777,7 +775,6 @@ paths:
           required: true
           schema:
             enum:
-              - SCORE_TIME_SPAN_UNSPECIFIED
               - ALL_TIME
               - WEEKLY
               - DAILY
@@ -840,7 +837,6 @@ paths:
           required: true
           schema:
             enum:
-              - SCORE_COLLECTION_UNSPECIFIED
               - PUBLIC
               - SOCIAL
               - FRIENDS
@@ -851,7 +847,6 @@ paths:
           required: true
           schema:
             enum:
-              - SCORE_TIME_SPAN_UNSPECIFIED
               - ALL_TIME
               - WEEKLY
               - DAILY
@@ -1189,7 +1184,6 @@ paths:
           required: true
           schema:
             enum:
-              - COLLECTION_UNSPECIFIED
               - ALL
             type: string
         - description: The preferred language to use for strings returned by this method.
@@ -1256,7 +1250,6 @@ paths:
           required: true
           schema:
             enum:
-              - SCORE_TIME_SPAN_UNSPECIFIED
               - ALL
               - ALL_TIME
               - WEEKLY
@@ -1267,7 +1260,6 @@ paths:
           name: includeRankType
           schema:
             enum:
-              - INCLUDE_RANK_TYPE_UNSPECIFIED
               - ALL
               - PUBLIC
               - SOCIAL
@@ -1370,6 +1362,148 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /games/v1/recall/tokens/{sessionId}:
+    get:
+      description: Retrieve all Recall tokens associated with the PGS Player principal encoded in the provided recall session id. The API is only available for users that have active PGS Player profile.
+      operationId: games.recall.retrieveTokens
+      parameters:
+        - description: Required. Opaque server-generated string that encodes all the necessary information to identify the PGS player / Google user and application.
+          in: path
+          name: sessionId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RetrievePlayerTokensResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - recall
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /games/v1/recall:linkPersona:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Associate the PGS Player principal encoded in the provided recall session id with an in-game account
+      operationId: games.recall.linkPersona
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LinkPersonaRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LinkPersonaResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - recall
+  /games/v1/recall:resetPersona:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Delete all Recall tokens linking the given persona to any player (with or without a profile).
+      operationId: games.recall.resetPersona
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPersonaRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResetPersonaResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - recall
+  /games/v1/recall:unlinkPersona:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Delete a Recall token linking the PGS Player principal identified by the Recall session and an in-game account identified either by the 'persona' or by the token value.
+      operationId: games.recall.unlinkPersona
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UnlinkPersonaRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnlinkPersonaResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/androidpublisher
+          Oauth2c:
+            - https://www.googleapis.com/auth/androidpublisher
+      tags:
+        - recall
   /games/v1/revisions/check:
     get:
       description: Checks whether the games client is out of date.
@@ -1565,7 +1699,6 @@ components:
         achievementType:
           description: The type of the achievement.
           enum:
-            - ACHIEVEMENT_TYPE_UNSPECIFIED
             - STANDARD
             - INCREMENTAL
           type: string
@@ -1585,7 +1718,6 @@ components:
         initialState:
           description: The initial state of the achievement.
           enum:
-            - INITIAL_ACHIEVEMENT_STATE_UNSPECIFIED
             - HIDDEN
             - REVEALED
             - UNLOCKED
@@ -1648,7 +1780,6 @@ components:
         currentState:
           description: The current state of the achievement for which a reveal was attempted. This might be `UNLOCKED` if the achievement was already unlocked.
           enum:
-            - REVEAL_ACHIEVEMENT_STATE_UNSPECIFIED
             - REVEALED
             - UNLOCKED
           type: string
@@ -1722,7 +1853,6 @@ components:
         updateType:
           description: The type of update being applied.
           enum:
-            - ACHIEVEMENT_UPDATE_TYPE_UNSPECIFIED
             - REVEAL
             - UNLOCK
             - INCREMENT
@@ -1738,7 +1868,6 @@ components:
         currentState:
           description: The current state of the achievement.
           enum:
-            - UPDATED_ACHIEVEMENT_STATE_UNSPECIFIED
             - HIDDEN
             - REVEALED
             - UNLOCKED
@@ -1782,7 +1911,6 @@ components:
           description: A list of features that have been enabled for the application.
           items:
             enum:
-              - APPLICATION_FEATURE_UNSPECIFIED
               - SNAPSHOTS
             type: string
           type: array
@@ -1890,7 +2018,6 @@ components:
         failureCause:
           description: The cause for the update failure.
           enum:
-            - EVENT_FAILURE_CAUSE_UNSPECIFIED
             - TOO_LARGE
             - TIME_PERIOD_EXPIRED
             - TIME_PERIOD_SHORT
@@ -1944,7 +2071,6 @@ components:
         visibility:
           description: The visibility of event being tracked in this definition.
           enum:
-            - EVENT_VISIBILITY_UNSPECIFIED
             - REVEALED
             - HIDDEN
           type: string
@@ -2003,7 +2129,6 @@ components:
         failureCause:
           description: The cause for the update failure.
           enum:
-            - EVENT_UPDATE_FAILURE_CAUSE_UNSPECIFIED
             - NOT_FOUND
             - INVALID_UPDATE_VALUE
           type: string
@@ -2145,7 +2270,6 @@ components:
         platformType:
           description: The platform type.
           enum:
-            - PLATFORM_TYPE_UNSPECIFIED
             - ANDROID
             - IOS
             - WEB_APP
@@ -2235,7 +2359,6 @@ components:
         order:
           description: How scores are ordered.
           enum:
-            - SCORE_ORDER_UNSPECIFIED
             - LARGER_IS_BETTER
             - SMALLER_IS_BETTER
           type: string
@@ -2269,7 +2392,6 @@ components:
         timeSpan:
           description: The time span of this high score.
           enum:
-            - SCORE_TIME_SPAN_UNSPECIFIED
             - ALL_TIME
             - WEEKLY
             - DAILY
@@ -2340,6 +2462,49 @@ components:
           description: The pagination token for the previous page of results.
           type: string
       type: object
+    LinkPersonaRequest:
+      description: Request to link an in-game account with a PGS principal (encoded in the session id).
+      properties:
+        cardinalityConstraint:
+          description: Required. Cardinality constraint to observe when linking a persona to a player in the scope of a game.
+          enum:
+            - ONE_PERSONA_TO_ONE_PLAYER
+          type: string
+        conflictingLinksResolutionPolicy:
+          description: Required. Resolution policy to apply when the linking of a persona to a player would result in violating the specified cardinality constraint.
+          enum:
+            - KEEP_EXISTING_LINKS
+            - CREATE_NEW_LINK
+          type: string
+        expireTime:
+          description: Input only. Optional expiration time.
+          format: google-datetime
+          type: string
+        persona:
+          description: Required. Stable identifier of the in-game account. Please refrain from re-using the same persona for different games.
+          type: string
+        sessionId:
+          description: Required. Opaque server-generated string that encodes all the necessary information to identify the PGS player / Google user and application.
+          type: string
+        token:
+          description: Required. Value of the token to create. Opaque to Play Games and assumed to be non-stable (encrypted with key rotation).
+          type: string
+        ttl:
+          description: Input only. Optional time-to-live.
+          format: google-duration
+          type: string
+      type: object
+    LinkPersonaResponse:
+      description: Outcome of a persona linking attempt.
+      properties:
+        state:
+          description: Output only. State of a persona linking attempt.
+          enum:
+            - LINK_CREATED
+            - PERSONA_OR_PLAYER_ALREADY_LINKED
+          readOnly: true
+          type: string
+      type: object
     MetagameConfig:
       description: The metagame config resource
       properties:
@@ -2377,7 +2542,6 @@ components:
         friendStatus:
           description: The friend status of the given player, relative to the requester. This is unset if the player is not sharing their friends list with the game.
           enum:
-            - FRIEND_STATUS_UNSPECIFIED
             - NO_RELATIONSHIP
             - FRIEND
           type: string
@@ -2416,7 +2580,6 @@ components:
         achievementState:
           description: The state of the achievement.
           enum:
-            - STATE_UNSPECIFIED
             - HIDDEN
             - REVEALED
             - UNLOCKED
@@ -2545,7 +2708,6 @@ components:
         timeSpan:
           description: The time span of this score.
           enum:
-            - SCORE_TIME_SPAN_UNSPECIFIED
             - ALL_TIME
             - WEEKLY
             - DAILY
@@ -2626,7 +2788,6 @@ components:
         timeSpan:
           description: The time span for this player score.
           enum:
-            - SCORE_TIME_SPAN_UNSPECIFIED
             - ALL_TIME
             - WEEKLY
             - DAILY
@@ -2651,7 +2812,6 @@ components:
           description: The time spans where the submitted score is better than the existing score for that time span.
           items:
             enum:
-              - SCORE_TIME_SPAN_UNSPECIFIED
               - ALL_TIME
               - WEEKLY
               - DAILY
@@ -2692,7 +2852,6 @@ components:
       properties:
         friendsListVisibility:
           enum:
-            - FRIENDS_LIST_VISIBILITY_UNSPECIFIED
             - VISIBLE
             - REQUEST_REQUIRED
             - UNAVAILABLE
@@ -2703,6 +2862,43 @@ components:
         profileVisible:
           description: Whether the player's profile is visible to the currently signed in player.
           type: boolean
+      type: object
+    RecallToken:
+      description: Recall token data returned from RetrievePlayerTokens RPC
+      properties:
+        expireTime:
+          description: Optional. Optional expiration time of the token
+          format: google-datetime
+          type: string
+        multiPlayerPersona:
+          description: Required. Whether the persona identified by the token is linked to multiple PGS Players
+          type: boolean
+        token:
+          description: Required. Value of the Recall token as it is provided by the client via LinkPersona RPC
+          type: string
+      type: object
+    ResetPersonaRequest:
+      description: Request to remove all Recall tokens associated with a persona for an app.
+      properties:
+        persona:
+          description: Value of the 'persona' field as it was provided by the client in LinkPersona RPC
+          type: string
+      type: object
+    ResetPersonaResponse:
+      description: Response for the ResetPersona RPC
+      properties:
+        unlinked:
+          description: Required. Whether any tokens were unlinked as a result of this request.
+          type: boolean
+      type: object
+    RetrievePlayerTokensResponse:
+      description: Response for the RetrievePlayerTokens RPC
+      properties:
+        tokens:
+          description: Required. Recall tokens associated with the requested PGS Player principal
+          items:
+            $ref: "#/components/schemas/RecallToken"
+          type: array
       type: object
     RevisionCheckResponse:
       description: A third party checking a revision response.
@@ -2716,7 +2912,6 @@ components:
         revisionStatus:
           description: The result of the revision check.
           enum:
-            - REVISION_STATUS_UNSPECIFIED
             - OK
             - DEPRECATED
             - INVALID
@@ -2788,7 +2983,6 @@ components:
         type:
           description: The type of this snapshot.
           enum:
-            - SNAPSHOT_TYPE_UNSPECIFIED
             - SAVE_GAME
           type: string
         uniqueName:
@@ -2878,6 +3072,26 @@ components:
           format: float
           type: number
       type: object
+    UnlinkPersonaRequest:
+      description: Request to remove a Recall token linking PGS principal and an in-game account
+      properties:
+        persona:
+          description: Value of the 'persona' field as it was provided by the client in LinkPersona RPC
+          type: string
+        sessionId:
+          description: Required. Opaque server-generated string that encodes all the necessary information to identify the PGS player / Google user and application.
+          type: string
+        token:
+          description: Value of the Recall token as it was provided by the client in LinkPersona RPC
+          type: string
+      type: object
+    UnlinkPersonaResponse:
+      description: Response for the UnlinkPersona RPC
+      properties:
+        unlinked:
+          description: Required. Whether a Recall token specified by the request was deleted. Can be 'false' when there were no Recall tokens satisfied the criteria from the request.
+          type: boolean
+      type: object
   securitySchemes:
     Oauth2:
       description: Oauth 2.0 implicit authentication
@@ -2885,6 +3099,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/androidpublisher: View and manage your Google Play Developer account
             https://www.googleapis.com/auth/drive.appdata: See, create, and delete its own configuration data in your Google Drive
             https://www.googleapis.com/auth/games: Create, edit, and delete your Google Play Games activity
       type: oauth2
@@ -2894,6 +3109,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/androidpublisher: View and manage your Google Play Developer account
             https://www.googleapis.com/auth/drive.appdata: See, create, and delete its own configuration data in your Google Drive
             https://www.googleapis.com/auth/games: Create, edit, and delete your Google Play Games activity
           tokenUrl: https://accounts.google.com/o/oauth2/token

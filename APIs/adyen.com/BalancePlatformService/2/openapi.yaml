@@ -62,6 +62,7 @@ tags:
   - name: Bank account validation
   - name: Balance accounts
   - name: Transaction rules
+  - name: Transfer routes
 paths:
   /accountHolders:
     post:
@@ -2717,6 +2718,74 @@ paths:
       x-groupName: Transaction rules
       x-methodName: updateTransactionRule
       x-sortIndex: 3
+  /transferRoutes/calculate:
+    post:
+      description: Returns available transfer routes based on a combination of transfer `country`, `currency`, `counterparty`, and `priorities`. Use this endpoint to find optimal transfer priorities and associated requirements before you [make a transfer](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers).
+      operationId: post-transferRoutes-calculate
+      requestBody:
+        content:
+          application/json:
+            examples:
+              transferRoutesCalculate:
+                $ref: "#/components/examples/post-transferRoutes-calculate-transferRoutesCalculate"
+            schema:
+              $ref: "#/components/schemas/TransferRouteRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                transferRoutesCalculate:
+                  $ref: "#/components/examples/post-transferRoutes-calculate-transferRoutesCalculate-200"
+              schema:
+                $ref: "#/components/schemas/TransferRouteResponse"
+          description: OK - the request has succeeded.
+        "401":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-401"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unauthorized - authentication required.
+        "403":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-403"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Forbidden - insufficient permissions to process the request.
+        "422":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-422"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Unprocessable Entity - a request validation error.
+        "500":
+          content:
+            application/json:
+              examples:
+                generic:
+                  $ref: "#/components/examples/generic-500"
+              schema:
+                $ref: "#/components/schemas/RestServiceError"
+          description: Internal Server Error - the server could not process the request.
+      security:
+        - BasicAuth: []
+        - ApiKeyAuth: []
+      summary: Calculate transfer routes
+      tags:
+        - Transfer routes
+      x-addedInVersion: "1"
+      x-groupName: Transfer routes
+      x-methodName: calculateTransferRoutes
+      x-sortIndex: 1
   /validateBankAccountIdentification:
     post:
       description: Validates bank account identification details. You can use this endpoint to validate bank account details before you [make a transfer](https://docs.adyen.com/api-explorer/transfers/latest/post/transfers) or [create a transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments).
@@ -3213,7 +3282,6 @@ components:
           receivePayments:
             requested: true
         description: Liable account holder used for international payments and payouts
-        legalEntityId: LE322JV223222D5GG42KN6869
         reference: S.Eller-001
     patch-accountHolders-id-requestAccountHolderCapability-200:
       description: Example response for requesting the `receivePayments` capability for an account holder
@@ -3894,6 +3962,65 @@ components:
         startDate: 2023-06-29T22:39:54.068487152+02:00
         status: active
         type: velocity
+    post-transferRoutes-calculate-transferRoutesCalculate:
+      description: Example request for calculating transfer routes
+      summary: Calculate transfer routes
+      value:
+        balancePlatform: YOUR_BALANCE_PLATFORM
+        category: bank
+        counterparty:
+          bankAccount:
+            accountIdentification:
+              iban: NL91ABNA0417164300
+              type: iban
+        currency: USD
+    post-transferRoutes-calculate-transferRoutesCalculate-200:
+      description: Example response for calculating transfer routes
+      summary: Response for calculating transfer routes
+      value:
+        transferRoutes:
+          - country: NL
+            currency: USD
+            priority: crossBorder
+            requirements:
+              - description: Amount of transfer must be at least 100, and no greater than 99999999999
+                max: 99999999999
+                min: 100
+                type: Amount Min Max Requirement
+              - description: Country, street and city is required.
+                requiredAddressFields:
+                  - STREET
+                  - CITY
+                type: addressRequirement
+              - bankAccountIdentificationTypes:
+                  - iban
+                  - numberAndBic
+                description: Bank account identification type must be iban or numberAndBic
+                type: Bank Account Identification Type Requirement
+              - issuingCountryCode: NL
+                paymentInstrumentType: BankAccount
+                type: Payment Instrument Requirement
+          - country: NL
+            currency: USD
+            priority: wire
+            requirements:
+              - description: Amount of transfer must be at least 100, and no greater than 99999999999
+                max: 99999999999
+                min: 100
+                type: Amount Min Max Requirement
+              - description: Country, street and city is required.
+                requiredAddressFields:
+                  - STREET
+                  - CITY
+                type: addressRequirement
+              - bankAccountIdentificationTypes:
+                  - iban
+                  - numberAndBic
+                description: Bank account identification type must be iban or numberAndBic
+                type: Bank Account Identification Type Requirement
+              - issuingCountryCode: NL
+                paymentInstrumentType: BankAccount
+                type: Payment Instrument Requirement
     post-validateBankAccountIdentification-validateBankAccountIdentificationIban:
       summary: Validate an IBAN
       value:
@@ -4354,6 +4481,26 @@ components:
         - postalCode
         - country
       type: object
+    AddressRequirement:
+      additionalProperties: false
+      properties:
+        description:
+          description: Specifies the required address related fields for a particular route.
+          type: string
+        requiredAddressFields:
+          description: List of address fields; i.e. Country , City , etc.
+          items:
+            type: string
+          type: array
+        type:
+          default: addressRequirement
+          description: "**addressRequirement**"
+          enum:
+            - addressRequirement
+          type: string
+      required:
+        - type
+      type: object
     Amount:
       properties:
         currency:
@@ -4368,6 +4515,29 @@ components:
       required:
         - value
         - currency
+      type: object
+    AmountMinMaxRequirement:
+      additionalProperties: false
+      properties:
+        description:
+          description: Specifies the eligible amounts of a particular route.
+          type: string
+        max:
+          description: max amount in numeric characters i.e. 99999999999
+          format: int64
+          type: integer
+        min:
+          description: min amount in numeric characters i.e. 1
+          format: int64
+          type: integer
+        type:
+          default: amountMinMaxRequirement
+          description: "**amountMinMaxRequirement**"
+          enum:
+            - amountMinMaxRequirement
+          type: string
+      required:
+        - type
       type: object
     Authentication:
       properties:
@@ -4691,6 +4861,68 @@ components:
         - sweeps
         - hasPrevious
         - hasNext
+      type: object
+    BankAccount:
+      properties:
+        accountIdentification:
+          description: Contains the bank account details. The fields required in this object depend on the country of the bank account and the currency of the transfer.
+          oneOf:
+            - $ref: "#/components/schemas/AULocalAccountIdentification"
+            - $ref: "#/components/schemas/BRLocalAccountIdentification"
+            - $ref: "#/components/schemas/CALocalAccountIdentification"
+            - $ref: "#/components/schemas/CZLocalAccountIdentification"
+            - $ref: "#/components/schemas/DKLocalAccountIdentification"
+            - $ref: "#/components/schemas/HKLocalAccountIdentification"
+            - $ref: "#/components/schemas/HULocalAccountIdentification"
+            - $ref: "#/components/schemas/IbanAccountIdentification"
+            - $ref: "#/components/schemas/NOLocalAccountIdentification"
+            - $ref: "#/components/schemas/NZLocalAccountIdentification"
+            - $ref: "#/components/schemas/NumberAndBicAccountIdentification"
+            - $ref: "#/components/schemas/PLLocalAccountIdentification"
+            - $ref: "#/components/schemas/SELocalAccountIdentification"
+            - $ref: "#/components/schemas/SGLocalAccountIdentification"
+            - $ref: "#/components/schemas/UKLocalAccountIdentification"
+            - $ref: "#/components/schemas/USLocalAccountIdentification"
+      required:
+        - accountIdentification
+      type: object
+    BankAccountIdentificationTypeRequirement:
+      additionalProperties: false
+      properties:
+        bankAccountIdentificationTypes:
+          description: "List of bank account identification types: eg.; [iban , numberAndBic]"
+          items:
+            enum:
+              - auLocal
+              - brLocal
+              - caLocal
+              - czLocal
+              - dkLocal
+              - hkLocal
+              - huLocal
+              - iban
+              - legacy
+              - noLocal
+              - numberAndBic
+              - nzLocal
+              - plLocal
+              - seLocal
+              - sgLocal
+              - ukLocal
+              - usLocal
+            type: string
+          type: array
+        description:
+          description: Specifies the bank account details for a particular route per required field in this object depending on the country of the bank account and the currency of the transfer.
+          type: string
+        type:
+          default: bankAccountIdentificationTypeRequirement
+          description: "**bankAccountIdentificationTypeRequirement**"
+          enum:
+            - bankAccountIdentificationTypeRequirement
+          type: string
+      required:
+        - type
       type: object
     BankAccountIdentificationValidationRequest:
       properties:
@@ -5184,6 +5416,15 @@ components:
         - phone
         - address
       type: object
+    Counterparty:
+      properties:
+        bankAccount:
+          $ref: "#/components/schemas/BankAccount"
+          description: Contains information about the bank account.
+        transferInstrumentId:
+          description: Unique identifier of the [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+          type: string
+      type: object
     CountriesRestriction:
       properties:
         operation:
@@ -5257,13 +5498,13 @@ components:
             >If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         line1:
-          description: First line of the address.
+          description: The street name of the house. For example, if address is 'Rokin 49', please write 'Rokin'.
           type: string
         line2:
-          description: Second line of the address.
+          description: The house number or name. For example, if address is 'Rokin 49', please write '49'.
           type: string
         line3:
-          description: Third line of the address.
+          description: Optional information about the address.
           type: string
         postalCode:
           description: |-
@@ -5489,14 +5730,14 @@ components:
       additionalProperties: false
       properties:
         accountNumber:
-          description: The 6- to 19-character bank account number (alphanumeric), without separators or whitespace.
-          maxLength: 19
-          minLength: 6
+          description: The 9- to 12-character bank account number (alphanumeric), without separators or whitespace. Starts with the 3-digit branch code.
+          maxLength: 12
+          minLength: 9
           type: string
-        bankCode:
-          description: The 6-digit bank code including the 3-digit bank code and 3-digit branch code, without separators or whitespace.
-          maxLength: 6
-          minLength: 6
+        clearingCode:
+          description: The 3-digit clearing code, without separators or whitespace.
+          maxLength: 3
+          minLength: 3
           type: string
         type:
           default: hkLocal
@@ -5507,7 +5748,7 @@ components:
       required:
         - type
         - accountNumber
-        - bankCode
+        - clearingCode
       type: object
     HULocalAccountIdentification:
       additionalProperties: false
@@ -6064,6 +6305,30 @@ components:
         - issuingCountryCode
         - type
       type: object
+    PaymentInstrumentRequirement:
+      additionalProperties: false
+      properties:
+        description:
+          description: Specifies the requirements for the Payment Instrument that needs to be included in the request for a particular route.
+          type: string
+        issuingCountryCode:
+          description: The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
+          type: string
+        paymentInstrumentType:
+          description: Type of the payment instrument i.e. BankAccount
+          enum:
+            - BankAccount
+            - Card
+          type: string
+        type:
+          default: paymentInstrumentRequirement
+          description: "**paymentInstrumentRequirement**"
+          enum:
+            - paymentInstrumentRequirement
+          type: string
+      required:
+        - type
+      type: object
     PaymentInstrumentRevealInfo:
       properties:
         cvc:
@@ -6388,7 +6653,7 @@ components:
         counterparty:
           $ref: "#/components/schemas/SweepCounterparty"
           description: |-
-            The destination or the source of the funds, depending on the `type`.
+            The destination or the source of the funds, depending on the sweep `type`.
 
             Either a `balanceAccountId`, `transferInstrumentId`, or `merchantAccount` is required.
         currency:
@@ -6516,13 +6781,16 @@ components:
              You can only use this for periodic sweep schedules such as `schedule.type` **daily** or **monthly**.
           type: string
         merchantAccount:
-          description: The merchant account that will be the source of funds, if you are processing payments with Adyen. You can only use this with sweeps of `type` **pull** and `schedule.type` **balance**.
+          description: |-
+            The merchant account that will be the source of funds.
+
+            You can only use this parameter with sweeps of `type` **pull** and `schedule.type` **balance**, and if you are processing payments with Adyen.
           type: string
         transferInstrumentId:
           description: |-
-            The unique identifier of the destination or source [transfer instrument](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/transferInstruments__resParam_id).
+            The unique identifier of the destination or source [transfer instrument](https://docs.adyen.com/api-explorer/legalentity/latest/post/transferInstruments#responses-200-id) depending on the sweep `type`
 
-            You can also use this in combination with a `merchantAccount` and a `type` **pull** to start a direct debit request from the source transfer instrument. To use this feature, reach out to your Adyen contact.
+            . To [set up automated top-up sweeps to balance accounts](https://docs.adyen.com/marketplaces-and-platforms/top-up-balance-account/#before-you-begin), use this parameter in combination with a `merchantAccount` and a sweep `type` of **pull**. Top-up sweeps start a direct debit request from the source transfer instrument. Contact Adyen Support to enable this feature.
           type: string
       type: object
     SweepSchedule:
@@ -6669,9 +6937,9 @@ components:
           type: string
         requestType:
           description: |-
-            Indicates the type of request to which the rule applies.
+            Indicates the type of request to which the rule applies. If not provided, by default, this is set to **authorization**.
 
-            Possible values: **authorization**, **authentication**, **tokenization**.
+            Possible values: **authorization**, **authentication**, **tokenization**, **bankTransfer**.
           enum:
             - authentication
             - authorization
@@ -6791,9 +7059,9 @@ components:
           type: string
         requestType:
           description: |-
-            Indicates the type of request to which the rule applies.
+            Indicates the type of request to which the rule applies. If not provided, by default, this is set to **authorization**.
 
-            Possible values: **authorization**, **authentication**, **tokenization**.
+            Possible values: **authorization**, **authentication**, **tokenization**, **bankTransfer**.
           enum:
             - authentication
             - authorization
@@ -7005,6 +7273,132 @@ components:
             $ref: "#/components/schemas/TransactionRule"
           type: array
       type: object
+    TransferRoute:
+      properties:
+        balancePlatform:
+          description: The unique identifier assigned to the balance platform associated with the account holder.
+          type: string
+        category:
+          description: |2
+             The type of transfer.
+
+             Possible values:
+
+              - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.
+          enum:
+            - bank
+            - card
+            - grants
+            - internal
+            - issuedCard
+            - migration
+            - platformPayment
+          type: string
+        country:
+          description: The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
+          type: string
+        currency:
+          description: The three-character ISO currency code of transfer. For example, **USD** or **EUR**.
+          type: string
+        priority:
+          description: |-
+            The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Possible values:
+
+            * **regular**: For normal, low-value transactions.
+
+            * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.
+
+            * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.
+
+            * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).
+
+            * **crossBorder**: High-value transfer to a recipient in a different country.
+
+            * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).
+          enum:
+            - crossBorder
+            - fast
+            - instant
+            - internal
+            - regular
+            - wire
+          type: string
+        requirements:
+          description: A set of rules defined by clearing houses and banking partners. Your transfer request must adhere to these rules to ensure successful initiation of transfer. Based on the priority, one or more requirements may be returned. Each requirement is defined with a `type` and `description`.
+          oneOf:
+            - $ref: "#/components/schemas/AddressRequirement"
+            - $ref: "#/components/schemas/AmountMinMaxRequirement"
+            - $ref: "#/components/schemas/BankAccountIdentificationTypeRequirement"
+            - $ref: "#/components/schemas/PaymentInstrumentRequirement"
+      type: object
+    TransferRouteRequest:
+      properties:
+        balanceAccountId:
+          description: |-
+            The unique identifier of the source [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id).
+            Required if `counterparty` is **transferInstrumentId**.
+          type: string
+        balancePlatform:
+          description: The unique identifier assigned to the balance platform associated with the account holder.
+          type: string
+        category:
+          description: |2
+             The type of transfer. Possible values:
+
+              - **bank**: Transfer to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id) or a bank account.
+          enum:
+            - bank
+          type: string
+        counterparty:
+          $ref: "#/components/schemas/Counterparty"
+          description: The recipient of the funds transfer. A bank account or a transfer instrument.
+        country:
+          description: |-
+            The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
+             > Either `counterparty` or `country` field must be provided in a transfer route request.
+          type: string
+        currency:
+          description: The three-character ISO currency code of transfer. For example, **USD** or **EUR**.
+          type: string
+        priorities:
+          description: |-
+            The list of priorities for the bank transfer. Priorities set the speed at which the transfer is sent and the fees that you have to pay. Multiple values can be provided.
+            Possible values:
+
+            * **regular**: For normal, low-value transactions.
+
+            * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.
+
+            * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.
+
+            * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).
+
+            * **crossBorder**: High-value transfer to a recipient in a different country.
+
+            * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).
+          items:
+            enum:
+              - crossBorder
+              - fast
+              - instant
+              - internal
+              - regular
+              - wire
+            type: string
+          type: array
+      required:
+        - balancePlatform
+        - currency
+        - category
+      type: object
+    TransferRouteResponse:
+      properties:
+        transferRoutes:
+          description: List of available priorities for a transfer, along with requirements. Use this information to initiate a transfer.
+          items:
+            $ref: "#/components/schemas/TransferRoute"
+          type: array
+      type: object
     UKLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -7184,7 +7578,7 @@ components:
         counterparty:
           $ref: "#/components/schemas/SweepCounterparty"
           description: |-
-            The destination or the source of the funds, depending on the `type`.
+            The destination or the source of the funds, depending on the sweep `type`.
 
             Either a `balanceAccountId`, `transferInstrumentId`, or `merchantAccount` is required.
         currency:
@@ -7558,3 +7952,4 @@ x-groups:
   - Network tokens
   - Grant accounts
   - Grant offers
+  - Transfer routes

@@ -709,7 +709,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Filtering results
+        - description: Optional. Filtering results
           in: query
           name: filter
           schema:
@@ -719,7 +719,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+        - description: Optional. Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
@@ -805,7 +805,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Filtering results
+        - description: Optional. Filtering results
           in: query
           name: filter
           schema:
@@ -815,7 +815,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
+        - description: Optional. Requested page size. Server may return fewer items than requested. If unspecified, server will pick an appropriate default.
           in: query
           name: pageSize
           schema:
@@ -1870,7 +1870,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Labels as key value pairs
+          description: Optional. Labels as key value pairs
           type: object
         name:
           description: Output only. name of resource
@@ -1910,7 +1910,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Labels as key value pairs
+          description: Optional. Labels as key value pairs
           type: object
         name:
           description: Output only. name of resource

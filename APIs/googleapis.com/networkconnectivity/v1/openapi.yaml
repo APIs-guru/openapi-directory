@@ -281,6 +281,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:acceptSpoke:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Accepts a proposal to attach a Network Connectivity Center spoke to the hub.
+      operationId: networkconnectivity.projects.locations.global.hubs.acceptSpoke
+      parameters:
+        - description: Required. The name of the hub.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AcceptHubSpokeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -426,6 +468,48 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/RejectSpokeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{name}:rejectSpoke:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Rejects a Network Connectivity Center spoke from being attached to the hub. If the spoke was previously in the `ACTIVE` state, it transitions to the `INACTIVE` state and is no longer able to connect to other spokes that are attached to the hub.
+      operationId: networkconnectivity.projects.locations.global.hubs.rejectSpoke
+      parameters:
+        - description: Required. The name of the hub.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RejectHubSpokeRequest"
       responses:
         "200":
           content:
@@ -1542,6 +1626,16 @@ components:
       schema:
         type: string
   schemas:
+    AcceptHubSpokeRequest:
+      description: The request for HubService.AcceptHubSpoke.
+      properties:
+        requestId:
+          description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server guarantees that a request doesn't result in creation of duplicate commitments for at least 60 minutes. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check to see whether the original operation was received. If it was, the server ignores the second request. This behavior prevents clients from mistakenly creating duplicate commitments. The request ID must be a valid UUID, with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
+        spokeUri:
+          description: Required. The URI of the spoke to accept into the hub.
+          type: string
+      type: object
     AcceptSpokeRequest:
       description: The request for HubService.AcceptSpoke.
       properties:
@@ -1790,7 +1884,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Optional. Labels in key:value format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+          description: Optional. Labels in key-value pair format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
           type: object
         name:
           description: "Immutable. The name of the group. Group names must be unique. They use the following form: `projects/{project_number}/locations/global/hubs/{hub}/groups/{group_id}`"
@@ -1833,7 +1927,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Optional labels in key:value format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+          description: Optional labels in key-value pair format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
           type: object
         name:
           description: "Immutable. The name of the hub. Hub names must be unique. They use the following form: `projects/{project_number}/locations/global/hubs/{hub_id}`"
@@ -2454,6 +2548,19 @@ components:
             - DELETING
           type: string
       type: object
+    RejectHubSpokeRequest:
+      description: The request for HubService.RejectHubSpoke.
+      properties:
+        details:
+          description: Optional. Additional information provided by the hub administrator.
+          type: string
+        requestId:
+          description: Optional. A request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server guarantees that a request doesn't result in creation of duplicate commitments for at least 60 minutes. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check to see whether the original operation was received. If it was, the server ignores the second request. This behavior prevents clients from mistakenly creating duplicate commitments. The request ID must be a valid UUID, with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          type: string
+        spokeUri:
+          description: Required. The URI of the spoke to reject from the hub.
+          type: string
+      type: object
     RejectSpokeRequest:
       description: The request for HubService.RejectSpoke.
       properties:
@@ -2481,7 +2588,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Optional labels in key:value format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+          description: Optional labels in key-value pair format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
           type: object
         location:
           description: 'Output only. The location of the route. Uses the following form: "projects/{project}/locations/{location}" Example: projects/1234/locations/us-central1'
@@ -2541,7 +2648,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Optional labels in key:value format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+          description: Optional labels in key-value pair format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
           type: object
         name:
           description: "Immutable. The name of the route table. Route table names must be unique. They use the following form: `projects/{project_number}/locations/global/hubs/{hub}/routeTables/{route_table_id}`"
@@ -2805,7 +2912,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: Optional labels in key:value format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
+          description: Optional labels in key-value pair format. For more information about labels, see [Requirements for labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements).
           type: object
         linkedInterconnectAttachments:
           $ref: "#/components/schemas/LinkedInterconnectAttachments"

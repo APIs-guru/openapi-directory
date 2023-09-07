@@ -106,12 +106,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: The binary log file name.
+        - description: Required. The binary log file name.
           in: query
           name: cdcStrategy.specificStartPosition.mysqlLogPosition.logFile
           schema:
             type: string
-        - description: The position within the binary log file. Default is head of file.
+        - description: Optional. The position within the binary log file. Default is head of file.
           in: query
           name: cdcStrategy.specificStartPosition.mysqlLogPosition.logPosition
           schema:
@@ -1601,10 +1601,10 @@ components:
       description: MySQL log position
       properties:
         logFile:
-          description: The binary log file name.
+          description: Required. The binary log file name.
           type: string
         logPosition:
-          description: The position within the binary log file. Default is head of file.
+          description: Optional. The position within the binary log file. Default is head of file.
           format: int32
           type: integer
       type: object
@@ -1826,6 +1826,9 @@ components:
         hostname:
           description: Required. Hostname for the Oracle connection.
           type: string
+        oracleSslConfig:
+          $ref: "#/components/schemas/OracleSslConfig"
+          description: Optional. SSL configuration for the Oracle connection.
         password:
           description: Required. Password for the Oracle connection.
           type: string
@@ -1881,6 +1884,17 @@ components:
         streamLargeObjects:
           $ref: "#/components/schemas/StreamLargeObjects"
           description: "Stream large object values. NOTE: This feature is currently experimental."
+      type: object
+    OracleSslConfig:
+      description: Oracle SSL configuration information.
+      properties:
+        caCertificate:
+          description: Input only. PEM-encoded certificate of the CA that signed the source database server's certificate.
+          type: string
+        caCertificateSet:
+          description: Output only. Indicates whether the ca_certificate field has been set for this Connection-Profile.
+          readOnly: true
+          type: boolean
       type: object
     OracleTable:
       description: Oracle table.
@@ -2228,6 +2242,11 @@ components:
             type: string
           description: Labels.
           type: object
+        lastRecoveryTime:
+          description: "Output only. If the stream was recovered, the time of the last recovery. Note: This field is currently experimental."
+          format: google-datetime
+          readOnly: true
+          type: string
         name:
           description: Output only. The stream's name.
           readOnly: true

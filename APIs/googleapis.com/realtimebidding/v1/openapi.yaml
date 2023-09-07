@@ -218,7 +218,7 @@ paths:
       tags:
         - buyers
     put:
-      description: Update the given user list. Only user lists with URLRestrictions can be updated.
+      description: Updates the given user list. Only user lists with URLRestrictions can be updated.
       operationId: realtimebidding.buyers.userLists.update
       parameters:
         - description: Output only. Name of the user list that must follow the pattern `buyers/{buyer}/userLists/{user_list}`, where `{buyer}` represents the account ID of the buyer who owns the user list. For a bidder accessing user lists on behalf of a child seat buyer, `{buyer}` represents the account ID of the child seat buyer. `{user_list}` is an int64 identifier assigned by Google to uniquely identify a user list.
@@ -302,7 +302,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Change the status of a user list to CLOSED. This prevents new users from being added to the user list.
+      description: Changes the status of a user list to CLOSED. This prevents new users from being added to the user list.
       operationId: realtimebidding.buyers.userLists.close
       parameters:
         - description: Required. The name of the user list to close. See UserList.name
@@ -335,7 +335,7 @@ paths:
       description: "Deprecated. This will be removed in October 2023. For more information, see the release notes: https://developers.google.com/authorized-buyers/apis/relnotes#real-time-bidding-api Gets remarketing tag for a buyer. A remarketing tag is a piece of JavaScript code that can be placed on a web page. When a user visits a page containing a remarketing tag, Google adds the user to a user list."
       operationId: realtimebidding.buyers.userLists.getRemarketingTag
       parameters:
-        - description: Required. To fetch remarketing tag for an account, name must follow the pattern `buyers/{accountId}` where `{accountId}` represents ID of a buyer that owns the remarketing tag. For a bidder accessing remarketing tag on behalf of a child seat buyer, `{accountId}` should represent the ID of the child seat buyer. To fetch remarketing tag for a specific user list, name must follow the pattern `buyers/{accountId}/userLists/{userListId}`. See UserList.name.
+        - description: Required. To fetch the remarketing tag for an account, the name must follow the pattern `buyers/{accountId}`, where `{accountId}` represents the ID of the buyer that owns the remarketing tag. For a bidder accessing the remarketing tag on behalf of a child seat buyer, `{accountId}` should represent the ID of the child seat buyer. To fetch the remarketing tag for a specific user list, the name must follow the pattern `buyers/{accountId}/userLists/{userListId}`. See UserList.name.
           in: path
           name: name
           required: true
@@ -381,7 +381,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Change the status of a user list to OPEN. This allows new users to be added to the user list.
+      description: Changes the status of a user list to OPEN. This allows new users to be added to the user list.
       operationId: realtimebidding.buyers.userLists.open
       parameters:
         - description: Required. The name of the user list to open. See UserList.name
@@ -863,7 +863,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Continuation page token (as received from a previous response).
+        - description: Continuation page token as received from a previous response.
           in: query
           name: pageToken
           schema:
@@ -895,10 +895,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create a new user list.
+      description: Creates a new user list.
       operationId: realtimebidding.buyers.userLists.create
       parameters:
-        - description: Required. The name of the parent buyer of the user list to be retrieved that must follow the pattern `buyers/{buyerAccountId}`, where `{buyerAccountId}` represents the account ID of the buyer who owns user lists. For a bidder accessing user lists on behalf of a child seat buyer , `{buyerAccountId}` should represent the account ID of the child seat buyer.
+        - description: Required. The name of the parent buyer of the user list to be retrieved, which must follow the pattern `buyers/{buyerAccountId}`, where `{buyerAccountId}` represents the account ID of the buyer who owns the user list. For a bidder accessing user lists on behalf of a child seat buyer, `{buyerAccountId}` should represent the account ID of the child seat buyer.
           in: path
           name: parent
           required: true
@@ -1887,7 +1887,7 @@ components:
       description: "Deprecated. This will be removed in October 2023. For more information, see the release notes: https://developers.google.com/authorized-buyers/apis/relnotes#real-time-bidding-api Response for a request to get remarketing tag."
       properties:
         snippet:
-          description: A HTML tag that can be placed on the advertiser's page to add users to a user list. For more information and code samples on using snippet on your website refer to [Tag your site for remarketing]( https://support.google.com/google-ads/answer/2476688).
+          description: An HTML tag that can be placed on the advertiser's page to add users to a user list. For more information and code samples on using snippets on your website, refer to [Tag your site for remarketing](https://support.google.com/google-ads/answer/2476688).
           type: string
       type: object
     HtmlContent:
@@ -2018,7 +2018,7 @@ components:
       description: The list user list response.
       properties:
         nextPageToken:
-          description: The continuation page token to send back to the server in a subsequent request. Due to a currently known issue, it is recommended that the caller keep invoking the list method till the time a next page token is not returned (even if the result set is empty).
+          description: The continuation page token to send back to the server in a subsequent request. Due to a currently known issue, it is recommended that the caller keep invoking the list method until the time a next page token is not returned, even if the result set is empty.
           type: string
         userLists:
           description: List of user lists from the search.
