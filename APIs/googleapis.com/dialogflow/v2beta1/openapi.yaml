@@ -1,6 +1,7 @@
 openapi: 3.0.0
 servers:
   - url: https://dialogflow.googleapis.com/
+x-hasEquivalentPaths: true
 info:
   contact:
     name: Google
@@ -110,6 +111,52 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
+  /v2beta1/{conversation}/suggestions:searchKnowledge:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Get answers for the given query based on knowledge documents.
+      operationId: dialogflow.projects.locations.conversations.suggestions.searchKnowledge
+      parameters:
+        - description: "The conversation (between human agent and end user) where the search request is triggered. Format: `projects//locations//conversations/`."
+          in: path
+          name: conversation
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SearchKnowledgeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SearchKnowledgeResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -2504,6 +2551,52 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
+  /v2beta1/{parent}/suggestions:searchKnowledge:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Get answers for the given query based on knowledge documents.
+      operationId: dialogflow.projects.suggestions.searchKnowledge
+      parameters:
+        - description: "The parent resource contains the conversation profile Format: 'projects/' or `projects//locations/`."
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SearchKnowledgeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SearchKnowledgeResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/dialogflow
+          Oauth2c:
+            - https://www.googleapis.com/auth/dialogflow
+      tags:
+        - projects
   /v2beta1/{parent}/suggestions:suggestArticles:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2894,6 +2987,43 @@ components:
       schema:
         type: string
   schemas:
+    GoogleCloudDialogflowCxV3AdvancedSettings:
+      description: "Hierarchical advanced settings for agent/flow/page/fulfillment/parameter. Settings exposed at lower level overrides the settings exposed at higher level. Overriding occurs at the sub-setting level. For example, the playback_interruption_settings at fulfillment level only overrides the playback_interruption_settings at the agent level, leaving other settings at the agent level unchanged. DTMF settings does not override each other. DTMF settings set at different levels define DTMF detections running in parallel. Hierarchy: Agent->Flow->Page->Fulfillment/Parameter."
+      properties:
+        audioExportGcsDestination:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3GcsDestination"
+          description: "If present, incoming audio is exported by Dialogflow to the configured Google Cloud Storage destination. Exposed at the following levels: - Agent level - Flow level"
+        dtmfSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3AdvancedSettingsDtmfSettings"
+          description: "Settings for DTMF. Exposed at the following levels: - Agent level - Flow level - Page level - Parameter level."
+        loggingSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3AdvancedSettingsLoggingSettings"
+          description: "Settings for logging. Settings for Dialogflow History, Contact Center messages, StackDriver logs, and speech logging. Exposed at the following levels: - Agent level."
+      type: object
+    GoogleCloudDialogflowCxV3AdvancedSettingsDtmfSettings:
+      description: Define behaviors for DTMF (dual tone multi frequency).
+      properties:
+        enabled:
+          description: If true, incoming audio is processed for DTMF (dual tone multi frequency) events. For example, if the caller presses a button on their telephone keypad and DTMF processing is enabled, Dialogflow will detect the event (e.g. a "3" was pressed) in the incoming audio and pass the event to the bot to drive business logic (e.g. when 3 is pressed, return the account balance).
+          type: boolean
+        finishDigit:
+          description: The digit that terminates a DTMF digit sequence.
+          type: string
+        maxDigits:
+          description: Max length of DTMF digits.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDialogflowCxV3AdvancedSettingsLoggingSettings:
+      description: Define behaviors on logging.
+      properties:
+        enableInteractionLogging:
+          description: If true, DF Interaction logging is currently enabled.
+          type: boolean
+        enableStackdriverLogging:
+          description: If true, StackDriver logging is currently enabled.
+          type: boolean
+      type: object
     GoogleCloudDialogflowCxV3AudioInput:
       description: Represents the natural speech audio to be processed.
       properties:
@@ -3219,6 +3349,9 @@ components:
     GoogleCloudDialogflowCxV3FormParameter:
       description: Represents a form parameter.
       properties:
+        advancedSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3AdvancedSettings"
+          description: Hierarchical advanced settings for this parameter. The settings exposed at the lower level overrides the settings exposed at the higher level.
         defaultValue:
           description: The default value of an optional parameter. If the parameter is required, the default value will be ignored.
         displayName:
@@ -3255,11 +3388,17 @@ components:
     GoogleCloudDialogflowCxV3Fulfillment:
       description: "A fulfillment can do one or more of the following actions at the same time: * Generate rich message responses. * Set parameter values. * Call the webhook. Fulfillments can be called at various stages in the Page or Form lifecycle. For example, when a DetectIntentRequest drives a session to enter a new page, the page's entry fulfillment can add a static response to the QueryResult in the returning DetectIntentResponse, call the webhook (for example, to load user data from a database), or both."
       properties:
+        advancedSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3AdvancedSettings"
+          description: Hierarchical advanced settings for this fulfillment. The settings exposed at the lower level overrides the settings exposed at the higher level.
         conditionalCases:
           description: Conditional cases for this fulfillment.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FulfillmentConditionalCases"
           type: array
+        enableGenerativeFallback:
+          description: If the flag is true, the agent will utilize LLM to generate a text response. If LLM generation fails, the defined responses in the fulfillment will be respected. This flag is only useful for fulfillments associated with no-match event handlers.
+          type: boolean
         messages:
           description: The list of rich message responses to present to the user.
           items:
@@ -3319,6 +3458,13 @@ components:
           type: string
         value:
           description: The new value of the parameter. A null value clears the parameter.
+      type: object
+    GoogleCloudDialogflowCxV3GcsDestination:
+      description: Google Cloud Storage location for a Dialogflow operation that writes or exports objects (e.g. exported agent or transcripts) outside of Dialogflow.
+      properties:
+        uri:
+          description: "Required. The Google Cloud Storage URI for the exported objects. A URI is of the form: `gs://bucket/object-name-or-prefix` Whether a full object name, or just a prefix, its usage depends on the Dialogflow operation."
+          type: string
       type: object
     GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata:
       description: Metadata in google::longrunning::Operation for Knowledge operations.
@@ -3524,6 +3670,9 @@ components:
     GoogleCloudDialogflowCxV3Page:
       description: A Dialogflow CX conversation (session) can be described and visualized as a state machine. The states of a CX session are represented by pages. For each flow, you define many pages, where your combined pages can handle a complete conversation on the topics the flow is designed for. At any given moment, exactly one page is the current page, the current page is considered active, and the flow associated with that page is considered active. Every flow has a special start page. When a flow initially becomes active, the start page page becomes the current page. For each conversational turn, the current page will either stay the same or transition to another page. You configure each page to collect information from the end-user that is relevant for the conversational state represented by the page. For more information, see the [Page guide](https://cloud.google.com/dialogflow/cx/docs/concept/page).
       properties:
+        advancedSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3AdvancedSettings"
+          description: Hierarchical advanced settings for this page. The settings exposed at the lower level overrides the settings exposed at the higher level.
         displayName:
           description: Required. The human-readable name of the page, unique within the flow.
           type: string
@@ -4234,6 +4383,43 @@ components:
           description: "Required. The name of [Service Directory](https://cloud.google.com/service-directory) service. Format: `projects//locations//namespaces//services/`. `Location ID` of the service directory must be the same as the location of the agent."
           type: string
       type: object
+    GoogleCloudDialogflowCxV3beta1AdvancedSettings:
+      description: "Hierarchical advanced settings for agent/flow/page/fulfillment/parameter. Settings exposed at lower level overrides the settings exposed at higher level. Overriding occurs at the sub-setting level. For example, the playback_interruption_settings at fulfillment level only overrides the playback_interruption_settings at the agent level, leaving other settings at the agent level unchanged. DTMF settings does not override each other. DTMF settings set at different levels define DTMF detections running in parallel. Hierarchy: Agent->Flow->Page->Fulfillment/Parameter."
+      properties:
+        audioExportGcsDestination:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1GcsDestination"
+          description: "If present, incoming audio is exported by Dialogflow to the configured Google Cloud Storage destination. Exposed at the following levels: - Agent level - Flow level"
+        dtmfSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AdvancedSettingsDtmfSettings"
+          description: "Settings for DTMF. Exposed at the following levels: - Agent level - Flow level - Page level - Parameter level."
+        loggingSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AdvancedSettingsLoggingSettings"
+          description: "Settings for logging. Settings for Dialogflow History, Contact Center messages, StackDriver logs, and speech logging. Exposed at the following levels: - Agent level."
+      type: object
+    GoogleCloudDialogflowCxV3beta1AdvancedSettingsDtmfSettings:
+      description: Define behaviors for DTMF (dual tone multi frequency).
+      properties:
+        enabled:
+          description: If true, incoming audio is processed for DTMF (dual tone multi frequency) events. For example, if the caller presses a button on their telephone keypad and DTMF processing is enabled, Dialogflow will detect the event (e.g. a "3" was pressed) in the incoming audio and pass the event to the bot to drive business logic (e.g. when 3 is pressed, return the account balance).
+          type: boolean
+        finishDigit:
+          description: The digit that terminates a DTMF digit sequence.
+          type: string
+        maxDigits:
+          description: Max length of DTMF digits.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDialogflowCxV3beta1AdvancedSettingsLoggingSettings:
+      description: Define behaviors on logging.
+      properties:
+        enableInteractionLogging:
+          description: If true, DF Interaction logging is currently enabled.
+          type: boolean
+        enableStackdriverLogging:
+          description: If true, StackDriver logging is currently enabled.
+          type: boolean
+      type: object
     GoogleCloudDialogflowCxV3beta1AudioInput:
       description: Represents the natural speech audio to be processed.
       properties:
@@ -4559,6 +4745,9 @@ components:
     GoogleCloudDialogflowCxV3beta1FormParameter:
       description: Represents a form parameter.
       properties:
+        advancedSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AdvancedSettings"
+          description: Hierarchical advanced settings for this parameter. The settings exposed at the lower level overrides the settings exposed at the higher level.
         defaultValue:
           description: The default value of an optional parameter. If the parameter is required, the default value will be ignored.
         displayName:
@@ -4595,11 +4784,17 @@ components:
     GoogleCloudDialogflowCxV3beta1Fulfillment:
       description: "A fulfillment can do one or more of the following actions at the same time: * Generate rich message responses. * Set parameter values. * Call the webhook. Fulfillments can be called at various stages in the Page or Form lifecycle. For example, when a DetectIntentRequest drives a session to enter a new page, the page's entry fulfillment can add a static response to the QueryResult in the returning DetectIntentResponse, call the webhook (for example, to load user data from a database), or both."
       properties:
+        advancedSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AdvancedSettings"
+          description: Hierarchical advanced settings for this fulfillment. The settings exposed at the lower level overrides the settings exposed at the higher level.
         conditionalCases:
           description: Conditional cases for this fulfillment.
           items:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCases"
           type: array
+        enableGenerativeFallback:
+          description: If the flag is true, the agent will utilize LLM to generate a text response. If LLM generation fails, the defined responses in the fulfillment will be respected. This flag is only useful for fulfillments associated with no-match event handlers.
+          type: boolean
         messages:
           description: The list of rich message responses to present to the user.
           items:
@@ -4659,6 +4854,13 @@ components:
           type: string
         value:
           description: The new value of the parameter. A null value clears the parameter.
+      type: object
+    GoogleCloudDialogflowCxV3beta1GcsDestination:
+      description: Google Cloud Storage location for a Dialogflow operation that writes or exports objects (e.g. exported agent or transcripts) outside of Dialogflow.
+      properties:
+        uri:
+          description: "Required. The Google Cloud Storage URI for the exported objects. A URI is of the form: `gs://bucket/object-name-or-prefix` Whether a full object name, or just a prefix, its usage depends on the Dialogflow operation."
+          type: string
       type: object
     GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata:
       description: Metadata in google::longrunning::Operation for Knowledge operations.
@@ -4864,6 +5066,9 @@ components:
     GoogleCloudDialogflowCxV3beta1Page:
       description: A Dialogflow CX conversation (session) can be described and visualized as a state machine. The states of a CX session are represented by pages. For each flow, you define many pages, where your combined pages can handle a complete conversation on the topics the flow is designed for. At any given moment, exactly one page is the current page, the current page is considered active, and the flow associated with that page is considered active. Every flow has a special start page. When a flow initially becomes active, the start page page becomes the current page. For each conversational turn, the current page will either stay the same or transition to another page. You configure each page to collect information from the end-user that is relevant for the conversational state represented by the page. For more information, see the [Page guide](https://cloud.google.com/dialogflow/cx/docs/concept/page).
       properties:
+        advancedSettings:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AdvancedSettings"
+          description: Hierarchical advanced settings for this page. The settings exposed at the lower level overrides the settings exposed at the higher level.
         displayName:
           description: Required. The human-readable name of the page, unique within the flow.
           type: string
@@ -5659,6 +5864,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - KNOWLEDGE_SEARCH
           type: string
       type: object
     GoogleCloudDialogflowV2Context:
@@ -6808,6 +7014,7 @@ components:
             - ARTICLE_SUGGESTION
             - FAQ
             - SMART_REPLY
+            - KNOWLEDGE_SEARCH
           type: string
       type: object
     GoogleCloudDialogflowV2SmartReplyAnswer:
@@ -7047,9 +7254,24 @@ components:
             - INEFFICIENT
             - EFFICIENT
           type: string
+        knowledgeSearchFeedback:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1AgentAssistantFeedbackKnowledgeSearchFeedback"
+          description: Optional. Feedback for knowledge search.
         summarizationFeedback:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1AgentAssistantFeedbackSummarizationFeedback"
           description: Feedback for conversation summarization.
+      type: object
+    GoogleCloudDialogflowV2beta1AgentAssistantFeedbackKnowledgeSearchFeedback:
+      description: Feedback for knowledge search.
+      properties:
+        answerCopied:
+          description: Whether the answer was copied by the human agent or not. If the value is set to be true, AnswerFeedback.clicked will be updated to be true.
+          type: boolean
+        clickedUris:
+          description: The URIs clicked by the human agent. The value is appended for each UpdateAnswerRecordRequest. If the value is not empty, AnswerFeedback.clicked will be updated to be true.
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudDialogflowV2beta1AgentAssistantFeedbackSummarizationFeedback:
       description: Feedback for conversation summarization.
@@ -7478,6 +7700,7 @@ components:
             - SMART_REPLY
             - DIALOGFLOW_ASSIST
             - CONVERSATION_SUMMARIZATION
+            - KNOWLEDGE_SEARCH
           type: string
       type: object
     GoogleCloudDialogflowV2beta1ClearSuggestionFeatureConfigRequest:
@@ -7500,6 +7723,7 @@ components:
             - SMART_REPLY
             - DIALOGFLOW_ASSIST
             - CONVERSATION_SUMMARIZATION
+            - KNOWLEDGE_SEARCH
           type: string
       type: object
     GoogleCloudDialogflowV2beta1CompileSuggestionRequest:
@@ -8199,8 +8423,11 @@ components:
         conversationProcessConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigConversationProcessConfig"
           description: Configs for processing conversation.
+        disableAgentQueryLogging:
+          description: "Optional. Disable the logging of search queries sent by human agents. It can prevent those queries from being stored at answer records. Supported features: KNOWLEDGE_SEARCH."
+          type: boolean
         enableEventBasedSuggestion:
-          description: "Automatically iterates all participants and tries to compile suggestions. Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST, ENTITY_EXTRACTION."
+          description: "Automatically iterates all participants and tries to compile suggestions. Supported features: ARTICLE_SUGGESTION, FAQ, DIALOGFLOW_ASSIST, ENTITY_EXTRACTION, KNOWLEDGE_ASSIST."
           type: boolean
         queryConfig:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfig"
@@ -9909,6 +10136,72 @@ components:
           description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
       type: object
+    GoogleCloudDialogflowV2beta1SearchKnowledgeAnswer:
+      description: Represents a SearchKnowledge answer.
+      properties:
+        answer:
+          description: The piece of text from the knowledge base documents that answers the search query
+          type: string
+        answerRecord:
+          description: "The name of the answer record. Format: `projects//locations//answer Records/`"
+          type: string
+        answerSources:
+          description: All sources used to generate the answer.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SearchKnowledgeAnswerAnswerSource"
+          type: array
+        answerType:
+          description: The type of the answer.
+          enum:
+            - ANSWER_TYPE_UNSPECIFIED
+            - FAQ
+            - GENERATIVE
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SearchKnowledgeAnswerAnswerSource:
+      description: The sources of the answers.
+      properties:
+        snippet:
+          description: The relevant snippet of the article.
+          type: string
+        title:
+          description: The title of the article.
+          type: string
+        uri:
+          description: The URI of the article.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SearchKnowledgeRequest:
+      description: The request message for Conversations.SearchKnowledge.
+      properties:
+        conversation:
+          description: "The conversation (between human agent and end user) where the search request is triggered. Format: `projects//locations//conversations/`."
+          type: string
+        conversationProfile:
+          description: "Required. The conversation profile used to configure the search. Format: `projects//locations//conversationProfiles/`."
+          type: string
+        latestMessage:
+          description: "The name of the latest conversation message when the request is triggered. Format: `projects//locations//conversations//messages/`."
+          type: string
+        parent:
+          description: "The parent resource contains the conversation profile Format: 'projects/' or `projects//locations/`."
+          type: string
+        query:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1TextInput"
+          description: Required. The natural language text query for knowledge search.
+        sessionId:
+          description: The ID of the search session. The session_id can be combined with Dialogflow V3 Agent ID retrieved from conversation profile or on its own to identify a search session. The search history of the same session will impact the search result. It's up to the API caller to choose an appropriate `Session ID`. It can be a random number or some type of session identifiers (preferably hashed). The length must not exceed 36 characters.
+          type: string
+      type: object
+    GoogleCloudDialogflowV2beta1SearchKnowledgeResponse:
+      description: The response message for Conversations.SearchKnowledge.
+      properties:
+        answers:
+          description: Most relevant snippets extracted from articles in the given knowledge base, ordered by confidence.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowV2beta1SearchKnowledgeAnswer"
+          type: array
+      type: object
     GoogleCloudDialogflowV2beta1Sentiment:
       description: "The sentiment, such as positive/negative feeling or association, for a unit of analysis, such as the query text. See: https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values for how to interpret the result."
       properties:
@@ -9981,6 +10274,7 @@ components:
             - SMART_REPLY
             - DIALOGFLOW_ASSIST
             - CONVERSATION_SUMMARIZATION
+            - KNOWLEDGE_SEARCH
           type: string
       type: object
     GoogleCloudDialogflowV2beta1SetSuggestionFeatureConfigRequest:
@@ -10039,6 +10333,9 @@ components:
             - USE_STANDARD
             - USE_ENHANCED
           type: string
+        useTimeoutBasedEndpointing:
+          description: Use timeout based endpointing, interpreting endpointer sensitivy as seconds of timeout value.
+          type: boolean
       type: object
     GoogleCloudDialogflowV2beta1SubAgent:
       description: Contains basic configuration for a sub-agent.
@@ -10287,6 +10584,7 @@ components:
             - SMART_REPLY
             - DIALOGFLOW_ASSIST
             - CONVERSATION_SUMMARIZATION
+            - KNOWLEDGE_SEARCH
           type: string
       type: object
     GoogleCloudDialogflowV2beta1SuggestionInput:

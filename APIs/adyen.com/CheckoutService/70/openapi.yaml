@@ -2078,14 +2078,8 @@ paths:
           schema:
             type: string
       responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StoredPaymentMethodResource"
-          description: OK - the request has succeeded.
         "204":
-          description: No Content - the request has been successfully processed, but there is no additional content.
+          description: "No Content - look at the actual response code for the status of the request "
       security:
         - BasicAuth: []
         - ApiKeyAuth: []
@@ -15416,6 +15410,8 @@ components:
             - zip_pos
           type: string
       title: Zip
+      type: object
+    void:
       type: object
   securitySchemes:
     ApiKeyAuth:

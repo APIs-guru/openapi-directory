@@ -1874,12 +1874,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              updateTransferInstrument:
+                $ref: "#/components/examples/patch-transferInstruments-id-updateTransferInstrument"
             schema:
               $ref: "#/components/schemas/TransferInstrumentInfo"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                updateTransferInstrument:
+                  $ref: "#/components/examples/patch-transferInstruments-id-updateTransferInstrument-200"
               schema:
                 $ref: "#/components/schemas/TransferInstrument"
           description: OK - the request has succeeded.
@@ -2243,6 +2249,28 @@ components:
             postalCode: 1011DJ
             street: Simon Carmiggeltstraat 6 - 50
         type: individual
+    patch-transferInstruments-id-updateTransferInstrument:
+      description: Example request for updating a transfer instrument
+      summary: Update a transfer instrument
+      value:
+        bankAccount:
+          accountIdentification:
+            iban: NL02ABNA0123456789
+            type: iban
+        legalEntityId: YOUR_LEGAL_ENTITY
+        type: bankAccount
+    patch-transferInstruments-id-updateTransferInstrument-200:
+      description: Example response for updating a transfer instrument
+      summary: Transfer instrument updated
+      value:
+        bankAccount:
+          accountIdentification:
+            iban: NL02ABNA0123456789
+            type: iban
+          countryCode: NL
+        id: SE322KH223222F5GXZFNM3BGP
+        legalEntityId: YOUR_LEGAL_ENTITY
+        type: bankAccount
     post-businessLines-createBusinessLines-businessAccounts:
       description: Example request for creating a business line for a business account
       summary: Create a business line for a business account
@@ -2649,6 +2677,7 @@ components:
       value:
         locale: nl-NL
         redirectUrl: https://your.redirect-url.com/
+        themeId: YOUR_THEME_ID
     post-legalEntities-id-onboardingLinks-createOnboardingLink-200:
       description: Example response for a hosted onboarding link
       summary: Hosted onboarding link created
@@ -2926,6 +2955,9 @@ components:
           description: The type of bank account.
           type: string
           x-deprecatedInVersion: "2"
+        bankName:
+          description: The name of the banking institution where the bank account is held.
+          type: string
         countryCode:
           description: The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code where the bank account is registered. For example, **NL**.
           type: string

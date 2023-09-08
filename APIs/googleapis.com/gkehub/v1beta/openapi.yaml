@@ -1467,7 +1467,8 @@ components:
       properties:
         binauthz:
           $ref: "#/components/schemas/ConfigManagementBinauthzConfig"
-          description: Binauthz conifguration for the cluster.
+          deprecated: true
+          description: "Binauthz conifguration for the cluster. Deprecated: This field will be ignored and should not be set."
         cluster:
           description: The user-specified cluster name used by Config Sync cluster-name-selector annotation or ClusterSelector, for applying configs to only a subset of clusters. Omit this field if the cluster's fleet membership name is used by Config Sync cluster-name-selector annotation or ClusterSelector. Set this field if a name different from the cluster's fleet membership name is used by Config Sync cluster-name-selector annotation or ClusterSelector.
           type: string
@@ -2015,9 +2016,6 @@ components:
           type: string
         tenant:
           description: Kind of Azure AD account to be authenticated. Supported values are or for accounts belonging to a specific tenant.
-          type: string
-        userClaim:
-          description: Optional. Claim in the AzureAD ID Token that holds the user details.
           type: string
       type: object
     IdentityServiceGoogleConfig:

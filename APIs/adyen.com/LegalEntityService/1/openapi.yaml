@@ -1733,12 +1733,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              updateTransferInstrument:
+                $ref: "#/components/examples/patch-transferInstruments-id-updateTransferInstrument"
             schema:
               $ref: "#/components/schemas/TransferInstrumentInfo"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                updateTransferInstrument:
+                  $ref: "#/components/examples/patch-transferInstruments-id-updateTransferInstrument-200"
               schema:
                 $ref: "#/components/schemas/TransferInstrument"
           description: OK - the request has succeeded.
@@ -2047,6 +2053,26 @@ components:
           taxExempt: false
           type: listedPublicCompany
         type: organization
+    patch-transferInstruments-id-updateTransferInstrument:
+      description: Example request for updating a transfer instrument
+      summary: Update a transfer instrument
+      value:
+        bankAccount:
+          currencyCode: EUR
+          iban: NL02ABNA0123456789
+        legalEntityId: YOUR_LEGAL_ENTITY
+        type: bankAccount
+    patch-transferInstruments-id-updateTransferInstrument-200:
+      description: Example response for updating a transfer instrument
+      summary: Transfer instrument updated
+      value:
+        bankAccount:
+          countryCode: NL
+          currencyCode: EUR
+          iban: NL02ABNA0123456789
+        id: SE576BH223222F5GJVKHH6BDT
+        legalEntityId: YOUR_LEGAL_ENTITY
+        type: bankAccount
     post-businessLines-createBusinessLines-businessAccounts:
       description: Example request for creating a business line for a business account
       summary: Create a business line for a business account
@@ -2285,6 +2311,7 @@ components:
       value:
         locale: nl-NL
         redirectUrl: https://your.redirect-url.com/
+        themeId: YOUR_THEME_ID
     post-legalEntities-id-onboardingLinks-createOnboardingLink-200:
       description: Example response for a hosted onboarding link
       summary: Hosted onboarding link created

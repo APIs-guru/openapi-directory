@@ -29,43 +29,11 @@ externalDocs:
 tags:
   - name: accounts
   - name: media
-  - name: privacypolicy
-  - name: projects
 paths:
-  /v1alpha/privacypolicy:analyze:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Performs a synchronous analysis of a privacy policy, where the policy content is mapped to privacy categories, data types, and purposes.
-      operationId: checks.privacypolicy.analyze
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/AnalyzePrivacyPolicyRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AnalyzePrivacyPolicyResponse"
-          description: Successful response
-      tags:
-        - privacypolicy
   /v1alpha/{name}:
     delete:
       description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: checks.projects.privacypolicy.operations.delete
+      operationId: checks.accounts.apps.operations.delete
       parameters:
         - description: The name of the operation resource to be deleted.
           in: path
@@ -81,12 +49,12 @@ paths:
                 $ref: "#/components/schemas/Empty"
           description: Successful response
       tags:
-        - projects
+        - accounts
     get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: checks.projects.privacypolicy.operations.get
+      description: Gets a report. By default, only the name and results_uri fields are returned. You can include other fields by listing them in the `fields` URL query parameter. For example, `?fields=name,checks` will return the name and checks fields.
+      operationId: checks.accounts.apps.reports.get
       parameters:
-        - description: The name of the operation resource.
+        - description: "Required. Resource name of the report. Example: `accounts/123/apps/456/reports/789`"
           in: path
           name: name
           required: true
@@ -102,10 +70,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/GoogleChecksReportV1alphaReport"
           description: Successful response
       tags:
-        - projects
+        - accounts
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -165,53 +133,6 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  /v1alpha/{name}/privacypolicy/operations:
-    get:
-      description: Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`.
-      operationId: checks.projects.privacypolicy.operations.list
-      parameters:
-        - description: The name of the operation's parent resource.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-        - description: The standard list filter.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListOperationsResponse"
-          description: Successful response
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
   /v1alpha/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -227,7 +148,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-      operationId: checks.projects.privacypolicy.operations.cancel
+      operationId: checks.accounts.apps.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
           in: path
@@ -248,7 +169,7 @@ paths:
                 $ref: "#/components/schemas/Empty"
           description: Successful response
       tags:
-        - projects
+        - accounts
   /v1alpha/{name}:wait:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -264,17 +185,12 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Waits until the specified long-running operation is done or reaches at most a specified timeout, returning the latest state. If the operation is already done, the latest state is immediately returned. If the timeout specified is greater than the default HTTP/RPC timeout, the HTTP/RPC timeout is used. If the server does not support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Note that this method is on a best-effort basis. It may return the latest state before the specified timeout (including immediately), meaning even an immediate response is no guarantee that the operation is done.
-      operationId: checks.projects.privacypolicy.operations.wait
+      operationId: checks.accounts.apps.operations.wait
       parameters:
         - description: The name of the operation resource to wait on.
           in: path
           name: name
           required: true
-          schema:
-            type: string
-        - description: The maximum duration to wait before timing out. If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol. If RPC context deadline is also specified, the shorter one will be used.
-          in: query
-          name: timeout
           schema:
             type: string
       requestBody:
@@ -290,7 +206,7 @@ paths:
                 $ref: "#/components/schemas/Operation"
           description: Successful response
       tags:
-        - projects
+        - accounts
   /v1alpha/{parent}/apps:
     get:
       description: Lists the apps under the given account.
@@ -498,71 +414,13 @@ components:
       schema:
         type: string
   schemas:
-    AnalyzePrivacyPolicyRequest:
-      description: Request for the AnalyzePrivacyPolicy method.
-      properties:
-        privacyPolicyPageContent:
-          description: The HTML content of the privacy policy. This is useful if you'd like to manage the crawling and rendering of the privacy policy.
-          type: string
-        privacyPolicyUri:
-          description: The URI that points to the web page for the privacy policy.
-          type: string
-      type: object
-    AnalyzePrivacyPolicyResponse:
-      description: Response containing the analyzed privacy policy for the AnalyzePrivacyPolicy method.
-      properties:
-        dataPurposeAnnotations:
-          description: A list of detected purposes in the privacy policy.
-          items:
-            $ref: "#/components/schemas/PolicyPurposeOfUseAnnotation"
-          type: array
-        dataTypeAnnotations:
-          description: A list of detected data types in the privacy policy.
-          items:
-            $ref: "#/components/schemas/PolicyDataTypeAnnotation"
-          type: array
-        htmlContent:
-          description: HTML content for the privacy policy page. The byte offsets in each annotated section will match this content.
-          type: string
-        lastUpdatedDateInfo:
-          $ref: "#/components/schemas/LastUpdatedDate"
-          description: Information about the date when the privacy policy was last updated.
-        sectionAnnotations:
-          description: A list of detected topics in the privacy policy.
-          items:
-            $ref: "#/components/schemas/PolicySectionAnnotation"
-          type: array
-      type: object
     CancelOperationRequest:
       description: The request message for Operations.CancelOperation.
       properties: {}
       type: object
-    Date:
-      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values. * A month and day, with a zero year (for example, an anniversary). * A year on its own, with a zero month and a zero day. * A year and month, with a zero day (for example, a credit card expiration date). Related types: * google.type.TimeOfDay * google.type.DateTime * google.protobuf.Timestamp"
-      properties:
-        day:
-          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
-          format: int32
-          type: integer
-        month:
-          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
-          format: int32
-          type: integer
-        year:
-          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
-          format: int32
-          type: integer
-      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
-      type: object
-    FindPrivacyPolicyResponse:
-      description: Response containing the analyzed privacy policy for the FindPrivacyPolicy method.
-      properties:
-        privacyPolicy:
-          description: Resource name of the PrivacyPolicy that was found.
-          type: string
       type: object
     GoogleChecksAccountV1alphaApp:
       description: Represents an app in Checks.
@@ -1280,24 +1138,6 @@ components:
           description: SDK identifier.
           type: string
       type: object
-    LastUpdatedDate:
-      description: Information about the date when the privacy policy was last updated.
-      properties:
-        endOffset:
-          description: Byte offsets for the end of the date text inside the full text.
-          format: int64
-          type: string
-        lastUpdatedDate:
-          $ref: "#/components/schemas/Date"
-          description: Date when the privacy policy was last updated.
-        startOffset:
-          description: Byte offsets for the start of the date text inside the full text.
-          format: int64
-          type: string
-        textContent:
-          description: "The bytes of actual text content in the section. Note: - This will correspond to the whole sentence that includes the date. - This field might contain HTML and it is not sanitized."
-          type: string
-      type: object
     ListOperationsResponse:
       description: The response message for Operations.ListOperations.
       properties:
@@ -1332,171 +1172,6 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
-      type: object
-    PolicyDataTypeAnnotation:
-      properties:
-        dataType:
-          description: Type of the data mentioned in the policy.
-          enum:
-            - DATA_TYPE_UNSPECIFIED
-            - CONTACT_INFO_NAME
-            - CONTACT_INFO_EMAIL_ADDRESS
-            - CONTACT_INFO_PHONE_NUMBER
-            - CONTACT_INFO_MAILING_ADDRESS
-            - CONTACT_INFO_OTHER
-            - IDENTITY_INFO_OTHER
-            - USER_CONTENT_EMAIL_MESSAGES
-            - USER_CONTENT_TEXT_MESSAGES
-            - USER_CONTENT_OTHER_IN_APP_MESSAGES
-            - USER_CONTENT_PHOTOS
-            - USER_CONTENT_VIDEOS
-            - USER_CONTENT_MUSIC_FILES
-            - USER_CONTENT_VOICE_OR_SOUND_RECORDINGS
-            - USER_CONTENT_OTHER_AUDIO_FILES
-            - USER_CONTENT_FILES_AND_DOCS
-            - USER_CONTENT_GAMEPLAY_DATA
-            - USER_CONTENT_CUSTOMER_SUPPORT
-            - COOKIES_AND_TRACKING_ELEMENTS
-            - BROWSING_HISTORY
-            - SEARCH_HISTORY
-            - PURCHASE_HISTORY
-            - PRODUCT_INTERACTION
-            - USER_GENERATED_CONTENT_OTHER
-            - IN_APP_ACTIONS_OTHER
-            - ADVERTISING
-            - APP_CRASH_LOGS
-            - APP_DIAGNOSTICS
-            - APP_PERFORMANCE_OTHER
-            - USER_IDENTIFIERS
-            - DEVICE_IDENTIFIERS
-            - IP_ADDRESS
-            - CONTACTS
-            - AUTHENTICATION_DATA
-            - CALENDAR_EVENTS_OR_NOTES
-            - HEALTH
-            - FITNESS
-            - LOCATION_PRECISE
-            - LOCATION_COARSE
-            - LOCATION_GENERAL
-            - APPS_ON_DEVICE
-            - FINANCIAL_PAYMENT_INFO
-            - FINANCIAL_CREDIT_INFO
-            - FINANCIAL_OTHER
-            - PERSONAL_INFO_RACE_AND_ETHNICITY
-            - PERSONAL_INFO_POLITICAL_OR_RELIGIOUS_BELIEFS
-            - PERSONAL_INFO_SEXUAL_ORIENTATION
-            - PERSONAL_INFO_OTHER
-            - GENERIC_PERSONAL_INFORMATION
-            - UNSPECIFIED_INFORMATION
-            - OTHER_DATA
-          type: string
-        endOffset:
-          description: Byte offsets for the end of the data type sentence inside the full text.
-          format: int64
-          type: string
-        score:
-          description: Score given by the model representing how confident it was regarding this `text_content` being of `data_type`.
-          format: float
-          type: number
-        startOffset:
-          description: Byte offsets for the start of the data type sentence inside the full text.
-          format: int64
-          type: string
-        textContent:
-          description: "Actual text content in the section. This makes it much easier to consume the information. NOTE: This field might contain HTML and does not guarantee a SafeHtml security contract go/safehtmltypecontracts#safehtml."
-          type: string
-      type: object
-    PolicyPurposeOfUseAnnotation:
-      properties:
-        endOffset:
-          description: Byte offsets for the end of the purpose of use sentence inside the full text.
-          format: int64
-          type: string
-        purposeOfUse:
-          description: Purpose of use mentioned in the policy.
-          enum:
-            - PURPOSE_OF_USE_UNSPECIFIED
-            - APP_FUNCTIONALITY
-            - APP_DIAGNOSTICS_AND_PERFORMANCE
-            - FRAUD_PREVENTION_AND_SECURITY
-            - PRODUCT_PERSONALIZATION
-            - ANALYTICS
-            - DEVELOPERS_COMMUNICATION_AND_MARKETING
-            - THIRD_PARTY_ADVERTISING
-            - GENERAL_ADVERTISING
-            - LEGAL_COMPLIANCE
-            - MERGERS_AND_ACQUISITIONS
-            - OTHER_SPECIFIED_PURPOSE
-            - NO_PURPOSE_MENTIONED
-          type: string
-        score:
-          description: Score given by the model representing how confident it was regarding this `text_content` being of `purpose_of_use`.
-          format: float
-          type: number
-        startOffset:
-          description: Byte offsets for the start of the purpose of use sentence inside the full text.
-          format: int64
-          type: string
-        textContent:
-          description: The bytes of actual text content in the sentence that mentions the purpose of use. This makes it much easier to consume the information.
-          type: string
-      type: object
-    PolicySectionAnnotation:
-      properties:
-        endOffset:
-          description: Byte offsets for the end of the section inside the full text.
-          format: int64
-          type: string
-        score:
-          description: Score given by the model representing how confident it was regarding this `text_content` being of `section_type`.
-          format: float
-          type: number
-        sectionType:
-          description: Detected type of the high-level topic in the policy.
-          enum:
-            - SECTION_TYPE_UNSPECIFIED
-            - FIRST_PARTY_COLLECTION
-            - FIRST_PARTY_USE
-            - THIRD_PARTY_SHARING
-            - CHILDREN_RELATED
-            - DATA_RETENTION
-            - PRIVACY_CONTACT
-            - RIGHT_TO_DELETE
-            - RIGHT_TO_RESTRICT_PROCESSING
-            - RIGHT_TO_ACCESS
-            - RIGHT_TO_RECTIFICATION
-            - RIGHT_TO_KNOW_ABOUT_SELLING
-            - RIGHT_TO_KNOW_ABOUT_SHARING
-            - RIGHT_TO_OPT_OUT_FROM_SELLING
-            - RIGHT_TO_OPT_OUT_FROM_SHARING
-            - METHOD_TO_OPT_OUT_FROM_SELLING_OR_SHARING
-            - AUTHORIZED_AGENT
-            - CCPA_CPRA_REFERENCE
-            - DATA_PROTECTION_OFFICER
-            - DATA_CONTROLLER
-            - DO_NOT_SELL
-            - GDPR_REFERENCE
-            - LAWFUL_LEGAL_BASIS
-            - PRIVACY_SHIELD
-            - RIGHT_TO_LODGE_A_COMPLAINT
-            - TRANSFER_MECHANISMS
-            - NO_CHILDREN_DATA_COLLECTION
-            - NO_CHILDREN_DATA_SHARING
-            - CHILDREN_INFORMATION_PUBLICITY
-            - PARENTS_METHOD_OF_INFORMATION_DELETION
-            - PARENTS_METHOD_TO_INFORMATION_REVIEW
-            - PARENTS_METHOD_TO_STOP_FURTHER_INFORMATION_COLLECTION_USE
-            - PARENTS_RIGHT_TO_INFORMATION_DELETION
-            - PARENTS_RIGHT_TO_INFORMATION_REVIEW
-            - PARENTS_RIGHT_TO_STOP_FURTHER_INFORMATION_COLLECTION_USE
-          type: string
-        startOffset:
-          description: Byte offsets for the start of the section inside the full text.
-          format: int64
-          type: string
-        textContent:
-          description: Actual text content in the section.
-          type: string
       type: object
     Status:
       description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
