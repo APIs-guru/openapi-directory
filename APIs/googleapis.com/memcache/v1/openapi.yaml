@@ -399,6 +399,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:upgrade:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Upgrades the Memcache instance to a newer memcached engine version specified in the request.
+      operationId: memcache.projects.locations.instances.upgrade
+      parameters:
+        - description: "Required. Memcache instance resource name using the form: `projects/{project}/locations/{location}/instances/{instance}` where `location_id` refers to a GCP region."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudMemcacheV1UpgradeInstanceRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}/instances:
     get:
       description: Lists Instances in a given location.
@@ -692,6 +734,17 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudMemcacheV1UpgradeInstanceRequest:
+      description: Request for UpgradeInstance.
+      properties:
+        memcacheVersion:
+          description: Required. Specifies the target version of memcached engine to upgrade to.
+          enum:
+            - MEMCACHE_VERSION_UNSPECIFIED
+            - MEMCACHE_1_5
+            - MEMCACHE_1_6_15
+          type: string
+      type: object
     GoogleCloudMemcacheV1ZoneMetadata:
       properties: {}
       type: object
@@ -935,6 +988,7 @@ components:
           enum:
             - MEMCACHE_VERSION_UNSPECIFIED
             - MEMCACHE_1_5
+            - MEMCACHE_1_6_15
           type: string
         name:
           description: "Required. Unique name of the resource in this scope including project and location using the form: `projects/{project_id}/locations/{location_id}/instances/{instance_id}` Note: Memcached instances are managed and addressed at the regional level so `location_id` here refers to a Google Cloud region; however, users may choose which zones Memcached nodes should be provisioned in within an instance. Refer to zones field for more details."
@@ -963,6 +1017,7 @@ components:
             - UPDATING
             - DELETING
             - PERFORMING_MAINTENANCE
+            - MEMCACHE_VERSION_UPGRADING
           readOnly: true
           type: string
         updateTime:
@@ -1140,6 +1195,18 @@ components:
       properties:
         host:
           description: Output only. Hostname or IP address of the Memcached node used by the clients to connect to the Memcached server on this node.
+          readOnly: true
+          type: string
+        memcacheFullVersion:
+          description: Output only. The full version of memcached server running on this node. e.g. - memcached-1.5.16
+          readOnly: true
+          type: string
+        memcacheVersion:
+          description: Output only. Major version of memcached server running on this node, e.g. MEMCACHE_1_5
+          enum:
+            - MEMCACHE_VERSION_UNSPECIFIED
+            - MEMCACHE_1_5
+            - MEMCACHE_1_6_15
           readOnly: true
           type: string
         nodeId:

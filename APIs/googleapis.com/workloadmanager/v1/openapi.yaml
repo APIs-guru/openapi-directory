@@ -863,10 +863,10 @@ components:
           type: string
         sapDiscovery:
           $ref: "#/components/schemas/SapDiscovery"
-          description: The insights data for sap system discovery. This is a copy of SAP System proto and should get updated whenever that one changes.
+          description: The insights data for SAP system discovery. This is a copy of SAP System proto and should get updated whenever that one changes.
         sapValidation:
           $ref: "#/components/schemas/SapValidation"
-          description: The insights data for the sap workload validation.
+          description: The insights data for the SAP workload validation.
         sentTime:
           description: Output only. [Output only] Create time stamp
           format: google-datetime
@@ -1013,7 +1013,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     OperationMetadata:
@@ -1152,22 +1152,23 @@ components:
           type: string
       type: object
     SapDiscovery:
-      description: LINT.IfChange The schema of SAP system discovery data.
+      description: The schema of SAP system discovery data.
       properties:
         applicationLayer:
           $ref: "#/components/schemas/SapDiscoveryComponent"
-          description: An SAP system may run without an application layer.
+          description: Optional. An SAP system may run without an application layer.
         databaseLayer:
           $ref: "#/components/schemas/SapDiscoveryComponent"
-          description: An SAP System must have a database.
+          description: Required. An SAP System must have a database.
         metadata:
           $ref: "#/components/schemas/SapDiscoveryMetadata"
-          description: The metadata for SAP system discovery data.
+          description: Optional. The metadata for SAP system discovery data.
         systemId:
-          description: A combination of database SID, database instance URI and tenant DB name to make a unique identifier per-system.
+          description: Output only. A combination of database SID, database instance URI and tenant DB name to make a unique identifier per-system.
+          readOnly: true
           type: string
         updateTime:
-          description: Unix timestamp this system has been updated last.
+          description: Required. Unix timestamp this system has been updated last.
           format: google-datetime
           type: string
       type: object
@@ -1181,15 +1182,15 @@ components:
           $ref: "#/components/schemas/SapDiscoveryComponentDatabaseProperties"
           description: Optional. The component is a SAP database.
         hostProject:
-          description: Pantheon Project in which the resources reside.
+          description: Required. Pantheon Project in which the resources reside.
           type: string
         resources:
-          description: The resources in a component.
+          description: Optional. The resources in a component.
           items:
             $ref: "#/components/schemas/SapDiscoveryResource"
           type: array
         sid:
-          description: The sap identifier, used by the SAP software and helps differentiate systems for customers.
+          description: Optional. The SAP identifier, used by the SAP software and helps differentiate systems for customers.
           type: string
       type: object
     SapDiscoveryComponentApplicationProperties:
@@ -1202,7 +1203,7 @@ components:
             - NETWEAVER
           type: string
         ascsUri:
-          description: Required. Resource URI of the recognized ASCS host of the application.
+          description: Optional. Resource URI of the recognized ASCS host of the application.
           type: string
         nfsUri:
           description: Optional. Resource URI of the recognized shared NFS of the application. May be empty if the application server has only a single node.
@@ -1230,23 +1231,23 @@ components:
       description: Message describing SAP discovery system metadata
       properties:
         customerRegion:
-          description: Customer region string for customer's use. Does not represent GCP region.
+          description: Optional. Customer region string for customer's use. Does not represent GCP region.
           type: string
         definedSystem:
-          description: Customer defined, something like "E-commerce pre prod"
+          description: Optional. Customer defined, something like "E-commerce pre prod"
           type: string
         environmentType:
-          description: Should be "prod", "QA", "dev", "staging", etc.
+          description: Optional. Should be "prod", "QA", "dev", "staging", etc.
           type: string
         sapProduct:
-          description: This sap product name
+          description: Optional. This SAP product name
           type: string
       type: object
     SapDiscoveryResource:
       description: Message describing a resource.
       properties:
         relatedResources:
-          description: A list of resource URIs related to this resource.
+          description: Optional. A list of resource URIs related to this resource.
           items:
             type: string
           type: array
@@ -1275,10 +1276,10 @@ components:
             - RESOURCE_TYPE_NETWORK
           type: string
         resourceUri:
-          description: URI of the resource, includes project, location, and name.
+          description: Required. URI of the resource, includes project, location, and name.
           type: string
         updateTime:
-          description: Unix timestamp of when this resource last had its discovery data updated.
+          description: Required. Unix timestamp of when this resource last had its discovery data updated.
           format: google-datetime
           type: string
       type: object
@@ -1286,7 +1287,7 @@ components:
       description: A presentation of SAP workload insight. The schema of SAP workloads validation related data.
       properties:
         validationDetails:
-          description: A list of SAP validation metrics data.
+          description: Optional. A list of SAP validation metrics data.
           items:
             $ref: "#/components/schemas/SapValidationValidationDetail"
           type: array
@@ -1297,10 +1298,10 @@ components:
         details:
           additionalProperties:
             type: string
-          description: "The pairs of metrics data: field name & field value."
+          description: "Optional. The pairs of metrics data: field name & field value."
           type: object
         sapValidationType:
-          description: The SAP system that the validation data is from.
+          description: Optional. The SAP system that the validation data is from.
           enum:
             - SAP_VALIDATION_TYPE_UNSPECIFIED
             - SYSTEM
@@ -1308,6 +1309,8 @@ components:
             - PACEMAKER
             - HANA
             - NETWEAVER
+            - HANA_SECURITY
+            - CUSTOM
           type: string
       type: object
     ScannedResource:
@@ -1321,7 +1324,7 @@ components:
       description: A presentation of SQLServer workload insight. The schema of SqlServer workloads validation related data.
       properties:
         agentVersion:
-          description: The agent version collected this data point
+          description: Optional. The agent version collected this data point
           type: string
         instance:
           description: "Required. The instance_name of the instance that the Insight data comes from. According to https://linter.aip.dev/122/name-suffix: field names should not use the _name suffix unless the field would be ambiguous without it."
@@ -1330,7 +1333,7 @@ components:
           description: Required. The project_id of the cloud project that the Insight data comes from.
           type: string
         validationDetails:
-          description: A list of SqlServer validation metrics data.
+          description: Optional. A list of SqlServer validation metrics data.
           items:
             $ref: "#/components/schemas/SqlserverValidationValidationDetail"
           type: array
@@ -1353,7 +1356,7 @@ components:
             $ref: "#/components/schemas/SqlserverValidationDetails"
           type: array
         type:
-          description: The Sqlserver system that the validation data is from.
+          description: Optional. The Sqlserver system that the validation data is from.
           enum:
             - SQLSERVER_VALIDATION_TYPE_UNSPECIFIED
             - OS
@@ -1365,6 +1368,9 @@ components:
             - DB_BUFFER_POOL_EXTENSION
             - DB_MAX_SERVER_MEMORY
             - INSTANCE_METRICS
+            - DB_INDEX_FRAGMENTATION
+            - DB_TABLE_INDEX_COMPRESSION
+            - DB_BACKUP_POLICY
           type: string
       type: object
     Status:

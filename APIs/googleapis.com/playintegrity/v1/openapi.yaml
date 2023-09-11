@@ -233,17 +233,10 @@ components:
     GuidanceDetails:
       description: Contains guidance details about the Integrity API response, providing additional context to the integrity verdicts.
       properties:
-        userRemediation:
-          description: This shows when there is an issue with at least one of the integrity verdicts, and provides user remediation guidance.
+        userRemediationDetails:
+          description: This shows when there is an issue with at least one of the integrity verdicts, which can be remedied by the user and provides additional details.
           items:
-            enum:
-              - UNKNOWN_USER_REMEDIATION
-              - RESTORE_FACTORY_ROM
-              - LOCK_BOOTLOADER
-              - GET_UNMODIFIED_APP
-              - SIGN_INTO_GOOGLE_ACCOUNT
-              - INSTALL_APP_FROM_PLAY
-            type: string
+            $ref: "#/components/schemas/UserRemediationDetails"
           type: array
       type: object
     RequestDetails:
@@ -291,6 +284,20 @@ components:
         testingDetails:
           $ref: "#/components/schemas/TestingDetails"
           description: Indicates that this payload is generated for testing purposes and contains any additional data that is linked with testing status.
+      type: object
+    UserRemediationDetails:
+      description: Contains details of remediation guidance that the user can perform. See go/pia-interstitials-dd
+      properties:
+        remediation:
+          description: Description of the user remediation action. Required.
+          enum:
+            - UNKNOWN_USER_REMEDIATION
+            - RESTORE_FACTORY_ROM
+            - LOCK_BOOTLOADER
+            - GET_UNMODIFIED_APP
+            - SIGN_INTO_GOOGLE_ACCOUNT
+            - INSTALL_APP_FROM_PLAY
+          type: string
       type: object
   securitySchemes:
     Oauth2:

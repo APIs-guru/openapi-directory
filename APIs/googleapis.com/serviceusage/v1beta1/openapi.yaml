@@ -912,7 +912,7 @@ components:
       properties: {}
       type: object
     AddEnableRulesResponse:
-      description: The response message of `AddEnableRules` method.
+      description: The response message of "AddEnableRules" method.
       properties:
         addedValues:
           description: The values added to the parent consumer policy.
@@ -1243,7 +1243,7 @@ components:
           description: An opaque tag indicating the current version of the policy, used for concurrency control.
           type: string
         name:
-          description: "Output only. The resource name of the policy. We only allow consumer policy name as `default` for now: `projects/12345/consumerPolicies/default`, `folders/12345/consumerPolicies/default`, `organizations/12345/consumerPolicies/default`."
+          description: 'Output only. The resource name of the policy. For example, We only allow consumer policy name as "default" for now: `projects/12345/consumerPolicies/default`, `folders/12345/consumerPolicies/default`, `organizations/12345/consumerPolicies/default`. Legacy format: `projects/12345/consumerPoly`'
           readOnly: true
           type: string
         updateTime:
@@ -1520,7 +1520,7 @@ components:
           type: string
         groups:
           deprecated: true
-          description: "DEPRECATED: Please use field `values`. Service group should have prefix `groups/`. The names of the service groups that are enabled (Not Implemented). Example: `groups/googleServices`."
+          description: "DEPRECATED: Please use field `values`. Service group should have prefix `groups/`. The names of the service groups that are enabled (Not Implemented). go/predefined-service-groups. Example: `groups/googleServices`."
           items:
             type: string
           type: array
@@ -1531,7 +1531,7 @@ components:
             type: string
           type: array
         values:
-          description: "The names of the services or service groups that are enabled. Example: `services/storage.googleapis.com`, `groups/googleServices`, `groups/allServices`."
+          description: "The names of the services or service groups that are enabled. Example: `services/storage.googleapis.com`, groups/googleServices`, groups/allServices`."
           items:
             type: string
           type: array
@@ -2712,7 +2712,7 @@ components:
       properties: {}
       type: object
     RemoveEnableRulesResponse:
-      description: The response message of `RemoveEnableRules` method.
+      description: The response message of "RemoveEnableRules" method.
       properties:
         parent:
           description: The parent consumer policy. It can be `projects/12345/consumerPolicies/default`, or `folders/12345/consumerPolicies/default`, or `organizations/12345/consumerPolicies/default`.

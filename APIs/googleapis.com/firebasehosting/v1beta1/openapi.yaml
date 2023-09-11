@@ -44,6 +44,21 @@ paths:
           required: true
           schema:
             type: string
+        - description: If true, the request succeeds even if the `CustomDomain` doesn't exist.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
+        - description: A tag that represents the state of the `CustomDomain` as you know it. If present, the supplied tag must match the current value on your `CustomDomain`, or the request fails.
+          in: query
+          name: etag
+          schema:
+            type: string
+        - description: If true, Hosting validates that it's possible to complete your request but doesn't actually delete the `CustomDomain`.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -125,6 +140,11 @@ paths:
           name: updateMask
           schema:
             type: string
+        - description: If true, Hosting validates that it's possible to complete your request but doesn't actually create or update the `CustomDomain`.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -181,6 +201,116 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
+  /v1beta1/{name}/operations:
+    get:
+      description: Lists operations that match the specified filter in the request.
+      operationId: firebasehosting.projects.sites.customDomains.operations.list
+      parameters:
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOperationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase.readonly
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1beta1/{name}:undelete:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Undeletes the specified `CustomDomain` if it has been soft-deleted. Hosting retains soft-deleted CustomDomains for around 30 days before permanently deleting them.
+      operationId: firebasehosting.projects.sites.customDomains.undelete
+      parameters:
+        - description: Required. The name of the `CustomDomain` to delete.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UndeleteCustomDomainRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
   /v1beta1/{parent}/channels:
     get:
       description: Lists the channels for the specified site. All sites have a default `live` channel.
@@ -278,6 +408,113 @@ paths:
             - https://www.googleapis.com/auth/firebase
       tags:
         - sites
+  /v1beta1/{parent}/customDomains:
+    get:
+      description: Lists each `CustomDomain` associated with the specified parent Hosting Site. Returns `CustomDomain`s in a consistent, but undefined, order to facilitate pagination.
+      operationId: firebasehosting.projects.sites.customDomains.list
+      parameters:
+        - description: Required. The Firebase Hosting `Site` with `CustomDomain` entities you'd like to list.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The max number of `CustomDomain` entities to return in a request. Defaults to 10.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token from a previous call to `ListCustomDomains` that tells the server where to resume listing.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: If true, the request returns soft-deleted `CustomDomain`s that haven't been fully-deleted yet. To restore deleted `CustomDomain`s, make an `UndeleteCustomDomain` request.
+          in: query
+          name: showDeleted
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCustomDomainsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase.readonly
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a `CustomDomain`.
+      operationId: firebasehosting.projects.sites.customDomains.create
+      parameters:
+        - description: Required. The `CustomDomain`'s parent, specifically a Firebase Hosting `Site`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the `CustomDomain`, which is the domain name you'd like to use with Firebase Hosting.
+          in: query
+          name: customDomainId
+          schema:
+            type: string
+        - description: If true, Hosting validates that it's possible to complete your request but doesn't actually create a new `CustomDomain`.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomDomain"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/firebase
+          Oauth2c:
+            - https://www.googleapis.com/auth/firebase
+      tags:
+        - projects
   /v1beta1/{parent}/domains:
     get:
       description: Lists the domains for the specified site.
@@ -942,6 +1179,64 @@ components:
           description: The token to serve at the specified URL path to satisfy the certificate challenge.
           type: string
       type: object
+    CertVerification:
+      description: A set of ACME challenges you can use to allow Hosting to create an SSL certificate for your domain name before directing traffic to Hosting servers. Use either the DNS or HTTP challenge; it's not necessary to provide both.
+      properties:
+        dns:
+          $ref: "#/components/schemas/DnsUpdates"
+          description: Output only. A `TXT` record to add to your DNS records that confirms your intent to let Hosting create an SSL cert for your domain name.
+          readOnly: true
+        http:
+          $ref: "#/components/schemas/HttpUpdate"
+          description: Output only. A file to add to your existing, non-Hosting hosting service that confirms your intent to let Hosting create an SSL cert for your domain name.
+          readOnly: true
+      type: object
+    Certificate:
+      description: An SSL certificate used to provide end-to-end encryption for requests against your domain name. A `Certificate` can be an actual SSL certificate or, for newly-created Custom Domains, Hosting's intent to create one.
+      properties:
+        createTime:
+          description: Output only. The certificate's creation time. For `TEMPORARY` certs this is the time Hosting first generated challenges for your domain name. For all other cert types, it's the time the actual cert was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        expireTime:
+          description: Output only. The certificate's expiration time. After this time, the cert can no longer be used to provide secure communication between Hosting and your Site's visitors.
+          format: google-datetime
+          readOnly: true
+          type: string
+        issues:
+          description: Output only. A set of errors Hosting encountered when attempting to create a cert for your domain name. Resolve these issues to ensure Hosting is able to provide secure communication with your site's visitors.
+          items:
+            $ref: "#/components/schemas/Status"
+          readOnly: true
+          type: array
+        state:
+          description: Output only. The state of the certificate. Only the `CERT_ACTIVE` and `CERT_EXPIRING_SOON` states provide SSL coverage for a domain name. If the state is `PROPAGATING` and Hosting had an active cert for the domain name before, that formerly-active cert provides SSL coverage for the domain name until the current cert propagates.
+          enum:
+            - CERT_STATE_UNSPECIFIED
+            - CERT_PREPARING
+            - CERT_VALIDATING
+            - CERT_PROPAGATING
+            - CERT_ACTIVE
+            - CERT_EXPIRING_SOON
+            - CERT_EXPIRED
+          readOnly: true
+          type: string
+        type:
+          description: Output only. The certificate's type.
+          enum:
+            - TYPE_UNSPECIFIED
+            - TEMPORARY
+            - GROUPED
+            - PROJECT_GROUPED
+            - DEDICATED
+          readOnly: true
+          type: string
+        verification:
+          $ref: "#/components/schemas/CertVerification"
+          description: Output only. A set of ACME challenges you can add to your DNS records or existing, non-Hosting hosting provider to allow Hosting to create an SSL certificate for your domain name before you point traffic toward hosting. You can use thse challenges as part of a zero downtime transition from your old provider to Hosting.
+          readOnly: true
+      type: object
     Channel:
       description: A `Channel` represents a stream of releases for a site. All sites have a default `live` channel that serves content to the Firebase-provided subdomains and any connected custom domains.
       properties:
@@ -1011,6 +1306,217 @@ components:
         tag:
           description: Optional. User-provided TrafficConfig tag to send traffic to. When omitted, traffic is sent to the service-wide URI
           type: string
+      type: object
+    CustomDomain:
+      description: A `CustomDomain` is an entity that links a domain name to a Firebase Hosting Site. Add a `CustomDomain` to your Site to allow Hosting to serve the Site's content in response to requests against your domain name.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: Annotations you can add to leave both human- and machine-readable metadata about your `CustomDomain`.
+          type: object
+        cert:
+          $ref: "#/components/schemas/Certificate"
+          description: Output only. The SSL certificate Hosting has for this `CustomDomain`'s domain name. For new `CustomDomain`s, this often represents Hosting's intent to create a certificate, rather than an actual cert. Check the `state` field for more.
+          readOnly: true
+        certPreference:
+          description: A field that lets you specify which SSL certificate type Hosting creates for your domain name. Spark plan `CustomDomain`s only have access to the `GROUPED` cert type, while Blaze plan can select any option.
+          enum:
+            - TYPE_UNSPECIFIED
+            - TEMPORARY
+            - GROUPED
+            - PROJECT_GROUPED
+            - DEDICATED
+          type: string
+        createTime:
+          description: Output only. The `CustomDomain`'s create time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deleteTime:
+          description: Output only. The time the `CustomDomain` was deleted; null for `CustomDomains` that haven't been deleted. Deleted `CustomDomains` persist for approximately 30 days, after which time Hosting removes them completely. To restore a deleted `CustomDomain`, make an `UndeleteCustomDomain` request.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Output only. A string that represents the current state of the `CustomDomain` and allows you to confirm its initial state in requests that would modify it. Use the tag to ensure consistency when making `UpdateCustomDomain`, `DeleteCustomDomain`, and `UndeleteCustomDomain` requests.
+          readOnly: true
+          type: string
+        expireTime:
+          description: Output only. The minimum time before a soft-deleted `CustomDomain` is completely removed from Hosting; null for `CustomDomains` that haven't been deleted.
+          format: google-datetime
+          readOnly: true
+          type: string
+        hostState:
+          description: Output only. The `HostState` of the domain name this `CustomDomain` refers to.
+          enum:
+            - HOST_STATE_UNSPECIFIED
+            - HOST_UNHOSTED
+            - HOST_UNREACHABLE
+            - HOST_MISMATCH
+            - HOST_CONFLICT
+            - HOST_ACTIVE
+          readOnly: true
+          type: string
+        issues:
+          description: Output only. A set of errors Hosting systems encountered when trying to establish Hosting's ability to serve secure content for your domain name. Resolve these issues to ensure your `CustomDomain` behaves properly.
+          items:
+            $ref: "#/components/schemas/Status"
+          readOnly: true
+          type: array
+        labels:
+          additionalProperties:
+            type: string
+          description: Labels used for extra metadata and/or filtering.
+          type: object
+        name:
+          description: Output only. The fully-qualified name of the `CustomDomain`.
+          readOnly: true
+          type: string
+        ownershipState:
+          description: Output only. The `OwnershipState` of the domain name this `CustomDomain` refers to.
+          enum:
+            - OWNERSHIP_STATE_UNSPECIFIED
+            - OWNERSHIP_MISSING
+            - OWNERSHIP_UNREACHABLE
+            - OWNERSHIP_MISMATCH
+            - OWNERSHIP_CONFLICT
+            - OWNERSHIP_PENDING
+            - OWNERSHIP_ACTIVE
+          readOnly: true
+          type: string
+        reconciling:
+          description: Output only. A field that, if true, indicates that Hosting's systems are attmepting to make the `CustomDomain`'s state match your preferred state. This is most frequently `true` when initially provisioning a `CustomDomain` after a `CreateCustomDomain` request or when creating a new SSL certificate to match an updated `cert_preference` after an `UpdateCustomDomain` request.
+          readOnly: true
+          type: boolean
+        redirectTarget:
+          description: A domain name that this CustomDomain should direct traffic towards. If specified, Hosting will respond to requests against this CustomDomain with an HTTP 301 code, and route traffic to the specified `redirect_target` instead.
+          type: string
+        requiredDnsUpdates:
+          $ref: "#/components/schemas/DnsUpdates"
+          description: Output only. A set of updates you should make to the domain name's DNS records to let Hosting serve secure content on its behalf.
+          readOnly: true
+        updateTime:
+          description: Output only. The last time the `CustomDomain` was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    CustomDomainMetadata:
+      description: Metadata associated with a`CustomDomain` operation.
+      properties:
+        certState:
+          description: The `CertState` of the domain name's SSL certificate.
+          enum:
+            - CERT_STATE_UNSPECIFIED
+            - CERT_PREPARING
+            - CERT_VALIDATING
+            - CERT_PROPAGATING
+            - CERT_ACTIVE
+            - CERT_EXPIRING_SOON
+            - CERT_EXPIRED
+          type: string
+        hostState:
+          description: The `HostState` of the domain name this `CustomDomain` refers to.
+          enum:
+            - HOST_STATE_UNSPECIFIED
+            - HOST_UNHOSTED
+            - HOST_UNREACHABLE
+            - HOST_MISMATCH
+            - HOST_CONFLICT
+            - HOST_ACTIVE
+          type: string
+        issues:
+          description: A list of issues that are currently preventing Hosting from completing the operation. These are generally DNS-related issues that Hosting encounters when querying a domain name's records or attempting to mint an SSL certificate.
+          items:
+            $ref: "#/components/schemas/Status"
+          type: array
+        liveMigrationSteps:
+          description: A set of DNS record updates and ACME challenges that allow you to transition domain names to Firebase Hosting with zero downtime. These updates allow Hosting's to create an SSL certificate and establish ownership for your custom domain before Hosting begins serving traffic on it. If your domain name is already in active use with another provider, add one of the challenges and make the recommended dns updates. After adding challenges and adjusting DNS records as necessary, wait for the `ownershipState` to be `OWNERSHIP_ACTIVE` and the `certState` to be `CERT_ACTIVE` before sending traffic to Hosting.
+          items:
+            $ref: "#/components/schemas/LiveMigrationStep"
+          type: array
+        ownershipState:
+          description: The `OwnershipState` of the domain name this `CustomDomain` refers to.
+          enum:
+            - OWNERSHIP_STATE_UNSPECIFIED
+            - OWNERSHIP_MISSING
+            - OWNERSHIP_UNREACHABLE
+            - OWNERSHIP_MISMATCH
+            - OWNERSHIP_CONFLICT
+            - OWNERSHIP_PENDING
+            - OWNERSHIP_ACTIVE
+          type: string
+        quickSetupUpdates:
+          $ref: "#/components/schemas/DnsUpdates"
+          description: "A set of DNS record updates that allow Hosting to serve secure content on your domain name. The record type determines the update's purpose: - `A` and `AAAA`: Updates your domain name's IP addresses so that they direct traffic to Hosting servers. - `TXT`: Updates ownership permissions on your domain name, letting Hosting know that your custom domain's project has permission to perfrom actions for that domain name. - `CAA`: Updates your domain name's list of authorized Certificate Authorities (CAs). Only present if you have existing `CAA` records that prohibit Hosting's CA from minting certs for your domain name. These updates include all DNS changes you'll need to get started with Hosting, but, if made all at once, can result in a brief period of downtime for your domain name--while Hosting creates and uploads an SSL cert, for example. If you'd like to add your domain name to Hosting without downtime, complete the `liveMigrationSteps` first, before making the remaining updates in this field."
+      type: object
+    DnsRecord:
+      description: DNS records are resource records that define how systems and services should behave when handling requests for a domain name. For example, when you add `A` records to your domain name's DNS records, you're informing other systems (e.g. your users' web browsers) to contact those IPv4 addresses to retrieve resources relevant to your domain name (e.g. your Hosting site files).
+      properties:
+        domainName:
+          description: Output only. The domain name the record pertains to, e.g. `foo.bar.com.`.
+          readOnly: true
+          type: string
+        rdata:
+          description: "Output only. The data of the record. The meaning of the value depends on record type: - A and AAAA: IP addresses for the domain name. - CNAME: Another domain to check for records. - TXT: Arbitrary text strings associated with the domain name. Hosting uses TXT records to determine a which Firebase Projects have permission to act on the domain name's behalf. - CAA: The record's flags, tag, and value, e.g. `0 issue \"pki.goog\"`."
+          readOnly: true
+          type: string
+        requiredAction:
+          description: Output only. An enum that indicates the a required action for this record.
+          enum:
+            - NONE
+            - ADD
+            - REMOVE
+          readOnly: true
+          type: string
+        type:
+          description: Output only. The record's type, which determines what data the record contains.
+          enum:
+            - TYPE_UNSPECIFIED
+            - A
+            - CNAME
+            - TXT
+            - AAAA
+            - CAA
+          readOnly: true
+          type: string
+      type: object
+    DnsRecordSet:
+      description: A set of DNS records relevant to the set up and maintenance of a Custom Domain in Firebase Hosting.
+      properties:
+        checkError:
+          $ref: "#/components/schemas/Status"
+          description: "Output only. An error Hosting services encountered when querying your domain name's DNS records. Note: Hosting ignores `NXDOMAIN` errors, as those generally just mean that a domain name hasn't been set up yet."
+          readOnly: true
+        domainName:
+          description: Output only. The domain name the record set pertains to.
+          readOnly: true
+          type: string
+        records:
+          description: Output only. Records on the domain.
+          items:
+            $ref: "#/components/schemas/DnsRecord"
+          readOnly: true
+          type: array
+      type: object
+    DnsUpdates:
+      description: A set of DNS record updates that you should make to allow Hosting to serve secure content in response to requests against your domain name. These updates present the current state of your domain name's DNS records when Hosting last queried them, and the desired set of records that Hosting needs to see before your Custom Domain can be fully active.
+      properties:
+        checkTime:
+          description: The last time Hosting checked your CustomDomain's DNS records.
+          format: google-datetime
+          type: string
+        desired:
+          description: The set of DNS records Hosting needs to serve secure content on the domain.
+          items:
+            $ref: "#/components/schemas/DnsRecordSet"
+          type: array
+        discovered:
+          description: The set of DNS records Hosting discovered when inspecting a domain.
+          items:
+            $ref: "#/components/schemas/DnsRecordSet"
+          type: array
       type: object
     Domain:
       description: The intended behavior and status information of a domain.
@@ -1129,6 +1635,31 @@ components:
           description: The user-supplied RE2 regular expression to match against the request URL path.
           type: string
       type: object
+    HttpUpdate:
+      description: A file you can add to your existing, non-Hosting hosting service that confirms your intent to allow Hosting's Certificate Authorities to create an SSL certificate for your domain.
+      properties:
+        checkError:
+          $ref: "#/components/schemas/Status"
+          description: Output only. An error encountered during the last contents check. If null, the check completed successfully.
+          readOnly: true
+        desired:
+          description: Output only. A text string to serve at the path.
+          readOnly: true
+          type: string
+        discovered:
+          description: Output only. Whether Hosting was able to find the required file contents on the specified path during its last check.
+          readOnly: true
+          type: string
+        lastCheckTime:
+          description: Output only. The last time Hosting systems checked for the file contents.
+          format: google-datetime
+          readOnly: true
+          type: string
+        path:
+          description: Output only. The path to the file.
+          readOnly: true
+          type: string
+      type: object
     I18nConfig:
       description: If provided, i18n rewrites are enabled.
       properties:
@@ -1147,6 +1678,18 @@ components:
           description: The pagination token, if more results exist beyond the ones in this response. Include this token in your next call to `ListChannels`. Page tokens are short-lived and should not be stored.
           type: string
       type: object
+    ListCustomDomainsResponse:
+      description: The response from `ListCustomDomains`.
+      properties:
+        customDomains:
+          description: A list of `CustomDomain` entities associated with the specified Firebase `Site`.
+          items:
+            $ref: "#/components/schemas/CustomDomain"
+          type: array
+        nextPageToken:
+          description: The pagination token, if more results exist beyond the ones in this response. Include this token in your next call to `ListCustomDomains`. Page tokens are short-lived and should not be stored.
+          type: string
+      type: object
     ListDomainsResponse:
       description: The response to listing Domains.
       properties:
@@ -1158,6 +1701,18 @@ components:
         nextPageToken:
           description: The pagination token, if more results exist.
           type: string
+      type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
       type: object
     ListReleasesResponse:
       properties:
@@ -1202,6 +1757,35 @@ components:
           items:
             $ref: "#/components/schemas/Version"
           type: array
+      type: object
+    LiveMigrationStep:
+      description: A set of updates including ACME challenges and DNS records that allow Hosting to create an SSL certificate and establish project ownership for your domain name before you direct traffic to Hosting servers. Use these updates to facilitate zero downtime migrations to Hosting from other services. After you've made the recommended updates, check your custom domain's `ownershipState` and `certState`. To avoid downtime, they should be `OWNERSHIP_ACTIVE` and `CERT_ACTIVE`, respectively, before you update your `A` and `AAAA` records.
+      properties:
+        certVerification:
+          $ref: "#/components/schemas/CertVerification"
+          description: Output only. A pair of ACME challenges that Hosting's Certificate Authority (CA) can use to create an SSL cert for your domain name. Use either the DNS or HTTP challenge; it's not necessary to provide both.
+          readOnly: true
+        dnsUpdates:
+          $ref: "#/components/schemas/DnsUpdates"
+          description: Output only. DNS updates to facilitate your domain's zero-downtime migration to Hosting.
+          readOnly: true
+        issues:
+          description: Output only. Issues that prevent the current step from completing.
+          items:
+            $ref: "#/components/schemas/Status"
+          readOnly: true
+          type: array
+        state:
+          description: Output only. The state of the live migration step, indicates whether you should work to complete the step now, in the future, or have already completed it.
+          enum:
+            - STATE_UNSPECIFIED
+            - PREPARING
+            - PENDING
+            - INCOMPLETE
+            - PROCESSING
+            - COMPLETE
+          readOnly: true
+          type: string
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -1418,6 +2002,16 @@ components:
         message:
           description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
+      type: object
+    UndeleteCustomDomainRequest:
+      description: The request sent to `UndeleteCustomDomain`.
+      properties:
+        etag:
+          description: A tag that represents the state of the `CustomDomain` as you know it. If present, the supplied tag must match the current value on your `CustomDomain`, or the request fails.
+          type: string
+        validateOnly:
+          description: If true, Hosting validates that it's possible to complete your request but doesn't actually delete the `CustomDomain`.
+          type: boolean
       type: object
     Version:
       description: A `Version` is a configuration and a collection of static files which determine how a site is displayed.

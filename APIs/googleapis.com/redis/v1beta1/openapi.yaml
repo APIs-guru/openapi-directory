@@ -608,7 +608,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a Redis cluster based on the specified tier and memory size. The creation is executed asynchronously and callers may check the returned operation to track its progress. Once the operation is completed the Redis cluster will be fully functional. The completed longrunning.Operation will contain the new cluster object in the response field. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
+      description: Creates a Redis cluster based on the specified properties. The creation is executed asynchronously and callers may check the returned operation to track its progress. Once the operation is completed the Redis cluster will be fully functional. The completed longrunning.Operation will contain the new cluster object in the response field. The returned operation is automatically deleted after a few hours, so there is no need to call DeleteOperation.
       operationId: redis.projects.locations.clusters.create
       parameters:
         - description: "Required. The resource name of the cluster location using the form: `projects/{project_id}/locations/{location_id}` where `location_id` refers to a GCP region."
@@ -1422,7 +1422,7 @@ components:
     PscConfig:
       properties:
         network:
-          description: Required. The consumer network where the IP address of the discovery endpoint will be reserved, in the form of projects/{network_host_project}/global/networks/{network_id}.
+          description: Required. The network where the IP address of the discovery endpoint will be reserved, in the form of projects/{network_project}/global/networks/{network_id}.
           type: string
       type: object
     PscConnection:
@@ -1440,7 +1440,8 @@ components:
           description: The consumer network where the IP address resides, in the form of projects/{project_id}/global/networks/{network_id}.
           type: string
         projectId:
-          description: The consumer project_id where the forwarding rule is created from.
+          description: Output only. The consumer project_id where the forwarding rule is created from.
+          readOnly: true
           type: string
         pscConnectionId:
           description: Output only. The PSC connection id of the forwarding rule connected to the service attachment.

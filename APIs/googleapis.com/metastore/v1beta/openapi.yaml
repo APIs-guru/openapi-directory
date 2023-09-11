@@ -1256,6 +1256,10 @@ components:
     Consumer:
       description: "Contains information of the customer's network configurations.Next available ID: 5"
       properties:
+        endpointLocation:
+          description: "Output only. The location of the endpoint URI. Format: projects/{project}/locations/{location}."
+          readOnly: true
+          type: string
         endpointUri:
           description: Output only. The URI of the endpoint used to access the metastore service.
           readOnly: true

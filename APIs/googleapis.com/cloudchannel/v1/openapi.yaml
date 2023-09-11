@@ -3488,7 +3488,8 @@ components:
           description: Required. Information about the adjustment.
         channelPartnerGranularity:
           $ref: "#/components/schemas/GoogleCloudChannelV1RepricingConfigChannelPartnerGranularity"
-          description: Applies the repricing configuration at the channel partner level. Only ChannelPartnerRepricingConfig supports this value.
+          deprecated: true
+          description: "Applies the repricing configuration at the channel partner level. Only ChannelPartnerRepricingConfig supports this value. Deprecated: This is no longer supported. Use RepricingConfig.entitlement_granularity instead."
         conditionalOverrides:
           description: The conditional overrides to apply for this configuration. If you list multiple overrides, only the first valid override is used. If you don't list any overrides, the API uses the normal adjustment and rebilling basis.
           items:
@@ -3509,7 +3510,8 @@ components:
           type: string
       type: object
     GoogleCloudChannelV1RepricingConfigChannelPartnerGranularity:
-      description: Applies the repricing configuration at the channel partner level. The channel partner value is derived from the resource name. Takes an empty json object.
+      deprecated: true
+      description: "Applies the repricing configuration at the channel partner level. The channel partner value is derived from the resource name. Takes an empty json object. Deprecated: This is no longer supported. Use RepricingConfig.EntitlementGranularity instead."
       properties: {}
       type: object
     GoogleCloudChannelV1RepricingConfigEntitlementGranularity:

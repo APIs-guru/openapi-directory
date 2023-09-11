@@ -37,6 +37,7 @@ tags:
   - name: notifications
   - name: objectAccessControls
   - name: objects
+  - name: operations
   - name: projects
 paths:
   /b:
@@ -1438,6 +1439,11 @@ paths:
               - full
               - noAcl
             type: string
+        - description: If true, only soft-deleted object versions will be listed. The default is false. For more information, see Soft Delete.
+          in: query
+          name: softDeleted
+          schema:
+            type: boolean
         - description: Filter results to objects whose names are lexicographically equal to or after startOffset. If endOffset is also set, the objects listed will have names between startOffset (inclusive) and endOffset (exclusive).
           in: query
           name: startOffset
@@ -1573,6 +1579,53 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Object"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - objects
+  /b/{bucket}/o/bulkRestore:
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Initiates a long-running bulk restore operation on the specified bucket.
+      operationId: storage.objects.bulkRestore
+      parameters:
+        - description: Name of the bucket in which the object resides.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BulkRestoreObjectsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -1812,6 +1865,11 @@ paths:
               - full
               - noAcl
             type: string
+        - description: If true, only soft-deleted object versions will be listed. The default is false. For more information, see Soft Delete.
+          in: query
+          name: softDeleted
+          schema:
+            type: boolean
         - description: The project to be billed for this request. Required for Requester Pays buckets.
           in: query
           name: userProject
@@ -2548,6 +2606,260 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
+  /b/{bucket}/o/{object}/restore:
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Restores a soft-deleted object.
+      operationId: storage.objects.restore
+      parameters:
+        - description: Name of the bucket in which the object resides.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: Name of the object. For information about how to URL encode object names to be path safe, see Encoding URI Path Parts.
+          in: path
+          name: object
+          required: true
+          schema:
+            type: string
+        - description: Selects a specific revision of this object.
+          in: query
+          name: generation
+          required: true
+          schema:
+            type: string
+        - description: Makes the operation conditional on whether the object's one live generation matches the given value. Setting to 0 makes the operation succeed only if there are no live versions of the object.
+          in: query
+          name: ifGenerationMatch
+          schema:
+            type: string
+        - description: Makes the operation conditional on whether none of the object's live generations match the given value. If no live object exists, the precondition fails. Setting to 0 makes the operation succeed only if there is a live version of the object.
+          in: query
+          name: ifGenerationNotMatch
+          schema:
+            type: string
+        - description: Makes the operation conditional on whether the object's one live metageneration matches the given value.
+          in: query
+          name: ifMetagenerationMatch
+          schema:
+            type: string
+        - description: Makes the operation conditional on whether none of the object's live metagenerations match the given value.
+          in: query
+          name: ifMetagenerationNotMatch
+          schema:
+            type: string
+        - description: Set of properties to return. Defaults to full.
+          in: query
+          name: projection
+          schema:
+            enum:
+              - full
+              - noAcl
+            type: string
+        - description: The project to be billed for this request. Required for Requester Pays buckets.
+          in: query
+          name: userProject
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Object"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Object"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+      tags:
+        - objects
+  /b/{bucket}/operations:
+    get:
+      description: Lists operations that match the specified filter in the request.
+      operationId: storage.buckets.operations.list
+      parameters:
+        - description: Name of the bucket in which to look for operations.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: A filter to narrow down results to a preferred subset. The filtering language is documented in more detail in [AIP-160](https://google.aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Maximum number of items to return in a single page of responses. Fewer total results may be returned than requested. The service uses this parameter or 100 items, whichever is smaller.
+          in: query
+          name: pageSize
+          schema:
+            minimum: 0
+            type: integer
+        - description: A previously-returned page token representing part of the larger set of results to view.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningListOperationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - operations
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  /b/{bucket}/operations/{operationId}:
+    get:
+      description: Gets the latest state of a long-running operation.
+      operationId: storage.buckets.operations.get
+      parameters:
+        - description: The parent bucket of the operation resource.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The ID of the operation resource.
+          in: path
+          name: operationId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_only
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_only
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - operations
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+  /b/{bucket}/operations/{operationId}/cancel:
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/uploadType"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed.
+      operationId: storage.buckets.operations.cancel
+      parameters:
+        - description: The parent bucket of the operation resource.
+          in: path
+          name: bucket
+          required: true
+          schema:
+            type: string
+        - description: The ID of the operation resource.
+          in: path
+          name: operationId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.full_control
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.full_control
+        - Oauth2:
+            - https://www.googleapis.com/auth/devstorage.read_write
+          Oauth2c:
+            - https://www.googleapis.com/auth/devstorage.read_write
+      tags:
+        - operations
   /b/{destinationBucket}/o/{destinationObject}/compose:
     parameters:
       - $ref: "#/components/parameters/alt"
@@ -3695,6 +4007,29 @@ components:
           description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
           type: string
       type: object
+    BulkRestoreObjectsRequest:
+      description: A bulk restore objects request.
+      properties:
+        allowOverwrite:
+          description: If false (default), the restore will not overwrite live objects with the same name at the destination. This means some deleted objects may be skipped. If true, live objects will be overwritten resulting in a noncurrent object (if versioning is enabled). If versioning is not enabled, overwriting the object will result in a soft-deleted object. In either case, if a noncurrent object already exists with the same name, a live version can be written without issue.
+          type: boolean
+        copySourceAcl:
+          description: If true, copies the source object's ACL; otherwise, uses the bucket's default object ACL. The default is false.
+          type: boolean
+        matchGlobs:
+          description: Restores only the objects matching any of the specified glob(s). If this parameter is not specified, all objects will be restored within the specified time range.
+          items:
+            type: string
+          type: array
+        softDeletedAfterTime:
+          description: Restores only the objects that were soft-deleted after this time.
+          format: date-time
+          type: string
+        softDeletedBeforeTime:
+          description: Restores only the objects that were soft-deleted before this time.
+          format: date-time
+          type: string
+      type: object
     Channel:
       description: An notification channel used to watch for resource changes.
       properties:
@@ -3780,6 +4115,59 @@ components:
           type: string
         title:
           description: An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
+          type: string
+      type: object
+    GoogleLongrunningListOperationsResponse:
+      description: The response message for storage.buckets.operations.list.
+      properties:
+        nextPageToken:
+          description: The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/GoogleLongrunningOperation"
+          type: array
+      type: object
+    GoogleLongrunningOperation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is "false", it means the operation is still in progress. If "true", the operation is completed, and either "error" or "response" is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the "name" should be a resource name ending with "operations/{operationId}".
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as "Delete", the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type "XxxResponse", where "Xxx" is the original method name. For example, if the original method name is "TakeSnapshot()", the inferred response type is "TakeSnapshotResponse".
+          type: object
+      type: object
+    GoogleRpcStatus:
+      description: 'The "Status" type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each "Status" message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+      properties:
+        code:
+          description: The status code, which should be an enum value of google.rpc.Code.
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
+          items:
+            additionalProperties:
+              description: Properties of the object. Contains field @type with type URL.
+            type: object
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English.
           type: string
       type: object
     HmacKey:

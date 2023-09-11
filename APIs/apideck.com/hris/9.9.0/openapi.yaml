@@ -1039,6 +1039,8 @@ paths:
           description: For virtual webhook events on Paylocity, we monitor the "List Employees" response, which has a very small set of fields in comparison of the "Get Employee" response.
         - connector: sage-hr
           description: The minimum pagination `limit` is 50, since Sage HR does not support pagination with a lower limit. Pagination for Sage HR only support per 50 limits.
+        - connector: sap-successfactors
+          description: The custom fields are mapped only when they are in the personalInfoNav.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1404,6 +1406,9 @@ paths:
       tags:
         - Employees
       x-apideck-api: hris
+      x-apideck-gotchas:
+        - connector: sap-successfactors
+          description: The custom fields are mapped only when they are in the personalInfoNav.
       x-codeSamples:
         - label: Node
           lang: TypeScript

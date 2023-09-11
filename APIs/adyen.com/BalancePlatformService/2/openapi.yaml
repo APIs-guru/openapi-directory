@@ -593,7 +593,7 @@ paths:
               createSweep-push-priorities:
                 $ref: "#/components/examples/post-balanceAccounts-balanceAccountId-sweeps-createSweep-push-priorities"
             schema:
-              $ref: "#/components/schemas/SweepConfigurationV2"
+              $ref: "#/components/schemas/CreateSweepConfigurationV2"
       responses:
         "200":
           content:
@@ -3986,7 +3986,7 @@ components:
               - description: Amount of transfer must be at least 100, and no greater than 99999999999
                 max: 99999999999
                 min: 100
-                type: Amount Min Max Requirement
+                type: amountMinMaxRequirement
               - description: Country, street and city is required.
                 requiredAddressFields:
                   - STREET
@@ -3996,10 +3996,10 @@ components:
                   - iban
                   - numberAndBic
                 description: Bank account identification type must be iban or numberAndBic
-                type: Bank Account Identification Type Requirement
+                type: bankAccountIdentificationTypeRequirement
               - issuingCountryCode: NL
                 paymentInstrumentType: BankAccount
-                type: Payment Instrument Requirement
+                type: paymentInstrumentRequirement
           - country: NL
             currency: USD
             priority: wire
@@ -4007,7 +4007,7 @@ components:
               - description: Amount of transfer must be at least 100, and no greater than 99999999999
                 max: 99999999999
                 min: 100
-                type: Amount Min Max Requirement
+                type: amountMinMaxRequirement
               - description: Country, street and city is required.
                 requiredAddressFields:
                   - STREET
@@ -4017,10 +4017,10 @@ components:
                   - iban
                   - numberAndBic
                 description: Bank account identification type must be iban or numberAndBic
-                type: Bank Account Identification Type Requirement
+                type: bankAccountIdentificationTypeRequirement
               - issuingCountryCode: NL
                 paymentInstrumentType: BankAccount
-                type: Payment Instrument Requirement
+                type: paymentInstrumentRequirement
     post-validateBankAccountIdentification-validateBankAccountIdentificationIban:
       summary: Validate an IBAN
       value:
@@ -4488,7 +4488,7 @@ components:
           description: Specifies the required address related fields for a particular route.
           type: string
         requiredAddressFields:
-          description: List of address fields; i.e. Country , City , etc.
+          description: List of address fields.
           items:
             type: string
           type: array
@@ -4520,14 +4520,14 @@ components:
       additionalProperties: false
       properties:
         description:
-          description: Specifies the eligible amounts of a particular route.
+          description: Specifies the eligible amounts for a particular route.
           type: string
         max:
-          description: max amount in numeric characters i.e. 99999999999
+          description: Maximum amount.
           format: int64
           type: integer
         min:
-          description: min amount in numeric characters i.e. 1
+          description: Minimum amount.
           format: int64
           type: integer
         type:
@@ -5438,6 +5438,142 @@ components:
       required:
         - operation
       type: object
+    CreateSweepConfigurationV2:
+      properties:
+        category:
+          description: |-
+            The type of transfer that results from the sweep.
+
+            Possible values:
+
+             - **bank**: Sweep to a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+
+            - **internal**: Transfer to another [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/balanceAccounts__resParam_id) within your platform.
+
+            Required when setting `priorities`.
+          enum:
+            - bank
+            - internal
+            - platformPayment
+          type: string
+          x-addedInVersion: "2"
+        counterparty:
+          $ref: "#/components/schemas/SweepCounterparty"
+          description: |-
+            The destination or the source of the funds, depending on the sweep `type`.
+
+            Either a `balanceAccountId`, `transferInstrumentId`, or `merchantAccount` is required.
+        currency:
+          description: |-
+            The three-character [ISO currency code](https://docs.adyen.com/development-resources/currency-codes) in uppercase. For example, **EUR**.
+
+            The sweep currency must match any of the [balances currencies](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__resParam_balances).
+          type: string
+        description:
+          description: |-
+            The message that will be used in the sweep transfer's description body with a maximum length of 140 characters.
+
+            If the message is longer after replacing placeholders, the message will be cut off at 140 characters.
+          type: string
+        priorities:
+          description: |-
+            The list of priorities for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. You can provide multiple priorities. Adyen will try to pay out using the priority listed first, and if that's not possible, it moves on to the next option in the order of provided priorities.
+
+            Possible values:
+
+            * **regular**: For normal, low-value transactions.
+
+            * **fast**: Faster way to transfer funds but has higher fees. Recommended for high-priority, low-value transactions.
+
+            * **wire**: Fastest way to transfer funds but has the highest fees. Recommended for high-priority, high-value transactions.
+
+            * **instant**: Instant way to transfer funds in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).
+
+            * **crossBorder**: High-value transfer to a recipient in a different country.
+
+            * **internal**: Transfer to an Adyen-issued business bank account (by bank account number/IBAN).
+
+            Set `category` to **bank**. For more details, see [optional priorities setup](https://docs.adyen.com/marketplaces-and-platforms/payout-to-users/scheduled-payouts#optional-priorities-setup).
+          items:
+            enum:
+              - crossBorder
+              - directDebit
+              - fast
+              - instant
+              - internal
+              - regular
+              - wire
+            type: string
+          type: array
+          x-addedInVersion: "2"
+        reason:
+          description: The reason for disabling the sweep.
+          enum:
+            - amountLimitExceeded
+            - approved
+            - counterpartyAccountBlocked
+            - counterpartyAccountClosed
+            - counterpartyAccountNotFound
+            - counterpartyAddressRequired
+            - counterpartyBankTimedOut
+            - counterpartyBankUnavailable
+            - error
+            - notEnoughBalance
+            - refusedByCounterpartyBank
+            - routeNotFound
+            - unknown
+          readOnly: true
+          type: string
+        schedule:
+          $ref: "#/components/schemas/SweepSchedule"
+          description: The schedule when the `triggerAmount` is evaluated. If the balance meets the threshold, funds are pushed out of or pulled in to the balance account.
+        status:
+          description: |+
+            The status of the sweep. If not provided, by default, this is set to **active**.
+
+            Possible values: 
+
+             * **active**:  the sweep is enabled and funds will be pulled in or pushed out based on the defined configuration. 
+
+             * **inactive**: the sweep is disabled and cannot be triggered. 
+
+          enum:
+            - active
+            - inactive
+          type: string
+        sweepAmount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount that must be pushed out or pulled in. You can configure either `sweepAmount` or `targetAmount`, not both.
+        targetAmount:
+          $ref: "#/components/schemas/Amount"
+          description: The amount that must be available in the balance account after the sweep. You can configure either `sweepAmount` or `targetAmount`, not both.
+        triggerAmount:
+          $ref: "#/components/schemas/Amount"
+          description: |-
+            The threshold amount that triggers the sweep. If not provided, by default, the amount is set to zero. The `triggerAmount` is evaluated according to the specified `schedule.type`.
+
+            * For `type` **pull**, if the balance is less than or equal to the `triggerAmount`, funds are pulled in to the balance account.
+
+            * For `type` **push**, if the balance is more than or equal to the `triggerAmount`, funds are pushed out of the balance account.
+        type:
+          default: push
+          description: |-
+            The direction of sweep, whether pushing out or pulling in funds to the balance account. If not provided, by default, this is set to **push**.
+
+            Possible values:
+
+             * **push**: _push out funds_ to a destination balance account or transfer instrument.
+
+             * **pull**: _pull in funds_ from a source merchant account, transfer instrument, or balance account.
+          enum:
+            - pull
+            - push
+          type: string
+      required:
+        - schedule
+        - currency
+        - counterparty
+      type: object
     DKLocalAccountIdentification:
       additionalProperties: false
       properties:
@@ -5498,10 +5634,10 @@ components:
             >If you don't know the country or are not collecting the country from the shopper, provide `country` as `ZZ`.
           type: string
         line1:
-          description: The street name of the house. For example, if address is 'Rokin 49', please write 'Rokin'.
+          description: The street name. For example, if the address is "Rokin 49", provide "Rokin".
           type: string
         line2:
-          description: The house number or name. For example, if address is 'Rokin 49', please write '49'.
+          description: The house number or name. For example, if the address is "Rokin 49", provide "49".
           type: string
         line3:
           description: Optional information about the address.
@@ -6309,13 +6445,13 @@ components:
       additionalProperties: false
       properties:
         description:
-          description: Specifies the requirements for the Payment Instrument that needs to be included in the request for a particular route.
+          description: Specifies the requirements for the payment instrument that need to be included in the request for a particular route.
           type: string
         issuingCountryCode:
           description: The two-character ISO-3166-1 alpha-2 country code of the counterparty. For example, **US** or **NL**.
           type: string
         paymentInstrumentType:
-          description: Type of the payment instrument i.e. BankAccount
+          description: The type of the payment instrument. For example, "BankAccount" or "Card".
           enum:
             - BankAccount
             - Card

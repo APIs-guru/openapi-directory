@@ -519,6 +519,9 @@ components:
     SecurityKey:
       description: The credential information for a Google registered security key.
       properties:
+        deviceNickname:
+          description: The security key nickname explicitly set by the user.
+          type: string
         privateKey:
           description: Hardware-backed private key text in SSH format.
           type: string

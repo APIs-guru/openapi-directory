@@ -2282,9 +2282,6 @@ components:
           description: Output only. If set, the repository satisfies physical zone separation.
           readOnly: true
           type: boolean
-        sbomConfig:
-          $ref: "#/components/schemas/SbomConfig"
-          description: Optional. Config and state for sbom generation for resources within this Repository.
         sizeBytes:
           description: Output only. The size, in bytes, of all artifact storage in this repository. Repositories that are generally available or in public preview use this to calculate storage costs.
           format: int64
@@ -2298,22 +2295,6 @@ components:
         virtualRepositoryConfig:
           $ref: "#/components/schemas/VirtualRepositoryConfig"
           description: Configuration specific for a Virtual Repository.
-      type: object
-    SbomConfig:
-      description: Config for whether to generate SBOMs for resources in this repository, as well as output fields describing current state.
-      properties:
-        enablementConfig:
-          description: Optional. Config for whether this repository has sbom generation disabled.
-          enum:
-            - ENABLEMENT_CONFIG_UNSPECIFIED
-            - INHERITED
-            - DISABLED
-          type: string
-        lastEnableTime:
-          description: Output only. The last time this repository config was set to INHERITED.
-          format: google-datetime
-          readOnly: true
-          type: string
       type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
@@ -2473,7 +2454,7 @@ components:
       description: The response of the completed artifact upload operation. This response is contained in the Operation and available to users.
       properties:
         yumArtifacts:
-          description: The Apt artifacts updated.
+          description: The Yum artifacts updated.
           items:
             $ref: "#/components/schemas/YumArtifact"
           type: array
