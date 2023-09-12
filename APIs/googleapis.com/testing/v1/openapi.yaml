@@ -1056,7 +1056,7 @@ components:
           readOnly: true
           type: array
         ttl:
-          description: "Optional. The amount of time that a device will be initially allocated for. This can eventually be extended with the ExtendDeviceSession RPC. Default: 3 hours."
+          description: "Optional. The amount of time that a device will be initially allocated for. This can eventually be extended with the ExtendDeviceSession RPC. Default: 30 minutes."
           format: google-duration
           type: string
       type: object

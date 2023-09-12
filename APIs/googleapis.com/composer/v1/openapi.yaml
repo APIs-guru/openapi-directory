@@ -790,6 +790,9 @@ components:
             - DELETING
             - ERROR
           type: string
+        storageConfig:
+          $ref: "#/components/schemas/StorageConfig"
+          description: Optional. Storage configuration for this environment.
         updateTime:
           description: Output only. The time at which this environment was last modified.
           format: google-datetime
@@ -1387,6 +1390,10 @@ components:
           items:
             type: string
           type: array
+      type: object
+    StorageConfig:
+      description: The configuration for data storage in the environment.
+      properties: {}
       type: object
     WebServerConfig:
       description: The configuration settings for the Airflow web server App Engine instance. Supported for Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*

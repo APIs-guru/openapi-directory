@@ -1371,12 +1371,18 @@ paths:
       requestBody:
         content:
           application/json:
+            examples:
+              updateTermsofService:
+                $ref: "#/components/examples/patch-legalEntities-id-termsOfService-termsofservicedocumentid-updateTermsofService"
             schema:
               $ref: "#/components/schemas/AcceptTermsOfServiceRequest"
       responses:
         "200":
           content:
             application/json:
+              examples:
+                updateTermsofService:
+                  $ref: "#/components/examples/patch-legalEntities-id-termsOfService-termsofservicedocumentid-updateTermsofService-200"
               schema:
                 $ref: "#/components/schemas/AcceptTermsOfServiceResponse"
           description: OK - the request has succeeded.
@@ -2177,6 +2183,22 @@ components:
           residentialAddress:
             country: US
         type: individual
+    patch-legalEntities-id-termsOfService-termsofservicedocumentid-updateTermsofService:
+      description: Example request for accepting the Terms of Service document
+      summary: Accept the Terms of Service document
+      value:
+        acceptedBy: YOUR_LEGAL_ENTITY
+        ipAddress: 82.199.87.148
+    patch-legalEntities-id-termsOfService-termsofservicedocumentid-updateTermsofService-200:
+      description: Example response when accepting a Terms of Service document
+      summary: Terms of Service document accepted
+      value:
+        acceptedBy: LE00000000000000000000002
+        id: TOSA000AB00000000B2AAAB2BA0AA0
+        ipAddress: 82.199.87.148
+        language: en
+        termsOfServiceDocumentId: abc123
+        type: adyenIssuing
     patch-legalEntities-id-updateLegalEntityOrganization:
       description: Example request adding entity associations to a legal entity
       summary: Add entity associations to an organization
@@ -2746,6 +2768,7 @@ components:
             iban: NL62ABNA0000000123
             type: iban
           countryCode: NL
+          trustedSource: false
         id: SE322KH223222F5GXZFNM3BGP
         legalEntityId: YOUR_LEGAL_ENTITY
         type: bankAccount
@@ -2771,6 +2794,7 @@ components:
             routingNumber: "121202211"
             type: usLocal
           countryCode: US
+          trustedSource: false
         id: SE322JV223222F5GJVKHH8DTC
         legalEntityId: YOUR_LEGAL_ENTITY
         type: bankAccount
@@ -2943,6 +2967,7 @@ components:
             - $ref: "#/components/schemas/HULocalAccountIdentification"
             - $ref: "#/components/schemas/IbanAccountIdentification"
             - $ref: "#/components/schemas/NOLocalAccountIdentification"
+            - $ref: "#/components/schemas/NZLocalAccountIdentification"
             - $ref: "#/components/schemas/NumberAndBicAccountIdentification"
             - $ref: "#/components/schemas/PLLocalAccountIdentification"
             - $ref: "#/components/schemas/SELocalAccountIdentification"
@@ -3436,8 +3461,8 @@ components:
             - proofOfFundingOrWealthSource
           type: string
       required:
-        - type
         - description
+        - type
       type: object
     DocumentPage:
       properties:
@@ -3557,6 +3582,9 @@ components:
             - adyenFranchisee
             - adyenIssuing
           type: string
+      required:
+        - type
+        - language
       type: object
     GetTermsOfServiceDocumentResponse:
       properties:
@@ -4026,6 +4054,24 @@ components:
           description: "**noLocal**"
           enum:
             - noLocal
+          type: string
+      required:
+        - type
+        - accountNumber
+      type: object
+    NZLocalAccountIdentification:
+      additionalProperties: false
+      properties:
+        accountNumber:
+          description: The 15-16 digit bank account number. The first 2 digits are the bank number, the next 4 digits are the branch number, the next 7 digits are the account number, and the final 2-3 digits are the suffix.
+          maxLength: 16
+          minLength: 15
+          type: string
+        type:
+          default: nzLocal
+          description: "**nzLocal**"
+          enum:
+            - nzLocal
           type: string
       required:
         - type
