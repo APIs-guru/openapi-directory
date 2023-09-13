@@ -28,51 +28,7 @@ externalDocs:
   url: https://mapsplatform.google.com/maps-products/#places-section
 tags:
   - name: places
-  - name: Text
 paths:
-  /v1/Text:search:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Text query based place search.
-      operationId: places.Text.search
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleMapsPlacesV1SearchTextRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleMapsPlacesV1SearchTextResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/maps-platform.places
-          Oauth2c:
-            - https://www.googleapis.com/auth/maps-platform.places
-        - Oauth2:
-            - https://www.googleapis.com/auth/maps-platform.places.textsearch
-          Oauth2c:
-            - https://www.googleapis.com/auth/maps-platform.places.textsearch
-      tags:
-        - Text
   /v1/places:searchText:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"

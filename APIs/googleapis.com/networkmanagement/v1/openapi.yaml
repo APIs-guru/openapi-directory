@@ -812,6 +812,10 @@ components:
         name:
           description: "Required. Unique name of the resource using the form: `projects/{project_id}/locations/global/connectivityTests/{test_id}`"
           type: string
+        probingDetails:
+          $ref: "#/components/schemas/ProbingDetails"
+          description: Output only. The probing details of this test from the latest run, present for applicable tests only. The details are updated when creating a new test, updating an existing test, or triggering a one-time rerun of an existing test.
+          readOnly: true
         protocol:
           description: IP Protocol of the test. When not provided, "TCP" is assumed.
           type: string
@@ -905,6 +909,13 @@ components:
           description: URI of the resource that caused the drop.
           type: string
       type: object
+    EdgeLocation:
+      description: Representation of a network edge location as per https://cloud.google.com/vpc/docs/edge-locations.
+      properties:
+        metropolitanArea:
+          description: Name of the metropolitan area.
+          type: string
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
@@ -927,6 +938,16 @@ components:
         forwardingRule:
           description: "A forwarding rule and its corresponding IP address represent the frontend configuration of a Google Cloud load balancer. Forwarding rules are also used for protocol forwarding, Private Service Connect and other network services to provide forwarding information in the control plane. Format: projects/{project}/global/forwardingRules/{id} or projects/{project}/regions/{region}/forwardingRules/{id}"
           type: string
+        forwardingRuleTarget:
+          description: Output only. Specifies the type of the target of the forwarding rule.
+          enum:
+            - FORWARDING_RULE_TARGET_UNSPECIFIED
+            - INSTANCE
+            - LOAD_BALANCER
+            - VPN_GATEWAY
+            - PSC
+          readOnly: true
+          type: string
         gkeMasterCluster:
           description: A cluster URI for [Google Kubernetes Engine master](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture).
           type: string
@@ -934,7 +955,27 @@ components:
           description: A Compute Engine instance URI.
           type: string
         ipAddress:
-          description: The IP address of the endpoint, which can be an external or internal IP. An IPv6 address is only allowed when the test's destination is a [global load balancer VIP](/load-balancing/docs/load-balancing-overview).
+          description: The IP address of the endpoint, which can be an external or internal IP. An IPv6 address is only allowed when the test's destination is a [global load balancer VIP](https://cloud.google.com/load-balancing/docs/load-balancing-overview).
+          type: string
+        loadBalancerId:
+          description: Output only. ID of the load balancer the forwarding rule points to. Empty for forwarding rules not related to load balancers.
+          readOnly: true
+          type: string
+        loadBalancerType:
+          description: Output only. Type of the load balancer the forwarding rule points to.
+          enum:
+            - LOAD_BALANCER_TYPE_UNSPECIFIED
+            - HTTPS_ADVANCED_LOAD_BALANCER
+            - HTTPS_LOAD_BALANCER
+            - REGIONAL_HTTPS_LOAD_BALANCER
+            - INTERNAL_HTTPS_LOAD_BALANCER
+            - SSL_PROXY_LOAD_BALANCER
+            - TCP_PROXY_LOAD_BALANCER
+            - INTERNAL_TCP_PROXY_LOAD_BALANCER
+            - NETWORK_LOAD_BALANCER
+            - LEGACY_NETWORK_LOAD_BALANCER
+            - TCP_UDP_INTERNAL_LOAD_BALANCER
+          readOnly: true
           type: string
         network:
           description: A Compute Engine network URI.
@@ -1154,6 +1195,27 @@ components:
           description: URI of a Compute Engine instance.
           type: string
       type: object
+    LatencyDistribution:
+      description: Describes measured latency distribution.
+      properties:
+        latencyPercentiles:
+          description: Representative latency percentiles.
+          items:
+            $ref: "#/components/schemas/LatencyPercentile"
+          type: array
+      type: object
+    LatencyPercentile:
+      description: Latency percentile rank and value.
+      properties:
+        latencyMicros:
+          description: percent-th percentile of latency observed, in microseconds. Fraction of percent/100 of samples have latency lower or equal to the value of this field.
+          format: int64
+          type: string
+        percent:
+          description: Percentage of samples this data point applies to.
+          format: int32
+          type: integer
+      type: object
     ListConnectivityTestsResponse:
       description: Response for the `ListConnectivityTests` method.
       properties:
@@ -1362,6 +1424,50 @@ components:
           description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
           format: int32
           type: integer
+      type: object
+    ProbingDetails:
+      description: Results of active probing from the last run of the test.
+      properties:
+        abortCause:
+          description: The reason probing was aborted.
+          enum:
+            - PROBING_ABORT_CAUSE_UNSPECIFIED
+            - PERMISSION_DENIED
+            - NO_SOURCE_LOCATION
+          type: string
+        destinationEgressLocation:
+          $ref: "#/components/schemas/EdgeLocation"
+          description: The EdgeLocation from which a packet destined for/originating from the internet will egress/ingress the Google network. This will only be populated for a connectivity test which has an internet destination/source address. The absence of this field *must not* be used as an indication that the destination/source is part of the Google network.
+        endpointInfo:
+          $ref: "#/components/schemas/EndpointInfo"
+          description: The source and destination endpoints derived from the test input and used for active probing.
+        error:
+          $ref: "#/components/schemas/Status"
+          description: Details about an internal failure or the cancellation of active probing.
+        probingLatency:
+          $ref: "#/components/schemas/LatencyDistribution"
+          description: "Latency as measured by active probing in one direction: from the source to the destination endpoint."
+        result:
+          description: The overall result of active probing.
+          enum:
+            - PROBING_RESULT_UNSPECIFIED
+            - REACHABLE
+            - UNREACHABLE
+            - REACHABILITY_INCONSISTENT
+            - UNDETERMINED
+          type: string
+        sentProbeCount:
+          description: Number of probes sent.
+          format: int32
+          type: integer
+        successfulProbeCount:
+          description: Number of probes that reached the destination.
+          format: int32
+          type: integer
+        verifyTime:
+          description: The time that reachability was assessed through active probing.
+          format: google-datetime
+          type: string
       type: object
     ReachabilityDetails:
       description: Results of the configuration analysis from the last run of the test.

@@ -537,12 +537,12 @@ paths:
             Event types to return. Optional. Possible values are: 
             - "default" 
             - "focusTime" 
-            - "outOfOffice" 
-            - "workingLocation"This parameter can be repeated multiple times to return events of different types. Currently, these are the only allowed values for this field: 
-            - ["default", "focusTime", "outOfOffice"] 
+            - "outOfOffice"This parameter can be repeated multiple times to return events of different types. Currently, this is the only allowed value for this field: 
+            - ["default", "focusTime", "outOfOffice"] This value is the default.
+
+            If you're enrolled in the Working Location developer preview program, in addition to the default value above you can also set the "workingLocation" event type: 
             - ["default", "focusTime", "outOfOffice", "workingLocation"] 
-            - ["workingLocation"] The default is ["default", "focusTime", "outOfOffice"].
-            Additional combinations of these four event types will be made available in later releases.
+            - ["workingLocation"] Additional combinations of these four event types will be made available in later releases. Developer Preview.
           explode: true
           in: query
           name: eventTypes
@@ -902,12 +902,12 @@ paths:
             Event types to return. Optional. Possible values are: 
             - "default" 
             - "focusTime" 
-            - "outOfOffice" 
-            - "workingLocation"This parameter can be repeated multiple times to return events of different types. Currently, these are the only allowed values for this field: 
-            - ["default", "focusTime", "outOfOffice"] 
+            - "outOfOffice"This parameter can be repeated multiple times to return events of different types. Currently, this is the only allowed value for this field: 
+            - ["default", "focusTime", "outOfOffice"] This value is the default.
+
+            If you're enrolled in the Working Location developer preview program, in addition to the default value above you can also set the "workingLocation" event type: 
             - ["default", "focusTime", "outOfOffice", "workingLocation"] 
-            - ["workingLocation"] The default is ["default", "focusTime", "outOfOffice"].
-            Additional combinations of these four event types will be made available in later releases.
+            - ["workingLocation"] Additional combinations of these four event types will be made available in later releases. Developer Preview.
           explode: true
           in: query
           name: eventTypes
@@ -2648,11 +2648,11 @@ components:
         eventType:
           default: default
           description: |-
-            Specific type of the event. This cannot be modified after the event is created. Possible values are:  
+            Specific type of the event. Read-only. Possible values are:  
             - "default" - A regular event or not further specified. 
             - "outOfOffice" - An out-of-office event. 
             - "focusTime" - A focus-time event. 
-            - "workingLocation" - A working location event.  Currently, only "default " and "workingLocation" events can be created using the API. Extended support for other event types will be made available in later releases.
+            - "workingLocation" - A working location event. Developer Preview.
           type: string
         extendedProperties:
           description: Extended properties of the event.
@@ -2848,7 +2848,7 @@ components:
           type: string
         workingLocationProperties:
           $ref: "#/components/schemas/EventWorkingLocationProperties"
-          description: Working location event data.
+          description: Working Location event data. Developer Preview.
       type: object
     EventAttachment:
       properties:
@@ -2966,25 +2966,20 @@ components:
               description: An optional building identifier. This should reference a building ID in the organization's Resources database.
               type: string
             deskId:
-              description: An optional desk identifier.
+              description: An optional arbitrary desk identifier.
               type: string
             floorId:
-              description: An optional floor identifier.
+              description: An optional arbitrary floor identifier.
               type: string
             floorSectionId:
-              description: An optional floor section identifier.
+              description: An optional arbitrary floor section identifier.
               type: string
             label:
-              description: The office name that's displayed in Calendar Web and Mobile clients. We recommend you reference a building name in the organization's Resources database.
+              description: An optional extra label for additional information.
               type: string
           type: object
         type:
-          description: |-
-            Type of the working location. Possible values are:  
-            - "homeOffice" - The user is working at home. 
-            - "officeLocation" - The user is working from an office. 
-            - "customLocation" - The user is working from a custom location.  Any details are specified in a sub-field of the specified name, but this field may be missing if empty. Any other fields are ignored.
-            Required when adding working location properties.
+          description: Indicates what kind of location this is. Any details are specified in a sub-field of the specified name (but which may be missing if empty). Any other fields are ignored.
           type: string
       type: object
     Events:

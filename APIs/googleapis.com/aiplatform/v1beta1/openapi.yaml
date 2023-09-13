@@ -3700,7 +3700,7 @@ paths:
       description: Lists Features in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.list
       parameters:
-        - description: "Required. The resource name of the Location to list Features. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
+        - description: "Required. The resource name of the Location to list Features. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
           in: path
           name: parent
           required: true
@@ -3716,7 +3716,7 @@ paths:
           name: latestStatsCount
           schema:
             type: integer
-        - description: 'A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending. Supported fields: * `feature_id` * `value_type` * `create_time` * `update_time`'
+        - description: 'A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending. Supported fields: * `feature_id` * `value_type` (Not supported for FeatureRegistry Feature) * `create_time` * `update_time`'
           in: query
           name: orderBy
           schema:
@@ -3766,13 +3766,13 @@ paths:
       description: Creates a new Feature in a given EntityType.
       operationId: aiplatform.projects.locations.featurestores.entityTypes.features.create
       parameters:
-        - description: "Required. The resource name of the EntityType or FeatureGroup to create a Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
+        - description: "Required. The resource name of the EntityType to create a Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType/FeatureGroup.
+        - description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType .
           in: query
           name: featureId
           schema:
@@ -7919,16 +7919,16 @@ components:
           description: Operation metadata for Feature.
       type: object
     GoogleCloudAiplatformV1beta1CreateFeatureRequest:
-      description: Request message for FeaturestoreService.CreateFeature and FeatureRegistryService.CreateFeature.
+      description: Request message for FeaturestoreService.CreateFeature.
       properties:
         feature:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1Feature"
           description: Required. The Feature to create.
         featureId:
-          description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType/FeatureGroup.
+          description: Required. The ID to use for the Feature, which will become the final component of the Feature's resource name. This value may be up to 128 characters, and valid characters are `[a-z0-9_]`. The first character cannot be a number. The value must be unique within an EntityType .
           type: string
         parent:
-          description: "Required. The resource name of the EntityType or FeatureGroup to create a Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}` `projects/{project}/locations/{location}/featureGroups/{feature_group}`"
+          description: "Required. The resource name of the EntityType to create a Feature. Format: `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`"
           type: string
       type: object
     GoogleCloudAiplatformV1beta1CreateFeaturestoreOperationMetadata:
@@ -9368,6 +9368,27 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudAiplatformV1beta1ExportEndpointOperationMetadata:
+      description: Details of EndpointService.ExportEndpoint operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: The common part of the operation metadata.
+      type: object
+    GoogleCloudAiplatformV1beta1ExportEndpointResponse:
+      description: Response message of EndpointService.ExportEndpoint operation.
+      properties:
+        outputInfo:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ExportEndpointResponseOutputInfo"
+          description: Information further describing the output of this Endpoint export.
+      type: object
+    GoogleCloudAiplatformV1beta1ExportEndpointResponseOutputInfo:
+      description: Describes the output of the ExportEndpoint.
+      properties:
+        bigQueryDestination:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1BigQueryDestination"
+          description: If the Endpoint is being exported to BigQuery this is the full path of the BigQuery ML model created.
+      type: object
     GoogleCloudAiplatformV1beta1ExportFeatureValuesOperationMetadata:
       description: Details of operations that exports Features values.
       properties:
@@ -9563,7 +9584,7 @@ components:
           readOnly: true
           type: string
         valueType:
-          description: Required. Immutable. Type of Feature value.
+          description: Immutable. Type of Feature value.
           enum:
             - VALUE_TYPE_UNSPECIFIED
             - BOOL
@@ -10277,6 +10298,9 @@ components:
         displayName:
           description: Required. The display name of the Index. The name can be up to 128 characters long and can consist of any UTF-8 characters.
           type: string
+        encryptionSpec:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1EncryptionSpec"
+          description: Immutable. Customer-managed encryption key spec for an Index. If set, this Index and all sub-resources of this Index will be secured by this key.
         etag:
           description: Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
           type: string
@@ -10327,7 +10351,7 @@ components:
             type: number
           type: array
         restricts:
-          description: 'Optional. List of Restrict of the datapoint, used to perform "restricted searches" where boolean rule are used to filter the subset of the database eligible for matching. See: https://cloud.google.com/vertex-ai/docs/matching-engine/filtering'
+          description: 'Optional. List of Restrict of the datapoint, used to perform "restricted searches" where boolean rule are used to filter the subset of the database eligible for matching. This uses categorical tokens. See: https://cloud.google.com/vertex-ai/docs/matching-engine/filtering'
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1IndexDatapointRestriction"
           type: array
@@ -10343,17 +10367,17 @@ components:
       description: Restriction of a datapoint which describe its attributes(tokens) from each of several attribute categories(namespaces).
       properties:
         allowList:
-          description: "The attributes to allow in this namespace. eg: 'red'"
+          description: "The attributes to allow in this namespace. e.g.: 'red'"
           items:
             type: string
           type: array
         denyList:
-          description: "The attributes to deny in this namespace. eg: 'blue'"
+          description: "The attributes to deny in this namespace. e.g.: 'blue'"
           items:
             type: string
           type: array
         namespace:
-          description: "The namespace of this restriction. eg: color."
+          description: "The namespace of this restriction. e.g.: color."
           type: string
       type: object
     GoogleCloudAiplatformV1beta1IndexEndpoint:
@@ -10380,6 +10404,9 @@ components:
           deprecated: true
           description: "Optional. Deprecated: If true, expose the IndexEndpoint via private service connect. Only one of the fields, network or enable_private_service_connect, can be set."
           type: boolean
+        encryptionSpec:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1EncryptionSpec"
+          description: Immutable. Customer-managed encryption key spec for an IndexEndpoint. If set, this IndexEndpoint and all sub-resources of this IndexEndpoint will be secured by this key.
         etag:
           description: Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
           type: string
@@ -10672,7 +10699,7 @@ components:
           type: string
       type: object
     GoogleCloudAiplatformV1beta1ListFeaturesResponse:
-      description: Response message for FeaturestoreService.ListFeatures. Response message for FeatureRegistryService.ListFeatures.
+      description: Response message for FeaturestoreService.ListFeatures.
       properties:
         features:
           description: The Features matching the request.
@@ -12495,6 +12522,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        version:
+          description: Output only. The VM os image version of NotebookRuntime.
+          readOnly: true
+          type: string
       type: object
     GoogleCloudAiplatformV1beta1NotebookRuntimeTemplate:
       description: A template that specifies runtime configurations such as machine type, runtime version, network configurations, etc. Multiple runtimes can be created from a runtime template.
@@ -13405,13 +13436,17 @@ components:
     GoogleCloudAiplatformV1beta1RaySpec:
       description: "Configuration information for the Ray cluster. For experimental launch, Ray cluster creation and Persistent cluster creation are 1:1 mapping: We will provision all the nodes within the Persistent cluster as Ray nodes."
       properties:
-        headMachineSpec:
-          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1MachineSpec"
-          deprecated: true
-          description: Optional. Will use the machine from the first workerpool as the head node by default. For Ray-on-Vertex Experimental scope launch, we will only support one resource pool for Ray cluster and thus will not support head machine selection.
+        headNodeResourcePoolId:
+          description: Optional. This will be used to indicate which resource pool will serve as the Ray head node(the first node within that pool). Will use the machine from the first workerpool as the head node by default if this field is not set.
+          type: string
         imageUri:
           description: Optional. Default image for user to choose a preferred ML framework(e.g. tensorflow or Pytorch) by choosing from Vertex prebuild images(https://cloud.google.com/vertex-ai/docs/training/pre-built-containers). Either this or the resource_pool_images is required. Use this field if you need all the resource pools to have the same Ray image, Otherwise, use the {@code resource_pool_images} field.
           type: string
+        resourcePoolImages:
+          additionalProperties:
+            type: string
+          description: 'Optional. Required if image_uri is not set. A map of resource_pool_id to prebuild Ray image if user need to use different images for different head/worker pools. This map needs to cover all the resource pool ids. Example: { "ray_head_node_pool": "head image" "ray_worker_node_pool1": "worker image" "ray_worker_node_pool2": "another worker image" }'
+          type: object
       type: object
     GoogleCloudAiplatformV1beta1ReadFeatureValuesRequest:
       description: Request message for FeaturestoreOnlineServingService.ReadFeatureValues.
@@ -13646,6 +13681,10 @@ components:
           description: 'Output only. URIs for user to connect to the Cluster. Example: { "RAY_HEAD_NODE_INTERNAL_IP": "head-node-IP:10001" "RAY_DASHBOARD_URI": "ray-dashboard-address:8888" }'
           readOnly: true
           type: object
+        notebookRuntimeTemplate:
+          description: 'Output only. The resource name of NotebookRuntimeTemplate for the RoV Persistent Cluster The NotebokRuntimeTemplate is created in the same VPC (if set), and with the same Ray and Python version as the Persistent Cluster. Example: "projects/1000/locations/us-central1/notebookRuntimeTemplates/abc123"'
+          readOnly: true
+          type: string
       type: object
     GoogleCloudAiplatformV1beta1ResourceRuntimeSpec:
       description: "Configure runtime on a PersistentResource instance, including but may not limited to: * Service accounts used to run the workloads; * Whether make it a dedicated Ray Cluster;"
@@ -16889,6 +16928,11 @@ components:
         clientId:
           description: Required. The identifier of the client that is requesting the suggestion. If multiple SuggestTrialsRequests have the same `client_id`, the service will return the identical suggested Trial if the Trial is pending, and provide a new Trial if the last suggested Trial was completed.
           type: string
+        contexts:
+          description: "Optional. This allows you to specify the \"context\" for a Trial; a context is a slice (a subspace) of the search space. Typical uses for contexts: 1) You are using Vizier to tune a server for best performance, but there's a strong weekly cycle. The context specifies the day-of-week. This allows Tuesday to generalize from Wednesday without assuming that everything is identical. 2) Imagine you're optimizing some medical treatment for people. As they walk in the door, you know certain facts about them (e.g. sex, weight, height, blood-pressure). Put that information in the context, and Vizier will adapt its suggestions to the patient. 3) You want to do a fair A/B test efficiently. Specify the \"A\" and \"B\" conditions as contexts, and Vizier will generalize between \"A\" and \"B\" conditions. If they are similar, this will allow Vizier to converge to the optimum faster than if \"A\" and \"B\" were separate Studies. NOTE: You can also enter contexts as REQUESTED Trials, e.g. via the CreateTrial() RPC; that's the asynchronous option where you don't need a close association between contexts and suggestions. NOTE: All the Parameters you set in a context MUST be defined in the Study. NOTE: You must supply 0 or $suggestion_count contexts. If you don't supply any contexts, Vizier will make suggestions from the full search space specified in the StudySpec; if you supply a full set of context, each suggestion will match the corresponding context. NOTE: A Context with no features set matches anything, and allows suggestions from the full search space. NOTE: Contexts MUST lie within the search space specified in the StudySpec. It's an error if they don't. NOTE: Contexts preferentially match ACTIVE then REQUESTED trials before new suggestions are generated. NOTE: Generation of suggestions involves a match between a Context and (optionally) a REQUESTED trial; if that match is not fully specified, a suggestion will be geneated in the merged subspace."
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1TrialContext"
+          type: array
         suggestionCount:
           description: Required. The number of suggestions requested. It must be positive.
           format: int32
@@ -17451,6 +17495,18 @@ components:
           readOnly: true
           type: object
       type: object
+    GoogleCloudAiplatformV1beta1TrialContext:
+      description: "Next ID: 3"
+      properties:
+        description:
+          description: A human-readable field which can store a description of this context. This will become part of the resulting Trial's description field.
+          type: string
+        parameters:
+          description: "If/when a Trial is generated or selected from this Context, its Parameters will match any parameters specified here. (I.e. if this context specifies parameter name:'a' int_value:3, then a resulting Trial will have int_value:3 for its parameter named 'a'.) Note that we first attempt to match existing REQUESTED Trials with contexts, and if there are no matches, we generate suggestions in the subspace defined by the parameters specified here. NOTE: a Context without any Parameters matches the entire feasible search space."
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1TrialParameter"
+          type: array
+      type: object
     GoogleCloudAiplatformV1beta1TrialParameter:
       description: A message representing a parameter to be tuned.
       properties:
@@ -17572,6 +17628,13 @@ components:
         genericMetadata:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
           description: The operation generic information.
+      type: object
+    GoogleCloudAiplatformV1beta1UpdatePersistentResourceOperationMetadata:
+      description: Details of operations that perform update PersistentResource.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1GenericOperationMetadata"
+          description: Operation metadata for PersistentResource.
       type: object
     GoogleCloudAiplatformV1beta1UpdateSpecialistPoolOperationMetadata:
       description: Runtime operation metadata for SpecialistPoolService.UpdateSpecialistPool.

@@ -2004,6 +2004,9 @@ components:
         collation:
           description: The Cloud SQL default instance level collation.
           type: string
+        dataCacheConfig:
+          $ref: "#/components/schemas/DataCacheConfig"
+          description: Optional. Configuration for data cache.
         dataDiskSizeGb:
           description: The storage capacity available to the database, in GB. The minimum (and default) size is 10GB.
           format: int64
@@ -2343,6 +2346,13 @@ components:
       properties:
         onlyIfNoPrimaryKey:
           description: Required. Only work on tables without primary key defined
+          type: boolean
+      type: object
+    DataCacheConfig:
+      description: Data cache configurations.
+      properties:
+        dataCacheEnabled:
+          description: Optional. Whether data cache is enabled for the instance.
           type: boolean
       type: object
     DatabaseEngineInfo:

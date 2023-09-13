@@ -194,6 +194,58 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v2/{name}/locations:
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: cloudbuild.projects.locations.list
+      parameters:
+        - description: The resource that owns the locations collection, if applicable.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: A filter to narrow down results to a preferred subset. The filtering language accepts strings like `"displayName=tokyo"`, and is documented in more detail in [AIP-160](https://google.aip.dev/160).
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of results to return. If not set, the service selects a default.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token received from the `next_page_token` field in the response. Send that page token to receive the subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v2/{name}:cancel:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -909,7 +961,6 @@ components:
           enum:
             - TYPE_UNSPECIFIED
             - TASK_RUN
-            - CUSTOM_RUN
           readOnly: true
           type: string
         whenExpressions:
@@ -1274,6 +1325,18 @@ components:
           description: A token identifying a page of results the server should return.
           type: string
       type: object
+    ListLocationsResponse:
+      description: The response message for Locations.ListLocations.
+      properties:
+        locations:
+          description: A list of locations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Location"
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
     ListRepositoriesResponse:
       description: Message for response to listing Repositories.
       properties:
@@ -1285,6 +1348,29 @@ components:
           items:
             $ref: "#/components/schemas/Repository"
           type: array
+      type: object
+    Location:
+      description: A resource that represents a Google Cloud location.
+      properties:
+        displayName:
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+          type: object
+        locationId:
+          description: 'The canonical id for this location. For example: `"us-east1"`.'
+          type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata. For example the available capacity at the given location.
+          type: object
+        name:
+          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
       type: object
     OAuthCredential:
       description: Represents an OAuth token of the account that authorized the Connection, and associated metadata.
@@ -1527,6 +1613,10 @@ components:
           items:
             $ref: "#/components/schemas/PipelineTask"
           type: array
+        generatedYaml:
+          description: Output only. auto-generated yaml that is output only for display purpose for workflows using pipeline_spec, used by UI/gcloud cli for Workflows.
+          readOnly: true
+          type: string
         params:
           description: List of parameters.
           items:
@@ -1840,12 +1930,6 @@ components:
     TaskRef:
       description: TaskRef can be used to refer to a specific instance of a task. PipelineRef can be used to refer to a specific instance of a Pipeline.
       properties:
-        customTask:
-          description: Optional. The CustomTask definition to use.
-          enum:
-            - CUSTOM_TASK_UNSPECIFIED
-            - DOCKER
-          type: string
         name:
           deprecated: true
           description: Name of the task.

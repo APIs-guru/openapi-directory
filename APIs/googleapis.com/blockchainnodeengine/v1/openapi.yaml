@@ -482,6 +482,9 @@ components:
           description: Output only. The fully qualified name of the blockchain node. e.g. `projects/my-project/locations/us-central1/blockchainNodes/my-node`.
           readOnly: true
           type: string
+        pscOnly:
+          description: Optional. This can only be accessed through the private ip.
+          type: boolean
         state:
           description: Output only. A status representing the state of the node.
           enum:
@@ -512,6 +515,10 @@ components:
           $ref: "#/components/schemas/EndpointInfo"
           description: Output only. The endpoint information through which to interact with a blockchain node.
           readOnly: true
+        serviceAttachment:
+          description: "Output only. A service attachment that exposes a node, and has the following format: projects/{project}/regions/{region}/serviceAttachments/{service_attachment_name}"
+          readOnly: true
+          type: string
       type: object
     EndpointInfo:
       description: Contains endpoint information through which to interact with a blockchain node.
@@ -691,7 +698,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     OperationMetadata:

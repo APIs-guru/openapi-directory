@@ -79,6 +79,15 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Options to include extra data
+          in: query
+          name: includeExtraData
+          schema:
+            enum:
+              - INCLUDE_EXTRA_DATA_UNSPECIFIED
+              - INCLUDE_EXTRA_DATA_NONE
+              - INCLUDE_GOOGLE_GENERATED_METADATA
+            type: string
       responses:
         "200":
           content:
@@ -1131,16 +1140,6 @@ paths:
               - STANDARD
               - FLEXIBLE
             type: string
-        - description: Optional. Maximum results to return per page.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Optional. Continuation token for fetching the next page of results.
-          in: query
-          name: pageToken
-          schema:
-            type: string
       responses:
         "200":
           content:
@@ -1268,6 +1267,15 @@ paths:
           name: servicesId
           required: true
           schema:
+            type: string
+        - description: Optional. Options to include extra data
+          in: query
+          name: includeExtraData
+          schema:
+            enum:
+              - INCLUDE_EXTRA_DATA_UNSPECIFIED
+              - INCLUDE_EXTRA_DATA_NONE
+              - INCLUDE_GOOGLE_GENERATED_METADATA
             type: string
       responses:
         "200":
@@ -1510,6 +1518,15 @@ paths:
           name: versionsId
           required: true
           schema:
+            type: string
+        - description: Optional. Options to include extra data
+          in: query
+          name: includeExtraData
+          schema:
+            enum:
+              - INCLUDE_EXTRA_DATA_UNSPECIFIED
+              - INCLUDE_EXTRA_DATA_NONE
+              - INCLUDE_GOOGLE_GENERATED_METADATA
             type: string
         - description: Controls the set of fields returned in the Get response.
           in: query
@@ -2266,6 +2283,11 @@ components:
           description: Output only. The Google Container Registry domain used for storing managed build docker images for this application.
           readOnly: true
           type: string
+        generatedCustomerMetadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Additional Google Generated Customer Metadata, this field won't be provided by default and can be requested by setting the IncludeExtraData field in GetApplicationRequest
+          type: object
         iap:
           $ref: "#/components/schemas/IdentityAwareProxy"
         id:
@@ -2511,6 +2533,22 @@ components:
           description: The target value for the metric.
           format: double
           type: number
+      type: object
+    Date:
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: A full date, with non-zero year, month, and day values. A month and day, with a zero year (for example, an anniversary). A year on its own, with a zero month and a zero day. A year and month, with a zero day (for example, a credit card expiration date).Related types: google.type.TimeOfDay google.type.DateTime google.protobuf.Timestamp"
+      properties:
+        day:
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          format: int32
+          type: integer
+        year:
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          format: int32
+          type: integer
       type: object
     DebugInstanceRequest:
       description: Request message for Instances.DebugInstance.
@@ -3439,6 +3477,15 @@ components:
     Runtime:
       description: Runtime versions for App Engine.
       properties:
+        decommissionedDate:
+          $ref: "#/components/schemas/Date"
+          description: Date when Runtime is decommissioned.
+        deprecationDate:
+          $ref: "#/components/schemas/Date"
+          description: Date when Runtime is deprecated.
+        endOfSupportDate:
+          $ref: "#/components/schemas/Date"
+          description: Date when Runtime is end of support.
         environment:
           description: The environment of the runtime.
           enum:
@@ -3459,6 +3506,7 @@ components:
             - GA
             - DEPRECATED
             - DECOMMISSIONED
+            - END_OF_SUPPORT
           type: string
         warnings:
           description: Warning messages, e.g., a deprecation warning.
@@ -3476,6 +3524,11 @@ components:
     Service:
       description: A Service resource is a logical component of an application that can share state and communicate in a secure fashion with other services. For example, an application that handles customer requests might include separate services to handle tasks such as backend data analysis or API requests from mobile devices. Each service has a collection of versions that define a specific set of code used to implement the functionality of that service.
       properties:
+        generatedCustomerMetadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Additional Google Generated Customer Metadata, this field won't be provided by default and can be requested by setting the IncludeExtraData field in GetServiceRequest
+          type: object
         id:
           description: "Relative name of the service within the application. Example: default.@OutputOnly"
           type: string
@@ -3721,6 +3774,11 @@ components:
         flexibleRuntimeSettings:
           $ref: "#/components/schemas/FlexibleRuntimeSettings"
           description: Settings for App Engine flexible runtimes.
+        generatedCustomerMetadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Additional Google Generated Customer Metadata, this field won't be provided by default and can be requested by setting the IncludeExtraData field in GetVersionRequest
+          type: object
         handlers:
           description: An ordered list of URL-matching patterns that should be applied to incoming requests. The first matching URL handles the request and other request handlers are not attempted.Only returned in GET requests if view=FULL is set.
           items:
@@ -3841,7 +3899,7 @@ components:
             - PRIVATE_IP_RANGES
           type: string
         name:
-          description: Full Serverless VPC Access Connector name e.g. /projects/my-project/locations/us-central1/connectors/c1.
+          description: Full Serverless VPC Access Connector name e.g. projects/my-project/locations/us-central1/connectors/c1.
           type: string
       type: object
     ZipInfo:

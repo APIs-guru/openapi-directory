@@ -49,13 +49,13 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
       tags:
         - enterprises
     parameters:
@@ -107,13 +107,13 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
       tags:
         - enterprises
   /v1/{parent}/devices:
@@ -141,13 +141,13 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
       tags:
         - enterprises
     parameters:
@@ -182,13 +182,13 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
       tags:
         - enterprises
     parameters:
@@ -228,13 +228,13 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - https://www.googleapis.com/auth/sdm.service
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
           Oauth2c:
-            - https://www.googleapis.com/auth/userinfo.email
+            - https://www.googleapis.com/auth/sdm.service
       tags:
         - enterprises
     parameters:
@@ -440,8 +440,8 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
             https://www.googleapis.com/auth/sdm.service: See and/or control the devices that you selected
-            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -449,7 +449,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
             https://www.googleapis.com/auth/sdm.service: See and/or control the devices that you selected
-            https://www.googleapis.com/auth/userinfo.email: See your primary Google Account email address
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

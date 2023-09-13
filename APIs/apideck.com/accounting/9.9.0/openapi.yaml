@@ -2661,6 +2661,8 @@ paths:
           Procountor only accepts the following values for the payment_method field: BANK_TRANSFER, DIRECT_PAYMENT, CLEARING, CREDIT_CARD_CHARGE, FOREIGN_PAYMENT, OTHER, CASH, DOMESTIC_PAYMENT_PLUSGIRO, DOMESTIC_PAYMENT_BANKGIRO, DOMESTIC_PAYMENT_CREDITOR, DKLMPKRE, NETS.
           connector: procountor-fi
           description: ""
+        - connector: exact-online
+          description: To configure the shipping address for invoices, it is recommended to update the customer resource. If there is a need to change this property, modifying the customer information is advised.
       x-codeSamples:
         - label: Node
           lang: TypeScript
