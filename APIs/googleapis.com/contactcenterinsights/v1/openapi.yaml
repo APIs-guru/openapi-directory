@@ -2021,7 +2021,7 @@ components:
           description: Configuration that applies to all conversations.
         gcsSource:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1IngestConversationsRequestGcsSource"
-          description: A cloud storage bucket source.
+          description: A cloud storage bucket source. Note that any previously ingested objects from the source will be skipped to avoid duplication.
         parent:
           description: Required. The parent resource for new conversations.
           type: string
@@ -3524,7 +3524,7 @@ components:
           description: Configuration that applies to all conversations.
         gcsSource:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1IngestConversationsRequestGcsSource"
-          description: A cloud storage bucket source.
+          description: A cloud storage bucket source. Note that any previously ingested objects from the source will be skipped to avoid duplication.
         parent:
           description: Required. The parent resource for new conversations.
           type: string

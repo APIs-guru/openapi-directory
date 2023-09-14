@@ -431,6 +431,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:rollbackTarget:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a `Rollout` to roll back the specified target.
+      operationId: clouddeploy.projects.locations.deliveryPipelines.rollbackTarget
+      parameters:
+        - description: Required. The `DeliveryPipeline` for which the rollback `Rollout` should be created. Format should be projects/{project_id}/locations/{location_name}/deliveryPipelines/{pipeline_name}.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RollbackTargetRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RollbackTargetResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{name}:terminate:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2537,6 +2579,45 @@ components:
       description: The response object from 'RetryJob'.
       properties: {}
       type: object
+    RollbackTargetConfig:
+      description: Configs for the Rollback rollout.
+      properties:
+        rollout:
+          $ref: "#/components/schemas/Rollout"
+          description: Optional. The rollback `Rollout` to create.
+        startingPhaseId:
+          description: Optional. The starting phase ID for the `Rollout`. If unspecified, the `Rollout` will start in the stable phase.
+          type: string
+      type: object
+    RollbackTargetRequest:
+      description: The request object for `RollbackTarget`.
+      properties:
+        releaseId:
+          description: Optional. ID of the `Release` to roll back to. If this isn't specified, the previous successful `Rollout` to the specified target will be used to determine the `Release`.
+          type: string
+        rollbackConfig:
+          $ref: "#/components/schemas/RollbackTargetConfig"
+          description: Optional. Configs for the rollback `Rollout`.
+        rolloutId:
+          description: Required. ID of the rollback `Rollout` to create.
+          type: string
+        rolloutToRollBack:
+          description: Optional. If provided, this must be the latest `Rollout` that is on the `Target`.
+          type: string
+        targetId:
+          description: Required. ID of the `Target` that is being rolled back.
+          type: string
+        validateOnly:
+          description: Optional. If set to true, the request is validated and the user is provided with a `RollbackTargetResponse`.
+          type: boolean
+      type: object
+    RollbackTargetResponse:
+      description: The response object from `RollbackTarget`.
+      properties:
+        rollbackConfig:
+          $ref: "#/components/schemas/RollbackTargetConfig"
+          description: The config of the rollback `Rollout` created or will be created.
+      type: object
     Rollout:
       description: A `Rollout` resource in the Cloud Deploy API. A `Rollout` contains information around a specific deployment to a `Target`.
       properties:
@@ -2627,6 +2708,16 @@ components:
           description: Output only. The phases that represent the workflows of this `Rollout`.
           items:
             $ref: "#/components/schemas/Phase"
+          readOnly: true
+          type: array
+        rollbackOfRollout:
+          description: Output only. Name of the `Rollout` that is rolled back by this `Rollout`. Empty if this `Rollout` wasn't created as a rollback.
+          readOnly: true
+          type: string
+        rolledBackByRollouts:
+          description: Output only. Names of `Rollouts` that rolled back this `Rollout`.
+          items:
+            type: string
           readOnly: true
           type: array
         state:

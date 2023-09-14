@@ -257,7 +257,9 @@ paths:
 
          Adyen uses the information from the [legal entity](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/legalEntities) to run automated verification checks. If these checks fail, you will be notified to provide additional documents.
 
-         You should only upload documents when Adyen requests additional information for the legal entity. 
+         You should only upload documents when Adyen requests additional information for the legal entity.
+
+         >You can upload a maximum of 15 pages for photo IDs.
       operationId: post-documents
       parameters:
         - description: Use a suberror code as your requested verification code. You can include one code at a time in your request header. Requested verification codes can only be used in your test environment.
@@ -439,7 +441,10 @@ paths:
       x-methodName: getDocument
       x-sortIndex: 5
     patch:
-      description: Updates a document.
+      description: |-
+        Updates a document.
+
+         >You can upload a maximum of 15 pages for photo IDs.
       operationId: patch-documents-id
       parameters:
         - description: The unique identifier of the document to be updated.
@@ -3009,26 +3014,9 @@ components:
           description: The number in the document.
           type: string
         type:
-          description: |-
-            Type of document, used when providing an ID number or uploading a document. The possible values depend on the legal entity type.
-
-            * For **organization**, the `type` values can be **proofOfAddress**, **registrationDocument**, **taxDocument**, **proofOfOwnership**, or **proofOfIndustry**.
-
-            * For **individual**, the `type` values can be **identityCard**, **driversLicense**, **proofOfNationalIdNumber**, **proofOfResidency**, or **proofOfIndustry**.
-
-            * Use **bankStatement** to upload documents for a [transfer instrument](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/transferInstruments__resParam_id).
+          description: Type of identity data. For **individual**, the `type` value is **nationalIdNumber**.
           enum:
-            - bankStatement
-            - driversLicense
-            - identityCard
-            - nationalIdNumber
-            - passport
-            - proofOfAddress
             - proofOfNationalIdNumber
-            - proofOfResidency
-            - registrationDocument
-            - taxDocument
-            - proofOfIndustry
           type: string
       required:
         - type

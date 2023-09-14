@@ -456,6 +456,67 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  /v1/{target}:analyzeWorkloadMove:
+    get:
+      description: Analyzes a hypothetical move of a source resource to a target workload to surface compliance risks. The analysis is best effort and is not guaranteed to be exhaustive.
+      operationId: assuredworkloads.organizations.locations.workloads.analyzeWorkloadMove
+      parameters:
+        - description: "Required. The resource ID of the folder-based destination workload. This workload is where the source resource will hypothetically be moved to. Specify the workload's relative resource name, formatted as: \"organizations/{ORGANIZATION_ID}/locations/{LOCATION_ID}/workloads/{WORKLOAD_ID}\" For example: \"organizations/123/locations/us-east1/workloads/assured-workload-2\""
+          in: path
+          name: target
+          required: true
+          schema:
+            type: string
+        - description: Optional. List of asset types to be analyzed, including and under the source resource. If empty, all assets are analyzed. The complete list of asset types is available [here](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+          explode: true
+          in: query
+          name: assetTypes
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: Optional. Page size. If a value is not specified, the default value of 10 is used.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The page token from the previous response. It needs to be passed in the second and following requests.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "The source type is a project. Specify the project's relative resource name, formatted as either a project number or a project ID: \"projects/{PROJECT_NUMBER}\" or \"projects/{PROJECT_ID}\" For example: \"projects/951040570662\" when specifying a project number, or \"projects/my-project-123\" when specifying a project ID."
+          in: query
+          name: project
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1AnalyzeWorkloadMoveResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -547,6 +608,33 @@ components:
       description: Response for violation acknowledgement
       properties: {}
       type: object
+    GoogleCloudAssuredworkloadsV1AnalyzeWorkloadMoveResponse:
+      description: Response containing the analysis results for the hypothetical resource move.
+      properties:
+        assetMoveAnalyses:
+          description: List of analysis results for each asset in scope.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1AssetMoveAnalysis"
+          type: array
+        nextPageToken:
+          description: The next page token. Is empty if the last page is reached.
+          type: string
+      type: object
+    GoogleCloudAssuredworkloadsV1AssetMoveAnalysis:
+      description: Represents move analysis results for an asset.
+      properties:
+        analysisGroups:
+          description: List of eligible analyses performed for the asset.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1MoveAnalysisGroup"
+          type: array
+        asset:
+          description: "The full resource name of the asset being analyzed. Example: //compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1"
+          type: string
+        assetType:
+          description: Type of the asset being analyzed. Possible values will be among the ones listed [here](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+          type: string
+      type: object
     GoogleCloudAssuredworkloadsV1CreateWorkloadOperationMetadata:
       description: Operation metadata to give request details of CreateWorkload.
       properties:
@@ -606,6 +694,40 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1Workload"
           type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1MoveAnalysisGroup:
+      description: Represents a logical group of checks performed for an asset. If successful, the group contains the analysis result, otherwise it contains an error with the failure reason.
+      properties:
+        analysisResult:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1MoveAnalysisResult"
+          description: Result of a successful analysis.
+        displayName:
+          description: Name of the analysis group.
+          type: string
+        error:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Error details for a failed analysis.
+      type: object
+    GoogleCloudAssuredworkloadsV1MoveAnalysisResult:
+      description: Represents the successful move analysis results for a group.
+      properties:
+        blockers:
+          description: List of blockers. If not resolved, these will result in compliance violations in the target.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1MoveImpact"
+          type: array
+        warnings:
+          description: List of warnings. These are risks that may or may not result in compliance violations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1MoveImpact"
+          type: array
+      type: object
+    GoogleCloudAssuredworkloadsV1MoveImpact:
+      description: Represents the impact of moving the asset to the target.
+      properties:
+        detail:
+          description: Explanation of the impact.
+          type: string
       type: object
     GoogleCloudAssuredworkloadsV1MutatePartnerPermissionsRequest:
       description: Request for updating permission settings for a partner workload.

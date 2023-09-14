@@ -71,6 +71,35 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Update notification settings.
+      operationId: advisorynotifications.organizations.locations.updateSettings
+      parameters:
+        - description: "Output only. The resource name of the settings to retrieve. Format: organizations/{organization}/locations/{location}/settings."
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAdvisorynotificationsV1Settings"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAdvisorynotificationsV1Settings"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   /v1/{parent}/notifications:
     get:
       description: Lists notifications under a given parent.
@@ -312,6 +341,29 @@ components:
         subject:
           $ref: "#/components/schemas/GoogleCloudAdvisorynotificationsV1Subject"
           description: The subject line of the notification.
+      type: object
+    GoogleCloudAdvisorynotificationsV1NotificationSettings:
+      description: Settings for each NotificationType.
+      properties:
+        enabled:
+          description: Whether the associated NotificationType is enabled.
+          type: boolean
+      type: object
+    GoogleCloudAdvisorynotificationsV1Settings:
+      description: Settings for Advisory Notifications.
+      properties:
+        etag:
+          description: Required. Fingerprint for optimistic concurrency returned in Get requests. Must be provided for Update requests. If the value provided does not match the value known to the server, ABORTED will be thrown, and the client should retry the read-modify-write cycle.
+          type: string
+        name:
+          description: "Output only. The resource name of the settings to retrieve. Format: organizations/{organization}/locations/{location}/settings."
+          readOnly: true
+          type: string
+        notificationSettings:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudAdvisorynotificationsV1NotificationSettings"
+          description: Required. Map of each notification type and its settings to get/set all settings at once. The server will validate the value for each notification type.
+          type: object
       type: object
     GoogleCloudAdvisorynotificationsV1Subject:
       description: A subject line of a notification.

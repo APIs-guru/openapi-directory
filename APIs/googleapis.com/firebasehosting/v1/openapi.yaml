@@ -276,7 +276,7 @@ components:
             $ref: "#/components/schemas/Status"
           type: array
         liveMigrationSteps:
-          description: A set of DNS record updates and ACME challenges that allow you to transition domain names to Firebase Hosting with zero downtime. These updates allow Hosting's to create an SSL certificate and establish ownership for your custom domain before Hosting begins serving traffic on it. If your domain name is already in active use with another provider, add one of the challenges and make the recommended dns updates. After adding challenges and adjusting DNS records as necessary, wait for the `ownershipState` to be `OWNERSHIP_ACTIVE` and the `certState` to be `CERT_ACTIVE` before sending traffic to Hosting.
+          description: A set of DNS record updates and ACME challenges that allow you to transition domain names to Firebase Hosting with zero downtime. These updates allow Hosting to create an SSL certificate and establish ownership for your custom domain before Hosting begins serving traffic on it. If your domain name is already in active use with another provider, add one of the challenges and make the recommended DNS updates. After adding challenges and adjusting DNS records as necessary, wait for the `ownershipState` to be `OWNERSHIP_ACTIVE` and the `certState` to be `CERT_ACTIVE` before sending traffic to Hosting.
           items:
             $ref: "#/components/schemas/LiveMigrationStep"
           type: array
@@ -296,14 +296,14 @@ components:
           description: "A set of DNS record updates that allow Hosting to serve secure content on your domain name. The record type determines the update's purpose: - `A` and `AAAA`: Updates your domain name's IP addresses so that they direct traffic to Hosting servers. - `TXT`: Updates ownership permissions on your domain name, letting Hosting know that your custom domain's project has permission to perfrom actions for that domain name. - `CAA`: Updates your domain name's list of authorized Certificate Authorities (CAs). Only present if you have existing `CAA` records that prohibit Hosting's CA from minting certs for your domain name. These updates include all DNS changes you'll need to get started with Hosting, but, if made all at once, can result in a brief period of downtime for your domain name--while Hosting creates and uploads an SSL cert, for example. If you'd like to add your domain name to Hosting without downtime, complete the `liveMigrationSteps` first, before making the remaining updates in this field."
       type: object
     DnsRecord:
-      description: DNS records are resource records that define how systems and services should behave when handling requests for a domain name. For example, when you add `A` records to your domain name's DNS records, you're informing other systems (e.g. your users' web browsers) to contact those IPv4 addresses to retrieve resources relevant to your domain name (e.g. your Hosting site files).
+      description: DNS records are resource records that define how systems and services should behave when handling requests for a domain name. For example, when you add `A` records to your domain name's DNS records, you're informing other systems (such as your users' web browsers) to contact those IPv4 addresses to retrieve resources relevant to your domain name (such as your Hosting site files).
       properties:
         domainName:
           description: Output only. The domain name the record pertains to, e.g. `foo.bar.com.`.
           readOnly: true
           type: string
         rdata:
-          description: "Output only. The data of the record. The meaning of the value depends on record type: - A and AAAA: IP addresses for the domain name. - CNAME: Another domain to check for records. - TXT: Arbitrary text strings associated with the domain name. Hosting uses TXT records to determine a which Firebase Projects have permission to act on the domain name's behalf. - CAA: The record's flags, tag, and value, e.g. `0 issue \"pki.goog\"`."
+          description: "Output only. The data of the record. The meaning of the value depends on record type: - A and AAAA: IP addresses for the domain name. - CNAME: Another domain to check for records. - TXT: Arbitrary text strings associated with the domain name. Hosting uses TXT records to determine which Firebase projects have permission to act on the domain name's behalf. - CAA: The record's flags, tag, and value, e.g. `0 issue \"pki.goog\"`."
           readOnly: true
           type: string
         requiredAction:
@@ -327,7 +327,7 @@ components:
           type: string
       type: object
     DnsRecordSet:
-      description: A set of DNS records relevant to the set up and maintenance of a Custom Domain in Firebase Hosting.
+      description: A set of DNS records relevant to the setup and maintenance of a custom domain in Firebase Hosting.
       properties:
         checkError:
           $ref: "#/components/schemas/Status"
@@ -345,10 +345,10 @@ components:
           type: array
       type: object
     DnsUpdates:
-      description: A set of DNS record updates that you should make to allow Hosting to serve secure content in response to requests against your domain name. These updates present the current state of your domain name's DNS records when Hosting last queried them, and the desired set of records that Hosting needs to see before your Custom Domain can be fully active.
+      description: A set of DNS record updates that you should make to allow Hosting to serve secure content in response to requests against your domain name. These updates present the current state of your domain name's DNS records when Hosting last queried them, and the desired set of records that Hosting needs to see before your custom domain can be fully active.
       properties:
         checkTime:
-          description: The last time Hosting checked your CustomDomain's DNS records.
+          description: The last time Hosting checked your custom domain's DNS records.
           format: google-datetime
           type: string
         desired:

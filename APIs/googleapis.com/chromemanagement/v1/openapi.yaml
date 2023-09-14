@@ -2699,9 +2699,13 @@ components:
           enum:
             - EVENT_TYPE_UNSPECIFIED
             - AUDIO_SEVERE_UNDERRUN
+            - NETWORK_STATE_CHANGE
             - USB_ADDED
             - USB_REMOVED
             - NETWORK_HTTPS_LATENCY_CHANGE
+            - WIFI_SIGNAL_STRENGTH_LOW
+            - WIFI_SIGNAL_STRENGTH_RECOVERED
+            - VPN_CONNECTION_STATE_CHANGE
           type: string
         httpsLatencyChangeEvent:
           $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryHttpsLatencyChangeEvent"
@@ -2711,6 +2715,10 @@ components:
           description: Output only. Resource name of the event.
           readOnly: true
           type: string
+        networkStateChangeEvent:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryNetworkConnectionStateChangeEvent"
+          description: Output only. Payload for network connection state change event. Present only when `event_type` is `NETWORK_STATE_CHANGE`.
+          readOnly: true
         reportTime:
           description: Timestamp that represents when the event was reported.
           format: google-datetime
@@ -2723,6 +2731,14 @@ components:
           $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryUserInfo"
           description: Output only. Information about the user associated with the event.
           readOnly: true
+        vpnConnectionStateChangeEvent:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryNetworkConnectionStateChangeEvent"
+          description: Output only. Payload for VPN connection state change event. Present only when `event_type` is `VPN_CONNECTION_STATE_CHANGE`.
+          readOnly: true
+        wifiSignalStrengthEvent:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryNetworkSignalStrengthEvent"
+          description: Output only. Payload for WiFi signal strength events. Present only when `event_type` is `WIFI_SIGNAL_STRENGTH_LOW` or `WIFI_SIGNAL_STRENGTH_RECOVERED`.
+          readOnly: true
       type: object
     GoogleChromeManagementV1TelemetryEventNotificationFilter:
       description: Configures how the telemetry events should be filtered.
@@ -2733,9 +2749,13 @@ components:
             enum:
               - EVENT_TYPE_UNSPECIFIED
               - AUDIO_SEVERE_UNDERRUN
+              - NETWORK_STATE_CHANGE
               - USB_ADDED
               - USB_REMOVED
               - NETWORK_HTTPS_LATENCY_CHANGE
+              - WIFI_SIGNAL_STRENGTH_LOW
+              - WIFI_SIGNAL_STRENGTH_RECOVERED
+              - VPN_CONNECTION_STATE_CHANGE
             type: string
           type: array
       type: object
@@ -2752,6 +2772,34 @@ components:
             - RECOVERY
             - PROBLEM
           type: string
+      type: object
+    GoogleChromeManagementV1TelemetryNetworkConnectionStateChangeEvent:
+      description: "`TelemetryNetworkConnectionStateChangeEvent` is triggered on network connection state changes. * Granular permission needed: TELEMETRY_API_NETWORK_REPORT"
+      properties:
+        connectionState:
+          description: Current connection state of the network.
+          enum:
+            - NETWORK_CONNECTION_STATE_UNSPECIFIED
+            - ONLINE
+            - CONNECTED
+            - PORTAL
+            - CONNECTING
+            - NOT_CONNECTED
+          type: string
+        guid:
+          description: Unique identifier of the network.
+          type: string
+      type: object
+    GoogleChromeManagementV1TelemetryNetworkSignalStrengthEvent:
+      description: "`TelemetryNetworkSignalStrengthEvent` is triggered on WiFi signal strength events. * Granular permission needed: TELEMETRY_API_NETWORK_REPORT"
+      properties:
+        guid:
+          description: Unique identifier of the network.
+          type: string
+        signalStrengthDbm:
+          description: Signal strength RSSI value.
+          format: int32
+          type: integer
       type: object
     GoogleChromeManagementV1TelemetryNotificationConfig:
       description: Configuration to receive notifications of telemetry data.

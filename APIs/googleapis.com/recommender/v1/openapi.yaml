@@ -212,7 +212,7 @@ paths:
       description: Mark the Recommendation State as Dismissed. Users can use this method to indicate to the Recommender API that an ACTIVE recommendation has to be marked back as DISMISSED. MarkRecommendationDismissed can be applied to recommendations in ACTIVE state. Requires the recommender.*.update IAM permission for the specified recommender.
       operationId: recommender.projects.locations.recommenders.recommendations.markDismissed
       parameters:
-        - description: Name of the recommendation.
+        - description: Required. Name of the recommendation.
           in: path
           name: name
           required: true

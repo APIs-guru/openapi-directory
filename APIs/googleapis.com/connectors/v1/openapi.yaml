@@ -1564,6 +1564,10 @@ components:
           description: "Output only. GCR location where the runtime image is stored. formatted like: gcr.io/{bucketName}/{imageName}"
           readOnly: true
           type: string
+        isTrustedTester:
+          description: Output only. Is trusted tester program enabled for the project.
+          readOnly: true
+          type: boolean
         labels:
           additionalProperties:
             type: string
@@ -1751,6 +1755,9 @@ components:
         resourceRequests:
           $ref: "#/components/schemas/ResourceRequests"
           description: System resource requests.
+        sharedDeployment:
+          description: The name of shared connector deployment.
+          type: string
       type: object
     ConnectorVersion:
       description: ConnectorVersion indicates a specific version of a connector.
@@ -1867,6 +1874,10 @@ components:
           $ref: "#/components/schemas/ResourceRequests"
           description: Output only. System resource requests.
           readOnly: true
+        sharedDeployment:
+          description: Output only. The name of shared connector deployment.
+          readOnly: true
+          type: string
       type: object
     ConnectorsLogConfig:
       description: Log configuration for the connection.
@@ -2144,9 +2155,15 @@ components:
         enrichmentEnabled:
           description: Enrichment Enabled.
           type: boolean
+        privateConnectivityEnabled:
+          description: Optional. Private Connectivity Enabled.
+          type: boolean
+        publicEventsListenerEndpoint:
+          description: Optional. Public Events listener endpoint.
+          type: string
         registrationDestinationConfig:
           $ref: "#/components/schemas/DestinationConfig"
-          description: Registration endpoint for auto regsitration.
+          description: Registration endpoint for auto registration.
       type: object
     EventingConfigTemplate:
       description: Eventing Config details of a connector version.
@@ -2245,6 +2262,7 @@ components:
             - STATE_UNSPECIFIED
             - ACTIVE
             - ERROR
+            - PUBLIC_ENDPOINT_REQUIRED
           readOnly: true
           type: string
       type: object
@@ -2394,6 +2412,9 @@ components:
         field:
           description: Name of the Field.
           type: string
+        jsonSchema:
+          $ref: "#/components/schemas/JsonSchema"
+          description: JsonSchema representation of this entity's schema
         key:
           description: The following boolean field specifies if the current Field acts as a primary key or id if the parent is of type entity.
           type: boolean
@@ -2555,12 +2576,142 @@ components:
         description:
           description: A brief description of the Parameter.
           type: string
+        jsonSchema:
+          $ref: "#/components/schemas/JsonSchema"
+          description: JsonSchema representation of this action's parameter
         nullable:
           description: Specifies whether a null value is allowed.
           type: boolean
         parameter:
           description: Name of the Parameter.
           type: string
+      type: object
+    JsonSchema:
+      description: JsonSchema representation of schema metadata
+      properties:
+        description:
+          description: A description of this schema.
+          type: string
+        enum:
+          description: Possible values for an enumeration. This works in conjunction with `type` to represent types with a fixed set of legal values
+          items: {}
+          type: array
+        format:
+          description: Format of the value as per https://json-schema.org/understanding-json-schema/reference/string.html#format
+          type: string
+        items:
+          $ref: "#/components/schemas/JsonSchema"
+          description: Schema that applies to array values, applicable only if this is of type `array`.
+        jdbcType:
+          description: JDBC datatype of the field.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - DATA_TYPE_INT
+            - DATA_TYPE_SMALLINT
+            - DATA_TYPE_DOUBLE
+            - DATA_TYPE_DATE
+            - DATA_TYPE_DATETIME
+            - DATA_TYPE_TIME
+            - DATA_TYPE_STRING
+            - DATA_TYPE_LONG
+            - DATA_TYPE_BOOLEAN
+            - DATA_TYPE_DECIMAL
+            - DATA_TYPE_UUID
+            - DATA_TYPE_BLOB
+            - DATA_TYPE_BIT
+            - DATA_TYPE_TINYINT
+            - DATA_TYPE_INTEGER
+            - DATA_TYPE_BIGINT
+            - DATA_TYPE_FLOAT
+            - DATA_TYPE_REAL
+            - DATA_TYPE_NUMERIC
+            - DATA_TYPE_CHAR
+            - DATA_TYPE_VARCHAR
+            - DATA_TYPE_LONGVARCHAR
+            - DATA_TYPE_TIMESTAMP
+            - DATA_TYPE_NCHAR
+            - DATA_TYPE_NVARCHAR
+            - DATA_TYPE_LONGNVARCHAR
+            - DATA_TYPE_NULL
+            - DATA_TYPE_OTHER
+            - DATA_TYPE_JAVA_OBJECT
+            - DATA_TYPE_DISTINCT
+            - DATA_TYPE_STRUCT
+            - DATA_TYPE_ARRAY
+            - DATA_TYPE_CLOB
+            - DATA_TYPE_REF
+            - DATA_TYPE_DATALINK
+            - DATA_TYPE_ROWID
+            - DATA_TYPE_BINARY
+            - DATA_TYPE_VARBINARY
+            - DATA_TYPE_LONGVARBINARY
+            - DATA_TYPE_NCLOB
+            - DATA_TYPE_SQLXML
+            - DATA_TYPE_REF_CURSOR
+            - DATA_TYPE_TIME_WITH_TIMEZONE
+            - DATA_TYPE_TIMESTAMP_WITH_TIMEZONE
+          type: string
+          x-enumDeprecated:
+            - false
+            - true
+            - false
+            - false
+            - false
+            - true
+            - false
+            - true
+            - true
+            - false
+            - false
+            - true
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+            - false
+        properties:
+          additionalProperties:
+            $ref: "#/components/schemas/JsonSchema"
+          description: The child schemas, applicable only if this is of type `object`. The key is the name of the property and the value is the json schema that describes that property
+          type: object
+        required:
+          description: Whether this property is required.
+          items:
+            type: string
+          type: array
+        type:
+          description: "JSON Schema Validation: A Vocabulary for Structural Validation of JSON"
+          items:
+            type: string
+          type: array
       type: object
     JwtClaims:
       description: JWT claims used for the jwt-bearer authorization grant.
@@ -3185,6 +3336,9 @@ components:
         field:
           description: Name of the result field.
           type: string
+        jsonSchema:
+          $ref: "#/components/schemas/JsonSchema"
+          description: JsonSchema representation of this action's result
       type: object
     RetryEventSubscriptionRequest:
       description: Request message for ConnectorsService.RefreshEventSubscription
@@ -3218,12 +3372,20 @@ components:
           description: Output only. Name of the action.
           readOnly: true
           type: string
+        inputJsonSchema:
+          $ref: "#/components/schemas/JsonSchema"
+          description: Output only. JsonSchema representation of this action's input metadata
+          readOnly: true
         inputParameters:
           description: Output only. List of input parameter metadata for the action.
           items:
             $ref: "#/components/schemas/InputParameter"
           readOnly: true
           type: array
+        resultJsonSchema:
+          $ref: "#/components/schemas/JsonSchema"
+          description: Output only. JsonSchema representation of this action's result metadata
+          readOnly: true
         resultMetadata:
           description: Output only. List of result field metadata.
           items:
@@ -3304,6 +3466,10 @@ components:
             $ref: "#/components/schemas/Field"
           readOnly: true
           type: array
+        jsonSchema:
+          $ref: "#/components/schemas/JsonSchema"
+          description: Output only. JsonSchema representation of this entity's metadata
+          readOnly: true
       type: object
     Secret:
       description: Secret provides a reference to entries in Secret Manager.

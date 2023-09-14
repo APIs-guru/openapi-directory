@@ -697,6 +697,10 @@ components:
     GoogleCloudPaymentsResellerSubscriptionV1Product:
       description: A Product resource that defines a subscription service that can be resold.
       properties:
+        bundleDetails:
+          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetails"
+          description: Output only. Output Only. Specifies the details for a bundle product.
+          readOnly: true
         finiteBillingCycleDetails:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1FiniteBillingCycleDetails"
           description: Optional. Details for a subscription line item with finite billing cycles. If unset, the line item will be charged indefinitely.
@@ -710,6 +714,14 @@ components:
             $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ProductPriceConfig"
           readOnly: true
           type: array
+        productType:
+          description: Output only. Output Only. Specifies the type of the product.
+          enum:
+            - PRODUCT_TYPE_UNSPECIFIED
+            - PRODUCT_TYPE_SUBSCRIPTION
+            - PRODUCT_TYPE_BUNDLE_SUBSCRIPTION
+          readOnly: true
+          type: string
         regionCodes:
           description: 'Output only. 2-letter ISO region code where the product is available in. Ex. "US" Please refers to: https://en.wikipedia.org/wiki/ISO_3166-1'
           items:
@@ -726,6 +738,30 @@ components:
             $ref: "#/components/schemas/GoogleTypeLocalizedText"
           readOnly: true
           type: array
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetails:
+      description: Details for a bundle product.
+      properties:
+        bundleElements:
+          description: The individual products that are included in the bundle.
+          items:
+            $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetailsBundleElement"
+          type: array
+        entitlementMode:
+          description: The entitlement mode of the bundle product.
+          enum:
+            - ENTITLEMENT_MODE_UNSPECIFIED
+            - ENTITLEMENT_MODE_FULL
+            - ENTITLEMENT_MODE_INCREMENTAL
+          type: string
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetailsBundleElement:
+      description: The individual product that is included in the bundle.
+      properties:
+        product:
+          description: Required. Output only. Product resource name that identifies the bundle element. The format is 'partners/{partner_id}/products/{product_id}'.
+          readOnly: true
+          type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ProductPayload:
       description: Specifies product specific payload.

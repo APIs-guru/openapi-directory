@@ -482,9 +482,6 @@ components:
           description: Output only. The fully qualified name of the blockchain node. e.g. `projects/my-project/locations/us-central1/blockchainNodes/my-node`.
           readOnly: true
           type: string
-        pscOnly:
-          description: Optional. This can only be accessed through the private ip.
-          type: boolean
         state:
           description: Output only. A status representing the state of the node.
           enum:
