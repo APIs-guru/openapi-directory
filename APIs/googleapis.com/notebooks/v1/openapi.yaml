@@ -1305,6 +1305,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Sort results. Supported values are "name", "name desc" or "" (unsorted).
+          in: query
+          name: orderBy
+          schema:
+            type: string
         - description: Maximum return size of the list call.
           in: query
           name: pageSize
@@ -1426,6 +1436,16 @@ paths:
           in: path
           name: parent
           required: true
+          schema:
+            type: string
+        - description: Optional. List filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Sort results. Supported values are "name", "name desc" or "" (unsorted).
+          in: query
+          name: orderBy
           schema:
             type: string
         - description: Maximum return size of the list call.
@@ -1813,6 +1833,7 @@ components:
             - NVIDIA_TESLA_P4
             - NVIDIA_TESLA_T4
             - NVIDIA_TESLA_A100
+            - NVIDIA_L4
             - NVIDIA_TESLA_T4_VWS
             - NVIDIA_TESLA_P100_VWS
             - NVIDIA_TESLA_P4_VWS
@@ -2231,6 +2252,10 @@ components:
         installGpuDriver:
           description: Whether the end user authorizes Google Cloud to install GPU driver on this instance. If this field is empty or set to false, the GPU driver won't be installed. Only applicable to instances with GPUs.
           type: boolean
+        instanceMigrationEligibility:
+          $ref: "#/components/schemas/InstanceMigrationEligibility"
+          description: Output only. Checks how feasible a migration from UmN to WbI is.
+          readOnly: true
         instanceOwners:
           description: "Input only. The owner of this instance after creation. Format: `alias@example.com` Currently supports one owner only. If not specified, all of the service account users of your VM instance's service account can use the instance."
           items:
@@ -2282,10 +2307,6 @@ components:
         postStartupScript:
           description: Path to a Bash script that automatically runs after a notebook instance fully boots up. The path must be a URL or Cloud Storage path (`gs://path-to-file/file-name`).
           type: string
-        preMigrationCheck:
-          $ref: "#/components/schemas/PreMigrationCheck"
-          description: Output only. Check how possible a migration from UmN to WbI is.
-          readOnly: true
         proxyUri:
           description: Output only. The proxy endpoint that is used to access the Jupyter notebook.
           readOnly: true
@@ -2352,6 +2373,33 @@ components:
         notebookUpgradeSchedule:
           description: Cron expression in UTC timezone, used to schedule instance auto upgrade. Please follow the [cron format](https://en.wikipedia.org/wiki/Cron).
           type: string
+      type: object
+    InstanceMigrationEligibility:
+      description: InstanceMigrationEligibility represents the feasibility information of a migration from UmN to WbI.
+      properties:
+        errors:
+          description: Output only. Certain configurations make the UmN ineligible for an automatic migration. A manual migration is required.
+          items:
+            enum:
+              - ERROR_UNSPECIFIED
+              - DATAPROC_HUB
+            type: string
+          readOnly: true
+          type: array
+        warnings:
+          description: Output only. Certain configurations will be defaulted during the migration.
+          items:
+            enum:
+              - WARNING_UNSPECIFIED
+              - UNSUPPORTED_MACHINE_TYPE
+              - UNSUPPORTED_ACCELERATOR_TYPE
+              - UNSUPPORTED_OS
+              - NO_REMOVE_DATA_DISK
+              - GCS_BACKUP
+              - POST_STARTUP_SCRIPT
+            type: string
+          readOnly: true
+          type: array
       type: object
     IsInstanceUpgradeableResponse:
       description: Response for checking if a notebook instance is upgradeable.
@@ -2601,7 +2649,7 @@ components:
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          description: The normal, successful response of the operation. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     OperationMetadata:
@@ -2635,7 +2683,7 @@ components:
           type: string
       type: object
     Policy:
-      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members`, or principals, to a single `role`. Principals can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** ``` { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } ``` **YAML example:** ``` bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') etag: BwWWja0YfJA= version: 3 ``` For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         bindings:
           description: Associates a list of `members`, or principals, with a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one principal. The `bindings` in a `Policy` can refer to up to 1,500 principals; up to 250 of these principals can be Google groups. Each occurrence of a principal counts towards these limits. For example, if the `bindings` grant 50 different roles to `user:alice@example.com`, and not to any other principal, then you can add another 1,450 principals to the `bindings` in the `Policy`.
@@ -2650,21 +2698,6 @@ components:
           description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
           format: int32
           type: integer
-      type: object
-    PreMigrationCheck:
-      description: PreMigrationCheck checks how feasible a migration from UmN is.
-      properties:
-        message:
-          description: Message provides a summary or workaround.
-          type: string
-        result:
-          description: Result returns the result of the check.
-          enum:
-            - RESULT_UNSPECIFIED
-            - IDENTICAL
-            - PARTIAL
-            - NOT_RECOMMENDED
-          type: string
       type: object
     RefreshRuntimeTokenInternalRequest:
       description: Request for getting a new access token.
@@ -2800,6 +2833,10 @@ components:
           description: "Output only. The resource name of the runtime. Format: `projects/{project}/locations/{location}/runtimes/{runtimeId}`"
           readOnly: true
           type: string
+        runtimeMigrationEligibility:
+          $ref: "#/components/schemas/RuntimeMigrationEligibility"
+          description: Output only. Checks how feasible a migration from GmN to WbI is.
+          readOnly: true
         softwareConfig:
           $ref: "#/components/schemas/RuntimeSoftwareConfig"
           description: The config settings for software inside the runtime.
@@ -2899,6 +2936,33 @@ components:
           description: Output only. The system metrics.
           readOnly: true
           type: object
+      type: object
+    RuntimeMigrationEligibility:
+      description: RuntimeMigrationEligibility represents the feasibility information of a migration from GmN to WbI.
+      properties:
+        errors:
+          description: Output only. Certain configurations make the GmN ineligible for an automatic migration. A manual migration is required.
+          items:
+            enum:
+              - ERROR_UNSPECIFIED
+              - CUSTOM_CONTAINER
+            type: string
+          readOnly: true
+          type: array
+        warnings:
+          description: Output only. Certain configurations will be defaulted during the migration.
+          items:
+            enum:
+              - WARNING_UNSPECIFIED
+              - UNSUPPORTED_ACCELERATOR_TYPE
+              - UNSUPPORTED_OS
+              - RESERVED_IP_RANGE
+              - GOOGLE_MANAGED_NETWORK
+              - POST_STARTUP_SCRIPT
+              - SINGLE_USER
+            type: string
+          readOnly: true
+          type: array
       type: object
     RuntimeShieldedInstanceConfig:
       description: A set of Shielded Instance options. See [Images using supported Shielded VM features](https://cloud.google.com/compute/docs/instances/modifying-shielded-vm). Not all combinations are valid.
@@ -3060,6 +3124,7 @@ components:
             - NVIDIA_TESLA_P4
             - NVIDIA_TESLA_T4
             - NVIDIA_TESLA_A100
+            - NVIDIA_L4
             - NVIDIA_TESLA_T4_VWS
             - NVIDIA_TESLA_P100_VWS
             - NVIDIA_TESLA_P4_VWS

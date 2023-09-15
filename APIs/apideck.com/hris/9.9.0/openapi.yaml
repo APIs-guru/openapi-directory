@@ -432,6 +432,7 @@ paths:
                 subdomain: 'company',
                 status: 'active',
                 company_number: '123456-AB',
+                currency: 'USD',
                 addresses: [
                   {
                     id: '123',
@@ -652,6 +653,7 @@ paths:
                 subdomain: 'company',
                 status: 'active',
                 company_number: '123456-AB',
+                currency: 'USD',
                 addresses: [
                   {
                     id: '123',
@@ -5196,6 +5198,8 @@ components:
           $ref: "#/components/schemas/CreatedAt"
         created_by:
           $ref: "#/components/schemas/CreatedBy"
+        currency:
+          $ref: "#/components/schemas/Currency"
         debtor_id:
           example: "12345"
           minLength: 1
@@ -5253,6 +5257,7 @@ components:
       x-apideck-schema-id: HrisCompany
       x-apideck-weights:
         company_number: high
+        currency: low
         debtor_id: edge-case
         id: critical
         legal_name: critical
