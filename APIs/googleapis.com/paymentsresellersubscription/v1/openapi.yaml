@@ -698,7 +698,7 @@ components:
       description: A Product resource that defines a subscription service that can be resold.
       properties:
         bundleDetails:
-          $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetails"
+          $ref: "#/components/schemas/ProductBundleDetails"
           description: Output only. Output Only. Specifies the details for a bundle product.
           readOnly: true
         finiteBillingCycleDetails:
@@ -738,22 +738,6 @@ components:
             $ref: "#/components/schemas/GoogleTypeLocalizedText"
           readOnly: true
           type: array
-      type: object
-    GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetails:
-      description: Details for a bundle product.
-      properties:
-        bundleElements:
-          description: The individual products that are included in the bundle.
-          items:
-            $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetailsBundleElement"
-          type: array
-        entitlementMode:
-          description: The entitlement mode of the bundle product.
-          enum:
-            - ENTITLEMENT_MODE_UNSPECIFIED
-            - ENTITLEMENT_MODE_FULL
-            - ENTITLEMENT_MODE_INCREMENTAL
-          type: string
       type: object
     GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetailsBundleElement:
       description: The individual product that is included in the bundle.
@@ -995,6 +979,10 @@ components:
           $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1Amount"
           description: Output only. The price of the product/service in this line item. The amount could be the wholesale price, or it can include a cost of sale based on the contract.
           readOnly: true
+        bundleDetails:
+          $ref: "#/components/schemas/SubscriptionLineItemBundleDetails"
+          description: Output only. The bundle details for the line item. Only populated if the line item corresponds to a hard bundle.
+          readOnly: true
         description:
           description: Output only. Description of this line item.
           readOnly: true
@@ -1046,6 +1034,19 @@ components:
             - LINE_ITEM_STATE_DEACTIVATING
             - LINE_ITEM_STATE_WAITING_TO_DEACTIVATE
             - LINE_ITEM_STATE_OFF_CYCLE_CHARGING
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemBundleDetailsBundleElementDetails:
+      description: The details for an element in the hard bundle.
+      properties:
+        product:
+          description: Output only. Product resource name that identifies the bundle element. The format is 'partners/{partner_id}/products/{product_id}'.
+          readOnly: true
+          type: string
+        userAccountLinkedTime:
+          description: Output only. The time when this product is linked to an end user.
+          format: google-datetime
           readOnly: true
           type: string
       type: object
@@ -1127,4 +1128,29 @@ components:
         text:
           description: Localized string in the language corresponding to `language_code' below.
           type: string
+      type: object
+    ProductBundleDetails:
+      description: Details for a bundle product.
+      properties:
+        bundleElements:
+          description: The individual products that are included in the bundle.
+          items:
+            $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1ProductBundleDetailsBundleElement"
+          type: array
+        entitlementMode:
+          description: The entitlement mode of the bundle product.
+          enum:
+            - ENTITLEMENT_MODE_UNSPECIFIED
+            - ENTITLEMENT_MODE_FULL
+            - ENTITLEMENT_MODE_INCREMENTAL
+          type: string
+      type: object
+    SubscriptionLineItemBundleDetails:
+      description: The bundle details for a line item corresponding to a hard bundle.
+      properties:
+        bundleElementDetails:
+          description: The details for each element in the hard bundle.
+          items:
+            $ref: "#/components/schemas/GoogleCloudPaymentsResellerSubscriptionV1SubscriptionLineItemBundleDetailsBundleElementDetails"
+          type: array
       type: object

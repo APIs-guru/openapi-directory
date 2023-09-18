@@ -946,7 +946,7 @@ paths:
       description: Generates the required PCI questionnaire based on the user's [salesChannel](https://docs.adyen.com/api-explorer/#/legalentity/latest/post/businessLines__reqParam_salesChannels). If multiple questionnaires are required, this request creates a single consodilated document to be signed.
       operationId: post-legalEntities-id-pciQuestionnaires-generatePciTemplates
       parameters:
-        - description: The legal entity ID of the individual who will sign the PCI questionnaire.
+        - description: The unique identifier of the legal entity to get PCI questionnaire information.
           in: path
           name: id
           required: true
@@ -1151,7 +1151,7 @@ paths:
       description: Returns the Terms of Service document for a legal entity.
       operationId: post-legalEntities-id-termsOfService
       parameters:
-        - description: The unique identifier of the legal entity.
+        - description: The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner.
           in: path
           name: id
           required: true
@@ -1220,7 +1220,7 @@ paths:
       description: Accepts Terms of Service.
       operationId: patch-legalEntities-id-termsOfService-termsofservicedocumentid
       parameters:
-        - description: The unique identifier of the legal entity.
+        - description: The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner.
           in: path
           name: id
           required: true
@@ -1295,7 +1295,7 @@ paths:
       description: Returns Terms of Service information for a legal entity.
       operationId: get-legalEntities-id-termsOfServiceAcceptanceInfos
       parameters:
-        - description: The unique identifier of the legal entity.
+        - description: The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner.
           in: path
           name: id
           required: true
@@ -1356,7 +1356,7 @@ paths:
       description: Returns the required types of Terms of Service that need to be accepted by a legal entity.
       operationId: get-legalEntities-id-termsOfServiceStatus
       parameters:
-        - description: The unique identifier of the legal entity.
+        - description: The unique identifier of the legal entity. For sole proprietorships, this is the individual legal entity ID of the owner.
           in: path
           name: id
           required: true
@@ -2440,7 +2440,12 @@ components:
     AcceptTermsOfServiceRequest:
       properties:
         acceptedBy:
-          description: The individual legal entity ID of the user accepting the Terms of Service. For organizations, this must be the legal entity ID of an authorized signatory for the organization.
+          description: |-
+            The legal entity ID of the user accepting the Terms of Service.
+
+            For organizations, this must be the individual legal entity ID of an authorized signatory for the organization.
+
+            For sole proprietorships, this must be the individual legal entity ID of the owner.
           type: string
         ipAddress:
           description: The IP address of the user accepting the Terms of Service.

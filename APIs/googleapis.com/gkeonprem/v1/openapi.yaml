@@ -3013,9 +3013,6 @@ components:
         localName:
           description: Local name of the dependency.
           type: string
-        membership:
-          description: Membership names are formatted as `projects//locations//memberships/`.
-          type: string
         resourceName:
           description: Resource name of the dependency.
           type: string
@@ -3527,7 +3524,8 @@ components:
           readOnly: true
         vcenter:
           $ref: "#/components/schemas/VmwareVCenterConfig"
-          description: VmwareVCenterConfig specifies vCenter config for the user cluster. Inherited from the admin cluster.
+          description: Output only. VmwareVCenterConfig specifies vCenter config for the user cluster. Inherited from the admin cluster.
+          readOnly: true
         vmTrackingEnabled:
           description: Enable VM tracking.
           type: boolean
@@ -3921,8 +3919,7 @@ components:
       description: Represents configuration for the VMware VCenter for the user cluster.
       properties:
         address:
-          description: Output only. The vCenter IP address.
-          readOnly: true
+          description: The vCenter IP address.
           type: string
         caCertData:
           description: Contains the vCenter CA certificate public key for SSL verification.
@@ -3949,11 +3946,6 @@ components:
     VmwareVersionInfo:
       description: Contains information about a specific Anthos on VMware version.
       properties:
-        dependencies:
-          description: The list of upgrade dependencies for this version.
-          items:
-            $ref: "#/components/schemas/UpgradeDependency"
-          type: array
         hasDependencies:
           description: If set, the cluster dependencies (e.g. the admin cluster, other user clusters managed by the same admin cluster) must be upgraded before this version can be installed or upgraded to.
           type: boolean

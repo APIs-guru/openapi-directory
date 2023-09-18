@@ -3381,6 +3381,68 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - liasettings
+  /{merchantId}/liasettings/{accountId}/setomnichannelexperience:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Sets the omnichannel experience for the specified country.
+      operationId: content.liasettings.setomnichannelexperience
+      parameters:
+        - description: The ID of the managing account. If this parameter is not the same as accountId, then this account must be a multi-client account and `accountId` must be the ID of a sub-account of this account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: The ID of the account for which to retrieve accessible Business Profiles.
+          in: path
+          name: accountId
+          required: true
+          schema:
+            type: string
+        - description: The CLDR country code (for example, "US") for which the omnichannel experience is selected.
+          in: query
+          name: country
+          schema:
+            type: string
+        - description: 'The Local Store Front (LSF) type for this country. Acceptable values are: - "`ghlsf`" (Google-Hosted Local Store Front) - "`mhlsfBasic`" (Merchant-Hosted Local Store Front Basic) - "`mhlsfFull`" (Merchant-Hosted Local Store Front Full) More details about these types can be found here.'
+          in: query
+          name: lsfType
+          schema:
+            type: string
+        - description: 'The Pickup types for this country. Acceptable values are: - "`pickupToday`" - "`pickupLater`" '
+          explode: true
+          in: query
+          name: pickupTypes
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiaOmnichannelExperience"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - liasettings
   /{merchantId}/liasettings/{accountId}/setposdataprovider:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -10312,6 +10374,9 @@ components:
         inventory:
           $ref: "#/components/schemas/LiaInventorySettings"
           description: LIA inventory verification settings.
+        omnichannelExperience:
+          $ref: "#/components/schemas/LiaOmnichannelExperience"
+          description: The omnichannel experience configured for this country.
         onDisplayToOrder:
           $ref: "#/components/schemas/LiaOnDisplayToOrderSettings"
           description: LIA "On Display To Order" settings.
@@ -10336,6 +10401,21 @@ components:
         status:
           description: 'The status of the inventory verification process. Acceptable values are: - "`active`" - "`inactive`" - "`pending`" '
           type: string
+      type: object
+    LiaOmnichannelExperience:
+      description: Omnichannel experience details.
+      properties:
+        country:
+          description: The CLDR country code (for example, "US").
+          type: string
+        lsfType:
+          description: 'The Local Store Front (LSF) type for this country. Acceptable values are: - "`ghlsf`" (Google-Hosted Local Store Front) - "`mhlsfBasic`" (Merchant-Hosted Local Store Front Basic) - "`mhlsfFull`" (Merchant-Hosted Local Store Front Full) More details about these types can be found here.'
+          type: string
+        pickupTypes:
+          description: 'The Pickup types for this country. Acceptable values are: - "`pickupToday`" - "`pickupLater`" '
+          items:
+            type: string
+          type: array
       type: object
     LiaOnDisplayToOrderSettings:
       properties:
@@ -10412,6 +10492,9 @@ components:
         method:
           description: 'The method of the batch entry. Acceptable values are: - "`get`" - "`getAccessibleGmbAccounts`" - "`requestGmbAccess`" - "`requestInventoryVerification`" - "`setInventoryVerificationContact`" - "`update`" '
           type: string
+        omnichannelExperience:
+          $ref: "#/components/schemas/LiaOmnichannelExperience"
+          description: The omnichannel experience for a country. Required only for SetOmnichannelExperience.
         posDataProviderId:
           description: The ID of POS data provider. Required only for SetPosProvider.
           format: uint64
@@ -10449,6 +10532,9 @@ components:
         liaSettings:
           $ref: "#/components/schemas/LiaSettings"
           description: The retrieved or updated Lia settings.
+        omnichannelExperience:
+          $ref: "#/components/schemas/LiaOmnichannelExperience"
+          description: The updated omnichannel experience for a country.
         posDataProviders:
           description: The list of POS data providers.
           items:

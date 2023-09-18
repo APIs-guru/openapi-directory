@@ -1059,6 +1059,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaListAdSenseLinksResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - properties
     parameters:
@@ -1095,6 +1104,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAdSenseLink"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.edit
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.edit
       tags:
         - properties
   /v1alpha/{parent}/audiences:

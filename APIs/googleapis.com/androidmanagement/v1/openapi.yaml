@@ -1465,12 +1465,16 @@ components:
             - DATA_SHARING_FROM_WORK_TO_PERSONAL_DISALLOWED
             - CROSS_PROFILE_DATA_SHARING_ALLOWED
           type: string
+        exemptionsToShowWorkContactsInPersonalProfile:
+          $ref: "#/components/schemas/PackageNameList"
+          description: "List of apps which are excluded from the ShowWorkContactsInPersonalProfile setting. For this to be set, ShowWorkContactsInPersonalProfile must be set to one of the following values: * SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED. In this case, these exemptions act as a blocklist. * SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED. In this case, these exemptions act as an allowlist. * SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED_EXCEPT_SYSTEM. In this case, these exemptions act as an allowlist, in addition to the already allowlisted system apps. Supported on Android 14 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14."
         showWorkContactsInPersonalProfile:
           description: Whether contacts stored in the work profile can be shown in personal profile contact searches and incoming calls.
           enum:
             - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_UNSPECIFIED
             - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED
             - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED
+            - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED_EXCEPT_SYSTEM
           type: string
         workProfileWidgetsDefault:
           description: Specifies the default behaviour for work profile widgets. If the policy does not specify work_profile_widgets for a specific application, it will behave according to the value specified here.
