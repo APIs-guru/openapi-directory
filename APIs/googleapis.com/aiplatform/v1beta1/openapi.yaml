@@ -3671,7 +3671,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the Tensorboard experiment, which becomes the final component of the Tensorboard experiment's resource name. This value should be 1-128 characters, and valid characters are /a-z-/.
+        - description: Required. The ID to use for the Tensorboard experiment, which becomes the final component of the Tensorboard experiment's resource name. This value should be 1-128 characters, and valid characters are `/a-z-/`.
           in: query
           name: tensorboardExperimentId
           schema:
@@ -5060,7 +5060,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the PersistentResource, which become the final component of the PersistentResource's resource name. The maximum length is 63 characters, and valid characters are /^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$/.
+        - description: Required. The ID to use for the PersistentResource, which become the final component of the PersistentResource's resource name. The maximum length is 63 characters, and valid characters are `/^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$/`.
           in: query
           name: persistentResourceId
           schema:
@@ -5156,7 +5156,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are /a-z-/.
+        - description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are `/a-z-/`.
           in: query
           name: pipelineJobId
           schema:
@@ -5252,7 +5252,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the Tensorboard run, which becomes the final component of the Tensorboard run's resource name. This value should be 1-128 characters, and valid characters are /a-z-/.
+        - description: Required. The ID to use for the Tensorboard run, which becomes the final component of the Tensorboard run's resource name. This value should be 1-128 characters, and valid characters are `/a-z-/`.
           in: query
           name: tensorboardRunId
           schema:
@@ -7986,7 +7986,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1PipelineJob"
           description: Required. The PipelineJob to create.
         pipelineJobId:
-          description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are /a-z-/.
+          description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are `/a-z-/`.
           type: string
       type: object
     GoogleCloudAiplatformV1beta1CreateSolverOperationMetadata:
@@ -8020,7 +8020,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1TensorboardRun"
           description: Required. The TensorboardRun to create.
         tensorboardRunId:
-          description: Required. The ID to use for the Tensorboard run, which becomes the final component of the Tensorboard run's resource name. This value should be 1-128 characters, and valid characters are /a-z-/.
+          description: Required. The ID to use for the Tensorboard run, which becomes the final component of the Tensorboard run's resource name. This value should be 1-128 characters, and valid characters are `/a-z-/`.
           type: string
       type: object
     GoogleCloudAiplatformV1beta1CreateTensorboardTimeSeriesRequest:
@@ -8558,7 +8558,7 @@ components:
           description: Output only. Provides paths for users to send requests directly to the deployed index services running on Cloud via private services access. This field is populated if network is configured.
           readOnly: true
         reservedIpRanges:
-          description: "Optional. A list of reserved ip ranges under the VPC network that can be used for this DeployedIndex. If set, we will deploy the index within the provided ip ranges. Otherwise, the index might be deployed to any ip ranges under the provided VPC network. The value should be the name of the address (https://cloud.google.com/compute/docs/reference/rest/v1/addresses) Example: 'vertex-ai-ip-range'."
+          description: "Optional. A list of reserved ip ranges under the VPC network that can be used for this DeployedIndex. If set, we will deploy the index within the provided ip ranges. Otherwise, the index might be deployed to any ip ranges under the provided VPC network. The value should be the name of the address (https://cloud.google.com/compute/docs/reference/rest/v1/addresses) Example: ['vertex-ai-ip-range']. For more information about subnets and network IP ranges, please see https://cloud.google.com/vpc/docs/subnets#manually_created_subnet_ip_ranges."
           items:
             type: string
           type: array
@@ -8624,7 +8624,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1ExplanationSpec"
           description: Explanation configuration for this DeployedModel. When deploying a Model using EndpointService.DeployModel, this value overrides the value of Model.explanation_spec. All fields of explanation_spec are optional in the request. If a field of explanation_spec is not populated, the value of the same field of Model.explanation_spec is inherited. If the corresponding Model.explanation_spec is not populated, all fields of the explanation_spec will be used for the explanation configuration.
         id:
-          description: Immutable. The ID of the DeployedModel. If not provided upon deployment, Vertex AI will generate a value for this ID. This value should be 1-10 characters, and valid characters are /[0-9]/.
+          description: Immutable. The ID of the DeployedModel. If not provided upon deployment, Vertex AI will generate a value for this ID. This value should be 1-10 characters, and valid characters are `/[0-9]/`.
           type: string
         model:
           description: "Required. The resource name of the Model that this is the deployment of. Note that the Model may be in a different location than the DeployedModel's Endpoint. The resource name may contain version id or version alias to specify the version. Example: `projects/{project}/locations/{location}/models/{model}@2` or `projects/{project}/locations/{location}/models/{model}@golden` if no version is specified, the default version will be deployed."
@@ -12487,6 +12487,11 @@ components:
             - UNHEALTHY
           readOnly: true
           type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'The labels with user-defined metadata to organize your NotebookRuntime. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one Dataset (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable. Following system labels exist for NotebookRuntime: * "aiplatform.googleapis.com/notebook_runtime_gce_instance_id": output only, its value is the Compute Engine instance id. * "aiplatform.googleapis.com/colab_enterprise_entry_service": its value is either "BigQuery" or "Vertex"; if absent, it should be "Vertex". This is to describe the entry service, either BigQuery or Vertex.'
+          type: object
         name:
           description: Output only. The resource name of the NotebookRuntime.
           readOnly: true
@@ -12564,7 +12569,7 @@ components:
           type: object
         machineSpec:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1beta1MachineSpec"
-          description: Required. Immutable. The specification of a single machine used by the prediction.
+          description: Optional. Immutable. The specification of a single machine for the template.
         name:
           description: Output only. The resource name of the NotebookRuntimeTemplate.
           readOnly: true

@@ -2061,6 +2061,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:start:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts a NotebookRuntime.
+      operationId: aiplatform.projects.locations.notebookRuntimes.start
+      parameters:
+        - description: Required. The name of the NotebookRuntime resource to be started. Instead of checking whether the name is in valid NotebookRuntime resource name format, directly throw NotFound exception if there is no such NotebookRuntime in spanner.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1StartNotebookRuntimeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{name}:stop:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -3389,7 +3431,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the Tensorboard experiment, which becomes the final component of the Tensorboard experiment's resource name. This value should be 1-128 characters, and valid characters are /a-z-/.
+        - description: Required. The ID to use for the Tensorboard experiment, which becomes the final component of the Tensorboard experiment's resource name. This value should be 1-128 characters, and valid characters are `/a-z-/`.
           in: query
           name: tensorboardExperimentId
           schema:
@@ -4526,6 +4568,206 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{parent}/notebookRuntimeTemplates:
+    get:
+      description: Lists NotebookRuntimeTemplates in a Location.
+      operationId: aiplatform.projects.locations.notebookRuntimeTemplates.list
+      parameters:
+        - description: "Required. The resource name of the Location from which to list the NotebookRuntimeTemplates. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `display_name` supports = and != * `labels` supports general map functions that is: * `labels.key=value` - key:value equality * `labels.key:* or labels:key - key existence * A key including a space must be quoted. `labels.\"a key\"`. Some examples: * `notebookRuntimeTemplate=notebookRuntimeTemplate123` * `displayName=\"myDisplayName\"` * `labels.myKey=\"myValue\"`"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'Optional. A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending. Supported fields: * `display_name` * `create_time` * `update_time` Example: `display_name, create_time desc`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The standard list page token. Typically obtained via ListNotebookRuntimeTemplatesResponse.next_page_token of the previous NotebookService.ListNotebookRuntimeTemplates call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Optional. Mask specifying which fields to read.
+          in: query
+          name: readMask
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1ListNotebookRuntimeTemplatesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a NotebookRuntimeTemplate.
+      operationId: aiplatform.projects.locations.notebookRuntimeTemplates.create
+      parameters:
+        - description: "Required. The resource name of the Location to create the NotebookRuntimeTemplate. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. User specified ID for the notebook runtime template.
+          in: query
+          name: notebookRuntimeTemplateId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookRuntimeTemplate"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/notebookRuntimes:
+    get:
+      description: Lists NotebookRuntimes in a Location.
+      operationId: aiplatform.projects.locations.notebookRuntimes.list
+      parameters:
+        - description: "Required. The resource name of the Location from which to list the NotebookRuntimes. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. An expression for filtering the results of the request. For field names both snake_case and camelCase are supported. * `notebookRuntime` supports = and !=. `notebookRuntime` represents the NotebookRuntime ID, i.e. the last segment of the NotebookRuntime's resource name. * `displayName` supports = and != and regex. * `notebookRuntimeTemplate` supports = and !=. `notebookRuntimeTemplate` represents the NotebookRuntimeTemplate ID, i.e. the last segment of the NotebookRuntimeTemplate's resource name. * `healthState` supports = and !=. healthState enum: [HEALTHY, UNHEALTHY, HEALTH_STATE_UNSPECIFIED]. * `runtimeState` supports = and !=. runtimeState enum: [RUNTIME_STATE_UNSPECIFIED, RUNNING, BEING_STARTED, BEING_STOPPED, STOPPED, BEING_UPGRADED]. * `runtimeUser` supports = and !=. * API version is UI only: `uiState` supports = and !=. uiState enum: [UI_RESOURCE_STATE_UNSPECIFIED, UI_RESOURCE_STATE_BEING_CREATED, UI_RESOURCE_STATE_ACTIVE, UI_RESOURCE_STATE_BEING_DELETED, UI_RESOURCE_STATE_CREATION_FAILED]. Some examples: * `notebookRuntime=\"notebookRuntime123\"` * `displayName=\"myDisplayName\"` and `displayName=~\"myDisplayNameRegex\"` * `notebookRuntimeTemplate=\"notebookRuntimeTemplate321\"` * `healthState=HEALTHY` * `runtimeState=RUNNING` * `runtimeUser=\"test@google.com\"` * `uiState=UI_RESOURCE_STATE_BEING_DELETED`"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'Optional. A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending. Supported fields: * `display_name` * `create_time` * `update_time` Example: `display_name, create_time desc`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The standard list page token. Typically obtained via ListNotebookRuntimesResponse.next_page_token of the previous NotebookService.ListNotebookRuntimes call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Optional. Mask specifying which fields to read.
+          in: query
+          name: readMask
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1ListNotebookRuntimesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  /v1/{parent}/notebookRuntimes:assign:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Assigns a NotebookRuntime to a user for a particular Notebook file. This method will either returns an existing assignment or generates a new one.
+      operationId: aiplatform.projects.locations.notebookRuntimes.assign
+      parameters:
+        - description: "Required. The resource name of the Location to get the NotebookRuntime assignment. Format: `projects/{project}/locations/{location}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1AssignNotebookRuntimeRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   /v1/{parent}/pipelineJobs:
     get:
       description: Lists PipelineJobs in a Location.
@@ -4598,7 +4840,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are /a-z-/.
+        - description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are `/a-z-/`.
           in: query
           name: pipelineJobId
           schema:
@@ -4698,7 +4940,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the Tensorboard run, which becomes the final component of the Tensorboard run's resource name. This value should be 1-128 characters, and valid characters are /a-z-/.
+        - description: Required. The ID to use for the Tensorboard run, which becomes the final component of the Tensorboard run's resource name. This value should be 1-128 characters, and valid characters are `/a-z-/`.
           in: query
           name: tensorboardRunId
           schema:
@@ -5713,7 +5955,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: aiplatform.projects.locations.featurestores.entityTypes.getIamPolicy
+      operationId: aiplatform.projects.locations.notebookRuntimeTemplates.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -5755,7 +5997,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
-      operationId: aiplatform.projects.locations.featurestores.entityTypes.setIamPolicy
+      operationId: aiplatform.projects.locations.notebookRuntimeTemplates.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -5797,7 +6039,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: aiplatform.projects.locations.featurestores.entityTypes.testIamPermissions
+      operationId: aiplatform.projects.locations.notebookRuntimeTemplates.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
           in: path
@@ -6542,6 +6784,29 @@ components:
           type: string
         uri:
           description: The uniform resource identifier of the artifact file. May be empty if there is no actual artifact file.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1AssignNotebookRuntimeOperationMetadata:
+      description: Metadata information for NotebookService.AssignNotebookRuntime.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1GenericOperationMetadata"
+          description: The operation generic information.
+        progressMessage:
+          description: A human-readable message that shows the intermediate progress details of NotebookRuntime.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1AssignNotebookRuntimeRequest:
+      description: Request message for NotebookService.AssignNotebookRuntime.
+      properties:
+        notebookRuntime:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookRuntime"
+          description: Required. Provide runtime specific information (e.g. runtime owner, notebook id) used for NotebookRuntime assignment.
+        notebookRuntimeId:
+          description: Optional. User specified ID for the notebook runtime.
+          type: string
+        notebookRuntimeTemplate:
+          description: Required. The resource name of the NotebookRuntimeTemplate based on which a NotebookRuntime will be assigned (reuse or create a new one).
           type: string
       type: object
     GoogleCloudAiplatformV1Attribution:
@@ -7328,6 +7593,13 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1GenericOperationMetadata"
           description: Operation metadata for creating a MetadataStore.
       type: object
+    GoogleCloudAiplatformV1CreateNotebookRuntimeTemplateOperationMetadata:
+      description: Metadata information for NotebookService.CreateNotebookRuntimeTemplate.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1GenericOperationMetadata"
+          description: The operation generic information.
+      type: object
     GoogleCloudAiplatformV1CreatePipelineJobRequest:
       description: Request message for PipelineService.CreatePipelineJob.
       properties:
@@ -7338,7 +7610,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1PipelineJob"
           description: Required. The PipelineJob to create.
         pipelineJobId:
-          description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are /a-z-/.
+          description: The ID to use for the PipelineJob, which will become the final component of the PipelineJob name. If not provided, an ID will be automatically generated. This value should be less than 128 characters, and valid characters are `/a-z-/`.
           type: string
       type: object
     GoogleCloudAiplatformV1CreateSpecialistPoolOperationMetadata:
@@ -7365,7 +7637,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1TensorboardRun"
           description: Required. The TensorboardRun to create.
         tensorboardRunId:
-          description: Required. The ID to use for the Tensorboard run, which becomes the final component of the Tensorboard run's resource name. This value should be 1-128 characters, and valid characters are /a-z-/.
+          description: Required. The ID to use for the Tensorboard run, which becomes the final component of the Tensorboard run's resource name. This value should be 1-128 characters, and valid characters are `/a-z-/`.
           type: string
       type: object
     GoogleCloudAiplatformV1CreateTensorboardTimeSeriesRequest:
@@ -7893,7 +8165,7 @@ components:
           description: Output only. Provides paths for users to send requests directly to the deployed index services running on Cloud via private services access. This field is populated if network is configured.
           readOnly: true
         reservedIpRanges:
-          description: "Optional. A list of reserved ip ranges under the VPC network that can be used for this DeployedIndex. If set, we will deploy the index within the provided ip ranges. Otherwise, the index might be deployed to any ip ranges under the provided VPC network. The value should be the name of the address (https://cloud.google.com/compute/docs/reference/rest/v1/addresses) Example: 'vertex-ai-ip-range'."
+          description: "Optional. A list of reserved ip ranges under the VPC network that can be used for this DeployedIndex. If set, we will deploy the index within the provided ip ranges. Otherwise, the index might be deployed to any ip ranges under the provided VPC network. The value should be the name of the address (https://cloud.google.com/compute/docs/reference/rest/v1/addresses) Example: ['vertex-ai-ip-range']. For more information about subnets and network IP ranges, please see https://cloud.google.com/vpc/docs/subnets#manually_created_subnet_ip_ranges."
           items:
             type: string
           type: array
@@ -7956,7 +8228,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1ExplanationSpec"
           description: Explanation configuration for this DeployedModel. When deploying a Model using EndpointService.DeployModel, this value overrides the value of Model.explanation_spec. All fields of explanation_spec are optional in the request. If a field of explanation_spec is not populated, the value of the same field of Model.explanation_spec is inherited. If the corresponding Model.explanation_spec is not populated, all fields of the explanation_spec will be used for the explanation configuration.
         id:
-          description: Immutable. The ID of the DeployedModel. If not provided upon deployment, Vertex AI will generate a value for this ID. This value should be 1-10 characters, and valid characters are /[0-9]/.
+          description: Immutable. The ID of the DeployedModel. If not provided upon deployment, Vertex AI will generate a value for this ID. This value should be 1-10 characters, and valid characters are `/[0-9]/`.
           type: string
         model:
           description: "Required. The resource name of the Model that this is the deployment of. Note that the Model may be in a different location than the DeployedModel's Endpoint. The resource name may contain version id or version alias to specify the version. Example: `projects/{project}/locations/{location}/models/{model}@2` or `projects/{project}/locations/{location}/models/{model}@golden` if no version is specified, the default version will be deployed."
@@ -10098,6 +10370,30 @@ components:
           description: A token to retrieve the next page of results. Pass to ListNasTrialDetailsRequest.page_token to obtain that page.
           type: string
       type: object
+    GoogleCloudAiplatformV1ListNotebookRuntimeTemplatesResponse:
+      description: Response message for NotebookService.ListNotebookRuntimeTemplates.
+      properties:
+        nextPageToken:
+          description: A token to retrieve next page of results. Pass to ListNotebookRuntimeTemplatesRequest.page_token to obtain that page.
+          type: string
+        notebookRuntimeTemplates:
+          description: List of NotebookRuntimeTemplates in the requested page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookRuntimeTemplate"
+          type: array
+      type: object
+    GoogleCloudAiplatformV1ListNotebookRuntimesResponse:
+      description: Response message for NotebookService.ListNotebookRuntimes.
+      properties:
+        nextPageToken:
+          description: A token to retrieve next page of results. Pass to ListNotebookRuntimesRequest.page_token to obtain that page.
+          type: string
+        notebookRuntimes:
+          description: List of NotebookRuntimes in the requested page.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookRuntime"
+          type: array
+      type: object
     GoogleCloudAiplatformV1ListOptimalTrialsRequest:
       description: Request message for VizierService.ListOptimalTrials.
       properties: {}
@@ -11578,6 +11874,19 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudAiplatformV1NetworkSpec:
+      description: Network spec.
+      properties:
+        enableInternetAccess:
+          description: Whether to enable public internet access. Default false.
+          type: boolean
+        network:
+          description: The full name of the Google Compute Engine [network](https://cloud.google.com//compute/docs/networks-and-firewalls#networks)
+          type: string
+        subnetwork:
+          description: "The name of the subnet that this instance is in. Format: `projects/{project_id_or_number}/regions/{region}/subnetworks/{subnetwork_id}`"
+          type: string
+      type: object
     GoogleCloudAiplatformV1NfsMount:
       description: Represents a mount configuration for Network File System (NFS) to mount.
       properties:
@@ -11591,6 +11900,161 @@ components:
           description: Required. IP address of the NFS server.
           type: string
       type: object
+    GoogleCloudAiplatformV1NotebookEucConfig:
+      description: The euc configuration of NotebookRuntimeTemplate.
+      properties:
+        bypassActasCheck:
+          description: Output only. Whether ActAs check is bypassed for service account attached to the VM. If false, we need ActAs check for the default Compute Engine Service account. When a Runtime is created, a VM is allocated using Default Compute Engine Service Account. Any user requesting to use this Runtime requires Service Account User (ActAs) permission over this SA. If true, Runtime owner is using EUC and does not require the above permission as VM no longer use default Compute Engine SA, but a P4SA.
+          readOnly: true
+          type: boolean
+        eucDisabled:
+          description: Input only. Whether EUC is disabled in this NotebookRuntimeTemplate. In proto3, the default value of a boolean is false. In this way, by default EUC will be enabled for NotebookRuntimeTemplate.
+          type: boolean
+      type: object
+    GoogleCloudAiplatformV1NotebookIdleShutdownConfig:
+      description: The idle shutdown configuration of NotebookRuntimeTemplate, which contains the idle_timeout as required field.
+      properties:
+        idleShutdownDisabled:
+          description: Whether Idle Shutdown is disabled in this NotebookRuntimeTemplate.
+          type: boolean
+        idleTimeout:
+          description: "Required. Duration is accurate to the second. In Notebook, Idle Timeout is accurate to minute so the range of idle_timeout (second) is: 10 * 60 ~ 1440 * 60."
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudAiplatformV1NotebookRuntime:
+      description: A runtime is a virtual machine allocated to a particular user for a particular Notebook file on temporary basis with lifetime limited to 24 hours.
+      properties:
+        createTime:
+          description: Output only. Timestamp when this NotebookRuntime was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        description:
+          description: The description of the NotebookRuntime.
+          type: string
+        displayName:
+          description: Required. The display name of the NotebookRuntime. The name can be up to 128 characters long and can consist of any UTF-8 characters.
+          type: string
+        expirationTime:
+          description: "Output only. Timestamp when this NotebookRuntime will be expired: 1. System Predefined NotebookRuntime: 24 hours after creation. After expiration, system predifined runtime will be deleted. 2. User created NotebookRuntime: 6 months after last upgrade. After expiration, user created runtime will be stopped and allowed for upgrade."
+          format: google-datetime
+          readOnly: true
+          type: string
+        healthState:
+          description: Output only. The health state of the NotebookRuntime.
+          enum:
+            - HEALTH_STATE_UNSPECIFIED
+            - HEALTHY
+            - UNHEALTHY
+          readOnly: true
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'The labels with user-defined metadata to organize your NotebookRuntime. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one Dataset (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable. Following system labels exist for NotebookRuntime: * "aiplatform.googleapis.com/notebook_runtime_gce_instance_id": output only, its value is the Compute Engine instance id. * "aiplatform.googleapis.com/colab_enterprise_entry_service": its value is either "BigQuery" or "Vertex"; if absent, it should be "Vertex". This is to describe the entry service, either BigQuery or Vertex.'
+          type: object
+        name:
+          description: Output only. The resource name of the NotebookRuntime.
+          readOnly: true
+          type: string
+        notebookRuntimeTemplateRef:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookRuntimeTemplateRef"
+          description: Output only. The pointer to NotebookRuntimeTemplate this NotebookRuntime is created from.
+          readOnly: true
+        proxyUri:
+          description: Output only. The proxy endpoint used to access the NotebookRuntime.
+          readOnly: true
+          type: string
+        runtimeState:
+          description: Output only. The runtime (instance) state of the NotebookRuntime.
+          enum:
+            - RUNTIME_STATE_UNSPECIFIED
+            - RUNNING
+            - BEING_STARTED
+            - BEING_STOPPED
+            - STOPPED
+            - BEING_UPGRADED
+          readOnly: true
+          type: string
+        runtimeUser:
+          description: Required. The user email of the NotebookRuntime.
+          type: string
+        serviceAccount:
+          description: Output only. The service account that the NotebookRuntime workload runs as.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Timestamp when this NotebookRuntime was most recently updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+        version:
+          description: Output only. The VM os image version of NotebookRuntime.
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1NotebookRuntimeTemplate:
+      description: A template that specifies runtime configurations such as machine type, runtime version, network configurations, etc. Multiple runtimes can be created from a runtime template.
+      properties:
+        createTime:
+          description: Output only. Timestamp when this NotebookRuntimeTemplate was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        dataPersistentDiskSpec:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1PersistentDiskSpec"
+          description: Optional. The specification of persistent disk attached to the runtime as data disk storage.
+        description:
+          description: The description of the NotebookRuntimeTemplate.
+          type: string
+        displayName:
+          description: Required. The display name of the NotebookRuntimeTemplate. The name can be up to 128 characters long and can consist of any UTF-8 characters.
+          type: string
+        etag:
+          description: Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
+          type: string
+        eucConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookEucConfig"
+          description: EUC configuration of the NotebookRuntimeTemplate.
+        idleShutdownConfig:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookIdleShutdownConfig"
+          description: The idle shutdown configuration of NotebookRuntimeTemplate. This config will only be set when idle shutdown is enabled.
+        isDefault:
+          description: Output only. The default template to use if not specified.
+          readOnly: true
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: The labels with user-defined metadata to organize the NotebookRuntimeTemplates. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. See https://goo.gl/xmQnxf for more information and examples of labels.
+          type: object
+        machineSpec:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1MachineSpec"
+          description: Optional. Immutable. The specification of a single machine for the template.
+        name:
+          description: Output only. The resource name of the NotebookRuntimeTemplate.
+          readOnly: true
+          type: string
+        networkSpec:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1NetworkSpec"
+          description: Optional. Network spec.
+        serviceAccount:
+          description: The service account that the runtime workload runs as. You can use any service account within the same project, but you must have the service account user permission to use the instance. If not specified, the [Compute Engine default service account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account) is used.
+          type: string
+        updateTime:
+          description: Output only. Timestamp when this NotebookRuntimeTemplate was most recently updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudAiplatformV1NotebookRuntimeTemplateRef:
+      description: Points to a NotebookRuntimeTemplateRef.
+      properties:
+        notebookRuntimeTemplate:
+          description: Immutable. A resource name of the NotebookRuntimeTemplate.
+          type: string
+      type: object
     GoogleCloudAiplatformV1PauseModelDeploymentMonitoringJobRequest:
       description: Request message for JobService.PauseModelDeploymentMonitoringJob.
       properties: {}
@@ -11598,6 +12062,17 @@ components:
     GoogleCloudAiplatformV1PauseScheduleRequest:
       description: Request message for ScheduleService.PauseSchedule.
       properties: {}
+      type: object
+    GoogleCloudAiplatformV1PersistentDiskSpec:
+      description: Represents the spec of persistent disk options.
+      properties:
+        diskSizeGb:
+          description: Size in GB of the disk (default is 100GB).
+          format: int64
+          type: string
+        diskType:
+          description: 'Type of the disk (default is "pd-standard"). Valid values: "pd-ssd" (Persistent Disk Solid State Drive) "pd-standard" (Persistent Disk Hard Disk Drive) "pd-balanced" (Balanced Persistent Disk) "pd-extreme" (Extreme Persistent Disk)'
+          type: string
       type: object
     GoogleCloudAiplatformV1PipelineJob:
       description: An instance of a machine learning PipelineJob.
@@ -15310,6 +15785,20 @@ components:
           items:
             type: string
           type: array
+      type: object
+    GoogleCloudAiplatformV1StartNotebookRuntimeOperationMetadata:
+      description: Metadata information for NotebookService.StartNotebookRuntime.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1GenericOperationMetadata"
+          description: The operation generic information.
+        progressMessage:
+          description: A human-readable message that shows the intermediate progress details of NotebookRuntime.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1StartNotebookRuntimeRequest:
+      description: Request message for NotebookService.StartNotebookRuntime.
+      properties: {}
       type: object
     GoogleCloudAiplatformV1StopTrialRequest:
       description: Request message for VizierService.StopTrial.
