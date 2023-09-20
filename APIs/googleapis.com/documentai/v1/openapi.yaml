@@ -965,11 +965,7 @@ components:
     GoogleCloudDocumentaiUiv1beta3AutoLabelDocumentsMetadataIndividualAutoLabelStatus:
       description: The status of individual documents in the auto-labeling process.
       properties:
-        documentId:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3DocumentId"
-          description: The document id of the auto-labeled document. This will replace the gcs_uri.
         gcsUri:
-          deprecated: true
           description: The gcs_uri of the auto-labeling document, which uniquely identifies a dataset document.
           type: string
         status:
@@ -2959,10 +2955,7 @@ components:
           type: array
         computeStyleInfo:
           deprecated: true
-          description: Turn on font identification model and return font style information. Deprecated, use PremiumFeatures.compute_style_info instead.
-          type: boolean
-        disableCharacterBoxesDetection:
-          description: Turn off character box detector in OCR engine. Character box detection is enabled by default in OCR 2.0+ processors.
+          description: Turn on font identification model and return font style information.
           type: boolean
         enableImageQualityScores:
           description: Enables intelligent document quality scores after OCR. Can help with diagnosing why OCR responses are of poor quality for a given input. Adds additional latency comparable to regular OCR to the process call.
@@ -2976,9 +2969,6 @@ components:
         hints:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1OcrConfigHints"
           description: Hints for the OCR model.
-        premiumFeatures:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1OcrConfigPremiumFeatures"
-          description: Configurations for premium OCR features.
       type: object
     GoogleCloudDocumentaiV1OcrConfigHints:
       description: Hints for OCR Engine
@@ -2989,46 +2979,12 @@ components:
             type: string
           type: array
       type: object
-    GoogleCloudDocumentaiV1OcrConfigPremiumFeatures:
-      description: Configurations for premium OCR features.
-      properties:
-        computeStyleInfo:
-          description: Turn on font identification model and return font style information.
-          type: boolean
-        enableMathOcr:
-          description: Turn on the model that can extract LaTeX math formulas.
-          type: boolean
-        enableSelectionMarkDetection:
-          description: Turn on selection mark detector in OCR engine. Only available in OCR 2.0+ processors.
-          type: boolean
-      type: object
     GoogleCloudDocumentaiV1ProcessOptions:
       description: Options for Process API
       properties:
-        fromEnd:
-          description: Only process certain pages from the end, same as above.
-          format: int32
-          type: integer
-        fromStart:
-          description: Only process certain pages from the start, process all if the document has less pages.
-          format: int32
-          type: integer
-        individualPageSelector:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1ProcessOptionsIndividualPageSelector"
-          description: Which pages to process (1-indexed).
         ocrConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1OcrConfig"
           description: Only applicable to `OCR_PROCESSOR`. Returns error if set on other processor types.
-      type: object
-    GoogleCloudDocumentaiV1ProcessOptionsIndividualPageSelector:
-      description: A list of individual page numbers.
-      properties:
-        pages:
-          description: Optional. Indices of the pages (starting from 1).
-          items:
-            format: int32
-            type: integer
-          type: array
       type: object
     GoogleCloudDocumentaiV1ProcessRequest:
       description: Request message for the ProcessDocument method.
@@ -5449,7 +5405,7 @@ components:
           type: string
       type: object
     GoogleCloudDocumentaiV1beta3Dataset:
-      description: "A singleton resource under a Processor which configures a collection of documents. Next Id: 8."
+      description: A singleton resource under a Processor which configures a collection of documents.
       properties:
         documentWarehouseConfig:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DatasetDocumentWarehouseConfig"

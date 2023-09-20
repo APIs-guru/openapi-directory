@@ -4297,12 +4297,12 @@ components:
     CsePrivateKeyMetadata:
       description: Metadata for a private key instance.
       properties:
+        hardwareKeyMetadata:
+          $ref: "#/components/schemas/HardwareKeyMetadata"
+          description: Metadata for hardware keys.
         kaclsKeyMetadata:
           $ref: "#/components/schemas/KaclsKeyMetadata"
           description: Metadata for a private key instance managed by an external key access control list service.
-        pivKeyMetadata:
-          $ref: "#/components/schemas/PivKeyMetadata"
-          description: Metadata for PIV card certificate.
         privateKeyMetadataId:
           description: Output only. The immutable ID for the private key metadata instance.
           readOnly: true
@@ -4420,6 +4420,13 @@ components:
             - verificationStatusUnspecified
             - accepted
             - pending
+          type: string
+      type: object
+    HardwareKeyMetadata:
+      description: Metadata for hardware keys.
+      properties:
+        description:
+          description: Description about the hardware key.
           type: string
       type: object
     History:
@@ -4831,13 +4838,6 @@ components:
     ObliterateCseKeyPairRequest:
       description: Request to obliterate a CSE key pair.
       properties: {}
-      type: object
-    PivKeyMetadata:
-      description: Metadata for a personal identity verification (PIV) private key that requires a card reader for access.
-      properties:
-        description:
-          description: Description about the PIV key.
-          type: string
       type: object
     PopSettings:
       description: POP settings for an account.
