@@ -1999,7 +1999,7 @@ components:
             type: string
           type: array
         buildStepOutputs:
-          description: List of build step outputs, produced by builder images, in the order corresponding to build step indices. [Cloud Builders](https://cloud.google.com/cloud-build/docs/cloud-builders) can produce this output by writing to `$BUILDER_OUTPUT/output`. Only the first 4KB of data is stored.
+          description: List of build step outputs, produced by builder images, in the order corresponding to build step indices. [Cloud Builders](https://cloud.google.com/cloud-build/docs/cloud-builders) can produce this output by writing to `$BUILDER_OUTPUT/output`. Only the first 50KB of data is stored.
           items:
             format: byte
             type: string
@@ -2094,6 +2094,14 @@ components:
           description: Output only. Hash(es) of the build source, which can be used to verify that the original source integrity was maintained in the build. Note that `FileHashes` will only be populated if `BuildOptions` has requested a `SourceProvenanceHash`. The keys to this map are file paths used as build source and the values contain the hash values for those files. If the build source came in a single package such as a gzipped tarfile (`.tar.gz`), the `FileHash` will be for the single path to that file.
           readOnly: true
           type: object
+        resolvedConnectedRepository:
+          $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1ConnectedRepository"
+          description: Output only. A copy of the build's `source.connected_repository`, if exists, with any revisions resolved.
+          readOnly: true
+        resolvedGitSource:
+          $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1GitSource"
+          description: Output only. A copy of the build's `source.git_source`, if exists, with any revisions resolved.
+          readOnly: true
         resolvedRepoSource:
           $ref: "#/components/schemas/ContaineranalysisGoogleDevtoolsCloudbuildV1RepoSource"
           description: A copy of the build's `source.repo_source`, if exists, with any revisions resolved.
@@ -2352,6 +2360,10 @@ components:
           description: The last time continuous analysis was done for this resource. Deprecated, do not use.
           format: google-datetime
           type: string
+        lastScanTime:
+          description: The last time this resource was scanned.
+          format: google-datetime
+          type: string
         sbomStatus:
           $ref: "#/components/schemas/SBOMStatus"
           description: The status of an SBOM generation.
@@ -2406,7 +2418,7 @@ components:
           type: string
       type: object
     DocumentNote:
-      description: "DocumentNote represents an SPDX Document Creation Information section: https://spdx.github.io/spdx-spec/v2.3/document-creation-information/"
+      description: "DocumentNote represents an SPDX Document Creation Information section: https://spdx.github.io/spdx-spec/2-document-creation-information/"
       properties:
         dataLicence:
           description: Compliance with the SPDX specification includes populating the SPDX fields therein with data related to such fields ("SPDX-Metadata")
@@ -2416,7 +2428,7 @@ components:
           type: string
       type: object
     DocumentOccurrence:
-      description: "DocumentOccurrence represents an SPDX Document Creation Information section: https://spdx.github.io/spdx-spec/v2.3/document-creation-information/"
+      description: "DocumentOccurrence represents an SPDX Document Creation Information section: https://spdx.github.io/spdx-spec/2-document-creation-information/"
       properties:
         createTime:
           description: Identify when the SPDX file was originally created. The date is to be specified according to combined date and time in UTC format as specified in ISO 8601 standard
@@ -4067,6 +4079,9 @@ components:
           items:
             $ref: "#/components/schemas/Detail"
           type: array
+        extraDetails:
+          description: Occurrence-specific extra details about the vulnerability.
+          type: string
         severity:
           description: Note provider assigned impact of the vulnerability.
           enum:

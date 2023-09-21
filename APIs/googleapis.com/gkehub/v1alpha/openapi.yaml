@@ -1676,6 +1676,9 @@ components:
     CommonFleetDefaultMemberConfigSpec:
       description: CommonFleetDefaultMemberConfigSpec contains default configuration information for memberships of a fleet
       properties:
+        configmanagement:
+          $ref: "#/components/schemas/ConfigManagementMembershipSpec"
+          description: Config Management-specific spec.
         identityservice:
           $ref: "#/components/schemas/IdentityServiceMembershipSpec"
           description: Identity Service-specific spec.

@@ -1262,7 +1262,10 @@ components:
       type: object
     CommonFleetDefaultMemberConfigSpec:
       description: CommonFleetDefaultMemberConfigSpec contains default configuration information for memberships of a fleet
-      properties: {}
+      properties:
+        configmanagement:
+          $ref: "#/components/schemas/ConfigManagementMembershipSpec"
+          description: Config Management-specific spec.
       type: object
     ConfigManagementConfigSync:
       description: Configuration for Config Sync

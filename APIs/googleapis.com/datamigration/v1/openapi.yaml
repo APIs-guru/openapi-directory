@@ -2006,7 +2006,7 @@ components:
           type: string
         dataCacheConfig:
           $ref: "#/components/schemas/DataCacheConfig"
-          description: Optional. Configuration for data cache.
+          description: Optional. Data cache is an optional feature available for Cloud SQL for MySQL Enterprise Plus edition only. For more information on data cache, see [Data cache overview](https://cloud.google.com/sql/help/mysql-data-cache) in Cloud SQL documentation.
         dataDiskSizeGb:
           description: The storage capacity available to the database, in GB. The minimum (and default) size is 10GB.
           format: int64
@@ -2349,7 +2349,7 @@ components:
           type: boolean
       type: object
     DataCacheConfig:
-      description: Data cache configurations.
+      description: Data cache is an optional feature available for Cloud SQL for MySQL Enterprise Plus edition only. For more information on data cache, see [Data cache overview](https://cloud.google.com/sql/help/mysql-data-cache) in Cloud SQL documentation.
       properties:
         dataCacheEnabled:
           description: Optional. Whether data cache is enabled for the instance.

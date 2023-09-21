@@ -100,7 +100,7 @@ paths:
       description: Updates an existing workflow. Running this method has no impact on already running executions of the workflow. A new revision of the workflow might be created as a result of a successful update operation. In that case, the new revision is used in new workflow executions.
       operationId: workflows.projects.locations.workflows.patch
       parameters:
-        - description: "The resource name of the workflow. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+        - description: "The resource name of the workflow. Format: projects/{project}/locations/{location}/workflows/{workflow}. This is a workflow-wide field and is not tied to a specific revision."
           in: path
           name: name
           required: true
@@ -239,13 +239,13 @@ paths:
       description: Lists revisions for a given workflow.
       operationId: workflows.projects.locations.workflows.listRevisions
       parameters:
-        - description: "Required. Workflow from which the revisions should be listed. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+        - description: "Required. Workflow for which the revisions should be listed. Format: projects/{project}/locations/{location}/workflows/{workflow}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The maximum number of revisions to return per page. If a value is not specified, a default value of 20 is used. The maximum permitted value is 100 and values greater than 100 coerced down to 100.
+        - description: The maximum number of revisions to return per page. If a value is not specified, a default value of 20 is used. The maximum permitted value is 100. Values greater than 100 are coerced down to 100.
           in: query
           name: pageSize
           schema:
@@ -615,7 +615,7 @@ components:
             - LOG_NONE
           type: string
         createTime:
-          description: Output only. The timestamp for when the workflow was created.
+          description: Output only. The timestamp for when the workflow was created. This is a workflow-wide field and is not tied to a specific revision.
           format: google-datetime
           readOnly: true
           type: string
@@ -623,15 +623,15 @@ components:
           description: "Optional. The resource name of a KMS crypto key used to encrypt or decrypt the data associated with the workflow. Format: projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{cryptoKey} Using `-` as a wildcard for the `{project}` or not providing one at all will infer the project from the account. If not provided, data associated with the workflow will not be CMEK-encrypted."
           type: string
         description:
-          description: Description of the workflow provided by the user. Must be at most 1000 unicode characters long.
+          description: Description of the workflow provided by the user. Must be at most 1000 Unicode characters long. This is a workflow-wide field and is not tied to a specific revision.
           type: string
         labels:
           additionalProperties:
             type: string
-          description: Labels associated with this workflow. Labels can contain at most 64 entries. Keys and values can be no longer than 63 characters and can only contain lowercase letters, numeric characters, underscores, and dashes. Label keys must start with a letter. International characters are allowed.
+          description: Labels associated with this workflow. Labels can contain at most 64 entries. Keys and values can be no longer than 63 characters and can only contain lowercase letters, numeric characters, underscores, and dashes. Label keys must start with a letter. International characters are allowed. This is a workflow-wide field and is not tied to a specific revision.
           type: object
         name:
-          description: "The resource name of the workflow. Format: projects/{project}/locations/{location}/workflows/{workflow}"
+          description: "The resource name of the workflow. Format: projects/{project}/locations/{location}/workflows/{workflow}. This is a workflow-wide field and is not tied to a specific revision."
           type: string
         revisionCreateTime:
           description: Output only. The timestamp for the latest revision of the workflow's creation.
@@ -661,7 +661,7 @@ components:
           description: Output only. Error regarding the state of the workflow. For example, this field will have error details if the execution data is unavailable due to revoked KMS key permissions.
           readOnly: true
         updateTime:
-          description: Output only. The timestamp for when the workflow was last updated.
+          description: Output only. The timestamp for when the workflow was last updated. This is a workflow-wide field and is not tied to a specific revision.
           format: google-datetime
           readOnly: true
           type: string

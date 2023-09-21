@@ -2278,10 +2278,10 @@ components:
           type: string
       type: object
     GenericInsight:
-      description: An insight about an asset (experimental insight)
+      description: A generic insight about an asset.
       properties:
         additionalInformation:
-          description: Output only. Additional information about the insight, each entry can be a logical entry and must make sense if it is displayed with line breaks between each entry. Text can contain md style links
+          description: Output only. Additional information about the insight, each entry can be a logical entry and must make sense if it is displayed with line breaks between each entry. Text can contain md style links.
           items:
             type: string
           readOnly: true
@@ -4042,9 +4042,15 @@ components:
         computeEnginePreferences:
           $ref: "#/components/schemas/ComputeEnginePreferences"
           description: Compute Engine preferences concern insights and recommendations for Compute Engine target.
+        networkCostParameters:
+          $ref: "#/components/schemas/VirtualMachinePreferencesNetworkCostParameters"
+          description: Optional. Parameters that affect network cost estimations. If not set, default values will be used for the parameters.
         regionPreferences:
           $ref: "#/components/schemas/RegionPreferences"
           description: Region preferences for assets using this preference set. If you are unsure which value to set, the migration service API region is often a good value to start with.
+        sizingOptimizationCustomParameters:
+          $ref: "#/components/schemas/VirtualMachinePreferencesSizingOptimizationCustomParameters"
+          description: Optional. Custom data to use for sizing optimizations. Relevant when SizingOptimizationStrategy is set to "custom".
         sizingOptimizationStrategy:
           description: Sizing optimization strategy specifies the preferred strategy used when extrapolating usage data to calculate insights and recommendations for a virtual machine. If you are unsure which value to set, a moderate sizing optimization strategy is often a good value to start with.
           enum:
@@ -4052,6 +4058,7 @@ components:
             - SIZING_OPTIMIZATION_STRATEGY_SAME_AS_SOURCE
             - SIZING_OPTIMIZATION_STRATEGY_MODERATE
             - SIZING_OPTIMIZATION_STRATEGY_AGGRESSIVE
+            - SIZING_OPTIMIZATION_STRATEGY_CUSTOM
           type: string
         soleTenancyPreferences:
           $ref: "#/components/schemas/SoleTenancyPreferences"
@@ -4067,6 +4074,39 @@ components:
         vmwareEnginePreferences:
           $ref: "#/components/schemas/VmwareEnginePreferences"
           description: Preferences concerning insights and recommendations for Google Cloud VMware Engine.
+      type: object
+    VirtualMachinePreferencesNetworkCostParameters:
+      description: Parameters that affect network cost estimations.
+      properties:
+        estimatedEgressTrafficPercentage:
+          description: Optional. An estimated percentage of priced outbound traffic (egress traffic) from the measured outbound traffic. Must be in the interval [0, 100].
+          format: int32
+          type: integer
+      type: object
+    VirtualMachinePreferencesSizingOptimizationCustomParameters:
+      description: Custom data to use for sizing optimizations.
+      properties:
+        aggregationMethod:
+          description: Optional. Type of statistical aggregation of a resource utilization data, on which to base the sizing metrics.
+          enum:
+            - AGGREGATION_METHOD_UNSPECIFIED
+            - AGGREGATION_METHOD_AVERAGE
+            - AGGREGATION_METHOD_MEDIAN
+            - AGGREGATION_METHOD_NINETY_FIFTH_PERCENTILE
+            - AGGREGATION_METHOD_PEAK
+          type: string
+        cpuUsagePercentage:
+          description: Optional. Desired percentage of CPU usage. Must be in the interval [1, 100] (or 0 for default value).
+          format: int32
+          type: integer
+        memoryUsagePercentage:
+          description: Optional. Desired percentage of memory usage. Must be in the interval [1, 100] (or 0 for default value).
+          format: int32
+          type: integer
+        storageMultiplier:
+          description: Optional. Desired increase factor of storage, relative to currently used storage. Must be in the interval [1.0, 2.0] (or 0 for default value).
+          format: double
+          type: number
       type: object
     VmwareDiskConfig:
       description: VMware disk config details.

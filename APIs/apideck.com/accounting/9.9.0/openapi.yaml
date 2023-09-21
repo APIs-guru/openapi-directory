@@ -2865,6 +2865,8 @@ paths:
       x-apideck-gotchas:
         - connector: netsuite
           description: The minimun page size accepted for Netsuite is 5.
+        - connector: xero
+          description: Xero will return 100 items for each call, so the limit parameter is ignored.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2922,6 +2924,8 @@ paths:
         - connector: procountor-fi
           description: |
             Procountor only accepts the following values for the tax_code field: SALES, PURCHASE.
+        - connector: xero
+          description: When creating journal entries, the returned ID is collected from Xero with a maximum of 100 new journal items per day. If more than 100 journal entries are created in a single day, the id returned will be of the manual journal.
       x-codeSamples:
         - label: Node
           lang: TypeScript

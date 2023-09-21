@@ -1862,6 +1862,9 @@ components:
             type: string
           readOnly: true
           type: array
+        billingProjectId:
+          description: Optional. Project to bill on endpoint uptime usage.
+          type: string
         createTime:
           description: Output only. Create time stamp
           format: google-datetime

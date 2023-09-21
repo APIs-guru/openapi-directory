@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 info:
   description: API for accessing CRM object events.
   title: HubSpot Events API
@@ -16,12 +16,25 @@ info:
 tags:
   - name: Events
 paths:
-  /events/v3/events:
+  /events/v3/events/:
     get:
-      operationId: get-/events/v3/events_getPage
+      operationId: get-/events/v3/events/
       parameters:
-        - description: The starting time as an ISO 8601 timestamp.
-          explode: true
+        - explode: true
+          in: query
+          name: objectType
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: eventType
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
           in: query
           name: occurredAfter
           required: false
@@ -29,8 +42,7 @@ paths:
             format: date-time
             type: string
           style: form
-        - description: The ending time as an ISO 8601 timestamp.
-          explode: true
+        - explode: true
           in: query
           name: occurredBefore
           required: false
@@ -38,16 +50,7 @@ paths:
             format: date-time
             type: string
           style: form
-        - description: The type of object being selected. Valid values are hubspot named object types (e.g. `contact`).
-          explode: true
-          in: query
-          name: objectType
-          required: false
-          schema:
-            type: string
-          style: form
-        - description: The id of the selected object. If not present, then the `objectProperty` parameter is required.
-          explode: true
+        - explode: true
           in: query
           name: objectId
           required: false
@@ -55,15 +58,21 @@ paths:
             format: int64
             type: integer
           style: form
-        - description: Limits the response to the specified event type.  For example `&eventType=e_visited_page` returns only `e_visited_page` events.  If not present all event types are returned.
-          explode: true
+        - explode: true
           in: query
-          name: eventType
+          name: indexTableName
           required: false
           schema:
             type: string
           style: form
-        - description: An additional parameter that may be used to get the next `limit` set of results.
+        - explode: true
+          in: query
+          name: indexSpecificMetadata
+          required: false
+          schema:
+            type: string
+          style: form
+        - description: The paging cursor token of the last successfully read resource will be returned as the `paging.next.after` JSON property of a paged response containing more results.
           explode: true
           in: query
           name: after
@@ -78,7 +87,7 @@ paths:
           schema:
             type: string
           style: form
-        - description: The maximum number of events to return, defaults to 20.
+        - description: The maximum number of results to display per page.
           explode: true
           in: query
           name: limit
@@ -87,10 +96,32 @@ paths:
             format: int32
             type: integer
           style: form
-        - description: Selects the sort field and order. Defaults to ascending, prefix with `-` for descending order. `occurredAt` is the only field supported for sorting.
-          explode: true
+        - explode: true
           in: query
           name: sort
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - explode: true
+          in: query
+          name: objectProperty.{propname}
+          required: false
+          schema:
+            type: object
+          style: form
+        - explode: true
+          in: query
+          name: property.{propname}
+          required: false
+          schema:
+            type: object
+          style: form
+        - explode: true
+          in: query
+          name: id
           required: false
           schema:
             items:
@@ -107,10 +138,9 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
-        - oauth2_legacy:
-            - business-intelligence
         - private_apps_legacy: []
-      summary: Returns a collection of events matching a query.
+        - oauth2_legacy:
+            - oauth
       tags:
         - Events
 components:
@@ -263,7 +293,6 @@ components:
         - objectId
         - objectType
         - occurredAt
-        - properties
       type: object
     NextPage:
       properties:
@@ -278,6 +307,17 @@ components:
       properties:
         next:
           $ref: "#/components/schemas/NextPage"
+        prev:
+          $ref: "#/components/schemas/PreviousPage"
+      type: object
+    PreviousPage:
+      properties:
+        before:
+          type: string
+        link:
+          type: string
+      required:
+        - before
       type: object
   securitySchemes:
     oauth2_legacy:
@@ -285,15 +325,10 @@ components:
         authorizationCode:
           authorizationUrl: https://app.hubspot.com/oauth/authorize
           scopes:
-            business-intelligence: Read from Business Intelligence API
+            oauth: User and Account Information
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
     private_apps_legacy:
       in: header
       name: private-app-legacy
       type: apiKey
-x-hubspot-available-client-libraries:
-  - PHP
-  - Node
-  - Python
-  - Ruby

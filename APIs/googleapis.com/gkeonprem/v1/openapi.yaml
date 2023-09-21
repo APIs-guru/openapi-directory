@@ -3527,7 +3527,7 @@ components:
           readOnly: true
         vcenter:
           $ref: "#/components/schemas/VmwareVCenterConfig"
-          description: VmwareVCenterConfig specifies vCenter config for the user cluster. Inherited from the admin cluster.
+          description: VmwareVCenterConfig specifies vCenter config for the user cluster. If unspecified, it is inherited from the admin cluster.
         vmTrackingEnabled:
           description: Enable VM tracking.
           type: boolean

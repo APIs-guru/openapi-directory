@@ -6763,7 +6763,7 @@ components:
           description: The kind of this response ("androidpublisher#tracksListResponse").
           type: string
         tracks:
-          description: All tracks.
+          description: All tracks (including tracks with no releases).
           items:
             $ref: "#/components/schemas/Track"
           type: array

@@ -4301,6 +4301,7 @@ components:
       x-apideck-schema-id: Employee
       x-apideck-weights:
         addresses: critical
+        bank_accounts: high
         birthday: critical
         company_id: critical
         company_name: medium
@@ -4427,6 +4428,12 @@ components:
         payment_frequency: medium
         payment_unit: medium
         rate: high
+    EmployeeId:
+      description: ID of the employee
+      example: "12345"
+      nullable: true
+      title: Employee ID
+      type: string
     EmployeeJob:
       properties:
         compensation_rate:
@@ -4520,30 +4527,71 @@ components:
       title: Employee number
       type: string
     EmployeePayroll:
+      additionalProperties: false
       properties:
-        employee:
-          $ref: "#/components/schemas/Employee"
-        payroll:
-          $ref: "#/components/schemas/Payroll"
+        check_date:
+          description: The date on which employees will be paid for the payroll.
+          example: 2022-04-08
+          nullable: true
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        company_id:
+          $ref: "#/components/schemas/CompanyId"
+        compensations:
+          description: An array of compensations for the payroll.
+          items:
+            $ref: "#/components/schemas/Compensation"
+          type: array
+        employee_id:
+          $ref: "#/components/schemas/EmployeeId"
+        end_date:
+          description: The end date, inclusive, of the pay period.
+          example: 2022-04-21
+          nullable: true
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        id:
+          $ref: "#/components/schemas/IdOrNull"
+        processed:
+          description: Whether or not the payroll has been successfully processed. Note that processed payrolls cannot be updated.
+          example: false
+          nullable: true
+          type: boolean
+        processed_date:
+          description: The date the payroll was processed.
+          example: 2022-04-08
+          nullable: true
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        start_date:
+          description: The start date, inclusive, of the pay period.
+          example: 2022-04-08
+          nullable: true
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        totals:
+          $ref: "#/components/schemas/PayrollTotals"
+          description: The overview of the payroll totals.
+          type: object
+      required:
+        - id
+        - processed
+        - check_date
+        - start_date
+        - end_date
       type: object
       x-apideck-schema-id: EmployeePayroll
       x-apideck-weights:
-        employee: critical
-        payroll: critical
-    EmployeePayrolls:
-      properties:
-        employee:
-          $ref: "#/components/schemas/Employee"
-        payrolls:
-          items:
-            $ref: "#/components/schemas/Payroll"
-          nullable: true
-          type: array
-      type: object
-      x-apideck-schema-id: EmployeePayrolls
-      x-apideck-weights:
-        employee: critical
-        payrolls: critical
+        check_date: critical
+        company_id: high
+        compensations: medium
+        employee_id: critical
+        end_date: critical
+        id: critical
+        processed: critical
+        processed_date: medium
+        start_date: critical
+        totals: high
     EmployeeSchedules:
       properties:
         employee:
@@ -4770,7 +4818,9 @@ components:
     GetEmployeePayrollsResponse:
       properties:
         data:
-          $ref: "#/components/schemas/EmployeePayrolls"
+          items:
+            $ref: "#/components/schemas/EmployeePayroll"
+          type: array
         operation:
           description: Operation performed
           example: all
@@ -6108,11 +6158,7 @@ components:
           title: Description
           type: string
         employee_id:
-          description: ID of the employee
-          example: "12345"
-          nullable: true
-          title: Employee ID
-          type: string
+          $ref: "#/components/schemas/EmployeeId"
         end_date:
           description: The end date of the time off request.
           example: 2022-04-01
