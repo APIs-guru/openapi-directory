@@ -1687,7 +1687,10 @@ components:
       type: object
     SasPortalSetupSasAnalyticsRequest:
       description: Request for the SetupSasAnalytics rpc.
-      properties: {}
+      properties:
+        userId:
+          description: Optional. User id to setup analytics for, if not provided the user id associated with the project is used. optional
+          type: string
       type: object
     SasPortalSetupSasAnalyticsResponse:
       description: Response returned by the long running operation for the SetupSasAnalytics rpc.

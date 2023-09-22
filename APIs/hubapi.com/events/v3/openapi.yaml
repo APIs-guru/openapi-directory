@@ -18,7 +18,7 @@ tags:
 paths:
   /events/v3/events/:
     get:
-      operationId: get-/events/v3/events/
+      operationId: get-/events/v3/events/_getPage
       parameters:
         - explode: true
           in: query
@@ -332,3 +332,14 @@ components:
       in: header
       name: private-app-legacy
       type: apiKey
+x-hubspot-available-client-libraries:
+  - PHP
+  - Node
+  - Ruby
+  - Python
+x-hubspot-documentation-banner: NONE
+x-hubspot-product-tier-requirements:
+  cms: FREE
+  marketing: FREE
+  sales: FREE
+  service: FREE

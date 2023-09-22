@@ -13,7 +13,18 @@ info:
     ## Authentication
     To use the Payout API, you need to have [two API credentials](https://docs.adyen.com/online-payments/online-payouts#payouts-to-bank-accounts-and-wallets): one for storing payout details and submitting payouts, and another one for confirming or declining payouts. If you don't have the required API credentials, contact our [Support Team](https://www.adyen.help/hc/en-us/requests/new).
 
-    Both of these API credentials must be authenticated with [basic authentication](https://docs.adyen.com/development-resources/api-credentials#basic-authentication).The following example shows how to authenticate your request when submitting a payout:
+    If using an API key, add an `X-API-Key` header with the API key as the value, for example:
+
+     ```
+    curl
+    -H "Content-Type: application/json" \
+    -H "X-API-Key: YOUR_API_KEY" \
+    ...
+    ```
+
+    Alternatively, you can use the username and password to connect to the API using [basic authentication](https://docs.adyen.com/development-resources/api-credentials#basic-authentication).
+
+    The following example shows how to authenticate your request with basic authentication when submitting a payout:
 
     ```
     curl

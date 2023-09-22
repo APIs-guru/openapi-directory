@@ -2210,10 +2210,10 @@ components:
           type: array
       type: object
     GenericInsight:
-      description: An insight about an asset (experimental insight)
+      description: A generic insight about an asset.
       properties:
         additionalInformation:
-          description: Output only. Additional information about the insight, each entry can be a logical entry and must make sense if it is displayed with line breaks between each entry. Text can contain md style links
+          description: Output only. Additional information about the insight, each entry can be a logical entry and must make sense if it is displayed with line breaks between each entry. Text can contain md style links.
           items:
             type: string
           readOnly: true
@@ -3144,7 +3144,7 @@ components:
           $ref: "#/components/schemas/NetworkUsageSample"
           description: Network usage sample.
         sampleTime:
-          description: Time the sample was If omitted, the frame report time will be used.
+          description: Time the sample was collected. If omitted, the frame report time will be used.
           format: google-datetime
           type: string
       type: object

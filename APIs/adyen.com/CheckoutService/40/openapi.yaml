@@ -4804,8 +4804,8 @@ components:
         merchantAccount: YOUR_MERCHANT_ACCOUNT
         reference: YOUR_UNIQUE_REFERENCE
     post-payments-paymentPspReference-captures-capture-201:
-      description: Example response when a refund was requested
-      summary: Refund requested
+      description: Example response when a capture was requested
+      summary: Capture requested
       value:
         amount:
           currency: EUR
@@ -6411,6 +6411,7 @@ components:
             - afterpay_default
             - afterpaytouch
             - afterpay_b2b
+            - clearpay
           type: string
       required:
         - type
