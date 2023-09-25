@@ -269,7 +269,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 9.9.0
+  version: 9.9.1
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -750,6 +750,9 @@ paths:
       tags:
         - Departments
       x-apideck-api: hris
+      x-apideck-gotchas:
+        - connector: humaans-io
+          description: Departments are mapped to teams in Humaans. Increase the limit for this API call to 200 to get the most accurate data back. The teams are inferred from number of employees defined by the limit parameter (default 20).
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -1157,6 +1160,7 @@ paths:
                   type: 'contractor',
                   sub_type: 'full_time'
                 },
+                ethnicity: 'African American',
                 manager: {
                   id: '12345',
                   name: 'Elon Musk',
@@ -1526,6 +1530,7 @@ paths:
                   type: 'contractor',
                   sub_type: 'full_time'
                 },
+                ethnicity: 'African American',
                 manager: {
                   id: '12345',
                   name: 'Elon Musk',
@@ -4127,6 +4132,11 @@ components:
           type: string
         employment_status:
           $ref: "#/components/schemas/EmploymentStatus"
+        ethnicity:
+          description: The ethnicity of the employee
+          example: African American
+          nullable: true
+          type: string
         first_name:
           $ref: "#/components/schemas/FirstName"
         food_allergies:
@@ -4330,6 +4340,7 @@ components:
         employment_role: critical
         employment_start_date: critical
         employment_status: critical
+        ethnicity: critical
         first_name: critical
         food_allergies: edge-case
         gender: high

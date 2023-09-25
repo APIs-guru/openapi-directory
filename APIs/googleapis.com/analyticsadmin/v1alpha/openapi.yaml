@@ -2207,7 +2207,7 @@ paths:
       description: Lists SKAdNetworkConversionValueSchema on a stream. Properties can have at most one SKAdNetworkConversionValueSchema.
       operationId: analyticsadmin.properties.dataStreams.sKAdNetworkConversionValueSchema.list
       parameters:
-        - description: "Required. Format: properties/{property_id}/dataStreams/{dataStream}/sKAdNetworkConversionValueSchema Example: properties/1234/dataStreams/5678/sKAdNetworkConversionValueSchema"
+        - description: "Required. The DataStream resource to list schemas for. Format: properties/{property_id}/dataStreams/{dataStream} Example: properties/1234/dataStreams/5678"
           in: path
           name: parent
           required: true

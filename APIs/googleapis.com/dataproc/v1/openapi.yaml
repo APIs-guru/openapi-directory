@@ -2524,9 +2524,6 @@ components:
         gcePdKmsKeyName:
           description: Optional. The Cloud KMS key name to use for PD disk encryption for all instances in the cluster.
           type: string
-        kmsKey:
-          description: Optional. The Cloud KMS key name to use for encrypting customer core content and cluster PD disk for all instances in the cluster.
-          type: string
       type: object
     EndpointConfig:
       description: Endpoint config for this cluster
@@ -2579,7 +2576,7 @@ components:
           description: Optional. Subnetwork URI to connect workload to.
           type: string
         ttl:
-          description: "Optional. The duration after which the workload will be terminated. When the workload exceeds this duration, it will be unconditionally terminated without waiting for ongoing work to finish. If ttl is not specified for a batch workload, the workload will be allowed to run until it exits naturally (or runs forever without exiting). If ttl is not specified for an interactive session, it defaults to 24h. If ttl is not specified for a batch that uses 2.1+ runtime version, it defaults to 4h. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)). If both ttl and idle_ttl are specified (for an interactive session), the conditions are treated as OR conditions: the workload will be terminated when it has been idle for idle_ttl or when ttl has been exceeded, whichever occurs first."
+          description: "Optional. The duration after which the workload will be terminated, specified as the JSON representation for Duration (https://protobuf.dev/programming-guides/proto3/#json). When the workload exceeds this duration, it will be unconditionally terminated without waiting for ongoing work to finish. If ttl is not specified for a batch workload, the workload will be allowed to run until it exits naturally (or run forever without exiting). If ttl is not specified for an interactive session, it defaults to 24 hours. If ttl is not specified for a batch that uses 2.1+ runtime version, it defaults to 4 hours. Minimum value is 10 minutes; maximum value is 14 days. If both ttl and idle_ttl are specified (for an interactive session), the conditions are treated as OR conditions: the workload will be terminated when it has been idle for idle_ttl or when ttl has been exceeded, whichever occurs first."
           format: google-duration
           type: string
       type: object
@@ -2600,10 +2597,10 @@ components:
           type: string
       type: object
     FlinkJob:
-      description: A Dataproc job for running Apache Flink (https://flink.apache.org/) applications on YARN.
+      description: A Dataproc job for running Apache Flink applications on YARN.
       properties:
         args:
-          description: Optional. The arguments to pass to the driver. Do not include arguments, such as --conf, that can be set as job properties, since a collision may occur that causes an incorrect job submission.
+          description: Optional. The arguments to pass to the driver. Do not include arguments, such as --conf, that can be set as job properties, since a collision might occur that causes an incorrect job submission.
           items:
             type: string
           type: array
@@ -2616,7 +2613,7 @@ components:
           $ref: "#/components/schemas/LoggingConfig"
           description: Optional. The runtime log config for job execution.
         mainClass:
-          description: The name of the driver's main class. The jar file that contains the class must be in the default CLASSPATH or specified in jar_file_uris.
+          description: The name of the driver's main class. The jar file that contains the class must be in the default CLASSPATH or specified in jarFileUris.
           type: string
         mainJarFileUri:
           description: The HCFS URI of the jar file that contains the main class.
@@ -2624,10 +2621,10 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: Optional. A mapping of property names to values, used to configure Flink. Properties that conflict with values set by the Dataproc API may beoverwritten. Can include properties set in/etc/flink/conf/flink-defaults.conf and classes in user code.
+          description: Optional. A mapping of property names to values, used to configure Flink. Properties that conflict with values set by the Dataproc API might beoverwritten. Can include properties set in/etc/flink/conf/flink-defaults.conf and classes in user code.
           type: object
         savepointUri:
-          description: Optional. HCFS URI of the savepoint which contains the last saved progress for this job
+          description: Optional. HCFS URI of the savepoint, which contains the last saved progress for starting the current job.
           type: string
       type: object
     GceClusterConfig:
@@ -2814,7 +2811,7 @@ components:
             type: string
           type: array
         args:
-          description: Optional. The arguments to pass to the driver. Do not include arguments, such as -libjars or -Dfoo=bar, that can be set as job properties, since a collision may occur that causes an incorrect job submission.
+          description: Optional. The arguments to pass to the driver. Do not include arguments, such as -libjars or -Dfoo=bar, that can be set as job properties, since a collision might occur that causes an incorrect job submission.
           items:
             type: string
           type: array
@@ -2840,7 +2837,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: Optional. A mapping of property names to values, used to configure Hadoop. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site and classes in user code.
+          description: Optional. A mapping of property names to values, used to configure Hadoop. Properties that conflict with values set by the Dataproc API might be overwritten. Can include properties set in /etc/hadoop/conf/*-site and classes in user code.
           type: object
       type: object
     HiveJob:
@@ -2857,7 +2854,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: Optional. A mapping of property names and values, used to configure Hive. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/hive/conf/hive-site.xml, and classes in user code.
+          description: Optional. A mapping of property names and values, used to configure Hive. Properties that conflict with values set by the Dataproc API might be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/hive/conf/hive-site.xml, and classes in user code.
           type: object
         queryFileUri:
           description: The HCFS URI of the script that contains Hive queries.
@@ -3059,7 +3056,7 @@ components:
           readOnly: true
           type: boolean
         driverControlFilesUri:
-          description: Output only. If present, the location of miscellaneous control files which may be used as part of job setup and handling. If not present, control files may be placed in the same location as driver_output_uri.
+          description: Output only. If present, the location of miscellaneous control files which can be used as part of job setup and handling. If not present, control files might be placed in the same location as driver_output_uri.
           readOnly: true
           type: string
         driverOutputResourceUri:
@@ -3079,13 +3076,13 @@ components:
           $ref: "#/components/schemas/HiveJob"
           description: Optional. Job is a Hive job.
         jobUuid:
-          description: Output only. A UUID that uniquely identifies a job within the project over time. This is in contrast to a user-settable reference.job_id that may be reused over time.
+          description: Output only. A UUID that uniquely identifies a job within the project over time. This is in contrast to a user-settable reference.job_id that might be reused over time.
           readOnly: true
           type: string
         labels:
           additionalProperties:
             type: string
-          description: Optional. The labels to associate with this job. Label keys must contain 1 to 63 characters, and must conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). Label values may be empty, but, if present, must contain 1 to 63 characters, and must conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be associated with a job.
+          description: Optional. The labels to associate with this job. Label keys must contain 1 to 63 characters, and must conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). Label values can be empty, but, if present, must contain 1 to 63 characters, and must conform to RFC 1035 (https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be associated with a job.
           type: object
         pigJob:
           $ref: "#/components/schemas/PigJob"
@@ -3116,7 +3113,7 @@ components:
           description: Optional. Job is a SparkSql job.
         status:
           $ref: "#/components/schemas/JobStatus"
-          description: Output only. The job status. Additional application-specific status information may be contained in the type_job and yarn_applications fields.
+          description: Output only. The job status. Additional application-specific status information might be contained in the type_job and yarn_applications fields.
           readOnly: true
         statusHistory:
           description: Output only. The previous job status.
@@ -3128,7 +3125,7 @@ components:
           $ref: "#/components/schemas/TrinoJob"
           description: Optional. Job is a Trino job.
         yarnApplications:
-          description: "Output only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It may be changed before final release."
+          description: "Output only. The collection of YARN applications spun up by this job.Beta Feature: This report is available for testing purposes only. It might be changed before final release."
           items:
             $ref: "#/components/schemas/YarnApplication"
           readOnly: true
@@ -3185,11 +3182,11 @@ components:
       description: Job scheduling options.
       properties:
         maxFailuresPerHour:
-          description: "Optional. Maximum number of times per hour a driver may be restarted as a result of driver exiting with non-zero code before job is reported failed.A job may be reported as thrashing if the driver exits with a non-zero code four times within a 10-minute window.Maximum value is 10.Note: This restartable job option is not supported in Dataproc workflow templates (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)."
+          description: "Optional. Maximum number of times per hour a driver can be restarted as a result of driver exiting with non-zero code before job is reported failed.A job might be reported as thrashing if the driver exits with a non-zero code four times within a 10-minute window.Maximum value is 10.Note: This restartable job option is not supported in Dataproc workflow templates (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)."
           format: int32
           type: integer
         maxFailuresTotal:
-          description: "Optional. Maximum total number of times a driver may be restarted as a result of the driver exiting with a non-zero code. After the maximum number is reached, the job will be reported as failed.Maximum value is 240.Note: Currently, this restartable job option is not supported in Dataproc workflow templates (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)."
+          description: "Optional. Maximum total number of times a driver can be restarted as a result of the driver exiting with a non-zero code. After the maximum number is reached, the job will be reported as failed.Maximum value is 240.Note: Currently, this restartable job option is not supported in Dataproc workflow templates (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template)."
           format: int32
           type: integer
       type: object
@@ -3464,7 +3461,7 @@ components:
               - FATAL
               - OFF
             type: string
-          description: "The per-package log levels for the driver. This may include \"root\" package name to configure rootLogger. Examples: - 'com.google = FATAL' - 'root = INFO' - 'org.apache = DEBUG'"
+          description: "The per-package log levels for the driver. This can include \"root\" package name to configure rootLogger. Examples: - 'com.google = FATAL' - 'root = INFO' - 'org.apache = DEBUG'"
           type: object
       type: object
     ManagedCluster:
@@ -3670,6 +3667,9 @@ components:
     OrderedJob:
       description: A job executed by the workflow.
       properties:
+        flinkJob:
+          $ref: "#/components/schemas/FlinkJob"
+          description: Optional. Job is a Flink job.
         hadoopJob:
           $ref: "#/components/schemas/HadoopJob"
           description: Optional. Job is a Hadoop job.
@@ -3751,7 +3751,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: Optional. A mapping of property names to values, used to configure Pig. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/pig/conf/pig.properties, and classes in user code.
+          description: Optional. A mapping of property names to values, used to configure Pig. Properties that conflict with values set by the Dataproc API might be overwritten. Can include properties set in /etc/hadoop/conf/*-site.xml, /etc/pig/conf/pig.properties, and classes in user code.
           type: object
         queryFileUri:
           description: The HCFS URI of the script that contains the Pig queries.
@@ -3882,7 +3882,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: Optional. A mapping of property names to values, used to configure PySpark. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.
+          description: Optional. A mapping of property names to values, used to configure PySpark. Properties that conflict with values set by the Dataproc API might be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.
           type: object
         pythonFileUris:
           description: "Optional. HCFS file URIs of Python files to pass to the PySpark framework. Supported file types: .py, .egg, and .zip."
@@ -4196,6 +4196,10 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        uuid:
+          description: Output only. A session template UUID (Unique Universal Identifier). The service generates this value when it creates the session template.
+          readOnly: true
+          type: string
       type: object
     SetIamPolicyRequest:
       description: Request message for SetIamPolicy method.
@@ -4314,7 +4318,7 @@ components:
           $ref: "#/components/schemas/LoggingConfig"
           description: Optional. The runtime log config for job execution.
         mainClass:
-          description: The name of the driver's main class. The jar file that contains the class must be in the default CLASSPATH or specified in jar_file_uris.
+          description: The name of the driver's main class. The jar file that contains the class must be in the default CLASSPATH or specified in SparkJob.jar_file_uris.
           type: string
         mainJarFileUri:
           description: The HCFS URI of the jar file that contains the main class.
@@ -4322,7 +4326,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: Optional. A mapping of property names to values, used to configure Spark. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.
+          description: Optional. A mapping of property names to values, used to configure Spark. Properties that conflict with values set by the Dataproc API might be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.
           type: object
       type: object
     SparkRBatch:
@@ -4374,7 +4378,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: Optional. A mapping of property names to values, used to configure SparkR. Properties that conflict with values set by the Dataproc API may be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.
+          description: Optional. A mapping of property names to values, used to configure SparkR. Properties that conflict with values set by the Dataproc API might be overwritten. Can include properties set in /etc/spark/conf/spark-defaults.conf and classes in user code.
           type: object
       type: object
     SparkSqlBatch:
@@ -4408,7 +4412,7 @@ components:
         properties:
           additionalProperties:
             type: string
-          description: Optional. A mapping of property names to values, used to configure Spark SQL's SparkConf. Properties that conflict with values set by the Dataproc API may be overwritten.
+          description: Optional. A mapping of property names to values, used to configure Spark SQL's SparkConf. Properties that conflict with values set by the Dataproc API might be overwritten.
           type: object
         queryFileUri:
           description: The HCFS URI of the script that contains SQL queries.

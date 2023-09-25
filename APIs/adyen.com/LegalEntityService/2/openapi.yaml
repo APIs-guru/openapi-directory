@@ -1884,7 +1884,7 @@ components:
         capability: issueBankAccount
         id: SE322KH223222F5GV2SQ924F6
         industryCode: "4531"
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         sourceOfFunds:
           adyenProcessedFunds: false
           description: Funds from my flower shop business
@@ -1902,7 +1902,7 @@ components:
         fileName: Registration doc for Example Company
         id: SE322JV223222F5GV2N9L8GDK
         owner:
-          id: YOUR_LEGAL_ENTITY
+          id: LE00000000000000000000001
           type: legalEntity
         type: registrationDocument
     get-legalEntities-id-businessLines-success-200:
@@ -1913,7 +1913,7 @@ components:
           - capability: issueBankAccount
             id: SE322JV223222F5GVGMLNB83F
             industryCode: "55"
-            legalEntityId: YOUR_LEGAL_ENTITY
+            legalEntityId: LE00000000000000000000001
             sourceOfFunds:
               adyenProcessedFunds: false
               description: Funds from my flower shop business
@@ -1924,7 +1924,7 @@ components:
           - capability: receivePayments
             id: SE322JV223222F5GVGPNRB9GJ
             industryCode: 339E
-            legalEntityId: YOUR_LEGAL_ENTITY
+            legalEntityId: LE00000000000000000000001
             salesChannels:
               - eCommerce
               - ecomMoto
@@ -1975,7 +1975,7 @@ components:
             allowed: false
             requested: true
             verificationStatus: pending
-        id: YOUR_LEGAL_ENTITY
+        id: LE00000000000000000000001
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -1995,8 +1995,8 @@ components:
       summary: Terms of Service information for a legal entity
       value:
         data:
-          - acceptedBy: YOUR_LEGAL_ENTITY_2
-            acceptedFor: YOUR_LEGAL_ENTITY_1
+          - acceptedBy: LE00000000000000000000002
+            acceptedFor: LE00000000000000000000001
             createdAt: 2022-12-05T13:36:58.212253Z
             id: TOSA000AB00000000B2AAAB2BA0AA0
             type: adyenIssuing
@@ -2062,7 +2062,7 @@ components:
           currencyCode: EUR
           iban: NL62ABNA0000000123
         id: SE322JV223222F5GNXSR89TMW
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         type: bankAccount
     patch-businessLines-id-updateBusinessLine:
       description: Example request for updating the industry code of a business line
@@ -2078,7 +2078,7 @@ components:
         capability: issueBankAccount
         id: SE322JV223222F5GVGMLNB83F
         industryCode: "55"
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         sourceOfFunds:
           adyenProcessedFunds: false
           description: Funds from my flower shop business
@@ -2102,7 +2102,7 @@ components:
         fileName: Proof of industry for Example Company
         id: SE322JV223222F5GV2N9L8GDK
         owner:
-          id: YOUR_LEGAL_ENTITY
+          id: LE00000000000000000000001
           type: legalEntity
         type: proofOfIndustry
     patch-legalEntities-id-changeLegalEntityType:
@@ -2114,7 +2114,7 @@ components:
       description: Example response when changing the legal entity type
       summary: Legal entity type changed
       value:
-        id: YOUR_LEGAL_ENTITY
+        id: LE00000000000000000000001
         individual:
           name:
             firstName: Explorer
@@ -2126,15 +2126,13 @@ components:
       description: Example request for accepting the Terms of Service document
       summary: Accept the Terms of Service document
       value:
-        acceptedBy: YOUR_LEGAL_ENTITY
-        ipAddress: 82.199.87.148
+        acceptedBy: LE00000000000000000000002
     patch-legalEntities-id-termsOfService-termsofservicedocumentid-updateTermsofService-200:
       description: Example response when accepting a Terms of Service document
       summary: Terms of Service document accepted
       value:
         acceptedBy: LE00000000000000000000002
         id: TOSA000AB00000000B2AAAB2BA0AA0
-        ipAddress: 82.199.87.148
         language: en
         termsOfServiceDocumentId: abc123
         type: adyenIssuing
@@ -2144,20 +2142,20 @@ components:
       value:
         entityAssociations:
           - jobTitle: CEO
-            legalEntityId: YOUR_LEGAL_ENTITY_2
+            legalEntityId: LE00000000000000000000002
             type: uboThroughControl
     patch-legalEntities-id-updateLegalEntityOrganization-200:
       description: Example response for adding an entity association to an organization
       summary: Entity associations added
       value:
         entityAssociations:
-          - associatorId: YOUR_LEGAL_ENTITY_1
+          - associatorId: LE00000000000000000000001
             entityType: individual
             jobTitle: CEO
-            legalEntityId: YOUR_LEGAL_ENTITY_2
+            legalEntityId: LE00000000000000000000002
             name: Simone Hopper
             type: uboThroughControl
-        id: YOUR_LEGAL_ENTITY_1
+        id: LE00000000000000000000001
         organization:
           description: FinTech
           doingBusinessAs: Adyen BV
@@ -2185,18 +2183,18 @@ components:
       summary: Add entity associations to a sole proprietorship
       value:
         entityAssociations:
-          - legalEntityId: YOUR_LEGAL_ENTITY_2
+          - legalEntityId: LE00000000000000000000002
             type: soleProprietorship
     patch-legalEntities-id-updateLegalEntitySoleProp-200:
       description: Example response for adding an entity association to a sole proprietorship
       summary: Entity association added to a sole proprietorship
       value:
         entityAssociations:
-          - associatorId: YOUR_LEGAL_ENTITY_1
+          - associatorId: LE00000000000000000000001
             entityType: soleProprietorship
-            legalEntityId: YOUR_LEGAL_ENTITY_2
+            legalEntityId: LE00000000000000000000002
             type: soleProprietorship
-        id: YOUR_LEGAL_ENTITY_1
+        id: LE00000000000000000000001
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -2217,7 +2215,7 @@ components:
         bankAccount:
           currencyCode: EUR
           iban: NL02ABNA0123456789
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         type: bankAccount
     patch-transferInstruments-id-updateTransferInstrument-200:
       description: Example response for updating a transfer instrument
@@ -2228,7 +2226,7 @@ components:
           currencyCode: EUR
           iban: NL02ABNA0123456789
         id: SE576BH223222F5GJVKHH6BDT
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         type: bankAccount
     post-businessLines-createBusinessLines-businessAccounts:
       description: Example request for creating a business line for a business account
@@ -2236,7 +2234,7 @@ components:
       value:
         capability: issueBankAccount
         industryCode: "4531"
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         sourceOfFunds:
           adyenProcessedFunds: false
           description: Funds from my flower shop business
@@ -2250,7 +2248,7 @@ components:
         capability: issueBankAccount
         id: SE322JV223222F5GVGMLNB83F
         industryCode: "4531"
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         sourceOfFunds:
           adyenProcessedFunds: false
           description: Funds from my flower shop business
@@ -2266,7 +2264,7 @@ components:
           - content: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
         description: Registration doc for Example Company
         owner:
-          id: YOUR_LEGAL_ENTITY
+          id: LE00000000000000000000001
           type: legalEntity
         type: registrationDocument
     post-documents-uploadDocument-200:
@@ -2279,7 +2277,7 @@ components:
         fileName: Registration doc for Example Company
         id: SE322JV223222F5GV2N9L8GDK
         owner:
-          id: YOUR_LEGAL_ENTITY
+          id: LE00000000000000000000001
           type: legalEntity
         type: registrationDocument
     post-legalEntities-createLegalEntityIndividualNL:
@@ -2303,7 +2301,7 @@ components:
       description: Example response for creating a legal entity for an individual residing in the Netherlands
       summary: Individual legal entity created
       value:
-        id: YOUR_LEGAL_ENTITY
+        id: LE00000000000000000000001
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -2343,7 +2341,7 @@ components:
       description: Example response for creating a legal entity for an individual residing in the US
       summary: Individual legal entity created
       value:
-        id: YOUR_LEGAL_ENTITY
+        id: LE00000000000000000000001
         individual:
           birthData:
             dateOfBirth: 1990-06-21
@@ -2368,7 +2366,7 @@ components:
       value:
         entityAssociations:
           - jobTitle: CEO
-            legalEntityId: YOUR_LEGAL_ENTITY_1
+            legalEntityId: LE00000000000000000000001
             type: signatory
         organization:
           doingBusinessAs: API Company Trading
@@ -2387,13 +2385,13 @@ components:
       summary: Organization legal entity created
       value:
         entityAssociations:
-          - associatorId: YOUR_LEGAL_ENTITY_2
+          - associatorId: LE00000000000000000000002
             entityType: individual
             jobTitle: CEO
-            legalEntityId: YOUR_LEGAL_ENTITY_1
+            legalEntityId: LE00000000000000000000001
             name: Simone Hopper
             type: signatory
-        id: YOUR_LEGAL_ENTITY_2
+        id: LE00000000000000000000002
         organization:
           doingBusinessAs: API Company Trading
           email: organization@example.com
@@ -2426,7 +2424,7 @@ components:
       description: Example response for creating a legal entity for an organization operating in the US
       summary: Organization legal entity created
       value:
-        id: YOUR_LEGAL_ENTITY
+        id: LE00000000000000000000001
         organization:
           legalName: Explorer Company based in US
           registeredAddress:
@@ -2456,7 +2454,7 @@ components:
       description: Example response for creating a legal entity for a sole proprietor operating in the Netherlands
       summary: Sole proprietor legal enity created
       value:
-        id: YOUR_LEGAL_ENTITY
+        id: LE00000000000000000000001
         soleProprietorship:
           countryOfGoverningLaw: NL
           name: Shelly Seller Sole Trader
@@ -2485,7 +2483,7 @@ components:
       description: Example response for creating a legal entity for a sole proprietor operating in the US
       summary: Sole proprietor legal enity created
       value:
-        id: YOUR_LEGAL_ENTITY
+        id: LE00000000000000000000001
         soleProprietorship:
           countryOfGoverningLaw: US
           name: Shelly Eller Sole Trader
@@ -2549,7 +2547,7 @@ components:
       summary: Terms of Service document returned
       value:
         document: JVBERi0xLjQKJcOkw7zDtsOfCjIgMCBv+f/ub0j6JPRX+E3EmC==
-        id: YOUR_LEGAL_ENTITY
+        id: LE00000000000000000000001
         language: en
         termsOfServiceDocumentId: abc123
         type: adyenIssuing
@@ -2561,7 +2559,7 @@ components:
           countryCode: NL
           currencyCode: EUR
           iban: NL62ABNA0000000123
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         type: bankAccount
     post-transferInstruments-createTransferInstrumentEUR-200:
       description: Example response for adding a bank account as a transfer instrument of a legal entity
@@ -2573,7 +2571,7 @@ components:
           iban: NL62ABNA0000000123
           trustedSource: false
         id: SE576BH223222F5GJVKHH6BDT
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         type: bankAccount
     post-transferInstruments-createTransferInstrumentUSD:
       description: Example request for creating a transfer instrument for USD
@@ -2585,7 +2583,7 @@ components:
           branchCode: "121202211"
           countryCode: US
           currencyCode: USD
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         type: bankAccount
     post-transferInstruments-createTransferInstrumentUSD-200:
       description: Example response for adding a bank account as a transfer instrument of a legal entity
@@ -2599,7 +2597,7 @@ components:
           currencyCode: USD
           trustedSource: false
         id: SE322JV223222F5GJVKHH8DTC
-        legalEntityId: YOUR_LEGAL_ENTITY
+        legalEntityId: LE00000000000000000000001
         type: bankAccount
   schemas:
     AcceptTermsOfServiceRequest:
@@ -2630,7 +2628,7 @@ components:
           description: The IP address of the user that accepted the Terms of Service.
           type: string
         language:
-          description: The language used for the Terms of Service document, specified by the two letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. For example, **nl** for Dutch.
+          description: "The language used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English."
           type: string
         termsOfServiceDocumentId:
           description: The unique identifier of the Terms of Service document.
@@ -3204,7 +3202,7 @@ components:
     GetTermsOfServiceDocumentRequest:
       properties:
         language:
-          description: The language to be used for the Terms of Service document, specified by the two letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. For example, **nl** for Dutch.
+          description: "The language to be used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English."
           type: string
         type:
           description: The type of Terms of Service.
@@ -3231,7 +3229,7 @@ components:
           description: The unique identifier of the legal entity.
           type: string
         language:
-          description: The language used for the Terms of Service document, specified by the two letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. For example, **nl** for Dutch.
+          description: "The language used for the Terms of Service document, specified by the two-letter [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code. Possible value: **en** for English."
           type: string
         termsOfServiceDocumentId:
           description: The unique identifier of the Terms of Service document.

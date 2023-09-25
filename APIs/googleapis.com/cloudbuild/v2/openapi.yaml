@@ -2104,15 +2104,8 @@ components:
           description: Operator that represents an Input's relationship to the values
           enum:
             - EXPRESSION_OPERATOR_UNSPECIFIED
-            - DOES_NOT_EXIST
-            - EQUALS
-            - DOUBLE_EQUALS
             - IN
-            - NOT_EQUALS
             - NOT_IN
-            - EXISTS
-            - GREATER_THAN
-            - LESS_THAN
           type: string
         input:
           description: Input is the string for guard checking which can be a static input or an output from a parent Task.

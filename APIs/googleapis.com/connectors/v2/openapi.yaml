@@ -574,6 +574,12 @@ components:
     Action:
       description: Action message contains metadata information about a single action present in the external system.
       properties:
+        description:
+          description: Brief Description of action
+          type: string
+        displayName:
+          description: Display Name of action to be shown on client side
+          type: string
         inputJsonSchema:
           $ref: "#/components/schemas/JsonSchema"
           description: JsonSchema representation of this actions's input schema
@@ -790,6 +796,11 @@ components:
     InputParameter:
       description: Input Parameter message contains metadata about the parameters required for executing an Action.
       properties:
+        additionalDetails:
+          additionalProperties:
+            description: Properties of the object.
+          description: The following map contains fields that are not explicitly mentioned above,this give connectors the flexibility to add new metadata fields.
+          type: object
         dataType:
           description: The data type of the Parameter
           enum:
@@ -1195,8 +1206,7 @@ components:
             - false
             - false
             - false
-        value:
-          type: string
+        value: {}
       type: object
     Reference:
       properties:

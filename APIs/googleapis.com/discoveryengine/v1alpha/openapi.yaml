@@ -52,7 +52,7 @@ paths:
           name: query
           schema:
             type: string
-        - description: "Selects data model of query suggestions for serving. Currently supported values: * `document` - Using suggestions generated from user-imported documents. * `search-history` - Using suggestions generated from the past history of SearchService.Search API calls. Do not use it when there is no traffic for Search API. * `user-event` - Using suggestions generated from user-imported search events. * `document-completable` - Using suggestions taken directly from user-imported document fields marked as completable. Default values: * `document` is the default model for regular dataStores. * `search-history` is the default model for IndustryVertical.SITE_SEARCH dataStores."
+        - description: "Selects data model of query suggestions for serving. Currently supported values: * `document` - Using suggestions generated from user-imported documents. * `search-history` - Using suggestions generated from the past history of SearchService.Search API calls. Do not use it when there is no traffic for Search API. * `user-event` - Using suggestions generated from user-imported search events. * `document-completable` - Using suggestions taken directly from user-imported document fields marked as completable. Default values: * `document` is the default model for regular dataStores. * `search-history` is the default model for site search dataStores."
           in: query
           name: queryModel
           schema:
@@ -1039,6 +1039,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1alpha/{siteSearchEngine}:recrawlUris:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Request on-demand recrawl for a list of URIs.
+      operationId: discoveryengine.projects.locations.dataStores.siteSearchEngine.recrawlUris
+      parameters:
+        - description: Required. Full resource name of the SiteSearchEngine, such as `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine`.
+          in: path
+          name: siteSearchEngine
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaRecrawlUrisRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -1427,7 +1469,7 @@ components:
           description: Required. The typeahead input used to fetch suggestions. Maximum length is 128 characters.
           type: string
         queryModel:
-          description: "Selects data model of query suggestions for serving. Currently supported values: * `document` - Using suggestions generated from user-imported documents. * `search-history` - Using suggestions generated from the past history of SearchService.Search API calls. Do not use it when there is no traffic for Search API. * `user-event` - Using suggestions generated from user-imported search events. * `document-completable` - Using suggestions taken directly from user-imported document fields marked as completable. Default values: * `document` is the default model for regular dataStores. * `search-history` is the default model for IndustryVertical.SITE_SEARCH dataStores."
+          description: "Selects data model of query suggestions for serving. Currently supported values: * `document` - Using suggestions generated from user-imported documents. * `search-history` - Using suggestions generated from the past history of SearchService.Search API calls. Do not use it when there is no traffic for Search API. * `user-event` - Using suggestions generated from user-imported search events. * `document-completable` - Using suggestions taken directly from user-imported document fields marked as completable. Default values: * `document` is the default model for regular dataStores. * `search-history` is the default model for site search dataStores."
           type: string
         userPseudoId:
           description: A unique identifier for tracking visitors. For example, this could be implemented with an HTTP cookie, which should be able to uniquely identify a visitor on a single device. This unique identifier should not change if the visitor logs in or out of the website. This field should NOT have a fixed value such as `unknown_visitor`. This should be the same identifier as UserEvent.user_pseudo_id and SearchRequest.user_pseudo_id. The field must be a UTF-8 encoded string with a length limit of 128 characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
@@ -2166,6 +2208,88 @@ components:
           additionalProperties: {}
           description: "Additional Document metadata / annotations. Possible values: * `score`: Recommendation score in double value. Is set if `returnScore` is set to true in RecommendRequest.params."
           type: object
+      type: object
+    GoogleCloudDiscoveryengineV1alphaRecrawlUrisMetadata:
+      description: Metadata related to the progress of the SiteSearchEngineService.RecrawlUris operation. This will be returned by the google.longrunning.Operation.metadata field.
+      properties:
+        createTime:
+          description: Operation create time.
+          format: google-datetime
+          type: string
+        invalidUris:
+          description: Unique URIs in the request that don't match any TargetSite in the DataStore, only match TargetSites that haven't been fully indexed, or match a TargetSite with type EXCLUDE.
+          items:
+            type: string
+          type: array
+        pendingCount:
+          description: Total number of URIs that have yet to be crawled.
+          format: int32
+          type: integer
+        quotaExceededCount:
+          description: Total number of URIs that were rejected due to insufficient indexing resources.
+          format: int32
+          type: integer
+        successCount:
+          description: Total number of URIs that have been crawled so far.
+          format: int32
+          type: integer
+        updateTime:
+          description: Operation last update time. If the operation is done, this is also the finish time.
+          format: google-datetime
+          type: string
+        validUrisCount:
+          description: Total number of unique URIs in the request that are not in invalid_uris.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDiscoveryengineV1alphaRecrawlUrisRequest:
+      description: Request message for SiteSearchEngineService.RecrawlUris method.
+      properties:
+        uris:
+          description: Required. List of URIs to crawl. At most 10K URIs are supported, otherwise an INVALID_ARGUMENT error is thrown. Each URI should match at least one TargetSite in `site_search_engine`.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponse:
+      description: Response message for SiteSearchEngineService.RecrawlUris method.
+      properties:
+        failedUris:
+          description: URIs that were not crawled before the LRO terminated.
+          items:
+            type: string
+          type: array
+        failureSamples:
+          description: Details for a sample of up to 10 `failed_uris`.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfo"
+          type: array
+      type: object
+    GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfo:
+      description: Details about why a particular URI failed to be crawled. Each FailureInfo contains one FailureReason per CorpusType.
+      properties:
+        failureReasons:
+          description: List of failure reasons by corpus type (e.g. desktop, mobile).
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfoFailureReason"
+          type: array
+        uri:
+          description: URI that failed to be crawled.
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaRecrawlUrisResponseFailureInfoFailureReason:
+      description: Details about why crawling failed for a particular CorpusType, e.g. DESKTOP and MOBILE crawling may fail for different reasons.
+      properties:
+        corpusType:
+          description: DESKTOP, MOBILE, or CORPUS_TYPE_UNSPECIFIED.
+          enum:
+            - CORPUS_TYPE_UNSPECIFIED
+            - DESKTOP
+            - MOBILE
+          type: string
+        errorMessage:
+          description: Reason why the URI was not crawled.
+          type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaReply:
       description: Defines a reply message to user.
