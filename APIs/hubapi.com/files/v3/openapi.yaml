@@ -22,7 +22,6 @@ paths:
     post:
       description: Upload a single file with content specified in request body.
       operationId: post-/files/v3/files_upload
-      parameters: []
       requestBody:
         content:
           multipart/form-data:
@@ -68,7 +67,6 @@ paths:
     post:
       description: Asynchronously imports the file at the given URL into the file manager.
       operationId: post-/files/v3/files/import-from-url/async_importFromUrl
-      parameters: []
       requestBody:
         content:
           application/json:
@@ -631,7 +629,6 @@ paths:
     post:
       description: Creates a folder.
       operationId: post-/files/v3/folders_create
-      parameters: []
       requestBody:
         content:
           application/json:
@@ -810,7 +807,6 @@ paths:
     post:
       description: Update properties of folder by given ID. This action happens asynchronously and will update all of the folder's children as well.
       operationId: post-/files/v3/folders/update/async_updateProperties
-      parameters: []
       requestBody:
         content:
           application/json:

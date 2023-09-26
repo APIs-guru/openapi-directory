@@ -3259,6 +3259,9 @@ components:
     Entity:
       description: A workspace entity that may represent a tag, trigger, variable, or folder in addition to its status in the workspace.
       properties:
+        builtInVariable:
+          $ref: "#/components/schemas/BuiltInVariable"
+          description: The built in variable being represented by the entity.
         changeStatus:
           description: Represents how the entity has been changed in the workspace.
           enum:
@@ -3271,9 +3274,15 @@ components:
         client:
           $ref: "#/components/schemas/Client"
           description: The client being represented by the entity.
+        customTemplate:
+          $ref: "#/components/schemas/CustomTemplate"
+          description: The custom template being represented by the entity.
         folder:
           $ref: "#/components/schemas/Folder"
           description: The folder being represented by the entity.
+        gtagConfig:
+          $ref: "#/components/schemas/GtagConfig"
+          description: The gtag config being represented by the entity.
         tag:
           $ref: "#/components/schemas/Tag"
           description: The tag being represented by the entity.
@@ -3286,6 +3295,9 @@ components:
         variable:
           $ref: "#/components/schemas/Variable"
           description: The variable being represented by the entity.
+        zone:
+          $ref: "#/components/schemas/Zone"
+          description: The zone being represented by the entity.
       type: object
     Environment:
       description: Represents a Google Tag Manager Environment. Note that a user can create, delete and update environments of type USER, but can only update the enable_debug and url fields of environments of other types.

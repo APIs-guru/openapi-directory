@@ -2647,6 +2647,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If true, copies the source object's ACL; otherwise, uses the bucket's default object ACL. The default is false.
+          in: query
+          name: copySourceAcl
+          schema:
+            type: boolean
         - description: Selects a specific revision of this object.
           in: query
           name: generation

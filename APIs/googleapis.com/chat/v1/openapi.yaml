@@ -523,6 +523,10 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/chat.bot
         - Oauth2:
+            - https://www.googleapis.com/auth/chat.import
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.import
+        - Oauth2:
             - https://www.googleapis.com/auth/chat.memberships
           Oauth2c:
             - https://www.googleapis.com/auth/chat.memberships
@@ -956,7 +960,7 @@ components:
           type: string
       type: object
     Annotation:
-      description: 'Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/chat/api/guides/message-formats/text#format-texts). Example plain-text message body: ``` Hello @FooBot how are you!" ``` The corresponding annotations metadata: ``` "annotations":[{ "type":"USER_MENTION", "startIndex":6, "length":7, "userMention": { "user": { "name":"users/{user}", "displayName":"FooBot", "avatarUrl":"https://goo.gl/aeDtrS", "type":"BOT" }, "type":"MENTION" } }] ```'
+      description: 'Output only. Annotations associated with the plain-text body of the message. To add basic formatting to a text message, see [Format text messages](https://developers.google.com/chat/format-messages). Example plain-text message body: ``` Hello @FooBot how are you!" ``` The corresponding annotations metadata: ``` "annotations":[{ "type":"USER_MENTION", "startIndex":6, "length":7, "userMention": { "user": { "name":"users/{user}", "displayName":"FooBot", "avatarUrl":"https://goo.gl/aeDtrS", "type":"BOT" }, "type":"MENTION" } }] ```'
       properties:
         length:
           description: Length of the substring in the plain-text message body this annotation corresponds to.
@@ -1596,7 +1600,7 @@ components:
           description: A button that a user can click to trigger an action.
         endIcon:
           $ref: "#/components/schemas/GoogleAppsCardV1Icon"
-          description: An icon displayed after the text. Supports [built-in](https://developers.google.com/chat/api/guides/message-formats/cards#builtinicons) and [custom](https://developers.google.com/chat/api/guides/message-formats/cards#customicons) icons.
+          description: An icon displayed after the text. Supports [built-in](https://developers.google.com/chat/format-messages#builtinicons) and [custom](https://developers.google.com/chat/format-messages#customicons) icons.
         icon:
           $ref: "#/components/schemas/GoogleAppsCardV1Icon"
           deprecated: true
@@ -1670,7 +1674,7 @@ components:
           type: string
       type: object
     GoogleAppsCardV1Icon:
-      description: An icon displayed in a widget on a card. For an example in Google Chat apps, see [Icon](https://developers.google.com/chat/ui/widgets/icon). Supports [built-in](https://developers.google.com/chat/api/guides/message-formats/cards#builtinicons) and [custom](https://developers.google.com/chat/api/guides/message-formats/cards#customicons) icons.
+      description: An icon displayed in a widget on a card. For an example in Google Chat apps, see [Icon](https://developers.google.com/chat/ui/widgets/icon). Supports [built-in](https://developers.google.com/chat/format-messages#builtinicons) and [custom](https://developers.google.com/chat/format-messages#customicons) icons.
       properties:
         altText:
           description: Optional. A description of the icon used for accessibility. If unspecified, the default value `Button` is provided. As a best practice, you should set a helpful description for what the icon displays, and if applicable, what it does. For example, `A user's account portrait`, or `Opens a new browser tab and navigates to the Google Chat developer documentation at https://developers.google.com/chat`. If the icon is set in a `Button`, the `altText` appears as helper text when the user hovers over the button. However, if the button also sets `text`, the icon's `altText` is ignored.
@@ -1685,7 +1689,7 @@ components:
             - CIRCLE
           type: string
         knownIcon:
-          description: Display one of the built-in icons provided by Google Workspace. For example, to display an airplane icon, specify `AIRPLANE`. For a bus, specify `BUS`. For a full list of supported icons, see [built-in icons](https://developers.google.com/chat/api/guides/message-formats/cards#builtinicons).
+          description: Display one of the built-in icons provided by Google Workspace. For example, to display an airplane icon, specify `AIRPLANE`. For a bus, specify `BUS`. For a full list of supported icons, see [built-in icons](https://developers.google.com/chat/format-messages#builtinicons).
           type: string
       type: object
     GoogleAppsCardV1Image:
@@ -2227,12 +2231,11 @@ components:
           description: "Resource name of the membership, assigned by the server. Format: `spaces/{space}/members/{member}`"
           type: string
         role:
-          description: Output only. User's role within a Chat space, which determines their permitted actions in the space.
+          description: "Optional. User's role within a Chat space, which determines their permitted actions in the space. [Developer Preview](https://developers.google.com/workspace/preview): This field can only be used as input in `UpdateMembership`."
           enum:
             - MEMBERSHIP_ROLE_UNSPECIFIED
             - ROLE_MEMBER
             - ROLE_MANAGER
-          readOnly: true
           type: string
         state:
           description: Output only. State of the membership.
@@ -2307,6 +2310,10 @@ components:
         fallbackText:
           description: A plain-text description of the message's cards, used when the actual cards can't be displayed—for example, mobile notifications.
           type: string
+        formattedText:
+          description: "Output only. Contains the message `text` with markups added to communicate formatting. This field might not capture all formatting visible in the UI, but includes the following: * [Markup syntax](https://developers.google.com/chat/format-messages) for bold, italic, strikethrough, monospace, and monospace block. * [User mentions](https://developers.google.com/chat/format-messages#messages-@mention) using the format ``. * Custom hyperlinks using the format `<{url}|{rendered_text}>` where the first string is the URL and the second is the rendered text—for example, ``. * Custom emoji using the format `:{emoji_name}:`—for example, `:smile:`. This doesn't apply to Unicode emoji, such as `U+1F600` for a grinning face emoji. For more information, see [View text formatting sent in a message](https://developers.google.com/chat/format-messages#view_text_formatting_sent_in_a_message)"
+          readOnly: true
+          type: string
         lastUpdateTime:
           description: Output only. The time at which the message was last edited by a user. If the message has never been edited, this field is empty.
           format: google-datetime
@@ -2335,7 +2342,7 @@ components:
           $ref: "#/components/schemas/Space"
           description: If your Chat app [authenticates as a user](https://developers.google.com/chat/api/guides/auth/users), the output populates the [space](https://developers.google.com/chat/api/reference/rest/v1/spaces) `name`.
         text:
-          description: Plain-text body of the message. The first link to an image, video, or web page generates a [preview chip](https://developers.google.com/chat/how-tos/preview-links). You can also [@mention a Google Chat user](https://developers.google.com/chat/api/guides/message-formats/text#messages-@mention), or everyone in the space. To learn about creating text messages, see [Create a text message](https://developers.google.com/chat/api/guides/message-formats/text).
+          description: Plain-text body of the message. The first link to an image, video, or web page generates a [preview chip](https://developers.google.com/chat/how-tos/preview-links). You can also [@mention a Google Chat user](https://developers.google.com/chat/format-messages#messages-@mention), or everyone in the space. To learn about creating text messages, see [Create a text message](https://developers.google.com/chat/api/guides/message-formats/text).
           type: string
         thread:
           $ref: "#/components/schemas/Thread"

@@ -613,10 +613,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-translation
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
     parameters:
@@ -693,10 +689,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-translation
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
     parameters:
@@ -866,10 +858,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-translation
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-translation
       tags:
         - projects
     parameters:
@@ -1257,7 +1245,7 @@ components:
         formatConversions:
           additionalProperties:
             type: string
-          description: Optional.
+          description: "Optional. The file format conversion map that is applied to all input files. The map key is the original mime_type. The map value is the target mime_type of translated documents. Supported file format conversion includes: - `application/pdf` to `application/vnd.openxmlformats-officedocument.wordprocessingml.document` If nothing specified, output files will be in the same format as the original file."
           type: object
         glossaries:
           additionalProperties:

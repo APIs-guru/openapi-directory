@@ -134,7 +134,6 @@ paths:
     post:
       description: Creates a new marketing event in HubSpot
       operationId: post-/marketing/v3/marketing-events/events_create
-      parameters: []
       requestBody:
         content:
           application/json:
@@ -162,7 +161,6 @@ paths:
     post:
       description: Bulk delete a number of marketing events in HubSpot
       operationId: post-/marketing/v3/marketing-events/events/delete_archiveBatch
-      parameters: []
       requestBody:
         content:
           application/json:
@@ -213,7 +211,6 @@ paths:
     post:
       description: Upset multiple Marketing Event. If there is an existing Marketing event with the specified id, it will be updated; otherwise a new event will be created.
       operationId: post-/marketing/v3/marketing-events/events/upsert_doUpsert
-      parameters: []
       requestBody:
         content:
           application/json:
