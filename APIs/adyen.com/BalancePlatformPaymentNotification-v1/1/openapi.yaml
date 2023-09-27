@@ -758,6 +758,9 @@ components:
       type: object
     MerchantData:
       properties:
+        acquirerId:
+          description: The unique identifier of the merchant's acquirer.
+          type: string
         mcc:
           description: The merchant category code.
           type: string
@@ -1134,10 +1137,18 @@ components:
         type:
           description: The type of the related split.
           enum:
+            - AcquiringFees
+            - AdyenCommission
+            - AdyenFees
+            - AdyenMarkup
             - BalanceAccount
             - Commission
             - Default
+            - Interchange
             - PaymentFee
+            - Remainder
+            - SchemeFee
+            - TopUp
             - VAT
           type: string
       type: object

@@ -2019,6 +2019,43 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  /v1/{name}:restore:
+    get:
+      description: Restores a dataset version.
+      operationId: aiplatform.projects.locations.datasets.datasetVersions.restore
+      parameters:
+        - description: "Required. The name of the DatasetVersion resource. Format: `projects/{project}/locations/{location}/datasets/{dataset}/datasetVersions/{dataset_version}`"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /v1/{name}:resume:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2832,6 +2869,97 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudAiplatformV1DataLabelingJob"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  /v1/{parent}/datasetVersions:
+    get:
+      description: Lists DatasetVersions in a Dataset.
+      operationId: aiplatform.projects.locations.datasets.datasetVersions.list
+      parameters:
+        - description: "Required. The resource name of the Dataset to list DatasetVersions from. Format: `projects/{project}/locations/{location}/datasets/{dataset}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. A comma-separated list of fields to order by, sorted in ascending order. Use "desc" after a field name for descending.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Optional. Mask specifying which fields to read.
+          in: query
+          name: readMask
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudAiplatformV1ListDatasetVersionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create a version from a Dataset.
+      operationId: aiplatform.projects.locations.datasets.datasetVersions.create
+      parameters:
+        - description: "Required. The name of the Dataset resource. Format: `projects/{project}/locations/{location}/datasets/{dataset}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudAiplatformV1DatasetVersion"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
           description: Successful response
       security:
         - Oauth2:
@@ -7963,6 +8091,31 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudAiplatformV1DatasetVersion:
+      description: Describes the dataset version.
+      properties:
+        bigQueryDatasetName:
+          description: Output only. Name of the associated BigQuery dataset.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. Timestamp when this DatasetVersion was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Used to perform consistent read-modify-write updates. If not set, a blind "overwrite" update happens.
+          type: string
+        name:
+          description: Output only. The resource name of the DatasetVersion.
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Timestamp when this DatasetVersion was last updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudAiplatformV1DedicatedResources:
       description: A description of resources that are dedicated to a DeployedModel, and that need a higher degree of manual configuration.
       properties:
@@ -8918,6 +9071,9 @@ components:
         annotationsFilter:
           description: An expression for filtering what part of the Dataset is to be exported. Only Annotations that match this filter will be exported. The filter syntax is the same as in ListAnnotations.
           type: string
+        filterSplit:
+          $ref: "#/components/schemas/GoogleCloudAiplatformV1ExportFilterSplit"
+          description: Split based on the provided filters for each set.
         fractionSplit:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1ExportFractionSplit"
           description: Split based on fractions defining the size of each set.
@@ -9006,6 +9162,19 @@ components:
     GoogleCloudAiplatformV1ExportFeatureValuesResponse:
       description: Response message for FeaturestoreService.ExportFeatureValues.
       properties: {}
+      type: object
+    GoogleCloudAiplatformV1ExportFilterSplit:
+      description: Assigns input data to training, validation, and test sets based on the given filters, data pieces not matched by any filter are ignored. Currently only supported for Datasets containing DataItems. If any of the filters in this message are to match nothing, then they can be set as '-' (the minus sign). Supported only for unstructured Datasets.
+      properties:
+        testFilter:
+          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to test the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
+          type: string
+        trainingFilter:
+          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to train the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
+          type: string
+        validationFilter:
+          description: Required. A filter on DataItems of the Dataset. DataItems that match this filter are used to validate the Model. A filter with same syntax as the one used in DatasetService.ListDataItems may be used. If a single DataItem is matched by more than one of the FilterSplit filters, then it is assigned to the first set that applies to it in the training, validation, test order.
+          type: string
       type: object
     GoogleCloudAiplatformV1ExportFractionSplit:
       description: Assigns the input data to training, validation, and test sets as per the given fractions. Any of `training_fraction`, `validation_fraction` and `test_fraction` may optionally be provided, they must sum to up to 1. If the provided ones sum to less than 1, the remainder is assigned to sets as decided by Vertex AI. If none of the fractions are set, by default roughly 80% of data is used for training, 10% for validation, and 10% for test.
@@ -10149,6 +10318,18 @@ components:
           description: A list of DataLabelingJobs that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/GoogleCloudAiplatformV1DataLabelingJob"
+          type: array
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+      type: object
+    GoogleCloudAiplatformV1ListDatasetVersionsResponse:
+      description: Response message for DatasetService.ListDatasetVersions.
+      properties:
+        datasetVersions:
+          description: A list of DatasetVersions that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/GoogleCloudAiplatformV1DatasetVersion"
           type: array
         nextPageToken:
           description: The standard List next-page token.
@@ -11357,6 +11538,11 @@ components:
         enableLogging:
           description: Dump the anomalies to Cloud Logging. The anomalies will be put to json payload encoded from proto google.cloud.aiplatform.logging.ModelMonitoringAnomaliesLogEntry. This can be further sinked to Pub/Sub or any other services supported by Cloud Logging.
           type: boolean
+        notificationChannels:
+          description: Resource names of the NotificationChannels to send alert. Must be of the format `projects//notificationChannels/`
+          items:
+            type: string
+          type: array
       type: object
     GoogleCloudAiplatformV1ModelMonitoringAlertConfigEmailAlertConfig:
       description: The config for email alert.
@@ -11952,7 +12138,7 @@ components:
         labels:
           additionalProperties:
             type: string
-          description: 'The labels with user-defined metadata to organize your NotebookRuntime. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one Dataset (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable. Following system labels exist for NotebookRuntime: * "aiplatform.googleapis.com/notebook_runtime_gce_instance_id": output only, its value is the Compute Engine instance id. * "aiplatform.googleapis.com/colab_enterprise_entry_service": its value is either "BigQuery" or "Vertex"; if absent, it should be "Vertex". This is to describe the entry service, either BigQuery or Vertex.'
+          description: 'The labels with user-defined metadata to organize your NotebookRuntime. Label keys and values can be no longer than 64 characters (Unicode codepoints), can only contain lowercase letters, numeric characters, underscores and dashes. International characters are allowed. No more than 64 user labels can be associated with one NotebookRuntime (System labels are excluded). See https://goo.gl/xmQnxf for more information and examples of labels. System reserved label keys are prefixed with "aiplatform.googleapis.com/" and are immutable. Following system labels exist for NotebookRuntime: * "aiplatform.googleapis.com/notebook_runtime_gce_instance_id": output only, its value is the Compute Engine instance id. * "aiplatform.googleapis.com/colab_enterprise_entry_service": its value is either "bigquery" or "vertex"; if absent, it should be "vertex". This is to describe the entry service, either BigQuery or Vertex.'
           type: object
         name:
           description: Output only. The resource name of the NotebookRuntime.
@@ -11962,6 +12148,14 @@ components:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1NotebookRuntimeTemplateRef"
           description: Output only. The pointer to NotebookRuntimeTemplate this NotebookRuntime is created from.
           readOnly: true
+        notebookRuntimeType:
+          description: Output only. The type of the notebook runtime.
+          enum:
+            - NOTEBOOK_RUNTIME_TYPE_UNSPECIFIED
+            - USER_DEFINED
+            - ONE_CLICK
+          readOnly: true
+          type: string
         proxyUri:
           description: Output only. The proxy endpoint used to access the NotebookRuntime.
           readOnly: true
@@ -12039,6 +12233,13 @@ components:
         networkSpec:
           $ref: "#/components/schemas/GoogleCloudAiplatformV1NetworkSpec"
           description: Optional. Network spec.
+        notebookRuntimeType:
+          description: Optional. Immutable. The type of the notebook runtime template.
+          enum:
+            - NOTEBOOK_RUNTIME_TYPE_UNSPECIFIED
+            - USER_DEFINED
+            - ONE_CLICK
+          type: string
         serviceAccount:
           description: The service account that the runtime workload runs as. You can use any service account within the same project, but you must have the service account user permission to use the instance. If not specified, the [Compute Engine default service account](https://cloud.google.com/compute/docs/access/service-accounts#default_service_account) is used.
           type: string
@@ -12157,7 +12358,7 @@ components:
           description: Output only. Pipeline template metadata. Will fill up fields if PipelineJob.template_uri is from supported template registry.
           readOnly: true
         templateUri:
-          description: A template uri from where the PipelineJob.pipeline_spec, if empty, will be downloaded.
+          description: A template uri from where the PipelineJob.pipeline_spec, if empty, will be downloaded. Currently, only uri from Vertex Template Registry & Gallery is supported. Reference to https://cloud.google.com/vertex-ai/docs/pipelines/create-pipeline-template.
           type: string
         updateTime:
           description: Output only. Timestamp when this PipelineJob was most recently updated.

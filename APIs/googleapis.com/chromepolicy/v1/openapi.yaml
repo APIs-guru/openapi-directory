@@ -1471,16 +1471,9 @@ components:
     Proto2FileDescriptorProto:
       description: Describes a complete .proto file.
       properties:
-        editionEnum:
-          description: The edition of the proto file.
-          enum:
-            - EDITION_UNKNOWN
-            - EDITION_2023
-            - EDITION_1_TEST_ONLY
-            - EDITION_2_TEST_ONLY
-            - EDITION_99997_TEST_ONLY
-            - EDITION_99998_TEST_ONLY
-            - EDITION_99999_TEST_ONLY
+        editionDeprecated:
+          deprecated: true
+          description: BEGIN GOOGLE-INTERNAL TODO(b/297898292) Deprecate and remove this field in favor of enums. END GOOGLE-INTERNAL
           type: string
         enumType:
           items:

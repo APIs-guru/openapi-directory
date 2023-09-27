@@ -1772,6 +1772,23 @@ components:
             - P_LARGE
             - P_EXTRA_LARGE
           type: string
+        pointerLocation:
+          description: The pointer location for this widget (also sometimes called a "tail")
+          enum:
+            - POINTER_LOCATION_UNSPECIFIED
+            - PL_TOP
+            - PL_RIGHT
+            - PL_BOTTOM
+            - PL_LEFT
+            - PL_TOP_LEFT
+            - PL_TOP_RIGHT
+            - PL_RIGHT_TOP
+            - PL_RIGHT_BOTTOM
+            - PL_BOTTOM_RIGHT
+            - PL_BOTTOM_LEFT
+            - PL_LEFT_BOTTOM
+            - PL_LEFT_TOP
+          type: string
         textColor:
           description: The text color as a hex string. "#RRGGBB" or "#RGB"
           type: string

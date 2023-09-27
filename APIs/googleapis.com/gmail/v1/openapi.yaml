@@ -4254,6 +4254,9 @@ components:
         primaryKeyPairId:
           description: If a key pair is associated, the ID of the key pair, CseKeyPair.
           type: string
+        signAndEncryptKeyPairs:
+          $ref: "#/components/schemas/SignAndEncryptKeyPairs"
+          description: The configuration of a CSE identity that uses different key pairs for signing and encryption.
       type: object
     CseKeyPair:
       description: "A client-side encryption S/MIME key pair, which is comprised of a public key, its certificate chain, and metadata for its paired private key. Gmail uses the key pair to complete the following tasks: - Sign outgoing client-side encrypted messages. - Save and reopen drafts of client-side encrypted messages. - Save and reopen sent messages. - Decrypt incoming or archived S/MIME messages."
@@ -4912,6 +4915,16 @@ components:
             - verificationStatusUnspecified
             - accepted
             - pending
+          type: string
+      type: object
+    SignAndEncryptKeyPairs:
+      description: The configuration of a CSE identity that uses different key pairs for signing and encryption.
+      properties:
+        encryptionKeyPairId:
+          description: The ID of the CseKeyPair that encrypts signed outgoing mail.
+          type: string
+        signingKeyPairId:
+          description: The ID of the CseKeyPair that signs outgoing mail.
           type: string
       type: object
     SmimeInfo:

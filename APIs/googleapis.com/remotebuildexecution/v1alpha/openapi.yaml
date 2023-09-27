@@ -1392,6 +1392,11 @@ components:
         vmImage:
           description: The name of the image used by each VM.
           type: string
+        zones:
+          description: Optional. Zones in the region where the pool VMs should be. Leave empty for no restrictions.
+          items:
+            type: string
+          type: array
       type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool:
       description: A worker pool resource in the Remote Build Execution API.

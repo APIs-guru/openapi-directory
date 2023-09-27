@@ -1914,10 +1914,6 @@ components:
       description: Response for an export insights operation.
       properties: {}
       type: object
-    GoogleCloudContactcenterinsightsV1ExportIssueModelResponse:
-      description: Response from export issue model
-      properties: {}
-      type: object
     GoogleCloudContactcenterinsightsV1FaqAnswerData:
       description: Agent Assist frequently-asked-question answer data.
       properties:
@@ -1955,10 +1951,6 @@ components:
       type: object
     GoogleCloudContactcenterinsightsV1HoldData:
       description: The data for a hold annotation.
-      properties: {}
-      type: object
-    GoogleCloudContactcenterinsightsV1ImportIssueModelResponse:
-      description: Response from import issue model
       properties: {}
       type: object
     GoogleCloudContactcenterinsightsV1IngestConversationsMetadata:
@@ -2499,6 +2491,9 @@ components:
         redactionConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1RedactionConfig"
           description: Default DLP redaction resources to be applied while ingesting conversations.
+        speechConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1SpeechConfig"
+          description: Optional. Default Speech-to-Text resources to be used while ingesting audio files. Optional, CCAI Insights will create a default if not provided.
         updateTime:
           description: Output only. The time at which the settings were last updated.
           format: google-datetime
@@ -2560,6 +2555,13 @@ components:
           type: string
         reply:
           description: The content of the reply.
+          type: string
+      type: object
+    GoogleCloudContactcenterinsightsV1SpeechConfig:
+      description: Speech-to-Text configuration.
+      properties:
+        speechRecognizer:
+          description: "The fully-qualified Speech Recognizer resource name. Format: `projects/{project_id}/locations/{location}/recognizer/{recognizer}`"
           type: string
       type: object
     GoogleCloudContactcenterinsightsV1UndeployIssueModelMetadata:
@@ -2631,6 +2633,9 @@ components:
         redactionConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1RedactionConfig"
           description: Optional. DLP settings for transcript redaction. Optional, will default to the config specified in Settings.
+        speechConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1SpeechConfig"
+          description: Optional. Default Speech-to-Text configuration. Optional, will default to the config specified in Settings.
       type: object
     GoogleCloudContactcenterinsightsV1View:
       description: The View resource.
@@ -3417,10 +3422,6 @@ components:
       description: Response for an export insights operation.
       properties: {}
       type: object
-    GoogleCloudContactcenterinsightsV1alpha1ExportIssueModelResponse:
-      description: Response from export issue model
-      properties: {}
-      type: object
     GoogleCloudContactcenterinsightsV1alpha1FaqAnswerData:
       description: Agent Assist frequently-asked-question answer data.
       properties:
@@ -3458,10 +3459,6 @@ components:
       type: object
     GoogleCloudContactcenterinsightsV1alpha1HoldData:
       description: The data for a hold annotation.
-      properties: {}
-      type: object
-    GoogleCloudContactcenterinsightsV1alpha1ImportIssueModelResponse:
-      description: Response from import issue model
       properties: {}
       type: object
     GoogleCloudContactcenterinsightsV1alpha1IngestConversationsMetadata:
@@ -3831,6 +3828,13 @@ components:
           description: The content of the reply.
           type: string
       type: object
+    GoogleCloudContactcenterinsightsV1alpha1SpeechConfig:
+      description: Speech-to-Text configuration.
+      properties:
+        speechRecognizer:
+          description: "The fully-qualified Speech Recognizer resource name. Format: `projects/{project_id}/locations/{location}/recognizer/{recognizer}`"
+          type: string
+      type: object
     GoogleCloudContactcenterinsightsV1alpha1UndeployIssueModelMetadata:
       description: Metadata for undeploying an issue model.
       properties:
@@ -3900,6 +3904,9 @@ components:
         redactionConfig:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1RedactionConfig"
           description: Optional. DLP settings for transcript redaction. Optional, will default to the config specified in Settings.
+        speechConfig:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1alpha1SpeechConfig"
+          description: Optional. Default Speech-to-Text configuration. Optional, will default to the config specified in Settings.
       type: object
     GoogleLongrunningListOperationsResponse:
       description: The response message for Operations.ListOperations.
