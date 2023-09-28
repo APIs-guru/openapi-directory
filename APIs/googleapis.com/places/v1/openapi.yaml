@@ -188,6 +188,10 @@ components:
     GoogleMapsPlacesV1Place:
       description: All the information representing a Place.
       properties:
+        accessibilityOptions:
+          $ref: "#/components/schemas/GoogleMapsPlacesV1PlaceAccessibilityOptions"
+          description: Output only. Information about the accessibility options a place offers.
+          readOnly: true
         addressComponents:
           description: Output only. Repeated components for each locality level.
           items:
@@ -375,6 +379,13 @@ components:
           description: Output only. The authoritative website for this place, e.g. a business' homepage. Note that for places that are part of a chain (e.g. an IKEA store), this will usually be the website for the individual store, not the overall chain.
           readOnly: true
           type: string
+      type: object
+    GoogleMapsPlacesV1PlaceAccessibilityOptions:
+      description: Information about the accessibility options a place offers.
+      properties:
+        wheelchairAccessibleEntrance:
+          description: Places has wheelchair accessible entrance.
+          type: boolean
       type: object
     GoogleMapsPlacesV1PlaceAddressComponent:
       description: The structured components that form the formatted address, if this information is available.

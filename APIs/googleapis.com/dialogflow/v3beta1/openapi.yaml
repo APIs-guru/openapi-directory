@@ -1650,98 +1650,6 @@ paths:
             - https://www.googleapis.com/auth/dialogflow
       tags:
         - projects
-  /v3beta1/{parent}/intents:export:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Exports the selected intents. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ExportIntentsMetadata - `response`: ExportIntentsResponse"
-      operationId: dialogflow.projects.locations.agents.intents.export
-      parameters:
-        - description: "Required. The name of the parent agent to export intents. Format: `projects//locations//agents/`."
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ExportIntentsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/dialogflow
-          Oauth2c:
-            - https://www.googleapis.com/auth/dialogflow
-      tags:
-        - projects
-  /v3beta1/{parent}/intents:import:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: "Imports the specified intents into the agent. This method is a [long-running operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation). The returned `Operation` type has the following method-specific fields: - `metadata`: ImportIntentsMetadata - `response`: ImportIntentsResponse"
-      operationId: dialogflow.projects.locations.agents.intents.import
-      parameters:
-        - description: "Required. The agent to import the intents into. Format: `projects//locations//agents/`."
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ImportIntentsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleLongrunningOperation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/dialogflow
-          Oauth2c:
-            - https://www.googleapis.com/auth/dialogflow
-      tags:
-        - projects
   /v3beta1/{parent}/pages:
     get:
       description: Returns the list of all pages in the specified flow.
@@ -3064,20 +2972,6 @@ components:
           description: The URI to a file containing the exported flow. This field is populated only if `flow_uri` is specified in ExportFlowRequest.
           type: string
       type: object
-    GoogleCloudDialogflowCxV3ExportIntentsMetadata:
-      description: Metadata returned for the Intents.ExportIntents long running operation.
-      properties: {}
-      type: object
-    GoogleCloudDialogflowCxV3ExportIntentsResponse:
-      description: The response message for Intents.ExportIntents.
-      properties:
-        intentsContent:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3InlineDestination"
-          description: Uncompressed byte content for intents. This field is populated only if `intents_content_inline` is set to true in ExportIntentsRequest.
-        intentsUri:
-          description: The URI to a file containing the exported intents. This field is populated only if `intents_uri` is specified in ExportIntentsRequest.
-          type: string
-      type: object
     GoogleCloudDialogflowCxV3ExportTestCasesMetadata:
       description: Metadata returned for the TestCases.ExportTestCases long running operation. This message currently has no fields.
       properties: {}
@@ -3258,36 +3152,6 @@ components:
           description: "The unique identifier of the new flow. Format: `projects//locations//agents//flows/`."
           type: string
       type: object
-    GoogleCloudDialogflowCxV3ImportIntentsMetadata:
-      description: Metadata returned for the Intents.ImportIntents long running operation.
-      properties: {}
-      type: object
-    GoogleCloudDialogflowCxV3ImportIntentsResponse:
-      description: The response message for Intents.ImportIntents.
-      properties:
-        conflictingResources:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ImportIntentsResponseConflictingResources"
-          description: Info which resources have conflicts when REPORT_CONFLICT merge_option is set in ImportIntentsRequest.
-        intents:
-          description: "The unique identifier of the imported intents. Format: `projects//locations//agents//intents/`."
-          items:
-            type: string
-          type: array
-      type: object
-    GoogleCloudDialogflowCxV3ImportIntentsResponseConflictingResources:
-      description: Conflicting resources detected during the import process. Only filled when REPORT_CONFLICT is set in the request and there are conflicts in the display names.
-      properties:
-        entityDisplayNames:
-          description: Display names of conflicting entities.
-          items:
-            type: string
-          type: array
-        intentDisplayNames:
-          description: Display names of conflicting intents.
-          items:
-            type: string
-          type: array
-      type: object
     GoogleCloudDialogflowCxV3ImportTestCasesMetadata:
       description: Metadata returned for the TestCases.ImportTestCases long running operation.
       properties:
@@ -3305,15 +3169,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    GoogleCloudDialogflowCxV3InlineDestination:
-      description: Inline destination for a Dialogflow operation that writes or exports objects (e.g. intents) outside of Dialogflow.
-      properties:
-        content:
-          description: Output only. The uncompressed byte content for the objects. Only populated in responses.
-          format: byte
-          readOnly: true
-          type: string
       type: object
     GoogleCloudDialogflowCxV3InputAudioConfig:
       description: Instructs the speech recognizer on how to process the audio content.
@@ -5049,43 +4904,6 @@ components:
           description: The URI to a file containing the exported flow. This field is populated only if `flow_uri` is specified in ExportFlowRequest.
           type: string
       type: object
-    GoogleCloudDialogflowCxV3beta1ExportIntentsMetadata:
-      description: Metadata returned for the Intents.ExportIntents long running operation.
-      properties: {}
-      type: object
-    GoogleCloudDialogflowCxV3beta1ExportIntentsRequest:
-      description: The request message for Intents.ExportIntents.
-      properties:
-        dataFormat:
-          description: Optional. The data format of the exported intents. If not specified, `BLOB` is assumed.
-          enum:
-            - DATA_FORMAT_UNSPECIFIED
-            - BLOB
-            - JSON
-            - CSV
-          type: string
-        intents:
-          description: "Required. The name of the intents to export. Format: `projects//locations//agents//intents/`."
-          items:
-            type: string
-          type: array
-        intentsContentInline:
-          description: Optional. The option to return the serialized intents inline.
-          type: boolean
-        intentsUri:
-          description: Optional. The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to export the intents to. The format of this URI must be `gs:///`. Dialogflow performs a write operation for the Cloud Storage object on the caller's behalf, so your request authentication must have write permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
-          type: string
-      type: object
-    GoogleCloudDialogflowCxV3beta1ExportIntentsResponse:
-      description: The response message for Intents.ExportIntents.
-      properties:
-        intentsContent:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1InlineDestination"
-          description: Uncompressed byte content for intents. This field is populated only if `intents_content_inline` is set to true in ExportIntentsRequest.
-        intentsUri:
-          description: The URI to a file containing the exported intents. This field is populated only if `intents_uri` is specified in ExportIntentsRequest.
-          type: string
-      type: object
     GoogleCloudDialogflowCxV3beta1ExportTestCasesMetadata:
       description: Metadata returned for the TestCases.ExportTestCases long running operation. This message currently has no fields.
       properties: {}
@@ -5464,65 +5282,6 @@ components:
           description: "The unique identifier of the new flow. Format: `projects//locations//agents//flows/`."
           type: string
       type: object
-    GoogleCloudDialogflowCxV3beta1ImportIntentsMetadata:
-      description: Metadata returned for the Intents.ImportIntents long running operation.
-      properties: {}
-      type: object
-    GoogleCloudDialogflowCxV3beta1ImportIntentsRequest:
-      description: The request message for Intents.ImportIntents.
-      properties:
-        intentsContent:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1InlineSource"
-          description: Uncompressed byte content of intents.
-        intentsUri:
-          description: The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI to import intents from. The format of this URI must be `gs:///`. Dialogflow performs a read operation for the Cloud Storage object on the caller's behalf, so your request authentication must have read permissions for the object. For more information, see [Dialogflow access control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
-          type: string
-        mergeOption:
-          description: Merge option for importing intents. If not specified, `REJECT` is assumed.
-          enum:
-            - MERGE_OPTION_UNSPECIFIED
-            - REJECT
-            - REPLACE
-            - MERGE
-            - RENAME
-            - REPORT_CONFLICT
-            - KEEP
-          type: string
-          x-enumDeprecated:
-            - false
-            - true
-            - false
-            - false
-            - false
-            - false
-            - false
-      type: object
-    GoogleCloudDialogflowCxV3beta1ImportIntentsResponse:
-      description: The response message for Intents.ImportIntents.
-      properties:
-        conflictingResources:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ImportIntentsResponseConflictingResources"
-          description: Info which resources have conflicts when REPORT_CONFLICT merge_option is set in ImportIntentsRequest.
-        intents:
-          description: "The unique identifier of the imported intents. Format: `projects//locations//agents//intents/`."
-          items:
-            type: string
-          type: array
-      type: object
-    GoogleCloudDialogflowCxV3beta1ImportIntentsResponseConflictingResources:
-      description: Conflicting resources detected during the import process. Only filled when REPORT_CONFLICT is set in the request and there are conflicts in the display names.
-      properties:
-        entityDisplayNames:
-          description: Display names of conflicting entities.
-          items:
-            type: string
-          type: array
-        intentDisplayNames:
-          description: Display names of conflicting intents.
-          items:
-            type: string
-          type: array
-      type: object
     GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata:
       description: Metadata returned for the TestCases.ImportTestCases long running operation.
       properties:
@@ -5551,23 +5310,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    GoogleCloudDialogflowCxV3beta1InlineDestination:
-      description: Inline destination for a Dialogflow operation that writes or exports objects (e.g. intents) outside of Dialogflow.
-      properties:
-        content:
-          description: Output only. The uncompressed byte content for the objects. Only populated in responses.
-          format: byte
-          readOnly: true
-          type: string
-      type: object
-    GoogleCloudDialogflowCxV3beta1InlineSource:
-      description: Inline source for a Dialogflow operation that reads or imports objects (e.g. intents) into Dialogflow.
-      properties:
-        content:
-          description: The uncompressed byte content for the objects.
-          format: byte
-          type: string
       type: object
     GoogleCloudDialogflowCxV3beta1InputAudioConfig:
       description: Instructs the speech recognizer on how to process the audio content.

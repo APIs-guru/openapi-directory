@@ -2977,6 +2977,9 @@ components:
             - PREEMPTIBLE
             - SPOT
           type: string
+        startupConfig:
+          $ref: "#/components/schemas/StartupConfig"
+          description: Optional. Configuration to handle the startup of instances during cluster create and update process.
       type: object
     InstanceReference:
       description: A reference to a Compute Engine instance.
@@ -4433,6 +4436,9 @@ components:
           description: "Required. Timeout for Spark graceful decommissioning of spark workers. Specifies the duration to wait for spark worker to complete spark decommissioning tasks before forcefully removing workers. Only applicable to downscaling operations.Bounds: 0s, 1d."
           format: google-duration
           type: string
+        removeOnlyIdleWorkers:
+          description: Optional. Remove only idle workers when scaling down cluster
+          type: boolean
         scaleDownFactor:
           description: "Required. Fraction of required executors to remove from Spark Serverless clusters. A scale-down factor of 1.0 will result in scaling down so that there are no more executors for the Spark Job.(more aggressive scaling). A scale-down factor closer to 0 will result in a smaller magnitude of scaling donw (less aggressive scaling).Bounds: 0.0, 1.0."
           format: double
@@ -4459,6 +4465,14 @@ components:
         requestId:
           description: "Optional. A unique ID used to identify the request. If the server receives two StartClusterRequest (https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s with the same id, then the second request will be ignored and the first google.longrunning.Operation created and stored in the backend is returned.Recommendation: Set this value to a UUID (https://en.wikipedia.org/wiki/Universally_unique_identifier).The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-). The maximum length is 40 characters."
           type: string
+      type: object
+    StartupConfig:
+      description: Configuration to handle the startup of instances during cluster create and update process.
+      properties:
+        requiredRegistrationFraction:
+          description: Optional. The config setting to enable cluster creation/ updation to be successful only after required_registration_fraction of instances are up and running. This configuration is applicable to only secondary workers for now. The cluster will fail if required_registration_fraction of instances are not available. This will include instance creation, agent registration, and service registration (if enabled).
+          format: double
+          type: number
       type: object
     StateHistory:
       description: Historical state information.

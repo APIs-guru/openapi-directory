@@ -529,7 +529,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Flag that specifies whether to enable sequenced rollout. If set to `true`, the environment group routing rules corresponding to this deployment will be removed before removing the deployment from the runtime. This is likely to be a rare use case; it is only needed when the intended effect of undeploying this proxy is to cause the traffic it currently handles to be rerouted to some other existing proxy in the environment group. The [GenerateUndeployChangeReport API](GenerateUndeployChangeReport) may be used to examine routing changes before issuing the undeployment request, and its response will indicate if a sequenced rollout is recommended for the undeployment.
+        - description: Flag that specifies whether to enable sequenced rollout. If set to `true`, the environment group routing rules corresponding to this deployment will be removed before removing the deployment from the runtime. This is likely to be a rare use case; it is only needed when the intended effect of undeploying this proxy is to cause the traffic it currently handles to be rerouted to some other existing proxy in the environment group. The GenerateUndeployChangeReport API may be used to examine routing changes before issuing the undeployment request, and its response will indicate if a sequenced rollout is recommended for the undeployment.
           in: query
           name: sequencedRollout
           schema:
@@ -875,6 +875,90 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  /v1/{name}:disable:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Disable a SecurityAction. The `state` of the SecurityAction after disabling is `DISABLED`. `DisableSecurityAction` can be called on SecurityActions in the state `ENABLED`; SecurityActions in a different state (including `DISABLED`) return an error.
+      operationId: apigee.organizations.environments.securityActions.disable
+      parameters:
+        - description: "Required. The name of the SecurityAction to disable. Format: organizations/{org}/environments/{env}/securityActions/{security_action}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1DisableSecurityActionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityAction"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  /v1/{name}:enable:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Enable a SecurityAction. The `state` of the SecurityAction after enabling is `ENABLED`. `EnableSecurityAction` can be called on SecurityActions in the state `DISABLED`; SecurityActions in a different state (including `ENABLED) return an error.
+      operationId: apigee.organizations.environments.securityActions.enable
+      parameters:
+        - description: "Required. The name of the SecurityAction to enable. Format: organizations/{org}/environments/{env}/securityActions/{security_action}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1EnableSecurityActionRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityAction"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   /v1/{name}:expire:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1085,6 +1169,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  /v1/{name}:setAddonEnablement:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Updates an add-on enablement status of an environment.
+      operationId: apigee.organizations.environments.addonsConfig.setAddonEnablement
+      parameters:
+        - description: Required. Name of the add-ons config. Must be in the format of `/organizations/{org}/environments/{env}/addonsConfig`
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1SetAddonEnablementRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   /v1/{name}:setSyncAuthorization:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -4040,6 +4166,92 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  /v1/{parent}/securityActions:
+    get:
+      description: Returns a list of SecurityActions. This returns both enabled and disabled actions.
+      operationId: apigee.organizations.environments.securityActions.list
+      parameters:
+        - description: "Required. The parent, which owns this collection of SecurityActions. Format: organizations/{org}/environments/{env}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "The filter expression to filter List results. https://google.aip.dev/160. Allows for filtering over: state and api_proxies. E.g.: state = ACTIVE AND apiProxies:foo. Filtering by action is not supported https://github.com/aip-dev/google.aip.dev/issues/624"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The maximum number of SecurityActions to return. If unspecified, at most 50 SecurityActions will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListSecurityActions` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListSecurityActions` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListSecurityActionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: CreateSecurityAction creates a SecurityAction.
+      operationId: apigee.organizations.environments.securityActions.create
+      parameters:
+        - description: "Required. The organization and environment that this SecurityAction applies to. Format: organizations/{org}/environments/{env}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID to use for the SecurityAction, which will become the final component of the action's resource name. This value should be 0-61 characters, and valid format is (^[a-z]([a-z0-9-]{​0,61}[a-z0-9])?$).
+          in: query
+          name: securityActionId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityAction"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityAction"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   /v1/{parent}/securityIncidents:
     get:
       description: ListSecurityIncidents lists all the security incident associated with the environment.
@@ -4149,7 +4361,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. The ID to use for the SecurityProfile, which will become the final component of the action's resource name. This value should be 4-63 characters, and valid characters are /(^[a-z]([a-z0-9-]{​0,61}[a-z0-9])?$/.
+        - description: Required. The ID to use for the SecurityProfile, which will become the final component of the action's resource name. This value should be 1-63 characters and validated by "(^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$)".
           in: query
           name: securityProfileId
           schema:
@@ -4940,6 +5152,9 @@ components:
         advancedApiOpsConfig:
           $ref: "#/components/schemas/GoogleCloudApigeeV1AdvancedApiOpsConfig"
           description: Configuration for the Advanced API Ops add-on.
+        analyticsConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1AnalyticsConfig"
+          description: Configuration for the Analytics add-on.
         apiSecurityConfig:
           $ref: "#/components/schemas/GoogleCloudApigeeV1ApiSecurityConfig"
           description: Configuration for the API Security add-on.
@@ -4997,6 +5212,33 @@ components:
             - ALIAS_TYPE_UNSPECIFIED
             - CERT
             - KEY_CERT
+          type: string
+      type: object
+    GoogleCloudApigeeV1AnalyticsConfig:
+      description: Configuration for the Analytics add-on.
+      properties:
+        enabled:
+          description: Whether the Analytics add-on is enabled.
+          type: boolean
+        expireTimeMillis:
+          description: Output only. Time at which the Analytics add-on expires in milliseconds since epoch. If unspecified, the add-on will never expire.
+          format: int64
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The state of the Analytics add-on.
+          enum:
+            - ADDON_STATE_UNSPECIFIED
+            - ENABLING
+            - ENABLED
+            - DISABLING
+            - DISABLED
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. The latest update time.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     GoogleCloudApigeeV1ApiCategory:
@@ -6572,6 +6814,14 @@ components:
           description: Comma joined dimension names. E.g. "dim1_name,dim2_name". Deprecated. If name already has comma before join, we may get wrong splits. Please use individual_names.
           type: string
       type: object
+    GoogleCloudApigeeV1DisableSecurityActionRequest:
+      description: Message to disable an enabled SecurityAction.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1EnableSecurityActionRequest:
+      description: Message to enable a disabled SecurityAction.
+      properties: {}
+      type: object
     GoogleCloudApigeeV1EndpointAttachment:
       description: Apigee endpoint attachment. For more information, see [Southbound networking patterns] (https://cloud.google.com/apigee/docs/api-platform/architecture/southbound-networking-patterns-endpoints).
       properties:
@@ -6706,6 +6956,9 @@ components:
       type: object
     GoogleCloudApigeeV1EnvironmentConfig:
       properties:
+        addonsConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1RuntimeAddonsConfig"
+          description: The latest runtime configurations for add-ons.
         arcConfigLocation:
           description: The location for the config blob of API Runtime Control, aka Envoy Adapter, for op-based authentication as a URI, e.g. a Cloud Storage URI. This is only used by Envoy-based gateways.
           type: string
@@ -7619,6 +7872,18 @@ components:
             $ref: "#/components/schemas/GoogleCloudApigeeV1RatePlan"
           type: array
       type: object
+    GoogleCloudApigeeV1ListSecurityActionsResponse:
+      description: Contains a list of SecurityActions in response to a ListSecurityActionRequest.
+      properties:
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+          type: string
+        securityActions:
+          description: The SecurityActions for the specified environment.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityAction"
+          type: array
+      type: object
     GoogleCloudApigeeV1ListSecurityIncidentsResponse:
       description: Response for ListSecurityIncidents.
       properties:
@@ -8018,6 +8283,14 @@ components:
             - ACTIVE
             - DELETING
             - UPDATING
+          readOnly: true
+          type: string
+        subscriptionPlan:
+          description: Output only. Subscription plan that the customer has purchased. Output only.
+          enum:
+            - SUBSCRIPTION_PLAN_UNSPECIFIED
+            - SUBSCRIPTION_2021
+            - SUBSCRIPTION_2024
           readOnly: true
           type: string
         subscriptionType:
@@ -8724,6 +8997,42 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudApigeeV1RuntimeAddonsConfig:
+      description: RuntimeAddonsConfig defines the runtime configurations for add-ons in an environment.
+      properties:
+        analyticsConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1RuntimeAnalyticsConfig"
+          description: Runtime configuration for Analytics add-on.
+        apiSecurityConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1RuntimeApiSecurityConfig"
+          description: Runtime configuration for API Security add-on.
+        name:
+          description: "Name of the addons config in the format: `organizations/{org}/environments/{env}/addonsConfig`"
+          type: string
+        revisionId:
+          description: Revision number used by the runtime to detect config changes.
+          type: string
+        uid:
+          description: UID is to detect if config is recreated after deletion. The add-on config will only be deleted when the environment itself gets deleted, thus it will always be the same as the UID of EnvironmentConfig.
+          type: string
+      type: object
+    GoogleCloudApigeeV1RuntimeAnalyticsConfig:
+      description: Runtime configuration for the Analytics add-on.
+      properties:
+        billingPipelineEnabled:
+          description: If Runtime should send billing data to AX or not.
+          type: boolean
+        enabled:
+          description: If the Analytics is enabled or not.
+          type: boolean
+      type: object
+    GoogleCloudApigeeV1RuntimeApiSecurityConfig:
+      description: Runtime configuration for the API Security add-on.
+      properties:
+        enabled:
+          description: If the API Security is enabled or not.
+          type: boolean
+      type: object
     GoogleCloudApigeeV1RuntimeConfig:
       description: Runtime configuration for the organization. Response for GetRuntimeConfig.
       properties:
@@ -8933,6 +9242,113 @@ components:
           description: Documentation link for the action.
           type: string
       type: object
+    GoogleCloudApigeeV1SecurityAction:
+      description: "A SecurityAction is rule that can be enforced at an environment level. The result is one of: - A denied API call - An explicitly allowed API call - A flagged API call (HTTP headers added before the target receives it) At least one condition is required to create a SecurityAction."
+      properties:
+        allow:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityActionAllow"
+          description: Allow a request through if it matches this SecurityAction.
+        conditionConfig:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityActionConditionConfig"
+          description: Required. A valid SecurityAction must contain at least one condition.
+        createTime:
+          description: Output only. The create time for this SecurityAction.
+          format: google-datetime
+          readOnly: true
+          type: string
+        deny:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityActionDeny"
+          description: Deny a request through if it matches this SecurityAction.
+        description:
+          description: Optional. An optional user provided description of the SecurityAction.
+          type: string
+        expireTime:
+          description: The expiration for this SecurityAction.
+          format: google-datetime
+          type: string
+        flag:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityActionFlag"
+          description: Flag a request through if it matches this SecurityAction.
+        name:
+          description: "Immutable. This field is ignored during creation as per AIP-133. Please set the `security_action_id` field in the CreateSecurityActionRequest when creating a new SecurityAction. Format: organizations/{org}/environments/{env}/securityActions/{security_action}"
+          type: string
+        state:
+          description: Required. Only an ENABLED SecurityAction is enforced. An ENABLED SecurityAction past its expiration time will not be enforced.
+          enum:
+            - STATE_UNSPECIFIED
+            - ENABLED
+            - DISABLED
+          type: string
+        ttl:
+          description: Input only. The TTL for this SecurityAction.
+          format: google-duration
+          type: string
+        updateTime:
+          description: Output only. The update time for this SecurityAction. This reflects when this SecurityAction changed states.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudApigeeV1SecurityActionAllow:
+      description: Message that should be set in case of an Allow Action. This does not have any fields.
+      properties: {}
+      type: object
+    GoogleCloudApigeeV1SecurityActionConditionConfig:
+      description: 'The following are a list of conditions. A valid SecurityAction must contain at least one condition. Within a condition, each element is ORed. Across conditions elements are ANDed. For example if a SecurityAction has the following: api_keys: ["key1", "key2"] and developers: ["dev1", "dev2"] then this is interpreted as: enforce the action if the incoming request has ((api_key = "key1" OR api_key="key") AND (developer="dev1" OR developer="dev2"))'
+      properties:
+        botReasons:
+          description: "Optional. A list of Bot Reasons. Current options: Flooder, Brute Guessor, Static Content Scraper, OAuth Abuser, Robot Abuser, TorListRule, Advanced Anomaly Detection and Advanced API Scraper."
+          items:
+            type: string
+          type: array
+        ipAddressRanges:
+          description: Optional. A list of IP addresses. This could be either IPv4 or IPv6. Limited to 100 per action.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudApigeeV1SecurityActionDeny:
+      description: Message that should be set in case of a Deny Action.
+      properties:
+        responseCode:
+          description: Optional. The HTTP response code if the Action = DENY.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudApigeeV1SecurityActionFlag:
+      description: The message that should be set in the case of a Flag action.
+      properties:
+        headers:
+          description: Optional. A list of HTTP headers to be sent to the target in case of a FLAG SecurityAction. Limit 5 headers per SecurityAction. At least one is mandatory.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1SecurityActionHttpHeader"
+          type: array
+      type: object
+    GoogleCloudApigeeV1SecurityActionHttpHeader:
+      description: An HTTP header.
+      properties:
+        name:
+          description: The header name to be sent to the target.
+          type: string
+        value:
+          description: The header value to be sent to the target.
+          type: string
+      type: object
+    GoogleCloudApigeeV1SecurityActionsConfig:
+      description: "SecurityActionsConfig reflects the current state of the SecurityActions feature. This is a singleton resource: https://google.aip.dev/156"
+      properties:
+        enabled:
+          description: The flag that controls whether this feature is enabled. This is `unset` by default. When this flag is `false`, even if individual rules are enabled, no SecurityActions will be enforced.
+          type: boolean
+        name:
+          description: "This is a singleton resource, the name will always be set by SecurityActions and any user input will be ignored. The name is always: `organizations/{org}/environments/{env}/security_actions_config`"
+          type: string
+        updateTime:
+          description: Output only. The update time for configuration.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     GoogleCloudApigeeV1SecurityIncident:
       description: Represents an SecurityIncident resource.
       properties:
@@ -9050,7 +9466,7 @@ components:
           readOnly: true
           type: string
         name:
-          description: "Immutable. Name of the profile-environment association resource. Format: organizations/{org}/securityProfiles/{profile}/environments/{env}"
+          description: Immutable. Name of the environment that the profile is attached to.
           type: string
         securityProfileRevisionId:
           description: Revision ID of the security profile.
@@ -9256,6 +9672,16 @@ components:
           description: The first transaction creation timestamp in millisecond, recorded by UAP.
           format: int64
           type: string
+      type: object
+    GoogleCloudApigeeV1SetAddonEnablementRequest:
+      description: Request for SetAddonEnablement.
+      properties:
+        analyticsEnabled:
+          description: If the Analytics should be enabled in the environment.
+          type: boolean
+        apiSecurityEnabled:
+          description: If the API Security should be enabled in the environment.
+          type: boolean
       type: object
     GoogleCloudApigeeV1SetAddonsRequest:
       description: Request for SetAddons.

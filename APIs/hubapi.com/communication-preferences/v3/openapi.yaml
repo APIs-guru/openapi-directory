@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 info:
   description: Subscriptions allow contacts to control what forms of communications they receive. Contacts can decide whether they want to receive communication pertaining to a specific topic, brand, or an entire HubSpot account.
   title: Subscriptions
@@ -14,10 +14,9 @@ info:
   x-providerName: hubapi.com
   x-serviceName: communication-preferences
 tags:
-  - description: Whether a contact has subscribed or unsubscribed from a given subscription type.
-    name: Status
-  - description: The different subscription types that are defined in a portal.
-    name: Definition
+  - name: Status
+  - name: Subscription_Status
+  - name: Definition
 paths:
   /communication-preferences/v3/definitions:
     get:
@@ -72,6 +71,35 @@ paths:
       summary: Get subscription definitions
       tags:
         - Definition
+  /communication-preferences/v3/status/email/bulk:
+    post:
+      operationId: post-/communication-preferences/v3/status/email/bulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PublicBulkSubscriptionStatusesResponse"
+          description: successful operation
+        default:
+          $ref: "#/components/responses/Error"
+      security:
+        - private_apps_legacy: []
+        - oauth2_legacy:
+            - communication_preferences.read_write
+        - private_apps_legacy: []
+        - oauth2_legacy:
+            - communication_preferences.read
+      tags:
+        - Subscription_Status
   /communication-preferences/v3/status/email/{emailAddress}:
     get:
       description: Returns a list of subscriptions and their status for a given contact.
@@ -147,6 +175,26 @@ paths:
               schema:
                 $ref: "#/components/schemas/PublicSubscriptionStatus"
           description: successful operation
+        "400":
+          content:
+            application/json:
+              example:
+                category: VALIDATION_ERROR
+                correlationId: af3df921-1418-4b18-b6f4-35ca117728ae
+                message: subscription 7148712 for example@example.com cannot be updated because they have unsubscribed
+                requestId: 3b0e0c44-fd57-4714-a3c9-42f6fead33c8
+                status: error
+          description: ""
+        "404":
+          content:
+            application/json:
+              example:
+                category: OBJECT_NOT_FOUND
+                correlationId: af3df921-1418-4b18-b6f4-35ca117728ae
+                message: example@example.com either has no subscriptions associated with this portal or does not exist
+                requestId: 3b0e0c44-fd57-4714-a3c9-42f6fead33c8
+                status: error
+          description: ""
         default:
           $ref: "#/components/responses/Error"
       security:
@@ -185,6 +233,26 @@ paths:
               schema:
                 $ref: "#/components/schemas/PublicSubscriptionStatus"
           description: successful operation
+        "400":
+          content:
+            application/json:
+              example:
+                category: VALIDATION_ERROR
+                correlationId: af3df921-1418-4b18-b6f4-35ca117728ae
+                message: example@example.com is already unsubscribed to subscription 7148712
+                requestId: 3b0e0c44-fd57-4714-a3c9-42f6fead33c8
+                status: error
+          description: ""
+        "404":
+          content:
+            application/json:
+              example:
+                category: OBJECT_NOT_FOUND
+                correlationId: af3df921-1418-4b18-b6f4-35ca117728ae
+                message: example@example.com either has no subscriptions associated with this portal or does not exist
+                requestId: 3b0e0c44-fd57-4714-a3c9-42f6fead33c8
+                status: error
+          description: ""
         default:
           $ref: "#/components/responses/Error"
       security:
@@ -284,6 +352,17 @@ components:
           type: string
       required:
         - message
+      type: object
+    PublicBulkSubscriptionStatusesResponse:
+      properties:
+        recipientToSubscriptionStatuses:
+          additionalProperties:
+            items:
+              $ref: "#/components/schemas/PublicSubscriptionStatus"
+            type: array
+          type: object
+      required:
+        - recipientToSubscriptionStatuses
       type: object
     PublicSubscriptionStatus:
       description: The status of a subscription for a contact.
@@ -453,5 +532,11 @@ components:
 x-hubspot-available-client-libraries:
   - PHP
   - Node
-  - Python
   - Ruby
+  - Python
+x-hubspot-documentation-banner: NONE
+x-hubspot-product-tier-requirements:
+  cms: FREE
+  marketing: FREE
+  sales: FREE
+  service: FREE

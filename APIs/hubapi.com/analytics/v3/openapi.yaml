@@ -1,6 +1,6 @@
 openapi: 3.0.1
 servers:
-  - url: https://api.hubapi.com/
+  - url: https://api.hubapi.com
 info:
   description: HTTP API for triggering instances of custom behavioral events
   title: Custom Behavioral Events API
@@ -48,6 +48,395 @@ components:
             $ref: "#/components/schemas/Error"
       description: An error occurred.
   schemas:
+    AssociationDefinition:
+      properties:
+        allowsCustomLabels:
+          type: boolean
+        cardinality:
+          enum:
+            - ONE_TO_ONE
+            - ONE_TO_MANY
+          type: string
+        category:
+          enum:
+            - HUBSPOT_DEFINED
+            - USER_DEFINED
+            - INTEGRATOR_DEFINED
+          type: string
+        fromObjectType:
+          enum:
+            - CONTACT
+            - COMPANY
+            - DEAL
+            - ENGAGEMENT
+            - TICKET
+            - OWNER
+            - PRODUCT
+            - LINE_ITEM
+            - BET_DELIVERABLE_SERVICE
+            - CONTENT
+            - CONVERSATION
+            - BET_ALERT
+            - PORTAL
+            - QUOTE
+            - FORM_SUBMISSION_INBOUNDDB
+            - QUOTA
+            - UNSUBSCRIBE
+            - COMMUNICATION
+            - FEEDBACK_SUBMISSION
+            - ATTRIBUTION
+            - SALESFORCE_SYNC_ERROR
+            - RESTORABLE_CRM_OBJECT
+            - HUB
+            - LANDING_PAGE
+            - PRODUCT_OR_FOLDER
+            - TASK
+            - FORM
+            - MARKETING_EMAIL
+            - AD_ACCOUNT
+            - AD_CAMPAIGN
+            - AD_GROUP
+            - AD
+            - KEYWORD
+            - CAMPAIGN
+            - SOCIAL_CHANNEL
+            - SOCIAL_POST
+            - SITE_PAGE
+            - BLOG_POST
+            - IMPORT
+            - EXPORT
+            - CTA
+            - TASK_TEMPLATE
+            - AUTOMATION_PLATFORM_FLOW
+            - OBJECT_LIST
+            - NOTE
+            - MEETING_EVENT
+            - CALL
+            - EMAIL
+            - PUBLISHING_TASK
+            - CONVERSATION_SESSION
+            - CONTACT_CREATE_ATTRIBUTION
+            - INVOICE
+            - MARKETING_EVENT
+            - CONVERSATION_INBOX
+            - CHATFLOW
+            - MEDIA_BRIDGE
+            - SEQUENCE
+            - SEQUENCE_STEP
+            - FORECAST
+            - SNIPPET
+            - TEMPLATE
+            - DEAL_CREATE_ATTRIBUTION
+            - QUOTE_TEMPLATE
+            - QUOTE_MODULE
+            - QUOTE_MODULE_FIELD
+            - QUOTE_FIELD
+            - SEQUENCE_ENROLLMENT
+            - SUBSCRIPTION
+            - ACCEPTANCE_TEST
+            - SOCIAL_BROADCAST
+            - DEAL_SPLIT
+            - DEAL_REGISTRATION
+            - GOAL_TARGET
+            - GOAL_TARGET_GROUP
+            - PORTAL_OBJECT_SYNC_MESSAGE
+            - FILE_MANAGER_FILE
+            - FILE_MANAGER_FOLDER
+            - SEQUENCE_STEP_ENROLLMENT
+            - APPROVAL
+            - APPROVAL_STEP
+            - CTA_VARIANT
+            - SALES_DOCUMENT
+            - DISCOUNT
+            - FEE
+            - TAX
+            - MARKETING_CALENDAR
+            - PERMISSIONS_TESTING
+            - PRIVACY_SCANNER_COOKIE
+            - DATA_SYNC_STATE
+            - WEB_INTERACTIVE
+            - PLAYBOOK
+            - FOLDER
+            - PLAYBOOK_QUESTION
+            - PLAYBOOK_SUBMISSION
+            - PLAYBOOK_SUBMISSION_ANSWER
+            - COMMERCE_PAYMENT
+            - GSC_PROPERTY
+            - SOX_PROTECTED_DUMMY_TYPE
+            - BLOG_LISTING_PAGE
+            - QUARANTINED_SUBMISSION
+            - PAYMENT_SCHEDULE
+            - PAYMENT_SCHEDULE_INSTALLMENT
+            - MARKETING_CAMPAIGN_UTM
+            - DISCOUNT_TEMPLATE
+            - DISCOUNT_CODE
+            - FEEDBACK_SURVEY
+            - CMS_URL
+            - SALES_TASK
+            - SALES_WORKLOAD
+            - USER
+            - POSTAL_MAIL
+            - SCHEMAS_BACKEND_TEST
+            - PAYMENT_LINK
+            - SUBMISSION_TAG
+            - CAMPAIGN_STEP
+            - SCHEDULING_PAGE
+            - SOX_PROTECTED_TEST_TYPE
+            - ORDER
+            - MARKETING_SMS
+            - PARTNER_ACCOUNT
+            - CAMPAIGN_TEMPLATE
+            - CAMPAIGN_TEMPLATE_STEP
+            - PLAYLIST
+            - CLIP
+            - CAMPAIGN_BUDGET_ITEM
+            - CAMPAIGN_SPEND_ITEM
+            - MIC
+            - CONTENT_AUDIT
+            - CONTENT_AUDIT_PAGE
+            - PLAYLIST_FOLDER
+            - LEAD
+            - ABANDONED_CART
+            - EXTERNAL_WEB_URL
+            - VIEW
+            - VIEW_BLOCK
+            - ROSTER
+            - CART
+            - AUTOMATION_PLATFORM_FLOW_ACTION
+            - SOCIAL_PROFILE
+            - PARTNER_CLIENT
+            - ROSTER_MEMBER
+            - MARKETING_EVENT_ATTENDANCE
+            - ALL_PAGES
+            - AI_FORECAST
+            - CRM_PIPELINES_DUMMY_TYPE
+            - KNOWLEDGE_ARTICLE
+            - PROPERTY_INFO
+            - DATA_PRIVACY_CONSENT
+            - UNKNOWN
+          type: string
+        fromObjectTypeId:
+          type: string
+        hasAllAssociatedObjects:
+          type: boolean
+        hasCascadingDeletes:
+          type: boolean
+        hasUserEnforcedMaxFromObjectIds:
+          type: boolean
+        hasUserEnforcedMaxToObjectIds:
+          type: boolean
+        hidden:
+          type: boolean
+        id:
+          format: int32
+          type: integer
+        inverseAllowsCustomLabels:
+          type: boolean
+        inverseCardinality:
+          enum:
+            - ONE_TO_ONE
+            - ONE_TO_MANY
+          type: string
+        inverseHasAllAssociatedObjects:
+          type: boolean
+        inverseId:
+          format: int32
+          type: integer
+        inverseLabel:
+          type: string
+        inverseName:
+          type: string
+        isInversePrimary:
+          type: boolean
+        isPrimary:
+          type: boolean
+        label:
+          type: string
+        maxFromObjectIds:
+          format: int32
+          type: integer
+        maxToObjectIds:
+          format: int32
+          type: integer
+        name:
+          type: string
+        toObjectType:
+          enum:
+            - CONTACT
+            - COMPANY
+            - DEAL
+            - ENGAGEMENT
+            - TICKET
+            - OWNER
+            - PRODUCT
+            - LINE_ITEM
+            - BET_DELIVERABLE_SERVICE
+            - CONTENT
+            - CONVERSATION
+            - BET_ALERT
+            - PORTAL
+            - QUOTE
+            - FORM_SUBMISSION_INBOUNDDB
+            - QUOTA
+            - UNSUBSCRIBE
+            - COMMUNICATION
+            - FEEDBACK_SUBMISSION
+            - ATTRIBUTION
+            - SALESFORCE_SYNC_ERROR
+            - RESTORABLE_CRM_OBJECT
+            - HUB
+            - LANDING_PAGE
+            - PRODUCT_OR_FOLDER
+            - TASK
+            - FORM
+            - MARKETING_EMAIL
+            - AD_ACCOUNT
+            - AD_CAMPAIGN
+            - AD_GROUP
+            - AD
+            - KEYWORD
+            - CAMPAIGN
+            - SOCIAL_CHANNEL
+            - SOCIAL_POST
+            - SITE_PAGE
+            - BLOG_POST
+            - IMPORT
+            - EXPORT
+            - CTA
+            - TASK_TEMPLATE
+            - AUTOMATION_PLATFORM_FLOW
+            - OBJECT_LIST
+            - NOTE
+            - MEETING_EVENT
+            - CALL
+            - EMAIL
+            - PUBLISHING_TASK
+            - CONVERSATION_SESSION
+            - CONTACT_CREATE_ATTRIBUTION
+            - INVOICE
+            - MARKETING_EVENT
+            - CONVERSATION_INBOX
+            - CHATFLOW
+            - MEDIA_BRIDGE
+            - SEQUENCE
+            - SEQUENCE_STEP
+            - FORECAST
+            - SNIPPET
+            - TEMPLATE
+            - DEAL_CREATE_ATTRIBUTION
+            - QUOTE_TEMPLATE
+            - QUOTE_MODULE
+            - QUOTE_MODULE_FIELD
+            - QUOTE_FIELD
+            - SEQUENCE_ENROLLMENT
+            - SUBSCRIPTION
+            - ACCEPTANCE_TEST
+            - SOCIAL_BROADCAST
+            - DEAL_SPLIT
+            - DEAL_REGISTRATION
+            - GOAL_TARGET
+            - GOAL_TARGET_GROUP
+            - PORTAL_OBJECT_SYNC_MESSAGE
+            - FILE_MANAGER_FILE
+            - FILE_MANAGER_FOLDER
+            - SEQUENCE_STEP_ENROLLMENT
+            - APPROVAL
+            - APPROVAL_STEP
+            - CTA_VARIANT
+            - SALES_DOCUMENT
+            - DISCOUNT
+            - FEE
+            - TAX
+            - MARKETING_CALENDAR
+            - PERMISSIONS_TESTING
+            - PRIVACY_SCANNER_COOKIE
+            - DATA_SYNC_STATE
+            - WEB_INTERACTIVE
+            - PLAYBOOK
+            - FOLDER
+            - PLAYBOOK_QUESTION
+            - PLAYBOOK_SUBMISSION
+            - PLAYBOOK_SUBMISSION_ANSWER
+            - COMMERCE_PAYMENT
+            - GSC_PROPERTY
+            - SOX_PROTECTED_DUMMY_TYPE
+            - BLOG_LISTING_PAGE
+            - QUARANTINED_SUBMISSION
+            - PAYMENT_SCHEDULE
+            - PAYMENT_SCHEDULE_INSTALLMENT
+            - MARKETING_CAMPAIGN_UTM
+            - DISCOUNT_TEMPLATE
+            - DISCOUNT_CODE
+            - FEEDBACK_SURVEY
+            - CMS_URL
+            - SALES_TASK
+            - SALES_WORKLOAD
+            - USER
+            - POSTAL_MAIL
+            - SCHEMAS_BACKEND_TEST
+            - PAYMENT_LINK
+            - SUBMISSION_TAG
+            - CAMPAIGN_STEP
+            - SCHEDULING_PAGE
+            - SOX_PROTECTED_TEST_TYPE
+            - ORDER
+            - MARKETING_SMS
+            - PARTNER_ACCOUNT
+            - CAMPAIGN_TEMPLATE
+            - CAMPAIGN_TEMPLATE_STEP
+            - PLAYLIST
+            - CLIP
+            - CAMPAIGN_BUDGET_ITEM
+            - CAMPAIGN_SPEND_ITEM
+            - MIC
+            - CONTENT_AUDIT
+            - CONTENT_AUDIT_PAGE
+            - PLAYLIST_FOLDER
+            - LEAD
+            - ABANDONED_CART
+            - EXTERNAL_WEB_URL
+            - VIEW
+            - VIEW_BLOCK
+            - ROSTER
+            - CART
+            - AUTOMATION_PLATFORM_FLOW_ACTION
+            - SOCIAL_PROFILE
+            - PARTNER_CLIENT
+            - ROSTER_MEMBER
+            - MARKETING_EVENT_ATTENDANCE
+            - ALL_PAGES
+            - AI_FORECAST
+            - CRM_PIPELINES_DUMMY_TYPE
+            - KNOWLEDGE_ARTICLE
+            - PROPERTY_INFO
+            - DATA_PRIVACY_CONSENT
+            - UNKNOWN
+          type: string
+        toObjectTypeId:
+          type: string
+      required:
+        - allowsCustomLabels
+        - cardinality
+        - category
+        - fromObjectTypeId
+        - hasAllAssociatedObjects
+        - hasCascadingDeletes
+        - hasUserEnforcedMaxFromObjectIds
+        - hasUserEnforcedMaxToObjectIds
+        - hidden
+        - id
+        - inverseAllowsCustomLabels
+        - inverseCardinality
+        - inverseHasAllAssociatedObjects
+        - inverseId
+        - inverseName
+        - isInversePrimary
+        - isPrimary
+        - maxFromObjectIds
+        - maxToObjectIds
+        - name
+        - toObjectTypeId
+      type: object
     BehavioralEventHttpCompletionRequest:
       properties:
         email:
@@ -71,9 +460,34 @@ components:
         utk:
           description: User token
           type: string
+        uuid:
+          type: string
       required:
         - eventName
-        - properties
+      type: object
+    BehavioralEventTypeDefinitionLabels:
+      properties:
+        plural:
+          type: string
+        singular:
+          type: string
+      required:
+        - singular
+      type: object
+    CollectionResponseWithTotalExternalBehavioralEventTypeDefinitionForwardPaging:
+      properties:
+        paging:
+          $ref: "#/components/schemas/ForwardPaging"
+        results:
+          items:
+            $ref: "#/components/schemas/ExternalBehavioralEventTypeDefinition"
+          type: array
+        total:
+          format: int32
+          type: integer
+      required:
+        - results
+        - total
       type: object
     Error:
       example:
@@ -153,6 +567,259 @@ components:
           type: string
       required:
         - message
+      type: object
+    ExternalBehavioralEventPropertyCreate:
+      properties:
+        description:
+          description: A description of the property that will be shown as help text in HubSpot.
+          type: string
+        label:
+          description: Human readable label for the property. Used in HubSpot UI
+          type: string
+        name:
+          description: Internal property name, which must be used when referencing the property from the API
+          type: string
+        options:
+          description: "A list of available options for the property if it is an enumeration. NOTE: This field is only applicable for enumerated properties."
+          items:
+            $ref: "#/components/schemas/OptionInput"
+          type: array
+        type:
+          description: "The data type of the property. Can be one of the following: [string, number, enumeration, datetime]"
+          type: string
+      required:
+        - label
+        - type
+      type: object
+    ExternalBehavioralEventPropertyDefinitionPatch:
+      properties:
+        description:
+          description: A description of the property that will be shown as help text in HubSpot.
+          type: string
+        label:
+          description: Human readable label for the property. Used in HubSpot UI
+          type: string
+        options:
+          description: "A list of available options for the property if it is an enumeration. NOTE: This field is only applicable for enumerated properties."
+          items:
+            $ref: "#/components/schemas/OptionInput"
+          type: array
+      type: object
+    ExternalBehavioralEventTypeDefinition:
+      properties:
+        archived:
+          type: boolean
+        associations:
+          items:
+            $ref: "#/components/schemas/AssociationDefinition"
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+        createdUserId:
+          format: int32
+          type: integer
+        description:
+          type: string
+        fullyQualifiedName:
+          type: string
+        id:
+          type: string
+        labels:
+          $ref: "#/components/schemas/BehavioralEventTypeDefinitionLabels"
+        name:
+          type: string
+        objectTypeId:
+          type: string
+        primaryObject:
+          type: string
+        primaryObjectId:
+          type: string
+        properties:
+          items:
+            $ref: "#/components/schemas/Property"
+          type: array
+        trackingType:
+          enum:
+            - VISITED_URL
+            - CLICKED_ELEMENT
+            - CUSTOM_SCRIPT
+            - MANUAL
+            - IMPORT
+          type: string
+      required:
+        - archived
+        - associations
+        - fullyQualifiedName
+        - id
+        - labels
+        - name
+        - objectTypeId
+        - properties
+      type: object
+    ExternalBehavioralEventTypeDefinitionEgg:
+      properties:
+        description:
+          description: A description of the event that will be shown as help text in HubSpot.
+          type: string
+        label:
+          description: Human readable label for the event. Used in HubSpot UI
+          type: string
+        name:
+          description: Internal event name, which must be used when referencing the event from the API. If a name is not supplied, one will be generated based on the label. The name does not include the pe<PORTAL_ID>_ prefix used when sending event completions.
+          type: string
+        primaryObject:
+          description: The object type to associate this event to. Can be one of CONTACT, COMPANY, DEAL, TICKET. If no primaryObject is supplied, we will default to associating the event to CONTACT objects.
+          type: string
+        propertyDefinitions:
+          description: List of custom properties on event
+          items:
+            $ref: "#/components/schemas/ExternalBehavioralEventPropertyCreate"
+          type: array
+      required:
+        - label
+        - propertyDefinitions
+      type: object
+    ExternalBehavioralEventTypeDefinitionPatch:
+      properties:
+        description:
+          description: A description of the event that will be shown as help text in HubSpot.
+          type: string
+        label:
+          description: Human readable label for the event. Used in HubSpot UI
+          type: string
+      type: object
+    ForwardPaging:
+      properties:
+        next:
+          $ref: "#/components/schemas/NextPage"
+      type: object
+    NextPage:
+      properties:
+        after:
+          type: string
+        link:
+          type: string
+      required:
+        - after
+      type: object
+    Option:
+      properties:
+        description:
+          type: string
+        displayOrder:
+          format: int32
+          type: integer
+        hidden:
+          type: boolean
+        label:
+          type: string
+        value:
+          type: string
+      required:
+        - hidden
+        - label
+        - value
+      type: object
+    OptionInput:
+      properties:
+        description:
+          description: "null"
+          type: string
+        displayOrder:
+          format: int32
+          type: integer
+        hidden:
+          type: boolean
+        label:
+          description: "null"
+          type: string
+        value:
+          description: "null"
+          type: string
+      required:
+        - label
+        - value
+      type: object
+    Property:
+      properties:
+        archived:
+          type: boolean
+        archivedAt:
+          format: date-time
+          type: string
+        calculated:
+          type: boolean
+        calculationFormula:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        createdUserId:
+          type: string
+        description:
+          type: string
+        displayOrder:
+          format: int32
+          type: integer
+        externalOptions:
+          type: boolean
+        fieldType:
+          type: string
+        formField:
+          type: boolean
+        groupName:
+          type: string
+        hasUniqueValue:
+          type: boolean
+        hidden:
+          type: boolean
+        hubspotDefined:
+          type: boolean
+        label:
+          type: string
+        modificationMetadata:
+          $ref: "#/components/schemas/PropertyModificationMetadata"
+        name:
+          type: string
+        options:
+          items:
+            $ref: "#/components/schemas/Option"
+          type: array
+        referencedObjectType:
+          type: string
+        showCurrencySymbol:
+          type: boolean
+        type:
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        updatedUserId:
+          type: string
+      required:
+        - description
+        - fieldType
+        - groupName
+        - label
+        - name
+        - options
+        - type
+      type: object
+    PropertyModificationMetadata:
+      properties:
+        archivable:
+          type: boolean
+        readOnlyDefinition:
+          type: boolean
+        readOnlyOptions:
+          type: boolean
+        readOnlyValue:
+          type: boolean
+      required:
+        - archivable
+        - readOnlyDefinition
+        - readOnlyValue
       type: object
   securitySchemes:
     oauth2_legacy:
