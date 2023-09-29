@@ -1738,6 +1738,10 @@ components:
     ConnectorInfraConfig:
       description: This cofiguration provides infra configs like rate limit threshold which need to be configurable for every connector version
       properties:
+        connectionRatelimitWindowSeconds:
+          description: The window used for ratelimiting runtime requests to connections.
+          format: int64
+          type: string
         hpaConfig:
           $ref: "#/components/schemas/HPAConfig"
           description: HPA autoscaling config.
@@ -1852,6 +1856,11 @@ components:
     ConnectorVersionInfraConfig:
       description: This cofiguration provides infra configs like rate limit threshold which need to be configurable for every connector version
       properties:
+        connectionRatelimitWindowSeconds:
+          description: Output only. The window used for ratelimiting runtime requests to connections.
+          format: int64
+          readOnly: true
+          type: string
         hpaConfig:
           $ref: "#/components/schemas/HPAConfig"
           description: Output only. HPA autoscaling config.

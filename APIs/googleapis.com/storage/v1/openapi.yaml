@@ -4390,10 +4390,6 @@ components:
           description: The content generation of this object. Used for object versioning.
           format: int64
           type: string
-        hardDeleteTime:
-          description: This is the time (in the future) when the soft-deleted object will no longer be restorable. It is equal to the soft delete time plus the current soft delete retention duration of the bucket.
-          format: date-time
-          type: string
         id:
           description: The ID of the object, including the bucket name, object name, and generation number.
           type: string
@@ -4455,10 +4451,6 @@ components:
           description: Content-Length of the data in bytes.
           format: uint64
           type: string
-        softDeleteTime:
-          description: The time at which the object became soft-deleted in RFC 3339 format.
-          format: date-time
-          type: string
         storageClass:
           description: Storage class of the object.
           type: string
@@ -4470,7 +4462,7 @@ components:
           format: date-time
           type: string
         timeDeleted:
-          description: The time at which the object became noncurrent in RFC 3339 format. Will be returned if and only if this version of the object has been deleted.
+          description: The deletion time of the object in RFC 3339 format. Will be returned if and only if this version of the object has been deleted.
           format: date-time
           type: string
         timeStorageClassUpdated:

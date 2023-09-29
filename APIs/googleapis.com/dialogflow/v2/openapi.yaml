@@ -3605,20 +3605,6 @@ components:
           description: The URI to a file containing the exported flow. This field is populated only if `flow_uri` is specified in ExportFlowRequest.
           type: string
       type: object
-    GoogleCloudDialogflowCxV3ExportIntentsMetadata:
-      description: Metadata returned for the Intents.ExportIntents long running operation.
-      properties: {}
-      type: object
-    GoogleCloudDialogflowCxV3ExportIntentsResponse:
-      description: The response message for Intents.ExportIntents.
-      properties:
-        intentsContent:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3InlineDestination"
-          description: Uncompressed byte content for intents. This field is populated only if `intents_content_inline` is set to true in ExportIntentsRequest.
-        intentsUri:
-          description: The URI to a file containing the exported intents. This field is populated only if `intents_uri` is specified in ExportIntentsRequest.
-          type: string
-      type: object
     GoogleCloudDialogflowCxV3ExportTestCasesMetadata:
       description: Metadata returned for the TestCases.ExportTestCases long running operation. This message currently has no fields.
       properties: {}
@@ -3799,36 +3785,6 @@ components:
           description: "The unique identifier of the new flow. Format: `projects//locations//agents//flows/`."
           type: string
       type: object
-    GoogleCloudDialogflowCxV3ImportIntentsMetadata:
-      description: Metadata returned for the Intents.ImportIntents long running operation.
-      properties: {}
-      type: object
-    GoogleCloudDialogflowCxV3ImportIntentsResponse:
-      description: The response message for Intents.ImportIntents.
-      properties:
-        conflictingResources:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ImportIntentsResponseConflictingResources"
-          description: Info which resources have conflicts when REPORT_CONFLICT merge_option is set in ImportIntentsRequest.
-        intents:
-          description: "The unique identifier of the imported intents. Format: `projects//locations//agents//intents/`."
-          items:
-            type: string
-          type: array
-      type: object
-    GoogleCloudDialogflowCxV3ImportIntentsResponseConflictingResources:
-      description: Conflicting resources detected during the import process. Only filled when REPORT_CONFLICT is set in the request and there are conflicts in the display names.
-      properties:
-        entityDisplayNames:
-          description: Display names of conflicting entities.
-          items:
-            type: string
-          type: array
-        intentDisplayNames:
-          description: Display names of conflicting intents.
-          items:
-            type: string
-          type: array
-      type: object
     GoogleCloudDialogflowCxV3ImportTestCasesMetadata:
       description: Metadata returned for the TestCases.ImportTestCases long running operation.
       properties:
@@ -3846,15 +3802,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    GoogleCloudDialogflowCxV3InlineDestination:
-      description: Inline destination for a Dialogflow operation that writes or exports objects (e.g. intents) outside of Dialogflow.
-      properties:
-        content:
-          description: Output only. The uncompressed byte content for the objects. Only populated in responses.
-          format: byte
-          readOnly: true
-          type: string
       type: object
     GoogleCloudDialogflowCxV3InputAudioConfig:
       description: Instructs the speech recognizer on how to process the audio content.
@@ -5054,20 +5001,6 @@ components:
           description: The URI to a file containing the exported flow. This field is populated only if `flow_uri` is specified in ExportFlowRequest.
           type: string
       type: object
-    GoogleCloudDialogflowCxV3beta1ExportIntentsMetadata:
-      description: Metadata returned for the Intents.ExportIntents long running operation.
-      properties: {}
-      type: object
-    GoogleCloudDialogflowCxV3beta1ExportIntentsResponse:
-      description: The response message for Intents.ExportIntents.
-      properties:
-        intentsContent:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1InlineDestination"
-          description: Uncompressed byte content for intents. This field is populated only if `intents_content_inline` is set to true in ExportIntentsRequest.
-        intentsUri:
-          description: The URI to a file containing the exported intents. This field is populated only if `intents_uri` is specified in ExportIntentsRequest.
-          type: string
-      type: object
     GoogleCloudDialogflowCxV3beta1ExportTestCasesMetadata:
       description: Metadata returned for the TestCases.ExportTestCases long running operation. This message currently has no fields.
       properties: {}
@@ -5248,36 +5181,6 @@ components:
           description: "The unique identifier of the new flow. Format: `projects//locations//agents//flows/`."
           type: string
       type: object
-    GoogleCloudDialogflowCxV3beta1ImportIntentsMetadata:
-      description: Metadata returned for the Intents.ImportIntents long running operation.
-      properties: {}
-      type: object
-    GoogleCloudDialogflowCxV3beta1ImportIntentsResponse:
-      description: The response message for Intents.ImportIntents.
-      properties:
-        conflictingResources:
-          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ImportIntentsResponseConflictingResources"
-          description: Info which resources have conflicts when REPORT_CONFLICT merge_option is set in ImportIntentsRequest.
-        intents:
-          description: "The unique identifier of the imported intents. Format: `projects//locations//agents//intents/`."
-          items:
-            type: string
-          type: array
-      type: object
-    GoogleCloudDialogflowCxV3beta1ImportIntentsResponseConflictingResources:
-      description: Conflicting resources detected during the import process. Only filled when REPORT_CONFLICT is set in the request and there are conflicts in the display names.
-      properties:
-        entityDisplayNames:
-          description: Display names of conflicting entities.
-          items:
-            type: string
-          type: array
-        intentDisplayNames:
-          description: Display names of conflicting intents.
-          items:
-            type: string
-          type: array
-      type: object
     GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata:
       description: Metadata returned for the TestCases.ImportTestCases long running operation.
       properties:
@@ -5295,15 +5198,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    GoogleCloudDialogflowCxV3beta1InlineDestination:
-      description: Inline destination for a Dialogflow operation that writes or exports objects (e.g. intents) outside of Dialogflow.
-      properties:
-        content:
-          description: Output only. The uncompressed byte content for the objects. Only populated in responses.
-          format: byte
-          readOnly: true
-          type: string
       type: object
     GoogleCloudDialogflowCxV3beta1InputAudioConfig:
       description: Instructs the speech recognizer on how to process the audio content.
