@@ -1469,7 +1469,7 @@ components:
           $ref: "#/components/schemas/PackageNameList"
           description: "List of apps which are excluded from the ShowWorkContactsInPersonalProfile setting. For this to be set, ShowWorkContactsInPersonalProfile must be set to one of the following values: * SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_ALLOWED. In this case, these exemptions act as a blocklist. * SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED. In this case, these exemptions act as an allowlist. * SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED_EXCEPT_SYSTEM. In this case, these exemptions act as an allowlist, in addition to the already allowlisted system apps. Supported on Android 14 and above. A nonComplianceDetail with API_LEVEL is reported if the Android version is less than 14."
         showWorkContactsInPersonalProfile:
-          description: Whether contacts stored in the work profile can be shown in personal profile contact searches and incoming calls.
+          description: Whether personal apps can access contacts stored in the work profile.See also exemptions_to_show_work_contacts_in_personal_profile.
           enum:
             - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_UNSPECIFIED
             - SHOW_WORK_CONTACTS_IN_PERSONAL_PROFILE_DISALLOWED
@@ -2992,6 +2992,7 @@ components:
               - FACE
               - IRIS
               - BIOMETRICS
+              - SHORTCUTS
               - ALL_FEATURES
             type: string
           type: array
@@ -3372,7 +3373,7 @@ components:
           description: Title of this action.
       type: object
     SigninDetail:
-      description: A resource containing sign in details for an enterprise.
+      description: "A resource containing sign in details for an enterprise. Use enterprises to manage SigninDetails for a given enterprise. For an enterprise, we can have any number of SigninDetails that is uniquely identified by combination of the following three fields (signin_url, allow_personal_usage, token_tag). One cannot create two SigninDetails with the same (signin_url, allow_personal_usage, token_tag). (token_tag is an optional field) Patch: The operation updates the current list of SigninDetails with the new list of SigninDetails. If the stored SigninDetail configuration is passed, it returns the same signin_enrollment_token and qr_code. If we pass multiple identical SigninDetail configurations that are not stored, it will store the first one amongst those SigninDetail configurations and if the configuration already exists we cannot request it more than once in a particular patch API call, otherwise it will give a duplicate key error and the whole operation will fail. If we remove certain SigninDetail configuration from the request then it will get removed from the storage. And then we can request for another signin_enrollment_token and qr_code for the same SigninDetail configuration."
       properties:
         allowPersonalUsage:
           description: "Controls whether personal usage is allowed on a device provisioned with this enrollment token.For company-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage requires the user provision the device as a fully managed device.For personally-owned devices: Enabling personal usage allows the user to set up a work profile on the device. Disabling personal usage will prevent the device from provisioning. Personal usage cannot be disabled on personally-owned device."
@@ -3389,6 +3390,9 @@ components:
           type: string
         signinUrl:
           description: Sign-in URL for authentication when device is provisioned with a sign-in enrollment token. The sign-in endpoint should finish authentication flow with a URL in the form of https://enterprise.google.com/android/enroll?et= for a successful login, or https://enterprise.google.com/android/enroll/invalid for a failed login.
+          type: string
+        tokenTag:
+          description: An EMM-specified tag to distinguish between instances of SigninDetail.
           type: string
       type: object
     SignupUrl:

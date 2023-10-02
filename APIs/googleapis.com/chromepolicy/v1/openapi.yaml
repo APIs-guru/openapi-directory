@@ -715,29 +715,6 @@ components:
       schema:
         type: string
   schemas:
-    ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle:
-      properties:
-        deprecatedInFavorOf:
-          description: In the event that this policy was deprecated in favor of another policy, the fully qualified namespace(s) of the new policies as they will show in PolicyAPI.
-          items:
-            type: string
-          type: array
-        description:
-          description: Description about current life cycle.
-          type: string
-        endSupport:
-          $ref: "#/components/schemas/GoogleTypeDate"
-          description: End supporting date for current policy.
-        policyApiLifecycleStage:
-          description: Indicate current life cycle stage of the policy API.
-          enum:
-            - API_UNSPECIFIED
-            - API_PREVIEW
-            - API_DEVELOPMENT
-            - API_CURRENT
-            - API_DEPRECATED
-          type: string
-      type: object
     GoogleChromePolicyVersionsV1AdditionalTargetKeyName:
       description: Additional key names that will be used to identify the target of the policy value.
       properties:
@@ -985,6 +962,30 @@ components:
           format: int64
           type: string
       type: object
+    GoogleChromePolicyVersionsV1PolicyApiLifecycle:
+      description: Lifecycle information.
+      properties:
+        deprecatedInFavorOf:
+          description: In the event that this policy was deprecated in favor of another policy, the fully qualified namespace(s) of the new policies as they will show in PolicyAPI. Could only be set if policy_api_lifecycle_stage is API_DEPRECATED.
+          items:
+            type: string
+          type: array
+        description:
+          description: Description about current life cycle.
+          type: string
+        endSupport:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: End supporting date for current policy. Attempting to modify a policy after its end support date will result in a Bad Request (400 error). Could only be set if policy_api_lifecycle_stage is API_DEPRECATED.
+        policyApiLifecycleStage:
+          description: Indicates current life cycle stage of the policy API.
+          enum:
+            - API_UNSPECIFIED
+            - API_PREVIEW
+            - API_DEVELOPMENT
+            - API_CURRENT
+            - API_DEPRECATED
+          type: string
+      type: object
     GoogleChromePolicyVersionsV1PolicyModificationError:
       description: Error information for a modification request of a specific policy on a specific target.
       properties:
@@ -1068,7 +1069,7 @@ components:
           readOnly: true
           type: array
         policyApiLifecycle:
-          $ref: "#/components/schemas/ChromeCrosDpanelAutosettingsProtoPolicyApiLifecycle"
+          $ref: "#/components/schemas/GoogleChromePolicyVersionsV1PolicyApiLifecycle"
           description: Output only. Current lifecycle information.
           readOnly: true
         policyDescription:

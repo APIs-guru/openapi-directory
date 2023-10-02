@@ -1870,6 +1870,9 @@ components:
           format: google-datetime
           readOnly: true
           type: string
+        description:
+          description: Optional. Description of the firewall endpoint. Max length 2048 characters.
+          type: string
         labels:
           additionalProperties:
             type: string
@@ -2500,7 +2503,7 @@ components:
           description: Optional. Labels as key value pairs.
           type: object
         name:
-          description: Immutable. Name of the SecurityProfile resource. It matches pattern `projects|organizations/*/locations/{location}/securityProfiles/{security_profile}`.
+          description: Immutable. Identifier. Name of the SecurityProfile resource. It matches pattern `projects|organizations/*/locations/{location}/securityProfiles/{security_profile}`.
           type: string
         threatPreventionProfile:
           $ref: "#/components/schemas/ThreatPreventionProfile"
@@ -2538,7 +2541,7 @@ components:
           description: Optional. Labels as key value pairs.
           type: object
         name:
-          description: Immutable. Name of the SecurityProfileGroup resource. It matches pattern `projects|organizations/*/locations/{location}/securityProfileGroups/{security_profile_group}`.
+          description: Immutable. Identifier. Name of the SecurityProfileGroup resource. It matches pattern `projects|organizations/*/locations/{location}/securityProfileGroups/{security_profile_group}`.
           type: string
         threatPreventionProfile:
           description: Optional. Reference to a SecurityProfile with the threat prevention configuration for the SecurityProfileGroup.
