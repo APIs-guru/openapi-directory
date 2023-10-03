@@ -1227,6 +1227,7 @@ components:
             - NUMBER
             - INTEGER
             - BOOLEAN
+            - GEOLOCATION
           readOnly: true
           type: string
         indexableOption:
@@ -2569,6 +2570,10 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchResponseFacet"
           type: array
+        geoSearchDebugInfo:
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchResponseGeoSearchDebugInfo"
+          type: array
         guidedSearchResult:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResult"
           description: Guided search result.
@@ -2621,6 +2626,16 @@ components:
           description: Interval value for a facet, such as 10, 20) for facet "price". It matches [SearchRequest.FacetSpec.FacetKey.intervals.
         value:
           description: Text value of a facet, such as "Black" for facet "colors".
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1betaSearchResponseGeoSearchDebugInfo:
+      description: Debug information specifically related to forward geocoding issues arising from Geolocation Search.
+      properties:
+        errorMessage:
+          description: The error produced.
+          type: string
+        originalAddressQuery:
+          description: The address from which forward geocoding ingestion produced issues.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1betaSearchResponseGuidedSearchResult:

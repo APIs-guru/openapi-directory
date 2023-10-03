@@ -1763,6 +1763,7 @@ components:
             - NUMBER
             - INTEGER
             - BOOLEAN
+            - GEOLOCATION
           readOnly: true
           type: string
         indexableOption:
@@ -2650,6 +2651,10 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponseFacet"
           type: array
+        geoSearchDebugInfo:
+          items:
+            $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponseGeoSearchDebugInfo"
+          type: array
         guidedSearchResult:
           $ref: "#/components/schemas/GoogleCloudDiscoveryengineV1alphaSearchResponseGuidedSearchResult"
           description: Guided search result.
@@ -2702,6 +2707,16 @@ components:
           description: Interval value for a facet, such as 10, 20) for facet "price". It matches [SearchRequest.FacetSpec.FacetKey.intervals.
         value:
           description: Text value of a facet, such as "Black" for facet "colors".
+          type: string
+      type: object
+    GoogleCloudDiscoveryengineV1alphaSearchResponseGeoSearchDebugInfo:
+      description: Debug information specifically related to forward geocoding issues arising from Geolocation Search.
+      properties:
+        errorMessage:
+          description: The error produced.
+          type: string
+        originalAddressQuery:
+          description: The address from which forward geocoding ingestion produced issues.
           type: string
       type: object
     GoogleCloudDiscoveryengineV1alphaSearchResponseGuidedSearchResult:
@@ -3094,6 +3109,13 @@ components:
           type: boolean
         name:
           description: "Immutable. The full resource name of the widget config. Format: `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/widgetConfigs/{widget_config_id}`. This field must be a UTF-8 encoded string with a length limit of 1024 characters."
+          type: string
+        resultDisplayType:
+          description: The type of snippet to display in UCS widget. - RESULT_DISPLAY_TYPE_UNSPECIFIED for existing users. - SNIPPET for new non-enterprise search users. - EXTRACTIVE_ANSWER for new enterprise search users.
+          enum:
+            - RESULT_DISPLAY_TYPE_UNSPECIFIED
+            - SNIPPET
+            - EXTRACTIVE_ANSWER
           type: string
         solutionType:
           description: Required. Immutable. Specifies the solution type that this WidgetConfig can be used for.
